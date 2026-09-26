@@ -1,7 +1,8 @@
 {
- "_note": "Files that must never change. R7-4 preregistration: hash recorded when it was written (R7-4 results, V34). archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files.",
+ "_note": "Files that must never change. R7-4 and R7-7 preregistrations: hashes recorded when each was written, before any computation. archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files.",
  "files": {
   "70 Project/R7/R7-4 preregistration.md": "07a947ecbb9777ebc1ec50dd6af397d37161f136f288bb6f9866e9ea2fbbf6ce",
+  "70 Project/R7/R7-7 preregistration.md": "211704336959ad498edde65144baec84d765495c5b541bf3997be2f1359c8d0b",
   "archive/v6.6_flat/A_core.md": "299283812cbf874f0c36f7d8614a13d592730b415a5072082edcd8a4c7ff97e8",
   "archive/v6.6_flat/B_dictionary.md": "02b11f43f4e78c06a5f168990e6ff4e30f37e474982d929fefab62e0e0efd723",
   "archive/v6.6_flat/C_boundary.md": "3556baa2c1629626eff6ec39ee3cbf9706fbfa7470476fb6aed9a0bda2304471",
