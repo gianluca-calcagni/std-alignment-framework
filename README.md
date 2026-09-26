@@ -1,4 +1,4 @@
-# std-alignment-framework — v7.3.2
+# std-alignment-framework — v7.3.3
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -26,7 +26,7 @@ the checks that verify it, and its sources, and the tools keep those links deriv
 | Command | Does |
 |---|---|
 | `python3 tools/vault.py sync` | recompute every derived field and generated section, after any edit |
-| `python3 tools/vault.py lint` | schema, links, dependency cycles, definition order, actor-model tags, the measurement/explanation layers, checks and sources, table well-formedness, the bibliography's one-to-one match with the source notes, and the hashes of frozen files (`tools/frozen.json`); must report 0 errors |
+| `python3 tools/vault.py lint` | schema, links, dependency cycles, definition order, actor-model tags, the measurement/explanation layers, checks and sources, table well-formedness, the bibliography's one-to-one match with the source notes, the hashes of frozen files (`tools/frozen.json`), and version banners (the current version stated consistently; no part's banner older than its own text); must report 0 errors |
 | `python3 tools/vault.py migration-check` | re-prove the one-time migration: a fresh build from `archive/v6.6_flat/` reproduces all 19 flat files |
 | `python3 tools/vault.py compile --check archive/v6.6_flat` | compare the live vault with v6.6. Every difference should be an edit logged in the hygiene log (Status §5) |
 | `python3 tools/vault.py deps "Thm 13"` · `scan A3` | dependency queries, and the scan for a refactor step |

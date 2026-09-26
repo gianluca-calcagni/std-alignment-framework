@@ -5,7 +5,34 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v6.6 (R7-1)** — the actual behaviour is now any distribution, and no actor model is assumed in the
+**Status: v7.3.3** — a review of the whole package against its stated goal.
+- **Nothing proved changed, and every numerical check still reproduces.** The review found no error in the
+  proofs it read.
+- **Status text had gone stale.** This abstract stood at v6.6, the Dictionary banner at v6.3 and the Boundary
+  banner at v6.4. Core §12 still called Thms 1, 13, 17 and Prop. 18 entropic-only,
+  although they have been tier 1 since v6.4. §1.4 still listed as untested the crossing that R5 and R6 had tested.
+  All are corrected (§5), and `lint` now rejects a part banner older than its own text.
+- **The open risk is external contact, not internal consistency.** No prediction has been tested against
+  outside data (C8, C9 and C11 have been checked only on the project's own generators). No real case has been
+  run through the framework end to end (ROADMAP T7). Until then it is a checked calculus, not yet a standard.
+
+**v7.3.1 (R7-5 closed)** — no real case needs a divergence other than KL. One real defect was found: an agent
+that pursues the **true** target with best-of-n or a quantilizer scores as misaligned: `M_free` has a median of
+0.04–0.39 nats (R7-5 go-no-go), and `M_budget` is never smaller. The cardinal measures charge the *shape* of the
+pursuit as well as its direction.
+R7-7 (the ordinal target) is the planned repair; until then, read a positive `M_budget` or `M_free` for a
+non-Gibbs optimizer as possibly shape, not misdirection.
+
+**v7.3 (R7-4)** — external reward versus the agent's own objective (Props 27–30), with one stationary
+dynamic element. Pre-registered: 6 of 8 predictions held, and 2 failed as registered on test design.
+
+**v7.2 (R7-3)** — two layers. The measurement layer says what misalignment is from behaviour, a declared
+reference, the target and a convention; lint keeps explanation out of it. **v7.1 (R7-2)** — the declared
+reference is part of the intent; a wrong default in the actor is measured misalignment unless it leans along the
+target (Prop. 26). **v7.0** — the package became a vault, with one content edit: Prop. 20's proof no longer cites B11(i), which
+closed a dependency cycle.
+
+**v6.6 (R7-1)** — the actual behaviour is now any distribution, and no actor model is assumed in the
 definitions.
 - The entropic actor is a named explanatory hypothesis (E) in Def. 13, and (C) in Def. 5. Every result that
   needs one says so; the tool checks.
@@ -40,7 +67,9 @@ the wrong objective equals the divergence between actual and intended behaviour.
 is a theorem with a proof, using standard mathematics, checked numerically by `verify.py`. Nine dictionary
 entries are derived rather than asserted (six in v6). The prior-art check (C14) found the package to be
 **predominantly an index**: most results are known and are now cited where used. The core's weakest joint has moved from "is the normal form
-vacuous?" (it was: v6 abandons it) to "does anything survive for actors that are not exponential tilts?".
+vacuous?" (it was: v6 abandons it) to "does anything survive for actors that are not exponential tilts?". That
+question is now answered in part (v6.4, R5, R6): the tier-1 results hold for any actual actor, and the capacity bounds
+for exact maximizers. The E-based bounds do not transfer, and the crossing transfers but its location does not.
 
 Review R2 retracted nineteen v5 claims; the rebuild found two more in R2's own text; review R3 added five. **§2 is the corpus's
 memory.**
@@ -66,7 +95,7 @@ memory.**
 | worst-case regret is not separable | A Thm 9 | V5 | **C3** |
 | four conjugate pairings | A Prop. 10 | V6, 0 / 20,000 each | C4 |
 | KL exposure infinite under sub-exponential tails; χ² finite under finite variance | A Prop. 11 | V6 | **C4** |
-| behaviour identifies only the tilt (not `β`, not `q`) | A Prop. 12 | — | C10 |
+| behaviour identifies only the tilt (not `β`, not the actor's own reference `q_A`), under (E_A) | A Prop. 12 | — | C10 |
 | full-ray decomposition `β·R_J = D_⊥ + D_∥` (Thm 13(a)); rescaling is axial | A Thm 13(a), Cors 13.3–13.4 | V7, 10⁻¹² | C5 |
 | initial sign `−Cov_q(F̂,F)`; terminal value by argmax agreement | A Prop. 14 | V8 | C6 |
 | regret is a Bregman divergence for any convex regularizer and concave target *(v6.1)* | A Prop. 15 | V12 | C1, C7 |
@@ -158,7 +187,7 @@ memory.**
 
 | Claim | Where | Why flagged |
 |---|---|---|
-| rank reversal and the conjugacy picture hold for non-Gibbs actors | C7, C8 | **the weakest joint; untested** |
+| the crossing (rank reversal) holds for every optimizer, and one index orders where it falls | C7, C8; ROADMAP T8 | tested on one instance (V5) for five optimizers: it held for all, and its location varied about 180-fold (R5, R6; §1.2). No general statement, and no index yet. *(Until v7.3.3 this row read "untested". Its other half, the conjugacy picture, is tier 1: Props 10–11 hold for any behaviour, and what actual optimizers expose is B §2.)* |
 | `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | untested |
 | delay sets a bandwidth; correction amplifies error near crossover; double protection restated | C §5.1 | simulation only; the actor acting on `τ` is outside the core |
 | the closed-loop lift as the next carrier | C §5.2 | proved pieces, untested as a carrier |
@@ -279,8 +308,10 @@ verbatim from v5, even where their "replaced by" column has itself since been re
    outside-X 23, dynamic 20. **No further census measurement.** The PI's layer decision (T6) is deferred by
    the PI.
 1. **Does anything qualitative survive non-Gibbs actors?** C7 and C8. This decides whether the core
-   describes deployed optimizers or an idealization of them. Prop. 15 settles it for exact regularized
-   optimizers only.
+   describes deployed optimizers or an idealization of them. **Partly answered.** The tier-1 results hold for any
+   actual actor (v6.4), and Prop. 15 extends the identity to exact regularized intended actors. The crossing
+   transfers to every optimizer tested, but its location does not (R5, R6). Open: whether one index orders the
+   location (T8), and what the cardinal measures should say of a non-Gibbs optimizer on the true target (R7-7).
 2. **Does the unification exist elsewhere?** C14 — answered in R3: predominantly an index. That is now the
    headline of Core.
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between
@@ -349,6 +380,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **v7.3.3 (review).** A review of the package against its goal (ROADMAP §1), asked for by the PI. No error was found in the proofs read. All 34 `verify.py` blocks and `final_audit.py` reproduce on a second machine (Intel Xeon, AVX-512). **Stale status text, corrected.** The Status abstract stood at v6.6, the Dictionary banner at v6.3 and the Boundary banner at v6.4, while their parts cited R7-2 to R7-4; each now summarizes what changed since. Core §12's actor paragraph called Thms 1, 13, 17 and Prop. 18 entropic-only and best-of-n uncovered, against the tier table since v6.4 (rows 67–68), and said "no dynamics" against Prop. 27(b); it now matches, and states the cardinal-target limit R7-5 found. §1.4 listed the crossing as untested, which §1.2 and C8 record as tested in R5 and R6. §1.1's Prop. 12 row and Core §10 said `q` where R7-2 made it `q_A`. §3's question 1 is marked partly answered. **Tooling.** `lint` checks that the current version is stated the same in 00 Home, `README.md`, ROADMAP §0 and this log's newest row. It also checks that each part's status banner (the first `**Status: vX**` in its reading order) is at least as recent as the newest version its own text refers to, as `vX.Y` or as a completed R7 step, dated by its row here. It is a lower bound: an edit that carries no version tag is invisible to it. It found exactly the three stale banners, and each of its error paths was tested by a planted violation. The contradictions in §12 and §1.4 were found by reading, not by the rule. **New:** ROADMAP §5, the review's recommendations for the PI; NOTES_claude §7, its other observations | Core, Dictionary, Boundary, Status, ROADMAP, NOTES, README, tools |
 | **v7.3.2 (repository).** The vault moved to a public GitHub repository, [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), under the PI's AGPL-3.0 license. New files: `.github/workflows/checks.yml` runs the vault checks, all 34 `verify.py` blocks in parallel, and `final_audit.py` on every push and pull request. `tools/reproduce.py` compares a rerun with the committed reference outputs. It is exact except for residual-scale digits (magnitude ≤ 1e-9). `requirements.txt` pins numpy 2.4.4, scipy 1.17.1 and pybtex 0.26.1, the reference environment. `.gitignore` is also new. The R6 blind-test answer key was never part of the vault and is not in the repository. **The first CI run** failed V33. Its finite-difference line measures round-off, which depends on the CPU's SIMD path; this was reproduced locally by disabling AVX-512. The second run passed V33 and the audit, but failed V25 on the same kind of line: forward differences, round-off-dominated. GitHub's runners differ in hardware, so each run samples a different CPU. The first run's audit failure could not be read from the session. Emulating an AVX2-only CPU locally reproduces it: the local optimizer's shortfall in F1 and a round-off measure in F3 move. Fixes: those lines get declared upper bounds — what each check actually claims — in `tools/reproduce_tolerances.json`, with their reasons, and every other line must still reproduce exactly; CI failures are reported as annotations, readable without the raw logs; the runner is pinned to `ubuntu-24.04` | all |
 | **v7.3.2 (bibliography).** `references.bib` now covers every source note: 102 entries, and the six R7-5 sources are placed in their section. Each source note names its entries (`bibkey`). `lint` enforces a one-to-one match, rejects repeated fields, and requires `note={check …}` on every status-U entry. That rule found two missing markers (Stratonovich 1965, Verdun 2025). `sync` generates the order of the entries. The file parses in pybtex. Census attributions (Part C) stay out of it, by rule | Sources, tools |
 | **R7-5 go/no-go (v7.3.1).** The PI's rule: proceed with R7-5 only if a real case needs a divergence other than KL. The answer is no (R7-5 go-no-go), and R7-5 is closed as a clean negative with a revival trigger. The one real defect found — best-of-n and quantilizers on the true target score as misaligned — is repaired by an ordinal target set (R7-7), keeping KL. It comes with an exploratory probe (`70 Project/R7/r75_probe.py`, not pre-registered and not a `verify.py` block). Six sources were added (Part B.4). `tools/vault.py`: a source's `where` field now also counts explicit wiki-links. The ROADMAP was reordered: R7-7 is next | ROADMAP, Sources, tools |

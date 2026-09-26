@@ -14,8 +14,8 @@ updated: "2026-09-26"
 
 | | |
 |---|---|
-| **Current** | **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **R7-7** — target sets, with the **ordinal target** as its lead case: `M_ord` (the KL projection onto the monotone-ratio cone, closed form by isotonic regression) and the split `M_free ≥ M_ord + M_free(p°)`. First task: pre-register, then write the target-set definition against the contract |
+| **Current** | **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
+| **Next** | **R7-7** — target sets, with the **ordinal target** as its lead case: `M_ord` (the KL projection onto the monotone-ratio cone, closed form by isotonic regression) and the split `M_free ≥ M_ord + M_free(p°)`. First task: pre-register, then write the target-set definition against the contract. §5 proposes running T3 and one T7 case before or alongside it, and restating M5 in R7-7 |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -320,3 +320,47 @@ second index in the same turn.
 10a. **R7 discipline.** One assumption per turn; definitions before dependents; a DAG check every turn; exact
     reduction to v6.4 in the special case. If in doubt, stop and restore.
 10. **Every turn ends with §0 updated.**
+
+---
+
+## 5. Recommendations from the v7.3.3 review *(for the PI; not decided)*
+
+A review of the whole package against §1. The mathematics is sound, as far as the proofs read go; the limits are
+shown unusually well; and every numerical check reproduces on a second machine. The two outward criteria of §1 —
+**testable predictions** and **diagnostics** — are not yet met, by the project's own definition of done ([[NOTES_claude]]
+§0: an outsider runs a real case and gets a diagnosis, a checkable prediction and the imported theorems). Three
+recommendations, in order. A fourth — a lint rule for stale status banners, and the corrections it prompted — was
+applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
+
+1. **Run T3 and one T7 case before R7-7, or alongside it.** *Serves: predicts, diagnoses.*
+   - R6 marked "diagnostics on real cases, and predictions that transfer across optimizers" as underserved, and
+     named T7 and T8 as the next turns ([[R6_LOG]] §1). Five refactor steps followed (R7-0 to R7-4), then R7-5's
+     go/no-go. Each passed the drift test on its own terms. Together they deferred the two criteria that no
+     refactor can serve.
+   - C8, C9 and C11 have been checked only on the project's own generators. Status §6: almost nothing has come from
+     a prediction succeeding on its own terms.
+   - T3 — C9, the overoptimization slope `α ≈ √2·ρ·sd` against published coefficients — is by Status §3 "the
+     cheapest external contact", and it sits under "Later".
+   - **Proposal.** T3 as one small pre-registered step. T7 with one case first, before committing to four: the
+     human default case, where B12 supplies the identification ([[NOTES_claude]] H6). If that case yields only a
+     relabelling, T7's gate has fired early and cheaply.
+2. **Treat R7-7 as a correction to the definition of misalignment, not an extension.** *Serves: solid.*
+   - The measurement layer's intended behaviour is always a Gibbs tilt of the declared reference. So
+     "misalignment" is the distance from what an **entropic** agent pursuing `F` would do. M5 protects pursuit by
+     that one model only: best-of-n and quantilizers run on the true target score as misaligned in 93–100 % of
+     instances ([[R7-5 go-no-go]]).
+   - **Proposal.** R7-7 restates M5 without the Gibbs family: an agent that pursues a declared member of the
+     target set, at any intensity, has `M = 0`. It then shows that the cardinal declaration recovers the current M5
+     exactly (M7). The cardinal/ordinal choice becomes a declared convention of Def. 8, like price, budget and free,
+     instead of a silent default.
+3. **Say who the raters and reviewers were, and add one from outside.** *Serves: solid, limits.*
+   - The census raters and reviews R5 and R6 are called independent, but the vault never says who or what they
+     were. R5's scripts ran under `/home/claude/` (`reviews/R5_independent/compare.py`), which suggests sessions of
+     the same model family as the executor. Errors from one model family are correlated, and "independent"
+     then means less than it says.
+   - Agreement was moderate: κ 0.54–0.57 between the first two raters on expressibility, and 0.04 between the
+     first rater and the third rater's blind codes on the disputed items. The "specific" band, 55–61 %, spans two
+     codings of one rater; it does not carry the between-rater uncertainty.
+   - **Proposal.** State the raters' and reviewers' identity in [[T1_census_routing]], [[R5_LOG]] and [[R6_LOG]]. For the
+     next measurement on held-out items ([[T1_RULES_FROZEN]] §3), use at least one human rater or a different model
+     family. The frozen measurement is not re-run (§3).

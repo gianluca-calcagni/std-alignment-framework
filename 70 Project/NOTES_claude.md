@@ -26,7 +26,8 @@ substrate, runs it through the framework, and gets:
 
 Until that works on real cases, the framework is a calculus, not a standard.
 
-**Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). **v7.0: the
+**Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). v7.3.3 was a
+review against §0's goal: its recommendations are [[ROADMAP]] §5 (for the PI), its other observations §7 below. **v7.0: the
 package is an Obsidian vault.** Next is R7-7 (target sets, confirmed by the PI), led by the ordinal target. Apply the PI's test — a real case,
 or no step — before R7-6 and R7-8 too.
 
@@ -77,6 +78,9 @@ serves.
 | **Allow-listing a cycle instead of fixing it** | v6.6's depgraph allow-listed Prop. 20 → B11 as "attribution only"; v7.0's linter, which treats dictionary entries as nodes, showed it closed a real cycle through B04 and Prop. 21 | a citation that is "only attribution" does not belong in a proof: move it out, don't allow-list it |
 | **Measuring after the answer has converged** | three rounds of routing (T1, T1b, T1c) | when a measurement stops changing what I'd build, stop measuring |
 | **Headlines overclaim scope** | row 52: "a formalization of alignment" | put the scope in the headline, not only in §12 |
+| **Correcting the ledger, not the prose that repeats it** | v7.3.3 review: Core §12 still called Thms 1, 13, 17 and Prop. 18 entropic-only three versions after rows 67–68 made them tier 1; Status §1.4 still said "untested" of the crossing that §1.2 records as tested; three part banners were two to four versions stale | a tier or status change is a retraction for grep purposes: grep the old wording across the vault, prose included. Banners are now linted; prose contradictions are not, so the grep is still mine to do |
+| **Calling a pattern derived when the model builds it in** | Prop. 27(c): "complies when rewarded, reverts when not … derived, not assumed". Def. 16 puts `m_c` inside the survival probability `s_c`, so `κ_c = 0` at `m_c = 0` by construction. What is derived is the *size* of `κ_c` (a shadow price), not the on/off pattern | before writing "derived", check whether the conclusion's switch is already in a definition. Say which part is derived |
+| **Choosing internal refinement over external contact** | R6 named diagnostics and cross-optimizer predictions as underserved (R6_LOG §1); the next five steps were refactors (R7-0 to R7-4). Each passed the drift test alone | the drift test must also be applied to the *sequence*: after two internal steps, the next step makes external contact unless the PI says otherwise |
 
 **Meta-pattern.** Every one of these was caught by someone else or by a check, not by re-reading. So: more
 checks, fewer re-reads.
@@ -247,3 +251,39 @@ exclusion]*.
   then the math.
 - Makes the strategic decisions (T6, scope). **Don't pre-empt them.**
 - Uses independent reviewers well; they have caught more of my errors than I have. **Welcome them.**
+
+---
+
+## 7. Open items from the v7.3.3 review — observations not yet acted on
+
+The review's recommendations for the PI are [[ROADMAP]] §5 (T3 and one T7 case; R7-7 as a correction to M5; who
+the raters were). What was fixed at once is in Status §5. These are the rest, so they are not lost. None is
+decided; each says what would close it.
+
+1. **Prop. 27(c) overclaims** (see the §1 row). Reword the Reading of Prop. 27, the Core 00 banner, the R7-4 note in
+   Boundary §3 and [[R7-4 results]]: the size of `κ_c` is derived; the on/off pattern follows from putting `m_c`
+   into the coupling. The registered falsifier was therefore weak: the static model could not produce the pattern
+   because it had no `m_c`-dependent continuation, not because the pattern needs dynamics. Closing it: a hygiene
+   edit, and a sentence in the Status abstract.
+2. **"Substrate-free" means "defined for any `p̂`", not "neutral about what pursuit looks like".** The intent ray
+   is the Gibbs family, so M5 protects entropic pursuit only. R7-7 is where this gets fixed (ROADMAP §5.2). Until
+   then, every positive `M_free` for a non-Gibbs optimizer may be shape (H8).
+3. **The core reads as its own changelog.** Items carry notes such as "until R7-3 this read …" and "(v6.1–v6.4
+   defined …)"; Core 00 stacks ten version paragraphs before the scope. For a *standard*, a newcomer needs the current statement
+   only. Proposal: mark history notes with one convention (e.g. a `> [!history]` callout), and let `compile`
+   produce a clean view without them next to the full one. It needs a new markup rule, so the PI decides.
+4. **Lint warnings, standing at 37.** 13 checks are cited by no note (V10, V11, V17, V23, F3, F4, F6, F7,
+   W1–W5) and 2 sources have no citing note (Lande 1983, Bewley 2002). Either link each to what it verifies, or
+   record why it stands alone. A warning nobody reads is the table-escaping failure again, more slowly.
+5. **The hygiene log's "Where" column is hand-written and incomplete.** The R7-4 row says "Core, tools", but the
+   claim ledger changed too. That is why the banner rule reads version tags from the text instead. Now that the
+   repository is the source of truth, "where" could be derived from the commit's changed paths.
+6. **`updated:` in every note's frontmatter is 2026-09-26**, the import date. It carries no information. Derive it
+   from git, or drop it.
+7. **Prose copies of the linter's rules** (00 Home "Rules", `README.md`) can drift from `lint()`. Generate them from
+   one list in `tools/vault.py`, or point to it.
+8. **Status §4 "The honest position" is written from v6.x** ("v6 is more constrained than v5"; "v6.2 measures the
+   gap"). It is not wrong, but its latest content is v6.4. Refresh it when R7-7 lands, with the measurement-layer
+   verdicts (the layers, the declared reference, the cardinal limit).
+9. **Independence, beyond the raters.** Every review so far came from the project's own process. The definition
+   of done in §0 needs an *outsider*. The first T7 case is a good moment to ask a human domain reader to run it.

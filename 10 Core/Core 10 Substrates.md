@@ -57,8 +57,8 @@ policy of the KL penalty. Before R7-2 one `q` played both roles, so the status c
 rational-inattention actor, whose reference is its own optimized choice marginal, has an exact regret
 identity with a marginal correction ([[B07|B7(e)]]; tier 1 in the actual actor, against the rational-inattention
 optimum). So the human actor needs no new
-carrier. What distinguishes humans from institutions is the reference: default experiments shift `q` while
-— under exclusion — leaving the evaluator fixed, which identifies `q` within a parametric family ([[B12]]). The
+carrier. What distinguishes humans from institutions is the reference: default experiments shift the chooser's own reference `q_A` while
+— under exclusion — leaving the evaluator fixed, which identifies `q_A` within a parametric family ([[B12]]). The
 exclusion restriction fails to the extent that defaults act as recommendations. Time inconsistency splits
 along the framework's existing boundary: naive present bias is a dynamic-layer phenomenon, and
 sophisticated present bias is an intrapersonal game (B §12(c)).

@@ -25,7 +25,7 @@ updated: "2026-09-26"
 | worst-case regret is not separable | A Thm [[Thm 9\|9]] | V5 | **C3** |
 | four conjugate pairings | A Prop. [[Prop 10\|10]] | V6, 0 / 20,000 each | C4 |
 | KL exposure infinite under sub-exponential tails; χ² finite under finite variance | A Prop. [[Prop 11\|11]] | V6 | **C4** |
-| behaviour identifies only the tilt (not `β`, not `q`) | A Prop. [[Prop 12\|12]] | — | C10 |
+| behaviour identifies only the tilt (not `β`, not the actor's own reference `q_A`), under (E_A) | A Prop. [[Prop 12\|12]] | — | C10 |
 | full-ray decomposition `β·R_J = D_⊥ + D_∥` (Thm [[Thm 13\|13]](a)); rescaling is axial | A Thm [[Thm 13\|13]](a), Cors [[Cor 13.3\|13.3]]–[[Cor 13.4\|13.4]] | V7, 10⁻¹² | C5 |
 | initial sign `−Cov_q(F̂,F)`; terminal value by argmax agreement | A Prop. [[Prop 14\|14]] | V8 | C6 |
 | regret is a Bregman divergence for any convex regularizer and concave target *(v6.1)* | A Prop. [[Prop 15\|15]] | V12 | C1, C7 |
@@ -117,7 +117,7 @@ updated: "2026-09-26"
 
 | Claim | Where | Why flagged |
 |---|---|---|
-| rank reversal and the conjugacy picture hold for non-Gibbs actors | C7, C8 | **the weakest joint; untested** |
+| the crossing (rank reversal) holds for every optimizer, and one index orders where it falls | C7, C8; [[ROADMAP]] T8 | tested on one instance (V5) for five optimizers: it held for all, and its location varied about 180-fold (R5, R6; §1.2). No general statement, and no index yet. *(Until v7.3.3 this row read "untested". Its other half, the conjugacy picture, is tier 1: Props [[Prop 10\|10]]–[[Prop 11\|11]] hold for any behaviour, and what actual optimizers expose is [[B02\|B §2]].)* |
 | `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | untested |
 | delay sets a bandwidth; correction amplifies error near crossover; double protection restated | C §5.1 | simulation only; the actor acting on `τ` is outside the core |
 | the closed-loop lift as the next carrier | C §5.2 | proved pieces, untested as a carrier |

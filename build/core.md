@@ -1,6 +1,10 @@
 # A — Core
 
-> **Status: v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
+> **Status: v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
+> and 17 and Prop. 18's cap hold for any actual actor. It also states the one dynamic element of (E_R), and the limit that
+> R7-5 found: the target is cardinal, so best-of-n run on the true target scores as misaligned (R7-7 is the repair).
+>
+> **v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
 > versus the reward `R` of an outer process. The weight on `R` is a derived shadow price
 > (Prop. 27), and "complies when rewarded, reverts when not" follows from one stationary dynamic element.
 > Also new: incentive masking, selection blindness and the fake-alignment gap (Props 28–30). The work
@@ -1695,8 +1699,8 @@ policy of the KL penalty. Before R7-2 one `q` played both roles, so the status c
 rational-inattention actor, whose reference is its own optimized choice marginal, has an exact regret
 identity with a marginal correction (B7(e); tier 1 in the actual actor, against the rational-inattention
 optimum). So the human actor needs no new
-carrier. What distinguishes humans from institutions is the reference: default experiments shift `q` while
-— under exclusion — leaving the evaluator fixed, which identifies `q` within a parametric family (B12). The
+carrier. What distinguishes humans from institutions is the reference: default experiments shift the chooser's own reference `q_A` while
+— under exclusion — leaving the evaluator fixed, which identifies `q_A` within a parametric family (B12). The
 exclusion restriction fails to the extent that defaults act as recommendations. Time inconsistency splits
 along the framework's existing boundary: naive present bias is a dynamic-layer phenomenon, and
 sophisticated present bias is an intrapersonal game (B §12(c)).
@@ -1764,18 +1768,25 @@ Each item is a statement the core entails, whose negation it rules out, with the
   to positive affine maps and a reference shift (Prop. 16). For best-of-n it identifies only the evaluator's
   ordering: any strictly increasing transform leaves behaviour unchanged (V26). Identification statements
   must name the actor class. The independent review's tests of which tier-4 predictions transfer to other
-  optimizers are summarized in C7. The exponential-form results (Thm 1, 13, 17; Props 3, 4, 14, 18; Cor. 1.5) are for entropic
-  actors. Prop. 15 extends the identity to any exact maximizer of a concave target minus a convex
-  regularizer. Best-of-n, quantilizers and gradient-trained policies that do not reach the regularized
-  optimum are not covered. Theorem 5(i) needs only that the actor maximizes its objective over a set
+  optimizers are summarized in C7. The exponential form enters in two ways. Thms 1, 13 and 17 and the cap
+  in Prop. 18 use it for the **intended** actor only, so they hold for any actual actor (tier 1). Props 2–4,
+  Prop. 14(ii)–(iii) and Cors 1.1–1.5 use it for the actual actor too, under (E). Prop. 15 extends the
+  identity to an intended actor that exactly maximizes a concave target minus a convex regularizer. Best-of-n,
+  quantilizers and gradient-trained policies that do not reach the regularized optimum are covered as actual
+  actors by the tier-1 results, and best-of-n compared at equal `n` by Prop. 23 (tier 2′). The tier-2 and
+  tier-4 results do not cover them. Theorem 5(i) needs only that the actor maximizes its objective over a set
   containing the intended actor.
 - **Other agents.** Only exact potential games under log-linear learning (B §13). General
   games, collusion and arms races are the largest missing layer (T1_census_routing).
 - **Target.** A single target, linear except in Prop. 15. Sets of targets (aggregation, disagreement,
-  multiple selves) are not formalized (R3_FIX_LOG).
+  multiple selves) are not formalized (R3_FIX_LOG). The target is **cardinal**: the budget and free measures
+  charge the shape of a pursuit as well as its direction, so best-of-n or a quantilizer run on the true target
+  scores as misaligned (R7-5 go-no-go). The ordinal target is ROADMAP R7-7.
 - **Observation.** i.i.d. behavioural samples, optionally with exogenous contexts (§9). No data layer for
   the evaluator; no adaptive or strategic observation.
-- **Static.** No dynamics; contexts (§9) are the only structure beyond one-shot behaviour. `X` may be a set of trajectories. KL between trajectory distributions with shared dynamics
+- **Static, with one exception.** The explanation layer's hypothesis (E_R) carries one stationary dynamic
+  element, the continuation value (Prop. 27(b)). Otherwise there are no dynamics, and contexts (§9) are the
+  only structure beyond one-shot behaviour. `X` may be a set of trajectories. KL between trajectory distributions with shared dynamics
   equals the expected sum of per-step action-distribution KLs (chain rule); divergences between occupancy
   measures are different objects.
 - **Exogenous frame and existing intent.** `q`, `β`, `F` fixed and not functions of `p`; a single `F`

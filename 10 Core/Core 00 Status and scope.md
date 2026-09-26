@@ -7,7 +7,11 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
+> **Status: v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
+> and 17 and Prop. 18's cap hold for any actual actor. It also states the one dynamic element of (E_R), and the limit that
+> R7-5 found: the target is cardinal, so best-of-n run on the true target scores as misaligned (R7-7 is the repair).
+>
+> **v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
 > versus the reward `R` of an outer process. The weight on `R` is a derived shadow price
 > (Prop. [[Prop 27|27]]), and "complies when rewarded, reverts when not" follows from one stationary dynamic element.
 > Also new: incentive masking, selection blindness and the fake-alignment gap (Props [[Prop 28|28]]–[[Prop 30|30]]). The work

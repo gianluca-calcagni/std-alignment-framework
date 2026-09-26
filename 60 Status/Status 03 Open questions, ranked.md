@@ -13,8 +13,10 @@ updated: "2026-09-26"
    outside-X 23, dynamic 20. **No further census measurement.** The PI's layer decision (T6) is deferred by
    the PI.
 1. **Does anything qualitative survive non-Gibbs actors?** C7 and C8. This decides whether the core
-   describes deployed optimizers or an idealization of them. Prop. [[Prop 15|15]] settles it for exact regularized
-   optimizers only.
+   describes deployed optimizers or an idealization of them. **Partly answered.** The tier-1 results hold for any
+   actual actor (v6.4), and Prop. [[Prop 15|15]] extends the identity to exact regularized intended actors. The crossing
+   transfers to every optimizer tested, but its location does not (R5, R6). Open: whether one index orders the
+   location (T8), and what the cardinal measures should say of a non-Gibbs optimizer on the true target (R7-7).
 2. **Does the unification exist elsewhere?** C14 — answered in R3: predominantly an index. That is now the
    headline of [[Core index|Core]].
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between

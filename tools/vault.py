@@ -477,6 +477,7 @@ def lint():
     for f, h in fz.items():
         if not os.path.exists(VAULT + f): errs.append(f"frozen file missing: {f}")
         elif hashlib.sha256(open(VAULT + f, 'rb').read()).hexdigest() != h: errs.append(f"frozen file changed: {f}")
+    errs += version_errors(notes)
     for k, n in items.items():
         o = n['fm'].get('order', 0)
         for v in n['fm'].get('depends_on', []):
@@ -511,6 +512,49 @@ def lint():
     print(f"errors: {len(errs)}"); [print('  E ' + e) for e in errs[:60]]
     print(f"warnings: {len(warns)}"); [print('  W ' + w) for w in warns[:80]]
     return len(errs)
+
+# ---------------------------------------------------------------- version banners (v7.3.3)
+# The current version is stated in four places, which must agree. Each part's status banner — the first
+# "**Status: vX**" in the part's reading order — must be at least as recent as the newest version its own text
+# refers to, as vX.Y or as a completed R7 step (the step's version comes from its hygiene-log row). It is a lower
+# bound: an edit that carries no version tag cannot be seen. Before this rule the Dictionary banner said v6.3, the
+# Boundary banner v6.4 and the Status abstract v6.6, while their parts cited R7-2 to R7-4.
+VTAG = re.compile(r'(?<![\w.])v([5-9](?:\.\d+){1,2})(?!\.?\d)')
+PART_DIRS = {'core': ('10 Core/', '15 Hypotheses/'), 'dictionary': ('20 Dictionary/',), 'boundary': ('30 Boundary/',),
+             'status': ('60 Status/',)}
+def vkey(v): return tuple(int(x) for x in v.split('.'))
+def version_errors(notes):
+    errs = []
+    hyg = notes.get('Status 05 Hygiene log'); home = notes.get('00 Home'); rm = notes.get('ROADMAP')
+    if not (hyg and home and rm): return ["version check: 00 Home, ROADMAP or the hygiene log is missing"]
+    steps = {s: v for s, v in re.findall(r'\*\*(R7-\d+)\b[^*(]*\((?:v)?(\d+(?:\.\d+)+)\)', hyg['body'])}
+    rows = [l for l in hyg['body'].split('\n') if l.startswith('| ') and not l.startswith('| Change')]
+    stated = {'00 Home title': re.search(r'^# .*?\bv(\d+(?:\.\d+)+)\s*$', home['body'], re.M),
+              'README.md title': re.search(r'^# .*?\bv(\d+(?:\.\d+)+)\s*$', open(VAULT + 'README.md', encoding='utf-8').read(), re.M),
+              'ROADMAP §0 Current': re.search(r'^\|\s*\*\*Current\*\*\s*\|\s*\*\*v(\d+(?:\.\d+)+)', rm['body'], re.M),
+              'hygiene log, newest row': VTAG.search(rows[0]) if rows else None}
+    missing = [w for w, m in stated.items() if not m]
+    if missing: return [f"version check: no version found in {missing}"]
+    stated = {w: m.group(1) for w, m in stated.items()}
+    cur = stated['00 Home title']
+    if len(set(stated.values())) > 1: errs.append(f"the current version is stated inconsistently: {stated}")
+    for part, dirs in PART_DIRS.items():
+        ks = [k for k, n in notes.items() if n['path'].startswith(dirs)]
+        newest, where = None, None
+        for k in ks:
+            t = strip_gen(notes[k]['body'])
+            tags = VTAG.findall(t) + [steps[s] for s in re.findall(r'\b(R7-\d+)\b', t) if s in steps]
+            for v in tags:
+                if newest is None or vkey(v) > vkey(newest): newest, where = v, k
+        heads = sorted([k for k in ks if notes[k]['fm'].get('part') == part and notes[k]['fm'].get('type') == 'section'],
+                       key=lambda k: notes[k]['fm'].get('order', 0))
+        banner = next(((k, m.group(1)) for k in heads for m in [re.search(r'\*\*Status: v(\d+(?:\.\d+)+)', notes[k]['body'])] if m), None)
+        if not banner: errs.append(f"{part}: no '**Status: vX**' banner in the part's section notes"); continue
+        bk, bv = banner
+        if vkey(bv) > vkey(cur): errs.append(f"{bk}: status banner v{bv} is later than the current version v{cur}")
+        if newest and vkey(bv) < vkey(newest):
+            errs.append(f"{bk}: status banner v{bv} is older than the part's own text, which refers to v{newest} (in {where})")
+    return errs
 
 # ---------------------------------------------------------------- queries
 def deps(k):
