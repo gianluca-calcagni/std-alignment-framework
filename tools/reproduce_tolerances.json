@@ -1,0 +1,7 @@
+{
+ "_rule": "Declared exceptions to exact reproduction. Each entry names a block, a substring of the reference line, a relative tolerance for the numbers on that line, and why the line measures numerical noise rather than a result. Keep this list short: a result that moves across machines is a finding, not a tolerance.",
+ "V33": [
+  {"line": "(central finite difference)", "rel": 0.5,
+   "why": "Central finite differences with h = 1e-6 are dominated by round-off, and their digits depend on the CPU's SIMD path. Reproduced locally by disabling AVX-512: the relative error moved from 5.5e-05 to 5.8e-05, with every other V33 line unchanged. The check's claim is that the derivative matches the variance to finite-difference noise, far below Var."}
+ ]
+}

@@ -45,7 +45,9 @@ The v6.6 flat files are frozen in `archive/v6.6_flat/`. The one-time migration i
   - all 34 `verify.py` blocks, in parallel, each compared with its reference output;
   - `final_audit.py`, compared with its reference output.
 
-  Residual-scale digits (|x| ≤ 1e-9) may differ across machines. Any other difference fails the run.
+  Residual-scale digits (|x| ≤ 1e-9) may differ across machines. So may a few lines that measure numerical
+  noise (finite differences, for instance), each with a declared tolerance and its reason in
+  `tools/reproduce_tolerances.json`. Any other difference fails the run.
 - **One roadmap step, one pull request.** The PI reviews the diff and merging accepts the step. Pre-registrations
   are committed and pushed before any computation, so the commit timestamp dates them.
 - **Honesty rules.** A falsified prediction is recorded, not repaired. Retractions are never deleted. A property of
