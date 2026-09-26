@@ -65,7 +65,7 @@ Mackay are used in B §11.
 | Fluri, L., Lang, L., Abate, A., Forré, P., Krueger, D. & Skalse, J. (2025). The perils of optimizing learned reward functions: low training error does not guarantee low regret. *Proceedings of ICML 2025*, PMLR 267, 17306–17377. arXiv:2406.15753. | B §2; D §2 row 44 | V |
 | Kwa, T., Thomas, D. & Garriga-Alonso, A. (2024). Catastrophic Goodhart: regularizing RLHF with KL divergence does not mitigate heavy-tailed reward misspecification. *NeurIPS 2024*. arXiv:2407.14503. | A Prop. 11; B §2; C4 | V |
 | Laidlaw, C., Singhal, S. & Dragan, A. (2025). Correlated proxies: a new definition and improved mitigation for reward hacking. *ICLR 2025*. arXiv:2403.03185. | B §§2, 5 | V |
-| Gao, L., Schulman, J. & Hilton, J. (2023). Scaling laws for reward model overoptimization. *Proceedings of ICML 2023*, PMLR 202, 10835–10866. arXiv:2210.10760. | B §4; C7, C9 | V |
+| Gao, L., Schulman, J. & Hilton, J. (2023). Scaling laws for reward model overoptimization. *Proceedings of ICML 2023*, PMLR 202, 10835–10866. arXiv:2210.10760. | B §4; C7, C9; T3 results | V |
 | Manheim, D. & Garrabrant, S. (2018). Categorizing variants of Goodhart's law. arXiv:1803.04585. | B §3 | K |
 | Karwowski, J., Hayman, O., Bai, X., Kiendlhofer, K., Griffin, C. & Skalse, J. (2024). Goodhart's law in reinforcement learning. *ICLR 2024*. arXiv:2310.09144. | B §3 | U |
 | Beirami, A., Agarwal, A., Berant, J., D'Amour, A., Eisenstein, J., Nagpal, C. & Suresh, A. T. (2024). Theoretical guarantees on the best-of-n alignment policy. arXiv:2401.01879. — the BoN KL expression is an upper bound | B §4; MSG; R7-5 go-no-go | U (bound itself: V) |

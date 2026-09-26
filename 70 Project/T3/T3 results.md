@@ -21,6 +21,38 @@ is added to the repository.
 **S2.** No other source could be read: every publisher and preprint host is blocked in this environment (web
 search returns snippets only). None was searched in full.
 
+## The passages and readings used
+
+Quoted from the PMLR version:
+- §1: "We find empirically that for best-of-n (BoN) sampling, `R_bon(d) = d(α_bon − β_bon·d)`"; "Here, `R(0) := 0` by
+  convention because the reward is translation invariant."
+- §2: "The KL divergences for BoN are computed analytically: `KL_bon = log n − (n−1)/n`."
+- §2.1: "The 6B reward model from Ouyang et al. (2022) is used as the gold RM, and our proxy RMs vary from 3M to 3B
+  parameters"; the synthetic comparisons are labelled by "always marking the trajectory with the higher gold RM
+  score as preferred"; 100,000 comparisons, 10 % held out "for computing the validation loss of RMs".
+- §2.2: "we recenter each RM such that the average reward of the initial policy is 0. We also unit normalize the
+  variance of the gold RM scores." Footnote 5: "We later decided this was unnecessary but decided not to change it."
+  And: "All renormalization and recalibration is applied after the experiments; this does not affect BoN at all."
+- §3.2: "We hold policy size (1.2B) and data size (90,000) constant … for the gold RM scores, `α_bon` and `β_bon`
+  change smoothly with RM size (Figures 3a and 3b). For RL, we find that we can hold `α_RL` constant across all RM
+  sizes."
+
+**Figure 3a, gold `α_bon`, read point by point** (PMLR p. 4; rendered at 220 dpi). Nine points, left to right on a
+logarithmic RM-size axis; the sizes are read positions, not the paper's labels. Reading uncertainty ±10 % (data
+rule 1).
+
+| Point | RM size (read) | `α_bon` (read) | `ρ` needed for P1 exactly (`α/√2`) |
+|---|---|---|---|
+| 1 | ≈ 3·10⁶ | 0.51 | 0.36 |
+| 2 | ≈ 1.2·10⁷ | 0.52 | 0.36 |
+| 3 | ≈ 2.5·10⁷ | 0.55 | 0.39 |
+| 4 | ≈ 4·10⁷ | 0.57 | 0.40 |
+| 5 | ≈ 8·10⁷ | 0.58 | 0.41 |
+| 6 | ≈ 3·10⁸ | 0.62 | 0.44 |
+| 7 | ≈ 7·10⁸ | 0.65 | 0.46 |
+| 8 | ≈ 1.2·10⁹ | 0.63 | 0.45 |
+| 9 | ≈ 3·10⁹ | 0.64 | 0.45 |
+
 ## Verdict under the registered rules
 
 **Data rule 5 applies: C9 is not testable from published data.** P1 and P2 are not evaluated. This is a clean
