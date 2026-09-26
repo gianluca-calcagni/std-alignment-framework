@@ -204,7 +204,7 @@ memory.**
 | Claim | Where | Why flagged |
 |---|---|---|
 | the crossing (rank reversal) holds for every optimizer, and one index orders where it falls | C7, C8; ROADMAP T8 | tested on one instance (V5) for five optimizers: it held for all, and its location varied about 180-fold (R5, R6; §1.2). No general statement, and no index yet. *(Until v7.3.3 this row read "untested". Its other half, the conjugacy picture, is tier 1: Props 10–11 hold for any behaviour, and what actual optimizers expose is B §2.)* |
-| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | untested |
+| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | **not testable from published data** (T3, pre-registered): Gao et al. report `α_bon` ≈ 0.51–0.65 (figure only) and `sd = 1`, but not `ρ`. Needs replication (T3b) |
 | delay sets a bandwidth; correction amplifies error near crossover; double protection restated | C §5.1 | simulation only; the actor acting on `τ` is outside the core |
 | the closed-loop lift as the next carrier | C §5.2 | proved pieces, untested as a carrier |
 | transverse errors compose along chains | C §5.3 | unexamined |
@@ -333,7 +333,8 @@ verbatim from v5, even where their "replaced by" column has itself since been re
    headline of Core.
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between
    divergence orders is idle in practice.
-4. **Does `α ≈ √2·ρ·sd` hold against published coefficients?** C9. It is the cheapest external contact.
+4. **Does `α ≈ √2·ρ·sd` hold against published coefficients?** C9. It was the cheapest external contact, and it is closed as a clean negative: the published data lack the
+   proxy–gold correlation (T3 results). Replication with open models (T3b) is the next route.
 5. **Should the closed-loop lift become the carrier?** C12, ROADMAP T4.
 6. **The equilibrium fork.** Deferred; the cost is now concrete in three places (C §4).
 7. **A fixed-intent version of Thm 9.** C3.
@@ -399,6 +400,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **v7.4 (T3).** Pre-registered (T3 preregistration, `37be3d8`) before retrieval; the environment could not reach the paper, so the PI supplied the PDFs (not added to the repository). Gao et al. report `α_bon` only in a figure and fix `sd = 1` by normalization, but give no proxy–gold correlation: under data rule 5, **C9 is not testable from published data** (T3 results). C9, the claim ledger, open question 4 and the ROADMAP are updated; T3b (replication) is recorded | Boundary, Status, ROADMAP |
 | **v7.4 (archive).** The PI's Alignment Subframework, the source of retraction rows 1–6, is archived unedited in `archive/alignment_subframework/` with a provenance note, and its hashes are frozen in `tools/frozen.json`. ROADMAP §6 and `README.md` point to it | archive, ROADMAP, README, tools |
 | **v7.4 (roadmap, reworked).** With the source of retraction rows 1–6 now supplied by the PI (the Alignment Subframework, not in the repository), ROADMAP §6 is rebuilt around the five gaps: G0 (the frame), G1–G5 (specification, transmission, grounding, persistence, verification), C1 (their coupling) and L1–L4 (levers, the frame table, the principal's compression, execution). The first draft's D2 filed the resolution-mismatch scenarios under grounding; the source shows they are transmission and specification underdetermination (NOTES §1) | ROADMAP, NOTES |
 | **v7.4 (roadmap).** The PI accepted §5, item 1: next are T3 and one T7 case. New ROADMAP §6: eight dropped ideas (D1–D8), queued to brainstorm, each with its killing correction, what survives, and the rules for bringing it back. The v5 texts behind rows 1–30 are in neither the repository nor the v6.2 package the PI supplied; D1 and part of D2 wait on them. NOTES: the slow-tools working rule | ROADMAP, NOTES |

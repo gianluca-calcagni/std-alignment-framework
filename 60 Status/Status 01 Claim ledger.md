@@ -122,7 +122,7 @@ updated: "2026-09-26"
 | Claim | Where | Why flagged |
 |---|---|---|
 | the crossing (rank reversal) holds for every optimizer, and one index orders where it falls | C7, C8; [[ROADMAP]] T8 | tested on one instance (V5) for five optimizers: it held for all, and its location varied about 180-fold (R5, R6; §1.2). No general statement, and no index yet. *(Until v7.3.3 this row read "untested". Its other half, the conjugacy picture, is tier 1: Props [[Prop 10\|10]]–[[Prop 11\|11]] hold for any behaviour, and what actual optimizers expose is [[B02\|B §2]].)* |
-| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | untested |
+| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | **not testable from published data** (T3, pre-registered): Gao et al. report `α_bon` ≈ 0.51–0.65 (figure only) and `sd = 1`, but not `ρ`. Needs replication (T3b) |
 | delay sets a bandwidth; correction amplifies error near crossover; double protection restated | C §5.1 | simulation only; the actor acting on `τ` is outside the core |
 | the closed-loop lift as the next carrier | C §5.2 | proved pieces, untested as a carrier |
 | transverse errors compose along chains | C §5.3 | unexamined |

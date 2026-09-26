@@ -22,7 +22,8 @@ updated: "2026-09-26"
    headline of [[Core index|Core]].
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between
    divergence orders is idle in practice.
-4. **Does `α ≈ √2·ρ·sd` hold against published coefficients?** C9. It is the cheapest external contact.
+4. **Does `α ≈ √2·ρ·sd` hold against published coefficients?** C9. It was the cheapest external contact, and it is closed as a clean negative: the published data lack the
+   proxy–gold correlation ([[T3 results]]). Replication with open models (T3b) is the next route.
 5. **Should the closed-loop lift become the carrier?** C12, [[ROADMAP]] T4.
 6. **The equilibrium fork.** Deferred; the cost is now concrete in three places (C §4).
 7. **A fixed-intent version of Thm [[Thm 9|9]].** C3.

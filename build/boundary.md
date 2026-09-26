@@ -153,8 +153,10 @@ other actors (C7).
 paths, and approached by best-of-n as `n` grows (B §4).
 **Falsifier.** Published or replicated `α_bon` off by more than a factor 1.5 from `√2·ρ·sd` when `ρ` (the
 proxy–gold correlation under the initial policy) is measured.
-**Cheapest route.** Check whether Gao et al. report the initial proxy–gold correlation; otherwise replicate
-with small open models.
+**Cheapest route — run, clean negative (T3).** Gao et al. do not report the initial proxy–gold correlation; they fix
+`sd = 1` by normalization and show `α_bon` ≈ 0.51–0.65 only in a figure. C9 is **not testable from published data**;
+it needs `ρ` between about 0.24 and 0.69 to hold within the band (T3 results). Next: replicate with small open
+models (T3b).
 
 ### C10 — Identification (Props 12 and 16, Core §10)
 **Asserts.** Value-unit statements need an external unit channel; institutions lack one, so the
