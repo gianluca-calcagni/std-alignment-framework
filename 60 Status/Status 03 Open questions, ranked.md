@@ -16,7 +16,8 @@ updated: "2026-09-26"
    describes deployed optimizers or an idealization of them. **Partly answered.** The tier-1 results hold for any
    actual actor (v6.4), and Prop. [[Prop 15|15]] extends the identity to exact regularized intended actors. The crossing
    transfers to every optimizer tested, but its location does not (R5, R6). Open: whether one index orders the
-   location (T8), and what the cardinal measures should say of a non-Gibbs optimizer on the true target (R7-7).
+   location (T8). What the measures should say of a non-Gibbs optimizer on the true target is now a declaration
+   (R7-7): under an ordinal target, nothing; under a cardinal one, the shape of its pursuit.
 2. **Does the unification exist elsewhere?** C14 — answered in R3: predominantly an index. That is now the
    headline of [[Core index|Core]].
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between
@@ -25,7 +26,9 @@ updated: "2026-09-26"
 5. **Should the closed-loop lift become the carrier?** C12, [[ROADMAP]] T4.
 6. **The equilibrium fork.** Deferred; the cost is now concrete in three places (C §4).
 7. **A fixed-intent version of Thm [[Thm 9|9]].** C3.
-8. **Which Layer-0 ontology?** Causal influence diagrams were proposed in R3; the choice belongs to the PI
+8. **A certified computation of the ordinal budget measure** (R7-7). Its zeros are exact; its values come from a
+   non-convex solver, which failed once in 393 ([[R7-7 results]]).
+9. **Which Layer-0 ontology?** Causal influence diagrams were proposed in R3; the choice belongs to the PI
    ([[R3_FIX_LOG]]).
 
 ---

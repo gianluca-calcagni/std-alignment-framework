@@ -7,7 +7,15 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
+> **Status: v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
+> and everything before v7.4) or the ordinal set `[F]_ord`, when only the order of outcomes is intended (Def. 17).
+> The contract is restated for target sets (Def. 11), and every target set's budget and free measures satisfy it
+> (Prop. 31). The ordinal free measure has a closed form by isotonic regression, and it scores best-of-n and
+> quantilizers on the true target as aligned (Prop. 32). Pre-registered: 6 of 10 predictions held, and the
+> registered falsifier D4 fired, because the ordinal *budget* measure has no closed form and its solver failed once
+> in 393 (R7-7 results).
+>
+> **v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
 > and 17 and Prop. 18's cap hold for any actual actor. It also states the one dynamic element of (E_R), and the limit that
 > R7-5 found: the target is cardinal, so best-of-n run on the true target scores as misaligned (R7-7 is the repair).
 >

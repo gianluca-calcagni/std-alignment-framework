@@ -26,7 +26,8 @@ substrate, runs it through the framework, and gets:
 
 Until that works on real cases, the framework is a calculus, not a standard.
 
-**Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). v7.3.3 was a
+**Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). **R7-7 is done (v7.4): target sets, the ordinal
+target; D4 fired on the budget convention** ([[R7-7 results]]). Next is the PI's choice (ROADMAP §0). v7.3.3 was a
 review against §0's goal: its recommendations are [[ROADMAP]] §5 (for the PI), its other observations §7 below. **v7.0: the
 package is an Obsidian vault.** Next is R7-7 (target sets, confirmed by the PI), led by the ordinal target. Apply the PI's test — a real case,
 or no step — before R7-6 and R7-8 too.
@@ -78,6 +79,9 @@ serves.
 | **Allow-listing a cycle instead of fixing it** | v6.6's depgraph allow-listed Prop. 20 → B11 as "attribution only"; v7.0's linter, which treats dictionary entries as nodes, showed it closed a real cycle through B04 and Prop. 21 | a citation that is "only attribution" does not belong in a proof: move it out, don't allow-list it |
 | **Measuring after the answer has converged** | three rounds of routing (T1, T1b, T1c) | when a measurement stops changing what I'd build, stop measuring |
 | **Headlines overclaim scope** | row 52: "a formalization of alignment" | put the scope in the headline, not only in §12 |
+| **Registering a threshold without deriving its scale** | R7-7: P8 tested a strict inequality as "gap > 10⁻¹²" when the gap is second order in `M_ord`; P10 used an absolute `10⁻¹⁰` on a 4,473-nat value; P6 predicted that a cardinal measure moves under monotone maps, forgetting that anti-aligned behaviour sits at the half-ray's endpoint `t = 0` | before registering a number, derive how the quantity scales (its order in the small parameter, its range) and make the tolerance relative or scaled. Run the endpoint and sign cases through the prediction, in writing |
+| **A pass rate as a reliability rule** | R7-7 D1: the solver's starts agreed in 98.7 % of instances, so the rule passed; the one failure that mattered (D4) was on an instance where they disagreed | reliability rules are per instance: a flag on each value, not a rate over values |
+| **Self-matching `pkill`, twice** | R7-4, and again in R7-7: `pkill -f "verify.py V35"` matched its own shell and killed it | stop processes by PID, found with `ps`; never `pkill -f` with a pattern that appears in the command line itself |
 | **Correcting the ledger, not the prose that repeats it** | v7.3.3 review: Core §12 still called Thms 1, 13, 17 and Prop. 18 entropic-only three versions after rows 67–68 made them tier 1; Status §1.4 still said "untested" of the crossing that §1.2 records as tested; three part banners were two to four versions stale | a tier or status change is a retraction for grep purposes: grep the old wording across the vault, prose included. Banners are now linted; prose contradictions are not, so the grep is still mine to do |
 | **Calling a pattern derived when the model builds it in** | Prop. 27(c): "complies when rewarded, reverts when not … derived, not assumed". Def. 16 puts `m_c` inside the survival probability `s_c`, so `κ_c = 0` at `m_c = 0` by construction. What is derived is the *size* of `κ_c` (a shadow price), not the on/off pattern | before writing "derived", check whether the conclusion's switch is already in a definition. Say which part is derived |
 | **Choosing internal refinement over external contact** | R6 named diagnostics and cross-optimizer predictions as underserved (R6_LOG §1); the next five steps were refactors (R7-0 to R7-4). Each passed the drift test alone | the drift test must also be applied to the *sequence*: after two internal steps, the next step makes external contact unless the PI says otherwise |
@@ -185,6 +189,9 @@ than `κ = 0`, by pushing the agent onto reward near-ties where `G` decides.
 - Suspicion: many practical claims of "overoptimization" at small KL are shape, not order. Testable in T7.
 - Distrust: random Gaussian `F` and noise; real reward-model errors are structured (length, sycophancy)
   and may reorder systematically. Do not quote the shares outside the probe's setting.
+- **R7-7 (X2): not replicated on another generator.** With noise on log-probabilities instead of the
+  evaluator, the ordering share has median 0.26 at small noise, not 0.02. The shares are generator
+  properties. The hunch survives only as "shape can dominate"; how often is an empirical question for T7.
 
 **H6. Human default experiments are the cleanest empirical test bed for identification** *[conditional on
 exclusion]*.
@@ -222,6 +229,9 @@ exclusion]*.
 - **Two layers (R7-3).** Measurement = `(X, q, F, κ)` plus `p̂`; explanation = evaluator, error, `q_A`, actor models.
   Lint enforces the split. Anything I add that uses `F̂` or an actor model goes in the explanation layer, however
   "basic" it feels.
+- **Target sets (R7-7).** Cardinal (`[F]₊`) or ordinal (`[F]_ord`) is the principal's declaration, like the
+  convention. Don't let the framework choose it, and don't call shape "misdirection" without saying which set
+  was declared.
 - The generality measurement: frozen. Named 78 %, specific 55–61 %, full 29 %.
 - Missing layers, by count: strategic 51 > statistical 31 > frame 23 > dynamic 20.
 - Justified exceptions: no single target, and internals.
@@ -285,5 +295,8 @@ decided; each says what would close it.
 8. **Status §4 "The honest position" is written from v6.x** ("v6 is more constrained than v5"; "v6.2 measures the
    gap"). It is not wrong, but its latest content is v6.4. Refresh it when R7-7 lands, with the measurement-layer
    verdicts (the layers, the declared reference, the cardinal limit).
-9. **Independence, beyond the raters.** Every review so far came from the project's own process. The definition
+9. **The ordinal budget measure has no closed form** (R7-7, D4). A certified algorithm, or a closed form in a
+   special case (two levels; one pooled block), would let the default convention carry an ordinal target with
+   exact numbers, not only exact zeros.
+10. **Independence, beyond the raters.** Every review so far came from the project's own process. The definition
    of done in §0 needs an *outsider*. The first T7 case is a good moment to ask a human domain reader to run it.

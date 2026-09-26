@@ -11,7 +11,19 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.3.3** — a review of the whole package against its stated goal.
+**Status: v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
+intended. Under that declaration, best-of-n and quantilizers run on the true target are aligned (`M_ord = 0`),
+which repairs the defect v7.3.1 found. Three hedges:
+- **Under the budget convention the repair is exact only at zero.** The ordinal budget measure has no closed
+  form. A solver computes it, and the registered falsifier D4 fired: on one case of 393 the solver did not
+  certify a zero. Zeros are exact without it (Prop. [[Prop 32|32]](f)); non-zero values carry solver error.
+- **4 of 10 predictions failed as registered** (P6, P7, P8, P10), on test design or on predictions about the
+  cardinal measures; one proved claim, a strict inequality, is withdrawn under the registered rule D2
+  ([[R7-7 results]]).
+- **Which set to declare is the principal's choice, not the framework's.** A positive cardinal measure for a
+  non-Gibbs optimizer may be shape, not misdirection; the ordinal measure separates the two.
+
+**v7.3.3** — a review of the whole package against its stated goal.
 - **Nothing proved changed, and every numerical check still reproduces.** The review found no error in the
   proofs it read.
 - **Status text had gone stale.** This abstract stood at v6.6, the Dictionary banner at v6.3 and the Boundary

@@ -5,7 +5,19 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.3.3** — a review of the whole package against its stated goal.
+**Status: v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
+intended. Under that declaration, best-of-n and quantilizers run on the true target are aligned (`M_ord = 0`),
+which repairs the defect v7.3.1 found. Three hedges:
+- **Under the budget convention the repair is exact only at zero.** The ordinal budget measure has no closed
+  form. A solver computes it, and the registered falsifier D4 fired: on one case of 393 the solver did not
+  certify a zero. Zeros are exact without it (Prop. 32(f)); non-zero values carry solver error.
+- **4 of 10 predictions failed as registered** (P6, P7, P8, P10), on test design or on predictions about the
+  cardinal measures; one proved claim, a strict inequality, is withdrawn under the registered rule D2
+  (R7-7 results).
+- **Which set to declare is the principal's choice, not the framework's.** A positive cardinal measure for a
+  non-Gibbs optimizer may be shape, not misdirection; the ordinal measure separates the two.
+
+**v7.3.3** — a review of the whole package against its stated goal.
 - **Nothing proved changed, and every numerical check still reproduces.** The review found no error in the
   proofs it read.
 - **Status text had gone stale.** This abstract stood at v6.6, the Dictionary banner at v6.3 and the Boundary
@@ -127,6 +139,8 @@ memory.**
 | selection sees only rewarded behaviour (any actor); the selection differential between types vanishes at rate `β·gap_R` *(R7-4)* | Core Prop. 29 | V34 (P8, window) | C07 |
 | fake-alignment gap: `Γ_free →` deployment misalignment when `argmax R = argmax F` in evaluation; reward hacking exposed, with limit `−log sup_t p_{F,t}(x_R)` *(R7-4)* | Core Prop. 30 | V34 (P6, P7) | C15 |
 | the misalignment contract (M1–M9); budget and free measures satisfy it; the price measure fails M5 (it charges a right-target agent at the wrong intensity); raw `ΔF` fails M1–M2 *(R7-0)* | A Def. 11, Prop. 24 | V30 | C5 |
+| **target sets** *(R7-7)*: the contract restated for a declared set `𝒯` (M1, M3, M5); every target set's budget and free measures satisfy it; `[F]₊` gives back Def. 10 exactly; a larger set can only lower the measures | Core Def. 17, Def. 11, Prop. 31 | V35 (P5, P9, P10) | C05 |
+| **the ordinal measure** *(R7-7)*: `M_ord` in closed form (isotonic regression; the within-block divergence from `q`); the decomposition and the budget split `KL(p̂‖q) = M_ord + KL(p°‖q)`; invariance under every increasing map; `M_ord ≤ M_budget([F]_ord) ≤ M_budget`, with equal zero sets. *The strict first inequality failed as registered (P8) and is withdrawn from the statement* | Core Prop. 32 | V35 (P1–P4, P6, P8) | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark 13.5 | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. B4 | V9 | C9 |
@@ -139,6 +153,8 @@ memory.**
 
 | Claim | Evidence | Scope |
 |---|---|---|
+| the ordinal budget measure has no closed form; a five-start solver certified `≤ 10⁻⁸` on 392 of 393 best-of-`k` and quantilizer cases, and returned `7.3·10⁻⁶` on one, where the starts disagreed (D4 fired) *(R7-7)* | V35; R7-7 results | solver-dependent |
+| the share of the cardinal `M_free` that is ordering error: median 0.26 at small noise on V35's generator, against 0.02 on R7-5's *(R7-7, exploratory)* | V35 X2 | generator-dependent; not to be quoted across generators |
 | masking is not monotone: a moderate incentive reveals more about the own objective than none in 50 % of random instances (pre-registered 10–70 %) *(R7-4)* | V34 | generator-dependent |
 | under reward hacking, evaluation misalignment rises with the incentive (median ×4.6 from `κ = 0` to `300`) *(R7-4, not pre-registered)* | V34 | generator-dependent |
 | slack distributions of every bound | V1, V2, V4 | random instances; the generators are in `verify.py` |
@@ -311,7 +327,8 @@ verbatim from v5, even where their "replaced by" column has itself since been re
    describes deployed optimizers or an idealization of them. **Partly answered.** The tier-1 results hold for any
    actual actor (v6.4), and Prop. 15 extends the identity to exact regularized intended actors. The crossing
    transfers to every optimizer tested, but its location does not (R5, R6). Open: whether one index orders the
-   location (T8), and what the cardinal measures should say of a non-Gibbs optimizer on the true target (R7-7).
+   location (T8). What the measures should say of a non-Gibbs optimizer on the true target is now a declaration
+   (R7-7): under an ordinal target, nothing; under a cardinal one, the shape of its pursuit.
 2. **Does the unification exist elsewhere?** C14 — answered in R3: predominantly an index. That is now the
    headline of Core.
 3. **Are evaluator errors that matter heavy-tailed?** C4. If not, the structural difference between
@@ -320,7 +337,9 @@ verbatim from v5, even where their "replaced by" column has itself since been re
 5. **Should the closed-loop lift become the carrier?** C12, ROADMAP T4.
 6. **The equilibrium fork.** Deferred; the cost is now concrete in three places (C §4).
 7. **A fixed-intent version of Thm 9.** C3.
-8. **Which Layer-0 ontology?** Causal influence diagrams were proposed in R3; the choice belongs to the PI
+8. **A certified computation of the ordinal budget measure** (R7-7). Its zeros are exact; its values come from a
+   non-convex solver, which failed once in 393 (R7-7 results).
+9. **Which Layer-0 ontology?** Causal influence diagrams were proposed in R3; the choice belongs to the PI
    (R3_FIX_LOG).
 
 ---
@@ -380,6 +399,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **R7-7 (v7.4).** Pre-registered in R7-7 preregistration (sha256 `21170433…`, commit `28903d4`) before any computation. New: Def. 17 (target sets); Props 31–32; `V35`; R7-7 results; the post-hoc diagnosis `70 Project/R7/r77_diagnose.py` and its output. Restated: Def. 11 (M1, M3, M5 refer to the declared target set) and Def. 12 (an instance is `(X, q, 𝒯, κ)`); notes on Defs 8 and 10, Prop. 24 and Overview 0. No proof changed. M7: for `[F]₊` every definition reads as before. Outcomes: P1–P5 and P9 held; P6, P7, P8 and P10 failed as registered; D4 fired (the ordinal budget measure's solver failed once in 393). Under D2 the strict inequality of Prop. 32(f) is withdrawn from the statement. Reproduction: V1–V34 and F1–F8 were rerun; only F6's count line changed (61 → 64 results, 34 → 35 blocks), by construction, and its reference is updated. V35 was rerun on a second SIMD path before its output was recorded; three solver-dependent numbers got declared tolerances. Tooling: symbols `𝒯`, `[F]_ord`, `M_ord`, `C_F`, `I_free`, `I_budget` belong to Def. 17 (the `C_F` pattern excludes the capacity actor `p^C_F`); CI runs `V35`. Found on the way: the R7-5 probe ran the isotonic regression per state, which is right only without tied levels; V35 aggregates to levels first. Process slip: a self-matching `pkill` killed its own shell, as in R7-4; the runs were then stopped by PID | Core, Status, ROADMAP, NOTES, tools, verify |
 | **v7.3.3 (review).** A review of the package against its goal (ROADMAP §1), asked for by the PI. No error was found in the proofs read. All 34 `verify.py` blocks and `final_audit.py` reproduce on a second machine (Intel Xeon, AVX-512). **Stale status text, corrected.** The Status abstract stood at v6.6, the Dictionary banner at v6.3 and the Boundary banner at v6.4, while their parts cited R7-2 to R7-4; each now summarizes what changed since. Core §12's actor paragraph called Thms 1, 13, 17 and Prop. 18 entropic-only and best-of-n uncovered, against the tier table since v6.4 (rows 67–68), and said "no dynamics" against Prop. 27(b); it now matches, and states the cardinal-target limit R7-5 found. §1.4 listed the crossing as untested, which §1.2 and C8 record as tested in R5 and R6. §1.1's Prop. 12 row and Core §10 said `q` where R7-2 made it `q_A`. §3's question 1 is marked partly answered. **Tooling.** `lint` checks that the current version is stated the same in 00 Home, `README.md`, ROADMAP §0 and this log's newest row. It also checks that each part's status banner (the first `**Status: vX**` in its reading order) is at least as recent as the newest version its own text refers to, as `vX.Y` or as a completed R7 step, dated by its row here. It is a lower bound: an edit that carries no version tag is invisible to it. It found exactly the three stale banners, and each of its error paths was tested by a planted violation. The contradictions in §12 and §1.4 were found by reading, not by the rule. **New:** ROADMAP §5, the review's recommendations for the PI; NOTES_claude §7, its other observations | Core, Dictionary, Boundary, Status, ROADMAP, NOTES, README, tools |
 | **v7.3.2 (repository).** The vault moved to a public GitHub repository, [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), under the PI's AGPL-3.0 license. New files: `.github/workflows/checks.yml` runs the vault checks, all 34 `verify.py` blocks in parallel, and `final_audit.py` on every push and pull request. `tools/reproduce.py` compares a rerun with the committed reference outputs. It is exact except for residual-scale digits (magnitude ≤ 1e-9). `requirements.txt` pins numpy 2.4.4, scipy 1.17.1 and pybtex 0.26.1, the reference environment. `.gitignore` is also new. The R6 blind-test answer key was never part of the vault and is not in the repository. **The first CI run** failed V33. Its finite-difference line measures round-off, which depends on the CPU's SIMD path; this was reproduced locally by disabling AVX-512. The second run passed V33 and the audit, but failed V25 on the same kind of line: forward differences, round-off-dominated. GitHub's runners differ in hardware, so each run samples a different CPU. The first run's audit failure could not be read from the session. Emulating an AVX2-only CPU locally reproduces it: the local optimizer's shortfall in F1 and a round-off measure in F3 move. Fixes: those lines get declared upper bounds — what each check actually claims — in `tools/reproduce_tolerances.json`, with their reasons, and every other line must still reproduce exactly; CI failures are reported as annotations, readable without the raw logs; the runner is pinned to `ubuntu-24.04` | all |
 | **v7.3.2 (bibliography).** `references.bib` now covers every source note: 102 entries, and the six R7-5 sources are placed in their section. Each source note names its entries (`bibkey`). `lint` enforces a one-to-one match, rejects repeated fields, and requires `note={check …}` on every status-U entry. That rule found two missing markers (Stratonovich 1965, Verdun 2025). `sync` generates the order of the entries. The file parses in pybtex. Census attributions (Part C) stay out of it, by rule | Sources, tools |

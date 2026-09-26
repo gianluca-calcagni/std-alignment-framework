@@ -57,6 +57,8 @@ updated: "2026-09-26"
 | selection sees only rewarded behaviour (any actor); the selection differential between types vanishes at rate `β·gap_R` *(R7-4)* | Core Prop. [[Prop 29\|29]] | [[V34]] (P8, window) | [[C07]] |
 | fake-alignment gap: `Γ_free →` deployment misalignment when `argmax R = argmax F` in evaluation; reward hacking exposed, with limit `−log sup_t p_{F,t}(x_R)` *(R7-4)* | Core Prop. [[Prop 30\|30]] | [[V34]] (P6, P7) | [[C15]] |
 | the misalignment contract (M1–M9); budget and free measures satisfy it; the price measure fails M5 (it charges a right-target agent at the wrong intensity); raw `ΔF` fails M1–M2 *(R7-0)* | A Def. [[Def 11\|11]], Prop. [[Prop 24\|24]] | V30 | C5 |
+| **target sets** *(R7-7)*: the contract restated for a declared set `𝒯` (M1, M3, M5); every target set's budget and free measures satisfy it; `[F]₊` gives back Def. 10 exactly; a larger set can only lower the measures | Core Def. [[Def 17\|17]], Def. [[Def 11\|11]], Prop. [[Prop 31\|31]] | [[V35]] (P5, P9, P10) | [[C05]] |
+| **the ordinal measure** *(R7-7)*: `M_ord` in closed form (isotonic regression; the within-block divergence from `q`); the decomposition and the budget split `KL(p̂‖q) = M_ord + KL(p°‖q)`; invariance under every increasing map; `M_ord ≤ M_budget([F]_ord) ≤ M_budget`, with equal zero sets. *The strict first inequality failed as registered (P8) and is withdrawn from the statement* | Core Prop. [[Prop 32\|32]] | [[V35]] (P1–P4, P6, P8) | [[C05]] |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. [[Prop 22\|22]] | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark [[Rem 13.5\|13.5]] | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. [[B04\|B4]] | V9 | C9 |
@@ -69,6 +71,8 @@ updated: "2026-09-26"
 
 | Claim | Evidence | Scope |
 |---|---|---|
+| the ordinal budget measure has no closed form; a five-start solver certified `≤ 10⁻⁸` on 392 of 393 best-of-`k` and quantilizer cases, and returned `7.3·10⁻⁶` on one, where the starts disagreed (D4 fired) *(R7-7)* | [[V35]]; [[R7-7 results]] | solver-dependent |
+| the share of the cardinal `M_free` that is ordering error: median 0.26 at small noise on V35's generator, against 0.02 on R7-5's *(R7-7, exploratory)* | [[V35]] X2 | generator-dependent; not to be quoted across generators |
 | masking is not monotone: a moderate incentive reveals more about the own objective than none in 50 % of random instances (pre-registered 10–70 %) *(R7-4)* | [[V34]] | generator-dependent |
 | under reward hacking, evaluation misalignment rises with the incentive (median ×4.6 from `κ = 0` to `300`) *(R7-4, not pre-registered)* | [[V34]] | generator-dependent |
 | slack distributions of every bound | V1, V2, V4 | random instances; the generators are in `verify.py` |

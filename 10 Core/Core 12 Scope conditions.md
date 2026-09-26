@@ -24,10 +24,11 @@ updated: "2026-09-26"
   containing the intended actor.
 - **Other agents.** Only exact potential games under log-linear learning ([[B13|B §13]]). General
   games, collusion and arms races are the largest missing layer ([[T1_census_routing]]).
-- **Target.** A single target, linear except in Prop. [[Prop 15|15]]. Sets of targets (aggregation, disagreement,
-  multiple selves) are not formalized ([[R3_FIX_LOG]]). The target is **cardinal**: the budget and free measures
-  charge the shape of a pursuit as well as its direction, so best-of-n or a quantilizer run on the true target
-  scores as misaligned ([[R7-5 go-no-go]]). The ordinal target is [[ROADMAP]] R7-7.
+- **Target.** A declared target set whose members are linear functionals of behaviour, except in Prop. [[Prop 15|15]]. Families
+  of target sets (aggregation, disagreement, multiple selves) are measured per member, with no aggregate defined (Def. [[Def 17|17]], R7-7). By default the target is
+  **cardinal**: its measures charge the shape of a pursuit as well as its direction, so best-of-n or a quantilizer run
+  on the true target scores as misaligned ([[R7-5 go-no-go]]). Declaring the **ordinal** target removes that charge
+  (Prop. [[Prop 32|32]]); its budget measure has no closed form. Non-linear targets are [[ROADMAP]] R7-6.
 - **Observation.** i.i.d. behavioural samples, optionally with exogenous contexts (§9). No data layer for
   the evaluator; no adaptive or strategic observation.
 - **Static, with one exception.** The explanation layer's hypothesis (E_R) carries one stationary dynamic

@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: []
-mentions: ["Def 1", "Def 10", "Def 11", "Def 12", "Def 13", "Def 8", "Thm 17"]
+mentions: ["Def 1", "Def 10", "Def 11", "Def 12", "Def 13", "Def 17", "Def 8", "Thm 17"]
 checks: []
 sources: []
 aliases: ["Overview 0", "Overview. 0"]
@@ -35,7 +35,8 @@ Definition [[Def 13|13]]).
 
 The **target** `F` is any designated functional on behaviour: the objective of a principal, or a
 teleonomic target such as fitness. No principal is assumed. The target proper is the positive-affine
-class `[F]₊`. An instance fixes a representative `F`, i.e. a unit relative to `β`, only when it reports
+class `[F]₊`, unless a different target set is declared — for instance the ordinal set `[F]_ord`, when only the
+order of outcomes is intended (R7-7; Definition [[Def 17|17]]). An instance fixes a representative `F`, i.e. a unit relative to `β`, only when it reports
 value-unit or price-convention quantities (Definition [[Def 11|11]], M3; Theorem [[Thm 17|17]](iv)).
 
 <!-- gen:links -->
@@ -52,6 +53,7 @@ value-unit or price-convention quantities (Definition [[Def 11|11]], M3; Theorem
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Def 12]] — alignment instance; formal
 - [[Def 13]] — actor models; R7-1
+- [[Def 17]] — target sets; R7-7
 - [[Thm 17]] — every regret notion is a point on one convex curve
 
 ## Mentioned in

@@ -1,6 +1,14 @@
 # A — Core
 
-> **Status: v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
+> **Status: v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
+> and everything before v7.4) or the ordinal set `[F]_ord`, when only the order of outcomes is intended (Def. 17).
+> The contract is restated for target sets (Def. 11), and every target set's budget and free measures satisfy it
+> (Prop. 31). The ordinal free measure has a closed form by isotonic regression, and it scores best-of-n and
+> quantilizers on the true target as aligned (Prop. 32). Pre-registered: 6 of 10 predictions held, and the
+> registered falsifier D4 fired, because the ordinal *budget* measure has no closed form and its solver failed once
+> in 393 (R7-7 results).
+>
+> **v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
 > and 17 and Prop. 18's cap hold for any actual actor. It also states the one dynamic element of (E_R), and the limit that
 > R7-5 found: the target is cardinal, so best-of-n run on the true target scores as misaligned (R7-7 is the repair).
 >
@@ -141,7 +149,7 @@ left tier 4; row 76.)*
 
 | Tier | Needs, about the actual actor | Results |
 |---|---|---|
-| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
+| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
 | **2** | an **exact maximizer** of its evaluator over a set containing the intended actor | Thm 5 (all parts: capacity maximizers); Thm 9; the regret bound in Prop. 7 |
 | **2′** | an **argmax selector over a common random candidate set** (e.g. best-of-n compared at equal n) | Prop. 23 |
 | **3** | an exact optimum of `U − φ/β`, with `φ/β − U` convex | none since R7-3: the Bregman identity needs this of the *intended* actor only, so it is tier 1 (row 78) |
@@ -208,7 +216,8 @@ Definition 13).
 
 The **target** `F` is any designated functional on behaviour: the objective of a principal, or a
 teleonomic target such as fitness. No principal is assumed. The target proper is the positive-affine
-class `[F]₊`. An instance fixes a representative `F`, i.e. a unit relative to `β`, only when it reports
+class `[F]₊`, unless a different target set is declared — for instance the ordinal set `[F]_ord`, when only the
+order of outcomes is intended (R7-7; Definition 17). An instance fixes a representative `F`, i.e. a unit relative to `β`, only when it reports
 value-unit or price-convention quantities (Definition 11, M3; Theorem 17(iv)).
 
 **Definition 1 (objects).**
@@ -746,6 +755,10 @@ organizes these as one conjugate pairing; that organization is the part not foun
   `t ↦ KL(p_{F,t}‖q)` is continuous and strictly increasing, from 0 towards `log 1/q(argmax F)`. Otherwise
   `M_budget` is undefined: this is saturation.
 
+*Note (R7-7).* These are the measures of the cardinal target set `[F]₊`: the only one v7.3 had. Def. 17 defines
+them for any target set, as the divergence from a union of half-rays, and Prop. 31(a) shows that `[F]₊` gives
+back exactly the measures here.
+
 *Note (R7-2).* Every tilt here is of the **declared** reference `q` (Def. 1), and the budget is matched as
 `KL(·‖q)` against it. The actor's own reference plays no role: a measure that used it would depend on the
 explanation of the behaviour, not on the behaviour (Def. 11, M4). Prop. 26 gives the consequence.
@@ -1016,6 +1029,11 @@ The actor is **ε-aligned with `F` under `κ ∈ {budget, free}`** iff the measu
 price convention, `M_price ≤ ε` defines **ε-regret**, not ε-alignment. The budget measure is defined only below saturation
 (Def. 10).
 
+*Note (R7-7: target sets).* The table is the case of the cardinal target set `[F]₊`. With a declared target set
+`𝒯`, the budget and free measures are those of Def. 17, and ε-alignment is with `𝒯`. The price convention needs
+a unit, so it applies to a cardinal set with a declared representative only. Under an ordinal target the free
+measure has a closed form (Prop. 32); the budget measure has none.
+
 *Note.*
 - **Why the price measure is called a regret rather than misalignment:** Prop. 24(c). It charges an agent that
   pursues the right target at the wrong intensity. *(v6.1–v6.4 defined ε-alignment under the price convention
@@ -1059,6 +1077,132 @@ equals `M(λ)/λ` by Thm 17(iii). The saturated case follows from `E_{p^C_F}F = 
 > **Theorem 5's worst-case regret (§4) and the budget convention (§7) are the same object.** The pure
 > capacity actor's regret is the same-budget regret, and the width `w_δ(E)` bounds it over all targets. This
 > is a reason, beyond gauge invariance, to use the budget convention as the default.
+
+**Definition 17 (target sets; R7-7).** Let `Δ°` be the set of full-support distributions on `X`.
+- A **target set** `𝒯` is a non-empty set of non-constant functions on `X`, closed under positive affine maps:
+  `G ∈ 𝒯` implies `aG + c ∈ 𝒯` for every `a > 0` and `c ∈ ℝ`. Each member is an admissible statement of one intent.
+- The **cardinal** target set of a non-constant `F` is `[F]₊ = {aF + c : a > 0, c ∈ ℝ}`. The **ordinal** target
+  set is `[F]_ord = {φ∘F : φ : ℝ → ℝ strictly increasing}`.
+- The **intended set** under the free convention, `I_free(𝒯)`, is the closure in `Δ°` of the union of the
+  half-rays `{p_{G,t} : t ≥ 0}` over `G ∈ 𝒯` (Def. 1). Under the budget convention, for an actual behaviour
+  `p̂` with `k = KL(p̂‖q)`, it is `I_budget(𝒯) = I_free(𝒯) ∩ {p : KL(p‖q) = k}`.
+- For a full-support `p̂` and `κ ∈ {budget, free}`, the **measure** is `M_κ(𝒯) = inf_{p ∈ I_κ(𝒯)} KL(p̂‖p)`.
+  `M_budget(𝒯)` is undefined when `I_budget(𝒯)` is empty. The **ordinal measure** is `M_ord = M_free([F]_ord)`.
+- The **ordinal cone** of `F` is `C_F = {p ∈ Δ° : p/q is a non-decreasing function of F}`.
+
+*Note (what v7.3 declared silently).* For `𝒯 = [F]₊` the intended sets are the half-ray and its budget point,
+and the measures are those of Def. 10 (Prop. 31(a)). Until R7-7 every instance declared the cardinal set
+without saying so.
+
+*Note (which set to declare).* The **cardinal** set says that the principal's exchange rates between outcomes
+are part of the intent. The **ordinal** set says that only their order is. Best-of-n and quantilizers run on
+the true target pursue its order with a different shape: they are misaligned under the cardinal set and aligned
+under the ordinal set (Prop. 32; R7-5 go-no-go). This is a declaration, like the convention `κ`
+(Def. 8); the framework does not make it.
+
+*Note (the price convention).* It needs a representative carrying a unit relative to `β` (Prop. 16). So it is
+defined only for a cardinal set with a declared representative, as in Def. 10. An ordinal target has no unit.
+
+*Note (several principals).* A family of target sets, one per principal, is measured member by member. The
+framework defines no aggregate; one must be declared. This changes the census exception "no single target"
+(16 items) from "not formalized" to "measured per principal, with aggregation undeclared". The frozen census
+routing is not re-run (ROADMAP §3).
+
+*Note (computing the budget measure).* `M_budget([F]_ord)` has no closed form: its intended set meets a convex
+cone with a level set of a convex function, and the minimization is not convex. V35 computes it from five
+starts. Its zero set needs no solver: `M_budget([F]_ord) = 0` iff `M_ord = 0` (Prop. 32(f)).
+
+**Proposition 32 (the ordinal measure; R7-7; tier 1).** Let `F` be non-constant, with values `v_1 < … < v_m` on
+the level sets `L_1, …, L_m`. Let `p̂` have full support, and `y = p̂/q`. Let `r°` be the `q`-weighted isotonic
+(non-decreasing) regression of the level means `p̂(L_j)/q(L_j)`, with weights `q(L_j)`, read as a function of `F`
+on `X`. Its **pooled blocks** `B_1, …, B_s` are the unions of consecutive levels on which it is constant. Let
+`p° = q·r°`, and `⟨g, h⟩_q = Σ_x q(x)g(x)h(x)`. The measures `M_free` and `M_budget` are those of Def. 10.
+
+(a) `I_free([F]_ord) = C_F` (Def. 17).
+
+(b) `p°` is the unique minimizer of `KL(p̂‖p)` over `C_F`, and
+
+```
+M_ord = KL(p̂‖p°) = Σ_i p̂(B_i)·KL( p̂(·|B_i) ‖ q(·|B_i) ).
+```
+
+(c) For every `p ∈ C_F`:
+
+```
+KL(p̂‖p) = KL(p̂‖p°) + KL(p°‖p) + ⟨r° − y, log(p/q)⟩_q,   the last term ≥ 0.
+```
+
+In particular, at `p = q`: `KL(p̂‖q) = M_ord + KL(p°‖q)`.
+
+(d) `M_free ≥ M_ord + M_free(p°)`. Where `M_budget` is defined, at the budget-matched exchange rate `λ`,
+`M_budget ≥ M_ord + KL(p°‖p_{F,λ})`.
+
+(e) `C_F`, `p°` and `M_ord` depend on `F` only through the ordered partition `(L_1, …, L_m)`: they are unchanged
+by `F ↦ φ∘F` for every strictly increasing `φ`.
+
+(f) `M_budget([F]_ord)` is defined iff `M_budget` is, i.e. iff `KL(p̂‖q) < log 1/q(argmax F)`. Then
+`M_ord ≤ M_budget([F]_ord) ≤ M_budget`, and `M_budget([F]_ord) = 0` iff `M_ord = 0`.
+
+*Proof.* (a) For `φ` strictly increasing, `p_{φ∘F,t}/q = e^{tφ(F)}/Z` is a non-decreasing function of `F`, so every
+half-ray of `[F]_ord` lies in `C_F`, which is closed in `Δ°`. Conversely, let `p ∈ C_F` have level ratios
+`r_1 ≤ … ≤ r_m`. If they increase strictly, take a strictly increasing `φ` with `φ(v_j) = log r_j`: then
+`p = p_{φ∘F,1}`, because `Σ_x q·e^{φ(F)} = Σ_x q·r = 1`. Otherwise, with `j(x)` the level index of `x`,
+`p` is the limit as `ε ↓ 0` of `q·(r + ε·j)/(1 + ε·Σ_x q·j)`, whose level ratios increase strictly.
+
+(c) Let `K` be the convex cone of non-decreasing functions of `F` on `X`; it contains the constants of both
+signs. The level means are the `L²(q)` projection of `y` onto the functions of `F`, and `K` lies in that
+subspace, so `r°` is the `L²(q)` projection of `y` onto `K`. Hence `⟨y − r°, g⟩_q ≤ 0` for every `g ∈ K`, since `K`
+is a cone containing `r°`. Also `⟨y − r°, h⟩_q = 0` for every `h` constant on each pooled block, since
+pool-adjacent-violators sets `r°` on a block to the `q`-mean of `y` there. With `h = 1`, `Σ_x q·r° = 1`; and `r° > 0`,
+as a mean of positive values. So `p° ∈ C_F`. For `p = q·r ∈ C_F`:
+`KL(p̂‖p) − KL(p̂‖p°) − KL(p°‖p) = Σ_x q·(y − r°)·log(r°/r) = ⟨y − r°, log r°⟩_q − ⟨y − r°, log r⟩_q`. The first
+term is 0, because `log r°` is constant on each block. The second is `≤ 0`, because `log r ∈ K`. So the remainder
+is `−⟨y − r°, log r⟩_q = ⟨r° − y, log(p/q)⟩_q ≥ 0`. At `p = q` it is 0.
+
+(b) By (c), `KL(p̂‖p) ≥ KL(p̂‖p°) + KL(p°‖p)`, and `KL(p°‖p) > 0` unless `p = p°`. On a block `B`,
+`p°(B) = q(B)·(the q-mean of y on B) = p̂(B)` and `p°(·|B) = q(·|B)`. The chain rule for KL over the partition into
+blocks gives the sum.
+
+(d) Every `p_{F,t}` with `t ≥ 0` lies in `C_F`. Apply (c) to `p = p_{F,t}` and take the infimum over `t ≥ 0`; or apply
+it to `p = p_{F,λ}`.
+
+(e) `C_F` is defined by the ordered partition, and so are the level means, their weights and the regression.
+
+(f) For `p = q·r ∈ C_F`, `r` is largest on the top level, so `q(argmax F)·max r ≤ Σ_x q·r = 1`. Hence
+`KL(p‖q) = Σ_x p·log r ≤ log max r ≤ log 1/q(argmax F)`, with equality only for a distribution supported on
+`argmax F`, which is not in `Δ°`. So `I_budget([F]_ord)` is empty when `KL(p̂‖q) ≥ log 1/q(argmax F)`. Below that
+value, `p_{F,λ}` lies on the budget sphere (Lemma 5.1) and in `C_F`. Since
+`{p_{F,λ}} ⊆ I_budget([F]_ord) ⊆ C_F`, (b) gives the two inequalities. The infimum defining `M_budget([F]_ord)` is
+attained: `KL(p̂‖p) → ∞` as `p` approaches the boundary of the simplex, so its sublevel sets in the closed set
+`I_budget([F]_ord)` are compact. Hence `M_budget([F]_ord) = 0` iff `p̂ ∈ I_budget([F]_ord)`. As `p̂` lies on its own
+budget sphere, this holds iff `p̂ ∈ C_F`, that is, by (b), iff `M_ord = 0`. ∎
+
+*Check.* V35 (1,200 instances, 610 with tied levels; pre-registered, R7-7 preregistration):
+- (b): a generic constrained optimizer never beats the isotonic value by more than `3.3·10⁻¹⁵`; the block
+  formula holds to `7·10⁻¹⁶`.
+- (c): the cross term is never below `−1.1·10⁻¹⁵` over 20 random members of `C_F` per instance; the split
+  `KL(p̂‖q) = M_ord + KL(p°‖q)` holds to `9·10⁻¹⁶`.
+- (d): the smallest slack is `−7·10⁻¹⁵` (free) and `−3·10⁻¹⁶` (budget).
+- (e): `M_ord` is unchanged, to the last bit, under a random strictly increasing map.
+- (f): `M_ord ≤ M_budget([F]_ord) ≤ M_budget` holds on the 1,123 instances where the budget measure is defined,
+  within the solver's tolerance.
+
+*Failed as registered (P8).* The pre-registration also claimed that the first inequality of (f) is strict when
+`M_ord > 0`, tested as a gap above `10⁻¹²` whenever `M_ord > 10⁻⁹`. Four instances failed, all with `M_ord` below
+`3·10⁻⁷`. Under the registered rule D2 the strict claim is withdrawn from the statement. The diagnosis is in
+R7-7 results: the gap is second order in `M_ord` (the median of `gap/M_ord²` is 0.9–1.8 wherever the gap can be
+resolved), so it falls below double-precision noise when `M_ord` is small. Stating strictness again needs a
+check designed from that scaling.
+
+*Reading.* **The ordinal measure charges only what no reading of the target's order can justify.** On each
+pooled block, the ordinal intent is indifferent, so the intended behaviour follows the declared reference there.
+`M_ord` is the divergence from the reference inside the blocks. The budget split in (c) says that the
+information `p̂` spends divides exactly into the ordinal misalignment and what its ordinal projection spends.
+(d) says that the cardinal measures charge the ordinal misalignment plus a **shape** term: how far the ordinal
+projection lies from the target's own half-ray. Shape counts as misalignment only under a cardinal declaration.
+
+*Prior art.* Order-restricted inference: the isotonic regression and the KL projection onto a monotone cone
+(src Barlow 1972, src Robertson 1988). What is new here is its use as a misalignment measure against the contract.
 
 ---
 
@@ -1272,23 +1416,30 @@ distributions of `(c, x)`: by the chain rule their KL is `E_{ρ_ev} KL(p̂_c‖p
 > to condition on contexts the overseer undersamples. It does give the quantity to estimate, and the bound
 > it obeys.
 
-**Definition 11 (the misalignment contract; R7-0).** A **misalignment measure** assigns to a non-constant
-target `F`, a declared convention `κ`, and a full-support actual behaviour `p̂` a value `M ∈ [0, ∞]`, or
-declares it undefined. It must satisfy:
+**Definition 11 (the misalignment contract; R7-0, restated for target sets in R7-7).** A **misalignment measure**
+assigns to a target set `𝒯` (Def. 17; by default the cardinal set `[F]₊` of a non-constant target `F`), a
+declared convention `κ`, and a full-support actual behaviour `p̂` a value `M ∈ [0, ∞]`, or declares it undefined. It
+must satisfy:
 
 | | Axiom |
 |---|---|
-| **M1** (identity) | `M = 0` iff `p̂` is an intended behaviour under `κ` |
+| **M1** (identity) | `M = 0` iff `p̂` is an intended behaviour under `κ`: for a target set under the budget or free convention, iff `p̂ ∈ I_κ(𝒯)` |
 | **M2** (sign) | `M ≥ 0` |
-| **M3** (representation) | `M` is unchanged when `F` is replaced by `aF + c`, `a > 0`, and every declared quantity carrying the unit of `F` is transformed with it (`β ↦ β/a`) |
+| **M3** (representation) | `M` depends on the target only through the declared set `𝒯`, and every declared quantity carrying the unit of a representative is transformed with it (`β ↦ β/a` when `F ↦ aF + c`). For `[F]₊` this is invariance under `F ↦ aF + c`, `a > 0`; for `[F]_ord`, under every strictly increasing map |
 | **M4** (behavioural) | `M` depends on the agent only through `p̂`, or its per-context laws |
-| **M5** (misdirection, not intensity) | if `p̂ = p_{F,t}` for some `t ≥ 0` — the agent pursues the target itself, at some intensity — then `M = 0` |
+| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0` — the agent pursues an admissible statement of the target, at some intensity — then `M = 0`. For `[F]₊` this reads `p̂ = p_{F,t}` |
 | **M6** (substrate-free) | `M` is defined for every full-support `p̂ ∈ Δ(X)`, or declared undefined by an explicit rule |
 | **M8** (contexts) | with contexts (Def. 9), `M` applies per context `c`, with aggregates `Σ_c ρ(c)·M_c` for the deployment and evaluation context laws `ρ_dep`, `ρ_ev` |
 
 Two further conditions bind **the R7 refactor**, not a measure as such:
 - **M7:** every refactored measure coincides with its v6.4 counterpart whenever the dropped assumptions hold.
 - **M9:** the sanity suite of `verify.py` V30 passes.
+
+*Note (R7-7).* Until R7-7 the contract took a single non-constant target `F`, and M1, M3 and M5 referred to it.
+With `𝒯 = [F]₊` each reads exactly as before, so every measure that satisfied the contract still does (M7).
+What the target set adds is the declaration of how much of `F` is intended: its exchange rates (`[F]₊`) or
+only its order (`[F]_ord`). The measures for any target set are in Prop. 31.
+
 
 *Note (mechanism-relative comparisons).* A comparison between a mechanism and the same mechanism run on the
 target (Def. 14) depends on the attributed mechanism and resource. So it fails M4 by construction, and it is
@@ -1325,6 +1476,8 @@ full support.
 - (d): an agent at `p_{F,t}` with `t > β` has `ΔF < 0` (Lemma 5.1: `E_{p_{F,t}}F` increases in `t`). Any `p̂ ≠ p_{F,β}` with the same mean of
   `F` has `ΔF = 0`. ∎
 
+*Note (R7-7).* This is the case `𝒯 = [F]₊` of the contract restated for target sets. Prop. 31 covers any target set.
+
 *Check.* V30:
 - 600 random instances per axiom, with 0 violations for the budget and free measures.
 - The price measure fails M5 in 600 of 600 (median 0.23 nats).
@@ -1340,19 +1493,67 @@ that pursues the right target too weakly or too strongly, which common sense cal
 capability, not misalignment. Thm 1 is unaffected: it is an identity for the regret. What changes is which
 quantity the word "misalignment" names (Def. 8; row 74).
 
+**Proposition 31 (target sets against the contract; R7-7; tier 1).** Let `𝒯` be a target set (Def. 17) and
+`p̂` a full-support actual behaviour.
+
+(a) For `𝒯 = [F]₊`: `I_free(𝒯) = 𝓡⁺_F`, and `M_free(𝒯)` and `M_budget(𝒯)` are the measures `M_free` and `M_budget` of
+Def. 10, defined in the same cases.
+
+(b) `M_free(𝒯)` satisfies M1–M6 and M8 of Def. 11, with intended set `I_free(𝒯)`. `M_budget(𝒯)` satisfies them
+wherever it is defined, with intended set `I_budget(𝒯)`. Both infima are attained.
+
+(c) If `𝒯 ⊆ 𝒯′`, then `M_κ(𝒯′) ≤ M_κ(𝒯)` wherever both are defined, and `M_free(𝒯) ≤ M_budget(𝒯)`. In particular
+`M_κ([F]_ord) ≤ M_κ([F]₊)`.
+
+*Proof.* (a) The half-ray of `aF + c` is `{p_{F,at} : t ≥ 0} = 𝓡⁺_F`, so the union over `[F]₊` is `𝓡⁺_F`. It is closed
+in `Δ°`: its limit points as `t → ∞` are supported on `argmax F`, a proper subset of `X`. By Lemma 5.1, `𝓡⁺_F`
+meets `{p : KL(p‖q) = k}` in the single point `p_{F,λ}` when `k < log 1/q(argmax F)`, and nowhere otherwise. These
+are the measures of Def. 10 and its saturation rule.
+
+(b) For every `x`, `KL(p̂‖p) ≥ p̂(x)·log(1/p(x)) − log |X|`, so `KL(p̂‖p) → ∞` as `p` approaches the boundary of
+the simplex. Each sublevel set `{p ∈ I : KL(p̂‖p) ≤ c}` of a set `I` closed in `Δ°` is therefore compact, and the
+infimum over `I` is attained. Hence `M = 0` iff `p̂ ∈ I` (M1), and `M ≥ 0` (M2).
+- M3: the measure is defined from `𝒯` as a set, and neither convention carries a unit.
+- M4 and M6: the measure is a function of `(q, 𝒯, p̂)`, and `M_budget(𝒯)` is undefined only by the explicit rule.
+- M5: if `p̂ = p_{G,t}` with `G ∈ 𝒯` and `t ≥ 0`, then `p̂ ∈ I_free(𝒯)`; and since `KL(p̂‖q) = k`, also `p̂ ∈ I_budget(𝒯)`.
+- M8: apply the measure per context (Def. 9).
+
+(c) A larger target set has a larger intended set under either convention, and `I_budget(𝒯) ⊆ I_free(𝒯)`. An
+infimum over a larger set is smaller. `[F]₊ ⊆ [F]_ord`, since `v ↦ av + c` is strictly increasing for `a > 0`. ∎
+
+*Check.* V35 (pre-registered, R7-7 preregistration):
+- (a): the target-set code for `[F]₊` returns Def. 10's reference code's `M_free` to `1.3·10⁻¹²`, and `M_budget`
+  to relative `4.8·10⁻¹²`. *As registered* the tolerance was an absolute `10⁻¹⁰`, and one instance failed it: a
+  budget measure of 4,473 nats, at `λ = 3,239`, differs by `2.1·10⁻⁸` (P10; R7-7 results).
+- (b), for `[F]_ord`: `M_ord = 0` agrees with an independent membership test for `C_F` in all 1,200 instances.
+  M5 holds for monotone, best-of-`k` and quantilizer behaviours, and a sign-flipped behaviour always scores
+  positive (smallest `4.4·10⁻⁴`). A two-context agent scores 0 in evaluation and positive in deployment (M8).
+- (b), for `M_budget([F]_ord)`: its value comes from a non-convex solver. On the 393 best-of-`k` and quantilizer
+  cases where it is defined, the solver reached `≤ 10⁻⁸` in 392, and `7.3·10⁻⁶` in one, a 12-level quantilizer on
+  which its five starts disagreed. The true value there is 0 by M5. That one case fired the registered
+  falsifier D4 (R7-7 results). Membership in `I_budget` needs no solver: see Prop. 32(f).
+
+*Reading.* **The contract survives the move from one target to a set of targets unchanged in form.** M1, M3 and M5
+now refer to the declared set, and for `[F]₊` they are word for word what they were. A set of targets can only
+lower the measures: declaring less about the intent can only excuse more behaviour.
+
 **Definition 12 (alignment instance; formal; measurement layer since R7-3).** An **alignment instance** is a
-tuple `(X, q, F, κ)`, with a price `β ∈ (0, ∞)` when `κ` is the price convention:
+tuple `(X, q, 𝒯, κ)`, with a price `β ∈ (0, ∞)` when `κ` is the price convention:
 - a finite behaviour set `X` with a full-support **declared** reference `q` (standing assumption S);
-- a non-constant target `F` (Def. 1);
+- a target set `𝒯` (Def. 17): by default the cardinal set `[F]₊` of a non-constant target `F` (Def. 1);
 - a convention `κ` (Def. 8).
 
 Optionally, it also has contexts (Def. 9). Given an actual behaviour `p̂`, an instance determines every
-misalignment measure (Def. 10).
+misalignment measure (Def. 10; for a target set, Def. 17).
 
 *Note.* By Cor. 5.2, one resource suffices for the soft actor or the pure capacity actor. The target proper is
 the positive-affine class `[F]₊`. An instance fixes a representative only when it reports value-unit or
 price-convention quantities (Prop. 16, Def. 7). No principal is assumed: the target can be teleonomic, such as
 fitness.
+
+*Note (R7-7).* The instance was `(X, q, F, κ)` until R7-7. Writing `F` meant the cardinal set `[F]₊`, and it
+still does unless another set is declared. The price convention needs a cardinal set with a declared
+representative.
 
 *Note (R7-3).* An **explanation** of an instance adds an evaluator `F̂`, an actor model `A`, the actor's own
 reference `q_A` and the model's resource (Def. 13; the capacity model and its budget `δ`, Def. 15). Until
@@ -1778,10 +1979,11 @@ Each item is a statement the core entails, whose negation it rules out, with the
   containing the intended actor.
 - **Other agents.** Only exact potential games under log-linear learning (B §13). General
   games, collusion and arms races are the largest missing layer (T1_census_routing).
-- **Target.** A single target, linear except in Prop. 15. Sets of targets (aggregation, disagreement,
-  multiple selves) are not formalized (R3_FIX_LOG). The target is **cardinal**: the budget and free measures
-  charge the shape of a pursuit as well as its direction, so best-of-n or a quantilizer run on the true target
-  scores as misaligned (R7-5 go-no-go). The ordinal target is ROADMAP R7-7.
+- **Target.** A declared target set whose members are linear functionals of behaviour, except in Prop. 15. Families
+  of target sets (aggregation, disagreement, multiple selves) are measured per member, with no aggregate defined (Def. 17, R7-7). By default the target is
+  **cardinal**: its measures charge the shape of a pursuit as well as its direction, so best-of-n or a quantilizer run
+  on the true target scores as misaligned (R7-5 go-no-go). Declaring the **ordinal** target removes that charge
+  (Prop. 32); its budget measure has no closed form. Non-linear targets are ROADMAP R7-6.
 - **Observation.** i.i.d. behavioural samples, optionally with exogenous contexts (§9). No data layer for
   the evaluator; no adaptive or strategic observation.
 - **Static, with one exception.** The explanation layer's hypothesis (E_R) carries one stationary dynamic

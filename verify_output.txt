@@ -205,3 +205,27 @@
   Prop 29 [P8]: selection differential log-slope / (-beta gap_R) in the same window: min 0.9581, max 1.1246, within 10%: 0.993 (n=300)
   Prop 30(a,b) [P6]: argmax R = argmax F in evaluation: M_free(kappa=300)/M_free(0) < 1% in 1.000 of 60; deployment is kappa-free by construction (Prop 27(c))
   Prop 30(c) [P7]: argmax R != argmax F: min M_free(kappa=300) = 0.131; median M_free(300)/M_free(0) = 4.62; limit -log sup_t p_(F,t)(argmax R) matched at kappa = 3000 to 1.3e-05
+
+[V35] R7-7: target sets and the ordinal target (Def. 17, Props 31-32), against the pre-registration (P1-P10, D1, X1-X3)
+  P1 (R) closed form: generic optimum below the isotonic value by at most 3.3e-15 (1,200 instances, 610 with tied levels; 1200 with a feasible generic end point) -> holds
+  P2 block formula: max difference 7.2e-16 -> holds
+  P3 budget split KL(p_hat||q) = M_ord + KL(p0||q): max difference 8.9e-16 -> holds
+  P4 (R) cross term min -1.1e-15 (20 random p in C_F per instance); (d) slack min: free -7.2e-15, budget -3.3e-16 -> holds
+  P5 M1: M_ord <= 1e-12 disagrees with the independent cone test in 0 of 1,200; kinds B, C, D all zero: True; kind F min M_ord 4.41e-04 -> holds
+  P6 strong M3: M_ord moves by at most 0.0e+00 under a random increasing map; the cardinal M_free moves by > 1e-6 in 0.538 of 184 kind-A instances with >= 3 levels -> FAILS
+  P7 R7-5's cases (best-of-k, quantilizers on F; 400 instances): max M_ord 3.3e-16 (R); budget ordinal defined and solved in 393, max 7.3e-06; cardinal M_free > 1e-6 in 0.899 of 366 with >= 3 levels (R) -> FAILS
+      C k=16: cardinal M_free median 0.005, > 1e-6 in 0.822 of 45
+      C k=2: cardinal M_free median 0.018, > 1e-6 in 1.000 of 47
+      C k=4: cardinal M_free median 0.032, > 1e-6 in 1.000 of 39
+      C k=64: cardinal M_free median 0.000, > 1e-6 in 0.453 of 53
+      D alpha=0.1: cardinal M_free median 0.004, > 1e-6 in 1.000 of 94
+      D alpha=0.3: cardinal M_free median 0.142, > 1e-6 in 1.000 of 88
+  P8 where defined and solved (1123): min (M_budget_ord - M_ord) -5.1e-11; max (M_budget_ord - M_budget) 5.7e-13; strict above M_ord whenever M_ord > 1e-9: False -> FAILS
+  D1 budget ordinal: defined in 1123; the best two of five starts agree to 1e-7 in 0.987 (rule: >= 0.90) -> numbers quotable
+  P9 M8, 200 two-context agents (rho_ev = (1, 0), rho_dep = (1/2, 1/2)): max evaluation M_ord 3.3e-16, min deployment M_ord 2.20e-04 -> holds
+  P10 (implementation part) target-set code for [F]+ against Def. 10's reference code: M_free 1.3e-12, M_budget 2.1e-08 -> FAILS; the reproduction part is tools/reproduce.py on V1-V34 and F1-F8
+  X1 kinds A, E (326): M_budget_ord / M_ord median [p10, p90] 1.16 [1.   2.42]; M_budget_ord / M_budget 0.62 [0.11 0.99]
+  X2 kind E sigma=0.05: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.26 [0. 1.] (71)
+  X2 kind E sigma=0.3: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.26 [0. 1.] (69)
+  X2 kind E sigma=1.0: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.50 [0.02 0.98] (60)
+  X3 kinds A, E: p0 pools more than one level in 0.655

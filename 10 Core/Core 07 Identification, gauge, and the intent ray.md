@@ -41,5 +41,10 @@ updated: "2026-09-26"
 ![[Cor 17.1#Statement]]
 ![[Cor 17.1#Proof]]
 ![[Cor 17.1#Notes and checks]]
+![[Def 17#Statement]]
+![[Def 17#Notes and checks]]
+![[Prop 32#Statement]]
+![[Prop 32#Proof]]
+![[Prop 32#Notes and checks]]
 ---
 

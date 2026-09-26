@@ -53,5 +53,35 @@
    ],
    "why": "The relative deviation from exact scale covariance is a round-off measure; the claim is covariance up to numerics. With AVX-512 disabled locally it reads 3.4e-09 against the reference 8.5e-09, just above the residual threshold. The bound sits far above the noise and far below any real violation of the scaling law."
   }
+ ],
+ "V35": [
+  {
+   "line": "budget ordinal defined and solved in",
+   "numbers": [
+    6
+   ],
+   "upper": [
+    0.0001
+   ],
+   "why": "The size of the one budget-solver failure (D4, R7-7 results) is where SLSQP stops on a non-convex problem for one 12-level quantilizer: 7.3e-06 on the reference CPU (AVX-512) and 2.3e-06 with X86_V4 disabled. The finding is that it exceeds the registered 1e-8, and the verdict text ('FAILS') must still reproduce exactly. The bound only stops the failure from growing unnoticed; it is not a claim of the check."
+  },
+  {
+   "line": "the best two of five starts agree to 1e-7 in",
+   "numbers": [
+    3
+   ],
+   "rel": 0.01,
+   "why": "The share of instances whose best two solver starts agree to 1e-7 moved from 0.987 to 0.986 with X86_V4 disabled: one instance of 1,123 on a non-convex problem. The registered rule is a threshold at 0.90, and its verdict text must still reproduce exactly."
+  },
+  {
+   "line": "target-set code for [F]+ against Def. 10's reference code",
+   "numbers": [
+    3
+   ],
+   "upper": [
+    1e-07
+   ],
+   "why": "The largest M_budget difference comes from one instance with lambda = 3,239 near saturation, where the root for lambda is ill-conditioned: 2.1e-08 on the reference CPU, 2.2e-08 with X86_V4 disabled, a relative difference of about 5e-12 on a 4,473-nat value. The registered absolute tolerance (1e-10) failed on both paths, and the verdict text ('FAILS') must still reproduce exactly."
+  }
  ]
 }

@@ -14,8 +14,8 @@ updated: "2026-09-26"
 
 | | |
 |---|---|
-| **Current** | **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **R7-7** — target sets, with the **ordinal target** as its lead case: `M_ord` (the KL projection onto the monotone-ratio cone, closed form by isotonic regression) and the split `M_free ≥ M_ord + M_free(p°)`. First task: pre-register, then write the target-set definition against the contract. §5 proposes running T3 and one T7 case before or alongside it, and restating M5 in R7-7 |
+| **Current** | **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
+| **Next** | **The PI's choice** between T3 and one T7 case (§5, item 1) and the remaining refactor steps (R7-6, the PI's test first; R7-8, optional). R7-7 carried out §5, item 2: M5 is restated for target sets |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -222,7 +222,22 @@ not" without assuming it, the layer needs dynamics, and it is recorded as such.
 - *PI's test (v7.3.1):* passes at first sight — coverage and diversity targets, where the entropic intent charges dropped modes only logarithmically ([[R7-5 go-no-go]], case 4). Apply the test properly before starting.
 - The intent ray and Props [[Prop 20|20]]–[[Prop 22|22]] re-introduce linearity as a hypothesis.
 
-### R7-7 — A6: a set of targets *(confirmed by the PI, v6.5; part of the core — the target is a measurement-layer primitive)*
+### R7-7 — A6: a set of targets *(done, v7.4 — [[R7-7 results]])*
+
+**Outcome.**
+- Def. 17 (target sets; the cardinal set `[F]₊` and the ordinal set `[F]_ord`); the contract restated for target
+  sets (Def. 11: M1, M3 and M5 refer to the declared set); an instance is `(X, q, 𝒯, κ)` (Def. 12). For `[F]₊`
+  everything reads as before (M7).
+- Prop. 31: every target set's budget and free measures satisfy the contract. Prop. 32: the ordinal measure in
+  closed form (isotonic regression; the within-block divergence), the decomposition, the budget split
+  `KL(p̂‖q) = M_ord + KL(p°‖q)`, order invariance, and the budget measure's bounds and zero set.
+- Pre-registered ([[R7-7 preregistration]]): 6 of 10 predictions held; P6, P7, P8 and P10 failed as registered,
+  diagnosed in [[R7-7 results]]. **D4 fired:** the ordinal budget measure has no closed form, and its solver
+  failed to certify a zero on one R7-5 case of 393. Its zero set is exact without a solver (Prop. 32(f)); its
+  non-zero values are quoted only where the solver's starts agree.
+- Disagreeing principals: measured per principal; no aggregate is defined.
+
+*The plan as written before the step follows.*
 - **Lead case (from [[R7-5 go-no-go]]): the ordinal target** `{φ∘F : φ increasing}`. Best-of-n and quantilizers on the true target score as misaligned under the cardinal measures (`M_free` median 0.04–0.39 nats, positive in 93–100 % of instances). `M_ord` scores them 0 and keeps KL. For nearly correct evaluators, most of `M_free` is shape, not order. Whether shape counts is a declaration the framework currently makes silently.
 - Set-valued measures; aggregation only when a scalar is demanded.
 - This changes the status of the "disagreeing principals" exception.
@@ -353,6 +368,7 @@ applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
      target set, at any intensity, has `M = 0`. It then shows that the cardinal declaration recovers the current M5
      exactly (M7). The cardinal/ordinal choice becomes a declared convention of Def. 8, like price, budget and free,
      instead of a silent default.
+   - *Carried out in R7-7 (v7.4): Def. 11's M5 now reads "`p̂ = p_{G,t}` for some `G ∈ 𝒯`", and the target set is part of the instance (Def. 12).*
 3. **Say who the raters and reviewers were, and add one from outside.** *Serves: solid, limits.*
    - The census raters and reviews R5 and R6 are called independent, but the vault never says who or what they
      were. R5's scripts ran under `/home/claude/` (`reviews/R5_independent/compare.py`), which suggests sessions of

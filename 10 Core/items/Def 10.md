@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: ["Lemma 5.1"]
-mentions: ["Def 1", "Def 11", "Prop 26", "Thm 13"]
+mentions: ["Def 1", "Def 11", "Def 17", "Prop 26", "Prop 31", "Thm 13"]
 checks: []
 sources: []
 aliases: ["Definition 10", "Def. 10"]
@@ -35,6 +35,10 @@ updated: "2026-09-26"
 
 ## Notes and checks
 
+*Note (R7-7).* These are the measures of the cardinal target set `[F]₊`: the only one v7.3 had. Def. [[Def 17|17]] defines
+them for any target set, as the divergence from a union of half-rays, and Prop. [[Prop 31|31]](a) shows that `[F]₊` gives
+back exactly the measures here.
+
 *Note (R7-2).* Every tilt here is of the **declared** reference `q` (Def. [[Def 1|1]]), and the budget is matched as
 `KL(·‖q)` against it. The actor's own reference plays no role: a measure that used it would depend on the
 explanation of the behaviour, not on the behaviour (Def. [[Def 11|11]], M4). Prop. [[Prop 26|26]] gives the consequence.
@@ -56,10 +60,13 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 - [[Cor 13.4]] — second order
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 12]] — alignment instance; formal
+- [[Def 17]] — target sets; R7-7
 - [[Prop 16]] — gauge group and identified quantities
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
 - [[Prop 30]] — the fake-alignment gap; R7-4
+- [[Prop 31]] — target sets against the contract; R7-7
+- [[Prop 32]] — the ordinal measure; R7-7
 - [[Rem 13.5]] — whether rescaling is harmful depends on the declared convention; v6.3
 - [[Thm 13]] — intent-ray decomposition
 - [[Thm 17]] — every regret notion is a point on one convex curve
@@ -67,7 +74,9 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 ## Mentions
 - [[Def 1]] — objects
 - [[Def 11]] — the misalignment contract; R7-0
+- [[Def 17]] — target sets; R7-7
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
+- [[Prop 31]] — target sets against the contract; R7-7
 - [[Thm 13]] — intent-ray decomposition
 
 ## Mentioned in

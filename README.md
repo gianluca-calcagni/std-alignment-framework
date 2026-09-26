@@ -1,4 +1,4 @@
-# std-alignment-framework — v7.3.3
+# std-alignment-framework — v7.4
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -42,7 +42,7 @@ The v6.6 flat files are frozen in `archive/v6.6_flat/`. The one-time migration i
 
 - **Continuous checks.** Every push and pull request runs `.github/workflows/checks.yml`:
   - the vault checks (lint, the migration check, the freshness of `build/`, cross-references, the bibliography);
-  - all 34 `verify.py` blocks, in parallel, each compared with its reference output;
+  - all 35 `verify.py` blocks, in parallel, each compared with its reference output;
   - `final_audit.py`, compared with its reference output.
 
   Residual-scale digits (|x| ≤ 1e-9) may differ across machines. So may a few lines that measure numerical

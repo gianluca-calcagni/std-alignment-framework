@@ -72,6 +72,7 @@ up to 88 nats.
 
 ## Mentioned in
 - [[Def 12]] — alignment instance; formal
+- [[Def 17]] — target sets; R7-7
 
 ## Checks
 - [[V14]]
