@@ -1,0 +1,207 @@
+# Reference run of verify.py (v7.3, R7-4). Every block was rerun in this turn, in parallel groups; each block is independent and seeded. V1-V33 reproduce the v7.2 output exactly; V34 is new.
+
+[V1] Thm 1: beta*R_J = KL(p_hat||p*);  Cor 1.2: E_ph E - E_p* E = Jeffreys/beta;  Cor 1.3 integral forms;  Cor 1.4 ratio
+  max|beta R_J - KL(ph||p*)| = 4.8e-14   max|beta*gap - Jeffreys| = 5.3e-14
+  max|int t Var dt - beta R_J| = 2.6e-14   max|int Var dt - gap| = 1.4e-13   (300 instances)
+  Cor 1.4 ratio R_J/gap  p5/p50/p95 = [0.185 0.482 0.682]  min = 0.034  max = 0.937
+
+[V3] Prop 4: E = M*1_A  =>  beta*R_J = kl(p_hat(A)||p*(A)); limits log 1/p*(A) (M->+inf), log 1/(1-p*(A)) (M->-inf)
+  p*(A) = 0.0720; max|KL - binary kl| = 1.7e-13
+  M=+40: beta R_J = 2.6309  vs log 1/p*(A) = 2.6309
+  M=-40: beta R_J = 0.0747  vs log 1/(1-p*(A)) = 0.0747
+
+[V5] Lemma 8 / Thm 9: width ratio limits; R^C rank reversal
+  d=1e-06: w(E1)/w(1_A) = 62.8034   predicted limit 62.7957
+  d=1e-05: w(E1)/w(1_A) = 62.8730   predicted limit 62.7957
+  d=8.47: w(E1)/w(1_A) = 5.3013   predicted osc(E1) = 5.3013
+  K >= 11.8  => any separable (E,d)-bound on worst-case regret is >= 3.4x loose
+  fixed-intent example: R(E1)/R(E2) over d in [0.002,7]: 13.45 -> 0.13; span x103
+
+[V7] Thm 13: beta R_J = D_perp + D_par (Pythagorean);  rescaling;  affine invariance of D_perp;  second order
+  max|KL(ph||p*) - D_perp - D_par| = 5.5e-12;  instances with t_hat < 0: 119/5000;  max change of D_perp under F->aF+c: 6.4e-14
+  rescaling F_hat = 1.7F: t_hat/beta = 1.700000, D_perp = 2.3e-16, beta R_J = D_par = 0.2218
+  second order: E = eps*E0 (fixed E0), a = Cov_p*(E,F)/Var_p*(F), E_perp = E - aF
+    eps=0.3: D_perp/[(b^2/2)Var(E_perp)] = 1.0814   D_par/[(b^2/2)a^2 Var F] = 0.6148
+    eps=0.1: D_perp/[(b^2/2)Var(E_perp)] = 1.0290   D_par/[(b^2/2)a^2 Var F] = 0.1898
+    eps=0.03: D_perp/[(b^2/2)Var(E_perp)] = 1.0088   D_par/[(b^2/2)a^2 Var F] = 0.6973
+    eps=0.01: D_perp/[(b^2/2)Var(E_perp)] = 1.0030   D_par/[(b^2/2)a^2 Var F] = 0.8939
+    eps=0.003: D_perp/[(b^2/2)Var(E_perp)] = 1.0009   D_par/[(b^2/2)a^2 Var F] = 0.9676
+
+[V2] Prop 2: R_J <= beta*osc^2/8;  Prop 3: R_J <= [L(2b)-2L(b)]/b <= 2*beta*s+^2 (upper-tail proxy under p*)
+  violations: Prop2 0, Prop3a 0, Prop3b 0  / 20000
+  slack R/bound p5/p50/p95:  Prop2 [0.002 0.108 0.412]  Prop3a [0.256 0.572 0.986]  Prop3b [0.019 0.205 0.33 ]  old normal form osc*sqrt(2d) [0.001 0.043 0.154]
+  frac Prop2 tighter than old normal form: 0.875
+
+[V4] Thm 5: R^C <= w_d(E), with equality in sup over intents (beta=inf);  Prop 6: DV formula and limits;  Prop 7 realized-reference bound
+  Thm5 violations 0/3000; R^C/w p5/p50/p95 = [0.009 0.095 0.268];  attainment R(F=-0.999E)/w: min 0.9990 max 0.9990
+  Prop6 DV: max|inf_l (d+L(l))/l - sigma_d| = 2.0e-12
+  small-d: d=0.0001 sigma_d/sqrt(2 d Var) = 1.0010
+  small-d: d=0.001 sigma_d/sqrt(2 d Var) = 1.0031
+  small-d: d=0.01 sigma_d/sqrt(2 d Var) = 1.0094
+  large-d: d=log 50 -> sigma_d = 2.5784  max E - E_q E = 2.5784
+  Prop7 violations 0/3000; slack p5/p50/p95 = [0.002 0.09  0.315]; never looser than osc*sqrt(2d): 1.000
+  [retraction record] d in [0.001,0.01): violation rate of osc_d*sqrt(2d) with reading (a) 0.62  (b) 1.00  (c) 0.00
+  [retraction record] d in [0.01,0.1): violation rate of osc_d*sqrt(2d) with reading (a) 0.08  (b) 1.00  (c) 0.00
+  [retraction record] d in [0.1,1): violation rate of osc_d*sqrt(2d) with reading (a) 0.00  (b) 1.00  (c) 0.00
+  [retraction record] d in [1,4): violation rate of osc_d*sqrt(2d) with reading (a) 0.00  (b) 0.54  (c) 0.00
+
+[V6] Prop 10: four pairings;  Prop 11: KL exposure infinite under sub-exponential tails, chi^2 finite
+  violations (TV-osc, KL-CGF, chi2-Var, Dinf-L1): [0, 0, 0, 0] / 20000
+  Pareto a=3.0: Var_q E = 0.750; chi2-exposure bound sqrt(d Var) at d=0.1: 0.274
+    m=1e+02: KL(p||q) = 0.0571 (<= 0.1)   E_p E - E_q E = 1.075e+00
+    m=1e+04: KL(p||q) = 0.0760 (<= 0.1)   E_p E - E_q E = 5.428e+01
+    m=1e+08: KL(p||q) = 0.0868 (<= 0.1)   E_p E - E_q E = 2.714e+05
+    m=1e+16: KL(p||q) = 0.0928 (<= 0.1)   E_p E - E_q E = 1.357e+13
+
+[V9] Dictionary: Holmstrom (exact independence cost; second-order optimal weight);  Gaussian Gibbs linearity (Gao slope);  Conant-Fano
+  beta=4.0: R_J(E)=0.2586 R_J(E-0.8N)=0.1506 | c* (2nd order) = -0.871  numerical argmin = -0.954
+  beta=1.0: R_J(E)=0.1753 R_J(E-0.8N)=0.0440 | c* (2nd order) = -0.853  numerical argmin = -0.855
+  beta=0.25: R_J(E)=0.0447 R_J(E-0.8N)=0.0106 | c* (2nd order) = -0.833  numerical argmin = -0.833
+  beta=0.05: R_J(E)=0.0088 R_J(E-0.8N)=0.0021 | c* (2nd order) = -0.827  numerical argmin = -0.827
+  independence (product space): added regret 0.28656971 = KL(tilt_N||q_N)/beta 0.28656971
+    Gaussian Gibbs path: d=0.141  gold gain/d = 0.8485   sqrt(2)*rho*sd(F) = 0.8485
+    Gaussian Gibbs path: d=0.707  gold gain/d = 0.8485   sqrt(2)*rho*sd(F) = 0.8485
+    Gaussian Gibbs path: d=1.414  gold gain/d = 0.8485   sqrt(2)*rho*sd(F) = 0.8485
+    Gaussian Gibbs path: d=2.121  gold gain/d = 0.8485   sqrt(2)*rho*sd(F) = 0.8485
+  Conant: violations of H(Z) >= H(D) - I(D;R): 0/5000; slack p5/p50/p95 = [0.045 0.446 0.87 ]
+
+[V8] Prop 14: T'(0) = -Cov_q(F_hat,F); T(inf) = max F - E_{q|argmax F_hat} F;  measured frequencies
+  max|finite-diff T'(0) + Cov_q(F_hat,F)| = 4.0e-05;   max|T(1e4) - limit| = 3.7e-06
+  scale 0.2: mono-good 0.86 mono-bad 0.00 interior 0.14 | raw align. regret non-monotone 0.99, negative somewhere 0.79 | P(mono-good|argmax agrees) 1.00 | median argmin beta 64
+  scale 1: mono-good 0.53 mono-bad 0.01 interior 0.45 | raw align. regret non-monotone 0.77, negative somewhere 0.62 | P(mono-good|argmax agrees) 0.97 | median argmin beta 22.6274
+  scale 4: mono-good 0.38 mono-bad 0.14 interior 0.43 | raw align. regret non-monotone 0.58, negative somewhere 0.52 | P(mono-good|argmax agrees) 0.85 | median argmin beta 4
+  scale 8: mono-good 0.37 mono-bad 0.25 interior 0.30 | raw align. regret non-monotone 0.47, negative somewhere 0.53 | P(mono-good|argmax agrees) 0.88 | median argmin beta 1.68179
+
+[V10] Delayed correction e' = c(t) - u(t - tau): P at the margin vs PI; bandwidth
+  tau=0.5: P at k=pi/(2tau): mean 0.316 (2tau/pi = 0.318), peak-to-peak 0.908 | PI: mean +7.7e-14, max|e| 7.7e-14
+  tau=1: P at k=pi/(2tau): mean 0.629 (2tau/pi = 0.637), peak-to-peak 1.576 | PI: mean +1.1e-13, max|e| 1.1e-13
+  tau=2: P at k=pi/(2tau): mean 1.256 (2tau/pi = 1.273), peak-to-peak 2.936 | PI: mean +1.2e-13, max|e| 1.2e-13
+  tau=4: P at k=pi/(2tau): mean 2.511 (2tau/pi = 2.546), peak-to-peak 5.667 | PI: mean -1.2e-13, max|e| 1.2e-13
+  sinusoidal creation, tau=1, w=0.03: closed-loop amplitude 0.375  open-loop 33.333
+  sinusoidal creation, tau=1, w=0.3: closed-loop amplitude 3.207  open-loop 3.333
+  sinusoidal creation, tau=1, w=1: closed-loop amplitude 1.568  open-loop 1.000
+  sinusoidal creation, tau=1, w=3: closed-loop amplitude 0.334  open-loop 0.333
+
+[V11] H2 repair attempt: <R_J>*2beta'/(n-1) under Boltzmann refinement of E at rate beta' (predicted ~1)
+  actor beta=0.5: beta'=20: 1.02  beta'=200: 1.12  beta'=2000: 1.07   (exp H(p*) = 3.77)
+  actor beta=2: beta'=20: 1.12  beta'=200: 0.98  beta'=2000: 0.69   (exp H(p*) = 2.27)
+  actor beta=8: beta'=20: 0.01  beta'=200: 0.01  beta'=2000: 0.02   (exp H(p*) = 1.00)
+
+[V12] Prop 15: J(p*) - J(p) = B_Psi(p,p*) (interior) and >= (boundary)
+  (a) chi^2 regularizer, linear target: interior n=961 max|gap|=4.5e-13; boundary n=3039 min gap=7.4e-05; violations 0
+  (b) KL regularizer, concave target U = E_pF - k(E_pG)^2: max|J(p*)-J(p) - [KL(p||p*)/b + k(E_pG-E_p*G)^2]| = 6.7e-15
+
+[V13] Cor 5.2: lambda_delta = 1/V'(delta)
+  max relative |1/V'(delta) - lambda_delta| = 3.3e-08
+
+[V15] Cor 1.5: stacked entropic stages = one stage with beta = sum beta_k, error = beta-weighted mean
+  max|sequential - single| = 4.2e-17
+    eps=0.1: B*R_J / [Var_p*(sum b_k E_k)/2] = 1.0113
+    eps=0.03: B*R_J / [Var_p*(sum b_k E_k)/2] = 1.0034
+    eps=0.01: B*R_J / [Var_p*(sum b_k E_k)/2] = 1.0011
+
+[V17] B §11: E_p F - E_q F = Cov_q(dp/dq, F) for any p (Price selection term); first order gives Prop 14(ii)
+  max|E_pF - E_qF - Cov_q(w,F)| = 4.4e-16
+
+[V14] Thm 13(b): half-ray decomposition;  Thm 17: one curve;  Prop 16: invariance;  price vs budget conventions
+  max|beta R_J - (D_perp + D_par + X_anti)| = 3.0e-13  (t_hat < 0 in 1052/3000)
+  D_perp is the minimum of M on [0,inf): max excess over grid minimum = 0.0e+00
+  same-budget raw regret = M(lambda)/lambda: max error 6.0e-12
+  invariance under F -> aF + c (a > 0): max change of D_perp and of M(lambda) = 3.8e-10;  max change of M(beta) = 88.29 (not invariant)
+  price vs budget convention: ranking of error pairs by raw regret reverses in 139/1218 = 11.4%
+
+[V16] Prop 18: Chernoff information C <= min(KL(ph||p*), KL(p*||ph)) <= beta R_J;  Prop 19: evaluation gap
+  violations 0/5000;  C/(beta R_J) p5/p50/p95 = [0.168 0.262 0.538];  min(KL,KL_rev)/(beta R_J) p50 = 1.000
+  per-context KL = [0.0, 0.0, 0.0, 0.0, 3.5015];  KL of eval joints = 0.1401 = E_ev KL_c = 0.1401
+  deployment harm E_dep KL_c = 2.1009;  evaluation gap Gamma = 1.9608
+
+[V18] Cor 17.1: with both capacity constraints binding, R^C = M(lambda)/lambda
+  2903 binding instances: max |R^C - M(lambda)/lambda| = 1.2e-13
+
+[V19] Def 8 saturation: budget beyond log 1/q(argmax F)
+  KL(p_hat||q) = 0.916 >= 0.223; KL(p_hat || q(.|argmax F)) = inf; raw regret max F - E_ph F = 1.530e-07
+
+[V20] Prop 20: for ANY actor p << q (best-of-n, top-k, arbitrary):  E_pF - E_qF = Cov_q(w,F_hat) - Cov_q(w,E);  E_p1 F - E_p2 F = Cov_q(w1 - w2, F)
+  max error (Goodhart as covariance) = 2.4e-15;  max error (regret between two actors) = 1.3e-15
+
+[V21] B7(e): reference optimized (capacity = mutual information); for pi_w << pi*_w: J(pi*) - J(pi) = lam*[E_w KL(pi_w||pi*_w) - KL(pibar||pibar*)]
+  max |identity error| = 1.6e-15;  pi* beats every other policy in 2000/2000 (it is the global optimum)
+  marginal correction KL(pibar||pibar*) / E_w KL(pi_w||pi*_w): median 0.418, max 1.000  (<= 1 by data processing)
+
+[V22] B §12: two defaults identify the reference's default weight iff the default does not move the evaluator
+  endorsement effect gamma = 0.0: median |alpha_hat - alpha| = 8.88e-16  (failed fits: 0/200)
+  endorsement effect gamma = 0.3: median |alpha_hat - alpha| = 1.56e-01  (failed fits: 0/200)
+  endorsement effect gamma = 1.0: median |alpha_hat - alpha| = 3.92e-01  (failed fits: 0/200)
+
+[V23] B §13: log-linear learning in a potential game has stationary law prod_i q_i(x_i) * exp(beta*Phi(x))
+  max |stationary law - tilt of the joint reference by the potential| = 6.3e-13  (200 random games, 2-3 players)
+  public goods (m/n < c < m): t_hat/beta = -0.3333 (= (m/n-c)/(m-c) = -0.3333); half-ray D_perp = KL(ph||q) = 0.0909, X_anti = 0.5511, D_par = 0.7748; sum = 1.4168 = beta R_J = 1.4168
+
+[V24] Prop 21: if E_q[F|F_hat] = a + b F_hat and w = dp/dq depends on x only through F_hat, gold gain = b * proxy gain
+  F_hat-measurable actors (Gibbs, top selection, arbitrary): max |gold gain - b*proxy gain| = 3.1e-15
+  an actor whose weights use the residual: median violation 0.550 (the condition is needed)
+
+[V25] Prop 22: d/dt E_{p_t}F at t=0 = sum_x v_x F_x = Cov_q(v/q, F); vanilla softmax gradient gives eta*sum_x q_x^2 (F - E_qF)(F_hat - E_qF_hat)
+  Gibbs: max |finite-difference - Cov_q(F_hat,F)| = 8.7e-07;  VPG: max relative error vs q^2-weighted formula = 4.0e-05
+  random instances where the two optimizers' initial effects have opposite signs: 80/2000
+
+[V26] Remark 13.5: F_hat = sF under the three conventions; best-of-n is invariant to monotone transforms and puts weight <= n q(x) on any state
+  s=0.5: price convention M(beta) = 0.4420;  budget convention M(lambda) = -4.8e-17 (lambda/beta = 0.5000; the budget point is p_hat itself, so free D_perp = 0 too)
+  s=1.7: price convention M(beta) = 0.1112;  budget convention M(lambda) = -1.5e-16 (lambda/beta = 1.7000; the budget point is p_hat itself, so free D_perp = 0 too)
+  s=3.0: price convention M(beta) = 0.2255;  budget convention M(lambda) = 3.2e-16 (lambda/beta = 3.0000; the budget point is p_hat itself, so free D_perp = 0 too)
+  best-of-n: max change under a strictly increasing transform = 0.0e+00;  max (p_BoN(x) - n q(x)) = 5.6e-17 (<= 0)
+
+[V27] Thm 1, Thm 13(b), Thm 17(iii) and Prop 18's cap hold for an ARBITRARY full-support actual actor (best-of-n, early-stopped VPG, random); only the intended actor is Gibbs
+  4222 actor instances: max |beta R_J - KL(ph||p*)| = 1.6e-14;  max Thm 13(b) error = 6.0e-12;  max Thm 17(iii) error = 1.1e-12;  Prop 18 cap violations = 0
+
+[V28] Prop 23: argmax selectors on a COMMON random candidate set (best-of-n at equal n): 0 <= R <= E_ph E - E_p* E
+  20000 instances (30 % with ties; common tie-breaking): R < 0 in 0;  R > E_ph E - E_p* E in 0
+
+[V29] Prop 15 with a NON-concave target U(p) = E_pF + k(E_pG)^2 (k > 0), where Psi = KL/beta - U is still convex
+  3000 instances: max |J(p*) - J(p) - B_Psi(p,p*)| = 1.8e-15  (B_Psi = KL(p||p*)/beta - k (E_pG - E_p*G)^2)
+
+[V30] Def. 11 contract on the v6.4 measures (Prop. 24): M1 identity, M2 >= 0, M3 representation invariance, M5 intensity is not misdirection, M8 per context; sanity suite M9
+  violations over 600 instances each: M1 budget: 0; M1 free: 0; M1 price: 0; M2 any KL measure: 0; M3 budget: 0; M3 free: 0; M3 price(beta/a): 0; M5 budget: 0; M5 free: 0
+  M5 for the price measure (an agent pursuing F itself at 1/4, 1/2, 2 or 4 times the price): positive in 600/600, median 0.231 nats -> the price measure FAILS M5
+  raw value regret dF negative for an over-optimizing, right-target agent in 327/600 -> dF fails M2
+  sanity suite M9 (budget | free | price, in nats):
+    aligned (the intended actor)            0.0000 | 0.0000 | 0.0000
+    weaker, right target (t = beta/2)       0.0000 | 0.0000 | 0.0692
+    stronger, right target (t = 3 beta)     0.0000 | 0.0000 | 0.3665
+    inactive: stays at the default q        0.0000 | 0.0000 | 0.3381
+    sign-flipped (F_hat = -F)               1.9103 | 0.3925 | 1.5312
+    random behaviour                        2.4284 | 1.0193 | 1.1852
+    a different target, same budget         0.6610 | 0.3838 | 0.5187
+    context case: evaluation budget/free = 1e-17/1e-16; deployment = 0.773/0.504 -> per-context measures separate the two
+
+[V31] Prop. 25: M_own = KL(ph || A(F; r)) and R_own = E_{A(F;r)}F - E_ph F against the contract
+  (c) same behaviour attributed as (F_hat, beta) or (2.0 F_hat, beta/2.0): M_own = 0.231 vs 0.294 nats; behaviours identical to 0e+00
+  (d) reorder-only evaluator, best-of-6: R_own = 0.0e+00, while KL(ph || A(F)) = 0.210 nats  -> R_own fails M1
+  (d) vanilla policy gradient, same steps, F_hat = 2F: R_own < 0 in 200/200  -> R_own fails M2
+  (a) M_own for best-of-n run on the target at the actor's n: max 0e+00;  (b) change under positive affine maps: max 0e+00;  (e) detection-cap violations: 0/1000
+
+[V32] Prop. 26: an actor entropic from its own reference q_A = q e^h; the measures use the declared q
+  (a) absorption p^(q_A)_(F_hat,beta) = p_(F_hat + h/beta, beta): max log-probability error 7e-15 over 2000 instances
+  (c) F_hat = F, random h              : M_free in [2.9e-06, 2.2]; M_budget in [2.9e-06, 4.86] (defined in 599/600)
+  (c) F_hat = F, h = aF + c, a > -beta : M_free in [-1.6e-15, 8.9e-16]; M_budget in [-5.8e-16, 8.53e-16] (defined in 600/600)
+  (c) F_hat = F, h = aF + c, a < -beta : M_free in [8.7e-05, 3.4]; M_budget in [3.5e-04, 315] (defined in 578/600)
+  (d) M_free / ((eps^2/2) Var_p*(h0_perp)): eps=0.3: 0.8730  eps=0.1: 0.9510  eps=0.03: 0.9844  eps=0.01: 0.9947
+  (e) one instance, M_free vs beta: 0.25: 0.545  0.5: 0.551  1: 0.560  2: 0.604  4: 0.756  8: 0.370  16: 0.002  32: 0.000  64: 0.000 | beta -> 0 limit inf_t KL(q_A||p_F,t) = 0.535
+  (e) 200 random instances, beta in [0.25, 64]: interior maximum in 67/200; M_free(64) < 1% of its maximum in 195/200
+  rejected alternative (budget matched on the actor's own reference): one behaviour, two attributions -> the measure differs by median 0.22, max 10.6 nats (288 instances)
+  Prop 25 (reference attribution): M_own under (q, F_hat) vs (q_A, F_hat - h/beta), same behaviour: differs in 300/300, median 0.26 nats
+
+[V33] Lemma 5.1: t -> KL(p_{G,t}||q) strictly increasing to log 1/q(argmax G); t -> E_{p_{G,t}}G strictly increasing with derivative Var_{p_{G,t}}(G)
+  2000 instances, 102013 resolvable grid steps: steps where KL or the mean fails to increase strictly: 0 (17987 steps skipped: within 1e-8 of the limit, saturated in floating point)
+  d/dt E_(p_(G,t)) G vs Var_(p_(G,t)) G (central finite difference): max absolute error 1.1e-08; max relative error where Var > 1e-4: 5.5e-05
+  limit: max |KL(p_(G,t)||q) - log 1/q(argmax G)| at t = 60/gap(G): 8.9e-16
+
+[V34] Props 27-30: external reward R, contingency m, persistence coupling; instrumental tracking, masking, selection, fake-alignment gap
+  Prop 27(b) [P1]: 80 instances: generic optimizer minus the tilt solution, value: max 1.4e-13; policies agree to median 1e-10; where they differ by > 1e-4 the generic value is lower: True
+  Prop 27(c) [P2]: contexts with m_c = 0: max |p_c - own-objective tilt| = 0e+00;  derived kappa/m = gamma*nu*V*: median 0.48, range [-0.05, 53.16] (negative iff V* < 0)
+  Prop 27(a) [P3]: general concave coupling, 150 instances: generic minus fixed-point tilt value: max 8.9e-16
+  Prop 28 [P4]: KL between two types' behaviour, log-slope / (-beta gap_R) in the window beta*kappa*gap_R in [30, 60]: min 1.0000, max 1.1076, within 10%: 0.997 (n=300); as registered (fixed kappa <= 40, naive KL): within 10% in 179/185
+  Prop 28 [P5]: KL(kappa) > KL(0) for some kappa in (0, 40]: 150/300 = 0.50
+  Prop 29 [P8]: selection differential log-slope / (-beta gap_R) in the same window: min 0.9581, max 1.1246, within 10%: 0.993 (n=300)
+  Prop 30(a,b) [P6]: argmax R = argmax F in evaluation: M_free(kappa=300)/M_free(0) < 1% in 1.000 of 60; deployment is kappa-free by construction (Prop 27(c))
+  Prop 30(c) [P7]: argmax R != argmax F: min M_free(kappa=300) = 0.131; median M_free(300)/M_free(0) = 4.62; limit -log sup_t p_(F,t)(argmax R) matched at kappa = 3000 to 1.3e-05

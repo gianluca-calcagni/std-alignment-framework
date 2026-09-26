@@ -1,0 +1,17 @@
+[T-B, VPG] q-covariance positive, q^2-weighted covariance negative
+  mass on heavy states: q 0.057, q^2-weights 0.420
+  Cov_q(Fh,F) = +0.417   Cov_q2(Fh,F) = -3.145
+  Gibbs gain, beta=1e-3: +4.17e-04   (predicts help)
+  VPG gain after 1, 10, 200 steps: -2.46e-03, -2.46e-02, -2.95e+00
+  exact VPG initial velocity sum_x q_x^2 (F-EqF)(Fh-EqFh) = -4.92e-03
+
+[T-C] zero value regret, positive detection exponent (BoN)
+  n= 2: value regret -2.7e-15   Chernoff 0.004 nats/sample   KL(ph||p*) 0.014
+  n= 8: value regret -1.1e-14   Chernoff 0.029 nats/sample   KL(ph||p*) 0.111
+  n=64: value regret -8.3e-14   Chernoff 0.684 nats/sample   KL(ph||p*) 1.632
+  Gibbs beta=2.0: value regret dF -1.37e-03;  beta*R_J = KL(ph||p*) = 0.0144;  Chernoff 0.0036
+  -> for Gibbs the bound holds because R_J charges the information cost; dF can be ~0 or negative.
+
+[T-D, VPG] Gaussian joint, uniform q, traced path
+  sqrt(KL) / gold gain / gold:proxy  ->  3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565; 3.15/2.143/0.565
+  non-uniform q ∝ exp(0.8·residual): under this q, F and Fh are no longer jointly Gaussian-with-independent-residual; skipped as out of B4 scope

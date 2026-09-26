@@ -1,0 +1,42 @@
+[T-A] V5 pair: Var_q E1=0.373  Var_q E2=0.0180  osc E1=4.06 osc E2=6.0
+  BoN:   n      KL      R(E1)     R(E2)    ratio
+         2   0.193   0.08078   0.00131      61.8
+         4   0.636   0.14648   0.00417      35.2
+        16   1.835   0.27141   0.02344      11.6
+        64   3.174   0.38277   0.11052      3.46
+       256   4.548   0.53858   0.47523      1.13
+      1024   5.922   0.65565   1.69968     0.386
+      4096   7.160   0.51709   3.77810     0.137
+     16384   7.598   0.47884   4.34403      0.11
+     65536   7.601   0.47879   4.34524      0.11
+    262144   7.601   0.47879   4.34524      0.11
+   1048576   7.601   0.47879   4.34524      0.11
+  VPG (unregularized, early-stopped, matched KL):
+   d= 0.01: R(E1)=0.02056 R(E2)=0.00465 ratio=4.42
+   d= 0.05: R(E1)=0.04321 R(E2)=0.10780 ratio=0.401
+   d=  0.2: R(E1)=0.09823 R(E2)=0.33191 ratio=0.296
+   d=  0.5: R(E1)=0.14285 R(E2)=0.53433 ratio=0.267
+   d=    1: R(E1)=0.15346 R(E2)=0.80796 ratio=0.19
+   d=    2: R(E1)=0.17469 R(E2)=1.35523 ratio=0.129
+   d=    3: R(E1)=0.19592 R(E2)=1.90249 ratio=0.103
+   d=    4: R(E1)=0.21715 R(E2)=2.44976 ratio=0.0886
+   d=    5: R(E1)=0.23837 R(E2)=2.99702 ratio=0.0795
+
+[T-A] crossing location (KL from reference at which R(E1)=R(E2))
+Traceback (most recent call last):
+  File "/home/claude/blind/t2b.py", line 12, in <module>
+    dg=brentq(lambda d: ratio_gibbs(d)-1,1e-4,7); print(f'  Gibbs path : d* = {dg:.3f}')
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/scipy/optimize/_zeros_py.py", line 846, in brentq
+    r = _zeros._brentq(f, a, b, xtol, rtol, maxiter, args, full_output, disp)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/scipy/optimize/_zeros_py.py", line 94, in f_raise
+    fx = f(x, *args)
+         ^^^^^^^^^^^
+  File "/home/claude/blind/t2b.py", line 12, in <lambda>
+    dg=brentq(lambda d: ratio_gibbs(d)-1,1e-4,7); print(f'  Gibbs path : d* = {dg:.3f}')
+                        ^^^^^^^^^^^^^^
+  File "/home/claude/blind/t2b.py", line 7, in ratio_gibbs
+    def ratio_gibbs(d): pf=gibbs_at(q,F,d); return (pf@F-gibbs_at(q,F+E1,d)@F)/(pf@F-gibbs_at(q,F+E2,d)@F)
+                                    ^
+NameError: name 'q' is not defined

@@ -1,0 +1,77 @@
+prev counts Counter({'F': 78, 'P': 76, 'N': 67})
+expr lenient: agree 0.715 kappa 0.572
+  prev->mine {'F->F': 55, 'F->P': 22, 'F->N': 1, 'P->F': 4, 'P->P': 55, 'P->N': 17, 'N->F': 1, 'N->P': 18, 'N->N': 48}
+expr strict: agree 0.692 kappa 0.543
+  prev->mine {'F->F': 55, 'F->P': 21, 'F->N': 2, 'P->F': 4, 'P->P': 34, 'P->N': 38, 'N->F': 1, 'N->P': 2, 'N->N': 64}
+layer: agree 0.756 kappa 0.699
+locus: agree 0.805 kappa 0.756
+T1b-40 expr lenient: 0.800 k=0.684
+T1b-40 expr strict: 0.700 k=0.548
+T1b-40 layer: 0.825 k=0.773
+
+prev layer Counter({'static': 79, 'strategic': 51, 'dynamic': 27, 'outside-X': 22, 'statistical': 16, 'outside-E': 13, 'category': 13})
+
+--- expr disagreements (lenient) ---
+A10  prev F/static      mine P/undetermined | prev: X = trajectories, so non-Markov targets are admissible; the Markov-restricted evaluator leaves 
+A15  prev P/dynamic     mine N/dynamic     | prev: snapshot: exploratory behaviour puts mass on catastrophic region; learning-by-trial is dynamic
+A18  prev F/static      mine Pt/dynamic     | prev: X = trajectories; step-level monitoring observes a coarsening, detection ≤ KL of the coarsened 
+B6   prev N/outside-X   mine Pt/outside-X   | prev: resisting modification acts on the correction loop; no core object for modification of the acto
+B8   prev F/static      mine P/statistical | prev: actor optimizes the proxy as its evaluator: E = proxy − target (target uncertainty not needed t
+B9   prev F/static      mine P/statistical | prev: contexts (Def 9): per-context E_c large off-distribution while g stays small; T = g + ΔF separa
+B10  prev N/statistical mine Pt/statistical | prev: the entropic actor predicts local effects of a local E; broad misalignment is a generalization 
+B11  prev N/statistical mine Pt/statistical | prev: as B10
+B12  prev F/static      mine P/statistical | prev: context-dependent training: evaluation gap across chat/agentic contexts (Prop 19)
+C1   prev F/static      mine P/statistical | prev: as B9: competent (low g) pursuit of the wrong goal off-distribution
+C2   prev F/static      mine P/statistical | prev: instance of C1
+C8   prev N/outside-X   mine P/dynamic     | prev: the actor's behaviour changes the distribution and the target (hard case)
+C9   prev F/static      mine P/statistical | prev: as B9
+D1   prev P/dynamic     mine N/outside-X   | prev: Turner's POWER needs states (B §9); acquiring power changes the reach (outside-X at the limit)
+D2   prev P/dynamic     mine N/undetermined | prev: as D1
+D3   prev N/outside-X   mine Pt/outside-X   | prev: acts on the correction loop
+D7   prev F/static      mine P/category    | prev: actor conditions on context (Def 9): the prerequisite for Γ > 0
+D10  prev F/static      mine P/category    | prev: two evaluators (scheming vs sycophancy) produce the same behaviour: non-identification (Prop 12
+D11  prev N/outside-X   mine Pt/outside-X   | prev: acts on its own containment
+D12  prev N/outside-X   mine Pt/outside-X   | prev: acts on monitoring
+D13  prev N/outside-X   mine Pt/outside-X   | prev: acts on the correction process
+D14  prev N/strategic   mine Pt/statistical | prev: coordination with other agents
+D17  prev P/category    mine N/category    | prev: observation is a coarsening (detection bound applies); the content of hidden reasoning is mecha
+E5   prev F/static      mine P/statistical | prev: labeller-dependent evaluator error; the disagreement component is E10
+E15  prev F/static      mine P/statistical | prev: teacher behaviour becomes the student's reference/evaluator: stacked stages (Cor 1.5), referenc
+E16  prev F/static      mine P/strategic   | prev: safety tax = increase of g under tighter capacity (Cor 5.2); pressure to undo it is dynamic/str
+E17  prev F/static      mine P/statistical | prev: mitigation effective only in one context: context-dependent behaviour (Def 9)
+F9   prev F/static      mine P/statistical | prev: errors compound through stacked stages (Cor 1.5)
+F10  prev P/strategic   mine F/static      | prev: against a fixed monitor: E on the monitor score (Prop 20); adaptation to a changing monitor is 
+G9   prev P/statistical mine N/undetermined | prev: many actors share correlated evaluator errors; the core has one actor
+H6   prev P/dynamic     mine N/dynamic     | prev: the evaluator resets with consumption history
+H10  prev P/outside-E   mine N/outside-E   | prev: target constructed at elicitation: context-dependent F(c,·) (Def 9) but no context-free target
+H11  prev P/outside-E   mine N/outside-E   | prev: as H10
+H21  prev N/dynamic     mine P/dynamic     | prev: learned beliefs about controllability; not an objective gap
+H24  prev P/dynamic     mine N/dynamic     | prev: history-dependent evaluator (contexts indexed by past acts)
+I1   prev F/static      mine P/strategic   | prev: agent's evaluator ≠ principal's target; contract design is strategic
+I2   prev F/static      mine P/strategic   | prev: evaluator omits consequences borne by others; hidden-action contracting is strategic
+I5   prev P/dynamic     mine F/static      | prev: the indicator's relation to the target erodes as agents act on it
+I9   prev N/outside-X   mine Pt/strategic   | prev: the evaluated party reshapes the evaluator
+I26  prev N/outside-X   mine Pt/outside-X   | prev: actor expands its own mandate
+J11  prev N/strategic   mine Pt/strategic   | prev: as J10
+J12  prev N/strategic   mine Pt/strategic   | prev: competition among offspring
+J13  prev N/strategic   mine Pt/strategic   | prev: a third party manipulates the host's evaluator
+J16  prev N/strategic   mine F/static      | prev: an adversarial population evolving against a designed objective (hard case)
+J17  prev P/strategic   mine F/static      | prev: relatedness proxy as evaluator (static); its exploitation by cheats is strategic
+J19  prev F/static      mine N/outside-E   | prev: with fitness as the target, R_J = 0: no misalignment; a misalignment exists only against a desi
+K1   prev P/strategic   mine N/strategic   | prev: multilevel Price decomposition (B §11, stated); levels are players (hard case)
+K7   prev P/strategic   mine N/strategic   | prev: maternally transmitted elements' evaluator (hard case)
+K8   prev P/strategic   mine N/strategic   | prev: two genomes, two optima (hard case)
+K9   prev N/strategic   mine Pt/strategic   | prev: endosymbiont manipulates host (hard case)
+K13  prev P/strategic   mine N/strategic   | prev: germline vs soma interests (hard case)
+L4   prev P/dynamic     mine N/undetermined | prev: stated (B §9)
+L11  prev P/dynamic     mine N/dynamic     | prev: discounted targets on trajectories are static; dynamic consistency is dynamic
+M2   prev F/static      mine P/statistical | prev: error measured under q, exposure grows with capacity (Props 6, 10, 11)
+M5   prev F/static      mine P/category    | prev: contexts known to the actor (Def 9)
+M6   prev F/static      mine P/category    | prev: eval-awareness lowers eval-context divergence: detection exponent falls, Γ rises (Prop 19)
+M7   prev F/static      mine P/category    | prev: realism moves ρ_ev toward ρ_dep, reducing Γ
+M9   prev F/static      mine P/statistical | prev: as B12
+M10  prev N/statistical mine Pt/statistical | prev: as B11
+M11  prev N/statistical mine Pt/statistical | prev: as B10: the entropic actor predicts local effects
+M13  prev P/category    mine N/category    | prev: detection trade-off (Prop 18); probes are mechanism-level
+M14  prev P/strategic   mine F/static      | prev: training against a detector: adversarial Goodhart
+M16  prev P/category    mine N/category    | prev: behaviour does not identify objectives (Prop 12); coherence of internal goals is mechanism-leve

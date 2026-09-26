@@ -1,0 +1,168 @@
+{
+ "section_notes": {
+  "A|1": "Core 01 Setting",
+  "A|2": "Core 02 The identity",
+  "A|3": "Core 03 Bounds in the error alone",
+  "A|4": "Core 04 Capacity",
+  "A|5": "Core 05 Non-separability",
+  "A|6": "Core 06 The divergence fixes the norm",
+  "A|7": "Core 07 Identification, gauge, and the intent ray",
+  "A|8": "Core 08 Capability what optimization pressure does",
+  "A|9": "Core 09 Observation what an overseer can detect",
+  "A|10": "Core 10 Substrates",
+  "A|11": "Core 11 What the core forbids",
+  "A|12": "Core 12 Scope conditions",
+  "B|0": "Dictionary 00 How to read an entry",
+  "B|1": "B01",
+  "B|2": "B02",
+  "B|3": "B03",
+  "B|4": "B04",
+  "B|5": "B05",
+  "B|6": "B06",
+  "B|7": "B07",
+  "B|8": "B08",
+  "B|9": "B09",
+  "B|10": "B10",
+  "B|11": "B11",
+  "B|12": "B12",
+  "B|13": "B13",
+  "B|14": "Dictionary 14 Gate",
+  "B|15": "Dictionary 15 What this dictionary is not",
+  "C|1": "Boundary 01 The attack surface",
+  "C|2": "Boundary 02 What is outside",
+  "C|3": "Boundary 03 The boundary as two conditions",
+  "C|4": "Boundary 04 The equilibrium fork",
+  "C|5": "Boundary 05 Stated extensions, untested",
+  "C|6": "Boundary 06 What a good attack looks like",
+  "D|1": "Status 01 Claim ledger",
+  "D|2": "Status 02 Retraction history",
+  "D|3": "Status 03 Open questions, ranked",
+  "D|4": "Status 04 The honest position",
+  "D|5": "Status 05 Hygiene log",
+  "D|6": "Status 06 Base rate"
+ },
+ "tier_of": {
+  "Thm 1": [
+   "1"
+  ],
+  "Thm 13": [
+   "1"
+  ],
+  "Thm 17": [
+   "1"
+  ],
+  "Prop 18": [
+   "1"
+  ],
+  "Prop 19": [
+   "1"
+  ],
+  "Prop 24": [
+   "1"
+  ],
+  "Prop 6": [
+   "1"
+  ],
+  "Prop 10": [
+   "1"
+  ],
+  "Prop 11": [
+   "1"
+  ],
+  "Prop 20": [
+   "1"
+  ],
+  "Prop 21": [
+   "1"
+  ],
+  "Prop 22": [
+   "1"
+  ],
+  "Lemma 8": [
+   "1"
+  ],
+  "Prop 7": [
+   "1",
+   "2"
+  ],
+  "B07": [
+   "1",
+   "4′"
+  ],
+  "B11": [
+   "1",
+   "4"
+  ],
+  "Thm 5": [
+   "2"
+  ],
+  "Thm 9": [
+   "2"
+  ],
+  "Prop 23": [
+   "2′"
+  ],
+  "Prop 15": [
+   "3"
+  ],
+  "Cor 1.1": [
+   "4",
+   "—"
+  ],
+  "Cor 1.5": [
+   "4"
+  ],
+  "Prop 2": [
+   "4"
+  ],
+  "Prop 4": [
+   "4"
+  ],
+  "Prop 12": [
+   "4"
+  ],
+  "Prop 3": [
+   "4"
+  ],
+  "Prop 14": [
+   "4",
+   "—"
+  ],
+  "Prop 16": [
+   "4"
+  ],
+  "Cor 13.1": [
+   "4"
+  ],
+  "Cor 13.3": [
+   "4"
+  ],
+  "Cor 13.4": [
+   "4"
+  ],
+  "Rem 13.5": [
+   "4"
+  ],
+  "Cor 17.1": [
+   "4"
+  ],
+  "B04": [
+   "4"
+  ],
+  "B06": [
+   "4"
+  ],
+  "B12": [
+   "4"
+  ],
+  "Lemma 5.1": [
+   "—"
+  ],
+  "Cor 5.2": [
+   "—"
+  ],
+  "B13": [
+   "4″"
+  ]
+ }
+}

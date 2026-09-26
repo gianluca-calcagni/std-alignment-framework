@@ -1,0 +1,13 @@
+44
+my codes on their 44: Counter({'P': 19, 'Pt': 14, 'N': 9, 'F': 2})
+their-generous that I keep as strict P or F: [('A11', 'P'), ('B3', 'P'), ('B4', 'P'), ('D6', 'P'), ('D16', 'P'), ('F1', 'P'), ('F10', 'F'), ('F12', 'P'), ('H25', 'P'), ('I21', 'P'), ('J6', 'P'), ('J7', 'P'), ('J8', 'P'), ('J9', 'P'), ('J17', 'F'), ('J18', 'P'), ('K10', 'P'), ('K11', 'P'), ('K14', 'P'), ('L2', 'P'), ('M15', 'P')]
+
+my codes on their other 32 P: Counter({'P': 15, 'N': 8, 'Pt': 7, 'F': 2})
+their NON-generous P that I call N or Pt: [('A15', 'N', 'dynamic'), ('A17', 'Pt', 'statistical'), ('C4', 'Pt', 'statistical'), ('D1', 'N', 'dynamic'), ('D2', 'N', 'dynamic'), ('F7', 'Pt', 'statistical'), ('G9', 'N', 'statistical'), ('H6', 'N', 'dynamic'), ('H13', 'Pt', 'statistical'), ('H24', 'N', 'dynamic'), ('I8', 'Pt', 'dynamic'), ('L4', 'N', 'dynamic'), ('L11', 'N', 'dynamic'), ('M4', 'Pt', 'statistical'), ('M8', 'Pt', 'dynamic')]
+
+F+P: prev 154 69.7%
+F+P prev pessimistic 44: 110 49.8%
+mine lenient 155 70.1%; mine strict 117 52.9%
+prev F+P with only item-level demotions: 116 52.5% 38
+F+P under BOTH (prev, mine strict): 114 51.6%
+F under both: 55 24.9%

@@ -1,0 +1,29 @@
+{
+ "_note": "Files that must never change. R7-4 preregistration: hash recorded when it was written (R7-4 results, V34). archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files.",
+ "files": {
+  "70 Project/R7/R7-4 preregistration.md": "07a947ecbb9777ebc1ec50dd6af397d37161f136f288bb6f9866e9ea2fbbf6ce",
+  "archive/v6.6_flat/A_core.md": "299283812cbf874f0c36f7d8614a13d592730b415a5072082edcd8a4c7ff97e8",
+  "archive/v6.6_flat/B_dictionary.md": "02b11f43f4e78c06a5f168990e6ff4e30f37e474982d929fefab62e0e0efd723",
+  "archive/v6.6_flat/C_boundary.md": "3556baa2c1629626eff6ec39ee3cbf9706fbfa7470476fb6aed9a0bda2304471",
+  "archive/v6.6_flat/D_status.md": "309cc9c33f78dddb622a8fe5b790209d2341a083b78e18af5ab1bc52b9c46489",
+  "archive/v6.6_flat/E_census.md": "6bd1b6a36facbe377201a131545a6b74ceea19da8718cad9275ae321eee2f2d8",
+  "archive/v6.6_flat/F_method.md": "dab1da71c11f106c032a5026aa0b3fb1d435f05c5f503831df3e396216552d66",
+  "archive/v6.6_flat/MESSAGE_to_previous_executor.md": "6a9444d25b9d71ac7bbbd38fe3fc1581f0da3e4fe6dac9e889194986bec866e2",
+  "archive/v6.6_flat/MSG_1_findings.md": "3128aebc7f39708db95fc47496d750a2a90857f3b264aaa4bc0943d3771579cb",
+  "archive/v6.6_flat/MSG_2_steering.md": "a0ce3e59d7ac50b3ada303a84cec7f1fb8dd62c0d524df62b0df2e86edf50144",
+  "archive/v6.6_flat/NOTES_claude.md": "101ed1d15425bfe42568846baab37051824472e64d069fcfb47ca34a1fc8965e",
+  "archive/v6.6_flat/R3_FIX_LOG.md": "43edfc32a573fd3b2a1bdd2bd9316bad9265bf47155b14b7fee8dbf196c602f6",
+  "archive/v6.6_flat/R4_LOG.md": "34c4d9294daede62579f6b9a593849739cbde98531e84f5009e722601fd01e96",
+  "archive/v6.6_flat/R5_LOG.md": "15048e638e1a355e689337bb56e2e40b79e29c9e7fe033eca6d05a01a8117a85",
+  "archive/v6.6_flat/R6_LOG.md": "11e90f72163d7dc998b9eeba47ddf828a8632c5767efaaae1c35d9ec5762f38d",
+  "archive/v6.6_flat/README.md": "a568e46ac4801726d96b24657f40cf39f8edcc7bf5e84674e09cad7c55aaa5ec",
+  "archive/v6.6_flat/REFERENCES.md": "495a3cd212fd4d06ef4db80c14c41d3a828748fc8a56c3a42f7ae738b7bf5d77",
+  "archive/v6.6_flat/ROADMAP.md": "1f6380eb4ac15124cf4cac3782324f8ba6f011772d41922850be32b86f10ab39",
+  "archive/v6.6_flat/T1_RULES_FROZEN.md": "a5858dc0107f30a944551cae0b3bcae5ffc968fcd7b5ff793b12341994552772",
+  "archive/v6.6_flat/T1_census_routing.md": "ffdd6f4478ba90ee910f7244694b4baba848c4031798e2465b5681ced9ed27ce",
+  "archive/v6.6_flat/T1_preregistration.md": "933e2f3bafc8a64ab64698d682b18483b090765c410df17b1e6ddeb62c3d2028",
+  "archive/v6.6_flat/final_audit_output.txt": "9590056787a0a7eb408499b79d6606750a59d8728766188b17c9e546d60fdfd3",
+  "archive/v6.6_flat/verify_addendum_output.txt": "834eb17970d3f4b350f194921646ed000d3eb80bc17cb715b3ffe6032688b0a9",
+  "archive/v6.6_flat/verify_output.txt": "98e319c9c14db9abc01dc7d9944e16380cb96e59663f0c6cac323628f8f7ae96"
+ }
+}

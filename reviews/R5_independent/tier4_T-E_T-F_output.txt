@@ -1,0 +1,18 @@
+[T-E] rescaling F-hat = s*F (Cor 13.3)
+  Gibbs, same price: beta*R_J = KL(ph||p*) = 0.4256  (axial cost, as Cor 13.3)
+  Gibbs, same budget (default convention): M(lambda) = KL(ph||p_F,lambda) = -5.45e-16, lambda/beta = 1.7000
+  BoN n=16: max|p_BoN(F) - p_BoN(1.7F+3)| = 0.0e+00;  even exp(F): 0.0e+00
+
+[T-F] spike exploitation at matched PROXY gain (Prop 20 covariance term)
+  M=6:
+    n=8: proxy+1.40 | spike mass BoN 4.0e-03 Gibbs 7.5e-02 | Cov_q(w,E) BoN 0.021 Gibbs 0.445
+    n=64: proxy+2.33 | spike mass BoN 3.2e-02 Gibbs 2.6e-01 | Cov_q(w,E) BoN 0.186 Gibbs 1.556
+    n=512: proxy+3.29 | spike mass BoN 2.3e-01 Gibbs 5.1e-01 | Cov_q(w,E) BoN 1.352 Gibbs 3.073
+  M=20:
+    n=8: proxy+1.44 | spike mass BoN 4.0e-03 Gibbs 6.5e-02 | Cov_q(w,E) BoN 0.070 Gibbs 1.289
+    n=64: proxy+2.77 | spike mass BoN 3.2e-02 Gibbs 1.3e-01 | Cov_q(w,E) BoN 0.620 Gibbs 2.679
+    n=512: proxy+6.44 | spike mass BoN 2.3e-01 Gibbs 3.3e-01 | Cov_q(w,E) BoN 4.508 Gibbs 6.621
+  M=100:
+    n=8: proxy+1.72 | spike mass BoN 4.0e-03 Gibbs 1.8e-02 | Cov_q(w,E) BoN 0.349 Gibbs 1.711
+    n=64: proxy+5.25 | spike mass BoN 3.2e-02 Gibbs 5.3e-02 | Cov_q(w,E) BoN 3.100 Gibbs 5.269
+    n=512: proxy+24.47 | spike mass BoN 2.3e-01 Gibbs 2.5e-01 | Cov_q(w,E) BoN 22.541 Gibbs 24.737

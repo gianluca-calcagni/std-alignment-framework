@@ -1,0 +1,40 @@
+N = 221
+expressibility {'F': '78 (35.3 %)', 'P': '76 (34.4 %)', 'N': '67 (30.3 %)'}
+layer {'static': '79 (35.7 %)', 'statistical': '16 (7.2 %)', 'dynamic': '27 (12.2 %)', 'strategic': '51 (23.1 %)', 'outside-E': '13 (5.9 %)', 'outside-X': '22 (10.0 %)', 'category': '13 (5.9 %)', 'undetermined': '0 (0.0 %)'}
+locus {'L1': '23 (10.4 %)', 'L2': '71 (32.1 %)', 'L3': '6 (2.7 %)', 'L4': '10 (4.5 %)', 'L5': '47 (21.3 %)', 'L6': '22 (10.0 %)', 'L7': '42 (19.0 %)'}
+F+P = 154 69.7 %
+
+by section: F / P / N ; static / statistical / dynamic / strategic / outside-E / outside-X / category
+  A AI — specification           n=20  F 14 P  6 N  0 | 14  1  1  0  1  3  0
+  B AI — inner alignment         n=12  F  4 P  4 N  4 |  4  3  0  2  0  3  0
+  C AI — generalization          n=11  F  5 P  2 N  4 |  5  2  0  0  2  1  1
+  D AI — strategic               n=18  F  3 P  5 N 10 |  3  1  3  5  0  4  2
+  E AI — training pipelines      n=17  F 14 P  2 N  1 | 14  1  1  0  1  0  0
+  F AI — oversight               n=12  F  4 P  5 N  3 |  4  1  0  4  0  0  3
+  G AI — multi-agent/systemic    n=10  F  1 P  1 N  8 |  1  1  2  4  1  1  0
+  H humans — individual          n=25  F  4 P 13 N  8 |  4  1  9  2  3  3  3
+  I humans — institutional       n=30  F 11 P  8 N 11 | 11  0  3 10  3  3  0
+  J biology — organism           n=20  F  7 P  7 N  6 |  7  0  1 11  0  1  0
+  K biology — within-genome      n=15  F  1 P 11 N  3 |  1  0  4 10  0  0  0
+  L formal results               n=15  F  3 P  5 N  7 |  4  0  2  2  2  3  2
+  M empirical regularities       n=16  F  7 P  7 N  2 |  7  5  1  1  0  0  2
+
+N items by layer: Counter({'strategic': 23, 'outside-X': 16, 'category': 10, 'outside-E': 9, 'dynamic': 5, 'statistical': 4})
+
+hard cases (a group 'fires' if any item needs a layer other than static or is outside):
+  I16–I18, G10   FIRES  (4/4 items need a layer or are outside)
+  G1–G3          FIRES  (3/3 items need a layer or are outside)
+  K1–K15         FIRES  (14/15 items need a layer or are outside)
+  J19            handled  (0/1 items need a layer or are outside)
+  H15–H17        FIRES  (3/3 items need a layer or are outside)
+  B7             FIRES  (1/1 items need a layer or are outside)
+  G8             FIRES  (1/1 items need a layer or are outside)
+  D16, M15       FIRES  (2/2 items need a layer or are outside)
+  E10            FIRES  (1/1 items need a layer or are outside)
+  C8, G4         FIRES  (2/2 items need a layer or are outside)
+  J14, J16       FIRES  (1/2 items need a layer or are outside)
+  H23            FIRES  (1/1 items need a layer or are outside)
+  fired: 11 of 12 (prediction: >= 8)
+
+sensitivity: 44 projections judged generous; pessimistic F+P = 110 (49.8 %)
+non-static items by layer (build-order signal): {'strategic': 51, 'dynamic': 27, 'outside-X': 22, 'statistical': 16, 'outside-E': 13, 'category': 13}

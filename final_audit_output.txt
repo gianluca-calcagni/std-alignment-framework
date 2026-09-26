@@ -1,0 +1,51 @@
+
+[F1] closed forms vs a generic constrained optimizer (value gap = generic - closed form; > 0 would refute)
+  soft    : max(generic - closed form) = +1.1e-16   (min = -1.7e-06)
+  cap     : max(generic - closed form) = +1.0e-13   (min = -2.5e-07)
+  cap_inf : max(generic - closed form) = +1.7e-13   (min = -4.2e-08)
+  width   : max(generic - closed form) = +2.1e-13   (min = -3.9e-03)
+  chi2    : max(generic - closed form) = +5.6e-14   (min = -6.9e-07)
+  concave : max(generic - closed form) = +6.7e-16   (min = -1.4e-07)
+
+[F2] exact Bayes error vs n for p_hat vs p* on |X| = 3 (equal priors; enumeration of types)
+  beta*R_J = KL(ph||p*) = 0.3211   KL(p*||ph) = 0.1850   Chernoff C = 0.0621
+    n=   1: -(1/n) log P_e = 0.9479   (> beta R_J)
+    n=   2: -(1/n) log P_e = 0.5881   (> beta R_J)
+    n=   5: -(1/n) log P_e = 0.3282   (> beta R_J)
+    n=  10: -(1/n) log P_e = 0.2009   (<= beta R_J)
+    n=  25: -(1/n) log P_e = 0.1270   (<= beta R_J)
+    n=  50: -(1/n) log P_e = 0.1005   (<= beta R_J)
+    n= 100: -(1/n) log P_e = 0.0847   (<= beta R_J)
+    n= 200: -(1/n) log P_e = 0.0752   (<= beta R_J)
+    n= 400: -(1/n) log P_e = 0.0694   (<= beta R_J)
+
+[F3] scale covariance: (F, F_hat, E) -> s(.), beta -> beta/s, delta fixed
+  class value    : max relative deviation from predicted scaling = 9.5e-12
+  class inv_value: max relative deviation from predicted scaling = 2.7e-12
+  class nats     : max relative deviation from predicted scaling = 8.5e-09
+  class value2   : max relative deviation from predicted scaling = 5.7e-13
+
+[F4] edge-case stress (log-space arithmetic)
+  392 cases (n in {2,3,5,40}, q masses down to 1e-12, beta in {1e-3..60}, |E| up to ~100, ties, anti-aligned)
+  Thm1     : worst relative error = 9.4e-13
+  Cor1.2   : worst relative error = 1.2e-11
+  Thm13a   : worst relative error = 1.8e-11
+  Thm13b   : worst relative error = 1.8e-11
+  Thm17iii : worst relative error = 1.7e-11
+  Prop18   : max (C - min KL) = 1.4e-14  (must be <= 0 up to rounding)
+
+[F5] Definition 8, budget convention, when lambda does not exist
+  KL(p_hat||q) = 0.916 >= log 1/q(argmax F) = 0.223: no finite lambda
+  v6.1 fallback M_budget = KL(p_hat || q(.|argmax F)) = inf  (infinite: p_hat has mass off argmax F)
+  same-budget raw regret (value units) = max F - E_ph F = 1.530e-07  (finite, and tiny: the actor is essentially aligned)
+
+[F6] cross-references (on the compiled linear views of the vault)
+  results defined in the core: 61; in the dictionary: ['B11', 'B12', 'B13', 'B4', 'B6', 'B7']; V-blocks: 34
+  unresolved references: 0
+
+[F7] Cor. 17.1: with both capacity constraints binding, R^C = M(lambda)/lambda (the budget convention)
+  2900 binding instances: max |R^C - M(lambda)/lambda| = 7.7e-13
+
+[F8] independent check of Prop. 3 (Student-t3 errors, beta in [1e-3, 30]; sup over t by dense log grid + refinement)
+  4000 instances: violations [L(2b)-2L(b)]/b: 0, 2*b*sigma+^2: 0
+  max R_J/bound where bound > 1e-9 (below that, cancellation noise dominates): 1.000, 0.910

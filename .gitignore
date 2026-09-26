@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+# Obsidian: per-user state, not part of the vault
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/

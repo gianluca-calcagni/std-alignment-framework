@@ -1,0 +1,5 @@
+# The reference outputs (verify_output.txt, final_audit_output.txt) were produced with exactly these versions,
+# on Python 3.11. tools/reproduce.py tolerates residual-scale digits only; keep the pins unless re-baselining.
+numpy==2.4.4
+scipy==1.17.1
+pybtex==0.26.1
