@@ -1,0 +1,57 @@
+{
+ "_rule": "Declared exceptions to exact reproduction. Each entry names a block, a substring of the reference line, the positions of the tolerated numbers on that line (0-based, negative counts from the end), and either 'upper' (the number must stay below the bound the check actually claims, in this run and in the reference) or 'rel' (relative closeness), with the reason. Only lines that measure numerical noise qualify, and only after a run on another machine has shown the noise. Keep this list short: a result that moves across machines is a finding, not a tolerance.",
+ "V25": [
+  {
+   "line": "Gibbs: max |finite-difference - Cov_q(F_hat,F)|",
+   "numbers": [
+    0,
+    -1
+   ],
+   "upper": [
+    0.0001,
+    0.001
+   ],
+   "why": "Forward differences with h = 1e-7 are dominated by round-off. On a GitHub runner (first CI runs, 2026-09-26) the VPG relative error read 7.2e-05 against the reference 4.0e-05, and the Gibbs error 8.6e-07 against 8.7e-07. The check claims agreement with the covariance formulas to finite-difference accuracy. The bounds sit well above the noise and three orders of magnitude or more below the O(0.1-1) quantities being compared."
+  }
+ ],
+ "V33": [
+  {
+   "line": "(central finite difference)",
+   "numbers": [
+    0,
+    -1
+   ],
+   "upper": [
+    1e-06,
+    0.001
+   ],
+   "why": "Central differences with h = 1e-6 are dominated by round-off, and their digits depend on the CPU's SIMD path. Disabling AVX-512 locally moves the relative error from 5.5e-05 to 5.8e-05 and leaves every other V33 line unchanged. The first CI run on a GitHub runner also failed V33. The check claims that d/dt E G equals Var G to finite-difference accuracy. The bounds sit far above the noise and far below Var."
+  }
+ ],
+ "F1": [
+  {
+   "line": "max(generic - closed form)",
+   "numbers": [
+    -2,
+    -1
+   ],
+   "upper": [
+    1e-09,
+    1e-09
+   ],
+   "why": "The claim is the max: a generic constrained optimizer never beats the closed form, so max(generic - closed form) is at most residual scale. The min is the local optimizer's shortfall from the optimum. It depends on the optimizer's iterates and hence on the CPU. With AVX-512 disabled locally, three of six mins moved by up to three orders of magnitude (chi2: -6.9e-07 to -8.8e-04), while every max stayed at most 1.4e-13. The first CI run's audit failure is consistent with this. Its log is not readable from the session."
+  }
+ ],
+ "F3": [
+  {
+   "line": "class nats",
+   "numbers": [
+    -1
+   ],
+   "upper": [
+    1e-06
+   ],
+   "why": "The relative deviation from exact scale covariance is a round-off measure; the claim is covariance up to numerics. With AVX-512 disabled locally it reads 3.4e-09 against the reference 8.5e-09, just above the residual threshold. The bound sits far above the noise and far below any real violation of the scaling law."
+  }
+ ]
+}

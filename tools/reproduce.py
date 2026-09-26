@@ -7,10 +7,13 @@ tools/reproduce.py — rerun the numerical checks and compare them with the comm
 The comparison is exact for text and for every printed number, with one exception: two numbers that are both
 at residual scale (|x| <= 1e-9) are treated as equal. Residuals such as "max 1.4e-13" legitimately move in their
 last digits across CPUs and BLAS builds; a count, a fraction or a bound that moves is a real difference.
+Lines that measure numerical noise (finite differences, a local optimizer's shortfall) may carry a declared
+tolerance in tools/reproduce_tolerances.json, each with its reason: 'upper' (the number must stay below the bound
+the check actually claims) or 'rel' (relative closeness), for the listed number positions on that line.
 Exit status 1 if any block differs (or is missing), 0 otherwise. A GitHub step summary is written when
 $GITHUB_STEP_SUMMARY is set.
 """
-import os, re, subprocess, sys
+import json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NUM = re.compile(r'[-+]?(?:\d+\.\d*|\.\d+|\d+)(?:[eE][-+]?\d+)?')
@@ -29,19 +32,56 @@ def blocks(text, tag):
     return {k: '\n'.join(v).strip() for k, v in out.items()}
 
 
-def same_line(a, b):
+TOL = {k: v for k, v in json.load(open(os.path.join(ROOT, 'tools', 'reproduce_tolerances.json'), encoding='utf-8')).items() if not k.startswith('_')}
+
+
+def _covered(spec, i, n):
+    idx = spec.get('numbers', 'all')
+    return idx == 'all' or i in [j % n for j in idx]
+
+
+def _bound(spec, i, n):
+    u = spec['upper']
+    if not isinstance(u, list):
+        return u
+    idx = [j % n for j in spec['numbers']]
+    return u[idx.index(i)]
+
+
+def same_line(a, b, spec=None):
+    """text identical; numbers identical, or both at residual scale, or within the line's declared tolerance:
+    'rel' (relative closeness) or 'upper' (the number, in this run and in the reference, is at most the bound
+    that the check actually claims)"""
     ta, tb = NUM.split(a), NUM.split(b)
     na, nb = NUM.findall(a), NUM.findall(b)
     if ta != tb or len(na) != len(nb):
         return False
-    for x, y in zip(na, nb):
+    n = len(na)
+    for i, (x, y) in enumerate(zip(na, nb)):
+        fx, fy = float(x), float(y)
+        if spec and _covered(spec, i, n):
+            if 'upper' in spec:
+                b_ = _bound(spec, i, n)
+                if fx <= b_ and fy <= b_:
+                    continue
+                return False
+            if abs(fx - fy) <= spec['rel'] * max(abs(fx), abs(fy)):
+                continue
+            return False
         if x == y:
             continue
-        fx, fy = float(x), float(y)
         if abs(fx) <= RESIDUAL and abs(fy) <= RESIDUAL:
             continue
         return False
     return True
+
+
+def annotate(level, title, msg):
+    """a GitHub Actions annotation: readable through the public check-runs API, unlike the raw logs"""
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        esc = msg.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        t = title.replace('%', '%25').replace(':', '%3A').replace(',', '%2C')
+        print(f"::{level} title={t}::{esc}")
 
 
 def compare(ref, new, keys):
@@ -52,17 +92,40 @@ def compare(ref, new, keys):
         if k not in ref:
             report.append(f"- {k}: new block, no reference yet"); continue
         ra, na = ref[k].split('\n'), new[k].split('\n')
-        diff = [(i, x, y) for i, (x, y) in enumerate(zip(ra, na)) if not same_line(x, y)]
+        tol = lambda x: next((t for t in TOL.get(k, []) if t['line'] in x), None)
+        diff = [(i, x, y) for i, (x, y) in enumerate(zip(ra, na)) if not same_line(x, y, tol(x))]
+        tolerated = [x for x, y in zip(ra, na) if tol(x) and not same_line(x, y) and same_line(x, y, tol(x))]
         if len(ra) != len(na) or diff:
             bad += 1
             report.append(f"- **{k}: differs** ({len(diff)} line(s); {len(ra)} reference lines, {len(na)} new)")
             for i, x, y in diff[:6]:
                 report.append(f"  - reference: `{x.strip()}`")
                 report.append(f"  - this run:  `{y.strip()}`")
+                annotate('error', f"{k} differs from the reference", f"reference: {x.strip()}\nthis run:  {y.strip()}")
+            if len(ra) != len(na):
+                annotate('error', f"{k} differs from the reference", f"{len(ra)} reference lines, {len(na)} lines in this run")
         else:
             exact = ref[k] == new[k]
-            report.append(f"- {k}: reproduces" + ("" if exact else " (residual-scale digits differ only)"))
+            why = [] if exact else (["residual-scale digits"] if len(tolerated) < sum(x != y for x, y in zip(ra, na)) else []) + \
+                  ([f"{len(tolerated)} line(s) within a declared tolerance (tools/reproduce_tolerances.json)"] if tolerated else [])
+            report.append(f"- {k}: reproduces" + (f" — differences only in: {'; '.join(why)}" if why else ""))
     return bad, report
+
+
+def platform():
+    """CPU model and numpy's SIMD path: the usual cause of last-digit differences"""
+    cpu = '?'
+    try:
+        cpu = next(l.split(':', 1)[1].strip() for l in open('/proc/cpuinfo') if l.startswith('model name'))
+    except Exception:
+        pass
+    try:
+        import numpy as np
+        from numpy._core._multiarray_umath import __cpu_features__ as f
+        simd = 'AVX-512' if f.get('AVX512F') else 'AVX2' if f.get('AVX2') else 'baseline'
+        return f"{cpu}; numpy {np.__version__}, SIMD {simd}"
+    except Exception:
+        return cpu
 
 
 def run(cmd):
@@ -87,8 +150,10 @@ def main():
         keys = sorted(set(ref) | set(new), key=lambda k: int(k[1:]))
         title = 'final_audit.py'
     bad, report = compare(ref, new, keys)
-    text = f"### {title}: {'all blocks reproduce' if not bad else f'{bad} block(s) differ'}\n\n" + '\n'.join(report) + '\n'
+    text = f"### {title}: {'all blocks reproduce' if not bad else f'{bad} block(s) differ'}\n\nplatform: {platform()}\n\n" + '\n'.join(report) + '\n'
     print(text)
+    annotate('notice' if not bad else 'error', f"{title}: {'reproduces' if not bad else 'differs'}",
+             f"{len(keys) - bad} of {len(keys)} blocks reproduce the committed reference output. Platform: {platform()}")
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8').write(text + '\n')
     sys.exit(1 if bad else 0)
