@@ -15,7 +15,7 @@ updated: "2026-09-26"
 | | |
 |---|---|
 | **Current** | **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **The PI's choice** between T3 and one T7 case (§5, item 1) and the remaining refactor steps (R7-6, the PI's test first; R7-8, optional). R7-7 carried out §5, item 2: M5 is restated for target sets |
+| **Next** | **T3**, then **one T7 case** (the human default case): the PI accepted §5, item 1 (after v7.4). The dropped ideas in §6 are queued for brainstorming, not for building. R7-7 carried out §5, item 2: M5 is restated for target sets |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -380,3 +380,126 @@ applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
    - **Proposal.** State the raters' and reviewers' identity in [[T1_census_routing]], [[R5_LOG]] and [[R6_LOG]]. For the
      next measurement on held-out items ([[T1_RULES_FROZEN]] §3), use at least one human rater or a different model
      family. The frozen measurement is not re-run (§3).
+
+---
+
+## 6. Dropped ideas, to brainstorm before they return *(PI, after v7.4)*
+
+**Why this section exists.** The reviews retracted many claims for good reasons: a circular definition, a
+condition that was generically true, a false premise. Often the *scenario* behind the claim was dropped along
+with its *formulation*, and nothing replaced it. Ignoring those scenarios is wrong, and so is putting them back
+unchanged. Each item below records the scenario, why its formulation died, and what survives today. It starts
+life as a **brainstorm**, not a build step.
+
+**Rules for every item here.**
+1. **State the killing correction first.** A proposal must say how it avoids the reason the item was retracted.
+2. **A rate or a cost, not a yes/no condition** ([[Method]] item 19). **Define the thing before decomposing it**
+   (item 20).
+3. **Place it.** Say which layer it belongs to (measurement or explanation), which locus (L1–L7), and which
+   existing results it touches.
+4. **Pass the drift test** (§1) before it becomes a roadmap step with a pre-registration.
+
+**Sources.** The original v5 texts are **not** in the repository, nor in the v6.2 package the PI supplied. Both
+keep the v5 framework only as retraction rows 1–30 ([[Status 02 Retraction history]]) and the lessons in
+[[Method]]. Several items below cannot be completed until the v5 (or earlier) text is recovered; each says so.
+
+### D1 — The five gaps *(rows 1–3, 8; blocked on the v5 text)*
+- **What it was.** v5 defined alignment as "all five gaps close" (row 1). Verification was once proposed as a
+  fifth gap and retracted as a different type, assurance (row 2). Three gaps were said to be un-closable in
+  principle (row 3). A related claim, "the unconstrained residual underlies every failure", was wrong for two
+  of five **loci** (row 8), which suggests the gaps and the loci were linked.
+- **Why it died.** The definition was circular: alignment was defined only through its decomposition. The
+  "un-closable" verdicts were artifacts of measurability conditions with no threshold. The correction said "one
+  impossibility; the rest are prices", and which impossibility survived is not recorded.
+- **What survives.** Alignment now has an independent definition (Defs 10, 11, 17). The loci L1–L7 say where
+  a failure sits. Several quantities could be candidate "gaps": the transverse error, the axial error, the
+  anti-alignment excess, the boundedness cost, the evaluation gap `Γ`, the ordinal/shape split.
+- **To brainstorm.** Recover the five gaps from the v5 text. For each, find the quantity that measures it,
+  defined from the measures rather than the other way round. Is the "alignment iff all gaps close" statement
+  true as a *theorem* once the gaps are quantities? Which one impossibility survived, and does anything
+  in today's core correspond to it?
+
+### D2 — Grounding: resolution mismatch between principal, agent and overseer *(rows 4, 21)*
+- **What it was.** Grounding as measurability with respect to a self-reachable σ-algebra `𝒮_t` (row 4). The
+  agent's σ-algebra could be **coarser** than the principal's (it cannot "get" the request), or **finer** (it
+  receives loose instructions). Grounding was later found to be "one row of seven", not only about the
+  instrument (row 21). The seven rows are not recorded.
+- **Why it died.** A measurability condition with no threshold is generically satisfied, hence empty.
+- **What survives.** The overseer's coarsening is used: detection is capped by the KL of the coarsened law
+  (census A18, D17). The agent side appears in fragments: B7 (information-limited regulation; a Fano floor),
+  Prop. 21 (an actor that sees only the evaluator). The principal side is handled silently: where the target is
+  flat, the declared reference `q` governs the unspecified details, and an agent that fills them in
+  differently is charged (Prop. 32(b)). R7-8's "declared resolution" is the only planned place for it.
+- **To brainstorm (sketch, unverified).**
+  - *Loose instructions* as a declared partition `𝒢` of the principal: the intended set is every behaviour
+    whose law on `𝒢` matches a tilt, so departures inside a cell drop out by the chain rule. This separates
+    "the principal does not care within a cell" from "the principal's default governs within a cell".
+  - *Cannot get the request* as an actor whose behaviour inside the cells of a coarser partition `ℋ` is fixed.
+    Under the free convention its floor is 0: doing nothing is allowed. Under the budget convention the floor
+    is positive whenever the target is not `ℋ`-measurable and the agent spends information. That is the cost
+    that item 19 asks for.
+  - Recover the seven grounding rows from the v5 text.
+
+### D3 — Values expressible only in acquired concepts *(row 6)*
+- **What it was.** "You cannot specify values, only in terms of concepts already acquired."
+- **Why it died.** True instantaneously, false dynamically: concepts are acquired over time.
+- **What survives.** Nothing in the core. Census C5 and C6 (ontological crisis, the diamond maximizer) are
+  routed outside the single-target frame; C11 (ontology identification) is filed as interpretability.
+- **To brainstorm.** The instantaneous half is D2's coarse agent. The dynamic half is a partition that refines
+  over time, and ontological crisis is a target that loses its referent under refinement. This belongs to the
+  dynamic layer. The question is whether a target set on the coarsest common partition keeps a measure
+  defined across a refinement.
+
+### D4 — Value learning versus world learning *(row 5)*
+- **What it was.** Value learning is harder than world learning *by requirement*.
+- **Why it died.** It is a bandwidth ratio, not a requirement, and its premise — that values and world
+  knowledge arrive on separate channels — is false.
+- **What survives.** Nothing. The statistical layer is not built.
+- **To brainstorm.** In a statistical layer, compare the sample cost of pinning down the target to within a
+  misalignment `ε` with the cost of pinning down the rest of the instance, without assuming separate channels.
+  Does the ratio say anything that the gauge results (only the tilt is identified, Prop. 12) do not?
+
+### D5 — Levers: which intervention acts on which term *(rows 16, 17)*
+- **What it was.** A table of mitigation levers. "Re-specify" was first said to act on the reach and then
+  found to act on the error (row 16). "Enlarge the probe space" is not a sixth lever but gates three others
+  (row 17).
+- **Why it died.** Not retracted as a whole. The table was corrected entry by entry, and then not carried into v6.
+- **What survives.** The probe space became the evaluation contexts (Def. 9, Prop. 19, `Γ`). Nothing maps
+  interventions onto the terms of the measures.
+- **To brainstorm.** Diagnostics should end in an intervention (§1). For each quantity the core reports —
+  transverse and axial error, `X_anti`, the boundedness cost `g`, `Γ`, the reference term, the ordinal/shape
+  split — which lever moves it, and which does it gate? A natural first use is T7's diagnostic protocol.
+
+### D6 — The frame table, including *maintaining* the frame *(rows 24, 25; attack A11)*
+- **What it was.** A table of the ways an actor acts on its own setup: the target, the evaluator, the reach,
+  the correction loop.
+- **Why it died.** It was subsumed by reward tampering, corrigibility and instrumental convergence (row 24),
+  a concession left open as attack A11 in case the concession was itself wrong. It was incomplete in one
+  direction: it had no cell for the actor **maintaining** its frame (row 25).
+- **What survives.** Condition (X), locus L7, and T6 (the strategic/frame layer, deferred by the PI).
+- **To brainstorm, when T6 opens.** Both directions: acting on the frame, and maintaining it — goal
+  preservation, resisting correction. Re-run the A11 test: does the table predict anything the three
+  literatures do not?
+
+### D7 — The principal's own compression, and chains *(rows 14, 35; [[Method]] item 21)*
+- **What it was.** The principal was declared a persona with a compressed representation of its own, and the
+  fact was never used, "which cost the entire composition analysis". Widths were once said to multiply through
+  a chain (row 14).
+- **Why it died.** Errors **add** along a chain, and they multiply only across different reaches (row 14).
+  The product normal form fell with row 35.
+- **What survives.** Cor. 1.5 (entropic stages compose additively); B7's per-link view. "Transverse errors
+  compose along chains" is listed as unexamined (Status §1.4; Boundary §5.3).
+- **To brainstorm.** A chain in which each principal passes on a *compressed* target — D2's loose
+  instructions, applied link by link. Does misalignment accumulate by the chain rule of KL, and where does the
+  principal's compression enter?
+
+### D8 — Execution failure versus misdirection *(row 19)*
+- **What it was.** The evaluator was taken to be the functional that behaviour maximizes.
+- **Why it died.** Execution failure became inexpressible, and the reading collides with reward
+  non-identifiability.
+- **What survives.** Def. 11 states the limit: from behaviour alone, unsystematic error cannot be told apart
+  from misdirection. Locus L3 (optimizer) carries capability failure.
+- **To brainstorm (low priority).** In the explanation layer, an actor model with an execution-noise channel.
+  Is there a quantity that separates slips from misdirection given an independent measurement of the noise, as
+  B12 does for defaults?
+

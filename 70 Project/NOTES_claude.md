@@ -39,6 +39,9 @@ or no step — before R7-6 and R7-8 too.
 - Never hand-edit `depends_on` or anything between `gen` markers.
 - Dependencies are what the Statement and Proof cite. So **a citation in a proof is a dependency claim** —
   attribution goes in Notes. That is what created the B11 cycle.
+- **The tools are slow (the PI, after v7.4).** Locally, rerun only the blocks a change touches, in parallel and in
+  the background, and never block a turn waiting on a full rerun: CI reruns everything on every push. A new
+  block's reference output is still checked on a second SIMD path before it is recorded.
 - **Since v7.3.2 the repository is the source of truth:** `github.com/gianluca-calcagni/std-alignment-framework`,
   AGPL-3.0, public. No more zips.
   - One roadmap step is one branch and one pull request.
