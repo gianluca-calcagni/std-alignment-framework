@@ -36,7 +36,8 @@ the checks that verify it, and its sources, and the tools keep those links deriv
 Install the pinned environment with `pip install -r requirements.txt` (Python 3.11). The reference outputs
 `verify_output.txt` and `final_audit_output.txt` were produced with exactly these versions.
 
-The v6.6 flat files are frozen in `archive/v6.6_flat/`. The one-time migration is `tools/build_vault.py`.
+The v6.6 flat files are frozen in `archive/v6.6_flat/`. The Alignment Subframework — the source of the five gaps and of
+retraction rows 1–6 — is archived in `archive/alignment_subframework/`; ROADMAP §6 says what of it was dropped and why. The one-time migration is `tools/build_vault.py`.
 
 ## How the work proceeds
 

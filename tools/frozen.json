@@ -1,5 +1,5 @@
 {
- "_note": "Files that must never change. R7-4 and R7-7 preregistrations: hashes recorded when each was written, before any computation. archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files.",
+ "_note": "Files that must never change. R7-4 and R7-7 preregistrations: hashes recorded when each was written, before any computation. archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files. archive/alignment_subframework: the PI's Alignment Subframework (source of retraction rows 1-6), hashed when archived after v7.4.",
  "files": {
   "70 Project/R7/R7-4 preregistration.md": "07a947ecbb9777ebc1ec50dd6af397d37161f136f288bb6f9866e9ea2fbbf6ce",
   "70 Project/R7/R7-7 preregistration.md": "211704336959ad498edde65144baec84d765495c5b541bf3997be2f1359c8d0b",
@@ -25,6 +25,13 @@
   "archive/v6.6_flat/T1_preregistration.md": "933e2f3bafc8a64ab64698d682b18483b090765c410df17b1e6ddeb62c3d2028",
   "archive/v6.6_flat/final_audit_output.txt": "9590056787a0a7eb408499b79d6606750a59d8728766188b17c9e546d60fdfd3",
   "archive/v6.6_flat/verify_addendum_output.txt": "834eb17970d3f4b350f194921646ed000d3eb80bc17cb715b3ffe6032688b0a9",
-  "archive/v6.6_flat/verify_output.txt": "98e319c9c14db9abc01dc7d9944e16380cb96e59663f0c6cac323628f8f7ae96"
+  "archive/v6.6_flat/verify_output.txt": "98e319c9c14db9abc01dc7d9944e16380cb96e59663f0c6cac323628f8f7ae96",
+  "archive/alignment_subframework/00_HANDOVER.md": "cadb9c88d3c9cae2ada73c3c0e57586080f353be783b9bc1e66d3cc5329a1da0",
+  "archive/alignment_subframework/01_setting.md": "1f81028423503aba716af84fd8011a9d84b473344169783a50d84321bfbf3936",
+  "archive/alignment_subframework/02_decomposition.md": "0cb6db6e8a17ed8bf06e2eda1b61ae8e8188d5478f6f818b268015a1e937009c",
+  "archive/alignment_subframework/03_status.md": "2908a4e103055818598370371f63551454ed0377a08370a004c2ce406cece722",
+  "archive/alignment_subframework/ARCHIVE_NOTE.md": "7da54714123c300689b53915c5a374482fca5a7dfbdf91fcd40fc1ccf112973b",
+  "archive/alignment_subframework/A_antipatterns.md": "c20e1ec2193e76dd1a30b701310d08e71dff61c27d2c347f324d1d6b0cf0d775",
+  "archive/alignment_subframework/B_ethos.md": "c2cb95d390c76a31d6d04b1b405a77b46bd3537a219b15b3870b12a6e8a7d2d2"
  }
 }

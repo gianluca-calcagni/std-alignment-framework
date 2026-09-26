@@ -392,8 +392,9 @@ today, and a question to brainstorm. It is not a build step.
 
 **The source.** The PI supplied the **Alignment Subframework** (`00_HANDOVER`, `01_setting`,
 `02_decomposition`, `03_status`, `A_antipatterns`, `B_ethos`): the persona-based framework whose claims are
-retraction rows 1–6 ([[Status 02 Retraction history]]). It is **not** in the repository; it is cited below
-as *SF* with its file and section. The v6.2 package holds only the retraction rows.
+retraction rows 1–6 ([[Status 02 Retraction history]]). It is archived unedited in
+`archive/alignment_subframework/` and cited below as *SF* with its file and section. The v6.2 package holds only
+the retraction rows.
 
 **Rules for every item.**
 1. **State the killing correction first**, and how the proposal avoids it.
