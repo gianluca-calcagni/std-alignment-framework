@@ -383,123 +383,166 @@ applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
 
 ---
 
-## 6. Dropped ideas, to brainstorm before they return *(PI, after v7.4)*
+## 6. Dropped ideas, to brainstorm before they return *(PI, after v7.4; reworked with the source)*
 
-**Why this section exists.** The reviews retracted many claims for good reasons: a circular definition, a
-condition that was generically true, a false premise. Often the *scenario* behind the claim was dropped along
-with its *formulation*, and nothing replaced it. Ignoring those scenarios is wrong, and so is putting them back
-unchanged. Each item below records the scenario, why its formulation died, and what survives today. It starts
-life as a **brainstorm**, not a build step.
+**Why this section exists.** The reviews retracted many claims for good reasons. Often the *scenario* behind a
+claim was dropped along with its *formulation*, and nothing replaced it. Ignoring those scenarios is wrong, and
+so is putting them back unchanged. Each item records the scenario, what killed its formulation, what survives
+today, and a question to brainstorm. It is not a build step.
 
-**Rules for every item here.**
-1. **State the killing correction first.** A proposal must say how it avoids the reason the item was retracted.
-2. **A rate or a cost, not a yes/no condition** ([[Method]] item 19). **Define the thing before decomposing it**
-   (item 20).
-3. **Place it.** Say which layer it belongs to (measurement or explanation), which locus (L1–L7), and which
-   existing results it touches.
-4. **Pass the drift test** (§1) before it becomes a roadmap step with a pre-registration.
+**The source.** The PI supplied the **Alignment Subframework** (`00_HANDOVER`, `01_setting`,
+`02_decomposition`, `03_status`, `A_antipatterns`, `B_ethos`): the persona-based framework whose claims are
+retraction rows 1–6 ([[Status 02 Retraction history]]). It is **not** in the repository; it is cited below
+as *SF* with its file and section. The v6.2 package holds only the retraction rows.
 
-**Sources.** The original v5 texts are **not** in the repository, nor in the v6.2 package the PI supplied. Both
-keep the v5 framework only as retraction rows 1–30 ([[Status 02 Retraction history]]) and the lessons in
-[[Method]]. Several items below cannot be completed until the v5 (or earlier) text is recovered; each says so.
+**Rules for every item.**
+1. **State the killing correction first**, and how the proposal avoids it.
+2. **A rate or a cost, not a measurability condition** ([[Method]] item 19). **Define the thing before
+   decomposing it** (item 20). **Check that its signature is not shared with another gap** (item 22).
+3. **Place it:** layer (measurement or explanation), locus (L1–L7), and the existing results it touches. The
+   SF's own rule carries over unchanged: a claim whose truth depends on the modelling rule is about the model,
+   not the agent (SF `01` §3.2; here, Def. 7's reporting rule and the contract's M4).
+4. **Pass the drift test** (§1) before it becomes a pre-registered roadmap step.
 
-### D1 — The five gaps *(rows 1–3, 8; blocked on the v5 text)*
-- **What it was.** v5 defined alignment as "all five gaps close" (row 1). Verification was once proposed as a
-  fifth gap and retracted as a different type, assurance (row 2). Three gaps were said to be un-closable in
-  principle (row 3). A related claim, "the unconstrained residual underlies every failure", was wrong for two
-  of five **loci** (row 8), which suggests the gaps and the loci were linked.
-- **Why it died.** The definition was circular: alignment was defined only through its decomposition. The
-  "un-closable" verdicts were artifacts of measurability conditions with no threshold. The correction said "one
-  impossibility; the rest are prices", and which impossibility survived is not recorded.
-- **What survives.** Alignment now has an independent definition (Defs 10, 11, 17). The loci L1–L7 say where
-  a failure sits. Several quantities could be candidate "gaps": the transverse error, the axial error, the
-  anti-alignment excess, the boundedness cost, the evaluation gap `Γ`, the ordinal/shape split.
-- **To brainstorm.** Recover the five gaps from the v5 text. For each, find the quantity that measures it,
-  defined from the measures rather than the other way round. Is the "alignment iff all gaps close" statement
-  true as a *theorem* once the gaps are quantities? Which one impossibility survived, and does anything
-  in today's core correspond to it?
+**Translation.** SF's objects map onto today's as follows, approximately:
+- the principal's intent `≻_P` is a target set (Def. 17), and the reward channel `r` an evaluator (Def. 13);
+- the reach `O` is the set of achievable behaviours, `Δ(X)` or a capacity set;
+- the carried σ-algebra `𝒞_t` is a partition of `X` the agent can condition on — new;
+- the self-reachable σ-algebra `𝒮_t`, and the self-interventions `𝒜_self`, have no counterpart — new.
 
-### D2 — Grounding: resolution mismatch between principal, agent and overseer *(rows 4, 21)*
-- **What it was.** Grounding as measurability with respect to a self-reachable σ-algebra `𝒮_t` (row 4). The
-  agent's σ-algebra could be **coarser** than the principal's (it cannot "get" the request), or **finer** (it
-  receives loose instructions). Grounding was later found to be "one row of seven", not only about the
-  instrument (row 21). The seven rows are not recorded.
-- **Why it died.** A measurability condition with no threshold is generically satisfied, hence empty.
-- **What survives.** The overseer's coarsening is used: detection is capped by the KL of the coarsened law
-  (census A18, D17). The agent side appears in fragments: B7 (information-limited regulation; a Fano floor),
-  Prop. 21 (an actor that sees only the evaluator). The principal side is handled silently: where the target is
-  flat, the declared reference `q` governs the unspecified details, and an agent that fills them in
-  differently is charged (Prop. 32(b)). R7-8's "declared resolution" is the only planned place for it.
-- **To brainstorm (sketch, unverified).**
-  - *Loose instructions* as a declared partition `𝒢` of the principal: the intended set is every behaviour
-    whose law on `𝒢` matches a tilt, so departures inside a cell drop out by the chain rule. This separates
-    "the principal does not care within a cell" from "the principal's default governs within a cell".
-  - *Cannot get the request* as an actor whose behaviour inside the cells of a coarser partition `ℋ` is fixed.
-    Under the free convention its floor is 0: doing nothing is allowed. Under the budget convention the floor
-    is positive whenever the target is not `ℋ`-measurable and the agent spends information. That is the cost
-    that item 19 asks for.
-  - Recover the seven grounding rows from the v5 text.
+SF's persona-state machinery (`Φ_t`, `V` on states) has no counterpart, and on the rules above none is needed
+unless a gap cannot be stated behaviourally.
 
-### D3 — Values expressible only in acquired concepts *(row 6)*
-- **What it was.** "You cannot specify values, only in terms of concepts already acquired."
-- **Why it died.** True instantaneously, false dynamically: concepts are acquired over time.
-- **What survives.** Nothing in the core. Census C5 and C6 (ontological crisis, the diamond maximizer) are
-  routed outside the single-target frame; C11 (ontology identification) is filed as interpretability.
-- **To brainstorm.** The instantaneous half is D2's coarse agent. The dynamic half is a partition that refines
-  over time, and ontological crisis is a target that loses its referent under refinement. This belongs to the
-  dynamic layer. The question is whether a target set on the coarsest common partition keeps a measure
-  defined across a refinement.
+### G0 — The frame: "alignment holds iff all five gaps close" *(rows 1, 3, 7)*
+- **SF.** Alignment is five distinct failures, each with a formal condition and a quantity (`02` §0). Three are
+  "un-closable in principle" (`02` §0.1). The coupling of §6 implies "an irreducible floor on total failure".
+- **Killed by.** Circularity: alignment was defined only through its decomposition (row 1). The un-closability
+  verdicts were artifacts of measurability conditions with no threshold, and only one impossibility survived
+  (row 3; which one is not recorded — on SF's own table the candidates are §1 representability, an imported
+  theorem, and §2 observability, an information-theoretic fact). The floor was never established (row 7).
+- **Today.** Alignment is defined independently (Defs 10, 11, 17). The loci L1–L7 descend from SF's chain
+  (`02` §7.1) through R3's ontology.
+- **To brainstorm.** Restate each gap as a *term or a floor of the defined measure*, so that "aligned iff every
+  gap is zero" becomes a checkable statement rather than a definition. Settle which impossibility survived.
 
-### D4 — Value learning versus world learning *(row 5)*
-- **What it was.** Value learning is harder than world learning *by requirement*.
-- **Why it died.** It is a bandwidth ratio, not a requirement, and its premise — that values and world
-  knowledge arrive on separate channels — is false.
-- **What survives.** Nothing. The statistical layer is not built.
-- **To brainstorm.** In a statistical layer, compare the sample cost of pinning down the target to within a
-  misalignment `ε` with the cost of pinning down the rest of the instance, without assuming separate channels.
-  Does the ratio say anything that the gauge results (only the tilt is identified, Prop. 12) do not?
+### G1 — Specification, and its underdetermination *(rows 39, 61; partly carried)*
+- **SF.** Three sub-failures: representability (no reward orders trajectories as intended; Abel 2021, Bowling
+  2023), choice (the wrong reward was emitted: Goodhart), fidelity (the pipeline distorts it). "Magnitude matters
+  exactly insofar as the transform is not order-preserving." Plus **underdetermination**: where the agent
+  distinguishes more than the principal, the intent is indifferent over what the agent can act on (`02` §1; `01`
+  §5).
+- **Killed by.** Nothing killed the gap. Row 39 retracted "uniform rescaling is harmless"; row 61 restored it
+  under the budget and free conventions.
+- **Today.** Choice is the evaluator error (L2), the core's main object. Representability: non-linear targets
+  (Prop. 15; R7-6) and census A10, A11. **Fidelity: R7-7 vindicates SF's statement in full, as a declaration:**
+  under an ordinal target, every order-preserving transform is harmless (Prop. 32(e)). **Underdetermination is
+  handled silently, the other way round:** where the target is flat, the declared reference governs, and an
+  agent that fills in the details differently is charged (Prop. 32(b)).
+- **To brainstorm.** Declared indifference: a target stated on the principal's coarser partition `𝒢`, with
+  intended behaviours free inside its cells (by the chain rule, departures inside a cell drop out). Where does
+  SF's CoinRun reading — specification underdetermination, not persistence — sit against the census routing,
+  which files CoinRun and goal misgeneralization as context shift (C1, C2 → L5)?
 
-### D5 — Levers: which intervention acts on which term *(rows 16, 17)*
-- **What it was.** A table of mitigation levers. "Re-specify" was first said to act on the reach and then
-  found to act on the error (row 16). "Enlarge the probe space" is not a sixth lever but gates three others
-  (row 17).
-- **Why it died.** Not retracted as a whole. The table was corrected entry by entry, and then not carried into v6.
-- **What survives.** The probe space became the evaluation contexts (Def. 9, Prop. 19, `Γ`). Nothing maps
-  interventions onto the terms of the measures.
-- **To brainstorm.** Diagnostics should end in an intervention (§1). For each quantity the core reports —
-  transverse and axial error, `X_anti`, the boundedness cost `g`, `Γ`, the reference term, the ordinal/shape
-  split — which lever moves it, and which does it gate? A natural first use is T7's diagnostic protocol.
+### G2 — Transmission: observability and retention *(rows 5, 6; the gap itself vanished unretracted)*
+- **SF.** A distinction the intent depends on must be carried by the agent's representation, or no reward on it
+  can shape the agent's evaluator (`02` §2). Two levels: **observability** (the distinction is absent from
+  everything any observer could see — "do what I'd endorse on reflection"; never heals) and **retention** (this
+  agent does not carry it — "the model doesn't understand"; heals with learning). Consequences: "alignment is a
+  property of a (principal, agent, environment) triple" (`01` §2.3); a diagnostic signature, **"more reward does
+  not help; the proxy shifts instead"**; and two derived claims.
+- **Killed by.** The derived claims: value learning is harder than world learning *by requirement* (row 5: a
+  bandwidth ratio, and the channel-modularity premise is false), and "you can only specify values in concepts
+  already acquired" (row 6: true instantaneously, false dynamically). The signature was shared with another
+  locus, which invalidated a nominated first experiment ([[Method]] item 22). The gap itself was never
+  retracted: it did not survive the v6 rebuild, which kept only what the static calculus could hold.
+- **Today.** Nothing in the core. The measurement layer cannot see it (Def. 11's limit: an agent that does not
+  grasp the request is behaviourally misdirected). Fragments sit in the explanation layer: B7
+  (information-limited regulation; Fano floor), Prop. 21 (an agent that sees only the evaluator).
+- **To brainstorm.**
+  - *Retention as a cost:* an actor whose behaviour inside the cells of a coarser partition `ℋ` is fixed.
+    Under the free convention its floor is 0 (doing nothing is allowed). Under the budget convention the floor
+    is positive whenever the target is not `ℋ`-measurable and the agent spends information *(sketch,
+    unverified)*.
+  - *Observability:* where does "not in any observation" enter a behavioural framework — as a target that no
+    target set on `X` expresses (outside-E), or as an environment-relative `X`?
+  - *The signature:* which pair of gaps did it fail to separate, and does a two-dimensional signature (response
+    to more reward, response to finer features) separate them?
 
-### D6 — The frame table, including *maintaining* the frame *(rows 24, 25; attack A11)*
-- **What it was.** A table of the ways an actor acts on its own setup: the target, the evaluator, the reach,
-  the correction loop.
-- **Why it died.** It was subsumed by reward tampering, corrigibility and instrumental convergence (row 24),
-  a concession left open as attack A11 in case the concession was itself wrong. It was incomplete in one
-  direction: it had no cell for the actor **maintaining** its frame (row 25).
-- **What survives.** Condition (X), locus L7, and T6 (the strategic/frame layer, deferred by the PI).
-- **To brainstorm, when T6 opens.** Both directions: acting on the frame, and maintaining it — goal
-  preservation, resisting correction. Re-run the A11 test: does the table predict anything the three
-  literatures do not?
+### G3 — Grounding: the exposed fraction *(row 4; the quantity was lost with the condition)*
+- **SF.** Grounding fails when the agent can move its own evaluator by acting on itself. The self-reachable
+  σ-algebra `𝒮_t` holds the events the agent can vary with self-interventions `𝒜_self` alone (`02` §3).
+  Wireheading, reward tampering and the delusion box are one failure; preference manipulation is the same failure
+  by a longer path. Two quantities: the variance share `E_t`, and the **achievable range under self-only
+  policies**, `R_t = [sup − inf over Π_self of E_π V] / range(V)`, "estimable as the share of reward-model
+  variance explained by features the policy controls independently of task outcome — length, hedging, flattery,
+  formatting". Claims: `R_t` grows with the self-control repertoire; every grounded persona admits an exploit.
+- **Killed by.** The *condition* "grounding holds iff `V` is not `𝒮_t`-measurable" is generically satisfied,
+  hence vacuous (row 4). **Nothing killed `R_t`**, which is exactly the rate that [[Method]] item 19 asks for.
+- **Today.** Nothing. Wireheading, reward tampering and the delusion box are routed outside the frame, as
+  snapshots (census A3–A5 → L7, condition (X)). Sycophancy and length bias are ordinary evaluator error (L2).
+- **To brainstorm.** In today's calculus `R_t` is a **width**: the range of the evaluator over the sub-reach of
+  behaviours that differ only in outcome-irrelevant, self-controllable features. Compare Def. 6's width of the
+  capacity set along the error. Is that sub-reach declarable behaviourally — outcome-equivalence classes of `X`
+  under the target? If so, grounding re-enters **inside** the frame as a measurement-layer quantity, and
+  wireheading moves from (X) to a limit case. **First use: T7's RLHF length-bias case**, which is exactly SF's
+  example.
 
-### D7 — The principal's own compression, and chains *(rows 14, 35; [[Method]] item 21)*
-- **What it was.** The principal was declared a persona with a compressed representation of its own, and the
-  fact was never used, "which cost the entire composition analysis". Widths were once said to multiply through
-  a chain (row 14).
-- **Why it died.** Errors **add** along a chain, and they multiply only across different reaches (row 14).
-  The product normal form fell with row 35.
-- **What survives.** Cor. 1.5 (entropic stages compose additively); B7's per-link view. "Transverse errors
-  compose along chains" is listed as unexamined (Status §1.4; Boundary §5.3).
-- **To brainstorm.** A chain in which each principal passes on a *compressed* target — D2's loose
-  instructions, applied link by link. Does misalignment accumulate by the chain rule of KL, and where does the
-  principal's compression enter?
+### G4 — Persistence: refinement and the indifferent extension *(never retracted; dropped with the dynamics)*
+- **SF.** When the agent refines its representation, the goal extends in exactly one way (the pullback), and
+  that way is indifferent to every newly distinguished dimension; refinement also expands the reach. So
+  capability growth and ontology drift are not independent risks, and "reasoning training is not goal-neutral
+  even with the objective untouched" (`02` §4). The criterion: a refinement is **behaviourally goal-safe iff
+  argmax commutes with pullback**. The canonical section is reverse Bayesianism (Karni & Vierø), the
+  maximum-entropy one.
+- **Killed by.** Nothing. It left with the dynamic material in the v6 rebuild.
+- **Today.** The static half is already in the core, unnamed. A target pulled back to a refined `X` is constant
+  on the new cells, and every intended behaviour splits mass inside them in proportion to the declared
+  reference. That is SF's maximum-entropy section, **adopted silently** — the same kind of silent declaration
+  R7-7 removed for exchange rates. The census routes ontological crisis and the diamond maximizer outside the
+  frame (C5, C6).
+- **To brainstorm.** One refinement step is static: `X′ → X`. State the commutation criterion there, and ask what
+  each convention charges an agent that exploits the new cells. Should the intended split inside new cells be a
+  declaration, as with G1's declared indifference? This is the natural lead case for R7-8's "declared
+  resolution", which would turn that optional step into a real one.
 
-### D8 — Execution failure versus misdirection *(row 19)*
-- **What it was.** The evaluator was taken to be the functional that behaviour maximizes.
-- **Why it died.** Execution failure became inexpressible, and the reading collides with reward
-  non-identifiability.
-- **What survives.** Def. 11 states the limit: from behaviour alone, unsystematic error cannot be told apart
-  from misdirection. Locus L3 (optimizer) carries capability failure.
-- **To brainstorm (low priority).** In the explanation layer, an actor model with an execution-noise channel.
-  Is there a quantity that separates slips from misdirection given an independent measurement of the noise, as
-  B12 does for defaults?
+### G5 — Verification: states, not maps *(row 2; rightly reclassified)*
+- **SF.** An agent can report states but not maps, and its evaluator is a map, so eliciting latent *values* is
+  structurally harder than eliciting latent *beliefs*; an agent cannot verify its own goal preservation (`02`
+  §5, §4.4). The one claim that **inverts** a common assumption: a system should confabulate *less* about process
+  to the extent its process is externalised into readable context.
+- **Killed by.** "Verification is a fifth alignment gap" → assurance, a different type (row 2). That is correct:
+  it is about observing the evaluator, not producing it, as SF itself notes (`02` §7.2).
+- **Today.** External verification is detection (Props 18, 19; the evaluation gap). Introspection is filed
+  under interpretability (census "category").
+- **To brainstorm (low priority).** Keep the inverting prediction as a named explanation-layer prediction, to
+  run when model access exists; it needs SF's mandatory control (the externalised chain must be causally
+  load-bearing).
 
+### C1 — The coupling: grounding versus transmission *(rows 5, 6, 7)*
+- **SF.** The channel into the evaluator that the agent cannot write must be narrow; so fine value
+  specification runs only through learned concepts, and widening that channel improves transmission while
+  worsening grounding (`02` §6).
+- **Killed by.** Its premise, separate channels for value and world, is false (row 5); its conclusion holds only
+  instantaneously (row 6); the floor was never located (row 7).
+- **To brainstorm, after G2 and G3 are quantities.** Restated without the channel premise: does the
+  evaluator's **resolution** — how finely it separates behaviours — trade against its **exposed fraction**? A
+  richer evaluator has more features, and more of them may be self-controllable. That is testable in the core
+  once G3's width exists.
+
+### Other dropped ideas
+- **L1 — Levers** *(rows 16, 17; v5, not in SF)*. Which intervention moves which term: re-specify acts on the
+  error; enlarging the probe space gates three other levers. SF's closability table (`02` §0.1) is the same
+  question asked of the gaps. Brainstorm for T7's diagnostic protocol: for each quantity the core reports, which
+  lever moves it.
+- **L2 — The frame table, including maintaining the frame** *(rows 24, 25; attack A11)*. Subsumed by reward
+  tampering, corrigibility and instrumental convergence; it lacked the cell for an actor *maintaining* its
+  frame. SF's route (b) (the agent varies the principal's preferences) and its point that the feedback arrow is
+  both the correction path and the manipulation surface belong here. Held for T6.
+- **L3 — The principal's own compression, and chains** *(row 14; [[Method]] item 21; SF `01` §1, §5)*. SF says
+  the principal is also a persona, with its own coarseness, and that neither partition refines the other in
+  general, so G1's underdetermination and G2's retention usually hold at once. Errors add along a chain (row 14).
+  Brainstorm with G1 and G2: a chain in which each link passes on a compressed target.
+- **L4 — Execution and competence** *(row 19; SF `02` §7.2)*. SF drew the alignment/capability boundary: gaps
+  upstream of the evaluator are alignment, downstream (execution, competence) are capability. Today's analogue
+  is the contract's M5 — intensity is not misdirection — and locus L3. Low priority: is there an actor model
+  that separates slips from misdirection given an independent measurement of the noise, as B12 does for defaults?
