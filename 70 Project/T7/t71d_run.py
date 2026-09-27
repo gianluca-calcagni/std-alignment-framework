@@ -69,6 +69,9 @@ for cfg, d in data.items():
     R = ph@ln - q@ln; sW = W*np.sign(R)
     A = 1 - np.mean([wg for s in SUBS[1:] for wg, _, _ in d[s]]); nat = np.mean([wg for wg, _, _ in d["Natural"]])
     rows.append((cfg, dsgn*sW, dsgn*R, A, nat, W, Th, _mfree_mm(ph, lq, F)))
+with open("70 Project/T7/t71d_table.csv", "w") as f:
+    f.write("config,adversarial_error,natural_accuracy,d_sW,d_R,W,Theta,M_free\n")
+    for r in rows: f.write(f"{r[0]},{r[3]:.6f},{r[4]:.6f},{r[1]:.6f},{r[2]:.6f},{r[5]:.6f},{r[6]:.6f},{r[7]:.6f}\n")
 x = np.array([r[1] for r in rows]); rr = np.array([r[2] for r in rows]); A = np.array([r[3] for r in rows]); nat = np.array([r[4] for r in rows])
 ok = lambda b: "holds" if b else "FAILS"
 r3 = spearmanr(x, A).correlation; rR = spearmanr(rr, A).correlation
