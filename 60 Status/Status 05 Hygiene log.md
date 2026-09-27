@@ -4,12 +4,13 @@ type: "section"
 title: "Hygiene log"
 part: "status"
 order: 6
-updated: "2026-09-26"
+updated: "2026-09-27"
 ---
 ## 5. Hygiene log
 
 | Change | Where |
 |---|---|
+| **I1-dyn2 (v7.10).** The second design, cut down by a count of degrees of freedom: a reference from another cohort shifts the increment along `(1, 0, −1)` and a pool of cohorts adds a Wahlund term, so ST/CH and the old males carry none. What remains is cage 23's young females against young males, with the eggs of their own cohort as reference ([[I1-dyn2 preregistration]], with a power gate). The gate passed at the floor (0.512). P1 (rank 1) holds, `p = 0.34`, robust to the cohort bound; the point estimates lean toward a sex difference. [[I1-dyn2 results]]. ROADMAP I1 gains the diploid allele-series limit; NOTES gains a failure mode (a blacklist mask leaks) | project |
 | **I1-dyn (v7.10).** First real test of the dynamic rank, on Dobzhansky (1947) Tables 3–4 ([[I1-dyn preregistration]], [[I1-dyn amendment]] after D2 fired on OCR). P1 holds vacuously, P2 holds (exposed): the self-fitted Hardy–Weinberg reference removes a degree of freedom, so the test had no power. A NaN bug was fixed in the open. Next design: the egg samples as an independent reference. [[I1-dyn results]] | project |
 | **I1 dynamics brainstorm (v7.10).** The PI's direction: capture the dynamics, with identifiability as the key. Recorded in [[ROADMAP]] §6 I1 (*Dynamics*) and [[NOTES_claude]] §9: snapshots identify only `log q + t·F̂`; increments cancel `q`; dynamic rank and angle; the pull-to-reference limit; the ladder declare → measure → identify by intervention. Next: I1-dyn. No core change | project |
 | **Def. 23 (v7.10).** The declaration format of [[R8-2 preregistration]] written into the core, as tested in [[R8-2 results]]: nine slots with written-out defaults; rules reported as a compliance vector with implicit fines; instruments and feasibility in the explanation layer. No new mathematics, no new check | core, status |
