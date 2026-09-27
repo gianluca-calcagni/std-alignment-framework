@@ -1,4 +1,4 @@
-# std-alignment-framework — v7.9
+# std-alignment-framework — v7.10
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 

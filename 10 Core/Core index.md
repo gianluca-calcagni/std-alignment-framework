@@ -34,13 +34,13 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Hyp E_A]] — the entropic actor model from the actor's own reference
 - [[Hyp E_R]] — the reward-coupled entropic agent
 
-## Measurement layer (33 items)
+## Measurement layer (34 items)
 *what misalignment is and how it is measured — the declared reference, the target, the conventions and the actual behaviour only.*
 
 **Overviews (1)**
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12  · definition
 
-**Definitions (15)**
+**Definitions (16)**
 - [[Def 1]] — objects  · definition
 - [[Def 2]] — the bounded actor  · definition
 - [[Def 3]] — regrets  · definition
@@ -56,6 +56,7 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Def 20]] — minimum intensity and the intended segment; R7-6b  · definition
 - [[Def 21]] — declared resolution; R7-10  · definition
 - [[Def 22]] — value shortfall at equal effort; R8-1  · definition
+- [[Def 23]] — the declaration; R8-2  · definition
 
 **Theorems (3)**
 - [[Thm 1]] — regret is a divergence  · tier 1 · proved

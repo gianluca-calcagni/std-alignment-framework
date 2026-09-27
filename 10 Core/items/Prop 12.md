@@ -50,6 +50,7 @@ the tilted measure.
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 13]] — actor models; R7-1
 - [[Def 22]] — value shortfall at equal effort; R8-1
+- [[Def 23]] — the declaration; R8-2
 
 ## Checks
 - none

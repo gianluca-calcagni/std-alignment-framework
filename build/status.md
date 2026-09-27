@@ -5,7 +5,13 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
+**Status: v7.10 (R8-2)** — the declaration. Every diagnosis must state what it measures against: the target, how
+several targets combine, intensity, rules, the environment, and the defaults it uses. Rules ("harm rate at most 1%")
+are reported as compliance, not folded into the measure, because folding them in breaks the geometry the
+decompositions rest on. The hedge: the supporting test is a toy, and both of its registered predictions failed as
+stated (badly set thresholds); the post-hoc diagnosis supports the design (R8-2 results).
+
+**v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
 severity enters through the target and the intended intensity. Every diagnosis now also reports the value forgone, in
 the target's own units, against pure pursuit with the same departure from the reference; and a principal with a safety
 concern declares a floor, a minimum standard. The default convention is now free, the one without known defects. The
@@ -195,6 +201,7 @@ memory.**
 | **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. 18, Prop. 33 | V36 | C05 |
 | **the core as a declared intended set** *(R7-9)*: every measure is the KL projection onto a declared set `𝓘`; the contract is a set of conditions on `𝓘`; on log-convex sets the projection is unique with a Pythagorean inequality, which yields Thm 13(a), Prop. 32(c) and Prop. 33(b) | Core Def. 19, Prop. 34 | V38 (run 1: V37, stopped) | C05 |
 | **minimum intensity** *(R7-6b)*: a declared floor on the intent ray; the segment free measure is the error off the ray plus an undershoot or an overshoot; both segment measures satisfy the contract with M5 within the segment; an untouched default is charged under a threshold policy | Core Def. 20, Prop. 35 | V39 | C05 |
+| **the declaration** *(R8-2)*: every diagnosis states nine slots with defaults written out; rules are reported as compliance, not charged in the measure (as level constraints they break log-convexity in a toy, 398 of 400) | Core Def. 23 | — | C05 |
 | **value shortfall** *(R8-1)*: `ΔV`, value forgone in `F`'s units against pure pursuit at equal effort; `M_budget = λ·ΔV` below saturation (Thm 17(iii)); units scale with `F`; the free point is value-neutral; a floor is a minimum standard `v_min`. The default convention is free | Core Def. 22, Prop. 37 | V41 | C05 |
 | **declared resolution** *(R7-10)*: a declared partition of `X`; the measure at a resolution is the coarse instance's measure of the cell masses; free-type measures split exactly as `M = M^𝒢 + W`; the budget convention reads within-cell divergence as extra pursuit (`Θ > 0` iff `W > 0`); exploitation inside a cell is invisible at that resolution. *P5's constancy threshold failed as registered, on summation error; the claim is unchanged* | Core Def. 21, Prop. 36 | V40 | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
@@ -456,6 +463,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **Def. 23 (v7.10).** The declaration format of R8-2 preregistration written into the core, as tested in R8-2 results: nine slots with written-out defaults; rules reported as a compliance vector with implicit fines; instruments and feasibility in the explanation layer. No new mathematics, no new check | core, status |
 | **R8-2 (v7.9).** Pre-registered in R8-2 preregistration (sha256 `c9fa3cbc…`, `5a9dd4b`): the declaration format (nine slots, defaults written out) and a toy test of rules as level constraints. P1 and P2 failed as registered (an every-instance quantifier; a threshold below optimizer precision); post-hoc diagnosis: the level-form set is not log-convex on 398 of 400 instances, and the rule-breaking agent scores 0 on free and cone forms. Rules go in a compliance report. R8-2 results. No core change | project, status |
 | **R8-1 (v7.9).** The PI accepted R8's revised recommendations. Pre-registered in R8-1 preregistration (`1c6e97d`); run 1 stopped on D2 (P1's bound had no scale); run 2 in R8-1 preregistration run 2 (sha256 `705fbfc0…`, `894161d`): all held, both SIMD paths. The run-2 identity `ΔV = M_budget/λ` is Thm 17(iii), missed at registration. New: Def. 22 (value shortfall, a report), Prop. 37, `V41`, R8-1 results. Changed: the default convention is free (Def. 8; Prop. 24, Rem. 13.5, Cor. 17.1 aligned); stakes note (A1) and harm-weighted KL rejected; Def. 19 notes (A2, A6) | core, checks, project, status |
 | **R8 foundations review (v7.8).** Hidden assumptions and simplifications after T7 (R8 foundations review): no proof wrong; misalignment measures distinguishability, not harm (A1); KL rests on an entropic principal, not detection (A2, R7-9 registry corrected); no estimation layer (A3); `X` and `q` dominate numbers (A4); the default convention has the known defects (A5); T7 case 2 tested an actor model, not the diagnostics (B1, T7 summary corrected); 5 of 15 empirical predictions held (B3). No core change | project |
