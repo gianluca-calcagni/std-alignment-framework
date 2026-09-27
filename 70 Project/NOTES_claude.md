@@ -95,6 +95,7 @@ serves.
 | **Choosing internal refinement over external contact** | R6 named diagnostics and cross-optimizer predictions as underserved (R6_LOG §1); the next five steps were refactors (R7-0 to R7-4). Each passed the drift test alone | the drift test must also be applied to the *sequence*: after two internal steps, the next step makes external contact unless the PI says otherwise |
 | **Registering a claim the core already proves, with a bound set without a scale** | R8-1 run 1: P1 required `ΔV > 10⁻⁹` off the ray; it failed at `8.3·10⁻¹⁰`. The "new" identity `ΔV = M_budget/λ` was Thm 17(iii) all along (R8-1 results) | before registering, grep the core for the quantity; derive every threshold from a stated scale |
 | **The same, again: thresholds below optimizer precision; "every instance" on a continuously varying quantity** | R8-2: P2 required a cone measure `≤ 10⁻¹²` from a bounded 2-D search (it reached `10⁻⁷`); P1 required every fixed midpoint off the set, though log-convexity fails on one | derive each threshold from the solver's tolerance; state existence claims as existence ("some midpoint"), not as every-instance bounds |
+| **A reference fitted from the data being judged** | I1-dyn: Hardy–Weinberg from the same counts left one degree of freedom, so the rank test was vacuous (angles 0.1°, thresholds up to 177°) | before registering, count the degrees of freedom the reference removes; use an independent reference |
 
 **Meta-pattern.** Every one of these was caught by someone else or by a check, not by re-reading. So: more
 checks, fewer re-reads.
