@@ -14,12 +14,12 @@ updated: "2026-09-26"
 
 | | |
 |---|---|
-| **Current** | **v7.7 — R7-6b, minimum intensity** ([[R7-6b results]]): a declared floor, so that an agent staying at the default is charged when the principal requires a minimum; all 5 predictions held. Before that: **v7.6 — R7-9, the core as a declared intended set** ([[R7-9 results]]): misalignment is the KL projection onto a declared intended set; every decomposition comes from log-convexity; declaration registry and silent-declaration audit. Run 1 stopped on its registered rule D2 (test design); run 2 held. Before that: **v7.5 — R7-6a, intensity caps** ([[R7-6a results]]). A principal can declare how hard the target is meant to be pursued; a distributional target is a cap at `p_T`. Pre-registered; all 7 predictions held. Before that: **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
+| **Current** | **v7.7 — R7-6b, minimum intensity** ([[R7-6b results]]): a declared floor charges an agent that stays at the default when the principal requires a minimum; all 5 predictions held. The core now reads: misalignment is the KL projection onto a declared intended set (v7.6, R7-9), with target sets (v7.4, R7-7), caps (v7.5, R7-6a) and floors (v7.7) as the declarations. External contact: T3 closed as a clean negative (C9 not testable from published data). The history of every version is the hygiene log ([[Status 05 Hygiene log]]) and the Status abstract |
 | **Next** | **The PI's choice among the audit candidates, each needing its rule-13 example confirmed:** the split inside cells (§6 G1, G4), worst-context aggregation (M8), R7-8 (resolution). Identifiability (§6 I1) remains the lead brainstorming theme. Deferred: T3b, T7 |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
-| **Workflow** | since v7.3.2 the repository is the source of truth: [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), AGPL-3.0, public. One roadmap step is one pull request, and CI reruns every check. Pre-registrations are pushed before computing |
+| **Workflow** | since v7.3.2 the repository is the source of truth: [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), AGPL-3.0, public. One roadmap step is one pull request (v7.3.3–v7.7 broke this: seven steps went into one branch), and CI reruns every check. Pre-registrations are pushed before computing. A fresh session starts at [[HANDOVER]] |
 
 ---
 
@@ -400,7 +400,7 @@ Until all four hold, the core is a checked calculus, not a standard.
 
 ---
 
-## 5. Recommendations from the v7.3.3 review *(for the PI; not decided)*
+## 5. Recommendations from the v7.3.3 review *(status after v7.7: 1 half done, 2 done, 3 open)*
 
 A review of the whole package against §1. The mathematics is sound, as far as the proofs read go; the limits are
 shown unusually well; and every numerical check reproduces on a second machine. The two outward criteria of §1 —
@@ -409,7 +409,7 @@ shown unusually well; and every numerical check reproduces on a second machine. 
 recommendations, in order. A fourth — a lint rule for stale status banners, and the corrections it prompted — was
 applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
 
-1. **Run T3 and one T7 case before R7-7, or alongside it.** *Serves: predicts, diagnoses.*
+1. **Run T3 and one T7 case before R7-7, or alongside it.** *Serves: predicts, diagnoses.* *Status: T3 done, a clean negative ([[T3 results]]); T7 deferred by the PI. The outward criteria are still unmet.*
    - R6 marked "diagnostics on real cases, and predictions that transfer across optimizers" as underserved, and
      named T7 and T8 as the next turns ([[R6_LOG]] §1). Five refactor steps followed (R7-0 to R7-4), then R7-5's
      go/no-go. Each passed the drift test on its own terms. Together they deferred the two criteria that no
@@ -431,7 +431,7 @@ applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
      exactly (M7). The cardinal/ordinal choice becomes a declared convention of Def. 8, like price, budget and free,
      instead of a silent default.
    - *Carried out in R7-7 (v7.4): Def. 11's M5 now reads "`p̂ = p_{G,t}` for some `G ∈ 𝒯`", and the target set is part of the instance (Def. 12).*
-3. **Say who the raters and reviewers were, and add one from outside.** *Serves: solid, limits.*
+3. **Say who the raters and reviewers were, and add one from outside.** *Serves: solid, limits.* *Status: open.*
    - The census raters and reviews R5 and R6 are called independent, but the vault never says who or what they
      were. R5's scripts ran under `/home/claude/` (`reviews/R5_independent/compare.py`), which suggests sessions of
      the same model family as the executor. Errors from one model family are correlated, and "independent"

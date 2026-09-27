@@ -5,6 +5,8 @@ updated: "2026-09-26"
 ---
 # T3 — status: blocked on network access (after v7.4)
 
+> [!note] Superseded by [[T3 results]]. The PI supplied the PDFs directly; the block below is kept as the record of why retrieval failed.
+
 The pre-registration ([[T3 preregistration]], commit `37be3d8`) was pushed before any retrieval. Then every
 route to source S1 (Gao, Schulman & Hilton 2023) was refused by the environment's egress policy: `arxiv.org`,
 `proceedings.mlr.press` and `ar5iv.labs.arxiv.org`, from the shell and from the web-fetch tool. `semanticscholar.org`,

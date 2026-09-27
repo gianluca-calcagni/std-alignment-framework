@@ -96,7 +96,7 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
 | project | 1 |
 | proposition | 29 |
 | remark | 3 |
-| report | 19 |
+| report | 20 |
 | retraction | 78 |
 | section | 39 |
 | source | 101 |
