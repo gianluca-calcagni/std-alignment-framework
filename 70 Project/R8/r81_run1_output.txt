@@ -1,0 +1,6 @@
+
+[V41] R8-1: value shortfall at equal effort (Def. 22, Prop. 37), against the pre-registration (P1-P4)
+  P1 dV >= 0: min 0.0e+00; on-ray max 2.2e-14; off-ray min 8.26e-10 -> FAILS
+  P2 dV(aF + c) = a dV(F): max relative difference 5.4e-13 -> holds
+  P3 free point is value-neutral when t_hat >= 0: max |E_(p_t_hat) F - E_ph F| 3.8e-15 -> holds
+  P4 floor r <-> minimum standard v_min: disagreements 0 -> holds
