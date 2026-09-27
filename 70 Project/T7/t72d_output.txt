@@ -1,0 +1,9 @@
+series 3% default: sum=0.9990 tick-fit R2=0.999999 -> ok
+series 6% default: sum=0.9995 tick-fit R2=0.999999 -> ok
+test bins: ['0%', '1-2%', '4-5%', '7-10%', '11-15%']
+P1 Spearman(l(x), r(x)) = -0.791 over 5 bins -> FAILS
+P2 l(4-5%) = -0.272 > l(1-2%) = +1.830 -> FAILS
+P3 max |l(x) - mean| = 1.511 vs log 1.5 = 0.405 -> FAILS
+reported: per-bin l(x) (r): 0% +0.65 (-3), 1-2% +1.83 (-3), 4-5% -0.27 (+0), 7-10% -0.05 (+3), 11-15% -0.56 (+3)
+reported: fractions 3% / 6% default: 0% 0.042/0.085, 1-2% 0.006/0.064, 3% 0.275/0.042, 4-5% 0.030/0.022, 6% 0.239/0.489, 7-10% 0.179/0.170, 11-15% 0.227/0.127
+reported: without the 0% bin, Spearman = -0.632
