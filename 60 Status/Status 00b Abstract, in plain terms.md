@@ -18,6 +18,11 @@ verdict of overshoot can be style drift. The hedge: one of five predictions (P5)
 floating-point threshold; the claim is exact and unchanged ([[R7-10 results]]). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
 
+**T7 case 2 (after v7.8)** — retirement-enrolment defaults. On Choi et al.'s 401(k) data, the framework's model of a
+human chooser passed its structural test: the options that are the default in neither regime moved together, and
+each default pulled toward itself. The hedge: the tolerance is loose, and the rows suggest that the default also
+changes what people value below it, in one of the two companies ([[T7-2 results]]).
+
 **T7 case 1 (after v7.8)** — the first contact with real data. On 216 AlpacaEval models and 65 LLMBar evaluator
 configurations, every verification prediction held. With independent gold labels, the framework's style term
 measured on ordinary data predicted evaluator failure on adversarial data (ρ = 0.52). The hedge: in all three designs

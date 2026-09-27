@@ -28,7 +28,7 @@ Until that works on real cases, the framework is a calculus, not a standard.
 
 **Current work:** v7.8. The R7 series has restated the core as the KL projection onto a declared intended set
 (R7-9, v7.6), with target sets (R7-7), caps (R7-6a), floors (R7-6b) and a resolution (R7-10) as declarations. §4b is
-confirmed and the core steps are closed: T7 case 1 is done in three designs ([[T7 case 1 index]]); next is T7 case 2 (defaults), the PI's choice. R7-5 closed as a clean
+confirmed and the core steps are closed: T7 case 1 is done in three designs ([[T7 case 1 index]]); case 2 (defaults) passed its structural test ([[T7-2 results]]). Next: the PI's choice. R7-5 closed as a clean
 negative; T3 too. T3b is deferred by the PI. The
 v7.3.3 review's recommendations are [[ROADMAP]] §5; its other observations are §7 below. A fresh session starts at
 [[HANDOVER]].
@@ -390,6 +390,11 @@ only when its cells came from independent labels (LLMBar, ρ = 0.52), and never 
 (0.285 vs 0.377; 0.522 vs 0.533). My reading: on real evaluators, style preference barely depends on true quality, so
 conditioning buys nothing. The framework's value in this case is the structured reading (terms, levers, `Θ`), not
 predictive power. Don't oversell that as a diagnosis that beats practitioners' features.
+
+**After T7 case 2.** Where the framework's *structure* is the claim (B12: one common ratio across non-default options),
+real data passed it, at a loose tolerance, and the rows showed where exclusion starts to fail (below the default in
+Company B). That is the pattern to look for: cases where the framework predicts a structure, not a feature it can at
+best tie. Also a process slip: I chained `lint | grep` into a commit and pushed a lint error; lint is now a hard gate.
 
 **What it changes in practice.** T7's protocol gains a diagnosis table (the three terms), an identification rule
 (no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
