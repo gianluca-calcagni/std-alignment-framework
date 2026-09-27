@@ -1,0 +1,18 @@
+models: 223 on the leaderboard, 5 without annotations, 2 failing the integrity check, 216 used
+P1 M_free = M_free^G + W: max error 2.2e-16 -> holds
+P2 Theta > 0 where W > 1e-9 (216 models with both budget measures): exceptions 0 -> holds
+P3 Spearman(W, D) = 0.276 over 216 models -> FAILS
+P4 Spearman(Theta, D) = 0.268 over 216 models -> FAILS
+P5 median W/M_free over the top decile of D (22 models) = 1.000 -> holds
+reported: finest budget measure undefined for 0 models; q (pooled) = [0.6184, 0.1565, 0.1055, 0.1196]
+reported: diagnosis table (W, off-ray, intensity, Theta, M_free), largest and smallest D:
+  gpt4_1106_preview_concise              D=18.98  W=0.2415  off=0.0000  int=0.0000  Theta=0.2085  M_free=0.2415
+  internlm2-chat-20b-ExPO                D=18.96  W=0.7192  off=0.0000  int=0.0000  Theta=0.3776  M_free=0.7192
+  gpt4                                   D=14.55  W=0.1504  off=0.0000  int=0.0000  Theta=0.1215  M_free=0.1504
+  gpt4_0613                              D=14.43  W=0.1752  off=-0.0000  int=0.0138  Theta=0.2144  M_free=0.1891
+  Nanbeige2-8B-Chat                      D=14.11  W=0.5677  off=0.0000  int=0.0000  Theta=0.2991  M_free=0.5677
+  gpt4_1106_preview                      D= 0.00  W=0.4830  off=0.0000  int=0.0000  Theta=0.1695  M_free=0.4830
+  guanaco-7b                             D= 0.01  W=0.0002  off=-0.0000  int=0.1574  Theta=0.0003  M_free=0.1576
+  phi-2-dpo                              D= 0.01  W=0.0209  off=0.0000  int=0.0768  Theta=0.0326  M_free=0.0977
+  blendaxai-gm-l3-v35                    D= 0.04  W=0.0588  off=-0.0000  int=0.0000  Theta=0.0017  M_free=0.0588
+  llama-2-chat-7b-evol70k-neft           D= 0.07  W=0.0129  off=0.0000  int=0.0787  Theta=0.0204  M_free=0.0917
