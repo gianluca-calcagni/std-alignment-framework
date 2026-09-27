@@ -1,0 +1,8 @@
+ST/CH (cage 22): pooled centered increment [-0.257  0.357 -0.492]; first = het -> P2 holds
+   young F: n 130, theta 0.1 deg, bootstrap 98.75th pct 15.9 deg -> within (undefined bootstrap angles excluded: 0)
+   old M: n 125, theta 0.1 deg, bootstrap 98.75th pct 15.8 deg -> within (undefined bootstrap angles excluded: 0)
+AR/CH (cage 23): pooled centered increment [-0.154  0.181 -0.212]; first = het -> P2 holds
+   young F: n 100, theta 5.6 deg, bootstrap 98.75th pct 176.9 deg -> within (undefined bootstrap angles excluded: 5)
+   old M: n 100, theta 1.1 deg, bootstrap 98.75th pct 177.3 deg -> within (undefined bootstrap angles excluded: 7)
+   young M: n 134, theta 3.9 deg, bootstrap 98.75th pct 23.7 deg -> within (undefined bootstrap angles excluded: 0)
+P1 one evaluator across sex and age (within sampling): holds
