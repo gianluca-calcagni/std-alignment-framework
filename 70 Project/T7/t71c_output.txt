@@ -1,0 +1,19 @@
+models used: 216; design check: off-ray > 1e-6 for 100% (needs >= 25%) -> passes
+P1 M_free = W + off + intensity: max error 8.9e-16 -> holds
+P2 Theta > 0 where W > 1e-9: exceptions 0 -> holds
+P3 Spearman(W, D) = 0.083 over 216 -> FAILS
+matched set: 37 models
+P4 Spearman(sW, J) = 0.285 -> FAILS
+P5 Spearman(sW, J) = 0.285 vs Spearman(avg_length, J) = 0.377 -> FAILS
+reported: Spearman(D, J) = -0.325; Spearman(win_rate, Elo) = 0.931; Spearman(LC, Elo) = 0.975
+reported: diagnosis table, largest and smallest J:
+  Yi-34B-Chat                        J=+15.0  sW=+0.1549  off=0.0103  int=0.0000  Theta=0.0858  len=2123
+  Mistral-7B-Instruct-v0.2           J= +6.5  sW=+0.0673  off=0.0004  int=0.0228  Theta=0.0945  len=1676
+  tulu-2-dpo-70b                     J= +4.0  sW=-0.1306  off=0.0089  int=0.0157  Theta=0.1609  len=1418
+  gemini-pro                         J= +4.0  sW=-0.0323  off=0.0008  int=0.0087  Theta=0.0459  len=1456
+  Mixtral-8x7B-Instruct-v0.1         J= +3.0  sW=-0.0647  off=0.0012  int=0.0087  Theta=0.0842  len=1465
+  gpt4_0613                          J=-10.0  sW=-0.0950  off=0.0007  int=0.0183  Theta=0.1262  len=1140
+  gpt-3.5-turbo-0613                 J= -7.0  sW=-0.0580  off=0.0000  int=0.0301  Theta=0.0841  len=1331
+  claude-2.1                         J= -5.0  sW=-0.2714  off=0.0005  int=0.0176  Theta=0.3232  len=1096
+  OpenHermes-2.5-Mistral-7B          J= -4.0  sW=-0.0959  off=0.0006  int=0.0577  Theta=0.1368  len=1107
+  claude                             J= -3.5  sW=-0.2471  off=0.0001  int=0.0129  Theta=0.2886  len=1082
