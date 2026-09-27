@@ -5,8 +5,8 @@ updated: "2026-09-27"
 ---
 # T7 case 1d/1e — results: evaluator length bias on LLMBar, with independent gold labels
 
-Pre-registered in [[T7-1d preregistration]] (sha256 `cccf4f98…`, `e6ece5f`); its D2 fired on a wrong reading of the
-data, and [[T7-1e amendment]] (`fe0af6d1…`, `8683078`) corrected the reading before any prediction was computed.
+Pre-registered in [[T7-1d preregistration]] (sha256 `cccf4f98…`, `0cdf7b4`; rebased from `e6ece5f` after PR #5 merged without it — author dates preserved, order unchanged); its D2 fired on a wrong reading of the
+data, and [[T7-1e amendment]] (`fe0af6d1…`, `e7a1d2b`) corrected the reading before any prediction was computed.
 Script `t71d_run.py`; output `t71d_output.txt`. Data: `princeton-nlp/LLMBar` at `900616b` (Zeng et al. 2024).
 
 **Data.** 65 evaluator configurations (6 LLMs × prompting strategies), all passing the integrity check (exact counts
