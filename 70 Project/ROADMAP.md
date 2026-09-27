@@ -15,7 +15,7 @@ updated: "2026-09-26"
 | | |
 |---|---|
 | **Current** | **v7.7 — R7-6b, minimum intensity** ([[R7-6b results]]): a declared floor charges an agent that stays at the default when the principal requires a minimum; all 5 predictions held. The core now reads: misalignment is the KL projection onto a declared intended set (v7.6, R7-9), with target sets (v7.4, R7-7), caps (v7.5, R7-6a) and floors (v7.7) as the declarations. External contact: T3 closed as a clean negative (C9 not testable from published data). The history of every version is the hygiene log ([[Status 05 Hygiene log]]) and the Status abstract |
-| **Next** | **The PI's choice among the audit candidates, each needing its rule-13 example confirmed:** the split inside cells (§6 G1, G4), worst-context aggregation (M8), R7-8 (resolution). Identifiability (§6 I1) remains the lead brainstorming theme. Deferred: T3b, T7 |
+| **Next** | **R7-10, declared resolution** (pre-registered: [[R7-10 preregistration]]), then **T7**: §4b is confirmed, and its items 3 and 4 need real cases, not core steps. Identifiability (§6 I1) remains the lead brainstorming theme. Deferred: T3b |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -283,7 +283,14 @@ the intended set is a segment from floor to cap.
   pursuit below it charged. With no floor, everything reads as now. Apply the PI's test first: a real case where
   non-pursuit is wrongly scored as aligned.
 
-### R7-8 — A7: measurable spaces *(optional, last)*
+### R7-10 — Declared resolution *(in progress: pre-registered in [[R7-10 preregistration]]; merges §6 G1, G4 and R7-8)*
+- The principal declares a partition of `X`; misalignment is measured on the cell masses only. Default: the finest
+  partition (the current core).
+- Rule 13: style drift charged under a "style free" declaration; style drift misread as overshoot under the budget
+  convention; saturation on a continuous `X`.
+- The PI's decision after v7.7: the last core step before T7 (§4b).
+
+### R7-8 — A7: measurable spaces *(optional, last; its trigger case moves into R7-10)*
 - Integrability hypotheses per result.
 - *Real trigger (v7.3.1):* deterministic behaviour on a continuous `X` saturates every f-divergence ([[R7-5 go-no-go]], case 5). The cheap remedy keeps KL: measure outcomes, or declare a resolution.
 
@@ -389,14 +396,14 @@ second index in the same turn.
     *and* it states a structural claim that could fail — a theorem it must prove, or a result it must reproduce or
     explain — so that "structural" does not mean "unfalsifiable".
 
-## 4b. When is the core final? *(proposed after v7.5; the PI to confirm)*
+## 4b. When is the core final? *(confirmed by the PI after v7.7)*
 
 1. The declaration space is listed (R7-9's registry), each declaration with an elicitation story and a default.
 2. The contract is unchanged for three consecutive core steps.
 3. One real diagnostic per substrate (T7), with the imported theorems named.
 4. One outside reader — a human, or a model of a different family — has run a real case through it.
 
-Until all four hold, the core is a checked calculus, not a standard.
+Until all four hold, the core is a checked calculus, not a standard. Items 3 and 4 cannot be reached by core steps: after R7-10, the next work is T7.
 
 ---
 
