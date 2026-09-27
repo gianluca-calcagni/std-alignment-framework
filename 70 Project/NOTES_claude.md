@@ -286,7 +286,8 @@ exclusion]*.
 
 ## 5. Start-of-turn checklist
 
-1. Re-read §0. Name the criterion the task serves.
+1. Re-read §0. Name the criterion the task serves. **Name one example in which the item changes a verdict, a
+   number or a decision** (ROADMAP rule 13); if there is none, do not start it.
 2. Check [[ROADMAP]] §0 for PI decisions. T6 deferred ⇒ build nothing strategic.
 3. Before writing any claim:
    - Is there a closed form?

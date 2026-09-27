@@ -15,7 +15,7 @@ updated: "2026-09-26"
 | | |
 |---|---|
 | **Current** | **v7.5 — R7-6a, intensity caps** ([[R7-6a results]]). A principal can declare how hard the target is meant to be pursued; a distributional target is a cap at `p_T`. Pre-registered; all 7 predictions held. Before that: **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **R7-9 — the core as a declared intended set** (approved by the PI after v7.5; §2A), with the declaration registry and the silent-declaration audit. Identifiability (§6 I1) is the lead brainstorming theme. R7-6a is done ([[R7-6a results]]); general non-linear targets wait for a case the cap cannot repair. Open: R7-6b (minimum intensity), R7-8 (declared resolution; ROADMAP §6 G4 is its natural lead case), the §6 brainstorms (G3 first, with T7), and the deferred T3b and T7 |
+| **Next** | **R7-6b — minimum intensity**, pending the PI: it passes rule 13 (a harm-threshold policy under which the untouched base model scores as aligned). **R7-9 fails rule 13 as a standalone restatement** and frames R7-6b instead. Identifiability (§6 I1) is the lead brainstorming theme. Open: R7-8, the §6 brainstorms, T3b, T7 |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -248,7 +248,12 @@ not" without assuming it, the layer needs dynamics, and it is recorded as such.
 - Set-valued measures; aggregation only when a scalar is demanded.
 - This changes the status of the "disagreeing principals" exception.
 
-### R7-9 — The core as a declared intended set *(approved by the PI after v7.5; next)*
+### R7-9 — The core as a declared intended set *(approved by the PI after v7.5; **fails rule 13 as a standalone step**)*
+**Rule 13 check (after v7.5).** A pure restatement changes no measure by design (M7), so no example changes a
+verdict. It is **not run as its own step**. Its view frames the steps whose own examples pass: first R7-6b, where
+floor and cap make the intended set a segment. The registry and the audit proceed candidate by candidate, each
+needing its own example.
+
 **Aim.** Restate the measurement layer as one definition: **misalignment is the KL projection of the actual
 behaviour onto a declared set `𝓘` of intended behaviours.** The half-ray, the ordinal cone and the capped segment
 become generators of `𝓘` from `(q, target set, convention, cap)`; new notions become new generators, not new axioms.
@@ -267,7 +272,12 @@ become generators of `𝓘` from `(q, target set, convention, cap)`; new notions
   V30's sanity suite; the audit lists each candidate with a verdict (declare, keep with default, or out of scope).
 - **Falsifier:** a load-bearing result that cannot be stated as a property of the projection onto `𝓘`.
 
-### R7-6b — Minimum intensity *(candidate from the v7.5 brainstorm)*
+### R7-6b — Minimum intensity *(candidate from the v7.5 brainstorm; **passes rule 13**, next pending the PI)*
+**Rule 13 check.** A content policy requires harmful outputs at most 1 %; the base model has 5 %. With the target
+"avoid harm", the free and budget measures score the untouched base model as perfectly aligned: the ray starts at
+the default, and M5 exempts weaker pursuit. Compliance regimes — safety thresholds, minimum service levels — say it
+violates the intent. A declared floor at the ray point where the harmful rate is 1 % repairs it; with R7-6a's cap,
+the intended set is a segment from floor to cap.
 - The ray starts at `t = 0`, so an agent staying at the default scores zero under the free convention. Shirking is
   an alignment problem in principal–agent theory. Mirror R7-6a: a declared **floor** behaviour on the ray, with
   pursuit below it charged. With no floor, everything reads as now. Apply the PI's test first: a real case where
@@ -370,6 +380,9 @@ second index in the same turn.
 11. **Label every pre-registered prediction as *verification* or *empirical*** (after v7.5). A verification
     prediction checks a proof and can fail only through a bug or a badly scaled threshold; an empirical one can be
     wrong about the world. Only empirical predictions count towards the base rate (Status §6).
+13. **Before starting any work item, confirm it is meaningful** (the PI, after v7.5): name at least one concrete
+    example in which the item changes a verdict, a number or a decision. No example, no item. It generalizes
+    the PI's R7-5 test from refactor steps to every step, and it is checked at the top of the item's note.
 12. **Brainstorm and go/no-go steps use a light protocol** (after v7.5): a report note, a ROADMAP line and a
     hygiene row; no version bump unless the core changes. The full R7 discipline is for steps that change the core.
 
