@@ -10,6 +10,7 @@ updated: "2026-09-26"
 
 | Change | Where |
 |---|---|
+| **T7 case 2d (v7.8).** Two defaults (3%, 6%) in a fresh company (Beshears et al., w12009, Fig. 3; [[T7-2d preregistration]], `47c5b7a`). P1–P3 fail: the local pull fails in the opposite direction (ρ −0.79); B12's constant ratio fails (spread 1.51 nats). A higher default pushes some people down. Case 3 (institutions) skipped: no reachable public dataset. [[T7-2d results]] | project |
 | **T7 case 2b/2c (v7.8).** Replication of T7-2's post-hoc floor pattern on Madrian & Shea Fig. 4C and Choi et al. Fig. 3C, extracted from vector geometry ([[T7-2b preregistration]]; D2 fired on legend swatches, fixed in [[T7-2c amendment]] with the exposure disclosed). P1 fails (δ −0.27 and +0.88), P2 holds, P3 untestable. Post hoc: a local pull around the default in both companies. [[T7-2b results]] | project |
 | **T7 case 2 (v7.8).** Retirement-enrolment defaults on Choi et al. (2004) Table 2 ([[T7-2 preregistration]], `0c1569a`). P1–P3 hold: the two non-default categories share one ratio (median \|δ\| 0.265 < log 1.5); both defaults pull toward themselves in 9/9 rows. Post hoc: a widening exclusion failure below the default in Company B. [[T7-2 results]] | project |
 | **T7 case 1 documented (v7.8).** [[T7 case 1 index]] ties the three designs together, with files and reproduction steps; per-model and per-configuration tables saved (`t71c_table.csv`, `t71d_table.csv`); both scripts rerun and reproduce their recorded outputs exactly. HANDOVER, NOTES §0 and ROADMAP §0 point to case 2 | project |

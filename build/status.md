@@ -12,6 +12,11 @@ verdict of overshoot can be style drift. The hedge: one of five predictions (P5)
 floating-point threshold; the claim is exact and unchanged (R7-10 results). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
 
+**T7 case 2d (after v7.8)** — the cleanest test of the human case: one company, two automatic-enrollment defaults (3% and
+6%). The framework's model of a human chooser failed it clearly. A higher default pushed some people down to low rates
+or out of the plan, which a fixed evaluator with a shifted reference cannot do. The model holds roughly against
+opt-in data and fails the clean comparison; the default changes what people value (T7-2d results).
+
 **T7 case 2 (after v7.8)** — retirement-enrolment defaults. On Choi et al.'s 401(k) data, the framework's model of a
 human chooser passed its structural test: the options that are the default in neither regime moved together, and
 each default pulled toward itself. The hedge: the tolerance is loose, and a pattern suggesting the default acts as a
@@ -437,6 +442,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **T7 case 2d (v7.8).** Two defaults (3%, 6%) in a fresh company (Beshears et al., w12009, Fig. 3; T7-2d preregistration, `47c5b7a`). P1–P3 fail: the local pull fails in the opposite direction (ρ −0.79); B12's constant ratio fails (spread 1.51 nats). A higher default pushes some people down. Case 3 (institutions) skipped: no reachable public dataset. T7-2d results | project |
 | **T7 case 2b/2c (v7.8).** Replication of T7-2's post-hoc floor pattern on Madrian & Shea Fig. 4C and Choi et al. Fig. 3C, extracted from vector geometry (T7-2b preregistration; D2 fired on legend swatches, fixed in T7-2c amendment with the exposure disclosed). P1 fails (δ −0.27 and +0.88), P2 holds, P3 untestable. Post hoc: a local pull around the default in both companies. T7-2b results | project |
 | **T7 case 2 (v7.8).** Retirement-enrolment defaults on Choi et al. (2004) Table 2 (T7-2 preregistration, `0c1569a`). P1–P3 hold: the two non-default categories share one ratio (median \|δ\| 0.265 < log 1.5); both defaults pull toward themselves in 9/9 rows. Post hoc: a widening exclusion failure below the default in Company B. T7-2 results | project |
 | **T7 case 1 documented (v7.8).** T7 case 1 index ties the three designs together, with files and reproduction steps; per-model and per-configuration tables saved (`t71c_table.csv`, `t71d_table.csv`); both scripts rerun and reproduce their recorded outputs exactly. HANDOVER, NOTES §0 and ROADMAP §0 point to case 2 | project |

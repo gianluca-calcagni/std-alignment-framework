@@ -402,6 +402,12 @@ Good: that is exactly why post-hoc patterns get registered before they are belie
 appeared in both (the default pulls its neighbours hardest), and it would correct B12's reference family. Treat it the
 same way: register it before believing it.
 
+**After T7-2d.** The cleanest test (two participation defaults, one fresh company) rejected both B12's point mass
+and my local-pull idea, the latter in the opposite direction: a high default pushes people *down*. Two post-hoc
+patterns in a row failed on registration. My pattern-reading on small tables is unreliable; the registration
+discipline caught it both times. The honest state of the human case: the framework's actor fits opt-in data loosely,
+fails the clean test, and says where (the default moves the evaluator).
+
 **What it changes in practice.** T7's protocol gains a diagnosis table (the three terms), an identification rule
 (no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
 RLHF length-bias case is where items 2 and 3 meet real data.
