@@ -1,0 +1,9 @@
+P1 midpoint distances: median 4.219e-03; > 1e-6 on 393 of 400; <= 1e-6 on 7
+   instance 70: w=0.5 4.79e-08; max over w in (0.25, 0.75) 3.95e-06
+   instance 148: w=0.5 9.87e-08; max over w in (0.25, 0.75) 1.02e-05
+   instance 199: w=0.5 4.79e-07; max over w in (0.25, 0.75) 4.92e-06
+   instance 226: w=0.5 8.29e-08; max over w in (0.25, 0.75) 2.18e-03
+   instance 297: w=0.5 4.19e-08; max over w in (0.25, 0.75) 5.17e-07
+   instance 301: w=0.5 4.83e-07; max over w in (0.25, 0.75) 8.98e-04
+   instance 393: w=0.5 5.39e-10; max over w in (0.25, 0.75) 4.48e-09
+P2 cone measure evaluated at the known cone point (t0, 0): max 0.0e+00
