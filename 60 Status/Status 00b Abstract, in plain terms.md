@@ -18,6 +18,11 @@ verdict of overshoot can be style drift. The hedge: one of five predictions (P5)
 floating-point threshold; the claim is exact and unchanged ([[R7-10 results]]). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
 
+**T7 closed (after v7.8)** — the framework against real cases, summarised in [[T7 summary]]. The mathematics held on
+real data every time. The measurement layer's diagnosis read the data correctly but never beat a raw feature. The one
+explanation-layer model tested, B12's human chooser, failed its clean test. By the project's own finish line (§4b), the
+core is a checked calculus, not yet a standard.
+
 **T7 case 2d (after v7.8)** — the cleanest test of the human case: one company, two automatic-enrollment defaults (3% and
 6%). The framework's model of a human chooser failed it clearly. A higher default pushed some people down to low rates
 or out of the plan, which a fixed evaluator with a shifted reference cannot do. The model holds roughly against
