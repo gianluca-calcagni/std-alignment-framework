@@ -66,6 +66,7 @@ monotone mean — then Prop. 14(i) — had never been checked numerically.)*
 - [[Prop 27]] — instrumental tracking — the weight on external reward is a shadow price; R7-4
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 32]] — the ordinal measure; R7-7
+- [[Prop 33]] — capped measures against the contract; R7-6a
 
 ## Mentions
 - [[Prop 14]]

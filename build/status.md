@@ -5,7 +5,13 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
+**Status: v7.5 (R7-6a)** — intensity caps. How hard a target is meant to be pursued is now a declaration. Without a cap
+the measures behave as before; with one, an agent that overshoots it is charged. This repairs a real defect: an agent
+collapsed onto a distributional target's modes used to score as perfectly aligned. All seven pre-registered
+predictions held (R7-6a results). The hedge: the repair is exact because the distributional target is scored by KL;
+a principal scoring the spread by another divergence is not covered.
+
+**v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
 intended. Under that declaration, best-of-n and quantilizers run on the true target are aligned (`M_ord = 0`),
 which repairs the defect v7.3.1 found. Three hedges:
 - **Under the budget convention the repair is exact only at zero.** The ordinal budget measure has no closed
@@ -141,6 +147,7 @@ memory.**
 | the misalignment contract (M1–M9); budget and free measures satisfy it; the price measure fails M5 (it charges a right-target agent at the wrong intensity); raw `ΔF` fails M1–M2 *(R7-0)* | A Def. 11, Prop. 24 | V30 | C5 |
 | **target sets** *(R7-7)*: the contract restated for a declared set `𝒯` (M1, M3, M5); every target set's budget and free measures satisfy it; `[F]₊` gives back Def. 10 exactly; a larger set can only lower the measures | Core Def. 17, Def. 11, Prop. 31 | V35 (P5, P9, P10) | C05 |
 | **the ordinal measure** *(R7-7)*: `M_ord` in closed form (isotonic regression; the within-block divergence from `q`); the decomposition and the budget split `KL(p̂‖q) = M_ord + KL(p°‖q)`; invariance under every increasing map; `M_ord ≤ M_budget([F]_ord) ≤ M_budget`, with equal zero sets. *The strict first inequality failed as registered (P8) and is withdrawn from the statement* | Core Prop. 32 | V35 (P1–P4, P6, P8) | C05 |
+| **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. 18, Prop. 33 | V36 | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark 13.5 | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. B4 | V9 | C9 |
@@ -400,6 +407,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **R7-6a (v7.5).** Pre-registered in R7-6a preregistration (sha256 `902a9939…`, commit `5eebce5`) before any computation. New: Def. 18 (intensity caps; distributional targets), Prop. 33, `V36`, R7-6a results. Restated: Def. 11's M5, within the declared cap. No proof changed; with no cap every measure reads as before (M7). All seven predictions held. F6's count line changes by construction (64 → 66 results, 35 → 36 blocks). Tooling: symbols `p^max`, `^cap` and the capped segment belong to Def. 18; Prop. 33 joins Prop. 24 in the list of results whose `p̂ = p_{F,t}` is a test case, not an actor hypothesis; CI runs `V36` | Core, Status, ROADMAP, tools, verify |
 | **v7.4 (T3 source record; R7-6 go/no-go).** The PI deferred T3b and T7. `src Gao 2023` records the two PDF versions read in T3, with their sha256 (the PDFs are not in the repository), and T3 results adds the quoted passages and a point-by-point reading of Fig. 3a. R7-6's go/no-go (R7-6 go-no-go; exploratory probe `70 Project/R7/r76_probe.py`) finds one real defect — distributional targets: a collapsed agent scores as perfectly aligned — repaired by a declared intensity cap, since the regularized path of `−KL(·‖p_T)` is the ray cut off at `p_T`. Proposed: R7-6a | Sources, ROADMAP |
 | **v7.4 (T3).** Pre-registered (T3 preregistration, `37be3d8`) before retrieval; the environment could not reach the paper, so the PI supplied the PDFs (not added to the repository). Gao et al. report `α_bon` only in a figure and fix `sd = 1` by normalization, but give no proxy–gold correlation: under data rule 5, **C9 is not testable from published data** (T3 results). C9, the claim ledger, open question 4 and the ROADMAP are updated; T3b (replication) is recorded | Boundary, Status, ROADMAP |
 | **v7.4 (archive).** The PI's Alignment Subframework, the source of retraction rows 1–6, is archived unedited in `archive/alignment_subframework/` with a provenance note, and its hashes are frozen in `tools/frozen.json`. ROADMAP §6 and `README.md` point to it | archive, ROADMAP, README, tools |

@@ -11,7 +11,13 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
+**Status: v7.5 (R7-6a)** — intensity caps. How hard a target is meant to be pursued is now a declaration. Without a cap
+the measures behave as before; with one, an agent that overshoots it is charged. This repairs a real defect: an agent
+collapsed onto a distributional target's modes used to score as perfectly aligned. All seven pre-registered
+predictions held ([[R7-6a results]]). The hedge: the repair is exact because the distributional target is scored by KL;
+a principal scoring the spread by another divergence is not covered.
+
+**v7.4 (R7-7)** — target sets. The target can now be declared **ordinal**: only the order of outcomes is
 intended. Under that declaration, best-of-n and quantilizers run on the true target are aligned (`M_ord = 0`),
 which repairs the defect v7.3.1 found. Three hedges:
 - **Under the budget convention the repair is exact only at zero.** The ordinal budget measure has no closed

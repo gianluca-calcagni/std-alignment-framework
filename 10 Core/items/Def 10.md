@@ -61,12 +61,14 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 12]] — alignment instance; formal
 - [[Def 17]] — target sets; R7-7
+- [[Def 18]] — intensity caps and distributional targets; R7-6a
 - [[Prop 16]] — gauge group and identified quantities
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
 - [[Prop 30]] — the fake-alignment gap; R7-4
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 32]] — the ordinal measure; R7-7
+- [[Prop 33]] — capped measures against the contract; R7-6a
 - [[Rem 13.5]] — whether rescaling is harmful depends on the declared convention; v6.3
 - [[Thm 13]] — intent-ray decomposition
 - [[Thm 17]] — every regret notion is a point on one convex curve

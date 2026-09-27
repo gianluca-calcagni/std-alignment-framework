@@ -1162,7 +1162,90 @@ def V35():
     x3 = np.mean([r['pooled'] for r in K('A', 'E')])
     print(f"  X3 kinds A, E: p0 pools more than one level in {x3:.3f}")
 
+# =====================================================================================================
+# R7-6a block: intensity caps and distributional targets (Def. 18, Prop. 33). Pre-registered in
+# `70 Project/R7/R7-6a preregistration.md` (P1-P7) before any computation.
+# =====================================================================================================
+def _that(ph, lq, F):
+    """t_hat of Thm 13 (moment condition), clipped at 0 from below"""
+    tgt = ph@F; g = lambda t: gibbs(lq, F, t)@F - tgt
+    if g(0.0) >= 0: return 0.0
+    hi = 1.0
+    while g(hi) < 0: hi *= 2
+    return brentq(g, 0, hi, xtol=1e-14)
+def _cap_free(ph, lq, F, s):
+    return KLl(np.log(ph), lgibbs(lq, F, min(_that(ph, lq, F), s)))
+def _cap_budget(ph, lq, F, s):
+    q = np.exp(lq); k = KL(ph, q); ks = np.inf if np.isinf(s) else KLl(lgibbs(lq, F, s), lq)
+    if k > ks: return KLl(np.log(ph), lgibbs(lq, F, s))
+    lam = lam_to_kl(lq, F, k)
+    return None if np.isinf(lam) else KLl(np.log(ph), lgibbs(lq, F, lam))
+
+def V36():
+    print("\n[V36] R7-6a: intensity caps and distributional targets (Def. 18, Prop. 33), against the pre-registration (P1-P7)")
+    rng = np.random.default_rng(3606); ok = lambda c: "holds" if c else "FAILS"
+    e1 = e2 = e4 = e5 = e6 = e7 = 0.0; on_max = 0.0; off_min = np.inf; ordv = np.inf; n_dec = 0; col = []
+    for i in range(900):
+        n = int(rng.integers(3, 13))
+        while True:
+            q = rng.dirichlet(np.ones(n)); pT = rng.dirichlet(np.ones(n))
+            if min(q.min(), pT.min()) >= 1e-3: break
+        lq = np.log(q)
+        if i < 600: F = np.log(pT) - lq; s = 1.0
+        else: F = rng.normal(size=n); s = float(rng.uniform(0.2, 5))
+        kind = i % 4
+        if kind == 0:
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 1: ph = gibbs(lq, F, rng.uniform(0, s))
+        elif kind == 2: ph = gibbs(lq, F, rng.uniform(1.05*s, 4*s))
+        else:
+            l = lgibbs(lq, F, rng.uniform(1.05*s, 4*s)) + 0.3*rng.normal(size=n); ph = np.exp(l - logsumexp(l))
+        lh = np.log(ph); mf = _cap_free(ph, lq, F, s); mb = _cap_budget(ph, lq, F, s)
+        # P1: closed form vs grid + bounded minimisation over [0, s]
+        ts = np.linspace(0, s, 400); v = [KLl(lh, lgibbs(lq, F, t)) for t in ts]; t0 = ts[int(np.argmin(v))]
+        r = minimize_scalar(lambda t: KLl(lh, lgibbs(lq, F, t)), bounds=(max(0, t0 - s/399), min(s, t0 + s/399)), method='bounded', options={'xatol': 1e-13})
+        e1 = max(e1, abs(mf - min(r.fun, min(v))))
+        # P2: decomposition when t_hat > s
+        th = _that(ph, lq, F)
+        if th > s:
+            n_dec += 1; e2 = max(e2, abs(mf - (KLl(lh, lgibbs(lq, F, th)) + KLl(lgibbs(lq, F, th), lgibbs(lq, F, s)))))
+        # P3: M1 and the capped M5
+        if kind == 1: on_max = max(on_max, mf, mb if mb is not None else 0.0)
+        else: off_min = min(off_min, mf, mb if mb is not None else np.inf)
+        # P4: M3 under F -> aF + c, s -> s/a
+        a, c = rng.uniform(0.2, 5), rng.normal()
+        e4 = max(e4, abs(_cap_free(ph, lq, a*F + c, s/a) - mf))
+        mb2 = _cap_budget(ph, lq, a*F + c, s/a)
+        if mb is not None and mb2 is not None: e4 = max(e4, abs(mb2 - mb))
+        # P5: order, and s = infinity reproduces Def. 10
+        if mb is not None: ordv = min(ordv, mb - mf)
+        uniq = np.sum(F == F.max()) == 1
+        e5 = max(e5, abs(_cap_free(ph, lq, F, np.inf) - _mfree(lh, lq, F)))
+        if uniq:
+            b0, bref = _cap_budget(ph, lq, F, np.inf), _mbud(lh, lq, F)
+            if b0 is not None and bref is not None: e5 = max(e5, abs(b0 - bref))
+        if i < 600:
+            # P6: the regularised path of U = -KL(p||p_T) against a generic optimiser
+            t = float(rng.uniform(0.2, 5)); lT = np.log(pT)
+            obj = lambda z: KLl(z - logsumexp(z), lT) + KLl(z - logsumexp(z), lq)/t
+            z = minimize(obj, np.zeros(n), method='BFGS', options={'gtol': 1e-12}).x
+            e6 = max(e6, np.abs((z - logsumexp(z)) - lgibbs(lq, F, t/(1 + t))).max())
+            # P7 (R): collapsed agents on distributional targets
+            pc = gibbs(lq, F, rng.uniform(1.05, 10))
+            col.append((_mfree_mm(pc, lq, F), _cap_free(pc, lq, F, 1.0), KL(pc, pT)))
+    col = np.array(col); e7 = np.abs(col[:, 1] - col[:, 2]).max()
+    print(f"  P1 closed form M(min(t_hat+, s)) against grid + bounded minimisation over [0, s]: max difference {e1:.1e} -> {ok(e1 <= 1e-9)}")
+    print(f"  P2 overshoot decomposition D_perp + KL(p_(F,t_hat)||p_max), {n_dec} instances with t_hat > s: max difference {e2:.1e} -> {ok(e2 <= 1e-10)}")
+    print(f"  P3 M1 and capped M5: on-segment max {on_max:.1e}; overshoot and off-ray min {off_min:.2e} -> {ok(on_max <= 1e-10 and off_min > 1e-9)}")
+    print(f"  P4 M3 under F -> aF + c, s -> s/a: max change {e4:.1e} -> {ok(e4 <= 1e-9)}")
+    print(f"  P5 M_free_cap <= M_budget_cap: min gap {ordv:.1e}; s = infinity against Def. 10's reference code: max difference {e5:.1e} -> {ok(ordv >= -1e-10 and e5 <= 1e-10)}")
+    print(f"  P6 path of -KL(p||p_T) against a generic optimiser: max log-probability difference {e6:.1e} -> {ok(e6 <= 1e-4)}")
+    print(f"  P7 (R) collapsed agents (600): uncapped M_free max {col[:,0].max():.1e}; capped = KL(p_hat||p_T) to {e7:.1e}, min {col[:,1].min():.3f}, median {np.median(col[:,1]):.3f} "
+          f"-> {ok(col[:,0].max() <= 1e-10 and e7 <= 1e-10 and col[:,1].min() > 1e-9)}")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36"]
     for w in which: globals()[w]()

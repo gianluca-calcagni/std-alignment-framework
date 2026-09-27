@@ -27,7 +27,8 @@ substrate, runs it through the framework, and gets:
 Until that works on real cases, the framework is a calculus, not a standard.
 
 **Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). **R7-7 is done (v7.4): target sets, the ordinal
-target; D4 fired on the budget convention** ([[R7-7 results]]). Next is the PI's choice (ROADMAP §0). v7.3.3 was a
+target; D4 fired on the budget convention** ([[R7-7 results]]). **R7-6a is done (v7.5): intensity caps** ([[R7-6a results]]).
+T3 closed as a clean negative; T3b and T7 deferred by the PI. Next is the PI's choice (ROADMAP §0). v7.3.3 was a
 review against §0's goal: its recommendations are [[ROADMAP]] §5 (for the PI), its other observations §7 below. **v7.0: the
 package is an Obsidian vault.** Next is R7-7 (target sets, confirmed by the PI), led by the ordinal target. Apply the PI's test — a real case,
 or no step — before R7-6 and R7-8 too.

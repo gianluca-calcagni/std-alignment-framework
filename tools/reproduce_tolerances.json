@@ -83,5 +83,17 @@
    ],
    "why": "The largest M_budget difference comes from one instance with lambda = 3,239 near saturation, where the root for lambda is ill-conditioned: 2.1e-08 on the reference CPU, 2.2e-08 with X86_V4 disabled, a relative difference of about 5e-12 on a 4,473-nat value. The registered absolute tolerance (1e-10) failed on both paths, and the verdict text ('FAILS') must still reproduce exactly."
   }
+ ],
+ "V36": [
+  {
+   "line": "path of -KL(p||p_T) against a generic optimiser",
+   "numbers": [
+    1
+   ],
+   "upper": [
+    0.0001
+   ],
+   "why": "BFGS stops at its gradient tolerance, and where depends on the SIMD path: 4.1e-06 on the reference CPU (AVX-512), 5.8e-06 with X86_V4 disabled. The pre-registered claim (R7-6a, P6) is agreement to 1e-4, and the verdict text must still reproduce exactly."
+  }
  ]
 }

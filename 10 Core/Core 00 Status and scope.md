@@ -7,7 +7,12 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
+> **Status: v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
+> behaviour on the intent ray (Def. 18). Weaker pursuit stays exempt; pursuit beyond the cap is charged as overshoot plus
+> transverse error (Prop. 33). A distributional target — a spread of behaviours — is the cap at `p_T`, which is also what
+> the non-linear target `−KL(·‖p_T)` gives. Pre-registered; all seven predictions held (R7-6a results).
+>
+> **v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
 > and everything before v7.4) or the ordinal set `[F]_ord`, when only the order of outcomes is intended (Def. 17).
 > The contract is restated for target sets (Def. 11), and every target set's budget and free measures satisfy it
 > (Prop. 31). The ordinal free measure has a closed form by isotonic regression, and it scores best-of-n and

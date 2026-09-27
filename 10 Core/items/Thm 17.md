@@ -71,6 +71,7 @@ detail.
 - [[Cor 17.1]] — the capacity actor's regret is the budget convention
 - [[Prop 16]] — gauge group and identified quantities
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
+- [[Prop 33]] — capped measures against the contract; R7-6a
 
 ## Mentions
 - none

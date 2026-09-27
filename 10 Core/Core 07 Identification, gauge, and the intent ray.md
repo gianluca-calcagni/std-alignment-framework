@@ -43,8 +43,13 @@ updated: "2026-09-26"
 ![[Cor 17.1#Notes and checks]]
 ![[Def 17#Statement]]
 ![[Def 17#Notes and checks]]
+![[Def 18#Statement]]
+![[Def 18#Notes and checks]]
 ![[Prop 32#Statement]]
 ![[Prop 32#Proof]]
 ![[Prop 32#Notes and checks]]
+![[Prop 33#Statement]]
+![[Prop 33#Proof]]
+![[Prop 33#Notes and checks]]
 ---
 

@@ -1,6 +1,11 @@
 # A — Core
 
-> **Status: v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
+> **Status: v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
+> behaviour on the intent ray (Def. 18). Weaker pursuit stays exempt; pursuit beyond the cap is charged as overshoot plus
+> transverse error (Prop. 33). A distributional target — a spread of behaviours — is the cap at `p_T`, which is also what
+> the non-linear target `−KL(·‖p_T)` gives. Pre-registered; all seven predictions held (R7-6a results).
+>
+> **v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
 > and everything before v7.4) or the ordinal set `[F]_ord`, when only the order of outcomes is intended (Def. 17).
 > The contract is restated for target sets (Def. 11), and every target set's budget and free measures satisfy it
 > (Prop. 31). The ordinal free measure has a closed form by isotonic regression, and it scores best-of-n and
@@ -149,7 +154,7 @@ left tier 4; row 76.)*
 
 | Tier | Needs, about the actual actor | Results |
 |---|---|---|
-| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
+| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); **Prop. 33** (capped measures; R7-6a); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
 | **2** | an **exact maximizer** of its evaluator over a set containing the intended actor | Thm 5 (all parts: capacity maximizers); Thm 9; the regret bound in Prop. 7 |
 | **2′** | an **argmax selector over a common random candidate set** (e.g. best-of-n compared at equal n) | Prop. 23 |
 | **3** | an exact optimum of `U − φ/β`, with `φ/β − U` convex | none since R7-3: the Bregman identity needs this of the *intended* actor only, so it is tier 1 (row 78) |
@@ -1112,6 +1117,33 @@ routing is not re-run (ROADMAP §3).
 cone with a level set of a convex function, and the minimization is not convex. V35 computes it from five
 starts. Its zero set needs no solver: `M_budget([F]_ord) = 0` iff `M_ord = 0` (Prop. 32(f)).
 
+**Definition 18 (intensity caps and distributional targets; R7-6a).** Let `F` be non-constant, with the half-ray
+`𝓡⁺_F` of Def. 10.
+- A **cap** is a declared point `p^max = p_{F,s}` of the half-ray, `s ∈ (0, ∞]`; `s = ∞` means no cap. The
+  **capped intent segment** is `𝓡⁺_F(p^max) = {p_{F,t} : 0 ≤ t ≤ s}`.
+- For a full-support `p̂`, with `k = KL(p̂‖q)` and `k_s = KL(p^max‖q)` (`k_s = ∞` when `s = ∞`):
+  - the **capped free measure** is `M_free^cap = inf_{0 ≤ t ≤ s} KL(p̂‖p_{F,t})`;
+  - the **capped budget measure** is `M_budget^cap = KL(p̂‖p_{F,λ})`, with `λ` the budget match of Def. 10, when
+    `k ≤ k_s`; and `M_budget^cap = KL(p̂‖p^max)` when `k > k_s`. It is undefined when `s = ∞` and `M_budget` is.
+- A **distributional target** is a full-support distribution `p_T`. It is declared as the cap `p^max = p_T` on the
+  target `F = log(p_T/q)`, for which `p_T = p_{F,1}`.
+
+*Note (why a point, not a number).* Intensity has no unit of its own: `p_{aF,t} = p_{F,at}`. A cap stated as a number
+`s` would change meaning with the representative of `F`. Stated as a behaviour on the ray, it does not (Prop. 33(c), M3).
+
+*Note (what the cap declares).* How hard the target is meant to be pursued is a decision of the principal. Without a
+cap, pursuing it harder is never misalignment (the contract's M5). With a cap, pursuing it *less* hard is still
+exempt — weakness, not misdirection — and pursuing it *beyond* the cap is charged. **Past the cap, the intended
+behaviour is the cap itself:** an agent that spends more information than the declared maximum is compared with
+the maximum.
+
+*Note (distributional targets).* When the intent is a spread of behaviours — a population's views, a diverse set of
+outputs, a coverage requirement, calibrated frequencies — the intent is a point, not a direction. Without the cap,
+an agent collapsed onto the target's modes scores as perfectly aligned (R7-6 go-no-go). The cap is also what a
+non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped segment (Prop. 33(d)).
+
+*Note (scope).* Caps are defined for the cardinal target set; for other target sets (Def. 17) they are open.
+
 **Proposition 32 (the ordinal measure; R7-7; tier 1).** Let `F` be non-constant, with values `v_1 < … < v_m` on
 the level sets `L_1, …, L_m`. Let `p̂` have full support, and `y = p̂/q`. Let `r°` be the `q`-weighted isotonic
 (non-decreasing) regression of the level means `p̂(L_j)/q(L_j)`, with weights `q(L_j)`, read as a function of `F`
@@ -1203,6 +1235,58 @@ projection lies from the target's own half-ray. Shape counts as misalignment onl
 
 *Prior art.* Order-restricted inference: the isotonic regression and the KL projection onto a monotone cone
 (src Barlow 1972, src Robertson 1988). What is new here is its use as a misalignment measure against the contract.
+
+**Proposition 33 (capped measures against the contract; R7-6a; tier 1).** Let `F` be non-constant, `p^max = p_{F,s}` a cap
+(Def. 18), `p̂` a full-support behaviour, `M(t) = KL(p̂‖p_{F,t})`, and `t̂`, `t̂⁺`, `D_⊥` as in Thm 13.
+
+(a) `M_free^cap = M(min(t̂⁺, s))`.
+
+(b) If `t̂ > s`: `M_free^cap = D_⊥ + KL(p_{F,t̂} ‖ p^max)` — the transverse error plus an **overshoot** term.
+
+(c) Both capped measures satisfy M1–M4, M5 within the cap, M6 and M8 of Def. 11, with the capped segment as
+intended set, and `M_free^cap ≤ M_budget^cap`. With `s = ∞` they are `M_free` and `M_budget` of Def. 10.
+
+(d) Let `p_T` have full support, `U(p) = −KL(p‖p_T)` and `F = log(p_T/q)`. For every `t ≥ 0`,
+`argmax_p [U(p) − KL(p‖q)/t] = p_{F, t/(1+t)}`. So the regularized path of `U` is the capped segment with
+`p^max = p_T`, traversed as `t` runs over `[0, ∞)`.
+
+*Proof.* (a) `M` is convex, with unconstrained minimizer `t̂` (Thm 17(i), Thm 13). A convex function of
+one variable attains its minimum over `[0, s]` at the point of `[0, s]` nearest to `t̂`, which is `min(t̂⁺, s)`.
+
+(b) If `t̂ > s ≥ 0`, (a) gives `M_free^cap = M(s)`, and Thm 13(a) gives
+`M(s) = KL(p̂‖p_{F,t̂}) + KL(p_{F,t̂}‖p_{F,s})`. Since `t̂ > 0`, the first term is `D_⊥`.
+
+(c) `KL ≥ 0` gives M2. By Lemma 5.1, `t ↦ KL(p_{F,t}‖q)` is strictly increasing, so the segment is the
+set of ray points with `KL(·‖q) ≤ k_s`.
+- M1 and M5 within the cap, free measure: for `s < ∞` the segment is compact in `Δ°`, and `M_free^cap = 0` iff `p̂`
+  lies on it. For `s = ∞` this is Def. 10.
+- M1 and M5 within the cap, budget measure: if `p̂ = p_{F,t}` with `t ≤ s`, then `k ≤ k_s` and `λ = t`, so the measure
+  is 0. Conversely, if `k ≤ k_s`, the measure is 0 iff `p̂ = p_{F,λ}` with `λ ≤ s`; if `k > k_s`, then `p̂` is not on
+  the segment and differs from `p^max`, whose divergence from `q` is `k_s ≠ k`, so the measure is positive.
+- M3: `p_{aF+c,t} = p_{F,at}`, so under `F ↦ aF + c`, `s ↦ s/a` the segment, `p^max` and `k_s` are unchanged.
+- M4 and M6: both measures are functions of `(q, F, p^max, p̂)`, defined by explicit rules. M8: per context
+  (Def. 9).
+- Order: the budget measure's reference point, `p_{F,λ}` or `p^max`, lies on the segment.
+- `s = ∞`: the segment is `𝓡⁺_F`, the branch `k > k_s` never occurs, and both measures are Def. 10's.
+
+(d) `U` is concave and `KL(·‖q)/t` strictly convex, and both terms force full support, so the maximizer is unique
+and interior. Stationarity: `−log(p/p_T) − (1/t)·log(p/q) = const`, so
+`log p = (t·log p_T + log q)/(1 + t) + const = log q + (t/(1+t))·F + const`. ∎
+
+*Check.* V36 (900 instances; pre-registered, R7-6a preregistration; all seven predictions held):
+- (a): the closed form matches a grid plus bounded minimization to `8·10⁻¹⁶`.
+- (b): the overshoot decomposition holds to `9·10⁻¹⁴` on the 473 instances with `t̂ > s`.
+- (c): on-segment behaviours score at most `7·10⁻¹⁶` on both measures; overshooting and off-ray behaviours at least
+  `5.8·10⁻⁵`. Both are unchanged under `F ↦ aF + c`, `s ↦ s/a` to `5·10⁻¹⁴`; `M_free^cap ≤ M_budget^cap`; with `s = ∞`
+  both equal Def. 10's reference code to `6·10⁻¹⁴`.
+- (d): the closed-form path matches a generic optimizer to `4·10⁻⁶` in log-probability.
+- The defect: 600 agents collapsed onto distributional targets score uncapped `M_free ≤ 4·10⁻¹⁵`, and capped exactly
+  `KL(p̂‖p_T)` (median 0.93 nats).
+
+*Reading.* **A cap turns intensity into a declaration.** The contract's M5 says that pursuing the target at another
+intensity is not misdirection. That is right for a direction ("more helpfulness is fine"), and wrong for a point
+("reflect this population's views"). The cap lets the principal say which. Below the cap nothing changes; beyond it,
+(b) says the charge is exactly the overshoot along the ray, added to whatever transverse error there is.
 
 ---
 
@@ -1427,7 +1511,7 @@ must satisfy:
 | **M2** (sign) | `M ≥ 0` |
 | **M3** (representation) | `M` depends on the target only through the declared set `𝒯`, and every declared quantity carrying the unit of a representative is transformed with it (`β ↦ β/a` when `F ↦ aF + c`). For `[F]₊` this is invariance under `F ↦ aF + c`, `a > 0`; for `[F]_ord`, under every strictly increasing map |
 | **M4** (behavioural) | `M` depends on the agent only through `p̂`, or its per-context laws |
-| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0` — the agent pursues an admissible statement of the target, at some intensity — then `M = 0`. For `[F]₊` this reads `p̂ = p_{F,t}` |
+| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared cap if there is one (Def. 18) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
 | **M6** (substrate-free) | `M` is defined for every full-support `p̂ ∈ Δ(X)`, or declared undefined by an explicit rule |
 | **M8** (contexts) | with contexts (Def. 9), `M` applies per context `c`, with aggregates `Σ_c ρ(c)·M_c` for the deployment and evaluation context laws `ρ_dep`, `ρ_ev` |
 

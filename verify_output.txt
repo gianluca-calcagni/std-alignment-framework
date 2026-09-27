@@ -229,3 +229,12 @@
   X2 kind E sigma=0.3: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.26 [0. 1.] (69)
   X2 kind E sigma=1.0: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.50 [0.02 0.98] (60)
   X3 kinds A, E: p0 pools more than one level in 0.655
+
+[V36] R7-6a: intensity caps and distributional targets (Def. 18, Prop. 33), against the pre-registration (P1-P7)
+  P1 closed form M(min(t_hat+, s)) against grid + bounded minimisation over [0, s]: max difference 8.0e-16 -> holds
+  P2 overshoot decomposition D_perp + KL(p_(F,t_hat)||p_max), 473 instances with t_hat > s: max difference 8.6e-14 -> holds
+  P3 M1 and capped M5: on-segment max 7.4e-16; overshoot and off-ray min 5.81e-05 -> holds
+  P4 M3 under F -> aF + c, s -> s/a: max change 4.8e-14 -> holds
+  P5 M_free_cap <= M_budget_cap: min gap -6.8e-16; s = infinity against Def. 10's reference code: max difference 5.7e-14 -> holds
+  P6 path of -KL(p||p_T) against a generic optimiser: max log-probability difference 4.1e-06 -> holds
+  P7 (R) collapsed agents (600): uncapped M_free max 3.5e-15; capped = KL(p_hat||p_T) to 6.7e-16, min 0.003, median 0.932 -> holds

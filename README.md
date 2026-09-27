@@ -1,4 +1,4 @@
-# std-alignment-framework — v7.4
+# std-alignment-framework — v7.5
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -43,7 +43,7 @@ retraction rows 1–6 — is archived in `archive/alignment_subframework/`; ROAD
 
 - **Continuous checks.** Every push and pull request runs `.github/workflows/checks.yml`:
   - the vault checks (lint, the migration check, the freshness of `build/`, cross-references, the bibliography);
-  - all 35 `verify.py` blocks, in parallel, each compared with its reference output;
+  - all 36 `verify.py` blocks, in parallel, each compared with its reference output;
   - `final_audit.py`, compared with its reference output.
 
   Residual-scale digits (|x| ≤ 1e-9) may differ across machines. So may a few lines that measure numerical
