@@ -1245,7 +1245,81 @@ def V36():
     print(f"  P7 (R) collapsed agents (600): uncapped M_free max {col[:,0].max():.1e}; capped = KL(p_hat||p_T) to {e7:.1e}, min {col[:,1].min():.3f}, median {np.median(col[:,1]):.3f} "
           f"-> {ok(col[:,0].max() <= 1e-10 and e7 <= 1e-10 and col[:,1].min() > 1e-9)}")
 
+# =====================================================================================================
+# R7-9 block: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34). Pre-registered in
+# `70 Project/R7/R7-9 preregistration.md` (P1-P4) before any computation. All predictions are verification.
+# =====================================================================================================
+def _hull_proj(lh, L, starts, bounds=None, free_const=False):
+    """M over {p ∝ exp(sum_k w_k L[k])}: w in the simplex (bounds None) or w >= 0 (conic, bounds given).
+    Convex in w (log-sum-exp). Returns (value, log p°) for each start."""
+    ph = np.exp(lh); K = L.shape[0]
+    def lp(w): l = w@L; return l - logsumexp(l)
+    f = lambda w: float(ph@(lh - lp(w)))
+    def g(w):
+        p = np.exp(lp(w)); return -(L@ph) + L@p
+    out = []
+    for w0 in starts:
+        if bounds is None:
+            cons = [{'type': 'eq', 'fun': lambda w: w.sum() - 1, 'jac': lambda w: np.ones(K)}]
+            r = minimize(f, w0, jac=g, constraints=cons, bounds=[(0, 1)]*K, method='SLSQP', options={'ftol': 1e-15, 'maxiter': 3000})
+        else:
+            r = minimize(f, w0, jac=g, bounds=bounds, method='L-BFGS-B', options={'ftol': 1e-15, 'gtol': 1e-13, 'maxiter': 5000})
+        out.append((float(r.fun), lp(r.x)))
+    return out
+
+def V37():
+    print("\n[V37] R7-9: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34), against the pre-registration (P1-P4)")
+    rng = np.random.default_rng(3709); ok = lambda c: "holds" if c else "FAILS"
+    d1 = 0.0; p2 = np.inf
+    for i in range(400):
+        n = int(rng.integers(3, 11)); K = [2, 3, 5][i % 3]
+        L = np.log(rng.dirichlet(np.ones(n), size=K)); lh = np.log(rng.dirichlet(np.ones(n)))
+        res = _hull_proj(lh, L, [rng.dirichlet(np.ones(K)) for _ in range(5)])
+        best = min(res, key=lambda x: x[0]); lp0 = best[1]
+        d1 = max(d1, max(np.abs(np.exp(r[1]) - np.exp(lp0)).max() for r in res))
+        for _ in range(20):
+            w = rng.dirichlet(np.ones(K)); l = w@L; lpp = l - logsumexp(l)
+            p2 = min(p2, KLl(lh, lpp) - best[0] - KLl(lp0, lpp))
+    print(f"  P1 uniqueness on 400 generic log-convex hulls (K = 2, 3, 5): the minimizers from 5 starts agree to {d1:.1e} -> {ok(d1 <= 1e-6)}")
+    print(f"  P2 Pythagorean inequality KL(p_hat||p) - M - KL(p°||p), 20 members per hull: min {p2:.1e} -> {ok(p2 >= -1e-8)}")
+    e_cap = e_ord = 0.0
+    for i in range(300):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); lh = np.log(rng.dirichlet(np.ones(n)))
+        F = rng.normal(size=n) if i % 2 else rng.integers(0, 4, size=n).astype(float)
+        if len(np.unique(F)) < 2: F[0] += 1.0
+        s = float(rng.uniform(0.2, 5)); ph = np.exp(lh)
+        L = np.vstack([lq, lgibbs(lq, F, s)])
+        v = min(r[0] for r in _hull_proj(lh, L, [np.array([a, 1 - a]) for a in (0.1, 0.5, 0.9)]))
+        e_cap = max(e_cap, abs(v - _cap_free(ph, lq, F, s)))
+        vals = np.unique(F); steps = np.array([(F >= v_).astype(float) for v_ in vals[1:]])
+        Lc = np.vstack([lq, steps]); bnds = [(1.0, 1.0)] + [(0, None)]*len(steps)
+        vo = min(r[0] for r in _hull_proj(lh, Lc, [np.concatenate([[1.0], rng.uniform(0, 2, len(steps))]) for _ in range(3)], bounds=bnds))
+        e_ord = max(e_ord, abs(vo - KL(ph, _ordproj(ph, q, F)[0])))
+    print(f"  P3 generic code reproduces the capped free measure (two-point hull {{q, p_(F,s)}}): {e_cap:.1e}; the ordinal measure (conic hull of level steps): {e_ord:.1e} -> {ok(e_cap <= 1e-8 and e_ord <= 1e-8)}")
+    dis = 0; tot = 0
+    for i in range(200):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph); k = KL(ph, q)
+        G = rng.normal(size=n); F = rng.normal(size=n); s = float(rng.uniform(0.5, 4))
+        # the budget sphere {KL(p||q) = k} intersected with the log-convex set {p ∝ q e^(aF + bG), a, b >= 0}: not log-convex
+        def lp(z): l = lq + z[0]*F + z[1]*G; return l - logsumexp(l)
+        f = lambda z: KLl(lh, lp(z)); cons = [{'type': 'eq', 'fun': lambda z: KLl(lp(z), lq) - k}]
+        ends = []
+        for _ in range(5):
+            r = minimize(f, rng.uniform(0, 3, 2), constraints=cons, bounds=[(0, None)]*2, method='SLSQP', options={'ftol': 1e-14, 'maxiter': 2000})
+            if r.success and abs(KLl(lp(r.x), lq) - k) < 1e-8: ends.append(r.fun)
+        if len(ends) >= 2:
+            tot += 1; dis += (max(ends) - min(ends) > 1e-6)
+    print(f"  P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances with >= 2 feasible end points")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37"]
     for w in which: globals()[w]()

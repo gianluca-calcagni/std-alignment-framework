@@ -238,3 +238,9 @@
   P5 M_free_cap <= M_budget_cap: min gap -6.8e-16; s = infinity against Def. 10's reference code: max difference 5.7e-14 -> holds
   P6 path of -KL(p||p_T) against a generic optimiser: max log-probability difference 4.1e-06 -> holds
   P7 (R) collapsed agents (600): uncapped M_free max 3.5e-15; capped = KL(p_hat||p_T) to 6.7e-16, min 0.003, median 0.932 -> holds
+
+[V37] R7-9: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34), against the pre-registration (P1-P4)
+  P1 uniqueness on 400 generic log-convex hulls (K = 2, 3, 5): the minimizers from 5 starts agree to 1.5e-08 -> holds
+  P2 Pythagorean inequality KL(p_hat||p) - M - KL(p°||p), 20 members per hull: min -1.1e-08 -> FAILS
+  P3 generic code reproduces the capped free measure (two-point hull {q, p_(F,s)}): 8.9e-16; the ordinal measure (conic hull of level steps): 1.4e-03 -> FAILS
+  P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 58 of 184 instances with >= 2 feasible end points

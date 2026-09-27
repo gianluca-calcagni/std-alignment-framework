@@ -15,7 +15,7 @@ updated: "2026-09-26"
 | | |
 |---|---|
 | **Current** | **v7.5 — R7-6a, intensity caps** ([[R7-6a results]]). A principal can declare how hard the target is meant to be pursued; a distributional target is a cap at `p_T`. Pre-registered; all 7 predictions held. Before that: **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **R7-9 — the core as a declared intended set** (the PI, under rule 13's structural exception), then **R7-6b — minimum intensity**, which passes rule 13 outright. Identifiability (§6 I1) is the lead brainstorming theme. Open: R7-8, the §6 brainstorms, T3b, T7 |
+| **Next** | **The PI's decision on R7-9:** its run stopped on the registered rule D2 — a generic optimizer's non-convergence on 1 instance of 300, which the post-hoc diagnosis shows is not a failure of the reduction ([[R7-9 results]]). Resume with a corrected pre-registered check, or proceed to **R7-6b** (minimum intensity), which passes rule 13 outright |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -248,7 +248,7 @@ not" without assuming it, the layer needs dynamics, and it is recorded as such.
 - Set-valued measures; aggregation only when a scalar is demanded.
 - This changes the status of the "disagreeing principals" exception.
 
-### R7-9 — The core as a declared intended set *(approved by the PI after v7.5; runs under rule 13's structural exception)*
+### R7-9 — The core as a declared intended set *(approved by the PI after v7.5; **stopped by its registered rule D2** — [[R7-9 results]]; resuming is the PI's decision)*
 **Rule 13 check.** No verdict changes by design (M7). The PI approved it as structural. Its falsifiable structural
 claim: **the measures with unique minimizers and Pythagorean decompositions are exactly the projections onto
 log-convex intended sets** — the ray, the ordinal cone, the capped segment — while the ordinal budget set is not
