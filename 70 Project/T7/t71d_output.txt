@@ -1,0 +1,18 @@
+configurations: 65; failing the integrity check or incomplete: 0; used: 65
+trap direction d = +1 (adversarial distractors are longer on average)
+P1 M_free = M_free^G + W: max error 3.1e-16 -> holds
+P2 Theta > 0 where W > 1e-9: exceptions 0 -> holds
+P3 Spearman(d*sW_Natural, adversarial error) = 0.522 over 65 -> holds
+P4 0.522 vs raw Spearman(d*R_Natural, adversarial error) = 0.533 -> FAILS
+reported: Spearman(Natural accuracy, adversarial error) = -0.539; partial Spearman(d*sW, A | Natural accuracy) = 0.567; same for raw R: 0.604
+reported: diagnosis table (Natural), best and worst adversarial error:
+  GPT-4/Metrics_Reference          A=0.155  nat_acc=0.960  d*sW=+0.0002  d*R=+0.049  W=0.0002  Theta=0.0000  M_free=0.0002
+  GPT-4/Rating_Metrics_Reference   A=0.161  nat_acc=0.940  d*sW=+0.0005  d*R=+0.059  W=0.0005  Theta=0.0000  M_free=0.0005
+  GPT-4/Metrics                    A=0.166  nat_acc=0.930  d*sW=+0.0008  d*R=+0.039  W=0.0008  Theta=0.0000  M_free=0.0008
+  GPT-4/Rating_Metrics             A=0.171  nat_acc=0.935  d*sW=+0.0014  d*R=+0.064  W=0.0014  Theta=0.0000  M_free=0.0014
+  GPT-4/Reference                  A=0.172  nat_acc=0.955  d*sW=+0.0044  d*R=+0.074  W=0.0044  Theta=0.0000  M_free=0.0044
+  ChatGPT/Vanilla_2shot            A=0.745  nat_acc=0.825  d*sW=+0.0105  d*R=+0.093  W=0.0105  Theta=0.0002  M_free=0.0105
+  ChatGPT/Vanilla                  A=0.730  nat_acc=0.815  d*sW=+0.0105  d*R=+0.093  W=0.0105  Theta=0.0002  M_free=0.0105
+  ChatGPT/Vanilla_1shot            A=0.723  nat_acc=0.800  d*sW=+0.0166  d*R=+0.108  W=0.0166  Theta=0.0004  M_free=0.0166
+  ChatGPT/Vanilla_NoRules          A=0.723  nat_acc=0.790  d*sW=+0.0089  d*R=+0.088  W=0.0089  Theta=0.0001  M_free=0.0089
+  LLaMA2/Vanilla_NoRules           A=0.722  nat_acc=0.770  d*sW=+0.0606  d*R=+0.176  W=0.0606  Theta=0.0066  M_free=0.0606

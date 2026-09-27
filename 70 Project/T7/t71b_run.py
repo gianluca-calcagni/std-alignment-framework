@@ -53,6 +53,10 @@ print(f"matched set: {len(M)} models")
 if len(M) < 25: print("D2: fewer than 25 matched -> P4, P5 not evaluated"); sys.exit()
 E = np.array([elo[n(m)] for m in M]); WR = np.array([res[m]['wr'] for m in M]); J = rankdata(WR) - rankdata(E)
 sW = np.array([res[m]['sW'] for m in M]); L = np.array([res[m]['L'] for m in M]); D = np.array([res[m]['D'] for m in M])
+with open("70 Project/T7/t71c_table.csv", "w") as f:
+    f.write("model,arena_elo,win_rate,lc_win_rate,avg_length,J,sW,W,off_ray,intensity,Theta\n")
+    for i, m in enumerate(M):
+        r = res[m]; f.write(f"{m},{E[i]},{r['wr']},{r['lc']},{r['L']},{J[i]},{r['sW']:.6f},{r['W']:.6f},{r['off']:.6f},{r['inten']:.6f},{r['Th']:.6f}\n")
 r4 = spearmanr(sW, J).correlation; rL = spearmanr(L, J).correlation
 print(f"P4 Spearman(sW, J) = {r4:.3f} -> {ok(r4 > 0.3)}")
 print(f"P5 Spearman(sW, J) = {r4:.3f} vs Spearman(avg_length, J) = {rL:.3f} -> {ok(r4 > rL)}")

@@ -12,6 +12,12 @@ verdict of overshoot can be style drift. The hedge: one of five predictions (P5)
 floating-point threshold; the claim is exact and unchanged (R7-10 results). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
 
+**T7 case 1 (after v7.8)** — the first contact with real data. On 216 AlpacaEval models and 65 LLMBar evaluator
+configurations, every verification prediction held. With independent gold labels, the framework's style term
+measured on ordinary data predicted evaluator failure on adversarial data (ρ = 0.52). The hedge: in all three designs
+it did no better than the raw feature it isolates, so its value there is the structured reading, not extra
+predictive power (T7-1d results).
+
 **v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
 minimum, an agent that stays at the default is charged. All five pre-registered predictions held (R7-6b results).
 
@@ -425,6 +431,8 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **T7 case 1 documented (v7.8).** T7 case 1 index ties the three designs together, with files and reproduction steps; per-model and per-configuration tables saved (`t71c_table.csv`, `t71d_table.csv`); both scripts rerun and reproduce their recorded outputs exactly. HANDOVER, NOTES §0 and ROADMAP §0 point to case 2 | project |
+| **T7 case 1d/1e (v7.8).** LLMBar, independent gold labels (T7-1d preregistration; D2 fired on a wrong reading of the data, corrected in T7-1e amendment before any prediction). P1–P3 hold (the style term on Natural predicts adversarial error, ρ = 0.522, n = 65); P4 fails (raw length 0.533). §4c R7-10 row retired as far as real data allow. T7-1d results | project |
 | **T7 case 1b/1c (v7.8).** Improved design against Chatbot Arena Elo (T7-1b preregistration, T7-1c amendment after D2 fired on the April column). P1, P2 hold; P3, P4, P5 fail: the style term points the right way (ρ = 0.285, n = 37) but raw length does better (0.377). T7-1b results. No core change | project |
 | **T7 case 1 (v7.8).** Pre-registered in T7-1 preregistration (`684fea8`). RLHF length bias, structural test on AlpacaEval 2 (216 models): P1, P2 hold; P3, P4 fail (ρ ≈ 0.27 against 0.3); P5 holds but was unfalsifiable by design. §4c's R7-10 row partly retired. T7-1 results. No core change | project |
 | **B1 brainstorm (v7.8).** Every open ROADMAP §6 item brainstormed under the light protocol, with five toy tests (`70 Project/B1/`). No core change. Main finding: one object (a partition the target is not measurable on) in three positions — principal (R7-10), agent (retention), world (observability). Consolidated in NOTES §8; ROADMAP reshuffled: T7 reshaped (real data first, one case, then decide; protocol with the diagnosis, identification and lever tables), candidate core steps from B1 listed after T7, a drain rule for §6 | project |
