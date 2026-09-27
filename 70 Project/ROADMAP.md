@@ -15,7 +15,7 @@ updated: "2026-09-26"
 | | |
 |---|---|
 | **Current** | **v7.5 — R7-6a, intensity caps** ([[R7-6a results]]). A principal can declare how hard the target is meant to be pursued; a distributional target is a cap at `p_T`. Pre-registered; all 7 predictions held. Before that: **v7.4 — R7-7, target sets** ([[R7-7 results]]). The ordinal target is declarable: best-of-n and quantilizers on the true target score 0 under it. Pre-registered; 6 of 10 predictions held, and the registered falsifier D4 fired: the ordinal *budget* measure has no closed form, and its solver failed once in 393. Before that: **v7.3.3 — review of the package against §1.** Mathematics sound, every check reproduces on a second machine; stale status text corrected, and lint now rejects a part banner older than its own text. The review's recommendations are §5, for the PI. Before that: **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **The PI's choice.** R7-6a is done ([[R7-6a results]]); general non-linear targets wait for a case the cap cannot repair. Open: R7-8 (declared resolution; ROADMAP §6 G4 is its natural lead case), the §6 brainstorms (G3 first, with T7), and the deferred T3b and T7 |
+| **Next** | **R7-9 — the core as a declared intended set** (approved by the PI after v7.5; §2A), with the declaration registry and the silent-declaration audit. Identifiability (§6 I1) is the lead brainstorming theme. R7-6a is done ([[R7-6a results]]); general non-linear targets wait for a case the cap cannot repair. Open: R7-6b (minimum intensity), R7-8 (declared resolution; ROADMAP §6 G4 is its natural lead case), the §6 brainstorms (G3 first, with T7), and the deferred T3b and T7 |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
@@ -248,6 +248,31 @@ not" without assuming it, the layer needs dynamics, and it is recorded as such.
 - Set-valued measures; aggregation only when a scalar is demanded.
 - This changes the status of the "disagreeing principals" exception.
 
+### R7-9 — The core as a declared intended set *(approved by the PI after v7.5; next)*
+**Aim.** Restate the measurement layer as one definition: **misalignment is the KL projection of the actual
+behaviour onto a declared set `𝓘` of intended behaviours.** The half-ray, the ordinal cone and the capped segment
+become generators of `𝓘` from `(q, target set, convention, cap)`; new notions become new generators, not new axioms.
+**Serves:** solid, importable.
+- **Restate the contract** as conditions on `𝓘` (M1: `M = 0` iff `p̂ ∈ 𝓘`; M5: `𝓘` contains the declared pursuit family),
+  and show that every current measure is a case, exactly (M7).
+- **Name the import:** Csiszár's I-projection theory. The Pythagorean splits (Thm 13), the ordinal decomposition
+  (Prop. 32) and the overshoot term (Prop. 33) should all follow from it; any that does not is a finding.
+- **A declaration registry:** each declaration (`q`, the target set, the convention, the cap, the resolution of
+  `X`, context weights) gets an **elicitation story** — how a real principal states it — and a **justified
+  default**.
+- **A silent-declaration audit:** list every choice made in computing `M` from `(X, q, F, p̂)` and ask whether a real
+  principal would choose otherwise. Known candidates: the resolution of `X` (R7-8); the split inside cells (§6
+  G4); the lower end of the ray (R7-6b); linear averaging over contexts (M8); `q` itself.
+- **Tests.** Pre-register. Every existing measure is reproduced exactly (V1–V36); the contract as restated passes
+  V30's sanity suite; the audit lists each candidate with a verdict (declare, keep with default, or out of scope).
+- **Falsifier:** a load-bearing result that cannot be stated as a property of the projection onto `𝓘`.
+
+### R7-6b — Minimum intensity *(candidate from the v7.5 brainstorm)*
+- The ray starts at `t = 0`, so an agent staying at the default scores zero under the free convention. Shirking is
+  an alignment problem in principal–agent theory. Mirror R7-6a: a declared **floor** behaviour on the ray, with
+  pursuit below it charged. With no floor, everything reads as now. Apply the PI's test first: a real case where
+  non-pursuit is wrongly scored as aligned.
+
 ### R7-8 — A7: measurable spaces *(optional, last)*
 - Integrability hypotheses per result.
 - *Real trigger (v7.3.1):* deterministic behaviour on a continuous `X` saturates every f-divergence ([[R7-5 go-no-go]], case 5). The cheap remedy keeps KL: measure outcomes, or declare a resolution.
@@ -342,6 +367,20 @@ second index in the same turn.
 10a. **R7 discipline.** One assumption per turn; definitions before dependents; a DAG check every turn; exact
     reduction to v6.4 in the special case. If in doubt, stop and restore.
 10. **Every turn ends with §0 updated.**
+11. **Label every pre-registered prediction as *verification* or *empirical*** (after v7.5). A verification
+    prediction checks a proof and can fail only through a bug or a badly scaled threshold; an empirical one can be
+    wrong about the world. Only empirical predictions count towards the base rate (Status §6).
+12. **Brainstorm and go/no-go steps use a light protocol** (after v7.5): a report note, a ROADMAP line and a
+    hygiene row; no version bump unless the core changes. The full R7 discipline is for steps that change the core.
+
+## 4b. When is the core final? *(proposed after v7.5; the PI to confirm)*
+
+1. The declaration space is listed (R7-9's registry), each declaration with an elicitation story and a default.
+2. The contract is unchanged for three consecutive core steps.
+3. One real diagnostic per substrate (T7), with the imported theorems named.
+4. One outside reader — a human, or a model of a different family — has run a real case through it.
+
+Until all four hold, the core is a checked calculus, not a standard.
 
 ---
 
@@ -536,6 +575,33 @@ unless a gap cannot be stated behaviourally.
   evaluator's **resolution** — how finely it separates behaviours — trade against its **exposed fraction**? A
   richer evaluator has more features, and more of them may be self-controllable. That is testable in the core
   once G3's width exists.
+
+### I1 — Identifiability *(PI, after v7.5; the lead theme for brainstorming)*
+- **Why it matters.** Identifiability is what lets an agent model the principal's request at all, and what lets a
+  principal model the agent. In the core it is used only as a *limit* (Props 12, 16, 26(b)), never as a primitive.
+- **What is already there.** The entropic actor identifies its objective up to `[F]₊` (Prop. 16); best-of-n only up to
+  its order (V26). R7-7's defect was declaring a target set finer than best-of-n identifies; the fix was its
+  identification class. R7-6a's cap is a behaviour because intensity is not identified.
+- **Hypotheses to brainstorm** ([[NOTES_claude]] H10):
+  - (a) the natural target set for a channel is its identification class, and misalignment measured with a
+    finer set charges the agent for distinctions the channel cannot carry — which is v5's transmission gap;
+  - (b) each of v5's five gaps is an identification failure along a different channel;
+  - (c) value learning and oversight are two inverse problems on one channel; detection (Prop. 18) is only the
+    testing half of the second.
+- **First concrete question.** Define the identification class of a channel from intent to behaviour, and compute
+  it for three channels: the entropic actor, best-of-n, and a Bradley–Terry preference learner (which should
+  identify the target only up to a constant per context). Does (a) predict which misalignments each can and
+  cannot correct?
+- **Caution.** Identifiability is a ceiling on what can be learned, not a mechanism by which it is; whether an
+  agent reaches the ceiling is estimation (the statistical layer).
+
+### Needing more clarity *(after v7.5)*
+- **The declared reference `q`** carries the default, the zero of intensity and the unspecified details inside
+  cells. It needs its own elicitation story and contract (R7-9; NOTES H13).
+- **Execution failure versus misdirection:** v5 counts execution as capability; the measurement layer must count
+  unsystematic slips as misdirection (Def. 11). The disagreement should be stated, not left implicit (L4).
+- **The chain rule of KL as the gaps' bridge** (G0; NOTES H12): speculative, unchecked.
+- **What "intensity" means for non-cardinal target sets** (R7-6a results, Open).
 
 ### Other dropped ideas
 - **L1 — Levers** *(rows 16, 17; v5, not in SF)*. Which intervention moves which term: re-specify acts on the

@@ -203,6 +203,47 @@ exclusion]*.
 - They shift `q` while holding `F̂` fixed, which no other non-biological substrate offers. If T7's human case
   works, identification results (Props [[Prop 12|12]], [[Prop 16|16]]) get their first real-data contact.
 
+**H9. The core is one definition: KL projection onto a declared intended set** *[PI approved as R7-9, after v7.5]*.
+- Every R7 step since R7-2 turned a silent choice into a declaration (the reference, cardinal or ordinal, the cap),
+  while the measure stayed "KL to the nearest intended behaviour". The ray, the ordinal cone and the capped segment
+  are ways of generating one declared set `𝓘`; the Pythagorean, ordinal/shape and overshoot splits are facts about
+  I-projections onto exponential families and log-convex sets (Csiszár).
+- Falsifier: a contract axiom or a load-bearing result that cannot be stated as a condition on `𝓘` or a property
+  of the projection.
+- Distrust: it can make everything a declaration, and so empty. The defence is an elicitation story and a
+  justified default for every declaration.
+
+**H10. Identifiability is the common denominator** *[PI, after v7.5: "a superpower"; ROADMAP §6 I1]*.
+- (a) *The natural target set of a channel is its identification class.* The entropic actor identifies its
+  objective up to `[F]₊` (Prop. 16); best-of-n up to `[F]_ord` (V26) — and R7-7's defect was declaring a set finer
+  than the channel identifies. The cap is a behaviour because intensity is not identified (Prop. 12(i)).
+- (b) *Every v5 gap is an identification failure along a different channel:* reward → intent (specification);
+  observations → distinction (transmission); evaluator → cause (grounding: "only their signature"); old goal →
+  new cells (persistence); self-report → evaluator (verification).
+- (c) *Two inverse problems on one channel:* the agent identifying the principal (value learning) and the principal
+  identifying the agent (oversight). Detection (Prop. 18) is only the testing half of the second.
+- Falsifier: a declared target set coarser than the channel's identification class that still gives a
+  common-sense-wrong verdict; or a v5 gap that stays when every channel identifies.
+- Distrust: (b) is exactly the kind of unifying elegance I over-trust. And identifiability is a ceiling on what an
+  agent can learn, not a mechanism by which it does.
+
+**H11. "Doing nothing" is a silent declaration** *[ROADMAP R7-6b]*.
+- The ray starts at `t = 0`, so an agent staying at the default scores zero under the free convention — the mirror
+  of the cap. Principal–agent theory calls that shirking (moral hazard), an alignment problem. It is also why the
+  G2 "cannot get the request" floor is zero. A declared minimum intensity would make it visible.
+- Falsifier: every real principal treats non-pursuit as capability, not misalignment.
+
+**H12. The chain rule of KL may give the five gaps back as additive terms** *[speculative; ROADMAP §6 G0]*.
+- If each link intent → reward → representation → evaluator → action is a Markov kernel, KL's chain rule splits
+  the measured divergence along the chain, and each gap is a term defined *from* the measure — which avoids what
+  killed the gaps (row 1).
+- Falsifier: the links do not compose as kernels, or the terms are not identified (H10) and so not measurable.
+
+**H13. The declared reference `q` is overloaded** *[unexamined]*.
+- It fixes the default, the zero of intensity, and the unspecified details inside cells (G1, G4). It is the most
+  load-bearing object in the measurement layer and the least examined.
+- Next: give `q` its own entry in the declaration registry (R7-9), with an elicitation story.
+
 **Dormant.** Keep, but don't spend time on these:
 - the refined drift barrier (equipartition over directions with `β'λ ≫ β`);
 - transverse errors composing in `L²` along chains;
