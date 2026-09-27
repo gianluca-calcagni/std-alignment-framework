@@ -42,7 +42,8 @@ ALLOW_FORWARD = {('Rem 7.1', 'Prop 10'): 'historical remark that restates a late
 NOT_E = {'Prop 24': 'p̂ = p_{F,t} is a test case on the intended family, not a hypothesis about the actor',
          'Prop 25': 'part (c) states its entropic attribution explicitly',
          'Prop 33': 'p̂ = p_{F,t} is a test case on the intended (capped) segment, not a hypothesis about the actor',
-         'Prop 35': 'p̂ = p_{F,t} is a test case on the intended segment, not a hypothesis about the actor'}
+         'Prop 35': 'p̂ = p_{F,t} is a test case on the intended segment, not a hypothesis about the actor',
+         'Prop 37': 'p̂ = p_{F,λ} is the equality case of (a), not a hypothesis about the actor'}
 EPAT = r'p̂ ∝|p_\{F̂,|R_J\(E|p̂ = p_\{F|p_\{F\+E|p_\{sF̂'
 TAGRX = r'\[Assumes|\*\[\(g1\)|assumes \(E\)|assume \(E_A\)'
 QAPAT = r'q_A'
@@ -56,7 +57,7 @@ SYMBOLS = [(r'F̂', 'Def 13'), (r'Λ\(|Λ_q', 'Def 13'), (r'q_A', 'Def 13'),
            (r'W_c|m_c|s_c\(', 'Def 16'), (r'κ_c', 'Prop 27'),
            (r'𝒯|\[F\]_ord|M_ord|(?<!\^)C_F|I_free|I_budget', 'Def 17'),
            (r'p\^max|\^cap|𝓡⁺_F\(', 'Def 18'), (r'M_𝓘|𝓘', 'Def 19'), (r'p\^min|\^seg', 'Def 20'),
-           (r'M\^𝒢|p̂_𝒢|q_𝒢', 'Def 21')]
+           (r'M\^𝒢|p̂_𝒢|q_𝒢', 'Def 21'), (r'ΔV', 'Def 22')]
 # R7-3: explanation vocabulary, forbidden in the Statement and Proof of measurement-layer items
 EXPL_VOCAB = r'W_c|m_c|κ_c|F̂|(?<![\w_(\[])E(?![\w_\[(|)])|E₀|Ē|Λ\(|Λ_q|q_A|\[Assumes|R\^C|M_own|R_own|σ_δ\(|w_δ\('                     # R7-2: statements that use the actor's own reference must assume (E_A) or be definitions
 

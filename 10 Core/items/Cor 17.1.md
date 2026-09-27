@@ -9,7 +9,7 @@ tier: ["4 (C)"]
 assumes: ["Hyp C"]
 status: "proved"
 depends_on: ["Lemma 5.1", "Thm 17", "Def 13", "Def 5", "Def 15", "Def 2"]
-mentions: ["Thm 5"]
+mentions: ["Def 22", "Def 8", "Thm 5"]
 checks: ["V18", "V19"]
 sources: []
 aliases: ["Corollary 17.1", "Cor. 17.1"]
@@ -45,7 +45,9 @@ equals `M(λ)/λ` by Thm [[Thm 17|17]](iii). The saturated case follows from `E_
 
 > **Theorem [[Thm 5|5]]'s worst-case regret (§4) and the budget convention (§7) are the same object.** The pure
 > capacity actor's regret is the same-budget regret, and the width `w_δ(E)` bounds it over all targets. This
-> is a reason, beyond gauge invariance, to use the budget convention as the default.
+> is a reason, beyond gauge invariance, to use the budget convention as the default. *(Since v7.9 the default is
+> free and budget is declared (Def. [[Def 8|8]]); this identity is why the value shortfall `ΔV` is taken at equal effort,
+> Def. [[Def 22|22]].)*
 
 <!-- gen:links -->
 ## Depends on (logical: statement and proof)
@@ -60,10 +62,12 @@ equals `M(λ)/λ` by Thm [[Thm 17|17]](iii). The saturated case follows from `E_
 - none
 
 ## Mentions
+- [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
+- [[Def 22]] — value shortfall at equal effort; R8-1
 - [[Thm 5]] — the width is the exact worst case
 
 ## Mentioned in
-- none
+- [[Def 22]] — value shortfall at equal effort; R8-1
 
 ## Checks
 - [[V18]]

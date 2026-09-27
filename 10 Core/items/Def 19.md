@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: []
-mentions: ["Def 17", "Def 18", "Def 8", "Prop 18", "Prop 34", "R7-9 results"]
+mentions: ["Def 17", "Def 18", "Def 8", "Prop 18", "Prop 34", "R7-9 results", "R8 foundations review", "Thm 1"]
 checks: []
 sources: []
 aliases: ["Definition 19", "Def. 19"]
@@ -36,7 +36,12 @@ updated: "2026-09-27"
 of the actual behaviour onto what the principal declared as intended.** Everything else the measurement layer
 contains is a way to *generate* `𝓘` from declarations — the reference `q`, a target set (Def. [[Def 17|17]]), a convention
 (Def. [[Def 8|8]]), a cap (Def. [[Def 18|18]]) — and Prop. [[Prop 34|34]](a) shows each existing measure is a case. A new notion enters as a
-new generator of `𝓘`, not as a new axiom. KL is fixed by detection (Prop. [[Prop 18|18]]), not by this definition.
+new generator of `𝓘`, not as a new axiom. KL is the divergence because the principal is entropic (Thm [[Thm 1|1]]); detection (Prop. [[Prop 18|18]]) bounds it but does not select it ([[R8 foundations review]], A2).
+
+*Note (the budget set is not a declaration; R8-1).* Under the budget convention `𝓘 = {p_{F,λ}}`, and `λ` is set by
+`KL(p̂‖q)`: the set depends on the behaviour being judged. Prop. [[Prop 34|34]] still holds, since the measure uses that set,
+but the declaration is a *family* of sets indexed by the agent's spending. "The projection onto what the principal
+declared" is literal only for the free-type measures ([[R8 foundations review]], A6).
 
 *Note (the declaration registry).* Every declaration needs an elicitation story — how a real principal states it
 — and a justified default. The registry, and the audit of choices still made silently, are in [[R7-9 results]].
@@ -60,6 +65,8 @@ measure, whose set is not log-convex, needed a solver.
 - [[Prop 18]] — harm bounds detectability
 - [[Prop 34]] — the core as a declared intended set; R7-9
 - [[R7-9 results]]
+- [[R8 foundations review]]
+- [[Thm 1]] — regret is a divergence
 
 ## Mentioned in
 - [[Def 11]] — the misalignment contract; R7-0

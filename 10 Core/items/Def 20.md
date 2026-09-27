@@ -53,13 +53,15 @@ floor is a behaviour on the ray, not a number, because intensity has no unit of 
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Prop 35]] — the intended segment against the contract; R7-6b
 - [[Prop 36]] — declared resolution against the core; R7-10
+- [[Prop 37]] — the value shortfall; R8-1
 
 ## Mentions
 - [[Prop 34]] — the core as a declared intended set; R7-9
 - [[Prop 35]] — the intended segment against the contract; R7-6b
 
 ## Mentioned in
-- none
+- [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
+- [[Def 22]] — value shortfall at equal effort; R8-1
 
 ## Checks
 - none

@@ -34,13 +34,13 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Hyp E_A]] — the entropic actor model from the actor's own reference
 - [[Hyp E_R]] — the reward-coupled entropic agent
 
-## Measurement layer (31 items)
+## Measurement layer (33 items)
 *what misalignment is and how it is measured — the declared reference, the target, the conventions and the actual behaviour only.*
 
 **Overviews (1)**
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12  · definition
 
-**Definitions (14)**
+**Definitions (15)**
 - [[Def 1]] — objects  · definition
 - [[Def 2]] — the bounded actor  · definition
 - [[Def 3]] — regrets  · definition
@@ -55,13 +55,14 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Def 19]] — declared intended set; R7-9  · definition
 - [[Def 20]] — minimum intensity and the intended segment; R7-6b  · definition
 - [[Def 21]] — declared resolution; R7-10  · definition
+- [[Def 22]] — value shortfall at equal effort; R8-1  · definition
 
 **Theorems (3)**
 - [[Thm 1]] — regret is a divergence  · tier 1 · proved
 - [[Thm 13]] — intent-ray decomposition  · tier 1 · proved
 - [[Thm 17]] — every regret notion is a point on one convex curve  · tier 1 · proved
 
-**Propositions (10)**
+**Propositions (11)**
 - [[Prop 15]] — the identity for any convex regularizer and any target that keeps the objective concave  · tier 1 · proved
 - [[Prop 18]] — harm bounds detectability  · tier 1 · proved
 - [[Prop 19]] — the evaluation gap  · tier 1 · proved
@@ -72,6 +73,7 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Prop 34]] — the core as a declared intended set; R7-9  · tier 1 · proved
 - [[Prop 35]] — the intended segment against the contract; R7-6b  · tier 1 · proved
 - [[Prop 36]] — declared resolution against the core; R7-10  · proved
+- [[Prop 37]] — the value shortfall; R8-1  · proved
 
 **Corollaries (2)**
 - [[Cor 5.2]] — the exchange rate is a shadow price  · tier — · proved

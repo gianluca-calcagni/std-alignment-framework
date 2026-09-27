@@ -5,9 +5,17 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
+**Status: v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
+severity enters through the target and the intended intensity. Every diagnosis now also reports the value forgone, in
+the target's own units, against pure pursuit with the same departure from the reference; and a principal with a safety
+concern declares a floor, a minimum standard. The default convention is now free, the one without known defects. The
+hedge: no new mathematics (the key identity was already Thm 17(iii), which the first registration missed and so set a
+bound without a scale); the readings across substrates rest on a declared target and reference, and the estimation
+protocol is still missing (R8-1 results).
+
+**v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
 Under the free convention this removes exactly the drift inside indistinguishable outcomes (style, verbosity) and
-changes nothing else. Under the budget convention, by default, such drift is misread as over-optimization: a budget
+changes nothing else. Under the budget convention such drift is misread as over-optimization: a budget
 verdict of overshoot can be style drift. The hedge: one of five predictions (P5) failed as registered, on a
 floating-point threshold; the claim is exact and unchanged (R7-10 results). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
@@ -187,6 +195,7 @@ memory.**
 | **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. 18, Prop. 33 | V36 | C05 |
 | **the core as a declared intended set** *(R7-9)*: every measure is the KL projection onto a declared set `𝓘`; the contract is a set of conditions on `𝓘`; on log-convex sets the projection is unique with a Pythagorean inequality, which yields Thm 13(a), Prop. 32(c) and Prop. 33(b) | Core Def. 19, Prop. 34 | V38 (run 1: V37, stopped) | C05 |
 | **minimum intensity** *(R7-6b)*: a declared floor on the intent ray; the segment free measure is the error off the ray plus an undershoot or an overshoot; both segment measures satisfy the contract with M5 within the segment; an untouched default is charged under a threshold policy | Core Def. 20, Prop. 35 | V39 | C05 |
+| **value shortfall** *(R8-1)*: `ΔV`, value forgone in `F`'s units against pure pursuit at equal effort; `M_budget = λ·ΔV` below saturation (Thm 17(iii)); units scale with `F`; the free point is value-neutral; a floor is a minimum standard `v_min`. The default convention is free | Core Def. 22, Prop. 37 | V41 | C05 |
 | **declared resolution** *(R7-10)*: a declared partition of `X`; the measure at a resolution is the coarse instance's measure of the cell masses; free-type measures split exactly as `M = M^𝒢 + W`; the budget convention reads within-cell divergence as extra pursuit (`Θ > 0` iff `W > 0`); exploitation inside a cell is invisible at that resolution. *P5's constancy threshold failed as registered, on summation error; the claim is unchanged* | Core Def. 21, Prop. 36 | V40 | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark 13.5 | V26 | C5 |
@@ -447,6 +456,8 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **R8-1 (v7.9).** The PI accepted R8's revised recommendations. Pre-registered in R8-1 preregistration (`1c6e97d`); run 1 stopped on D2 (P1's bound had no scale); run 2 in R8-1 preregistration run 2 (sha256 `705fbfc0…`, `894161d`): all held, both SIMD paths. The run-2 identity `ΔV = M_budget/λ` is Thm 17(iii), missed at registration. New: Def. 22 (value shortfall, a report), Prop. 37, `V41`, R8-1 results. Changed: the default convention is free (Def. 8; Prop. 24, Rem. 13.5, Cor. 17.1 aligned); stakes note (A1) and harm-weighted KL rejected; Def. 19 notes (A2, A6) | core, checks, project, status |
+| **R8 foundations review (v7.8).** Hidden assumptions and simplifications after T7 (R8 foundations review): no proof wrong; misalignment measures distinguishability, not harm (A1); KL rests on an entropic principal, not detection (A2, R7-9 registry corrected); no estimation layer (A3); `X` and `q` dominate numbers (A4); the default convention has the known defects (A5); T7 case 2 tested an actor model, not the diagnostics (B1, T7 summary corrected); 5 of 15 empirical predictions held (B3). No core change | project |
 | **T7 closed (v7.8).** The PI: "a negative is still a result." T7 summary records the cases, what they showed, §4b's status (item 3 not met) and §4c's debt. ROADMAP §0 and T7, HANDOVER, NOTES and the Status abstract updated | project |
 | **T7 case 2d (v7.8).** Two defaults (3%, 6%) in a fresh company (Beshears et al., w12009, Fig. 3; T7-2d preregistration, `47c5b7a`). P1–P3 fail: the local pull fails in the opposite direction (ρ −0.79); B12's constant ratio fails (spread 1.51 nats). A higher default pushes some people down. Case 3 (institutions) skipped: no reachable public dataset. T7-2d results | project |
 | **T7 case 2b/2c (v7.8).** Replication of T7-2's post-hoc floor pattern on Madrian & Shea Fig. 4C and Choi et al. Fig. 3C, extracted from vector geometry (T7-2b preregistration; D2 fired on legend swatches, fixed in T7-2c amendment with the exposure disclosed). P1 fails (δ −0.27 and +0.88), P2 holds, P3 untestable. Post hoc: a local pull around the default in both companies. T7-2b results | project |

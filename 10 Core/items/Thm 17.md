@@ -73,11 +73,14 @@ detail.
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 33]] — capped measures against the contract; R7-6a
 - [[Prop 35]] — the intended segment against the contract; R7-6b
+- [[Prop 37]] — the value shortfall; R8-1
 
 ## Mentions
 - none
 
 ## Mentioned in
+- [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
+- [[Def 22]] — value shortfall at equal effort; R8-1
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 - [[Prop 15]] — the identity for any convex regularizer and any target that keeps the objective concave
 

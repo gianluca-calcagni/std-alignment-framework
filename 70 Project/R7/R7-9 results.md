@@ -97,7 +97,7 @@ example before it becomes a step.
 | the resolution of `X` | **declared in R7-10 (v7.8)** | deterministic control on a continuous `X` saturates every divergence (R7-5 case 5) |
 | contexts aggregate linearly | **candidate** | a safety principal who cares about the worst deployment context: a rare catastrophic context is averaged away. To confirm |
 | `q` itself | **keep, with its elicitation story**; examine (H13) | — |
-| KL as the divergence | **keep**: forced by detection (R7-5) | revival trigger in [[R7-5 go-no-go]] |
+| KL as the divergence | **keep**, given the entropic intent (Thm 1; R7-5). *Corrected in [[R8 foundations review]] A2: detection gives Chernoff/Stein exponents, which bound KL but do not force it* | revival trigger in [[R7-5 go-no-go]] |
 
 ## Run 1's proposal, as written (adopted after run 2): Def. 19
 

@@ -7,9 +7,13 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.8 (R7-10).** **Declared resolution.** A principal can declare which distinctions between outcomes matter
+> **Status: v7.9 (R8-1).** **Stakes and the default.** The default convention is free; budget is a declaration,
+> "compare at equal effort" (Def. 8). Every diagnosis also reports the value shortfall `ΔV` in the target's units
+> (Def. 22): below saturation `M_budget = λ·ΔV` (Thm 17(iii), Prop. 37), and a floor is a minimum standard in those units.
+>
+> **v7.8 (R7-10).** **Declared resolution.** A principal can declare which distinctions between outcomes matter
 > (Def. 21): the measure is then taken on the cell masses. Free-type measures split exactly into that measure plus the
-> divergence inside cells; the budget convention, by default, reads that divergence as extra pursuit (Prop. 36).
+> divergence inside cells; the budget convention reads that divergence as extra pursuit (Prop. 36).
 >
 > **v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
 > intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm

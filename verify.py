@@ -1565,7 +1565,47 @@ def V40():
     print(f"  P4 splits resampled: M^G changes by {inv_err:.1e}; min M - M^G {order_min:.1e}; style drift M^G max {drift_coarse:.1e}, finest min {drift_fine_min:.2e} -> {ok(inv_err <= 1e-12 and order_min >= -1e-10 and drift_coarse <= 1e-10 and drift_fine_min > 1e-9)}")
     print(f"  P5 refinement to 2^16 sub-outcomes: finest free measure strictly increasing, M - M^G at 2^16 in [{min(last):.2f}, {max(last):.2f}]; M^G constant to {const:.1e} -> {ok(sat_ok and const <= 1e-12)}")
 
+def _dV(ph, lq, F):
+    """Def. 22: value shortfall at equal effort (units of F); saturation gives max F - E_ph F"""
+    lam = lam_to_kl(lq, F, KL(ph, np.exp(lq)))
+    return (F.max() if np.isinf(lam) else gibbs(lq, F, lam)@F) - ph@F
+
+def V41():
+    print("\n[V41] R8-1 run 2: value shortfall at equal effort (Def. 22, Prop. 37), against the run-2 pre-registration (P1', P2-P4)")
+    rng = np.random.default_rng(4141); ok = lambda c: "holds" if c else "FAILS"
+    neg = 0.0; idm = 0.0; npos = 0; nid = 0; sc = 0.0; mm = 0.0; dis = 0
+    def chk(p, lq, F):
+        nonlocal neg, idm, npos, nid
+        d = _dV(p, lq, F); neg = min(neg, d)
+        lam = lam_to_kl(lq, F, KL(p, np.exp(lq)))
+        if np.isfinite(lam):
+            mb = KL(p, gibbs(lq, F, lam))
+            if mb > 1e-12 and not d > 0: npos += 1
+            if lam > 1e-3: idm = max(idm, abs(d - mb/lam)/max(1.0, d)); nid += 1
+        return d
+    for i in range(600):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); F = rng.normal(size=n)
+        ph = rng.dirichlet(np.ones(n))
+        while ph.min() < 1e-4: ph = rng.dirichlet(np.ones(n))
+        d = chk(ph, lq, F)
+        t = float(rng.uniform(0, 4)); chk(gibbs(lq, F, t), lq, F)
+        l = lgibbs(lq, F, rng.uniform(0.2, 3)) + 0.3*rng.normal(size=n); po = np.exp(l - logsumexp(l))
+        chk(po, lq, F)
+        a, c = rng.uniform(0.2, 5), rng.normal(); sc = max(sc, abs(_dV(ph, lq, a*F + c) - a*d)/max(1.0, a*d))
+        th = _that_full(ph, lq, F)
+        if th >= 0: mm = max(mm, abs(gibbs(lq, F, th)@F - ph@F))
+        r, tt = rng.uniform(0, 3), rng.uniform(0, 3); vmin = gibbs(lq, F, r)@F; vt = gibbs(lq, F, tt)@F
+        if abs(vt - vmin) > 1e-12 and (tt >= r) != (vt >= vmin): dis += 1
+    print(f"  P1' dV = M_budget/lambda: max relative difference {idm:.1e} over {nid} points; min dV {neg:.1e}; dV <= 0 with M_budget > 1e-12: {npos} -> {ok(idm <= 1e-9 and neg >= -1e-12 and npos == 0)}")
+    print(f"  P2 dV(aF + c) = a dV(F): max relative difference {sc:.1e} -> {ok(sc <= 1e-9)}")
+    print(f"  P3 free point is value-neutral when t_hat >= 0: max |E_(p_t_hat) F - E_ph F| {mm:.1e} -> {ok(mm <= 1e-10)}")
+    print(f"  P4 floor r <-> minimum standard v_min: disagreements {dis} -> {ok(dis == 0)}")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39","V40"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39","V40","V41"]
     for w in which: globals()[w]()

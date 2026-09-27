@@ -266,3 +266,9 @@
       reported: finest budget measure undefined while M_budget^G is defined on 91 of 600
   P4 splits resampled: M^G changes by 8.6e-16; min M - M^G -7.6e-16; style drift M^G max 5.3e-16, finest min 1.21e-03 -> holds
   P5 refinement to 2^16 sub-outcomes: finest free measure strictly increasing, M - M^G at 2^16 in [11.09, 11.09]; M^G constant to 7.3e-12 -> FAILS
+
+[V41] R8-1 run 2: value shortfall at equal effort (Def. 22, Prop. 37), against the run-2 pre-registration (P1', P2-P4)
+  P1' dV = M_budget/lambda: max relative difference 5.2e-14 over 1744 points; min dV -2.9e-14; dV <= 0 with M_budget > 1e-12: 0 -> holds
+  P2 dV(aF + c) = a dV(F): max relative difference 5.4e-13 -> holds
+  P3 free point is value-neutral when t_hat >= 0: max |E_(p_t_hat) F - E_ph F| 3.8e-15 -> holds
+  P4 floor r <-> minimum standard v_min: disagreements 0 -> holds

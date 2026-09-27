@@ -1,8 +1,12 @@
 # A — Core
 
-> **Status: v7.8 (R7-10).** **Declared resolution.** A principal can declare which distinctions between outcomes matter
+> **Status: v7.9 (R8-1).** **Stakes and the default.** The default convention is free; budget is a declaration,
+> "compare at equal effort" (Def. 8). Every diagnosis also reports the value shortfall `ΔV` in the target's units
+> (Def. 22): below saturation `M_budget = λ·ΔV` (Thm 17(iii), Prop. 37), and a floor is a minimum standard in those units.
+>
+> **v7.8 (R7-10).** **Declared resolution.** A principal can declare which distinctions between outcomes matter
 > (Def. 21): the measure is then taken on the cell masses. Free-type measures split exactly into that measure plus the
-> divergence inside cells; the budget convention, by default, reads that divergence as extra pursuit (Prop. 36).
+> divergence inside cells; the budget convention reads that divergence as extra pursuit (Prop. 36).
 >
 > **v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
 > intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm
@@ -857,11 +861,11 @@ positive-affine class of `F` only: `p_{aF+c,t} = p_{F,at}`, so the half-ray depe
 
 | Measure (Def. 10) | Cost of rescaling |
 |---|---|
-| free | `M_free = D_⊥ = 0` |
-| budget (the default) | `M_budget = 0`: the budget-matched intended actor is `p̂` itself |
+| free (the default) | `M_free = D_⊥ = 0` |
+| budget | `M_budget = 0`: the budget-matched intended actor is `p̂` itself |
 | price | `M_price = β·R_J = D_∥ > 0` for `s ≠ 1` (Cor. 13.3) |
 
-Rescaling is **harmless under the default convention, and harmful only if the intended actor is required to
+Rescaling is **harmless under the free and budget conventions, and harmful only if the intended actor is required to
 keep the actual actor's exchange rate.** For best-of-n it is harmless outright: best-of-n is invariant to any
 strictly increasing transform of the evaluator.
 
@@ -1039,13 +1043,26 @@ independent measurement of `q_A` — for humans, default experiments under exclu
 
 | Convention | Intended behaviour | Measure | Named |
 |---|---|---|---|
-| budget | `p_{F,λ}`, same KL to `q` as `p̂` | `M_budget` | **misalignment** (the default) |
-| free | any point of the half-ray `𝓡⁺_F` | `M_free = D_⊥` | **misalignment**, capability-free |
+| free | any point of the half-ray `𝓡⁺_F` | `M_free = D_⊥` | **misalignment** (the default), capability-free |
+| budget | `p_{F,λ}`, same KL to `q` as `p̂` | `M_budget` | **misalignment** at equal effort (declared) |
 | price | `p_{F,β}`, the declared price | `M_price = β·R_J` | **regret** at a price |
 
 The actor is **ε-aligned with `F` under `κ ∈ {budget, free}`** iff the measure is at most `ε` nats. Under the
 price convention, `M_price ≤ ε` defines **ε-regret**, not ε-alignment. The budget measure is defined only below saturation
 (Def. 10).
+
+*Note (R8-1: the default is free).* Until v7.8 the default was budget. It misreads style drift as pursuit
+(Prop. 36(c)), is undefined at saturation, and has no closed form under an ordinal target. The free measure has
+none of these defects, and caps and floors (Defs. 18, 20) now declare intensity explicitly. Budget stays
+available as a declaration: "compare at equal effort" (R8 foundations review, A5).
+
+*Note (R8-1: stakes).* The measures are unit-free (M3), so nats do not say how much is at stake. Severity enters in
+two places: through `F` (mass `ε` on an outcome `ΔF` below the intended ones costs about `ε·t·ΔF` nats), and through the
+intended intensity, so at low intensity a harm inherited from `q` is barely charged. Hence every diagnosis reports, next to the measure, the value shortfall `ΔV` of Def. 22
+(Prop. 37: `M_budget = λ·ΔV`), and, for a principal with a safety concern, a declared floor as the standard
+declaration: a minimum `v_min` in `F`'s units (Prop. 37(d)). A harm-weighted divergence was considered and
+rejected: it can be negative, or it is a different principal (Prop. 15), and it double-counts what `F` encodes
+(R8 foundations review, A1).
 
 *Note (R7-7: target sets).* The table is the case of the cardinal target set `[F]₊`. With a declared target set
 `𝒯`, the budget and free measures are those of Def. 17, and ε-alignment is with `𝒯`. The price convention needs
@@ -1071,7 +1088,7 @@ measure has a closed form (Prop. 32); the budget measure has none.
   target can use. Every budget-matched intended actor attains `max F`, and is supported on `argmax F`. Report
   `M_free` and the raw same-budget regret `max F − E_{p̂}F` instead. *(v6.1 as first released used `p_{F,∞}`
   here, which gives `+∞` even for an essentially aligned actor — F5; row 57.)*
-- Approaching saturation, `M(λ) = λ·(raw regret)` grows like `λ → ∞` at fixed raw regret. Regret in nats is
+- Below saturation, `M(λ) = λ·(raw regret)` exactly (Thm 17(iii)); approaching saturation it grows like `λ → ∞` at fixed raw regret. Regret in nats is
   value times the exchange rate, so highly optimized actors register large nat regrets even for small value
   losses. That is also why they are easy to detect (Prop. 18).
 
@@ -1094,7 +1111,9 @@ equals `M(λ)/λ` by Thm 17(iii). The saturated case follows from `E_{p^C_F}F = 
 
 > **Theorem 5's worst-case regret (§4) and the budget convention (§7) are the same object.** The pure
 > capacity actor's regret is the same-budget regret, and the width `w_δ(E)` bounds it over all targets. This
-> is a reason, beyond gauge invariance, to use the budget convention as the default.
+> is a reason, beyond gauge invariance, to use the budget convention as the default. *(Since v7.9 the default is
+> free and budget is declared (Def. 8); this identity is why the value shortfall `ΔV` is taken at equal effort,
+> Def. 22.)*
 
 **Definition 17 (target sets; R7-7).** Let `Δ°` be the set of full-support distributions on `X`.
 - A **target set** `𝒯` is a non-empty set of non-constant functions on `X`, closed under positive affine maps:
@@ -1187,7 +1206,12 @@ floor is a behaviour on the ray, not a number, because intensity has no unit of 
 of the actual behaviour onto what the principal declared as intended.** Everything else the measurement layer
 contains is a way to *generate* `𝓘` from declarations — the reference `q`, a target set (Def. 17), a convention
 (Def. 8), a cap (Def. 18) — and Prop. 34(a) shows each existing measure is a case. A new notion enters as a
-new generator of `𝓘`, not as a new axiom. KL is fixed by detection (Prop. 18), not by this definition.
+new generator of `𝓘`, not as a new axiom. KL is the divergence because the principal is entropic (Thm 1); detection (Prop. 18) bounds it but does not select it (R8 foundations review, A2).
+
+*Note (the budget set is not a declaration; R8-1).* Under the budget convention `𝓘 = {p_{F,λ}}`, and `λ` is set by
+`KL(p̂‖q)`: the set depends on the behaviour being judged. Prop. 34 still holds, since the measure uses that set,
+but the declaration is a *family* of sets indexed by the agent's spending. "The projection onto what the principal
+declared" is literal only for the free-type measures (R8 foundations review, A6).
 
 *Note (the declaration registry).* Every declaration needs an elicitation story — how a real principal states it
 — and a justified default. The registry, and the audit of choices still made silently, are in R7-9 results.
@@ -1222,6 +1246,53 @@ distinctions the target makes. That is incoherent, so it is excluded, not repair
 *Note (R7-8).* A declared resolution is the cheap remedy for deterministic behaviour on a continuous `X`, which
 saturates every divergence (R7-5 go-no-go, case 5). The finite core covers it by refinement only (Prop. 36(e));
 measurable spaces remain R7-8.
+
+**Definition 22 (value shortfall at equal effort; R8-1).** Let `F` be a cardinal target, `p̂` full-support, and `λ` the
+budget-matched intensity of Def. 10, `KL(p_{F,λ}‖q) = KL(p̂‖q)`. The **value shortfall** of `p̂` is
+
+```
+ΔV = E_{p_{F,λ}}F − E_{p̂}F           below saturation,
+ΔV = max F − E_{p̂}F                  at saturation (KL(p̂‖q) ≥ log 1/q(argmax F)).
+```
+
+It is the value, in `F`'s own units, that `p̂` forgoes against the behaviour that pursues `F` purely with the same
+effort, effort being information spent away from `q`. It is a **report**, not a measure: it changes with the units of
+`F`, by design, so it does not satisfy M3 of the contract.
+
+*Note (why it exists).* Misalignment is in nats and unit-free (M3), so it cannot say how much is at stake. Below
+saturation, `ΔV = M_budget/λ` (Thm 17(iii); Prop. 37(a)): the nats are the value shortfall priced at the
+intended exchange rate. At low intensity a large shortfall costs few nats, and near saturation a small one costs
+many. Reporting `ΔV` next to `M` shows both (R8 foundations review, A1). It fails M3 of Def. 11 on purpose: units are what it adds.
+
+*Note (why at equal effort).* Against the free intended point the shortfall is zero whenever `t̂ ≥ 0`
+(Prop. 37(c)): the free projection keeps value and removes only the off-ray divergence. A value gap needs a
+counterfactual that holds something fixed. Equal information spent is the one the core already has (Cor. 17.1:
+the capacity actor's regret).
+
+*Note (reading across substrates).* `F` is the principal's declared target, not a quantity the substrate supplies,
+and `q` is the declared reference. Both are modelling choices, and `ΔV` inherits them.
+
+| Substrate | `q` | `F` | effort `KL(p̂‖q)` | `ΔV` | floor (Def. 20) as a standard |
+|---|---|---|---|---|---|
+| ML | the reference policy (e.g. SFT) | the principal's target (gold reward, not the proxy) | the KL spent from the reference, which RLHF budgets | gold reward forgone against the best policy with the same KL | a minimum expected gold score; with `F = −1{harmful}`, a maximum harm rate |
+| Humans | behaviour under the status quo or default | a declared welfare criterion, with its declarer named (the person or a planner) | how far choices move from the default | welfare forgone against the choices that move as far and pursue the criterion only | an adequacy standard (e.g. a minimum saving rate) |
+| Institutions | the pre-reform or baseline distribution of decisions | the mandate a principal (legislature, board) declares | how far the institution departs from the baseline | mandate value forgone at equal departure: movement spent in other directions | a statutory minimum service level |
+| Biology | the population's distribution without selection (neutral or ancestral) | log fitness (Malthusian), declared by the modeller | the information change the population undergoes | mean log fitness forgone against pure selection with the same change | a viability threshold (mean Malthusian fitness `≥ 0`) |
+
+- *Biology is the exact case, and the principal is a metaphor.* With constant fitness, the replicator dynamics give
+  `p_t ∝ q·e^{tF}`: the intent ray is the selection trajectory, and `dE_{p_t}F/dt = Var_{p_t}F` is Fisher's
+  fundamental theorem. `ΔV` is then the log-fitness lost to forces other than selection (drift, mutation, migration,
+  constraint) at equal divergence; at saturation it is `max F − E_{p̂}F`, a log-fitness form of genetic load. No one
+  intends anything; "misalignment" means departure from pure selection. Frequency-dependent fitness breaks the fixed
+  `F`.
+- *Humans:* the welfare criterion is declared, not inferred from choices (Prop. 12). T7 found the default can move
+  the evaluator itself (T7-2d results), so `q` must be the declared reference, not a fitted one.
+- *Institutions and ML:* the principal and the agent are distinct and `F` is the principal's. Contexts are exogenous
+  (Def. 9); an agent that chooses its contexts is outside this reading.
+
+*Note (what it does not fix).* Risk attitude over outcomes (a CVaR, "no catastrophe above 1%") is non-linear in `p`
+and not representable. `ΔV` is an expectation. All quantities are population quantities; estimation is not yet
+specified (R8 foundations review, A3).
 
 **Proposition 32 (the ordinal measure; R7-7; tier 1).** Let `F` be non-constant, with values `v_1 < … < v_m` on
 the level sets `L_1, …, L_m`. Let `p̂` have full support, and `y = p̂/q`. Let `r°` be the `q`-weighted isotonic
@@ -1501,6 +1572,46 @@ depends on the target only through `𝒯`.
 (R7-10 results) locates the error in floating-point summation: rebuilding each cell mass from `2¹⁶` terms costs
 `3·10⁻¹²`, and with exact summation `M^𝒢` is constant to `2·10⁻¹⁶`. The statement is unchanged; the threshold
 was set without that error in view.
+
+**Proposition 37 (the value shortfall; R8-1; tier 1).** Let `F` be non-constant, `p̂` full-support, and `ΔV` as in
+Def. 22.
+
+(a) **Nats are priced value.** Below saturation with `λ > 0`, `ΔV = M_budget/λ`. Hence `ΔV ≥ 0`, with `ΔV = 0` iff
+`p̂ = p_{F,λ}`. At saturation `ΔV = max F − E_{p̂}F > 0`.
+
+(b) **Units.** Under `F ↦ aF + c` with `a > 0`, `ΔV ↦ a·ΔV`, while `M_budget` is unchanged.
+
+(c) **The free point is value-neutral.** If the moment point `t̂` of Thm 13 is `≥ 0`, then
+`E_{p_{F,t̂}}F = E_{p̂}F`.
+
+(d) **A floor is a minimum standard.** For `r, t ≥ 0`: `t ≥ r` iff `E_{p_{F,t}}F ≥ v_min`, with
+`v_min = E_{p_{F,r}}F`. So a floor at intensity `r` (Def. 20) declares a minimum expected value `v_min` in `F`'s
+units.
+
+*Proof.* (a) The identity is Thm 17(iii). `M_budget = KL(p̂‖p_{F,λ}) ≥ 0`, with equality iff `p̂ = p_{F,λ}`. At
+saturation `p̂` is full-support, so it puts mass off `argmax F`, which is a proper subset for non-constant `F`.
+
+(b) `p_{aF+c,t} = p_{F,at}`, so the budget-matched intended behaviour is the same distribution, with intensity `λ/a`.
+Both expectations scale by `a` and shift by `c`; the shift cancels. `M_budget` is Thm 17(iv).
+
+(c) Thm 13: `t̂` solves the moment condition `E_{p_{F,t̂}}F = E_{p̂}F`.
+
+(d) `dE_{p_{F,t}}F/dt = Var_{p_{F,t}}F > 0` for non-constant `F` (Lemma 5.1), so `t ↦ E_{p_{F,t}}F` is strictly
+increasing. ∎
+
+*Reading.* (a) says that `M_budget` and `ΔV` are the same comparison in two units: nats, and `F`'s units, related by the
+intended exchange rate. (b) is why `ΔV` is a report and not a measure. (c) is why the value shortfall is taken at equal
+effort and not at the free point. (d) turns a floor into the form a principal states it: "at least `v_min`".
+
+*Nothing here is new mathematics.* (a) is Thm 17(iii), (c) is Thm 13's moment condition, and (d) is the
+monotonicity of Lemma 5.1. The step names the report and fixes how the core uses it. Pre-registration run 1
+missed Thm 17(iii) and set a bound without a scale; its P1 failed as registered (R8-1 results).
+
+*Check.* V41 (600 instances, 1,744 points for the identity; pre-registered, R8-1 preregistration run 2):
+- (a): `|ΔV − M_budget/λ| ≤ 5.2·10⁻¹⁴·max(1, ΔV)`; `ΔV ≥ −4·10⁻¹⁴`; never `ΔV ≤ 0` while `M_budget > 10⁻¹²`.
+- (b): relative difference `≤ 5.4·10⁻¹³`.
+- (c): `≤ 3.8·10⁻¹⁵`.
+- (d): no disagreement.
 
 ---
 
@@ -1790,7 +1901,7 @@ full support.
   (budget) in deployment.
 
 *Reading.* **This fixes the common-sense meaning of "misalignment" in the framework.** Misalignment is
-measured by `M_budget` (the default) or `M_free`. `M_price = β·R_J` is a **regret**. It also charges an agent
+measured by `M_free` (the default since v7.9) or `M_budget`. `M_price = β·R_J` is a **regret**. It also charges an agent
 that pursues the right target too weakly or too strongly, which common sense calls a difference in
 capability, not misalignment. Thm 1 is unaffected: it is an identity for the regret. What changes is which
 quantity the word "misalignment" names (Def. 8; row 74).

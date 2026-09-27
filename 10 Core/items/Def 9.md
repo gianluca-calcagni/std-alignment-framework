@@ -58,7 +58,7 @@ single reference across disturbances; here each context carries its own referenc
 - [[Prop 19]] — the evaluation gap
 
 ## Mentioned in
-- none
+- [[Def 22]] — value shortfall at equal effort; R8-1
 
 ## Checks
 - none

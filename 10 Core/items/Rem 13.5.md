@@ -27,11 +27,11 @@ updated: "2026-09-26"
 
 | Measure (Def. [[Def 10\|10]]) | Cost of rescaling |
 |---|---|
-| free | `M_free = D_⊥ = 0` |
-| budget (the default) | `M_budget = 0`: the budget-matched intended actor is `p̂` itself |
+| free (the default) | `M_free = D_⊥ = 0` |
+| budget | `M_budget = 0`: the budget-matched intended actor is `p̂` itself |
 | price | `M_price = β·R_J = D_∥ > 0` for `s ≠ 1` (Cor. [[Cor 13.3\|13.3]]) |
 
-Rescaling is **harmless under the default convention, and harmful only if the intended actor is required to
+Rescaling is **harmless under the free and budget conventions, and harmful only if the intended actor is required to
 keep the actual actor's exchange rate.** For best-of-n it is harmless outright: best-of-n is invariant to any
 strictly increasing transform of the evaluator.
 

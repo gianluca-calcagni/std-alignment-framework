@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: ["Def 10", "Def 3"]
-mentions: ["Def 14", "Def 17", "Prop 12", "Prop 18", "Prop 24", "Prop 25", "Prop 32", "R057", "R074", "R075"]
+mentions: ["Def 14", "Def 17", "Def 18", "Def 20", "Def 22", "Prop 12", "Prop 15", "Prop 18", "Prop 24", "Prop 25", "Prop 32", "Prop 36", "Prop 37", "R057", "R074", "R075", "R8 foundations review", "Thm 17"]
 checks: ["F5", "V32"]
 sources: []
 aliases: ["Definition 8", "Def. 8"]
@@ -27,8 +27,8 @@ updated: "2026-09-26"
 
 | Convention | Intended behaviour | Measure | Named |
 |---|---|---|---|
-| budget | `p_{F,λ}`, same KL to `q` as `p̂` | `M_budget` | **misalignment** (the default) |
-| free | any point of the half-ray `𝓡⁺_F` | `M_free = D_⊥` | **misalignment**, capability-free |
+| free | any point of the half-ray `𝓡⁺_F` | `M_free = D_⊥` | **misalignment** (the default), capability-free |
+| budget | `p_{F,λ}`, same KL to `q` as `p̂` | `M_budget` | **misalignment** at equal effort (declared) |
 | price | `p_{F,β}`, the declared price | `M_price = β·R_J` | **regret** at a price |
 
 The actor is **ε-aligned with `F` under `κ ∈ {budget, free}`** iff the measure is at most `ε` nats. Under the
@@ -36,6 +36,19 @@ price convention, `M_price ≤ ε` defines **ε-regret**, not ε-alignment. The 
 (Def. [[Def 10|10]]).
 
 ## Notes and checks
+
+*Note (R8-1: the default is free).* Until v7.8 the default was budget. It misreads style drift as pursuit
+(Prop. [[Prop 36|36]](c)), is undefined at saturation, and has no closed form under an ordinal target. The free measure has
+none of these defects, and caps and floors (Defs. [[Def 18|18]], [[Def 20|20]]) now declare intensity explicitly. Budget stays
+available as a declaration: "compare at equal effort" ([[R8 foundations review]], A5).
+
+*Note (R8-1: stakes).* The measures are unit-free (M3), so nats do not say how much is at stake. Severity enters in
+two places: through `F` (mass `ε` on an outcome `ΔF` below the intended ones costs about `ε·t·ΔF` nats), and through the
+intended intensity, so at low intensity a harm inherited from `q` is barely charged. Hence every diagnosis reports, next to the measure, the value shortfall `ΔV` of Def. [[Def 22|22]]
+(Prop. [[Prop 37|37]]: `M_budget = λ·ΔV`), and, for a principal with a safety concern, a declared floor as the standard
+declaration: a minimum `v_min` in `F`'s units (Prop. [[Prop 37|37]](d)). A harm-weighted divergence was considered and
+rejected: it can be negative, or it is a different principal (Prop. [[Prop 15|15]]), and it double-counts what `F` encodes
+([[R8 foundations review]], A1).
 
 *Note (R7-7: target sets).* The table is the case of the cardinal target set `[F]₊`. With a declared target set
 `𝒯`, the budget and free measures are those of Def. [[Def 17|17]], and ε-alignment is with `𝒯`. The price convention needs
@@ -61,7 +74,7 @@ measure has a closed form (Prop. [[Prop 32|32]]); the budget measure has none.
   target can use. Every budget-matched intended actor attains `max F`, and is supported on `argmax F`. Report
   `M_free` and the raw same-budget regret `max F − E_{p̂}F` instead. *(v6.1 as first released used `p_{F,∞}`
   here, which gives `+∞` even for an essentially aligned actor — [[F5]]; [[R057|row 57]].)*
-- Approaching saturation, `M(λ) = λ·(raw regret)` grows like `λ → ∞` at fixed raw regret. Regret in nats is
+- Below saturation, `M(λ) = λ·(raw regret)` exactly (Thm [[Thm 17|17]](iii)); approaching saturation it grows like `λ → ∞` at fixed raw regret. Regret in nats is
   value times the exchange rate, so highly optimized actors register large nat regrets even for small value
   losses. That is also why they are easy to detect (Prop. [[Prop 18|18]]).
 
@@ -79,16 +92,25 @@ measure has a closed form (Prop. [[Prop 32|32]]); the budget measure has none.
 ## Mentions
 - [[Def 14]] — mechanism-relative comparison; explanation layer; R7-1
 - [[Def 17]] — target sets; R7-7
+- [[Def 18]] — intensity caps and distributional targets; R7-6a
+- [[Def 20]] — minimum intensity and the intended segment; R7-6b
+- [[Def 22]] — value shortfall at equal effort; R8-1
 - [[Prop 12]] — what behaviour identifies
+- [[Prop 15]] — the identity for any convex regularizer and any target that keeps the objective concave
 - [[Prop 18]] — harm bounds detectability
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
 - [[Prop 32]] — the ordinal measure; R7-7
+- [[Prop 36]] — declared resolution against the core; R7-10
+- [[Prop 37]] — the value shortfall; R8-1
+- [[R8 foundations review]]
 - [[R057]]
 - [[R074]]
 - [[R075]]
+- [[Thm 17]] — every regret notion is a point on one convex curve
 
 ## Mentioned in
+- [[Cor 17.1]] — the capacity actor's regret is the budget convention
 - [[Def 17]] — target sets; R7-7
 - [[Def 19]] — declared intended set; R7-9
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12

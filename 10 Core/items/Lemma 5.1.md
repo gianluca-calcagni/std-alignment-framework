@@ -69,6 +69,7 @@ monotone mean — then Prop. 14(i) — had never been checked numerically.)*
 - [[Prop 33]] — capped measures against the contract; R7-6a
 - [[Prop 35]] — the intended segment against the contract; R7-6b
 - [[Prop 36]] — declared resolution against the core; R7-10
+- [[Prop 37]] — the value shortfall; R8-1
 
 ## Mentions
 - [[Prop 14]]
