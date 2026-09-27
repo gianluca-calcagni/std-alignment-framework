@@ -68,6 +68,7 @@ starts. Its zero set needs no solver: `M_budget([F]_ord) = 0` iff `M_ord = 0` (P
 - [[Def 12]] — alignment instance; formal
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 32]] — the ordinal measure; R7-7
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
@@ -81,6 +82,7 @@ starts. Its zero set needs no solver: `M_budget([F]_ord) = 0` iff `M_ord = 0` (P
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 10]] — intent ray and misalignment measures; v6.4, R7-0
 - [[Def 18]] — intensity caps and distributional targets; R7-6a
+- [[Def 19]] — declared intended set; R7-9
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 
 ## Checks

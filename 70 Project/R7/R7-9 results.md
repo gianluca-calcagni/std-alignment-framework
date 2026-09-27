@@ -3,12 +3,15 @@ id: "R7-9 results"
 type: "report"
 updated: "2026-09-27"
 ---
-# R7-9 — results: stopped by the registered rule D2
+# R7-9 — results: run 1 stopped by D2; run 2 held, and the core is restated (v7.6)
 
 Pre-registered in [[R7-9 preregistration]] (sha256 `90ab57a9…`), pushed before any computation. The check is [[V37]].
 Runs under rule 13's structural exception (the PI, after v7.5).
 
-## Headline
+**Outcome.** Run 1 stopped on its registered rule D2; the PI chose to resume; run 2 held, and Def. 19 and Prop. 34
+entered the core in v7.6 (below). The run-1 sections are kept as written.
+
+## Run 1 — headline
 
 **D2 fired as registered, and R7-9 is stopped.** P3 — the registered test of the reduction (a) — failed on one
 instance of 300: a generic optimizer, from three starts, missed the ordinal measure by `1.4·10⁻³`. D2 said: "if the
@@ -52,7 +55,51 @@ below the closed form), with enough starts to show convergence; and test Prop. 3
 projections that are exact, or with a tolerance derived from the solver's accuracy. The proposed items follow,
 unchanged.
 
-## Proposed, not adopted: Def. 19
+## Run 2 (the PI chose to resume) — all held; adopted in v7.6
+
+Pre-registered in [[R7-9 preregistration run 2]] (sha256 `67a8c7fb…`, `bc2111c`) before any run-2 computation. Check
+[[V38]], fresh seed; all predictions are verification.
+
+| # | Outcome | Numbers |
+|---|---|---|
+| Q1 | held | a generic value (20 starts) is never below a closed form: at most `1.1·10⁻¹⁵` over 600 projections; the best start reaches the closed form in all 600 |
+| Q2 | held | Pythagorean inequality on exact projections (capped segment, ordinal cone): relative slack at least `−2·10⁻¹⁵` |
+| Q3 | held | equality on the full ray: `10⁻¹³` |
+| reported | — | budget sphere intersected with a log-convex cone: 5 starts disagree in 45 of 183 instances |
+
+Rerun with X86_V4 disabled before recording: every verdict identical; the reported count moves (42), with a declared
+tolerance. **Adopted:** Def. [[Def 19|19]] and Prop. [[Prop 34|34]], and a note on Def. [[Def 11|11]]. No measure changed (M7): V1–V36 are untouched,
+and F6's count line changes by construction (66 → 68 results, 37 → 38 blocks).
+
+## The declaration registry
+
+Each declaration generates part of the intended set `𝓘`. "Elicitation" is how a real principal would state it.
+
+| Declaration | What it fixes in `𝓘` | Elicitation | Default | Status |
+|---|---|---|---|---|
+| reference `q` | the default; the zero of intensity; the split inside cells the target does not distinguish | "What behaviour is acceptable if nothing is optimized?" — the base policy (AI), the status quo (humans, institutions), the neutral mutation distribution (biology) | the agent's starting point, when the principal endorses it | declared since R7-2; **overloaded** ([[NOTES_claude]] H13) |
+| target set `𝒯` | which reweightings count as pursuing the target | "Do the exchange rates between outcomes matter, or only their order?" | cardinal | R7-7 |
+| convention `κ` | which point of the pursuit family is the comparison | "Compare with an agent that spent the same effort (budget), any effort (free), or a declared price?" | budget | R7-0 |
+| cap `p^max` | the most intense intended pursuit | "Which behaviour is already enough, or is the target itself a distribution?" | none | R7-6a |
+| floor | the least intense intended pursuit | "Which behaviour is the minimum acceptable?" | none: `q` is intended | candidate, R7-6b |
+| resolution of `X` | which distinctions the measure sees | "Which differences between behaviours matter at all?" | `X` as declared | candidate, R7-8 |
+| context weights and aggregation | how per-context measures combine (M8) | "Where will it run, and does the average or the worst context matter?" | linear average under `ρ_dep`, `ρ_ev` | candidate, below |
+
+## The silent-declaration audit
+
+Every choice made in computing `M` from `(X, q, F, p̂)`, with a verdict. Each "candidate" still needs its own rule-13
+example before it becomes a step.
+
+| Choice made silently | Verdict | Rule-13 example |
+|---|---|---|
+| the ray starts at `q`: doing nothing is intended | **candidate R7-6b** | a harm-threshold policy under which the untouched base model scores as aligned (passes) |
+| inside a cell the target does not distinguish, the intended split follows `q` | **candidate** (§6 G1, G4) | "any valid answer, style free": an agent answering in a different style from the base model is charged. To confirm with a real principal |
+| the resolution of `X` | **candidate R7-8** | deterministic control on a continuous `X` saturates every divergence (R7-5 case 5) |
+| contexts aggregate linearly | **candidate** | a safety principal who cares about the worst deployment context: a rare catastrophic context is averaged away. To confirm |
+| `q` itself | **keep, with its elicitation story**; examine (H13) | — |
+| KL as the divergence | **keep**: forced by detection (R7-5) | revival trigger in [[R7-5 go-no-go]] |
+
+## Run 1's proposal, as written (adopted after run 2): Def. 19
 
 # Def 19 — declared intended set; R7-9
 
@@ -79,7 +126,7 @@ new generator of `𝓘`, not as a new axiom. KL is fixed by detection (Prop. Pro
 Pythagorean inequality. That is where every decomposition of the core comes from, and why the ordinal budget
 measure, whose set is not log-convex, needed a solver.
 
-## Proposed, not adopted: Prop. 34
+## Run 1's proposal, as written (adopted after run 2): Prop. 34
 
 # Prop 34 — the core as a declared intended set; R7-9
 

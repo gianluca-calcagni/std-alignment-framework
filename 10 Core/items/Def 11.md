@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: ["Def 17", "Def 18", "Def 9"]
-mentions: ["Def 14", "Prop 25", "Prop 26", "Prop 31"]
+mentions: ["Def 14", "Def 19", "Prop 25", "Prop 26", "Prop 31", "Prop 34"]
 checks: []
 sources: []
 aliases: ["Definition 11", "Def. 11"]
@@ -43,6 +43,10 @@ Two further conditions bind **the R7 refactor**, not a measure as such:
 
 ## Notes and checks
 
+*Note (R7-9).* Every axiom here is a condition on the declared intended set `𝓘` (Def. [[Def 19|19]]): M1, M2, M4 and M6 hold
+for any `𝓘` closed in `Δ°`; M5 says `𝓘` contains the declared pursuit family; M3 says `𝓘` depends on the target only
+through the declared set (Prop. [[Prop 34|34]](b)).
+
 *Note (R7-7).* Until R7-7 the contract took a single non-constant target `F`, and M1, M3 and M5 referred to it.
 With `𝒯 = [F]₊` each reads exactly as before, so every measure that satisfied the contract still does (M7).
 What the target set adds is the declaration of how much of `F` is intended: its exchange rates (`[F]₊`) or
@@ -74,12 +78,15 @@ an actor model: the explanation layer, not the measurement layer.
 - [[Prop 30]] — the fake-alignment gap; R7-4
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[Def 14]] — mechanism-relative comparison; explanation layer; R7-1
+- [[Def 19]] — declared intended set; R7-9
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
 - [[Prop 31]] — target sets against the contract; R7-7
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentioned in
 - [[Def 10]] — intent ray and misalignment measures; v6.4, R7-0

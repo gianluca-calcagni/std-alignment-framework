@@ -125,7 +125,7 @@ projection lies from the target's own half-ray. Shape counts as misalignment onl
 - [[Lemma 5.1]] — form of the capacity actor
 
 ## Used by
-- none
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[R7-7 preregistration]]

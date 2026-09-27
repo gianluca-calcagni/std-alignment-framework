@@ -45,6 +45,8 @@ updated: "2026-09-26"
 ![[Def 17#Notes and checks]]
 ![[Def 18#Statement]]
 ![[Def 18#Notes and checks]]
+![[Def 19#Statement]]
+![[Def 19#Notes and checks]]
 ![[Prop 32#Statement]]
 ![[Prop 32#Proof]]
 ![[Prop 32#Notes and checks]]

@@ -131,5 +131,15 @@
    "rel": 0.1,
    "why": "An exploratory count of instances where non-convex solver starts disagree: 58 of 184 on the reference CPU, 56 with X86_V4 disabled."
   }
+ ],
+ "V38": [
+  {
+   "line": "(reported) budget sphere intersected with a log-convex cone",
+   "numbers": [
+    2
+   ],
+   "rel": 0.15,
+   "why": "An unregistered count of instances where non-convex solver starts disagree: 45 of 183 on the reference CPU, 42 with X86_V4 disabled."
+  }
  ]
 }

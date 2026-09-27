@@ -58,6 +58,7 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 ## Used by
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[Def 17]] — target sets; R7-7
@@ -65,7 +66,7 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 - [[R7-6 go-no-go]]
 
 ## Mentioned in
-- none
+- [[Def 19]] — declared intended set; R7-9
 
 ## Checks
 - none

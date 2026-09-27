@@ -54,7 +54,7 @@ SYMBOLS = [(r'F̂', 'Def 13'), (r'Λ\(|Λ_q', 'Def 13'), (r'q_A', 'Def 13'),
            (r'ρ_ev|ρ_dep', 'Def 9'), (r'M_own|R_own', 'Def 14'), (r'D_∥|X_anti', 'Thm 13'),
            (r'W_c|m_c|s_c\(', 'Def 16'), (r'κ_c', 'Prop 27'),
            (r'𝒯|\[F\]_ord|M_ord|(?<!\^)C_F|I_free|I_budget', 'Def 17'),
-           (r'p\^max|\^cap|𝓡⁺_F\(', 'Def 18')]
+           (r'p\^max|\^cap|𝓡⁺_F\(', 'Def 18'), (r'M_𝓘|𝓘', 'Def 19')]
 # R7-3: explanation vocabulary, forbidden in the Statement and Proof of measurement-layer items
 EXPL_VOCAB = r'W_c|m_c|κ_c|F̂|(?<![\w_(\[])E(?![\w_\[(|)])|E₀|Ē|Λ\(|Λ_q|q_A|\[Assumes|R\^C|M_own|R_own|σ_δ\(|w_δ\('                     # R7-2: statements that use the actor's own reference must assume (E_A) or be definitions
 

@@ -244,3 +244,10 @@
   P2 Pythagorean inequality KL(p_hat||p) - M - KL(p°||p), 20 members per hull: min -1.1e-08 -> FAILS
   P3 generic code reproduces the capped free measure (two-point hull {q, p_(F,s)}): 8.9e-16; the ordinal measure (conic hull of level steps): 1.4e-03 -> FAILS
   P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 58 of 184 instances with >= 2 feasible end points
+
+[V38] R7-9 run 2: corrected checks (Def. 19, Prop. 34), against the run-2 pre-registration (Q1-Q3)
+  Q1 the refuting side: largest amount by which a generic value (20 starts) is below the closed form, 600 projections: 1.1e-15 -> holds
+  Q1 (reported) the best of 20 starts is within 1e-8 of the closed form in 1.000 of 600 projections
+  Q2 Pythagorean inequality on exact projections (capped segment, ordinal cone), relative slack min -2.2e-15 -> holds
+  Q3 equality on the full ray (Thm 13(a)), relative |slack| max 1.0e-13 -> holds
+  (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 45 of 183 instances

@@ -7,7 +7,12 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
+> **Status: v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
+> of intended behaviours (Def. 19); every earlier measure is a case, and every decomposition of the core comes from one
+> fact, convexity of the divergence along geometric lines in a log-convex set (Prop. 34). New notions are new ways to
+> declare the set, not new axioms. Run 1 stopped on its registered rule D2 (test design); run 2 held (R7-9 results).
+>
+> **v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
 > behaviour on the intent ray (Def. 18). Weaker pursuit stays exempt; pursuit beyond the cap is charged as overshoot plus
 > transverse error (Prop. 33). A distributional target — a spread of behaviours — is the cap at `p_T`, which is also what
 > the non-linear target `−KL(·‖p_T)` gives. Pre-registered; all seven predictions held (R7-6a results).

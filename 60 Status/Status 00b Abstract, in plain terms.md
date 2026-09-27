@@ -11,7 +11,12 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.5 (R7-6a)** — intensity caps. How hard a target is meant to be pursued is now a declaration. Without a cap
+**Status: v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
+intended behaviours, and its decompositions come from log-convexity. No measure changed. The hedge: the first run of the
+check stopped on its own registered rule because of two test-design errors; the adopted items rest on the corrected
+second run ([[R7-9 results]]).
+
+**v7.5 (R7-6a)** — intensity caps. How hard a target is meant to be pursued is now a declaration. Without a cap
 the measures behave as before; with one, an agent that overshoots it is charged. This repairs a real defect: an agent
 collapsed onto a distributional target's modes used to score as perfectly aligned. All seven pre-registered
 predictions held ([[R7-6a results]]). The hedge: the repair is exact because the distributional target is scored by KL;

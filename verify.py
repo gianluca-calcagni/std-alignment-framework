@@ -1319,7 +1319,72 @@ def V37():
             tot += 1; dis += (max(ends) - min(ends) > 1e-6)
     print(f"  P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances with >= 2 feasible end points")
 
+# =====================================================================================================
+# R7-9 run 2: corrected checks (Def. 19, Prop. 34). Pre-registered in
+# `70 Project/R7/R7-9 preregistration run 2.md` (Q1-Q3) before any run-2 computation. All verification.
+# =====================================================================================================
+def _that_full(ph, lq, F):
+    """t_hat on the full ray (t in R): the moment condition E_{p_(F,t)} F = E_{p_hat} F"""
+    tgt = ph@F; g = lambda t: gibbs(lq, F, t)@F - tgt; lo, hi = -1.0, 1.0
+    while g(lo) > 0: lo *= 2
+    while g(hi) < 0: hi *= 2
+    return brentq(g, lo, hi, xtol=1e-14)
+
+def V38():
+    print("\n[V38] R7-9 run 2: corrected checks (Def. 19, Prop. 34), against the run-2 pre-registration (Q1-Q3)")
+    rng = np.random.default_rng(3809); ok = lambda c: "holds" if c else "FAILS"
+    below = -np.inf; conv = []; q2 = np.inf; q3 = 0.0
+    for i in range(300):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph)
+        F = rng.normal(size=n) if i % 2 else rng.integers(0, 4, size=n).astype(float)
+        if len(np.unique(F)) < 2: F[0] += 1.0
+        s = float(rng.uniform(0.2, 5))
+        # Q1: the refuting side of the reduction, 20 starts each
+        cf_cap = _cap_free(ph, lq, F, s)
+        g_cap = min(r[0] for r in _hull_proj(lh, np.vstack([lq, lgibbs(lq, F, s)]), [np.array([a, 1 - a]) for a in rng.uniform(0, 1, 20)]))
+        p0, r0, blk, lab = _ordproj(ph, q, F); cf_ord = KL(ph, p0)
+        vals = np.unique(F); steps = np.array([(F >= v_).astype(float) for v_ in vals[1:]])
+        g_ord = min(r[0] for r in _hull_proj(lh, np.vstack([lq, steps]), [np.concatenate([[1.0], rng.uniform(0, 3, len(steps))]) for _ in range(20)],
+                                             bounds=[(1.0, 1.0)] + [(0, None)]*len(steps)))
+        below = max(below, cf_cap - g_cap, cf_ord - g_ord)
+        conv += [g_cap - cf_cap <= 1e-8, g_ord - cf_ord <= 1e-8]
+        # Q2 (i): capped segment, exact projection (Prop. 33(a))
+        lp0 = lgibbs(lq, F, min(_that(ph, lq, F), s)); M = KLl(lh, lp0)
+        for t in rng.uniform(0, s, 20):
+            lp = lgibbs(lq, F, t); a = KLl(lh, lp); q2 = min(q2, (a - M - KLl(lp0, lp)) / max(1.0, a))
+        # Q2 (ii): ordinal cone, exact projection (Prop. 32(b))
+        _, inv, _, b = _lev(ph, q, F); lp0o = np.log(p0)
+        for _ in range(20):
+            rr = _rand_ratio(rng, b); lp = lq + np.log(rr[inv]); a = KLl(lh, lp)
+            q2 = min(q2, (a - cf_ord - KLl(lp0o, lp)) / max(1.0, a))
+        # Q3: full ray, the equality case (Thm 13(a))
+        lpf = lgibbs(lq, F, _that_full(ph, lq, F)); Mf = KLl(lh, lpf)
+        for t in rng.uniform(-3, 3, 20):
+            lp = lgibbs(lq, F, t); a = KLl(lh, lp); q3 = max(q3, abs(a - Mf - KLl(lpf, lp)) / max(1.0, a))
+    print(f"  Q1 the refuting side: largest amount by which a generic value (20 starts) is below the closed form, 600 projections: {below:.1e} -> {ok(below <= 1e-10)}")
+    print(f"  Q1 (reported) the best of 20 starts is within 1e-8 of the closed form in {np.mean(conv):.3f} of 600 projections")
+    print(f"  Q2 Pythagorean inequality on exact projections (capped segment, ordinal cone), relative slack min {q2:.1e} -> {ok(q2 >= -1e-12)}")
+    print(f"  Q3 equality on the full ray (Thm 13(a)), relative |slack| max {q3:.1e} -> {ok(q3 <= 1e-12)}")
+    dis = tot = 0
+    for i in range(200):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph); k = KL(ph, q); G = rng.normal(size=n); F = rng.normal(size=n)
+        def lp(z): l = lq + z[0]*F + z[1]*G; return l - logsumexp(l)
+        f = lambda z: KLl(lh, lp(z)); cons = [{'type': 'eq', 'fun': lambda z: KLl(lp(z), lq) - k}]; ends = []
+        for _ in range(5):
+            r = minimize(f, rng.uniform(0, 3, 2), constraints=cons, bounds=[(0, None)]*2, method='SLSQP', options={'ftol': 1e-14, 'maxiter': 2000})
+            if r.success and abs(KLl(lp(r.x), lq) - k) < 1e-8: ends.append(r.fun)
+        if len(ends) >= 2: tot += 1; dis += (max(ends) - min(ends) > 1e-6)
+    print(f"  (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38"]
     for w in which: globals()[w]()

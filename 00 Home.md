@@ -4,7 +4,7 @@ type: "home"
 index_of: "home"
 updated: "2026-09-26"
 ---
-# Alignment as the tilt of an error by a bounded actor — vault v7.5
+# Alignment as the tilt of an error by a bounded actor — vault v7.6
 
 **What this is.** A formal framework for alignment: it measures how far behaviour departs from the behaviour
 intended for a target, from behaviour alone, and explains the departure by actor models. As of v7.0 it is an
@@ -82,9 +82,9 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
 |---|---|
 | attack-surface | 15 |
 | census | 1 |
-| check | 50 |
+| check | 51 |
 | corollary | 11 |
-| definition | 17 |
+| definition | 18 |
 | dictionary-entry | 13 |
 | home | 1 |
 | hypothesis | 4 |
@@ -94,7 +94,7 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
 | method | 1 |
 | overview | 1 |
 | project | 1 |
-| proposition | 27 |
+| proposition | 28 |
 | remark | 3 |
 | report | 17 |
 | retraction | 78 |

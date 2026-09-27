@@ -27,7 +27,7 @@ substrate, runs it through the framework, and gets:
 Until that works on real cases, the framework is a calculus, not a standard.
 
 **Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). **R7-7 is done (v7.4): target sets, the ordinal
-target; D4 fired on the budget convention** ([[R7-7 results]]). **R7-6a is done (v7.5): intensity caps** ([[R7-6a results]]).
+target; D4 fired on the budget convention** ([[R7-7 results]]). **R7-6a is done (v7.5): intensity caps** ([[R7-6a results]]). **R7-9 is done (v7.6): the core as a declared intended set** ([[R7-9 results]]; H9 promoted).
 T3 closed as a clean negative; T3b and T7 deferred by the PI. Next is the PI's choice (ROADMAP §0). v7.3.3 was a
 review against §0's goal: its recommendations are [[ROADMAP]] §5 (for the PI), its other observations §7 below. **v7.0: the
 package is an Obsidian vault.** Next is R7-7 (target sets, confirmed by the PI), led by the ordinal target. Apply the PI's test — a real case,
@@ -203,7 +203,7 @@ exclusion]*.
 - They shift `q` while holding `F̂` fixed, which no other non-biological substrate offers. If T7's human case
   works, identification results (Props [[Prop 12|12]], [[Prop 16|16]]) get their first real-data contact.
 
-**H9. The core is one definition: KL projection onto a declared intended set** *[PI approved as R7-9, after v7.5]*.
+**H9. The core is one definition: KL projection onto a declared intended set** *[PROMOTED in R7-9, v7.6: Def. 19, Prop. 34]*.
 - Every R7 step since R7-2 turned a silent choice into a declaration (the reference, cardinal or ordinal, the cap),
   while the measure stayed "KL to the nearest intended behaviour". The ray, the ordinal cone and the capped segment
   are ways of generating one declared set `𝓘`; the Pythagorean, ordinal/shape and overshoot splits are facts about

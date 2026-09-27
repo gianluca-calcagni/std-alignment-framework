@@ -51,6 +51,7 @@ single reference across disturbances; here each context carries its own referenc
 - [[Prop 30]] — the fake-alignment gap; R7-4
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[B07]] — Ashby (requisite variety); Conant & Ashby (good regulator)

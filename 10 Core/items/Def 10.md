@@ -69,6 +69,7 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 32]] — the ordinal measure; R7-7
 - [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
 - [[Rem 13.5]] — whether rescaling is harmful depends on the declared convention; v6.3
 - [[Thm 13]] — intent-ray decomposition
 - [[Thm 17]] — every regret notion is a point on one convex curve

@@ -90,6 +90,7 @@ measure has a closed form (Prop. [[Prop 32|32]]); the budget measure has none.
 
 ## Mentioned in
 - [[Def 17]] — target sets; R7-7
+- [[Def 19]] — declared intended set; R7-9
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2

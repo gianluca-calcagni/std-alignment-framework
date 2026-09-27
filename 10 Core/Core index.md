@@ -34,13 +34,13 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Hyp E_A]] — the entropic actor model from the actor's own reference
 - [[Hyp E_R]] — the reward-coupled entropic agent
 
-## Measurement layer (25 items)
+## Measurement layer (27 items)
 *what misalignment is and how it is measured — the declared reference, the target, the conventions and the actual behaviour only.*
 
 **Overviews (1)**
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12  · definition
 
-**Definitions (11)**
+**Definitions (12)**
 - [[Def 1]] — objects  · definition
 - [[Def 2]] — the bounded actor  · definition
 - [[Def 3]] — regrets  · definition
@@ -52,13 +52,14 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Def 12]] — alignment instance; formal  · definition
 - [[Def 17]] — target sets; R7-7  · definition
 - [[Def 18]] — intensity caps and distributional targets; R7-6a  · definition
+- [[Def 19]] — declared intended set; R7-9  · definition
 
 **Theorems (3)**
 - [[Thm 1]] — regret is a divergence  · tier 1 · proved
 - [[Thm 13]] — intent-ray decomposition  · tier 1 · proved
 - [[Thm 17]] — every regret notion is a point on one convex curve  · tier 1 · proved
 
-**Propositions (7)**
+**Propositions (8)**
 - [[Prop 15]] — the identity for any convex regularizer and any target that keeps the objective concave  · tier 1 · proved
 - [[Prop 18]] — harm bounds detectability  · tier 1 · proved
 - [[Prop 19]] — the evaluation gap  · tier 1 · proved
@@ -66,6 +67,7 @@ The core: definitions, hypotheses and results of the static module. Read the sec
 - [[Prop 31]] — target sets against the contract; R7-7  · tier 1 · proved
 - [[Prop 32]] — the ordinal measure; R7-7  · tier 1 · proved
 - [[Prop 33]] — capped measures against the contract; R7-6a  · tier 1 · proved
+- [[Prop 34]] — the core as a declared intended set; R7-9  · tier 1 · proved
 
 **Corollaries (2)**
 - [[Cor 5.2]] — the exchange rate is a shadow price  · tier — · proved

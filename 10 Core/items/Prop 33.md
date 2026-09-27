@@ -89,7 +89,7 @@ intensity is not misdirection. That is right for a direction ("more helpfulness 
 - [[Thm 17]] — every regret notion is a point on one convex curve
 
 ## Used by
-- none
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentions
 - [[R7-6a preregistration]]

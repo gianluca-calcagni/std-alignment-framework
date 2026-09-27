@@ -83,6 +83,7 @@ Both bounds hold for every `λ`, and each is at most the corresponding KL, so
 
 ## Mentioned in
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
+- [[Def 19]] — declared intended set; R7-9
 - [[Prop 15]] — the identity for any convex regularizer and any target that keeps the objective concave
 
 ## Checks

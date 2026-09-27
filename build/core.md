@@ -1,6 +1,11 @@
 # A — Core
 
-> **Status: v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
+> **Status: v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
+> of intended behaviours (Def. 19); every earlier measure is a case, and every decomposition of the core comes from one
+> fact, convexity of the divergence along geometric lines in a log-convex set (Prop. 34). New notions are new ways to
+> declare the set, not new axioms. Run 1 stopped on its registered rule D2 (test design); run 2 held (R7-9 results).
+>
+> **v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
 > behaviour on the intent ray (Def. 18). Weaker pursuit stays exempt; pursuit beyond the cap is charged as overshoot plus
 > transverse error (Prop. 33). A distributional target — a spread of behaviours — is the cap at `p_T`, which is also what
 > the non-linear target `−KL(·‖p_T)` gives. Pre-registered; all seven predictions held (R7-6a results).
@@ -154,7 +159,7 @@ left tier 4; row 76.)*
 
 | Tier | Needs, about the actual actor | Results |
 |---|---|---|
-| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); **Prop. 33** (capped measures; R7-6a); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
+| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); **Prop. 33** (capped measures; R7-6a); **Prop. 34** (the declared intended set; R7-9); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
 | **2** | an **exact maximizer** of its evaluator over a set containing the intended actor | Thm 5 (all parts: capacity maximizers); Thm 9; the regret bound in Prop. 7 |
 | **2′** | an **argmax selector over a common random candidate set** (e.g. best-of-n compared at equal n) | Prop. 23 |
 | **3** | an exact optimum of `U − φ/β`, with `φ/β − U` convex | none since R7-3: the Bregman identity needs this of the *intended* actor only, so it is tier 1 (row 78) |
@@ -1144,6 +1149,25 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 
 *Note (scope).* Caps are defined for the cardinal target set; for other target sets (Def. 17) they are open.
 
+**Definition 19 (declared intended set; R7-9).** Let `Δ°` be the set of full-support distributions on `X`.
+- A **declaration** fixes a set `𝓘 ⊆ Δ°` of **intended behaviours**, closed in `Δ°`.
+- The **misalignment** of a full-support `p̂` under `𝓘` is `M_𝓘(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`, undefined when `𝓘` is empty.
+- `𝓘` is **log-convex** if, for all `p₀, p₁ ∈ 𝓘` and `λ ∈ [0, 1]`, the **geometric mixture**
+  `p_λ = p₀^{1−λ}·p₁^{λ} / Σ_x p₀^{1−λ}·p₁^{λ}` is in `𝓘`.
+
+*Note (what this definition does).* It states the measurement layer in one line: **misalignment is the KL projection
+of the actual behaviour onto what the principal declared as intended.** Everything else the measurement layer
+contains is a way to *generate* `𝓘` from declarations — the reference `q`, a target set (Def. 17), a convention
+(Def. 8), a cap (Def. 18) — and Prop. 34(a) shows each existing measure is a case. A new notion enters as a
+new generator of `𝓘`, not as a new axiom. KL is fixed by detection (Prop. 18), not by this definition.
+
+*Note (the declaration registry).* Every declaration needs an elicitation story — how a real principal states it
+— and a justified default. The registry, and the audit of choices still made silently, are in R7-9 results.
+
+*Note (why log-convexity).* Prop. 34(c): on a log-convex set the projection is unique and satisfies a
+Pythagorean inequality. That is where every decomposition of the core comes from, and why the ordinal budget
+measure, whose set is not log-convex, needed a solver.
+
 **Proposition 32 (the ordinal measure; R7-7; tier 1).** Let `F` be non-constant, with values `v_1 < … < v_m` on
 the level sets `L_1, …, L_m`. Let `p̂` have full support, and `y = p̂/q`. Let `r°` be the `q`-weighted isotonic
 (non-decreasing) regression of the level means `p̂(L_j)/q(L_j)`, with weights `q(L_j)`, read as a function of `F`
@@ -1519,6 +1543,10 @@ Two further conditions bind **the R7 refactor**, not a measure as such:
 - **M7:** every refactored measure coincides with its v6.4 counterpart whenever the dropped assumptions hold.
 - **M9:** the sanity suite of `verify.py` V30 passes.
 
+*Note (R7-9).* Every axiom here is a condition on the declared intended set `𝓘` (Def. 19): M1, M2, M4 and M6 hold
+for any `𝓘` closed in `Δ°`; M5 says `𝓘` contains the declared pursuit family; M3 says `𝓘` depends on the target only
+through the declared set (Prop. 34(b)).
+
 *Note (R7-7).* Until R7-7 the contract took a single non-constant target `F`, and M1, M3 and M5 referred to it.
 With `𝒯 = [F]₊` each reads exactly as before, so every measure that satisfied the contract still does (M7).
 What the target set adds is the declaration of how much of `F` is intended: its exchange rates (`[F]₊`) or
@@ -1620,6 +1648,66 @@ infimum over a larger set is smaller. `[F]₊ ⊆ [F]_ord`, since `v ↦ av + c`
 *Reading.* **The contract survives the move from one target to a set of targets unchanged in form.** M1, M3 and M5
 now refer to the declared set, and for `[F]₊` they are word for word what they were. A set of targets can only
 lower the measures: declaring less about the intent can only excuse more behaviour.
+
+**Proposition 34 (the core as a declared intended set; R7-9; tier 1).** Let `𝓘` be a declared intended set and `p̂` a
+full-support behaviour (Def. 19).
+
+(a) **Reduction.** The free and budget measures of Def. 10, of Def. 17 and of Def. 18 are `M_𝓘` for the
+intended sets those definitions give: the half-ray `𝓡⁺_F`, the budget point, `I_free(𝒯)`, `I_budget(𝒯)`, the capped
+segment, and the capped budget reference.
+
+(b) **The contract as conditions on `𝓘`.** For every `𝓘` closed in `Δ°`, `M_𝓘` attains its infimum and satisfies M1
+(with `𝓘` as the intended behaviours), M2, M4 and M6 of Def. 11. It satisfies M5 iff `𝓘` contains the declared
+pursuit family, and M3 iff `𝓘` depends on the target only through the declared target set. M8 holds per context.
+
+(c) **Log-convex sets.** If `𝓘` is log-convex and closed in `Δ°`, the minimizer `p°` is unique, and for every `p ∈ 𝓘`
+
+```
+KL(p̂‖p) ≥ M_𝓘(p̂) + KL(p°‖p),
+```
+
+with equality when the geometric line through `p` and `p°` continues in `𝓘` beyond `p°`.
+
+(d) **Instances.** The half-ray, the capped segment and the ordinal cone `C_F` are log-convex. Thm 13(a) is the
+equality case of (c) on the full ray; the cross-term inequality of Prop. 32(c) and the overshoot split of
+Prop. 33(b) are cases of (c).
+
+*Proof.* (a) By inspection of each definition: each measure is an infimum of `KL(p̂‖·)` over the set named.
+
+(b) `KL(p̂‖p) ≥ p̂(x)·log(1/p(x)) − log |X|` for every `x`, so the sublevel sets of `KL(p̂‖·)` in a set closed in `Δ°`
+are compact, and the infimum is attained. Hence `M_𝓘 = 0` iff `p̂ ∈ 𝓘` (M1), and `M_𝓘 ≥ 0` (M2). M4 and M6: `M_𝓘` is a
+function of `(𝓘, p̂)`, undefined only by the explicit rule. M5: if `𝓘` contains the pursuit family, a pursuing `p̂`
+lies in `𝓘` and scores 0; if it does not, a member outside `𝓘` scores positive by M1. M3: `M_𝓘` depends on the target
+only through `𝓘`. M8: apply per context (Def. 9).
+
+(c) Let `p₀, p₁ ∈ 𝓘` and `Z_λ = Σ_x p₀^{1−λ} p₁^{λ}`. Then
+`f(λ) := KL(p̂‖p_λ) = (1−λ)·KL(p̂‖p₀) + λ·KL(p̂‖p₁) + log Z_λ`. `log Z_λ` is convex in `λ` (a log-sum-exp of affine functions),
+and strictly so unless `p₀ = p₁`; so `f` is strictly convex along every geometric line in `𝓘`. Two distinct minimizers
+would give a smaller value between them; so `p°` is unique. For `p ∈ 𝓘`, take `p₀ = p°`, `p₁ = p`: `f(λ) ≥ f(0)` on
+`[0, 1]`, so `f'(0⁺) ≥ 0`, and `f'(0) = KL(p̂‖p) − KL(p̂‖p°) + d/dλ log Z_λ |₀ = KL(p̂‖p) − KL(p̂‖p°) − KL(p°‖p)`. If the
+line continues in `𝓘` for `λ < 0`, then `f'(0) = 0` by minimality on both sides.
+
+(d) Half-ray and capped segment: `p_{F,t}^{1−λ}·p_{F,t′}^{λ} ∝ p_{F,(1−λ)t+λt′}`, so a geometric mixture of two ray points is
+the ray point at the convex combination of the intensities. Ordinal cone: `log(p/q)` is a non-decreasing function of
+`F` for each member, and convex combinations of non-decreasing functions are non-decreasing. On the full ray every
+point has the line continuing on both sides, which gives Thm 13(a)'s equality. ∎
+
+*Check.* V38 (run 2, pre-registered in R7-9 preregistration run 2; all verification, all held): over 600
+projections a generic optimizer from 20 starts is never below the closed forms (at most `1.1·10⁻¹⁵`) and reaches them
+in all 600; the inequality of (c) holds on exact projections of the capped segment and the ordinal cone (relative
+slack at least `−2·10⁻¹⁵`), with equality on the full ray to `10⁻¹³`. On a budget sphere intersected with a
+log-convex cone, which is not log-convex, five solver starts disagree in about a quarter of instances. Run 1 (V37)
+stopped on its registered rule D2 because of two test-design errors; see R7-9 results.
+
+
+*Reading.* **Every decomposition in the measurement layer is one inequality.** The Pythagorean splits, the
+ordinal/shape split and the overshoot term all come from convexity of the divergence along geometric lines. What a
+declaration must preserve for the measure to behave well is log-convexity. The budget sets (spheres of fixed
+divergence from `q`) are not log-convex, and that is where the core needed a non-convex solver (R7-7, D4).
+
+*Prior art.* Information projections and their Pythagorean identities: Csiszár (1975); for the reverse projection,
+minimizing over the second argument, and log-convex sets, Csiszár & Matúš (2003). Bibliographic details not checked
+(no network access in this session).
 
 **Definition 12 (alignment instance; formal; measurement layer since R7-3).** An **alignment instance** is a
 tuple `(X, q, 𝒯, κ)`, with a price `β ∈ (0, ∞)` when `κ` is the price convention:
