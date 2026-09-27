@@ -8,7 +8,9 @@ MIS = 1 / 64  # a heterozygous adult is read as each homozygote with probability
 MOBS = np.array([[1, MIS, 0], [0, 1 - 2 * MIS, 0], [0, MIS, 1]])  # observed class <- true genotype (columns)
 E1, E2 = np.array([1., 0, -1]), np.array([-1., 2, -1])  # additive and dominance directions, centered log space
 ADULTS = {"young F": [24, 63, 13], "young M": [34, 70, 30]}  # Table 4, cage 23: AR/AR, AR/CH, CH/CH
-EGGS = None  # Table 2, cage 23: {"November 1945": [...], "December 1945": [...]}, filled in after the gate
+# Table 2, cage 23, filled in after the gate passed. OCR '8I' -> 81 (amendment rule); both rows match the printed
+# Expected row to 0.07 and total 150
+EGGS = {"November 1945": [29, 81, 40], "December 1945": [48, 74, 28]}
 
 
 def norm(lv): return np.exp(lv - logsumexp(lv))

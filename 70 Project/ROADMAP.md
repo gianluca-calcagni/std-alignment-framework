@@ -671,9 +671,13 @@ unless a gap cannot be stated behaviourally.
     **identify** the evaluator only through interventions (a change of reference or of fine). The third tier is a
     protocol requirement (Def. 23's timing slot).
   - *Limits:* reading rank and angle as "the evaluator" assumes log-linear dynamics (best-response and additive dynamics
-    break it); rank estimation needs the estimation protocol (A3).
-  - *Real data per substrate:* allele-frequency time series (selection coefficients are log-ratio increments;
-    fluctuating selection is rank > 1); RLHF checkpoints (log-probability increments on fixed responses); panels with
+    break it); rank estimation needs the estimation protocol (A3). Diploid allele-frequency series break it too: with
+    dominance an allele's marginal fitness `Σ_j x_j W_ij` moves with the frequencies, so one fixed genotype evaluator
+    gives rank > 1 over three or more alleles. A reference from another cohort adds a shift along the additive direction
+    `(1, 0, −1)`, and a pool of cohorts adds a Wahlund term; either can remove every degree of freedom
+    ([[I1-dyn2 preregistration]]).
+  - *Real data per substrate:* genotype increments within one cohort, or haploid allele-frequency series (selection
+    coefficients are log-ratio increments; fluctuating selection is rank > 1); RLHF checkpoints (log-probability increments on fixed responses); panels with
     three or more default regimes; sequential policy outcomes.
   - *Next step, I1-dyn:* define dynamic rank and angle (measurement layer); a proposition (rank 1 iff fixed evaluator
     under log-linear dynamics; `θ` identified without `q`; with a pull, only `ηF̂ + α log q`); a toy test, then real data

@@ -1,0 +1,8 @@
+x0 0.5321; q [0.2831 0.4979 0.219 ]; F = log(0.7, 1, 0.3); additive part a = 0.4236
+H0a (one evaluator, equal intensity): chi2(1) rejection share 0.043; 95th pct 3.551; negative Lambda 1
+H0b (one evaluator, male intensity 0.3): chi2(1) rejection share 0.037; 95th pct 3.323; negative Lambda 0
+H1 (gate: females F, males additive part only): chi2(1) rejection share 0.477; 95th pct 10.213; negative Lambda 0
+H1-half (information: males half the additive part): chi2(1) rejection share 0.144; 95th pct 5.943; negative Lambda 0
+critical value c (max of the two H0 95th percentiles) 3.551
+power against H1 0.512; against H1-half (information) 0.170
+GATE (power >= 0.50): passes
