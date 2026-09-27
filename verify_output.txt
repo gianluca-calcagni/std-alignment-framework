@@ -251,3 +251,10 @@
   Q2 Pythagorean inequality on exact projections (capped segment, ordinal cone), relative slack min -2.2e-15 -> holds
   Q3 equality on the full ray (Thm 13(a)), relative |slack| max 1.0e-13 -> holds
   (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 45 of 183 instances
+
+[V39] R7-6b: minimum intensity, the intended segment (Def. 20, Prop. 35), against the pre-registration (P1-P5)
+  P1 formula KL(p_hat||p_(F,t_hat)) + KL(p_(F,t_hat)||p_(F,t*)) against grid + bounded minimisation over [r, s]: max difference 4.4e-16 -> holds
+  P2 M1 and M5 within the segment: on-segment max 5.4e-16; below-floor, above-cap and off-ray min 8.95e-06 -> holds
+  P3 M_free_seg <= M_budget_seg: min gap -3.4e-16; reductions to Def. 18 (r = 0) and Def. 10 (r = 0, s = inf): max difference 1.4e-13 -> holds
+  P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change 5.8e-14 -> holds
+  P5 threshold policies (300): base model with the floor min 2.18e-04, without max 4.5e-16; floor hits the threshold to 1.5e-14 -> holds

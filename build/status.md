@@ -5,7 +5,10 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
+**Status: v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
+minimum, an agent that stays at the default is charged. All five pre-registered predictions held (R7-6b results).
+
+**v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
 intended behaviours, and its decompositions come from log-convexity. No measure changed. The hedge: the first run of the
 check stopped on its own registered rule because of two test-design errors; the adopted items rest on the corrected
 second run (R7-9 results).
@@ -154,6 +157,7 @@ memory.**
 | **the ordinal measure** *(R7-7)*: `M_ord` in closed form (isotonic regression; the within-block divergence from `q`); the decomposition and the budget split `KL(p̂‖q) = M_ord + KL(p°‖q)`; invariance under every increasing map; `M_ord ≤ M_budget([F]_ord) ≤ M_budget`, with equal zero sets. *The strict first inequality failed as registered (P8) and is withdrawn from the statement* | Core Prop. 32 | V35 (P1–P4, P6, P8) | C05 |
 | **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. 18, Prop. 33 | V36 | C05 |
 | **the core as a declared intended set** *(R7-9)*: every measure is the KL projection onto a declared set `𝓘`; the contract is a set of conditions on `𝓘`; on log-convex sets the projection is unique with a Pythagorean inequality, which yields Thm 13(a), Prop. 32(c) and Prop. 33(b) | Core Def. 19, Prop. 34 | V38 (run 1: V37, stopped) | C05 |
+| **minimum intensity** *(R7-6b)*: a declared floor on the intent ray; the segment free measure is the error off the ray plus an undershoot or an overshoot; both segment measures satisfy the contract with M5 within the segment; an untouched default is charged under a threshold policy | Core Def. 20, Prop. 35 | V39 | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark 13.5 | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. B4 | V9 | C9 |
@@ -413,6 +417,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **R7-6b (v7.7).** Pre-registered in R7-6b preregistration (sha256 `8b86d294…`, `ff45cb3`). New: Def. 20 (floor; intended segment), Prop. 35, `V39`, R7-6b results. Restated: Def. 11's M5, within the declared floor and cap. All five predictions held. An implementation edge (`k = 0`) stopped the first run before any prediction was evaluated, and was fixed. F6's count line changes by construction (68 → 70 results, 38 → 39 blocks). Tooling: `p^min`, `^seg` belong to Def. 20; CI runs `V39` | Core, Status, ROADMAP, tools, verify |
 | **R7-9 (v7.6).** Run 2, resumed by the PI, pre-registered in R7-9 preregistration run 2 (sha256 `67a8c7fb…`, `bc2111c`) with corrected checks; `V38`: all held, on both SIMD paths. Adopted: Def. 19 (declared intended set), Prop. 34 (reduction; the contract as conditions on the set; log-convex projections; instances), a note on Def. 11; the declaration registry and the silent-declaration audit in R7-9 results. No measure changed; F6's count line changes by construction (66 → 68 results, 37 → 38 blocks). Tooling: symbols `𝓘`, `M_𝓘` belong to Def. 19; CI runs `V38` | Core, Status, ROADMAP, tools, verify |
 | **R7-9 (v7.5, stopped).** Pre-registered in R7-9 preregistration (sha256 `90ab57a9…`, `bb158e6`). Rule 13 gained a structural exception (PI-approved items that change no verdict must state a structural claim that could fail). `V37`: P1 held; P2 and P3 failed as registered, and **P3 fired the registered rule D2, which stopped the step**: Def. 11 is unchanged, and the proposed definition and proposition are kept in R7-9 results, not in the core. The post-hoc diagnosis (`r79_diagnose.py`) attributes both failures to the test: solver-bound tolerances, and a one-sided claim tested on both sides. `V37` stays as the record; CI runs it; F6's block count changes to 37 | Core, ROADMAP, NOTES, tools, verify |
 | **v7.5 (rule 13).** The PI's rule, generalized: before any work item, name an example in which it changes a verdict, a number or a decision (ROADMAP anti-drift rule 13; NOTES checklist). Applied at once: R7-9 fails as a standalone restatement and frames R7-6b; R7-6b passes (a harm-threshold policy under which the untouched base model scores as aligned) | ROADMAP, NOTES |

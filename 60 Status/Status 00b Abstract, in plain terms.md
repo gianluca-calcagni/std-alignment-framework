@@ -11,7 +11,10 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
+**Status: v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
+minimum, an agent that stays at the default is charged. All five pre-registered predictions held ([[R7-6b results]]).
+
+**v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
 intended behaviours, and its decompositions come from log-convexity. No measure changed. The hedge: the first run of the
 check stopped on its own registered rule because of two test-design errors; the adopted items rest on the corrected
 second run ([[R7-9 results]]).

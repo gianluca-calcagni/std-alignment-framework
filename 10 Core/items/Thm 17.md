@@ -72,6 +72,7 @@ detail.
 - [[Prop 16]] — gauge group and identified quantities
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 35]] — the intended segment against the contract; R7-6b
 
 ## Mentions
 - none

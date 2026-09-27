@@ -8,7 +8,7 @@ layer: "measurement"
 tier: []
 assumes: []
 status: "definition"
-depends_on: ["Def 17", "Def 18", "Def 9"]
+depends_on: ["Def 17", "Def 18", "Def 20", "Def 9"]
 mentions: ["Def 14", "Def 19", "Prop 25", "Prop 26", "Prop 31", "Prop 34"]
 checks: []
 sources: []
@@ -33,7 +33,7 @@ must satisfy:
 | **M2** (sign) | `M ≥ 0` |
 | **M3** (representation) | `M` depends on the target only through the declared set `𝒯`, and every declared quantity carrying the unit of a representative is transformed with it (`β ↦ β/a` when `F ↦ aF + c`). For `[F]₊` this is invariance under `F ↦ aF + c`, `a > 0`; for `[F]_ord`, under every strictly increasing map |
 | **M4** (behavioural) | `M` depends on the agent only through `p̂`, or its per-context laws |
-| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared cap if there is one (Def. [[Def 18\|18]]) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
+| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared floor and cap, if any (Defs [[Def 18\|18]], [[Def 20\|20]]) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
 | **M6** (substrate-free) | `M` is defined for every full-support `p̂ ∈ Δ(X)`, or declared undefined by an explicit rule |
 | **M8** (contexts) | with contexts (Def. [[Def 9\|9]]), `M` applies per context `c`, with aggregates `Σ_c ρ(c)·M_c` for the deployment and evaluation context laws `ρ_dep`, `ρ_ev` |
 
@@ -73,12 +73,14 @@ an actor model: the explanation layer, not the measurement layer.
 - [[Def 9]] — contexts
 - [[Def 17]] — target sets; R7-7
 - [[Def 18]] — intensity caps and distributional targets; R7-6a
+- [[Def 20]] — minimum intensity and the intended segment; R7-6b
 
 ## Used by
 - [[Prop 30]] — the fake-alignment gap; R7-4
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 33]] — capped measures against the contract; R7-6a
 - [[Prop 34]] — the core as a declared intended set; R7-9
+- [[Prop 35]] — the intended segment against the contract; R7-6b
 
 ## Mentions
 - [[Def 14]] — mechanism-relative comparison; explanation layer; R7-1

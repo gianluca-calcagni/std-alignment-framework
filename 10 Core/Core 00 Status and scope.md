@@ -7,7 +7,11 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
+> **Status: v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
+> intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm
+> threshold, a service level (Prop. 35). All five pre-registered predictions held (R7-6b results).
+>
+> **v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
 > of intended behaviours (Def. 19); every earlier measure is a case, and every decomposition of the core comes from one
 > fact, convexity of the divergence along geometric lines in a log-convex set (Prop. 34). New notions are new ways to
 > declare the set, not new axioms. Run 1 stopped on its registered rule D2 (test design); run 2 held (R7-9 results).

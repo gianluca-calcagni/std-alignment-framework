@@ -1,6 +1,10 @@
 # A — Core
 
-> **Status: v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
+> **Status: v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
+> intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm
+> threshold, a service level (Prop. 35). All five pre-registered predictions held (R7-6b results).
+>
+> **v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
 > of intended behaviours (Def. 19); every earlier measure is a case, and every decomposition of the core comes from one
 > fact, convexity of the divergence along geometric lines in a log-convex set (Prop. 34). New notions are new ways to
 > declare the set, not new axioms. Run 1 stopped on its registered rule D2 (test design); run 2 held (R7-9 results).
@@ -159,7 +163,7 @@ left tier 4; row 76.)*
 
 | Tier | Needs, about the actual actor | Results |
 |---|---|---|
-| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); **Prop. 33** (capped measures; R7-6a); **Prop. 34** (the declared intended set; R7-9); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
+| **1** | nothing: any `p ≪ q` (full support where stated). Prop. 21 also needs weights that depend on behaviour only through `F̂`; Prop. 22 needs a differentiable path | **Thm 1** (the intended actor is Gibbs at a declared price); **Prop. 15** (the intended actor is an exact regularized optimum); **Thm 13** (full-support `p̂`); **Thm 17 (i)–(iii)**; the cap in **Prop. 18** (`C ≤ KL(p̂‖p*) = β·R_J`); both parts of **Prop. 19**; **Prop. 24** (the contract); **Props 31–32** (target sets and the ordinal measure; R7-7); **Prop. 33** (capped measures; R7-6a); **Prop. 35** (the intended segment; R7-6b); **Prop. 34** (the declared intended set; R7-9); Prop. 29(a) (selection sees only rewarded behaviour); Props 6, 10, 11, 20, 21, 22; Lemma 8; the inequalities in Prop. 7; B7(a)–(e) (for (e), the intended actor is the rational-inattention optimum; R7-2, row 77); B11(i) |
 | **2** | an **exact maximizer** of its evaluator over a set containing the intended actor | Thm 5 (all parts: capacity maximizers); Thm 9; the regret bound in Prop. 7 |
 | **2′** | an **argmax selector over a common random candidate set** (e.g. best-of-n compared at equal n) | Prop. 23 |
 | **3** | an exact optimum of `U − φ/β`, with `φ/β − U` convex | none since R7-3: the Bregman identity needs this of the *intended* actor only, so it is tier 1 (row 78) |
@@ -1149,6 +1153,26 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 
 *Note (scope).* Caps are defined for the cardinal target set; for other target sets (Def. 17) they are open.
 
+**Definition 20 (minimum intensity and the intended segment; R7-6b).** Let `F` be non-constant, with a cap `p^max = p_{F,s}`
+as in Def. 18 (`s = ∞`: no cap).
+- A **floor** is a declared point `p^min = p_{F,r}` of the half-ray with `0 ≤ r ≤ s`; `r = 0` means no floor. The
+  **intended segment** is `{p_{F,t} : r ≤ t ≤ s}`.
+- For a full-support `p̂`, with `k = KL(p̂‖q)`, `k_r = KL(p^min‖q)` and `k_s = KL(p^max‖q)` (`k_s = ∞` when `s = ∞`):
+  - the **segment free measure** is `M_free^seg = inf_{r ≤ t ≤ s} KL(p̂‖p_{F,t})`;
+  - the **segment budget measure** is `KL(p̂‖p^min)` when `k < k_r`; `KL(p̂‖p_{F,λ})`, with `λ` the budget match of
+    Def. 10, when `k_r ≤ k ≤ k_s`; and `KL(p̂‖p^max)` when `k > k_s`. It is undefined when `s = ∞` and the budget match
+    is.
+
+*Note (what the floor declares).* Without a floor, the intent ray starts at the default `q`: doing nothing is intended,
+and the contract's M5 exempts every weaker pursuit. That is right when effort is the agent's own business. It is wrong
+when the principal requires a minimum — a harm threshold, a minimum service level, a compliance rule. There, **below the
+floor, the intended behaviour is the floor itself**, and an agent that stays at the default is charged (Prop. 35(c)).
+In principal–agent terms, the floor makes shirking visible.
+
+*Note (floor and cap together).* The intended segment is log-convex, so Prop. 34(c) applies: the projection is unique,
+and the charge splits into the error off the ray plus an undershoot or an overshoot (Prop. 35(a)). Like the cap, the
+floor is a behaviour on the ray, not a number, because intensity has no unit of its own.
+
 **Definition 19 (declared intended set; R7-9).** Let `Δ°` be the set of full-support distributions on `X`.
 - A **declaration** fixes a set `𝓘 ⊆ Δ°` of **intended behaviours**, closed in `Δ°`.
 - The **misalignment** of a full-support `p̂` under `𝓘` is `M_𝓘(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`, undefined when `𝓘` is empty.
@@ -1311,6 +1335,46 @@ and interior. Stationarity: `−log(p/p_T) − (1/t)·log(p/q) = const`, so
 intensity is not misdirection. That is right for a direction ("more helpfulness is fine"), and wrong for a point
 ("reflect this population's views"). The cap lets the principal say which. Below the cap nothing changes; beyond it,
 (b) says the charge is exactly the overshoot along the ray, added to whatever transverse error there is.
+
+**Proposition 35 (the intended segment against the contract; R7-6b; tier 1).** Let `F` be non-constant, with floor
+`p^min = p_{F,r}` and cap `p^max = p_{F,s}` (Def. 20), `p̂` full-support, `t̂ ∈ ℝ` the point of the full ray with
+`E_{p_{F,t̂}}F = E_{p̂}F` (Thm 13), and `t* = min(max(t̂, r), s)`.
+
+(a) `M_free^seg = KL(p̂‖p_{F,t̂}) + KL(p_{F,t̂}‖p_{F,t*})`: the error off the ray, plus an **undershoot** term when `t̂ < r`
+and an **overshoot** term when `t̂ > s`.
+
+(b) Both segment measures satisfy M1–M4, M5 within the segment, M6 and M8 of Def. 11, and `M_free^seg ≤ M_budget^seg`.
+With `r = 0` they are the capped measures of Def. 18; with `r = 0` and `s = ∞`, the measures of Def. 10.
+
+(c) **A threshold policy.** Let `F = −1_H` for a set `H` of behaviours with `0 < q(H) < 1`, and `0 < ε < q(H)`. There is a unique
+floor with `p^min(H) = ε`, at `r = log[q(H)(1 − ε) / (ε(1 − q(H)))] > 0`. The untouched default `p̂ = q` then scores
+`KL(q‖p^min) > 0` on both segment measures, and 0 on both without a floor.
+
+*Proof.* (a) `M(t) = KL(p̂‖p_{F,t})` is convex on `ℝ` with minimizer `t̂` (Thm 13, Thm 17(i)); its minimum over `[r, s]` is at
+the point nearest `t̂`, which is `t*`. Thm 13(a) at `t = t*` gives the decomposition.
+
+(b) The segment is closed in `Δ°` and log-convex (Prop. 34(d)), so `M_free^seg = 0` iff `p̂` is on it. By Lemma 5.1,
+`t ↦ KL(p_{F,t}‖q)` is strictly increasing, so the segment is the set of ray points with `k_r ≤ KL(·‖q) ≤ k_s`. If
+`p̂ = p_{F,t}` with `r ≤ t ≤ s`, then `k_r ≤ k ≤ k_s` and `λ = t`, so the budget measure is 0. If `k < k_r` or `k > k_s`, `p̂` is not
+on the segment and differs from the reference point `p^min` or `p^max`, whose divergence from `q` is not `k`; so the measure
+is positive. If `k_r ≤ k ≤ k_s`, the measure is 0 iff `p̂ = p_{F,λ}`. M2, M4, M6 and M8 are as in Prop. 34(b). M3:
+`p_{aF+c,t} = p_{F,at}`, so the segment, `p^min`, `p^max`, `k_r` and `k_s` are unchanged under `F ↦ aF + c`, `r ↦ r/a`, `s ↦ s/a`.
+Order: every reference point lies on the segment. With `r = 0`, `k_r = 0` and the first branch never occurs: Def. 18. With
+also `s = ∞`: Def. 10.
+
+(c) `p_{F,t}(H) = q(H)e^{−t} / (q(H)e^{−t} + 1 − q(H))` decreases strictly and continuously from `q(H)` at `t = 0` to `0`; solving
+`p_{F,r}(H) = ε` gives the stated `r > 0`. `q = p_{F,0}` is on the ray below the floor, so it is not on the segment and both
+measures are positive by (b); without a floor, `q` is on the half-ray and scores 0. ∎
+
+*Check.* V39 (600 instances, 300 of them threshold policies; pre-registered in R7-6b preregistration; all five
+predictions held, all verification): (a) matches a grid plus bounded minimization to `4·10⁻¹⁶`; on-segment behaviours
+score at most `5·10⁻¹⁶`, and below-floor, above-cap and off-ray ones at least `9·10⁻⁶`; the reductions to Defs 18 and 10
+hold to `1.4·10⁻¹³`; the untouched base model scores at least `2.2·10⁻⁴` with a floor and at most `5·10⁻¹⁶` without, and
+the floor meets the threshold to `1.5·10⁻¹⁴`.
+
+*Reading.* **Doing nothing is not always intended.** When a principal states a minimum — "at most 1 % harmful
+outputs" — the untouched default is no longer an aligned agent pursuing the target weakly; it is short of what was asked,
+and it is charged exactly the divergence to the least behaviour that meets the requirement.
 
 ---
 
@@ -1535,7 +1599,7 @@ must satisfy:
 | **M2** (sign) | `M ≥ 0` |
 | **M3** (representation) | `M` depends on the target only through the declared set `𝒯`, and every declared quantity carrying the unit of a representative is transformed with it (`β ↦ β/a` when `F ↦ aF + c`). For `[F]₊` this is invariance under `F ↦ aF + c`, `a > 0`; for `[F]_ord`, under every strictly increasing map |
 | **M4** (behavioural) | `M` depends on the agent only through `p̂`, or its per-context laws |
-| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared cap if there is one (Def. 18) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
+| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared floor and cap, if any (Defs 18, 20) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
 | **M6** (substrate-free) | `M` is defined for every full-support `p̂ ∈ Δ(X)`, or declared undefined by an explicit rule |
 | **M8** (contexts) | with contexts (Def. 9), `M` applies per context `c`, with aggregates `Σ_c ρ(c)·M_c` for the deployment and evaluation context laws `ρ_dep`, `ρ_ev` |
 

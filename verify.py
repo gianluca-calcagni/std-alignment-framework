@@ -1384,7 +1384,83 @@ def V38():
         if len(ends) >= 2: tot += 1; dis += (max(ends) - min(ends) > 1e-6)
     print(f"  (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances")
 
+# =====================================================================================================
+# R7-6b block: minimum intensity, the intended segment (Def. 20, Prop. 35). Pre-registered in
+# `70 Project/R7/R7-6b preregistration.md` (P1-P5) before any computation. All verification.
+# =====================================================================================================
+def _seg_free(ph, lq, F, r, s):
+    return KLl(np.log(ph), lgibbs(lq, F, min(max(_that_full(ph, lq, F), r), s)))
+def _seg_budget(ph, lq, F, r, s):
+    q = np.exp(lq); k = KL(ph, q); lh = np.log(ph)
+    kr = 0.0 if r == 0 else KLl(lgibbs(lq, F, r), lq)
+    ks = np.inf if np.isinf(s) else KLl(lgibbs(lq, F, s), lq)
+    if k < kr: return KLl(lh, lgibbs(lq, F, r))
+    if k > ks: return KLl(lh, lgibbs(lq, F, s))
+    lam = 0.0 if k < 1e-15 else lam_to_kl(lq, F, k)
+    return None if np.isinf(lam) else KLl(lh, lgibbs(lq, F, lam))
+
+def V39():
+    print("\n[V39] R7-6b: minimum intensity, the intended segment (Def. 20, Prop. 35), against the pre-registration (P1-P5)")
+    rng = np.random.default_rng(3909); ok = lambda c: "holds" if c else "FAILS"
+    e1 = e3 = e4 = 0.0; on_max = 0.0; off_min = np.inf; ordv = np.inf; base_w = np.inf; base_wo = 0.0; eps_err = 0.0; nthr = 0
+    for i in range(600):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q)
+        if i % 2 == 0:
+            F = rng.normal(size=n); r = float(rng.uniform(0.1, 2)); s = r + float(rng.uniform(0.2, 3))
+        else:
+            nthr += 1; H = np.zeros(n, bool); H[rng.choice(n, int(rng.integers(1, n)), replace=False)] = True
+            F = -H.astype(float); qH = q[H].sum(); eps = float(rng.uniform(0.1, 0.9))*qH
+            r = float(np.log(qH*(1 - eps)/(eps*(1 - qH)))); s = np.inf
+            eps_err = max(eps_err, abs(gibbs(lq, F, r)[H].sum() - eps))
+            # P5: the untouched base model
+            base_w = min(base_w, _seg_free(q, lq, F, r, s), _seg_budget(q, lq, F, r, s))
+            base_wo = max(base_wo, _seg_free(q, lq, F, 0.0, np.inf), _seg_budget(q, lq, F, 0.0, np.inf))
+        hi = s if np.isfinite(s) else r + 3.0
+        kind = i % 5
+        if kind == 0:
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 1: ph = gibbs(lq, F, rng.uniform(r, hi))
+        elif kind == 2: ph = gibbs(lq, F, rng.uniform(0, 0.95*r))
+        elif kind == 3: ph = gibbs(lq, F, rng.uniform(1.05*s, 2*s + 1)) if np.isfinite(s) else gibbs(lq, F, rng.uniform(0, 0.95*r))
+        else:
+            l = lgibbs(lq, F, rng.uniform(r, hi)) + 0.3*rng.normal(size=n); ph = np.exp(l - logsumexp(l))
+        lh = np.log(ph); mf = _seg_free(ph, lq, F, r, s); mb = _seg_budget(ph, lq, F, r, s)
+        # P1: formula vs grid + bounded minimisation over [r, s]
+        top = s if np.isfinite(s) else max(r, _that_full(ph, lq, F)) + 5.0
+        ts = np.linspace(r, top, 400); v = [KLl(lh, lgibbs(lq, F, t)) for t in ts]; t0 = ts[int(np.argmin(v))]; h = (top - r)/399
+        rr = minimize_scalar(lambda t: KLl(lh, lgibbs(lq, F, t)), bounds=(max(r, t0 - h), min(top, t0 + h)), method='bounded', options={'xatol': 1e-13})
+        e1 = max(e1, abs(mf - min(rr.fun, min(v))))
+        # P2
+        if kind == 1: on_max = max(on_max, mf, mb if mb is not None else 0.0)
+        elif kind != 0: off_min = min(off_min, mf, mb if mb is not None else np.inf)
+        # P3: order and reductions
+        if mb is not None: ordv = min(ordv, mb - mf)
+        if np.isfinite(s):
+            e3 = max(e3, abs(_seg_free(ph, lq, F, 0.0, s) - _cap_free(ph, lq, F, s)))
+            b1, b2 = _seg_budget(ph, lq, F, 0.0, s), _cap_budget(ph, lq, F, s)
+            if b1 is not None and b2 is not None: e3 = max(e3, abs(b1 - b2))
+        e3 = max(e3, abs(_seg_free(ph, lq, F, 0.0, np.inf) - _mfree(lh, lq, F)))
+        if np.sum(F == F.max()) == 1:
+            b1, b2 = _seg_budget(ph, lq, F, 0.0, np.inf), _mbud(lh, lq, F)
+            if b1 is not None and b2 is not None: e3 = max(e3, abs(b1 - b2))
+        # P4: M3
+        a, c = rng.uniform(0.2, 5), rng.normal()
+        e4 = max(e4, abs(_seg_free(ph, lq, a*F + c, r/a, s/a) - mf))
+        m2 = _seg_budget(ph, lq, a*F + c, r/a, s/a)
+        if mb is not None and m2 is not None: e4 = max(e4, abs(m2 - mb))
+    print(f"  P1 formula KL(p_hat||p_(F,t_hat)) + KL(p_(F,t_hat)||p_(F,t*)) against grid + bounded minimisation over [r, s]: max difference {e1:.1e} -> {ok(e1 <= 1e-9)}")
+    print(f"  P2 M1 and M5 within the segment: on-segment max {on_max:.1e}; below-floor, above-cap and off-ray min {off_min:.2e} -> {ok(on_max <= 1e-10 and off_min > 1e-9)}")
+    print(f"  P3 M_free_seg <= M_budget_seg: min gap {ordv:.1e}; reductions to Def. 18 (r = 0) and Def. 10 (r = 0, s = inf): max difference {e3:.1e} -> {ok(ordv >= -1e-10 and e3 <= 1e-10)}")
+    print(f"  P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change {e4:.1e} -> {ok(e4 <= 1e-9)}")
+    print(f"  P5 threshold policies ({nthr}): base model with the floor min {base_w:.2e}, without max {base_wo:.1e}; floor hits the threshold to {eps_err:.1e} -> {ok(base_w > 1e-9 and base_wo <= 1e-12 and eps_err <= 1e-12)}")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39"]
     for w in which: globals()[w]()

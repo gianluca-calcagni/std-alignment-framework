@@ -27,7 +27,7 @@ substrate, runs it through the framework, and gets:
 Until that works on real cases, the framework is a calculus, not a standard.
 
 **Current work:** the R7 refactor, one assumption per turn. R7-0 (v6.5), R7-1 (v6.6), R7-2 (v7.1), R7-3 (v7.2) and R7-4 (v7.3) are done; R7-5 closed as a clean negative (v7.3.1). **R7-7 is done (v7.4): target sets, the ordinal
-target; D4 fired on the budget convention** ([[R7-7 results]]). **R7-6a is done (v7.5): intensity caps** ([[R7-6a results]]). **R7-9 is done (v7.6): the core as a declared intended set** ([[R7-9 results]]; H9 promoted).
+target; D4 fired on the budget convention** ([[R7-7 results]]). **R7-6a is done (v7.5): intensity caps** ([[R7-6a results]]). **R7-9 is done (v7.6): the core as a declared intended set** ([[R7-9 results]]; H9 promoted). **R7-6b is done (v7.7): minimum intensity** ([[R7-6b results]]; H11 promoted).
 T3 closed as a clean negative; T3b and T7 deferred by the PI. Next is the PI's choice (ROADMAP §0). v7.3.3 was a
 review against §0's goal: its recommendations are [[ROADMAP]] §5 (for the PI), its other observations §7 below. **v7.0: the
 package is an Obsidian vault.** Next is R7-7 (target sets, confirmed by the PI), led by the ordinal target. Apply the PI's test — a real case,
@@ -227,7 +227,7 @@ exclusion]*.
 - Distrust: (b) is exactly the kind of unifying elegance I over-trust. And identifiability is a ceiling on what an
   agent can learn, not a mechanism by which it does.
 
-**H11. "Doing nothing" is a silent declaration** *[ROADMAP R7-6b]*.
+**H11. "Doing nothing" is a silent declaration** *[PROMOTED in R7-6b, v7.7: Def. 20, Prop. 35]*.
 - The ray starts at `t = 0`, so an agent staying at the default scores zero under the free convention — the mirror
   of the cap. Principal–agent theory calls that shirking (moral hazard), an alignment problem. It is also why the
   G2 "cannot get the request" floor is zero. A declared minimum intensity would make it visible.

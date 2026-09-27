@@ -101,7 +101,7 @@ minimizing over the second argument, and log-convex sets, Csiszár & Matúš (20
 - [[Thm 13]] — intent-ray decomposition
 
 ## Used by
-- none
+- [[Prop 35]] — the intended segment against the contract; R7-6b
 
 ## Mentions
 - [[R7-9 preregistration run 2]]
@@ -110,6 +110,7 @@ minimizing over the second argument, and log-convex sets, Csiszár & Matúš (20
 ## Mentioned in
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Def 19]] — declared intended set; R7-9
+- [[Def 20]] — minimum intensity and the intended segment; R7-6b
 
 ## Checks
 - [[V37]]
