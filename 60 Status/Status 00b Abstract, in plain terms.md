@@ -20,8 +20,9 @@ measure to exploitation inside cells, by declaration.
 
 **T7 case 2 (after v7.8)** — retirement-enrolment defaults. On Choi et al.'s 401(k) data, the framework's model of a
 human chooser passed its structural test: the options that are the default in neither regime moved together, and
-each default pulled toward itself. The hedge: the tolerance is loose, and the rows suggest that the default also
-changes what people value below it, in one of the two companies ([[T7-2 results]]).
+each default pulled toward itself. The hedge: the tolerance is loose, and a pattern suggesting the default acts as a
+floor failed to replicate on two further companies; there, the default's pull looked local, reaching the rates next to
+it, which would call for a richer reference family than B12's ([[T7-2 results]], [[T7-2b results]]).
 
 **T7 case 1 (after v7.8)** — the first contact with real data. On 216 AlpacaEval models and 65 LLMBar evaluator
 configurations, every verification prediction held. With independent gold labels, the framework's style term

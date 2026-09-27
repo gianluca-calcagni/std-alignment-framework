@@ -54,6 +54,7 @@ allowed for. The tolerance stays as registered.
 - **Company A** shows no such trend. Its largest `δ` (+0.59 at 42–47 months) sits on a cell of 0.9 %.
 - **Caveats:** the "below default" cells are 1–4 %, so their ratios are noisy; no standard errors are published; and
   hired-before and hired-after employees are observed at different dates.
+- **Tested since, and not replicated** ([[T7-2b results]]): the pattern held in Madrian & Shea's company and reversed in Company C.
 - **A follow-up test could check the Company B pattern:** register "`Δ_<` stays below `Δ_>`, with a gap that widens
   with tenure", and run it on Madrian & Shea's company or on Choi et al.'s Company C, if their distributions can be
   obtained as numbers.
