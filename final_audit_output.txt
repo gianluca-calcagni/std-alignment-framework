@@ -40,7 +40,7 @@
   same-budget raw regret (value units) = max F - E_ph F = 1.530e-07  (finite, and tiny: the actor is essentially aligned)
 
 [F6] cross-references (on the compiled linear views of the vault)
-  results defined in the core: 61; in the dictionary: ['B11', 'B12', 'B13', 'B4', 'B6', 'B7']; V-blocks: 34
+  results defined in the core: 70; in the dictionary: ['B11', 'B12', 'B13', 'B4', 'B6', 'B7']; V-blocks: 39
   unresolved references: 0
 
 [F7] Cor. 17.1: with both capacity constraints binding, R^C = M(lambda)/lambda (the budget convention)

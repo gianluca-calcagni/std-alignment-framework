@@ -89,6 +89,9 @@ says how large it is.
 - [[Cor 13.3]] — rescaling is purely axial
 - [[Cor 13.4]] — second order
 - [[Prop 16]] — gauge group and identified quantities
+- [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
+- [[Prop 35]] — the intended segment against the contract; R7-6b
 - [[Rem 13.5]] — whether rescaling is harmful depends on the declared convention; v6.3
 - [[Thm 17]] — every regret notion is a point on one convex curve
 

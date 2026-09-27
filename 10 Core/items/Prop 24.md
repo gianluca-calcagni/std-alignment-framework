@@ -9,7 +9,7 @@ tier: ["1"]
 assumes: []
 status: "proved"
 depends_on: ["Def 10", "Def 8", "Thm 17", "Lemma 5.1", "Def 9", "Def 3"]
-mentions: ["R074", "Thm 1"]
+mentions: ["Prop 31", "R074", "Thm 1"]
 checks: ["V30"]
 sources: []
 aliases: ["Proposition 24", "Prop. 24"]
@@ -46,6 +46,8 @@ full support.
 
 ## Notes and checks
 
+*Note (R7-7).* This is the case `𝒯 = [F]₊` of the contract restated for target sets. Prop. [[Prop 31|31]] covers any target set.
+
 *Check.* [[V30]]:
 - 600 random instances per axiom, with 0 violations for the budget and free measures.
 - The price measure fails M5 in 600 of 600 (median 0.23 nats).
@@ -74,6 +76,7 @@ quantity the word "misalignment" names (Def. [[Def 8|8]]; [[R074|row 74]]).
 - none
 
 ## Mentions
+- [[Prop 31]] — target sets against the contract; R7-7
 - [[R074]]
 - [[Thm 1]] — regret is a divergence
 

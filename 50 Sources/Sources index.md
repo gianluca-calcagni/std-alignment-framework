@@ -101,7 +101,7 @@ Mackay are used in [[B11|B §11]].
 - [[src Fluri 2025]] — B §2; D §2 row 44 · status V
 - [[src Kwa 2024]] — A Prop. 11; B §2; C4; [[R7-5 go-no-go]] · status V
 - [[src Laidlaw 2025]] — B §§2, 5 · status V
-- [[src Gao 2023]] — B §4; C7, C9 · status V
+- [[src Gao 2023]] — B §4; C7, C9; [[T3 results]] · status V
 - [[src Manheim 2018]] — B §3 · status K
 - [[src Karwowski 2024]] — B §3 · status U
 - [[src Beirami 2024]] — B §4; MSG; [[R7-5 go-no-go]] · status U (bound itself: V)

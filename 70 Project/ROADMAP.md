@@ -14,12 +14,12 @@ updated: "2026-09-26"
 
 | | |
 |---|---|
-| **Current** | **v7.3.2 — bibliography consolidated** (`references.bib`, one entry per source note, lint-checked). **v7.3.1 — R7-5 closed as a clean negative** ([[R7-5 go-no-go]]). The PI's rule: proceed only if a real case needs a divergence other than KL. None was found. Detectability and the measure's KL are forced (Stein/Chernoff; Thm 1). The regularizer cases belong to the explanation layer (Props 10–11). The one real defect — best-of-n and quantilizers on the true target score as misaligned — is an **ordinal-target** issue that KL handles (R7-7). Before that: v7.3 (R7-4, external reward), v7.2 (R7-3, two layers), v7.0 (vault) |
-| **Next** | **R7-7** — target sets, with the **ordinal target** as its lead case: `M_ord` (the KL projection onto the monotone-ratio cone, closed form by isotonic regression) and the split `M_free ≥ M_ord + M_free(p°)`. First task: pre-register, then write the target-set definition against the contract |
+| **Current** | **v7.7 — R7-6b, minimum intensity** ([[R7-6b results]]): a declared floor charges an agent that stays at the default when the principal requires a minimum; all 5 predictions held. The core now reads: misalignment is the KL projection onto a declared intended set (v7.6, R7-9), with target sets (v7.4, R7-7), caps (v7.5, R7-6a) and floors (v7.7) as the declarations. External contact: T3 closed as a clean negative (C9 not testable from published data). The history of every version is the hygiene log ([[Status 05 Hygiene log]]) and the Status abstract |
+| **Next** | **The PI's choice among the audit candidates, each needing its rule-13 example confirmed:** the split inside cells (§6 G1, G4), worst-context aggregation (M8), R7-8 (resolution). Identifiability (§6 I1) remains the lead brainstorming theme. Deferred: T3b, T7 |
 | **Baseline** | v6.4 is the revert target for the whole R7 series |
 | **PI decisions pending** | T6 (the strategic/frame layer) is **deferred by the PI**. Do not build toward it |
 | **Scope** | this thread's purpose (§1). The North Star is related but not in scope here |
-| **Workflow** | since v7.3.2 the repository is the source of truth: [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), AGPL-3.0, public. One roadmap step is one pull request, and CI reruns every check. Pre-registrations are pushed before computing |
+| **Workflow** | since v7.3.2 the repository is the source of truth: [github.com/gianluca-calcagni/std-alignment-framework](https://github.com/gianluca-calcagni/std-alignment-framework), AGPL-3.0, public. One roadmap step is one pull request (v7.3.3–v7.7 broke this: seven steps went into one branch), and CI reruns every check. Pre-registrations are pushed before computing. A fresh session starts at [[HANDOVER]] |
 
 ---
 
@@ -217,15 +217,71 @@ not" without assuming it, the layer needs dynamics, and it is recorded as such.
   separate. The "cheap ⇒ hard to detect" link becomes a property of the entropic counterfactual.
 - Quantilizers (`D_∞`) and χ²-regularization become native. *(v7.3.1: mis-filed. χ² is already native in the explanation layer, Props 10–11. Quantilizers on the true target are an ordinal-target case, R7-7.)*
 
-### R7-6 — A5: non-linear targets
+### R7-6 — A5: non-linear targets *(go/no-go done after v7.4: a narrow GO — [[R7-6 go-no-go]]; R7-6a done, v7.5 — [[R7-6a results]])*
+- **Outcome of the PI's test.** One real case fails by common sense: a **distributional** target (pluralism, RLHF
+  diversity loss, coverage). The linear measures score an agent collapsed onto the target's modes as perfectly
+  aligned. The minimal repair is a **declared intensity cap** on the existing ray: the regularized path of
+  `U = −KL(·‖p_T)` is exactly the ray of `log(p_T/q)` cut off at `p_T`. Proposed: **R7-6a** (caps and distributional
+  targets). General non-linear targets wait for a risk-sensitive, fairness or non-KL case the cap cannot repair.
+- *The plan as written before the test follows.*
 - The target becomes a functional `U` on `Δ(X)`.
 - *PI's test (v7.3.1):* passes at first sight — coverage and diversity targets, where the entropic intent charges dropped modes only logarithmically ([[R7-5 go-no-go]], case 4). Apply the test properly before starting.
 - The intent ray and Props [[Prop 20|20]]–[[Prop 22|22]] re-introduce linearity as a hypothesis.
 
-### R7-7 — A6: a set of targets *(confirmed by the PI, v6.5; part of the core — the target is a measurement-layer primitive)*
+### R7-7 — A6: a set of targets *(done, v7.4 — [[R7-7 results]])*
+
+**Outcome.**
+- Def. 17 (target sets; the cardinal set `[F]₊` and the ordinal set `[F]_ord`); the contract restated for target
+  sets (Def. 11: M1, M3 and M5 refer to the declared set); an instance is `(X, q, 𝒯, κ)` (Def. 12). For `[F]₊`
+  everything reads as before (M7).
+- Prop. 31: every target set's budget and free measures satisfy the contract. Prop. 32: the ordinal measure in
+  closed form (isotonic regression; the within-block divergence), the decomposition, the budget split
+  `KL(p̂‖q) = M_ord + KL(p°‖q)`, order invariance, and the budget measure's bounds and zero set.
+- Pre-registered ([[R7-7 preregistration]]): 6 of 10 predictions held; P6, P7, P8 and P10 failed as registered,
+  diagnosed in [[R7-7 results]]. **D4 fired:** the ordinal budget measure has no closed form, and its solver
+  failed to certify a zero on one R7-5 case of 393. Its zero set is exact without a solver (Prop. 32(f)); its
+  non-zero values are quoted only where the solver's starts agree.
+- Disagreeing principals: measured per principal; no aggregate is defined.
+
+*The plan as written before the step follows.*
 - **Lead case (from [[R7-5 go-no-go]]): the ordinal target** `{φ∘F : φ increasing}`. Best-of-n and quantilizers on the true target score as misaligned under the cardinal measures (`M_free` median 0.04–0.39 nats, positive in 93–100 % of instances). `M_ord` scores them 0 and keeps KL. For nearly correct evaluators, most of `M_free` is shape, not order. Whether shape counts is a declaration the framework currently makes silently.
 - Set-valued measures; aggregation only when a scalar is demanded.
 - This changes the status of the "disagreeing principals" exception.
+
+### R7-9 — The core as a declared intended set *(done, v7.6 — [[R7-9 results]]: run 1 stopped on D2 from test-design errors; run 2, resumed by the PI, held)*
+**Rule 13 check.** No verdict changes by design (M7). The PI approved it as structural. Its falsifiable structural
+claim: **the measures with unique minimizers and Pythagorean decompositions are exactly the projections onto
+log-convex intended sets** — the ray, the ordinal cone, the capped segment — while the ordinal budget set is not
+log-convex, which should explain R7-7's D4. If a load-bearing decomposition does not follow, that is a finding.
+
+**Aim.** Restate the measurement layer as one definition: **misalignment is the KL projection of the actual
+behaviour onto a declared set `𝓘` of intended behaviours.** The half-ray, the ordinal cone and the capped segment
+become generators of `𝓘` from `(q, target set, convention, cap)`; new notions become new generators, not new axioms.
+**Serves:** solid, importable.
+- **Restate the contract** as conditions on `𝓘` (M1: `M = 0` iff `p̂ ∈ 𝓘`; M5: `𝓘` contains the declared pursuit family),
+  and show that every current measure is a case, exactly (M7).
+- **Name the import:** Csiszár's I-projection theory. The Pythagorean splits (Thm 13), the ordinal decomposition
+  (Prop. 32) and the overshoot term (Prop. 33) should all follow from it; any that does not is a finding.
+- **A declaration registry:** each declaration (`q`, the target set, the convention, the cap, the resolution of
+  `X`, context weights) gets an **elicitation story** — how a real principal states it — and a **justified
+  default**.
+- **A silent-declaration audit:** list every choice made in computing `M` from `(X, q, F, p̂)` and ask whether a real
+  principal would choose otherwise. Known candidates: the resolution of `X` (R7-8); the split inside cells (§6
+  G4); the lower end of the ray (R7-6b); linear averaging over contexts (M8); `q` itself.
+- **Tests.** Pre-register. Every existing measure is reproduced exactly (V1–V36); the contract as restated passes
+  V30's sanity suite; the audit lists each candidate with a verdict (declare, keep with default, or out of scope).
+- **Falsifier:** a load-bearing result that cannot be stated as a property of the projection onto `𝓘`.
+
+### R7-6b — Minimum intensity *(done, v7.7 — [[R7-6b results]])*
+**Rule 13 check.** A content policy requires harmful outputs at most 1 %; the base model has 5 %. With the target
+"avoid harm", the free and budget measures score the untouched base model as perfectly aligned: the ray starts at
+the default, and M5 exempts weaker pursuit. Compliance regimes — safety thresholds, minimum service levels — say it
+violates the intent. A declared floor at the ray point where the harmful rate is 1 % repairs it; with R7-6a's cap,
+the intended set is a segment from floor to cap.
+- The ray starts at `t = 0`, so an agent staying at the default scores zero under the free convention. Shirking is
+  an alignment problem in principal–agent theory. Mirror R7-6a: a declared **floor** behaviour on the ray, with
+  pursuit below it charged. With no floor, everything reads as now. Apply the PI's test first: a real case where
+  non-pursuit is wrongly scored as aligned.
 
 ### R7-8 — A7: measurable spaces *(optional, last)*
 - Integrability hypotheses per result.
@@ -286,7 +342,8 @@ second index in the same turn.
 - P9, KL-penalized policy gradient at scale: **dropped.** No framework claim depends on it.
 
 ### Later, only if a turn's goal needs them
-- T3: the overoptimization slope against published coefficients.
+- T3: the overoptimization slope against published coefficients. *(Done after v7.4: not testable from published data — [[T3 results]].)*
+- T3b: replicate C9 with small open models — measure `ρ` and `sd` under the initial policy, fit `α_bon`. Needs compute and model hosts.
 - T4: the closed-loop carrier decision.
 - T5: the dynamic form.
 - A statistical layer. It must allow narrow errors to have broad effects: emergent misalignment contradicts
@@ -320,3 +377,262 @@ second index in the same turn.
 10a. **R7 discipline.** One assumption per turn; definitions before dependents; a DAG check every turn; exact
     reduction to v6.4 in the special case. If in doubt, stop and restore.
 10. **Every turn ends with §0 updated.**
+11. **Label every pre-registered prediction as *verification* or *empirical*** (after v7.5). A verification
+    prediction checks a proof and can fail only through a bug or a badly scaled threshold; an empirical one can be
+    wrong about the world. Only empirical predictions count towards the base rate (Status §6).
+12. **Brainstorm and go/no-go steps use a light protocol** (after v7.5): a report note, a ROADMAP line and a
+    hygiene row; no version bump unless the core changes. The full R7 discipline is for steps that change the core.
+13. **Before starting any work item, confirm it is meaningful** (the PI, after v7.5): name at least one concrete
+    example in which the item changes a verdict, a number or a decision. No example, no item. It generalizes
+    the PI's R7-5 test from refactor steps to every step, and it is checked at the top of the item's note.
+    **Structural exception** (the PI, after v7.5): an item that changes no verdict may run if the PI approves it
+    *and* it states a structural claim that could fail — a theorem it must prove, or a result it must reproduce or
+    explain — so that "structural" does not mean "unfalsifiable".
+
+## 4b. When is the core final? *(proposed after v7.5; the PI to confirm)*
+
+1. The declaration space is listed (R7-9's registry), each declaration with an elicitation story and a default.
+2. The contract is unchanged for three consecutive core steps.
+3. One real diagnostic per substrate (T7), with the imported theorems named.
+4. One outside reader — a human, or a model of a different family — has run a real case through it.
+
+Until all four hold, the core is a checked calculus, not a standard.
+
+---
+
+## 5. Recommendations from the v7.3.3 review *(status after v7.7: 1 half done, 2 done, 3 open)*
+
+A review of the whole package against §1. The mathematics is sound, as far as the proofs read go; the limits are
+shown unusually well; and every numerical check reproduces on a second machine. The two outward criteria of §1 —
+**testable predictions** and **diagnostics** — are not yet met, by the project's own definition of done ([[NOTES_claude]]
+§0: an outsider runs a real case and gets a diagnosis, a checkable prediction and the imported theorems). Three
+recommendations, in order. A fourth — a lint rule for stale status banners, and the corrections it prompted — was
+applied in v7.3.3. The review's other observations are in [[NOTES_claude]] §7.
+
+1. **Run T3 and one T7 case before R7-7, or alongside it.** *Serves: predicts, diagnoses.* *Status: T3 done, a clean negative ([[T3 results]]); T7 deferred by the PI. The outward criteria are still unmet.*
+   - R6 marked "diagnostics on real cases, and predictions that transfer across optimizers" as underserved, and
+     named T7 and T8 as the next turns ([[R6_LOG]] §1). Five refactor steps followed (R7-0 to R7-4), then R7-5's
+     go/no-go. Each passed the drift test on its own terms. Together they deferred the two criteria that no
+     refactor can serve.
+   - C8, C9 and C11 have been checked only on the project's own generators. Status §6: almost nothing has come from
+     a prediction succeeding on its own terms.
+   - T3 — C9, the overoptimization slope `α ≈ √2·ρ·sd` against published coefficients — is by Status §3 "the
+     cheapest external contact", and it sits under "Later".
+   - **Proposal.** T3 as one small pre-registered step. T7 with one case first, before committing to four: the
+     human default case, where B12 supplies the identification ([[NOTES_claude]] H6). If that case yields only a
+     relabelling, T7's gate has fired early and cheaply.
+2. **Treat R7-7 as a correction to the definition of misalignment, not an extension.** *Serves: solid.*
+   - The measurement layer's intended behaviour is always a Gibbs tilt of the declared reference. So
+     "misalignment" is the distance from what an **entropic** agent pursuing `F` would do. M5 protects pursuit by
+     that one model only: best-of-n and quantilizers run on the true target score as misaligned in 93–100 % of
+     instances ([[R7-5 go-no-go]]).
+   - **Proposal.** R7-7 restates M5 without the Gibbs family: an agent that pursues a declared member of the
+     target set, at any intensity, has `M = 0`. It then shows that the cardinal declaration recovers the current M5
+     exactly (M7). The cardinal/ordinal choice becomes a declared convention of Def. 8, like price, budget and free,
+     instead of a silent default.
+   - *Carried out in R7-7 (v7.4): Def. 11's M5 now reads "`p̂ = p_{G,t}` for some `G ∈ 𝒯`", and the target set is part of the instance (Def. 12).*
+3. **Say who the raters and reviewers were, and add one from outside.** *Serves: solid, limits.* *Status: open.*
+   - The census raters and reviews R5 and R6 are called independent, but the vault never says who or what they
+     were. R5's scripts ran under `/home/claude/` (`reviews/R5_independent/compare.py`), which suggests sessions of
+     the same model family as the executor. Errors from one model family are correlated, and "independent"
+     then means less than it says.
+   - Agreement was moderate: κ 0.54–0.57 between the first two raters on expressibility, and 0.04 between the
+     first rater and the third rater's blind codes on the disputed items. The "specific" band, 55–61 %, spans two
+     codings of one rater; it does not carry the between-rater uncertainty.
+   - **Proposal.** State the raters' and reviewers' identity in [[T1_census_routing]], [[R5_LOG]] and [[R6_LOG]]. For the
+     next measurement on held-out items ([[T1_RULES_FROZEN]] §3), use at least one human rater or a different model
+     family. The frozen measurement is not re-run (§3).
+
+---
+
+## 6. Dropped ideas, to brainstorm before they return *(PI, after v7.4; reworked with the source)*
+
+**Why this section exists.** The reviews retracted many claims for good reasons. Often the *scenario* behind a
+claim was dropped along with its *formulation*, and nothing replaced it. Ignoring those scenarios is wrong, and
+so is putting them back unchanged. Each item records the scenario, what killed its formulation, what survives
+today, and a question to brainstorm. It is not a build step.
+
+**The source.** The PI supplied the **Alignment Subframework** (`00_HANDOVER`, `01_setting`,
+`02_decomposition`, `03_status`, `A_antipatterns`, `B_ethos`): the persona-based framework whose claims are
+retraction rows 1–6 ([[Status 02 Retraction history]]). It is archived unedited in
+`archive/alignment_subframework/` and cited below as *SF* with its file and section. The v6.2 package holds only
+the retraction rows.
+
+**Rules for every item.**
+1. **State the killing correction first**, and how the proposal avoids it.
+2. **A rate or a cost, not a measurability condition** ([[Method]] item 19). **Define the thing before
+   decomposing it** (item 20). **Check that its signature is not shared with another gap** (item 22).
+3. **Place it:** layer (measurement or explanation), locus (L1–L7), and the existing results it touches. The
+   SF's own rule carries over unchanged: a claim whose truth depends on the modelling rule is about the model,
+   not the agent (SF `01` §3.2; here, Def. 7's reporting rule and the contract's M4).
+4. **Pass the drift test** (§1) before it becomes a pre-registered roadmap step.
+
+**Translation.** SF's objects map onto today's as follows, approximately:
+- the principal's intent `≻_P` is a target set (Def. 17), and the reward channel `r` an evaluator (Def. 13);
+- the reach `O` is the set of achievable behaviours, `Δ(X)` or a capacity set;
+- the carried σ-algebra `𝒞_t` is a partition of `X` the agent can condition on — new;
+- the self-reachable σ-algebra `𝒮_t`, and the self-interventions `𝒜_self`, have no counterpart — new.
+
+SF's persona-state machinery (`Φ_t`, `V` on states) has no counterpart, and on the rules above none is needed
+unless a gap cannot be stated behaviourally.
+
+### G0 — The frame: "alignment holds iff all five gaps close" *(rows 1, 3, 7)*
+- **SF.** Alignment is five distinct failures, each with a formal condition and a quantity (`02` §0). Three are
+  "un-closable in principle" (`02` §0.1). The coupling of §6 implies "an irreducible floor on total failure".
+- **Killed by.** Circularity: alignment was defined only through its decomposition (row 1). The un-closability
+  verdicts were artifacts of measurability conditions with no threshold, and only one impossibility survived
+  (row 3; which one is not recorded — on SF's own table the candidates are §1 representability, an imported
+  theorem, and §2 observability, an information-theoretic fact). The floor was never established (row 7).
+- **Today.** Alignment is defined independently (Defs 10, 11, 17). The loci L1–L7 descend from SF's chain
+  (`02` §7.1) through R3's ontology.
+- **To brainstorm.** Restate each gap as a *term or a floor of the defined measure*, so that "aligned iff every
+  gap is zero" becomes a checkable statement rather than a definition. Settle which impossibility survived.
+
+### G1 — Specification, and its underdetermination *(rows 39, 61; partly carried)*
+- **SF.** Three sub-failures: representability (no reward orders trajectories as intended; Abel 2021, Bowling
+  2023), choice (the wrong reward was emitted: Goodhart), fidelity (the pipeline distorts it). "Magnitude matters
+  exactly insofar as the transform is not order-preserving." Plus **underdetermination**: where the agent
+  distinguishes more than the principal, the intent is indifferent over what the agent can act on (`02` §1; `01`
+  §5).
+- **Killed by.** Nothing killed the gap. Row 39 retracted "uniform rescaling is harmless"; row 61 restored it
+  under the budget and free conventions.
+- **Today.** Choice is the evaluator error (L2), the core's main object. Representability: non-linear targets
+  (Prop. 15; R7-6) and census A10, A11. **Fidelity: R7-7 vindicates SF's statement in full, as a declaration:**
+  under an ordinal target, every order-preserving transform is harmless (Prop. 32(e)). **Underdetermination is
+  handled silently, the other way round:** where the target is flat, the declared reference governs, and an
+  agent that fills in the details differently is charged (Prop. 32(b)).
+- **To brainstorm.** Declared indifference: a target stated on the principal's coarser partition `𝒢`, with
+  intended behaviours free inside its cells (by the chain rule, departures inside a cell drop out). Where does
+  SF's CoinRun reading — specification underdetermination, not persistence — sit against the census routing,
+  which files CoinRun and goal misgeneralization as context shift (C1, C2 → L5)?
+
+### G2 — Transmission: observability and retention *(rows 5, 6; the gap itself vanished unretracted)*
+- **SF.** A distinction the intent depends on must be carried by the agent's representation, or no reward on it
+  can shape the agent's evaluator (`02` §2). Two levels: **observability** (the distinction is absent from
+  everything any observer could see — "do what I'd endorse on reflection"; never heals) and **retention** (this
+  agent does not carry it — "the model doesn't understand"; heals with learning). Consequences: "alignment is a
+  property of a (principal, agent, environment) triple" (`01` §2.3); a diagnostic signature, **"more reward does
+  not help; the proxy shifts instead"**; and two derived claims.
+- **Killed by.** The derived claims: value learning is harder than world learning *by requirement* (row 5: a
+  bandwidth ratio, and the channel-modularity premise is false), and "you can only specify values in concepts
+  already acquired" (row 6: true instantaneously, false dynamically). The signature was shared with another
+  locus, which invalidated a nominated first experiment ([[Method]] item 22). The gap itself was never
+  retracted: it did not survive the v6 rebuild, which kept only what the static calculus could hold.
+- **Today.** Nothing in the core. The measurement layer cannot see it (Def. 11's limit: an agent that does not
+  grasp the request is behaviourally misdirected). Fragments sit in the explanation layer: B7
+  (information-limited regulation; Fano floor), Prop. 21 (an agent that sees only the evaluator).
+- **To brainstorm.**
+  - *Retention as a cost:* an actor whose behaviour inside the cells of a coarser partition `ℋ` is fixed.
+    Under the free convention its floor is 0 (doing nothing is allowed). Under the budget convention the floor
+    is positive whenever the target is not `ℋ`-measurable and the agent spends information *(sketch,
+    unverified)*.
+  - *Observability:* where does "not in any observation" enter a behavioural framework — as a target that no
+    target set on `X` expresses (outside-E), or as an environment-relative `X`?
+  - *The signature:* which pair of gaps did it fail to separate, and does a two-dimensional signature (response
+    to more reward, response to finer features) separate them?
+
+### G3 — Grounding: the exposed fraction *(row 4; the quantity was lost with the condition)*
+- **SF.** Grounding fails when the agent can move its own evaluator by acting on itself. The self-reachable
+  σ-algebra `𝒮_t` holds the events the agent can vary with self-interventions `𝒜_self` alone (`02` §3).
+  Wireheading, reward tampering and the delusion box are one failure; preference manipulation is the same failure
+  by a longer path. Two quantities: the variance share `E_t`, and the **achievable range under self-only
+  policies**, `R_t = [sup − inf over Π_self of E_π V] / range(V)`, "estimable as the share of reward-model
+  variance explained by features the policy controls independently of task outcome — length, hedging, flattery,
+  formatting". Claims: `R_t` grows with the self-control repertoire; every grounded persona admits an exploit.
+- **Killed by.** The *condition* "grounding holds iff `V` is not `𝒮_t`-measurable" is generically satisfied,
+  hence vacuous (row 4). **Nothing killed `R_t`**, which is exactly the rate that [[Method]] item 19 asks for.
+- **Today.** Nothing. Wireheading, reward tampering and the delusion box are routed outside the frame, as
+  snapshots (census A3–A5 → L7, condition (X)). Sycophancy and length bias are ordinary evaluator error (L2).
+- **To brainstorm.** In today's calculus `R_t` is a **width**: the range of the evaluator over the sub-reach of
+  behaviours that differ only in outcome-irrelevant, self-controllable features. Compare Def. 6's width of the
+  capacity set along the error. Is that sub-reach declarable behaviourally — outcome-equivalence classes of `X`
+  under the target? If so, grounding re-enters **inside** the frame as a measurement-layer quantity, and
+  wireheading moves from (X) to a limit case. **First use: T7's RLHF length-bias case**, which is exactly SF's
+  example.
+
+### G4 — Persistence: refinement and the indifferent extension *(never retracted; dropped with the dynamics)*
+- **SF.** When the agent refines its representation, the goal extends in exactly one way (the pullback), and
+  that way is indifferent to every newly distinguished dimension; refinement also expands the reach. So
+  capability growth and ontology drift are not independent risks, and "reasoning training is not goal-neutral
+  even with the objective untouched" (`02` §4). The criterion: a refinement is **behaviourally goal-safe iff
+  argmax commutes with pullback**. The canonical section is reverse Bayesianism (Karni & Vierø), the
+  maximum-entropy one.
+- **Killed by.** Nothing. It left with the dynamic material in the v6 rebuild.
+- **Today.** The static half is already in the core, unnamed. A target pulled back to a refined `X` is constant
+  on the new cells, and every intended behaviour splits mass inside them in proportion to the declared
+  reference. That is SF's maximum-entropy section, **adopted silently** — the same kind of silent declaration
+  R7-7 removed for exchange rates. The census routes ontological crisis and the diamond maximizer outside the
+  frame (C5, C6).
+- **To brainstorm.** One refinement step is static: `X′ → X`. State the commutation criterion there, and ask what
+  each convention charges an agent that exploits the new cells. Should the intended split inside new cells be a
+  declaration, as with G1's declared indifference? This is the natural lead case for R7-8's "declared
+  resolution", which would turn that optional step into a real one.
+
+### G5 — Verification: states, not maps *(row 2; rightly reclassified)*
+- **SF.** An agent can report states but not maps, and its evaluator is a map, so eliciting latent *values* is
+  structurally harder than eliciting latent *beliefs*; an agent cannot verify its own goal preservation (`02`
+  §5, §4.4). The one claim that **inverts** a common assumption: a system should confabulate *less* about process
+  to the extent its process is externalised into readable context.
+- **Killed by.** "Verification is a fifth alignment gap" → assurance, a different type (row 2). That is correct:
+  it is about observing the evaluator, not producing it, as SF itself notes (`02` §7.2).
+- **Today.** External verification is detection (Props 18, 19; the evaluation gap). Introspection is filed
+  under interpretability (census "category").
+- **To brainstorm (low priority).** Keep the inverting prediction as a named explanation-layer prediction, to
+  run when model access exists; it needs SF's mandatory control (the externalised chain must be causally
+  load-bearing).
+
+### C1 — The coupling: grounding versus transmission *(rows 5, 6, 7)*
+- **SF.** The channel into the evaluator that the agent cannot write must be narrow; so fine value
+  specification runs only through learned concepts, and widening that channel improves transmission while
+  worsening grounding (`02` §6).
+- **Killed by.** Its premise, separate channels for value and world, is false (row 5); its conclusion holds only
+  instantaneously (row 6); the floor was never located (row 7).
+- **To brainstorm, after G2 and G3 are quantities.** Restated without the channel premise: does the
+  evaluator's **resolution** — how finely it separates behaviours — trade against its **exposed fraction**? A
+  richer evaluator has more features, and more of them may be self-controllable. That is testable in the core
+  once G3's width exists.
+
+### I1 — Identifiability *(PI, after v7.5; the lead theme for brainstorming)*
+- **Why it matters.** Identifiability is what lets an agent model the principal's request at all, and what lets a
+  principal model the agent. In the core it is used only as a *limit* (Props 12, 16, 26(b)), never as a primitive.
+- **What is already there.** The entropic actor identifies its objective up to `[F]₊` (Prop. 16); best-of-n only up to
+  its order (V26). R7-7's defect was declaring a target set finer than best-of-n identifies; the fix was its
+  identification class. R7-6a's cap is a behaviour because intensity is not identified.
+- **Hypotheses to brainstorm** ([[NOTES_claude]] H10):
+  - (a) the natural target set for a channel is its identification class, and misalignment measured with a
+    finer set charges the agent for distinctions the channel cannot carry — which is v5's transmission gap;
+  - (b) each of v5's five gaps is an identification failure along a different channel;
+  - (c) value learning and oversight are two inverse problems on one channel; detection (Prop. 18) is only the
+    testing half of the second.
+- **First concrete question.** Define the identification class of a channel from intent to behaviour, and compute
+  it for three channels: the entropic actor, best-of-n, and a Bradley–Terry preference learner (which should
+  identify the target only up to a constant per context). Does (a) predict which misalignments each can and
+  cannot correct?
+- **Caution.** Identifiability is a ceiling on what can be learned, not a mechanism by which it is; whether an
+  agent reaches the ceiling is estimation (the statistical layer).
+
+### Needing more clarity *(after v7.5)*
+- **The declared reference `q`** carries the default, the zero of intensity and the unspecified details inside
+  cells. It needs its own elicitation story and contract (R7-9; NOTES H13).
+- **Execution failure versus misdirection:** v5 counts execution as capability; the measurement layer must count
+  unsystematic slips as misdirection (Def. 11). The disagreement should be stated, not left implicit (L4).
+- **The chain rule of KL as the gaps' bridge** (G0; NOTES H12): speculative, unchecked.
+- **What "intensity" means for non-cardinal target sets** (R7-6a results, Open).
+
+### Other dropped ideas
+- **L1 — Levers** *(rows 16, 17; v5, not in SF)*. Which intervention moves which term: re-specify acts on the
+  error; enlarging the probe space gates three other levers. SF's closability table (`02` §0.1) is the same
+  question asked of the gaps. Brainstorm for T7's diagnostic protocol: for each quantity the core reports, which
+  lever moves it.
+- **L2 — The frame table, including maintaining the frame** *(rows 24, 25; attack A11)*. Subsumed by reward
+  tampering, corrigibility and instrumental convergence; it lacked the cell for an actor *maintaining* its
+  frame. SF's route (b) (the agent varies the principal's preferences) and its point that the feedback arrow is
+  both the correction path and the manipulation surface belong here. Held for T6.
+- **L3 — The principal's own compression, and chains** *(row 14; [[Method]] item 21; SF `01` §1, §5)*. SF says
+  the principal is also a persona, with its own coarseness, and that neither partition refines the other in
+  general, so G1's underdetermination and G2's retention usually hold at once. Errors add along a chain (row 14).
+  Brainstorm with G1 and G2: a chain in which each link passes on a compressed target.
+- **L4 — Execution and competence** *(row 19; SF `02` §7.2)*. SF drew the alignment/capability boundary: gaps
+  upstream of the evaluator are alignment, downstream (execution, competence) are capability. Today's analogue
+  is the contract's M5 — intensity is not misdirection — and locus L3. Low priority: is there an actor model
+  that separates slips from misdirection given an independent measurement of the noise, as B12 does for defaults?

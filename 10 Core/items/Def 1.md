@@ -50,6 +50,7 @@ and the actor's reference.
 ## Used by
 - [[B12]] — Human choice — logit, defaults, rational inattention, present bias *(new in v6.2)*
 - [[Def 12]] — alignment instance; formal
+- [[Def 17]] — target sets; R7-7
 - [[Prop 12]] — what behaviour identifies
 
 ## Mentions

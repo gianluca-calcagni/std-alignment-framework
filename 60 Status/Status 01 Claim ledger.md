@@ -25,7 +25,7 @@ updated: "2026-09-26"
 | worst-case regret is not separable | A Thm [[Thm 9\|9]] | V5 | **C3** |
 | four conjugate pairings | A Prop. [[Prop 10\|10]] | V6, 0 / 20,000 each | C4 |
 | KL exposure infinite under sub-exponential tails; χ² finite under finite variance | A Prop. [[Prop 11\|11]] | V6 | **C4** |
-| behaviour identifies only the tilt (not `β`, not `q`) | A Prop. [[Prop 12\|12]] | — | C10 |
+| behaviour identifies only the tilt (not `β`, not the actor's own reference `q_A`), under (E_A) | A Prop. [[Prop 12\|12]] | — | C10 |
 | full-ray decomposition `β·R_J = D_⊥ + D_∥` (Thm [[Thm 13\|13]](a)); rescaling is axial | A Thm [[Thm 13\|13]](a), Cors [[Cor 13.3\|13.3]]–[[Cor 13.4\|13.4]] | V7, 10⁻¹² | C5 |
 | initial sign `−Cov_q(F̂,F)`; terminal value by argmax agreement | A Prop. [[Prop 14\|14]] | V8 | C6 |
 | regret is a Bregman divergence for any convex regularizer and concave target *(v6.1)* | A Prop. [[Prop 15\|15]] | V12 | C1, C7 |
@@ -57,6 +57,11 @@ updated: "2026-09-26"
 | selection sees only rewarded behaviour (any actor); the selection differential between types vanishes at rate `β·gap_R` *(R7-4)* | Core Prop. [[Prop 29\|29]] | [[V34]] (P8, window) | [[C07]] |
 | fake-alignment gap: `Γ_free →` deployment misalignment when `argmax R = argmax F` in evaluation; reward hacking exposed, with limit `−log sup_t p_{F,t}(x_R)` *(R7-4)* | Core Prop. [[Prop 30\|30]] | [[V34]] (P6, P7) | [[C15]] |
 | the misalignment contract (M1–M9); budget and free measures satisfy it; the price measure fails M5 (it charges a right-target agent at the wrong intensity); raw `ΔF` fails M1–M2 *(R7-0)* | A Def. [[Def 11\|11]], Prop. [[Prop 24\|24]] | V30 | C5 |
+| **target sets** *(R7-7)*: the contract restated for a declared set `𝒯` (M1, M3, M5); every target set's budget and free measures satisfy it; `[F]₊` gives back Def. 10 exactly; a larger set can only lower the measures | Core Def. [[Def 17\|17]], Def. [[Def 11\|11]], Prop. [[Prop 31\|31]] | [[V35]] (P5, P9, P10) | [[C05]] |
+| **the ordinal measure** *(R7-7)*: `M_ord` in closed form (isotonic regression; the within-block divergence from `q`); the decomposition and the budget split `KL(p̂‖q) = M_ord + KL(p°‖q)`; invariance under every increasing map; `M_ord ≤ M_budget([F]_ord) ≤ M_budget`, with equal zero sets. *The strict first inequality failed as registered (P8) and is withdrawn from the statement* | Core Prop. [[Prop 32\|32]] | [[V35]] (P1–P4, P6, P8) | [[C05]] |
+| **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. [[Def 18\|18]], Prop. [[Prop 33\|33]] | [[V36]] | [[C05]] |
+| **the core as a declared intended set** *(R7-9)*: every measure is the KL projection onto a declared set `𝓘`; the contract is a set of conditions on `𝓘`; on log-convex sets the projection is unique with a Pythagorean inequality, which yields Thm 13(a), Prop. 32(c) and Prop. 33(b) | Core Def. [[Def 19\|19]], Prop. [[Prop 34\|34]] | [[V38]] (run 1: [[V37]], stopped) | [[C05]] |
+| **minimum intensity** *(R7-6b)*: a declared floor on the intent ray; the segment free measure is the error off the ray plus an undershoot or an overshoot; both segment measures satisfy the contract with M5 within the segment; an untouched default is charged under a threshold policy | Core Def. [[Def 20\|20]], Prop. [[Prop 35\|35]] | [[V39]] | [[C05]] |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. [[Prop 22\|22]] | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark [[Rem 13.5\|13.5]] | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. [[B04\|B4]] | V9 | C9 |
@@ -69,6 +74,8 @@ updated: "2026-09-26"
 
 | Claim | Evidence | Scope |
 |---|---|---|
+| the ordinal budget measure has no closed form; a five-start solver certified `≤ 10⁻⁸` on 392 of 393 best-of-`k` and quantilizer cases, and returned `7.3·10⁻⁶` on one, where the starts disagreed (D4 fired) *(R7-7)* | [[V35]]; [[R7-7 results]] | solver-dependent |
+| the share of the cardinal `M_free` that is ordering error: median 0.26 at small noise on V35's generator, against 0.02 on R7-5's *(R7-7, exploratory)* | [[V35]] X2 | generator-dependent; not to be quoted across generators |
 | masking is not monotone: a moderate incentive reveals more about the own objective than none in 50 % of random instances (pre-registered 10–70 %) *(R7-4)* | [[V34]] | generator-dependent |
 | under reward hacking, evaluation misalignment rises with the incentive (median ×4.6 from `κ = 0` to `300`) *(R7-4, not pre-registered)* | [[V34]] | generator-dependent |
 | slack distributions of every bound | V1, V2, V4 | random instances; the generators are in `verify.py` |
@@ -117,8 +124,8 @@ updated: "2026-09-26"
 
 | Claim | Where | Why flagged |
 |---|---|---|
-| rank reversal and the conjugacy picture hold for non-Gibbs actors | C7, C8 | **the weakest joint; untested** |
-| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | untested |
+| the crossing (rank reversal) holds for every optimizer, and one index orders where it falls | C7, C8; [[ROADMAP]] T8 | tested on one instance (V5) for five optimizers: it held for all, and its location varied about 180-fold (R5, R6; §1.2). No general statement, and no index yet. *(Until v7.3.3 this row read "untested". Its other half, the conjugacy picture, is tier 1: Props [[Prop 10\|10]]–[[Prop 11\|11]] hold for any behaviour, and what actual optimizers expose is [[B02\|B §2]].)* |
+| `α ≈ √2·ρ·sd` against published overoptimization coefficients | C9 | **not testable from published data** (T3, pre-registered): Gao et al. report `α_bon` ≈ 0.51–0.65 (figure only) and `sd = 1`, but not `ρ`. Needs replication (T3b) |
 | delay sets a bandwidth; correction amplifies error near crossover; double protection restated | C §5.1 | simulation only; the actor acting on `τ` is outside the core |
 | the closed-loop lift as the next carrier | C §5.2 | proved pieces, untested as a carrier |
 | transverse errors compose along chains | C §5.3 | unexamined |

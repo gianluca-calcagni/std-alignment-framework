@@ -7,7 +7,33 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
+> **Status: v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
+> intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm
+> threshold, a service level (Prop. 35). All five pre-registered predictions held (R7-6b results).
+>
+> **v7.6 (R7-9).** **One definition.** Misalignment is the KL projection of the actual behaviour onto a declared set
+> of intended behaviours (Def. 19); every earlier measure is a case, and every decomposition of the core comes from one
+> fact, convexity of the divergence along geometric lines in a log-convex set (Prop. 34). New notions are new ways to
+> declare the set, not new axioms. Run 1 stopped on its registered rule D2 (test design); run 2 held (R7-9 results).
+>
+> **v7.5 (R7-6a).** **Intensity caps.** A principal can declare how hard the target is meant to be pursued, as a
+> behaviour on the intent ray (Def. 18). Weaker pursuit stays exempt; pursuit beyond the cap is charged as overshoot plus
+> transverse error (Prop. 33). A distributional target — a spread of behaviours — is the cap at `p_T`, which is also what
+> the non-linear target `−KL(·‖p_T)` gives. Pre-registered; all seven predictions held (R7-6a results).
+>
+> **v7.4 (R7-7).** **Target sets.** An instance declares a target set: the cardinal set `[F]₊` (the default,
+> and everything before v7.4) or the ordinal set `[F]_ord`, when only the order of outcomes is intended (Def. 17).
+> The contract is restated for target sets (Def. 11), and every target set's budget and free measures satisfy it
+> (Prop. 31). The ordinal free measure has a closed form by isotonic regression, and it scores best-of-n and
+> quantilizers on the true target as aligned (Prop. 32). Pre-registered: 6 of 10 predictions held, and the
+> registered falsifier D4 fired, because the ordinal *budget* measure has no closed form and its solver failed once
+> in 393 (R7-7 results).
+>
+> **v7.3.3.** Only §12 changed, whose actor paragraph had not fully absorbed the v6.4 tier corrections. It now matches the tier table: Thms 1, 13
+> and 17 and Prop. 18's cap hold for any actual actor. It also states the one dynamic element of (E_R), and the limit that
+> R7-5 found: the target is cardinal, so best-of-n run on the true target scores as misaligned (R7-7 is the repair).
+>
+> **v7.3 (R7-4).** The explanation layer gains **external reward**: the agent's own objective `G`
 > versus the reward `R` of an outer process. The weight on `R` is a derived shadow price
 > (Prop. [[Prop 27|27]]), and "complies when rewarded, reverts when not" follows from one stationary dynamic element.
 > Also new: incentive masking, selection blindness and the fake-alignment gap (Props [[Prop 28|28]]–[[Prop 30|30]]). The work

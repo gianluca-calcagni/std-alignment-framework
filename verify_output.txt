@@ -205,3 +205,56 @@
   Prop 29 [P8]: selection differential log-slope / (-beta gap_R) in the same window: min 0.9581, max 1.1246, within 10%: 0.993 (n=300)
   Prop 30(a,b) [P6]: argmax R = argmax F in evaluation: M_free(kappa=300)/M_free(0) < 1% in 1.000 of 60; deployment is kappa-free by construction (Prop 27(c))
   Prop 30(c) [P7]: argmax R != argmax F: min M_free(kappa=300) = 0.131; median M_free(300)/M_free(0) = 4.62; limit -log sup_t p_(F,t)(argmax R) matched at kappa = 3000 to 1.3e-05
+
+[V35] R7-7: target sets and the ordinal target (Def. 17, Props 31-32), against the pre-registration (P1-P10, D1, X1-X3)
+  P1 (R) closed form: generic optimum below the isotonic value by at most 3.3e-15 (1,200 instances, 610 with tied levels; 1200 with a feasible generic end point) -> holds
+  P2 block formula: max difference 7.2e-16 -> holds
+  P3 budget split KL(p_hat||q) = M_ord + KL(p0||q): max difference 8.9e-16 -> holds
+  P4 (R) cross term min -1.1e-15 (20 random p in C_F per instance); (d) slack min: free -7.2e-15, budget -3.3e-16 -> holds
+  P5 M1: M_ord <= 1e-12 disagrees with the independent cone test in 0 of 1,200; kinds B, C, D all zero: True; kind F min M_ord 4.41e-04 -> holds
+  P6 strong M3: M_ord moves by at most 0.0e+00 under a random increasing map; the cardinal M_free moves by > 1e-6 in 0.538 of 184 kind-A instances with >= 3 levels -> FAILS
+  P7 R7-5's cases (best-of-k, quantilizers on F; 400 instances): max M_ord 3.3e-16 (R); budget ordinal defined and solved in 393, max 7.3e-06; cardinal M_free > 1e-6 in 0.899 of 366 with >= 3 levels (R) -> FAILS
+      C k=16: cardinal M_free median 0.005, > 1e-6 in 0.822 of 45
+      C k=2: cardinal M_free median 0.018, > 1e-6 in 1.000 of 47
+      C k=4: cardinal M_free median 0.032, > 1e-6 in 1.000 of 39
+      C k=64: cardinal M_free median 0.000, > 1e-6 in 0.453 of 53
+      D alpha=0.1: cardinal M_free median 0.004, > 1e-6 in 1.000 of 94
+      D alpha=0.3: cardinal M_free median 0.142, > 1e-6 in 1.000 of 88
+  P8 where defined and solved (1123): min (M_budget_ord - M_ord) -5.1e-11; max (M_budget_ord - M_budget) 5.7e-13; strict above M_ord whenever M_ord > 1e-9: False -> FAILS
+  D1 budget ordinal: defined in 1123; the best two of five starts agree to 1e-7 in 0.987 (rule: >= 0.90) -> numbers quotable
+  P9 M8, 200 two-context agents (rho_ev = (1, 0), rho_dep = (1/2, 1/2)): max evaluation M_ord 3.3e-16, min deployment M_ord 2.20e-04 -> holds
+  P10 (implementation part) target-set code for [F]+ against Def. 10's reference code: M_free 1.3e-12, M_budget 2.1e-08 -> FAILS; the reproduction part is tools/reproduce.py on V1-V34 and F1-F8
+  X1 kinds A, E (326): M_budget_ord / M_ord median [p10, p90] 1.16 [1.   2.42]; M_budget_ord / M_budget 0.62 [0.11 0.99]
+  X2 kind E sigma=0.05: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.26 [0. 1.] (71)
+  X2 kind E sigma=0.3: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.26 [0. 1.] (69)
+  X2 kind E sigma=1.0: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] 0.50 [0.02 0.98] (60)
+  X3 kinds A, E: p0 pools more than one level in 0.655
+
+[V36] R7-6a: intensity caps and distributional targets (Def. 18, Prop. 33), against the pre-registration (P1-P7)
+  P1 closed form M(min(t_hat+, s)) against grid + bounded minimisation over [0, s]: max difference 8.0e-16 -> holds
+  P2 overshoot decomposition D_perp + KL(p_(F,t_hat)||p_max), 473 instances with t_hat > s: max difference 8.6e-14 -> holds
+  P3 M1 and capped M5: on-segment max 7.4e-16; overshoot and off-ray min 5.81e-05 -> holds
+  P4 M3 under F -> aF + c, s -> s/a: max change 4.8e-14 -> holds
+  P5 M_free_cap <= M_budget_cap: min gap -6.8e-16; s = infinity against Def. 10's reference code: max difference 5.7e-14 -> holds
+  P6 path of -KL(p||p_T) against a generic optimiser: max log-probability difference 4.1e-06 -> holds
+  P7 (R) collapsed agents (600): uncapped M_free max 3.5e-15; capped = KL(p_hat||p_T) to 6.7e-16, min 0.003, median 0.932 -> holds
+
+[V37] R7-9: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34), against the pre-registration (P1-P4)
+  P1 uniqueness on 400 generic log-convex hulls (K = 2, 3, 5): the minimizers from 5 starts agree to 1.5e-08 -> holds
+  P2 Pythagorean inequality KL(p_hat||p) - M - KL(p°||p), 20 members per hull: min -1.1e-08 -> FAILS
+  P3 generic code reproduces the capped free measure (two-point hull {q, p_(F,s)}): 8.9e-16; the ordinal measure (conic hull of level steps): 1.4e-03 -> FAILS
+  P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 58 of 184 instances with >= 2 feasible end points
+
+[V38] R7-9 run 2: corrected checks (Def. 19, Prop. 34), against the run-2 pre-registration (Q1-Q3)
+  Q1 the refuting side: largest amount by which a generic value (20 starts) is below the closed form, 600 projections: 1.1e-15 -> holds
+  Q1 (reported) the best of 20 starts is within 1e-8 of the closed form in 1.000 of 600 projections
+  Q2 Pythagorean inequality on exact projections (capped segment, ordinal cone), relative slack min -2.2e-15 -> holds
+  Q3 equality on the full ray (Thm 13(a)), relative |slack| max 1.0e-13 -> holds
+  (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in 45 of 183 instances
+
+[V39] R7-6b: minimum intensity, the intended segment (Def. 20, Prop. 35), against the pre-registration (P1-P5)
+  P1 formula KL(p_hat||p_(F,t_hat)) + KL(p_(F,t_hat)||p_(F,t*)) against grid + bounded minimisation over [r, s]: max difference 4.4e-16 -> holds
+  P2 M1 and M5 within the segment: on-segment max 5.4e-16; below-floor, above-cap and off-ray min 8.95e-06 -> holds
+  P3 M_free_seg <= M_budget_seg: min gap -3.4e-16; reductions to Def. 18 (r = 0) and Def. 10 (r = 0, s = inf): max difference 1.4e-13 -> holds
+  P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change 5.8e-14 -> holds
+  P5 threshold policies (300): base model with the floor min 2.18e-04, without max 4.5e-16; floor hits the threshold to 1.5e-14 -> holds

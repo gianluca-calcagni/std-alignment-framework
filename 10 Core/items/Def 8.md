@@ -9,7 +9,7 @@ tier: []
 assumes: []
 status: "definition"
 depends_on: ["Def 10", "Def 3"]
-mentions: ["Def 14", "Prop 12", "Prop 18", "Prop 24", "Prop 25", "R057", "R074", "R075"]
+mentions: ["Def 14", "Def 17", "Prop 12", "Prop 18", "Prop 24", "Prop 25", "Prop 32", "R057", "R074", "R075"]
 checks: ["F5", "V32"]
 sources: []
 aliases: ["Definition 8", "Def. 8"]
@@ -36,6 +36,11 @@ price convention, `M_price ≤ ε` defines **ε-regret**, not ε-alignment. The 
 (Def. [[Def 10|10]]).
 
 ## Notes and checks
+
+*Note (R7-7: target sets).* The table is the case of the cardinal target set `[F]₊`. With a declared target set
+`𝒯`, the budget and free measures are those of Def. [[Def 17|17]], and ε-alignment is with `𝒯`. The price convention needs
+a unit, so it applies to a cardinal set with a declared representative only. Under an ordinal target the free
+measure has a closed form (Prop. [[Prop 32|32]]); the budget measure has none.
 
 *Note.*
 - **Why the price measure is called a regret rather than misalignment:** Prop. [[Prop 24|24]](c). It charges an agent that
@@ -73,15 +78,19 @@ price convention, `M_price ≤ ε` defines **ε-regret**, not ε-alignment. The 
 
 ## Mentions
 - [[Def 14]] — mechanism-relative comparison; explanation layer; R7-1
+- [[Def 17]] — target sets; R7-7
 - [[Prop 12]] — what behaviour identifies
 - [[Prop 18]] — harm bounds detectability
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
+- [[Prop 32]] — the ordinal measure; R7-7
 - [[R057]]
 - [[R074]]
 - [[R075]]
 
 ## Mentioned in
+- [[Def 17]] — target sets; R7-7
+- [[Def 19]] — declared intended set; R7-9
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2

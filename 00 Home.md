@@ -4,7 +4,7 @@ type: "home"
 index_of: "home"
 updated: "2026-09-26"
 ---
-# Alignment as the tilt of an error by a bounded actor — vault v7.3.2
+# Alignment as the tilt of an error by a bounded actor — vault v7.7
 
 **What this is.** A formal framework for alignment: it measures how far behaviour departs from the behaviour
 intended for a target, from behaviour alone, and explains the departure by actor models. As of v7.0 it is an
@@ -65,7 +65,9 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
    - the two layers: no explanation vocabulary or dependency in the measurement layer, and a check for every
      measurement-layer result;
    - that checks and sources exist;
-   - that generated sections are up to date.
+   - that generated sections are up to date;
+   - that the current version is stated consistently, and that no part's status banner is older than the
+     newest version its own text refers to (v7.3.3).
 4. **Linear views** for reviewers are compiled into `build/` by `python3 tools/vault.py compile`.
 5. **Queries:**
    - `python3 tools/vault.py deps "Thm 13"` gives dependencies and dependents;
@@ -80,9 +82,9 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
 |---|---|
 | attack-surface | 15 |
 | census | 1 |
-| check | 47 |
+| check | 52 |
 | corollary | 11 |
-| definition | 15 |
+| definition | 19 |
 | dictionary-entry | 13 |
 | home | 1 |
 | hypothesis | 4 |
@@ -92,9 +94,9 @@ Every note has a `type` in its frontmatter. Each type has a template in `_templa
 | method | 1 |
 | overview | 1 |
 | project | 1 |
-| proposition | 24 |
+| proposition | 29 |
 | remark | 3 |
-| report | 6 |
+| report | 20 |
 | retraction | 78 |
 | section | 39 |
 | source | 101 |

@@ -8,7 +8,7 @@ layer: "measurement"
 tier: []
 assumes: []
 status: "definition"
-depends_on: ["Def 1", "Def 8", "Def 9", "Def 10"]
+depends_on: ["Def 17", "Def 1", "Def 8", "Def 9", "Def 10"]
 mentions: ["Cor 5.2", "Def 13", "Def 15", "Def 7", "Prop 16"]
 checks: []
 sources: []
@@ -23,13 +23,13 @@ updated: "2026-09-26"
 ## Statement
 
 **Definition 12 (alignment instance; formal; measurement layer since R7-3).** An **alignment instance** is a
-tuple `(X, q, F, κ)`, with a price `β ∈ (0, ∞)` when `κ` is the price convention:
+tuple `(X, q, 𝒯, κ)`, with a price `β ∈ (0, ∞)` when `κ` is the price convention:
 - a finite behaviour set `X` with a full-support **declared** reference `q` (standing assumption S);
-- a non-constant target `F` (Def. [[Def 1|1]]);
+- a target set `𝒯` (Def. [[Def 17|17]]): by default the cardinal set `[F]₊` of a non-constant target `F` (Def. [[Def 1|1]]);
 - a convention `κ` (Def. [[Def 8|8]]).
 
 Optionally, it also has contexts (Def. [[Def 9|9]]). Given an actual behaviour `p̂`, an instance determines every
-misalignment measure (Def. [[Def 10|10]]).
+misalignment measure (Def. [[Def 10|10]]; for a target set, Def. [[Def 17|17]]).
 
 ## Notes and checks
 
@@ -37,6 +37,10 @@ misalignment measure (Def. [[Def 10|10]]).
 the positive-affine class `[F]₊`. An instance fixes a representative only when it reports value-unit or
 price-convention quantities (Prop. [[Prop 16|16]], Def. [[Def 7|7]]). No principal is assumed: the target can be teleonomic, such as
 fitness.
+
+*Note (R7-7).* The instance was `(X, q, F, κ)` until R7-7. Writing `F` meant the cardinal set `[F]₊`, and it
+still does unless another set is declared. The price convention needs a cardinal set with a declared
+representative.
 
 *Note (R7-3).* An **explanation** of an instance adds an evaluator `F̂`, an actor model `A`, the actor's own
 reference `q_A` and the model's resource (Def. [[Def 13|13]]; the capacity model and its budget `δ`, Def. [[Def 15|15]]). Until
@@ -49,6 +53,7 @@ budget measure matches the actual behaviour's own divergence, and the free measu
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 9]] — contexts
 - [[Def 10]] — intent ray and misalignment measures; v6.4, R7-0
+- [[Def 17]] — target sets; R7-7
 
 ## Used by
 - none

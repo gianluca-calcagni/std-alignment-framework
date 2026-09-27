@@ -985,7 +985,482 @@ def V34():
     print(f"  Prop 30(c) [P7]: argmax R != argmax F: min M_free(kappa=300) = {mh.min():.3f}; median M_free(300)/M_free(0) = {np.median(rh):.2f}; "
           f"limit -log sup_t p_(F,t)(argmax R) matched at kappa = 3000 to {le:.1e}")
 
+# =====================================================================================================
+# R7-7 block: target sets and the ordinal target (Def. 17, Props 31-32). Pre-registered in
+# `70 Project/R7/R7-7 preregistration.md` (P1-P10, D1-D4, X1-X3) before any computation.
+# =====================================================================================================
+def _pava(y, w):
+    """weighted non-decreasing isotonic regression (pool-adjacent-violators); fitted values and block labels"""
+    blocks = []
+    for i, (yi, wi) in enumerate(zip(y, w)):
+        blocks.append([yi*wi, wi, [i]])
+        while len(blocks) > 1 and blocks[-2][0]/blocks[-2][1] > blocks[-1][0]/blocks[-1][1]:
+            s_, w_, ix = blocks.pop(); blocks[-1][0] += s_; blocks[-1][1] += w_; blocks[-1][2] += ix
+    fit = np.empty(len(y)); lab = np.empty(len(y), int)
+    for k, (s_, w_, ix) in enumerate(blocks): fit[ix] = s_/w_; lab[ix] = k
+    return fit, lab
+def _lev(ph, q, F):
+    """levels of F (exact ties), level masses a (actual) and b (reference), level index per state"""
+    vals, inv = np.unique(F, return_inverse=True); m = len(vals)
+    return vals, inv, np.bincount(inv, ph, m), np.bincount(inv, q, m)
+def _ordproj(ph, q, F):
+    """Prop. 32(b): p0 = q r0, r0 the q-weighted isotonic regression of the level means of p_hat/q"""
+    vals, inv, a, b = _lev(ph, q, F); fit, lab = _pava(a/b, b)
+    return q*fit[inv], fit, lab[inv], lab
+def _mfree_mm(ph, lq, F):
+    """M_free([F]+) by the moment condition of Thm 13: KL(p_hat || p_(F, t_hat+))"""
+    q = np.exp(lq); tgt = ph@F; lh = np.log(ph)
+    g = lambda t: gibbs(lq, F, t)@F - tgt; hi = 1.0
+    if tgt <= q@F or g(0.0) >= 0: return KLl(lh, lq)
+    while g(hi) < 0: hi *= 2
+    return KLl(lh, lgibbs(lq, F, brentq(g, 0, hi, xtol=1e-14)))
+def _mbud_card(ph, lq, F):
+    """M_budget([F]+) (Def. 10), tie-aware saturation; None when undefined"""
+    q = np.exp(lq); lam = lam_to_kl(lq, F, KL(ph, q))
+    return None if np.isinf(lam) else KLl(np.log(ph), lgibbs(lq, F, lam)), lam
+def _slsqp_levels(a, b, C, k, starts):
+    """min_r C - a.log r over non-decreasing level ratios r (r = T v, v = (r_1, increments)) with b.r = 1, and,
+    if k is not None, b.(r log r) = k. Returns the objective values of the feasible end points."""
+    m = len(a); T = np.tril(np.ones((m, m)))
+    f = lambda v: C - a@np.log(T@v)
+    fj = lambda v: T.T@(-a/(T@v))
+    cons = [{'type': 'eq', 'fun': lambda v: b@(T@v) - 1, 'jac': lambda v: T.T@b}]
+    if k is not None:
+        cons.append({'type': 'eq', 'fun': lambda v: b@((T@v)*np.log(T@v)) - k, 'jac': lambda v: T.T@(b*(np.log(T@v) + 1))})
+    out = []
+    for r0 in starts:
+        v0 = np.concatenate([[r0[0]], np.diff(r0)])
+        with np.errstate(all='ignore'):
+            r = minimize(f, v0, jac=fj, constraints=cons, method='SLSQP', bounds=[(1e-12, None)] + [(0, None)]*(m - 1),
+                         options={'ftol': 1e-15, 'maxiter': 2000})
+        rr = T@r.x
+        if np.all(rr > 0) and abs(b@rr - 1) < 1e-9 and (k is None or abs(b@(rr*np.log(rr)) - k) < 1e-9*max(1, k)):
+            out.append(float(f(r.x)))
+    return out
+def _rand_ratio(rng, b):
+    r = np.sort(np.exp(rng.normal(size=len(b))*rng.uniform(0.2, 2))); return r/(b@r)
+
+def V35():
+    print("\n[V35] R7-7: target sets and the ordinal target (Def. 17, Props 31-32), against the pre-registration (P1-P10, D1, X1-X3)")
+    rng = np.random.default_rng(3507); kinds = 'ABCDEF'; R = []
+    for i in range(1200):
+        kind = kinds[i % 6]
+        n = int(rng.integers(3, 13))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        while True:
+            F = rng.normal(size=n) if rng.uniform() < 0.5 else rng.integers(0, max(1, n//2) + 1, size=n).astype(float)
+            if len(np.unique(F)) >= 2: break
+        lq = np.log(q); vals, inv, _, bq = _lev(q, q, F); m = len(vals)
+        par = ''
+        if kind == 'A':
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 'B':
+            psi = np.cumsum(np.exp(rng.normal(size=m))); ph = gibbs(lq, psi[inv], rng.uniform(0, 3))
+        elif kind == 'C':
+            k = int(rng.choice([2, 4, 16, 64])); Q = np.cumsum(bq); Qm = np.concatenate([[0.0], Q[:-1]])
+            ph = q*((Q**k - Qm**k)/bq)[inv]; par = f"k={k}"
+        elif kind == 'D':
+            al = float(rng.choice([0.1, 0.3])); take = np.zeros(m); left = al
+            for j in range(m - 1, -1, -1):
+                take[j] = min(bq[j], left); left -= take[j]
+                if left <= 0: break
+            ph = (1 - 1e-3)*q*(take/bq/al)[inv] + 1e-3*q; par = f"alpha={al}"
+        elif kind == 'E':
+            sg = float(rng.choice([0.05, 0.3, 1.0])); l = lgibbs(lq, F, rng.uniform(0, 3)) + sg*rng.normal(size=n)
+            ph = np.exp(l - logsumexp(l)); par = f"sigma={sg}"
+        else:
+            ph = gibbs(lq, -F, rng.uniform(0.1, 3))
+        ph = ph/ph.sum(); lh = np.log(ph)
+        vals, inv, a, b = _lev(ph, q, F)
+        p0, r0, blk, lab = _ordproj(ph, q, F); Mord = KL(ph, p0); C = float(ph@(lh - lq))
+        # P2: block formula
+        bf = sum(ph[blk == B].sum()*KL(ph[blk == B]/ph[blk == B].sum(), q[blk == B]/q[blk == B].sum()) for B in np.unique(blk))
+        # P3: budget split
+        k_ = KL(ph, q); split = k_ - Mord - KL(p0, q)
+        # P1: generic optimizer for M_ord (3 random starts)
+        gen = _slsqp_levels(a, b, C, None, [_rand_ratio(rng, b) for _ in range(3)])
+        # P4: cross term for 20 random p in C_F; the corollaries (d)
+        cross = min(KL(ph, q*rr[inv]) - Mord - KL(p0, q*rr[inv]) for rr in (_rand_ratio(rng, b) for _ in range(20)))
+        Mf = _mfree_mm(ph, lq, F); d_free = Mf - Mord - _mfree_mm(p0, lq, F)
+        mb = _mbud_card(ph, lq, F); Mb, lam = mb if mb[0] is not None else (None, None)
+        d_bud = None if Mb is None else Mb - Mord - KLl(np.log(p0), lgibbs(lq, F, lam))
+        # P5: independent membership test for C_F
+        yb = a/b; wl = np.max(np.abs(ph/q - yb[inv])/yb[inv])
+        in_cone = bool(np.all(np.diff(yb) >= -1e-10*yb[:-1]) and wl <= 1e-10)
+        # P6: strong M3 under a fresh strictly increasing psi; the cardinal M_free under the same psi
+        psi = np.cumsum(np.exp(rng.normal(size=len(vals)))); F2 = psi[inv]
+        Mord2 = KL(ph, _ordproj(ph, q, F2)[0]); Mf2 = _mfree_mm(ph, lq, F2)
+        # budget ordinal (P7, P8, D1): 5 starts, the cardinal budget point first, none of them p_hat
+        Mbo, agree = None, None
+        if Mb is not None:
+            st = [np.exp(lam*vals - logsumexp(lam*vals + np.log(b)))] + [_rand_ratio(rng, b) for _ in range(4)]
+            vs = sorted(_slsqp_levels(a, b, C, k_, st))
+            if vs: Mbo = vs[0]; agree = len(vs) >= 2 and vs[1] - vs[0] <= 1e-7
+        # P10 (implementation cross-check): the target-set code for [F]+ against Def. 10's reference code
+        uniq_top = np.sum(F == F.max()) == 1
+        ref_f = _mfree(lh, lq, F); ref_b = _mbud(lh, lq, F) if uniq_top else None
+        R.append(dict(kind=kind, par=par, m=m, Mord=Mord, bf=bf, split=split, gen=gen, cross=cross, d_free=d_free, d_bud=d_bud,
+                      in_cone=in_cone, dMord=abs(Mord2 - Mord), dMf=abs(Mf2 - Mf), Mf=Mf, Mb=Mb, Mbo=Mbo, agree=agree,
+                      pooled=len(np.unique(lab)) < len(vals), ties=len(vals) < n,
+                      p10f=abs(Mf - ref_f), p10b=None if (ref_b is None or Mb is None) else abs(Mb - ref_b)))
+    K = lambda *ks: [r for r in R if r['kind'] in ks]
+    ok = lambda c: "holds" if c else "FAILS"
+    nt = sum(r['ties'] for r in R)
+    # P1
+    worst = max(r['Mord'] - min(r['gen']) for r in R if r['gen']); ngen = sum(1 for r in R if r['gen'])
+    print(f"  P1 (R) closed form: generic optimum below the isotonic value by at most {worst:.1e} (1,200 instances, {nt} with tied levels; "
+          f"{ngen} with a feasible generic end point) -> {ok(worst <= 1e-9)}")
+    e2 = max(abs(r['Mord'] - r['bf'])/max(1, r['Mord']) for r in R); e3 = max(abs(r['split']) for r in R)
+    print(f"  P2 block formula: max difference {e2:.1e} -> {ok(e2 <= 1e-12)}")
+    print(f"  P3 budget split KL(p_hat||q) = M_ord + KL(p0||q): max difference {e3:.1e} -> {ok(e3 <= 1e-12)}")
+    cmin = min(r['cross'] for r in R); dfm = min(r['d_free'] for r in R); dbm = min(r['d_bud'] for r in R if r['d_bud'] is not None)
+    print(f"  P4 (R) cross term min {cmin:.1e} (20 random p in C_F per instance); (d) slack min: free {dfm:.1e}, budget {dbm:.1e} "
+          f"-> {ok(cmin >= -1e-12 and dfm >= -1e-10 and dbm >= -1e-10)}")
+    dis = sum((r['Mord'] <= 1e-12) != r['in_cone'] for r in R); zBCD = all(r['Mord'] <= 1e-12 for r in K('B', 'C', 'D'))
+    posF = min(r['Mord'] for r in K('F'))
+    print(f"  P5 M1: M_ord <= 1e-12 disagrees with the independent cone test in {dis} of 1,200; kinds B, C, D all zero: {zBCD}; "
+          f"kind F min M_ord {posF:.2e} -> {ok(dis == 0 and zBCD and posF > 1e-9)}")
+    dmo = max(r['dMord'] for r in R); a3 = [r for r in K('A') if r['m'] >= 3]; sh6 = np.mean([r['dMf'] > 1e-6 for r in a3])
+    print(f"  P6 strong M3: M_ord moves by at most {dmo:.1e} under a random increasing map; the cardinal M_free moves by > 1e-6 in "
+          f"{sh6:.3f} of {len(a3)} kind-A instances with >= 3 levels -> {ok(dmo <= 1e-12 and sh6 >= 0.95)}")
+    cd = K('C', 'D'); mo7 = max(r['Mord'] for r in cd); bo7 = [r['Mbo'] for r in cd if r['Mbo'] is not None]
+    cd3 = [r for r in cd if r['m'] >= 3]; sh7 = np.mean([r['Mf'] > 1e-6 for r in cd3])
+    print(f"  P7 R7-5's cases (best-of-k, quantilizers on F; {len(cd)} instances): max M_ord {mo7:.1e} (R); budget ordinal defined and "
+          f"solved in {len(bo7)}, max {max(bo7):.1e}; cardinal M_free > 1e-6 in {sh7:.3f} of {len(cd3)} with >= 3 levels (R) "
+          f"-> {ok(mo7 <= 1e-12 and max(bo7) <= 1e-8 and sh7 >= 0.90)}")
+    for ks in ('C', 'D'):
+        for pv in sorted({r['par'] for r in K(ks)}):
+            rr = [r for r in K(ks) if r['par'] == pv and r['m'] >= 3]
+            print(f"      {ks} {pv}: cardinal M_free median {np.median([r['Mf'] for r in rr]):.3f}, > 1e-6 in {np.mean([r['Mf'] > 1e-6 for r in rr]):.3f} of {len(rr)}")
+    bd = [r for r in R if r['Mbo'] is not None]
+    lo = min(r['Mbo'] - r['Mord'] for r in bd); hi = max(r['Mbo'] - r['Mb'] for r in bd)
+    strict = all(r['Mbo'] - r['Mord'] > 1e-12 for r in bd if r['Mord'] > 1e-9)
+    print(f"  P8 where defined and solved ({len(bd)}): min (M_budget_ord - M_ord) {lo:.1e}; max (M_budget_ord - M_budget) {hi:.1e}; "
+          f"strict above M_ord whenever M_ord > 1e-9: {strict} -> {ok(lo >= -1e-9 and hi <= 1e-9 and strict)}")
+    defd = [r for r in R if r['Mb'] is not None]; ag = np.mean([bool(r['agree']) for r in defd])
+    print(f"  D1 budget ordinal: defined in {len(defd)}; the best two of five starts agree to 1e-7 in {ag:.3f} (rule: >= 0.90) -> "
+          f"{'numbers quotable' if ag >= 0.9 else 'NOT quotable: ordinal target under the free convention only'}")
+    # P9: a context-split agent, ordinal-aligned in evaluation, sign-flipped in deployment (M8)
+    ev = [r['Mord'] for r in K('B', 'C')][:200]; dp = [r['Mord'] for r in K('F')][:200]
+    agg_ev = [1.0*e + 0.0*d for e, d in zip(ev, dp)]; agg_dep = [0.5*e + 0.5*d for e, d in zip(ev, dp)]
+    print(f"  P9 M8, 200 two-context agents (rho_ev = (1, 0), rho_dep = (1/2, 1/2)): max evaluation M_ord {max(agg_ev):.1e}, "
+          f"min deployment M_ord {min(agg_dep):.2e} -> {ok(max(agg_ev) <= 1e-12 and min(agg_dep) > 1e-9)}")
+    pf = max(r['p10f'] for r in R); pb = max(r['p10b'] for r in R if r['p10b'] is not None)
+    print(f"  P10 (implementation part) target-set code for [F]+ against Def. 10's reference code: M_free {pf:.1e}, M_budget {pb:.1e} "
+          f"-> {ok(pf <= 1e-10 and pb <= 1e-10)}; the reproduction part is tools/reproduce.py on V1-V34 and F1-F8")
+    ae = [r for r in K('A', 'E') if r['Mbo'] is not None and r['Mord'] > 1e-9]
+    x1a = np.array([r['Mbo']/r['Mord'] for r in ae]); x1b = np.array([r['Mbo']/r['Mb'] for r in ae])
+    print(f"  X1 kinds A, E ({len(ae)}): M_budget_ord / M_ord median [p10, p90] {np.median(x1a):.2f} {np.percentile(x1a, [10, 90]).round(2)}; "
+          f"M_budget_ord / M_budget {np.median(x1b):.2f} {np.percentile(x1b, [10, 90]).round(2)}")
+    for sg in ('sigma=0.05', 'sigma=0.3', 'sigma=1.0'):
+        x2 = np.array([r['Mord']/r['Mf'] for r in K('E') if r['par'] == sg and r['Mf'] > 1e-12])
+        print(f"  X2 kind E {sg}: share of the cardinal M_free that is ordering, M_ord / M_free, median [p10, p90] {np.median(x2):.2f} {np.percentile(x2, [10, 90]).round(2)} ({len(x2)})")
+    x3 = np.mean([r['pooled'] for r in K('A', 'E')])
+    print(f"  X3 kinds A, E: p0 pools more than one level in {x3:.3f}")
+
+# =====================================================================================================
+# R7-6a block: intensity caps and distributional targets (Def. 18, Prop. 33). Pre-registered in
+# `70 Project/R7/R7-6a preregistration.md` (P1-P7) before any computation.
+# =====================================================================================================
+def _that(ph, lq, F):
+    """t_hat of Thm 13 (moment condition), clipped at 0 from below"""
+    tgt = ph@F; g = lambda t: gibbs(lq, F, t)@F - tgt
+    if g(0.0) >= 0: return 0.0
+    hi = 1.0
+    while g(hi) < 0: hi *= 2
+    return brentq(g, 0, hi, xtol=1e-14)
+def _cap_free(ph, lq, F, s):
+    return KLl(np.log(ph), lgibbs(lq, F, min(_that(ph, lq, F), s)))
+def _cap_budget(ph, lq, F, s):
+    q = np.exp(lq); k = KL(ph, q); ks = np.inf if np.isinf(s) else KLl(lgibbs(lq, F, s), lq)
+    if k > ks: return KLl(np.log(ph), lgibbs(lq, F, s))
+    lam = lam_to_kl(lq, F, k)
+    return None if np.isinf(lam) else KLl(np.log(ph), lgibbs(lq, F, lam))
+
+def V36():
+    print("\n[V36] R7-6a: intensity caps and distributional targets (Def. 18, Prop. 33), against the pre-registration (P1-P7)")
+    rng = np.random.default_rng(3606); ok = lambda c: "holds" if c else "FAILS"
+    e1 = e2 = e4 = e5 = e6 = e7 = 0.0; on_max = 0.0; off_min = np.inf; ordv = np.inf; n_dec = 0; col = []
+    for i in range(900):
+        n = int(rng.integers(3, 13))
+        while True:
+            q = rng.dirichlet(np.ones(n)); pT = rng.dirichlet(np.ones(n))
+            if min(q.min(), pT.min()) >= 1e-3: break
+        lq = np.log(q)
+        if i < 600: F = np.log(pT) - lq; s = 1.0
+        else: F = rng.normal(size=n); s = float(rng.uniform(0.2, 5))
+        kind = i % 4
+        if kind == 0:
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 1: ph = gibbs(lq, F, rng.uniform(0, s))
+        elif kind == 2: ph = gibbs(lq, F, rng.uniform(1.05*s, 4*s))
+        else:
+            l = lgibbs(lq, F, rng.uniform(1.05*s, 4*s)) + 0.3*rng.normal(size=n); ph = np.exp(l - logsumexp(l))
+        lh = np.log(ph); mf = _cap_free(ph, lq, F, s); mb = _cap_budget(ph, lq, F, s)
+        # P1: closed form vs grid + bounded minimisation over [0, s]
+        ts = np.linspace(0, s, 400); v = [KLl(lh, lgibbs(lq, F, t)) for t in ts]; t0 = ts[int(np.argmin(v))]
+        r = minimize_scalar(lambda t: KLl(lh, lgibbs(lq, F, t)), bounds=(max(0, t0 - s/399), min(s, t0 + s/399)), method='bounded', options={'xatol': 1e-13})
+        e1 = max(e1, abs(mf - min(r.fun, min(v))))
+        # P2: decomposition when t_hat > s
+        th = _that(ph, lq, F)
+        if th > s:
+            n_dec += 1; e2 = max(e2, abs(mf - (KLl(lh, lgibbs(lq, F, th)) + KLl(lgibbs(lq, F, th), lgibbs(lq, F, s)))))
+        # P3: M1 and the capped M5
+        if kind == 1: on_max = max(on_max, mf, mb if mb is not None else 0.0)
+        else: off_min = min(off_min, mf, mb if mb is not None else np.inf)
+        # P4: M3 under F -> aF + c, s -> s/a
+        a, c = rng.uniform(0.2, 5), rng.normal()
+        e4 = max(e4, abs(_cap_free(ph, lq, a*F + c, s/a) - mf))
+        mb2 = _cap_budget(ph, lq, a*F + c, s/a)
+        if mb is not None and mb2 is not None: e4 = max(e4, abs(mb2 - mb))
+        # P5: order, and s = infinity reproduces Def. 10
+        if mb is not None: ordv = min(ordv, mb - mf)
+        uniq = np.sum(F == F.max()) == 1
+        e5 = max(e5, abs(_cap_free(ph, lq, F, np.inf) - _mfree(lh, lq, F)))
+        if uniq:
+            b0, bref = _cap_budget(ph, lq, F, np.inf), _mbud(lh, lq, F)
+            if b0 is not None and bref is not None: e5 = max(e5, abs(b0 - bref))
+        if i < 600:
+            # P6: the regularised path of U = -KL(p||p_T) against a generic optimiser
+            t = float(rng.uniform(0.2, 5)); lT = np.log(pT)
+            obj = lambda z: KLl(z - logsumexp(z), lT) + KLl(z - logsumexp(z), lq)/t
+            z = minimize(obj, np.zeros(n), method='BFGS', options={'gtol': 1e-12}).x
+            e6 = max(e6, np.abs((z - logsumexp(z)) - lgibbs(lq, F, t/(1 + t))).max())
+            # P7 (R): collapsed agents on distributional targets
+            pc = gibbs(lq, F, rng.uniform(1.05, 10))
+            col.append((_mfree_mm(pc, lq, F), _cap_free(pc, lq, F, 1.0), KL(pc, pT)))
+    col = np.array(col); e7 = np.abs(col[:, 1] - col[:, 2]).max()
+    print(f"  P1 closed form M(min(t_hat+, s)) against grid + bounded minimisation over [0, s]: max difference {e1:.1e} -> {ok(e1 <= 1e-9)}")
+    print(f"  P2 overshoot decomposition D_perp + KL(p_(F,t_hat)||p_max), {n_dec} instances with t_hat > s: max difference {e2:.1e} -> {ok(e2 <= 1e-10)}")
+    print(f"  P3 M1 and capped M5: on-segment max {on_max:.1e}; overshoot and off-ray min {off_min:.2e} -> {ok(on_max <= 1e-10 and off_min > 1e-9)}")
+    print(f"  P4 M3 under F -> aF + c, s -> s/a: max change {e4:.1e} -> {ok(e4 <= 1e-9)}")
+    print(f"  P5 M_free_cap <= M_budget_cap: min gap {ordv:.1e}; s = infinity against Def. 10's reference code: max difference {e5:.1e} -> {ok(ordv >= -1e-10 and e5 <= 1e-10)}")
+    print(f"  P6 path of -KL(p||p_T) against a generic optimiser: max log-probability difference {e6:.1e} -> {ok(e6 <= 1e-4)}")
+    print(f"  P7 (R) collapsed agents (600): uncapped M_free max {col[:,0].max():.1e}; capped = KL(p_hat||p_T) to {e7:.1e}, min {col[:,1].min():.3f}, median {np.median(col[:,1]):.3f} "
+          f"-> {ok(col[:,0].max() <= 1e-10 and e7 <= 1e-10 and col[:,1].min() > 1e-9)}")
+
+# =====================================================================================================
+# R7-9 block: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34). Pre-registered in
+# `70 Project/R7/R7-9 preregistration.md` (P1-P4) before any computation. All predictions are verification.
+# =====================================================================================================
+def _hull_proj(lh, L, starts, bounds=None, free_const=False):
+    """M over {p ∝ exp(sum_k w_k L[k])}: w in the simplex (bounds None) or w >= 0 (conic, bounds given).
+    Convex in w (log-sum-exp). Returns (value, log p°) for each start."""
+    ph = np.exp(lh); K = L.shape[0]
+    def lp(w): l = w@L; return l - logsumexp(l)
+    f = lambda w: float(ph@(lh - lp(w)))
+    def g(w):
+        p = np.exp(lp(w)); return -(L@ph) + L@p
+    out = []
+    for w0 in starts:
+        if bounds is None:
+            cons = [{'type': 'eq', 'fun': lambda w: w.sum() - 1, 'jac': lambda w: np.ones(K)}]
+            r = minimize(f, w0, jac=g, constraints=cons, bounds=[(0, 1)]*K, method='SLSQP', options={'ftol': 1e-15, 'maxiter': 3000})
+        else:
+            r = minimize(f, w0, jac=g, bounds=bounds, method='L-BFGS-B', options={'ftol': 1e-15, 'gtol': 1e-13, 'maxiter': 5000})
+        out.append((float(r.fun), lp(r.x)))
+    return out
+
+def V37():
+    print("\n[V37] R7-9: the core as a declared intended set; log-convex sets (Def. 19, Prop. 34), against the pre-registration (P1-P4)")
+    rng = np.random.default_rng(3709); ok = lambda c: "holds" if c else "FAILS"
+    d1 = 0.0; p2 = np.inf
+    for i in range(400):
+        n = int(rng.integers(3, 11)); K = [2, 3, 5][i % 3]
+        L = np.log(rng.dirichlet(np.ones(n), size=K)); lh = np.log(rng.dirichlet(np.ones(n)))
+        res = _hull_proj(lh, L, [rng.dirichlet(np.ones(K)) for _ in range(5)])
+        best = min(res, key=lambda x: x[0]); lp0 = best[1]
+        d1 = max(d1, max(np.abs(np.exp(r[1]) - np.exp(lp0)).max() for r in res))
+        for _ in range(20):
+            w = rng.dirichlet(np.ones(K)); l = w@L; lpp = l - logsumexp(l)
+            p2 = min(p2, KLl(lh, lpp) - best[0] - KLl(lp0, lpp))
+    print(f"  P1 uniqueness on 400 generic log-convex hulls (K = 2, 3, 5): the minimizers from 5 starts agree to {d1:.1e} -> {ok(d1 <= 1e-6)}")
+    print(f"  P2 Pythagorean inequality KL(p_hat||p) - M - KL(p°||p), 20 members per hull: min {p2:.1e} -> {ok(p2 >= -1e-8)}")
+    e_cap = e_ord = 0.0
+    for i in range(300):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); lh = np.log(rng.dirichlet(np.ones(n)))
+        F = rng.normal(size=n) if i % 2 else rng.integers(0, 4, size=n).astype(float)
+        if len(np.unique(F)) < 2: F[0] += 1.0
+        s = float(rng.uniform(0.2, 5)); ph = np.exp(lh)
+        L = np.vstack([lq, lgibbs(lq, F, s)])
+        v = min(r[0] for r in _hull_proj(lh, L, [np.array([a, 1 - a]) for a in (0.1, 0.5, 0.9)]))
+        e_cap = max(e_cap, abs(v - _cap_free(ph, lq, F, s)))
+        vals = np.unique(F); steps = np.array([(F >= v_).astype(float) for v_ in vals[1:]])
+        Lc = np.vstack([lq, steps]); bnds = [(1.0, 1.0)] + [(0, None)]*len(steps)
+        vo = min(r[0] for r in _hull_proj(lh, Lc, [np.concatenate([[1.0], rng.uniform(0, 2, len(steps))]) for _ in range(3)], bounds=bnds))
+        e_ord = max(e_ord, abs(vo - KL(ph, _ordproj(ph, q, F)[0])))
+    print(f"  P3 generic code reproduces the capped free measure (two-point hull {{q, p_(F,s)}}): {e_cap:.1e}; the ordinal measure (conic hull of level steps): {e_ord:.1e} -> {ok(e_cap <= 1e-8 and e_ord <= 1e-8)}")
+    dis = 0; tot = 0
+    for i in range(200):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph); k = KL(ph, q)
+        G = rng.normal(size=n); F = rng.normal(size=n); s = float(rng.uniform(0.5, 4))
+        # the budget sphere {KL(p||q) = k} intersected with the log-convex set {p ∝ q e^(aF + bG), a, b >= 0}: not log-convex
+        def lp(z): l = lq + z[0]*F + z[1]*G; return l - logsumexp(l)
+        f = lambda z: KLl(lh, lp(z)); cons = [{'type': 'eq', 'fun': lambda z: KLl(lp(z), lq) - k}]
+        ends = []
+        for _ in range(5):
+            r = minimize(f, rng.uniform(0, 3, 2), constraints=cons, bounds=[(0, None)]*2, method='SLSQP', options={'ftol': 1e-14, 'maxiter': 2000})
+            if r.success and abs(KLl(lp(r.x), lq) - k) < 1e-8: ends.append(r.fun)
+        if len(ends) >= 2:
+            tot += 1; dis += (max(ends) - min(ends) > 1e-6)
+    print(f"  P4 (exploratory) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances with >= 2 feasible end points")
+
+# =====================================================================================================
+# R7-9 run 2: corrected checks (Def. 19, Prop. 34). Pre-registered in
+# `70 Project/R7/R7-9 preregistration run 2.md` (Q1-Q3) before any run-2 computation. All verification.
+# =====================================================================================================
+def _that_full(ph, lq, F):
+    """t_hat on the full ray (t in R): the moment condition E_{p_(F,t)} F = E_{p_hat} F"""
+    tgt = ph@F; g = lambda t: gibbs(lq, F, t)@F - tgt; lo, hi = -1.0, 1.0
+    while g(lo) > 0: lo *= 2
+    while g(hi) < 0: hi *= 2
+    return brentq(g, lo, hi, xtol=1e-14)
+
+def V38():
+    print("\n[V38] R7-9 run 2: corrected checks (Def. 19, Prop. 34), against the run-2 pre-registration (Q1-Q3)")
+    rng = np.random.default_rng(3809); ok = lambda c: "holds" if c else "FAILS"
+    below = -np.inf; conv = []; q2 = np.inf; q3 = 0.0
+    for i in range(300):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph)
+        F = rng.normal(size=n) if i % 2 else rng.integers(0, 4, size=n).astype(float)
+        if len(np.unique(F)) < 2: F[0] += 1.0
+        s = float(rng.uniform(0.2, 5))
+        # Q1: the refuting side of the reduction, 20 starts each
+        cf_cap = _cap_free(ph, lq, F, s)
+        g_cap = min(r[0] for r in _hull_proj(lh, np.vstack([lq, lgibbs(lq, F, s)]), [np.array([a, 1 - a]) for a in rng.uniform(0, 1, 20)]))
+        p0, r0, blk, lab = _ordproj(ph, q, F); cf_ord = KL(ph, p0)
+        vals = np.unique(F); steps = np.array([(F >= v_).astype(float) for v_ in vals[1:]])
+        g_ord = min(r[0] for r in _hull_proj(lh, np.vstack([lq, steps]), [np.concatenate([[1.0], rng.uniform(0, 3, len(steps))]) for _ in range(20)],
+                                             bounds=[(1.0, 1.0)] + [(0, None)]*len(steps)))
+        below = max(below, cf_cap - g_cap, cf_ord - g_ord)
+        conv += [g_cap - cf_cap <= 1e-8, g_ord - cf_ord <= 1e-8]
+        # Q2 (i): capped segment, exact projection (Prop. 33(a))
+        lp0 = lgibbs(lq, F, min(_that(ph, lq, F), s)); M = KLl(lh, lp0)
+        for t in rng.uniform(0, s, 20):
+            lp = lgibbs(lq, F, t); a = KLl(lh, lp); q2 = min(q2, (a - M - KLl(lp0, lp)) / max(1.0, a))
+        # Q2 (ii): ordinal cone, exact projection (Prop. 32(b))
+        _, inv, _, b = _lev(ph, q, F); lp0o = np.log(p0)
+        for _ in range(20):
+            rr = _rand_ratio(rng, b); lp = lq + np.log(rr[inv]); a = KLl(lh, lp)
+            q2 = min(q2, (a - cf_ord - KLl(lp0o, lp)) / max(1.0, a))
+        # Q3: full ray, the equality case (Thm 13(a))
+        lpf = lgibbs(lq, F, _that_full(ph, lq, F)); Mf = KLl(lh, lpf)
+        for t in rng.uniform(-3, 3, 20):
+            lp = lgibbs(lq, F, t); a = KLl(lh, lp); q3 = max(q3, abs(a - Mf - KLl(lpf, lp)) / max(1.0, a))
+    print(f"  Q1 the refuting side: largest amount by which a generic value (20 starts) is below the closed form, 600 projections: {below:.1e} -> {ok(below <= 1e-10)}")
+    print(f"  Q1 (reported) the best of 20 starts is within 1e-8 of the closed form in {np.mean(conv):.3f} of 600 projections")
+    print(f"  Q2 Pythagorean inequality on exact projections (capped segment, ordinal cone), relative slack min {q2:.1e} -> {ok(q2 >= -1e-12)}")
+    print(f"  Q3 equality on the full ray (Thm 13(a)), relative |slack| max {q3:.1e} -> {ok(q3 <= 1e-12)}")
+    dis = tot = 0
+    for i in range(200):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); ph = rng.dirichlet(np.ones(n)); lh = np.log(ph); k = KL(ph, q); G = rng.normal(size=n); F = rng.normal(size=n)
+        def lp(z): l = lq + z[0]*F + z[1]*G; return l - logsumexp(l)
+        f = lambda z: KLl(lh, lp(z)); cons = [{'type': 'eq', 'fun': lambda z: KLl(lp(z), lq) - k}]; ends = []
+        for _ in range(5):
+            r = minimize(f, rng.uniform(0, 3, 2), constraints=cons, bounds=[(0, None)]*2, method='SLSQP', options={'ftol': 1e-14, 'maxiter': 2000})
+            if r.success and abs(KLl(lp(r.x), lq) - k) < 1e-8: ends.append(r.fun)
+        if len(ends) >= 2: tot += 1; dis += (max(ends) - min(ends) > 1e-6)
+    print(f"  (reported) budget sphere intersected with a log-convex cone: 5 starts end more than 1e-6 apart in {dis} of {tot} instances")
+
+# =====================================================================================================
+# R7-6b block: minimum intensity, the intended segment (Def. 20, Prop. 35). Pre-registered in
+# `70 Project/R7/R7-6b preregistration.md` (P1-P5) before any computation. All verification.
+# =====================================================================================================
+def _seg_free(ph, lq, F, r, s):
+    return KLl(np.log(ph), lgibbs(lq, F, min(max(_that_full(ph, lq, F), r), s)))
+def _seg_budget(ph, lq, F, r, s):
+    q = np.exp(lq); k = KL(ph, q); lh = np.log(ph)
+    kr = 0.0 if r == 0 else KLl(lgibbs(lq, F, r), lq)
+    ks = np.inf if np.isinf(s) else KLl(lgibbs(lq, F, s), lq)
+    if k < kr: return KLl(lh, lgibbs(lq, F, r))
+    if k > ks: return KLl(lh, lgibbs(lq, F, s))
+    lam = 0.0 if k < 1e-15 else lam_to_kl(lq, F, k)
+    return None if np.isinf(lam) else KLl(lh, lgibbs(lq, F, lam))
+
+def V39():
+    print("\n[V39] R7-6b: minimum intensity, the intended segment (Def. 20, Prop. 35), against the pre-registration (P1-P5)")
+    rng = np.random.default_rng(3909); ok = lambda c: "holds" if c else "FAILS"
+    e1 = e3 = e4 = 0.0; on_max = 0.0; off_min = np.inf; ordv = np.inf; base_w = np.inf; base_wo = 0.0; eps_err = 0.0; nthr = 0
+    for i in range(600):
+        n = int(rng.integers(3, 11))
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q)
+        if i % 2 == 0:
+            F = rng.normal(size=n); r = float(rng.uniform(0.1, 2)); s = r + float(rng.uniform(0.2, 3))
+        else:
+            nthr += 1; H = np.zeros(n, bool); H[rng.choice(n, int(rng.integers(1, n)), replace=False)] = True
+            F = -H.astype(float); qH = q[H].sum(); eps = float(rng.uniform(0.1, 0.9))*qH
+            r = float(np.log(qH*(1 - eps)/(eps*(1 - qH)))); s = np.inf
+            eps_err = max(eps_err, abs(gibbs(lq, F, r)[H].sum() - eps))
+            # P5: the untouched base model
+            base_w = min(base_w, _seg_free(q, lq, F, r, s), _seg_budget(q, lq, F, r, s))
+            base_wo = max(base_wo, _seg_free(q, lq, F, 0.0, np.inf), _seg_budget(q, lq, F, 0.0, np.inf))
+        hi = s if np.isfinite(s) else r + 3.0
+        kind = i % 5
+        if kind == 0:
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 1: ph = gibbs(lq, F, rng.uniform(r, hi))
+        elif kind == 2: ph = gibbs(lq, F, rng.uniform(0, 0.95*r))
+        elif kind == 3: ph = gibbs(lq, F, rng.uniform(1.05*s, 2*s + 1)) if np.isfinite(s) else gibbs(lq, F, rng.uniform(0, 0.95*r))
+        else:
+            l = lgibbs(lq, F, rng.uniform(r, hi)) + 0.3*rng.normal(size=n); ph = np.exp(l - logsumexp(l))
+        lh = np.log(ph); mf = _seg_free(ph, lq, F, r, s); mb = _seg_budget(ph, lq, F, r, s)
+        # P1: formula vs grid + bounded minimisation over [r, s]
+        top = s if np.isfinite(s) else max(r, _that_full(ph, lq, F)) + 5.0
+        ts = np.linspace(r, top, 400); v = [KLl(lh, lgibbs(lq, F, t)) for t in ts]; t0 = ts[int(np.argmin(v))]; h = (top - r)/399
+        rr = minimize_scalar(lambda t: KLl(lh, lgibbs(lq, F, t)), bounds=(max(r, t0 - h), min(top, t0 + h)), method='bounded', options={'xatol': 1e-13})
+        e1 = max(e1, abs(mf - min(rr.fun, min(v))))
+        # P2
+        if kind == 1: on_max = max(on_max, mf, mb if mb is not None else 0.0)
+        elif kind != 0: off_min = min(off_min, mf, mb if mb is not None else np.inf)
+        # P3: order and reductions
+        if mb is not None: ordv = min(ordv, mb - mf)
+        if np.isfinite(s):
+            e3 = max(e3, abs(_seg_free(ph, lq, F, 0.0, s) - _cap_free(ph, lq, F, s)))
+            b1, b2 = _seg_budget(ph, lq, F, 0.0, s), _cap_budget(ph, lq, F, s)
+            if b1 is not None and b2 is not None: e3 = max(e3, abs(b1 - b2))
+        e3 = max(e3, abs(_seg_free(ph, lq, F, 0.0, np.inf) - _mfree(lh, lq, F)))
+        if np.sum(F == F.max()) == 1:
+            b1, b2 = _seg_budget(ph, lq, F, 0.0, np.inf), _mbud(lh, lq, F)
+            if b1 is not None and b2 is not None: e3 = max(e3, abs(b1 - b2))
+        # P4: M3
+        a, c = rng.uniform(0.2, 5), rng.normal()
+        e4 = max(e4, abs(_seg_free(ph, lq, a*F + c, r/a, s/a) - mf))
+        m2 = _seg_budget(ph, lq, a*F + c, r/a, s/a)
+        if mb is not None and m2 is not None: e4 = max(e4, abs(m2 - mb))
+    print(f"  P1 formula KL(p_hat||p_(F,t_hat)) + KL(p_(F,t_hat)||p_(F,t*)) against grid + bounded minimisation over [r, s]: max difference {e1:.1e} -> {ok(e1 <= 1e-9)}")
+    print(f"  P2 M1 and M5 within the segment: on-segment max {on_max:.1e}; below-floor, above-cap and off-ray min {off_min:.2e} -> {ok(on_max <= 1e-10 and off_min > 1e-9)}")
+    print(f"  P3 M_free_seg <= M_budget_seg: min gap {ordv:.1e}; reductions to Def. 18 (r = 0) and Def. 10 (r = 0, s = inf): max difference {e3:.1e} -> {ok(ordv >= -1e-10 and e3 <= 1e-10)}")
+    print(f"  P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change {e4:.1e} -> {ok(e4 <= 1e-9)}")
+    print(f"  P5 threshold policies ({nthr}): base model with the floor min {base_w:.2e}, without max {base_wo:.1e}; floor hits the threshold to {eps_err:.1e} -> {ok(base_w > 1e-9 and base_wo <= 1e-12 and eps_err <= 1e-12)}")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39"]
     for w in which: globals()[w]()

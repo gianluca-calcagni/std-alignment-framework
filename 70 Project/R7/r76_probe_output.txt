@@ -1,0 +1,7 @@
+claimed intent path p_t ∝ q^(1/(1+t)) p_T^(t/(1+t)) vs generic optimizer: max log-prob error 1.1e-05 (300 instances)
+behaviour            | linear free measure (ray of log(p_T/q)) | non-linear free measure (path to p_T) | KL(p_hat||p_T)
+exact                | median -0.000, > 1e-6 in 0.00 | median 0.000, > 1e-6 in 0.00 | median 0.000
+collapsed t=3        | median -0.000, > 1e-6 in 0.00 | median 0.673, > 1e-6 in 1.00 | median 0.673
+collapsed t=10       | median -0.000, > 1e-6 in 0.00 | median 1.210, > 1e-6 in 1.00 | median 1.210
+over-diffuse t=0.5   | median -0.000, > 1e-6 in 0.00 | median -0.000, > 1e-6 in 0.00 | median 0.178
+random               | median 0.445, > 1e-6 in 1.00 | median 0.451, > 1e-6 in 1.00 | median 0.759

@@ -8,8 +8,8 @@ layer: "measurement"
 tier: []
 assumes: []
 status: "definition"
-depends_on: ["Def 9"]
-mentions: ["Def 14", "Prop 25", "Prop 26"]
+depends_on: ["Def 17", "Def 18", "Def 20", "Def 9"]
+mentions: ["Def 14", "Def 19", "Prop 25", "Prop 26", "Prop 31", "Prop 34"]
 checks: []
 sources: []
 aliases: ["Definition 11", "Def. 11"]
@@ -22,17 +22,18 @@ updated: "2026-09-26"
 
 ## Statement
 
-**Definition 11 (the misalignment contract; R7-0).** A **misalignment measure** assigns to a non-constant
-target `F`, a declared convention `κ`, and a full-support actual behaviour `p̂` a value `M ∈ [0, ∞]`, or
-declares it undefined. It must satisfy:
+**Definition 11 (the misalignment contract; R7-0, restated for target sets in R7-7).** A **misalignment measure**
+assigns to a target set `𝒯` (Def. [[Def 17|17]]; by default the cardinal set `[F]₊` of a non-constant target `F`), a
+declared convention `κ`, and a full-support actual behaviour `p̂` a value `M ∈ [0, ∞]`, or declares it undefined. It
+must satisfy:
 
 | | Axiom |
 |---|---|
-| **M1** (identity) | `M = 0` iff `p̂` is an intended behaviour under `κ` |
+| **M1** (identity) | `M = 0` iff `p̂` is an intended behaviour under `κ`: for a target set under the budget or free convention, iff `p̂ ∈ I_κ(𝒯)` |
 | **M2** (sign) | `M ≥ 0` |
-| **M3** (representation) | `M` is unchanged when `F` is replaced by `aF + c`, `a > 0`, and every declared quantity carrying the unit of `F` is transformed with it (`β ↦ β/a`) |
+| **M3** (representation) | `M` depends on the target only through the declared set `𝒯`, and every declared quantity carrying the unit of a representative is transformed with it (`β ↦ β/a` when `F ↦ aF + c`). For `[F]₊` this is invariance under `F ↦ aF + c`, `a > 0`; for `[F]_ord`, under every strictly increasing map |
 | **M4** (behavioural) | `M` depends on the agent only through `p̂`, or its per-context laws |
-| **M5** (misdirection, not intensity) | if `p̂ = p_{F,t}` for some `t ≥ 0` — the agent pursues the target itself, at some intensity — then `M = 0` |
+| **M5** (misdirection, not intensity) | if `p̂ = p_{G,t}` for some `G ∈ 𝒯` and `t ≥ 0`, within the declared floor and cap, if any (Defs [[Def 18\|18]], [[Def 20\|20]]) — the agent pursues an admissible statement of the target, at an intended intensity — then `M = 0`. For `[F]₊` with no cap this reads `p̂ = p_{F,t}` |
 | **M6** (substrate-free) | `M` is defined for every full-support `p̂ ∈ Δ(X)`, or declared undefined by an explicit rule |
 | **M8** (contexts) | with contexts (Def. [[Def 9\|9]]), `M` applies per context `c`, with aggregates `Σ_c ρ(c)·M_c` for the deployment and evaluation context laws `ρ_dep`, `ρ_ev` |
 
@@ -41,6 +42,16 @@ Two further conditions bind **the R7 refactor**, not a measure as such:
 - **M9:** the sanity suite of `verify.py` V30 passes.
 
 ## Notes and checks
+
+*Note (R7-9).* Every axiom here is a condition on the declared intended set `𝓘` (Def. [[Def 19|19]]): M1, M2, M4 and M6 hold
+for any `𝓘` closed in `Δ°`; M5 says `𝓘` contains the declared pursuit family; M3 says `𝓘` depends on the target only
+through the declared set (Prop. [[Prop 34|34]](b)).
+
+*Note (R7-7).* Until R7-7 the contract took a single non-constant target `F`, and M1, M3 and M5 referred to it.
+With `𝒯 = [F]₊` each reads exactly as before, so every measure that satisfied the contract still does (M7).
+What the target set adds is the declaration of how much of `F` is intended: its exchange rates (`[F]₊`) or
+only its order (`[F]_ord`). The measures for any target set are in Prop. [[Prop 31|31]].
+
 
 *Note (mechanism-relative comparisons).* A comparison between a mechanism and the same mechanism run on the
 target (Def. [[Def 14|14]]) depends on the attributed mechanism and resource. So it fails M4 by construction, and it is
@@ -60,14 +71,24 @@ an actor model: the explanation layer, not the measurement layer.
 <!-- gen:links -->
 ## Depends on (logical: statement and proof)
 - [[Def 9]] — contexts
+- [[Def 17]] — target sets; R7-7
+- [[Def 18]] — intensity caps and distributional targets; R7-6a
+- [[Def 20]] — minimum intensity and the intended segment; R7-6b
 
 ## Used by
 - [[Prop 30]] — the fake-alignment gap; R7-4
+- [[Prop 31]] — target sets against the contract; R7-7
+- [[Prop 33]] — capped measures against the contract; R7-6a
+- [[Prop 34]] — the core as a declared intended set; R7-9
+- [[Prop 35]] — the intended segment against the contract; R7-6b
 
 ## Mentions
 - [[Def 14]] — mechanism-relative comparison; explanation layer; R7-1
+- [[Def 19]] — declared intended set; R7-9
 - [[Prop 25]] — mechanism-relative comparisons against the contract; tier 1 given the attribution
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
+- [[Prop 31]] — target sets against the contract; R7-7
+- [[Prop 34]] — the core as a declared intended set; R7-9
 
 ## Mentioned in
 - [[Def 10]] — intent ray and misalignment measures; v6.4, R7-0

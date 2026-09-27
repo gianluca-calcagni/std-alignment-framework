@@ -1,7 +1,8 @@
 {
- "_note": "Files that must never change. R7-4 preregistration: hash recorded when it was written (R7-4 results, V34). archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files.",
+ "_note": "Files that must never change. R7-4 and R7-7 preregistrations: hashes recorded when each was written, before any computation. archive/v6.6_flat: hashes taken at v7.3, so they guard against later change only; migration-check separately re-proves the build from these files. archive/alignment_subframework: the PI's Alignment Subframework (source of retraction rows 1-6), hashed when archived after v7.4.",
  "files": {
   "70 Project/R7/R7-4 preregistration.md": "07a947ecbb9777ebc1ec50dd6af397d37161f136f288bb6f9866e9ea2fbbf6ce",
+  "70 Project/R7/R7-7 preregistration.md": "211704336959ad498edde65144baec84d765495c5b541bf3997be2f1359c8d0b",
   "archive/v6.6_flat/A_core.md": "299283812cbf874f0c36f7d8614a13d592730b415a5072082edcd8a4c7ff97e8",
   "archive/v6.6_flat/B_dictionary.md": "02b11f43f4e78c06a5f168990e6ff4e30f37e474982d929fefab62e0e0efd723",
   "archive/v6.6_flat/C_boundary.md": "3556baa2c1629626eff6ec39ee3cbf9706fbfa7470476fb6aed9a0bda2304471",
@@ -24,6 +25,18 @@
   "archive/v6.6_flat/T1_preregistration.md": "933e2f3bafc8a64ab64698d682b18483b090765c410df17b1e6ddeb62c3d2028",
   "archive/v6.6_flat/final_audit_output.txt": "9590056787a0a7eb408499b79d6606750a59d8728766188b17c9e546d60fdfd3",
   "archive/v6.6_flat/verify_addendum_output.txt": "834eb17970d3f4b350f194921646ed000d3eb80bc17cb715b3ffe6032688b0a9",
-  "archive/v6.6_flat/verify_output.txt": "98e319c9c14db9abc01dc7d9944e16380cb96e59663f0c6cac323628f8f7ae96"
+  "archive/v6.6_flat/verify_output.txt": "98e319c9c14db9abc01dc7d9944e16380cb96e59663f0c6cac323628f8f7ae96",
+  "archive/alignment_subframework/00_HANDOVER.md": "cadb9c88d3c9cae2ada73c3c0e57586080f353be783b9bc1e66d3cc5329a1da0",
+  "archive/alignment_subframework/01_setting.md": "1f81028423503aba716af84fd8011a9d84b473344169783a50d84321bfbf3936",
+  "archive/alignment_subframework/02_decomposition.md": "0cb6db6e8a17ed8bf06e2eda1b61ae8e8188d5478f6f818b268015a1e937009c",
+  "archive/alignment_subframework/03_status.md": "2908a4e103055818598370371f63551454ed0377a08370a004c2ce406cece722",
+  "archive/alignment_subframework/ARCHIVE_NOTE.md": "7da54714123c300689b53915c5a374482fca5a7dfbdf91fcd40fc1ccf112973b",
+  "archive/alignment_subframework/A_antipatterns.md": "c20e1ec2193e76dd1a30b701310d08e71dff61c27d2c347f324d1d6b0cf0d775",
+  "archive/alignment_subframework/B_ethos.md": "c2cb95d390c76a31d6d04b1b405a77b46bd3537a219b15b3870b12a6e8a7d2d2",
+  "70 Project/T3/T3 preregistration.md": "1a515cfa6ceca8290611933cfffd2d69a83662338a70aa94c5d15bc80b21209a",
+  "70 Project/R7/R7-6a preregistration.md": "902a993966f7e0c4d2b132395e8661e8dbd1f8fea447bd86f83dc0910611e5af",
+  "70 Project/R7/R7-9 preregistration.md": "90ab57a94752ee66d150ed8c10931041ea1a0f04f112b172ab2848e706b9ef19",
+  "70 Project/R7/R7-9 preregistration run 2.md": "67a8c7fb37a26d0bbd36bafd033ccdcf8ce7eaad658ef211c628900114d388e7",
+  "70 Project/R7/R7-6b preregistration.md": "8b86d294f8133c22a80c7b51923171d224dd48cd66baf4ced3d20748ec8ad956"
  }
 }
