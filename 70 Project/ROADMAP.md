@@ -395,6 +395,9 @@ second index in the same turn.
     **Structural exception** (the PI, after v7.5): an item that changes no verdict may run if the PI approves it
     *and* it states a structural claim that could fail — a theorem it must prove, or a result it must reproduce or
     explain — so that "structural" does not mean "unfalsifiable".
+    **Toy examples are accepted during the refactor** (the PI, after v7.8): until the R7 refactor is complete, the
+    example may be a toy model or a stylized case rather than a real one. Each such example is a debt, listed in
+    §4c with the real case that would retire it, and paid in T7.
 
 ## 4b. When is the core final? *(confirmed by the PI after v7.7)*
 
@@ -404,6 +407,26 @@ second index in the same turn.
 4. One outside reader — a human, or a model of a different family — has run a real case through it.
 
 Until all four hold, the core is a checked calculus, not a standard. Items 3 and 4 cannot be reached by core steps: after R7-10, the next work is T7.
+
+## 4c. Toy-example debt *(the PI, after v7.8: accepted during the refactor, to be retired in T7)*
+
+Every refactor step below was justified by a toy or stylized example, not a real case. A step's result is proved and
+checked either way; what is not yet shown is that its **verdict change happens on real data**. A future executor retires
+a row by running the real case in T7 and recording whether the verdict changes as predicted. If it does not, the
+step's *motivation* fails, not its mathematics: record it, and ask whether the declaration still earns its place.
+
+| Step | Example that justified it | Kind | Real case that would retire it |
+|---|---|---|---|
+| R7-7 (v7.4) | best-of-n and quantilizers on the true target score as misaligned under the cardinal set | generated instances ([[R7-5 go-no-go]]) | a deployed best-of-n or rejection-sampling pipeline with its reward model: does the cardinal measure charge it where practitioners call it aligned? |
+| R7-6a (v7.5) | a principal whose target is a distribution; an agent collapsed onto its modes scores as aligned | stylized ([[R7-6 go-no-go]]) | a calibration or diversity target (e.g. matching a reference answer distribution) and a mode-collapsed fine-tune |
+| R7-9 (v7.6) | none: structural exception (the core restated as a declared intended set) | structural | nothing to retire; its falsifiable claims are checked (V38) |
+| R7-6b (v7.7) | a harm-threshold policy under which the untouched base model scores as aligned | stylized ([[R7-6b results]]) | a published safety policy with a numeric threshold and a base model's measured violation rate |
+| R7-10 (v7.8) | "style free": correct answers in a different style are charged; under the budget convention, style drift is read as over-optimization | toy, 4 outcomes, and one go/no-go probe ([[R7-10 results]]) | an RLHF model whose reward gain is partly length or tone: does the budget convention report overshoot that a length-controlled comparison attributes to style? |
+| R7-10 (v7.8) | deterministic control on a continuous `X` saturates every divergence | stylized ([[R7-5 go-no-go]], case 5) | a control or robotics policy logged with continuous actions |
+
+**For T7.** The first real case should retire the most rows at once. The RLHF case in the R7-10 row also bears on
+R7-7 (a reward model behind a pipeline) and needs the same data. Real data will have to be supplied by the PI: the
+environment reaches package registries only (T3).
 
 ---
 

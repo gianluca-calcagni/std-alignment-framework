@@ -50,7 +50,8 @@ measurable-space generalization.
 
 The style-drift example changed a verdict as predicted (charged → 0 under the declaration). The budget
 misattribution changed a *diagnosis*: an agent pursuing the target at `t = 1` is compared with an intensity of 2.62
-in the probe. Neither is yet a real case. T7 is where that is tested (ROADMAP §4b).
+in the probe. Neither is yet a real case: toy examples are accepted during the refactor by the PI's choice, and both are rows of
+the toy-example debt ([[ROADMAP]] §4c), to be retired in T7.
 
 ## Open
 

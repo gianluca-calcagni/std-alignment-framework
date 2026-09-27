@@ -33,7 +33,8 @@ Preference: no sycophancy, only intellectual honesty and constructive challenges
   the lead brainstorming theme; rater disclosure
   ([[ROADMAP]] §5, item 3). Deferred by the PI: T3b. T6 is deferred: do not build toward it.
 - **The honest gap:** no prediction has been tested against outside data, and no real case has run end to end.
-  T3 was the one attempt, a clean negative ([[T3 results]]).
+  T3 was the one attempt, a clean negative ([[T3 results]]). The refactor steps were justified by toy examples, by
+  the PI's choice; the debt, and the real case that retires each row, is [[ROADMAP]] §4c.
 
 ## Working rules (the ones a fresh instance breaks first)
 
