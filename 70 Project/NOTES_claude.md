@@ -28,7 +28,7 @@ Until that works on real cases, the framework is a calculus, not a standard.
 
 **Current work:** v7.8. The R7 series has restated the core as the KL projection onto a declared intended set
 (R7-9, v7.6), with target sets (R7-7), caps (R7-6a), floors (R7-6b) and a resolution (R7-10) as declarations. §4b is
-confirmed and the core steps are closed: next is T7. R7-5 closed as a clean
+confirmed and the core steps are closed: next is T7 (case 1: RLHF length bias), with B1's protocol (§8 below). R7-5 closed as a clean
 negative; T3 too. T3b is deferred by the PI. The
 v7.3.3 review's recommendations are [[ROADMAP]] §5; its other observations are §7 below. A fresh session starts at
 [[HANDOVER]].
@@ -233,16 +233,22 @@ exclusion]*.
   G2 "cannot get the request" floor is zero. A declared minimum intensity would make it visible.
 - Falsifier: every real principal treats non-pursuit as capability, not misalignment.
 
-**H12. The chain rule of KL may give the five gaps back as additive terms** *[speculative; ROADMAP §6 G0]*.
+**H12. The chain rule of KL may give the five gaps back as additive terms** *[partly confirmed in B1: exact for the free and segment measures (within cells + off the ray + intensity), not for the budget measure; the terms are symptoms, not causes — [[B1 brainstorm]]]*.
 - If each link intent → reward → representation → evaluator → action is a Markov kernel, KL's chain rule splits
   the measured divergence along the chain, and each gap is a term defined *from* the measure — which avoids what
   killed the gaps (row 1).
 - Falsifier: the links do not compose as kernels, or the terms are not identified (H10) and so not measurable.
 
-**H13. The declared reference `q` is overloaded** *[unexamined]*.
+**H13. The declared reference `q` is overloaded** *[closed in B1: after R7-6b and R7-10 `q` is only the ray's origin; its other two roles are defaults of the floor and the resolution]*.
 - It fixes the default, the zero of intensity, and the unspecified details inside cells (G1, G4). It is the most
   load-bearing object in the measurement layer and the least examined.
 - Next: give `q` its own entry in the declaration registry (R7-9), with an elicitation story.
+
+**H14. One object, three positions** *[B1; toy-tested]*. A partition the target is not measurable on, held by the
+principal (declared resolution, R7-10), by the agent (retention: cost `λ(k)·[m_F(k) − m_G(k)]`, increasing in `k`), or
+by the world (observability). Grounding exploits live exactly in the principal's blind spot.
+- Falsifier: a real case where retention and evaluator error respond identically to both budget and refinement.
+- Distrust: this is the unifying elegance H10 warns about; the toy tests check the algebra, not the world.
 
 **Dormant.** Keep, but don't spend time on these:
 - the refined drift barrier (equipartition over directions with `β'λ ≫ β`);
@@ -347,3 +353,37 @@ decided; each says what would close it.
    exact numbers, not only exact zeros.
 10. **Independence, beyond the raters.** Every review so far came from the project's own process. The definition
    of done in §0 needs an *outsider*. The first T7 case is a good moment to ask a human domain reader to run it.
+
+---
+
+## 8. B1, consolidated — what the brainstorm left me with (after v7.8)
+
+Full note: [[B1 brainstorm]]. Toy tests only: they check the algebra, not the world.
+
+**The one idea.** A partition the target is not measurable on, in three positions (H14):
+- held by the **principal** (declared resolution, R7-10): within-cell moves are invisible;
+- held by the **agent** (retention): the agent cannot follow the target within cells, and pays
+  `R(k) = λ(k)·[m_F(k) − m_G(k)]`, `G = E_q[F|ℋ]` — the exchange rate times the pursuit lost. It *rises* with budget
+  and vanishes when the agent's partition refines `F`'s level sets;
+- held by the **world** (observability): outside the finite core.
+
+**What I now believe, with the number that supports it.**
+1. The free measure is a sum of three attributable terms — within cells, off the ray, intensity — exact to `10⁻¹⁵`.
+   They are symptoms, not causes: two gaps can produce the same term. Diagnosis locates; it does not explain.
+2. A style exploit lives ~99 % inside cells (median, 300 toys). A "style free" declaration hides it. So the default
+   resolution is the finest partition for a reason, and Def. 21 needs that warning.
+3. Identification classes: entropic `[F]₊`, best-of-n `[F]_ord`, Bradley–Terry `F` + a constant per context. The last
+   gives misalignment *across* contexts that no amount of preference data removes (median 0.07 nats). R7-7's defect
+   was declaring a set finer than the channel identifies.
+4. The same slip rate costs more for a sharper agent (0 → 0.10 nats from `t = 1` to 40): slips land where intended
+   behaviour is thin.
+5. `q` is now only the ray's origin (H13 closed).
+
+**What I distrust.** The "one object" story is exactly the elegance H10 warns about. The retention signature
+(budget × refinement) separating retention from evaluator error is untested. The observability reading of row 3 is
+my inference.
+
+**What it changes in practice.** T7's protocol gains a diagnosis table (the three terms), an identification rule
+(no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
+RLHF length-bias case is where items 2 and 3 meet real data.
+
