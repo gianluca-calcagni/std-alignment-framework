@@ -380,11 +380,11 @@ second index in the same turn.
 11. **Label every pre-registered prediction as *verification* or *empirical*** (after v7.5). A verification
     prediction checks a proof and can fail only through a bug or a badly scaled threshold; an empirical one can be
     wrong about the world. Only empirical predictions count towards the base rate (Status §6).
+12. **Brainstorm and go/no-go steps use a light protocol** (after v7.5): a report note, a ROADMAP line and a
+    hygiene row; no version bump unless the core changes. The full R7 discipline is for steps that change the core.
 13. **Before starting any work item, confirm it is meaningful** (the PI, after v7.5): name at least one concrete
     example in which the item changes a verdict, a number or a decision. No example, no item. It generalizes
     the PI's R7-5 test from refactor steps to every step, and it is checked at the top of the item's note.
-12. **Brainstorm and go/no-go steps use a light protocol** (after v7.5): a report note, a ROADMAP line and a
-    hygiene row; no version bump unless the core changes. The full R7 discipline is for steps that change the core.
 
 ## 4b. When is the core final? *(proposed after v7.5; the PI to confirm)*
 
