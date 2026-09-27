@@ -414,3 +414,18 @@ fails the clean test, and says where (the default moves the evaluator).
 (no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
 RLHF length-bias case is where items 2 and 3 meet real data.
 
+---
+
+## 9. Identifiability through dynamics (after v7.10)
+
+The PI's intuition: capture the dynamics behind misalignment, explainable or not, with identifiability as the key.
+What I took from it, recorded in [[ROADMAP]] §6 I1 (*Dynamics*):
+- A snapshot identifies only `log q + t·F̂`. A difference of snapshots under multiplicative dynamics cancels `q`. So
+  **dynamics identify direction; only interventions identify the evaluator** when the actor is pulled to its
+  reference.
+- The quantities worth defining are model-free (rank, angle); their reading as "the evaluator" is the assumption.
+  That split is what "explainable or not" means operationally.
+- Checked before claiming: the second-order form is probably Cor. 13.4 in the Fisher metric (the Thm 17 lesson).
+- **Watch:** I will be tempted to call the rank test new. Fluctuating-selection tests in population genetics are
+  its ancestors; cite them.
+
