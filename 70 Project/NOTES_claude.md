@@ -233,16 +233,22 @@ exclusion]*.
   G2 "cannot get the request" floor is zero. A declared minimum intensity would make it visible.
 - Falsifier: every real principal treats non-pursuit as capability, not misalignment.
 
-**H12. The chain rule of KL may give the five gaps back as additive terms** *[speculative; ROADMAP §6 G0]*.
+**H12. The chain rule of KL may give the five gaps back as additive terms** *[partly confirmed in B1: exact for the free and segment measures (within cells + off the ray + intensity), not for the budget measure; the terms are symptoms, not causes — [[B1 brainstorm]]]*.
 - If each link intent → reward → representation → evaluator → action is a Markov kernel, KL's chain rule splits
   the measured divergence along the chain, and each gap is a term defined *from* the measure — which avoids what
   killed the gaps (row 1).
 - Falsifier: the links do not compose as kernels, or the terms are not identified (H10) and so not measurable.
 
-**H13. The declared reference `q` is overloaded** *[unexamined]*.
+**H13. The declared reference `q` is overloaded** *[closed in B1: after R7-6b and R7-10 `q` is only the ray's origin; its other two roles are defaults of the floor and the resolution]*.
 - It fixes the default, the zero of intensity, and the unspecified details inside cells (G1, G4). It is the most
   load-bearing object in the measurement layer and the least examined.
 - Next: give `q` its own entry in the declaration registry (R7-9), with an elicitation story.
+
+**H14. One object, three positions** *[B1; toy-tested]*. A partition the target is not measurable on, held by the
+principal (declared resolution, R7-10), by the agent (retention: cost `λ(k)·[m_F(k) − m_G(k)]`, increasing in `k`), or
+by the world (observability). Grounding exploits live exactly in the principal's blind spot.
+- Falsifier: a real case where retention and evaluator error respond identically to both budget and refinement.
+- Distrust: this is the unifying elegance H10 warns about; the toy tests check the algebra, not the world.
 
 **Dormant.** Keep, but don't spend time on these:
 - the refined drift barrier (equipartition over directions with `β'λ ≫ β`);

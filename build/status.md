@@ -425,6 +425,7 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **B1 brainstorm (v7.8).** Every open ROADMAP §6 item brainstormed under the light protocol, with five toy tests (`70 Project/B1/`). No core change. Main finding: one object (a partition the target is not measurable on) in three positions — principal (R7-10), agent (retention), world (observability). ROADMAP §0 and §6 updated | project |
 | **Toy-example debt (v7.8).** The PI's choice: toy examples satisfy rule 13 during the refactor. Recorded as a clause of rule 13 and as ROADMAP §4c, which lists each step's example and the real case that would retire it, for T7. HANDOVER and R7-10 results point to it. No content change | project |
 | **R7-10 (v7.8).** Pre-registered in R7-10 preregistration (sha256 `0c4e95a1…`, `d1e7a8d`). New: Def. 21 (declared resolution), Prop. 36, `V40`, R7-10 results, `r710_diagnose.py`. 4 of 5 predictions held; P5 failed as registered (summation threshold; claim unchanged). The budget misattribution term is `Θ` in the core (`E` in the frozen pre-registration). R7-9's registry: resolution declared. ROADMAP §4b confirmed by the PI; next is T7 | core, checks, project, status |
 | **Doc hygiene (v7.7, before the merge).** ROADMAP §0 and NOTES §0 compacted to the current state (the version history lives here and in the Status abstract); ROADMAP §5 given its status; T3 status marked superseded; HANDOVER added as the entry point for a fresh session. No content change | project |
