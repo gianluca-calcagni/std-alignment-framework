@@ -2,7 +2,7 @@
 id: "NOTES_claude"
 type: "working-notes"
 source_file: "NOTES_claude.md"
-updated: "2026-09-26"
+updated: "2026-09-27"
 ---
 # NOTES — for me only
 
@@ -428,6 +428,10 @@ What I took from it, recorded in [[ROADMAP]] §6 I1 (*Dynamics*):
 - The quantities worth defining are model-free (rank, angle); their reading as "the evaluator" is the assumption.
   That split is what "explainable or not" means operationally.
 - Checked before claiming: the second-order form is probably Cor. 13.4 in the Fisher metric (the Thm 17 lesson).
+- **I1-dyn2 (after v7.10):** the degrees-of-freedom count did most of the work. It removed three of five groups before any
+  value was read. The power gate turned a "holds" into what it was: 0.51 power, point estimates leaning the other way.
+  Next time, compute the power *before* choosing the paper: here, with about a hundred flies per group, even the
+  motivating difference was detected only half the time.
 - **Watch:** I will be tempted to call the rank test new. Fluctuating-selection tests in population genetics are
   its ancestors; cite them.
 

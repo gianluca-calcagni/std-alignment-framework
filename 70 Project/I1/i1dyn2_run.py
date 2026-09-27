@@ -129,5 +129,16 @@ def test():
     print("\n".join(lines))
 
 
+def describe():
+    """Added after the test, not registered: the raw increments beside Wright and Dobzhansky's evaluator, same basis."""
+    eggs = np.array(EGGS["November 1945"], float); le = np.log(eggs / eggs.sum()); wd = coords(np.log([0.7, 1.0, 0.3]))
+    lines = [f"(additive, dominance) coordinates in the (E1, E2) basis; Wright-Dobzhansky log(0.7, 1, 0.3): {np.round(wd, 3).tolist()}"]
+    for g, c in ADULTS.items():
+        c = np.array(c, float); u = coords(np.log(c / c.sum()) - le)
+        lines.append(f"   {g}: increment {np.round(u, 3).tolist()}; additive part / W-D additive part {u[0] / wd[0]:.2f}; "
+                     f"AR frequency {(2 * c[0] + c[1]) / (2 * c.sum()):.4f} (eggs {(2 * eggs[0] + eggs[1]) / (2 * eggs.sum()):.4f})")
+    print("\n".join(lines))
+
+
 if __name__ == "__main__":
-    {"gate": gate, "test": test}[sys.argv[1]]()
+    {"gate": gate, "test": test, "describe": describe}[sys.argv[1]]()

@@ -31,7 +31,10 @@ Preference: no sycophancy, only intellectual honesty and constructive challenges
   contract is Def. 11. §4b is confirmed: the core steps are closed, and next is T7.
 - **v7.9 (R8-1):** default convention free; the value shortfall `ΔV` (Def. 22, Prop. 37) is reported next to every measure; floors are the safety declaration ([[R8-1 results]]).
 - **v7.10 (Def. 23):** every diagnosis states a full declaration; rules are compliance reports ([[R8-2 results]]).
-- **Next:** brainstorm the explanation layer (`F` against `F̂`); the estimation protocol (A3) gates empirical work. T7 is closed ([[T7 summary]]): the AI case was a relabelling with one out-of-sample prediction, the human case failed its clean test, and case 3 was skipped (no public data); case 1 is indexed in [[T7 case 1 index]]. B1 ([[B1 brainstorm]], [[NOTES_claude]] §8) shaped its protocol.
+- **I1 dynamics:** the dynamic rank has met real data twice. I1-dyn was vacuous (a self-fitted reference). I1-dyn2 held
+  at half power, and Dobzhansky 1947 is now exhausted ([[I1-dyn2 results]]).
+- **Next:** the PI's choice ([[ROADMAP]] §0): the rank test on well-powered data (RLHF checkpoints, supplied by the PI), or
+  brainstorm the explanation layer (`F` against `F̂`). The estimation protocol (A3) gates empirical work. T7 is closed ([[T7 summary]]): the AI case was a relabelling with one out-of-sample prediction, the human case failed its clean test, and case 3 was skipped (no public data); case 1 is indexed in [[T7 case 1 index]]. B1 ([[B1 brainstorm]], [[NOTES_claude]] §8) shaped its protocol.
 - **Open for the PI:** identifiability ([[ROADMAP]] §6 I1),
   the lead brainstorming theme; rater disclosure
   ([[ROADMAP]] §5, item 3). Deferred by the PI: T3b. T6 is deferred: do not build toward it.
