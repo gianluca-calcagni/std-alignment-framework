@@ -19,6 +19,11 @@ prediction was computed.
 | 3 | Institutions: public goods | — | — | **skipped**: no complete public dataset reachable (CRAN, Dataverse, OSF, openICPSR blocked) |
 | 4 | Biology | — | — | not attempted (the stop rule: one case, then decide) |
 
+> [!warning] Read with [[R8 foundations review]]. **B1:** case 2 tested B12's actor model (explanation layer); it
+> computed no misalignment measure, so §4b item 3 is *untested*, not failed, for humans. **B2:** case 1's targets were
+> binary, so it exercised mainly the chain rule. **B3:** across T7, 5 of 15 empirical predictions held, and case 1's one
+> success came after two failed designs.
+
 ## What T7 showed about the framework
 
 1. **The mathematics holds on real data.** Every verification prediction held, in every design: the exact splits, the
