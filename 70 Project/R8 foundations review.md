@@ -16,14 +16,31 @@ is wording.
 
 ## A. The core
 
-**A1 (high) — "misalignment" measures distinguishability, not harm.**
-- M3 makes every measure invariant to `F ↦ aF + c`. The number, in nats, says how far behaviour is from intended
-  behaviour in information, not how bad the gap is. Scaling the stakes by 1000 leaves `M` unchanged.
-- Only the price measure carries value units, `R_J = KL/β`, and only at a declared price.
-- The word "misalignment", and phrases like "ε-aligned", invite a harm reading that the definitions do not support. A
-  rare catastrophic outcome and a rare harmless one, with the same probabilities, score the same.
-- **Fix:** say this in Def. 8 and in the Status abstract. Report `R_J` in value units whenever a price is declared. A
-  principal who cares about stakes needs a value-weighted measure, which the core does not offer.
+**A1 (high; corrected after the PI's question) — "misalignment" is unit-free, and severity enters only through `F`
+and intensity.**
+- *First version, withdrawn:* "a rare catastrophe and a rare trivial slip at the same probabilities score the same".
+  That holds only when `F` values them equally. The intended behaviour `p ∝ q·e^{tF}` gives a catastrophic outcome tiny
+  mass, so KL charges about `ε·t·ΔF` for mass `ε` on it: **severity is already in `F`**.
+- **The PI's question: should the measure be a harm-weighted KL?** No.
+  - `Σ w·p̂·log(p̂/p)` can be negative (`w = (1,100)`, `p̂ = (0.9,0.1)`, `p = (0.5,0.5)` gives about −15.6), so it
+    breaks M1 and M2.
+  - The non-negative form `Σ w(p̂ log(p̂/p) − p̂ + p)` is, by Prop. 15, the regret of a *different* principal, one whose
+    information cost is weighted. That changes the intended family.
+  - It loses the chain rule, unless the weights are constant on cells, and with it the decompositions.
+  - It loses the detection link, because Chernoff/Stein exponents are unweighted.
+  - Harm weights on outcomes are what `F` already encodes. Weighting again double-counts.
+- **The real gaps are three:**
+  1. *Absolute stakes.* M3 removes scale on purpose, so nats cannot compare stakes across problems. Value units need a
+     declared price (`R_J = M/β`) or the value gap `ΔV = E_{p*}F − E_{p̂}F`.
+  2. *Severity scales with intensity.* At low intended intensity, a catastrophe inherited from `q` is barely charged.
+     The remedy that exists is a declared floor (Def. 20), and no floor is the default.
+  3. *Risk attitude over distributions* (for example "any catastrophe above 1% is unacceptable", or CVaR). The
+     entropic principal is risk-neutral in `F`; such attitudes are non-linear in `p` and not representable (R7-6's
+     territory).
+- **Fix:**
+  - report `ΔV`, or `R_J` at a declared price, alongside `M` in every diagnosis;
+  - make a floor or threshold the standard declaration for a safety principal;
+  - a weighted divergence only if a case shows these insufficient (rule 13).
 
 **A2 (high) — every measure is relative to an entropic principal.**
 - The default intended behaviours are Gibbs tilts of `q`. KL is *the* measure only because the principal's value is
@@ -122,7 +139,7 @@ is wording.
 
 ## Recommended order (budget-aware)
 
-1. **Wording, cheap:** A1 (stakes) in Def. 8 and the abstract; A6 in Def. 19's notes. Done now, in project notes only:
+1. **Wording, cheap:** A1 (unit-free; severity via `F` and intensity; report `ΔV` alongside `M`; floor for safety principals) in Def. 8 and the abstract; A6 in Def. 19's notes. Done now, in project notes only:
    the R7-9 registry row (A2) and T7 summary (B1, B3).
 2. **One PI decision:** the default convention (A5).
 3. **Before any more empirical work:** the estimation protocol (A3, B4).
