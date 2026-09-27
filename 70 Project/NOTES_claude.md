@@ -385,6 +385,12 @@ Full note: [[B1 brainstorm]]. Toy tests only: they check the algebra, not the wo
 (budget × refinement) separating retention from evaluator error is untested. The observability reading of row 3 is
 my inference.
 
+**After T7 case 1 (three designs).** The verification predictions always held; the style term predicted out of sample
+only when its cells came from independent labels (LLMBar, ρ = 0.52), and never beat the raw feature it isolates
+(0.285 vs 0.377; 0.522 vs 0.533). My reading: on real evaluators, style preference barely depends on true quality, so
+conditioning buys nothing. The framework's value in this case is the structured reading (terms, levers, `Θ`), not
+predictive power. Don't oversell that as a diagnosis that beats practitioners' features.
+
 **What it changes in practice.** T7's protocol gains a diagnosis table (the three terms), an identification rule
 (no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
 RLHF length-bias case is where items 2 and 3 meet real data.

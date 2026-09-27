@@ -18,6 +18,12 @@ verdict of overshoot can be style drift. The hedge: one of five predictions (P5)
 floating-point threshold; the claim is exact and unchanged ([[R7-10 results]]). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.
 
+**T7 case 1 (after v7.8)** — the first contact with real data. On 216 AlpacaEval models and 65 LLMBar evaluator
+configurations, every verification prediction held. With independent gold labels, the framework's style term
+measured on ordinary data predicted evaluator failure on adversarial data (ρ = 0.52). The hedge: in all three designs
+it did no better than the raw feature it isolates, so its value there is the structured reading, not extra
+predictive power ([[T7-1d results]]).
+
 **v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
 minimum, an agent that stays at the default is charged. All five pre-registered predictions held ([[R7-6b results]]).
 
