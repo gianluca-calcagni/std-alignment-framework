@@ -85,6 +85,7 @@ serves.
 | **Headlines overclaim scope** | row 52: "a formalization of alignment" | put the scope in the headline, not only in §12 |
 | **Reconstructing a dropped idea from its retraction line alone** | ROADMAP §6, first draft: from row 4 I filed the coarse-agent and loose-instruction scenarios under "grounding". The source (the Alignment Subframework) shows grounding is the *self*-reachable σ-algebra — wireheading — and the resolution scenarios are transmission and specification underdetermination | before restoring or judging a retracted idea, get its source. A retraction line records what died, not what the idea was |
 | **Choosing a data column without checking its coverage** | T7-1b: I registered the April Elo column as "the most recent"; only 18 models had a value, D2 fired, and an amendment (T7-1c) was needed | before registering a column, count its non-missing values on the matched set — counts, not values |
+| **Registering a test before checking it has enough bins** | T7-2b: P3 needed at least 3 below-default bins; both plans default to 3%, so there were 2. I could have read the defaults (design parameters, not outcomes) before registering | read the design parameters a test depends on before registering it |
 | **Registering a prediction the design makes unfalsifiable** | T7-1: P5 asked for a within-cell share on a two-cell coarse space, where the intent ray covers every behaviour that beats `q`, so the off-ray term is 0 and the share is 1 by construction | before registering a share or a ratio, compute it on the degenerate cases of the design (here: any `p̂_𝒢` above `q_𝒢`) |
 | **Registering a threshold without deriving its scale** | R7-10: P5 required `10⁻¹²` constancy of a value computed from masses summed over `2¹⁶` floats (error `~n·ε`, observed `7·10⁻¹²`). R7-9: P2 set `−10⁻⁸` on a quantity computed by a solver accurate to `10⁻⁸`, and P3 tested a reduction on both sides when only one side can refute it — a generic optimizer can miss an infimum, never beat it. R7-7: P8 tested a strict inequality as "gap > 10⁻¹²" when the gap is second order in `M_ord`; P10 used an absolute `10⁻¹⁰` on a 4,473-nat value; P6 predicted that a cardinal measure moves under monotone maps, forgetting that anti-aligned behaviour sits at the half-ray's endpoint `t = 0` | before registering a number, derive how the quantity scales (its order in the small parameter, its range) and make the tolerance relative or scaled. Run the endpoint and sign cases through the prediction, in writing |
 | **A pass rate as a reliability rule** | R7-7 D1: the solver's starts agreed in 98.7 % of instances, so the rule passed; the one failure that mattered (D4) was on an instance where they disagreed | reliability rules are per instance: a flag on each value, not a rate over values |
@@ -395,6 +396,11 @@ predictive power. Don't oversell that as a diagnosis that beats practitioners' f
 real data passed it, at a loose tolerance, and the rows showed where exclusion starts to fail (below the default in
 Company B). That is the pattern to look for: cases where the framework predicts a structure, not a feature it can at
 best tie. Also a process slip: I chained `lint | grep` into a commit and pushed a lint error; lint is now a hard gate.
+
+**After T7-2b.** The pattern I flagged post hoc in T7-2 (a floor below the default) failed on two fresh companies.
+Good: that is exactly why post-hoc patterns get registered before they are believed. A different post-hoc pattern
+appeared in both (the default pulls its neighbours hardest), and it would correct B12's reference family. Treat it the
+same way: register it before believing it.
 
 **What it changes in practice.** T7's protocol gains a diagnosis table (the three terms), an identification rule
 (no target set finer than the channel identifies), and a lever table (which intervention moves which term). The
