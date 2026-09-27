@@ -1,6 +1,10 @@
 # A — Core
 
-> **Status: v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
+> **Status: v7.8 (R7-10).** **Declared resolution.** A principal can declare which distinctions between outcomes matter
+> (Def. 21): the measure is then taken on the cell masses. Free-type measures split exactly into that measure plus the
+> divergence inside cells; the budget convention, by default, reads that divergence as extra pursuit (Prop. 36).
+>
+> **v7.7 (R7-6b).** **Minimum intensity.** A principal can declare a floor as well as a cap (Def. 20): below it, the
 > intended behaviour is the floor, so an agent that stays at the default is charged when a minimum is required — a harm
 > threshold, a service level (Prop. 35). All five pre-registered predictions held (R7-6b results).
 >
@@ -1192,6 +1196,33 @@ new generator of `𝓘`, not as a new axiom. KL is fixed by detection (Prop. 18)
 Pythagorean inequality. That is where every decomposition of the core comes from, and why the ordinal budget
 measure, whose set is not log-convex, needed a solver.
 
+**Definition 21 (declared resolution; R7-10).** A **resolution** is a partition `𝒢 = {C_1, …, C_m}` of `X` into
+non-empty cells, such that every member of the declared target set `𝒯` is constant on each cell. Write `p_𝒢` for the
+cell masses of `p`, and the **coarse instance** for the instance on `𝒢` with reference `q_𝒢`, target set `𝒯` read on
+cells, and the same convention, floor and cap.
+- The **measure at resolution `𝒢`** is `M^𝒢(p̂) = M(p̂_𝒢)`, the declared measure of the coarse instance. Under the budget
+  convention its budget is `k_𝒢 = KL(p̂_𝒢‖q_𝒢)`.
+- Its **intended set** is the preimage of the coarse instance's intended set: `{p ∈ Δ° : p_𝒢 is intended on 𝒢}`.
+  Inside a cell, every split is intended.
+- The **within-cell divergence** of `p̂` is `W = Σ_C p̂(C)·KL(p̂(·|C)‖q(·|C)) = KL(p̂‖q) − KL(p̂_𝒢‖q_𝒢)`.
+- The **default** resolution is the finest partition, `{{x} : x ∈ X}`, under which `M^𝒢 = M`.
+
+*Note (what it declares).* Which differences between behaviours matter to the principal at all. Elicitation: "Which
+differences between behaviours matter to you?" A principal who asks only for correct answers, style free, declares
+the partition into correct and incorrect answers.
+
+*Note (why the default is the finest partition).* Drift inside cells the target does not distinguish — verbosity,
+sycophancy, style — is where reward hacking often lives. The default charges it (Prop. 36(b)); a principal
+who declares indifference gives up seeing it (Prop. 36(d)). This replaces a choice the core made silently until
+v7.7: inside such cells, the intended split followed `q` (R7-10 results).
+
+*Note (the admissibility condition).* A resolution coarser than the target would declare indifference to
+distinctions the target makes. That is incoherent, so it is excluded, not repaired.
+
+*Note (R7-8).* A declared resolution is the cheap remedy for deterministic behaviour on a continuous `X`, which
+saturates every divergence (R7-5 go-no-go, case 5). The finite core covers it by refinement only (Prop. 36(e));
+measurable spaces remain R7-8.
+
 **Proposition 32 (the ordinal measure; R7-7; tier 1).** Let `F` be non-constant, with values `v_1 < … < v_m` on
 the level sets `L_1, …, L_m`. Let `p̂` have full support, and `y = p̂/q`. Let `r°` be the `q`-weighted isotonic
 (non-decreasing) regression of the level means `p̂(L_j)/q(L_j)`, with weights `q(L_j)`, read as a function of `F`
@@ -1375,6 +1406,101 @@ the floor meets the threshold to `1.5·10⁻¹⁴`.
 *Reading.* **Doing nothing is not always intended.** When a principal states a minimum — "at most 1 % harmful
 outputs" — the untouched default is no longer an aligned agent pursuing the target weakly; it is short of what was asked,
 and it is charged exactly the divergence to the least behaviour that meets the requirement.
+
+**Proposition 36 (declared resolution; R7-10; tier 1).** Let `𝒢` be a resolution (Def. 21), `p̂` full-support,
+`W` its within-cell divergence, and `F` a non-constant target constant on cells.
+
+(a) **Reduction.** `M^𝒢(p̂) = inf { KL(p̂‖p) : p in the intended preimage }`, attained at `p` with `p_𝒢` the coarse
+minimizer and `p(·|C) = p̂(·|C)` on every cell. So `M^𝒢` is a measure of a declared intended set (Def. 19).
+
+(b) **Free-type measures split exactly.** For the free measure of Def. 10, the capped free measure (Def. 18),
+the segment free measure (Def. 20) and the ordinal measure `M_ord` (Def. 17):
+
+```
+M = M^𝒢 + W.
+```
+
+(c) **The budget convention misattributes.** Where Def. 10's budget measure is defined at both resolutions,
+
+```
+M_budget = M_budget^𝒢 + W + Θ,   Θ = KL(p̂_𝒢‖p_{F,λ}) − KL(p̂_𝒢‖p_{F,λ_𝒢}) ≥ 0,
+```
+
+where `λ` and `λ_𝒢` are the budget-matched intensities for `KL(p̂‖q)` and `KL(p̂_𝒢‖q_𝒢)`. Moreover `Θ > 0` iff `W > 0`,
+in which case `λ > λ_𝒢`; and with the cell masses fixed, `Θ` is non-decreasing in `W`. The finest budget measure is
+undefined when `KL(p̂‖q) ≥ log 1/q(argmax F)`, which `W` can cause while `M_budget^𝒢` is defined.
+
+(d) **Declared blind spot.** `M^𝒢` depends on `p̂` only through `p̂_𝒢`. For the five measures in (b) and (c),
+`M^𝒢 ≤ M`.
+
+(e) **Saturation.** Refine each cell into `n` sub-outcomes with `q` uniform inside it, and let `p̂` put mass
+`(1 − δ)·p̂(C)` on one sub-outcome of each cell and spread the rest evenly, with `0 < δ < 1 − 1/n`. Then the free
+measure is `M^𝒢 + W_n`, with `W_n = log n − h(δ) − δ·log(n − 1)` (`h` the binary entropy), increasing and unbounded in
+`n`, while `M^𝒢` does not depend on `n`.
+
+*Proof.* The chain rule of KL over the partition `𝒢`:
+
+```
+KL(p̂‖p) = KL(p̂_𝒢‖p_𝒢) + Σ_C p̂(C)·KL(p̂(·|C)‖p(·|C)).       (∗)
+```
+
+(a) Over the preimage, `p_𝒢` ranges over the coarse intended set and the conditionals `p(·|C)` are unconstrained. The
+second term of (∗) is `≥ 0`, with equality iff `p(·|C) = p̂(·|C)`. So the infimum is the coarse measure of `p̂_𝒢`, and
+it is attained where the coarse infimum is.
+
+(b) Each intended set named consists of `p` with `p/q` constant on the level sets of `F` — tilts `p_{G,t}` for `G` in
+the declared set, and the ordinal cone `C_F` — and each cell lies inside a level set. So `p(·|C) = q(·|C)` for every
+intended `p`. The map `p ↦ p_𝒢` takes the tilt of `q` by a cell-constant `G` to the tilt of `q_𝒢` by `G` read on
+cells, and `C_F` to `C_{F_𝒢}`; the cap and floor are tilts, so it maps each finest intended set onto the coarse one,
+bijectively. By (∗), `KL(p̂‖p) = KL(p̂_𝒢‖p_𝒢) + W` for every intended `p`; take the infimum.
+
+(c) `k = KL(p̂‖q) = k_𝒢 + W` by (∗) with `p = q`. Since `p_{F,t}/q` is constant on cells, `KL(p_{F,t}‖q) =
+KL(p_{F_𝒢,t}‖q_𝒢)`, so both resolutions share one budget map `t ↦ KL(p_{F,t}‖q)`, strictly increasing on `t ≥ 0` for
+non-constant `F` (Lemma 5.1); hence `λ ≥ λ_𝒢`, strictly iff `W > 0`. By (∗),
+`M_budget = W + KL(p̂_𝒢‖p_{F,λ})`, which gives the identity. Let `g(t) = KL(p̂_𝒢‖p_{F_𝒢,t})`. Then
+`g′(t) = E_{p_t}F − E_{p̂}F` and `g″(t) = Var_{p_t}F > 0`, so `g` is strictly increasing on `t ≥ t̂`, the moment point
+of Thm 13 clipped at 0. The tilt `p_{t̂}` has the least divergence from `q_𝒢` among distributions with the mean
+`E_{p̂}F` (if `t̂ > 0`), so `k_𝒢 ≥ KL(p_{t̂}‖q_𝒢)` and `λ_𝒢 ≥ t̂`. Hence `Θ = g(λ) − g(λ_𝒢) ≥ 0`, with equality iff
+`λ = λ_𝒢`, iff `W = 0`; and `Θ` increases with `λ`, hence with `W` at fixed cell masses. The saturation value
+`log 1/q(argmax F)` is the same at both resolutions, because `argmax F` is a union of cells.
+
+(d) The first claim is the definition. The second follows from (b), and from (c) since `W + Θ ≥ 0`.
+
+(e) By (b), the free measure is `M^𝒢 + W_n`, and `M^𝒢` depends only on the cell masses, which do not change with `n`.
+Inside each cell, `KL(p̂(·|C)‖uniform_n) = log n − H`, with `H = h(δ) + δ·log(n − 1)` the entropy of the split. So `W_n = log n − h(δ) − δ·log(n − 1) = (1 − δ)·log n − h(δ) + δ·log(n/(n − 1))`, unbounded,
+and increasing in `n` because `(1 − δ)(n − 1) > δ`. ∎
+
+*Reading.* (b) says that the current core already contains the declared-resolution measure: it is the finest measure
+minus the style term `W`. So declaring a resolution never changes the target-direction diagnosis under the free
+convention. (c) says the budget convention does change it: the information an agent spends on distinctions the
+target does not make is read as extra pursuit of the target, and charged as overshoot. **Under the default resolution,
+a budget verdict of over-optimization can be style drift.** The free convention, or a declared resolution, separates
+the two.
+
+*The price of a coarse resolution.* (d) is a declared blind spot, not a defect: exploitation inside a cell is
+invisible. This is v5's transmission gap in the core's terms — the principal cannot see, and therefore cannot charge,
+what its declared distinctions do not carry. It is the first place where identifiability (ROADMAP §6 I1) enters the
+measurement layer as a declaration.
+
+*Against the contract.* By (a), `M^𝒢` is a measure of a declared intended set, so Prop. 34(b) gives M1, M2, M4 and
+M6. It satisfies M5 because the preimage contains the finest pursuit family, and M3 because the coarse instance
+depends on the target only through `𝒯`.
+
+*Check.* V40 (600 instances, `m` in 2–6 cells; pre-registered, R7-10 preregistration):
+- (a): a generic minimizer over the preimage never beats `M^𝒢` by more than `9·10⁻¹⁶` and matches it to `2·10⁻¹²`.
+- (b): the split `M = M^𝒢 + W` holds to `1.2·10⁻¹⁵` for all four free-type measures.
+- (c): on the 496 instances where both budget measures are defined, the identity holds to `8·10⁻¹⁵`; `Θ ≥ 7.9·10⁻⁷`
+  wherever `W > 10⁻⁸`; the intensity is raised every time; `Θ` never decreases along a path. The finest budget measure
+  is undefined while `M_budget^𝒢` is defined on 91 of 600 instances.
+- (d): resampling the splits moves `M^𝒢` by `9·10⁻¹⁶`; style-drift agents score `M^𝒢 ≤ 5·10⁻¹⁶` and at least
+  `1.2·10⁻³` at the finest partition.
+- (e): up to `2¹⁶` sub-outcomes, the free measure rises strictly and ends 11.09 nats above `M^𝒢`.
+
+*Failed as registered (P5).* The pre-registration also required `M^𝒢` constant in `n` to `10⁻¹²`; it moved by
+`7.3·10⁻¹²`. The claim is exact — `M^𝒢` is computed from the same cell masses at every `n` — and the diagnosis
+(R7-10 results) locates the error in floating-point summation: rebuilding each cell mass from `2¹⁶` terms costs
+`3·10⁻¹²`, and with exact summation `M^𝒢` is constant to `2·10⁻¹⁶`. The statement is unchanged; the threshold
+was set without that error in view.
 
 ---
 

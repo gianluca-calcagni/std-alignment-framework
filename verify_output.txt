@@ -258,3 +258,11 @@
   P3 M_free_seg <= M_budget_seg: min gap -3.4e-16; reductions to Def. 18 (r = 0) and Def. 10 (r = 0, s = inf): max difference 1.4e-13 -> holds
   P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change 5.8e-14 -> holds
   P5 threshold policies (300): base model with the floor min 2.18e-04, without max 4.5e-16; floor hits the threshold to 1.5e-14 -> holds
+
+[V40] R7-10: declared resolution (Def. 21, Prop. 36), against the pre-registration (P1-P5)
+  P1 generic minimisation over the intended preimage: beats M^G by at most 8.7e-16; max |difference| 1.8e-12 -> holds
+  P2 M = M^G + W for free, capped, segment and ordinal measures: max difference 1.1e-15 -> holds
+  P3 budget (496 with both defined): identity max 8.4e-15; min E where W > 1e-8: 7.90e-07; intensity not raised: 0; max decrease of E along paths 6.1e-16 -> holds
+      reported: finest budget measure undefined while M_budget^G is defined on 91 of 600
+  P4 splits resampled: M^G changes by 8.6e-16; min M - M^G -7.6e-16; style drift M^G max 5.3e-16, finest min 1.21e-03 -> holds
+  P5 refinement to 2^16 sub-outcomes: finest free measure strictly increasing, M - M^G at 2^16 in [11.09, 11.09]; M^G constant to 7.3e-12 -> FAILS

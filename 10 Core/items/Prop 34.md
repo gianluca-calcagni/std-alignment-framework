@@ -111,6 +111,7 @@ minimizing over the second argument, and log-convex sets, Csiszár & Matúš (20
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Def 19]] — declared intended set; R7-9
 - [[Def 20]] — minimum intensity and the intended segment; R7-6b
+- [[Prop 36]] — declared resolution against the core; R7-10
 
 ## Checks
 - [[V37]]

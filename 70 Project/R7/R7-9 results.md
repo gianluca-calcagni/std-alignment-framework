@@ -82,7 +82,7 @@ Each declaration generates part of the intended set `𝓘`. "Elicitation" is how
 | convention `κ` | which point of the pursuit family is the comparison | "Compare with an agent that spent the same effort (budget), any effort (free), or a declared price?" | budget | R7-0 |
 | cap `p^max` | the most intense intended pursuit | "Which behaviour is already enough, or is the target itself a distribution?" | none | R7-6a |
 | floor | the least intense intended pursuit | "Which behaviour is the minimum acceptable?" | none: `q` is intended | declared, R7-6b (v7.7) |
-| resolution of `X` | which distinctions the measure sees | "Which differences between behaviours matter at all?" | `X` as declared | candidate, R7-8 |
+| resolution of `X` | which distinctions the measure sees | "Which differences between behaviours matter at all?" | the finest partition | declared, R7-10 (v7.8) |
 | context weights and aggregation | how per-context measures combine (M8) | "Where will it run, and does the average or the worst context matter?" | linear average under `ρ_dep`, `ρ_ev` | candidate, below |
 
 ## The silent-declaration audit
@@ -93,8 +93,8 @@ example before it becomes a step.
 | Choice made silently | Verdict | Rule-13 example |
 |---|---|---|
 | the ray starts at `q`: doing nothing is intended | **declared in R7-6b (v7.7)** | a harm-threshold policy under which the untouched base model scores as aligned (passes) |
-| inside a cell the target does not distinguish, the intended split follows `q` | **candidate** (§6 G1, G4) | "any valid answer, style free": an agent answering in a different style from the base model is charged. To confirm with a real principal |
-| the resolution of `X` | **candidate R7-8** | deterministic control on a continuous `X` saturates every divergence (R7-5 case 5) |
+| inside a cell the target does not distinguish, the intended split follows `q` | **the default of the declared resolution, R7-10 (v7.8)** | "any valid answer, style free": an agent answering in a different style from the base model is charged. To confirm with a real principal |
+| the resolution of `X` | **declared in R7-10 (v7.8)** | deterministic control on a continuous `X` saturates every divergence (R7-5 case 5) |
 | contexts aggregate linearly | **candidate** | a safety principal who cares about the worst deployment context: a rare catastrophic context is averaged away. To confirm |
 | `q` itself | **keep, with its elicitation story**; examine (H13) | — |
 | KL as the divergence | **keep**: forced by detection (R7-5) | revival trigger in [[R7-5 go-no-go]] |

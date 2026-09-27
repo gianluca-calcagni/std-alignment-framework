@@ -1,0 +1,2 @@
+cell masses rebuilt: bincount max error 3.4e-12, fsum max error 5.6e-17
+M^G change over n = 2..2^16: with bincount masses 3.8e-12; with fsum masses 1.7e-16

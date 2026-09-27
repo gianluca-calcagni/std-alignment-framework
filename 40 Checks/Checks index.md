@@ -10,7 +10,7 @@ Numerical checks: one note per block of `verify.py`, `final_audit.py` and `verif
 
 <!-- gen:index -->
 
-## `verify.py` (39)
+## `verify.py` (40)
 - [[V01]] — verifies [[C01]], [[Cor 1.3]], [[Cor 1.4]], [[Thm 1]]
 - [[V02]] — verifies [[Prop 2]], [[Prop 3]]
 - [[V03]] — verifies [[Prop 4]]
@@ -50,6 +50,7 @@ Numerical checks: one note per block of `verify.py`, `final_audit.py` and `verif
 - [[V37]] — verifies [[Prop 34]]
 - [[V38]] — verifies [[Prop 34]]
 - [[V39]] — verifies [[Prop 35]]
+- [[V40]] — verifies [[Prop 36]]
 
 ## `final_audit.py` (8)
 - [[F1]] — verifies [[Lemma 5.1]]
