@@ -61,6 +61,7 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 - [[Prop 33]] — capped measures against the contract; R7-6a
 - [[Prop 34]] — the core as a declared intended set; R7-9
 - [[Prop 35]] — the intended segment against the contract; R7-6b
+- [[Prop 36]] — declared resolution against the core; R7-10
 
 ## Mentions
 - [[Def 17]] — target sets; R7-7

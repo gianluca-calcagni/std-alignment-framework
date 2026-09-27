@@ -26,9 +26,10 @@ substrate, runs it through the framework, and gets:
 
 Until that works on real cases, the framework is a calculus, not a standard.
 
-**Current work:** v7.7. The R7 series has restated the core as the KL projection onto a declared intended set
-(R7-9, v7.6), with target sets (R7-7), caps (R7-6a) and floors (R7-6b) as declarations. R7-5 closed as a clean
-negative; T3 too. T3b and T7 are deferred by the PI. Next is the PI's choice ([[ROADMAP]] §0), under rule 13. The
+**Current work:** v7.8. The R7 series has restated the core as the KL projection onto a declared intended set
+(R7-9, v7.6), with target sets (R7-7), caps (R7-6a), floors (R7-6b) and a resolution (R7-10) as declarations. §4b is
+confirmed and the core steps are closed: next is T7. R7-5 closed as a clean
+negative; T3 too. T3b is deferred by the PI. The
 v7.3.3 review's recommendations are [[ROADMAP]] §5; its other observations are §7 below. A fresh session starts at
 [[HANDOVER]].
 
@@ -83,7 +84,7 @@ serves.
 | **Measuring after the answer has converged** | three rounds of routing (T1, T1b, T1c) | when a measurement stops changing what I'd build, stop measuring |
 | **Headlines overclaim scope** | row 52: "a formalization of alignment" | put the scope in the headline, not only in §12 |
 | **Reconstructing a dropped idea from its retraction line alone** | ROADMAP §6, first draft: from row 4 I filed the coarse-agent and loose-instruction scenarios under "grounding". The source (the Alignment Subframework) shows grounding is the *self*-reachable σ-algebra — wireheading — and the resolution scenarios are transmission and specification underdetermination | before restoring or judging a retracted idea, get its source. A retraction line records what died, not what the idea was |
-| **Registering a threshold without deriving its scale** | R7-9: P2 set `−10⁻⁸` on a quantity computed by a solver accurate to `10⁻⁸`, and P3 tested a reduction on both sides when only one side can refute it — a generic optimizer can miss an infimum, never beat it. R7-7: P8 tested a strict inequality as "gap > 10⁻¹²" when the gap is second order in `M_ord`; P10 used an absolute `10⁻¹⁰` on a 4,473-nat value; P6 predicted that a cardinal measure moves under monotone maps, forgetting that anti-aligned behaviour sits at the half-ray's endpoint `t = 0` | before registering a number, derive how the quantity scales (its order in the small parameter, its range) and make the tolerance relative or scaled. Run the endpoint and sign cases through the prediction, in writing |
+| **Registering a threshold without deriving its scale** | R7-10: P5 required `10⁻¹²` constancy of a value computed from masses summed over `2¹⁶` floats (error `~n·ε`, observed `7·10⁻¹²`). R7-9: P2 set `−10⁻⁸` on a quantity computed by a solver accurate to `10⁻⁸`, and P3 tested a reduction on both sides when only one side can refute it — a generic optimizer can miss an infimum, never beat it. R7-7: P8 tested a strict inequality as "gap > 10⁻¹²" when the gap is second order in `M_ord`; P10 used an absolute `10⁻¹⁰` on a 4,473-nat value; P6 predicted that a cardinal measure moves under monotone maps, forgetting that anti-aligned behaviour sits at the half-ray's endpoint `t = 0` | before registering a number, derive how the quantity scales (its order in the small parameter, its range) and make the tolerance relative or scaled. Run the endpoint and sign cases through the prediction, in writing |
 | **A pass rate as a reliability rule** | R7-7 D1: the solver's starts agreed in 98.7 % of instances, so the rule passed; the one failure that mattered (D4) was on an instance where they disagreed | reliability rules are per instance: a flag on each value, not a rate over values |
 | **Self-matching `pkill`, twice** | R7-4, and again in R7-7: `pkill -f "verify.py V35"` matched its own shell and killed it | stop processes by PID, found with `ps`; never `pkill -f` with a pattern that appears in the command line itself |
 | **Correcting the ledger, not the prose that repeats it** | v7.3.3 review: Core §12 still called Thms 1, 13, 17 and Prop. 18 entropic-only three versions after rows 67–68 made them tier 1; Status §1.4 still said "untested" of the crossing that §1.2 records as tested; three part banners were two to four versions stale | a tier or status change is a retraction for grep purposes: grep the old wording across the vault, prose included. Banners are now linted; prose contradictions are not, so the grep is still mine to do |

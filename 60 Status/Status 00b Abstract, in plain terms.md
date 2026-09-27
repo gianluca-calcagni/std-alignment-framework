@@ -11,7 +11,14 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
+**Status: v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
+Under the free convention this removes exactly the drift inside indistinguishable outcomes (style, verbosity) and
+changes nothing else. Under the budget convention, by default, such drift is misread as over-optimization: a budget
+verdict of overshoot can be style drift. The hedge: one of five predictions (P5) failed as registered, on a
+floating-point threshold; the claim is exact and unchanged ([[R7-10 results]]). A coarse resolution also blinds the
+measure to exploitation inside cells, by declaration.
+
+**v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
 minimum, an agent that stays at the default is charged. All five pre-registered predictions held ([[R7-6b results]]).
 
 **v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of

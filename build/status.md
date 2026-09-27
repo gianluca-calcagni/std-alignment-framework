@@ -5,7 +5,14 @@
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
+**Status: v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
+Under the free convention this removes exactly the drift inside indistinguishable outcomes (style, verbosity) and
+changes nothing else. Under the budget convention, by default, such drift is misread as over-optimization: a budget
+verdict of overshoot can be style drift. The hedge: one of five predictions (P5) failed as registered, on a
+floating-point threshold; the claim is exact and unchanged (R7-10 results). A coarse resolution also blinds the
+measure to exploitation inside cells, by declaration.
+
+**v7.7 (R7-6b)** — minimum intensity. Doing nothing is no longer always intended: when a principal declares a
 minimum, an agent that stays at the default is charged. All five pre-registered predictions held (R7-6b results).
 
 **v7.6 (R7-9)** — the core restated as one definition: misalignment is the KL projection onto a declared set of
@@ -158,6 +165,7 @@ memory.**
 | **intensity caps** *(R7-6a)*: a declared cap on the intent ray; the capped free measure is `M(min(t̂⁺, s))`, and beyond the cap it is transverse error plus overshoot; both capped measures satisfy the contract with M5 restated within the cap; the regularized path of `−KL(·‖p_T)` is the ray capped at `p_T` | Core Def. 18, Prop. 33 | V36 | C05 |
 | **the core as a declared intended set** *(R7-9)*: every measure is the KL projection onto a declared set `𝓘`; the contract is a set of conditions on `𝓘`; on log-convex sets the projection is unique with a Pythagorean inequality, which yields Thm 13(a), Prop. 32(c) and Prop. 33(b) | Core Def. 19, Prop. 34 | V38 (run 1: V37, stopped) | C05 |
 | **minimum intensity** *(R7-6b)*: a declared floor on the intent ray; the segment free measure is the error off the ray plus an undershoot or an overshoot; both segment measures satisfy the contract with M5 within the segment; an untouched default is charged under a threshold policy | Core Def. 20, Prop. 35 | V39 | C05 |
+| **declared resolution** *(R7-10)*: a declared partition of `X`; the measure at a resolution is the coarse instance's measure of the cell masses; free-type measures split exactly as `M = M^𝒢 + W`; the budget convention reads within-cell divergence as extra pursuit (`Θ > 0` iff `W > 0`); exploitation inside a cell is invisible at that resolution. *P5's constancy threshold failed as registered, on summation error; the claim is unchanged* | Core Def. 21, Prop. 36 | V40 | C05 |
 | first-order effect of any smooth optimizer = covariance in its geometry; vanilla gradient is `q²`-weighted — tier 1 *(v6.3)* | A Prop. 22 | V25 | C6, C7 |
 | rescaling costs nothing under the budget and free conventions and the axial error under the price convention; best-of-n is monotone-invariant *(v6.3)* | A Remark 13.5 | V26 | C5 |
 | Gaussian Gibbs path: gold gain exactly `√2·ρ·sd·d` | B Prop. B4 | V9 | C9 |
@@ -417,6 +425,8 @@ before it. The base rate below applies.
 
 | Change | Where |
 |---|---|
+| **Toy-example debt (v7.8).** The PI's choice: toy examples satisfy rule 13 during the refactor. Recorded as a clause of rule 13 and as ROADMAP §4c, which lists each step's example and the real case that would retire it, for T7. HANDOVER and R7-10 results point to it. No content change | project |
+| **R7-10 (v7.8).** Pre-registered in R7-10 preregistration (sha256 `0c4e95a1…`, `d1e7a8d`). New: Def. 21 (declared resolution), Prop. 36, `V40`, R7-10 results, `r710_diagnose.py`. 4 of 5 predictions held; P5 failed as registered (summation threshold; claim unchanged). The budget misattribution term is `Θ` in the core (`E` in the frozen pre-registration). R7-9's registry: resolution declared. ROADMAP §4b confirmed by the PI; next is T7 | core, checks, project, status |
 | **Doc hygiene (v7.7, before the merge).** ROADMAP §0 and NOTES §0 compacted to the current state (the version history lives here and in the Status abstract); ROADMAP §5 given its status; T3 status marked superseded; HANDOVER added as the entry point for a fresh session. No content change | project |
 | **R7-6b (v7.7).** Pre-registered in R7-6b preregistration (sha256 `8b86d294…`, `ff45cb3`). New: Def. 20 (floor; intended segment), Prop. 35, `V39`, R7-6b results. Restated: Def. 11's M5, within the declared floor and cap. All five predictions held. An implementation edge (`k = 0`) stopped the first run before any prediction was evaluated, and was fixed. F6's count line changes by construction (68 → 70 results, 38 → 39 blocks). Tooling: `p^min`, `^seg` belong to Def. 20; CI runs `V39` | Core, Status, ROADMAP, tools, verify |
 | **R7-9 (v7.6).** Run 2, resumed by the PI, pre-registered in R7-9 preregistration run 2 (sha256 `67a8c7fb…`, `bc2111c`) with corrected checks; `V38`: all held, on both SIMD paths. Adopted: Def. 19 (declared intended set), Prop. 34 (reduction; the contract as conditions on the set; log-convex projections; instances), a note on Def. 11; the declaration registry and the silent-declaration audit in R7-9 results. No measure changed; F6's count line changes by construction (66 → 68 results, 37 → 38 blocks). Tooling: symbols `𝓘`, `M_𝓘` belong to Def. 19; CI runs `V38` | Core, Status, ROADMAP, tools, verify |

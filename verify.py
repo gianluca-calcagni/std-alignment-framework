@@ -1460,7 +1460,112 @@ def V39():
     print(f"  P4 M3 under F -> aF + c, r -> r/a, s -> s/a: max change {e4:.1e} -> {ok(e4 <= 1e-9)}")
     print(f"  P5 threshold policies ({nthr}): base model with the floor min {base_w:.2e}, without max {base_wo:.1e}; floor hits the threshold to {eps_err:.1e} -> {ok(base_w > 1e-9 and base_wo <= 1e-12 and eps_err <= 1e-12)}")
 
+def _cells(ph, lab, m): return np.bincount(lab, ph, m)
+def _within(ph, q, lab, m):
+    """W = sum_C p_hat(C) KL(p_hat(.|C) || q(.|C)) = KL(p_hat||q) - KL(p_hat_G||q_G)"""
+    return KL(ph, q) - KL(_cells(ph, lab, m), _cells(q, lab, m))
+def _ord_free(ph, q, F): return KL(ph, _ordproj(ph, q, F)[0])
+
+def V40():
+    print("\n[V40] R7-10: declared resolution (Def. 21, Prop. 36), against the pre-registration (P1-P5)")
+    rng = np.random.default_rng(4010); ok = lambda c: "holds" if c else "FAILS"
+    p1_beat = p1_gap = e2 = e3 = 0.0; esign_min = np.inf; lam_bad = 0; path_dec = 0.0
+    inv_err = 0.0; order_min = np.inf; drift_coarse = 0.0; drift_fine_min = np.inf; undef_fine = 0; nbud = 0
+    for i in range(600):
+        m = int(rng.integers(2, 7)); sizes = rng.integers(1, 5, size=m); lab = np.repeat(np.arange(m), sizes); n = len(lab)
+        while True:
+            q = rng.dirichlet(np.ones(n))
+            if q.min() >= 1e-3: break
+        lq = np.log(q); FG = rng.normal(size=m); F = FG[lab]
+        qG = _cells(q, lab, m); lqG = np.log(qG)
+        r = float(rng.uniform(0.1, 2)); s = r + float(rng.uniform(0.2, 3))
+        def split(mass):
+            out = np.empty(n)
+            for c in range(m):
+                ix = lab == c
+                while True:
+                    w = rng.dirichlet(np.ones(ix.sum()))
+                    if w.min() >= 1e-4 or ix.sum() == 1: break
+                out[ix] = mass[c]*w
+            return out
+        kind = i % 3
+        if kind == 0:
+            while True:
+                ph = rng.dirichlet(np.ones(n))
+                if ph.min() >= 1e-4: break
+        elif kind == 1: ph = split(gibbs(lqG, FG, rng.uniform(r, s)))
+        else: ph = gibbs(lq, F, rng.uniform(r, s))
+        lh = np.log(ph); pG = _cells(ph, lab, m); lhG = np.log(pG); W = _within(ph, q, lab, m)
+        # coarse (resolution G) and finest measures
+        cf, ff = _mfree_mm(pG, lqG, FG), _mfree_mm(ph, lq, F)
+        ccap, fcap = _cap_free(pG, lqG, FG, s), _cap_free(ph, lq, F, s)
+        cseg, fseg = _seg_free(pG, lqG, FG, r, s), _seg_free(ph, lq, F, r, s)
+        cord, ford = _ord_free(pG, qG, FG), _ord_free(ph, q, F)
+        # P1: generic minimisation over the intended preimage (free, full ray)
+        best = np.inf
+        for st in range(4):
+            x0 = np.concatenate([[rng.uniform(0, 2)], rng.normal(size=n)])
+            def obj(x):
+                cm = gibbs(lqG, FG, x[0]**2); z = x[1:]; pp = np.empty(n)
+                for c in range(m):
+                    ix = lab == c; e = np.exp(z[ix] - z[ix].max()); pp[ix] = cm[c]*e/e.sum()
+                return KL(ph, pp)
+            best = min(best, minimize(obj, x0, method='L-BFGS-B', options={'ftol': 1e-15, 'gtol': 1e-11, 'maxiter': 5000}).fun)
+        p1_beat = max(p1_beat, cf - best); p1_gap = max(p1_gap, abs(best - cf))
+        # P2: exact split of the free-type measures
+        e2 = max(e2, abs(ff - cf - W), abs(fcap - ccap - W), abs(fseg - cseg - W), abs(ford - cord - W))
+        # P3: the budget convention
+        fb, cb = _mbud_card(ph, lq, F), _mbud_card(pG, lqG, FG)
+        fb = None if fb[0] is None else fb; cb = None if cb[0] is None else cb   # (None, inf) when undefined
+        if cb is not None and fb is None: undef_fine += 1
+        if fb is not None and cb is not None:
+            nbud += 1; (mbf, lf), (mbc, lc) = fb, cb
+            E = KLl(lhG, lgibbs(lqG, FG, lf)) - KLl(lhG, lgibbs(lqG, FG, lc))
+            e3 = max(e3, abs(mbf - mbc - W - E))
+            if W > 1e-8:
+                esign_min = min(esign_min, E)
+                if not lf > lc: lam_bad += 1
+            order_min = min(order_min, mbf - mbc)
+            # geometric path from q(.|C) to the split of p_hat, cell masses fixed
+            prevE = -np.inf
+            for a in np.linspace(0.05, 1, 20):
+                l = (1 - a)*lq + a*lh; pa = np.empty(n)
+                for c in range(m):
+                    ix = lab == c; e = np.exp(l[ix] - l[ix].max()); pa[ix] = pG[c]*e/e.sum()
+                fa = _mbud_card(pa, lq, F)
+                if fa[0] is None: break
+                Ea = KLl(lhG, lgibbs(lqG, FG, fa[1])) - KLl(lhG, lgibbs(lqG, FG, lc))
+                path_dec = max(path_dec, prevE - Ea); prevE = Ea
+        # P4: the declared blind spot
+        ph2 = split(pG); inv_err = max(inv_err, abs(_mfree_mm(_cells(ph2, lab, m), lqG, FG) - cf))
+        order_min = min(order_min, ff - cf, fcap - ccap, fseg - cseg, ford - cord)
+        if kind == 1:
+            drift_coarse = max(drift_coarse, cf, cseg)
+            if W > 1e-9: drift_fine_min = min(drift_fine_min, ff, fseg)
+    # P5: saturation under refinement
+    sat_ok = True; const = 0.0; last = []
+    for j in range(5):
+        m = 4; qG = rng.dirichlet(np.ones(m)); lqG = np.log(qG); FG = rng.normal(size=m); pG = rng.dirichlet(np.ones(m)*3)
+        cG = _mfree_mm(pG, lqG, FG); prev = -np.inf
+        for e in range(1, 17):
+            k = 2**e; lab = np.repeat(np.arange(m), k); q = qG[lab]/k; F = FG[lab]
+            ph = np.empty(m*k)
+            for c in range(m):
+                blk = np.full(k, pG[c]*1e-6/(k - 1)); blk[0] = pG[c]*(1 - 1e-6); ph[c*k:(c + 1)*k] = blk
+            mf = _mfree_mm(ph, np.log(q), F)
+            const = max(const, abs(_mfree_mm(_cells(ph, lab, m), lqG, FG) - cG))
+            if not mf > prev: sat_ok = False
+            prev = mf
+        last.append(prev - cG)
+        if prev <= cG + 10: sat_ok = False
+    print(f"  P1 generic minimisation over the intended preimage: beats M^G by at most {p1_beat:.1e}; max |difference| {p1_gap:.1e} -> {ok(p1_beat <= 1e-9 and p1_gap <= 1e-6)}")
+    print(f"  P2 M = M^G + W for free, capped, segment and ordinal measures: max difference {e2:.1e} -> {ok(e2 <= 1e-9)}")
+    print(f"  P3 budget ({nbud} with both defined): identity max {e3:.1e}; min E where W > 1e-8: {esign_min:.2e}; intensity not raised: {lam_bad}; max decrease of E along paths {path_dec:.1e} -> {ok(e3 <= 1e-9 and esign_min > 1e-12 and lam_bad == 0 and path_dec <= 1e-12)}")
+    print(f"      reported: finest budget measure undefined while M_budget^G is defined on {undef_fine} of 600")
+    print(f"  P4 splits resampled: M^G changes by {inv_err:.1e}; min M - M^G {order_min:.1e}; style drift M^G max {drift_coarse:.1e}, finest min {drift_fine_min:.2e} -> {ok(inv_err <= 1e-12 and order_min >= -1e-10 and drift_coarse <= 1e-10 and drift_fine_min > 1e-9)}")
+    print(f"  P5 refinement to 2^16 sub-outcomes: finest free measure strictly increasing, M - M^G at 2^16 in [{min(last):.2f}, {max(last):.2f}]; M^G constant to {const:.1e} -> {ok(sat_ok and const <= 1e-12)}")
+
 if __name__ == "__main__":
     import sys
-    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39"]
+    which = sys.argv[1:] or ["V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","V29","V30","V31","V32","V33","V34","V35","V36","V37","V38","V39","V40"]
     for w in which: globals()[w]()

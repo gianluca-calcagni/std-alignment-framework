@@ -66,9 +66,11 @@ starts. Its zero set needs no solver: `M_budget([F]_ord) = 0` iff `M_ord = 0` (P
 ## Used by
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Def 12]] — alignment instance; formal
+- [[Def 21]] — declared resolution; R7-10
 - [[Prop 31]] — target sets against the contract; R7-7
 - [[Prop 32]] — the ordinal measure; R7-7
 - [[Prop 34]] — the core as a declared intended set; R7-9
+- [[Prop 36]] — declared resolution against the core; R7-10
 
 ## Mentions
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0

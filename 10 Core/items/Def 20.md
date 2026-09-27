@@ -52,6 +52,7 @@ floor is a behaviour on the ray, not a number, because intensity has no unit of 
 ## Used by
 - [[Def 11]] — the misalignment contract; R7-0
 - [[Prop 35]] — the intended segment against the contract; R7-6b
+- [[Prop 36]] — declared resolution against the core; R7-10
 
 ## Mentions
 - [[Prop 34]] — the core as a declared intended set; R7-9

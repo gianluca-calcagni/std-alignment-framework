@@ -51,6 +51,7 @@ measure, whose set is not log-convex, needed a solver.
 
 ## Used by
 - [[Prop 34]] — the core as a declared intended set; R7-9
+- [[Prop 36]] — declared resolution against the core; R7-10
 
 ## Mentions
 - [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
