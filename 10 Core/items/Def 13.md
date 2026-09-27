@@ -116,6 +116,7 @@ with the error replaced by `E + h/β`, where `h = log(q_A/q)` (Prop. [[Prop 26|2
 ## Mentioned in
 - [[Def 1]] — objects
 - [[Def 12]] — alignment instance; formal
+- [[Def 23]] — the declaration; R8-2
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 
 ## Checks

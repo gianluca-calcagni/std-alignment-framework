@@ -55,6 +55,7 @@ measure, whose set is not log-convex, needed a solver.
 - none
 
 ## Used by
+- [[Def 23]] — the declaration; R8-2
 - [[Prop 34]] — the core as a declared intended set; R7-9
 - [[Prop 36]] — declared resolution against the core; R7-10
 

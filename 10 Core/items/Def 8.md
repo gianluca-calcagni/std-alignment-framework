@@ -87,6 +87,7 @@ measure has a closed form (Prop. [[Prop 32|32]]); the budget measure has none.
 - [[C05]] — Decomposition, gauge and conventions (Thm 13, Prop. 16, Thm 17, Def. 8)
 - [[C07]] — The actor model *(the weakest joint for the AI substrate; tiers corrected in v6.4)*
 - [[Def 12]] — alignment instance; formal
+- [[Def 23]] — the declaration; R8-2
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 
 ## Mentions

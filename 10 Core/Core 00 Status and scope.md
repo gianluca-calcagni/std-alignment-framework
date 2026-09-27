@@ -7,7 +7,11 @@ updated: "2026-09-26"
 ---
 # A — Core
 
-> **Status: v7.9 (R8-1).** **Stakes and the default.** The default convention is free; budget is a declaration,
+> **Status: v7.10 (R8-2).** **The declaration.** Every diagnosis states a complete declaration (Def. 23): nine slots,
+> defaults written out. Rules are reported as compliance, with implicit fines, not charged in the measure: as level
+> constraints they break log-convexity (R8-2 results).
+>
+> **v7.9 (R8-1).** **Stakes and the default.** The default convention is free; budget is a declaration,
 > "compare at equal effort" (Def. 8). Every diagnosis also reports the value shortfall `ΔV` in the target's units
 > (Def. 22): below saturation `M_budget = λ·ΔV` (Thm 17(iii), Prop. 37), and a floor is a minimum standard in those units.
 >

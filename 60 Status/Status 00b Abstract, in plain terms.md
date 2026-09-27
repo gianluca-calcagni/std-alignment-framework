@@ -11,7 +11,13 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
+**Status: v7.10 (R8-2)** — the declaration. Every diagnosis must state what it measures against: the target, how
+several targets combine, intensity, rules, the environment, and the defaults it uses. Rules ("harm rate at most 1%")
+are reported as compliance, not folded into the measure, because folding them in breaks the geometry the
+decompositions rest on. The hedge: the supporting test is a toy, and both of its registered predictions failed as
+stated (badly set thresholds); the post-hoc diagnosis supports the design ([[R8-2 results]]).
+
+**v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
 severity enters through the target and the intended intensity. Every diagnosis now also reports the value forgone, in
 the target's own units, against pure pursuit with the same departure from the reference; and a principal with a safety
 concern declares a floor, a minimum standard. The default convention is now free, the one without known defects. The

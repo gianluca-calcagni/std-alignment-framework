@@ -68,5 +68,7 @@ updated: "2026-09-26"
 ![[Prop 37#Statement]]
 ![[Prop 37#Proof]]
 ![[Prop 37#Notes and checks]]
+![[Def 23#Statement]]
+![[Def 23#Notes and checks]]
 ---
 
