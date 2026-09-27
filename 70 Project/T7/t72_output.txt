@@ -1,0 +1,14 @@
+comparable rows: 9; failing the sum check: 0
+P1 median |delta| = 0.265 vs log 1.5 = 0.405 -> holds
+P2 median |delta|/2 = 0.132 vs 'active choices unchanged' 0.293 -> holds
+P3 default pull > 0 and non-participation pull > 0 in every row: 9/9 -> holds
+reported: per row (Delta_<, Delta_>, delta, pi_D, pi_N):
+  A 24-29    +0.000 -0.086  delta=+0.086  pi_D=+1.503  pi_N=+1.564
+  A 30-35    +0.100 -0.165  delta=+0.265  pi_D=+1.527  pi_N=+1.502
+  A 36-41    -0.201 -0.047  delta=-0.154  pi_D=+1.435  pi_N=+1.595
+  A 42-47    +0.405 -0.181  delta=+0.587  pi_D=+1.307  pi_N=+1.515
+  B 3-5      -0.722 -0.573  delta=-0.149  pi_D=+3.517  pi_N=+0.953
+  B 6-11     -0.665 -0.405  delta=-0.260  pi_D=+3.146  pi_N=+0.978
+  B 12-17    -0.421 +0.032  delta=-0.454  pi_D=+2.848  pi_N=+1.395
+  B 18-23    -0.668 +0.005  delta=-0.673  pi_D=+2.593  pi_N=+1.130
+  B 24-26    -0.840 +0.031  delta=-0.871  pi_D=+2.382  pi_N=+0.929

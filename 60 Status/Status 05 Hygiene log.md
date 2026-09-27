@@ -10,6 +10,7 @@ updated: "2026-09-26"
 
 | Change | Where |
 |---|---|
+| **T7 case 2 (v7.8).** Retirement-enrolment defaults on Choi et al. (2004) Table 2 ([[T7-2 preregistration]], `0c1569a`). P1–P3 hold: the two non-default categories share one ratio (median \|δ\| 0.265 < log 1.5); both defaults pull toward themselves in 9/9 rows. Post hoc: a widening exclusion failure below the default in Company B. [[T7-2 results]] | project |
 | **T7 case 1 documented (v7.8).** [[T7 case 1 index]] ties the three designs together, with files and reproduction steps; per-model and per-configuration tables saved (`t71c_table.csv`, `t71d_table.csv`); both scripts rerun and reproduce their recorded outputs exactly. HANDOVER, NOTES §0 and ROADMAP §0 point to case 2 | project |
 | **T7 case 1d/1e (v7.8).** LLMBar, independent gold labels ([[T7-1d preregistration]]; D2 fired on a wrong reading of the data, corrected in [[T7-1e amendment]] before any prediction). P1–P3 hold (the style term on Natural predicts adversarial error, ρ = 0.522, n = 65); P4 fails (raw length 0.533). §4c R7-10 row retired as far as real data allow. [[T7-1d results]] | project |
 | **T7 case 1b/1c (v7.8).** Improved design against Chatbot Arena Elo ([[T7-1b preregistration]], [[T7-1c amendment]] after D2 fired on the April column). P1, P2 hold; P3, P4, P5 fail: the style term points the right way (ρ = 0.285, n = 37) but raw length does better (0.377). [[T7-1b results]]. No core change | project |
