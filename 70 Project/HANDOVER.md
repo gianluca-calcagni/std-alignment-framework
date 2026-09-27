@@ -29,7 +29,7 @@ Preference: no sycophancy, only intellectual honesty and constructive challenges
 - **The core:** misalignment is the KL projection onto a declared intended set (Def. 19, Prop. 34). The
   declarations are the target set (Def. 17), the cap (Def. 18), the floor (Def. 20) and the resolution (Def. 21); the
   contract is Def. 11. §4b is confirmed: the core steps are closed, and next is T7.
-- **Next:** T7 case 1, RLHF length bias on real data. B1 ([[B1 brainstorm]], [[NOTES_claude]] §8) shaped its protocol.
+- **Next:** a PI decision after T7 case 1 ([[T7-1 results]], structural). B1 ([[B1 brainstorm]], [[NOTES_claude]] §8) shaped its protocol.
 - **Open for the PI:** identifiability ([[ROADMAP]] §6 I1),
   the lead brainstorming theme; rater disclosure
   ([[ROADMAP]] §5, item 3). Deferred by the PI: T3b. T6 is deferred: do not build toward it.

@@ -1,0 +1,6 @@
+models used: 216; design check: off-ray > 1e-6 for 100% (needs >= 25%) -> passes
+P1 M_free = W + off + intensity: max error 8.9e-16 -> holds
+P2 Theta > 0 where W > 1e-9: exceptions 0 -> holds
+P3 Spearman(W, D) = 0.083 over 216 -> FAILS
+matched set: 18 models
+D2: fewer than 25 matched -> P4, P5 not evaluated
