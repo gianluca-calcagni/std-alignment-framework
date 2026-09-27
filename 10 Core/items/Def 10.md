@@ -63,6 +63,7 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 - [[Def 17]] — target sets; R7-7
 - [[Def 18]] — intensity caps and distributional targets; R7-6a
 - [[Def 20]] — minimum intensity and the intended segment; R7-6b
+- [[Def 22]] — value shortfall at equal effort; R8-1
 - [[Prop 16]] — gauge group and identified quantities
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 - [[Prop 26]] — reference misspecification is measured misalignment; R7-2
@@ -73,6 +74,7 @@ Named quantities that need `t̂` — `D_∥`, `X_anti` — are introduced in Thm
 - [[Prop 34]] — the core as a declared intended set; R7-9
 - [[Prop 35]] — the intended segment against the contract; R7-6b
 - [[Prop 36]] — declared resolution against the core; R7-10
+- [[Prop 37]] — the value shortfall; R8-1
 - [[Rem 13.5]] — whether rescaling is harmful depends on the declared convention; v6.3
 - [[Thm 13]] — intent-ray decomposition
 - [[Thm 17]] — every regret notion is a point on one convex curve

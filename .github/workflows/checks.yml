@@ -59,6 +59,7 @@ jobs:
           - V38
           - V39
           - V40
+          - V41
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

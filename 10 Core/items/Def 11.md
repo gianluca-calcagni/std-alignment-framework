@@ -93,6 +93,7 @@ an actor model: the explanation layer, not the measurement layer.
 ## Mentioned in
 - [[Def 10]] — intent ray and misalignment measures; v6.4, R7-0
 - [[Def 13]] — actor models; R7-1
+- [[Def 22]] — value shortfall at equal effort; R8-1
 - [[Overview 0]] — alignment instance — static, single-target module; not a definition — the formal definition is Definition 12
 
 ## Checks

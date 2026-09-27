@@ -69,6 +69,7 @@ non-linear target gives: the regularized path of `−KL(·‖p_T)` is the capped
 - [[R7-6 go-no-go]]
 
 ## Mentioned in
+- [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Def 19]] — declared intended set; R7-9
 
 ## Checks

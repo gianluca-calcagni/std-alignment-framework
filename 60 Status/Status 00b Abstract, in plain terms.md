@@ -11,9 +11,17 @@ updated: "2026-09-26"
 How much of this to believe, and why. **Read this before quoting anything from the other files.** They state
 claims without hedging, by design; the hedging is here.
 
-**Status: v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
+**Status: v7.9 (R8-1)** — stakes and the default. Misalignment is in nats and says nothing about how much is at stake;
+severity enters through the target and the intended intensity. Every diagnosis now also reports the value forgone, in
+the target's own units, against pure pursuit with the same departure from the reference; and a principal with a safety
+concern declares a floor, a minimum standard. The default convention is now free, the one without known defects. The
+hedge: no new mathematics (the key identity was already Thm 17(iii), which the first registration missed and so set a
+bound without a scale); the readings across substrates rest on a declared target and reference, and the estimation
+protocol is still missing ([[R8-1 results]]).
+
+**v7.8 (R7-10)** — declared resolution. A principal can declare which differences between behaviours matter.
 Under the free convention this removes exactly the drift inside indistinguishable outcomes (style, verbosity) and
-changes nothing else. Under the budget convention, by default, such drift is misread as over-optimization: a budget
+changes nothing else. Under the budget convention such drift is misread as over-optimization: a budget
 verdict of overshoot can be style drift. The hedge: one of five predictions (P5) failed as registered, on a
 floating-point threshold; the claim is exact and unchanged ([[R7-10 results]]). A coarse resolution also blinds the
 measure to exploitation inside cells, by declaration.

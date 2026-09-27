@@ -58,7 +58,7 @@ full support.
   (budget) in deployment.
 
 *Reading.* **This fixes the common-sense meaning of "misalignment" in the framework.** Misalignment is
-measured by `M_budget` (the default) or `M_free`. `M_price = β·R_J` is a **regret**. It also charges an agent
+measured by `M_free` (the default since v7.9) or `M_budget`. `M_price = β·R_J` is a **regret**. It also charges an agent
 that pursues the right target too weakly or too strongly, which common sense calls a difference in
 capability, not misalignment. Thm [[Thm 1|1]] is unaffected: it is an identity for the regret. What changes is which
 quantity the word "misalignment" names (Def. [[Def 8|8]]; [[R074|row 74]]).

@@ -75,6 +75,7 @@ identity.
 
 ## Mentioned in
 - [[Def 2]] — the bounded actor
+- [[Def 19]] — declared intended set; R7-9
 - [[Prop 24]] — the v6.4 measures against the contract; tier 1
 
 ## Checks

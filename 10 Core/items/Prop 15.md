@@ -86,6 +86,7 @@ and does not extend.
 - [[Thm 17]] — every regret notion is a point on one convex curve
 
 ## Mentioned in
+- [[Def 8]] — conventions, misalignment, ε-alignment; revised in R7-0
 - [[Thm 1]] — regret is a divergence
 
 ## Checks
