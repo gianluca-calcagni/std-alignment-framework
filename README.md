@@ -16,6 +16,7 @@ This branch rebuilds the core from scratch: slim, justified, and in plain terms 
 | `REFERENCES.md` | the sources the core cites |
 | `checks/` | one pytest check, at least, for every result in the core |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
+| `NOTES.md` | the executor's working notes: hunches not yet in the core, and open issues. Not part of the core |
 | `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before this restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
 
 ## Rules
@@ -39,7 +40,7 @@ paths, rather than reproduce printed digits.
 - **Reliability over elegance.** A result enters with a proof and a check that could fail: random instances, the
   degenerate and sign cases, and tolerances derived from the quantity's scale.
 - **Every choice is justified.** "Why this choice" argues it, by generality (for example: every full-support
-  distribution is an exponential tilt of the reference), by canonicity, or by a named case where the alternative gives
+  distribution is an exponential tilt of the default), by canonicity, or by a named case where the alternative gives
   a wrong verdict.
 - **Plain terms keep the qualifiers** of the formal statement.
 - **Slim.** About a dozen items. An item that does not earn its place goes to an appendix, or stays on `main`.
@@ -51,13 +52,13 @@ paths, rather than reproduce printed digits.
 ## The format of an item
 
 ```markdown
-### D1 — Outcomes and reference
-**Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the reference.
+### D1 — Outcomes and default
+**Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the default.
 **In plain terms.** The things that can happen, and how often each happens by default.
 **Why this choice.** …
 **Lineage.** main: Def 1 (in part).
 
-### P1 — Every behaviour is a tilt of the reference
+### P1 — Every behaviour is a tilt of the default
 **Statement.** For every full-support `p` on `X` there is `F` with `p ∝ q·e^F`; `F` is unique up to a constant.
 **In plain terms.** Any way of behaving can be written as the default reweighted by some objective.
 **Proof.** …
@@ -79,8 +80,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file and `CORE.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of past
-sessions, each with its evidence.
+Read this file, `CORE.md` and `NOTES.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
+past sessions, each with its evidence.
 
 ## License
 

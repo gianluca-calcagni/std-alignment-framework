@@ -1,6 +1,6 @@
-"""Checks of P5: misalignment is attained for full-support behaviour, zero exactly on the closure of the intended set, at
-most the departure from the reference when the reference is intended; and its closed form under the standard declaration
-(the pursuit ray), in all three cases: below the reference, in between, and at the best outcomes."""
+"""Checks of P5 (misalignment is attained for full-support behaviour, zero exactly on the closure of the intended set, at
+most the departure from the default when the default is intended; its closed form on the pursuit ray in all three cases;
+the deviance identity of its Notes) and of P6 (the departure from the default splits into pursuit and misalignment)."""
 import numpy as np
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt
 
@@ -88,7 +88,7 @@ def test_zero_exactly_on_the_intended_set():
             assert misalignment(z, q, F)[0] > 1e-9
 
 
-def test_bounded_by_departure_from_reference():
+def test_bounded_by_departure_from_default():
     r = rng(403)
     for _ in range(300):
         n = int(r.integers(2, 13)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
@@ -108,3 +108,50 @@ def test_the_ray_leaves_every_compact_set():
             assert mass <= bound * (1 + EXACT) + 1e-300
         # far enough along, as small as we like (the bound is tight for two outcomes: same relative margin as above)
         assert tilt(q, 100.0 / osc * F)[lo] <= q[lo] / q[hi] * np.exp(-100.0) * (1 + EXACT)
+
+
+def nearest(ph, q, F):
+    """The nearest intended behaviour on the closure of the ray: q, p_{F,t*}, or q(.|A)."""
+    ts = ray_minimizer(ph, q, F)
+    return best_outcomes_limit(q, F) if np.isinf(ts) else tilt(q, ts * F)
+
+
+def test_departure_splits_into_pursuit_and_misalignment():
+    """P6: KL(ph || q) = KL(p° || q) + M(ph), in all three cases of P5(iv)."""
+    r = rng(406)
+    cases = {"below": 0, "between": 0, "best": 0}
+    for _ in range(600):
+        n = int(r.integers(2, 13)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        kind = r.integers(0, 3)
+        if kind == 0:
+            ph = with_zeros(r, n) if r.random() < 0.3 else simplex_interior(r, n)
+        elif kind == 1:
+            ph = tilt(q, float(r.uniform(0, 3)) * F + r.normal(0, 0.7, n))
+        else:
+            ph = np.zeros(n); A = F >= F.max(); ph[A] = r.dirichlet(np.ones(A.sum()))
+        m, ts = misalignment(ph, q, F); po = nearest(ph, q, F)
+        cases["below" if ts == 0 else "best" if np.isinf(ts) else "between"] += 1
+        departure, pursuit = kl(ph, q), kl(po, q)
+        assert abs(departure - (pursuit + m)) <= 1e-9 * (1 + departure)
+        assert -EXACT <= m <= departure + EXACT
+        if ph @ F <= q @ F:
+            assert abs(m - departure) <= EXACT * (1 + departure)                # all of it is misalignment
+    assert min(cases.values()) >= 50                                           # every case exercised
+
+
+def test_deviance_identity():
+    """P5 Notes: for counts with frequencies ph, the log-likelihood ratio of the unrestricted multinomial against the best
+    pursuit of F equals n * M(ph)."""
+    r = rng(407)
+    for _ in range(300):
+        k = int(r.integers(2, 13)); q = simplex_interior(r, k); F = r.normal(0, 1, k)
+        counts = r.multinomial(int(r.integers(20, 500)), simplex_interior(r, k)); n = counts.sum(); ph = counts / n
+        m, ts = misalignment(ph, q, F)
+        if np.isinf(ts):
+            continue
+        loglik = lambda p: float(np.sum(counts[counts > 0] * np.log(p[counts > 0])))
+        best_on_ray = max(loglik(tilt(q, t * F)) for t in np.linspace(0, 3 * ts + 3, 1001))
+        llr = loglik(ph) - loglik(tilt(q, ts * F))
+        assert abs(llr - n * m) <= 1e-9 * (1 + n * m)
+        assert loglik(tilt(q, ts * F)) >= best_on_ray - EXACT * n * (1 + np.abs(np.log(q)).max())   # t* is the best fit
+

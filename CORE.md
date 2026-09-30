@@ -11,17 +11,19 @@ steps.
 1. **Behaviour** (section 1). What happens is described by how often each outcome occurs: a probability distribution.
    Any behaviour, and any change of behaviour over time, can be written as a default reweighted toward some objective,
    so this description loses nothing.
-2. **Pursuit** (section 2). Pursuing an objective means reweighting a default toward it, at some intensity, along the
-   steepest route. KL divergence measures the value lost against such a pursuit, when value includes the cost of
+2. **Pursuit** (section 2). Pursuing an objective means reweighting the default toward it, at some intensity, along
+   the steepest route. KL divergence measures the value lost against such a pursuit, when value includes the cost of
    departing from the default.
 3. **Declaration and score** (section 3). Before judging, the principal declares a default and the set of behaviours it
-   would accept. Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one, in nats.
+   would accept. Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one, in nats of
+   evidence per decision. How far the actor departs from the default splits exactly into pursuit and misalignment.
 
 The core assumes nothing about how the actor produces its behaviour.
 
 **How to read.** Items are numbered by kind: D for definitions, P for propositions. A statement, justification or proof
 uses only items above it. `[P2](iii)` means part (iii) of P2. Logarithms are natural, so divergences are in nats.
-Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome.
+Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome. The Notes of each item give the names its objects
+carry in other fields.
 
 | Symbol | Meaning | Introduced in |
 |---|---|---|
@@ -30,11 +32,14 @@ Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome.
 | `E_p[F]`, `Var_p(F)` | average and variance of `F` under `p` | [D1] |
 | `KL(p‖r)` | the Kullback–Leibler divergence, in nats | [D1] |
 | `tilt(r, F)` | `r` reweighted by `e^F` | [D1] |
-| `s` | time along a path of behaviours | [P2] |
-| `q`, `F`, `t` | the reference (the default), an objective, an intensity | [D2] |
+| `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [P2] |
+| `q`, `F`, `t` | the default, an objective, an intensity | [D2] |
 | `p_{F,t}`, `R_F` | pursuit of `F` at intensity `t`; the pursuit ray | [D2] |
-| `(q, 𝓘)` | a declaration: the reference and the intended behaviours | [D3] |
+| `J_t` | net value: the objective's average minus the cost of departing from the default | [P4] |
+| `(q, 𝓘)` | a declaration: the default and the intended behaviours | [D3] |
 | `M(p̂)` | the misalignment of the actual behaviour `p̂` | [D3] |
+| `t*`, `p°` | the revealed intensity; the nearest intended behaviour | [P5] |
+| `KL(p̂‖q)` | the departure of the actual behaviour from the default | [P6] |
 
 ## 1. Behaviours and tilts
 
@@ -42,9 +47,9 @@ Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome.
 **Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
 distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
 `p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and
-`Var_p(F) = E_p[F²] − E_p[F]²`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`, the
-**Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when `r(x) > 0`
-wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
+`Var_p(F) = E_p[F²] − E_p[F]²`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
+the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when
+`r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
 `tilt(r, F) = r·e^F / E_r[e^F]`.
 
 **In plain terms.** Outcomes are the things that can happen, and a behaviour says how often each one happens; full
@@ -61,6 +66,9 @@ symmetric, so the order matters. Tilting reweights a behaviour toward the outcom
 - *Behaviour is any distribution.* No model of how an actor produces its behaviour is assumed. The core measures
   behaviour; explanations are not part of it.
 - *KL and the tilt are notation here.* The items that use them argue that they are the right tools.
+
+**Notes.** A behaviour is a policy in reinforcement learning, a mixed strategy in game theory, a distribution of choices
+in economics, and a distribution of types in a population in biology. The tilt is exponential tilting in statistics.
 
 **Lineage.** main: Def 1 (the objects), and R7-1's rule that the actual behaviour is any distribution (Def 13). main's
 R7-8 (measurable spaces) stays deferred, as it was there.
@@ -83,12 +91,18 @@ normalization. Conversely, if the tilts are equal, then `F − log E_r[e^F] = G 
 **Checks.** checks/test_tilts.py::test_every_behaviour_is_a_tilt, checks/test_tilts.py::test_tilt_objective_unique_up_to_constant,
 checks/test_tilts.py::test_tilts_compose
 
+**Notes.** `log(p/r)` is the log-likelihood ratio of `p` to `r`. Recovering an objective from behaviour is the problem of
+inverse reinforcement learning, which is known to be ill-posed [@ng2000]; (ii) is the form the ambiguity takes here:
+given the default, a behaviour reveals its objective up to a constant. Written with an intensity, `tilt(r, t·F)`, it
+reveals only the product `t·F`.
+
 **Lineage.** New as a statement. main used the tilt as the form of intended behaviour (Def 1), and recorded "everything
-is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) is main's Prop 16 (g2).
+is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) is main's Prop 16 (g2), and the product
+`t·F` is main's Prop 12.
 
 ### P2 — Every change of behaviour follows a replicator equation
 **Statement.** Let `s ↦ p_s` be a continuously differentiable path in `Δ°`, over an interval containing `0`, and let
-`F_s = ∂_s log p_s`.
+`F_s = ∂_s log p_s`, the **revealed objective** at time `s`.
 (i) **Replicator form.** `ṗ_s = p_s·(F_s − E_{p_s}[F_s])`. A function `G` satisfies `ṗ_s = p_s·(G − E_{p_s}[G])` if
 and only if `G − F_s` is constant.
 (ii) **Steepest climb.** Give `Δ°` the Fisher metric `g_p(u, v) = Σ_x u(x)·v(x)/p(x)` on tangent vectors, those with
@@ -117,16 +131,18 @@ locally Lipschitz on `Δ°`, so the solution through `r` is unique.
 **Checks.** checks/test_paths.py::test_replicator_form_of_any_path, checks/test_paths.py::test_replicator_is_fisher_gradient,
 checks/test_paths.py::test_pursuit_ray_solves_the_replicator_flow
 
-**Notes.** In population genetics the replicator equation is the gradient of mean fitness in this metric, known there as
-the Shahshahani metric [@shahshahani1979].
+**Notes.** "Revealed" is meant as in revealed preference: read from behaviour, not assumed about the actor. In
+population genetics the revealed objective is the Malthusian fitness of each type (its per-capita growth rate), up to a
+constant, and the replicator equation is the gradient of mean fitness in this metric, known there as the Shahshahani
+metric [@shahshahani1979].
 
 **Lineage.** New as a proposition. main: NOTES §2.1 ("everything is a tilt") and ROADMAP §6 I1 (dynamics: increments
-cancel the reference).
+cancel the default).
 
 ## 2. Pursuit, and what KL measures
 
 ### D2 — Pursuit of an objective
-**Statement.** Let `q ∈ Δ°`, the **reference**, and let `F : X → ℝ` be a function, an **objective**. The **pursuit** of
+**Statement.** Let `q ∈ Δ°`, the **default**, and let `F : X → ℝ` be a function, an **objective**. The **pursuit** of
 `F` from `q` at **intensity** `t ≥ 0` is `p_{F,t} = tilt(q, t·F)`. The **pursuit ray** of `F` from `q` is
 `R_F = {p_{F,t} : t ≥ 0}`; for a constant `F` it is the single point `q`. A continuously differentiable path
 `s ↦ p_s` in `Δ°`, over an interval containing `0`, **pursues** `F` if `p_s = tilt(p_0, τ(s)·F)` for a
@@ -139,7 +155,7 @@ away from it, from wherever it starts.
 
 **Why this choice.**
 - *It loses no generality.* Every full-support behaviour `p` lies on the pursuit ray of some objective, from any
-  reference: `p = p_{F,1}` with `F = log(p/q)` ([P1](i)). Every path of behaviours follows the replicator equation of an
+  default: `p = p_{F,1}` with `F = log(p/q)` ([P1](i)). Every path of behaviours follows the replicator equation of an
   objective that may move over time ([P2](i)). What the definition adds is a claim that can fail: that the objective
   stays fixed, which the next item makes testable. Mixing a behaviour with another, for example, generally gives a path
   whose objective turns, as the next item's check shows; cut-offs that exclude outcomes leave `Δ°` altogether.
@@ -150,18 +166,25 @@ away from it, from wherever it starts.
   ([P2](ii)), and its flow from `q` is `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time,
   so the ray is the same. A notion of pursuit that must not depend on how finely outcomes are described is therefore
   led to this ray.
-- *The ray needs a reference; the path does not.* The same objective pursued from two references gives two different
-  rays, so the declaration below fixes the reference. Whether a path pursues `F` needs no reference at all, which is
-  why later items can read pursuit from changes of behaviour without declaring a default.
+- *The ray needs a default; the path does not.* The same objective pursued from two defaults gives two different rays,
+  so the declaration below fixes the default. Whether a path pursues `F` needs no default at all, which is why later
+  items can read pursuit from changes of behaviour without declaring one.
 
-**Lineage.** main: Def 1 (the Gibbs tilt `p_{G,t}`), Def 2 (the bounded actor, whose optimum is the tilt: here a
-property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray defines intended pursuit; it is not a
-model of the actor. main's rows 67–68 and 76–78 filed results by the intended actor's model instead of by what their
-proofs need, and the core keeps the two apart by construction.
+**Notes.** Names in other fields. The default is the reference policy of RL fine-tuning, the prior of KL control, the
+base measure of an exponential family, the status quo of behavioural economics, and the population before selection
+in biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of KL-regularized
+reward maximization with coefficient `1/t` in RL fine-tuning; with a uniform default it is the logit choice rule, or
+quantal response, with rationality `t` [@mckelvey1995]; and it is the result of `t` generations of constant selection
+with fitness `e^F`. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
+
+**Lineage.** main: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
+whose optimum is the tilt: here a property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray
+defines intended pursuit; it is not a model of the actor. main's rows 67–68 and 76–78 filed results by the intended
+actor's model instead of by what their proofs need, and the core keeps the two apart by construction.
 
 ### P3 — A fixed objective is visible in the changes of behaviour
 **Statement.** Let `s ↦ p_s` be a continuously differentiable path in `Δ°`, over an interval containing `0`, with
-`F_s = ∂_s log p_s`, and let `F` be non-constant.
+revealed objective `F_s = ∂_s log p_s`, and let `F` be non-constant.
 (i) There is a differentiable `τ` with `τ(0) = 0` and `p_s = tilt(p_0, τ(s)·F)` for every `s` if and only if
 `F_s ∈ span{F, 1}` for every `s`. Then `F_s = τ'(s)·F + c(s)`.
 (ii) The path pursues `F` ([D2]) if and only if, for every `s`, `F_s = a(s)·F + b(s)` with `a(s) ≥ 0`.
@@ -185,18 +208,20 @@ checks/test_paths.py::test_two_outcomes_always_keep_a_fixed_objective
 **Notes.** The condition `F_s ∈ span{F, 1}` is the precise form of "the increments have rank 1", which later items use
 for identifiability. The sign condition in (ii) is what a rank read on lines, not on rays, misses. With only two
 outcomes, `span{F, 1}` contains every function, so every path keeps a fixed objective: the test has content only with
-three or more outcomes. (On main, this is why a two-arrangement allele-frequency series could not test the rank.)
+three or more outcomes. (On main, this is why a two-arrangement allele-frequency series could not test the rank.) In
+population genetics a fixed objective is constant selection, and a turning one is fluctuating selection; in economics
+the question is whether preferences are stable.
 
 **Lineage.** New as a proposition. main: ROADMAP §6 I1 (the dynamic rank), and the I1-dyn and I1-dyn2 tests, whose null
 hypothesis counted opposite-pointing increments as one evaluator.
 
 ### P4 — What KL measures
-**Statement.** Let `q ∈ Δ°`, `F : X → ℝ` and `t > 0`, and let `J_t(p) = E_p[F] − KL(p‖q)/t` for `p ∈ Δ`: the average of
-the objective, minus the cost of departing from the reference, priced at `1/t`.
+**Statement.** Let `q ∈ Δ°`, `F : X → ℝ` and `t > 0`. The **net value** of `p ∈ Δ` is `J_t(p) = E_p[F] − KL(p‖q)/t`:
+the average of the objective, minus the cost of departing from the default, priced at `1/t`.
 (i) **Value.** For every `p ∈ Δ`, `J_t(p_{F,t}) − J_t(p) = KL(p‖p_{F,t})/t`. So `p_{F,t}` is the unique maximizer of
 `J_t`.
 (ii) **Every behaviour is an optimum.** For every `r ∈ Δ°`, `r = p_{G,1}` with `G = log(r/q)`. So `r` is the unique
-maximizer of `J_1` for the objective `G`, and for every `p ∈ Δ` the value `p` loses against `r` in that objective is
+maximizer of `J_1` for the objective `G`, and for every `p ∈ Δ` the net value `p` loses against `r` in that objective is
 exactly `KL(p‖r)`.
 (iii) **Chain rule.** For every partition `𝒢` of `X` into non-empty cells, every `p ∈ Δ` and every `r ∈ Δ°`,
 `KL(p‖r) = KL(p_𝒢‖r_𝒢) + Σ_{C ∈ 𝒢, p(C) > 0} p(C)·KL(p(·|C)‖r(·|C))`, where `p_𝒢` is the distribution of the cell
@@ -204,11 +229,11 @@ masses `p(C)`.
 (iv) **Merging never increases it.** `KL(p_𝒢‖r_𝒢) ≤ KL(p‖r)`, with equality if and only if `p/r` is constant on every
 cell `C` with `p(C) > 0`.
 
-**In plain terms.** Count the value of a behaviour as the average of an objective minus the cost of moving away from
-the default. Then the best behaviour is the pursuit of the objective, at the intensity set by the price of moving
-away, and the KL from any behaviour to it is exactly the value given up. Every full-support behaviour is the best one for some objective, so
-this reading always applies. KL also splits into a part between groups and a part within groups when outcomes are
-grouped, and grouping outcomes can only hide differences, never create them.
+**In plain terms.** Count the net value of a behaviour as the average of an objective minus the cost of moving away from
+the default. Then the best behaviour is the pursuit of the objective, at the intensity set by the price of moving away,
+and the KL from any behaviour to it is exactly the net value given up. Every full-support behaviour is the best one for
+some objective, so this reading always applies. KL also splits into a part between groups and a part within groups when
+outcomes are grouped, and grouping outcomes can only hide differences, never create them.
 
 **Proof.** (i) With `Z = E_q[e^{tF}]`, `log p_{F,t} = log q + t·F − log Z`, so for every `p ∈ Δ`,
 `KL(p‖p_{F,t}) = KL(p‖q) − t·E_p[F] + log Z = log Z − t·J_t(p)`. Hence `J_t(p) = (log Z − KL(p‖p_{F,t}))/t`. Taking the
@@ -224,10 +249,12 @@ cell with `p(C) > 0`, that is, if and only if `p/r` is constant there.
 checks/test_value.py::test_chain_rule, checks/test_value.py::test_merging_never_increases,
 checks/test_value.py::test_other_divergences_break_the_chain_rule
 
-**Notes.** (i) is the Gibbs variational principle. The chain rule and Gibbs' inequality are standard [@cover2006]. Hobson
-characterized KL, up to a positive factor, by a small set of conditions that includes the chain rule (iii)
-[@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation) break
-it.
+**Notes.** (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and a
+free energy in the literature on bounded rationality [@ortega2013]. The same ray therefore arises twice: as the steepest
+climb of [D2] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are standard
+[@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the chain rule
+(iii) [@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
+break it.
 
 **Lineage.** main: Thm 1 (regret is a divergence) for (i); Def 21 (the within-cell divergence) for (iii) and (iv). New:
 (ii), which follows from [P1] and removes the need to assume that intended behaviour is "Gibbs", since every
@@ -236,7 +263,7 @@ full-support behaviour is. main's Prop 15 (other regularizers) is not carried: t
 ## 3. The declaration and misalignment
 
 ### D3 — Declaration and misalignment
-**Statement.** A **declaration** is a pair `(q, 𝓘)`: a reference `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
+**Statement.** A **declaration** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is
 `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`. The **standard declaration** of an objective `F` is `(q, R_F)`: pursuit of `F` from
 `q` at every intensity, including none.
@@ -249,12 +276,18 @@ When the request is "pursue this objective", every intensity of pursuing it is a
 that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
 **Why this choice.**
-- *KL, with the actual behaviour first.* Count value as in [P4]: the average of an objective, minus the cost of
-  departing from the reference. Then each intended behaviour is the best one for its own objective ([P4](ii)), and
-  `KL(p̂‖p)` is exactly the value `p̂` loses against `p`. So `M(p̂)` is the smallest value lost against any acceptable
+- *KL, with the actual behaviour first.* Count value as the net value of [P4]: the average of an objective, minus the
+  cost of departing from the default. Then each intended behaviour is the best one for its own objective ([P4](ii)),
+  and `KL(p̂‖p)` is exactly the net value `p̂` loses against `p`. So `M(p̂)` is the smallest loss against any acceptable
   behaviour, each judged by its own objective, and that identity fixes the order of the arguments. The cost term is
-  what makes the reading general: without it, the only fully intended behaviours of an objective would be
-  those on its best outcomes, and every behaviour that puts any mass elsewhere would be charged.
+  what makes the reading general: without it, the only fully intended behaviours of an objective would be those on its
+  best outcomes, and every behaviour that puts any mass elsewhere would be charged.
+- *What the number means.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on average
+  `KL(p̂‖p)` nats to the log-likelihood ratio in favour of `p̂` over `p`. So `M(p̂)` is the slowest rate at which an
+  observer gathers evidence that the actor is not behaving as intended: about `1/M(p̂)` decisions give one nat, odds of
+  about `e` to 1.
+- *The direction charges the unintended.* `KL(p̂‖p)` is large when the actor often does what `p` rarely does, and
+  comparatively small when the actor merely does less of what `p` does. Doing the unintended costs more than leaving the intended undone.
 - *The nearest acceptable behaviour.* Taking the minimum gives the actor the benefit of the doubt: it is charged only
   for what no acceptable behaviour explains.
 - *Grouping only hides.* By [P4](iii) and (iv), the score splits along groupings of outcomes, and grouping can only hide
@@ -267,14 +300,20 @@ that stays at the default is not misaligned, though it may be useless, which is 
   the floor, Def 20).
 - *The actual behaviour may rule outcomes out; the intended ones may not.* A deterministic actor still gets a score.
   Intended behaviours keep full support so that the score is finite.
-- *Declared before, not fitted after.* A reference or an intended set fitted from the behaviour being judged removes
-  exactly the differences the judgement needs. On main, I1-dyn fitted a Hardy–Weinberg reference from the counts it
-  judged, and its test could not fail.
+- *Declared before, not fitted after.* A default or an intended set fitted from the behaviour being judged removes
+  exactly the differences the judgement needs. On main, I1-dyn fitted its default (a Hardy–Weinberg expectation) from
+  the counts it judged, and its test could not fail.
+- *Stakes are reported separately.* Misalignment in nats says nothing about how much of `F` is at stake. A later item
+  reports the shortfall in `F`'s own units (main: Def 22 and R8-1, where this lesson was learned).
 - *Slim on purpose.* main's declaration (Def 23) had nine slots. Only four changed the measure, and all four are ways of
   generating `𝓘`. Rules, instruments, feasibility and the environment did not enter the measure, so they are not
-  declared here; instruments return with identifiability, as interventions. The reference enters the measure through
-  `𝓘` (the pursuit ray starts at `q`), and later items use it directly. A later item adds a slot only with a case where
-  the slot changes a verdict, and with its default.
+  declared here; instruments return with identifiability, as interventions. The default enters the measure through `𝓘`
+  (the pursuit ray starts at `q`), and later items use it directly. A later item adds a slot only with a case where the
+  slot changes a verdict, and with the value it takes when nothing is declared.
+
+**Notes.** In AI safety and in formal verification, a declaration is a specification: the set of acceptable
+behaviours. Misalignment is then a quantitative distance from the specification. The direction of KL used here is the
+one called zero-forcing in variational inference.
 
 **Lineage.** main: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), and row 74. New: behaviours that rule outcomes out are
@@ -286,19 +325,20 @@ scored.
 (ii) `M(p̂) = 0` if and only if `p̂` is in the closure of `𝓘` in `Δ`. For `p̂ ∈ Δ°`, this means `p̂ ∈ 𝓘`.
 (iii) If `q ∈ 𝓘`, then `M(p̂) ≤ KL(p̂‖q)`.
 (iv) Let `F` be non-constant, and `A` the set of outcomes where `F` is largest. The pursuit ray `R_F` is closed in `Δ°`,
-so `(q, R_F)` is a declaration. Under it:
-- if `E_{p̂}[F] ≤ E_q[F]`, then `M(p̂) = KL(p̂‖q)`;
-- if `E_q[F] < E_{p̂}[F] < max F`, then `M(p̂) = KL(p̂‖p_{F,t*})`, where `t* > 0` is the unique intensity with
-  `E_{p_{F,t*}}[F] = E_{p̂}[F]`;
-- if `E_{p̂}[F] = max F`, that is, `p̂` puts all its mass on `A`, then `M(p̂) = KL(p̂‖q(·|A))`, approached as `t → ∞`
-  and not attained. It is `0` exactly when `p̂ = q(·|A)`.
+so `(q, R_F)` is a declaration. Under it, with `p°` the **nearest intended behaviour** (or its limit):
+- if `E_{p̂}[F] ≤ E_q[F]`, then `p° = q` and `M(p̂) = KL(p̂‖q)`;
+- if `E_q[F] < E_{p̂}[F] < max F`, then `p° = p_{F,t*}` and `M(p̂) = KL(p̂‖p°)`, where the **revealed intensity**
+  `t* > 0` is the unique intensity with `E_{p_{F,t*}}[F] = E_{p̂}[F]`;
+- if `E_{p̂}[F] = max F`, that is, `p̂` puts all its mass on `A`, then `p° = q(·|A)` and `M(p̂) = KL(p̂‖q(·|A))`,
+  approached as `t → ∞` and not attained. It is `0` exactly when `p̂ = q(·|A)`.
 
 **In plain terms.** For a full-support behaviour there is always a nearest acceptable behaviour. Misalignment is zero
 only for acceptable behaviours and their limits. When the default is acceptable, misalignment is never more than the
 actual behaviour's departure from the default. For "pursue `F`": a behaviour that does no better than the default is
 charged its whole departure from it; one that does better is compared with the pursuit that reaches the same average
-of `F`; and one that only ever picks the best outcomes is aligned exactly when it splits its choices among tied best
-outcomes as the default would. In particular, a maximizer with a single best outcome is aligned.
+of `F`, whose intensity is the one the behaviour reveals; and one that only ever picks the best outcomes is aligned
+exactly when it splits its choices among tied best outcomes as the default would. In particular, a maximizer with a
+single best outcome is aligned.
 
 **Proof.** (i) Pick `p₀ ∈ 𝓘` and let `c = KL(p̂‖p₀)` and `H(p̂) = −Σ_x p̂(x)·log p̂(x)`. For any `p ∈ Δ°`,
 `KL(p̂‖p) = −H(p̂) − Σ_y p̂(y)·log p(y)`, and every term `−p̂(y)·log p(y)` is non-negative. So `KL(p̂‖p) ≤ c` implies
@@ -326,14 +366,44 @@ that `p̂` puts all its mass on `A`. That limit is `0` exactly when `p̂ = q(·|
 
 **Checks.** checks/test_misalignment.py::test_minimum_on_the_ray_is_attained_at_the_closed_form,
 checks/test_misalignment.py::test_best_outcomes_case, checks/test_misalignment.py::test_zero_exactly_on_the_intended_set,
-checks/test_misalignment.py::test_bounded_by_departure_from_reference,
-checks/test_misalignment.py::test_the_ray_leaves_every_compact_set
+checks/test_misalignment.py::test_bounded_by_departure_from_default,
+checks/test_misalignment.py::test_the_ray_leaves_every_compact_set, checks/test_misalignment.py::test_deviance_identity
 
 **Notes.** The checks exercise the standard declaration; parts (i)–(iii) for a general closed `𝓘` rest on the proof
-alone. Pinsker's inequality is standard [@cover2006]. The second case of (iv) is maximum likelihood in the family
-`{p_{F,t}}`, restricted to `t ≥ 0`: it matches the mean of `F`. In the third case a maximizer that breaks ties among the
-best outcomes differently from the reference is charged; a principal who is indifferent among tied outcomes says so
-with a resolution, which a later item introduces.
+alone. Pinsker's inequality is standard [@cover2006]. The revealed intensity is the weight that maximum-entropy inverse
+reinforcement learning, in its one-step form, fits for the single feature `F` [@ziebart2008]; in the first case that
+fit is zero or negative, and in the third it is infinite. For `n` independent decisions with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted
+model against the best pursuit of `F` is `n·M(p̂)`, so `2n·M(p̂)` is the deviance of the model "the actor pursues `F`
+from the default" (checked in the second and first cases). In the third case, a maximizer that breaks ties among the
+best outcomes differently from the default is charged; a principal who is indifferent among tied outcomes says so with
+a resolution, which a later item introduces.
 
 **Lineage.** main: Prop 34(b) for (i) and (ii); Thm 13 and Thm 17(i) for the first two cases of (iv) (the transverse error
-`D_⊥`, attained at `t̂⁺`). New: behaviours that rule outcomes out, including the deterministic maximizer (the third case).
+`D_⊥`, attained at `t̂⁺`). New: behaviours that rule outcomes out, including the deterministic maximizer (the third case),
+and the name "revealed intensity".
+
+### P6 — The departure from the default splits into pursuit and misalignment
+**Statement.** Under the standard declaration of a non-constant `F`, let `p̂ ∈ Δ` and let `p°` be as in [P5](iv). The
+**departure** of `p̂` from the default is `KL(p̂‖q)`, and
+`KL(p̂‖q) = KL(p°‖q) + M(p̂)`.
+So `0 ≤ M(p̂) ≤ KL(p̂‖q)`, and `M(p̂) = KL(p̂‖q)` when `E_{p̂}[F] ≤ E_q[F]`.
+
+**In plain terms.** How far the actor moved away from the default splits exactly into two parts: the movement explained
+by pursuing the objective, and the misalignment. An actor that does no better than the default has all of its movement
+counted as misalignment.
+
+**Proof.** In the first case of [P5](iv), `p° = q` and `KL(q‖q) = 0`. In the second, `log(p°/q) = t*·F − log E_q[e^{t*F}]`,
+so `KL(p̂‖q) − KL(p̂‖p°) = E_{p̂}[log(p°/q)] = t*·E_{p̂}[F] − log E_q[e^{t*F}]`. Since `E_{p̂}[F] = E_{p°}[F]`, this equals
+`t*·E_{p°}[F] − log E_q[e^{t*F}] = E_{p°}[log(p°/q)] = KL(p°‖q)`. In the third, `p̂` and `q(·|A)` put all their mass on
+`A`, so `KL(p̂‖q) − KL(p̂‖q(·|A)) = −log q(A) = KL(q(·|A)‖q)`. The bounds follow because KL is non-negative, and the last
+claim is the first case.
+
+**Checks.** checks/test_misalignment.py::test_departure_splits_into_pursuit_and_misalignment
+
+**Notes.** The identity is a Pythagorean relation for KL along the pursuit ray. In RL fine-tuning the departure is the
+KL from the reference policy, often treated as a budget; the identity splits that budget into the part spent on the
+objective and the misaligned part. Whenever the actor departs from the default, `M(p̂)/KL(p̂‖q)` is the misaligned share
+of its departure, between 0 and 1.
+
+**Lineage.** main: Thm 13 (the intent-ray decomposition) and NOTES §2.5 (the intent ray). New: the third case, and the
+reading as a split of the departure.
