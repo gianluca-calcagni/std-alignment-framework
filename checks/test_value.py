@@ -20,15 +20,17 @@ def test_value_identity():
 
 
 def test_every_behaviour_is_an_optimum():
+    """P4(ii): at intensity 1, r is the optimum for the objective log(r/q), and KL(p||r) is exactly the value p loses."""
     r = rng(302)
     for _ in range(300):
-        n = int(r.integers(2, 13)); q, target = simplex_interior(r, n), simplex_interior(r, n); t = float(np.exp(r.uniform(-2, 2)))
-        F = np.log(target / q) / t                                                # the objective the target pursues
-        assert np.max(np.abs(tilt(q, t * F) - target)) <= EXACT
-        best = J(target, F, q, t)
+        n = int(r.integers(2, 13)); q, target = simplex_interior(r, n), simplex_interior(r, n)
+        F = np.log(target / q)                                                   # the objective the target pursues
+        assert np.max(np.abs(tilt(q, F) - target)) <= EXACT
+        best = J(target, F, q, 1.0)
         for _ in range(20):
-            p = simplex_interior(r, n)
-            assert J(p, F, q, t) <= best + EXACT * (1 + abs(best))
+            p = with_zeros(r, n) if r.random() < 0.3 else simplex_interior(r, n)
+            loss = best - J(p, F, q, 1.0)
+            assert abs(loss - kl(p, target)) <= EXACT * (1 + abs(best) + abs(J(p, F, q, 1.0)))
 
 
 def chain_gap(D, p, rr, labels):
