@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
+.pytest_cache/
 .DS_Store
-# Obsidian: per-user state, not part of the vault
+# Obsidian: per-user state
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
 .obsidian/cache

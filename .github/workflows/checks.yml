@@ -1,7 +1,7 @@
 name: checks
 
 on:
-  push:            # every branch: a roadmap step's branch is checked before its pull request is opened
+  push:            # every branch: a step's branch is checked before its pull request is opened
   pull_request:
   workflow_dispatch:
 
@@ -9,57 +9,26 @@ permissions:
   contents: read
 
 jobs:
-  vault:
-    name: vault (lint, migration, views, bibliography)
+  lint:
+    name: lint (items, fields, references, checks, bibliography)
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: pip
-      - run: pip install -r requirements.txt
-      - name: lint — 0 errors (schema, links, cycles, layers, tables, bibliography, frozen hashes, stale derived fields)
-        run: python3 tools/vault.py lint
-      - name: migration check — a fresh build from archive/v6.6_flat reproduces all 19 flat files
-        run: python3 tools/vault.py migration-check
-      - name: the linear views in build/ are up to date
-        run: python3 tools/vault.py compile && git diff --exit-code -- build/
-      - name: cross-references on the linear views (final_audit F6)
-        run: python3 final_audit.py F6
-      - name: references.bib parses
-        run: python3 -c "from pybtex.database import parse_file; d = parse_file('references.bib'); print(len(d.entries), 'entries')"
+      - name: lint — 0 errors (rules R1–R8 in tools/lint.py)
+        run: python3 tools/lint.py
 
-  verify:
-    name: verify ${{ matrix.blocks }}
+  checks:
+    name: checks (${{ matrix.simd }} SIMD path)
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:
-        blocks:
-          - V1 V3 V5 V7
-          - V2
-          - V4
-          - V6 V9
-          - V8
-          - V10 V11
-          - V12 V13 V15 V17
-          - V14
-          - V16
-          - V18 V19 V20 V21 V22 V23
-          - V24 V25 V26 V27 V28 V29 V30 V31
-          - V32
-          - V33
-          - V34
-          - V35
-          - V36
-          - V37
-          - V38
-          - V39
-          - V40
-          - V41
+        simd: [default, haswell]   # a check must hold on both paths: its tolerance is derived, not tuned to one CPU
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -67,20 +36,9 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: rerun and compare with verify_output.txt
-        run: python3 tools/reproduce.py verify ${{ matrix.blocks }}
-
-  audit:
-    name: final audit (F1–F8)
-    runs-on: ubuntu-24.04
-    timeout-minutes: 90
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: pip
-      - run: pip install -r requirements.txt
-      - run: python3 tools/vault.py compile
-      - name: rerun and compare with final_audit_output.txt
-        run: python3 tools/reproduce.py audit
+      - name: pytest (the checks of the core, and the tests of the linter)
+        run: |
+          if [ "${{ matrix.simd }}" = haswell ]; then
+            export NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell
+          fi
+          python3 -m pytest

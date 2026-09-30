@@ -1,58 +1,86 @@
-# std-alignment-framework — v7.10
+# std-alignment-framework — the slim core (v8, in progress)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
-A standard formal framework for alignment problems in general, not only in machine learning: AI systems,
-humans, institutions and organisms. The aim is a framework that is:
-- solid enough to build on;
-- substrate-independent;
-- easy to import existing theorems into;
-- able to make testable predictions, support diagnostics, and show its own limits.
+A standard formal framework for alignment problems in general, not only in machine learning: AI systems, humans,
+institutions and organisms. The aim is a framework that is solid enough to build on, substrate-independent, easy to
+import existing theorems into, and able to make testable predictions, support diagnostics, and show its own limits.
 
-The framework is an Obsidian vault of typed, linked notes. Every result links what it depends on, what uses it,
-the checks that verify it, and its sources, and the tools keep those links derived and exhaustive.
+This branch rebuilds the core from scratch: slim, justified, and in plain terms first.
 
-## Reading it
+## Where things are
 
-- **In Obsidian.** Open this folder as a vault and start at `00 Home.md`.
-- **On GitHub.** The notes use `[[wiki-links]]`, which GitHub does not follow. The linear views in `build/`
-  read top to bottom: `core.md`, `dictionary.md`, `boundary.md`, `status.md`, `references.md`.
-- **Where things are.** Current position and next steps: `70 Project/ROADMAP.md`. What is claimed, and how
-  strongly: `60 Status/`. Everything retracted, and why: `60 Status/retractions/`. The bibliography:
-  `references.bib`.
-
-## Tools
-
-| Command | Does |
+| | |
 |---|---|
-| `python3 tools/vault.py sync` | recompute every derived field and generated section, after any edit |
-| `python3 tools/vault.py lint` | schema, links, dependency cycles, definition order, actor-model tags, the measurement/explanation layers, checks and sources, table well-formedness, the bibliography's one-to-one match with the source notes, the hashes of frozen files (`tools/frozen.json`), and version banners (the current version stated consistently; no part's banner older than its own text); must report 0 errors |
-| `python3 tools/vault.py migration-check` | re-prove the one-time migration: a fresh build from `archive/v6.6_flat/` reproduces all 19 flat files |
-| `python3 tools/vault.py compile --check archive/v6.6_flat` | compare the live vault with v6.6. Every difference should be an edit logged in the hygiene log (Status §5) |
-| `python3 tools/vault.py deps "Thm 13"` · `scan A3` | dependency queries, and the scan for a refactor step |
-| `python3 verify.py [V1 …]` · `python3 final_audit.py` | numerical checks; each block has a note in `40 Checks/` |
-| `python3 tools/reproduce.py verify V1 …` · `audit` | rerun checks and compare them with the committed reference outputs |
+| `CORE.md` | the core: one document, read top to bottom |
+| `REFERENCES.md` | the sources the core cites |
+| `checks/` | one pytest check, at least, for every result in the core |
+| `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
+| `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before this restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
 
-Install the pinned environment with `pip install -r requirements.txt` (Python 3.11). The reference outputs
-`verify_output.txt` and `final_audit_output.txt` were produced with exactly these versions.
+## Rules
 
-The v6.6 flat files are frozen in `archive/v6.6_flat/`. The Alignment Subframework — the source of the five gaps and of
-retraction rows 1–6 — is archived in `archive/alignment_subframework/`; ROADMAP §6 says what of it was dropped and why. The one-time migration is `tools/build_vault.py`.
+**Enforced by lint** (`python3 tools/lint.py`; a property of the core is claimed only if lint checks it):
+- **R1–R2.** Every `###` heading in `CORE.md` is an item: `### D1 — title`. The kinds are D (definition), P (proposition),
+  T (theorem), L (lemma), C (corollary) and R (remark). Numbers increase within each kind.
+- **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. A definition also has a
+  **Why this choice**; a result (P, T, L, C) has a **Proof** and **Checks**. Fields come in a fixed order, with no field
+  empty.
+- **R5.** References are written `[D1]`, `[P3]`. A statement, justification or proof may use only items that come
+  earlier, so the dependencies follow the reading order and cannot form a cycle.
+- **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
+- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited.
 
-## How the work proceeds
+**Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
+SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
+paths, rather than reproduce printed digits.
 
-- **Continuous checks.** Every push and pull request runs `.github/workflows/checks.yml`:
-  - the vault checks (lint, the migration check, the freshness of `build/`, cross-references, the bibliography);
-  - all 40 `verify.py` blocks, in parallel, each compared with its reference output;
-  - `final_audit.py`, compared with its reference output.
+**Working agreements** (no tool checks these, so they are commitments, not claimed properties):
+- **Reliability over elegance.** A result enters with a proof and a check that could fail: random instances, the
+  degenerate and sign cases, and tolerances derived from the quantity's scale.
+- **Every choice is justified.** "Why this choice" argues it, by generality (for example: every full-support
+  distribution is an exponential tilt of the reference), by canonicity, or by a named case where the alternative gives
+  a wrong verdict.
+- **Plain terms keep the qualifiers** of the formal statement.
+- **Slim.** About a dozen items. An item that does not earn its place goes to an appendix, or stays on `main`.
+- **Lineage** names the items on `main` that an item replaces and the retraction rows that touch them
+  (`main: 60 Status/retractions/`), or says "New".
+- **Empirical tests** are pre-registered and pushed before any computation, as on `main`.
+- **One step, one branch, one pull request** into the branch that holds the new core, merged with a merge commit.
 
-  Residual-scale digits (|x| ≤ 1e-9) may differ across machines. So may a few lines that measure numerical
-  noise (finite differences, for instance), each with a declared tolerance and its reason in
-  `tools/reproduce_tolerances.json`. Any other difference fails the run.
-- **One roadmap step, one pull request.** The PI reviews the diff and merging accepts the step. Pre-registrations
-  are committed and pushed before any computation, so the commit timestamp dates them.
-- **Honesty rules.** A falsified prediction is recorded, not repaired. Retractions are never deleted. A property of
-  the vault is claimed only if a lint rule enforces it.
+## The format of an item
+
+```markdown
+### D1 — Outcomes and reference
+**Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the reference.
+**In plain terms.** The things that can happen, and how often each happens by default.
+**Why this choice.** …
+**Lineage.** main: Def 1 (in part).
+
+### P1 — Every behaviour is a tilt of the reference
+**Statement.** For every full-support `p` on `X` there is `F` with `p ∝ q·e^F`; `F` is unique up to a constant.
+**In plain terms.** Any way of behaving can be written as the default reweighted by some objective.
+**Proof.** …
+**Checks.** checks/test_tilt.py::test_every_distribution_is_a_tilt
+**Lineage.** New.
+```
+
+Optional fields, in order: **Example** (after Proof) and **Notes** (after Checks; attribution goes here, because a
+citation in a proof is a dependency claim).
+
+## Commands
+
+```bash
+pip install -r requirements.txt       # Python 3.11
+python3 tools/lint.py                 # 0 errors required
+python3 -m pytest                     # checks and linter tests
+NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # the second SIMD path
+```
+
+## Starting a session
+
+Read this file and `CORE.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of past
+sessions, each with its evidence.
 
 ## License
 

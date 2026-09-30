@@ -1,5 +1,0 @@
-T1 three-term split (within-cell + off-ray + intensity), 300 instances: max error 3.3e-15
-T2 retention cost: closed form vs constrained minimisation, max gap 1.7e-08 (SLSQP, 5 starts); increasing in k: True; example [(0.05, np.float64(0.0503)), (0.2, np.float64(0.1898)), (0.5, np.float64(0.4666))]
-T3 Gibbs actor on F + style: share of M carried by W: median 0.987 (min 0.653); left visible under 'style free': median 0.013
-T4 BT offsets: joint M_free median 0.069; within-context max 3.3e-16
-T5 slips eps=0.01, M_free by intensity t: [(1, 0.0), (5, 0.0003), (10, 0.0064), (20, 0.0395), (40, 0.1005)]
