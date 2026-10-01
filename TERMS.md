@@ -46,6 +46,11 @@ worked out.
 | **limited to** | [D4] | a behaviour that splits each cell as the default does | plain | constant on aliased states (RL) | A |
 | **has resolution** | [D4] | every behaviour the actor can produce is limited to it | plain | state abstraction, perceptual aliasing (RL) | A |
 | **within-cell departure** | [P7] | the part of the departure that happens inside cells | plain | main's within-cell divergence `W` (Def 21) | A |
+| **matched intensity** | [D5] | the intensity at which pursuit departs from the default as much as the actor did | it matches the departure | the same-budget counterfactual (main: Thm 17(iii)) | A |
+| **matched pursuit** | [D5] | the pursuit with the actor's departure: the most of `F` that departure can buy | plain | KL-constrained optimum, "best policy within the KL budget" (RL fine-tuning) | A |
+| **shortfall** | [D5] | how much more of `F` the matched pursuit gets than the actor, in `F`'s units | plain | value shortfall `ΔV` (main: Def 22), regret at a matched budget | A |
+| **under-pursuit** | [P9] | the part of the stakes from pursuing too timidly for the departure spent | names the cause | axial error `D_∥` (main: Thm 13) | A |
+| **anti-pursuit** | [P9] | the part of the stakes from moving against the objective | names the cause | anti-alignment excess `X_anti` (main: Thm 13) | A |
 
 ## 2. Correspondences not yet in the core
 
@@ -64,6 +69,7 @@ worked out.
 | the meet of two resolutions | common knowledge | game theory: Aumann (1976), cited in [D4] | B | used in [D4]'s justification only, where it is rejected as the score |
 | misalignment under a specification | robustness degree | formal verification: quantitative semantics of temporal logics | D | a case where the two orderings agree |
 | the small-effort misaligned share `sin²θ` | the dynamic angle | main: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A for a coarse actor ([P8] Notes); C in general | a proposition for any small departure from the default, in the identifiability section |
+| [P10](ii): an error in the objective matters in proportion to the revealed intensity | Goodhart's law: a proxy degrades under optimization pressure | AI safety: Manheim and Garrabrant (2018) | C | a case in which the bound's growth with intensity matches an observed overoptimization curve |
 
 ## 3. Naming decisions
 
@@ -76,3 +82,4 @@ worked out.
 | **intensity** kept over "inverse temperature" | first step | executor | plain, and not tied to physics |
 | **net value**, **revealed objective**, **revealed intensity**, **departure**, **nearest intended behaviour** | second review | executor | names for objects the core already used without one |
 | **resolution**, **cells**, **cell average**, **limited to** | resolution step | executor | the brainstorm's σ-algebras, in finite form and plain words |
+| **matched intensity**, **matched pursuit**, **shortfall**, **under-pursuit**, **anti-pursuit** | stakes step | executor | main's same-budget comparison and three-term split, with names for the causes instead of geometry (axial, transverse) |

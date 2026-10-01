@@ -49,3 +49,15 @@ def random_partition(r, n):
 
 def coarse(p, labels):
     return np.array([p[labels == c].sum() for c in range(labels.max() + 1)])
+
+
+def log_normalizer(q, c):
+    """Λ(c) = log E_q[e^c], computed stably."""
+    w = np.log(q) + c
+    m = w.max()
+    return float(m + np.log(np.exp(w - m).sum()))
+
+
+def kl_tilts(q, a, b):
+    """KL(tilt(q, a) || tilt(q, b)) = E_{p_a}[a - b] - Λ(a) + Λ(b): finite and accurate even where the tilts underflow."""
+    return float(tilt(q, a) @ (a - b) - log_normalizer(q, a) + log_normalizer(q, b))
