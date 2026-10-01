@@ -13,7 +13,7 @@ assumption. A result may use only the core and the results before it in the read
 | 5 | `feasibility.md` | P15 | misalignment splits into avoidable and unavoidable parts, exactly for linear limits |
 | 6 | `stakes.md` | P9, P10 | the shortfall and its three causes; sensitivity to the declared default and objective |
 | 7 | `identifiability.md` | P11–P13, P16, P17 | the start of a change; pass-through; what an actor can hide where it is not observed |
-| 8 | `evaluator.md` | P18–P20 | through the evaluator only the regression counts; a monotone regression rules out overoptimization; where overoptimization starts and ends |
+| 8 | `evaluator.md` | P18–P20, P25, P26 | through the evaluator only the regression counts; a monotone regression rules out overoptimization; where overoptimization starts and ends; the target's curve turns no more often than the regression; the regression on bins governs at small intensity |
 | 9 | `estimation.md` | P21–P24 | misalignment as the rate of evidence; detection; the distribution of estimated misalignment; the evaluation gap |
 
 Item numbers are those of v8, so references made before the split still hold; new results take the next numbers.

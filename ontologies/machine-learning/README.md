@@ -111,9 +111,11 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
 
 - In some prompts, a proxy trained on preference labels is not the gold's cell average over its features (section 3).
   How far from it is it? The regression of the gold on the proxy, estimated from samples of the initial policy by
-  grouping proxy scores into bins, is the regression on a coarser evaluator. Does its shape predict where the
-  best-of-`n` curve peaks? [P19] is exact only on the evaluator's own level sets, so this needs a result for binned
-  evaluators (`NOTES.md`).
+  grouping proxy scores into bins, is the regression on a coarser evaluator. Along a sweep of `β` at the optima, [P26]
+  keeps the gold's average within `w·D/(4β)` of its value under that binned regression, for bins of width `w` with the
+  gold spread `D` within them; with a single-peaked binned regression, [P25] then allows one fall at most, up to that
+  margin. Is the margin small enough, with bins that samples can fill, to predict the peak? Best-of-`n` is not covered
+  yet (`NOTES.md` E8).
 - Can the misaligned share at the start, `sin²θ` ([P11]), measured on the initial policy, predict the size of the gold
   peak, across reward models of different sizes?
 - KL-regularized fine-tuning uses one `β` for every prompt, which [P15] shows is the best feasible pursuit across

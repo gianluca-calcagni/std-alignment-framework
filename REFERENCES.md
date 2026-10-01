@@ -26,6 +26,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@mckelvey1995] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [@ng2000] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [@ortega2013] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.
+- [@polya1976] Pólya, G. and Szegő, G. (1976), *Problems and Theorems in Analysis II: Theory of Functions, Zeros, Polynomials, Determinants, Number Theory, Geometry*. Springer (German original 1925). Part V, chapter 1: Rolle's theorem and Descartes' rule of signs, with Laguerre's extension to exponential sums.
 - [@prasad2007] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [@price1970] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
