@@ -179,6 +179,14 @@ def test_the_survey_of_related_theories_is_checked(tmp_path):
     assert any("RELATED.md: R8 [@nobody1900] is not in REFERENCES.md" in e for e in errors), errors
 
 
+def test_the_import_map_names_only_existing_items(tmp_path):
+    ledger = "# Import\n\n| Thm 1 | regret is a divergence | in core | [P1] |\n"
+    errors, _ = make(tmp_path, extra={"IMPORT.md": ledger})
+    assert errors == [], errors
+    errors, _ = make(tmp_path, extra={"IMPORT.md": ledger + "| Thm 5 | the width | derive | [P9] |\n"})
+    assert any("IMPORT.md:4: R12 [P9] names no item" in e for e in errors), errors
+
+
 def test_the_standard_must_cover_every_definition(tmp_path):
     errors, _ = make(tmp_path, standard=None)
     assert any("R11 the reporting standard is missing" in e for e in errors), errors

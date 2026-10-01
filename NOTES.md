@@ -146,7 +146,9 @@ item changes.
 
 ## 4. Order next
 
-The PI's review of v10 ([D10], [D11], [P18]–[P24]). Then, in this order:
+The plan to merge `core` into `main` is in `IMPORT.md`: twelve results to derive from the archive (six of them block
+the merge), `derived/forbids.md`, and decisions Q11 and Q12. Before it, the PI's review of v10. The items below come
+after the merge, or alongside it:
 1. A worked case on the data of §3.2, pre-registered: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak to
    test, and [P21] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`, section
    4). A case with a pass-or-fail verifier would test [P19] directly.
