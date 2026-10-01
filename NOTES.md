@@ -1,6 +1,7 @@
 # NOTES — the executor's working notes
 
-Not part of the core, and not checked by lint. Blunt on purpose. A hunch is not a claim: nothing moves into `CORE.md`
+Not part of the core, and not checked by lint. Blunt on purpose. A hunch is not a claim: nothing moves into `CORE.md` or
+`derived/`
 without a proof and a check. Names, and correspondences with the literature, with their confidence levels, live in
 `TERMS.md`.
 
@@ -15,32 +16,82 @@ The full table, with its evidence, is on `main`: `70 Project/NOTES_claude.md` §
 | **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it | keep R5; write the "why" from what is above |
 | **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞` | keep check instances where float64 represents every mass; test limits by their own formula |
 | **A familiar formula that hides a typing error** | "the KL-regularized optimum is `tilt(π_ref, r/β)`" is true prompt by prompt, and false on prompt–response pairs: the pursuit ray of [D2] would also reweight the prompts, which no policy can do. Found only when the ontologies had to say what an outcome is | typed slots in every ontology, including **contexts**; a formula from the literature enters only with its outcome space stated |
+| **A probe bug read as a refutation** | the first probe of [P15] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact | when a probe contradicts a derivation, check the probe against the derivation before concluding anything |
+| **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
+| **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
 
-**One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises with
+**One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises
+with
 budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort law
 and exhibits a counterexample. The rule "a shape claim needs a random sample before it is said" (main, §1) paid off.
 
 ## 2. Is the core a compelling standard yet?
 
-Not yet: a credible foundation. The PI has the full assessment. Progress against the gaps listed after the second
-review:
+Closer, not yet. v9 applied the PI's decisions: the core holds five premises and nine definitions; every result is
+derived; the cost of departing from the default is derived ([P14]), not assumed; feasibility separates "cannot" from
+"will not" ([P15]); conditions, views and identification make deceptive alignment a measurable quantity ([P16],
+[P17]); and a reporting standard names every definition (`STANDARD.md`, lint R11).
 
 | Gap | State |
 |---|---|
-| everything is relative to a declared specification; no sensitivity result | **closed by [P10]**: an error in the default moves misalignment by at most its spread, and an error in the objective by at most the revealed intensity times its spread |
-| no resolution: cannot say "I don't care about these details" | **closed by section 4**: [P7] forgives exactly the within-cell departure; [P8] gives the coarse actor's unavoidable misalignment and its small-effort law |
-| no stakes report | **closed by [P9]**: the shortfall at matched intensity splits into misalignment, under-pursuit and anti-pursuit; misalignment is scale-free, stakes are not |
-| identifiability: what can be read from behaviour, and what cannot | **closed in part by section 6**: [P11] the misaligned share at the start of any change; [P12] pass-through is identified from behaviour alone, and revealed objectives certify an actor's distinctions but cannot prove their absence |
-| no estimation layer | open: the deviance identity of [P5] is the way in; [P12](i) needs it to be tested on data |
-| known mathematics, organization not yet shown across disciplines | **addressed by `ontologies/`**: five disciplines, each with typed slots, one known result, and claims labelled as consequences, predictions or readings (lint rule R10). Next: worked cases, which need data |
-| what one change of behaviour gains, not only what it misaligns | **closed by [P13]**: the average moves at the covariance rate (the Price equation), and at the start each unit of departure gains `cos θ` of the objective's spread |
-| outcomes that are partly fixed before the actor acts (contexts) | **open, found by the ontologies**: see the design question below |
+| sensitivity, resolution, stakes, the gain of a change | closed in v8: [P7]–[P10], [P13] |
+| the KL cost was assumed | **closed by [P14]**: forced by [A2] and [A3] together |
+| "cannot" versus "will not" | **closed by [P15]** for linear and convex limits; for capacity limits only a lower bound |
+| contexts (v8 design question Q1) | **closed by [P15]**: the shared intensity across contexts is derived, not chosen |
+| deceptive alignment | **opened as a measurable quantity**: [D8], [D9], [P16], [P17]; bounds on the objective's average in an unobserved condition, sharp given `ε` |
+| a standard for reports | **closed by `STANDARD.md`** (lint R11) |
+| no estimation layer | open: §3.3 E1 |
+| several actors, several principals | out of scope by declaration (`CORE.md` §0); §3.3 E4 |
+| worked cases | open: they need data (§3.2) |
 
-**Deferred from identifiability.** The "dynamic rank" (the dimension of the span of the revealed objectives along a
-path, modulo constants) generalizes [P3] beyond rank one. It adds no verdict the core needs yet: [P3] already says when a
-single objective explains a path. It stays on `main` until an ontology needs it; none did.
+**Deferred from identifiability.** The "dynamic rank" generalizes [P3] beyond rank one. No ontology needed it.
 
-## 3. Design question for the PI: contexts
+## 3. Open requests and recommendations
+
+Everything waiting on the PI or deferred by agreement, in one place.
+
+### 3.1 Decisions taken (v9)
+
+| # | Decision | By | Applied as |
+|---|---|---|---|
+| Q1 | contexts: one shared intensity or a free one per context | derived, not decided | [P15](v) and its Notes |
+| Q2 | no merging for its own sake; the core holds what cannot be derived and the universal definitions; derivations in their own folder | PI | `CORE.md`, `derived/`, lint R1 and R5 |
+| Q3 | C1 (the cost is forced), C4 (feasibility), C9 (a standard), the scope, premises as items, ontologies in folders | PI | [P14]; [D7], [P15]; `STANDARD.md`; `CORE.md` §0; A1–A5; `ontologies/<name>/` |
+| Q4 | identifiability into the core, so that deceptive alignment can be measured; interventions and stakes stay in the core | PI | [D8], [D9], [P16], [P17]; [D5], [D6] |
+| Q5 | C2 and C3 (merge P11 with P13; move the Price equation into P2) | PI: declined, merging only to have fewer items | not applied |
+
+### 3.2 Papers and data the PI could supply
+
+| # | For | What is needed | Why | Note |
+|---|---|---|---|---|
+| D1 | humans (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/humans/` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
+| D2 | humans (defaults) | Madrian and Shea (2001), the distribution of contribution rates in each cohort | the pass-through ratio test | the paper itself; the 403 from publishers blocks it here |
+| D3 | machine learning | samples from an initial policy, scored by a gold and a proxy reward model | the best-of-`n` slope and the covariance-at-the-peak predictions | an open RLHF setup would do; Gao et al.'s own data is not known to be public |
+| D4 | biology | Chippindale et al. (2001), the hemiclone fitness values per sex | the angle and the shortfall of ordinary selection | supplementary data, if any |
+| D5 | institutions | Dranove et al. (2003) | the reading only; Medicare data are not public | low priority |
+
+Every test is pre-registered and pushed before any computation (README rules).
+
+### 3.3 Open proposals (none applied)
+
+| # | Proposal | Kind | Evidence so far |
+|---|---|---|---|
+| E1 | **Estimation.** For `n` decisions from an actor that does pursue `F` at an interior intensity, `2n·M(p̂_n)` is asymptotically χ² with `|X| − 2` degrees of freedom (Wilks); at the boundary `t* = 0`, a chi-bar-square mixture. With [D9], estimated quantities get confidence sets, which the standard already asks for | a result in a new `derived/estimation.md` | probe: means 1.08, 2.98, 6.09, variances 2.15, 5.97, 11.5 for `|X|` = 3, 5, 8 |
+| E2 | **A floor.** `{p_{F,t} : t ≥ t_min}` for a principal for whom doing nothing fails; the nearest intensity is `max(t*, t_min)` | a remark in `derived/misalignment.md` | derivable from the convexity in [P5] |
+| E3 | **Ordinal objectives.** The tilts of `q` by every function non-decreasing in `F`: closed, contains the ray, misalignment a convex program. Best-of-`n` on a proxy is aligned with its ranking but not its values | a definition and a result | argued, not checked |
+| E4 | **Several principals.** Unions and intersections of intended sets; conflict as an angle at the default | a remark | trivial; needed for chains of delegation |
+| E5 | **Sharper identified sets.** [P17] uses KL alone. Every `f`-divergence obeys data processing, and for two conditions the exact condition for a pair of behaviours to come from a pair of views is a comparison of experiments (Blackwell) | a result | citation to verify before use |
+| E6 | **Misalignment in an unobserved condition.** [P17] bounds the objective's average. The largest misalignment within `ε` of the observed behaviour has no closed form; a small-`ε` expansion, as in [P11], may give one | a result | open |
+| E7 | **Identifying a view.** Which interventions identify what the actor perceives: the control-theory question of observability, from the principal's side | a result | open |
+
+**To verify.** [D2]'s justification says that the check of [P3] exercises mixture paths. A read-only search to confirm
+it
+was blocked by a permission prompt during the third review; still unverified.
+
+### 3.4 Contexts (history)
+
+Resolved in v9 by [P15]: see §3.1, Q1. The v8 analysis is kept below for the record.
+
 
 **What was found.** In four of the five ontologies, part of an outcome is fixed before the actor acts: the prompt a
 model answers, the patient who arrives, the request a manager sends, a person's circumstances. The actor chooses only
@@ -62,13 +113,16 @@ by [P4](iii). [P13](i), and the first limit of [P13](ii), hold across contexts a
   intensity is nearest in every context. Why one intensity: "pursue `F`" names one objective on all outcomes, and
   pursuing it at different intensities in different contexts is pursuing a different objective, `t(C)·F`, which [P1](ii)
   tells apart from `F`. KL-regularized fine-tuning, with one `β` for all prompts, is exactly this specification. The
-  report-card prediction (`ontologies/institutions.md`) needs it; the delegation ontology asks for it.
+  report-card prediction (`ontologies/institutions/`) needs it; the delegation ontology asks for it.
 - **B: free intensity per context.** Keep what the ontologies do now. It needs no new item, but it forgives an actor
   that pursues hard in some contexts and not at all in others.
 
 Either way the change is an addition (one definition, one proposition, a new section), not a refactoring: no existing
 item changes.
 
-**Order next.** The PI's decision on contexts. Then worked cases, one per discipline, on data the PI supplies, each
-pre-registered: the first candidates are the predictions in the ontologies that need only published or easily
-collected data (the pass-through ratios after automatic enrolment; the best-of-`n` slope from initial-policy samples).
+(End of the v8 record.)
+
+## 4. Order next
+
+The PI's review of v9. Then E1 (estimation), which every report needs, and worked cases on the data of §3.2, each
+pre-registered.

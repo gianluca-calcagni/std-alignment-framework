@@ -1,42 +1,52 @@
-"""Lint the core. Every rule below is a property the core claims about itself; a property not checked here is not claimed.
+"""Lint the framework. Every rule below is a property the framework claims about itself; a property not checked here is
+not claimed.
 
 Usage: python3 tools/lint.py [root]      (exit status 1 on any error)
 
+Where items live. CORE.md holds premises (A) and definitions (D). derived/ holds results (P proposition, T theorem,
+L lemma, C corollary) and remarks (R), one file per topic; derived/README.md lists the files in reading order.
+
 Rules
-  R1  CORE.md starts with a '# ' title; every '### ' heading is an item: '### <K><n> — <title>',
-      K in D (definition), P (proposition), T (theorem), L (lemma), C (corollary), R (remark).
-  R2  Item ids are unique, and numbers increase within each kind, in reading order.
+  R1  CORE.md starts with a '# ' title. Every '### ' heading in CORE.md and in derived/*.md is an item:
+      '### <K><n> — <title>'. CORE.md holds only premises and definitions; derived/ holds only results and remarks.
+      derived/README.md names every derived file once, in reading order, and names no missing file.
+  R2  Item ids are unique; within each file, numbers increase within each kind.
   R3  Fields start a line with a bold label, appear at most once, in this order:
       Statement, In plain terms, Why this choice, Proof, Example, Checks, Notes, Lineage.
-  R4  Required fields: every item has Statement, In plain terms and Lineage; a definition has Why this choice;
-      a result (P, T, L, C) has Proof and Checks. No field is empty; In plain terms has at least 8 words.
-  R5  References are written [D1], [P3], ...; each names an existing item. In Statement, Why this choice and Proof
-      they name an item that comes earlier (dependencies follow reading order, so they cannot form a cycle).
+  R4  Required fields: every item has Statement, In plain terms and Lineage; a premise or definition has Why this choice;
+      a result has Proof and Checks. No field is empty; In plain terms has at least 8 words.
+  R5  References are written [D1], [P3], ...; each names an existing item. Dependencies are the references in
+      Statement, Why this choice and Proof. A core Statement depends only on earlier core items. A result depends only
+      on core items and on results earlier in the reading order. A core "why" may cite any item, but the dependencies
+      form no cycle.
   R6  Checks cite pytest functions as checks/<file>.py::<test_name>; each exists. A result cites at least one.
   R7  Every test function in checks/ is cited by some item (no check without a claim).
   R8  Citations are written [@key]; each key is listed in REFERENCES.md as '- [@key] ...', listed once, and every
-      listed key is cited in CORE.md or in ontologies/.
+      listed key is cited in CORE.md, derived/, ontologies/ or STANDARD.md.
   R9  Every term an item defines (a bold span in its Statement that does not end with '.') has an entry in TERMS.md
       (a bold name in the first column of a table row), and every item TERMS.md names exists. Matching ignores case,
       hyphens and a final 's' on each word.
-  R10 Ontologies. ontologies/README.md lists the slots, one table row each: '| **<slot>** | [<item>] | ...'. Every other
-      ontologies/*.md has a '# Ontology — ' title and the sections ONTOLOGY_SECTIONS, in order. Its section 1 has a
-      table with the columns Slot, Core, In this discipline, Observed as, Fit; every slot appears in it once, its Core
-      cell names the slot's item, its Fit cell starts with a word of FITS, and no other row appears. Section 2 cites a
-      source. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or '**Reading** with',
-      and names at least one item before its first ':'; a prediction says '*Refuted if*'. Sections 4 and 5 are not
-      empty. Every item named in an ontology exists.
+  R10 Ontologies. ontologies/README.md lists the slots, one table row each: '| **<slot>** | [<item>] | ...'. Each
+      ontology lives in its own folder, as ontologies/<name>/README.md, with a '# Ontology — ' title and the sections
+      ONTOLOGY_SECTIONS, in order. Its section 1 has a table with the columns SLOT_COLUMNS; every slot appears in it
+      once, its Core cell names the slot's item, its Fit cell starts with a word of FITS, and no other row appears.
+      Section 2 cites a source. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or
+      '**Reading** with', and names at least one item before its first ':'; a prediction says '*Refuted if*'.
+      Sections 4 and 5 are not empty. Every item named in an ontology exists.
+  R11 STANDARD.md names only existing items, and names every definition of the core: the reporting standard covers the
+      whole shared vocabulary.
 """
 import re, sys
 from pathlib import Path
 
-KINDS = {"D": "definition", "P": "proposition", "T": "theorem", "L": "lemma", "C": "corollary", "R": "remark"}
-RESULTS = set("PTLC")
+KINDS = {"A": "premise", "D": "definition", "P": "proposition", "T": "theorem", "L": "lemma", "C": "corollary",
+         "R": "remark"}
+CORE_KINDS, RESULTS, DERIVED_KINDS = set("AD"), set("PTLC"), set("PTLCR")
 FIELDS = ["Statement", "In plain terms", "Why this choice", "Proof", "Example", "Checks", "Notes", "Lineage"]
-ORDERED_DEPS = {"Statement", "Why this choice", "Proof"}
-ITEM = re.compile(r"^### ([DPTLCR])(\d+) — (\S.*)$")
+DEPENDENCY_FIELDS = {"Statement", "Why this choice", "Proof"}
+ITEM = re.compile(r"^### ([ADPTLCR])(\d+) — (\S.*)$")
 LABEL = re.compile(r"^\*\*(" + "|".join(re.escape(f) for f in FIELDS) + r")\.\*\*")
-REF = re.compile(r"\[([DPTLCR]\d+)\]")
+REF = re.compile(r"\[([ADPTLCR]\d+)\]")
 CHECK = re.compile(r"(checks/[\w/]+\.py)::(\w+)")
 CITE = re.compile(r"\[@([\w:-]+)\]")
 LISTED = re.compile(r"^- \[@([\w:-]+)\] \S")
@@ -53,8 +63,8 @@ def norm_term(t):
     return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") else w for w in words)
 
 
-def parse_items(text):
-    """Return (errors, items); each item is a dict with id, kind, number, line, fields {label: text}."""
+def parse_items(text, name):
+    """Return (errors, items); each item has file, id, kind, number, line, fields {label: text}, order."""
     errors, items, cur, field, fenced = [], [], None, None, False
     for n, line in enumerate(text.splitlines(), 1):
         if line.lstrip().startswith("```"):
@@ -64,9 +74,10 @@ def parse_items(text):
             if line.startswith("### "):
                 m = ITEM.match(line)
                 if not m:
-                    errors.append(f"CORE.md:{n}: R1 a '### ' heading must be an item '### <K><n> — <title>': {line!r}")
+                    errors.append(f"{name}:{n}: R1 a '### ' heading must be an item '### <K><n> — <title>': {line!r}")
                     continue
-                cur = {"id": m[1] + m[2], "kind": m[1], "number": int(m[2]), "line": n, "fields": {}, "order": []}
+                cur = {"file": name, "id": m[1] + m[2], "kind": m[1], "number": int(m[2]), "line": n, "fields": {},
+                       "order": []}
                 items.append(cur)
             continue
         if cur is None:
@@ -75,7 +86,7 @@ def parse_items(text):
         if m:
             field = m[1]
             if field in cur["fields"]:
-                errors.append(f"CORE.md:{n}: R3 {cur['id']} has a second '{field}' field")
+                errors.append(f"{name}:{n}: R3 {cur['id']} has a second '{field}' field")
             cur["fields"][field] = line[m.end():]
             cur["order"].append(field)
         elif field is not None:
@@ -83,44 +94,85 @@ def parse_items(text):
     return errors, items
 
 
+def derived_files(root, errors):
+    """The derived files in reading order, as listed in derived/README.md (R1)."""
+    folder = root / "derived"
+    if not folder.exists():
+        return []
+    readme = folder / "README.md"
+    present = sorted(f.name for f in folder.glob("*.md") if f.name != "README.md")
+    if not readme.exists():
+        errors.append("derived: R1 README.md, with the reading order, is missing")
+        return present
+    listed = []
+    for line in readme.read_text(encoding="utf-8").splitlines():
+        if line.startswith("|"):
+            names = re.findall(r"`([\w.-]+\.md)`", line)
+            if names:
+                listed.append(names[0])
+    for name in sorted(set(listed)):
+        if listed.count(name) > 1:
+            errors.append(f"derived/README.md: R1 {name} is listed {listed.count(name)} times")
+        if name not in present:
+            errors.append(f"derived/README.md: R1 {name} is listed but does not exist")
+    for name in present:
+        if name not in listed:
+            errors.append(f"derived/README.md: R1 {name} is not listed in the reading order")
+    return [n for i, n in enumerate(listed) if n in present and n not in listed[:i]]
+
+
 def lint(root):
     root = Path(root); errors = []
     core = root / "CORE.md"
     if not core.exists():
-        return [f"R1 CORE.md is missing"], {}
-    text = core.read_text(encoding="utf-8")
-    if not text.startswith("# "):
+        return ["CORE.md: R1 the core is missing"], {}
+    core_text = core.read_text(encoding="utf-8")
+    if not core_text.startswith("# "):
         errors.append("CORE.md:1: R1 must start with a '# ' title")
-    perr, items = parse_items(text); errors += perr
+    perr, core_items = parse_items(core_text, "CORE.md"); errors += perr
+    texts, items = {"CORE.md": core_text}, list(core_items)
+    for it in core_items:
+        if it["kind"] not in CORE_KINDS:
+            errors.append(f"CORE.md:{it['line']}: R1 {it['id']} is a {KINDS[it['kind']]}; results belong in derived/")
+    for name in derived_files(root, errors):
+        path = f"derived/{name}"; text = (root / path).read_text(encoding="utf-8"); texts[path] = text
+        perr, ditems = parse_items(text, path); errors += perr
+        for it in ditems:
+            if it["kind"] not in DERIVED_KINDS:
+                errors.append(f"{path}:{it['line']}: R1 {it['id']} is a {KINDS[it['kind']]}; it belongs in CORE.md")
+        items += ditems
 
     # R2
     pos, last = {}, {}
     for i, it in enumerate(items):
         if it["id"] in pos:
-            errors.append(f"CORE.md:{it['line']}: R2 duplicate id {it['id']}")
+            errors.append(f"{it['file']}:{it['line']}: R2 duplicate id {it['id']}")
         else:
             pos[it["id"]] = i
-        if it["number"] <= last.get(it["kind"], 0):
-            errors.append(f"CORE.md:{it['line']}: R2 {it['id']} does not increase on the previous {KINDS[it['kind']]}")
-        last[it["kind"]] = max(last.get(it["kind"], 0), it["number"])
+        key = (it["file"], it["kind"])
+        if it["number"] <= last.get(key, 0):
+            errors.append(f"{it['file']}:{it['line']}: R2 {it['id']} does not increase on the previous "
+                          f"{KINDS[it['kind']]} in this file")
+        last[key] = max(last.get(key, 0), it["number"])
 
-    # R5, existence: anywhere in the document
-    for n, line in enumerate(text.splitlines(), 1):
-        for ref in REF.findall(line):
-            if ref not in pos:
-                errors.append(f"CORE.md:{n}: R5 [{ref}] names no item")
+    # R5, existence: anywhere in the item files
+    for name, text in texts.items():
+        for n, line in enumerate(text.splitlines(), 1):
+            for ref in REF.findall(line):
+                if ref not in pos:
+                    errors.append(f"{name}:{n}: R5 [{ref}] names no item")
 
-    # R3, R4, R5 (order), R6
-    cited_checks, test_defs = set(), {}
+    # R3, R4, R5 (order and cycles), R6
+    cited_checks, test_defs, deps = set(), {}, {}
     for f in sorted((root / "checks").rglob("*.py")) if (root / "checks").exists() else []:
         rel = f.relative_to(root).as_posix()
         test_defs[rel] = set(TESTDEF.findall(f.read_text(encoding="utf-8")))
     for i, it in enumerate(items):
-        where, fields = f"CORE.md:{it['line']}: {it['id']}", it["fields"]
+        where, fields = f"{it['file']}:{it['line']}: {it['id']}", it["fields"]
         if it["order"] != sorted(it["order"], key=FIELDS.index):
             errors.append(f"{where}: R3 fields out of order: {', '.join(it['order'])}")
         required = ["Statement", "In plain terms", "Lineage"]
-        if it["kind"] == "D":
+        if it["kind"] in CORE_KINDS:
             required.append("Why this choice")
         if it["kind"] in RESULTS:
             required += ["Proof", "Checks"]
@@ -132,10 +184,19 @@ def lint(root):
                 errors.append(f"{where}: R4 field '{f}' is empty")
         if "In plain terms" in fields and len(fields["In plain terms"].split()) < 8:
             errors.append(f"{where}: R4 'In plain terms' has fewer than 8 words")
+        deps[it["id"]] = set()
         for f, body in fields.items():
+            if f not in DEPENDENCY_FIELDS:
+                continue
             for ref in REF.findall(body):
-                if f in ORDERED_DEPS and ref in pos and pos[ref] > i:
-                    errors.append(f"{where}: R5 '{f}' uses [{ref}], which comes later")
+                if ref not in pos or ref == it["id"]:
+                    continue
+                deps[it["id"]].add(ref)
+                target = items[pos[ref]]; in_core = target["file"] == "CORE.md"
+                if it["file"] == "CORE.md" and f == "Statement" and (not in_core or pos[ref] > i):
+                    errors.append(f"{where}: R5 its Statement uses [{ref}], which is not an earlier core item")
+                if it["file"] != "CORE.md" and not in_core and pos[ref] > i:
+                    errors.append(f"{where}: R5 '{f}' uses [{ref}], which comes later in the reading order")
         checks = CHECK.findall(fields.get("Checks", ""))
         if it["kind"] in RESULTS and "Checks" in fields and not checks:
             errors.append(f"{where}: R6 a result must cite at least one check")
@@ -143,6 +204,19 @@ def lint(root):
             if name not in test_defs.get(path, set()):
                 errors.append(f"{where}: R6 {path}::{name} does not exist")
             cited_checks.add((path, name))
+    state = {}
+    def visit(node, trail):
+        state[node] = 1
+        for nxt in sorted(deps.get(node, ())):
+            if state.get(nxt) == 1:
+                cycle = trail[trail.index(nxt):] + [nxt] if nxt in trail else [node, nxt]
+                errors.append(f"{items[pos[node]]['file']}: R5 the dependencies form a cycle: {' → '.join(cycle)}")
+            elif nxt not in state:
+                visit(nxt, trail + [nxt])
+        state[node] = 2
+    for node in sorted(deps):
+        if node not in state:
+            visit(node, [node])
 
     # R7
     for path, names in sorted(test_defs.items()):
@@ -150,9 +224,25 @@ def lint(root):
             if (path, name) not in cited_checks:
                 errors.append(f"{path}: R7 {name} is cited by no item")
 
-    # R10 (before R8, which counts the ontologies' citations)
+    # R10 and R11 (before R8, which counts their citations)
     onto_errors, onto_cited, n_onto = lint_ontologies(root, pos)
     errors += onto_errors
+    cited = {(name, k) for name, text in texts.items() for k in CITE.findall(text)} | onto_cited
+    standard = root / "STANDARD.md"
+    if standard.exists():
+        stext = standard.read_text(encoding="utf-8")
+        cited |= {("STANDARD.md", k) for k in CITE.findall(stext)}
+        named = set()
+        for n, line in enumerate(stext.splitlines(), 1):
+            for ref in REF.findall(line):
+                named.add(ref)
+                if ref not in pos:
+                    errors.append(f"STANDARD.md:{n}: R11 [{ref}] names no item")
+        for it in core_items:
+            if it["kind"] == "D" and it["id"] not in named:
+                errors.append(f"STANDARD.md: R11 the definition {it['id']} is not covered by the standard")
+    elif any(it["kind"] == "D" for it in core_items):
+        errors.append("STANDARD.md: R11 the reporting standard is missing")
 
     # R8
     refs_file = root / "REFERENCES.md"
@@ -160,14 +250,11 @@ def lint(root):
               if (m := LISTED.match(line))]
     for key in sorted({k for k in listed if listed.count(k) > 1}):
         errors.append(f"REFERENCES.md: R8 {key} is listed twice")
-    cited = set(CITE.findall(text))
-    for key in sorted(cited - set(listed)):
-        errors.append(f"CORE.md: R8 [@{key}] is not in REFERENCES.md")
-    for name, key in sorted(onto_cited):
+    for name, key in sorted(cited):
         if key not in listed:
-            errors.append(f"ontologies/{name}: R8 [@{key}] is not in REFERENCES.md")
-    for key in sorted(set(listed) - cited - {k for _, k in onto_cited}):
-        errors.append(f"REFERENCES.md: R8 [@{key}] is cited nowhere in CORE.md or ontologies/")
+            errors.append(f"{name}: R8 [@{key}] is not in REFERENCES.md")
+    for key in sorted(set(listed) - {k for _, k in cited}):
+        errors.append(f"REFERENCES.md: R8 [@{key}] is cited nowhere")
 
     # R9
     defined = {}
@@ -184,7 +271,7 @@ def lint(root):
             glossary.update(norm_term(t) for t in BOLD.findall(first))
     for key, (iid, term) in sorted(defined.items()):
         if key not in glossary:
-            errors.append(f"CORE.md: {iid}: R9 the term '{term}' has no entry in TERMS.md")
+            errors.append(f"{items[pos[iid]]['file']}: {iid}: R9 the term '{term}' has no entry in TERMS.md")
     for n, line in enumerate(terms_text.splitlines(), 1):
         for ref in REF.findall(line):
             if ref not in pos:
@@ -213,7 +300,7 @@ def lint_ontologies(root, pos):
     if not readme.exists():
         return ["ontologies: R10 README.md, with the slot table, is missing"], cited, 0
     rtext = readme.read_text(encoding="utf-8")
-    cited |= {("README.md", k) for k in CITE.findall(rtext)}
+    cited |= {("ontologies/README.md", k) for k in CITE.findall(rtext)}
     slots = {}
     for cells in table_rows(rtext.splitlines()):
         m = re.fullmatch(r"\*\*([^*]+)\*\*", cells[0]) if cells else None
@@ -222,15 +309,18 @@ def lint_ontologies(root, pos):
             slots[m[1]] = refs[0]
     if not slots:
         errors.append("ontologies/README.md: R10 no slot table ('| **<slot>** | [<item>] | ...')")
-    files = sorted(f for f in folder.glob("*.md") if f.name != "README.md")
+    for f in sorted(folder.glob("*.md")):
+        if f.name != "README.md":
+            errors.append(f"ontologies/{f.name}: R10 an ontology lives in its own folder, as <name>/README.md")
+    files = sorted(d / "README.md" for d in folder.iterdir() if d.is_dir() and (d / "README.md").exists())
     for f in [readme] + files:
         for n, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
             for ref in REF.findall(line):
                 if ref not in pos:
-                    errors.append(f"ontologies/{f.name}:{n}: R10 [{ref}] names no item")
+                    errors.append(f"{f.relative_to(root).as_posix()}:{n}: R10 [{ref}] names no item")
     for f in files:
-        where, text = f"ontologies/{f.name}", f.read_text(encoding="utf-8")
-        cited |= {(f.name, k) for k in CITE.findall(text)}
+        where, text = f.relative_to(root).as_posix(), f.read_text(encoding="utf-8")
+        cited |= {(where, k) for k in CITE.findall(text)}
         if not text.startswith("# Ontology — "):
             errors.append(f"{where}:1: R10 must start with '# Ontology — <discipline>'")
         heads, body, cur = [], {}, None

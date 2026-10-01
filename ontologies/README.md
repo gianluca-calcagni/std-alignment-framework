@@ -2,7 +2,8 @@
 
 An ontology says what each object of the core is in one discipline: what an outcome is, who the principal is, what the
 default is, and so on. It is a dictionary, not a theorem. It proves nothing, and the core's results reach a discipline
-only through it. A wrong ontology gives correct mathematics about the wrong things, so every entry says how well it fits.
+only through it. A wrong ontology gives correct mathematics about the wrong things, so every entry says how well it
+fits.
 
 Each ontology then reframes one known result of its discipline in the core's terms. It says what the core adds to that
 result, separating three kinds of claims: consequences, predictions that data could refute, and readings that only
@@ -15,11 +16,11 @@ data that did not suggest it.
 
 | File | Discipline | Principal → actor | Known result |
 |---|---|---|---|
-| `machine-learning.md` | machine learning: fine-tuning against a learned reward | a developer → a fine-tuned policy | reward-model overoptimization [@gao2023] |
-| `biology.md` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [@chippindale2001], [@prasad2007] |
-| `humans.md` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [@madrian2001]; a fine that raised lateness [@gneezy2000] |
-| `institutions.md` | health policy: public reports on performance | a regulator → hospitals and surgeons | cardiac surgery report cards [@dranove2003] |
-| `job-delegation.md` | organizations: delegating work | a manager → an employee | rewarding A while hoping for B [@kerr1975]; multitask incentives [@holmstrom1991] |
+| `machine-learning/` | machine learning: fine-tuning against a learned reward | a developer → a fine-tuned policy | reward-model overoptimization [@gao2023] |
+| `biology/` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [@chippindale2001], [@prasad2007] |
+| `humans/` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [@madrian2001]; a fine that raised lateness [@gneezy2000] |
+| `institutions/` | health policy: public reports on performance | a regulator → hospitals and surgeons | cardiac surgery report cards [@dranove2003] |
+| `job-delegation/` | organizations: delegating work | a manager → an employee | rewarding A while hoping for B [@kerr1975]; multitask incentives [@holmstrom1991] |
 
 ## The slots
 
@@ -29,7 +30,7 @@ The Core column names the item below.
 | Slot | Core | Type | What the entry must say |
 |---|---|---|---|
 | **outcomes** | [D1] | a finite set | what one outcome is, and how a continuum is cut into finitely many |
-| **contexts** | [D4] | a resolution whose cell masses the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
+| **contexts** | [D8] | conditions whose frequencies the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
 | **behaviour** | [D1] | a distribution on the outcomes | whose behaviour, counted over what (people, occasions, generations), and how it is measured |
 | **default** | [D2] | a full-support distribution on the outcomes | what happens with no pursuit, and how it is measured apart from the behaviour it will judge |
 | **objective** | [D2] | a function on the outcomes, up to a constant | what the principal wants pursued, in whose units |
@@ -42,15 +43,12 @@ The Core column names the item below.
 | **stakes** | [D5] | the units of the objective | what a shortfall is counted in |
 
 **Contexts.** Often part of an outcome is fixed before the actor acts: the prompt a model answers, the patient who
-arrives, the request a manager sends. The actor chooses only what happens within each context. Contexts are then a
-third position for a resolution, beside the two of [D4], and the core has no item for this position yet. Until it has
-one, the ontologies apply every item context by context: within one context the actor chooses everything, and every item
-applies as stated. Across contexts, the intended set "pursue `F` in every context, at any intensity in each" is a
-specification by [D3]. When the actual behaviour has the default's context masses, its misalignment is the average of
-the misalignments within the contexts, weighted by the context masses, by the chain rule [P4](iii). Whether "pursue `F`"
-should instead require one intensity in every context is a design question for the core, recorded in `NOTES.md`.
-[P13](i) holds for any path, and the first limit of [P13](ii) for any path as in [P11], so both apply across contexts as
-stated; the second limit compares with a pursuit that moves the context masses, which the actor cannot do.
+arrives, the request a manager sends. These are conditions ([D8]) whose frequencies the actor does not choose. On
+condition–outcome pairs, the behaviours with those frequencies form a linear feasible set ([D7]). Within one context
+every item applies as stated. Across contexts, [P15] splits misalignment under the standard specification exactly: the
+best feasible behaviour pursues the objective within each context at one shared intensity, and the unavoidable part is
+how much the unconstrained pursuit would have reweighted the contexts. [P13](i) holds for any path, and the first limit
+of [P13](ii) for any path as in [P11], so both apply across contexts as stated.
 
 **Fit.** The last column says how well the discipline's object has the slot's type. It starts with one of four words.
 - **exact**: the object has the type, by definition or by a cited result.
@@ -72,7 +70,9 @@ The section "What the core says" holds the claims, one per bullet. Each starts w
 
 ## The format of an ontology
 
-A title `# Ontology — <discipline>`, a short introduction, then these sections, in this order: `## 1. Slots`,
+Each ontology lives in its own folder, `ontologies/<name>/README.md`, so that its worked cases and data can join it
+later. It has a title `# Ontology — <discipline>`, a short introduction, then these sections, in this order:
+`## 1. Slots`,
 `## 2. Known result`, `## 3. What the core says`, `## 4. Limits`, `## 5. Open questions`. The known result cites its
 source, listed in `REFERENCES.md`. Lint rule R10 checks the sections, that every slot appears once and names
 its item, the fit words, the claim kinds and their items, the *Refuted if* of every prediction, that every item named

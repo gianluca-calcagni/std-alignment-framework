@@ -10,7 +10,7 @@ option that changed saving, and a fine that increased the behaviour it was meant
 | Slot | Core | In this discipline | Observed as | Fit |
 |---|---|---|---|---|
 | **outcomes** | [D1] | the options of one decision: contribution rates to a retirement plan, or whether a parent arrives late | administrative records | exact for a menu of options; approximate when a continuum, such as minutes late, is cut into classes |
-| **contexts** | [D4] | the person's circumstances, fixed before they choose: age, pay, tenure | records | assumed: the analyst decides which circumstances count as given; none when a whole population is treated as one actor |
+| **contexts** | [D8] | the person's circumstances, fixed before they choose: age, pay, tenure | records | assumed: the analyst decides which circumstances count as given; none when a whole population is treated as one actor |
 | **behaviour** | [D1] | how often each option is chosen, in a population or by one person over many occasions | administrative records | exact as frequencies, but a population's frequencies are not any one person's behaviour |
 | **default** | [D2] | the choice frequencies before the change judged, in the same population or a comparable one | records from before the change | assumed: the analyst declares it. It is not the "default option" of behavioural economics: an option that everyone takes is a point mass, without full support, so the core treats a change of default option as an intervention ([D6]) |
 | **objective** | [D2] | what the principal wants: retirement saving, punctuality, or a person's own stated intention | a stated goal or a stated intention | assumed: which objective is a person's own welfare is contested, and the core does not settle it |
@@ -30,7 +30,8 @@ employees hired after the switch, and many of them kept both the default contrib
 authors attribute this to inertia, and to employees reading the default as advice.
 
 Gneezy and Rustichini introduced a fine for parents who picked up their children late, in six of ten day-care centres in
-Haifa, over twenty weeks [@gneezy2000]. The number of late parents increased. When the fine was removed, it stayed at the
+Haifa, over twenty weeks [@gneezy2000]. The number of late parents increased. When the fine was removed, it stayed at
+the
 higher level.
 
 ## 3. What the core says
@@ -78,5 +79,5 @@ higher level.
   behaviour as misalignment?
 - Is the drift away from a default option with tenure the pursuit of one fixed objective? [P3] tests this on panel
   data.
-- Across circumstances (contexts), should "save for retirement" require one intensity of pursuit for everyone? (See
-  `NOTES.md`.)
+- Across circumstances (contexts), [P15] takes the best feasible pursuit to share one intensity. Is the response to a
+  default consistent across ages and pay levels, or is part of it avoidable inconsistency?

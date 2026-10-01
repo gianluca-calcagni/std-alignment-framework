@@ -2,9 +2,10 @@
 objective), P12 (what an intervention reveals: pass-through is identified from behaviour alone; a change outside
 span{u, 1} shows the intervention moved more than it added; revealed objectives certify an actor's distinctions) and
 P13 (the objective's average moves at the covariance rate; at the start, the gain per unit of departure is cos θ times
-the objective's spread, and the shortfall is 1 − cos θ times it)."""
+the objective's spread, and the shortfall is 1 − cos θ times it), P16 (an actor cannot behave more differently in two
+conditions than its view tells them apart) and P17 (what an unobserved condition can hide)."""
 import numpy as np
-from .common import EXACT, rng, simplex_interior, tilt, kl_tilts, random_partition
+from .common import EXACT, rng, simplex_interior, tilt, kl, kl_tilts, log_normalizer, random_partition
 from .test_misalignment import ray_minimizer
 from .test_stakes import matched_intensity
 
@@ -127,3 +128,73 @@ def test_start_gains_cos_theta_of_the_spread():
             assert e4 <= 0.2 * e3 + 1e-9                                         # and closer, at first order
         signs["with" if c > 0 else "against"] += 1
     assert min(signs.values()) >= 100
+
+
+def actor(r, nw, nz, nx):
+    """Random inputs in two conditions (W_a, W_d), a view of the input (a channel K), and behaviours π_z."""
+    W_a, W_d = simplex_interior(r, nw), simplex_interior(r, nw)
+    K = np.array([simplex_interior(r, nz) for _ in range(nw)])
+    pi = np.array([tilt(simplex_interior(r, nx), r.normal(0, 3, nx)) for _ in range(nz)])
+    return W_a, W_d, K, pi
+
+
+def test_identical_views_give_identical_behaviour():
+    """P16(i): two conditions whose inputs differ, but which the actor's view does not separate (the channel sends the
+    differing inputs to the same signal distribution), give the same behaviour, whatever the behaviours π_z."""
+    r = rng(1601)
+    for _ in range(300):
+        nw, nz, nx = (int(v) for v in r.integers(3, 8, 3))
+        W_a, _, K, pi = actor(r, nw, nz, nx)
+        K[1] = K[0]                                                                # inputs 0 and 1 look alike
+        rest = 0.6 * simplex_interior(r, nw - 2)                                   # inputs 0 and 1 carry 0.4
+        W_a = np.concatenate([[0.32, 0.08], rest]); W_d = np.concatenate([[0.08, 0.32], rest])
+        assert kl(W_d, W_a) > 0.3                                                  # the conditions do differ
+        assert np.abs((W_d @ K) @ pi - (W_a @ K) @ pi).max() <= EXACT
+
+
+def test_behaviour_differs_no_more_than_views():
+    """P16(ii), (iii): KL(p_d || p_a) <= KL(V_d || V_a) <= KL(W_d || W_a), for any behaviours and any channel."""
+    r = rng(1602)
+    for _ in range(2000):
+        W_a, W_d, K, pi = actor(r, *r.integers(2, 8, 3))
+        V_a, V_d = W_a @ K, W_d @ K
+        assert kl(V_d @ pi, V_a @ pi) <= kl(V_d, V_a) * (1 + EXACT) + EXACT
+        assert kl(V_d, V_a) <= kl(W_d, W_a) * (1 + EXACT) + EXACT
+
+
+def departure_from(p0, G, lam):
+    return float(lam * (tilt(p0, lam * G) @ G) - log_normalizer(p0, lam * G))
+
+
+def extreme(p0, G, eps):
+    """The largest E_p[G] over {p : KL(p || p0) <= eps}: the pursuit of G from p0 with departure eps, or max G."""
+    if eps >= -np.log(p0[G >= G.max()].sum()):
+        return float(G.max())
+    lo, hi = 0.0, 1.0
+    while departure_from(p0, G, hi) < eps:
+        hi *= 2
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if departure_from(p0, G, mid) < eps else (lo, mid)
+    return float(tilt(p0, lo * G) @ G)
+
+
+def test_what_an_unobserved_condition_can_hide():
+    """P17(ii): E_{p_d}[F] lies between the pursuits of −F and F from p_a with departure ε = KL(V_d || V_a); the bound
+    is attained (an actor that acts out its view, π_z = δ_z, with V_d the pursuit of −F from V_a); and ε = 0 identifies
+    the behaviour in d."""
+    r = rng(1603); used = []
+    for _ in range(2000):
+        W_a, W_d, K, pi = actor(r, *r.integers(2, 8, 3))
+        V_a, V_d = W_a @ K, W_d @ K
+        p_a, p_d = V_a @ pi, V_d @ pi
+        eps = kl(V_d, V_a); F = r.normal(0, 1, p_a.size)
+        hi, lo = extreme(p_a, F, eps), -extreme(p_a, -F, eps)
+        assert lo - 1e-9 <= p_d @ F <= hi + 1e-9
+        used.append(max(p_d @ F - p_a @ F, 0) / (hi - p_a @ F) + max(p_a @ F - p_d @ F, 0) / (p_a @ F - lo))
+    assert max(used) > 0.9                                                         # random actors come close
+    for _ in range(200):                                                           # and one attains it
+        n = int(r.integers(2, 8)); V_a = simplex_interior(r, n); F = r.normal(0, 1, n); lam = float(r.uniform(0.1, 3))
+        V_d = tilt(V_a, -lam * F); pi = np.eye(n)                                  # the actor acts out its view
+        eps = kl(V_d, V_a)
+        assert abs((V_d @ pi) @ F + extreme(V_a, -F, eps)) <= 1e-9

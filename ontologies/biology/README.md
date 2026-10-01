@@ -11,7 +11,7 @@ genomes.
 | Slot | Core | In this discipline | Observed as | Fit |
 |---|---|---|---|---|
 | **outcomes** | [D1] | the haploid genomes of a population, or a sample of them | genomes kept intact in the laboratory (hemiclones) | exact for a sample of genomes; approximate for a whole population |
-| **contexts** | [D4] | none in the known result, which uses one laboratory environment; environments are contexts when selection is compared across them | the experimental design | absent: one environment |
+| **contexts** | [D8] | none in the known result, which uses one laboratory environment; environments are contexts when selection is compared across them | the experimental design | absent: one environment |
 | **behaviour** | [D1] | how often each genome occurs in a generation, at a given life stage | counts in samples | exact |
 | **default** | [D2] | the genome frequencies before the selection judged: at the start of an experiment, or at the egg stage of one generation | samples taken before selection | exact when measured before selection and apart from the counts judged; main's I1-dyn shows what fails when the default is fitted from those counts |
 | **objective** | [D2] | log fitness through one sex, or through both, as the analyst's question; selection itself pursues log fitness | fitness assays of each genome expressed in each sex | assumed: the analyst declares it, before reading the outcome |
