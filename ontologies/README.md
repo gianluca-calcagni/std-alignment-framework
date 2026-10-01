@@ -55,7 +55,9 @@ of [P13](ii) for any path as in [P11], so both apply across contexts as stated.
 **Evaluator.** The regression of the objective on the evaluator ([D10]) says more than the objective itself only when
 the evaluator scores several outcomes alike: a test passed or failed, a grade, an indicator, a fine. A real-valued
 evaluator, such as a reward model's score or a genome's fitness, gives distinct outcomes distinct values, so each level
-set is one outcome, the regression is the objective, and the residual is zero. Every entry says which case holds.
+set is one outcome, the regression is the objective, and the residual is zero. Then the regression on bins of its
+values governs the pursuit, up to a margin that grows with the intensity and the width of the bins ([P26]). Every
+entry says which case holds.
 
 **Sample.** Every behaviour in an ontology is known through samples ([D11]). [P23] needs each outcome counted many
 times, and independent draws. With very many outcomes, counts are grouped into the cells of a resolution, and grouping

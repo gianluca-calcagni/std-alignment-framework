@@ -104,3 +104,119 @@ def test_overoptimization_starts_where_correlation_ends_and_ends_at_the_top():
         logw = np.log(qv) + t * (v - v[-1]); terms = (v - v[-1]) * (mv - mv[-1])
         j = np.argmax(np.where(terms != 0, logw, -np.inf))
         assert (terms[j] < 0) == (mv[-1] < mv[-2])
+
+
+def sign_changes(values):
+    s = np.sign([x for x in values if x != 0])
+    return int(np.sum(s[1:] != s[:-1]))
+
+
+def level_set_instance(r, shape):
+    """Like evaluator_instance, with the regression on the level sets drawn as 'any', 'single-peaked' or 'increasing'."""
+    k = int(r.integers(2, 7)); n = int(r.integers(k + 1, 13))
+    labels = r.permutation(np.concatenate([np.arange(k), r.integers(0, k, n - k)]))
+    v = np.sort(r.normal(0, 1, k)); q = simplex_interior(r, n)
+    if shape == "increasing":
+        mv = np.sort(r.normal(0, 1, k))
+    elif shape == "single-peaked":
+        j = int(r.integers(0, k)); up = np.sort(r.normal(0, 1, j + 1))
+        mv = np.concatenate([up, np.minimum(np.sort(r.normal(0, 1, k - j - 1))[::-1], up[-1])])
+    else:
+        mv = r.normal(0, 1, k)
+    R0 = r.normal(0, 1, n)
+    cellmean = lambda f: np.array([q[labels == c] @ f[labels == c] / q[labels == c].sum() for c in range(k)])
+    F = mv[labels] + R0 - cellmean(R0)[labels]
+    qv = np.array([q[labels == c].sum() for c in range(k)])
+    return q, v[labels], labels, v, qv, mv, F
+
+
+def no_valley(values, scale):
+    """No t1 < t2 < t3 with values[t2] < min(values[t1], values[t3]), up to rounding."""
+    left = np.maximum.accumulate(values); right = np.maximum.accumulate(values[::-1])[::-1]
+    return bool(np.all(np.minimum(left, right) - values <= 1e-12 * scale))
+
+
+def test_the_target_curve_turns_no_more_often_than_the_regression():
+    """P25: (i) along tilt(q, t·F̂), t real, E_{p_t}[F] − c changes sign at most as often as m(v_1) − c, …, m(v_k) − c,
+    with the signs of its first and last non-zero terms at the ends (equality attained often); (ii) increasing m gives a
+    non-decreasing curve; (iii) single-peaked m gives a curve with no valley, which can still fall; arbitrary m can give
+    a valley. Notes: for best-of-n, E_n[F] − c = (m_k − c) + Σ_{j<k} (m_j − m_{j+1})·A_j^n, and (iii) holds along n."""
+    r = rng(2501); cases = attained = valleys = falls = 0
+    for _ in range(300):
+        q, Fh, labels, v, qv, mv, F = level_set_instance(r, "any")
+        scale = 1 + np.abs(F).max(); far = 40 / np.diff(v).min()
+        ts = np.linspace(-far, far, 4001)
+        for c in r.uniform(mv.min() - 0.5, mv.max() + 0.5, 3):
+            if np.abs(mv - c).min() < 0.05:
+                continue
+            def numerator(t):                                                        # the sign of E_{p_t}[F] − c
+                z = np.log(q) + t * Fh; return float(np.exp(z - z.max()) @ (F - c))
+            vals = [numerator(t) for t in ts]
+            vals = [x for x in vals if abs(x) > 1e-12 * scale]
+            bound = sign_changes(mv - c); cases += 1
+            assert sign_changes(vals) <= bound
+            attained += sign_changes(vals) == bound
+            nz = np.sign((mv - c)[mv != c])
+            assert np.sign(numerator(-far)) == nz[0] and np.sign(numerator(far)) == nz[-1]
+    assert attained >= cases // 2                                                    # the bound is not loose
+    ts = np.linspace(-12, 12, 2401)
+    for _ in range(300):
+        for shape in ("increasing", "single-peaked", "any"):
+            q, Fh, labels, v, qv, mv, F = level_set_instance(r, shape)
+            scale = 1 + np.abs(F).max()
+            E = np.array([tilt(q, t * Fh) @ F for t in ts])
+            if shape == "increasing":
+                assert nondecreasing(E, scale)
+            elif shape == "single-peaked":
+                assert no_valley(E, scale)
+                falls += not nondecreasing(E, scale)
+                ns = np.linspace(1, 200, 800); A = np.minimum(np.cumsum(qv), 1.0); B = A - qv
+                En = np.array([q @ (F * ((A ** n - B ** n) / qv)[labels]) for n in ns])  # best of n draws from q
+                c = r.normal()
+                tele = (mv[-1] - c) + (A[:-1, None] ** ns * (mv[:-1] - mv[1:])[:, None]).sum(axis=0)
+                assert np.abs((En - c) - tele).max() <= 1e-9 * scale
+                assert no_valley(En, scale)
+            else:
+                valleys += not no_valley(E, scale)
+    assert falls >= 50 and valleys >= 30                                             # the hypotheses matter
+
+
+def test_binned_evaluators():
+    """P26: for an evaluator with distinct values, G = h(F̂) grouping its values into bins of spread at most w, with
+    D the largest spread of F in a bin: |E_{p_t}[F] − E_{p_t}[m_G]| ≤ t·w·D/4 along tilt(q, t·F̂), attained to first
+    order by a two-outcome bin; with m_G increasing, E_{p_u}[F] ≥ E_{p_s}[F] − (s + u)·w·D/4; with m_G single-peaked,
+    E_{p_t}[m_G] has no valley."""
+    r = rng(2601); ts = np.linspace(0, 10, 201); falls = 0
+    bound = lambda t, w, D: t * w * D / 4
+    for trial in range(300):
+        n = int(r.integers(12, 120)); q = simplex_interior(r, n); Fh = r.normal(0, 1, n)
+        nb = int(r.integers(2, 10)); cuts = np.sort(r.uniform(Fh.min(), Fh.max(), nb - 1))
+        b = np.searchsorted(cuts, Fh); used = np.unique(b); b = np.searchsorted(used, b)   # bins 0..k−1, in order
+        k = used.size
+        if trial % 3 == 0:
+            F = 0.7 * Fh + r.normal(0, 1, n) * r.uniform(0.2, 1.5)                 # a noisy target
+        else:                                                                        # m_G increasing or single-peaked
+            mono = np.sort(r.normal(0, 1, k))
+            if trial % 3 == 2:
+                j = int(r.integers(0, k - 1)); down = np.sort(r.normal(0, 1, k - j - 1))[::-1]
+                mono = np.concatenate([mono[:j + 1], np.minimum(down, mono[j])])
+            R0 = r.normal(0, 1, n)
+            R0 = R0 - np.array([q[b == c] @ R0[b == c] / q[b == c].sum() for c in range(k)])[b]
+            F = mono[b] + R0
+        mG = np.array([q[b == c] @ F[b == c] / q[b == c].sum() for c in range(k)])[b]
+        w = max(np.ptp(Fh[b == c]) for c in range(k)); D = max(np.ptp(F[b == c]) for c in range(k))
+        scale = 1 + np.abs(F).max()
+        EF = np.array([tilt(q, t * Fh) @ F for t in ts]); EG = np.array([tilt(q, t * Fh) @ mG for t in ts])
+        assert np.all(np.abs(EF - EG) <= bound(ts, w, D) + 1e-12 * scale)
+        if trial % 3 == 1:                                                            # for s ≤ u
+            for i in range(0, ts.size, 10):
+                u = slice(i, None)
+                assert np.all(EF[u] - EF[i] >= -bound(ts[i] + ts[u], w, D) - 1e-12 * scale)
+        if trial % 3 == 2:
+            assert no_valley(EG, scale)
+            falls += not nondecreasing(EG, scale)
+    assert falls >= 20                                                               # single-peaked curves do fall
+    q = np.array([0.5, 0.5]); Fh = np.array([0.0, 1.0]); F = np.array([-1.0, 1.0])   # one bin: w = 1, D = 2, m_G = 0
+    for t in (1e-4, 1e-3):
+        gap = abs(tilt(q, t * Fh) @ F)
+        assert 0.999 * bound(t, 1, 2) <= gap <= bound(t, 1, 2)                       # attained to first order

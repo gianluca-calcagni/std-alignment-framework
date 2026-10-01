@@ -56,16 +56,18 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
   rewarded outcomes are worth more, to the manager, than the employee's current average. Kerr's folly is the case
   `E_p[F|A] < E_p[F]`: the rewarded outcomes are worth less than what the employee already does on average. In the
   running example, a bonus that only a rushed report earns has `E_p[F|A] = 0.5 < 0.9`.
-- **Consequence** of [P18], [P20]: a bonus on an indicator has no best size in between. The indicator `1_A` has two
-  level sets, and a behaviour that follows it keeps the splits inside `A` and outside it ([P18](i)), so the manager's
-  average is `p_φ(A)·E_p[F|A] + (1 − p_φ(A))·E_p[F|not A]`, which is monotone in `φ`: the best bonus is either none or
-  the largest. A bonus on a graded measure is different. In the running example, pay per report gives the measure
-  `u = (1, 2, 0, 0)` per unit of time, since a rushed report takes half the time. Its regression ([D10]) is `0.5` on
-  rushed reports, `2` on careful ones and `0.45/0.7 ≈ 0.64` on the unpaid outcomes: it falls at the top. The manager's
-  average rises from `0.9` to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the regression at the measure's
-  top value ([P20](ii)). The peak is where `Cov_{p_φ}(u, F) = 0` ([P20](i)): where the measure and the manager's value
-  become uncorrelated under the behaviour that the bonus itself induces. So the core gives a reason for weak incentives
-  with no risk aversion and no cost of pay: the measure stops tracking the value as the employee follows it.
+- **Consequence** of [P18], [P20], [P25]: a bonus on an indicator has no best size in between. The indicator `1_A` has
+  two level sets, and a behaviour that follows it keeps the splits inside `A` and outside it ([P18](i)), so the
+  manager's average is `p_φ(A)·E_p[F|A] + (1 − p_φ(A))·E_p[F|not A]`, which is monotone in `φ`: the best bonus is either
+  none or the largest. A bonus on a graded measure is different. In the running example, pay per report gives the
+  measure `u = (1, 2, 0, 0)` per unit of time, since a rushed report takes half the time. Its regression ([D10]) is
+  `0.5` on rushed reports, `2` on careful ones and `0.45/0.7 ≈ 0.64` on the unpaid outcomes: it rises and then falls, a
+  single peak. The manager's average rises from `0.9` to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the
+  regression at the measure's top value ([P20](ii)); since the regression has a single peak, so does this curve, and no
+  larger bonus brings the value back ([P25](iii)). The peak is where `Cov_{p_φ}(u, F) = 0` ([P20](i)): where the measure
+  and the manager's value become uncorrelated under the behaviour that the bonus itself induces. So the core gives a
+  reason for weak incentives with no risk aversion and no cost of pay: the measure stops tracking the value as the
+  employee follows it.
 - **Consequence** of [P11], [P8]: measured against the brief, the share of the employee's first response to a bonus
   `1_A` that is misaligned is `sin²θ`, with `cos θ` the correlation of `1_A` and `F` under `p`. When the rewarded
   outcomes are worth more than the rest, this share is the part of the variance of `F` that lies inside `A` and inside

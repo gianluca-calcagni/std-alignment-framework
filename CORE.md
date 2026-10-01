@@ -32,8 +32,8 @@ The framework in ten steps:
    and what observation determines. Derived: an actor cannot behave more differently in two situations than it can tell
    them apart, which bounds what it can hide when it is not observed (`derived/identifiability.md`).
 9. **The evaluator** (section 9). What the actor actually pursues, and what it tells about the principal's objective.
-   Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization
-   (`derived/evaluator.md`).
+   Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization, and a
+   single-peaked one allows at most one fall (`derived/evaluator.md`).
 10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
     against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 

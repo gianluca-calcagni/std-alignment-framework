@@ -111,7 +111,9 @@ that carry it.
 - *What it could take from us.* Exact results for actors that see only the evaluator: a monotone regression rules out
   overoptimization ([P19]), so a proxy that only averages the target over what it can tell apart cannot lower it, and
   neither can a pass-or-fail verifier whose passing outcomes are better on average (`ontologies/machine-learning/`);
-  and the terminal rule of [P20](ii). Whether Manheim and Garrabrant's regressional variant (proxy equals target plus
+  the terminal rule of [P20](ii); and the shape law of [P25]: the target's curve turns no more often than the
+  regression, so a single-peaked regression gives at most one overoptimization peak, for pursuit and for best-of-`n`
+  alike. Whether Manheim and Garrabrant's regressional variant (proxy equals target plus
   noise) has a monotone regression depends on the noise, which is a question for their definitions.
 
 ## Principal–agent theory
