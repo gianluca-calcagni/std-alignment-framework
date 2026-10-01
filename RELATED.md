@@ -2,12 +2,14 @@
 
 Theories that share objects or aims with this framework. The word "competitor" is used loosely: overlap is welcome,
 because it validates the approach and gives results to import. For each theory: what it shares with us and with which
-items, what differs, what we should import, what it could take from us, and the state of its sources. A source cited with a
-key in brackets is verified and listed in `REFERENCES.md`; one marked *(to verify)* is from memory and must be checked before
-an item cites it. Lint rule R12 checks that this file names only existing items and cites only listed sources.
+items, what differs, what we should import, what it could take from us, and the state of its sources. A source cited
+with a key in brackets is verified and listed in `REFERENCES.md`; one marked *(to verify)* is from memory and must be
+checked before an item cites it. Lint rule R12 checks that this file names only existing items and cites only listed
+sources.
 
 **Import priority.** *Now*: needed by the next items of the core. *Later*: useful once a later item needs it.
-*Never*: outside the framework's scope, recorded so the question is not reopened.
+*Never*: outside the framework's scope, recorded so the question is not reopened. *Done*: imported, with the items
+that carry it.
 
 ## Overview
 
@@ -18,10 +20,10 @@ an item cites it. Lint rule R12 checks that this file names only existing items 
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | later: an endogenous default |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | now: identification across environments |
-| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | now: the evaluator; early stopping |
+| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator and early stopping ([D10], [P18]–[P20]); later: hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
-| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | now: sampling, estimation and detection |
+| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([D11], [P21]–[P23]); later: Stein's exponent, the boundary case |
 | Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | later: audit protocols |
 | Distribution shift | bounds across conditions | prediction error, not misalignment | later: divergence-based transfer bounds |
 | Active inference | a KL from predicted to preferred outcomes | a process theory of brains | never, beyond the correspondence |
@@ -95,17 +97,18 @@ an item cites it. Lint rule R12 checks that this file names only existing items 
 - *Sources.* Gao et al. [@gao2023]; Skalse et al. [@skalse2022]; Karwowski et al. [@karwowski2024]; Manheim and
   Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
   Goodhart *(to verify)*.
-- *Shared.* An evaluator that differs from the target, and what pursuing it does to the target. Karwowski et al. explain
-  Goodhart by angles between reward vectors in the polytope of occupancy measures: a linear feasible set ([D7]) and the
-  angle of [P11]. Skalse et al. show that over all stochastic policies only trivial pairs are unhackable.
+- *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([D10]). Karwowski et al.
+  explain Goodhart by angles between reward vectors in the polytope of occupancy measures: a linear feasible set ([D7])
+  and the angle of [P11]. Skalse et al. show that over all stochastic policies only trivial pairs are unhackable.
 - *Different.* Rankings, worst cases and orderings over policy sets, rather than a divergence with stakes and
   identification.
-- *Import, now.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
-  residual (`NOTES.md` §5, approved); Karwowski et al.'s early stopping, which in our terms stops where the target and
-  the evaluator become uncorrelated under the current behaviour ([P13], Notes); hackability as a property of a target
-  and an evaluator over a feasible set.
+- *Import, done.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
+  residual ([D10], [P18]); Karwowski et al.'s early stopping, which in our terms stops where the target and the
+  evaluator become uncorrelated under the current behaviour ([P20](i)).
+- *Import, later.* Hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's
+  four variants, once their definitions are checked against [P8], [P20](ii), [P12] and [P17] (`NOTES.md` §5, H3).
 - *What it could take from us.* Exact results for actors that see only the evaluator: a monotone regression rules out
-  overoptimization (`NOTES.md` §5, H1).
+  overoptimization ([P19]), and the terminal rule of [P20](ii).
 
 ## Principal–agent theory
 
@@ -132,13 +135,15 @@ an item cites it. Lint rule R12 checks that this file names only existing items 
 
 ## Hypothesis testing and sequential analysis
 
-- *Sources.* Cover and Thomas [@cover2006] (Stein's lemma, Chernoff information); Wald's sequential analysis, Chernoff
-  (1952), and Wilks (1938) *(to verify)*.
-- *Shared.* KL is the expected evidence per observation under the true behaviour ([D3], "what the number means");
-  `2n·M(p̂)` is a deviance ([P5], Notes).
+- *Sources.* Cover and Thomas [@cover2006] (Stein's lemma, Chernoff information); Wald [@wald1945]; Chernoff
+  [@chernoff1952]; Wilks [@wilks1938].
+- *Shared.* KL is the expected evidence per observation under the true behaviour ([D11], [P21]); `2n·M(p̂)` is a
+  likelihood-ratio statistic ([P23]).
 - *Different.* A theory of tests; it does not define alignment.
-- *Import, now.* Sampling, as the act of measurement that connects behaviours to data, with estimation (Wilks),
-  detection (Chernoff, Stein) and sequential evidence (Wald) as derived results (`NOTES.md` §5, H4).
+- *Import, done.* Sampling, as the act of measurement that connects behaviours to data ([D11]), with evidence ([P21],
+  Wald in its Notes), detection ([P22], Chernoff) and estimation ([P23], Wilks) as derived results.
+- *Import, later.* Stein's exponent, for a test that fixes the error of one kind; the chi-bar-square limit at the
+  boundary `t* = 0`; confidence sets for the other quantities of the standard.
 - *What it could take from us.* Misalignment as the quantity a test of "the actor behaves as intended" is about.
 
 ## Deceptive alignment and AI evaluation
@@ -187,5 +192,5 @@ an item cites it. Lint rule R12 checks that this file names only existing items 
   verify)*.
 - *Shared.* A standard says what a report must declare and contain (`STANDARD.md`).
 - *Different.* Not about alignment.
-- *Import, now.* How to state uncertainty, once sampling is in the framework: what the standard calls "estimation
-  error" should follow a recognized convention.
+- *Import, now.* How to state uncertainty, now that sampling is in the framework ([D11]): the uncertainty of each
+  estimated result in `STANDARD.md` should follow a recognized convention.

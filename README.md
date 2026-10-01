@@ -1,4 +1,4 @@
-# std-alignment-framework — the core (v9, in progress)
+# std-alignment-framework — the core (v10, in progress)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 

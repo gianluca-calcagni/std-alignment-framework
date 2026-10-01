@@ -1,6 +1,6 @@
 # The core
 
-> **Status: v9, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
+> **Status: v10, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
 > framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
 > carries a formal statement and a plain-terms twin, and gives its lineage from the archive on `main`. The format is in
 > `README.md`.
@@ -8,11 +8,11 @@
 ## 0. What the core is
 
 Alignment compares what an actor does with what a principal intended. The core fixes the terms of that comparison and
-the few premises it rests on. Section 1 states the premises. Sections 2–8 give the definitions, each with the reasons
+the few premises it rests on. Section 1 states the premises. Sections 2–10 give the definitions, each with the reasons
 for it. The results, which follow from these by proofs, are in `derived/`, whose `README.md` gives their reading order.
 A definition may cite a result to justify itself, provided that no chain of dependencies leads back to it.
 
-The framework in eight steps:
+The framework in ten steps:
 1. **Premises** (section 1). Alignment is judged from behaviour in every condition; pursuit is the steepest climb, and
    the best trade-off; misalignment is value lost; specifications are declared before they judge.
 2. **Behaviour and pursuit** (section 2). Behaviour is a distribution over outcomes. Pursuing an objective reweights a
@@ -31,6 +31,11 @@ The framework in eight steps:
 8. **Conditions, views and identification** (section 8). The situations the actor faces, what it can perceive of them,
    and what observation determines. Derived: an actor cannot behave more differently in two situations than it can tell
    them apart, which bounds what it can hide when it is not observed (`derived/identifiability.md`).
+9. **The evaluator** (section 9). What the actor actually pursues, and what it tells about the principal's objective.
+   Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization
+   (`derived/evaluator.md`).
+10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
+    against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
 **In scope.** One principal and one actor; finitely many outcomes; behaviour in each of finitely many conditions; any
 declared set of acceptable behaviours, with closed forms for "pursue `F`"; what the actor cannot distinguish, cannot do,
@@ -47,7 +52,8 @@ observed.
   sets are specifications too, but weighing principals against each other is not defined.
 - *Continuous outcomes.* Deferred. The results are expected to carry over with integrability conditions; none is
   claimed.
-- *Estimation from finite samples.* Not yet in the framework (`NOTES.md`).
+- *Dependent samples.* Samples are independent draws ([D11]); successive decisions that depend on each other are not
+  covered yet.
 - *Which objective is right.* The principal declares it; the core does not choose it.
 - *Explanations.* Why an actor behaves as it does is not measured.
 
@@ -75,6 +81,8 @@ fields.
 | `𝒞`, `(p_c)` | the conditions; the actor's response | [D8] |
 | `Z`, `V_c` | the actor's view: its signals, and their distribution in condition `c` | [D8] |
 | `O` | the observed conditions | [D9] |
+| `F̂`, `m`, `R` | an evaluator; the regression of the target on it; the residual | [D10] |
+| `n`, `p̂_n` | the size of a sample; its empirical behaviour | [D11] |
 | `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [P2] |
 | `J_t` | net value: the objective's average minus the cost of departing from the default | [P4] |
 | `t*`, `p°` | the revealed intensity; the nearest intended behaviour | [P5] |
@@ -521,3 +529,74 @@ it could take.
 theory, identifiability of a system from input–output data, which needs inputs varied enough (persistent excitation).
 
 **Lineage.** New. main: ROADMAP §6 I1 (the ladder: declare, measure, identify through interventions).
+
+## 9. The evaluator
+
+### D10 — Evaluator, regression and residual
+**Statement.** Let `F` be the principal's objective, which this section calls the target. An **evaluator** is an
+objective `F̂ : X → ℝ` put forward as the one the actor pursues: known, when it is a function the actor is rewarded on,
+or revealed, when it is read from a full-support actual behaviour `p̂` as `F̂ = log(p̂/q)`; as the objective of a
+pursuit at some intensity, a revealed evaluator is fixed only up to a positive factor and an added constant. Let `𝒱` be
+the resolution whose cells are the level sets of `F̂` ([D4]). The **regression** of the target on the evaluator is the
+cell average `m = E_q[F|𝒱]`, and the **residual** is `R = F − m`.
+
+**In plain terms.** The evaluator is what the actor actually works toward: a reward it is paid on, a measure it is
+judged by, or, when nothing else is known, the objective its own behaviour reveals. The regression is what the
+evaluator tells, on average under the default, about the principal's objective; the residual is the part of the
+principal's objective that the evaluator does not see.
+
+**Why this choice.**
+- *It adds no assumption.* By [A3] and [P1], every full-support behaviour is the best trade-off for one objective,
+  `log(p̂/q)` at intensity 1, fixed up to a constant ([P1](ii)): every actor has a revealed evaluator. A known evaluator
+  is a hypothesis about the actor, which behaviour can test ([P1], [P3]).
+- *It is the actor's counterpart of the principal's objective.* The principal declares a pursuit of `F` from `q`; the
+  actor reveals a pursuit of `F̂` from the same `q`. Misalignment compares two pursuits from one default, in one
+  currency.
+- *It is universal.* A reward model in fine-tuning, selection through one sex, a fine, a report card, a measured bonus:
+  each ontology has one.
+- *The residual, not the difference.* The difference `F̂ − F`, main's evaluator error, depends on the scale of `F̂`,
+  which behaviour never identifies. The regression and the residual depend on `F̂` only through its level sets, and
+  whether the regression rises with `F̂` only through their order: neither changes under an increasing transformation
+  of `F̂`. The residual averages to zero in every cell of `𝒱` under the default, so an actor that sees outcomes only
+  through the evaluator can neither gain nor lose through it (`derived/evaluator.md`).
+- *Regression in the statistical sense.* `m` is the best predictor of `F` from `F̂` in mean square under the default.
+
+**Notes.** The evaluator is a proxy or reward model in machine learning, a performance measure in the economics of
+incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and
+a target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit.
+
+**Lineage.** main: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
+evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.
+
+## 10. Samples and evidence
+
+### D11 — Sample and evidence
+**Statement.** A **sample** of size `n` from a behaviour `p` is a sequence `x_1, …, x_n` of outcomes drawn independently
+from `p`. Its **empirical behaviour** `p̂_n` gives each outcome its frequency in the sample. For full-support behaviours
+`r` and `r'`, the **evidence** that the sample gives for `r` against `r'` is `Σ_{i=1}^n log(r(x_i)/r'(x_i))`, in nats.
+
+**In plain terms.** A sample is a record of what the actor did on separate occasions, each drawn from its behaviour
+independently of the others. Counting gives the empirical behaviour. The evidence for one behaviour against another is
+how much more likely the record is under the first than under the second, on a logarithmic scale.
+
+**Why this choice.**
+- *Behaviours are never observed; samples are.* This is the act of measurement that [A1] presumes when it says that
+  behaviour can be counted, and that [D9]'s observed conditions stand for.
+- *It is universal.* Counted choices, sampled genotypes, sampled responses, case records and logged units of work are
+  all samples.
+- *Evidence is the canonical statistic.* Between two behaviours, the most powerful test thresholds the likelihood ratio
+  (the Neyman–Pearson lemma [@cover2006]).
+- *It gives misalignment a second meaning.* The expected evidence per decision, under the actual behaviour, for it
+  against the nearest intended behaviour is the misalignment (`derived/estimation.md`). Value lost ([A4]) and evidence
+  gained agree, in the same direction of KL, as the steepest climb ([A2]) and the best trade-off ([A3]) agree on the
+  cost.
+- *It compares explanations in the same unit.* Two evaluators proposed for one actor are compared by the evidence a
+  sample gives for one pursuit against the other, in nats, the unit of misalignment and of value.
+- *Independence is the default model.* Successive decisions of one actor can depend on each other; dependent samples
+  are out of scope until an item needs them.
+
+**Notes.** The evidence is the log-likelihood ratio; I. J. Good called it the weight of evidence. In statistics a sample
+from a finite set is multinomial, and the empirical behaviour is the type of the sequence [@cover2006].
+
+**Lineage.** main: Prop 18 (detection) and the deviance of v8's [P5] Notes, which used samples without defining them.
+New: the definition, and evidence as the second meaning of misalignment.

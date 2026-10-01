@@ -6,6 +6,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
+- [@chernoff1952] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
 - [@cover2006] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
 - [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
@@ -30,4 +31,6 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
+- [@wald1945] Wald, A. (1945), Sequential tests of statistical hypotheses. *The Annals of Mathematical Statistics* 16(2), 117–186.
+- [@wilks1938] Wilks, S. S. (1938), The large-sample distribution of the likelihood ratio for testing composite hypotheses. *The Annals of Mathematical Statistics* 9(1), 60–62.
 - [@ziebart2008] Ziebart, B. D., Maas, A. L., Bagnell, J. A. and Dey, A. K. (2008), Maximum entropy inverse reinforcement learning. *Proceedings of the 23rd AAAI Conference on Artificial Intelligence*, 1433–1438.

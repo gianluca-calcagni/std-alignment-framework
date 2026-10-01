@@ -19,6 +19,9 @@ The full table, with its evidence, is on `main`: `70 Project/NOTES_claude.md` §
 | **A probe bug read as a refutation** | the first probe of [P15] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact | when a probe contradicts a derivation, check the probe against the derivation before concluding anything |
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
 | **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
+| **A plain-terms twin that claims more than the statement** | [P19]'s plain terms listed threshold selection among the covered paths; a threshold leaves `Δ°`, so the statement does not cover it (the conclusion holds there by a direct argument). Found in the review before the v10 commit | read each "In plain terms" against the Statement's hypotheses, one named example at a time |
+| **A rate copied from a sketch** | [P22]'s Notes said the Chernoff bound is approached like `1/log(1/ε)`; a computation across seven decades of `ε` showed `log log(1/ε)/log(1/ε)` | a rate in a Note is computed across several decades before it is written |
+| **A result silent on its specification** | [P24] said "the misalignment in deployment" without naming the specification on condition–outcome pairs; under one shared intensity its formula fails in 173 of 200 instances | every result over several conditions names the specification on pairs |
 | **Lineage amnesia after a restart** | [P13](ii) re-derived main's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9 | before adding a result, search main (`git grep -i <idea> origin/main`) for its counterpart, and cite it in the Lineage |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises
@@ -28,10 +31,16 @@ and exhibits a counterexample. The rule "a shape claim needs a random sample bef
 
 ## 2. Is the core a compelling standard yet?
 
-Closer, not yet. v9 applied the PI's decisions: the core holds five premises and nine definitions; every result is
+Closer, not yet. v9 applied the PI's decisions: the core held five premises and nine definitions; every result is
 derived; the cost of departing from the default is derived ([P14]), not assumed; feasibility separates "cannot" from
 "will not" ([P15]); conditions, views and identification make deceptive alignment a measurable quantity ([P16],
 [P17]); and a reporting standard names every definition (`STANDARD.md`, lint R11).
+
+v10 added the two concepts approved after the retrospective (§5): the evaluator ([D10]), from which the Goodhart results
+of main are derived ([P18]–[P20]), and sampling ([D11]), which gives misalignment its second meaning as a rate of
+evidence and brings detection, estimation and the evaluation gap ([P21]–[P24]). The core holds five premises and eleven
+definitions. Still missing for a compelling standard: worked cases on data (§3.2), now possible since samples are in the
+framework, and the forbidden statements of main's §11.
 
 | Gap | State |
 |---|---|
@@ -41,7 +50,9 @@ derived; the cost of departing from the default is derived ([P14]), not assumed;
 | contexts (v8 design question Q1) | **closed by [P15]**: the shared intensity across contexts is derived, not chosen |
 | deceptive alignment | **opened as a measurable quantity**: [D8], [D9], [P16], [P17]; bounds on the objective's average in an unobserved condition, sharp given `ε` |
 | a standard for reports | **closed by `STANDARD.md`** (lint R11) |
-| no estimation layer | open: §3.3 E1 |
+| no estimation layer | **closed in part by [P23]**: the estimated misalignment under the standard specification, at a positive intensity; the boundary `t* = 0` and confidence sets for the other quantities are open |
+| no theory of what optimizing a proxy does | **opened by [D10]**: [P18] (only the regression counts), [P19] (a monotone regression rules out overoptimization), [P20] (where it starts, how it ends) |
+| detection, and the gap between evaluation and use | **closed by [P22] and [P24]** |
 | several actors, several principals | out of scope by declaration (`CORE.md` §0); §3.3 E4 |
 | worked cases | open: they need data (§3.2) |
 
@@ -51,7 +62,7 @@ derived; the cost of departing from the default is derived ([P14]), not assumed;
 
 Everything waiting on the PI or deferred by agreement, in one place.
 
-### 3.1 Decisions taken (v9)
+### 3.1 Decisions taken (v9, v10)
 
 | # | Decision | By | Applied as |
 |---|---|---|---|
@@ -60,9 +71,10 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q3 | C1 (the cost is forced), C4 (feasibility), C9 (a standard), the scope, premises as items, ontologies in folders | PI | [P14]; [D7], [P15]; `STANDARD.md`; `CORE.md` §0; A1–A5; `ontologies/<name>/` |
 | Q4 | identifiability into the core, so that deceptive alignment can be measured; interventions and stakes stay in the core | PI | [D8], [D9], [P16], [P17]; [D5], [D6] |
 | Q5 | C2 and C3 (merge P11 with P13; move the Price equation into P2) | PI: declined, merging only to have fewer items | not applied |
-| Q6 | the evaluator as the one strong concept to import, with the residual `R = F − E_q[F \| F̂]` as the canonical error | PI: approved | draft D10 in §5.6 |
-| Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6) | draft D11 in §5.6 |
+| Q6 | the evaluator as the one strong concept to import, with the residual `R = F − E_q[F \| F̂]` as the canonical error | PI: approved | [D10]; [P18]–[P20] |
+| Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6); PI: approved | [D11]; [P21]–[P24] |
 | Q8 | a file on related theories | PI | `RELATED.md`, lint R12 |
+| Q9 | derived results whose proof is a classical theorem | PI: approved, with a light simulation unless a discrepancy shows | [P22] (Chernoff), [P23] (Wilks): the theorem quoted with its hypotheses, and a check |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -76,11 +88,11 @@ Everything waiting on the PI or deferred by agreement, in one place.
 
 Every test is pre-registered and pushed before any computation (README rules).
 
-### 3.3 Open proposals (none applied)
+### 3.3 Open proposals
 
 | # | Proposal | Kind | Evidence so far |
 |---|---|---|---|
-| E1 | **Estimation.** For `n` decisions from an actor that does pursue `F` at an interior intensity, `2n·M(p̂_n)` is asymptotically χ² with `|X| − 2` degrees of freedom (Wilks); at the boundary `t* = 0`, a chi-bar-square mixture. With [D9], estimated quantities get confidence sets, which the standard already asks for | a result in a new `derived/estimation.md` | probe: means 1.08, 2.98, 6.09, variances 2.15, 5.97, 11.5 for `|X|` = 3, 5, 8 |
+| E1 | **Estimation.** For `n` decisions from an actor that does pursue `F` at an interior intensity, `2n·M(p̂_n)` is asymptotically χ² with `|X| − 2` degrees of freedom (Wilks); at the boundary `t* = 0`, a chi-bar-square mixture. With [D9], estimated quantities get confidence sets, which the standard already asks for | **applied as [P23]** for `t* > 0`; the boundary `t* = 0` is open | probe: means 1.08, 2.98, 6.09, variances 2.15, 5.97, 11.5 for `|X|` = 3, 5, 8 |
 | E2 | **A floor.** `{p_{F,t} : t ≥ t_min}` for a principal for whom doing nothing fails; the nearest intensity is `max(t*, t_min)` | a remark in `derived/misalignment.md` | derivable from the convexity in [P5] |
 | E3 | **Ordinal objectives.** The tilts of `q` by every function non-decreasing in `F`: closed, contains the ray, misalignment a convex program. Best-of-`n` on a proxy is aligned with its ranking but not its values | a definition and a result | argued, not checked |
 | E4 | **Several principals.** Unions and intersections of intended sets; conflict as an angle at the default | a remark | trivial; needed for chains of delegation |
@@ -128,8 +140,12 @@ item changes.
 
 ## 4. Order next
 
-The PI's review of the drafts in §5.6. Then D10 (the evaluator) with its derived results, D11 (the sample) with
-estimation, detection and evidence, and a worked case on the data of §3.2, pre-registered.
+The PI's review of v10 ([D10], [D11], [P18]–[P24]). Then, in this order:
+1. A worked case on the data of §3.2, pre-registered: D3 (best-of-`n` on a proxy reward model) now has predictions to
+   test, [P19]'s monotone regression and [P20]'s peak, and [P23] gives the error bars.
+2. Evaluator and sample slots in the five ontologies: each names its evaluator and what its samples are.
+3. main's Thm 9 as the matched pursuit of the residual (§5.2), and the alignment plane (H6).
+4. main's §11 as `derived/forbids.md`.
 
 ## 5. Retrospective after v9, and hunches for v10
 
@@ -158,6 +174,9 @@ concepts from which the rest is derived, each with a canonicity argument, so tha
 
 So most of what was lost is derivable from v9 plus one concept, the evaluator; the detection results need a second,
 sampling.
+
+**Applied in v10.** Prop 20 as [P18](ii); Prop 21 and B §4 as special cases of [P19]; Prop 14 as [P20]; Prop 18 as
+[P22]; Prop 19 as [P24]. Still open: Thm 9, Prop 11, §11, the A3 tiers.
 
 ### 5.3 The strong concept: candidates
 
@@ -196,10 +215,10 @@ models are hypotheses that [P3] and [P12] test.
 
 | # | Hunch | Status |
 |---|---|---|
-| H1 | **Monotone regression rules out overoptimization.** If every revealed objective of a path is a non-decreasing function of `F̂` (pursuit of `F̂`, best-of-`n`, threshold selection, any monotone transform), and `m = E_q[F | F̂]` is non-decreasing, then `E_{p_s}[F]` never decreases. Proof sketch: the behaviours are tilts by functions of `F̂`, so `E_p[F] = E_p[m(F̂)]` ([P8](i)); by [P13](i) the rate is `Cov_{p_s}(F_s, m(F̂))`, the covariance of two non-decreasing functions of `F̂`, which is never negative (Chebyshev's association inequality). It generalizes main's Prop 21 (affine) and B §4 (Gaussian) | probe: 0 decreasing curves in 111 monotone instances; among 1889 non-monotone ones, 1474 decrease somewhere |
-| H2 | **Extremal Goodhart.** Along the pursuit of `F̂`, at large intensity the target decreases exactly when `m` is lower at the largest evaluator value than at the second largest; the peak, when there is one, is where `Cov_{p_t}(F̂, m(F̂)) = 0` | probe: 1889 of 1889 in the limit (log-space); at moderate intensity, a third value close to the second can still dominate |
+| H1 | **Monotone regression rules out overoptimization.** If every revealed objective of a path is a non-decreasing function of `F̂` (pursuit of `F̂`, best-of-`n`, threshold selection, any monotone transform), and `m = E_q[F | F̂]` is non-decreasing, then `E_{p_s}[F]` never decreases. Proof sketch: the behaviours are tilts by functions of `F̂`, so `E_p[F] = E_p[m(F̂)]` ([P8](i)); by [P13](i) the rate is `Cov_{p_s}(F_s, m(F̂))`, the covariance of two non-decreasing functions of `F̂`, which is never negative (Chebyshev's association inequality). It generalizes main's Prop 21 (affine) and B §4 (Gaussian) | **proved as [P19]**; probe: 0 decreasing curves in 111 monotone instances; among 1889 non-monotone ones, 1474 decrease somewhere |
+| H2 | **Extremal Goodhart.** Along the pursuit of `F̂`, at large intensity the target decreases exactly when `m` is lower at the largest evaluator value than at the second largest; the peak, when there is one, is where `Cov_{p_t}(F̂, m(F̂)) = 0` | **proved as [P20]**; probe: 1889 of 1889 in the limit (log-space); at moderate intensity, a third value close to the second can still dominate |
 | H3 | **Goodhart's four variants are four objects of v9.** Regressional: the cell average and its Jensen gap ([P8]); extremal: H2; causal: an intervention that changes more than it adds ([D6], [P12]); adversarial: an actor whose view separates observed from unobserved conditions ([D8], [P17]) | C: a mapping, to be checked against Manheim and Garrabrant's definitions |
-| H4 | **Value and evidence agree.** Misalignment is both the least value lost ([A4]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [A3] | C: state and prove with Wald's identity |
+| H4 | **Value and evidence agree.** Misalignment is both the least value lost ([A4]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [A3] | **stated as [P21]**: with the log-likelihood ratio as evidence ([D11]) and samples drawn from the actual behaviour, the rate is `KL(p̂‖·)`, form and direction, without [A3]; it rests on the choice of evidence (Neyman–Pearson) instead. [D3]'s Why gives the reading, and argues from value |
 | H5 | **The measure is not the actor's cost.** [P14] forces the measure to be KL; main's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
 | H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
@@ -212,14 +231,19 @@ models are hypotheses that [P3] and [P12] test.
 - Most of what was "lost" is derivable: the archive is a source of statements to re-derive and check, not of text to
   copy.
 
-### 5.6 Drafts for v10 (for the PI's review; not applied)
+### 5.6 Drafts for v10 (applied as [D10] and [D11]; kept for the record)
+
+**What changed from the drafts.** "Declared" and "revealed" became "known" and "revealed", since [D3] uses "declared"
+for specifications. The target is named in [D10]'s statement. Wald's sequential test is a Note of [P21], not an item;
+Stein's exponent is not imported. [P24] names the specification on condition–outcome pairs, and its Notes give the
+shared-intensity case, where its formula fails. Thm 9 is not yet re-derived.
 
 **D10 — Evaluator (draft).**
-*Statement.* Let `F` be the principal's objective. An **evaluator** is an objective `F̂ : X → ℝ` proposed as the one the
-actor pursues: **declared** when it is a known function the actor is rewarded on, **revealed** when `F̂ = log(p̂/q)` for
-a full-support behaviour `p̂`, which fixes it up to a positive factor and a constant. The **regression** of the target on
-the evaluator is `m = E_q[F | F̂]`, the cell average of `F` over the resolution whose cells are the level sets of `F̂`;
-the **residual** is `R = F − m`.
+*Statement.* Let `F` be the principal's objective. An **evaluator** is an objective `F̂ : X → ℝ` proposed as the one
+the actor pursues: **declared** when it is a known function the actor is rewarded on, **revealed** when
+`F̂ = log(p̂/q)` for a full-support behaviour `p̂`, which fixes it up to a positive factor and a constant. The
+**regression** of the target on the evaluator is `m = E_q[F | F̂]`, the cell average of `F` over the resolution whose
+cells are the level sets of `F̂`; the **residual** is `R = F − m`.
 *Why, in outline.* (a) No new assumption: by [P1] and [A3] every full-support behaviour reveals one evaluator, up to
 scale. (b) The actor's counterpart of the principal's objective, in the same currency. (c) Universal: each ontology has
 one. (d) Scale-free: `m` and `R` depend on `F̂` only through its level sets, and the monotonicity of `m` only through
