@@ -16,6 +16,9 @@ Rules
   R7  Every test function in checks/ is cited by some item (no check without a claim).
   R8  Citations are written [@key]; each key is listed in REFERENCES.md as '- [@key] ...', listed once, and every
       listed key is cited in CORE.md.
+  R9  Every term an item defines (a bold span in its Statement that does not end with '.') has an entry in TERMS.md
+      (a bold name in the first column of a table row), and every item TERMS.md names exists. Matching ignores case,
+      hyphens and a final 's' on each word.
 """
 import re, sys
 from pathlib import Path
@@ -31,6 +34,12 @@ CHECK = re.compile(r"(checks/[\w/]+\.py)::(\w+)")
 CITE = re.compile(r"\[@([\w:-]+)\]")
 LISTED = re.compile(r"^- \[@([\w:-]+)\] \S")
 TESTDEF = re.compile(r"^def (test_\w+)\(", re.M)
+BOLD = re.compile(r"\*\*([^*]+?)\*\*")
+
+
+def norm_term(t):
+    words = re.sub(r"[-–]", " ", t.lower()).split()
+    return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") else w for w in words)
 
 
 def parse_items(text):
@@ -142,9 +151,31 @@ def lint(root):
     for key in sorted(set(listed) - cited):
         errors.append(f"REFERENCES.md: R8 [@{key}] is cited nowhere in CORE.md")
 
+    # R9
+    defined = {}
+    for it in items:
+        for term in BOLD.findall(it["fields"].get("Statement", "")):
+            if not term.rstrip().endswith("."):
+                defined.setdefault(norm_term(term), (it["id"], term))
+    terms_file = root / "TERMS.md"
+    glossary = set()
+    terms_text = terms_file.read_text(encoding="utf-8") if terms_file.exists() else ""
+    for line in terms_text.splitlines():
+        if line.startswith("|") and not line.startswith("|---"):
+            first = line.split("|")[1]
+            glossary.update(norm_term(t) for t in BOLD.findall(first))
+    for key, (iid, term) in sorted(defined.items()):
+        if key not in glossary:
+            errors.append(f"CORE.md: {iid}: R9 the term '{term}' has no entry in TERMS.md")
+    for n, line in enumerate(terms_text.splitlines(), 1):
+        for ref in REF.findall(line):
+            if ref not in pos:
+                errors.append(f"TERMS.md:{n}: R9 [{ref}] names no item")
+
     counts = {KINDS[k]: sum(it["kind"] == k for it in items) for k in KINDS}
     summary = {"items": len(items), **{k: v for k, v in counts.items() if v},
-               "checks": sum(len(v) for v in test_defs.values()), "references": len(set(listed))}
+               "checks": sum(len(v) for v in test_defs.values()), "references": len(set(listed)),
+               "terms": len(glossary)}
     return errors, summary
 
 

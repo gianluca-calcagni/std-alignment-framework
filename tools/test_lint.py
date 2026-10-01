@@ -79,6 +79,24 @@ def test_bibliography_rules_fire(tmp_path):
     assert any("R8 [@cover2006] is not in REFERENCES.md" in e for e in errors), errors
 
 
+def test_glossary_rule_fires(tmp_path):
+    core = GOOD.replace("**Statement.** A finite set `X`, with", "**Statement.** A finite set `X` of **outcomes**, with")
+    errors, _ = make(tmp_path, core=core)
+    assert any("R9 the term 'outcomes' has no entry" in e for e in errors), errors
+    (tmp_path / "TERMS.md").write_text("| Term | Meaning |\n|---|---|\n| **outcome** | what can happen, see [D1] |\n")
+    errors, _ = make(tmp_path, core=core)
+    assert not any("R9" in e for e in errors), errors                       # plural and case are matched
+    (tmp_path / "TERMS.md").write_text("| Term | Meaning |\n|---|---|\n| **outcome** | see [D7] |\n")
+    errors, _ = make(tmp_path, core=core)
+    assert any("R9 [D7] names no item" in e for e in errors), errors
+
+
+def test_part_labels_are_not_terms(tmp_path):
+    core = GOOD.replace("**Statement.** Every full-support", "**Statement.** **Universality.** Every full-support")
+    errors, _ = make(tmp_path, core=core)
+    assert not any("R9" in e for e in errors), errors
+
+
 def test_the_repository_itself_passes():
     errors, _ = lint(Path(__file__).resolve().parent.parent)
     assert errors == [], errors
