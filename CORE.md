@@ -1,12 +1,13 @@
 # The core
 
-> **Status: v8, in progress.** Sections 1–5: behaviours, pursuit, the specification, resolution, and stakes. Each item carries a formal
+> **Status: v8, in progress.** Sections 1–6: behaviours, pursuit, the specification, resolution, stakes, and
+> identifiability. Each item carries a formal
 > statement and a plain-terms twin. A definition says why this choice; a result carries a proof and checks that run in
 > CI. Every item gives its lineage from the archive on `main`. The format is in `README.md`.
 
 ## 0. What the core does
 
-Alignment compares what an actor does with what a principal intended. The core makes that comparison precise in five
+Alignment compares what an actor does with what a principal intended. The core makes that comparison precise in six
 steps.
 1. **Behaviour** (section 1). What happens is described by how often each outcome occurs: a probability distribution.
    Any behaviour, and any change of behaviour over time, can be written as a default reweighted toward some objective,
@@ -21,6 +22,8 @@ steps.
    outcomes, and the actor may be unable to see some. Each changes misalignment in a way the core computes exactly.
 5. **Stakes and sensitivity** (section 5). Misalignment is in nats; the shortfall says how much of the objective is
    lost, in its own units. Both come with bounds on how much a slightly wrong default or objective can move them.
+6. **Identifiability** (section 6). What a change of behaviour or an intervention reveals about the actor without
+   knowing what it wants: how much of the change is misaligned, and how it responds to incentives.
 
 The core assumes nothing about how the actor produces its behaviour.
 
@@ -47,6 +50,8 @@ carry in other fields.
 | `ℬ`, `𝒜` | the principal's resolution; the actor's resolution | [D4] |
 | `E_q[F\|𝒜]`, `F̄` | the cell average of `F` under the default | [D4] |
 | `λ`, `S(p̂)` | the matched intensity; the shortfall, in the units of `F` | [D5] |
+| `θ` | the angle between a revealed objective and the declared one | [P11] |
+| `u`, `φ` | an intervention; the pass-through | [D6] |
 
 ## 1. Behaviours and tilts
 
@@ -682,3 +687,111 @@ objective can change the verdict entirely.
 
 **Lineage.** New as statements. main: Prop 26 (a wrong default is measured misalignment unless it leans along the
 target), and NOTES §2.3 (capacity switches the regime: errors matter more at high capacity).
+
+## 6. Identifiability: what changes of behaviour reveal
+
+A single behaviour reveals an objective only relative to a default ([P1]). Changes of behaviour reveal more: their
+objective needs no default ([P2]), and whether it stays fixed is testable ([P3]). This section adds how much of a change
+is misaligned, read from its first step ([P11]), and what interventions reveal about how an actor responds ([P12]).
+Each item also says what cannot be revealed.
+
+### P11 — The misaligned share at the start of a change
+**Statement.** Let `F` be non-constant, and let `s ↦ p_s`, for `s ≥ 0`, be a twice continuously differentiable path in
+`Δ°` with `p_0 = q`, whose revealed objective `G` at `s = 0` is non-constant. The **angle** `θ` between `G` and `F`
+is given by `cos θ = Cov_q(G, F) / (Var_q(G)·Var_q(F))^{1/2}`. Under the standard specification of `F`, as `s → 0`,
+`M(p_s)/KL(p_s‖q) → sin²θ` if `cos θ ≥ 0`, and `→ 1` if `cos θ < 0`. If `cos θ < 0`, then `M(p_s) = KL(p_s‖q)` for
+every small enough `s > 0`.
+
+**In plain terms.** Whenever a behaviour starts to move away from the default, the share of its departure that is
+misaligned is set by one angle: the angle between the objective its change reveals and the declared objective, whose
+cosine is the correlation of the two under the default. Moving straight along the objective is no misalignment; moving
+at a right angle to it is all misalignment, and so is moving against it.
+
+**Proof.** Since the path is twice continuously differentiable with `p_0 = q`, `p_s = tilt(q, a_s)` with
+`a_s = s·G + O(s²)`. Expanding the log-normalizer `Λ(c) = log E_q[e^c]` to second order gives
+`KL(tilt(q, a)‖tilt(q, b)) = ½·Var_q(a − b) + O(‖a‖³ + ‖b‖³)` for small `a`, `b`, so
+`KL(p_s‖q) = ½·s²·Var_q(G) + O(s³)`, which is positive for small `s > 0`. Let
+`ψ(s) = E_{p_s}[F] − E_q[F] = s·Cov_q(G, F) + O(s²)`.
+If `cos θ < 0`, then `ψ(s) < 0` for small `s > 0`, and the first case of [P5](iv) gives `M(p_s) = KL(p_s‖q)`.
+Otherwise, whenever `ψ(s) ≤ 0` the same case gives a share of `1`. When `ψ(s) > 0`, it is also below `max F − E_q[F]`
+for small `s`, so the second case applies: `M(p_s) = KL(p_s‖p_{F,t*})` with `E_{p_{F,t*}}[F] = E_{p_s}[F]`. Since
+`t ↦ E_{p_{F,t}}[F]` has derivative `Var_q(F) > 0` at `t = 0`, the inverse function theorem gives
+`t* = ψ(s)/Var_q(F) + O(ψ(s)²) = s·ρ + O(s²)`, with `ρ = Cov_q(G, F)/Var_q(F)`. Then
+`M(p_s) = ½·Var_q(s·G − t*·F) + O(s³) = ½·s²·Var_q(G − ρ·F) + O(s³)`, and
+`Var_q(G − ρ·F) = Var_q(G) − Cov_q(G, F)²/Var_q(F) = Var_q(G)·sin²θ`. Dividing by `KL(p_s‖q)` gives `sin²θ` in the
+limit. If `cos θ = 0`, then `ρ = 0` and `sin²θ = 1`, which agrees with the cases where `ψ(s) ≤ 0`.
+
+**Checks.** checks/test_identifiability.py::test_initial_share_is_sin_squared
+
+**Notes.** The angle needs only two things, both at the default: the first change of behaviour and the declared
+objective. The actor's own objective is never needed. [P8](iv)'s small-effort law is the case `G = F̄`, where
+`Cov_q(F̄, F) = Var_q(F̄)`. The curvature of the path does not affect the limit, and the convergence is first order in
+`s` (the check uses curved paths).
+
+**Lineage.** main: ROADMAP §6 I1 and NOTES §9 (the dynamic angle, `D_⊥ ≈ sin²θ·KL`, conjectured there), and Prop 22 (the
+first-order effect of any smooth path). New: the statement and its proof, including the case against the objective.
+
+### D6 — Intervention and pass-through
+**Statement.** An **intervention** changes what the actor faces by a known non-constant function `u : X → ℝ`: an
+incentive, a fine, or a change of the default option. With `p ∈ Δ°` the actor's behaviour before it and `p' ∈ Δ°` after,
+the actor passes the intervention through, with **pass-through** `φ ∈ ℝ`, if `p' = tilt(p, φ·u)`.
+
+**In plain terms.** An intervention is a known nudge added to the situation: a bonus for some outcomes, a fine for
+others, or a different default option. The actor passes it through when its behaviour changes exactly by reweighting
+with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value follows it, and
+a negative value means the nudge backfires.
+
+**Why this choice.**
+- *The simplest response that can fail.* Any change of behaviour is a reweighting by some function ([P1](i)). The claim
+  that this function is a multiple of the intervention is testable, and the next item tests it. When it fails, more
+  happened between the two behaviours than adding `u`: the intervention also changed what the actor pursues or where
+  it starts from, or something else changed at the same time.
+- *It needs no model of the actor.* The pass-through is defined from behaviour before and after; the actor's objective,
+  default and intensity never appear. An actor that pursues `F̂` at intensity `t` from its own default (every behaviour
+  can be written so, by [P1]), and adds `w·u` to `F̂`, has pass-through `φ = t·w` by [P1](iii); only that product is
+  identified.
+- *A change of default is an intervention too.* If the actor's own default is shifted by a known tilt `h` and its
+  objective is unchanged, its behaviour moves to `tilt(p, h)` by [P1](iii): pass-through `1` for `u = h`.
+
+**Lineage.** main: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments slot,
+made measurable, and T7-2d (a change of default that moved the evaluator).
+
+### P12 — What interventions reveal
+**Statement.** (i) **Pass-through is identified from behaviour alone.** Let `p, p' ∈ Δ°` be the behaviour before and
+after an intervention `u`. The actor passes it through if and only if `log(p'/p) ∈ span{u, 1}`, and then the
+pass-through is the coefficient of `u`. If `log(p'/p)` is not in `span{u, 1}`, no pass-through explains the change.
+(ii) **Changes certify distinctions.** Let `𝒜` be a resolution and `s ↦ p_s` a continuously differentiable path in `Δ°`.
+Every behaviour on the path splits each cell of `𝒜` in the same proportions as `p_0` if and only if every revealed
+objective `F_s` is constant on the cells of `𝒜`. So a revealed objective that separates two outcomes of one cell shows
+that their ratio moved; revealed objectives that never separate them do not show that the actor cannot tell them apart.
+
+**In plain terms.** Whether an actor simply follows an incentive can be read from its behaviour before and after, without
+knowing what it wants: the change must be a multiple of the incentive, apart from a constant, and that multiple is the
+pass-through. If the change has any other shape, something more than the incentive moved it: the incentive changed what
+the actor pursues or where it starts from, or something else changed at the same time. Likewise, a change that moves two
+outcomes apart proves that the actor treats them differently; changes that never do prove nothing.
+
+**Proof.** (i) If `p' = tilt(p, φ·u)`, then `log(p'/p) = φ·u − log E_p[e^{φu}]`, which is in `span{u, 1}`. Conversely,
+if `log(p'/p) = φ·u + c`, then `p'` is proportional to `p·e^{φu}`, and normalization gives `p' = tilt(p, φ·u)`. Since `u`
+is non-constant, `u` and `1` are linearly independent, so `φ` is determined.
+(ii) If `p_s(·|A) = p_0(·|A)` for every cell `A` and every `s`, then for `x ∈ A`,
+`log p_s(x) = log p_s(A) + log p_0(x|A)`, so `F_s(x) = ∂_s log p_s(A)` is the same for every `x ∈ A`. Conversely, if
+every `F_s` is constant on each cell, then for `x` and `y` in one cell,
+`∂_s log(p_s(x)/p_s(y)) = F_s(x) − F_s(y) = 0`, so every ratio inside a cell keeps its value at `s = 0`, and so does the
+split. For the last sentence: the constant path `p_s = p_0` has `F_s = 0` for every actor, including one that tells
+every outcome apart.
+
+**Checks.** checks/test_identifiability.py::test_pass_through_is_identified_from_behaviour_alone,
+checks/test_identifiability.py::test_revealed_objectives_certify_distinctions
+
+**Notes.** (i) has no power with two outcomes: then `span{u, 1}` is every function, so every change passes the
+intervention through, and an intervention that changed what the actor pursues shows only as a negative or a surprising
+pass-through. Telling the two apart needs at least three outcomes, or several interventions. With estimated behaviours
+the distance of `log(p'/p)` from `span{u, 1}` is never exactly zero; testing it needs an estimation item, which the
+core does not have yet. (ii) bounds an actor's resolution from one side only. Observed changes show which distinctions its behaviour
+makes; identifying its resolution needs interventions varied enough to move every distinction it could make. Together
+with [P1], this is the ladder main proposed: a snapshot identifies an objective only given a declared default, changes
+identify it up to a constant without one, and interventions identify how the actor responds.
+
+**Lineage.** main: ROADMAP §6 I1 (the identifiability ladder: declare, measure, identify through interventions), B1
+(identifying an actor's partition), and T7-2d. New: both statements.

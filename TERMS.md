@@ -51,6 +51,9 @@ worked out.
 | **shortfall** | [D5] | how much more of `F` the matched pursuit gets than the actor, in `F`'s units | plain | value shortfall `ΔV` (main: Def 22), regret at a matched budget | A |
 | **under-pursuit** | [P9] | the part of the stakes from pursuing too timidly for the departure spent | names the cause | axial error `D_∥` (main: Thm 13) | A |
 | **anti-pursuit** | [P9] | the part of the stakes from moving against the objective | names the cause | anti-alignment excess `X_anti` (main: Thm 13) | A |
+| **angle** | [P11] | how far the direction a behaviour starts moving in is from the declared objective; its cosine is their correlation under the default | the geometric picture is exact: the correlation is the cosine in the Fisher metric at the default | correlation (statistics), the dynamic angle (main: I1) | A |
+| **intervention** | [D6] | a known nudge added to what the actor faces: an incentive, a fine, a new default option | plain, and the word of causal inference for a change made from outside | instrument (main: Def 23), treatment (causal inference), incentive or price change (economics), selection regime (experimental evolution) | A |
+| **pass-through** | [D6] | how strongly behaviour follows an intervention: the multiple of it by which behaviour is reweighted | the economists' word for how much of a change in a cost or price is passed on | `t·w`: intensity times the weight on the intervention; responsiveness; the coefficient of `u` in the change of log-odds (a logit model) | A |
 
 ## 2. Correspondences not yet in the core
 
@@ -68,8 +71,13 @@ worked out.
 | the Jensen gap of [P8](iii) | value of information | information theory: Stratonovich (1965; 2020) | D | a derivation linking the gap to the value of refining the actor's resolution |
 | the meet of two resolutions | common knowledge | game theory: Aumann (1976), cited in [D4] | B | used in [D4]'s justification only, where it is rejected as the score |
 | misalignment under a specification | robustness degree | formal verification: quantitative semantics of temporal logics | D | a case where the two orderings agree |
-| the small-effort misaligned share `sin²θ` | the dynamic angle | main: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A for a coarse actor ([P8] Notes); C in general | a proposition for any small departure from the default, in the identifiability section |
+| the small-effort misaligned share `sin²θ` | the dynamic angle | main: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A: now [P11], for any smooth departure from the default | done |
 | [P10](ii): an error in the objective matters in proportion to the revealed intensity | Goodhart's law: a proxy degrades under optimization pressure | AI safety: Manheim and Garrabrant (2018) | C | a case in which the bound's growth with intensity matches an observed overoptimization curve |
+| [P10](ii) and [P12](i): what is rewarded is pursued in proportion to intensity, and unmeasured tasks lose | multitask moral hazard | economics: Holmström and Milgrom (1991), "Multitask principal–agent analyses" | C | the job-delegation ontology: state the linear-quadratic model's prediction as a pass-through and a misaligned share |
+| a change of behaviour outside `span{u, 1}` after an intervention `u` ([P12](i)) | motivation crowding-out: the fine changes the meaning of the act | economics: Gneezy and Rustichini (2000), "A fine is a price"; Frey and Jegen (2001) | C | a case with at least three outcomes, where the residual from `span{u, 1}` can be measured; with two, [P12](i) has no power |
+| interventions varied enough to move every distinction the actor could make ([P12] Notes) | persistent excitation | control and system identification: an input rich enough to identify every parameter | C | an identification item that states the condition for a resolution, with a check |
+| pass-through `φ` | cost pass-through | economics: the share of a cost change passed on to prices | B | the same word for the same role: how much of an external change reaches the response |
+| the misaligned share `sin²θ` at the start of a change ([P11]) | the unexplained share of variance, `1 − R²` | statistics: the share of `Var(G)` not explained by a regression on `F` | B | already the same number under `q`; promote if readers need it |
 
 ## 3. Naming decisions
 
@@ -83,3 +91,4 @@ worked out.
 | **net value**, **revealed objective**, **revealed intensity**, **departure**, **nearest intended behaviour** | second review | executor | names for objects the core already used without one |
 | **resolution**, **cells**, **cell average**, **limited to** | resolution step | executor | the brainstorm's σ-algebras, in finite form and plain words |
 | **matched intensity**, **matched pursuit**, **shortfall**, **under-pursuit**, **anti-pursuit** | stakes step | executor | main's same-budget comparison and three-term split, with names for the causes instead of geometry (axial, transverse) |
+| **angle** kept; **intervention** over main's "instrument"; **pass-through** | identifiability step | executor | "angle" is exact in the Fisher metric and readers picture it; "instrument" means something narrower in econometrics (a variable that moves behaviour only through the treatment); "pass-through" is the economists' word for the same role |
