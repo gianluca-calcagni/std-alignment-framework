@@ -60,6 +60,9 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q3 | C1 (the cost is forced), C4 (feasibility), C9 (a standard), the scope, premises as items, ontologies in folders | PI | [P14]; [D7], [P15]; `STANDARD.md`; `CORE.md` §0; A1–A5; `ontologies/<name>/` |
 | Q4 | identifiability into the core, so that deceptive alignment can be measured; interventions and stakes stay in the core | PI | [D8], [D9], [P16], [P17]; [D5], [D6] |
 | Q5 | C2 and C3 (merge P11 with P13; move the Price equation into P2) | PI: declined, merging only to have fewer items | not applied |
+| Q6 | the evaluator as the one strong concept to import, with the residual `R = F − E_q[F \| F̂]` as the canonical error | PI: approved | draft D10 in §5.6 |
+| Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6) | draft D11 in §5.6 |
+| Q8 | a file on related theories | PI | `RELATED.md`, lint R12 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -125,8 +128,8 @@ item changes.
 
 ## 4. Order next
 
-The PI's brainstorm on the strong concept of §5.3. Then, as decided: import it with its canonicity argument and its
-derived results; then E1 (estimation), and a worked case on the data of §3.2, pre-registered.
+The PI's review of the drafts in §5.6. Then D10 (the evaluator) with its derived results, D11 (the sample) with
+estimation, detection and evidence, and a worked case on the data of §3.2, pre-registered.
 
 ## 5. Retrospective after v9, and hunches for v10
 
@@ -208,3 +211,42 @@ models are hypotheses that [P3] and [P12] test.
 - Three restructurings without data: the next phase has to touch data (§3.2).
 - Most of what was "lost" is derivable: the archive is a source of statements to re-derive and check, not of text to
   copy.
+
+### 5.6 Drafts for v10 (for the PI's review; not applied)
+
+**D10 — Evaluator (draft).**
+*Statement.* Let `F` be the principal's objective. An **evaluator** is an objective `F̂ : X → ℝ` proposed as the one the
+actor pursues: **declared** when it is a known function the actor is rewarded on, **revealed** when `F̂ = log(p̂/q)` for
+a full-support behaviour `p̂`, which fixes it up to a positive factor and a constant. The **regression** of the target on
+the evaluator is `m = E_q[F | F̂]`, the cell average of `F` over the resolution whose cells are the level sets of `F̂`;
+the **residual** is `R = F − m`.
+*Why, in outline.* (a) No new assumption: by [P1] and [A3] every full-support behaviour reveals one evaluator, up to
+scale. (b) The actor's counterpart of the principal's objective, in the same currency. (c) Universal: each ontology has
+one. (d) Scale-free: `m` and `R` depend on `F̂` only through its level sets, and the monotonicity of `m` only through
+their order, so neither changes under an increasing transformation of `F̂`; the difference `F̂ − F` depends on a scale
+that behaviour never identifies. (e) Whether the actor does pursue a declared evaluator is testable ([P1], [P3]).
+*Results it would carry, in a new `derived/evaluator.md`.* (i) For a behaviour that sees outcomes only through `F̂`,
+the target's gain is the regression's gain, and the residual's gain is `0` ([P8](i)). (ii) H1: a non-decreasing
+regression rules out overoptimization along any path whose revealed objectives are non-decreasing functions of `F̂`.
+(iii) H2: the extremal rule at large intensity, and the peak where `Cov_{p_t}(F̂, m(F̂)) = 0`. (iv) main's Prop 20 as
+the integrated covariance form, split into regression and residual. (v) Later: main's Thm 9 (variance at small
+departures, oscillation at large ones) as the matched pursuit of the residual.
+
+**D11 — Sample and evidence (draft).**
+*Statement.* A **sample** of size `n` from a behaviour `p` is a sequence of `n` outcomes drawn independently from `p`;
+its **empirical behaviour** `p̂_n` gives each outcome its frequency in the sample. The **evidence** that a sample gives
+for a behaviour `r` against a behaviour `r'` is `Σ_i log(r(x_i)/r'(x_i))`, in nats.
+*Why, in outline.* (a) Behaviours are never observed, samples are: this is the act of measurement that [A1] presumes,
+and [D9]'s "observed" is informal without it. (b) Universal: counted choices, genotypes, sampled responses, case
+records, logged units of work. (c) The likelihood ratio is the most powerful statistic for two behaviours
+(Neyman–Pearson). (d) The expected evidence per decision, under `p`, for `p` against `r` is `KL(p‖r)`: misalignment is
+also the slowest rate at which evidence against the specification accumulates (H4), a second meaning, in the same
+direction, as the value lost of [A4]. (e) Explanations can be compared in the same unit: evidence in nats for one
+evaluator against another. (f) Independence is the default model; dependent samples are out of scope until an item
+needs them.
+*Results it would carry, in a new `derived/estimation.md`.* the expected evidence identity; Wald's expected sample size
+to reject the specification; Chernoff and Stein exponents for detection (main's Prop 18); Wilks for the estimated
+misalignment (E1); the evaluation gap (main's Prop 19) with [D8].
+*A policy question.* Wald, Chernoff, Stein and Wilks are classical theorems. Do derived results whose proof is a
+citation, checked by simulation, meet the standard of the derived folder? Executor's view: yes, with the theorem
+quoted with its hypotheses, and a check that would fail if a hypothesis did not hold.
