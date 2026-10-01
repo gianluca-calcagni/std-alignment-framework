@@ -15,7 +15,7 @@ takes half the time of a careful one. The manager values the four outcomes at `F
 | Slot | Core | In this discipline | Observed as | Fit |
 |---|---|---|---|---|
 | **outcomes** | [D1] | what one unit of the employee's time ends as: a task, and the way it is done | time sheets, task logs, audits of samples of work | approximate: time and quality are cut into a few classes |
-| **contexts** | [D4] | the requests that arrive (which client, which kind of task), when the employee does not choose them | the request log | assumed: the manager decides which parts of an outcome count as given; none when the employee chooses their own work |
+| **contexts** | [D8] | the requests that arrive (which client, which kind of task), when the employee does not choose them | the request log | assumed: the manager decides which parts of an outcome count as given; none when the employee chooses their own work |
 | **behaviour** | [D1] | the employee's allocation: how often each outcome occurs over their units of work in a period | the same logs, over a period | exact as a frequency, but one employee gives few units, so it is estimated with error |
 | **default** | [D2] | the employee's current practice: what they do before the brief or the change being judged | logs from a period before the brief | assumed: the manager declares it. Current practice was itself shaped by past incentives. An outcome never seen in that period needs a declared small mass, for full support |
 | **objective** | [D2] | the manager's value of each outcome, for the team or the firm | values written in the brief | assumed: the manager states it, which in practice is rare |
@@ -100,15 +100,16 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
 - One employee works few units in a period, so allocations are estimated with error, and the core has no estimation
   layer yet.
 - Requests that the employee does not choose are contexts. The claims above hold within one kind of request; across
-  kinds, the core can only average (see Contexts in `README.md`).
+  kinds, [P15] separates avoidable from unavoidable misalignment (see Contexts in `../README.md`).
 - The core needs the manager's values written down before the work is judged. Without them, it gives no verdict.
 
 ## 5. Open questions
 
 - Chains of delegation. A manager is also someone's employee. Does misalignment compose along a chain, and does a gap in
   resolution at one link transmit to the next (main: the transmission gap, G2)?
-- One intensity across contexts. Should "do more of what I value" require the same pace on every kind of request? An
-  employee who works hard on one client and not at all on another is charged for that only if it does.
+- One pace across kinds of request. By [P15], the best feasible pursuit keeps one intensity across contexts, so an
+  employee who works hard for one client and not at all for another is charged the difference as avoidable
+  misalignment. Is that what managers mean by "do more of what I value"?
 - Teams. With several employees sharing outcomes, the behaviour judged is joint; the core has no item for it.
 - Crowding in. The prediction above detects a change of objective, but not its sign: crowding out and crowding in both
   show as ratios that move.

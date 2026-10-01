@@ -9,7 +9,7 @@ overoptimization: past some point, pursuing the proxy harder makes the true obje
 | Slot | Core | In this discipline | Observed as | Fit |
 |---|---|---|---|---|
 | **outcomes** | [D1] | the responses to one prompt, up to a maximum length | sampled responses | exact: a finite vocabulary and a length limit make the set finite, though astronomically large |
-| **contexts** | [D4] | the prompts, drawn from a fixed distribution that the policy does not choose | the prompt set | exact: fine-tuning fixes the prompt distribution |
+| **contexts** | [D8] | the prompts, drawn from a fixed distribution that the policy does not choose | the prompt set | exact: fine-tuning fixes the prompt distribution |
 | **behaviour** | [D1] | the fine-tuned policy's distribution of responses to each prompt | samples | exact |
 | **default** | [D2] | the initial policy, before fine-tuning against the reward model | samples from it | exact: KL-regularized fine-tuning names it as the reference, and a softmax policy gives every response a positive probability |
 | **objective** | [D2] | the developer's objective: human preference, or, in a synthetic setup, a fixed "gold" reward model. The policy pursues a proxy `r̂`, the reward model trained on preference labels | gold and proxy scores of sampled responses | assumed for the gold, which the developer declares; exact for the proxy |
@@ -33,12 +33,14 @@ proxy reward model.
 ## 3. What the core says
 
 Within one prompt, `q` is the initial policy, `F` the gold objective and `r̂` the proxy. Across prompts, every claim holds
-prompt by prompt, and the misalignment is averaged over prompts (see Contexts in `README.md`).
+prompt by prompt, and [P15] relates them across prompts (see Contexts in `../README.md`).
 
 - **Consequence** of [P4]: within one prompt, KL-regularized fine-tuning maximizes `E_π[r̂] − β·KL(π‖q)`, which is the
   net value `J_t` of the proxy with `t = 1/β`. So its optimum is the pursuit of the proxy at intensity `1/β`, as known
   in the literature [@rafailov2023]. Across prompts, the optimum pursues the proxy within each prompt at one shared
-  intensity. That is not the pursuit ray of [D2] on prompt–response pairs, which would also reweight the prompts.
+  intensity. That is not the pursuit ray of [D2] on prompt–response pairs, which would also reweight the prompts; by
+  [P15] it is the best feasible behaviour for that ray, and what it cannot reach is how much the ray would reweight
+  the prompts.
 - **Reading** with [P1], [D2]: best-of-`n` is almost a pursuit too. When every response has a small probability and
   the proxy has no ties, best-of-`n` draws a response with probability close to `n·q(y)·Q(r̂(y))^{n−1}`, where `Q(v)` is
   the probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in the
@@ -73,7 +75,8 @@ prompt by prompt, and the misalignment is averaged over prompts (see Contexts in
 
 - The outcomes are astronomically many, so every quantity is estimated from samples, and the core has no estimation
   layer yet.
-- Prompts are contexts, so the core applies prompt by prompt. The known curves average over prompts.
+- Prompts are contexts. [P15] splits misalignment across prompts into avoidable and unavoidable parts; the known
+  curves average over prompts and report neither.
 - The gold objective is a model in the known result. With human raters, the objective is not fixed; [P3] can test
   whether it is, from changes of behaviour.
 - The core does not predict how `a` and `b` scale with the size of the proxy, nor where the gold peaks: it says what
@@ -89,5 +92,6 @@ prompt by prompt, and the misalignment is averaged over prompts (see Contexts in
   regressional variant of Goodhart's law (`TERMS.md`, section 2).
 - Can the misaligned share at the start, `sin²θ` ([P11]), measured on the initial policy, predict the size of the gold
   peak, across reward models of different sizes?
-- KL-regularized fine-tuning uses one `β` for every prompt. Should the core's specification across contexts require one
-  intensity too (the design question in `NOTES.md`)?
+- KL-regularized fine-tuning uses one `β` for every prompt, which [P15] shows is the best feasible pursuit across
+  prompts. Do trained policies keep one revealed intensity across prompts, or is part of their misalignment avoidable
+  inconsistency between prompts?

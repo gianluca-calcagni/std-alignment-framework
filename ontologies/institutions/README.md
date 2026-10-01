@@ -10,7 +10,7 @@ net harmed the sicker ones.
 | Slot | Core | In this discipline | Observed as | Fit |
 |---|---|---|---|---|
 | **outcomes** | [D1] | for one patient, the treatment given, cardiac surgery or not, within the patient's severity class | discharge records | approximate: severity is cut into classes |
-| **contexts** | [D4] | the patient's severity, which the hospital does not choose | clinical records | approximate: hospitals partly choose their patients, through referral and admission, so severity is not wholly given |
+| **contexts** | [D8] | the patient's severity, which the hospital does not choose | clinical records | approximate: hospitals partly choose their patients, through referral and admission, so severity is not wholly given |
 | **behaviour** | [D1] | how often each treatment is given in each severity class, over a state's patients in a year | discharge records | exact as frequencies |
 | **default** | [D2] | the treatment pattern before the cards, or in comparable states without them | records from before, or from comparison states | assumed: the comparison must be declared before the outcomes are read |
 | **objective** | [D2] | the patient's expected benefit from each treatment, in each severity class | clinical outcome data | assumed: the regulator's purpose is patient health, but the benefit of each treatment must be estimated |
@@ -49,7 +49,7 @@ patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery minus no 
   severity class, then the change of the log-odds of surgery in class `s` is `φ·Δu_s`, with the same `φ` for all
   classes. *Refuted if* the changes of log-odds across severity classes are not proportional to `Δu_s`, within sampling
   error. Within one class there are only two options, and [P12](i) has no power; the test gets its power from the
-  shared `φ`, which is the design question of one intensity across contexts (`NOTES.md`). A refutation means the card
+  shared `φ`, which is what the best feasible pursuit across contexts has ([P15], Notes). A refutation means the card
   did more than add `u` to what hospitals pursue, or that their response differs by class.
 - **Consequence** of [P4]: the regulator, who sees only what the risk model records, sees at most the misalignment at
   that resolution ([P4](iv)). Selection on unrecorded severity is invisible in the card's own data, and shows only in
@@ -65,7 +65,8 @@ patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery minus no 
 - The objective, a patient's benefit from surgery, is estimated, not observed; the core's verdicts inherit its errors
   ([P10]).
 - Two treatments per class leave the pass-through test without power class by class.
-- The core has no item for one intensity across contexts, which the prediction needs.
+- The prediction assumes one pass-through across severity classes; [P15] shows that a shared intensity is what the
+  best feasible pursuit has, but hospitals need not respond that way.
 - Matching of patients to hospitals, which the known result found to improve, involves a choice of hospital that this
   slot table leaves out.
 

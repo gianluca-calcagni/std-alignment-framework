@@ -1,4 +1,4 @@
-# std-alignment-framework — the slim core (v8, in progress)
+# std-alignment-framework — the core (v9, in progress)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -6,52 +6,57 @@ A standard formal framework for alignment problems in general, not only in machi
 institutions and organisms. The aim is a framework that is solid enough to build on, substrate-independent, easy to
 import existing theorems into, and able to make testable predictions, support diagnostics, and show its own limits.
 
-This branch rebuilds the core from scratch: slim, justified, and in plain terms first.
+The core holds only what cannot be derived: five premises and the definitions the whole framework uses. Everything
+else is derived from them, with proofs and checks, and reported through one standard.
 
 ## Where things are
 
 | | |
 |---|---|
-| `CORE.md` | the core: one document, read top to bottom |
-| `REFERENCES.md` | the sources the core cites |
-| `checks/` | one pytest check, at least, for every result in the core |
+| `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
+| `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
+| `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
+| `REFERENCES.md` | the sources cited anywhere in the framework |
+| `checks/` | one pytest check, at least, for every result |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
-| `ontologies/` | the core read in five disciplines: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots with items of the core and reframes one known result. Not part of the core |
-| `TERMS.md` | the vocabulary: every term the core defines, its other names in the literature, every correspondence not yet in the core, and every naming decision, each with a confidence level |
-| `NOTES.md` | the executor's working notes: failure modes and open gaps. Not part of the core |
-| `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before this restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
+| `ontologies/` | the core read in five disciplines, each in its own folder: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots and reframes one known result. Not part of the core |
+| `TERMS.md` | the vocabulary: every defined term, its other names in the literature, correspondences not yet worked out, and every naming decision, each with a confidence level |
+| `NOTES.md` | the executor's working notes: failure modes, open requests and recommendations. Not part of the core |
+| `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before the restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
 
 ## Rules
 
-**Enforced by lint** (`python3 tools/lint.py`; a property of the core is claimed only if lint checks it):
-- **R1–R2.** Every `###` heading in `CORE.md` is an item: `### D1 — title`. The kinds are D (definition), P (proposition),
-  T (theorem), L (lemma), C (corollary) and R (remark). Numbers increase within each kind.
-- **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. A definition also has a
-  **Why this choice**; a result (P, T, L, C) has a **Proof** and **Checks**. Fields come in a fixed order, with no field
-  empty.
-- **R5.** References are written `[D1]`, `[P3]`. A statement, justification or proof may use only items that come
-  earlier, so the dependencies follow the reading order and cannot form a cycle.
+**Enforced by lint** (`python3 tools/lint.py`; a property of the framework is claimed only if lint checks it):
+- **R1–R2.** Every `###` heading in `CORE.md` and `derived/` is an item: `### D1 — title`. `CORE.md` holds premises (A)
+  and definitions (D); `derived/` holds results (P proposition, T theorem, L lemma, C corollary) and remarks (R), in
+  files that `derived/README.md` lists in reading order. Ids are unique, and numbers increase within each kind in each
+  file.
+- **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. A premise or definition also
+  has a **Why this choice**; a result has a **Proof** and **Checks**. Fields come in a fixed order, with no field empty.
+- **R5.** References are written `[D1]`, `[P3]`, and name existing items. A core Statement uses only earlier core
+  items; a result uses only the core and results earlier in the reading order; a core "why" may cite a result. The
+  dependencies form no cycle.
 - **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
-- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited, in `CORE.md` or in
-  `ontologies/`.
+- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited somewhere.
 - **R9.** Every term an item defines (bold in its Statement) has an entry in `TERMS.md`, and every item `TERMS.md` names
   exists.
-- **R10.** Every ontology in `ontologies/` fills each slot listed in `ontologies/README.md` once, naming the slot's
-  item and how well it fits; has the five sections in order; cites the known result it reframes; and labels every
-  claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
+- **R10.** Every ontology lives in its own folder, fills each slot listed in `ontologies/README.md` once, naming the
+  slot's item and how well it fits; has the five sections in order; cites the known result it reframes; and labels
+  every claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
+- **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
 SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
 paths, rather than reproduce printed digits.
 
 **Working agreements** (no tool checks these, so they are commitments, not claimed properties):
+- **The core holds what cannot be derived**, and the definitions used everywhere. A result belongs in `derived/`. A
+  concept earns its own item when splitting it makes the framework clearer; items are not merged only to be fewer.
 - **Reliability over elegance.** A result enters with a proof and a check that could fail: random instances, the
-  degenerate and sign cases, and tolerances derived from the quantity's scale.
-- **Every choice is justified.** "Why this choice" argues it, by generality (for example: every full-support
-  distribution is an exponential tilt of the default), by canonicity, or by a named case where the alternative gives
-  a wrong verdict.
+  degenerate and sign cases, and tolerances derived from the quantity's scale. Every new check is mutation-tested.
+- **Every choice is justified.** "Why this choice" argues it, by generality, by canonicity, or by a named case where the
+  alternative gives a wrong verdict. Assume less and derive more.
 - **Plain terms keep the qualifiers** of the formal statement.
-- **Slim.** About a dozen items. An item that does not earn its place goes to an appendix, or stays on `main`.
 - **Lineage** names the items on `main` that an item replaces and the retraction rows that touch them
   (`main: 60 Status/retractions/`), or says "New".
 - **Empirical tests** are pre-registered and pushed before any computation, as on `main`.
@@ -74,8 +79,9 @@ paths, rather than reproduce printed digits.
 **Lineage.** New.
 ```
 
-Optional fields, in order: **Example** (after Proof) and **Notes** (after Checks; attribution goes here, because a
-citation in a proof is a dependency claim).
+A premise (A) has the fields of a definition. A result lives in `derived/` and has the fields of P1 above. Optional
+fields, in order: **Example** (after Proof) and **Notes** (after Checks; attribution goes here, because a citation in a
+proof is a dependency claim).
 
 ## Commands
 
@@ -88,7 +94,7 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
+Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
 past sessions, each with its evidence.
 
 ## License

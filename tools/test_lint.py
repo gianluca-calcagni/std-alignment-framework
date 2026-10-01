@@ -1,19 +1,36 @@
-"""Tests of tools/lint.py: a valid core passes, and each rule fires on a document built to break it."""
+"""Tests of tools/lint.py: a valid framework passes, and each rule fires on a document built to break it."""
 import textwrap
 from pathlib import Path
 import pytest
 from lint import lint
 
-GOOD = textwrap.dedent("""\
+CORE = textwrap.dedent("""\
     # The core
 
-    ## Setting
+    ## Premises
+
+    ### A1 — Finite
+    **Statement.** Only finitely many outcomes are considered.
+    **In plain terms.** Only finitely many different things can happen in any one decision.
+    **Why this choice.** Finite sums can be checked exactly [@cover2006].
+    **Lineage.** New.
+
+    ## Definitions
 
     ### D1 — Outcomes
-    **Statement.** A finite set `X`, with a full-support reference `q`.
+    **Statement.** A finite set `X`, with a full-support reference `q`, as [A1] allows.
     **In plain terms.** The things that can happen, and how often they happen by default.
-    **Why this choice.** Finite first, so that every claim can be checked exactly [@cover2006].
+    **Why this choice.** Finite first, so that every claim can be checked exactly.
     **Lineage.** New.
+
+    ### D2 — Objectives
+    **Statement.** A function `F` on `X`.
+    **In plain terms.** What the principal wants, written as a score for each outcome.
+    **Why this choice.** Every behaviour is a reweighting of the default by some function, as [P1] shows.
+    **Lineage.** New.
+    """)
+DERIVED = textwrap.dedent("""\
+    # Derived — tilts
 
     ### P1 — A fact about [D1]
     **Statement.** Every full-support `p` on `X` is `q·e^F` for some `F`, by [D1].
@@ -27,44 +44,87 @@ GOOD = textwrap.dedent("""\
     **Checks.** checks/test_a.py::test_tilt
     **Lineage.** main: Def 1.
     """)
+ORDER = "# Derived results\n\n| Reading order | File |\n|---|---|\n| 1 | `a.md` |\n"
+STANDARD = "# The reporting standard\n\n| Field | Core |\n|---|---|\n| Outcomes | [D1] |\n| Objective | [D2] |\n"
 REFS = "# References\n\n- [@cover2006] Cover and Thomas (2006), *Elements of Information Theory*.\n"
 TEST = "def test_tilt():\n    assert True\n"
 
 
-def make(tmp_path, core=GOOD, refs=REFS, test=TEST):
+def make(tmp_path, core=CORE, derived=DERIVED, order=ORDER, standard=STANDARD, refs=REFS, test=TEST, extra=None):
     (tmp_path / "CORE.md").write_text(core); (tmp_path / "REFERENCES.md").write_text(refs)
+    (tmp_path / "derived").mkdir(exist_ok=True)
+    (tmp_path / "derived" / "a.md").write_text(derived); (tmp_path / "derived" / "README.md").write_text(order)
+    if standard is not None:
+        (tmp_path / "STANDARD.md").write_text(standard)
     (tmp_path / "checks").mkdir(exist_ok=True); (tmp_path / "checks" / "test_a.py").write_text(test)
+    for name, text in (extra or {}).items():
+        (tmp_path / name).parent.mkdir(parents=True, exist_ok=True); (tmp_path / name).write_text(text)
     return lint(tmp_path)
 
 
-def codes(errors): return {e.split(": R")[1][0] if ": R" in e else "?" for e in errors}
+def codes(errors):
+    return {e.split(" R")[1].split()[0] for e in errors if " R" in e}
 
 
-def test_good_core_passes(tmp_path):
+def test_good_framework_passes(tmp_path):
     errors, summary = make(tmp_path)
-    assert errors == []
-    assert summary["items"] == 2 and summary["definition"] == 1 and summary["proposition"] == 1 and summary["checks"] == 1
+    assert errors == [], errors
+    assert summary["items"] == 4 and summary["premise"] == 1 and summary["definition"] == 2
+    assert summary["proposition"] == 1 and summary["checks"] == 1
 
 
-@pytest.mark.parametrize("old,new,rule", [
-    ("# The core", "The core", "1"),                                                    # no title
-    ("### D1 — Outcomes", "### Outcomes", "1"),                                         # a heading that is not an item
-    ("### P1 — A fact", "### D1 — A fact", "2"),                                         # duplicate id
-    ("**Why this choice.** Finite first", "**Lineage.** New.\n**Why this choice.** Finite first", "3"),  # order
-    ("**In plain terms.** The things that can happen, and how often they happen by default.\n", "", "4"),
-    ("**Why this choice.** Finite first, so that every claim can be checked exactly [@cover2006].\n", "", "4"),
-    ("**Proof.** Take `F = log(p/q)`.", "", "4"),                                          # a result without a proof
-    ("Any way of behaving can be described as a reweighting of the default.", "Too short to say.", "4"),
-    ("by [D1].", "by [D2].", "5"),                                                        # names no item
-    ("Finite first, so that", "Finite first, as [P1] needs, so that", "5"),               # uses a later item
-    ("checks/test_a.py::test_tilt", "checks/test_a.py::test_other", "6"),                # no such check
-    ("**Checks.** checks/test_a.py::test_tilt", "**Checks.** see the tests", "6"),       # a result without a check
+@pytest.mark.parametrize("where,old,new,rule", [
+    ("core", "# The core", "The core", "1"),                                                   # no title
+    ("core", "### D1 — Outcomes", "### Outcomes", "1"),                                        # a heading, not an item
+    ("core", "### D2 — Objectives", "### P2 — Objectives", "1"),                               # a result in the core
+    ("derived", "### P1 — A fact", "### D3 — A fact", "1"),                                     # a definition in derived/
+    ("core", "### D2 — Objectives", "### D1 — Objectives", "2"),                               # duplicate id
+    ("core", "### D1 — Outcomes", "### D3 — Outcomes", "2"),                                   # D3 before D2
+    ("core", "**Why this choice.** Finite first", "**Lineage.** New.\n**Why this choice.** Finite first", "3"),
+    ("core", "**In plain terms.** The things that can happen, and how often they happen by default.\n", "", "4"),
+    ("core", "**Why this choice.** Finite sums can be checked exactly [@cover2006].\n", "", "4"),  # a premise needs a why
+    ("derived", "**Proof.** Take `F = log(p/q)`.", "", "4"),                                     # a result needs a proof
+    ("core", "Every behaviour is a reweighting", "Every behaviour, by [P7], is a reweighting", "5"),  # names no item
+    ("core", "as [A1] allows.", "as [P1] shows.", "5"),                                         # a core Statement uses a result
+    ("core", "**Statement.** A finite set `X`", "**Statement.** With `F` of [D2], a finite set `X`", "5"),  # a later item
+    ("derived", "for some `F`, by [D1].", "for some `F`, by [D2].", "5"),                       # a cycle: D2 → P1 → D2
+    ("derived", "checks/test_a.py::test_tilt", "checks/test_a.py::test_other", "6"),            # no such check
+    ("derived", "**Checks.** checks/test_a.py::test_tilt", "**Checks.** see the tests", "6"),   # a result without checks
 ])
-def test_each_rule_fires(tmp_path, old, new, rule):
-    core = GOOD.replace(old, new)
-    assert core != GOOD
-    errors, _ = make(tmp_path, core=core)
+def test_each_rule_fires(tmp_path, where, old, new, rule):
+    src = CORE if where == "core" else DERIVED
+    changed = src.replace(old, new)
+    assert changed != src
+    errors, _ = make(tmp_path, **({"core": changed} if where == "core" else {"derived": changed}))
     assert rule in codes(errors), errors
+
+
+def test_a_core_statement_may_not_use_a_result(tmp_path):
+    core = CORE.replace("**Statement.** A function `F` on `X`.", "**Statement.** A function `F` on `X`, as in [P1].")
+    errors, _ = make(tmp_path, core=core)                                          # no cycle: P1 uses only D1
+    assert any("D2: R5 its Statement uses [P1], which is not an earlier core item" in e for e in errors), errors
+    assert not any("cycle" in e for e in errors), errors
+
+
+def test_a_cycle_is_named(tmp_path):
+    errors, _ = make(tmp_path, derived=DERIVED.replace("by [D1].", "by [D2]."))
+    assert any("cycle" in e and "D2" in e and "P1" in e for e in errors), errors
+
+
+def test_a_result_may_not_use_a_later_result(tmp_path):
+    later = DERIVED.replace("### P1 — A fact about [D1]", "### P2 — Another fact").replace(
+        "checks/test_a.py::test_tilt", "checks/test_a.py::test_two")
+    first = DERIVED.replace("by [D1].", "by [D1] and [P2].")
+    errors, _ = make(tmp_path, derived=first, order=ORDER + "| 2 | `b.md` |\n", test=TEST + "\ndef test_two():\n    assert True\n",
+                     extra={"derived/b.md": later})
+    assert any("R5" in e and "later in the reading order" in e for e in errors), errors
+
+
+def test_the_reading_order_must_list_every_file(tmp_path):
+    errors, _ = make(tmp_path, extra={"derived/b.md": "# Derived — b\n"})
+    assert any("b.md is not listed" in e for e in errors), errors
+    errors, _ = make(tmp_path, order=ORDER + "| 2 | `c.md` |\n")
+    assert any("c.md is listed but does not exist" in e for e in errors), errors
 
 
 def test_orphan_check_fires(tmp_path):
@@ -79,8 +139,14 @@ def test_bibliography_rules_fire(tmp_path):
     assert any("R8 [@cover2006] is not in REFERENCES.md" in e for e in errors), errors
 
 
+def test_a_source_cited_only_in_a_derived_file_counts(tmp_path):
+    core = CORE.replace(" [@cover2006]", "")
+    errors, _ = make(tmp_path, core=core, derived=DERIVED.replace("**Proof.** Take", "**Proof.** [@cover2006] Take"))
+    assert errors == [], errors
+
+
 def test_glossary_rule_fires(tmp_path):
-    core = GOOD.replace("**Statement.** A finite set `X`, with", "**Statement.** A finite set `X` of **outcomes**, with")
+    core = CORE.replace("**Statement.** A finite set `X`, with", "**Statement.** A finite set `X` of **outcomes**, with")
     errors, _ = make(tmp_path, core=core)
     assert any("R9 the term 'outcomes' has no entry" in e for e in errors), errors
     (tmp_path / "TERMS.md").write_text("| Term | Meaning |\n|---|---|\n| **outcome** | what can happen, see [D1] |\n")
@@ -91,10 +157,25 @@ def test_glossary_rule_fires(tmp_path):
     assert any("R9 [D7] names no item" in e for e in errors), errors
 
 
+def test_terms_defined_in_derived_files_count(tmp_path):
+    derived = DERIVED.replace("**Statement.** Every full-support", "**Statement.** Every **full-support**")
+    errors, _ = make(tmp_path, derived=derived)
+    assert any("R9 the term 'full-support'" in e for e in errors), errors
+
+
 def test_part_labels_are_not_terms(tmp_path):
-    core = GOOD.replace("**Statement.** Every full-support", "**Statement.** **Universality.** Every full-support")
-    errors, _ = make(tmp_path, core=core)
+    derived = DERIVED.replace("**Statement.** Every full-support", "**Statement.** **Universality.** Every full-support")
+    errors, _ = make(tmp_path, derived=derived)
     assert not any("R9" in e for e in errors), errors
+
+
+def test_the_standard_must_cover_every_definition(tmp_path):
+    errors, _ = make(tmp_path, standard=None)
+    assert any("R11 the reporting standard is missing" in e for e in errors), errors
+    errors, _ = make(tmp_path, standard=STANDARD.replace("| Objective | [D2] |\n", ""))
+    assert any("R11 the definition D2 is not covered" in e for e in errors), errors
+    errors, _ = make(tmp_path, standard=STANDARD + "| Other | [D9] |\n")
+    assert any("R11 [D9] names no item" in e for e in errors), errors
 
 
 ONTO_README = textwrap.dedent("""\
@@ -137,9 +218,7 @@ ONTO = textwrap.dedent("""\
 
 
 def make_ontology(tmp_path, onto=ONTO, readme=ONTO_README):
-    (tmp_path / "ontologies").mkdir(exist_ok=True)
-    (tmp_path / "ontologies" / "README.md").write_text(readme); (tmp_path / "ontologies" / "a.md").write_text(onto)
-    return make(tmp_path)
+    return make(tmp_path, extra={"ontologies/README.md": readme, "ontologies/a/README.md": onto})
 
 
 def test_good_ontology_passes(tmp_path):
@@ -181,11 +260,14 @@ def test_ontology_readme_rules_fire(tmp_path):
     assert any("README.md, with the slot table, is missing" in e for e in errors), errors
 
 
+def test_an_ontology_lives_in_its_own_folder(tmp_path):
+    errors, _ = make(tmp_path, extra={"ontologies/README.md": ONTO_README, "ontologies/loose.md": ONTO})
+    assert any("lives in its own folder" in e for e in errors), errors
+
+
 def test_a_source_cited_only_in_an_ontology_counts(tmp_path):
-    core = GOOD.replace(" [@cover2006]", "")
-    (tmp_path / "ontologies").mkdir()
-    (tmp_path / "ontologies" / "README.md").write_text(ONTO_README); (tmp_path / "ontologies" / "a.md").write_text(ONTO)
-    errors, _ = make(tmp_path, core=core)
+    core = CORE.replace(" [@cover2006]", "")
+    errors, _ = make(tmp_path, core=core, extra={"ontologies/README.md": ONTO_README, "ontologies/a/README.md": ONTO})
     assert errors == [], errors
 
 

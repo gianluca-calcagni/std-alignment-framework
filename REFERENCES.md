@@ -1,13 +1,14 @@
 # References
 
-One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md` or in
-`ontologies/`, and every citation there is listed here (lint rule R8).
+One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md`, `derived/`,
+`ontologies/` or `STANDARD.md`, and every citation there is listed here (lint rule R8).
 
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
 - [@cover2006] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
+- [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
 - [@dranove2003] Dranove, D., Kessler, D., McClellan, M. and Satterthwaite, M. (2003), Is more information better? The effects of "report cards" on health care providers. *Journal of Political Economy* 111(3), 555–588.
 - [@frey2001] Frey, B. S. and Jegen, R. (2001), Motivation crowding theory. *Journal of Economic Surveys* 15(5), 589–611.
 - [@gao2023] Gao, L., Schulman, J. and Hilton, J. (2023), Scaling laws for reward model overoptimization. *Proceedings of the 40th International Conference on Machine Learning*, PMLR 202, 10835–10866.
@@ -17,6 +18,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@holmstrom1991] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
 - [@kerr1975] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
 - [@madrian2001] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
+- [@manski2003] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
 - [@mckelvey1995] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [@ng2000] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [@ortega2013] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.
