@@ -19,6 +19,7 @@ The full table, with its evidence, is on `main`: `70 Project/NOTES_claude.md` §
 | **A probe bug read as a refutation** | the first probe of [P15] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact | when a probe contradicts a derivation, check the probe against the derivation before concluding anything |
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
 | **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
+| **Lineage amnesia after a restart** | [P13](ii) re-derived main's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9 | before adding a result, search main (`git grep -i <idea> origin/main`) for its counterpart, and cite it in the Lineage |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises
 with
@@ -124,5 +125,86 @@ item changes.
 
 ## 4. Order next
 
-The PI's review of v9. Then E1 (estimation), which every report needs, and worked cases on the data of §3.2, each
-pre-registered.
+The PI's brainstorm on the strong concept of §5.3. Then, as decided: import it with its canonicity argument and its
+derived results; then E1 (estimation), and a worked case on the data of §3.2, pre-registered.
+
+## 5. Retrospective after v9, and hunches for v10
+
+### 5.1 What v9 is
+
+v9 is a measurement standard: a small set of premises, forced choices, exact decompositions (departure, stakes,
+avoidable and unavoidable misalignment), identification-aware reporting, and mechanical checks. It is not yet a theory
+of what optimizing a proxy does. main was both: it measured the departure and explained it by what the agent optimizes
+("target" against "evaluator"). The predictive content, the Goodhart theory and the detection results, lived in the
+explanatory half, which v9 left out with "explanations". The PI's plan is to bring it back slowly, as one or two strong
+concepts from which the rest is derived, each with a canonicity argument, so that the design space stays confined.
+
+### 5.2 What main had that v9 lacks, and whether v9 can derive it
+
+| main | Content | Derivable in v9? |
+|---|---|---|
+| Prop 20 | Goodhart as a covariance, for any optimizer: `E_pF − E_qF = Cov_q(w, F̂) − Cov_q(w, E)`, `w = p/q` | yes, once the evaluator has a name: the finite form of [P13](i) (the Price equation) |
+| Prop 21 | an affine regression of target on evaluator rules out overoptimization, for actors that see only the evaluator | yes, from [P8](i) and [P13](i); and it generalizes to any monotone regression (H1 below) |
+| B §4 | Gaussian target and evaluator: gold gain `√2·ρ·sd·√KL` exactly | yes: [P13](ii) to first order; now credited in its Lineage |
+| Thm 9 | no ranking of evaluator errors holds at every budget: variance governs small budgets, oscillation large ones | yes, once the error is an object: the worst case at departure `δ` is a pursuit of the error ([P9](i), as in [P17](ii)); the small-`δ` limit is [P13](ii)'s expansion, the large-`δ` limit [P5](iv)'s third case |
+| Prop 11 | a KL limit cannot contain heavy-tailed errors; a χ² limit can | not in finite outcomes (heavy tails need infinitely many); its finite shadow is a χ² budget as a convex feasible set ([D7], [P15](ii)). Needs "the actor's own cost", distinct from the measure (main's Prop 15) |
+| Prop 18 | misalignment caps the detection exponent of any test (Chernoff `≤` KL) | yes, by importing Chernoff's theorem, once sampling is a concept |
+| Prop 19 | the evaluation gap `Γ = Σ_c (ρ_dep − ρ_ev)·KL_c` | yes, in one line from [D8] with frequencies; it complements [P17] (shift of conditions, against shift of behaviour) |
+| §11 | "what the core forbids": nine falsifiable statements, some tested in R5 and R6 | a section, not a result: return it as `derived/forbids.md`, each statement with its test |
+| A3 tiers | results for any actor, and for an assumed entropic actor | v9 can test the actor model instead of assuming it ([P3], [P12]): tier-E results return as results conditional on "the actor pursues `F̂`" |
+
+So most of what was lost is derivable from v9 plus one concept, the evaluator; the detection results need a second,
+sampling.
+
+### 5.3 The strong concept: candidates
+
+**Candidate 1, recommended: the evaluator.** The objective the actor pursues, `F̂`: declared, as a reward model, a
+performance measure, a fine or a selection regime, or revealed, as `log(p̂/q)` up to scale and constant ([P1]).
+- *Why it is canonical.* (a) It adds no assumption: by [P1] and [A3], every full-support behaviour is the best trade-off
+  for exactly one objective direction, its revealed evaluator. (b) It is the actor's counterpart of the principal's
+  objective, in the same currency: the principal declares `(q, F)`, the actor reveals `(q, t̂·F̂)`. (c) It is universal:
+  each of the five ontologies has one (the reward model; selection through males; the fine; the report card; the
+  measured bonus). (d) Its scale-free invariants are objects v9 already uses: the angle `θ` under `q` ([P11]), the
+  regression `m = E_q[F | F̂]` (the cell average of [P8] for the resolution that `F̂` generates), and that resolution.
+- *What it would re-derive.* Prop 20, Prop 21 and more (H1), B §4, Thm 9, the overoptimization peak, and Manheim and
+  Garrabrant's four Goodhart variants (H3).
+- *The geometry.* Target and evaluator span a two-parameter family `{tilt(q, a·F + b·F̂)}` through the default: the
+  alignment plane (H6). Every Goodhart quantity lives in it.
+- *Where to look for it in existing theory.* The angle between a performance measure and value in the economics of
+  incentives (Baker's "distortion" of performance measures, 2002: to verify); the angle between true and proxy rewards
+  in occupancy space (Karwowski et al., ICLR 2024); hackability of reward pairs (Skalse et al., NeurIPS 2022); selection
+  gradients and the secondary theorem of selection in biology (Lande and Arnold; Robertson; Price); Manheim and
+  Garrabrant's taxonomy.
+
+**Candidate 2, a possible second: sampling.** Observation through `n` independent decisions.
+- *Why it is canonical.* It gives misalignment a second, independent meaning that agrees with the first (H4): the
+  expected log-likelihood ratio per decision, under the actual behaviour, of the actual against the nearest intended
+  behaviour is `M`, so in a sequential test (Wald) about `log(1/α)/M` decisions reject the intended behaviour. Value
+  lost ([A4]) and evidence gained agree, in the same direction of KL: the same pattern as [A2] and [A3] agreeing on the
+  cost.
+- *What it would re-derive.* Prop 18 (with Chernoff's theorem), the estimation layer (E1: Wilks), and the standard's
+  error bars, as results instead of instructions.
+
+**Why not other candidates.** main's "capacity" is the intensity or the departure, already in v9. main's conventions
+are roles already assigned (misalignment = free, stakes = budget, a fixed price = a single intended behaviour). Actor
+models are hypotheses that [P3] and [P12] test.
+
+### 5.4 Hunches
+
+| # | Hunch | Status |
+|---|---|---|
+| H1 | **Monotone regression rules out overoptimization.** If every revealed objective of a path is a non-decreasing function of `F̂` (pursuit of `F̂`, best-of-`n`, threshold selection, any monotone transform), and `m = E_q[F | F̂]` is non-decreasing, then `E_{p_s}[F]` never decreases. Proof sketch: the behaviours are tilts by functions of `F̂`, so `E_p[F] = E_p[m(F̂)]` ([P8](i)); by [P13](i) the rate is `Cov_{p_s}(F_s, m(F̂))`, the covariance of two non-decreasing functions of `F̂`, which is never negative (Chebyshev's association inequality). It generalizes main's Prop 21 (affine) and B §4 (Gaussian) | probe: 0 decreasing curves in 111 monotone instances; among 1889 non-monotone ones, 1474 decrease somewhere |
+| H2 | **Extremal Goodhart.** Along the pursuit of `F̂`, at large intensity the target decreases exactly when `m` is lower at the largest evaluator value than at the second largest; the peak, when there is one, is where `Cov_{p_t}(F̂, m(F̂)) = 0` | probe: 1889 of 1889 in the limit (log-space); at moderate intensity, a third value close to the second can still dominate |
+| H3 | **Goodhart's four variants are four objects of v9.** Regressional: the cell average and its Jensen gap ([P8]); extremal: H2; causal: an intervention that changes more than it adds ([D6], [P12]); adversarial: an actor whose view separates observed from unobserved conditions ([D8], [P17]) | C: a mapping, to be checked against Manheim and Garrabrant's definitions |
+| H4 | **Value and evidence agree.** Misalignment is both the least value lost ([A4]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [A3] | C: state and prove with Wald's identity |
+| H5 | **The measure is not the actor's cost.** [P14] forces the measure to be KL; main's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
+| H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore |
+| H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
+| H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [P11]'s `cos θ` in the incentive literature | C: verify the paper |
+
+### 5.5 Process
+
+- Lineage amnesia (§1): search main before adding a result.
+- Three restructurings without data: the next phase has to touch data (§3.2).
+- Most of what was "lost" is derivable: the archive is a source of statements to re-derive and check, not of text to
+  copy.

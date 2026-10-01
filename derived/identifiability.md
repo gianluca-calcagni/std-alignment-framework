@@ -128,7 +128,11 @@ square root of the departure, with a finite slope at zero departure, bounded by 
 `|cos θ| ≤ 1`. Together with [P11]: at the start of a change, `sin²θ` of the departure is misaligned, and `1 − cos θ` of
 the attainable gain is lost.
 
-**Lineage.** main: ROADMAP §6 I1 (the dynamic angle) and Def 22 (the value shortfall). New: both statements.
+**Lineage.** main: B §4 (for a jointly Gaussian target and evaluator, the gold gain along the Gibbs path is exactly
+`√2·ρ_q(F, F̂)·sd_q(F)` times `√KL`, which (ii) generalizes to the first order of any smooth path), Prop 14 and
+Prop 22 (the initial effect has the sign of the covariance), ROADMAP §6 I1 (the dynamic angle) and Def 22 (the value
+shortfall). New: (i) as a statement about any path, and the shortfall in (ii). The v9 restart first credited none of
+the first three, which `NOTES.md` §1 records as a failure mode.
 
 ### P16 — An actor cannot behave more differently than it can tell conditions apart
 **Statement.** Let the actor's response depend on the condition only through a view `(Z, V)` ([D8]), and let `c` and
