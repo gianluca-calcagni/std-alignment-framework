@@ -22,7 +22,7 @@ def evaluator_instance(r, monotone=None):
 def test_through_the_evaluator_only_the_regression_counts():
     """P18: E_q[R] = 0; for p limited to the level sets of F̂, E_p[R] = 0 and E_p[F] = E_p[m]; for any p,
     E_p[F] − E_q[F] = Cov_q(p/q, m) + Cov_q(p/q, R); m and R are unchanged when F̂ becomes h(F̂), h injective, and change in
-    general when h merges level sets."""
+    general when h merges level sets; with distinct values on distinct outcomes, m = F (D10, Notes)."""
     r = rng(1801); changed = 0
     for _ in range(300):
         q, Fh, labels, v, F, cell = evaluator_instance(r)
@@ -43,6 +43,9 @@ def test_through_the_evaluator_only_the_regression_counts():
         m3 = np.array([q[merged == c] @ F[merged == c] / q[merged == c].sum() if np.any(merged == c) else 0.0
                        for c in range(labels.max() + 1)])[merged]
         changed += np.abs(m3 - m).max() > 1e-6
+        distinct = np.arange(q.size)                                                 # distinct values: m = F, R = 0
+        m4 = np.array([q[distinct == c] @ F[distinct == c] / q[distinct == c].sum() for c in range(q.size)])
+        assert np.abs(m4 - F).max() <= EXACT * scale
     assert changed >= 250                                                            # merging level sets changes m
 
 

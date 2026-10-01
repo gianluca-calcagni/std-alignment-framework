@@ -17,8 +17,10 @@ takes half the time of a careful one. The manager values the four outcomes at `F
 | **outcomes** | [D1] | what one unit of the employee's time ends as: a task, and the way it is done | time sheets, task logs, audits of samples of work | approximate: time and quality are cut into a few classes |
 | **contexts** | [D8] | the requests that arrive (which client, which kind of task), when the employee does not choose them | the request log | assumed: the manager decides which parts of an outcome count as given; none when the employee chooses their own work |
 | **behaviour** | [D1] | the employee's allocation: how often each outcome occurs over their units of work in a period | the same logs, over a period | exact as a frequency, but one employee gives few units, so it is estimated with error |
+| **sample** | [D11] | units of the employee's time, each logged as one outcome | time sheets, task logs, audits of sampled work | approximate: successive units of one person's time depend on each other (a task started is finished), so independence is a model; an audit draws units, and should draw them at random |
 | **default** | [D2] | the employee's current practice: what they do before the brief or the change being judged | logs from a period before the brief | assumed: the manager declares it. Current practice was itself shaped by past incentives. An outcome never seen in that period needs a declared small mass, for full support |
 | **objective** | [D2] | the manager's value of each outcome, for the team or the firm | values written in the brief | assumed: the manager states it, which in practice is rare |
+| **evaluator** | [D10] | the measure the employee is paid on: an indicator `1_A`, or pay per report `u = (1, 2, 0, 0)` in the running example; otherwise revealed from the allocation | the bonus rule, as written | exact for the rule. An indicator has two level sets, `A` and the rest; pay per report has three, careful reports, rushed reports, and the unpaid outcomes together |
 | **intensity** | [D2] | how hard the employee pursues what is asked, against the cost of changing their practice | never apart from the objective: only the product is identified | approximate: the cost of changing practice is modelled as KL ([P4]); contract theory usually uses other effort costs |
 | **specification** | [D3] | the brief: the current practice, and "do more of what I value, at the pace you can" | the written brief, dated before the period judged | exact when the brief is written beforehand; a brief reconstructed afterwards breaks the rule of use of [D3] |
 | **principal's resolution** | [D4] | what the manager declares not to care about: "I don't care how, as long as it is done well" groups the ways of reaching one deliverable | the brief | assumed; the finest resolution when the brief says nothing |
@@ -54,16 +56,16 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
   rewarded outcomes are worth more, to the manager, than the employee's current average. Kerr's folly is the case
   `E_p[F|A] < E_p[F]`: the rewarded outcomes are worth less than what the employee already does on average. In the
   running example, a bonus that only a rushed report earns has `E_p[F|A] = 0.5 < 0.9`.
-- **Consequence** of [P13], [P8]: a bonus on an indicator has no best size in between. Tilting by `1_A` leaves the
-  splits inside `A` and outside it unchanged ([P8](i)), so the manager's average is
-  `p_φ(A)·E_p[F|A] + (1 − p_φ(A))·E_p[F|not A]`, which is monotone in `φ`: the best bonus is either none or the largest.
-  A bonus on a graded measure is different. In the running example, pay per report gives the measure
-  `u = (1, 2, 0, 0)` per unit of time, since a rushed report takes half the time. The manager's average rises from `0.9`
-  to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the value of a rushed report. By [P13](i), the peak is
-  where `Cov_{p_φ}(u, F) = 0`: where the
-  measure and the manager's value become uncorrelated under the behaviour that the bonus itself induces. So the core
-  gives a reason for weak incentives with no risk aversion and no cost of pay: the measure stops tracking the value
-  as the employee follows it.
+- **Consequence** of [P18], [P20]: a bonus on an indicator has no best size in between. The indicator `1_A` has two
+  level sets, and a behaviour that follows it keeps the splits inside `A` and outside it ([P18](i)), so the manager's
+  average is `p_φ(A)·E_p[F|A] + (1 − p_φ(A))·E_p[F|not A]`, which is monotone in `φ`: the best bonus is either none or
+  the largest. A bonus on a graded measure is different. In the running example, pay per report gives the measure
+  `u = (1, 2, 0, 0)` per unit of time, since a rushed report takes half the time. Its regression ([D10]) is `0.5` on
+  rushed reports, `2` on careful ones and `0.45/0.7 ≈ 0.64` on the unpaid outcomes: it falls at the top. The manager's
+  average rises from `0.9` to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the regression at the measure's
+  top value ([P20](ii)). The peak is where `Cov_{p_φ}(u, F) = 0` ([P20](i)): where the measure and the manager's value
+  become uncorrelated under the behaviour that the bonus itself induces. So the core gives a reason for weak incentives
+  with no risk aversion and no cost of pay: the measure stops tracking the value as the employee follows it.
 - **Consequence** of [P11], [P8]: measured against the brief, the share of the employee's first response to a bonus
   `1_A` that is misaligned is `sin²θ`, with `cos θ` the correlation of `1_A` and `F` under `p`. When the rewarded
   outcomes are worth more than the rest, this share is the part of the variance of `F` that lies inside `A` and inside
@@ -90,6 +92,12 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
   misalignment at that resolution, which is never more than the misalignment at the finest one ([P4](iv)). This runs
   parallel to the informativeness principle [@holmstrom1979]: a finer record never hides more. The two are different
   statements, one about detection and one about the value of a contract.
+- **Consequence** of [P24], [D11]: an audit that samples kinds of request in other proportions than they arrive
+  measures a different misalignment. When the brief judges each kind of request on its own terms, the difference is
+  the evaluation gap `Γ`, each kind's misalignment weighted by how much more often it arrives than it is audited. An
+  audit that over-samples the kinds of request where the employee is closest to the brief understates their
+  misalignment. When the brief asks for one pace across kinds, `Γ` does not apply, and both misalignments must be
+  computed ([P24], Notes).
 
 ## 4. Limits
 
@@ -99,8 +107,9 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
 - The cost of changing one's practice is modelled as KL. Agreement with known qualitative results does not test that
   model; the prediction above, and the pursuit test of [P3] across bonuses of different sizes, do.
 - The default is the employee's current practice, which past incentives shaped. "No pursuit" means "nothing new asked".
-- One employee works few units in a period, so allocations are estimated with error, and the core has no estimation
-  layer yet.
+- One employee works few units in a period, so allocations are estimated with error. [P23] gives the law of the
+  estimated misalignment for independent units ([D11]); units of one person's time are not independent, so its error
+  bars are too narrow.
 - Requests that the employee does not choose are contexts. The claims above hold within one kind of request; across
   kinds, [P15] separates avoidable from unavoidable misalignment (see Contexts in `../README.md`).
 - The core needs the manager's values written down before the work is judged. Without them, it gives no verdict.

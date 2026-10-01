@@ -21,6 +21,7 @@ The full table, with its evidence, is on `main`: `70 Project/NOTES_claude.md` §
 | **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
 | **A plain-terms twin that claims more than the statement** | [P19]'s plain terms listed threshold selection among the covered paths; a threshold leaves `Δ°`, so the statement does not cover it (the conclusion holds there by a direct argument). Found in the review before the v10 commit | read each "In plain terms" against the Statement's hypotheses, one named example at a time |
 | **A rate copied from a sketch** | [P22]'s Notes said the Chernoff bound is approached like `1/log(1/ε)`; a computation across seven decades of `ε` showed `log log(1/ε)/log(1/ε)` | a rate in a Note is computed across several decades before it is written |
+| **A concept that is trivial in the typical case** | the regression of [D10] is the target itself whenever the evaluator gives distinct outcomes distinct values, the usual case for reward models and fitness; noticed only when filling the ontologies' evaluator slots, after [P18]–[P20] were proved and checked on instances built with ties | build check instances from the typical case as well as the interesting one, and fill one ontology before a new definition is final |
 | **A result silent on its specification** | [P24] said "the misalignment in deployment" without naming the specification on condition–outcome pairs; under one shared intensity its formula fails in 173 of 200 instances | every result over several conditions names the specification on pairs |
 | **Lineage amnesia after a restart** | [P13](ii) re-derived main's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9 | before adding a result, search main (`git grep -i <idea> origin/main`) for its counterpart, and cite it in the Lineage |
 
@@ -53,6 +54,7 @@ framework, and the forbidden statements of main's §11.
 | no estimation layer | **closed in part by [P23]**: the estimated misalignment under the standard specification, at a positive intensity; the boundary `t* = 0` and confidence sets for the other quantities are open |
 | no theory of what optimizing a proxy does | **opened by [D10]**: [P18] (only the regression counts), [P19] (a monotone regression rules out overoptimization), [P20] (where it starts, how it ends) |
 | detection, and the gap between evaluation and use | **closed by [P22] and [P24]** |
+| the regression of a real-valued evaluator | **open, E8**: on finitely many outcomes it is the target itself, so the evaluator results bite only for coarse evaluators (tests, grades, indicators) until binned evaluators have a result |
 | several actors, several principals | out of scope by declaration (`CORE.md` §0); §3.3 E4 |
 | worked cases | open: they need data (§3.2) |
 
@@ -99,6 +101,7 @@ Every test is pre-registered and pushed before any computation (README rules).
 | E5 | **Sharper identified sets.** [P17] uses KL alone. Every `f`-divergence obeys data processing, and for two conditions the exact condition for a pair of behaviours to come from a pair of views is a comparison of experiments (Blackwell) | a result | citation to verify before use |
 | E6 | **Misalignment in an unobserved condition.** [P17] bounds the objective's average. The largest misalignment within `ε` of the observed behaviour has no closed form; a small-`ε` expansion, as in [P11], may give one | a result | open |
 | E7 | **Identifying a view.** Which interventions identify what the actor perceives: the control-theory question of observability, from the principal's side | a result | open |
+| E8 | **Binned evaluators.** An evaluator with distinct values on distinct outcomes has `m = F` and `R = 0` ([D10], Notes), so [P19]'s hypothesis becomes "the evaluator never misorders two outcomes", which a learned reward model is not expected to meet. In practice the regression is estimated on bins of the evaluator, a coarser evaluator `h(F̂)`. Pursuing `F̂` and pursuing `h(F̂)` differ by at most `t·w` in log-probability, for bins of width `w` and `h` the bin's centre, so [P19] for the binned evaluator holds for `F̂` up to an error that grows with `t·w`. Wanted: the bound, and whether it is tight enough to say anything at the intensities where overoptimization is seen | a result in `derived/evaluator.md` | found in the double-check of the v10 ontologies; the continuous-outcome extension would make the regression non-trivial without binning |
 
 **To verify.** [D2]'s justification says that the check of [P3] exercises mixture paths. A read-only search to confirm
 it
@@ -141,11 +144,15 @@ item changes.
 ## 4. Order next
 
 The PI's review of v10 ([D10], [D11], [P18]–[P24]). Then, in this order:
-1. A worked case on the data of §3.2, pre-registered: D3 (best-of-`n` on a proxy reward model) now has predictions to
-   test, [P19]'s monotone regression and [P20]'s peak, and [P23] gives the error bars.
-2. Evaluator and sample slots in the five ontologies: each names its evaluator and what its samples are.
+1. A worked case on the data of §3.2, pre-registered: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak to
+   test, and [P21] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`, section
+   4). A case with a pass-or-fail verifier would test [P19] directly.
+2. E8, binned evaluators, before any claim about the regression of a real-valued proxy.
 3. main's Thm 9 as the matched pursuit of the residual (§5.2), and the alignment plane (H6).
 4. main's §11 as `derived/forbids.md`.
+
+Done since v10: evaluator and sample slots in the five ontologies, with the claims they allow (a cell-average proxy
+cannot overoptimize; a pass-or-fail verifier cannot either; the audit gap in job delegation).
 
 ## 5. Retrospective after v9, and hunches for v10
 

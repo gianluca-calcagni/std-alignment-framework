@@ -39,8 +39,9 @@ The framework in ten steps:
 
 **In scope.** One principal and one actor; finitely many outcomes; behaviour in each of finitely many conditions; any
 declared set of acceptable behaviours, with closed forms for "pursue `F`"; what the actor cannot distinguish, cannot do,
-or cannot perceive; and what observation identifies, including misalignment that an actor shows only when it is not
-observed.
+or cannot perceive; what observation identifies, including misalignment that an actor shows only when it is not
+observed; the evaluator an actor pursues, and what pursuing it does to the principal's objective; and what independent
+samples reveal.
 
 **Out of scope**, stated so that no result is read as covering it:
 - *Internal states.* The core judges behaviour ([A1]). Two actors that behave alike in every condition are the same
@@ -55,7 +56,8 @@ observed.
 - *Dependent samples.* Samples are independent draws ([D11]); successive decisions that depend on each other are not
   covered yet.
 - *Which objective is right.* The principal declares it; the core does not choose it.
-- *Explanations.* Why an actor behaves as it does is not measured.
+- *Explanations beyond the evaluator.* Why an actor pursues the evaluator it does, and by what mechanism, is not
+  measured. The evaluator itself is in scope, as a hypothesis about behaviour that samples can test ([D10], [D11]).
 
 **How to read.** Items are numbered by kind: A for premises and D for definitions, in this file; P for propositions, in
 `derived/`. `[P2](iii)` means part (iii) of P2. Logarithms are natural, so divergences are in nats. Operations on
@@ -204,7 +206,7 @@ symmetric, so the order matters. Tilting reweights a behaviour toward the outcom
   deterministic one, is still a behaviour: it is allowed as the first argument of KL, and it is a limit of full-support
   behaviours.
 - *Behaviour is any distribution* ([A1]). No model of how an actor produces its behaviour is assumed. The core measures
-  behaviour; explanations are not part of it.
+  behaviour; how it is produced is not part of it.
 - *KL and the tilt are notation here.* The items that use them argue that they are the right tools.
 
 **Notes.** A behaviour is a policy in reinforcement learning, a mixed strategy in game theory, a distribution of choices
@@ -563,7 +565,10 @@ principal's objective that the evaluator does not see.
 
 **Notes.** The evaluator is a proxy or reward model in machine learning, a performance measure in the economics of
 incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and
-a target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit.
+a target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit. When
+`F̂` gives distinct outcomes distinct values, every cell of `𝒱` is a single outcome, so `m = F` and `R = 0`. The
+regression says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or
+failed, a grade, a count or an indicator is.
 
 **Lineage.** main: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
 evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.

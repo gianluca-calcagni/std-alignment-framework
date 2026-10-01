@@ -24,7 +24,7 @@ Written before any behaviour is examined.
 | Interventions | [D6] | each planned intervention, as a known function `u` |
 | Observed conditions | [D9] | the conditions to be observed, and the conditions the report is about |
 | Objective's units | [D5] | the units in which the stakes will be counted |
-| Evaluator | [D10] | the evaluator the actor is rewarded on, if one is known; otherwise "revealed", to be read from behaviour |
+| Evaluator | [D10] | the evaluator the actor is rewarded on, if one is known; otherwise "revealed", to be read from behaviour; and which outcomes it scores alike |
 | Sampling | [D11] | how decisions will be sampled in each condition, the sample sizes, and why independence is a fair model |
 
 ## 2. The observations
@@ -41,7 +41,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 
 | Field | Core | What to write |
 |---|---|---|
-| Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23] |
+| Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
 | Departure split | [P6] | the departure `KL(p̂‖q)`, split into the pursuit part and misalignment |
@@ -49,7 +49,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Avoidable and unavoidable misalignment | [P15] | the split, when the feasible set is linear; the inequality when it is convex; otherwise the lower bound `inf_{p∈𝓕} M(p)` |
 | Resolution | [P7], [P8] | what the declared indifference forgave, and what the actor's resolution makes unavoidable |
 | Sensitivity | [P10] | how far an error in the default or in the objective could move misalignment |
-| Evaluator | [P18], [P19], [P20] | the regression of the target on the evaluator: whether it rises with the evaluator (then overoptimization is ruled out), and otherwise where the target stops rising and how it ends at high intensity; the share of the target's variance left in the residual |
+| Evaluator | [P18], [P19], [P20] | the regression of the target on the evaluator: whether it rises with the evaluator (then overoptimization is ruled out), and otherwise where the target stops rising and how it ends at high intensity; the share of the target's variance left in the residual. When the evaluator scores no two outcomes alike, say so: the regression is then the target itself ([D10]) |
 | Pass-through | [P12] | for each intervention, the coefficient of `u`, and the distance of `log(p'/p)` from `span{u, 1}` |
 | Unobserved conditions | [D9], [P16], [P17] | for each condition the report is about but did not observe: whether its behaviour is identified; otherwise `ε`, how it was bounded (from the inputs, [P16](iii)), and the bounds of [P17] on the objective's average there |
 | Evaluation gap | [P24] | when evaluation and real use meet conditions in different proportions, the gap between the two misalignments |

@@ -58,7 +58,9 @@ limited to `𝒱`. By [P18](i), `E_{p_s}[F] = E_{p_s}[m]`, and by [P13](i), appl
 
 **Notes.** It generalizes main's Prop 21, where the regression is affine, and main's B §4, where target and evaluator
 are jointly Gaussian. Monotonicity is a property of the default's joint law of target and evaluator, so it can be
-checked before any optimization. The check shows that, without it, overoptimization is common.
+checked before any optimization. The check shows that, without it, overoptimization is common. For an evaluator with
+distinct values on distinct outcomes, `m = F` ([D10], Notes), and the hypothesis asks that `F̂` never score an outcome
+above another that the target strictly prefers.
 Best-of-`n`, the best of `n` draws from `q` by `F̂` as a path in a real `n ≥ 1`, stays in `Δ°`, and its revealed
 objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B` the default's mass of `F̂ ≤ v` and of
 `F̂ < v`, it is `(A^n·log A − B^n·log B)/(A^n − B^n)`, with `0·log 0 = 0`: the average of `log u` over `[B, A]` with
@@ -91,8 +93,9 @@ sign is that of `m(v_1) − m(v_2)`.
 
 **Checks.** checks/test_evaluator.py::test_overoptimization_starts_where_correlation_ends_and_ends_at_the_top
 
-**Notes.** (i) is the stopping rule of Karwowski et al. [@karwowski2024] in the core's terms: stop where target and
-evaluator become uncorrelated under the current behaviour. (ii) is the extremal variant of Goodhart's law: what decides
+**Notes.** (i) gives a stopping rule: stop where target and evaluator become uncorrelated under the current behaviour.
+Karwowski et al. derive an early-stopping rule for proxy optimization in the geometry of occupancy measures
+[@karwowski2024]; whether the two rules coincide is not yet checked (`TERMS.md`, section 2). (ii) says that what decides
 the end is the regression at the top of the evaluator's range, which the default may sample rarely. Before the limit, a
 third value close to the second can still dominate the sign, as the check shows in log space.
 

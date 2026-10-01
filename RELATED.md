@@ -20,7 +20,7 @@ that carry it.
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | later: an endogenous default |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | now: identification across environments |
-| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator and early stopping ([D10], [P18]–[P20]); later: hackability over a feasible set |
+| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([D10], [P18]–[P20]); later: early stopping compared, hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
 | Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([D11], [P21]–[P23]); later: Stein's exponent, the boundary case |
@@ -103,12 +103,16 @@ that carry it.
 - *Different.* Rankings, worst cases and orderings over policy sets, rather than a divergence with stakes and
   identification.
 - *Import, done.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
-  residual ([D10], [P18]); Karwowski et al.'s early stopping, which in our terms stops where the target and the
-  evaluator become uncorrelated under the current behaviour ([P20](i)).
-- *Import, later.* Hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's
+  residual ([D10], [P18]); a stopping rule, where the target and the evaluator become uncorrelated under the current
+  behaviour ([P20](i)).
+- *Import, later.* Whether Karwowski et al.'s early stopping is the rule of [P20](i) (`TERMS.md`, section 2, level B);
+  hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's
   four variants, once their definitions are checked against [P8], [P20](ii), [P12] and [P17] (`NOTES.md` §5, H3).
 - *What it could take from us.* Exact results for actors that see only the evaluator: a monotone regression rules out
-  overoptimization ([P19]), and the terminal rule of [P20](ii).
+  overoptimization ([P19]), so a proxy that only averages the target over what it can tell apart cannot lower it, and
+  neither can a pass-or-fail verifier whose passing outcomes are better on average (`ontologies/machine-learning/`);
+  and the terminal rule of [P20](ii). Whether Manheim and Garrabrant's regressional variant (proxy equals target plus
+  noise) has a monotone regression depends on the noise, which is a question for their definitions.
 
 ## Principal–agent theory
 

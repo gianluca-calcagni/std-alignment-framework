@@ -32,8 +32,10 @@ The Core column names the item below.
 | **outcomes** | [D1] | a finite set | what one outcome is, and how a continuum is cut into finitely many |
 | **contexts** | [D8] | conditions whose frequencies the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
 | **behaviour** | [D1] | a distribution on the outcomes | whose behaviour, counted over what (people, occasions, generations), and how it is measured |
+| **sample** | [D11] | independent draws from a behaviour | what one draw is, how many there are in each condition, and why independence is a fair model |
 | **default** | [D2] | a full-support distribution on the outcomes | what happens with no pursuit, and how it is measured apart from the behaviour it will judge |
 | **objective** | [D2] | a function on the outcomes, up to a constant | what the principal wants pursued, in whose units |
+| **evaluator** | [D10] | a function on the outcomes, known or revealed | what the actor is rewarded or selected on, if that is known, and its level sets: which outcomes it scores alike |
 | **intensity** | [D2] | a number, at least 0 | what makes pursuit stronger or weaker; only the product of intensity and objective is identified ([P1]) |
 | **specification** | [D3] | a default and a closed set of intended behaviours | who declares it, when, and where it is written down |
 | **principal's resolution** | [D4] | a partition, the finest unless declared | the distinctions the principal declares it does not care about |
@@ -49,6 +51,16 @@ every item applies as stated. Across contexts, [P15] splits misalignment under t
 best feasible behaviour pursues the objective within each context at one shared intensity, and the unavoidable part is
 how much the unconstrained pursuit would have reweighted the contexts. [P13](i) holds for any path, and the first limit
 of [P13](ii) for any path as in [P11], so both apply across contexts as stated.
+
+**Evaluator.** The regression of the objective on the evaluator ([D10]) says more than the objective itself only when
+the evaluator scores several outcomes alike: a test passed or failed, a grade, an indicator, a fine. A real-valued
+evaluator, such as a reward model's score or a genome's fitness, gives distinct outcomes distinct values, so each level
+set is one outcome, the regression is the objective, and the residual is zero. Every entry says which case holds.
+
+**Sample.** Every behaviour in an ontology is known through samples ([D11]). [P23] needs each outcome counted many
+times, and independent draws. With very many outcomes, counts are grouped into the cells of a resolution, and grouping
+only hides misalignment ([P4](iv)), so what is estimated is a lower bound on misalignment. Draws that depend on each
+other, such as one person's successive decisions, make the error bars of [P23] too narrow.
 
 **Fit.** The last column says how well the discipline's object has the slot's type. It starts with one of four words.
 - **exact**: the object has the type, by definition or by a cited result.
