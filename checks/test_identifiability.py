@@ -1,9 +1,12 @@
 """Checks of P11 (the misaligned share at the start of any change away from the default is sin²θ, or 1 against the
-objective) and P12 (what an intervention reveals: pass-through is identified from behaviour alone; a change outside
-span{u, 1} shows the intervention moved more than it added; revealed objectives certify an actor's distinctions)."""
+objective), P12 (what an intervention reveals: pass-through is identified from behaviour alone; a change outside
+span{u, 1} shows the intervention moved more than it added; revealed objectives certify an actor's distinctions) and
+P13 (the objective's average moves at the covariance rate; at the start, the gain per unit of departure is cos θ times
+the objective's spread, and the shortfall is 1 − cos θ times it)."""
 import numpy as np
 from .common import EXACT, rng, simplex_interior, tilt, kl_tilts, random_partition
 from .test_misalignment import ray_minimizer
+from .test_stakes import matched_intensity
 
 
 def var(q, G):
@@ -88,3 +91,39 @@ def test_revealed_objectives_certify_distinctions():
             path2 = lambda s: (lambda z: np.exp(z - z.real.max()) / np.exp(z - z.real.max()).sum())(np.log(base) + s * w)
             Fs = np.imag(np.log(path2(0.3 + 1j * H))) / H
             assert abs(Fs[idx[0]] - Fs[idx[1]]) > 0.5
+
+
+def test_average_moves_at_the_covariance_rate():
+    """P13(i): along any smooth path, d/ds E_{p_s}[F] = Cov_{p_s}(F_s, F), at every s, not only at the start."""
+    r = rng(804)
+    H = 1e-30
+    for _ in range(300):
+        n = int(r.integers(2, 12)); q = simplex_interior(r, n); F, G, K = (r.normal(0, 1, n) for _ in range(3))
+        a = lambda s: s * G + s * s * K + 0.3 * np.sin(s) * F                    # a curved path through q
+        for s in r.uniform(-2, 2, 3):
+            z = np.log(q) + a(s + 1j * H); z = z - z.real.max()
+            p = np.exp(z) / np.exp(z).sum()
+            rate = np.imag(p @ F) / H                                            # d/ds E_{p_s}[F], by complex step
+            Fs, ps = np.imag(np.log(p)) / H, p.real                              # the revealed objective at s
+            assert abs(rate - cov(ps, Fs, F)) <= EXACT * (1 + abs(rate) + np.abs(F).max())
+
+
+def test_start_gains_cos_theta_of_the_spread():
+    """P13(ii): along p_s = tilt(q, sG + s²H), the gain in F per unit of (2 KL(p_s || q))^{1/2} tends to cos θ σ_q(F),
+    and the shortfall per unit tends to (1 − cos θ) σ_q(F), at first order in s."""
+    r = rng(805); signs = {"with": 0, "against": 0}
+    for _ in range(300):
+        n = int(r.integers(3, 10)); q = simplex_interior(r, n); F, G, K = (r.normal(0, 1, n) for _ in range(3))
+        sF = np.sqrt(var(q, F)); c = cov(q, G, F) / np.sqrt(var(q, G) * var(q, F))
+        errors = []
+        for s in (1e-3, 1e-4):
+            a = s * G + s * s * K; p = tilt(q, a); unit = np.sqrt(2 * kl_tilts(q, a, np.zeros(n)))
+            lam = matched_intensity(p, q, F)
+            assert np.isfinite(lam)
+            gain, short = (p @ F - q @ F) / unit, (tilt(q, lam * F) @ F - p @ F) / unit
+            errors.append((abs(gain - c * sF), abs(short - (1 - c) * sF)))
+        for e3, e4 in zip(*errors):
+            assert e4 <= 1e-2 * sF                                               # close at small departures
+            assert e4 <= 0.2 * e3 + 1e-9                                         # and closer, at first order
+        signs["with" if c > 0 else "against"] += 1
+    assert min(signs.values()) >= 100

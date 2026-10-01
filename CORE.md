@@ -23,7 +23,8 @@ steps.
 5. **Stakes and sensitivity** (section 5). Misalignment is in nats; the shortfall says how much of the objective is
    lost, in its own units. Both come with bounds on how much a slightly wrong default or objective can move them.
 6. **Identifiability** (section 6). What a change of behaviour or an intervention reveals about the actor without
-   knowing what it wants: how much of the change is misaligned, and how it responds to incentives.
+   knowing what it wants: how much of the change is misaligned, how much of the objective it gains, and how the actor
+   responds to incentives.
 
 The core assumes nothing about how the actor produces its behaviour.
 
@@ -36,7 +37,7 @@ carry in other fields.
 |---|---|---|
 | `X` | the outcomes | [D1] |
 | `Δ`, `Δ°` | all behaviours; the full-support ones | [D1] |
-| `E_p[F]`, `Var_p(F)` | average and variance of `F` under `p` | [D1] |
+| `E_p[F]`, `Var_p(F)`, `Cov_p(F, G)` | average, variance and covariance under `p` | [D1] |
 | `KL(p‖r)` | the Kullback–Leibler divergence, in nats | [D1] |
 | `tilt(r, F)` | `r` reweighted by `e^F` | [D1] |
 | `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [P2] |
@@ -52,6 +53,7 @@ carry in other fields.
 | `λ`, `S(p̂)` | the matched intensity; the shortfall, in the units of `F` | [D5] |
 | `θ` | the angle between a revealed objective and the declared one | [P11] |
 | `u`, `φ` | an intervention; the pass-through | [D6] |
+| `σ_q(F)` | the spread of `F` under the default: `Var_q(F)^{1/2}` | [P13] |
 
 ## 1. Behaviours and tilts
 
@@ -59,7 +61,7 @@ carry in other fields.
 **Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
 distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
 `p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and
-`Var_p(F) = E_p[F²] − E_p[F]²`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
+`Var_p(F) = E_p[F²] − E_p[F]²`, and `Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
 the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when
 `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
 `tilt(r, F) = r·e^F / E_r[e^F]`.
@@ -692,8 +694,8 @@ target), and NOTES §2.3 (capacity switches the regime: errors matter more at hi
 
 A single behaviour reveals an objective only relative to a default ([P1]). Changes of behaviour reveal more: their
 objective needs no default ([P2]), and whether it stays fixed is testable ([P3]). This section adds how much of a change
-is misaligned, read from its first step ([P11]), and what interventions reveal about how an actor responds ([P12]).
-Each item also says what cannot be revealed.
+is misaligned, read from its first step ([P11]), what interventions reveal about how an actor responds ([P12]), and
+how much of the objective a change gains ([P13]). Each item also says what cannot be revealed.
 
 ### P11 — The misaligned share at the start of a change
 **Statement.** Let `F` be non-constant, and let `s ↦ p_s`, for `s ≥ 0`, be a twice continuously differentiable path in
@@ -795,3 +797,47 @@ identify it up to a constant without one, and interventions identify how the act
 
 **Lineage.** main: ROADMAP §6 I1 (the identifiability ladder: declare, measure, identify through interventions), B1
 (identifying an actor's partition), and T7-2d. New: both statements.
+
+### P13 — What the start of a change gains
+**Statement.** Let `F` be non-constant, and let `s ↦ p_s`, for `s ≥ 0`, be a continuously differentiable path in `Δ°`
+with revealed objectives `F_s`.
+(i) **The average moves at the covariance rate.** For every `s`, `d/ds E_{p_s}[F] = Cov_{p_s}(F_s, F)`.
+(ii) **At the start, the gain is set by the angle.** Let the path be as in [P11], with angle `θ`, and let
+`σ_q(F) = Var_q(F)^{1/2}`. As `s → 0`,
+`(E_{p_s}[F] − E_q[F]) / (2·KL(p_s‖q))^{1/2} → cos θ·σ_q(F)` and `S(p_s) / (2·KL(p_s‖q))^{1/2} → (1 − cos θ)·σ_q(F)`,
+where `S` is the shortfall of [D5].
+
+**In plain terms.** As behaviour changes, the average of any objective moves at a rate equal to the covariance, under
+the current behaviour, between that objective and the objective the change reveals. At the start of a change away from
+the default, each unit of departure gains the objective's spread times the cosine of the angle of [P11]. Pursuing the
+objective itself, with the same departure, gains the full spread, so the shortfall is the rest: one minus the cosine,
+times the spread. No change gains more per unit of departure at the start than pursuit of the objective, and a change
+against the objective loses.
+
+**Proof.** (i) By [P2], `∂_s p_s(x) = p_s(x)·F_s(x)`, so `d/ds E_{p_s}[F] = Σ_x p_s(x)·F_s(x)·F(x) = E_{p_s}[F_s·F]`.
+Since `Σ_x p_s(x) = 1` for every `s`, `E_{p_s}[F_s] = Σ_x ∂_s p_s(x) = 0`, so `E_{p_s}[F_s·F] = Cov_{p_s}(F_s, F)`.
+(ii) Write `G = F_0` and `ε(s) = (2·KL(p_s‖q))^{1/2}`. The proof of [P11] gives `KL(p_s‖q) = ½·s²·Var_q(G) + O(s³)`, so
+`ε(s) = s·σ_q(G)·(1 + O(s))`. By (i) and Taylor's theorem, `E_{p_s}[F] − E_q[F] = s·Cov_q(G, F) + O(s²)`. Dividing,
+the first ratio tends to `Cov_q(G, F)/σ_q(G) = cos θ·σ_q(F)`.
+For the shortfall, let `A` be the set where `F` is largest. Along the ray, `d(t) = KL(p_{F,t}‖q)
+= t·E_{p_{F,t}}[F] − log E_q[e^{tF}]` is continuous and `0` at `t = 0`. The ray's revealed objective is
+`F − E_{p_{F,t}}[F]`, so (i) gives `d/dt E_{p_{F,t}}[F] = Var_{p_{F,t}}(F)`, and `d'(t) = t·Var_{p_{F,t}}(F) > 0` for
+`t > 0`: `d` is increasing. Its limit as
+`t → ∞` is `KL(q(·|A)‖q) = −log q(A) > 0`, since `F` is non-constant. So for small `s`, the matched intensity `λ` of
+[D5] is finite, `d(λ) = KL(p_s‖q)`, and `λ → 0` as `s → 0`. The same second-order expansion applied to the ray gives
+`d(λ) = ½·λ²·Var_q(F) + O(λ³)`, so `λ·σ_q(F) = ε(s)·(1 + O(λ))`, and `λ = O(s)`. By (i) on the ray,
+`E_{p_{F,λ}}[F] − E_q[F] = λ·Var_q(F) + O(λ²) = ε(s)·σ_q(F) + O(s²)`. Subtracting the actual gain,
+`S(p_s) = ε(s)·σ_q(F)·(1 − cos θ) + O(s²)`, and dividing by `ε(s)` gives the second limit.
+
+**Checks.** checks/test_identifiability.py::test_average_moves_at_the_covariance_rate,
+checks/test_identifiability.py::test_start_gains_cos_theta_of_the_spread
+
+**Notes.** (i) is the Price equation [@price1970] in continuous time without its transmission term, with `F_s` in the
+role of Malthusian fitness: it holds at every `s`, for any path, with no default. Along any path, the average of `F` is
+stationary exactly where `Cov_{p_s}(F_s, F) = 0`. So when an actor pursues a proxy, the average of the objective peaks
+only where the proxy and the objective are uncorrelated under the actor's current behaviour. (ii) is a law in the
+square root of the departure, with a finite slope at zero departure, bounded by `σ_q(F)` for every smooth path, since
+`|cos θ| ≤ 1`. Together with [P11]: at the start of a change, `sin²θ` of the departure is misaligned, and `1 − cos θ` of
+the attainable gain is lost.
+
+**Lineage.** main: ROADMAP §6 I1 (the dynamic angle) and Def 22 (the value shortfall). New: both statements.

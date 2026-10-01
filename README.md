@@ -16,6 +16,7 @@ This branch rebuilds the core from scratch: slim, justified, and in plain terms 
 | `REFERENCES.md` | the sources the core cites |
 | `checks/` | one pytest check, at least, for every result in the core |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
+| `ontologies/` | the core read in five disciplines: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots with items of the core and reframes one known result. Not part of the core |
 | `TERMS.md` | the vocabulary: every term the core defines, its other names in the literature, every correspondence not yet in the core, and every naming decision, each with a confidence level |
 | `NOTES.md` | the executor's working notes: failure modes and open gaps. Not part of the core |
 | `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before this restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
@@ -31,9 +32,13 @@ This branch rebuilds the core from scratch: slim, justified, and in plain terms 
 - **R5.** References are written `[D1]`, `[P3]`. A statement, justification or proof may use only items that come
   earlier, so the dependencies follow the reading order and cannot form a cycle.
 - **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
-- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited.
+- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited, in `CORE.md` or in
+  `ontologies/`.
 - **R9.** Every term an item defines (bold in its Statement) has an entry in `TERMS.md`, and every item `TERMS.md` names
   exists.
+- **R10.** Every ontology in `ontologies/` fills each slot listed in `ontologies/README.md` once, naming the slot's
+  item and how well it fits; has the five sections in order; cites the known result it reframes; and labels every
+  claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
 SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
@@ -83,7 +88,7 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `TERMS.md` and `NOTES.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
+Read this file, `CORE.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
 past sessions, each with its evidence.
 
 ## License
