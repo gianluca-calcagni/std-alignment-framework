@@ -15,7 +15,17 @@ Rules
   R6  Checks cite pytest functions as checks/<file>.py::<test_name>; each exists. A result cites at least one.
   R7  Every test function in checks/ is cited by some item (no check without a claim).
   R8  Citations are written [@key]; each key is listed in REFERENCES.md as '- [@key] ...', listed once, and every
-      listed key is cited in CORE.md.
+      listed key is cited in CORE.md or in ontologies/.
+  R9  Every term an item defines (a bold span in its Statement that does not end with '.') has an entry in TERMS.md
+      (a bold name in the first column of a table row), and every item TERMS.md names exists. Matching ignores case,
+      hyphens and a final 's' on each word.
+  R10 Ontologies. ontologies/README.md lists the slots, one table row each: '| **<slot>** | [<item>] | ...'. Every other
+      ontologies/*.md has a '# Ontology — ' title and the sections ONTOLOGY_SECTIONS, in order. Its section 1 has a
+      table with the columns Slot, Core, In this discipline, Observed as, Fit; every slot appears in it once, its Core
+      cell names the slot's item, its Fit cell starts with a word of FITS, and no other row appears. Section 2 cites a
+      source. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or '**Reading** with',
+      and names at least one item before its first ':'; a prediction says '*Refuted if*'. Sections 4 and 5 are not
+      empty. Every item named in an ontology exists.
 """
 import re, sys
 from pathlib import Path
@@ -31,6 +41,16 @@ CHECK = re.compile(r"(checks/[\w/]+\.py)::(\w+)")
 CITE = re.compile(r"\[@([\w:-]+)\]")
 LISTED = re.compile(r"^- \[@([\w:-]+)\] \S")
 TESTDEF = re.compile(r"^def (test_\w+)\(", re.M)
+BOLD = re.compile(r"\*\*([^*]+?)\*\*")
+ONTOLOGY_SECTIONS = ["1. Slots", "2. Known result", "3. What the core says", "4. Limits", "5. Open questions"]
+SLOT_COLUMNS = ["Slot", "Core", "In this discipline", "Observed as", "Fit"]
+FITS = ("exact", "approximate", "assumed", "absent")
+CLAIM = re.compile(r"^- \*\*(Consequence)\*\* of |^- \*\*(Prediction)\*\* from |^- \*\*(Reading)\*\* with ")
+
+
+def norm_term(t):
+    words = re.sub(r"[-–]", " ", t.lower()).split()
+    return " ".join(w[:-1] if len(w) > 3 and w.endswith("s") else w for w in words)
 
 
 def parse_items(text):
@@ -130,6 +150,10 @@ def lint(root):
             if (path, name) not in cited_checks:
                 errors.append(f"{path}: R7 {name} is cited by no item")
 
+    # R10 (before R8, which counts the ontologies' citations)
+    onto_errors, onto_cited, n_onto = lint_ontologies(root, pos)
+    errors += onto_errors
+
     # R8
     refs_file = root / "REFERENCES.md"
     listed = [m[1] for line in (refs_file.read_text(encoding="utf-8").splitlines() if refs_file.exists() else [])
@@ -139,13 +163,133 @@ def lint(root):
     cited = set(CITE.findall(text))
     for key in sorted(cited - set(listed)):
         errors.append(f"CORE.md: R8 [@{key}] is not in REFERENCES.md")
-    for key in sorted(set(listed) - cited):
-        errors.append(f"REFERENCES.md: R8 [@{key}] is cited nowhere in CORE.md")
+    for name, key in sorted(onto_cited):
+        if key not in listed:
+            errors.append(f"ontologies/{name}: R8 [@{key}] is not in REFERENCES.md")
+    for key in sorted(set(listed) - cited - {k for _, k in onto_cited}):
+        errors.append(f"REFERENCES.md: R8 [@{key}] is cited nowhere in CORE.md or ontologies/")
+
+    # R9
+    defined = {}
+    for it in items:
+        for term in BOLD.findall(it["fields"].get("Statement", "")):
+            if not term.rstrip().endswith("."):
+                defined.setdefault(norm_term(term), (it["id"], term))
+    terms_file = root / "TERMS.md"
+    glossary = set()
+    terms_text = terms_file.read_text(encoding="utf-8") if terms_file.exists() else ""
+    for line in terms_text.splitlines():
+        if line.startswith("|") and not line.startswith("|---"):
+            first = line.split("|")[1]
+            glossary.update(norm_term(t) for t in BOLD.findall(first))
+    for key, (iid, term) in sorted(defined.items()):
+        if key not in glossary:
+            errors.append(f"CORE.md: {iid}: R9 the term '{term}' has no entry in TERMS.md")
+    for n, line in enumerate(terms_text.splitlines(), 1):
+        for ref in REF.findall(line):
+            if ref not in pos:
+                errors.append(f"TERMS.md:{n}: R9 [{ref}] names no item")
 
     counts = {KINDS[k]: sum(it["kind"] == k for it in items) for k in KINDS}
     summary = {"items": len(items), **{k: v for k, v in counts.items() if v},
-               "checks": sum(len(v) for v in test_defs.values()), "references": len(set(listed))}
+               "checks": sum(len(v) for v in test_defs.values()), "references": len(set(listed)),
+               "terms": len(glossary), "ontologies": n_onto}
     return errors, summary
+
+
+def table_rows(lines):
+    """The cells of each table row in lines, skipping separator rows."""
+    return [[c.strip() for c in line.strip().strip("|").split("|")] for line in lines
+            if line.strip().startswith("|") and not re.match(r"^\|[\s:|-]+\|?$", line.strip())]
+
+
+def lint_ontologies(root, pos):
+    """R10. Returns (errors, {(file name, cited key)}, number of ontologies)."""
+    folder = root / "ontologies"
+    if not folder.exists():
+        return [], set(), 0
+    errors, cited = [], set()
+    readme = folder / "README.md"
+    if not readme.exists():
+        return ["ontologies: R10 README.md, with the slot table, is missing"], cited, 0
+    rtext = readme.read_text(encoding="utf-8")
+    cited |= {("README.md", k) for k in CITE.findall(rtext)}
+    slots = {}
+    for cells in table_rows(rtext.splitlines()):
+        m = re.fullmatch(r"\*\*([^*]+)\*\*", cells[0]) if cells else None
+        refs = REF.findall(cells[1]) if len(cells) > 1 else []
+        if m and len(refs) == 1 and cells[1] == f"[{refs[0]}]":
+            slots[m[1]] = refs[0]
+    if not slots:
+        errors.append("ontologies/README.md: R10 no slot table ('| **<slot>** | [<item>] | ...')")
+    files = sorted(f for f in folder.glob("*.md") if f.name != "README.md")
+    for f in [readme] + files:
+        for n, line in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+            for ref in REF.findall(line):
+                if ref not in pos:
+                    errors.append(f"ontologies/{f.name}:{n}: R10 [{ref}] names no item")
+    for f in files:
+        where, text = f"ontologies/{f.name}", f.read_text(encoding="utf-8")
+        cited |= {(f.name, k) for k in CITE.findall(text)}
+        if not text.startswith("# Ontology — "):
+            errors.append(f"{where}:1: R10 must start with '# Ontology — <discipline>'")
+        heads, body, cur = [], {}, None
+        for line in text.splitlines():
+            if line.startswith("## "):
+                cur = line[3:].strip(); heads.append(cur); body[cur] = []
+            elif cur is not None:
+                body[cur].append(line)
+        if heads != ONTOLOGY_SECTIONS:
+            errors.append(f"{where}: R10 sections must be {ONTOLOGY_SECTIONS}, found {heads}")
+        rows = table_rows(body.get(ONTOLOGY_SECTIONS[0], []))
+        if not rows or rows[0] != SLOT_COLUMNS:
+            errors.append(f"{where}: R10 section 1 needs a table with the columns {', '.join(SLOT_COLUMNS)}")
+        else:
+            seen = []
+            for cells in rows[1:]:
+                m = re.fullmatch(r"\*\*([^*]+)\*\*", cells[0])
+                name = m[1] if m else cells[0]
+                if name not in slots:
+                    errors.append(f"{where}: R10 '{name}' is not a slot of ontologies/README.md")
+                    continue
+                seen.append(name)
+                if len(cells) != len(SLOT_COLUMNS) or any(not c for c in cells):
+                    errors.append(f"{where}: R10 the row of '{name}' must fill all {len(SLOT_COLUMNS)} columns")
+                    continue
+                if f"[{slots[name]}]" not in cells[1]:
+                    errors.append(f"{where}: R10 the Core cell of '{name}' must name [{slots[name]}]")
+                if not cells[4].lower().startswith(FITS):
+                    errors.append(f"{where}: R10 the Fit of '{name}' must start with one of {', '.join(FITS)}")
+            for name in slots:
+                if seen.count(name) != 1:
+                    errors.append(f"{where}: R10 the slot '{name}' appears {seen.count(name)} times, not once")
+        if not CITE.search("\n".join(body.get(ONTOLOGY_SECTIONS[1], []))):
+            errors.append(f"{where}: R10 the known result must cite its source [@key]")
+        claims, cur = [], None
+        for line in body.get(ONTOLOGY_SECTIONS[2], []):
+            if line.startswith("- "):
+                cur = [line]; claims.append(cur)
+            elif cur is not None and line.startswith("  "):
+                cur.append(line)
+            else:
+                cur = None
+        if not claims:
+            errors.append(f"{where}: R10 section 3 has no claims")
+        for claim in claims:
+            first, whole = claim[0], " ".join(claim)
+            m = CLAIM.match(first)
+            if not m:
+                errors.append(f"{where}: R10 a claim must start with a kind and its items: {first[:60]!r}")
+                continue
+            head = whole[m.end():].split(":", 1)[0]
+            if not REF.search(head):
+                errors.append(f"{where}: R10 a claim names no item before its ':': {first[:60]!r}")
+            if m[2] and "*Refuted if*" not in whole:
+                errors.append(f"{where}: R10 a prediction must say when it is '*Refuted if*': {first[:60]!r}")
+        for sec in ONTOLOGY_SECTIONS[3:]:
+            if sec in body and not "".join(body[sec]).strip():
+                errors.append(f"{where}: R10 section '{sec}' is empty")
+    return errors, cited, len(files)
 
 
 if __name__ == "__main__":

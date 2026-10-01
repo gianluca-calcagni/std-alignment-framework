@@ -16,6 +16,9 @@ This branch rebuilds the core from scratch: slim, justified, and in plain terms 
 | `REFERENCES.md` | the sources the core cites |
 | `checks/` | one pytest check, at least, for every result in the core |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
+| `ontologies/` | the core read in five disciplines: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots with items of the core and reframes one known result. Not part of the core |
+| `TERMS.md` | the vocabulary: every term the core defines, its other names in the literature, every correspondence not yet in the core, and every naming decision, each with a confidence level |
+| `NOTES.md` | the executor's working notes: failure modes and open gaps. Not part of the core |
 | `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before this restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
 
 ## Rules
@@ -29,7 +32,13 @@ This branch rebuilds the core from scratch: slim, justified, and in plain terms 
 - **R5.** References are written `[D1]`, `[P3]`. A statement, justification or proof may use only items that come
   earlier, so the dependencies follow the reading order and cannot form a cycle.
 - **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
-- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited.
+- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited, in `CORE.md` or in
+  `ontologies/`.
+- **R9.** Every term an item defines (bold in its Statement) has an entry in `TERMS.md`, and every item `TERMS.md` names
+  exists.
+- **R10.** Every ontology in `ontologies/` fills each slot listed in `ontologies/README.md` once, naming the slot's
+  item and how well it fits; has the five sections in order; cites the known result it reframes; and labels every
+  claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
 SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
@@ -39,7 +48,7 @@ paths, rather than reproduce printed digits.
 - **Reliability over elegance.** A result enters with a proof and a check that could fail: random instances, the
   degenerate and sign cases, and tolerances derived from the quantity's scale.
 - **Every choice is justified.** "Why this choice" argues it, by generality (for example: every full-support
-  distribution is an exponential tilt of the reference), by canonicity, or by a named case where the alternative gives
+  distribution is an exponential tilt of the default), by canonicity, or by a named case where the alternative gives
   a wrong verdict.
 - **Plain terms keep the qualifiers** of the formal statement.
 - **Slim.** About a dozen items. An item that does not earn its place goes to an appendix, or stays on `main`.
@@ -51,13 +60,13 @@ paths, rather than reproduce printed digits.
 ## The format of an item
 
 ```markdown
-### D1 — Outcomes and reference
-**Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the reference.
+### D1 — Outcomes and default
+**Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the default.
 **In plain terms.** The things that can happen, and how often each happens by default.
 **Why this choice.** …
 **Lineage.** main: Def 1 (in part).
 
-### P1 — Every behaviour is a tilt of the reference
+### P1 — Every behaviour is a tilt of the default
 **Statement.** For every full-support `p` on `X` there is `F` with `p ∝ q·e^F`; `F` is unique up to a constant.
 **In plain terms.** Any way of behaving can be written as the default reweighted by some objective.
 **Proof.** …
@@ -79,8 +88,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file and `CORE.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of past
-sessions, each with its evidence.
+Read this file, `CORE.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
+past sessions, each with its evidence.
 
 ## License
 
