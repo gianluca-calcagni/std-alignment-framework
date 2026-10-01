@@ -22,7 +22,7 @@ Rules
   R6  Checks cite pytest functions as checks/<file>.py::<test_name>; each exists. A result cites at least one.
   R7  Every test function in checks/ is cited by some item (no check without a claim).
   R8  Citations are written [@key]; each key is listed in REFERENCES.md as '- [@key] ...', listed once, and every
-      listed key is cited in CORE.md, derived/, ontologies/ or STANDARD.md.
+      listed key is cited in CORE.md, derived/, ontologies/, STANDARD.md or RELATED.md.
   R9  Every term an item defines (a bold span in its Statement that does not end with '.') has an entry in TERMS.md
       (a bold name in the first column of a table row), and every item TERMS.md names exists. Matching ignores case,
       hyphens and a final 's' on each word.
@@ -35,6 +35,7 @@ Rules
       Sections 4 and 5 are not empty. Every item named in an ontology exists.
   R11 STANDARD.md names only existing items, and names every definition of the core: the reporting standard covers the
       whole shared vocabulary.
+  R12 RELATED.md, the survey of related theories, names only existing items; its citations count for R8.
 """
 import re, sys
 from pathlib import Path
@@ -243,6 +244,14 @@ def lint(root):
                 errors.append(f"STANDARD.md: R11 the definition {it['id']} is not covered by the standard")
     elif any(it["kind"] == "D" for it in core_items):
         errors.append("STANDARD.md: R11 the reporting standard is missing")
+    related = root / "RELATED.md"
+    if related.exists():
+        rtext = related.read_text(encoding="utf-8")
+        cited |= {("RELATED.md", k) for k in CITE.findall(rtext)}
+        for n, line in enumerate(rtext.splitlines(), 1):
+            for ref in REF.findall(line):
+                if ref not in pos:
+                    errors.append(f"RELATED.md:{n}: R12 [{ref}] names no item")
 
     # R8
     refs_file = root / "REFERENCES.md"

@@ -13,8 +13,10 @@ genomes.
 | **outcomes** | [D1] | the haploid genomes of a population, or a sample of them | genomes kept intact in the laboratory (hemiclones) | exact for a sample of genomes; approximate for a whole population |
 | **contexts** | [D8] | none in the known result, which uses one laboratory environment; environments are contexts when selection is compared across them | the experimental design | absent: one environment |
 | **behaviour** | [D1] | how often each genome occurs in a generation, at a given life stage | counts in samples | exact |
+| **sample** | [D11] | genomes drawn from the population at one life stage, in one generation | genotyped individuals, or hemiclones taken for assays | approximate: draws from a finite population are close to independent when the sample is small next to the population. Drift, a change between generations, is not sampling error within one |
 | **default** | [D2] | the genome frequencies before the selection judged: at the start of an experiment, or at the egg stage of one generation | samples taken before selection | exact when measured before selection and apart from the counts judged; main's I1-dyn shows what fails when the default is fitted from those counts |
 | **objective** | [D2] | log fitness through one sex, or through both, as the analyst's question; selection itself pursues log fitness | fitness assays of each genome expressed in each sex | assumed: the analyst declares it, before reading the outcome |
+| **evaluator** | [D10] | what selection acts on: log fitness through males `G_m` in male-limited evolution, or `G = ½·(G_m + G_f)` under ordinary weak selection (section 3). Truncation selection on a trait has two values, kept or not | fitness assays; the protocol | exact for clonal selection with constant fitness. Fitness is real-valued, so its level sets are single genomes and the regression of `F` on it is `F` itself; a truncation has two level sets |
 | **intensity** | [D2] | the number of generations of constant selection | the length of the experiment | exact for clonal selection with constant fitness `w`: `t` generations give `tilt(q, t·log w)`; approximate otherwise |
 | **specification** | [D3] | the analyst's question: from the frequencies before selection, pursue fitness through females, at any intensity | a pre-registration | assumed: the question is a choice, and the verdict is relative to it |
 | **principal's resolution** | [D4] | the genome classes the analyst groups together, for example by the alleles at one locus | the analysis plan | assumed; the finest resolution unless declared |
@@ -73,7 +75,9 @@ females, and `F = G_f` is the declared objective.
   diploid genotypes under random mating, are not tilts of the previous generation's over several generations, and
   selection is a pursuit only one generation at a time. Male-limited evolution in *Drosophila* comes close to the
   clonal case, because genomes are passed through males, which do not recombine.
-- Populations are finite: drift moves frequencies with no selection, and every behaviour is estimated.
+- Populations are finite: drift moves frequencies with no selection, and every behaviour is estimated from samples
+  ([D11]). Drift makes successive generations depend on each other, which [D11]'s independent draws within one
+  generation do not model.
 - Fitness that changes with frequencies is not a fixed objective. [P3] tests whether one objective explains a path.
 - Fitness is measured in one laboratory environment, and the reported correlation is of fitness, not log fitness.
 - The analyst's question is the principal. The core's verdicts hold relative to it, and carry no normative weight.

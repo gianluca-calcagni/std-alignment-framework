@@ -169,6 +169,16 @@ def test_part_labels_are_not_terms(tmp_path):
     assert not any("R9" in e for e in errors), errors
 
 
+def test_the_survey_of_related_theories_is_checked(tmp_path):
+    related = "# Related theories\n\n- shares [D1] and [P1] [@cover2006]\n"
+    errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra={"RELATED.md": related})
+    assert errors == [], errors                                                    # its citation counts for R8
+    errors, _ = make(tmp_path, extra={"RELATED.md": related + "- and [P9]\n"})
+    assert any("RELATED.md:4: R12 [P9] names no item" in e for e in errors), errors
+    errors, _ = make(tmp_path, extra={"RELATED.md": related + "- [@nobody1900]\n"})
+    assert any("RELATED.md: R8 [@nobody1900] is not in REFERENCES.md" in e for e in errors), errors
+
+
 def test_the_standard_must_cover_every_definition(tmp_path):
     errors, _ = make(tmp_path, standard=None)
     assert any("R11 the reporting standard is missing" in e for e in errors), errors

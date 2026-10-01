@@ -11,8 +11,10 @@ overoptimization: past some point, pursuing the proxy harder makes the true obje
 | **outcomes** | [D1] | the responses to one prompt, up to a maximum length | sampled responses | exact: a finite vocabulary and a length limit make the set finite, though astronomically large |
 | **contexts** | [D8] | the prompts, drawn from a fixed distribution that the policy does not choose | the prompt set | exact: fine-tuning fixes the prompt distribution |
 | **behaviour** | [D1] | the fine-tuned policy's distribution of responses to each prompt | samples | exact |
+| **sample** | [D11] | responses drawn from a policy, a fixed number for each prompt of an evaluation set | the responses, their gold and proxy scores, and the log-probabilities the policy and the initial policy give them | exact: at a fixed temperature, responses to one prompt are drawn independently. But a response is almost never drawn twice, so counts estimate nothing response by response (section 4) |
 | **default** | [D2] | the initial policy, before fine-tuning against the reward model | samples from it | exact: KL-regularized fine-tuning names it as the reference, and a softmax policy gives every response a positive probability |
 | **objective** | [D2] | the developer's objective: human preference, or, in a synthetic setup, a fixed "gold" reward model. The policy pursues a proxy `r̂`, the reward model trained on preference labels | gold and proxy scores of sampled responses | assumed for the gold, which the developer declares; exact for the proxy |
+| **evaluator** | [D10] | the proxy `r̂`, known: the policy is trained on it. At the optimum of KL-regularized fine-tuning the revealed evaluator is `r̂/β` within each prompt; best-of-`n` follows a path whose revealed objectives rise with `r̂` ([P19], Notes) | proxy scores of sampled responses | exact for the reward trained on. A real-valued proxy gives distinct responses distinct scores, so its level sets are single responses and the regression of the gold on it is the gold itself; a verifier that passes or fails a response has two level sets |
 | **intensity** | [D2] | `1/β`, for the coefficient `β` of the KL penalty; for best-of-`n`, `n − 1` (section 3) | the training configuration | exact at the optimum of KL-regularized fine-tuning; approximate for a policy that training has not brought to its optimum |
 | **specification** | [D3] | the initial policy, and pursuit of the gold objective at any intensity, in every prompt | the gold objective, fixed before training | exact in a synthetic setup with a fixed gold model; assumed for human preferences, which can drift |
 | **principal's resolution** | [D4] | the distinctions the developer declares not to care about, such as paraphrases | the specification | absent in the known result: no indifference is declared, so the finest resolution applies |
@@ -65,20 +67,36 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the best-of-`n` curve is
   itself computed from such samples, this tests the functional form near `d = 0`, and the small-mass idealization; it
   does not test language models.
-- **Prediction** from [P13]: along a sweep of `β` with policies near their optima, the gold score peaks where the
+- **Prediction** from [P20]: along a sweep of `β` with policies near their optima, the gold score peaks where the
   covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses zero.
-  This is [P13](i): along the pursuit of a proxy, the objective's average is stationary exactly where the two are
+  This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two are
   uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero; that
   would mean the trained policies are not the optima the slots assume.
 - **Consequence** of [P10]: within one prompt, the optimum for `β` lies on the proxy's pursuit ray, so its misalignment
   against the gold is at most `osc(F − r̂)/β`, where `osc` is taken over all responses ([P10](ii), with the proxy as the
   declared objective and the gold as the corrected one). Misalignment can grow at most in proportion to the intensity.
   The bound uses the proxy's worst error over all responses, where reward models are least reliable, so it is loose.
+- **Consequence** of [P19], [D10]: within one prompt, suppose the proxy were the gold's cell average over what its
+  features tell apart, under the initial policy: `r̂ = E_q[F|𝒜]` for some resolution `𝒜` ([D4]), or an increasing
+  function of it. The level sets of `r̂` group whole cells of `𝒜`, so the regression of the gold on `r̂` is the cell
+  average itself, which rises with `r̂`. Then neither pursuing the proxy nor best-of-`n` could lower the gold's average
+  in that prompt ([P19]). The known result shows the gold, averaged over prompts, falling under best-of-`n`, which
+  [P19] covers exactly; so in some prompt the proxy is not such an average. A proxy that errs only by averaging the
+  gold over what it can tell apart does not produce the fall.
+- **Consequence** of [P19], [P20]: within one prompt, fine-tuning at the optimum against a verifier that passes or
+  fails each response cannot overoptimize. The verifier has two level sets, so its regression is the gold's average
+  over the passing and over the failing responses under the initial policy, and it is monotone. As `1/β` grows, the
+  gold's average moves in one direction only, toward its average over the passing responses ([P20](ii)): up if those
+  are better on average under the initial policy, down otherwise. A peak in such a sweep would mean that the policies
+  are not the optima the slots assume.
 
 ## 4. Limits
 
-- The outcomes are astronomically many, so every quantity is estimated from samples, and the core has no estimation
-  layer yet.
+- The outcomes are astronomically many, so every quantity is estimated from samples ([D11]), and counts of responses
+  estimate nothing. A language model gives the log-probability of each response it samples, which helps: the evidence
+  per response for the policy against a pursuit of the gold, `log π − log q − t·F + log E_q[e^{t·F}]`, can be averaged
+  over the policy's samples, and its average is the KL divergence of [P21]. The last term needs samples of the initial
+  policy, and its estimate is biased at large `t`. [P23] does not apply as stated: it needs counts.
 - Prompts are contexts. [P15] splits misalignment across prompts into avoidable and unavoidable parts; the known
   curves average over prompts and report neither.
 - The gold objective is a model in the known result. With human raters, the objective is not fixed; [P3] can test
@@ -87,13 +105,15 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   holds at the peak, not when it comes, which depends on the joint distribution of proxy and gold far from the initial
   policy.
 - Best-of-`n` is a pursuit only in the small-mass idealization; over a small set of responses its exact distribution,
-  and its KL, differ.
+  and its KL, differ. [P19] covers its exact form, as a path whose revealed objectives rise with the proxy.
 
 ## 5. Open questions
 
-- Is a proxy trained on preference labels close to the average of the gold over what the proxy's features can tell
-  apart (the cell average of [P8])? If so, part of overoptimization would be the coarse actor's law of [P8](iv), the
-  regressional variant of Goodhart's law (`TERMS.md`, section 2).
+- In some prompts, a proxy trained on preference labels is not the gold's cell average over its features (section 3).
+  How far from it is it? The regression of the gold on the proxy, estimated from samples of the initial policy by
+  grouping proxy scores into bins, is the regression on a coarser evaluator. Does its shape predict where the
+  best-of-`n` curve peaks? [P19] is exact only on the evaluator's own level sets, so this needs a result for binned
+  evaluators (`NOTES.md`).
 - Can the misaligned share at the start, `sin²θ` ([P11]), measured on the initial policy, predict the size of the gold
   peak, across reward models of different sizes?
 - KL-regularized fine-tuning uses one `β` for every prompt, which [P15] shows is the best feasible pursuit across

@@ -12,8 +12,10 @@ net harmed the sicker ones.
 | **outcomes** | [D1] | for one patient, the treatment given, cardiac surgery or not, within the patient's severity class | discharge records | approximate: severity is cut into classes |
 | **contexts** | [D8] | the patient's severity, which the hospital does not choose | clinical records | approximate: hospitals partly choose their patients, through referral and admission, so severity is not wholly given |
 | **behaviour** | [D1] | how often each treatment is given in each severity class, over a state's patients in a year | discharge records | exact as frequencies |
+| **sample** | [D11] | patients: one patient's treatment, in a severity class, in one year | discharge records | approximate: patients are distinct people, but one hospital's decisions share its surgeons and policies, so the draws are clustered by hospital |
 | **default** | [D2] | the treatment pattern before the cards, or in comparable states without them | records from before, or from comparison states | assumed: the comparison must be declared before the outcomes are read |
 | **objective** | [D2] | the patient's expected benefit from each treatment, in each severity class | clinical outcome data | assumed: the regulator's purpose is patient health, but the benefit of each treatment must be estimated |
+| **evaluator** | [D10] | what hospitals pursue once the cards exist: as a hypothesis, what they pursued before plus the card's effect `u` (the intervention slot); otherwise revealed from treatment patterns | the published method; treatment patterns before and after | assumed: the weight hospitals give the card is not known. Within one severity class the two treatments score differently unless the risk model is exact for that class, so the level sets are single outcomes and the regression of the benefit on the card is the benefit itself |
 | **intensity** | [D2] | how strongly hospitals respond to the card, through reputation and referrals | not apart from the objective | approximate |
 | **specification** | [D3] | the regulator's purpose, better care for patients, with the pattern before the cards as the default | the programme that created the cards | assumed: the purpose is stated, the values of the objective are not |
 | **principal's resolution** | [D4] | the regulator does not care which surgeon treats a patient, given the treatment and its outcome | the programme's stated purpose | assumed |
@@ -65,6 +67,8 @@ patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery minus no 
 - The objective, a patient's benefit from surgery, is estimated, not observed; the core's verdicts inherit its errors
   ([P10]).
 - Two treatments per class leave the pass-through test without power class by class.
+- Patients treated in one hospital are not independent draws ([D11]): error bars that assume independence are too
+  narrow, and should be computed by hospital.
 - The prediction assumes one pass-through across severity classes; [P15] shows that a shared intensity is what the
   best feasible pursuit has, but hospitals need not respond that way.
 - Matching of patients to hospitals, which the known result found to improve, involves a choice of hospital that this
