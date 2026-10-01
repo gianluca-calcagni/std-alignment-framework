@@ -1,9 +1,9 @@
 # The core
 
 > **Status: v8, in progress.** Sections 1–6: behaviours, pursuit, the specification, resolution, stakes, and
-> identifiability. Each item carries a formal
-> statement and a plain-terms twin. A definition says why this choice; a result carries a proof and checks that run in
-> CI. Every item gives its lineage from the archive on `main`. The format is in `README.md`.
+> identifiability. Each item carries a formal statement and a plain-terms twin. A definition says why this choice; a
+> result carries a proof and checks that run in CI. Every item gives its lineage from the archive on `main`. The format
+> is in `README.md`.
 
 ## 0. What the core does
 
@@ -187,9 +187,11 @@ away from it, from wherever it starts.
 **Notes.** Names in other fields. The default is the reference policy of RL fine-tuning, the prior of KL control, the
 base measure of an exponential family, the status quo of behavioural economics, and the population before selection
 in biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of KL-regularized
-reward maximization with coefficient `1/t` in RL fine-tuning; with a uniform default it is the logit choice rule, or
-quantal response, with rationality `t` [@mckelvey1995]; and it is the result of `t` generations of constant selection
-with fitness `e^F`. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
+reward maximization with coefficient `1/t` in RL fine-tuning, for one prompt (across prompts, which the policy does
+not choose, the optimum reweights each prompt's responses separately, which is not a pursuit on prompt–response pairs);
+with a uniform default it is the logit choice rule, or quantal response, with rationality `t` [@mckelvey1995]; and it
+is the result of `t` generations of constant selection with fitness `e^F`, for types that are passed on intact, as in
+clonal reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
 
 **Lineage.** main: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
 whose optimum is the tilt: here a property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray
@@ -326,8 +328,10 @@ that stays at the default is not misaligned, though it may be useless, which is 
   slot changes a verdict, and with the value it takes when nothing is declared.
 
 **Notes.** The principal declares; what it declares is the specification, the word AI safety and formal verification use
-for the set of acceptable behaviours. Misalignment is then a quantitative distance from the specification. The direction of KL used here is the
-one called zero-forcing in variational inference.
+for the set of acceptable behaviours. Misalignment is then a quantitative distance from the specification. The direction
+of KL used here is the one called zero-forcing in variational inference. That the standard specification is a
+specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [P5](iv); for a constant `F` the ray is the
+single point `q`, which is closed.
 
 **Lineage.** main: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), and row 74. New: behaviours that rule outcomes out are
@@ -339,12 +343,13 @@ scored.
 (ii) `M(p̂) = 0` if and only if `p̂` is in the closure of `𝓘` in `Δ`. For `p̂ ∈ Δ°`, this means `p̂ ∈ 𝓘`.
 (iii) If `q ∈ 𝓘`, then `M(p̂) ≤ KL(p̂‖q)`.
 (iv) Let `F` be non-constant, and `A` the set of outcomes where `F` is largest. The pursuit ray `R_F` is closed in `Δ°`,
-so `(q, R_F)` is a specification. Under it, with `p°` the **nearest intended behaviour** (or its limit):
-- if `E_{p̂}[F] ≤ E_q[F]`, then `p° = q` and `M(p̂) = KL(p̂‖q)`;
-- if `E_q[F] < E_{p̂}[F] < max F`, then `p° = p_{F,t*}` and `M(p̂) = KL(p̂‖p°)`, where the **revealed intensity**
-  `t* > 0` is the unique intensity with `E_{p_{F,t*}}[F] = E_{p̂}[F]`;
-- if `E_{p̂}[F] = max F`, that is, `p̂` puts all its mass on `A`, then `p° = q(·|A)` and `M(p̂) = KL(p̂‖q(·|A))`,
-  approached as `t → ∞` and not attained. It is `0` exactly when `p̂ = q(·|A)`.
+so `(q, R_F)` is a specification. Under it, with `p°` the **nearest intended behaviour** (or its limit), and `t*` the
+intensity of `p°`, the **revealed intensity**:
+- if `E_{p̂}[F] ≤ E_q[F]`, then `t* = 0`, `p° = q` and `M(p̂) = KL(p̂‖q)`;
+- if `E_q[F] < E_{p̂}[F] < max F`, then `t* > 0` is the unique intensity with `E_{p_{F,t*}}[F] = E_{p̂}[F]`,
+  `p° = p_{F,t*}` and `M(p̂) = KL(p̂‖p°)`;
+- if `E_{p̂}[F] = max F`, that is, `p̂` puts all its mass on `A`, then `t* = ∞`, `p° = q(·|A)` and
+  `M(p̂) = KL(p̂‖q(·|A))`, approached as `t → ∞` and not attained. It is `0` exactly when `p̂ = q(·|A)`.
 
 **In plain terms.** For a full-support behaviour there is always a nearest acceptable behaviour. Misalignment is zero
 only for acceptable behaviours and their limits. When the default is acceptable, misalignment is never more than the
@@ -385,8 +390,8 @@ checks/test_misalignment.py::test_the_ray_leaves_every_compact_set, checks/test_
 
 **Notes.** The checks exercise the standard specification; parts (i)–(iii) for a general closed `𝓘` rest on the proof
 alone. Pinsker's inequality is standard [@cover2006]. The revealed intensity is the weight that maximum-entropy inverse
-reinforcement learning, in its one-step form, fits for the single feature `F` [@ziebart2008]; in the first case that
-fit is zero or negative, and in the third it is infinite. For `n` independent decisions with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted
+reinforcement learning, in its one-step form, fits for the single feature `F` [@ziebart2008], restricted to `t ≥ 0`:
+in the first case the unrestricted fit is zero or negative, and in the third it is infinite. For `n` independent decisions with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted
 model against the best pursuit of `F` is `n·M(p̂)`, so `2n·M(p̂)` is the deviance of the model "the actor pursues `F`
 from the default" (checked in the second and first cases). In the third case, a maximizer that breaks ties among the
 best outcomes differently from the default is charged; a principal who is indifferent among tied outcomes says so with
@@ -735,11 +740,11 @@ first-order effect of any smooth path). New: the statement and its proof, includ
 
 ### D6 — Intervention and pass-through
 **Statement.** An **intervention** changes what the actor faces by a known non-constant function `u : X → ℝ`: an
-incentive, a fine, or a change of the default option. With `p ∈ Δ°` the actor's behaviour before it and `p' ∈ Δ°` after,
+incentive, a fine, or a known shift of the actor's own default. With `p ∈ Δ°` the actor's behaviour before it and `p' ∈ Δ°` after,
 the actor passes the intervention through, with **pass-through** `φ ∈ ℝ`, if `p' = tilt(p, φ·u)`.
 
 **In plain terms.** An intervention is a known nudge added to the situation: a bonus for some outcomes, a fine for
-others, or a different default option. The actor passes it through when its behaviour changes exactly by reweighting
+others, or a shift in what the actor would do by default. The actor passes it through when its behaviour changes exactly by reweighting
 with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value follows it, and
 a negative value means the nudge backfires.
 
@@ -762,7 +767,8 @@ made measurable, and T7-2d (a change of default that moved the evaluator).
 **Statement.** (i) **Pass-through is identified from behaviour alone.** Let `p, p' ∈ Δ°` be the behaviour before and
 after an intervention `u`. The actor passes it through if and only if `log(p'/p) ∈ span{u, 1}`, and then the
 pass-through is the coefficient of `u`. If `log(p'/p)` is not in `span{u, 1}`, no pass-through explains the change.
-(ii) **Changes certify distinctions.** Let `𝒜` be a resolution and `s ↦ p_s` a continuously differentiable path in `Δ°`.
+(ii) **Changes certify distinctions.** Let `𝒜` be a resolution and `s ↦ p_s` a continuously differentiable path in `Δ°`,
+over an interval containing `0`.
 Every behaviour on the path splits each cell of `𝒜` in the same proportions as `p_0` if and only if every revealed
 objective `F_s` is constant on the cells of `𝒜`. So a revealed objective that separates two outcomes of one cell shows
 that their ratio moved; revealed objectives that never separate them do not show that the actor cannot tell them apart.
