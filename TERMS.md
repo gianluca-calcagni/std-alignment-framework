@@ -1,14 +1,16 @@
 # TERMS — the vocabulary of the core, its sources, and how sure we are
 
 This file gathers every naming choice of the core and every correspondence with the literature, each with a confidence
-level. Lint rule R9 checks two things: every term the core or a derived result defines (in bold, in a Statement) has an entry
-in section 1, and every item named here exists. Only level A may appear in `CORE.md`; the other levels stay here until they are
+level. Lint rule R9 checks two things: every term the core or a derived result defines (in bold, in a Statement) has an
+entry
+in section 1, and every item named here exists. Only level A may appear in `CORE.md` or `derived/`; the other levels
+stay here until they are
 worked out.
 
 | Level | Meaning |
 |---|---|
 | **A** | Adopted. A definition of the core, or a correspondence that is standard and cited, or checked. |
-| **B** | Confident. Standard in its field and correct here, but not yet needed in the core text. |
+| **B** | Confident. Standard in its field and correct here, but not yet needed in the framework's text. |
 | **C** | Plausible. The mapping looks right but has not been worked out; it needs a derivation or a check first. |
 | **D** | Hunch. Worth testing; it may well be wrong. |
 
@@ -66,14 +68,14 @@ worked out.
 | **avoidable misalignment** | [P15] | the distance from the actor's behaviour to the best it could have done: what it would not do | names the cause, as under-pursuit does | — | A |
 | **unavoidable misalignment** | [P15] | the distance from the best the actor could do to what was intended: what it could not do | names the cause | capability gap (AI safety, informal) | A |
 
-## 2. Correspondences not yet in the core
+## 2. Correspondences not yet in the framework
 
 | Our object | Literature name | Field and source | Level | What would promote it |
 |---|---|---|---|---|
 | centred revealed objective `F_s − E[F_s]` | advantage function | RL: natural policy gradient on a softmax policy moves the log-policy along the advantage (Kakade 2001; Agarwal, Kakade, Lee and Mahajan 2021) | C | the exact statement for one algorithm, with a check, in the dynamics section |
 | a maximizer charged for breaking ties ([P5], third case) | underspecification | ML: D'Amour et al. (2020), "Underspecification presents challenges for credibility in modern machine learning" | C | a worked example in which [P7]'s indifference is exactly the remedy D'Amour et al. need |
 | `2n·M(p̂)` | likelihood-ratio (χ²) test | statistics: Wilks' theorem, with the number of outcomes minus 2 as degrees of freedom; near `t* = 0` the half-ray boundary gives a chi-bar-square mixture | C | an estimation item, with a simulation check of the null distribution |
-| the pursuit part of the departure, `KL(p°‖q)` | optimization pressure | RL fine-tuning: Gao, Schulman and Hilton (2023), reward-model overoptimization curves | C | the first worked ML case: gold score should track the pursuit part, and the proxy–gold gap the misaligned part (`ontologies/machine-learning.md`) |
+| the pursuit part of the departure, `KL(p°‖q)` | optimization pressure | RL fine-tuning: Gao, Schulman and Hilton (2023), reward-model overoptimization curves | C | the first worked ML case: gold score should track the pursuit part, and the proxy–gold gap the misaligned part (`ontologies/machine-learning/`) |
 | the misaligned share `M/KL(p̂‖q)` | — | — | D | distrust: 0/0 at small departures, and a share hides scale (main: R8-1) |
 | misalignment as a testing exponent | Chernoff–Stein lemma | information theory (Cover and Thomas 2006, ch. 11) | C | work out which error the direction `KL(p̂‖p)` governs; the core uses only the expected log-likelihood ratio, which needs no lemma |
 | net value | rational inattention | economics: Sims (2003); the cost there is mutual information, which equals the KL cost only when the default is chosen optimally | C | state when the two coincide (main: insight 9, "endogeneity is a spectrum") |
@@ -84,21 +86,21 @@ worked out.
 | misalignment under a specification | robustness degree | formal verification: quantitative semantics of temporal logics | D | a case where the two orderings agree |
 | the small-effort misaligned share `sin²θ` | the dynamic angle | main: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A: now [P11], for any smooth departure from the default | done |
 | [P10](ii): an error in the objective matters in proportion to the revealed intensity | Goodhart's law: a proxy degrades under optimization pressure | AI safety: Manheim and Garrabrant (2018) | C | a case in which the bound's growth with intensity matches an observed overoptimization curve |
-| a bonus on measured outcomes, passed through ([D6]): every unmeasured outcome loses the same share | multitask moral hazard: effort substitution | economics: Holmström and Milgrom (1991), "Multitask principal–agent analyses" | B | worked out in `ontologies/job-delegation.md`, without their contract (no wages, no risk aversion); the proportional form is the core's, and testable |
-| a change of behaviour outside `span{u, 1}` after an intervention `u` ([P12](i)); with two outcomes, a pass-through of the removal that differs from that of the introduction | motivation crowding-out: the fine changes the meaning of the act | economics: Gneezy and Rustichini (2000), "A fine is a price"; Frey and Jegen (2001) | B | worked out in `ontologies/humans.md` for the two-outcome pair (fine, removal); a case with at least three outcomes would test the residual directly |
+| a bonus on measured outcomes, passed through ([D6]): every unmeasured outcome loses the same share | multitask moral hazard: effort substitution | economics: Holmström and Milgrom (1991), "Multitask principal–agent analyses" | B | worked out in `ontologies/job-delegation/`, without their contract (no wages, no risk aversion); the proportional form is the core's, and testable |
+| a change of behaviour outside `span{u, 1}` after an intervention `u` ([P12](i)); with two outcomes, a pass-through of the removal that differs from that of the introduction | motivation crowding-out: the fine changes the meaning of the act | economics: Gneezy and Rustichini (2000), "A fine is a price"; Frey and Jegen (2001) | B | worked out in `ontologies/humans/` for the two-outcome pair (fine, removal); a case with at least three outcomes would test the residual directly |
 | interventions varied enough to move every distinction the actor could make ([P12] Notes) | persistent excitation | control and system identification: an input rich enough to identify every parameter | C | an identification item that states the condition for a resolution, with a check |
 | pass-through `φ` | cost pass-through | economics: the share of a cost change passed on to prices | B | the same word for the same role: how much of an external change reaches the response |
 | the misaligned share `sin²θ` at the start of a change ([P11]) | the unexplained share of variance, `1 − R²` | statistics: the share of `Var(G)` not explained by a regression on `F` | B | already the same number under `q`; promote if readers need it |
 | [P13](i): `d/ds E_{p_s}[F] = Cov_{p_s}(F_s, F)` | the Price equation without transmission; Robertson's secondary theorem | evolutionary biology: Price (1970), cited in [P13] Notes; Robertson (1966) for the genetic form | A | done: cited in [P13] |
-| `E_p[F\|A] < E_p[F]`: rewarded outcomes worth less than the current average ([P13](i) with `u = 1_A`) | "rewarding A while hoping for B" | management: Kerr (1975) | B | worked out in `ontologies/job-delegation.md`; a field case with declared values would test it |
+| `E_p[F\|A] < E_p[F]`: rewarded outcomes worth less than the current average ([P13](i) with `u = 1_A`) | "rewarding A while hoping for B" | management: Kerr (1975) | B | worked out in `ontologies/job-delegation/`; a field case with declared values would test it |
 | the best power of a bonus on a graded measure: where `Cov_{p_φ}(u, F) = 0` | low-powered incentives | economics: Holmström and Milgrom (1991), where risk and the cost of pay give the reason | C | the core gives a different reason (the measure decorrelates from the value as the employee follows it); a case where both reasons can be told apart |
-| best-of-`n` sampling | pursuit of the proxy's rank, `log Q(r̂)`, at intensity `n − 1` | RL fine-tuning: the idealization behind the KL formula `log n − (n − 1)/n` | B | exact as masses tend to `0` (checked numerically while writing `ontologies/machine-learning.md`); a check in the core if an item needs it |
+| best-of-`n` sampling | pursuit of the proxy's rank, `log Q(r̂)`, at intensity `n − 1` | RL fine-tuning: the idealization behind the KL formula `log n − (n − 1)/n` | B | exact as masses tend to `0` (checked numerically while writing `ontologies/machine-learning/`); a check in the core if an item needs it |
 | [P16], [P17]: misalignment in unobserved conditions, bounded by how well the actor's view separates them from observed ones | deceptive alignment | AI safety: Hubinger et al. (2019), "Risks from learned optimization in advanced machine learning systems" | B | a worked case: an evaluation whose inputs can be told apart from deployment's, with `ε` bounded from the inputs ([P16](iii)) |
 | [P17](iv): an observed condition the actor cannot tell from an unobserved one identifies the unobserved behaviour | randomized audits; honeypots; blinded evaluation | AI safety and auditing practice | C | a case where audits drawn from real use are compared with announced evaluations |
 | [P15] with a random environment: the best feasible behaviour is the maximum-entropy policy, and the joint tilt is out of reach | maximum-entropy RL; the optimism of control as inference | RL: Ziebart (2008), cited in [P5]; Levine (2018) | B | already shown by the check of [P15]; the unavoidable part is the "optimism" that control as inference must remove |
 | the view ([D8]) | observability | control theory | C | an item that states which interventions identify a view |
-| the shortfall of ordinary selection against fitness through one sex, `1 − cos θ` at the start ([P13](ii)) | the gender load; the cost of separate sexes | evolutionary biology: Prasad et al. (2007), "an evolutionary cost of separate genders" | C | `ontologies/biology.md` gives it as a number from the intersexual correlation; a population where both spreads are measured |
-| the response to a report card concentrated where the card's risk model is coarse ([D4], [P13](i)) | gaming; cream-skimming; patient selection | health economics: Dranove et al. (2003) | C | `ontologies/institutions.md`; a case with the risk model and clinical severity |
+| the shortfall of ordinary selection against fitness through one sex, `1 − cos θ` at the start ([P13](ii)) | the gender load; the cost of separate sexes | evolutionary biology: Prasad et al. (2007), "an evolutionary cost of separate genders" | C | `ontologies/biology/` gives it as a number from the intersexual correlation; a population where both spreads are measured |
+| the response to a report card concentrated where the card's risk model is coarse ([D4], [P13](i)) | gaming; cream-skimming; patient selection | health economics: Dranove et al. (2003) | C | `ontologies/institutions/`; a case with the risk model and clinical severity |
 
 ## 3. Naming decisions
 

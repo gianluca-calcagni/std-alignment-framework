@@ -40,11 +40,14 @@ second case, `p° = p_{F,t*}` with `E_{p°}[F] = E_{p̂}[F]`, so
 `KL(p̂‖p_{F,λ}) = KL(p̂‖q) − λ·E_{p̂}[F] + Λ(λ) = M(p̂) + KL(q‖p_{F,λ}) + λ·(E_q[F] − E_{p̂}[F])`, because
 `KL(q‖p_{F,λ}) = −λ·E_q[F] + Λ(λ)`.
 (iii) By [P1](ii), `tilt(q, t·(a·F + c)) = tilt(q, (t·a)·F)`, so the pursuit ray of `a·F + c` is the same set as that
-of `F`, and `M(p̂)` is unchanged. The matched pursuit is the same behaviour, since it is the point of the same ray with the
+of `F`, and `M(p̂)` is unchanged. The matched pursuit is the same behaviour, since it is the point of the same ray with
+the
 same departure, so both averages are transformed by `v ↦ a·v + c`, and their difference is multiplied by `a`.
-(iv) If `λ = 0`, then `p̂ = q`, on the ray. If `0 < λ < ∞`, then by (ii) `S(p̂) = KL(p̂‖p_{F,λ})/λ`, which is `0` exactly
+(iv) If `λ = 0`, then `p̂ = q`, on the ray. If `0 < λ < ∞`, then by (ii) `S(p̂) = KL(p̂‖p_{F,λ})/λ`, which is `0`
+exactly
 when `p̂ = p_{F,λ}`, on the ray. If `λ = ∞`, then `S(p̂) = 0` exactly when `E_{p̂}[F] = max F`, that is, when `p̂` puts
-all its mass on `A`; by [P5](iv) `M(p̂) = KL(p̂‖q(·|A))` there, which is `0` exactly when `p̂ = q(·|A)`. Finally, the closure of the ray in `Δ` is the ray together with `q(·|A)`: a sequence
+all its mass on `A`; by [P5](iv) `M(p̂) = KL(p̂‖q(·|A))` there, which is `0` exactly when `p̂ = q(·|A)`. Finally, the
+closure of the ray in `Δ` is the ray together with `q(·|A)`: a sequence
 on the ray either has bounded intensities, and then a subsequence converges to a point of the ray (as in the proof
 of [P5](iv)), or has a subsequence with intensities tending to `∞`, which converges to `q(·|A)`. By [P5](ii),
 `M(p̂) = 0` means that `p̂` is in that closure, and in both cases `S(p̂) = 0`.
@@ -76,7 +79,8 @@ objective matters.
 **Proof.** First, for every `r ∈ Δ°`, `p ∈ Δ` and `h : X → ℝ`,
 `KL(p‖tilt(r, h)) − KL(p‖r) = log E_r[e^h] − E_p[h]`, and both terms lie in `[min h, max h]`, so the difference lies in
 `[−osc(h), osc(h)]`.
-(i) Let `h = log(q'/q)`. By [P1](iii), `tilt(q', t·F) = tilt(tilt(q, h), t·F) = tilt(p_{F,t}, h)`, where `p_{F,t}` is the
+(i) Let `h = log(q'/q)`. By [P1](iii), `tilt(q', t·F) = tilt(tilt(q, h), t·F) = tilt(p_{F,t}, h)`, where `p_{F,t}` is
+the
 pursuit from `q`. By the first step, `KL(p̂‖tilt(q', t·F))` and `KL(p̂‖p_{F,t})` differ by at most `osc(h)` for every
 `t ≥ 0`, and so do their infima over `t ≥ 0`, which are the two misalignments.
 (ii) Let `p_{F,t*}` be the nearest intended behaviour under `F`, so `M_{q,F}(p̂) = KL(p̂‖p_{F,t*})`. The pursuit of

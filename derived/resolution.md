@@ -21,7 +21,8 @@ principal declares them equivalent.
 `KL(p̂‖p) = KL(p̂_ℬ‖p_ℬ) + Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖p(·|C))`. Membership in `𝓘` constrains only `p_ℬ`: any
 full-support splits inside the cells can be combined with any `p_ℬ ∈ 𝓘_ℬ`. Choosing splits that approach `p̂(·|C)` makes
 the second term tend to `0`, so the infimum over `𝓘` is the infimum over `𝓘_ℬ` of the first term.
-(ii) Since `F` is constant on each cell, `p_{F,t}(·|C) = q(·|C)` for every `t` and every cell `C`, and `(p_{F,t})_ℬ` is the
+(ii) Since `F` is constant on each cell, `p_{F,t}(·|C) = q(·|C)` for every `t` and every cell `C`, and `(p_{F,t})_ℬ` is
+the
 pursuit of `F`, read on the cells, from `q_ℬ`. By [P4](iii), applied with `r = p_{F,t}` and with `r = q`,
 `KL(p̂‖p_{F,t}) = KL(p̂_ℬ‖(p_{F,t})_ℬ) + W(p̂)`, where `W(p̂) = Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖q(·|C))
 = KL(p̂‖q) − KL(p̂_ℬ‖q_ℬ)` does not depend on `t`. Taking the infimum over `t ≥ 0`, and using (i) for `M_ℬ`, gives
@@ -43,7 +44,8 @@ convention), Prop 32(b) and ROADMAP §6 G1 (underdetermination, here declared).
 **Statement.** Let `𝒜` be a resolution, `q ∈ Δ°` the default, `F : X → ℝ`, and `F̄ = E_q[F|𝒜]` its cell average.
 (i) **Limited behaviours.** The full-support behaviours limited to `𝒜` are exactly the tilts `tilt(q, G)` with `G`
 constant on the cells of `𝒜`. For every behaviour `p` limited to `𝒜`, `E_p[F] = E_p[F̄]`.
-(ii) **Best effort.** For every `t > 0`, among the behaviours limited to `𝒜`, the net value `J_t` of [P4] is maximized by
+(ii) **Best effort.** For every `t > 0`, among the behaviours limited to `𝒜`, the net value `J_t` of [P4] is maximized
+by
 `tilt(q, t·F̄)`: the actor pursues the cell average of the objective.
 (iii) **What it cannot remove.** Let `p* ∈ Δ°` and `b = log(p*/q)`. The smallest value of `KL(p‖p*)` over the behaviours
 `p` limited to `𝒜` is `−log E_q[exp(E_q[b|𝒜])] ≥ 0`, reached at `tilt(q, E_q[b|𝒜])`. It is `0` if and only if `p*` is
@@ -69,7 +71,8 @@ in proportion to `q`. For `p` limited to `𝒜`, `E_p[F] = Σ_A p(A)·E_{q(·|A)
 `0`, and (i) gives `E_p[F] = E_{p_𝒜}[F̄]`, reading `F̄` on the cells. So `J_t(p)` is the net value on the cells for the
 objective `F̄`, and by [P4](i) its unique maximizer is `tilt(q_𝒜, t·F̄)` on the cells. Splitting each cell as `q` does,
 that is `tilt(q, t·F̄)`.
-(iii) For `p` limited to `𝒜`, write `b̄ = E_q[b|𝒜]`. As in (i), `E_p[b] = E_p[b̄]`, and `log(p/q)` is `log(p(A)/q(A))` on
+(iii) For `p` limited to `𝒜`, write `b̄ = E_q[b|𝒜]`. As in (i), `E_p[b] = E_p[b̄]`, and `log(p/q)` is `log(p(A)/q(A))`
+on
 the support of `p`. So `KL(p‖p*) = E_p[log(p/q)] − E_p[b] = Σ_A p(A)·(log(p(A)/q(A)) − b̄(A))
 = KL(p_𝒜‖tilt(q_𝒜, b̄)) − log E_q[e^{b̄}]`. The first term is non-negative and is `0` exactly at `p = tilt(q, b̄)`. By
 Jensen's inequality for the conditional average, `E_q[e^{b̄}] ≤ E_q[e^b] = Σ_x p*(x) = 1`, so the minimum is
@@ -97,7 +100,8 @@ checks/test_resolution.py::test_irreducible_misalignment_is_a_jensen_gap,
 checks/test_resolution.py::test_coarse_pursuit_is_misaligned_at_every_effort,
 checks/test_resolution.py::test_coarse_misalignment_starts_quadratic_and_need_not_keep_growing
 
-**Notes.** Since `Var_q(F) = Var_q(F̄) + Var_q(F − F̄)`, the coefficient in (iv) is `½·Var_q(F̄)·Var_q(F − F̄)/Var_q(F)`:
+**Notes.** Since `Var_q(F) = Var_q(F̄) + Var_q(F − F̄)`, the coefficient in (iv) is
+`½·Var_q(F̄)·Var_q(F − F̄)/Var_q(F)`:
 the product of what the actor can see and the share it cannot. Writing `θ` for the angle between `F̄` and `F` in the
 Fisher metric at `q`, `cos²θ = Var_q(F̄)/Var_q(F)`, and the same expansion gives `KL(tilt(q, t·F̄)‖q) ≈ ½·t²·Var_q(F̄)`.
 So at small effort `M ≈ sin²θ` times the departure: here, the misaligned share of the departure is `sin²θ`. (iii) is
@@ -105,5 +109,6 @@ the retention gap of main's B1, in closed form.
 
 **Lineage.** main: B1 and NOTES §8 (retention, `G = E_q[F|ℋ]`, under the budget convention, where it rises with the
 budget), ROADMAP §6 G2 (transmission and retention), and the I1 notes (the dynamic angle, `D_⊥ ≈ sin²θ·KL`, conjectured
-there). New: the Jensen gap in closed form, the small-effort coefficient, and the counterexample to monotone growth: B1's
+there). New: the Jensen gap in closed form, the small-effort coefficient, and the counterexample to monotone growth:
+B1's
 "rises with budget" does not carry over as a law.

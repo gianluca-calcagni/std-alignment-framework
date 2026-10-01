@@ -30,7 +30,8 @@ employees hired after the switch, and many of them kept both the default contrib
 authors attribute this to inertia, and to employees reading the default as advice.
 
 Gneezy and Rustichini introduced a fine for parents who picked up their children late, in six of ten day-care centres in
-Haifa, over twenty weeks [@gneezy2000]. The number of late parents increased. When the fine was removed, it stayed at the
+Haifa, over twenty weeks [@gneezy2000]. The number of late parents increased. When the fine was removed, it stayed at
+the
 higher level.
 
 ## 3. What the core says

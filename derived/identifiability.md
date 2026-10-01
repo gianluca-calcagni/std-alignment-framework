@@ -52,14 +52,16 @@ Every behaviour on the path splits each cell of `𝒜` in the same proportions a
 objective `F_s` is constant on the cells of `𝒜`. So a revealed objective that separates two outcomes of one cell shows
 that their ratio moved; revealed objectives that never separate them do not show that the actor cannot tell them apart.
 
-**In plain terms.** Whether an actor simply follows an incentive can be read from its behaviour before and after, without
+**In plain terms.** Whether an actor simply follows an incentive can be read from its behaviour before and after,
+without
 knowing what it wants: the change must be a multiple of the incentive, apart from a constant, and that multiple is the
 pass-through. If the change has any other shape, something more than the incentive moved it: the incentive changed what
 the actor pursues or where it starts from, or something else changed at the same time. Likewise, a change that moves two
 outcomes apart proves that the actor treats them differently; changes that never do prove nothing.
 
 **Proof.** (i) If `p' = tilt(p, φ·u)`, then `log(p'/p) = φ·u − log E_p[e^{φu}]`, which is in `span{u, 1}`. Conversely,
-if `log(p'/p) = φ·u + c`, then `p'` is proportional to `p·e^{φu}`, and normalization gives `p' = tilt(p, φ·u)`. Since `u`
+if `log(p'/p) = φ·u + c`, then `p'` is proportional to `p·e^{φu}`, and normalization gives `p' = tilt(p, φ·u)`. Since
+`u`
 is non-constant, `u` and `1` are linearly independent, so `φ` is determined.
 (ii) If `p_s(·|A) = p_0(·|A)` for every cell `A` and every `s`, then for `x ∈ A`,
 `log p_s(x) = log p_s(A) + log p_0(x|A)`, so `F_s(x) = ∂_s log p_s(A)` is the same for every `x ∈ A`. Conversely, if
@@ -75,7 +77,8 @@ checks/test_identifiability.py::test_revealed_objectives_certify_distinctions
 intervention through, and an intervention that changed what the actor pursues shows only as a negative or a surprising
 pass-through. Telling the two apart needs at least three outcomes, or several interventions. With estimated behaviours
 the distance of `log(p'/p)` from `span{u, 1}` is never exactly zero; testing it needs an estimation item, which the
-core does not have yet. (ii) bounds an actor's resolution from one side only. Observed changes show which distinctions its behaviour
+core does not have yet. (ii) bounds an actor's resolution from one side only. Observed changes show which distinctions
+its behaviour
 makes; identifying its resolution needs interventions varied enough to move every distinction it could make. Together
 with [P1], this is the ladder main proposed: a snapshot identifies an objective only given a declared default, changes
 identify it up to a constant without one, and interventions identify how the actor responds.
@@ -167,7 +170,8 @@ by exactly `ε`; when `ε ≥ −log p_a(A₊)` the bound is `max F`. Likewise `
 (iii) The lower bound of (ii) is attained: for every `p_a ∈ Δ°` and `λ ≥ 0`, some view and some response through it
 have the observed behaviour `p_a`, `ε = KL(tilt(p_a, −λ·F)‖p_a)`, and `E_{p_d}[F] = E_{tilt(p_a, −λ·F)}[F]`. So, from
 `ε` alone, (ii) cannot be improved.
-(iv) If `ε = 0`, then `p_d = p_a`: the behaviour in `d`, and every quantity defined from it, such as its misalignment and
+(iv) If `ε = 0`, then `p_d = p_a`: the behaviour in `d`, and every quantity defined from it, such as its misalignment
+and
 its shortfall, is identified ([D9]).
 
 **In plain terms.** An actor watched in one situation and not in another can behave differently in the second only as
@@ -179,14 +183,16 @@ actor that cannot tell the two situations apart behaves the same in both, so wha
 for every `p` and every `λ > 0`, `E_p[F] − E_{p_λ}[F] = (KL(p‖p_a) − KL(p_λ‖p_a))/λ − KL(p‖p_λ)/λ`. As in the proof of
 [P9](i), the departure `KL(p_λ‖p_a)` increases continuously from `0` toward `−log p_a(A₊)` as `λ` grows. If `ε` is below
 that limit, `λ₊` exists, and for `p = p_d`, (i) gives `KL(p_d‖p_a) ≤ ε = KL(p_{λ₊}‖p_a)`, so
-`E_{p_d}[F] ≤ E_{p_{λ₊}}[F]`. Otherwise the bound `max F` holds for every behaviour. The lower bound is the same argument
+`E_{p_d}[F] ≤ E_{p_{λ₊}}[F]`. Otherwise the bound `max F` holds for every behaviour. The lower bound is the same
+argument
 for `−F`. (iii) Take `Z = X`, `V_a = p_a`, `V_d = tilt(p_a, −λ·F)`, and `π_z` the behaviour that puts all its mass on
 `z`. Then `p_c = V_c` in both conditions, so `ε = KL(V_d‖V_a)` is the departure of `tilt(p_a, −λ·F)`, whose average of
 `F` is the lower bound with `λ₋ = λ`. (iv) `ε = 0` means `V_d = V_a`, and [P16](i) applies.
 
 **Checks.** checks/test_identifiability.py::test_what_an_unobserved_condition_can_hide
 
-**Notes.** In the core's terms, an actor is deceptively aligned when its misalignment in conditions that are not observed
+**Notes.** In the core's terms, an actor is deceptively aligned when its misalignment in conditions that are not
+observed
 exceeds its misalignment in those that are. This result says what that needs and what it can cost. It needs a view
 that separates the conditions ((iv) and [P16](i)). And what it can cost in the objective is bounded, sharply given `ε`,
 by the matched pursuit of `−F` from the observed behaviour: [P9]'s comparison, with the observed behaviour as the

@@ -94,7 +94,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then, on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
+Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `NOTES.md` and `ontologies/README.md`. Then,
+on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
 past sessions, each with its evidence.
 
 ## License

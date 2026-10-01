@@ -19,10 +19,12 @@ normalization. Conversely, if the tilts are equal, then `F − log E_r[e^F] = G 
 `F − G` is constant. (iii) `tilt(tilt(r, F), G)` is proportional to `r·e^F·e^G`, and both sides are normalized;
 `e^0 = 1`.
 
-**Checks.** checks/test_tilts.py::test_every_behaviour_is_a_tilt, checks/test_tilts.py::test_tilt_objective_unique_up_to_constant,
+**Checks.** checks/test_tilts.py::test_every_behaviour_is_a_tilt,
+checks/test_tilts.py::test_tilt_objective_unique_up_to_constant,
 checks/test_tilts.py::test_tilts_compose
 
-**Notes.** `log(p/r)` is the log-likelihood ratio of `p` to `r`. Recovering an objective from behaviour is the problem of
+**Notes.** `log(p/r)` is the log-likelihood ratio of `p` to `r`. Recovering an objective from behaviour is the problem
+of
 inverse reinforcement learning, which is known to be ill-posed [@ng2000]; (ii) is the form the ambiguity takes here:
 given the default, a behaviour reveals its objective up to a constant. Written with an intensity, `tilt(r, t·F)`, it
 reveals only the product `t·F`.
@@ -59,7 +61,8 @@ So `v` is the gradient of `f`. If `F` is not constant, then `v ≠ 0`, and for `
 by (i) the path satisfies the equation; it starts at `r`. The field `p·(F − E_p[F])` is a polynomial in `p`, hence
 locally Lipschitz on `Δ°`, so the solution through `r` is unique.
 
-**Checks.** checks/test_paths.py::test_replicator_form_of_any_path, checks/test_paths.py::test_replicator_is_fisher_gradient,
+**Checks.** checks/test_paths.py::test_replicator_form_of_any_path,
+checks/test_paths.py::test_replicator_is_fisher_gradient,
 checks/test_paths.py::test_pursuit_ray_solves_the_replicator_flow
 
 **Notes.** "Revealed" is meant as in revealed preference: read from behaviour, not assumed about the actor. In
@@ -82,7 +85,8 @@ change must point along that objective, apart from a constant. It pursues the ob
 Two changes that point in opposite directions lie on one line, but they are not one pursuit.
 
 **Proof.** (i) If `p_s = tilt(p_0, τ(s)·F)`, then `log p_s = log p_0 + τ(s)·F − log E_{p_0}[e^{τ(s)F}]`, so
-`F_s = τ'(s)·F + c(s)`, with `c(s)` minus the derivative of the log-normalizer. Conversely, let `F_s = a(s)·F + b(s)` for
+`F_s = τ'(s)·F + c(s)`, with `c(s)` minus the derivative of the log-normalizer. Conversely, let `F_s = a(s)·F + b(s)`
+for
 every `s`. Since `F` is not constant, `F` and `1` are linearly independent, so `a` and `b` are determined by `F_s`, and
 they are continuous because the path is continuously differentiable. Integrating from `0` gives
 `log p_s = log p_0 + τ(s)·F + B(s)`, with `τ(s) = ∫_0^s a` and `B(s) = ∫_0^s b`, and normalization gives

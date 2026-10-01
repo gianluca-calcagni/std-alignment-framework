@@ -23,7 +23,8 @@ overoptimization: past some point, pursuing the proxy harder makes the true obje
 
 ## 2. Known result
 
-Gao, Schulman and Hilton built a synthetic setup [@gao2023]. A fixed gold reward model labels pairs of responses; a proxy
+Gao, Schulman and Hilton built a synthetic setup [@gao2023]. A fixed gold reward model labels pairs of responses; a
+proxy
 reward model is trained on those labels; a policy is optimized against the proxy, by reinforcement learning or by
 best-of-`n` sampling. As the policy moves away from the initial policy, measured by `d = KL(π‖π_init)^{1/2}`, the proxy
 score keeps rising, while the gold score rises, peaks and falls. The gold score fits `d·(a − b·d)` for best-of-`n` and
@@ -32,7 +33,8 @@ proxy reward model.
 
 ## 3. What the core says
 
-Within one prompt, `q` is the initial policy, `F` the gold objective and `r̂` the proxy. Across prompts, every claim holds
+Within one prompt, `q` is the initial policy, `F` the gold objective and `r̂` the proxy. Across prompts, every claim
+holds
 prompt by prompt, and [P15] relates them across prompts (see Contexts in `../README.md`).
 
 - **Consequence** of [P4]: within one prompt, KL-regularized fine-tuning maximizes `E_π[r̂] − β·KL(π‖q)`, which is the
@@ -43,7 +45,8 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   the prompts.
 - **Reading** with [P1], [D2]: best-of-`n` is almost a pursuit too. When every response has a small probability and
   the proxy has no ties, best-of-`n` draws a response with probability close to `n·q(y)·Q(r̂(y))^{n−1}`, where `Q(v)` is
-  the probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in the
+  the probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in
+  the
   same idealization in which Gao et al. compute its KL as `log n − (n − 1)/n`. So best-of-`n` pursues the proxy's rank,
   not its value: with the same proxy, the two methods pursue different objectives, at different angles to the gold.
   This gives one reason why their curves differ; it is not shown to be the only one.
@@ -51,7 +54,8 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   splits exactly into the pursuit of the gold, `KL(p°‖q)`, and misalignment against the gold. The axis mixes the two;
   the core separates them.
 - **Consequence** of [P13]: along any smooth path that starts at the initial policy, whatever the optimizer, the gold
-  score changes at first as `√2·cos θ·σ_q(F)·d`: a finite slope, at most `√2·σ_q(F)` in size. Here `σ_q(F)` is the spread of the
+  score changes at first as `√2·cos θ·σ_q(F)·d`: a finite slope, at most `√2·σ_q(F)` in size. Here `σ_q(F)` is the
+  spread of the
   gold score over the initial policy's responses, and `cos θ` is the correlation, under the initial policy, of the gold
   with the path's first revealed objective. The slope of the reinforcement-learning form, `a − b − b·log d`, grows
   without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the measured range only, and

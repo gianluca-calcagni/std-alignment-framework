@@ -2,7 +2,8 @@
 
 An ontology says what each object of the core is in one discipline: what an outcome is, who the principal is, what the
 default is, and so on. It is a dictionary, not a theorem. It proves nothing, and the core's results reach a discipline
-only through it. A wrong ontology gives correct mathematics about the wrong things, so every entry says how well it fits.
+only through it. A wrong ontology gives correct mathematics about the wrong things, so every entry says how well it
+fits.
 
 Each ontology then reframes one known result of its discipline in the core's terms. It says what the core adds to that
 result, separating three kinds of claims: consequences, predictions that data could refute, and readings that only
@@ -70,7 +71,8 @@ The section "What the core says" holds the claims, one per bullet. Each starts w
 ## The format of an ontology
 
 Each ontology lives in its own folder, `ontologies/<name>/README.md`, so that its worked cases and data can join it
-later. It has a title `# Ontology — <discipline>`, a short introduction, then these sections, in this order: `## 1. Slots`,
+later. It has a title `# Ontology — <discipline>`, a short introduction, then these sections, in this order:
+`## 1. Slots`,
 `## 2. Known result`, `## 3. What the core says`, `## 4. Limits`, `## 5. Open questions`. The known result cites its
 source, listed in `REFERENCES.md`. Lint rule R10 checks the sections, that every slot appears once and names
 its item, the fit words, the claim kinds and their items, the *Refuted if* of every prediction, that every item named

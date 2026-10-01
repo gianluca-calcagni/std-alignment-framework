@@ -1,6 +1,7 @@
 # NOTES — the executor's working notes
 
-Not part of the core, and not checked by lint. Blunt on purpose. A hunch is not a claim: nothing moves into `CORE.md`
+Not part of the core, and not checked by lint. Blunt on purpose. A hunch is not a claim: nothing moves into `CORE.md` or
+`derived/`
 without a proof and a check. Names, and correspondences with the literature, with their confidence levels, live in
 `TERMS.md`.
 
@@ -19,7 +20,8 @@ The full table, with its evidence, is on `main`: `70 Project/NOTES_claude.md` §
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
 | **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
 
-**One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises with
+**One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from main's B1 ("rises
+with
 budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort law
 and exhibits a counterexample. The rule "a shape claim needs a random sample before it is said" (main, §1) paid off.
 
@@ -62,7 +64,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 
 | # | For | What is needed | Why | Note |
 |---|---|---|---|---|
-| D1 | humans (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/humans.md` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
+| D1 | humans (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/humans/` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
 | D2 | humans (defaults) | Madrian and Shea (2001), the distribution of contribution rates in each cohort | the pass-through ratio test | the paper itself; the 403 from publishers blocks it here |
 | D3 | machine learning | samples from an initial policy, scored by a gold and a proxy reward model | the best-of-`n` slope and the covariance-at-the-peak predictions | an open RLHF setup would do; Gao et al.'s own data is not known to be public |
 | D4 | biology | Chippindale et al. (2001), the hemiclone fitness values per sex | the angle and the shortfall of ordinary selection | supplementary data, if any |
@@ -82,7 +84,8 @@ Every test is pre-registered and pushed before any computation (README rules).
 | E6 | **Misalignment in an unobserved condition.** [P17] bounds the objective's average. The largest misalignment within `ε` of the observed behaviour has no closed form; a small-`ε` expansion, as in [P11], may give one | a result | open |
 | E7 | **Identifying a view.** Which interventions identify what the actor perceives: the control-theory question of observability, from the principal's side | a result | open |
 
-**To verify.** [D2]'s justification says that the check of [P3] exercises mixture paths. A read-only search to confirm it
+**To verify.** [D2]'s justification says that the check of [P3] exercises mixture paths. A read-only search to confirm
+it
 was blocked by a permission prompt during the third review; still unverified.
 
 ### 3.4 Contexts (history)
@@ -110,7 +113,7 @@ by [P4](iii). [P13](i), and the first limit of [P13](ii), hold across contexts a
   intensity is nearest in every context. Why one intensity: "pursue `F`" names one objective on all outcomes, and
   pursuing it at different intensities in different contexts is pursuing a different objective, `t(C)·F`, which [P1](ii)
   tells apart from `F`. KL-regularized fine-tuning, with one `β` for all prompts, is exactly this specification. The
-  report-card prediction (`ontologies/institutions.md`) needs it; the delegation ontology asks for it.
+  report-card prediction (`ontologies/institutions/`) needs it; the delegation ontology asks for it.
 - **B: free intensity per context.** Keep what the ontologies do now. It needs no new item, but it forgives an actor
   that pursues hard in some contexts and not at all in others.
 

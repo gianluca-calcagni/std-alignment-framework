@@ -1,1 +1,1 @@
-"""Checks of the core. Each test is cited by an item of CORE.md (lint rule R7)."""
+"""Checks of the framework. Each test is cited by a result in derived/ (lint rule R7)."""

@@ -46,7 +46,8 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
 - **Consequence** of [D6], [P1]: a bonus on a set `A` of measured outcomes, `u = 1_A`, passed through with `φ > 0`,
   multiplies the mass of every outcome in `A` by one factor, `e^φ/Z`, and the mass of every outcome outside `A` by
   another, `1/Z`, with `Z = E_p[e^{φ·u}] > 1`. Every unmeasured task loses the same share of its time. This is the
-  substitution of effort that Holmström and Milgrom derive, in its simplest form, and its proportional form can be tested
+  substitution of effort that Holmström and Milgrom derive, in its simplest form, and its proportional form can be
+  tested
   (the prediction below).
 - **Consequence** of [P13]: at the start, the manager's average value moves at the rate
   `Cov_p(u, F) = p(A)·(E_p[F|A] − E_p[F])` per unit of pass-through. So rewarding `A` helps at first exactly when the
@@ -58,7 +59,8 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
   `p_φ(A)·E_p[F|A] + (1 − p_φ(A))·E_p[F|not A]`, which is monotone in `φ`: the best bonus is either none or the largest.
   A bonus on a graded measure is different. In the running example, pay per report gives the measure
   `u = (1, 2, 0, 0)` per unit of time, since a rushed report takes half the time. The manager's average rises from `0.9`
-  to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the value of a rushed report. By [P13](i), the peak is where `Cov_{p_φ}(u, F) = 0`: where the
+  to about `0.97` at `φ ≈ 0.79`, and then falls toward `0.5`, the value of a rushed report. By [P13](i), the peak is
+  where `Cov_{p_φ}(u, F) = 0`: where the
   measure and the manager's value become uncorrelated under the behaviour that the bonus itself induces. So the core
   gives a reason for weak incentives with no risk aversion and no cost of pay: the measure stops tracking the value
   as the employee follows it.

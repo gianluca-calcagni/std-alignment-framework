@@ -103,7 +103,8 @@ may face. Alignment is judged from that description alone, never from how the be
   internal goals. That is deliberate: a difference that shows in no condition has no consequence a principal could
   suffer.
 
-**Lineage.** main: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an argument.
+**Lineage.** main: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an
+argument.
 New: behaviour in every condition, so that deceptive alignment is in scope.
 
 ### A2 — Pursuit is the steepest climb
@@ -116,7 +117,8 @@ direct must not depend on how finely we describe what happens.
 **Why this choice.**
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
-- *It is enough.* By Čencov's theorem it fixes the geometry, up to a constant factor, and with it the form of pursuit,
+- *It is enough.* By Čencov's theorem [@cencov1982] it fixes the geometry, up to a constant factor, and with it the form
+  of pursuit,
   a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
 
 **Lineage.** main: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where this
@@ -124,8 +126,8 @@ was the one premise.
 
 ### A3 — Pursuit is the best trade-off
 **Statement.** To pursue an objective at an intensity is to choose the behaviour with the largest average of the
-objective minus a cost of departing from the default, priced at the reciprocal of the intensity. The cost depends only
-on the behaviour, and is differentiable.
+objective minus a cost of departing from the default, priced at the reciprocal of the intensity. With the default
+fixed, the cost depends only on the behaviour, and is differentiable.
 
 **In plain terms.** Pursuing harder means accepting more cost of change for more of what is pursued. The cost of change
 depends only on how the behaviour changes, not on what is pursued.
@@ -176,7 +178,8 @@ judged, and its test could not fail. Pre-registration in science makes the same 
 **Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
 distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
 `p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and
-`Var_p(F) = E_p[F²] − E_p[F]²`, and `Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
+`Var_p(F) = E_p[F²] − E_p[F]²`, and `Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`,
+`p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
 the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when
 `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
 `tilt(r, F) = r·e^F / E_r[e^F]`.
@@ -234,7 +237,8 @@ away from it, from wherever it starts.
 
 **Notes.** Names in other fields. The default is the reference policy of RL fine-tuning, the prior of KL control, the
 base measure of an exponential family, the status quo of behavioural economics, and the population before selection
-in biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of KL-regularized
+in biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of
+KL-regularized
 reward maximization with coefficient `1/t` in RL fine-tuning, for one prompt (across prompts, which the policy does
 not choose, the optimum reweights each prompt's responses separately, which is not a pursuit on prompt–response pairs);
 with a uniform default it is the logit choice rule, or quantal response, with rationality `t` [@mckelvey1995]; and it
@@ -274,7 +278,8 @@ that stays at the default is not misaligned, though it may be useless, which is 
   observer gathers evidence that the actor is not behaving as intended: about `1/M(p̂)` decisions give one nat, odds of
   about `e` to 1.
 - *The direction charges the unintended.* `KL(p̂‖p)` is large when the actor often does what `p` rarely does, and
-  comparatively small when the actor merely does less of what `p` does. Doing the unintended costs more than leaving the intended undone.
+  comparatively small when the actor merely does less of what `p` does. Doing the unintended costs more than leaving the
+  intended undone.
 - *The nearest acceptable behaviour.* Taking the minimum gives the actor the benefit of the doubt: it is charged only
   for what no acceptable behaviour explains.
 - *Grouping only hides.* By [P4](iii) and (iv), the score splits along groupings of outcomes, and grouping can only hide
@@ -292,7 +297,8 @@ that stays at the default is not misaligned, though it may be useless, which is 
   the counts it judged, and its test could not fail.
 - *Stakes are reported separately.* Misalignment in nats says nothing about how much of `F` is at stake. Section 5
   reports the shortfall in `F`'s own units (main: Def 22 and R8-1, where this lesson was learned).
-- *Slim on purpose.* main's declaration (Def 23, the same object under its old name) had nine slots. Only four changed the measure, and all four are ways of
+- *Slim on purpose.* main's declaration (Def 23, the same object under its old name) had nine slots. Only four changed
+  the measure, and all four are ways of
   generating `𝓘`. Rules, instruments, feasibility and the environment did not enter the measure, so they are not
   part of the specification. Instruments return as interventions (section 6), and feasibility as a property of the
   actor (section 7), where it splits misalignment instead of changing it. The default enters the measure through `𝓘`
@@ -312,13 +318,15 @@ scored.
 ## 4. Resolution: what each side distinguishes
 
 ### D4 — Resolution
-**Statement.** A **resolution** is a partition `𝒢` of `X` into non-empty **cells**. A function is constant on cells if it
+**Statement.** A **resolution** is a partition `𝒢` of `X` into non-empty **cells**. A function is constant on cells if
+it
 takes one value on each cell. For `p ∈ Δ`, `p_𝒢` is the distribution of the cell masses `p(C)`. For `q ∈ Δ°` and
 `F : X → ℝ`, the **cell average** `E_q[F|𝒢]` is the function equal, on each cell `C`, to `E_{q(·|C)}[F]`. Resolutions
 are used in two positions.
 - A specification `(q, 𝓘)` is **stated at resolution** `ℬ` if `𝓘 = {p ∈ Δ° : p_ℬ ∈ 𝓘_ℬ}` for a non-empty set `𝓘_ℬ`
   of full-support distributions on the cells, closed in the set of all full-support distributions on the cells. The
-  principal is then **indifferent** inside the cells of `ℬ`. For an objective `F` constant on the cells of `ℬ`, the **standard specification at resolution** `ℬ` takes
+  principal is then **indifferent** inside the cells of `ℬ`. For an objective `F` constant on the cells of `ℬ`,
+  the **standard specification at resolution** `ℬ` takes
   `𝓘_ℬ` to be the pursuit ray of `F`, read on the cells, from `q_ℬ`.
 - A behaviour `p` is **limited to** a resolution `𝒜` if it splits every cell as the default does: `p(·|A) = q(·|A)` for
   every cell `A` of `𝒜` with `p(A) > 0`. An actor **has resolution** `𝒜` if every behaviour it can produce is limited
@@ -345,7 +353,8 @@ occurs, but inside a cell the outcomes keep the proportions they have by default
   declared, never assumed. An actor's resolution, in contrast, is a fact about the actor, to be identified from its
   behaviour rather than declared.
 - *Not the meet.* The finest partition coarser than both resolutions (their meet) holds the events both sides can
-  describe, which are common knowledge in Aumann's sense [@aumann1976]. Misalignment computed there is a lower bound both
+  describe, which are common knowledge in Aumann's sense [@aumann1976]. Misalignment computed there is a lower bound
+  both
   can verify ([P4](iv)), but it is blind to every gap between the two resolutions, so it is not the score.
 
 **Notes.** The actor's position is a case of feasibility: the behaviours limited to `𝒜` form a linear feasible set
@@ -353,7 +362,8 @@ occurs, but inside a cell the outcomes keep the proportions they have by default
 are aliased. A principal's resolution is a coarse-graining of the outcomes.
 
 **Lineage.** main: Def 21 (the declared resolution: the principal's position), B1 and NOTES H14 (one object in several
-positions; retention), and ROADMAP §6 G1, G2 and G4. New: the actor's position as a definition, with the default deciding
+positions; retention), and ROADMAP §6 G1, G2 and G4. New: the actor's position as a definition, with the default
+deciding
 inside cells.
 
 ## 5. Stakes
@@ -369,11 +379,13 @@ departs from the default by the same amount, and the shortfall is how much more 
 the objective's own units.
 
 **Why this choice.**
-- *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled (`derived/stakes.md`), so it
+- *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
+  (`derived/stakes.md`), so it
   cannot say how much of the objective is lost; a principal needs that in its own units. On main this was learned the
   hard way (R8-1).
 - *Compare at the same departure.* The departure is what the actor spent, and the matched pursuit is the most of `F`
-  that departure can buy (`derived/stakes.md`). Comparing with the nearest intended behaviour would say nothing: in the second
+  that departure can buy (`derived/stakes.md`). Comparing with the nearest intended behaviour would say nothing: in the
+  second
   case of [P5](iv) it reaches the same average of `F` by construction.
 - *Not the best outcome.* Comparing with `max F` would charge every cautious actor for not being reckless, although the
   specification ([D3]) counts departing from the default as a cost.
@@ -386,17 +398,21 @@ the objective's own units.
 
 ### D6 — Intervention and pass-through
 **Statement.** An **intervention** changes what the actor faces by a known non-constant function `u : X → ℝ`: an
-incentive, a fine, or a known shift of the actor's own default. With `p ∈ Δ°` the actor's behaviour before it and `p' ∈ Δ°` after,
+incentive, a fine, or a known shift of the actor's own default. With `p ∈ Δ°` the actor's behaviour before it and
+`p' ∈ Δ°` after,
 the actor passes the intervention through, with **pass-through** `φ ∈ ℝ`, if `p' = tilt(p, φ·u)`.
 
 **In plain terms.** An intervention is a known nudge added to the situation: a bonus for some outcomes, a fine for
-others, or a shift in what the actor would do by default. The actor passes it through when its behaviour changes exactly by reweighting
-with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value follows it, and
+others, or a shift in what the actor would do by default. The actor passes it through when its behaviour changes exactly
+by reweighting
+with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value follows it,
+and
 a negative value means the nudge backfires.
 
 **Why this choice.**
 - *The simplest response that can fail.* Any change of behaviour is a reweighting by some function ([P1](i)). The claim
-  that this function is a multiple of the intervention is testable, and a derived result tests it (`derived/identifiability.md`). When it fails, more
+  that this function is a multiple of the intervention is testable, and a derived result tests it
+  (`derived/identifiability.md`). When it fails, more
   happened between the two behaviours than adding `u`: the intervention also changed what the actor pursues or where
   it starts from, or something else changed at the same time.
 - *It needs no model of the actor.* The pass-through is defined from behaviour before and after; the actor's objective,
@@ -406,7 +422,8 @@ a negative value means the nudge backfires.
 - *A change of default is an intervention too.* If the actor's own default is shifted by a known tilt `h` and its
   objective is unchanged, its behaviour moves to `tilt(p, h)` by [P1](iii): pass-through `1` for `u = h`.
 
-**Lineage.** main: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments slot,
+**Lineage.** main: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments
+slot,
 made measurable, and T7-2d (a change of default that moved the evaluator).
 
 ## 7. Feasibility

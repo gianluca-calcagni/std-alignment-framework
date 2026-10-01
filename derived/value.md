@@ -38,10 +38,12 @@ cell with `p(C) > 0`, that is, if and only if `p/r` is constant there.
 checks/test_value.py::test_chain_rule, checks/test_value.py::test_merging_never_increases,
 checks/test_value.py::test_other_divergences_break_the_chain_rule
 
-**Notes.** (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and a
+**Notes.** (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and
+a
 free energy in the literature on bounded rationality [@ortega2013]. The same ray therefore arises twice: as the steepest
 climb of [D2] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are standard
-[@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the chain rule
+[@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the chain
+rule
 (iii) [@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
 break it.
 
