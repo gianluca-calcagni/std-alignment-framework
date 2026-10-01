@@ -14,6 +14,9 @@ Each entry gets one verdict:
 
 ## 1. The estimate
 
+The counts below are those at the start of the import. Section 4 gives the current state of each item, and the
+roadmap (section 6) the state of each phase.
+
 | Kind in v7.10 | Count | In core | Derive (must / should / could) | Needs | Drop |
 |---|---|---|---|---|---|
 | Results (theorems, propositions, corollaries, lemmas, remarks) | 52 | 21 | 20 (7 / 9 / 4) | 3 | 8 |
@@ -37,27 +40,29 @@ core (the intent-ray decomposition, the one-curve view of conventions without th
 other three are the "must" items: the width as the exact worst case with non-separability, the conjugate pairings,
 and the closed-loop floor.
 
-## 2. Two decisions the imports need
+## 2. Two decisions the imports need (approved)
 
 - **Q11. The error of a known evaluator.** [D10] avoids the difference `F̂ − F` because behaviour never identifies the
   scale of a revealed evaluator. Main's bounds (Props 2–7, Thms 5 and 9, Prop 10) are about that difference. They make
   sense for an evaluator known in the units of the objective, such as a reward model trained to predict the gold.
-  Recommendation: state them for known evaluators only, with `E = F̂ − F` as notation inside each result, and no new
-  definition.
+  Recommendation, approved by the PI: state them for known evaluators only, with `E = F̂ − F` as notation inside each
+  result, and no new definition.
 - **Q12. Capacity as feasibility.** Main's capacity actor maximizes inside a KL ball, `{p : KL(p‖q) ≤ δ}`. In the core,
-  that ball is a convex feasible set ([D7]), and [P15](ii) applies to it. Recommendation: import capacity as a feasible
-  set, not as a new definition, keeping the actor's own cost apart from the measure (`NOTES.md` §5, H5).
+  that ball is a convex feasible set ([D7]), and [P15](ii) applies to it. Recommendation, approved by the PI: import
+  capacity as a feasible set, not as a new definition, keeping the actor's own cost apart from the measure (`NOTES.md`
+  §5, H5). Since [D7] already uses "capacity" for parametric limits, the ball is called a **departure budget**, after
+  the departure of [P6].
 
 ## 3. The new results, grouped
 
 | # | New result | From v7.10 | Priority | Where | Effort |
 |---|---|---|---|---|---|
-| N1 | The best feasible pursuit in a KL ball, and the budget as a shadow price | Def 5, Lemma 5.1, Def 15, Cor 5.2, Cor 17.1 (could) | must | `feasibility.md` | small |
-| N2 | The width of a KL ball along a function, computed | Def 6, Prop 6 | must | `feasibility.md` | small |
+| N1 | The best feasible pursuit in a KL ball, and the budget as a shadow price: **[P27]** | Def 5, Lemma 5.1, Def 15, Cor 5.2, Cor 17.1 (could) | must | `feasibility.md` | small |
+| N2 | The width of a KL ball along a function, computed: **[P28]** | Def 6, Prop 6 | must | `feasibility.md` | small |
 | N3 | The width is the exact worst case | Thm 5 | must | `evaluator.md` | medium |
 | N4 | No separable bound on the worst case | Lemma 8, Thm 9 | must | `evaluator.md` | medium: the hardest proof; main's checks exist |
 | N5 | Feasible sets of other shapes: total variation, χ², Rényi | Prop 10; Prop 11's finite shadow in its Notes | must | `feasibility.md` | medium |
-| N6 | The closed-loop floor: regulating conditions costs departure | Dictionary B07 (a)–(d) | must | `identifiability.md` | medium |
+| N6 | The closed-loop floor: regulating conditions costs departure | Dictionary B07 (a)–(d) | must | `feasibility.md` | medium |
 | N7 | Error bounds for a known evaluator: sharp, sub-Gaussian, one-region saturation | Props 2, 4, 7; Prop 3 (could) | should | `evaluator.md` | small |
 | N8 | Floors and caps: the intended segment | Defs 18, 20; Props 33, 35, 37(d) | should | `misalignment.md` | small (`NOTES.md` E2) |
 | N9 | Ordinal objectives, by isotonic regression | Def 17 (ordinal part), Prop 32 | should | `misalignment.md` | medium (`NOTES.md` E3) |
@@ -77,8 +82,8 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Def 1 | objects: default, target, exchange rate, tilt | in core | [D1], [D2], [D3] |
 | Def 2 | the bounded actor's net value | in core | [P4] |
 | Def 3 | regrets at a declared price; raw and total regret | drop | price convention, replaced by stakes at matched intensity ([D5], [P9]); main's row 74 |
-| Def 5 | the capacity actor, a KL ball | derive, must | N1 (Q12) |
-| Def 6 | the width of a KL ball along a function | derive, must | N2 |
+| Def 5 | the capacity actor, a KL ball | in core | [P27], imported in R1: the departure budget |
+| Def 6 | the width of a KL ball along a function | in core | [P28], imported in R1 |
 | Def 7 | the reporting rule: report only invariant quantities | in core | [D9], [P1], `STANDARD.md` |
 | Def 8 | conventions: free, budget, price | in core | free: [D3]; budget: [D5] as a report; price: dropped, as for Def 3 |
 | Def 9 | contexts with evaluation and deployment frequencies | in core | [D8], [P24] |
@@ -87,7 +92,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Def 12 | the alignment instance | in core | [D3] |
 | Def 13 | evaluator `F̂ = F + E`; actor models | in core | [D10]; the error as notation for known evaluators (Q11); actor models are paths ([P2]) |
 | Def 14 | mechanism-relative comparison `M_own` | drop | not identified from behaviour, as main's own Prop 25(c) shows; [D9] |
-| Def 15 | the capacity model, hypothesis (C) | derive, must | N1 |
+| Def 15 | the capacity model, hypothesis (C) | in core | [P27](ii) and its Notes, imported in R1 |
 | Def 16 | external reward, contingency, coupling | needs | a strategic layer: the agent's stake in an outer process. Out of scope (`CORE.md` §0) |
 | Def 17 | target sets: cardinal and ordinal | derive, should | cardinal: [D3]; ordinal: N9 |
 | Def 18 | caps on intensity | derive, should | N8 |
@@ -111,10 +116,10 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Prop 2 | sharp error-only bound, `osc(E)²/8` | derive, should | N7; in the core it bounds misalignment, not only regret at a price |
 | Prop 3 | only the upper tail matters | derive, could | N7, as a refinement |
 | Prop 4 | an error confined to one region saturates | derive, should | N7 |
-| Lemma 5.1 | the capacity actor is a pursuit at the matched intensity | derive, must | N1; the monotonicity part is in [D5] and [P5] |
+| Lemma 5.1 | the capacity actor is a pursuit at the matched intensity | in core | [P27](i) and (ii), imported in R1; the monotonicity part was already in [P9](i) |
 | Thm 5 | the width is the exact worst case | derive, must | N3 |
-| Cor 5.2 | the exchange rate is a shadow price | derive, must | N1 |
-| Prop 6 | the width, computed (Donsker–Varadhan) | derive, must | N2 |
+| Cor 5.2 | the exchange rate is a shadow price | in core | [P27](iii), imported in R1 |
+| Prop 6 | the width, computed (Donsker–Varadhan) | in core | [P28], imported in R1, with a term in `δ` that main did not have |
 | Prop 7 | a bound with realized travel (sub-Gaussian) | derive, should | N7 |
 | Rem 7.1 | the v5 normal form, and why its ball version fails | drop | a historical note; the lesson is in main's retraction history |
 | Lemma 8 | separable bounds are loose when rankings move | derive, must | N4 |
@@ -133,7 +138,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Prop 16 | the gauge group and the identified quantities | in core | [P1], [D9], [D10] |
 | Rem 16.1 | the actor's own default is not identified apart from its evaluator | in core | [P1](i) and (iii) |
 | Thm 17 | every regret notion is a point on one convex curve | in core | convexity: [P5]; the budget point: [D5], [P9]; the price point is dropped |
-| Cor 17.1 | the capacity actor's regret is the budget convention | derive, could | N1, as a remark |
+| Cor 17.1 | the capacity actor's regret is the budget convention | in core | [P27] Notes with [P9](ii), imported in R1 |
 | Prop 18 | harm bounds detectability | in core | [P22] |
 | Prop 19 | the evaluation gap | in core | [P24] |
 | Prop 20 | Goodhart as a covariance, for any optimizer | in core | [P18](ii) |
@@ -164,7 +169,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Core A3, assumption tiers | in core | the core tests actor models instead of assuming them ([P3], [P12]); "for any actor" results need no tier |
 | Hypothesis E (entropic actor) | in core | a pursuit of a known evaluator ([D2], [D10]) |
 | Hypothesis E_A (own default) | in core | absorbed by [P1](i) and (iii) |
-| Hypothesis C (capacity actor) | derive, must | N1 |
+| Hypothesis C (capacity actor) | in core | [P27](ii), imported in R1 |
 | Hypothesis E_R (reward-coupled agent) | needs | the strategic layer of Def 16 |
 | B01, the anchor | drop | an orientation note |
 | B02, the conjugacy scale | derive, must | with N5 |
@@ -191,9 +196,24 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Sources | as cited | `REFERENCES.md` grows only with the items imported (lint R8) |
 | Checks V1–V55 | as needed | each imported result gets its own check in `checks/`; main's checks serve as references |
 
-## 6. How to merge
+## 6. Roadmap
 
-1. Import the "must" results and `derived/forbids.md`, then as many "should" results as the PI wants.
-2. Tag `main` as `v7.10` before the merge, so that the archive stays reachable by name.
-3. Merge `core` into `main`, replacing the vault. Each "drop" and "needs" row above points into the tagged history.
-4. Keep this file after the merge, as the map from v7.10 to the core.
+The PI approved every recommendation of this file. The import runs in phases, each one pull request into `core`, in
+an order that respects the reading order of `derived/` (lint R5): a result may use only results before it.
+
+| Phase | Content | Files | Blocks the merge | State |
+|---|---|---|---|---|
+| R1 | N1, the best use of a departure budget, with its shadow price; N2, the width of a departure budget | `feasibility.md` | yes | done: [P27], [P28]; for review |
+| R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | |
+| R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | |
+| R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | |
+| R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | |
+| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | |
+| R7 | The merge: tag `main` as `v7.10`; merge `core` into `main`, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
+
+**Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been
+mutation-tested; each imported row of section 4 says "in core" and names its item; each new item's Lineage names the
+v7.10 items it re-derives; `TERMS.md`, `STANDARD.md` and `NOTES.md` follow.
+
+**After the merge.** The "could" rows, the empirical re-runs of section 5, and the strategic layer (the "needs" rows)
+are proposals for later versions, not debts of this one.

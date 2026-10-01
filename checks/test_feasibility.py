@@ -1,7 +1,8 @@
 """Checks of P15: the best feasible behaviour exists, is unique and has full support; convex limits give the Pythagorean
 inequality and linear limits the equality, with the exponential form; the split is the accounting of net value; and
 misalignment splits into avoidable and unavoidable parts. For the Notes: contexts, a coarse actor and a random
-environment are linear limits, and a curved (non-convex) limit can break the split."""
+environment are linear limits, and a curved (non-convex) limit can break the split. P27: the best use of a departure
+budget, and the budget as a price. P28: the width of a departure budget."""
 import itertools
 import numpy as np
 from scipy.optimize import minimize
@@ -187,3 +188,109 @@ def test_a_random_environment_is_a_linear_limit():
         m = q > 0; pt = np.zeros(16); pt[m] = tilt(q[m], R[m])
         star = trajectories(*best_policy(pi1, pi2, P1, P2, R.reshape(2, 2, 2, 2)), P1, P2)
         assert kl(star[m], pt[m]) <= 1e-12
+
+
+def budget_intensity(q, G, delta):
+    """λ_δ(G) = inf{t ≥ 0 : KL(p_{G,t} || q) ≥ δ}; inf when δ ≥ −log q(argmax G)."""
+    from .test_stakes import departure_on_ray
+    if delta >= -np.log(q[G >= G.max()].sum()):
+        return np.inf
+    lo, hi = 0.0, 1.0
+    while departure_on_ray(q, G, hi) < delta:
+        hi *= 2
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if departure_on_ray(q, G, mid) < delta else (lo, mid)
+    return 0.5 * (lo + hi)
+
+
+def in_budget(r, q, delta):
+    """A random behaviour with departure at most δ: a random tilt of q, pulled back toward q until it fits."""
+    h = r.normal(0, 2, q.size)
+    s = 1.0
+    while kl(tilt(q, s * h), q) > delta:
+        s *= 0.8
+    return tilt(q, s * r.uniform(0.3, 1.0) * h)
+
+
+def test_the_best_use_of_a_departure_budget():
+    """P27: in the budget KL(p || q) ≤ δ, the net value J_t of G is maximized by p_{G, min(t, λ_δ)}, with
+    J_t(p*) − J_t(p) ≥ KL(p || p*)/min(t, λ_δ) (equality when t ≤ λ_δ); the average of G alone (t = ∞) by p_{G, λ_δ}, or
+    on argmax G when the budget reaches it; a generic constrained optimizer agrees; and V_G(δ) = max E_p[G] has
+    derivative 1/λ_δ and is concave."""
+    from scipy.optimize import minimize as smin
+    r = rng(2701); regimes = {"cut": 0, "free": 0, "saturated": 0}; equal = 0
+    for trial in range(400):
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); G = r.normal(0, 1, n)
+        cap = -np.log(q[G >= G.max()].sum())                                        # float64 must hold every mass:
+        delta = cap * (r.uniform(0.02, 0.9) if r.random() < 0.75 else r.uniform(1.0, 1.3))  # not just below the cap
+        lam = budget_intensity(q, G, delta); scale = 1 + np.abs(G).max()
+        for t in (r.uniform(0.1, 6), np.inf):
+            s = min(t, lam)
+            star = q * (G >= G.max()) / q[G >= G.max()].sum() if np.isinf(s) else tilt(q, s * G)
+            if np.isinf(s):
+                regimes["saturated"] += 1
+                assert delta >= cap and abs(star @ G - G.max()) <= EXACT * scale
+                for _ in range(10):
+                    assert in_budget(r, q, delta) @ G <= G.max() + EXACT * scale
+                continue
+            regimes["cut" if t > lam else "free"] += 1
+            assert kl(star, q) <= delta * (1 + 1e-9) + 1e-12                       # feasible
+            J = (lambda p: p @ G - kl(p, q) / t) if np.isfinite(t) else (lambda p: p @ G)
+            for _ in range(10):
+                p = in_budget(r, q, delta)
+                assert J(star) - J(p) >= kl(p, star) / s - 1e-9 * scale
+                equal += np.isfinite(t) and t <= lam and abs(J(star) - J(p) - kl(p, star) / s) <= 1e-9 * scale
+        if trial < 40 and n <= 5:                                                    # a generic optimizer agrees
+            t = r.uniform(0.1, 6); s = min(t, lam)
+            star = tilt(q, s * G) if np.isfinite(s) else None
+            if star is not None:
+                neg = lambda z: -(tilt(q, z) @ G - kl(tilt(q, z), q) / t)
+                cons = {"type": "ineq", "fun": lambda z: delta - kl(tilt(q, z), q)}
+                found = []
+                for start in (0.0, 0.5 * s, s, 2 * s):                         # several starts; keep feasible ends
+                    z = smin(neg, start * G, method="SLSQP", constraints=[cons],
+                             options={"ftol": 1e-12, "maxiter": 500}).x
+                    if kl(tilt(q, z), q) <= delta * (1 + 1e-7):
+                        found.append(-neg(z))
+                best_j = star @ G - kl(star, q) / t
+                assert found and max(found) <= best_j + 1e-7 * scale                 # nothing feasible does better
+                assert max(found) >= best_j - 1e-5 * scale                           # and the optimizer reaches it
+    assert min(regimes.values()) >= 40 and equal >= 100
+    for _ in range(100):                                                             # the shadow price
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); G = r.normal(0, 1, n)
+        cap = -np.log(q[G >= G.max()].sum()); delta = r.uniform(0.05, 0.9) * cap; h = 1e-5 * delta
+        V = lambda d: tilt(q, budget_intensity(q, G, d) * G) @ G
+        lam = budget_intensity(q, G, delta)
+        assert abs((V(delta + h) - V(delta - h)) / (2 * h) - 1 / lam) <= 1e-4 * (1 + 1 / lam)
+        assert V(delta) >= 0.5 * (V(delta - 100 * h) + V(delta + 100 * h)) - 1e-12   # concave
+
+
+def test_the_width_of_a_departure_budget():
+    """P28: σ_δ(E) = max over the budget of E_p[E] − E_q[E] equals inf_{u>0} (δ + Λ(u))/u, attained at u = λ_δ(E);
+    σ_δ(E) = √(2δ·V) + κ₃·δ/(3V) + O(δ^{3/2}), so the width w_δ = σ_δ(E) + σ_δ(−E) is 2√(2δ·V) + O(δ^{3/2}); and σ_δ(E)
+    = max E − E_q[E] once δ ≥ −log q(argmax E), w_δ = osc(E) once the budget reaches both ends."""
+    from scipy.optimize import minimize_scalar
+    r = rng(2801)
+    sigma = lambda q, E, d: (tilt(q, budget_intensity(q, E, d) * E) @ E if np.isfinite(budget_intensity(q, E, d))
+                             else E.max()) - q @ E
+    for _ in range(300):
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); E = r.normal(0, 1, n); scale = 1 + np.abs(E).max()
+        cap = -np.log(q[E >= E.max()].sum()); delta = r.uniform(0.02, 0.95) * cap
+        lam = budget_intensity(q, E, delta); Ec = E - q @ E
+        dual = lambda u: (delta + log_normalizer(q, u * Ec)) / u
+        assert abs(dual(lam) - sigma(q, E, delta)) <= 1e-9 * scale                   # attained at λ_δ
+        best = minimize_scalar(lambda v: dual(np.exp(v)), bounds=(-12, 8), method="bounded",
+                               options={"xatol": 1e-12}).fun
+        assert best >= sigma(q, E, delta) - 1e-9 * scale                             # no u does better
+        for _ in range(5):                                                           # no budget behaviour moves E more
+            assert in_budget(r, q, delta) @ E - q @ E <= sigma(q, E, delta) + EXACT * scale
+        assert abs(sigma(q, E, 1.01 * cap) - (E.max() - q @ E)) <= EXACT * scale   # saturation
+        both = 1.01 * max(cap, -np.log(q[E <= E.min()].sum()))
+        assert abs(sigma(q, E, both) + sigma(q, -E, both) - np.ptp(E)) <= EXACT * scale
+        V = q @ Ec ** 2; k3 = q @ Ec ** 3
+        rem = [(sigma(q, E, d) - np.sqrt(2 * d * V)) / d for d in (1e-7, 1e-6)]
+        assert abs(rem[0] - k3 / (3 * V)) <= 3 * np.sqrt(1e-7) * (1 + abs(k3) / V ** 2) * scale ** 2
+        assert abs(rem[1] - k3 / (3 * V)) <= 3 * np.sqrt(1e-6) * (1 + abs(k3) / V ** 2) * scale ** 2
+        w = sigma(q, E, 1e-6) + sigma(q, -E, 1e-6)
+        assert abs(w - 2 * np.sqrt(2e-6 * V)) <= 3 * 1e-9 * (1 + abs(k3) / V ** 2) * scale ** 3
