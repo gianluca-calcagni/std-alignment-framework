@@ -14,6 +14,7 @@ else is derived from them, with proofs and checks, and reported through one stan
 | | |
 |---|---|
 | `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
+| `CORE-GENERAL.md` | draft 1 of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) that reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; no result claimed yet. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |
@@ -50,7 +51,8 @@ else is derived from them, with proofs and checks, and reported through one stan
   reading, with the items it uses. A prediction says when it is refuted, and is labelled empirical (it can be wrong
   about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
-- **R12.** `RELATED.md` and `IMPORT.md` name only existing items, and their citations are listed like all others.
+- **R12.** `RELATED.md`, `IMPORT.md` and `CORE-GENERAL.md` name only existing items, and their citations are listed
+  like all others.
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 
@@ -87,6 +89,7 @@ where each comes from):
 
 **Versions.** A version changes only when the Statement of a premise or a definition changes. Results, checks and
 ontologies are added within a version. The core is v10: no such Statement has changed since [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Sample and evidence|D11]] were added.
+`CORE-GENERAL.md` is a draft with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
 
@@ -136,9 +139,9 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`,
-`NOTES.md` and `ontologies/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with its evidence:
-read it before starting work.
+Read this file, `CORE.md`, `CORE-GENERAL.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`,
+`IMPORT.md`, `NOTES.md` and `ontologies/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with
+its evidence: read it before starting work.
 
 ## License
 

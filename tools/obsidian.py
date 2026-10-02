@@ -16,9 +16,9 @@ import lint  # one definition of what an item is, and of what it depends on
 
 REPO = "https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/"
 KEEP = {".obsidian", "Annotations"}
-DOCS = {"README.md": "About", "STANDARD.md": "Standard", "RECORD.md": "Record", "TERMS.md": "Terms",
-        "RELATED.md": "Related", "IMPORT.md": "Import", "NOTES.md": "Notes", "REFERENCES.md": "References",
-        "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies"}
+DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": "Standard", "RECORD.md": "Record",
+        "TERMS.md": "Terms", "RELATED.md": "Related", "IMPORT.md": "Import", "NOTES.md": "Notes",
+        "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies"}
 
 
 def anchor(heading):
@@ -93,7 +93,8 @@ def build(root):
     home = ["# Home", "", "A read-only view of the framework, generated from the repository by `tools/obsidian.py`. "
             "Edit the sources, not these notes; notes of your own go in `Annotations/`, which is never touched.", "",
             "- [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · "
-            "[[References]]", "- [[Core]]: premises and definitions", "", "## Derived, in reading order"]
+            "[[References]]", "- [[Core]]: premises and definitions",
+            "- [[General core]]: the draft for outcomes that are not finite", "", "## Derived, in reading order"]
     home += [f"- [[{folder.split(' ', 1)[1]}]]" for _, folder in sources[1:]]
     home += ["", "## Ontologies", "- [[Ontologies]]: the slots"] + [f"- [[{o.parent.name}]]" for o in ontologies]
     notes["00 Home.md"] = "\n".join(home) + "\n"

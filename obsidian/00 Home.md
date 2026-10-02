@@ -4,6 +4,7 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 
 - [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · [[References]]
 - [[Core]]: premises and definitions
+- [[General core]]: the draft for outcomes that are not finite
 
 ## Derived, in reading order
 - [[tilts-and-paths]]

@@ -187,6 +187,16 @@ def test_the_import_map_names_only_existing_items(tmp_path):
     assert any("IMPORT.md:4: R12 [P9] names no item" in e for e in errors), errors
 
 
+def test_the_general_core_names_only_existing_items(tmp_path):
+    """CORE-GENERAL.md is a draft: its GA and GD items are not the core's items, but every core item or result it names
+    must exist, and its citations count for R8."""
+    general = "# The general core\n\n### GD1 — Behaviours\n**Statement.** As [D1], on events [@cover2006].\n"
+    errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra={"CORE-GENERAL.md": general})
+    assert errors == [], errors
+    errors, _ = make(tmp_path, extra={"CORE-GENERAL.md": general + "Extends [P9].\n"})
+    assert any("CORE-GENERAL.md:5: R12 [P9] names no item" in e for e in errors), errors
+
+
 def test_the_standard_must_cover_every_definition(tmp_path):
     errors, _ = make(tmp_path, standard=None)
     assert any("R11 the reporting standard is missing" in e for e in errors), errors

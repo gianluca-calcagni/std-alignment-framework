@@ -1,10 +1,12 @@
 # References
 
-One line per source, written `- [[References|@key]] Authors (year), title.` Every source listed here is cited in `CORE.md`, `derived/`,
-`ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here (lint rule R8).
+One line per source, written `- [[References|@key]] Authors (year), title.` Every source listed here is cited in `CORE.md`,
+`CORE-GENERAL.md`, `derived/`, `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here
+(lint rule R8).
 
 - [[References|@ashby1956]] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
 - [[References|@aumann1976]] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
+- [[References|@beirami2024]] Beirami, A., Agarwal, A., Berant, J., D'Amour, A., Eisenstein, J., Nagpal, C. and Suresh, A. T. (2024), Theoretical guarantees on the best-of-n alignment policy. arXiv:2401.01879.
 - [[References|@campbell1986]] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
 - [[References|@cencov1982]] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [[References|@chernoff1952]] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
@@ -12,6 +14,8 @@ One line per source, written `- [[References|@key]] Authors (year), title.` Ever
 - [[References|@conant1969]] Conant, R. C. (1969), The information transfer required in regulatory processes. *IEEE Transactions on Systems Science and Cybernetics* 5(4), 334–338.
 - [[References|@cover2006]] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
 - [[References|@csiszar1975]] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
+- [[References|@csiszar1984]] Csiszár, I. (1984), Sanov property, generalized I-projection and a conditional limit theorem. *The Annals of Probability* 12(3), 768–793.
+- [[References|@dembo1998]] Dembo, A. and Zeitouni, O. (1998), *Large Deviations Techniques and Applications*, 2nd edition. Springer.
 - [[References|@dranove2003]] Dranove, D., Kessler, D., McClellan, M. and Satterthwaite, M. (2003), Is more information better? The effects of "report cards" on health care providers. *Journal of Political Economy* 111(3), 555–588.
 - [[References|@frank2018]] Frank, S. A. (2018), The Price equation program: simple invariances unify population dynamics, thermodynamics, probability, information and inference. *Entropy* 20(12), 978.
 - [[References|@frey2001]] Frey, B. S. and Jegen, R. (2001), Motivation crowding theory. *Journal of Economic Surveys* 15(5), 589–611.
@@ -21,15 +25,21 @@ One line per source, written `- [[References|@key]] Authors (year), title.` Ever
 - [[References|@holmstrom1979]] Holmström, B. (1979), Moral hazard and observability. *The Bell Journal of Economics* 10(1), 74–91.
 - [[References|@holmstrom1991]] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
 - [[References|@karwowski2024]] Karwowski, J., Hayman, O., Bai, X., Kiendlhofer, K., Griffin, C. and Skalse, J. (2024), Goodhart's law in reinforcement learning. *The Twelfth International Conference on Learning Representations* (ICLR 2024).
+- [[References|@kechris1995]] Kechris, A. S. (1995), *Classical Descriptive Set Theory*. Graduate Texts in Mathematics 156, Springer.
 - [[References|@kerr1975]] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
+- [[References|@kleven2016]] Kleven, H. J. (2016), Bunching. *Annual Review of Economics* 8, 435–464.
+- [[References|@kwa2024]] Kwa, T., Thomas, D. and Garriga-Alonso, A. (2024), Catastrophic Goodhart: regularizing RLHF with KL divergence does not mitigate heavy-tailed reward misspecification. *Advances in Neural Information Processing Systems* 37 (NeurIPS 2024).
 - [[References|@laidlaw2025]] Laidlaw, C., Singhal, S. and Dragan, A. (2025), Correlated proxies: a new definition and improved mitigation for reward hacking. *International Conference on Learning Representations* (ICLR 2025).
+- [[References|@lande1983]] Lande, R. and Arnold, S. J. (1983), The measurement of selection on correlated characters. *Evolution* 37(6), 1210–1226.
 - [[References|@madrian2001]] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
 - [[References|@manski2003]] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
-- [[References|@matejka2015]] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
 - [[References|@mason2012]] Mason, S., Weber, E. J., Coster, J., Freeman, J. and Locker, T. (2012), Time patients spend in the emergency department: England's 4-hour rule — a case of hitting the target but missing the point? *Annals of Emergency Medicine* 59(5), 341–349.
+- [[References|@massart1990]] Massart, P. (1990), The tight constant in the Dvoretzky–Kiefer–Wolfowitz inequality. *The Annals of Probability* 18(3), 1269–1283.
+- [[References|@matejka2015]] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
 - [[References|@mckelvey1995]] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [[References|@ng2000]] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [[References|@ortega2013]] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.
+- [[References|@pinsker1964]] Pinsker, M. S. (1964), *Information and Information Stability of Random Variables and Processes*. Holden-Day (Russian original 1960).
 - [[References|@polya1976]] Pólya, G. and Szegő, G. (1976), *Problems and Theorems in Analysis II: Theory of Functions, Zeros, Polynomials, Determinants, Number Theory, Geometry*. Springer (German original 1925). Part V, chapter 1: Rolle's theorem and Descartes' rule of signs, with Laguerre's extension to exponential sums.
 - [[References|@prasad2007]] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [[References|@price1970]] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
