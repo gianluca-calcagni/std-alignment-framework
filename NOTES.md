@@ -87,6 +87,9 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q15 | main's Thm 5 imported at an equal budget only, with the loss as the shortfall of [D5]; its part at a declared price dropped with the price convention. Lemma 8 kept as a lemma ([L1]), since it is about bounds, not about alignment | executor, under Q13 | [P29], [L1], [P30] |
 | Q16 | main's Prop 11 imported in its form on finite outcomes ([P31](vi)): a KL budget reaches a rare outcome at a cost `log(1/r)`, a `χ²` budget at `1/r − 1`; the statement on a continuum stays out of scope | executor, under Q13 | [P31] |
 | Q17 | `derived/forbids.md` as corollaries C1–C12: main's §11.1–8 kept, §11.9 (price convention) dropped, four statements added from the core's own results; main's Prop 4 imported there as [C3] instead of in N7 | executor, under Q13 | `derived/forbids.md` |
+| Q18 | R5 imported as [P33]–[P36]: main's error bounds as bounds on misalignment (not on regret at a price); floors and caps, and the ordinal specification, as specifications of [D3], with main's budget and contract parts dropped | executor, under Q13 | `derived/evaluator.md`, `derived/misalignment.md` |
+| Q19 | R6 imported as [P37] and [P38]: main's incentive results from the pass-through of [D6] alone, without its reward coupling (which stays out of scope); main's Bregman identity as a result about actors with other costs, the measure staying KL | executor, under Q13 | `derived/estimation.md`, `derived/value.md` |
+| Q20 | the compatibility review of every imported item, asked by the PI: all compatible and kept; [P29], [P33], [P34], [P37] changed (a supremum, an overclaim on the upper tail withdrawn, the selection bound strengthened to an attained worst case, the pass-through written as in [D6]); [P32] and [P38] flagged as the first candidates to drop | PI asked; executor | `IMPORT.md` §7 |
 
 ### 3.2 Papers and data the PI could supply
 

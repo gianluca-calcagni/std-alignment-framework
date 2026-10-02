@@ -1,7 +1,7 @@
 """Checks of P21 (the expected evidence per decision is the KL divergence, so misalignment is the slowest rate of
 evidence against the specification), P22 (detection: the Chernoff information is at most either KL), P23 (the
 estimated misalignment of an actor that does pursue F is asymptotically χ² with |X| − 2 degrees of freedom; a light
-simulation) and P24 (the evaluation gap)."""
+simulation), P24 (the evaluation gap) and P37 (a strong incentive masks the actor, and can fake alignment)."""
 import numpy as np
 from scipy.optimize import minimize_scalar
 from .common import EXACT, rng, simplex_interior, kl, tilt
@@ -98,3 +98,57 @@ def test_the_evaluation_gap():
         assert s_mid >= 0.5 * (s_ev + s_dep) - 1e-7
         missed += abs((s_dep - s_ev) - gap) > 1e-4
     assert missed >= 100                                                              # Γ does not give the shared gap
+
+
+def kl_stable(la, lb):
+    """KL(a || b) from log-masses la, lb, as Σ b·h(la − lb) with h(d) = d·e^d − (e^d − 1) ≥ 0, accurate when a ≈ b."""
+    d = la - lb
+    h = np.where(np.abs(d) < 1e-4, d ** 2 / 2 + d ** 3 / 3, d * np.exp(d) - np.expm1(d))
+    return float((np.exp(lb) * h).sum())
+
+
+def log_tilt(lp, f):
+    z = lp + f
+    return z - (z.max() + np.log(np.exp(z - z.max()).sum()))
+
+
+def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
+    """P37: under an intervention u with a unique largest outcome and gap γ, two actors' behaviours after it,
+    tilt(p_i, φ·u), differ by KL = O(e^{−φγ}), with (1/φ)·log KL → −γ when their ratios differ at a runner-up; where u
+    and F share their unique best outcome, misalignment tends to 0 as φ grows, while unevaluated conditions keep the
+    actor's own; and where u's best outcome is not among F's, misalignment tends to −log sup_t p_{F,t}(x_u) > 0."""
+    from scipy.optimize import minimize_scalar
+    r = rng(3701)
+    for _ in range(200):
+        n = int(r.integers(3, 9)); u = r.normal(0, 1, n); xs = int(np.argmax(u))
+        gamma = u[xs] - np.max(np.delete(u, xs)); d = u[xs] - u; others = np.arange(n) != xs
+        p1, p2 = simplex_interior(r, n), simplex_interior(r, n)
+        a1, a2 = p1 / p1[xs], p2 / p2[xs]; c = a1 * np.log(a1 / a2) - a1 + a2
+        for kg in (40, 80):                                                          # the leading form
+            k = kg / gamma
+            K = kl_stable(log_tilt(np.log(p1), k * u), log_tilt(np.log(p2), k * u))
+            lead = (np.exp(-k * d[others]) * c[others]).sum()
+            assert abs(K - lead) <= 1e-9 * lead
+        k = 400 / gamma                                                              # (1/φ)·log KL → −γ
+        K = kl_stable(log_tilt(np.log(p1), k * u), log_tilt(np.log(p2), k * u))
+        assert abs(np.log(K) / k + gamma) <= 0.05 * gamma
+    for _ in range(100):                                                                 # fake alignment
+        n = int(r.integers(3, 8)); q = simplex_interior(r, n); F = r.normal(0, 1, n); own = simplex_interior(r, n)
+        u = r.normal(0, 1, n); best = int(np.argmax(F)); u[best] = u.max() + r.uniform(0.5, 2)  # shared best outcome
+        def mis(kappa):                                                              # M, by a stable search over t
+            lph = log_tilt(np.log(own), kappa * u)
+            f = lambda z: float(np.exp(lph) @ (lph - log_tilt(np.log(q), np.exp(z) * F)))
+            return min(f(-np.inf), minimize_scalar(f, bounds=(-10, 12), method="bounded",
+                                                   options={"xatol": 1e-10}).fun)
+        assert abs(mis(2.0) - misalignment(tilt(own, 2.0 * u), q, F)[0]) <= 1e-7      # agrees with the helper
+        Ms = [mis(k) for k in (5.0, 50.0, 500.0)]
+        assert Ms[1] <= Ms[0] + 1e-12 and Ms[2] <= Ms[1] + 1e-12 and Ms[2] <= 1e-3    # → 0 as φ grows
+    for _ in range(100):                                                                 # reward hacking shows
+        n = int(r.integers(3, 8)); q = simplex_interior(r, n); F = r.normal(0, 1, n); own = simplex_interior(r, n)
+        u = r.normal(0, 1, n); xu = int(np.argmin(F)) if r.random() < 0.5 else int(np.argsort(F)[-2])
+        u[xu] = u.max() + 2.0
+        f = lambda t: -tilt(q, t * F)[xu]
+        sup = max(-minimize_scalar(f, bounds=(0, 50), method="bounded", options={"xatol": 1e-12}).fun, q[xu])
+        limit = -np.log(sup)
+        M, _ = misalignment(tilt(own, 25.0 * u), q, F)
+        assert limit > 0 and abs(M - limit) <= 1e-3 * (1 + limit)

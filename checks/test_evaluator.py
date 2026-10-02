@@ -2,7 +2,8 @@
 that sees outcomes only through the evaluator; the covariance form of the target's gain; invariance under injective
 transformations of the evaluator), P19 (a monotone regression rules out overoptimization), P20 (where
 overoptimization starts, and how it ends at high intensity), P25 (the target's curve turns no more often than the
-regression), P26 (binned evaluators), P29 (the width is the exact worst case), L1 and P30 (no separable bound)."""
+regression), P26 (binned evaluators), P29 (the width is the exact worst case), L1 and P30 (no separable bound), P33
+(error bounds for a known evaluator) and P34 (choosing from a common candidate set)."""
 import numpy as np
 from .common import EXACT, rng, simplex_interior, tilt
 
@@ -288,3 +289,71 @@ def test_no_separable_bound_on_the_worst_case():
         V = q @ (E1 - q @ E1) ** 2
         growth.append(np.sqrt(V / (rr * (1 - rr))) / np.ptp(E1))
     assert growth[0] > 3 and growth[1] > 10 * growth[0] * 0.9 and growth[2] > 10 * growth[1] * 0.9
+
+
+def test_error_bounds_for_a_known_evaluator():
+    """P33: for p̂ = p_{F+E,t} and r = p_{F,t}, KL(p̂ || r) = ∫_0^t s·Var_{tilt(r, sE)}(E) ds ≤ min(t²·osc(E)²/8,
+    Λ_r(2t) − 2Λ_r(t)), and M(p̂) ≤ KL(p̂ || r); the constant 1/8 is sharp; and within a departure budget δ the width is
+    at most √(2δ)·(σ₊ + σ₋) ≤ √(2δ)·osc(E), with σ±² the sub-Gaussian proxies of ±E under q."""
+    from scipy.optimize import minimize_scalar
+    from .common import kl_tilts, log_normalizer
+    from .test_misalignment import misalignment
+    from .test_feasibility import rise
+    r = rng(3301)
+    for _ in range(300):
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        E = r.normal(0, r.uniform(0.1, 2), n); t = r.uniform(0.05, 4); scale = 1 + np.abs(F).max() + np.abs(E).max()
+        d = kl_tilts(q, t * (F + E), t * F); base = tilt(q, t * F); Ec = E - base @ E
+        Lam = lambda u: log_normalizer(base, u * Ec)
+        assert d <= t ** 2 * np.ptp(E) ** 2 / 8 + 1e-12 * scale ** 2
+        assert d <= Lam(2 * t) - 2 * Lam(t) + 1e-10 * scale ** 2
+        ss = np.linspace(0, t, 2001); var = []
+        for s_ in ss:
+            p = tilt(base, s_ * E); var.append(p @ E ** 2 - (p @ E) ** 2)
+        integral = np.trapezoid(ss * np.array(var), ss)
+        assert abs(integral - d) <= 1e-5 * (1 + d)
+        if t * np.ptp(E) < 30:
+            M, _ = misalignment(tilt(q, t * (F + E)), q, F)
+            assert M <= d + 1e-9 * (1 + d)
+    q = np.array([0.25, 0.25, 0.5]); A = np.array([1.0, 1.0, 0.0])                   # sharp: two values, mass ½ each
+    for t in (1e-2, 1e-3):
+        assert abs(kl_tilts(q, t * A, 0 * A) / (t ** 2 / 8) - 1) <= 2 * t
+    for _ in range(200):                                                             # within a departure budget
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); E = r.normal(0, 1, n); scale = 1 + np.abs(E).max()
+        delta = r.uniform(0.01, 2.0)
+        def proxy(G):
+            Gc = G - q @ G; v = q @ Gc ** 2
+            best = minimize_scalar(lambda z: -2 * log_normalizer(q, np.exp(z) * Gc) / np.exp(2 * z),
+                                   bounds=(-12, 8), method="bounded", options={"xatol": 1e-10})
+            return max(v, -best.fun)
+        w = rise(q, E, delta) + rise(q, -E, delta)
+        bound = np.sqrt(2 * delta) * (np.sqrt(proxy(E)) + np.sqrt(proxy(-E)))
+        assert w <= bound * (1 + 1e-7) + EXACT * scale and bound <= np.sqrt(2 * delta) * np.ptp(E) * (1 + 1e-9)
+
+
+def test_choosing_from_a_common_candidate_set():
+    """P34: when the target's choice and the evaluator's choice are made from the same candidate set, with one
+    tie-breaking order, then pathwise 0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*) ≤ max_S E − min_S E, with E = F̂ − F; so the
+    same holds for the averages under their laws. The target F = −c·E loses exactly c·(max_S E − min_S E) on every S,
+    so the range is the supremum over targets with the same error."""
+    r = rng(3401); losses = 0
+    for _ in range(300):
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n)
+        F = np.round(r.normal(0, 1, n), 1); E = np.round(r.normal(0, 1, n), 1); Fh = F + E   # ties on purpose
+        order = r.permutation(n)                                                      # the common tie-breaking order
+        rank = np.empty(n, int); rank[order] = np.arange(n)
+        pick = lambda S, G: S[np.lexsort((rank[S], -G[S]))[0]]
+        c = r.uniform(0.05, 0.95); Fw = -c * E; Fwh = Fw + E                          # the worst target, F̂ = (1 − c)·E
+        tot_R = tot_E = tot_S = tot_W = 0.0
+        for _ in range(50):
+            S = r.choice(n, size=int(r.integers(1, 8)), p=q)
+            xs, xh = pick(S, F), pick(S, Fh); spread = E[S].max() - E[S].min()
+            assert -EXACT <= F[xs] - F[xh] <= E[xh] - E[xs] + EXACT
+            assert E[xh] - E[xs] <= spread + EXACT
+            ws, wh = pick(S, Fw), pick(S, Fwh)
+            assert abs((Fw[ws] - Fw[wh]) - c * spread) <= EXACT
+            tot_R += F[xs] - F[xh]; tot_E += E[xh] - E[xs]; tot_S += spread; tot_W += Fw[ws] - Fw[wh]
+        losses += tot_R > 0
+        assert 0 <= tot_R <= tot_E + EXACT and tot_E <= tot_S + EXACT
+        assert abs(tot_W - c * tot_S) <= EXACT * (1 + tot_S)
+    assert losses >= 100                                                             # the evaluator does lose

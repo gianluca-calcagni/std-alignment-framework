@@ -17,7 +17,7 @@ Written before any behaviour is examined.
 | Outcomes | [D1] | the finite set of outcomes, and how any continuum was cut into it |
 | Conditions | [D8] | the conditions considered, and their frequencies when the actor does not choose them |
 | Default | [D2] | the default behaviour in each condition, and how it was measured apart from the behaviour to be judged |
-| Specification | [D3] | the intended set: "pursue `F`" with `F` written out, or another closed set; who declared it, when, and where it is recorded |
+| Specification | [D3] | the intended set: "pursue `F`" with `F` written out, with a floor or a cap if any ([P35]), its order only ([P36]), or another closed set; who declared it, when, and where it is recorded |
 | Principal's resolution | [D4] | the distinctions declared irrelevant, or "finest" |
 | Feasible set | [D7] | what the actor is assumed able to do, and whether the set is linear, convex or neither; "everything" if nothing is assumed; a departure budget `δ` ([P27]) when only the departure from the default is limited, or a budget of another shape ([P31]) |
 | View | [D8] | what the actor is assumed to perceive of its conditions, including memory and side channels; "exact" if nothing is assumed |
@@ -49,7 +49,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Avoidable and unavoidable misalignment | [P15] | the split, when the feasible set is linear; the inequality when it is convex; otherwise the lower bound `inf_{p∈𝓕} M(p)` |
 | Resolution | [P7], [P8] | what the declared indifference forgave, and what the actor's resolution makes unavoidable |
 | Sensitivity | [P10] | how far an error in the default or in the objective could move misalignment |
-| Evaluator | [P18], [P19], [P20], [P25], [P26], [P29] | the regression of the target on the evaluator: whether it rises with the evaluator (then overoptimization is ruled out), whether it is single-peaked (then the target falls at most once), and otherwise where the target stops rising and how it ends at high intensity; the share of the target's variance left in the residual. When the evaluator scores no two outcomes alike, say so: the regression is then the target itself ([D10]); report the regression on bins instead, with the bins, their width `w`, the spread `D` of the target within them, and the margin `t·w·D/4` at the intensities reported. For an evaluator known in the target's units, pursued within a departure budget, the width of the budget along its error, the worst case of the target lost ([P29]) |
+| Evaluator | [P18], [P19], [P20], [P25], [P26], [P29], [P33], [P34] | the regression of the target on the evaluator: whether it rises with the evaluator (then overoptimization is ruled out), whether it is single-peaked (then the target falls at most once), and otherwise where the target stops rising and how it ends at high intensity; the share of the target's variance left in the residual. When the evaluator scores no two outcomes alike, say so: the regression is then the target itself ([D10]); report the regression on bins instead, with the bins, their width `w`, the spread `D` of the target within them, and the margin `t·w·D/4` at the intensities reported. For an evaluator known in the target's units, pursued within a departure budget, the width of the budget along its error, the worst case of the target lost ([P29]); its misalignment at intensity `t` is at most `t²/8` times the square of the error's range ([P33]). For best-of-`n` and other choices from shared candidates, the spread of the error over the candidates, the worst case of the target lost there ([P34]) |
 | Pass-through | [P12] | for each intervention, the coefficient of `u`, and the distance of `log(p'/p)` from `span{u, 1}` |
 | Unobserved conditions | [D9], [P16], [P17] | for each condition the report is about but did not observe: whether its behaviour is identified; otherwise `ε`, how it was bounded (from the inputs, [P16](iii)), and the bounds of [P17] on the objective's average there |
 | Evaluation gap | [P24] | when evaluation and real use meet conditions in different proportions, the gap between the two misalignments |
@@ -62,3 +62,6 @@ For each result: its value, whether it is identified, and the assumptions it use
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).
 - Call an unobserved condition aligned because an observed one is, without bounding `ε` ([P17]).
+- Take an evaluation under a strong incentive as evidence of alignment in use: where the incentive points at the
+  objective, every actor looks aligned ([P37]).
+- Rank two evaluator errors without naming the budget: no ranking holds at every budget ([C1]).

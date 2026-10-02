@@ -303,10 +303,10 @@ def test_the_width_of_a_departure_budget():
 
 
 def test_feasible_sets_of_other_shapes():
-    """P31: |E_p E − E_q E| ≤ osc(E)·TV, ≤ √(χ²·Var_q E); E_p E − E_q E ≤ (KL + Λ(u))/u;
-    E_p|E| ≤ e^{(α−1)D_α/α}·‖E‖_{α*} and ≤ e^{D_∞}·E_q|E|; the TV and χ² bounds are attained at small budgets; and a rare outcome is reached at a KL cost
-    log(1/r) but a χ² cost 1/r − 1, so with the variance fixed the KL rise grows without bound and the χ² rise does
-    not."""
+    """P31: |E_p E − E_q E| ≤ osc(E)·TV, ≤ √(χ²·Var_q E); E_p E − E_q E ≤ (KL + Λ(u))/u; E_p|E| ≤
+    e^{(α−1)D_α/α}·‖E‖_{α*} and ≤ e^{D_∞}·E_q|E|; the TV and χ² bounds are attained at small budgets; and a rare outcome
+    is reached at a KL cost log(1/r) but a χ² cost 1/r − 1, so with the variance fixed the KL rise grows without bound
+    and the χ² rise does not."""
     r = rng(3101)
     for _ in range(400):
         n = int(r.integers(2, 10)); q = simplex_interior(r, n); E = r.standard_t(3, n); p = simplex_interior(r, n)

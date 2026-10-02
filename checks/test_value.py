@@ -1,6 +1,6 @@
 """Checks of P4 (KL is the value lost against a pursuit; every behaviour is the optimum of its own objective; the chain
 rule; merging outcomes never increases KL; and, for the Notes, three other divergences break the chain rule) and P14
-(the cost of departing from the default can only be KL)."""
+(the cost of departing from the default can only be KL); P38 (any convex cost)."""
 import numpy as np
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt, random_partition, coarse
 
@@ -133,3 +133,45 @@ def test_a_function_of_kl_moves_only_the_intensity():
         t_prime = t / (1 + 2 * kl(p, q))
         assert kl(p, tilt(q, t_prime * F)) <= 1e-9                                 # on the ray, at t'
         assert t_prime < t * (1 - 1e-3) or kl(p, q) < 1e-4                        # and not at t
+
+
+def chi2_best(q, F, t):
+    """The maximizer of E_p[F] − χ²(p||q)/t over Δ: p = q·max(0, 1 + (t/2)(F − μ)), with μ set so that p sums to one."""
+    lo, hi = F.min() - 4 / t, F.max() + 4 / t
+    for _ in range(200):
+        mu = 0.5 * (lo + hi); p = q * np.maximum(0, 1 + t / 2 * (F - mu))
+        lo, hi = (mu, hi) if p.sum() > 1 else (lo, mu)
+    return q * np.maximum(0, 1 + t / 2 * (F - 0.5 * (lo + hi)))
+
+
+def test_any_convex_cost():
+    """P38: for J = U − φ/t with Ψ = φ/t − U convex, J(p*) − J(p) ≥ B_Ψ(p, p*), with equality when p* has full support:
+    KL cost (B = KL(p || p*)/t), χ² cost (B = Σ (p − p*)²/(t·q), with the optimum possibly on the boundary), and a
+    concave value E_p[F] − κ·(E_p[G])² with KL cost (B = KL(p || p*)/t + κ·(E_p G − E_{p*} G)²)."""
+    r = rng(3801); boundary = 0
+    for _ in range(300):
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); F = r.normal(0, 1, n); t = r.uniform(0.2, 5)
+        scale = 1 + np.abs(F).max()
+        star = tilt(q, t * F); J = lambda p: p @ F - kl(p, q) / t                     # KL: [P4](i)
+        for _ in range(5):
+            p = simplex_interior(r, n)
+            assert abs(J(star) - J(p) - kl(p, star) / t) <= 1e-10 * scale
+        cs = chi2_best(q, F, t); Jc = lambda p: p @ F - ((p - q) ** 2 / q).sum() / t     # χ²
+        interior = bool(np.all(cs > 1e-12)); boundary += not interior
+        for _ in range(5):
+            p = simplex_interior(r, n); B = ((p - cs) ** 2 / q).sum() / t
+            gap = Jc(cs) - Jc(p)
+            assert gap >= B - 1e-10 * scale
+            if interior:
+                assert abs(gap - B) <= 1e-9 * scale
+        G = r.normal(0, 1, n); kap = r.uniform(0.1, 2)                                   # a concave value
+        Jq = lambda p: p @ F - kap * (p @ G) ** 2 - kl(p, q) / t
+        lo, hi = G.min(), G.max()                                                    # p* = tilt(q, t·(F − 2κ·m·G)),
+        for _ in range(200):                                                         # m = E_{p*}[G]: a fixed point
+            m = 0.5 * (lo + hi)
+            lo, hi = (m, hi) if tilt(q, t * (F - 2 * kap * m * G)) @ G > m else (lo, m)
+        sq = tilt(q, t * (F - 2 * kap * 0.5 * (lo + hi) * G))
+        for _ in range(5):
+            p = simplex_interior(r, n); B = kl(p, sq) / t + kap * (p @ G - sq @ G) ** 2
+            assert abs(Jq(sq) - Jq(p) - B) <= 1e-10 * scale
+    assert boundary >= 30                                                    # χ² optima on the boundary occur

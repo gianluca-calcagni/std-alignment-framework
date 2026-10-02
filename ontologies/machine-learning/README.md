@@ -45,23 +45,22 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   intensity. That is not the pursuit ray of [D2] on prompt–response pairs, which would also reweight the prompts; by
   [P15] it is the best feasible behaviour for that ray, and what it cannot reach is how much the ray would reweight
   the prompts.
-- **Reading** with [P1], [D2]: best-of-`n` is almost a pursuit too. When every response has a small probability and
-  the proxy has no ties, best-of-`n` draws a response with probability close to `n·q(y)·Q(r̂(y))^{n−1}`, where `Q(v)` is
-  the probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in
-  the
+- **Reading** with [P1], [D2]: best-of-`n` is almost a pursuit too. When every response has a small probability and the
+  proxy has no ties, best-of-`n` draws a response with probability close to `n·q(y)·Q(r̂(y))^{n−1}`, where `Q(v)` is the
+  probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in the
   same idealization in which Gao et al. compute its KL as `log n − (n − 1)/n`. So best-of-`n` pursues the proxy's rank,
-  not its value: with the same proxy, the two methods pursue different objectives, at different angles to the gold.
-  This gives one reason why their curves differ; it is not shown to be the only one.
+  not its value: with the same proxy, the two methods pursue different objectives, at different angles to the gold. This
+  gives one reason why their curves differ; it is not shown to be the only one.
 - **Consequence** of [P6]: the horizontal axis of the known result, `KL(π‖q)`, is the departure. Within each prompt it
   splits exactly into the pursuit of the gold, `KL(p°‖q)`, and misalignment against the gold. The axis mixes the two;
   the core separates them.
 - **Consequence** of [P13]: along any smooth path that starts at the initial policy, whatever the optimizer, the gold
   score changes at first as `√2·cos θ·σ_q(F)·d`: a finite slope, at most `√2·σ_q(F)` in size. Here `σ_q(F)` is the
-  spread of the
-  gold score over the initial policy's responses, and `cos θ` is the correlation, under the initial policy, of the gold
-  with the path's first revealed objective. The slope of the reinforcement-learning form, `a − b − b·log d`, grows
-  without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the measured range only, and
-  cannot hold down to `d = 0`. The best-of-`n` form has the finite slope `a` at `0`, as the core requires.
+  spread of the gold score over the initial policy's responses, and `cos θ` is the correlation, under the initial
+  policy, of the gold with the path's first revealed objective. The slope of the reinforcement-learning form,
+  `a − b − b·log d`, grows without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the
+  measured range only, and cannot hold down to `d = 0`. The best-of-`n` form has the finite slope `a` at `0`, as the
+  core requires.
 - **Prediction** from [P13]: for best-of-`n`, `a = √2·Cov_q(G, F)/σ_q(G)`, where `G` is `log Q(r̂)` centred within each
   prompt. Both sides come from samples of the initial policy scored by the gold and the proxy, with no optimization.
   *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the best-of-`n` curve is
@@ -72,6 +71,12 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two are
   uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero; that
   would mean the trained policies are not the optima the slots assume.
+- **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
+  started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
+  policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
+  have the opposite sign to the pursuit of the proxy itself. A language model has no logit per response, so its first
+  step pursues another function of the proxy, set by its parametrization; [P13](i) still gives the gold's first rate
+  as the covariance with that function, and the claim of [C5] about optimizers carries over.
 - **Consequence** of [P10]: within one prompt, the optimum for `β` lies on the proxy's pursuit ray, so its misalignment
   against the gold is at most `osc(F − r̂)/β`, where `osc` is taken over all responses ([P10](ii), with the proxy as the
   declared objective and the gold as the corrected one). Misalignment can grow at most in proportion to the intensity.
@@ -89,6 +94,11 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   gold's average moves in one direction only, toward its average over the passing responses ([P20](ii)): up if those
   are better on average under the initial policy, down otherwise. A peak in such a sweep would mean that the policies
   are not the optima the slots assume.
+- **Consequence** of [P34]: within one prompt, best-of-`n` by the proxy loses, against best-of-`n` by the gold on the
+  same `n` samples, at most the spread over those samples of `g(r̂) − F`, for every strictly increasing `g`. Best-of-`n`
+  uses only the proxy's order, so the proxy need not be in the gold's units: every recalibration `g` gives a bound,
+  draw by draw, and the one closest to the gold gives the smallest. The comparison is at equal `n`; at equal KL against
+  the pursuit of the gold, the archive found that it can fail ([P34], Notes).
 
 ## 4. Limits
 

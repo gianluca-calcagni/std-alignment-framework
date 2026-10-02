@@ -22,6 +22,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@holmstrom1991] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
 - [@karwowski2024] Karwowski, J., Hayman, O., Bai, X., Kiendlhofer, K., Griffin, C. and Skalse, J. (2024), Goodhart's law in reinforcement learning. *The Twelfth International Conference on Learning Representations* (ICLR 2024).
 - [@kerr1975] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
+- [@laidlaw2025] Laidlaw, C., Singhal, S. and Dragan, A. (2025), Correlated proxies: a new definition and improved mitigation for reward hacking. *International Conference on Learning Representations* (ICLR 2025).
 - [@madrian2001] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
 - [@manski2003] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
 - [@matejka2015] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
@@ -32,6 +33,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@prasad2007] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [@price1970] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
+- [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
 - [@wald1945] Wald, A. (1945), Sequential tests of statistical hypotheses. *The Annals of Mathematical Statistics* 16(2), 117–186.
