@@ -37,6 +37,8 @@ The framework in ten steps:
 10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
     against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
+What the core rules out, the statements that data could contradict, is collected in `derived/forbids.md`.
+
 **In scope.** One principal and one actor; finitely many outcomes; behaviour in each of finitely many conditions; any
 declared set of acceptable behaviours, with closed forms for "pursue `F`"; what the actor cannot distinguish, cannot do,
 or cannot perceive; what observation identifies, including misalignment that an actor shows only when it is not

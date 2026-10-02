@@ -15,5 +15,6 @@ assumption. A result may use only the core and the results before it in the read
 | 7 | `feasibility.md` | P15, P27, P28, P31, P32 | misalignment splits into avoidable and unavoidable parts, exactly for linear limits; within a departure budget, the best behaviour is pursuit cut off where the budget runs out, and the budget acts as a price; how far a budget lets an average move; budgets of other shapes, and the cheap reach of a KL budget; regulation costs departure |
 | 8 | `evaluator.md` | P18–P20, P25, P26, P29, L1, P30 | through the evaluator only the regression counts; a monotone regression rules out overoptimization; where overoptimization starts and ends; the target's curve turns no more often than the regression; the regression on bins governs at small intensity; within a departure budget, the width along the evaluator's error is the exact worst case, and no bound separating error from budget is accurate at every budget |
 | 9 | `estimation.md` | P21–P24 | misalignment as the rate of evidence; detection; the distribution of estimated misalignment; the evaluation gap |
+| 10 | `forbids.md` | C1–C12 | what the core rules out, each with the checks that would fail if it happened: eight statements kept from the archive, four added |
 
 Item numbers are those of v8, so references made before the split still hold; new results take the next numbers.

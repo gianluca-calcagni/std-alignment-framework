@@ -63,13 +63,13 @@ and the closed-loop floor.
 | N4 | No separable bound on the worst case: **[L1]**, **[P30]** | Lemma 8, Thm 9 | must | `evaluator.md` | medium: the hardest proof; main's checks exist |
 | N5 | Feasible sets of other shapes: total variation, χ², Rényi: **[P31]** | Prop 10; Prop 11's finite shadow in its Notes | must | `feasibility.md` | medium |
 | N6 | The closed-loop floor: regulating conditions costs departure: **[P32]** | Dictionary B07 (a)–(d) | must | `feasibility.md` | medium |
-| N7 | Error bounds for a known evaluator: sharp, sub-Gaussian, one-region saturation | Props 2, 4, 7; Prop 3 (could) | should | `evaluator.md` | small |
+| N7 | Error bounds for a known evaluator: sharp and sub-Gaussian (one-region saturation is [C3], imported in R4) | Props 2, 7; Prop 3 (could) | should | `evaluator.md` | small |
 | N8 | Floors and caps: the intended segment | Defs 18, 20; Props 33, 35, 37(d) | should | `misalignment.md` | small (`NOTES.md` E2) |
 | N9 | Ordinal objectives, by isotonic regression | Def 17 (ordinal part), Prop 32 | should | `misalignment.md` | medium (`NOTES.md` E3) |
 | N10 | Choosing by the evaluator from a common candidate set | Prop 23 | should | `evaluator.md` | small |
 | N11 | A strong incentive masks the actor, and fakes alignment | Props 28, 30 (with interventions, not a coupling) | should | `estimation.md`, since it uses [P22] and [P24] | medium |
 | N12 | Any convex cost: the Bregman form of [P4] | Prop 15 | could | `value.md` | small |
-| — | `derived/forbids.md`: the statements the core rules out, each with its test | Core 11 | must | new file | medium |
+| — | `derived/forbids.md`: the statements the core rules out, each with its test: **[C1]–[C12]** | Core 11 | must | new file | medium |
 
 Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and needs no item of its own.
 
@@ -115,7 +115,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Cor 1.5 | stacked stages compose additively | in core | [P1](iii): stages of pursuit are one pursuit, of the intensity-weighted average objective at the summed intensity; the regret expansion belongs to the price convention |
 | Prop 2 | sharp error-only bound, `osc(E)²/8` | derive, should | N7; in the core it bounds misalignment, not only regret at a price |
 | Prop 3 | only the upper tail matters | derive, could | N7, as a refinement |
-| Prop 4 | an error confined to one region saturates | derive, should | N7 |
+| Prop 4 | an error confined to one region saturates | in core | [C3], imported in R4 |
 | Lemma 5.1 | the capacity actor is a pursuit at the matched intensity | in core | [P27](i) and (ii), imported in R1; the monotonicity part was already in [P9](i) |
 | Thm 5 | the width is the exact worst case | in core | [P29], imported in R2, at an equal budget; part (iii), at a declared price, is dropped with the price convention |
 | Cor 5.2 | the exchange rate is a shadow price | in core | [P27](iii), imported in R1 |
@@ -164,7 +164,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 
 | v7.10 | Verdict | Where, or why |
 |---|---|---|
-| Core 11, what the core forbids (9 statements) | derive, must | `derived/forbids.md`. Statements 4–8 follow from the core now ([P1], [P13], [P19], [P20], [P22], [P24]); 3 after N7; 1 after N4, with the crossing curves found in main's R5 and R6 as its test; 2 is out of scope (infinite outcomes), and its finite shadow goes in with N5; 9 is about the price convention and is dropped |
+| Core 11, what the core forbids (9 statements) | in core | `derived/forbids.md`, imported in R4: statements 1–8 are [C1]–[C8], re-derived from the core; statement 9, on the price convention, is dropped. [C9]–[C12] are statements the core adds |
 | Core 12, scope conditions | in core | `CORE.md` §0 |
 | Core A3, assumption tiers | in core | the core tests actor models instead of assuming them ([P3], [P12]); "for any actor" results need no tier |
 | Hypothesis E (entropic actor) | in core | a pursuit of a known evaluator ([D2], [D10]) |
@@ -184,7 +184,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | B11, selection on a proxy trait | in core | `ontologies/biology/`, [P13], [P19] |
 | B12, human choice | in core | `ontologies/humans/` |
 | B13, potential games | needs | several actors, out of scope; `RELATED.md` |
-| Boundary C01–C15 | drop as a folder | its live claims go to `derived/forbids.md` (C08, C15) and to the ontologies' predictions (C09); C11 is [P2] and [P3]; C12 is N6; C13 and C14 are in `CORE.md` §0 and `NOTES.md` |
+| Boundary C01–C15 | drop as a folder | its live claims are in `derived/forbids.md` (C08 in [C1], C15 in [C7] and [C8]) and in the ontologies' predictions (C09); C11 is [P2] and [P3]; C12 is [P32]; C13 and C14 are in `CORE.md` §0 and `NOTES.md` |
 | T7 cases 1–1e (length bias in reward models) | could | worked cases for `ontologies/machine-learning/`, re-run under the core's definitions with a new pre-registration; the data were seen, so a re-run is exploratory |
 | T7 cases 2–2d (retirement defaults) | could | the same, for `ontologies/humans/` |
 | I1-dyn, I1-dyn2 (selection between the sexes) | could | the same, for `ontologies/biology/`; I1-dyn2 did not reject one evaluator, at half power |
@@ -205,8 +205,8 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 |---|---|---|---|---|
 | R1 | N1, the best use of a departure budget, with its shadow price; N2, the width of a departure budget | `feasibility.md` | yes | merged: [P27], [P28] |
 | R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | merged: [P29], [L1], [P30] |
-| R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | done: [P31], [P32]; for review |
-| R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | |
+| R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | merged: [P31], [P32] |
+| R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | done: [C1]–[C12]; for review. With it, nothing blocks the merge |
 | R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | |
 | R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | |
 | R7 | The merge: tag `main` as `v7.10`; merge `core` into `main`, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
