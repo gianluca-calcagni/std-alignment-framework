@@ -37,11 +37,11 @@ else is derived from them, with proofs and checks, and reported through one stan
   file.
 - **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. A premise or definition also
   has a **Why this choice**; a result has a **Proof** and **Checks**. Fields come in a fixed order, with no field empty.
-- **R5.** References are written `[D1]`, `[P3]`, and name existing items. A core Statement uses only earlier core
+- **R5.** References are written `[[D1 — Outcomes, behaviours, divergence and tilt|D1]]`, `[[P3 — A fixed objective is visible in the changes of behaviour|P3]]`, and name existing items. A core Statement uses only earlier core
   items; a result uses only the core and results earlier in the reading order; a core "why" may cite a result. The
   dependencies form no cycle.
 - **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
-- **R8.** Every citation `[@key]` is listed in `REFERENCES.md`, and every listed source is cited somewhere.
+- **R8.** Every citation `[[References|@key]]` is listed in `REFERENCES.md`, and every listed source is cited somewhere.
 - **R9.** Every term an item defines (bold in its Statement) has an entry in `TERMS.md`, and every item `TERMS.md` names
   exists.
 - **R10.** Every ontology lives in its own folder, fills each slot listed in `ontologies/README.md` once, naming the
@@ -84,7 +84,7 @@ paths, rather than reproduce printed digits.
   family are correlated, and "independent" then means less than it says.
 
 **Versions.** A version changes only when the Statement of a premise or a definition changes. Results, checks and
-ontologies are added within a version. The core is v10: no such Statement has changed since [D10] and [D11] were added.
+ontologies are added within a version. The core is v10: no such Statement has changed since [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Sample and evidence|D11]] were added.
 
 ## The finish line
 

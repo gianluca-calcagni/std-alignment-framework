@@ -69,7 +69,7 @@ The core's own log, from the restart on. v7.10's 78 rows stay in the archive, ta
 | # | Retracted | Replaced by | Found by |
 |---|---|---|---|
 | 1 | v7.10's Prop 3, "only the error's upper tail matters", imported as [P33](iii) | for misalignment an underrating also costs nats, a bounded number of them ([C3]); (iii) now says only that the bound needs no range | the compatibility review of the import (`IMPORT.md` §7), by the executor, a Claude session |
-| 2 | [P29](ii) and [P34](ii): "the largest loss" | the supremum: the worst case is approached as `c → 1`, never reached | the same review |
+| 2 | [P29](ii) and [P34](ii): "the largest `L`", "the largest loss" | the supremum: the worst case is approached as `c → 1`, never reached | the same review |
 | 3 | [P37](i): the Chernoff information vanishes "like" the divergence; its Notes: strong incentives make evaluations weak evidence "exactly to the extent" they point at the objective | at least as fast ([P22](ii)); the Notes now say what (ii) and (iii) give | the same review |
 | 4 | `ontologies/humans/`: the pass-through prediction for a new default, presented as untested, with a request for data | tested in v7.10 before the ontology was written, and refuted in its two-default form; section 2.1 | the analysis of the archive before the merge, by the executor, a Claude session |
 | 5 | `IMPORT.md` §5: T3 "in core" in the machine-learning ontology's Limits; the census "could" be re-routed against the core | the Limits did not mention T3, and now do; the PI froze the census in v6.4 | the same analysis |

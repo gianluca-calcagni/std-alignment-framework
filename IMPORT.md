@@ -232,7 +232,7 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | merged: [P37], [P38], the ontology and survey follow-ups; reviewed in §7 |
 | M1 | the defects found by the analysis of the archive: the humans prediction, references to the archive, uncertainty in `STANDARD.md`, stale records | many | yes | done |
 | M2 | `RECORD.md` (honest position, ledger of predictions, retractions; lint R13); labelled predictions (R10); the rules of evidence, the finish line and the version rule in the README; the decisions of section 5 | `RECORD.md`, `README.md`, `tools/` | yes | done |
-| O1 | a generated Obsidian view of the framework, checked fresh by CI | `obsidian/`, `tools/` | no | |
+| O1 | a generated Obsidian view of the framework, checked fresh by CI | `obsidian/`, `tools/` | no | done |
 | R7 | The merge: tag `9459c14` as `v7.10`; merge `core` into `main` with a merge commit, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
 
 **Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been

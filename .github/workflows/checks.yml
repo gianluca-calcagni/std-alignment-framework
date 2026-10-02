@@ -20,6 +20,8 @@ jobs:
           python-version: '3.11'
       - name: lint — 0 errors (rules R1–R13 in tools/lint.py)
         run: python3 tools/lint.py
+      - name: the Obsidian view in obsidian/ is fresh (python3 tools/obsidian.py regenerates it)
+        run: python3 tools/obsidian.py --check
 
   checks:
     name: checks (${{ matrix.simd }} SIMD path)
