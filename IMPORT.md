@@ -61,8 +61,8 @@ and the closed-loop floor.
 | N2 | The width of a KL ball along a function, computed: **[P28]** | Def 6, Prop 6 | must | `feasibility.md` | small |
 | N3 | The width is the exact worst case: **[P29]** | Thm 5 | must | `evaluator.md` | medium |
 | N4 | No separable bound on the worst case: **[L1]**, **[P30]** | Lemma 8, Thm 9 | must | `evaluator.md` | medium: the hardest proof; main's checks exist |
-| N5 | Feasible sets of other shapes: total variation, χ², Rényi | Prop 10; Prop 11's finite shadow in its Notes | must | `feasibility.md` | medium |
-| N6 | The closed-loop floor: regulating conditions costs departure | Dictionary B07 (a)–(d) | must | `feasibility.md` | medium |
+| N5 | Feasible sets of other shapes: total variation, χ², Rényi: **[P31]** | Prop 10; Prop 11's finite shadow in its Notes | must | `feasibility.md` | medium |
+| N6 | The closed-loop floor: regulating conditions costs departure: **[P32]** | Dictionary B07 (a)–(d) | must | `feasibility.md` | medium |
 | N7 | Error bounds for a known evaluator: sharp, sub-Gaussian, one-region saturation | Props 2, 4, 7; Prop 3 (could) | should | `evaluator.md` | small |
 | N8 | Floors and caps: the intended segment | Defs 18, 20; Props 33, 35, 37(d) | should | `misalignment.md` | small (`NOTES.md` E2) |
 | N9 | Ordinal objectives, by isotonic regression | Def 17 (ordinal part), Prop 32 | should | `misalignment.md` | medium (`NOTES.md` E3) |
@@ -124,8 +124,8 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Rem 7.1 | the v5 normal form, and why its ball version fails | drop | a historical note; the lesson is in main's retraction history |
 | Lemma 8 | separable bounds are loose when rankings move | in core | [L1], imported in R2, with the bound shown to be attained |
 | Thm 9 | the worst-case regret is not separable | in core | [P30], imported in R2 |
-| Prop 10 | conjugate pairings of costs and error norms | derive, must | N5 |
-| Prop 11 | KL cannot contain heavy tails; χ² can | needs | infinitely many outcomes, out of scope; its finite shadow goes in N5's Notes |
+| Prop 10 | conjugate pairings of costs and error norms | in core | [P31], imported in R3, with the bounds shown to be attained |
+| Prop 11 | KL cannot contain heavy tails; χ² can | needs | infinitely many outcomes, out of scope; its form on finite outcomes is [P31](vi), imported in R3 |
 | Prop 12 | behaviour does not identify the scale or the actor's own default | in core | [P1], [D10] |
 | Thm 13 | the intent-ray decomposition | in core | [P6] and [P5]; the axial and anti-pursuit terms belong to the price convention and are dropped |
 | Cor 13.1 | transverse error zero iff `F̂ = aF + c` | in core | [P5](ii) with [P1] |
@@ -172,12 +172,12 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Hypothesis C (capacity actor) | in core | [P27](ii), imported in R1 |
 | Hypothesis E_R (reward-coupled agent) | needs | the strategic layer of Def 16 |
 | B01, the anchor | drop | an orientation note |
-| B02, the conjugacy scale | derive, must | with N5 |
+| B02, the conjugacy scale | in core | [P31], imported in R3; its literature rows are in `TERMS.md` §2, level C |
 | B03, Goodhart variants | in core | `TERMS.md` §2 (level C) and `RELATED.md` |
 | B04, reward-model overoptimization | in core | `ontologies/machine-learning/` |
 | B05, when optimizing a proxy helps | in core in part | `ontologies/job-delegation/`; Laidlaw et al. to add to `RELATED.md` once verified |
 | B06, the informativeness principle | in core | `ontologies/job-delegation/` |
-| B07, requisite variety and the good regulator | derive, must | N6 for (a)–(d); (e), rational inattention, is `RELATED.md`'s endogenous default (later) |
+| B07, requisite variety and the good regulator | in core | [P32] for (a)–(d), imported in R3; (e), rational inattention, is `RELATED.md`'s endogenous default (later) |
 | B08, the handicap principle | could | `RELATED.md`, then `ontologies/biology/` |
 | B09, power as attainable utility | could | `RELATED.md` |
 | B10, immune tolerance | could | `RELATED.md` |
@@ -204,8 +204,8 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | Phase | Content | Files | Blocks the merge | State |
 |---|---|---|---|---|
 | R1 | N1, the best use of a departure budget, with its shadow price; N2, the width of a departure budget | `feasibility.md` | yes | merged: [P27], [P28] |
-| R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | done: [P29], [L1], [P30]; for review |
-| R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | |
+| R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | merged: [P29], [L1], [P30] |
+| R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | done: [P31], [P32]; for review |
 | R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | |
 | R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | |
 | R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | |
