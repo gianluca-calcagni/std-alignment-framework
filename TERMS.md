@@ -67,6 +67,10 @@ worked out.
 | **identified set** | [D9] | the range of values that observation and assumptions leave open | the econometric term (Manski 2003, cited in [D9]) | partial identification region, sharp bounds | A |
 | **avoidable misalignment** | [P15] | the distance from the actor's behaviour to the best it could have done: what it would not do | names the cause, as under-pursuit does | — | A |
 | **unavoidable misalignment** | [P15] | the distance from the best the actor could do to what was intended: what it could not do | names the cause | capability gap (AI safety, informal) | A |
+| **intended segment** | [P35] | the part of the pursuit ray between a floor and a cap | plain | the intended segment (main) | A |
+| **floor** | [P35] | the least intensity of pursuit the principal accepts: a minimum average of the objective | plain | minimum standard, quota | A |
+| **cap** | [P35] | the greatest intensity of pursuit the principal accepts | plain | a limit on optimization pressure | A |
+| **ordinal specification** | [P36] | the behaviours that favour better outcomes at least as much as worse ones, relative to the default | it says that only the objective's order is declared | the ordinal target set (main); order-restricted (statistics) | A |
 | **departure budget** | [P27] | a limit on how far the actor may depart from the default: `KL(p‖q) ≤ δ` | it names what is limited, in the words of [P6]; main's "capacity" is taken by [D7] for parametric limits | KL ball, trust region (optimization), KL-constrained policy optimization (RL), capacity (main) | A |
 | **width** | [P28] | how far a departure budget lets the average of a function move, up and down together | main's word, kept | the range of a KL ambiguity set (robust optimization) | A |
 | **evaluator** | [D10] | what the actor actually pursues: a reward it is paid on, a measure it is judged by, or the objective its behaviour reveals | main's word, neutral across fields; "proxy" presumes the target it stands in for, and "reward model" belongs to one field | proxy, reward model (ML), performance measure (economics), fitness of a selection regime (biology) | A |
@@ -136,6 +140,8 @@ worked out.
 | **feasible set**, **linear**; **avoidable** and **unavoidable misalignment** | v9 | PI approved; names by the executor | "cannot" and "will not" in formal and plain terms |
 | **departure budget**, over main's "capacity" | v10, import | PI approved capacity as feasibility (`IMPORT.md`, Q12); name by the executor | [D7] uses "capacity" for parametric limits; "departure" is already the word of [P6] for `KL(p̂‖q)` |
 | **width** | v10, import | main's name, kept | — |
+| **intended segment**, **floor**, **cap** | v10, import | main's names, kept | plain words for a minimum and a maximum strength of pursuit |
+| **ordinal specification** | v10, import | executor | main's "ordinal target set" was a set of objectives; the core declares a specification, so the name says what is declared |
 | **condition**, **response**, **view**; **observed conditions**, **identified**, **identified set** | v9 | PI approved the direction (identifiability into the core); names by the executor | "view" rather than "observation", which is the principal's act; the econometric terms for identification |
 | **evaluator** kept from main, over "proxy" and "reward model" | v10 | PI approved the concept; the name is main's | neutral across fields, and it names what the actor is evaluated on rather than what it stands in for |
 | **regression** and **residual**, in place of main's "error" `E = F̂ − F` | v10 | PI approved | the error depends on the scale of the evaluator, which behaviour never identifies; the regression and the residual do not change under any increasing transformation of the evaluator |

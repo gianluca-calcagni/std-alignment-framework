@@ -17,7 +17,7 @@ Written before any behaviour is examined.
 | Outcomes | [D1] | the finite set of outcomes, and how any continuum was cut into it |
 | Conditions | [D8] | the conditions considered, and their frequencies when the actor does not choose them |
 | Default | [D2] | the default behaviour in each condition, and how it was measured apart from the behaviour to be judged |
-| Specification | [D3] | the intended set: "pursue `F`" with `F` written out, or another closed set; who declared it, when, and where it is recorded |
+| Specification | [D3] | the intended set: "pursue `F`" with `F` written out, with a floor or a cap if any ([P35]), its order only ([P36]), or another closed set; who declared it, when, and where it is recorded |
 | Principal's resolution | [D4] | the distinctions declared irrelevant, or "finest" |
 | Feasible set | [D7] | what the actor is assumed able to do, and whether the set is linear, convex or neither; "everything" if nothing is assumed; a departure budget `δ` ([P27]) when only the departure from the default is limited, or a budget of another shape ([P31]) |
 | View | [D8] | what the actor is assumed to perceive of its conditions, including memory and side channels; "exact" if nothing is assumed |

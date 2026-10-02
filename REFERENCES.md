@@ -32,6 +32,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@prasad2007] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [@price1970] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
+- [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
 - [@wald1945] Wald, A. (1945), Sequential tests of statistical hypotheses. *The Annals of Mathematical Statistics* 16(2), 117–186.

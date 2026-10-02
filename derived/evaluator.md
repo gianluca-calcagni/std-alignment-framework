@@ -9,7 +9,9 @@ evaluator that scores every outcome differently, the regression on bins of its v
 intensity is small against the bins ([P26]). For an evaluator known in the objective's units, pursued within a
 departure budget, the objective lost is at most the width of the budget along the evaluator's error, and that bound is
 the exact worst case ([P29]); which of two errors is worse depends on the budget, so no bound that separates the error
-from the budget can be accurate at every budget ([L1], [P30]).
+from the budget can be accurate at every budget ([L1], [P30]). Computable bounds on misalignment and on the width
+follow from the error's range and tails ([P33]); and when the evaluator and the objective choose from the same
+candidates, the loss is bounded draw by draw ([P34]).
 
 ### P18 — Through the evaluator, only the regression counts
 **Statement.** Let `F̂` be an evaluator for the objective `F`, with regression `m`, residual `R` and resolution `𝒱` of
@@ -282,3 +284,62 @@ is about the worst case only.
 
 **Lineage.** main: Thm 9 (the worst-case regret is not separable), with its check V5, and §11.1 (no capacity-free
 ranking of errors).
+
+### P33 — Error bounds for a known evaluator
+**Statement.** Let `F̂ = F + E` be an evaluator known in the units of `F` ([D10]), with `E` non-constant, and let
+`t > 0`, `p̂ = p_{F̂,t}` and `r = p_{F,t}`. Write `Λ_r(u) = log E_r[e^{u·(E − E_r[E])}]`, and `Λ_q` the same under `q`.
+(i) `M(p̂) ≤ KL(p̂‖r) = ∫_0^t s·Var_{tilt(r, s·E)}(E) ds`.
+(ii) `KL(p̂‖r) ≤ t²·(max E − min E)²/8`, and the constant `1/8` cannot be lowered.
+(iii) `KL(p̂‖r) ≤ Λ_r(2t) − 2Λ_r(t)`: only the error's upper tail under `r` enters.
+(iv) Within a departure budget `δ`, the objective lost by pursuing `F̂` instead of `F` ([P29]) is at most
+`w_δ(E) ≤ (2δ)^{1/2}·(σ₊ + σ₋) ≤ (2δ)^{1/2}·(max E − min E)`, where `σ₊² = sup_{u>0} 2Λ_q(u)/u²` and `σ₋²` is the same
+for `−E`.
+
+**In plain terms.** An actor that pursues an evaluator with an error is misaligned by at most an eighth of the square
+of the error's range, measured in nats at the actor's intensity: small errors cost very little. Only the evaluator's
+overrating matters, through the upper tail of the error. Within a budget of departure, the objective lost is at most
+the square root of twice the budget times the error's sub-Gaussian scales up and down.
+
+**Proof.** (i) `r` is on the pursuit ray of `F`, so `M(p̂) ≤ KL(p̂‖r)` ([D3]). By [P1](iii), `p̂ = tilt(r, t·E)`. With
+`g(s) = KL(tilt(r, s·E)‖r) = s·Λ_r'(s) − Λ_r(s)`, `g(0) = 0` and `g'(s) = s·Λ_r''(s) = s·Var_{tilt(r, s·E)}(E)`.
+(ii) A function whose values lie in an interval of length `d` has variance at most `d²/4` under any behaviour (the
+mean square distance to the interval's midpoint; Popoviciu's inequality, as in [P26]), so (i) gives at most
+`(d²/4)·t²/2`. If `E` takes two values on sets of `r`-mass one half each, `Var_r(E) = d²/4`, so `g(t) = d²·t²/8 + O(t³)`
+and the ratio of the two sides tends to `1` as `t → 0`. (iii) `Λ_r` is convex, so `Λ_r(2t) ≥ Λ_r(t) + t·Λ_r'(t)`, that
+is, `g(t) = t·Λ_r'(t) − Λ_r(t) ≤ Λ_r(2t) − 2Λ_r(t)`. (iv) For `u > 0` and `p` in the budget,
+`E_p[E] − E_q[E] ≤ (δ + Λ_q(u))/u ≤ δ/u + σ₊²·u/2` (the proof of [P28](i)), which is smallest at
+`u = (2δ/σ₊²)^{1/2}`; so `σ_δ(E) ≤ (2δ·σ₊²)^{1/2}`, and likewise `σ_δ(−E) ≤ (2δ·σ₋²)^{1/2}`. [P29](i) bounds the loss
+by their sum. Finally, `Λ_q(u) = ∫_0^u (u − s)·Var_{tilt(q, s·E)}(E) ds ≤ (max E − min E)²·u²/8` by the same variance
+bound, so `σ± ≤ (max E − min E)/2`.
+
+**Checks.** checks/test_evaluator.py::test_error_bounds_for_a_known_evaluator
+
+**Notes.** [P10](ii) gives the linear bound `M(p̂) ≤ t·(max E − min E)`; (ii) is the smaller of the two when the error's
+range in nats, `t·(max E − min E)`, is below `8`. The bound of (iv) is never looser than the range form, by the last
+step of the proof.
+
+**Lineage.** main: Prop 2 (the sharp bound by the range), Prop 3 (only the upper tail matters), Prop 7 (a bound with
+realized travel) and Cor 1.3 (the integral form). New: the bounds as bounds on misalignment, not on regret at a
+declared price.
+
+### P34 — Choosing by the evaluator from a common candidate set
+**Statement.** Let a random set `S` of candidate outcomes be drawn by any mechanism, for instance `n` independent draws
+from `q`. From the same `S`, let `x*` be a candidate with the largest `F` and `x̂` one with the largest `F̂ = F + E`,
+both breaking ties by one fixed order, and let `p*` and `p̂` be their distributions. Then
+`0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*)` for every `S`, and so `0 ≤ E_{p*}[F] − E_{p̂}[F] ≤ E_{p̂}[E] − E_{p*}[E]`.
+
+**In plain terms.** When the evaluator and the objective choose among the same candidates, the objective lost is at
+most how much more the evaluator overrates its own pick than the objective's pick. The bound holds for every draw, not
+only on average. Best-of-`n` by the evaluator, compared with best-of-`n` by the objective at the same `n`, is the case
+in point.
+
+**Proof.** `x̂ ∈ S`, so `F(x*) ≥ F(x̂)`; and `x* ∈ S`, so `F̂(x̂) ≥ F̂(x*)`, that is, `F(x̂) + E(x̂) ≥ F(x*) + E(x*)`.
+Together, `0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*)`. Taking averages over `S` gives the rest.
+
+**Checks.** checks/test_evaluator.py::test_choosing_from_a_common_candidate_set
+
+**Notes.** No width enters: the bound depends on the choices. It needs the candidates to be shared. The archive found
+that comparing best-of-`n` by the evaluator with the pursuit of the objective at the same departure, instead of at the
+same `n`, breaks the inequality in some instances (main: R6); that is its measurement.
+
+**Lineage.** main: Prop 23 (argmax selectors on a common candidate set).

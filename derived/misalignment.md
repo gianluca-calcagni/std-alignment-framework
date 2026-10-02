@@ -101,3 +101,92 @@ of its departure, between 0 and 1.
 
 **Lineage.** main: Thm 13 (the intent-ray decomposition) and NOTES §2.5 (the intent ray). New: the third case, and the
 reading as a split of the departure.
+
+### P35 — Floors and caps
+**Statement.** Let `F` be non-constant and `0 ≤ r ≤ s ≤ ∞`. The **intended segment** between a **floor** `r` and a
+**cap** `s` is `𝓘_{r,s} = {p_{F,t} : r ≤ t ≤ s, t < ∞}`. It is closed in `Δ°`, so `(q, 𝓘_{r,s})` is a specification
+([D3]); `r = 0` and `s = ∞` give the standard specification. For `p̂ ∈ Δ°`, let `t̂ ∈ ℝ` be the intensity with
+`E_{p_{F,t̂}}[F] = E_{p̂}[F]`, and `t° = min(max(t̂, r), s)`.
+(i) The misalignment under the segment is `KL(p̂‖p_{F,t̂}) + KL(p_{F,t̂}‖p_{F,t°})`: the departure from the whole line of
+pursuit, plus an undershoot when `t̂ < r` and an overshoot when `t̂ > s`.
+(ii) **A floor is a minimum standard.** For `t ≥ 0`, `t ≥ r` exactly when `E_{p_{F,t}}[F] ≥ E_{p_{F,r}}[F]`: a floor
+declares a minimum average of `F`, in its units, and a cap a maximum.
+(iii) For `F = −1_H` and `0 < ε < q(H)`, the floor at which `p_{F,r}(H) = ε` is
+`r = log(q(H)·(1 − ε)/(ε·(1 − q(H)))) > 0`, and under it the default itself is misaligned, by `KL(q‖p_{F,r}) > 0`;
+under the standard specification its misalignment is `0`.
+(iv) For `p_T ∈ Δ°` and `F = log(p_T/q)`, the behaviour with the largest `−KL(p‖p_T) − KL(p‖q)/t` is `p_{F, t/(1+t)}`:
+as `t` grows from `0` to `∞`, imitating `p_T` with a KL penalty runs along the segment `𝓘_{0,1}`, from `q` toward
+`p_T`.
+
+**In plain terms.** A principal can declare a minimum and a maximum strength of pursuit: "at least this much of the
+objective, but no more than that". Misalignment is then the distance from the whole line of pursuit, plus how far the
+actor falls short of the minimum or overshoots the maximum along it. A minimum strength is the same as a minimum
+average of the objective. Under a minimum, doing nothing can be a failure: a principal who wants a fine to cut lateness
+to a given rate charges an actor that keeps the default. Imitating a target behaviour with a penalty for departing
+moves along such a segment, with the target as its end.
+
+**Proof.** With `Λ(t) = log E_q[e^{t·F}]`, `E_{p_{F,t}}[F] = Λ'(t)` and its derivative is `Var_{p_{F,t}}(F) > 0`, so
+the average of `F` increases strictly along the line of pursuit, and `t̂` exists because `min F < E_{p̂}[F] < max F`.
+For `s < ∞` the segment is the image of `[r, s]` under a continuous map, hence compact; for `s = ∞` it is the part of
+the pursuit ray where the average of `F` is at least `Λ'(r)`, a closed part of a set closed in `Δ°` ([P5](iv)).
+(i) For every `t ∈ ℝ`, `KL(p̂‖p_{F,t}) − KL(p̂‖p_{F,t̂}) = E_{p̂}[log(p_{F,t̂}/p_{F,t})] = (t̂ − t)·E_{p̂}[F] − Λ(t̂) + Λ(t)`,
+and the same expression with `p_{F,t̂}` in place of `p̂` is `KL(p_{F,t̂}‖p_{F,t})`, since the two have the same average
+of `F`. So `KL(p̂‖p_{F,t}) = KL(p̂‖p_{F,t̂}) + KL(p_{F,t̂}‖p_{F,t})`. The second term is convex in `t`, as `Λ` is, and
+zero at `t̂`, so over `[r, s]` it is smallest at the point nearest `t̂`, which is `t°`. (ii) follows from the strict
+increase of the average. (iii) `p_{F,t}(H) = q(H)·e^{−t}/(q(H)·e^{−t} + 1 − q(H))` decreases continuously from `q(H)`
+toward `0`; solving for `ε` gives `r`. The default `q = p_{F,0}` has `t̂ = 0 < r`, so by (i) its misalignment is
+`KL(q‖p_{F,r}) > 0`; under the standard specification `q` is intended. (iv) The objective is strictly concave, and its
+stationarity condition, `−log(p/p_T) − log(p/q)/t = constant`, gives `log p = log q + (t/(1 + t))·F + constant`.
+
+**Checks.** checks/test_misalignment.py::test_floors_and_caps
+
+**Notes.** (iii) answers the principal for whom doing nothing is a failure ([D3], Why). The archive also defined
+budget versions of these measures; in the core, the comparison at the same departure is the stakes of [D5].
+
+**Lineage.** main: Defs 18 and 20 (caps; floors and the intended segment), Props 33 (a), (b), (d) and 35 (a), (c), and
+Prop 37 (d) (a floor is a minimum standard); R7-6a and R7-6b. Their parts about the contract are dropped
+(`IMPORT.md`).
+
+### P36 — Ordinal objectives
+**Statement.** Let `F` be non-constant, with values `v_1 < … < v_m` on the level sets `L_1, …, L_m`. The **ordinal
+specification** of `F` is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of F}`. For `p̂ ∈ Δ°`, let
+`r°` be the isotonic regression of the level ratios `p̂(L_j)/q(L_j)` with weights `q(L_j)`: the non-decreasing sequence
+nearest to them in weighted least squares [@robertson1988], read as a function of `F` on `X`. Its pooled blocks
+`B_1, …, B_k` are the unions of consecutive level sets on which it is constant. Let `p° = q·r°`.
+(i) `C_F` is the closure in `Δ°` of the union of the pursuit rays of `φ∘F` over the increasing functions `φ`, and it
+contains best-of-`n` by `F` for every `n ≥ 1`; it is closed in `Δ°`, so `(q, C_F)` is a specification ([D3]).
+(ii) `p°` is the nearest intended behaviour, and the ordinal misalignment is
+`M_ord(p̂) = KL(p̂‖p°) = Σ_i p̂(B_i)·KL(p̂(·|B_i)‖q(·|B_i))`.
+(iii) For every `p ∈ C_F`, `KL(p̂‖p) ≥ KL(p̂‖p°) + KL(p°‖p)`, with equality at `p = q`:
+`KL(p̂‖q) = M_ord(p̂) + KL(p°‖q)`.
+(iv) Under the standard specification of `F`, `M(p̂) ≥ M_ord(p̂) + M(p°)`.
+(v) `C_F`, `p°` and `M_ord` are unchanged when `F` is replaced by `φ∘F`, for every strictly increasing `φ`.
+
+**In plain terms.** A principal who cares only about the order of outcomes accepts every behaviour that favours better
+outcomes at least as much as worse ones, relative to the default. Its misalignment pools the outcomes whose order the
+actor's behaviour contradicts, and charges only the actor's departure from the default inside those pools. Misalignment
+against the objective's values is the ordinal misalignment plus a term for the shape. Best-of-`n` on the objective
+itself is aligned with its order, though not with its values.
+
+**Proof.** (i) For an increasing `φ`, `p_{φ∘F,t}/q = e^{t·φ(F)}/Z` is a non-decreasing function of `F`, so every such
+ray lies in `C_F`, which is closed in `Δ°`, being defined by non-strict inequalities. Conversely, if `p ∈ C_F` has level
+ratios increasing strictly, then `p = p_{φ∘F,1}` for an increasing `φ` with `φ(v_j)` the log of the `j`-th ratio;
+otherwise `p` is a limit of such behaviours. Best-of-`n` by `F` has the level ratio `(A_j^n − A_{j−1}^n)/q(L_j)`, with
+`A_j` the default's mass of `F ≤ v_j`, which is `n` times the average of `u^{n−1}` over `[A_{j−1}, A_j]`, non-decreasing
+in `j`. (iii) Let `y = p̂/q`, a function on `X`, and `K` the convex cone of non-decreasing functions of `F`. `r°` is the
+projection of `y` onto `K` in `L²(q)` [@robertson1988]; hence `E_q[(y − r°)·g] ≤ 0` for every `g ∈ K`, and
+`E_q[(y − r°)·h] = 0` for every `h` constant on each pooled block, since `r°` is the `q`-average of `y` there. With
+`h = 1`, `p°` sums to one, and `r° > 0`, so `p° ∈ C_F`. For `p = q·ρ ∈ C_F`,
+`KL(p̂‖p) − KL(p̂‖p°) − KL(p°‖p) = E_q[(y − r°)·log(r°/ρ)]`; the part with `log r°` is `0`, since `log r°` is constant
+on blocks, and the part with `−log ρ` is at least `0`, since `log ρ ∈ K`. At `p = q`, `log ρ = 0`. (ii) By (iii),
+`KL(p̂‖p) > KL(p̂‖p°)` for every `p ≠ p°` in `C_F`. On a block `B`, `p°(B) = p̂(B)` and `p°(·|B) = q(·|B)`, so the chain
+rule [P4](iii) gives the sum. (iv) Every point of the pursuit ray of `F` is in `C_F`; apply (iii) to each and take the
+infimum. (v) `C_F` and the regression depend on `F` only through the ordered level sets.
+
+**Checks.** checks/test_misalignment.py::test_ordinal_objectives
+
+**Notes.** This is `NOTES.md` proposal E3. A coarse actor's best effort ([P8](ii)) and best-of-`n` are ordinally
+aligned whenever their reweighting rises with `F`. The archive's check found, against its pre-registration, that the
+gap between the ordinal and the budget measure is of second order in `M_ord`; the core does not use the budget measure.
+
+**Lineage.** main: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure), with Prop 31 (c); R7-7.
