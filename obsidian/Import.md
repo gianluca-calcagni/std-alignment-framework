@@ -178,19 +178,19 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | B02, the conjugacy scale | in core | [[P31 — Budgets of other shapes\|P31]], imported in R3; its literature rows are in `TERMS.md` §2, level C |
 | B03, Goodhart variants | in core | `TERMS.md` §2 (level C) and `RELATED.md` |
 | B04, reward-model overoptimization | in core | `ontologies/machine-learning/` |
-| B05, when optimizing a proxy helps | in core | `ontologies/job-delegation/`; Laidlaw et al. [[References\|@laidlaw2025]] in `RELATED.md` (R6) |
-| B06, the informativeness principle | in core | `ontologies/job-delegation/` |
+| B05, when optimizing a proxy helps | in core | [[P13 — What the start of a change gains\|P13]](i) with a bonus on an indicator (`TERMS.md` §2); Laidlaw et al. [[References\|@laidlaw2025]] in `RELATED.md` (R6). The job-delegation ontology that worked it out was dropped (Q22) |
+| B06, the informativeness principle | could | `RELATED.md`, principal–agent theory (later); its reading in the job-delegation ontology was dropped with that ontology (Q22) |
 | B07, requisite variety and the good regulator | in core | [[P32 — Regulation costs departure\|P32]] for (a)–(d), imported in R3; (e), rational inattention, is `RELATED.md`'s endogenous default (later) |
-| B08, the handicap principle | could | `RELATED.md`, then `ontologies/biology/` |
+| B08, the handicap principle | could | `RELATED.md`, then `ontologies/evolutionary-biology/` |
 | B09, power as attainable utility | could | `RELATED.md` |
 | B10, immune tolerance | could | `RELATED.md` |
-| B11, selection on a proxy trait | in core | `ontologies/biology/`, [[P13 — What the start of a change gains\|P13]], [[P19 — A monotone regression rules out overoptimization\|P19]] |
-| B12, human choice | in core | `ontologies/humans/` |
+| B11, selection on a proxy trait | in core | `ontologies/evolutionary-biology/`, [[P13 — What the start of a change gains\|P13]], [[P19 — A monotone regression rules out overoptimization\|P19]] |
+| B12, human choice | in core | `ontologies/behavioural-economics/` |
 | B13, potential games | needs | several actors, out of scope; `RELATED.md` |
 | Boundary C01–C15 | drop as a folder | its live claims are in `derived/forbids.md` (C08 in [[C1 — No ranking of errors holds at every budget\|C1]], C15 in [[C7 — No test detects misalignment faster than misalignment\|C7]] and [[C8 — An evaluation weighted unlike use misses the evaluation gap\|C8]]) and in the ontologies' predictions (C09); C11 is [[P2 — Every change of behaviour follows a replicator equation\|P2]] and [[P3 — A fixed objective is visible in the changes of behaviour\|P3]]; C12 is [[P32 — Regulation costs departure\|P32]]; C13 and C14 are in `CORE.md` §0 and `NOTES.md` |
 | T7 cases 1–1e (length bias in reward models) | recorded | the outcome is history: the style term inside quality cells predicted evaluator failure out of sample but did no better than raw length. The data come over only for a case, and support exploratory claims only, since they were seen |
-| T7 cases 2–2d (retirement defaults) | recorded | `ontologies/humans/`, section 3: they tested that ontology's pass-through prediction before it was written; it held loosely against enrolment on request and failed between two defaults. Their data are seen |
-| I1-dyn, I1-dyn2 (selection between the sexes) | recorded | `ontologies/biology/`, section 5: I1-dyn could not fail, and I1-dyn2 did not reject one objective at power 0.51; the data are exhausted for [[P3 — A fixed objective is visible in the changes of behaviour\|P3]]'s test |
+| T7 cases 2–2d (retirement defaults) | recorded | `ontologies/behavioural-economics/`, section 3: they tested that ontology's pass-through prediction before it was written; it held loosely against enrolment on request and failed between two defaults. Their data are seen |
+| I1-dyn, I1-dyn2 (selection between the sexes) | recorded | `ontologies/evolutionary-biology/`, section 5: I1-dyn could not fail, and I1-dyn2 did not reject one objective at power 0.51; the data are exhausted for [[P3 — A fixed objective is visible in the changes of behaviour\|P3]]'s test |
 | T1, the census of 221 items | drop | its numbers measure v6.3, not the core, and must not be quoted for it. In v6.4 the PI froze it: the census is never re-routed, because it was used to develop the framework. A measurement of the core's coverage would need items held out from its development |
 | T3 (the overoptimization slope is not testable from published data) | recorded | `ontologies/machine-learning/`, section 4: the best-of-`n` slope prediction needs samples (`NOTES.md` §3.2, D3) |
 | R7, R8 (tests of v7.10's design decisions) | drop | they tested definitions the core replaced; their lessons are in `NOTES.md` §1 |

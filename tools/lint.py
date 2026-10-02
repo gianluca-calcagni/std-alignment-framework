@@ -30,7 +30,8 @@ Rules
       ontology lives in its own folder, as ontologies/<name>/README.md, with a '# Ontology — ' title and the sections
       ONTOLOGY_SECTIONS, in order. Its section 1 has a table with the columns SLOT_COLUMNS; every slot appears in it
       once, its Core cell names the slot's item, its Fit cell starts with a word of FITS, and no other row appears.
-      Section 2 cites a source. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or
+      Section 2 cites a source, and has a paragraph starting '**Data.**' that says what numbers the discipline offers
+      for the slots. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or
       '**Reading** with', and names at least one item before its first ':'; a prediction is labelled, as
       '**Prediction** (empirical) from' or '**Prediction** (verification) from', and says '*Refuted if*'.
       Sections 4 and 5 are not empty. Every item named in an ontology exists.
@@ -386,6 +387,8 @@ def lint_ontologies(root, pos):
                     errors.append(f"{where}: R10 the slot '{name}' appears {seen.count(name)} times, not once")
         if not CITE.search("\n".join(body.get(ONTOLOGY_SECTIONS[1], []))):
             errors.append(f"{where}: R10 the known result must cite its source [@key]")
+        if not any(line.startswith("**Data.**") for line in body.get(ONTOLOGY_SECTIONS[1], [])):
+            errors.append(f"{where}: R10 the known result needs a paragraph '**Data.**' on the numbers available")
         claims, cur = [], None
         for line in body.get(ONTOLOGY_SECTIONS[2], []):
             if line.startswith("- "):

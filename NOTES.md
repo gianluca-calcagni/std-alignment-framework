@@ -127,16 +127,18 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q19 | R6 imported as [P37] and [P38]: v7.10's incentive results from the pass-through of [D6] alone, without its reward coupling (which stays out of scope); v7.10's Bregman identity as a result about actors with other costs, the measure staying KL | executor, under Q13 | `derived/estimation.md`, `derived/value.md` |
 | Q20 | the compatibility review of every imported item, asked by the PI: all compatible and kept; [P29], [P33], [P34], [P37] changed (a supremum, an overclaim on the upper tail withdrawn, the selection bound strengthened to an attained worst case, the pass-through written as in [D6]); [P32] and [P38] flagged as the first candidates to drop | PI asked; executor | `IMPORT.md` §7 |
 | Q21 | the rest of v7.10, after the analysis of the archive: keep its record, not its files. An item survives only if it constrains what the core does now, for a reason stated in the framework's own goals; a result about the world that bears on a surviving claim is never dropped. Adopted: `RECORD.md` (lint R13), the rules of evidence (a)–(f), the finish line, the version rule, a generated Obsidian view. Dropped: the standing decisions that duplicate the scope or concern another project, the toy-example debt, T8, the dropped-ideas backlog, the retraction table as a file (`IMPORT.md` §5) | PI approved | `IMPORT.md` §5–§6, `README.md`, `RECORD.md` |
+| Q22 | the disciplines: an ontology needs a principal and an actor, behaviour reported in numbers, data that can be read, and to be inside the scope (`ontologies/README.md`). Kept: machine learning. Renamed: humans to behavioural economics, biology to evolutionary biology. Reworked: institutions to medical sciences, with the four-hour target as a second known result. Dropped: job delegation, which had no numbers; its prediction is withdrawn untested (`RECORD.md`). Declined: ethics and philosophy, normative sciences, game theory, network science, complexity theory, with reasons. Every ontology now states its data, checked by lint R10 | PI asked; executor | `ontologies/` |
 
 ### 3.2 Papers and data the PI could supply
 
 | # | For | What is needed | Why | Note |
 |---|---|---|---|---|
-| D1 | humans (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/humans/` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
-| D2 | humans (defaults) | the distribution of contribution rates under two defaults, in a company not used before | a confirmatory pass-through ratio test | v7.10 already read Madrian and Shea (2001), Choi et al. (2004) and Beshears et al. (w12009) from their figures and tables (T7-2, 2b, 2d), so tests on them are exploratory; the result is in `ontologies/humans/`, section 3 |
+| D1 | behavioural economics (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/behavioural-economics/` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
+| D2 | behavioural economics (defaults) | the distribution of contribution rates under two defaults, in a company not used before | a confirmatory pass-through ratio test | v7.10 already read Madrian and Shea (2001), Choi et al. (2004) and Beshears et al. (w12009) from their figures and tables (T7-2, 2b, 2d), so tests on them are exploratory; the result is in `ontologies/behavioural-economics/`, section 3 |
 | D3 | machine learning | samples from an initial policy, scored by a gold and a proxy reward model | the best-of-`n` slope and the covariance-at-the-peak predictions | an open RLHF setup would do; Gao et al.'s own data is not known to be public |
-| D4 | biology | Chippindale et al. (2001), the hemiclone fitness values per sex | the angle and the shortfall of ordinary selection | supplementary data, if any |
-| D5 | institutions | Dranove et al. (2003) | the reading only; Medicare data are not public | low priority |
+| D4 | evolutionary biology | Chippindale et al. (2001), the hemiclone fitness values per sex | the angle and the shortfall of ordinary selection | supplementary data, if any |
+| D5 | medical sciences (report cards) | Dranove et al. (2003): treatment by severity class, before and after the cards | the log-odds prediction | Medicare data are not public; the published cards give hospital-level deaths, not treatment by severity. Low priority |
+| D6 | medical sciences (four-hour target) | Mason et al. (2012): the shares of the three time intervals by year, trust and admission; or the same intervals in a system whose data have not been read | the ratio test and the within-cell misalignment | the paper's tables (not reachable from here); a House of Commons Library briefing charts the minute at which patients leave, from national records; England's data are seen in summary |
 
 Every test is pre-registered and pushed before any computation (README rules).
 
@@ -200,7 +202,8 @@ predictions and retractions, and the rules of work (M2); a generated Obsidian vi
 **After it**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak
    to test, and [P21] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`,
-   section 4); or D2 (two defaults in a company not used before) for the humans ontology. A case with a pass-or-fail
+   section 4); or D2 (two defaults in a company not used before) for the behavioural-economics ontology; or D6, the
+   time intervals before and after a time target, for the medical-sciences ontology. A case with a pass-or-fail
    verifier would test [P19] directly.
 2. E8 for best-of-`n`: [P26] covers the pursuit only. The ML ontology's open question asks whether the margin is
    small enough, with bins that samples can fill, to predict the peak: a computation on D3's data would answer it.

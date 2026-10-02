@@ -19,8 +19,7 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 
 ## Ontologies
 - [[Ontologies]]: the slots
-- [[biology]]
-- [[humans]]
-- [[institutions]]
-- [[job-delegation]]
+- [[behavioural-economics]]
+- [[evolutionary-biology]]
 - [[machine-learning]]
+- [[medical-sciences]]

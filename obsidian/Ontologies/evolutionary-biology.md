@@ -35,6 +35,11 @@ and Chippindale then made selection act through males only, by passing genomes f
 (male-limited evolution) [[References|@prasad2007]]. The evolved genomes raised fitness when expressed in males and lowered it when
 expressed in females.
 
+**Data.** Both papers report fitness measured per genome and sex, in figures and summary statistics; the genome-level
+data the prediction of section 3 needs are not reported. v7.10 used Dobzhansky's 1947 genotype counts from population
+cages, printed in his tables, and found them exhausted for [[P3 — A fixed objective is visible in the changes of behaviour|P3]]'s test (section 5). Experimental-evolution studies often
+deposit their counts in public archives; none has been retrieved here.
+
 ## 3. What the core says
 
 Here `q` is the frequency of each genome before selection, `G_m` and `G_f` are log fitness through males and through

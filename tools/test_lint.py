@@ -218,6 +218,8 @@ ONTO = textwrap.dedent("""\
 
     A known finding [@cover2006].
 
+    **Data.** Counts per option, public.
+
     ## 3. What the core says
 
     - **Consequence** of [P1]: it follows.
@@ -268,6 +270,7 @@ def test_good_ontology_passes(tmp_path):
     ("| records | exact |", "| records | |", "fill all"),                                          # an empty cell
     ("| **fact** |", "| **other** |", "not a slot"),                                               # an unknown slot
     ("A known finding [@cover2006].", "A known finding.", "must cite its source"),
+    ("**Data.** Counts per option, public.", "Counts per option, public.", "needs a paragraph '**Data.**'"),
     ("- **Consequence** of [P1]: it follows.", "- It follows from [P1].", "must start with a kind"),
     ("- **Reading** with [D1]: a", "- **Reading** with the core: a", "names no item before"),
     (" *Refuted if* it does not.", " It could fail.", "Refuted if"),
