@@ -24,7 +24,7 @@ else is derived from them, with proofs and checks, and reported through one stan
 | `ontologies/` | the core read in five disciplines, each in its own folder: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots and reframes one known result. Not part of the core |
 | `TERMS.md` | the vocabulary: every defined term, its other names in the literature, correspondences not yet worked out, and every naming decision, each with a confidence level |
 | `NOTES.md` | the executor's working notes: failure modes, open requests and recommendations. Not part of the core |
-| `main` branch | **the archive** (v7.10, commit `9459c14`): everything proved, tested, retracted and logged before the restart. Nothing there changes. A file comes over only when an item needs it (`git checkout main -- <path>`), and the item's lineage says so |
+| tag `v7.10` | **the archive** (commit `9459c14`): everything proved, tested, retracted and logged before the restart, as an Obsidian vault. Nothing there changes. A file comes over only when an item needs it (`git checkout v7.10 -- <path>`), and the item's lineage says so; `IMPORT.md` records the fate of every item |
 
 ## Rules
 
@@ -60,9 +60,9 @@ paths, rather than reproduce printed digits.
 - **Every choice is justified.** "Why this choice" argues it, by generality, by canonicity, or by a named case where the
   alternative gives a wrong verdict. Assume less and derive more.
 - **Plain terms keep the qualifiers** of the formal statement.
-- **Lineage** names the items on `main` that an item replaces and the retraction rows that touch them
-  (`main: 60 Status/retractions/`), or says "New".
-- **Empirical tests** are pre-registered and pushed before any computation, as on `main`.
+- **Lineage** names the items of v7.10 that an item replaces and the retraction rows that touch them
+  (`v7.10: 60 Status/retractions/`), or says "New".
+- **Empirical tests** are pre-registered and pushed before any computation, as in v7.10.
 - **One step, one branch, one pull request** into the branch that holds the new core, merged with a merge commit.
 
 ## The format of an item
@@ -72,7 +72,7 @@ paths, rather than reproduce printed digits.
 **Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the default.
 **In plain terms.** The things that can happen, and how often each happens by default.
 **Why this choice.** …
-**Lineage.** main: Def 1 (in part).
+**Lineage.** v7.10: Def 1 (in part).
 
 ### P1 — Every behaviour is a tilt of the default
 **Statement.** For every full-support `p` on `X` there is `F` with `p ∝ q·e^F`; `F` is unique up to a constant.
@@ -98,9 +98,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 ## Starting a session
 
 Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and
-`ontologies/README.md`. Then,
-on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
-past sessions, each with its evidence.
+`ontologies/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with its evidence: read it before
+starting work.
 
 ## License
 

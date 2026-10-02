@@ -42,7 +42,7 @@ DERIVED = textwrap.dedent("""\
     **Proof.** nor is this a field
     ```
     **Checks.** checks/test_a.py::test_tilt
-    **Lineage.** main: Def 1.
+    **Lineage.** v7.10: Def 1.
     """)
 ORDER = "# Derived results\n\n| Reading order | File |\n|---|---|\n| 1 | `a.md` |\n"
 STANDARD = "# The reporting standard\n\n| Field | Core |\n|---|---|\n| Outcomes | [D1] |\n| Objective | [D2] |\n"

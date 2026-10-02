@@ -72,7 +72,7 @@ accounting of net value. Three limits met in practice are linear, and the checks
 A limit of capacity, such as a parametric family, is not convex; the third check shows a curved family on which even
 (ii) fails. Then only `M(p̂) ≥ inf_{p∈𝓕} M(p)` remains.
 
-**Lineage.** New. main: Def 23's feasibility slot, B1 and ROADMAP §6 G2 (retention), and the v8 design question on
+**Lineage.** New. v7.10: Def 23's feasibility slot, B1 and ROADMAP §6 G2 (retention), and the v8 design question on
 contexts (`NOTES.md`), which (v) answers: across contexts, the shared intensity is derived, not chosen.
 
 ### P27 — The best use of a departure budget
@@ -114,13 +114,13 @@ non-negative derivative.
 **Checks.** checks/test_feasibility.py::test_the_best_use_of_a_departure_budget
 
 **Notes.** A departure budget is convex but not linear, so [P15](ii) gives only an inequality for it. It is called a
-departure budget, not main's "capacity", because [D7] uses capacity for limits such as parametric families. Main's
+departure budget, not v7.10's "capacity", because [D7] uses capacity for limits such as parametric families. Main's
 capacity model, an actor that is the best budget-`δ` pursuit of its evaluator, is the case `G = F̂` of (ii). When its
-budget binds, its matched pursuit ([D5]) is the best budget-`δ` pursuit of `F`, so main's capacity regret is the
+budget binds, its matched pursuit ([D5]) is the best budget-`δ` pursuit of `F`, so v7.10's capacity regret is the
 shortfall of [D5], split into its causes by [P9](ii). (iii) makes the matched intensity of [D5] an exchange rate: at
 the margin, `λ_δ` nats of departure buy one unit of the objective.
 
-**Lineage.** main: Def 5 (the capacity actor), Lemma 5.1 (its form), Def 15 (the capacity model), Cor 5.2 (the exchange
+**Lineage.** v7.10: Def 5 (the capacity actor), Lemma 5.1 (its form), Def 15 (the capacity model), Cor 5.2 (the exchange
 rate is a shadow price) and Cor 17.1 (the capacity actor's regret); R076 (they assume nothing about the actor). New: the
 budget as a feasible set of [D7], and its best behaviour as the one of [P15](i).
 
@@ -159,7 +159,7 @@ dual form: the quantity robust optimization computes over a KL ambiguity set (`T
 unchanged by adding a constant to `E`, and multiplied by `c` when `E` is, for `c > 0`. It is the quantity the worst-case
 results imported next are built on (`IMPORT.md`, N3 and N4).
 
-**Lineage.** main: Def 6 (the width) and Prop 6 (the width, computed; its check V4). New: the term in `δ` of (ii), and
+**Lineage.** v7.10: Def 6 (the width) and Prop 6 (the width, computed; its check V4). New: the term in `δ` of (ii), and
 with it the symmetry of the width to that order.
 
 ### P31 — Budgets of other shapes
@@ -211,7 +211,7 @@ every budget, while a finite variance keeps the `χ²` rise finite. That stateme
 (`CORE.md` §0) and is recorded in `IMPORT.md`. The measure of misalignment stays KL ([P14]); the shapes here are limits
 on what an actor can do, or costs an actor pays, not ways of measuring.
 
-**Lineage.** main: Prop 10 (the conjugate pairings), Prop 11 (the order is structural; here its form on finite
+**Lineage.** v7.10: Prop 10 (the conjugate pairings), Prop 11 (the order is structural; here its form on finite
 outcomes) and the dictionary's entry B2 (the conjugacy scale). New: (v), the bounds attained, and (vi) in finite form.
 
 ### P32 — Regulation costs departure
@@ -245,9 +245,9 @@ is `H(C) − I(C; X)`. (iii) By (i), `I(C; X)` is at most the average departure.
 it in the core's unit, the departure from the default. The set of responses with average departure at most `δ` is the
 departure budget of [P27] on condition–action pairs, with the frequencies of the conditions fixed: a convex feasible
 set ([D7]). The check confirms that the floor can fail when an action gives two conditions the same result. In each
-condition, [P4] applies as stated; main's closed-loop lift also re-derived it there. When the default is itself chosen
+condition, [P4] applies as stated; v7.10's closed-loop lift also re-derived it there. When the default is itself chosen
 to minimize the average departure, it is the average action `p̄`, and the departure is the information `I(C; X)`:
 rational inattention (`RELATED.md`, bounded rationality), which is not imported yet.
 
-**Lineage.** main: the dictionary's entry B7, parts (a)–(d) (the closed-loop lift), and its check V9. Part (e), rational
-inattention, is not imported (`IMPORT.md`).
+**Lineage.** v7.10: the dictionary's entry B7, parts (a)–(d) (the closed-loop lift), and its check V9. Part (e),
+rational inattention, is not imported (`IMPORT.md`).

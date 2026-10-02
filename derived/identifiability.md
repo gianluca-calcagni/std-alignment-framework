@@ -39,8 +39,8 @@ objective. The actor's own objective is never needed. [P8](iv)'s small-effort la
 `Cov_q(F̄, F) = Var_q(F̄)`. The curvature of the path does not affect the limit, and the convergence is first order in
 `s` (the check uses curved paths).
 
-**Lineage.** main: ROADMAP §6 I1 and NOTES §9 (the dynamic angle, `D_⊥ ≈ sin²θ·KL`, conjectured there), and Prop 22 (the
-first-order effect of any smooth path). New: the statement and its proof, including the case against the objective.
+**Lineage.** v7.10: ROADMAP §6 I1 and NOTES §9 (the dynamic angle, `D_⊥ ≈ sin²θ·KL`, conjectured there), and Prop 22
+(the first-order effect of any smooth path). New: the statement and its proof, including the case against the objective.
 
 ### P12 — What interventions reveal
 **Statement.** (i) **Pass-through is identified from behaviour alone.** Let `p, p' ∈ Δ°` be the behaviour before and
@@ -80,10 +80,10 @@ the distance of `log(p'/p)` from `span{u, 1}` is never exactly zero; testing it 
 core does not have yet. (ii) bounds an actor's resolution from one side only. Observed changes show which distinctions
 its behaviour
 makes; identifying its resolution needs interventions varied enough to move every distinction it could make. Together
-with [P1], this is the ladder main proposed: a snapshot identifies an objective only given a declared default, changes
+with [P1], this is the ladder v7.10 proposed: a snapshot identifies an objective only given a declared default, changes
 identify it up to a constant without one, and interventions identify how the actor responds.
 
-**Lineage.** main: ROADMAP §6 I1 (the identifiability ladder: declare, measure, identify through interventions), B1
+**Lineage.** v7.10: ROADMAP §6 I1 (the identifiability ladder: declare, measure, identify through interventions), B1
 (identifying an actor's partition), and T7-2d. New: both statements.
 
 ### P13 — What the start of a change gains
@@ -128,7 +128,7 @@ square root of the departure, with a finite slope at zero departure, bounded by 
 `|cos θ| ≤ 1`. Together with [P11]: at the start of a change, `sin²θ` of the departure is misaligned, and `1 − cos θ` of
 the attainable gain is lost.
 
-**Lineage.** main: B §4 (for a jointly Gaussian target and evaluator, the gold gain along the Gibbs path is exactly
+**Lineage.** v7.10: B §4 (for a jointly Gaussian target and evaluator, the gold gain along the Gibbs path is exactly
 `√2·ρ_q(F, F̂)·sd_q(F)` times `√KL`, which (ii) generalizes to the first order of any smooth path), Prop 14 and
 Prop 22 (the initial effect has the sign of the covariance), ROADMAP §6 I1 (the dynamic angle) and Def 22 (the value
 shortfall). New: (i) as a statement about any path, and the shortfall in (ii). The v9 restart first credited none of
@@ -161,7 +161,7 @@ bound how well the actor tells two conditions apart from what the actor receives
 about the actor. The bound holds only for a view that includes everything the actor uses. Memory across episodes,
 timestamps and side channels are inputs too, and an input left out of `W` can make the bound false.
 
-**Lineage.** New. main: ROADMAP §6 I1 (identification through interventions).
+**Lineage.** New. v7.10: ROADMAP §6 I1 (identification through interventions).
 
 ### P17 — What an unobserved condition can hide
 **Statement.** Let the actor's response depend on the condition only through a view ([D8]). Let `a` be an observed
@@ -207,4 +207,4 @@ data-processing inequality, so the identified set can be narrower than (ii) stat
 actor attains. The misalignment in `d` is at most the largest misalignment within `ε` of `p_a`, a maximization that has
 no closed form in general.
 
-**Lineage.** New, on the PI's request to make deceptive alignment measurable. main: none.
+**Lineage.** New, on the PI's request to make deceptive alignment measurable. v7.10: none.

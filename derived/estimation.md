@@ -58,7 +58,7 @@ only like `log log(1/ε)/log(1/ε)`. For typical behaviours the Chernoff informa
 one-sided: a large misalignment does not guarantee easy detection when the observer does not know the nearest intended
 behaviour.
 
-**Lineage.** main: Prop 18 (harm bounds detectability), proved there against the Gibbs intended behaviour.
+**Lineage.** v7.10: Prop 18 (harm bounds detectability), proved there against the Gibbs intended behaviour.
 
 ### P23 — The estimated misalignment of an actor that pursues the objective
 **Statement.** Let `F` be non-constant, `|X| ≥ 3`, and let the actor pursue `F` from `q` at an intensity `t > 0`, so
@@ -116,7 +116,7 @@ difference of the two misalignments, computed directly. In either case, the eval
 conditions, while the behaviour in each stays the same. [P17] covers the other case: the behaviour itself differs in
 conditions that are not observed, by as much as the actor's view allows. A report needs both.
 
-**Lineage.** main: Def 9 (contexts, with evaluation and deployment frequencies) and Prop 19 (the evaluation gap).
+**Lineage.** v7.10: Def 9 (contexts, with evaluation and deployment frequencies) and Prop 19 (the evaluation gap).
 
 ### P37 — A strong incentive masks the actor, and can fake alignment
 **Statement.** Let `u` be an intervention ([D6]) with a unique outcome `x_u` of largest value, `d(x) = u(x_u) − u(x)`,
@@ -165,5 +165,5 @@ the reward is needed. [P17] bounds the other route to the same gap: a behaviour 
 tell apart. Evaluations with strong incentives that point where the principal's objective does are therefore weak
 evidence of alignment in use; an incentive that points elsewhere makes misalignment show instead ((iii)).
 
-**Lineage.** main: Prop 28 (incentive masking) and Prop 30 (the fake-alignment gap), without the reward coupling of
+**Lineage.** v7.10: Prop 28 (incentive masking) and Prop 30 (the fake-alignment gap), without the reward coupling of
 Def 16. New: the leading form in (i) as a statement, and the derivation from pass-through alone.

@@ -119,7 +119,7 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
 ## 5. Open questions
 
 - Chains of delegation. A manager is also someone's employee. Does misalignment compose along a chain, and does a gap in
-  resolution at one link transmit to the next (main: the transmission gap, G2)?
+  resolution at one link transmit to the next (v7.10: the transmission gap, G2)?
 - One pace across kinds of request. By [P15], the best feasible pursuit keeps one intensity across contexts, so an
   employee who works hard for one client and not at all for another is charged the difference as avoidable
   misalignment. Is that what managers mean by "do more of what I value"?

@@ -116,6 +116,10 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   policy.
 - Best-of-`n` is a pursuit only in the small-mass idealization; over a small set of responses its exact distribution,
   and its KL, differ. [P19] covers its exact form, as a path whose revealed objectives rise with the proxy.
+- The best-of-`n` slope prediction of section 3 cannot be tested from the known result's paper: it reports the fitted
+  `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold under
+  the initial policy (v7.10, T3, a pre-registered attempt). The test needs samples of the initial policy scored by
+  both reward models (`NOTES.md` §3.2, D3).
 
 ## 5. Open questions
 

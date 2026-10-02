@@ -2,8 +2,8 @@
 
 > **Status: v10, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
 > framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
-> carries a formal statement and a plain-terms twin, and gives its lineage from the archive on `main`. The format is in
-> `README.md`.
+> carries a formal statement and a plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format
+> is in `README.md`.
 
 ## 0. What the core is
 
@@ -115,7 +115,7 @@ may face. Alignment is judged from that description alone, never from how the be
   internal goals. That is deliberate: a difference that shows in no condition has no consequence a principal could
   suffer.
 
-**Lineage.** main: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an
+**Lineage.** v7.10: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an
 argument.
 New: behaviour in every condition, so that deceptive alignment is in scope.
 
@@ -133,8 +133,8 @@ direct must not depend on how finely we describe what happens.
   of pursuit,
   a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
 
-**Lineage.** main: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where this
-was the one premise.
+**Lineage.** v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where
+this was the one premise.
 
 ### A3 — Pursuit is the best trade-off
 **Statement.** To pursue an objective at an intensity is to choose the behaviour with the largest average of the
@@ -151,7 +151,8 @@ depends only on how the behaviour changes, not on what is pursued.
   divergence from the default (`derived/value.md`). A2 is a geometric premise and A3 an economic one; they agree in one
   way only.
 
-**Lineage.** main: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived, not assumed.
+**Lineage.** v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived, not
+assumed.
 
 ### A4 — Misalignment is value lost
 **Statement.** The misalignment of a behaviour is the least value it loses against a behaviour the principal accepts,
@@ -169,7 +170,7 @@ the standard of that acceptable way.
 - *In nats.* A behaviour can be written with an objective and an intensity in many ways; only their product is fixed.
   Value times intensity does not depend on the choice.
 
-**Lineage.** v8: [D3]'s "why" (KL, with the actual behaviour first), where this was an argument. main: Thm 1 (regret is
+**Lineage.** v8: [D3]'s "why" (KL, with the actual behaviour first), where this was an argument. v7.10: Thm 1 (regret is
 a divergence).
 
 ### A5 — Declared before
@@ -179,10 +180,10 @@ judge.
 **In plain terms.** Decide what counts as acceptable before looking at what the actor did.
 
 **Why this choice.** A default or an acceptable set fitted to the behaviour being judged removes exactly the
-differences the judgement needs. On main, I1-dyn fitted its default (a Hardy–Weinberg expectation) from the counts it
+differences the judgement needs. In v7.10, I1-dyn fitted its default (a Hardy–Weinberg expectation) from the counts it
 judged, and its test could not fail. Pre-registration in science makes the same demand.
 
-**Lineage.** main: Def 23's timing slot. v8: [D3]'s rule of use.
+**Lineage.** v7.10: Def 23's timing slot. v8: [D3]'s rule of use.
 
 ## 2. Behaviour and pursuit
 
@@ -214,7 +215,7 @@ symmetric, so the order matters. Tilting reweights a behaviour toward the outcom
 **Notes.** A behaviour is a policy in reinforcement learning, a mixed strategy in game theory, a distribution of choices
 in economics, and a distribution of types in a population in biology. The tilt is exponential tilting in statistics.
 
-**Lineage.** main: Def 1 (the objects), and R7-1's rule that the actual behaviour is any distribution (Def 13). main's
+**Lineage.** v7.10: Def 1 (the objects), and R7-1's rule that the actual behaviour is any distribution (Def 13). v7.10's
 R7-8 (measurable spaces) stays deferred, as it was there.
 
 ### D2 — Pursuit of an objective
@@ -257,9 +258,9 @@ with a uniform default it is the logit choice rule, or quantal response, with ra
 is the result of `t` generations of constant selection with fitness `e^F`, for types that are passed on intact, as in
 clonal reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
 
-**Lineage.** main: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
+**Lineage.** v7.10: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
 whose optimum is the tilt: here a property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray
-defines intended pursuit; it is not a model of the actor. main's rows 67–68 and 76–78 filed results by the intended
+defines intended pursuit; it is not a model of the actor. v7.10's rows 67–68 and 76–78 filed results by the intended
 actor's model instead of by what their proofs need, and the core keeps the two apart by construction.
 
 ## 3. The specification and misalignment
@@ -297,19 +298,19 @@ that stays at the default is not misaligned, though it may be useless, which is 
 - *Grouping only hides.* By [P4](iii) and (iv), the score splits along groupings of outcomes, and grouping can only hide
   misalignment. Section 4 uses this for resolutions.
 - *A set, not a point.* A principal who asks for `F` without naming an intensity would otherwise charge the actor for an
-  intensity it never asked about (main: row 74, the price measure is a regret, not misalignment). A single intended
+  intensity it never asked about (v7.10: row 74, the price measure is a regret, not misalignment). A single intended
   behaviour is the case `𝓘 = {p*}`.
 - *The standard specification is the pursuit ray,* because "pursue `F`" states a fixed objective ([D2]) at an unstated
-  intensity. It includes doing nothing. A principal for whom doing nothing is a failure declares a smaller set (main:
+  intensity. It includes doing nothing. A principal for whom doing nothing is a failure declares a smaller set (v7.10:
   the floor, Def 20).
 - *The actual behaviour may rule outcomes out; the intended ones may not.* A deterministic actor still gets a score.
   Intended behaviours keep full support so that the score is finite.
 - *Declared before, not fitted after.* A default or an intended set fitted from the behaviour being judged removes
-  exactly the differences the judgement needs. On main, I1-dyn fitted its default (a Hardy–Weinberg expectation) from
+  exactly the differences the judgement needs. In v7.10, I1-dyn fitted its default (a Hardy–Weinberg expectation) from
   the counts it judged, and its test could not fail.
 - *Stakes are reported separately.* Misalignment in nats says nothing about how much of `F` is at stake. Section 5
-  reports the shortfall in `F`'s own units (main: Def 22 and R8-1, where this lesson was learned).
-- *Slim on purpose.* main's declaration (Def 23, the same object under its old name) had nine slots. Only four changed
+  reports the shortfall in `F`'s own units (v7.10: Def 22 and R8-1, where this lesson was learned).
+- *Slim on purpose.* v7.10's declaration (Def 23, the same object under its old name) had nine slots. Only four changed
   the measure, and all four are ways of
   generating `𝓘`. Rules, instruments, feasibility and the environment did not enter the measure, so they are not
   part of the specification. Instruments return as interventions (section 6), and feasibility as a property of the
@@ -323,7 +324,7 @@ of KL used here is the one called zero-forcing in variational inference. That th
 specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [P5](iv); for a constant `F` the ray is the
 single point `q`, which is closed.
 
-**Lineage.** main: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
+**Lineage.** v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), and row 74. New: behaviours that rule outcomes out are
 scored.
 
@@ -354,14 +355,14 @@ occurs, but inside a cell the outcomes keep the proportions they have by default
 **Why this choice.**
 - *One object, two positions.* The same kind of object describes what the principal cares to distinguish and what the
   actor can distinguish. Gaps between the two cover two familiar failures: a principal who cares about distinctions the
-  actor cannot see (main's transmission gap, G2), and an actor that acts on distinctions the principal never mentioned
+  actor cannot see (v7.10's transmission gap, G2), and an actor that acts on distinctions the principal never mentioned
   (underdetermination, G1).
 - *Partitions are the general case here.* On a finite set, a σ-algebra is the same thing as a partition into cells.
 - *Inside an actor's cells, the default decides.* An actor that cannot tell two outcomes apart cannot change how often
   one occurs relative to the other, so that ratio stays where it is without the actor's choice: at the default ([D2]).
   This needs no object beyond the specification.
 - *The finest resolution unless declared.* A principal who declares a coarse resolution cannot see what happens inside
-  its cells; on main, a style exploit lived almost entirely inside cells in toy tests (B1). So indifference has to be
+  its cells; in v7.10, a style exploit lived almost entirely inside cells in toy tests (B1). So indifference has to be
   declared, never assumed. An actor's resolution, in contrast, is a fact about the actor, to be identified from its
   behaviour rather than declared.
 - *Not the meet.* The finest partition coarser than both resolutions (their meet) holds the events both sides can
@@ -373,7 +374,7 @@ occurs, but inside a cell the outcomes keep the proportions they have by default
 ([D7]). In reinforcement learning, an actor's resolution is a state abstraction, and outcomes it cannot tell apart
 are aliased. A principal's resolution is a coarse-graining of the outcomes.
 
-**Lineage.** main: Def 21 (the declared resolution: the principal's position), B1 and NOTES H14 (one object in several
+**Lineage.** v7.10: Def 21 (the declared resolution: the principal's position), B1 and NOTES H14 (one object in several
 positions; retention), and ROADMAP §6 G1, G2 and G4. New: the actor's position as a definition, with the default
 deciding
 inside cells.
@@ -393,7 +394,7 @@ the objective's own units.
 **Why this choice.**
 - *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
   (`derived/stakes.md`), so it
-  cannot say how much of the objective is lost; a principal needs that in its own units. On main this was learned the
+  cannot say how much of the objective is lost; a principal needs that in its own units. In v7.10 this was learned the
   hard way (R8-1).
 - *Compare at the same departure.* The departure is what the actor spent, and the matched pursuit is the most of `F`
   that departure can buy (`derived/stakes.md`). Comparing with the nearest intended behaviour would say nothing: in the
@@ -404,7 +405,7 @@ the objective's own units.
 - *Defined by an infimum,* so that the definition needs no result: a derived result shows that the departure is matched
   exactly whenever `λ` is finite.
 
-**Lineage.** main: Def 22 (the value shortfall `ΔV`), Thm 17(iii) (the same-budget counterfactual), and R8-1.
+**Lineage.** v7.10: Def 22 (the value shortfall `ΔV`), Thm 17(iii) (the same-budget counterfactual), and R8-1.
 
 ## 6. Interventions
 
@@ -434,7 +435,7 @@ a negative value means the nudge backfires.
 - *A change of default is an intervention too.* If the actor's own default is shifted by a known tilt `h` and its
   objective is unchanged, its behaviour moves to `tilt(p, h)` by [P1](iii): pass-through `1` for `u = h`.
 
-**Lineage.** main: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments
+**Lineage.** v7.10: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments
 slot,
 made measurable, and T7-2d (a change of default that moved the evaluator).
 
@@ -468,9 +469,9 @@ environment responds to what the actor does.
 distributions it can induce; in economics, a budget or technology set; in biology, the genotypes and frequencies that
 inheritance allows. In control theory the question "which behaviours can the actor reach" is controllability.
 
-**Lineage.** main: Def 23's feasibility slot, dropped in v8 because it did not change the measure; it returns because it
-splits the measure. main: B1 and ROADMAP §6 G2 (retention). New: the definition, and linearity as the class for which
-the split is exact.
+**Lineage.** v7.10: Def 23's feasibility slot, dropped in v8 because it did not change the measure; it returns because
+it splits the measure. v7.10: B1 and ROADMAP §6 G2 (retention). New: the definition, and linearity as the class for
+which the split is exact.
 
 ## 8. Conditions, views and identification
 
@@ -505,7 +506,7 @@ here observability runs from the condition to the actor. In reinforcement learni
 and the response is the policy. In statistics, a response that depends on the condition only through a view is a
 Markov kernel composed with a channel.
 
-**Lineage.** New. main: ROADMAP §6 I1 (identification through interventions) and the brainstorm's point on
+**Lineage.** New. v7.10: ROADMAP §6 I1 (identification through interventions) and the brainstorm's point on
 identifiability dynamics. The ontologies' "contexts" (v8, `NOTES.md`) are conditions with fixed frequencies.
 
 ### D9 — Observation and identification
@@ -532,7 +533,7 @@ it could take.
 **Notes.** In econometrics this is identification, and partial identification when only a set is determined; in control
 theory, identifiability of a system from input–output data, which needs inputs varied enough (persistent excitation).
 
-**Lineage.** New. main: ROADMAP §6 I1 (the ladder: declare, measure, identify through interventions).
+**Lineage.** New. v7.10: ROADMAP §6 I1 (the ladder: declare, measure, identify through interventions).
 
 ## 9. The evaluator
 
@@ -558,7 +559,7 @@ principal's objective that the evaluator does not see.
   currency.
 - *It is universal.* A reward model in fine-tuning, selection through one sex, a fine, a report card, a measured bonus:
   each ontology has one.
-- *The residual, not the difference.* The difference `F̂ − F`, main's evaluator error, depends on the scale of `F̂`,
+- *The residual, not the difference.* The difference `F̂ − F`, v7.10's evaluator error, depends on the scale of `F̂`,
   which behaviour never identifies. The regression and the residual depend on `F̂` only through its level sets, and
   whether the regression rises with `F̂` only through their order: neither changes under an increasing transformation
   of `F̂`. The residual averages to zero in every cell of `𝒱` under the default, so an actor that sees outcomes only
@@ -572,7 +573,7 @@ a target; the residual separates the part of that gap that an actor seeing only 
 regression says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or
 failed, a grade, a count or an indicator is.
 
-**Lineage.** main: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
+**Lineage.** v7.10: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
 evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.
 
 ## 10. Samples and evidence
@@ -605,5 +606,5 @@ how much more likely the record is under the first than under the second, on a l
 **Notes.** The evidence is the log-likelihood ratio; I. J. Good called it the weight of evidence. In statistics a sample
 from a finite set is multinomial, and the empirical behaviour is the type of the sequence [@cover2006].
 
-**Lineage.** main: Prop 18 (detection) and the deviance of v8's [P5] Notes, which used samples without defining them.
+**Lineage.** v7.10: Prop 18 (detection) and the deviance of v8's [P5] Notes, which used samples without defining them.
 New: the definition, and evidence as the second meaning of misalignment.

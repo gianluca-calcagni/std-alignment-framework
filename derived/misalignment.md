@@ -67,7 +67,7 @@ from the default" (checked in the second and first cases). In the third case, a 
 best outcomes differently from the default is charged; a principal who is indifferent among tied outcomes says so with
 a resolution ([D4]).
 
-**Lineage.** main: Prop 34(b) for (i) and (ii); Thm 13 and Thm 17(i) for the first two cases of (iv) (the transverse
+**Lineage.** v7.10: Prop 34(b) for (i) and (ii); Thm 13 and Thm 17(i) for the first two cases of (iv) (the transverse
 error
 `D_⊥`, attained at `t̂⁺`). New: behaviours that rule outcomes out, including the deterministic maximizer (the third
 case),
@@ -99,7 +99,7 @@ KL from the reference policy, often treated as a budget; the identity splits tha
 objective and the misaligned part. Whenever the actor departs from the default, `M(p̂)/KL(p̂‖q)` is the misaligned share
 of its departure, between 0 and 1.
 
-**Lineage.** main: Thm 13 (the intent-ray decomposition) and NOTES §2.5 (the intent ray). New: the third case, and the
+**Lineage.** v7.10: Thm 13 (the intent-ray decomposition) and NOTES §2.5 (the intent ray). New: the third case, and the
 reading as a split of the departure.
 
 ### P35 — Floors and caps
@@ -143,7 +143,7 @@ stationarity condition, `−log(p/p_T) − log(p/q)/t = constant`, gives `log p 
 **Notes.** (iii) answers the principal for whom doing nothing is a failure ([D3], Why). The archive also defined
 budget versions of these measures; in the core, the comparison at the same departure is the stakes of [D5].
 
-**Lineage.** main: Defs 18 and 20 (caps; floors and the intended segment), Props 33 (a), (b), (d) and 35 (a), (c), and
+**Lineage.** v7.10: Defs 18 and 20 (caps; floors and the intended segment), Props 33 (a), (b), (d) and 35 (a), (c), and
 Prop 37 (d) (a floor is a minimum standard); R7-6a and R7-6b. Their parts about the contract are dropped
 (`IMPORT.md`).
 
@@ -189,4 +189,4 @@ infimum. (v) `C_F` and the regression depend on `F` only through the ordered lev
 aligned whenever their reweighting rises with `F`. The archive's check found, against its pre-registration, that the
 gap between the ordinal and the budget measure is of second order in `M_ord`; the core does not use the budget measure.
 
-**Lineage.** main: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure), with Prop 31 (c); R7-7.
+**Lineage.** v7.10: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure), with Prop 31 (c); R7-7.

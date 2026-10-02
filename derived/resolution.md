@@ -37,7 +37,7 @@ had not said it cared about. Indifference is the only way the core forgives what
 resolution chosen to hide an exploit would be a specification error, which is why the finest resolution holds unless
 another is declared.
 
-**Lineage.** main: Def 21 and R7-10 (a declared resolution removes exactly the drift inside cells, under the free
+**Lineage.** v7.10: Def 21 and R7-10 (a declared resolution removes exactly the drift inside cells, under the free
 convention), Prop 32(b) and ROADMAP §6 G1 (underdetermination, here declared).
 
 ### P8 — An actor that cannot tell outcomes apart
@@ -105,9 +105,9 @@ checks/test_resolution.py::test_coarse_misalignment_starts_quadratic_and_need_no
 the product of what the actor can see and the share it cannot. Writing `θ` for the angle between `F̄` and `F` in the
 Fisher metric at `q`, `cos²θ = Var_q(F̄)/Var_q(F)`, and the same expansion gives `KL(tilt(q, t·F̄)‖q) ≈ ½·t²·Var_q(F̄)`.
 So at small effort `M ≈ sin²θ` times the departure: here, the misaligned share of the departure is `sin²θ`. (iii) is
-the retention gap of main's B1, in closed form.
+the retention gap of v7.10's B1, in closed form.
 
-**Lineage.** main: B1 and NOTES §8 (retention, `G = E_q[F|ℋ]`, under the budget convention, where it rises with the
+**Lineage.** v7.10: B1 and NOTES §8 (retention, `G = E_q[F|ℋ]`, under the budget convention, where it rises with the
 budget), ROADMAP §6 G2 (transmission and retention), and the I1 notes (the dynamic angle, `D_⊥ ≈ sin²θ·KL`, conjectured
 there). New: the Jensen gap in closed form, the small-effort coefficient, and the counterexample to monotone growth:
 B1's

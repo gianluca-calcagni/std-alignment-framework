@@ -56,11 +56,11 @@ of [P5](iv)), or has a subsequence with intensities tending to `∞`, which conv
 checks/test_stakes.py::test_stakes_split_into_three_causes,
 checks/test_stakes.py::test_rescaling_moves_stakes_not_misalignment, checks/test_stakes.py::test_zero_stakes
 
-**Notes.** (ii) is main's three-term decomposition of the half-ray (transverse, axial and anti-alignment) read at the
+**Notes.** (ii) is v7.10's three-term decomposition of the half-ray (transverse, axial and anti-alignment) read at the
 matched intensity, with names for the causes. The matched intensity converts between the two units: `λ` nats per unit of
 `F`. The checks compute KL between tilts in closed form, because at large `λ` the tilts underflow in float64.
 
-**Lineage.** main: Def 22 and Thm 17(iii) (the shortfall at the same budget), Thm 13(b) (the three terms), Prop 16 and
+**Lineage.** v7.10: Def 22 and Thm 17(iii) (the shortfall at the same budget), Thm 13(b) (the three terms), Prop 16 and
 Thm 17(iv) (what rescaling leaves unchanged), and R8-1. New: the three cases, the zero-stakes characterization, and the
 names.
 
@@ -95,5 +95,5 @@ roles of `F` and `F + g` in (ii) gives the reverse bound with the revealed inten
 of [P5](iv) the revealed intensity is infinite and (ii) says nothing: at the extreme of pursuit, a small error in the
 objective can change the verdict entirely.
 
-**Lineage.** New as statements. main: Prop 26 (a wrong default is measured misalignment unless it leans along the
+**Lineage.** New as statements. v7.10: Prop 26 (a wrong default is measured misalignment unless it leans along the
 target), and NOTES §2.3 (capacity switches the regime: errors matter more at high capacity).
