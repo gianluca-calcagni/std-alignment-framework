@@ -31,11 +31,11 @@ worked out.
 | **pursues** | [D2] | a path keeps reweighting toward one objective, never away | reference-free reading of pursuit | constant selection (biology), stable preferences (economics) | A |
 | **revealed objective** | [P2] | the objective a change of behaviour reveals: `∂_s log p_s` | as in revealed preference: read from behaviour, not assumed | Malthusian fitness up to a constant (biology) | A |
 | **net value** | [P4] | the objective's average minus the cost of departing from the default | plain | KL-regularized RL objective, free energy [@ortega2013] | A |
-| **specification** | [D3] | the default and the set of acceptable behaviours | the word of AI safety and formal verification for what is required | main's "declaration", "intent", "contract" | A |
+| **specification** | [D3] | the default and the set of acceptable behaviours | the word of AI safety and formal verification for what is required | v7.10's "declaration", "intent", "contract" | A |
 | **declared** | [D3] | fixed before, and without using, the behaviour judged | the act of the principal (PI's decision: declaration is the act, specification the object) | pre-registered, specified ex ante | A |
 | **intended behaviours** | [D3] | the behaviours the principal would accept | "intended" in the formal text, "acceptable" in plain terms | admissible set, safe set, satisfying behaviours | A |
 | **misalignment** | [D3] | KL from the actual behaviour to the nearest acceptable one | the subject of the framework | quantitative distance from the specification; nats of evidence per decision (expected log-likelihood ratio) | A |
-| **standard specification** | [D3] | pursue `F` at any intensity, including none | the default way to state "pursue `F`" | main's free convention | A |
+| **standard specification** | [D3] | pursue `F` at any intensity, including none | the default way to state "pursue `F`" | v7.10's free convention | A |
 | **nearest intended behaviour** | [P5] | the acceptable behaviour closest to the actual one | plain | I-projection (here a reverse I-projection, in the second argument), best-fitting model | A |
 | **revealed intensity** | [P5] | the intensity the actual behaviour reveals | parallels "revealed objective" | the weight maximum-entropy inverse RL fits for one feature [@ziebart2008] | A |
 | **departure** | [P6] | `KL(p̂‖q)`: how far the actor moved from the default | plain | KL from the reference policy, "KL budget" (RL fine-tuning) | A |
@@ -43,18 +43,18 @@ worked out.
 | **cells** | [D4] | the groups of a resolution | plain | blocks of a partition, atoms of a σ-algebra | A |
 | **cell average** | [D4] | the default's average of `F` on each cell | plain | conditional expectation | A |
 | **stated at resolution** | [D4] | the specification constrains only the cell masses | plain | declared indifference, coarse specification | A |
-| **standard specification at resolution** | [D4] | "pursue `F`" stated on cells | consistent with "standard specification" | main's declared resolution under the free convention | A |
+| **standard specification at resolution** | [D4] | "pursue `F`" stated on cells | consistent with "standard specification" | v7.10's declared resolution under the free convention | A |
 | **indifferent** | [D4] | the principal does not care how a cell is split | plain | — | A |
 | **limited to** | [D4] | a behaviour that splits each cell as the default does | plain | constant on aliased states (RL) | A |
 | **has resolution** | [D4] | every behaviour the actor can produce is limited to it | plain | state abstraction, perceptual aliasing (RL) | A |
-| **within-cell departure** | [P7] | the part of the departure that happens inside cells | plain | main's within-cell divergence `W` (Def 21) | A |
-| **matched intensity** | [D5] | the intensity at which pursuit departs from the default as much as the actor did | it matches the departure | the same-budget counterfactual (main: Thm 17(iii)) | A |
+| **within-cell departure** | [P7] | the part of the departure that happens inside cells | plain | v7.10's within-cell divergence `W` (Def 21) | A |
+| **matched intensity** | [D5] | the intensity at which pursuit departs from the default as much as the actor did | it matches the departure | the same-budget counterfactual (v7.10: Thm 17(iii)) | A |
 | **matched pursuit** | [D5] | the pursuit with the actor's departure: the most of `F` that departure can buy | plain | KL-constrained optimum, "best policy within the KL budget" (RL fine-tuning) | A |
-| **shortfall** | [D5] | how much more of `F` the matched pursuit gets than the actor, in `F`'s units | plain | value shortfall `ΔV` (main: Def 22), regret at a matched budget | A |
-| **under-pursuit** | [P9] | the part of the stakes from pursuing too timidly for the departure spent | names the cause | axial error `D_∥` (main: Thm 13) | A |
-| **anti-pursuit** | [P9] | the part of the stakes from moving against the objective | names the cause | anti-alignment excess `X_anti` (main: Thm 13) | A |
-| **angle** | [P11] | how far the direction a behaviour starts moving in is from the declared objective; its cosine is their correlation under the default | the geometric picture is exact: the correlation is the cosine in the Fisher metric at the default | correlation (statistics), the dynamic angle (main: I1) | A |
-| **intervention** | [D6] | a known nudge added to what the actor faces: an incentive, a fine, a new default option | plain, and the word of causal inference for a change made from outside | instrument (main: Def 23), treatment (causal inference), incentive or price change (economics), selection regime (experimental evolution) | A |
+| **shortfall** | [D5] | how much more of `F` the matched pursuit gets than the actor, in `F`'s units | plain | value shortfall `ΔV` (v7.10: Def 22), regret at a matched budget | A |
+| **under-pursuit** | [P9] | the part of the stakes from pursuing too timidly for the departure spent | names the cause | axial error `D_∥` (v7.10: Thm 13) | A |
+| **anti-pursuit** | [P9] | the part of the stakes from moving against the objective | names the cause | anti-alignment excess `X_anti` (v7.10: Thm 13) | A |
+| **angle** | [P11] | how far the direction a behaviour starts moving in is from the declared objective; its cosine is their correlation under the default | the geometric picture is exact: the correlation is the cosine in the Fisher metric at the default | correlation (statistics), the dynamic angle (v7.10: I1) | A |
+| **intervention** | [D6] | a known nudge added to what the actor faces: an incentive, a fine, a new default option | plain, and the word of causal inference for a change made from outside | instrument (v7.10: Def 23), treatment (causal inference), incentive or price change (economics), selection regime (experimental evolution) | A |
 | **pass-through** | [D6] | how strongly behaviour follows an intervention: the multiple of it by which behaviour is reweighted | the economists' word for how much of a change in a cost or price is passed on | `t·w`: intensity times the weight on the intervention; responsiveness; the coefficient of `u` in the change of log-odds (a logit model) | A |
 | **feasible set** | [D7] | what the actor can do | plain | budget or technology set (economics), reachable set (control theory), the trajectory distributions a policy can induce (RL) | A |
 | **linear** | [D7] | a feasible set whose limits are "these averages cannot change" | the standard name for sets cut out by linear constraints | linear family (Csiszár), mixture-flat set (information geometry) | A |
@@ -67,19 +67,19 @@ worked out.
 | **identified set** | [D9] | the range of values that observation and assumptions leave open | the econometric term (Manski 2003, cited in [D9]) | partial identification region, sharp bounds | A |
 | **avoidable misalignment** | [P15] | the distance from the actor's behaviour to the best it could have done: what it would not do | names the cause, as under-pursuit does | — | A |
 | **unavoidable misalignment** | [P15] | the distance from the best the actor could do to what was intended: what it could not do | names the cause | capability gap (AI safety, informal) | A |
-| **intended segment** | [P35] | the part of the pursuit ray between a floor and a cap | plain | the intended segment (main) | A |
+| **intended segment** | [P35] | the part of the pursuit ray between a floor and a cap | plain | the intended segment (v7.10) | A |
 | **floor** | [P35] | the least intensity of pursuit the principal accepts: a minimum average of the objective | plain | minimum standard, quota | A |
 | **cap** | [P35] | the greatest intensity of pursuit the principal accepts | plain | a limit on optimization pressure | A |
-| **ordinal specification** | [P36] | the behaviours that favour better outcomes at least as much as worse ones, relative to the default | it says that only the objective's order is declared | the ordinal target set (main); order-restricted (statistics) | A |
-| **departure budget** | [P27] | a limit on how far the actor may depart from the default: `KL(p‖q) ≤ δ` | it names what is limited, in the words of [P6]; main's "capacity" is taken by [D7] for parametric limits | KL ball, trust region (optimization), KL-constrained policy optimization (RL), capacity (main) | A |
-| **width** | [P28] | how far a departure budget lets the average of a function move, up and down together | main's word, kept | the range of a KL ambiguity set (robust optimization) | A |
-| **evaluator** | [D10] | what the actor actually pursues: a reward it is paid on, a measure it is judged by, or the objective its behaviour reveals | main's word, neutral across fields; "proxy" presumes the target it stands in for, and "reward model" belongs to one field | proxy, reward model (ML), performance measure (economics), fitness of a selection regime (biology) | A |
+| **ordinal specification** | [P36] | the behaviours that favour better outcomes at least as much as worse ones, relative to the default | it says that only the objective's order is declared | the ordinal target set (v7.10); order-restricted (statistics) | A |
+| **departure budget** | [P27] | a limit on how far the actor may depart from the default: `KL(p‖q) ≤ δ` | it names what is limited, in the words of [P6]; v7.10's "capacity" is taken by [D7] for parametric limits | KL ball, trust region (optimization), KL-constrained policy optimization (RL), capacity (v7.10) | A |
+| **width** | [P28] | how far a departure budget lets the average of a function move, up and down together | v7.10's word, kept | the range of a KL ambiguity set (robust optimization) | A |
+| **evaluator** | [D10] | what the actor actually pursues: a reward it is paid on, a measure it is judged by, or the objective its behaviour reveals | v7.10's word, neutral across fields; "proxy" presumes the target it stands in for, and "reward model" belongs to one field | proxy, reward model (ML), performance measure (economics), fitness of a selection regime (biology) | A |
 | **regression** | [D10] | what the evaluator tells, on average under the default, about the principal's objective | the statistical term for this conditional expectation | conditional expectation, regression function | A |
-| **residual** | [D10] | the part of the principal's objective that the evaluator does not see | the statistical term; unlike main's "error", it needs no scale | the regression residual (statistics); the part of the target that the proxy does not explain | A |
+| **residual** | [D10] | the part of the principal's objective that the evaluator does not see | the statistical term; unlike v7.10's "error", it needs no scale | the regression residual (statistics); the part of the target that the proxy does not explain | A |
 | **sample** | [D11] | a record of decisions, each drawn independently from the behaviour | plain | data, observations, trials | A |
 | **empirical behaviour** | [D11] | how often each outcome occurs in a sample | parallels "behaviour" | empirical distribution, type (information theory) | A |
 | **evidence** | [D11] | how much more likely a record is under one behaviour than under another, in nats | plain, and I. J. Good's "weight of evidence" | log-likelihood ratio, weight of evidence | A |
-| **evaluation gap** | [P24] | how much the misalignment of real use exceeds that of an evaluation that meets situations in other proportions | main's name, kept | the cost of a shift in the distribution of situations | A |
+| **evaluation gap** | [P24] | how much the misalignment of real use exceeds that of an evaluation that meets situations in other proportions | v7.10's name, kept | the cost of a shift in the distribution of situations | A |
 
 ## 2. Correspondences not yet in the framework
 
@@ -89,15 +89,15 @@ worked out.
 | a maximizer charged for breaking ties ([P5], third case) | underspecification | ML: D'Amour et al. (2020), "Underspecification presents challenges for credibility in modern machine learning" | C | a worked example in which [P7]'s indifference is exactly the remedy D'Amour et al. need |
 | `2n·M(p̂)` | likelihood-ratio (χ²) test | statistics: Wilks' theorem, with the number of outcomes minus 2 as degrees of freedom; near `t* = 0` the half-ray boundary gives a chi-bar-square mixture | A | done for `t* > 0` in [P23], with a simulation check; the chi-bar-square at `t* = 0` is open |
 | the pursuit part of the departure, `KL(p°‖q)` | optimization pressure | RL fine-tuning: Gao, Schulman and Hilton (2023), reward-model overoptimization curves | C | the first worked ML case: gold score should track the pursuit part, and the proxy–gold gap the misaligned part (`ontologies/machine-learning/`) |
-| the misaligned share `M/KL(p̂‖q)` | — | — | D | distrust: 0/0 at small departures, and a share hides scale (main: R8-1) |
+| the misaligned share `M/KL(p̂‖q)` | — | — | D | distrust: 0/0 at small departures, and a share hides scale (v7.10: R8-1) |
 | misalignment as a testing exponent | Chernoff–Stein lemma | information theory (Cover and Thomas 2006, ch. 11) | C | the Chernoff part is done in [P22]; for Stein's exponent, work out which error the direction `KL(p̂‖p)` governs |
-| net value | rational inattention | economics: Sims (2003); the cost there is mutual information, which equals the KL cost only when the default is chosen optimally | C | state when the two coincide (main: insight 9, "endogeneity is a spectrum") |
+| net value | rational inattention | economics: Sims (2003); the cost there is mutual information, which equals the KL cost only when the default is chosen optimally | C | state when the two coincide (v7.10: insight 9, "endogeneity is a spectrum") |
 | the cell average `F̄` that a coarse actor pursues ([P8]) | the proxy, regressional Goodhart | AI safety: Manheim and Garrabrant (2018), "Categorizing variants of Goodhart's law" | C | check their definition of the regressional variant against `F = F̄ + (F − F̄)`; [P8](iv) would then be its exact small-effort law |
-| the Jensen gap of [P8](iii) | retention gap; transmission gap | main: B1 and ROADMAP §6 G2 | B | already the same object; promote the name if readers need it |
+| the Jensen gap of [P8](iii) | retention gap; transmission gap | v7.10: B1 and ROADMAP §6 G2 | B | already the same object; promote the name if readers need it |
 | the Jensen gap of [P8](iii) | value of information | information theory: Stratonovich (1965; 2020) | D | a derivation linking the gap to the value of refining the actor's resolution |
 | the meet of two resolutions | common knowledge | game theory: Aumann (1976), cited in [D4] | B | used in [D4]'s justification only, where it is rejected as the score |
 | misalignment under a specification | robustness degree | formal verification: quantitative semantics of temporal logics | D | a case where the two orderings agree |
-| the small-effort misaligned share `sin²θ` | the dynamic angle | main: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A: now [P11], for any smooth departure from the default | done |
+| the small-effort misaligned share `sin²θ` | the dynamic angle | v7.10: I1 notes, "`D_⊥ ≈ sin²θ·KL`, conjectured" | A: now [P11], for any smooth departure from the default | done |
 | [P10](ii): an error in the objective matters in proportion to the revealed intensity | Goodhart's law: a proxy degrades under optimization pressure | AI safety: Manheim and Garrabrant (2018) | C | a case in which the bound's growth with intensity matches an observed overoptimization curve |
 | a bonus on measured outcomes, passed through ([D6]): every unmeasured outcome loses the same share | multitask moral hazard: effort substitution | economics: Holmström and Milgrom (1991), "Multitask principal–agent analyses" | B | worked out in `ontologies/job-delegation/`, without their contract (no wages, no risk aversion); the proportional form is the core's, and testable |
 | a change of behaviour outside `span{u, 1}` after an intervention `u` ([P12](i)); with two outcomes, a pass-through of the removal that differs from that of the introduction | motivation crowding-out: the fine changes the meaning of the act | economics: Gneezy and Rustichini (2000), "A fine is a price"; Frey and Jegen (2001) | B | worked out in `ontologies/humans/` for the two-outcome pair (fine, removal); a case with at least three outcomes would test the residual directly |
@@ -133,18 +133,18 @@ worked out.
 | **intensity** kept over "inverse temperature" | first step | executor | plain, and not tied to physics |
 | **net value**, **revealed objective**, **revealed intensity**, **departure**, **nearest intended behaviour** | second review | executor | names for objects the core already used without one |
 | **resolution**, **cells**, **cell average**, **limited to** | resolution step | executor | the brainstorm's σ-algebras, in finite form and plain words |
-| **matched intensity**, **matched pursuit**, **shortfall**, **under-pursuit**, **anti-pursuit** | stakes step | executor | main's same-budget comparison and three-term split, with names for the causes instead of geometry (axial, transverse) |
-| **angle** kept; **intervention** over main's "instrument"; **pass-through** | identifiability step | executor | "angle" is exact in the Fisher metric and readers picture it; "instrument" means something narrower in econometrics (a variable that moves behaviour only through the treatment); "pass-through" is the economists' word for the same role |
+| **matched intensity**, **matched pursuit**, **shortfall**, **under-pursuit**, **anti-pursuit** | stakes step | executor | v7.10's same-budget comparison and three-term split, with names for the causes instead of geometry (axial, transverse) |
+| **angle** kept; **intervention** over v7.10's "instrument"; **pass-through** | identifiability step | executor | "angle" is exact in the Fisher metric and readers picture it; "instrument" means something narrower in econometrics (a variable that moves behaviour only through the treatment); "pass-through" is the economists' word for the same role |
 | "contexts" for the part of an outcome fixed before the actor acts | ontologies step | executor | now conditions ([D8]) whose frequencies the actor does not choose; the shared intensity across them is derived ([P15]) |
 | **premises** A1–A5, in the core; results moved to `derived/` | v9 | PI, on the executor's blueprint | the core holds what cannot be derived and the definitions used everywhere |
 | **feasible set**, **linear**; **avoidable** and **unavoidable misalignment** | v9 | PI approved; names by the executor | "cannot" and "will not" in formal and plain terms |
-| **departure budget**, over main's "capacity" | v10, import | PI approved capacity as feasibility (`IMPORT.md`, Q12); name by the executor | [D7] uses "capacity" for parametric limits; "departure" is already the word of [P6] for `KL(p̂‖q)` |
-| **width** | v10, import | main's name, kept | — |
-| **intended segment**, **floor**, **cap** | v10, import | main's names, kept | plain words for a minimum and a maximum strength of pursuit |
-| **ordinal specification** | v10, import | executor | main's "ordinal target set" was a set of objectives; the core declares a specification, so the name says what is declared |
+| **departure budget**, over v7.10's "capacity" | v10, import | PI approved capacity as feasibility (`IMPORT.md`, Q12); name by the executor | [D7] uses "capacity" for parametric limits; "departure" is already the word of [P6] for `KL(p̂‖q)` |
+| **width** | v10, import | v7.10's name, kept | — |
+| **intended segment**, **floor**, **cap** | v10, import | v7.10's names, kept | plain words for a minimum and a maximum strength of pursuit |
+| **ordinal specification** | v10, import | executor | v7.10's "ordinal target set" was a set of objectives; the core declares a specification, so the name says what is declared |
 | **condition**, **response**, **view**; **observed conditions**, **identified**, **identified set** | v9 | PI approved the direction (identifiability into the core); names by the executor | "view" rather than "observation", which is the principal's act; the econometric terms for identification |
-| **evaluator** kept from main, over "proxy" and "reward model" | v10 | PI approved the concept; the name is main's | neutral across fields, and it names what the actor is evaluated on rather than what it stands in for |
-| **regression** and **residual**, in place of main's "error" `E = F̂ − F` | v10 | PI approved | the error depends on the scale of the evaluator, which behaviour never identifies; the regression and the residual do not change under any increasing transformation of the evaluator |
+| **evaluator** kept from v7.10, over "proxy" and "reward model" | v10 | PI approved the concept; the name is v7.10's | neutral across fields, and it names what the actor is evaluated on rather than what it stands in for |
+| **regression** and **residual**, in place of v7.10's "error" `E = F̂ − F` | v10 | PI approved | the error depends on the scale of the evaluator, which behaviour never identifies; the regression and the residual do not change under any increasing transformation of the evaluator |
 | "known" and "revealed" evaluators, in plain words, not as defined terms | v10 | executor | "declared" already means "fixed in advance" ([D3]); a known evaluator need not be fixed in advance, only known to be what the actor is rewarded on |
 | **sample**, **empirical behaviour**, **evidence** | v10 | PI approved sampling in the core | "evidence" over "log-likelihood ratio": plain, Good's name, and it says what the number is for |
-| **evaluation gap** | v10 | main's name, kept | — |
+| **evaluation gap** | v10 | v7.10's name, kept | — |

@@ -1,9 +1,10 @@
 # IMPORT — what the archive holds, and what the core does with it
 
-The archive on `main` (v7.10, commit `9459c14`) holds 75 items, the chapter "what the core forbids", 13 dictionary
-bridges, 15 boundary claims, 4 actor hypotheses and the empirical projects. This file maps each of them to its fate in
-the core, so that the work left before `core` can be merged into `main` can be counted, and so that, after the merge,
-every result of v7.10 can still be found. Lint rule R12 checks that it names only existing items.
+The archive, tagged `v7.10` (commit `9459c14`, the last commit of the vault on `main`), holds 75 items, the chapter
+"what the core forbids", 13 dictionary bridges, 15 boundary claims, 4 actor hypotheses and the empirical projects. This
+file maps each of them to its fate in the core, so that the work left before `core` can be merged into `main` can be
+counted, and so that, after the merge, every result of v7.10 can still be found. Lint rule R12 checks that it names only
+existing items.
 
 Each entry gets one verdict:
 - **in core**: already derived, generalized or replaced; the entry names the item that holds it.
@@ -11,6 +12,8 @@ Each entry gets one verdict:
   **must** (blocks the merge), **should** (before the merge if possible), or **could** (after the merge, or never).
 - **needs**: needs a concept the core does not have; the entry names it.
 - **drop**: not re-imported; the entry gives the reason. Dropped items stay in the archive's history.
+- **recorded**: an empirical result. Its files stay in the archive; its outcome is kept where it bears on a claim of
+  the core, and the entry says where.
 
 ## 1. The estimate
 
@@ -31,7 +34,7 @@ many outcomes. Eight are dropped by design. Of the 26 items to derive, many are 
 **Effort.** The v10 step (two definitions, nine results, the ontologies) took three working turns. At that rate:
 the six "must" results and `forbids.md` take three to four turns; the "should" results two to three more; the merge
 itself one. **About six to eight turns to a merge with everything recommended; four to five with the "must" items
-only.** Re-running main's empirical cases under the core's definitions (section 5) is not needed for the merge and
+only.** Re-running v7.10's empirical cases under the core's definitions (section 5) is not needed for the merge and
 would add two to four turns, data permitting.
 
 **What blocks the merge.** The results v7.10 itself found stated nowhere else (its "honest position") and its
@@ -60,7 +63,7 @@ and the closed-loop floor.
 | N1 | The best feasible pursuit in a KL ball, and the budget as a shadow price: **[P27]** | Def 5, Lemma 5.1, Def 15, Cor 5.2, Cor 17.1 (could) | must | `feasibility.md` | small |
 | N2 | The width of a KL ball along a function, computed: **[P28]** | Def 6, Prop 6 | must | `feasibility.md` | small |
 | N3 | The width is the exact worst case: **[P29]** | Thm 5 | must | `evaluator.md` | medium |
-| N4 | No separable bound on the worst case: **[L1]**, **[P30]** | Lemma 8, Thm 9 | must | `evaluator.md` | medium: the hardest proof; main's checks exist |
+| N4 | No separable bound on the worst case: **[L1]**, **[P30]** | Lemma 8, Thm 9 | must | `evaluator.md` | medium: the hardest proof; v7.10's checks exist |
 | N5 | Feasible sets of other shapes: total variation, χ², Rényi: **[P31]** | Prop 10; Prop 11's finite shadow in its Notes | must | `feasibility.md` | medium |
 | N6 | The closed-loop floor: regulating conditions costs departure: **[P32]** | Dictionary B07 (a)–(d) | must | `feasibility.md` | medium |
 | N7 | Error bounds for a known evaluator: sharp and sub-Gaussian: **[P33]** (one-region saturation is [C3], imported in R4) | Props 2, 7; Prop 3 (could) | should | `evaluator.md` | small |
@@ -81,7 +84,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 |---|---|---|---|
 | Def 1 | objects: default, target, exchange rate, tilt | in core | [D1], [D2], [D3] |
 | Def 2 | the bounded actor's net value | in core | [P4] |
-| Def 3 | regrets at a declared price; raw and total regret | drop | price convention, replaced by stakes at matched intensity ([D5], [P9]); main's row 74 |
+| Def 3 | regrets at a declared price; raw and total regret | drop | price convention, replaced by stakes at matched intensity ([D5], [P9]); v7.10's row 74 |
 | Def 5 | the capacity actor, a KL ball | in core | [P27], imported in R1: the departure budget |
 | Def 6 | the width of a KL ball along a function | in core | [P28], imported in R1 |
 | Def 7 | the reporting rule: report only invariant quantities | in core | [D9], [P1], `STANDARD.md` |
@@ -91,7 +94,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Def 11 | the misalignment contract, axioms M1–M8 | drop | replaced by the premises: [A4] and [P14] force the measure that the contract only constrained |
 | Def 12 | the alignment instance | in core | [D3] |
 | Def 13 | evaluator `F̂ = F + E`; actor models | in core | [D10]; the error as notation for known evaluators (Q11); actor models are paths ([P2]) |
-| Def 14 | mechanism-relative comparison `M_own` | drop | not identified from behaviour, as main's own Prop 25(c) shows; [D9] |
+| Def 14 | mechanism-relative comparison `M_own` | drop | not identified from behaviour, as v7.10's own Prop 25(c) shows; [D9] |
 | Def 15 | the capacity model, hypothesis (C) | in core | [P27](ii) and its Notes, imported in R1 |
 | Def 16 | external reward, contingency, coupling | needs | a strategic layer: the agent's stake in an outer process. Out of scope (`CORE.md` §0) |
 | Def 17 | target sets: cardinal and ordinal | in core | cardinal: [D3]; ordinal: [P36], imported in R5, as the ordinal specification |
@@ -119,9 +122,9 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Lemma 5.1 | the capacity actor is a pursuit at the matched intensity | in core | [P27](i) and (ii), imported in R1; the monotonicity part was already in [P9](i) |
 | Thm 5 | the width is the exact worst case | in core | [P29], imported in R2, at an equal budget; part (iii), at a declared price, is dropped with the price convention |
 | Cor 5.2 | the exchange rate is a shadow price | in core | [P27](iii), imported in R1 |
-| Prop 6 | the width, computed (Donsker–Varadhan) | in core | [P28], imported in R1, with a term in `δ` that main did not have |
+| Prop 6 | the width, computed (Donsker–Varadhan) | in core | [P28], imported in R1, with a term in `δ` that v7.10 did not have |
 | Prop 7 | a bound with realized travel (sub-Gaussian) | in core | [P33](iv), imported in R5 |
-| Rem 7.1 | the v5 normal form, and why its ball version fails | drop | a historical note; the lesson is in main's retraction history |
+| Rem 7.1 | the v5 normal form, and why its ball version fails | drop | a historical note; the lesson is in v7.10's retraction history |
 | Lemma 8 | separable bounds are loose when rankings move | in core | [L1], imported in R2, with the bound shown to be attained |
 | Thm 9 | the worst-case regret is not separable | in core | [P30], imported in R2 |
 | Prop 10 | conjugate pairings of costs and error norms | in core | [P31], imported in R3, with the bounds shown to be attained |
@@ -185,16 +188,34 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | B12, human choice | in core | `ontologies/humans/` |
 | B13, potential games | needs | several actors, out of scope; `RELATED.md` |
 | Boundary C01–C15 | drop as a folder | its live claims are in `derived/forbids.md` (C08 in [C1], C15 in [C7] and [C8]) and in the ontologies' predictions (C09); C11 is [P2] and [P3]; C12 is [P32]; C13 and C14 are in `CORE.md` §0 and `NOTES.md` |
-| T7 cases 1–1e (length bias in reward models) | could | worked cases for `ontologies/machine-learning/`, re-run under the core's definitions with a new pre-registration; the data were seen, so a re-run is exploratory |
-| T7 cases 2–2d (retirement defaults) | could | the same, for `ontologies/humans/` |
-| I1-dyn, I1-dyn2 (selection between the sexes) | could | the same, for `ontologies/biology/`; I1-dyn2 did not reject one evaluator, at half power |
-| T1, the census of 221 items | could | re-route against the core to measure its coverage: v7.10 named 78% and treated 29% fully |
-| T3 (the overoptimization slope is not testable from published data) | in core | `ontologies/machine-learning/`, Limits |
-| R7, R8 (tests of main's design decisions) | drop | they tested definitions the core replaced; their lessons are in `NOTES.md` §1 |
+| T7 cases 1–1e (length bias in reward models) | recorded | the outcome is history: the style term inside quality cells predicted evaluator failure out of sample but did no better than raw length. The data come over only for a case, and support exploratory claims only, since they were seen |
+| T7 cases 2–2d (retirement defaults) | recorded | `ontologies/humans/`, section 3: they tested that ontology's pass-through prediction before it was written; it held loosely against enrolment on request and failed between two defaults. Their data are seen |
+| I1-dyn, I1-dyn2 (selection between the sexes) | recorded | `ontologies/biology/`, section 5: I1-dyn could not fail, and I1-dyn2 did not reject one objective at power 0.51; the data are exhausted for [P3]'s test |
+| T1, the census of 221 items | drop | its numbers measure v6.3, not the core, and must not be quoted for it. In v6.4 the PI froze it: the census is never re-routed, because it was used to develop the framework. A measurement of the core's coverage would need items held out from its development |
+| T3 (the overoptimization slope is not testable from published data) | recorded | `ontologies/machine-learning/`, section 4: the best-of-`n` slope prediction needs samples (`NOTES.md` §3.2, D3) |
+| R7, R8 (tests of v7.10's design decisions) | drop | they tested definitions the core replaced; their lessons are in `NOTES.md` §1 |
 | B1 toys | drop | probes, superseded by the core's checks |
-| Retractions, logs, reviews, the claim ledger | drop | history; it stays in the archive's history. The failure modes it taught are in `NOTES.md` §1 |
-| Sources | as cited | `REFERENCES.md` grows only with the items imported (lint R8) |
-| Checks V1–V55 | as needed | each imported result gets its own check in `checks/`; main's checks serve as references |
+| Retraction history (78 rows and notes) | drop | stays in the tag, cited as `v7.10: row N`; about ten rows concern objects the core still has. The core keeps its own log in `RECORD.md` §3 |
+| Logs, independent reviews, the claim ledger, the hygiene log | drop | history. The failure modes they taught are in `NOTES.md` §1, condensed |
+| Status §4, the honest position | in core | rewritten for the core in `RECORD.md` §1 |
+| Status §6, the base rate | in core | `RECORD.md` §2: a ledger of the ontologies' predictions (lint R13), with v7.10's record |
+| Status §3, open questions | drop | each is closed (Q8 by [P36]; a rare condition averaged away, by `STANDARD.md`'s report per condition), moot (Q5, Q6, Q9), absorbed (Q0 is the census, above; Q2, whether the unification exists elsewhere, is `RECORD.md` §1; Q4 is the data request D3 of `NOTES.md`; Q3 waits with continuous outcomes), or changes no verdict of the core (Q1, where optimizers cross, is T8; Q7, a fixed-target version of [P30]) |
+| Sources (101 notes) and `references.bib` | as cited | `REFERENCES.md` grows only with the items imported, and admits verified sources only (lint R8); only 17 of v7.10's 101 sources were checked against a search. The notes remain a lookup for `RELATED.md`'s entries marked *(to verify)* |
+| Checks V1–V41, F1–F8, W1–W5, and the comparison of printed outputs | drop | each imported result has its own check in `checks/`, which asserts its claim on two SIMD paths. Two are worth porting: F2, an exact check of [P22](i) by enumerating types, and F4, edge cases in log space for the checks' helpers (`NOTES.md` §4) |
+| The vault and its tools (`vault.py`, the migration check, `build/`, templates, Obsidian settings) | drop | plain files, lint and CI replace them; a generated Obsidian view replaces the vault for reading (O1) |
+| `tools/frozen.json`, the hashes of pre-registrations | in core, as a rule | README rule (d); a lint check before the first worked case |
+| Method (12 standing rules, a 42-item checklist) | in core, condensed | the README's rules of evidence (a)–(f), and the failure modes of `NOTES.md` §1 |
+| NOTES_claude §1 (failure modes) | in core, condensed | `NOTES.md` §1 |
+| NOTES_claude, its other sections; HANDOVER | drop | the README's "Starting a session" replaces the handover; the hunches still live in the core's terms are in `NOTES.md` |
+| ROADMAP §4, rules 11 and 13 | in core | README rules (b) and (c) |
+| ROADMAP §4b, when the core is final | in core, re-decided | the README's finish line: one criterion per goal; one worked case in any discipline instead of one per discipline |
+| ROADMAP §4c, the toy-example debt | drop | it was owed because v7.10 changed its definitions on toy cases. The core's floors and ordinal specification are derived ([P35], [P36]), and the two open rows are settled by proof: best-of-`n` has zero ordinal misalignment, and under a floor the default is misaligned |
+| ROADMAP T6, the strategic layer, as a standing decision | drop | `CORE.md` §0 puts several actors out of scope; a second rule would only duplicate it |
+| ROADMAP T8, one index for where optimizers cross | drop | no verdict of the core depends on it ([C1], [C5]) |
+| ROADMAP T3b, the slope on open models | in core | the data request D3 of `NOTES.md` §3.2 |
+| ROADMAP §5, recommendation 3 (who the raters were) | drop | historical; README rule (f) covers every review from now on |
+| ROADMAP §6, the dropped ideas (G0–G5, C1, I1, L1–L4) | drop | absorbed: G1 ([D4], [P7], [P36]), G2 ([D4], [P8]), I1 ([P2], [P3], [P12], [D9]), the static half of G4 ([D4], [C9]). Out of scope: G0 (circular), G5 (internal states, [A1]), L2 (strategic), L4 (slips against misdirection, which behaviour does not separate), C1 (speculative). G3's nearest version, the style term inside quality cells, was tested in T7-1 and did no better than raw length |
+| ROADMAP §0–§3, the stop list, anti-drift rules 1–10a and 12 | drop | the vault's and the refactor's machinery; the scope is `CORE.md` §0 |
 
 ## 6. Roadmap
 
@@ -206,10 +227,13 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | R1 | N1, the best use of a departure budget, with its shadow price; N2, the width of a departure budget | `feasibility.md` | yes | merged: [P27], [P28] |
 | R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | merged: [P29], [L1], [P30] |
 | R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | merged: [P31], [P32] |
-| R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | merged: [C1]–[C12]; nothing blocks the merge |
-| R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | done: [P33]–[P36]; reviewed in §7 |
-| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | done: [P37], [P38], the ontology and survey follow-ups; reviewed in §7 |
-| R7 | The merge: tag `main` as `v7.10`; merge `core` into `main`, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
+| R4 | `derived/forbids.md`: the nine statements of v7.10's §11, each kept, re-derived or dropped, with its test | new file | yes | merged: [C1]–[C12]; nothing blocks the merge |
+| R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | merged: [P33]–[P36]; reviewed in §7 |
+| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | merged: [P37], [P38], the ontology and survey follow-ups; reviewed in §7 |
+| M1 | the defects found by the analysis of the archive: the humans prediction, references to the archive, uncertainty in `STANDARD.md`, stale records | many | yes | done |
+| M2 | `RECORD.md` (honest position, ledger of predictions, retractions; lint R13); labelled predictions (R10); the rules of evidence, the finish line and the version rule in the README; the decisions of section 5 | `RECORD.md`, `README.md`, `tools/` | yes | done |
+| O1 | a generated Obsidian view of the framework, checked fresh by CI | `obsidian/`, `tools/` | no | done |
+| R7 | The merge: tag `9459c14` as `v7.10`; merge `core` into `main` with a merge commit, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
 
 **Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been
 mutation-tested; each imported row of section 4 says "in core" and names its item; each new item's Lineage names the
@@ -228,7 +252,7 @@ of low value or used nowhere yet; the first candidates to drop if `derived/` sho
 
 | Item | Verdict | Compatibility | Why it stays, and what the review changed |
 |---|---|---|---|
-| [P27] | keep | the departure budget is a feasible set of [D7] (Q12); no price | main's capacity as a feasible set (Q12), with the shadow price `1/λ_δ` in place of main's declared price; used by [P28], [P29], [P31], [P33], [C2] |
+| [P27] | keep | the departure budget is a feasible set of [D7] (Q12); no price | v7.10's capacity as a feasible set (Q12), with the shadow price `1/λ_δ` in place of v7.10's declared price; used by [P28], [P29], [P31], [P33], [C2] |
 | [P28] | keep | budget only | the width is the unit of every worst case on the error; used by [P29], [P30], [P33], [C1] |
 | [P29] | keep, changed | known evaluators (Q11); loss at an equal budget, as stakes are ([D5]) | the bridge from the error to the stakes ([D5]). Changed: "the largest `L`" to "the supremum of `L`", since `F = −c·E` reaches it only as `c → 1` |
 | [L1] | keep | pure algebra | the lemma that makes [P30] a two-line proof |
@@ -236,7 +260,7 @@ of low value or used nowhere yet; the first candidates to drop if `derived/` sho
 | [P31] | keep | budgets of other shapes are feasible sets of [D7] | (i)–(iv) are textbook; the value is (v), that they are attained, and (vi), the KL against `χ²` contrast, used by [C2] and by the comparison with Laidlaw et al. in `RELATED.md` |
 | [P32] | keep, flagged | the conditions of [D8]; departure averaged over conditions | sound and short, the core's form of requisite variety; no ontology uses it yet |
 | [C1]–[C12] | keep | each is either proved in `forbids.md` or points to the result it restates | [C1], [C3], [C5], [C9] carry content and checks of their own; the other eight restate earlier results as prohibitions. Their value is one list of what the core rules out, which is what a reader tests first; [C3] is now cited by [P33] |
-| [P33] | keep, changed | known evaluators (Q11); bounds on misalignment, not on regret at a price | (i)–(iv) bound misalignment and loss by the error's range and tails. Changed: (iii) said "only the error's upper tail enters", which is false for misalignment: an underrating also costs nats, a bounded number ([C3]). Now (iii) says what is true, that it needs no range, and the Notes record main's Prop 3 as weakened |
+| [P33] | keep, changed | known evaluators (Q11); bounds on misalignment, not on regret at a price | (i)–(iv) bound misalignment and loss by the error's range and tails. Changed: (iii) said "only the error's upper tail enters", which is false for misalignment: an underrating also costs nats, a bounded number ([C3]). Now (iii) says what is true, that it needs no range, and the Notes record v7.10's Prop 3 as weakened |
 | [P34] | keep, changed | known evaluators (Q11); selection from shared candidates, no budget | As imported, the bound was one line: the loss is `E(x̂) − E(x*)` minus the evaluator's margin, so the bound was computable only when the loss was. Added: the bound by the error's spread over the candidates, and (ii), that this spread is the exact worst case (`F = −c·E`), the counterpart for selection of [P29](ii). The check covers both; its five new assertions were mutation-tested, five of five caught. Now cited by `STANDARD.md` and the machine-learning ontology, which notes that best-of-`n` uses only the proxy's order, so every recalibration of the proxy gives a bound |
 | [P35] | keep | a specification of [D3], which does not require the default to be intended | (iii) shows that a floor makes the default itself misaligned: a consequence a principal must know, not a conflict with [D3] |
 | [P36] | keep | a specification of [D3]; unchanged by every increasing transform of `F` | the proof of (iii) re-read: it is the characterization of isotonic regression, `Σ (p̂ − p°)·h ≤ 0` for every non-decreasing `h`, with `h = log(p/q)` |

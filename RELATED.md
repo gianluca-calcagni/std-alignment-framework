@@ -174,7 +174,7 @@ that carry it.
 ## Distribution shift
 
 - *Sources.* Domain adaptation bounds (Ben-David and coauthors) and covariate shift *(to verify)*.
-- *Shared.* Behaviour in one condition bounded by behaviour in another and a divergence between them ([P17]); main's
+- *Shared.* Behaviour in one condition bounded by behaviour in another and a divergence between them ([P17]); v7.10's
   evaluation gap (Prop 19), which shifts the weights of conditions.
 - *Different.* Bounds on prediction error, not on misalignment.
 - *Import, later.* Divergences other than KL for transfer bounds, which may narrow [P17]'s identified set.

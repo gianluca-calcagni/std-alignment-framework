@@ -4,7 +4,7 @@ Each item states something the core rules out, as a corollary of earlier results
 it happened. A framework that forbids nothing says nothing; this file collects, in one place, what data could
 contradict.
 
-The archive's chapter "what the core forbids" (main, §11) had nine statements. Eight are kept here, re-derived from the
+The archive's chapter "what the core forbids" (v7.10, §11) had nine statements. Eight are kept here, re-derived from the
 core: C1–C8. The ninth said that the price and the budget conventions rank errors differently; it is about the price
 convention, which the core does not use (`IMPORT.md`). C9–C12 are statements the core adds.
 
@@ -27,10 +27,10 @@ the larger width. By [P29](ii), the width is the worst case of the objective los
 **Checks.** checks/test_forbids.py::test_no_ranking_of_errors_holds_at_every_budget
 
 **Notes.** The archive also measured the crossing for actual optimizers, not only for the worst case: for the pursuit
-of the evaluator, best-of-`n` and policy gradient, at different departures for each (main: R5, R6). Those are its
+of the evaluator, best-of-`n` and policy gradient, at different departures for each (v7.10: R5, R6). Those are its
 measurements; the core proves the crossing for the worst case only, and a worked case could test the rest.
 
-**Lineage.** main: §11.1, Thm 9 and the boundary claim C8 (crossing curves). The core's form uses [P28] and [P29].
+**Lineage.** v7.10: §11.1, Thm 9 and the boundary claim C8 (crossing curves). The core's form uses [P28] and [P29].
 
 ### C2 — A KL budget does not contain a rare, large error
 **Statement.** For every budget `δ > 0` and every number `B`, there are a default and an error `E` with
@@ -45,7 +45,7 @@ large, however small the error's variance; limiting it in `χ²` does.
 
 **Checks.** checks/test_feasibility.py::test_feasible_sets_of_other_shapes
 
-**Lineage.** main: §11.2 and Prop 11, in the form on finite outcomes of [P31](vi).
+**Lineage.** v7.10: §11.2 and Prop 11, in the form on finite outcomes of [P31](vi).
 
 ### C3 — An error confined to one region costs bounded nats
 **Statement.** Let `A` be a set of outcomes, `t > 0`, `F̂ = F + M·1_A` an evaluator whose error is confined to `A`,
@@ -65,7 +65,7 @@ as `M → −∞`, `p̂(A) → 0`. Finally, `p_{F,t}` is on the pursuit ray, so 
 
 **Checks.** checks/test_forbids.py::test_an_error_confined_to_one_region_costs_bounded_nats
 
-**Lineage.** main: §11.3 and Prop 4 (an error confined to one region saturates), imported here.
+**Lineage.** v7.10: §11.3 and Prop 4 (an error confined to one region saturates), imported here.
 
 ### C4 — Rescaling the objective is not misalignment
 **Statement.** An actor that pursues `s·F` from `q`, for any `s > 0` and any intensity, has misalignment `0` and stakes
@@ -82,7 +82,7 @@ stakes are `0` ([P9](iv)).
 **Notes.** The archive found that rescaling costs something only when the intended behaviour is required to keep the
 actor's price of departing, the price convention the core does not use.
 
-**Lineage.** main: §11.4, Cor 13.3 and Remark 13.5.
+**Lineage.** v7.10: §11.4, Cor 13.3 and Remark 13.5.
 
 ### C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top
 **Statement.** Let `F̂` be an evaluator and `F` the objective.
@@ -107,7 +107,7 @@ is `max F` exactly when `F = max F` on that level set, since `q` gives each outc
 
 **Checks.** checks/test_forbids.py::test_the_first_effect_depends_on_the_optimizer
 
-**Lineage.** main: §11.5, Prop 14 (initial and terminal effects) and Prop 22 (the first-order effect of any smooth
+**Lineage.** v7.10: §11.5, Prop 14 (initial and terminal effects) and Prop 22 (the first-order effect of any smooth
 optimizer). New: the gradient step as the pursuit of `q·(F̂ − E_q[F̂])`.
 
 ### C6 — A monotone regression forbids overoptimization
@@ -125,7 +125,7 @@ principal, following the evaluator harder never hurts the principal on average.
 **Notes.** The archive's form was a target and an evaluator jointly Gaussian under the default, which have an affine
 regression; on finitely many outcomes, the affine case is what remains of it.
 
-**Lineage.** main: §11.6, Prop 21 and the dictionary's B §4.
+**Lineage.** v7.10: §11.6, Prop 21 and the dictionary's B §4.
 
 ### C7 — No test detects misalignment faster than misalignment
 **Statement.** From independent samples, no test separates the actor's behaviour from its nearest intended behaviour
@@ -138,7 +138,7 @@ behaviours exactly.
 
 **Checks.** checks/test_estimation.py::test_detection_is_capped_by_misalignment
 
-**Lineage.** main: §11.7 and Prop 18.
+**Lineage.** v7.10: §11.7 and Prop 18.
 
 ### C8 — An evaluation weighted unlike use misses the evaluation gap
 **Statement.** When each condition is judged on its own terms, the misalignment in use exceeds the misalignment in an
@@ -153,7 +153,7 @@ than real use has, by a computable amount.
 
 **Checks.** checks/test_estimation.py::test_the_evaluation_gap
 
-**Lineage.** main: §11.8 and Prop 19.
+**Lineage.** v7.10: §11.8 and Prop 19.
 
 ## Added by the core
 

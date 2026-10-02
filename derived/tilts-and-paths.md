@@ -29,9 +29,9 @@ inverse reinforcement learning, which is known to be ill-posed [@ng2000]; (ii) i
 given the default, a behaviour reveals its objective up to a constant. Written with an intensity, `tilt(r, t·F)`, it
 reveals only the product `t·F`.
 
-**Lineage.** New as a statement. main used the tilt as the form of intended behaviour (Def 1), and recorded "everything
-is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) is main's Prop 16 (g2), and the product
-`t·F` is main's Prop 12.
+**Lineage.** New as a statement. v7.10 used the tilt as the form of intended behaviour (Def 1), and recorded "everything
+is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) is v7.10's Prop 16 (g2), and the product
+`t·F` is v7.10's Prop 12.
 
 ### P2 — Every change of behaviour follows a replicator equation
 **Statement.** Let `s ↦ p_s` be a continuously differentiable path in `Δ°`, over an interval containing `0`, and let
@@ -70,7 +70,7 @@ population genetics the revealed objective is the Malthusian fitness of each typ
 constant, and the replicator equation is the gradient of mean fitness in this metric, known there as the Shahshahani
 metric [@shahshahani1979].
 
-**Lineage.** New as a proposition. main: NOTES §2.1 ("everything is a tilt") and ROADMAP §6 I1 (dynamics: increments
+**Lineage.** New as a proposition. v7.10: NOTES §2.1 ("everything is a tilt") and ROADMAP §6 I1 (dynamics: increments
 cancel the default).
 
 ### P3 — A fixed objective is visible in the changes of behaviour
@@ -100,9 +100,9 @@ checks/test_paths.py::test_two_outcomes_always_keep_a_fixed_objective
 **Notes.** The condition `F_s ∈ span{F, 1}` is the precise form of "the increments have rank 1", which [P12] uses for
 interventions. The sign condition in (ii) is what a rank read on lines, not on rays, misses. With only two
 outcomes, `span{F, 1}` contains every function, so every path keeps a fixed objective: the test has content only with
-three or more outcomes. (On main, this is why a two-arrangement allele-frequency series could not test the rank.) In
+three or more outcomes. (In v7.10, this is why a two-arrangement allele-frequency series could not test the rank.) In
 population genetics a fixed objective is constant selection, and a turning one is fluctuating selection; in economics
 the question is whether preferences are stable.
 
-**Lineage.** New as a proposition. main: ROADMAP §6 I1 (the dynamic rank), and the I1-dyn and I1-dyn2 tests, whose null
+**Lineage.** New as a proposition. v7.10: ROADMAP §6 I1 (the dynamic rank), and the I1-dyn and I1-dyn2 tests, whose null
 hypothesis counted opposite-pointing increments as one evaluator.

@@ -42,6 +42,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Field | Core | What to write |
 |---|---|---|
 | Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
+| Uncertainty | [D11], [P23] | for every quantity estimated from samples: an interval, and how it was computed (the χ² reference of [P23] where it applies, otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
 | Departure split | [P6] | the departure `KL(p̂‖q)`, split into the pursuit part and misalignment |
@@ -58,6 +59,8 @@ For each result: its value, whether it is identified, and the assumptions it use
 ## What a report must not do
 
 - Give one number for a quantity that is not identified. Give its identified set, or its bounds.
+- Give a value estimated from samples without its interval ([D11]).
+- Call a test confirmatory when its data were seen before its prediction was registered ([A5]).
 - Fit the default or the specification to the behaviour it judges ([A5]).
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).

@@ -31,12 +31,17 @@ Rules
       ONTOLOGY_SECTIONS, in order. Its section 1 has a table with the columns SLOT_COLUMNS; every slot appears in it
       once, its Core cell names the slot's item, its Fit cell starts with a word of FITS, and no other row appears.
       Section 2 cites a source. Every bullet of section 3 starts with '**Consequence** of', '**Prediction** from' or
-      '**Reading** with', and names at least one item before its first ':'; a prediction says '*Refuted if*'.
+      '**Reading** with', and names at least one item before its first ':'; a prediction is labelled, as
+      '**Prediction** (empirical) from' or '**Prediction** (verification) from', and says '*Refuted if*'.
       Sections 4 and 5 are not empty. Every item named in an ontology exists.
   R11 STANDARD.md names only existing items, and names every definition of the core: the reporting standard covers the
       whole shared vocabulary.
   R12 RELATED.md, the survey of related theories, and IMPORT.md, the map from the archive to the core, name only
       existing items; their citations count for R8.
+  R13 RECORD.md, the record of predictions and retractions, names only existing items, and its citations count for
+      R8. Its ledger (the table with the columns LEDGER_COLUMNS) has exactly one row for every prediction of the
+      ontologies, keyed by the ontology's folder and the items the prediction is from, with the same label, and a
+      state that starts with one of STATES; and no other row. RECORD.md must exist once any ontology predicts.
 """
 import re, sys
 from pathlib import Path
@@ -57,7 +62,10 @@ BOLD = re.compile(r"\*\*([^*]+?)\*\*")
 ONTOLOGY_SECTIONS = ["1. Slots", "2. Known result", "3. What the core says", "4. Limits", "5. Open questions"]
 SLOT_COLUMNS = ["Slot", "Core", "In this discipline", "Observed as", "Fit"]
 FITS = ("exact", "approximate", "assumed", "absent")
-CLAIM = re.compile(r"^- \*\*(Consequence)\*\* of |^- \*\*(Prediction)\*\* from |^- \*\*(Reading)\*\* with ")
+CLAIM = re.compile(r"^- \*\*(Consequence)\*\* of |^- \*\*(Prediction)\*\*(?: \((verification|empirical)\))? from "
+                   r"|^- \*\*(Reading)\*\* with ")
+LEDGER_COLUMNS = ["Ontology", "From", "Label", "State", "Where"]
+STATES = ("untested", "held", "refuted", "untestable")
 
 
 def norm_term(t):
@@ -227,7 +235,7 @@ def lint(root):
                 errors.append(f"{path}: R7 {name} is cited by no item")
 
     # R10 and R11 (before R8, which counts their citations)
-    onto_errors, onto_cited, n_onto = lint_ontologies(root, pos)
+    onto_errors, onto_cited, n_onto, predictions = lint_ontologies(root, pos)
     errors += onto_errors
     cited = {(name, k) for name, text in texts.items() for k in CITE.findall(text)} | onto_cited
     standard = root / "STANDARD.md"
@@ -245,6 +253,18 @@ def lint(root):
                 errors.append(f"STANDARD.md: R11 the definition {it['id']} is not covered by the standard")
     elif any(it["kind"] == "D" for it in core_items):
         errors.append("STANDARD.md: R11 the reporting standard is missing")
+    # R13
+    record = root / "RECORD.md"
+    if record.exists():
+        rtext = record.read_text(encoding="utf-8")
+        cited |= {("RECORD.md", k) for k in CITE.findall(rtext)}
+        for n, line in enumerate(rtext.splitlines(), 1):
+            for ref in REF.findall(line):
+                if ref not in pos:
+                    errors.append(f"RECORD.md:{n}: R13 [{ref}] names no item")
+        errors += lint_ledger(rtext, predictions)
+    elif predictions:
+        errors.append("RECORD.md: R13 the record, with the ledger of the ontologies' predictions, is missing")
     for name in ("RELATED.md", "IMPORT.md"):
         survey = root / name
         if survey.exists():
@@ -305,11 +325,11 @@ def lint_ontologies(root, pos):
     """R10. Returns (errors, {(file name, cited key)}, number of ontologies)."""
     folder = root / "ontologies"
     if not folder.exists():
-        return [], set(), 0
-    errors, cited = [], set()
+        return [], set(), 0, {}
+    errors, cited, predictions = [], set(), {}
     readme = folder / "README.md"
     if not readme.exists():
-        return ["ontologies: R10 README.md, with the slot table, is missing"], cited, 0
+        return ["ontologies: R10 README.md, with the slot table, is missing"], cited, 0, predictions
     rtext = readme.read_text(encoding="utf-8")
     cited |= {("ontologies/README.md", k) for k in CITE.findall(rtext)}
     slots = {}
@@ -387,10 +407,49 @@ def lint_ontologies(root, pos):
                 errors.append(f"{where}: R10 a claim names no item before its ':': {first[:60]!r}")
             if m[2] and "*Refuted if*" not in whole:
                 errors.append(f"{where}: R10 a prediction must say when it is '*Refuted if*': {first[:60]!r}")
+            if m[2] and not m[3]:
+                errors.append(f"{where}: R10 a prediction must be labelled (verification) or (empirical): {first[:60]!r}")
+            if m[2]:
+                key = (f.parent.name, tuple(sorted(set(REF.findall(head)))))
+                if key in predictions:
+                    errors.append(f"{where}: R10 two predictions from the same items {', '.join(key[1])}")
+                predictions[key] = m[3]
         for sec in ONTOLOGY_SECTIONS[3:]:
             if sec in body and not "".join(body[sec]).strip():
                 errors.append(f"{where}: R10 section '{sec}' is empty")
-    return errors, cited, len(files)
+    return errors, cited, len(files), predictions
+
+
+def lint_ledger(text, predictions):
+    """R13: the ledger has one row per prediction of the ontologies, with its label and a state."""
+    errors, lines = [], text.splitlines()
+    starts = [i for i, line in enumerate(lines) if table_rows([line]) == [LEDGER_COLUMNS]]
+    if not starts:
+        return [f"RECORD.md: R13 no ledger: a table with the columns {', '.join(LEDGER_COLUMNS)}"] if predictions else []
+    rows, i = [], starts[0] + 1
+    while i < len(lines) and lines[i].strip().startswith("|"):
+        parsed = table_rows([lines[i]])
+        if parsed:
+            rows.append((i + 1, parsed[0]))
+        i += 1
+    seen = {}
+    for n, cells in rows:
+        if len(cells) != len(LEDGER_COLUMNS):
+            errors.append(f"RECORD.md:{n}: R13 a ledger row must fill all {len(LEDGER_COLUMNS)} columns")
+            continue
+        key = (cells[0], tuple(sorted(set(REF.findall(cells[1])))))
+        if key in seen:
+            errors.append(f"RECORD.md:{n}: R13 the prediction of {key[0]} from {cells[1]} is listed twice")
+        seen[key] = n
+        if key not in predictions:
+            errors.append(f"RECORD.md:{n}: R13 no prediction of ontologies/{key[0]}/ is from {cells[1]}")
+        elif cells[2] != predictions[key]:
+            errors.append(f"RECORD.md:{n}: R13 the label is '{cells[2]}' here but '{predictions[key]}' in the ontology")
+        if not cells[3].lower().startswith(STATES):
+            errors.append(f"RECORD.md:{n}: R13 the state must start with one of {', '.join(STATES)}")
+    for key in sorted(set(predictions) - set(seen)):
+        errors.append(f"RECORD.md: R13 the prediction of ontologies/{key[0]}/ from {', '.join(key[1])} has no row")
+    return errors
 
 
 if __name__ == "__main__":

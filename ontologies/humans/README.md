@@ -21,7 +21,7 @@ option that changed saving, and a fine that increased the behaviour it was meant
 | **principal's resolution** | [D4] | what the principal declares not to care about, such as which fund a contribution goes to | the policy document | assumed; the finest resolution unless declared |
 | **actor's resolution** | [D4] | the options a person does not tell apart, such as funds they never compare | choices that never move apart, which bound it from one side only ([P12](ii)) | assumed |
 | **change** | [P2] | choices drifting over time, such as people leaving a default option as their tenure grows | records over periods | approximate: read from cohorts or periods |
-| **intervention** | [D6] | a fine, a matching contribution, or a new default option | the rule, as written | exact for a fine or a match, which are known functions of the option chosen; approximate for a new default option, modelled as a bonus on it |
+| **intervention** | [D6] | a fine, a matching contribution, or a new default option | the rule, as written | exact for a fine or a match, which are known functions of the option chosen; approximate for a new default option, modelled as a bonus on it, and rejected between two defaults (section 3) |
 | **stakes** | [D5] | the units of the objective: money saved, minutes late | records | exact, given the objective |
 
 ## 2. Known result
@@ -46,20 +46,31 @@ higher level.
   with `φ` close to `0`. So no fixed actor that adds the fine to what it pursues fits both changes: the fine changed the
   parents, either what they pursue or what they do by default. This is the core's form of "a fine is a price", and it
   needs only the two-outcome counts that were reported. Two outcomes cannot tell which of the two changed.
-- **Prediction** from [P12], [D6]: automatic enrolment. Moving the default option from not participating to a default
-  rate `d` removes the effort of acting for those who take `d`, and adds it for those who stay out. If that is all it
-  does, it is the intervention `u = 1_d − 1_0`, a bonus on the new default option and a penalty on the old one. If
-  people only added it to what they pursue, every other contribution rate would keep its share relative to every other:
-  for example, the ratio of employees at 6% to employees at 10% would be the same in both cohorts. *Refuted if* those
-  ratios differ by more than their sampling error, in cohorts comparable in tenure and pay. A refutation shows that the
-  default did more than favour one option, for example by pulling nearby rates toward it as advice would. The test
-  needs the full distribution of contribution rates in both cohorts.
-- **Consequence** of [P13]: if the new default is passed through, the average of any objective `F`, such as savings at
-  retirement, changes at first at the rate `Cov_p(u, F) = p(d)·(F(d) − E_p[F]) + p(0)·(E_p[F] − F(0))` per unit of
-  pass-through, where `p` is the behaviour before the switch. The second term is the gain from enrolling people who
-  were not saving. The first is a loss when the default rate is worth less than the current average, because the switch
-  also draws people away from higher rates. The sign of the sum can be computed before the switch, from the behaviour
-  before it and a declared `F`: a check on the choice of the default rate.
+- **Prediction** (empirical) from [P12], [D6]: automatic enrolment. Moving the default option from not participating to
+  a default rate `d` removes the effort of acting for those who take `d`, and adds it for those who stay out. If that is
+  all it does, it is the intervention `u = 1_d − 1_0`, a bonus on the new default option and a penalty on the old one.
+  If people only added it to what they pursue, every other contribution rate would keep its share relative to every
+  other: for example, the ratio of employees at 6% to employees at 10% would be the same in both cohorts. *Refuted if*
+  those ratios differ by more than their sampling error, in cohorts comparable in tenure and pay. A refutation shows
+  that the default did more than favour one option, for example by pulling nearby rates toward it as advice would. The
+  test needs the full distribution of contribution rates in both cohorts. *Tested in v7.10, before this ontology was
+  written* (T7-2, T7-2b, T7-2d; data read from published tables and figures, without sampling errors, so a registered
+  tolerance `log 1.5` stood in for them). Against enrolment on request it held loosely. T7-2's registered test pooled
+  two companies and held (median `|δ|` 0.265, where `δ` is the difference of the log-ratios of the two non-default
+  categories), though one of them, taken alone, exceeds the tolerance (0.454, computed from the same table, not
+  registered). Of two further companies, Madrian and Shea's was within it (0.271) and the other was not (0.876, on a
+  cell of very few employees). Between two automatic-enrolment defaults, 3% and 6% in one company (Beshears, Choi,
+  Laibson and Madrian, NBER w12009), it failed: the log-ratios of the other rates were `+0.65`, `+1.83`, `−0.27`,
+  `−0.05` and `−0.56`, and the higher default moved some employees down. **Refuted in its two-default form.** Every one
+  of these datasets has been seen, so a further test on them is exploratory; a confirmatory test needs a company not yet
+  used.
+- **Consequence** of [P13]: if the new default is passed through, which the two-default data above reject, the average
+  of any objective `F`, such as savings at retirement, changes at first at the rate
+  `Cov_p(u, F) = p(d)·(F(d) − E_p[F]) + p(0)·(E_p[F] − F(0))` per unit of pass-through, where `p` is the behaviour
+  before the switch. The second term is the gain from enrolling people who were not saving. The first is a loss when the
+  default rate is worth less than the current average, because the switch also draws people away from higher rates. The
+  sign of the sum can be computed before the switch, from the behaviour before it and a declared `F`: a check on the
+  choice of the default rate.
 - **Reading** with [D4], [P8]: keeping the default fund. A person who does not tell the funds apart is limited, inside
   the cell "contributes at rate `x`", to the default's split among funds: inside an actor's cells, the default decides
   ([D4]). The plan's default allocation, all in one fund, is a point mass; the reading holds in the limit of a default
@@ -76,6 +87,9 @@ higher level.
   lateness is a habit. Error bars that assume independent draws ([D11], [P23]) are then too narrow.
 - Which objective is a person's own welfare is contested. The core needs one to be declared, and does not choose it.
 - The default option of behavioural economics is not the core's default; the two must not be confused.
+- A new default option is not a known bonus on it ([D6]): the two-default test of section 3 rejects that model, while a
+  fine or a match is a known function of the option chosen. The rejection bears on defaults, not on explicit
+  incentives, which the institutions and job-delegation ontologies use.
 
 ## 5. Open questions
 

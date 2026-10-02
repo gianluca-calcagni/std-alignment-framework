@@ -14,7 +14,7 @@ genomes.
 | **contexts** | [D8] | none in the known result, which uses one laboratory environment; environments are contexts when selection is compared across them | the experimental design | absent: one environment |
 | **behaviour** | [D1] | how often each genome occurs in a generation, at a given life stage | counts in samples | exact |
 | **sample** | [D11] | genomes drawn from the population at one life stage, in one generation | genotyped individuals, or hemiclones taken for assays | approximate: draws from a finite population are close to independent when the sample is small next to the population. Drift, a change between generations, is not sampling error within one |
-| **default** | [D2] | the genome frequencies before the selection judged: at the start of an experiment, or at the egg stage of one generation | samples taken before selection | exact when measured before selection and apart from the counts judged; main's I1-dyn shows what fails when the default is fitted from those counts |
+| **default** | [D2] | the genome frequencies before the selection judged: at the start of an experiment, or at the egg stage of one generation | samples taken before selection | exact when measured before selection and apart from the counts judged; v7.10's I1-dyn shows what fails when the default is fitted from those counts |
 | **objective** | [D2] | log fitness through one sex, or through both, as the analyst's question; selection itself pursues log fitness | fitness assays of each genome expressed in each sex | assumed: the analyst declares it, before reading the outcome |
 | **evaluator** | [D10] | what selection acts on: log fitness through males `G_m` in male-limited evolution, or `G = ½·(G_m + G_f)` under ordinary weak selection (section 3). Truncation selection on a trait has two values, kept or not | fitness assays; the protocol | exact for clonal selection with constant fitness. Fitness is real-valued, so its level sets are single genomes and the regression of `F` on it is `F` itself; a truncation has two level sets |
 | **intensity** | [D2] | the number of generations of constant selection | the length of the experiment | exact for clonal selection with constant fitness `w`: `t` generations give `tilt(q, t·log w)`; approximate otherwise |
@@ -61,12 +61,12 @@ females, and `F = G_f` is the declared objective.
   of what selection through females alone would gain: a shortfall of about `41%` ([P13](ii)). This puts a number on the
   "cost of separate genders" of Prasad et al.'s title. The equal spreads are an assumption; the general formula needs
   both.
-- **Prediction** from [P13], [D1]: in one generation of selection through males, with genomes passed on intact, the
-  mean of `F` changes by exactly `Cov_q(w_m, F)/E_q[w_m]`, where `w_m` is fitness through males: this is the tilt by
-  `log w_m`, and the Price equation's selection term [@price1970], with no transmission term. So in a male-limited
-  experiment started from genomes assayed in both sexes, the first generation's change of mean female log fitness
-  matches the value computed from the assays and the starting frequencies. *Refuted if* the two differ by more than
-  their sampling error. A refutation means the assays miss what selection acts on in the experiment: another
+- **Prediction** (empirical) from [P13], [D1]: in one generation of selection through males, with genomes passed on
+  intact, the mean of `F` changes by exactly `Cov_q(w_m, F)/E_q[w_m]`, where `w_m` is fitness through males: this is the
+  tilt by `log w_m`, and the Price equation's selection term [@price1970], with no transmission term. So in a
+  male-limited experiment started from genomes assayed in both sexes, the first generation's change of mean female log
+  fitness matches the value computed from the assays and the starting frequencies. *Refuted if* the two differ by more
+  than their sampling error. A refutation means the assays miss what selection acts on in the experiment: another
   environment, frequency dependence, or drift. Neither paper reports the genome-level data the test needs.
 
 ## 4. Limits
@@ -85,7 +85,9 @@ females, and `F = G_f` is the declared objective.
 ## 5. Open questions
 
 - Chippindale et al.'s title contrasts life stages. Whether one objective governs selection across stages is what [P3]
-  tests; main's I1-dyn tried it on Dobzhansky's 1947 data and found no power.
+  tests. v7.10 ran that test twice on Dobzhansky's 1947 cage data, across groups of flies rather than life stages:
+  I1-dyn fitted its reference from the counts it judged, so its test could not fail; I1-dyn2, across the sexes, did
+  not reject one objective (`p = 0.34`) at power 0.51. Those data are exhausted for this test.
 - Sex-limited expression is thought to resolve the conflict. In the core, it would let the genome act differently in
   each sex, refining what selection can distinguish. Is that a refinement of the actor's resolution, with the Jensen gap
   of [P8](iii) as the cost it removes?

@@ -73,11 +73,12 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
   outcomes are worth more than the rest, this share is the part of the variance of `F` that lies inside `A` and inside
   its complement, the part the indicator cannot see. The response to the bonus is limited to the resolution
   `{A, not A}` ([P8](i)), and the share is the small-effort share of [P8](iv).
-- **Prediction** from [P12], [D6]: if the employee only adds the bonus to what they pursue, the ratios among the
-  outcomes outside `A` do not change. In the running example, with pay for careful reports only, the ratio of helping a
-  colleague to other work stays fixed. *Refuted if* those ratios move by more than their sampling error. The test needs
-  at least two unmeasured outcomes. A refutation shows that the bonus changed more than what is paid: the employee's
-  own objective, as in crowding out [@frey2001], or other things that came with it, such as closer monitoring.
+- **Prediction** (empirical) from [P12], [D6]: if the employee only adds the bonus to what they pursue, the ratios among
+  the outcomes outside `A` do not change. In the running example, with pay for careful reports only, the ratio of
+  helping a colleague to other work stays fixed. *Refuted if* those ratios move by more than their sampling error. The
+  test needs at least two unmeasured outcomes. A refutation shows that the bonus changed more than what is paid: the
+  employee's own objective, as in crowding out [@frey2001], or other things that came with it, such as closer
+  monitoring.
 - **Consequence** of [D6], [P1]: behaviour identifies only `φ = t·w`, the product of how hard the employee pursues and
   how much they value the bonus. No record of behaviour tells a weakly motivated employee who values money from a
   motivated employee who does not.
@@ -119,7 +120,7 @@ bonus pays on a measured indicator `u`. The employee passes the bonus through wi
 ## 5. Open questions
 
 - Chains of delegation. A manager is also someone's employee. Does misalignment compose along a chain, and does a gap in
-  resolution at one link transmit to the next (main: the transmission gap, G2)?
+  resolution at one link transmit to the next (v7.10: the transmission gap, G2)?
 - One pace across kinds of request. By [P15], the best feasible pursuit keeps one intensity across contexts, so an
   employee who works hard for one client and not at all for another is charged the difference as avoidable
   misalignment. Is that what managers mean by "do more of what I value"?

@@ -61,16 +61,16 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   `a − b − b·log d`, grows without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the
   measured range only, and cannot hold down to `d = 0`. The best-of-`n` form has the finite slope `a` at `0`, as the
   core requires.
-- **Prediction** from [P13]: for best-of-`n`, `a = √2·Cov_q(G, F)/σ_q(G)`, where `G` is `log Q(r̂)` centred within each
-  prompt. Both sides come from samples of the initial policy scored by the gold and the proxy, with no optimization.
-  *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the best-of-`n` curve is
-  itself computed from such samples, this tests the functional form near `d = 0`, and the small-mass idealization; it
-  does not test language models.
-- **Prediction** from [P20]: along a sweep of `β` with policies near their optima, the gold score peaks where the
-  covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses zero.
-  This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two are
-  uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero; that
-  would mean the trained policies are not the optima the slots assume.
+- **Prediction** (empirical) from [P13]: for best-of-`n`, `a = √2·Cov_q(G, F)/σ_q(G)`, where `G` is `log Q(r̂)` centred
+  within each prompt. Both sides come from samples of the initial policy scored by the gold and the proxy, with no
+  optimization. *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the
+  best-of-`n` curve is itself computed from such samples, this tests the functional form near `d = 0`, and the
+  small-mass idealization; it does not test language models.
+- **Prediction** (empirical) from [P20]: along a sweep of `β` with policies near their optima, the gold score peaks
+  where the covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses
+  zero. This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two
+  are uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero;
+  that would mean the trained policies are not the optima the slots assume.
 - **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
@@ -116,6 +116,10 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   policy.
 - Best-of-`n` is a pursuit only in the small-mass idealization; over a small set of responses its exact distribution,
   and its KL, differ. [P19] covers its exact form, as a path whose revealed objectives rise with the proxy.
+- The best-of-`n` slope prediction of section 3 cannot be tested from the known result's paper: it reports the fitted
+  `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold under
+  the initial policy (v7.10, T3, a pre-registered attempt). The test needs samples of the initial policy scored by
+  both reward models (`NOTES.md` §3.2, D3).
 
 ## 5. Open questions
 

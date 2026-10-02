@@ -7,3 +7,5 @@ __pycache__/
 .obsidian/workspace-mobile.json
 .obsidian/cache
 .trash/
+# Obsidian: settings of the generated view are per user
+obsidian/.obsidian/

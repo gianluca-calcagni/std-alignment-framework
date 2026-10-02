@@ -38,12 +38,12 @@ values to distinct values, so `h(F̂)` has the same level sets as `F̂`, hence t
 
 **Checks.** checks/test_evaluator.py::test_through_the_evaluator_only_the_regression_counts
 
-**Notes.** (ii) is main's Prop 20 (Goodhart as a covariance, for any actor) with the regression and the residual in
+**Notes.** (ii) is v7.10's Prop 20 (Goodhart as a covariance, for any actor) with the regression and the residual in
 place of a scaled error. The second term is where an actor that sees more than the evaluator can gain or lose: through
 distinctions that the evaluator does not make. By [P12](ii), such distinctions show in the revealed objectives of its
 changes.
 
-**Lineage.** main: Prop 20 and Def 13. New: the split into regression and residual, and its invariance.
+**Lineage.** v7.10: Prop 20 and Def 13. New: the split into regression and residual, and its invariance.
 
 ### P19 — A monotone regression rules out overoptimization
 **Statement.** Let `F̂` be an evaluator whose regression `m` is non-decreasing in it: `m(x) ≤ m(y)` whenever `F̂(x) ≤
@@ -64,7 +64,7 @@ limited to `𝒱`. By [P18](i), `E_{p_s}[F] = E_{p_s}[m]`, and by [P13](i), appl
 
 **Checks.** checks/test_evaluator.py::test_a_monotone_regression_rules_out_overoptimization
 
-**Notes.** It generalizes main's Prop 21, where the regression is affine, and main's B §4, where target and evaluator
+**Notes.** It generalizes v7.10's Prop 21, where the regression is affine, and v7.10's B §4, where target and evaluator
 are jointly Gaussian. Monotonicity is a property of the default's joint law of target and evaluator, so it can be
 checked before any optimization. The check shows that, without it, overoptimization is common. For an evaluator with
 distinct values on distinct outcomes, `m = F` ([D10], Notes), and the hypothesis asks that `F̂` never score an outcome
@@ -75,7 +75,7 @@ objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B` 
 weight `u^{n−1}`, plus `1/n`. Keeping only the outcomes above a threshold leaves `Δ°`, so it is not such a path, but the
 conclusion holds for it directly: raising the threshold drops the level sets with the lowest regression.
 
-**Lineage.** main: Prop 21 and B §4. New: the monotone case, and the proof by association.
+**Lineage.** v7.10: Prop 21 and B §4. New: the monotone case, and the proof by association.
 
 ### P20 — Where overoptimization starts, and how it ends
 **Statement.** Let `F̂` be a non-constant evaluator, with regression `m`, and let `p_t = tilt(q, t·F̂)` be its pursuit.
@@ -107,7 +107,7 @@ Karwowski et al. derive an early-stopping rule for proxy optimization in the geo
 the end is the regression at the top of the evaluator's range, which the default may sample rarely. Before the limit, a
 third value close to the second can still dominate the sign, as the check shows in log space.
 
-**Lineage.** main: Prop 14 (the initial and terminal effects of optimization). New: the stationarity condition in the
+**Lineage.** v7.10: Prop 14 (the initial and terminal effects of optimization). New: the stationarity condition in the
 regression, and the terminal rule.
 
 ### P25 — The target's curve turns no more often than the regression
@@ -158,7 +158,7 @@ ends; (iii) adds that it gets there with one turn at most. For an evaluator that
 sequence `m_j` is the target itself in the evaluator's order, and (i) is a bound on noisy data; [P26] gives its
 bin-wise form.
 
-**Lineage.** New (`NOTES.md` E8). main: Prop 14 (initial and terminal effects) said where the curve starts and ends;
+**Lineage.** New (`NOTES.md` E8). v7.10: Prop 14 (initial and terminal effects) said where the curve starts and ends;
 nothing on its shape in between.
 
 ### P26 — The regression on bins governs at small intensity
@@ -200,7 +200,7 @@ error. With one outcome per bin, `w = 0` and (i) is exact, as [D10]'s Notes say:
 bound covers the pursuit of `F̂`, not best-of-`n`; for best-of-`n` the natural width of a bin is in units of
 `log Q(F̂)`, the log of the default's mass below a value, which is open (`NOTES.md` E8).
 
-**Lineage.** main: Prop 2 (Popoviciu's bound on the variance). New (`NOTES.md` E8).
+**Lineage.** v7.10: Prop 2 (Popoviciu's bound on the variance). New (`NOTES.md` E8).
 
 ### P29 — The width is the exact worst case
 **Statement.** Let `F` be the target, `F̂` an evaluator known in the units of `F` ([D10]), and `E = F̂ − F` its
@@ -232,10 +232,10 @@ With `F = −c·E`, `F̂ = (1 − c)·E`. A positive multiple of an objective ha
 
 **Notes.** The error `E = F̂ − F` needs the evaluator's scale, which behaviour never identifies ([D10]); this result is
 about evaluators known in the target's units, such as a reward model trained to predict the target. The
-comparison is at an equal budget, as stakes are ([D5]); main also compared net values at a declared price, which the
+comparison is at an equal budget, as stakes are ([D5]); v7.10 also compared net values at a declared price, which the
 core does not use. Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
 
-**Lineage.** main: Thm 5 (the width is the exact worst case), parts (i) and (ii) at `β = ∞`; part (iii), at a declared
+**Lineage.** v7.10: Thm 5 (the width is the exact worst case), parts (i) and (ii) at `β = ∞`; part (iii), at a declared
 price, is not imported. New: (iii) here, the loss as the shortfall of [D5].
 
 ### L1 — Separable bounds are loose when two quantities change rank
@@ -253,7 +253,7 @@ whose ratio changes with the budget: if the ratio moves by a factor `K`, the bou
 
 **Checks.** checks/test_evaluator.py::test_no_separable_bound_on_the_worst_case
 
-**Lineage.** main: Lemma 8. New: that `√K` is attained.
+**Lineage.** v7.10: Lemma 8. New: that `√K` is attained.
 
 ### P30 — No separable bound on the worst case
 **Statement.** Let `E₁` be non-constant and `A` a set of outcomes with `q(A) = r ∈ (0, 1)`.
@@ -282,7 +282,7 @@ quotient. [L1] with `Q(E, δ) = w_δ(E)`, the worst case by [P29](ii), gives the
 one-outcome spike swap ranks between small and large budgets, by a factor of about a hundred. The statement in the core
 is about the worst case only.
 
-**Lineage.** main: Thm 9 (the worst-case regret is not separable), with its check V5, and §11.1 (no capacity-free
+**Lineage.** v7.10: Thm 9 (the worst-case regret is not separable), with its check V5, and §11.1 (no capacity-free
 ranking of errors).
 
 ### P33 — Error bounds for a known evaluator
@@ -322,7 +322,7 @@ Prop 3 said that only the error's upper tail matters. For misalignment that hold
 also costs nats, but a bounded number of them; an error confined to a set of outcomes costs at most
 `max(log(1/a), log(1/(1 − a)))` nats, whatever its sign and size, with `a` the set's mass under `r` ([C3]).
 
-**Lineage.** main: Prop 2 (the sharp bound by the range), Prop 3 (only the upper tail matters, weakened: see Notes),
+**Lineage.** v7.10: Prop 2 (the sharp bound by the range), Prop 3 (only the upper tail matters, weakened: see Notes),
 Prop 7 (a bound with realized travel) and Cor 1.3 (the integral form). New: the bounds as bounds on misalignment, not on
 regret at a declared price.
 
@@ -355,7 +355,7 @@ supremum of the average loss over `0 < c < 1` is `E[max_S E − min_S E]`.
 `F̂(x̂) − F̂(x*) ≥ 0`, so it is computable only when the loss is. Its use is the range form, and (ii) shows that form
 cannot be improved; it is the counterpart, for selection, of [P29](ii). No width enters: the bound depends on the
 candidates. It needs them to be shared. The archive found that comparing best-of-`n` by the evaluator with the pursuit
-of the target at the same departure, instead of at the same `n`, breaks the inequality in some instances (main: R6);
+of the target at the same departure, instead of at the same `n`, breaks the inequality in some instances (v7.10: R6);
 that is its measurement.
 
-**Lineage.** main: Prop 23 (argmax selectors on a common candidate set).
+**Lineage.** v7.10: Prop 23 (argmax selectors on a common candidate set).

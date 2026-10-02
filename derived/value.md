@@ -47,9 +47,9 @@ rule
 (iii) [@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
 break it.
 
-**Lineage.** main: Thm 1 (regret is a divergence) for (i); Def 21 (the within-cell divergence) for (iii) and (iv). New:
+**Lineage.** v7.10: Thm 1 (regret is a divergence) for (i); Def 21 (the within-cell divergence) for (iii) and (iv). New:
 (ii), which follows from [P1] and removes the need to assume that intended behaviour is "Gibbs", since every
-full-support behaviour is. main's Prop 15 (other regularizers) is not carried: the score is KL.
+full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: the score is KL.
 
 ### P14 — The cost of departing from the default is forced
 **Statement.** Let `q ∈ Δ°` and let `c : Δ° → ℝ` be differentiable. For every `F : X → ℝ` and every `t > 0`, the pursuit
@@ -79,7 +79,7 @@ trade-off at price `1/t` is the pursuit at intensity `t/(1 + 2·KL)`. The first 
 squared Hellinger make no point of the ray a best trade-off, with three or more outcomes. Hobson reached KL from other
 conditions [@hobson1969].
 
-**Lineage.** main: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived.
+**Lineage.** v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived.
 
 ### P38 — Any convex cost
 **Statement.** Let `t > 0`, and let `U` and `φ` be functions on `Δ` such that `Ψ = φ/t − U`, extended to the positive
@@ -109,4 +109,4 @@ function is `0`; that of `Σ_x p(x)·log(p(x)/q(x))` is `KL(p‖p*)` on behaviou
 **Notes.** The budgets of other shapes in [P31] are the hard-limit forms of such costs. (ii) shows why a `χ²` cost can
 make an actor rule outcomes out entirely, which a KL cost never does.
 
-**Lineage.** main: Prop 15 (the identity for any convex regularizer).
+**Lineage.** v7.10: Prop 15 (the identity for any convex regularizer).
