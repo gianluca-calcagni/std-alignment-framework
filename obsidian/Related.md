@@ -64,7 +64,7 @@ that carry it.
 - *Import, now.* Selection gradients as evaluators, and the breeder's setting (a trait against fitness) as the model
   case of a target against an evaluator. *Later:* Frank's separation of forces, for paths that are not pursuits.
 - *What it could take from us.* Specification, misalignment and the stakes of selection that is not aligned with a
-  declared trait (the biology ontology's shortfall of ordinary selection).
+  declared trait (the evolutionary-biology ontology's shortfall of ordinary selection).
 
 ## Bounded rationality and discrete choice
 
@@ -126,7 +126,7 @@ that carry it.
 - *Sources.* Holmström [[References|@holmstrom1979]]; Holmström and Milgrom [[References|@holmstrom1991]]; Kerr [[References|@kerr1975]]; Frey and Jegen
   [[References|@frey2001]]; Gneezy and Rustichini [[References|@gneezy2000]]; Baker's distortion of performance measures *(to verify)*.
 - *Shared.* Delegation, a performance measure that differs from value, and the response to incentives
-  ([[D6 — Intervention and pass-through|D6]], [[P12 — What interventions reveal|P12]]); the job-delegation ontology.
+  ([[D6 — Intervention and pass-through|D6]], [[P12 — What interventions reveal|P12]]); the medical-sciences ontology, where the measures are written rules.
 - *Different.* These theories solve for optimal contracts, with risk, participation and the cost of pay. We measure,
   and do not model the principal's optimization.
 - *Import, later.* Baker's alignment of a performance measure as an angle between marginal effects, if it is the angle

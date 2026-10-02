@@ -1,4 +1,4 @@
-# Ontology — humans: choices under defaults and incentives
+# Ontology — behavioural economics: choices under defaults and incentives
 
 People choose among options: how much to save, whether to come on time. An employer, a regulator or an institution
 wants some choices more than others and changes what people face: a fine, a matching contribution, a default option.
@@ -33,8 +33,13 @@ authors attribute this to inertia, and to employees reading the default as advic
 
 Gneezy and Rustichini introduced a fine for parents who picked up their children late, in six of ten day-care centres in
 Haifa, over twenty weeks [@gneezy2000]. The number of late parents increased. When the fine was removed, it stayed at
-the
-higher level.
+the higher level.
+
+**Data.** Madrian and Shea report the distribution of contribution rates in each cohort in their figures. v7.10 read
+them, with Choi et al.'s table and figure for three more companies and Beshears et al.'s figure for a fourth (T7-2, 2b,
+2d), so these data are seen. Gneezy and Rustichini report the number of late parents in each centre and week; a public
+copy is reported (`NOTES.md` §3.2, D1) and has not been verified. Field experiments in economics increasingly publish
+replication files with counts per option, which is what the slots need.
 
 ## 3. What the core says
 
@@ -89,7 +94,7 @@ higher level.
 - The default option of behavioural economics is not the core's default; the two must not be confused.
 - A new default option is not a known bonus on it ([D6]): the two-default test of section 3 rejects that model, while a
   fine or a match is a known function of the option chosen. The rejection bears on defaults, not on explicit
-  incentives, which the institutions and job-delegation ontologies use.
+  incentives such as the fine here or the measures of the medical-sciences ontology.
 
 ## 5. Open questions
 

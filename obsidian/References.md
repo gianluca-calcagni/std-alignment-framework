@@ -26,6 +26,7 @@ One line per source, written `- [[References|@key]] Authors (year), title.` Ever
 - [[References|@madrian2001]] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
 - [[References|@manski2003]] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
 - [[References|@matejka2015]] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
+- [[References|@mason2012]] Mason, S., Weber, E. J., Coster, J., Freeman, J. and Locker, T. (2012), Time patients spend in the emergency department: England's 4-hour rule — a case of hitting the target but missing the point? *Annals of Emergency Medicine* 59(5), 341–349.
 - [[References|@mckelvey1995]] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [[References|@ng2000]] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [[References|@ortega2013]] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.

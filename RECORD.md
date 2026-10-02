@@ -36,15 +36,19 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 |---|---|---|---|---|
 | machine-learning | [P13] | empirical | untested. The published paper does not report what it needs (v7.10, T3); it needs samples of the initial policy (`NOTES.md` §3.2, D3) | `ontologies/machine-learning/`, sections 3 and 4 |
 | machine-learning | [P20] | empirical | untested | `ontologies/machine-learning/`, section 3 |
-| humans | [P12], [D6] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely: T7-2's registered test, pooling two companies, held, though one of them alone exceeds the tolerance; of two further companies, one was within it and one was not (T7-2b). Those data are seen | `ontologies/humans/`, section 3 |
-| institutions | [P12], [D6] | empirical | untested: the data are not public (`NOTES.md` §3.2, D5) | `ontologies/institutions/`, section 3 |
-| job-delegation | [P12], [D6] | empirical | untested | `ontologies/job-delegation/`, section 3 |
-| biology | [P13], [D1] | empirical | untested: neither paper reports the genome-level data | `ontologies/biology/`, section 3 |
+| behavioural-economics | [P12], [D6] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely: T7-2's registered test, pooling two companies, held, though one of them alone exceeds the tolerance; of two further companies, one was within it and one was not (T7-2b). Those data are seen | `ontologies/behavioural-economics/`, section 3 |
+| medical-sciences | [P12], [D6] | empirical | untested: the report cards' study used Medicare records, which are not public (`NOTES.md` §3.2, D5) | `ontologies/medical-sciences/`, section 3 |
+| medical-sciences | [P1], [D6] | empirical | untested: the known result's tables have not been read, and its English data are seen in summary; a confirmatory test needs a system whose data have not been read (`NOTES.md` §3.2, D6) | `ontologies/medical-sciences/`, section 3 |
+| evolutionary-biology | [P13], [D1] | empirical | untested: neither paper reports the genome-level data | `ontologies/evolutionary-biology/`, section 3 |
 
-The humans prediction was tested before its ontology was written, and the ontology first presented it as untested
-(section 3, row 4). Three of the six predictions share its form: an actor that only adds a known nudge keeps the
-ratios among the other options. The refutation concerns a new default option, which [D6] models as a bonus only
-approximately; the institutions and job-delegation predictions concern explicit incentives.
+The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it
+as untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known
+nudge keeps the ratios among the outcomes the nudge does not tell apart. The refutation concerns a new default option,
+which [D6] models as a bonus only approximately; the medical predictions concern measures written as rules.
+
+**Withdrawn untested** (`NOTES.md` §3.1, Q22): the job-delegation ontology's prediction from [P12] and [D6], that a
+bonus on measured outcomes leaves the ratios among the unmeasured ones unchanged. It was dropped with its ontology,
+which had no data to test it, not because of a result.
 
 ### 2.2 The base rate
 
@@ -75,3 +79,6 @@ The core's own log, from the restart on. v7.10's 78 rows stay in the archive, ta
 | 4 | `ontologies/humans/`: the pass-through prediction for a new default, presented as untested, with a request for data | tested in v7.10 before the ontology was written, and refuted in its two-default form; section 2.1 | the analysis of the archive before the merge, by the executor, a Claude session |
 | 5 | `IMPORT.md` §5: T3 "in core" in the machine-learning ontology's Limits; the census "could" be re-routed against the core | the Limits did not mention T3, and now do; the PI froze the census in v6.4 | the same analysis |
 | 6 | `ontologies/biology/`: v7.10's I1-dyn "found no power" | I1-dyn could not fail; I1-dyn2 did not reject one objective, at power 0.51 | the same analysis |
+
+Rows 4 and 6 name the ontologies as they were then called: `humans/` is now `behavioural-economics/`, and
+`biology/` is now `evolutionary-biology/` (Q22).

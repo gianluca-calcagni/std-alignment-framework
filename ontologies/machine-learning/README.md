@@ -26,12 +26,17 @@ overoptimization: past some point, pursuing the proxy harder makes the true obje
 ## 2. Known result
 
 Gao, Schulman and Hilton built a synthetic setup [@gao2023]. A fixed gold reward model labels pairs of responses; a
-proxy
-reward model is trained on those labels; a policy is optimized against the proxy, by reinforcement learning or by
+proxy reward model is trained on those labels; a policy is optimized against the proxy, by reinforcement learning or by
 best-of-`n` sampling. As the policy moves away from the initial policy, measured by `d = KL(π‖π_init)^{1/2}`, the proxy
 score keeps rising, while the gold score rises, peaks and falls. The gold score fits `d·(a − b·d)` for best-of-`n` and
 `d·(a − b·log d)` for reinforcement learning, where `a` and `b` (their `α` and `β`) scale smoothly with the size of the
 proxy reward model.
+
+**Data.** Gao et al. report fitted coefficients and figures, not the samples the predictions need: v7.10 found the slope
+prediction untestable from the paper (T3; section 4). Public numerical data that fit the slots exist. Leaderboards and
+preference benchmarks, such as those v7.10 used for evaluator length bias (AlpacaEval 2, Chatbot Arena and LLMBar, in
+T7-1), give scores and preferences per response, and are seen. Any open policy with an open reward model gives the
+log-probability and the score of every response it samples.
 
 ## 3. What the core says
 
