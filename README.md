@@ -16,6 +16,7 @@ else is derived from them, with proofs and checks, and reported through one stan
 | `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
+| `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |
 | `REFERENCES.md` | the sources cited anywhere in the framework |
 | `RELATED.md` | related theories: what each shares with the framework, what differs, what to import, and what it could take from us |
 | `IMPORT.md` | the map from every item of the archive (v7.10) to its fate in the core: in core, to derive, needing a concept, or dropped, with the reason; the plan for merging `core` into `main` |
@@ -44,9 +45,12 @@ else is derived from them, with proofs and checks, and reported through one stan
   exists.
 - **R10.** Every ontology lives in its own folder, fills each slot listed in `ontologies/README.md` once, naming the
   slot's item and how well it fits; has the five sections in order; cites the known result it reframes; and labels
-  every claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
+  every claim as a consequence, a prediction or a reading, with the items it uses. A prediction says when it is refuted,
+  and is labelled empirical (it can be wrong about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
 - **R12.** `RELATED.md` and `IMPORT.md` name only existing items, and their citations are listed like all others.
+- **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
+  ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
 SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
@@ -62,8 +66,39 @@ paths, rather than reproduce printed digits.
 - **Plain terms keep the qualifiers** of the formal statement.
 - **Lineage** names the items of v7.10 that an item replaces and the retraction rows that touch them
   (`v7.10: 60 Status/retractions/`), or says "New".
-- **Empirical tests** are pre-registered and pushed before any computation, as in v7.10.
-- **One step, one branch, one pull request** into the branch that holds the new core, merged with a merge commit.
+- **One step, one branch, one pull request**, merged with a merge commit, so that every commit keeps its date.
+
+**Rules of evidence** (working agreements too; each was learned in v7.10, where the evidence is in `NOTES.md` §1):
+- **(a) Record, do not repair.** A prediction that fails stays in its ontology and in `RECORD.md`, with its result. A
+  retraction is a row of `RECORD.md`, and is never deleted. v7.10's 78 rows stay in the tag `v7.10`.
+- **(b) Label every prediction** empirical or verification (lint R10). Only empirical predictions count toward the
+  base rate: in v7.10, verification predictions held every time, and empirical ones 5 times in 15.
+- **(c) Name what changes.** A new item or work step names a verdict, a number or a decision it would change, or the
+  PI approves it.
+- **(d) Register, then compute.** An empirical test is pre-registered and pushed before any computation. Before the
+  first worked case, lint will check pre-registrations against their recorded hashes.
+- **(e) Seen data are exploratory.** A test on data already looked at, including every dataset of v7.10, supports
+  exploratory claims only; a confirmatory test needs data not seen before its registration.
+- **(f) Say who.** Every review, rating or audit says who made it: a person, or a model family. Errors within one model
+  family are correlated, and "independent" then means less than it says.
+
+**Versions.** A version changes only when a premise or a definition changes. Results, checks and ontologies are added
+within a version. The core is v10: no premise or definition has changed since [D10] and [D11] were added.
+
+## The finish line
+
+The core is a standard, not only a checked calculus, when each of the framework's goals has its criterion met.
+
+| Goal | Criterion | State |
+|---|---|---|
+| solid | lint and every check pass on both SIMD paths, and every check is mutation-tested | met |
+| stable | no premise or definition changes for three consecutive steps | met: none since v10 |
+| easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
+| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | not met (`RECORD.md`) |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met |
+
+One case suffices for the last two rows, in any discipline: v7.10's attempts showed that data access, not the
+framework, decides which disciplines can be done.
 
 ## The format of an item
 
@@ -97,9 +132,9 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and
-`ontologies/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with its evidence: read it before
-starting work.
+Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`,
+`NOTES.md` and `ontologies/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with its evidence:
+read it before starting work.
 
 ## License
 

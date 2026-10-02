@@ -47,12 +47,12 @@ patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery minus no 
   signs of `Δu_s` and `ΔF_s` disagree for them, and the card pushes surgeons away from exactly those patients. This is
   the known result's mechanism, read as a gap between the actor's resolution and the resolution of the principal's
   measurement: the actor acts on distinctions the card does not record.
-- **Prediction** from [P12], [D6]: if hospitals only add the card to what they pursue, with one pass-through in every
-  severity class, then the change of the log-odds of surgery in class `s` is `φ·Δu_s`, with the same `φ` for all
-  classes. *Refuted if* the changes of log-odds across severity classes are not proportional to `Δu_s`, within sampling
-  error. Within one class there are only two options, and [P12](i) has no power; the test gets its power from the
-  shared `φ`, which is what the best feasible pursuit across contexts has ([P15], Notes). A refutation means the card
-  did more than add `u` to what hospitals pursue, or that their response differs by class.
+- **Prediction** (empirical) from [P12], [D6]: if hospitals only add the card to what they pursue, with one pass-through
+  in every severity class, then the change of the log-odds of surgery in class `s` is `φ·Δu_s`, with the same `φ` for
+  all classes. *Refuted if* the changes of log-odds across severity classes are not proportional to `Δu_s`, within
+  sampling error. Within one class there are only two options, and [P12](i) has no power; the test gets its power from
+  the shared `φ`, which is what the best feasible pursuit across contexts has ([P15], Notes). A refutation means the
+  card did more than add `u` to what hospitals pursue, or that their response differs by class.
 - **Consequence** of [P4]: the regulator, who sees only what the risk model records, sees at most the misalignment at
   that resolution ([P4](iv)). Selection on unrecorded severity is invisible in the card's own data, and shows only in
   data at a finer resolution, such as the clinical records the known result used.

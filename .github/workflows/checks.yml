@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   lint:
-    name: lint (items, fields, references, checks, bibliography, glossary, ontologies, standard, related)
+    name: lint (items, fields, references, checks, bibliography, glossary, ontologies, standard, related, record)
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: lint — 0 errors (rules R1–R12 in tools/lint.py)
+      - name: lint — 0 errors (rules R1–R13 in tools/lint.py)
         run: python3 tools/lint.py
 
   checks:

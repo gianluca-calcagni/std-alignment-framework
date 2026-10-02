@@ -46,22 +46,22 @@ higher level.
   with `φ` close to `0`. So no fixed actor that adds the fine to what it pursues fits both changes: the fine changed the
   parents, either what they pursue or what they do by default. This is the core's form of "a fine is a price", and it
   needs only the two-outcome counts that were reported. Two outcomes cannot tell which of the two changed.
-- **Prediction** from [P12], [D6]: automatic enrolment. Moving the default option from not participating to a default
-  rate `d` removes the effort of acting for those who take `d`, and adds it for those who stay out. If that is all it
-  does, it is the intervention `u = 1_d − 1_0`, a bonus on the new default option and a penalty on the old one. If
-  people only added it to what they pursue, every other contribution rate would keep its share relative to every other:
-  for example, the ratio of employees at 6% to employees at 10% would be the same in both cohorts. *Refuted if* those
-  ratios differ by more than their sampling error, in cohorts comparable in tenure and pay. A refutation shows that the
-  default did more than favour one option, for example by pulling nearby rates toward it as advice would. The test
-  needs the full distribution of contribution rates in both cohorts.
-  *Tested in v7.10, before this ontology was written* (T7-2, T7-2b, T7-2d; data read from published tables and
-  figures, without sampling errors, so a registered tolerance `log 1.5` stood in for them). Against enrolment on
-  request it held loosely: in three of four companies, Madrian and Shea's among them, the ratios of non-default rates
-  stayed within the tolerance; the fourth failed on a cell of very few employees. Between two automatic-enrolment
-  defaults, 3% and 6% in one company (Beshears, Choi, Laibson and Madrian, NBER w12009), it failed: the log-ratios of
-  the other rates were `+0.65`, `+1.83`, `−0.27`, `−0.05` and `−0.56`, and the higher default moved some employees
-  down. **Refuted in its two-default form.** Every one of these datasets has been seen, so a further test on them is
-  exploratory; a confirmatory test needs a company not yet used.
+- **Prediction** (empirical) from [P12], [D6]: automatic enrolment. Moving the default option from not participating to
+  a default rate `d` removes the effort of acting for those who take `d`, and adds it for those who stay out. If that is
+  all it does, it is the intervention `u = 1_d − 1_0`, a bonus on the new default option and a penalty on the old one.
+  If people only added it to what they pursue, every other contribution rate would keep its share relative to every
+  other: for example, the ratio of employees at 6% to employees at 10% would be the same in both cohorts. *Refuted if*
+  those ratios differ by more than their sampling error, in cohorts comparable in tenure and pay. A refutation shows
+  that the default did more than favour one option, for example by pulling nearby rates toward it as advice would. The
+  test needs the full distribution of contribution rates in both cohorts. *Tested in v7.10, before this ontology was
+  written* (T7-2, T7-2b, T7-2d; data read from published tables and figures, without sampling errors, so a registered
+  tolerance `log 1.5` stood in for them). Against enrolment on request it held loosely: in three of four companies,
+  Madrian and Shea's among them, the ratios of non-default rates stayed within the tolerance; the fourth failed on a
+  cell of very few employees. Between two automatic-enrolment defaults, 3% and 6% in one company (Beshears, Choi,
+  Laibson and Madrian, NBER w12009), it failed: the log-ratios of the other rates were `+0.65`, `+1.83`, `−0.27`,
+  `−0.05` and `−0.56`, and the higher default moved some employees down. **Refuted in its two-default form.** Every one
+  of these datasets has been seen, so a further test on them is exploratory; a confirmatory test needs a company not yet
+  used.
 - **Consequence** of [P13]: if the new default is passed through, which the two-default data above reject, the average
   of any objective `F`, such as savings at retirement, changes at first at the rate
   `Cov_p(u, F) = p(d)·(F(d) − E_p[F]) + p(0)·(E_p[F] − F(0))` per unit of pass-through, where `p` is the behaviour

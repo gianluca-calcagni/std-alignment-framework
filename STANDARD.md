@@ -60,6 +60,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 
 - Give one number for a quantity that is not identified. Give its identified set, or its bounds.
 - Give a value estimated from samples without its interval ([D11]).
+- Call a test confirmatory when its data were seen before its prediction was registered ([A5]).
 - Fit the default or the specification to the behaviour it judges ([A5]).
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).

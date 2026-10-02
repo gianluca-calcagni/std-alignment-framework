@@ -126,6 +126,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q18 | R5 imported as [P33]–[P36]: v7.10's error bounds as bounds on misalignment (not on regret at a price); floors and caps, and the ordinal specification, as specifications of [D3], with v7.10's budget and contract parts dropped | executor, under Q13 | `derived/evaluator.md`, `derived/misalignment.md` |
 | Q19 | R6 imported as [P37] and [P38]: v7.10's incentive results from the pass-through of [D6] alone, without its reward coupling (which stays out of scope); v7.10's Bregman identity as a result about actors with other costs, the measure staying KL | executor, under Q13 | `derived/estimation.md`, `derived/value.md` |
 | Q20 | the compatibility review of every imported item, asked by the PI: all compatible and kept; [P29], [P33], [P34], [P37] changed (a supremum, an overclaim on the upper tail withdrawn, the selection bound strengthened to an attained worst case, the pass-through written as in [D6]); [P32] and [P38] flagged as the first candidates to drop | PI asked; executor | `IMPORT.md` §7 |
+| Q21 | the rest of v7.10, after the analysis of the archive: keep its record, not its files. An item survives only if it constrains what the core does now, for a reason stated in the framework's own goals; a result about the world that bears on a surviving claim is never dropped. Adopted: `RECORD.md` (lint R13), the rules of evidence (a)–(f), the finish line, the version rule, a generated Obsidian view. Dropped: the standing decisions that duplicate the scope or concern another project, the toy-example debt, T8, the dropped-ideas backlog, the retraction table as a file (`IMPORT.md` §5) | PI approved | `IMPORT.md` §5–§6, `README.md`, `RECORD.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -204,6 +205,8 @@ predictions and retractions, and the rules of work (M2); a generated Obsidian vi
 2. E8 for best-of-`n`: [P26] covers the pursuit only. The ML ontology's open question asks whether the margin is
    small enough, with bins that samples can fill, to predict the peak: a computation on D3's data would answer it.
 3. The alignment plane (H6).
+4. Before the first worked case: lint checks pre-registrations against their recorded hashes (README rule (d)); port
+   v7.10's F2, an exact check of [P22](i), and F4, edge cases in log space for the checks' helpers.
 
 Done since v10: evaluator and sample slots in the five ontologies, with the claims they allow; [P25], the shape law;
 [P26], binned evaluators for the pursuit; the import of v7.10 (R1–R6: [P27]–[P38], [L1], [C1]–[C12]) and its review

@@ -221,7 +221,7 @@ ONTO = textwrap.dedent("""\
     ## 3. What the core says
 
     - **Consequence** of [P1]: it follows.
-    - **Prediction** from [D1], [P1]: data would show it,
+    - **Prediction** (empirical) from [D1], [P1]: data would show it,
       over two lines. *Refuted if* it does not.
     - **Reading** with [D1]: a redescription.
 
@@ -235,8 +235,20 @@ ONTO = textwrap.dedent("""\
     """)
 
 
-def make_ontology(tmp_path, onto=ONTO, readme=ONTO_README):
-    return make(tmp_path, extra={"ontologies/README.md": readme, "ontologies/a/README.md": onto})
+RECORD = textwrap.dedent("""\
+    # Record
+
+    | Ontology | From | Label | State | Where |
+    |---|---|---|---|---|
+    | a | [D1], [P1] | empirical | untested | `ontologies/a/` |
+    """)
+
+
+def make_ontology(tmp_path, onto=ONTO, readme=ONTO_README, record=RECORD):
+    extra = {"ontologies/README.md": readme, "ontologies/a/README.md": onto}
+    if record is not None:
+        extra["RECORD.md"] = record
+    return make(tmp_path, extra=extra)
 
 
 def test_good_ontology_passes(tmp_path):
@@ -259,6 +271,10 @@ def test_good_ontology_passes(tmp_path):
     ("- **Consequence** of [P1]: it follows.", "- It follows from [P1].", "must start with a kind"),
     ("- **Reading** with [D1]: a", "- **Reading** with the core: a", "names no item before"),
     (" *Refuted if* it does not.", " It could fail.", "Refuted if"),
+    ("**Prediction** (empirical) from", "**Prediction** from", "must be labelled"),               # no label
+    ("**Prediction** (empirical) from", "**Prediction** (likely) from", "must start with a kind"),  # not a label
+    ("- **Reading** with [D1]: a redescription.",
+     "- **Prediction** (empirical) from [P1], [D1]: again. *Refuted if* not.", "two predictions from the same items"),
     ("- **Consequence** of [P1]:", "- **Consequence** of [P9]:", "[P9] names no item"),
     ("A known finding [@cover2006].", "A known finding [@cover2006], [@nobody1900].", "R8 [@nobody1900]"),
     ("## 5. Open questions\n\n- Some.\n", "## 5. Open questions\n", "is empty"),
@@ -268,6 +284,47 @@ def test_ontology_rule_fires(tmp_path, old, new, message):
     assert onto != ONTO
     errors, _ = make_ontology(tmp_path, onto=onto)
     assert any(message in e for e in errors), errors
+
+
+@pytest.mark.parametrize("old,new,message", [
+    ("| a | [D1], [P1] | empirical | untested | `ontologies/a/` |\n", "", "has no row"),          # a prediction left out
+    ("| a | [D1], [P1] |", "| b | [D1], [P1] |", "no prediction of ontologies/b/"),              # an unknown ontology
+    ("| a | [D1], [P1] |", "| a | [D1] |", "no prediction of ontologies/a/"),                    # other items
+    ("| empirical | untested |", "| verification | untested |", "the label is 'verification'"),
+    ("| empirical | untested |", "| empirical | pending |", "the state must start"),
+    ("| untested | `ontologies/a/` |", "| untested |", "must fill all"),
+    ("| a | [D1], [P1] | empirical | untested | `ontologies/a/` |\n",
+     "| a | [D1], [P1] | empirical | untested | `ontologies/a/` |\n| a | [D1], [P1] | empirical | held | twice |\n",
+     "listed twice"),
+    ("# Record\n", "# Record, after [P9]\n", "R13 [P9] names no item"),
+    ("| Ontology | From | Label | State | Where |", "| Ontology | From | Label | State |", "no ledger"),
+])
+def test_record_rule_fires(tmp_path, old, new, message):
+    record = RECORD.replace(old, new)
+    assert record != RECORD
+    errors, _ = make_ontology(tmp_path, record=record)
+    assert any(message in e for e in errors), errors
+
+
+def test_the_record_is_required_once_an_ontology_predicts(tmp_path):
+    errors, _ = make_ontology(tmp_path, record=None)
+    assert any("R13 the record" in e and "is missing" in e for e in errors), errors
+    without = ONTO.replace("- **Prediction** (empirical) from [D1], [P1]: data would show it,\n"
+                           "  over two lines. *Refuted if* it does not.\n", "")
+    assert without != ONTO
+    errors, _ = make_ontology(tmp_path, onto=without, record=None)
+    assert errors == [], errors
+
+
+def test_a_source_cited_only_in_the_record_counts(tmp_path):
+    core = CORE.replace(" [@cover2006]", "")
+    onto = ONTO.replace("A known finding [@cover2006].", "A known finding [@cover2006].")
+    record = RECORD + "\nThe base rate follows [@cover2006].\n"
+    errors, _ = make(tmp_path, core=core, extra={"ontologies/README.md": ONTO_README, "ontologies/a/README.md": onto,
+                                                  "RECORD.md": record})
+    assert errors == [], errors
+    errors, _ = make_ontology(tmp_path, record=RECORD + "\n[@nobody1900]\n")
+    assert any("RECORD.md: R8 [@nobody1900] is not in REFERENCES.md" in e for e in errors), errors
 
 
 def test_ontology_readme_rules_fire(tmp_path):
@@ -285,7 +342,8 @@ def test_an_ontology_lives_in_its_own_folder(tmp_path):
 
 def test_a_source_cited_only_in_an_ontology_counts(tmp_path):
     core = CORE.replace(" [@cover2006]", "")
-    errors, _ = make(tmp_path, core=core, extra={"ontologies/README.md": ONTO_README, "ontologies/a/README.md": ONTO})
+    errors, _ = make(tmp_path, core=core, extra={"ontologies/README.md": ONTO_README, "ontologies/a/README.md": ONTO,
+                                                  "RECORD.md": RECORD})
     assert errors == [], errors
 
 

@@ -195,9 +195,27 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | T3 (the overoptimization slope is not testable from published data) | recorded | `ontologies/machine-learning/`, section 4: the best-of-`n` slope prediction needs samples (`NOTES.md` §3.2, D3) |
 | R7, R8 (tests of v7.10's design decisions) | drop | they tested definitions the core replaced; their lessons are in `NOTES.md` §1 |
 | B1 toys | drop | probes, superseded by the core's checks |
-| Retractions, logs, reviews, the claim ledger | drop | history; it stays in the archive's history. The failure modes it taught are in `NOTES.md` §1 |
-| Sources | as cited | `REFERENCES.md` grows only with the items imported (lint R8) |
-| Checks V1–V55 | as needed | each imported result gets its own check in `checks/`; v7.10's checks serve as references |
+| Retraction history (78 rows and notes) | drop | stays in the tag, cited as `v7.10: row N`; about ten rows concern objects the core still has. The core keeps its own log in `RECORD.md` §3 |
+| Logs, independent reviews, the claim ledger, the hygiene log | drop | history. The failure modes they taught are in `NOTES.md` §1, condensed |
+| Status §4, the honest position | in core | rewritten for the core in `RECORD.md` §1 |
+| Status §6, the base rate | in core | `RECORD.md` §2: a ledger of the ontologies' predictions (lint R13), with v7.10's record |
+| Status §3, open questions | drop | each is closed (Q8 by [P36]; a rare condition averaged away, by `STANDARD.md`'s report per condition), moot (Q5, Q6, Q9), absorbed (Q0 is the census, above; Q2, whether the unification exists elsewhere, is `RECORD.md` §1; Q4 is the data request D3 of `NOTES.md`; Q3 waits with continuous outcomes), or changes no verdict of the core (Q1, where optimizers cross, is T8; Q7, a fixed-target version of [P30]) |
+| Sources (101 notes) and `references.bib` | as cited | `REFERENCES.md` grows only with the items imported, and admits verified sources only (lint R8); only 17 of v7.10's 101 sources were checked against a search. The notes remain a lookup for `RELATED.md`'s entries marked *(to verify)* |
+| Checks V1–V41, F1–F8, W1–W5, and the comparison of printed outputs | drop | each imported result has its own check in `checks/`, which asserts its claim on two SIMD paths. Two are worth porting: F2, an exact check of [P22](i) by enumerating types, and F4, edge cases in log space for the checks' helpers (`NOTES.md` §4) |
+| The vault and its tools (`vault.py`, the migration check, `build/`, templates, Obsidian settings) | drop | plain files, lint and CI replace them; a generated Obsidian view replaces the vault for reading (O1) |
+| `tools/frozen.json`, the hashes of pre-registrations | in core, as a rule | README rule (d); a lint check before the first worked case |
+| Method (12 standing rules, a 42-item checklist) | in core, condensed | the README's rules of evidence (a)–(f), and the failure modes of `NOTES.md` §1 |
+| NOTES_claude §1 (failure modes) | in core, condensed | `NOTES.md` §1 |
+| NOTES_claude, its other sections; HANDOVER | drop | the README's "Starting a session" replaces the handover; the hunches still live in the core's terms are in `NOTES.md` |
+| ROADMAP §4, rules 11 and 13 | in core | README rules (b) and (c) |
+| ROADMAP §4b, when the core is final | in core, re-decided | the README's finish line: one criterion per goal; one worked case in any discipline instead of one per discipline |
+| ROADMAP §4c, the toy-example debt | drop | it was owed because v7.10 changed its definitions on toy cases. The core's floors and ordinal specification are derived ([P35], [P36]), and the two open rows are settled by proof: best-of-`n` has zero ordinal misalignment, and under a floor the default is misaligned |
+| ROADMAP T6, the strategic layer, as a standing decision | drop | `CORE.md` §0 puts several actors out of scope; a second rule would only duplicate it |
+| ROADMAP T8, one index for where optimizers cross | drop | no verdict of the core depends on it ([C1], [C5]) |
+| ROADMAP T3b, the slope on open models | in core | the data request D3 of `NOTES.md` §3.2 |
+| ROADMAP §5, recommendation 3 (who the raters were) | drop | historical; README rule (f) covers every review from now on |
+| ROADMAP §6, the dropped ideas (G0–G5, C1, I1, L1–L4) | drop | absorbed: G1 ([D4], [P7], [P36]), G2 ([D4], [P8]), I1 ([P2], [P3], [P12], [D9]), the static half of G4 ([D4], [C9]). Out of scope: G0 (circular), G5 (internal states, [A1]), L2 (strategic), L4 (slips against misdirection, which behaviour does not separate), C1 (speculative). G3's nearest version, the style term inside quality cells, was tested in T7-1 and did no better than raw length |
+| ROADMAP §0–§3, the stop list, anti-drift rules 1–10a and 12 | drop | the vault's and the refactor's machinery; the scope is `CORE.md` §0 |
 
 ## 6. Roadmap
 
@@ -210,9 +228,12 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | R2 | N3, the width is the exact worst case; N4, no separable bound on the worst case | `evaluator.md` | yes | merged: [P29], [L1], [P30] |
 | R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | merged: [P31], [P32] |
 | R4 | `derived/forbids.md`: the nine statements of v7.10's §11, each kept, re-derived or dropped, with its test | new file | yes | merged: [C1]–[C12]; nothing blocks the merge |
-| R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | done: [P33]–[P36]; reviewed in §7 |
-| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | done: [P37], [P38], the ontology and survey follow-ups; reviewed in §7 |
-| R7 | The merge: tag `main` as `v7.10`; merge `core` into `main`, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
+| R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | merged: [P33]–[P36]; reviewed in §7 |
+| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | merged: [P37], [P38], the ontology and survey follow-ups; reviewed in §7 |
+| M1 | the defects found by the analysis of the archive: the humans prediction, references to the archive, uncertainty in `STANDARD.md`, stale records | many | yes | done |
+| M2 | `RECORD.md` (honest position, ledger of predictions, retractions; lint R13); labelled predictions (R10); the rules of evidence, the finish line and the version rule in the README; the decisions of section 5 | `RECORD.md`, `README.md`, `tools/` | yes | done |
+| O1 | a generated Obsidian view of the framework, checked fresh by CI | `obsidian/`, `tools/` | no | |
+| R7 | The merge: tag `9459c14` as `v7.10`; merge `core` into `main` with a merge commit, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
 
 **Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been
 mutation-tested; each imported row of section 4 says "in core" and names its item; each new item's Lineage names the

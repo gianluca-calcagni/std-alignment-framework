@@ -61,12 +61,12 @@ females, and `F = G_f` is the declared objective.
   of what selection through females alone would gain: a shortfall of about `41%` ([P13](ii)). This puts a number on the
   "cost of separate genders" of Prasad et al.'s title. The equal spreads are an assumption; the general formula needs
   both.
-- **Prediction** from [P13], [D1]: in one generation of selection through males, with genomes passed on intact, the
-  mean of `F` changes by exactly `Cov_q(w_m, F)/E_q[w_m]`, where `w_m` is fitness through males: this is the tilt by
-  `log w_m`, and the Price equation's selection term [@price1970], with no transmission term. So in a male-limited
-  experiment started from genomes assayed in both sexes, the first generation's change of mean female log fitness
-  matches the value computed from the assays and the starting frequencies. *Refuted if* the two differ by more than
-  their sampling error. A refutation means the assays miss what selection acts on in the experiment: another
+- **Prediction** (empirical) from [P13], [D1]: in one generation of selection through males, with genomes passed on
+  intact, the mean of `F` changes by exactly `Cov_q(w_m, F)/E_q[w_m]`, where `w_m` is fitness through males: this is the
+  tilt by `log w_m`, and the Price equation's selection term [@price1970], with no transmission term. So in a
+  male-limited experiment started from genomes assayed in both sexes, the first generation's change of mean female log
+  fitness matches the value computed from the assays and the starting frequencies. *Refuted if* the two differ by more
+  than their sampling error. A refutation means the assays miss what selection acts on in the experiment: another
   environment, frequency dependence, or drift. Neither paper reports the genome-level data the test needs.
 
 ## 4. Limits
