@@ -16,11 +16,11 @@ data that did not suggest it.
 
 | File | Discipline | Principal → actor | Known result |
 |---|---|---|---|
-| `machine-learning/` | machine learning: fine-tuning against a learned reward | a developer → a fine-tuned policy | reward-model overoptimization [[References|@gao2023]] |
-| `biology/` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [[References|@chippindale2001]], [[References|@prasad2007]] |
-| `humans/` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [[References|@madrian2001]]; a fine that raised lateness [[References|@gneezy2000]] |
-| `institutions/` | health policy: public reports on performance | a regulator → hospitals and surgeons | cardiac surgery report cards [[References|@dranove2003]] |
-| `job-delegation/` | organizations: delegating work | a manager → an employee | rewarding A while hoping for B [[References|@kerr1975]]; multitask incentives [[References|@holmstrom1991]] |
+| `machine-learning/` | machine learning: fine-tuning against a learned reward | a developer → a fine-tuned policy | reward-model overoptimization [[References\|@gao2023]] |
+| `biology/` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [[References\|@chippindale2001]], [[References\|@prasad2007]] |
+| `humans/` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [[References\|@madrian2001]]; a fine that raised lateness [[References\|@gneezy2000]] |
+| `institutions/` | health policy: public reports on performance | a regulator → hospitals and surgeons | cardiac surgery report cards [[References\|@dranove2003]] |
+| `job-delegation/` | organizations: delegating work | a manager → an employee | rewarding A while hoping for B [[References\|@kerr1975]]; multitask incentives [[References\|@holmstrom1991]] |
 
 ## The slots
 
@@ -29,20 +29,20 @@ The Core column names the item below.
 
 | Slot | Core | Type | What the entry must say |
 |---|---|---|---|
-| **outcomes** | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] | a finite set | what one outcome is, and how a continuum is cut into finitely many |
-| **contexts** | [[D8 — Conditions, responses and views|D8]] | conditions whose frequencies the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
-| **behaviour** | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] | a distribution on the outcomes | whose behaviour, counted over what (people, occasions, generations), and how it is measured |
-| **sample** | [[D11 — Sample and evidence|D11]] | independent draws from a behaviour | what one draw is, how many there are in each condition, and why independence is a fair model |
-| **default** | [[D2 — Pursuit of an objective|D2]] | a full-support distribution on the outcomes | what happens with no pursuit, and how it is measured apart from the behaviour it will judge |
-| **objective** | [[D2 — Pursuit of an objective|D2]] | a function on the outcomes, up to a constant | what the principal wants pursued, in whose units |
-| **evaluator** | [[D10 — Evaluator, regression and residual|D10]] | a function on the outcomes, known or revealed | what the actor is rewarded or selected on, if that is known, and its level sets: which outcomes it scores alike |
-| **intensity** | [[D2 — Pursuit of an objective|D2]] | a number, at least 0 | what makes pursuit stronger or weaker; only the product of intensity and objective is identified ([[P1 — Every behaviour is a tilt of any other|P1]]) |
-| **specification** | [[D3 — Specification, declaration and misalignment|D3]] | a default and a closed set of intended behaviours | who declares it, when, and where it is written down |
-| **principal's resolution** | [[D4 — Resolution|D4]] | a partition, the finest unless declared | the distinctions the principal declares it does not care about |
-| **actor's resolution** | [[D4 — Resolution|D4]] | a partition | the distinctions the actor cannot make |
-| **change** | [[P2 — Every change of behaviour follows a replicator equation|P2]] | a differentiable path of behaviours | what moves behaviour over time, and what its revealed objective is |
-| **intervention** | [[D6 — Intervention and pass-through|D6]] | a known non-constant function on the outcomes | what a principal or an experimenter adds to what the actor faces |
-| **stakes** | [[D5 — Stakes|D5]] | the units of the objective | what a shortfall is counted in |
+| **outcomes** | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | a finite set | what one outcome is, and how a continuum is cut into finitely many |
+| **contexts** | [[D8 — Conditions, responses and views\|D8]] | conditions whose frequencies the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
+| **behaviour** | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | a distribution on the outcomes | whose behaviour, counted over what (people, occasions, generations), and how it is measured |
+| **sample** | [[D11 — Sample and evidence\|D11]] | independent draws from a behaviour | what one draw is, how many there are in each condition, and why independence is a fair model |
+| **default** | [[D2 — Pursuit of an objective\|D2]] | a full-support distribution on the outcomes | what happens with no pursuit, and how it is measured apart from the behaviour it will judge |
+| **objective** | [[D2 — Pursuit of an objective\|D2]] | a function on the outcomes, up to a constant | what the principal wants pursued, in whose units |
+| **evaluator** | [[D10 — Evaluator, regression and residual\|D10]] | a function on the outcomes, known or revealed | what the actor is rewarded or selected on, if that is known, and its level sets: which outcomes it scores alike |
+| **intensity** | [[D2 — Pursuit of an objective\|D2]] | a number, at least 0 | what makes pursuit stronger or weaker; only the product of intensity and objective is identified ([[P1 — Every behaviour is a tilt of any other\|P1]]) |
+| **specification** | [[D3 — Specification, declaration and misalignment\|D3]] | a default and a closed set of intended behaviours | who declares it, when, and where it is written down |
+| **principal's resolution** | [[D4 — Resolution\|D4]] | a partition, the finest unless declared | the distinctions the principal declares it does not care about |
+| **actor's resolution** | [[D4 — Resolution\|D4]] | a partition | the distinctions the actor cannot make |
+| **change** | [[P2 — Every change of behaviour follows a replicator equation\|P2]] | a differentiable path of behaviours | what moves behaviour over time, and what its revealed objective is |
+| **intervention** | [[D6 — Intervention and pass-through\|D6]] | a known non-constant function on the outcomes | what a principal or an experimenter adds to what the actor faces |
+| **stakes** | [[D5 — Stakes\|D5]] | the units of the objective | what a shortfall is counted in |
 
 **Contexts.** Often part of an outcome is fixed before the actor acts: the prompt a model answers, the patient who
 arrives, the request a manager sends. These are conditions ([[D8 — Conditions, responses and views|D8]]) whose frequencies the actor does not choose. On

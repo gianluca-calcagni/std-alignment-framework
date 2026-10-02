@@ -43,8 +43,13 @@ def build(root):
     by_id = {it["id"]: it for it in items}
 
     def linked(text):
-        text = lint.REF.sub(lambda m: f"[[{by_id[m[1]]['note']}|{m[1]}]]" if m[1] in by_id else m[0], text)
-        return lint.CITE.sub(lambda m: f"[[References|@{m[1]}]]", text)
+        """Every [P3] and [@key] as a link. In a table row the link's own '|' must be escaped, or Obsidian reads it as a
+        cell boundary."""
+        def line(row):
+            bar = "\\|" if row.lstrip().startswith("|") else "|"
+            row = lint.REF.sub(lambda m: f"[[{by_id[m[1]]['note']}{bar}{m[1]}]]" if m[1] in by_id else m[0], row)
+            return lint.CITE.sub(lambda m: f"[[References{bar}@{m[1]}]]", row)
+        return "\n".join(line(row) for row in text.split("\n"))
 
     def bullet(i):
         return f"- [[{by_id[i]['note']}|{i}]] — {by_id[i]['title']}"
@@ -103,7 +108,7 @@ def build(root):
 def broken_links(notes):
     """Every wiki-link whose target is not a note."""
     names = {Path(p).stem for p in notes}
-    return sorted({t for text in notes.values() for t in re.findall(r"\[\[([^\]|#]+)", text) if t not in names})
+    return sorted({t for text in notes.values() for t in re.findall(r"\[\[([^\]|#\\]+)", text) if t not in names})
 
 
 def on_disk(out):

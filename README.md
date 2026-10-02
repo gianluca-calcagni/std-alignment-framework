@@ -53,9 +53,9 @@ else is derived from them, with proofs and checks, and reported through one stan
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 
-**Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
-SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
-paths, rather than reproduce printed digits.
+**Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, the freshness of `obsidian/`,
+and every check on two SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It
+must hold on both paths, rather than reproduce printed digits.
 
 **Working agreements** (no tool checks these, so they are commitments, not claimed properties):
 - **The core holds what cannot be derived**, and the definitions used everywhere. A result belongs in `derived/`. A
@@ -69,11 +69,12 @@ paths, rather than reproduce printed digits.
   (`v7.10: 60 Status/retractions/`), or says "New".
 - **One step, one branch, one pull request**, merged with a merge commit, so that every commit keeps its date.
 
-**Rules of evidence** (working agreements too; each was learned in v7.10, where the evidence is in `NOTES.md` §1):
+**Rules of evidence** (working agreements too, adopted by the PI from v7.10's rules and failures; `IMPORT.md` §5 says
+where each comes from):
 - **(a) Record, do not repair.** A prediction that fails stays in its ontology and in `RECORD.md`, with its result. A
   retraction is a row of `RECORD.md`, and is never deleted. v7.10's 78 rows stay in the tag `v7.10`.
 - **(b) Label every prediction** empirical or verification (lint R10). Only empirical predictions count toward the
-  base rate: in v7.10, verification predictions held every time, and empirical ones 5 times in 15.
+  base rate: in v7.10's worked cases (T7), every verification prediction held, and 5 empirical ones in 15.
 - **(c) Name what changes.** A new item or work step names a verdict, a number or a decision it would change, or the
   PI approves it.
 - **(d) Register, then compute.** An empirical test is pre-registered and pushed before any computation. Before the
@@ -93,7 +94,7 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | Goal | Criterion | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
-| stable | the Statement of no premise or definition changes for three consecutive steps | met: none since v10 |
+| stable | no premise's or definition's Statement changes for three consecutive steps | met: none since v10 |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | not met (`RECORD.md`) |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met |

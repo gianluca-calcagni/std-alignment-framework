@@ -1,5 +1,6 @@
 """Tests of tools/obsidian.py: the view covers every item, its links resolve, it is fresh, and it leaves alone what it
 does not own."""
+import re
 from pathlib import Path
 import lint
 import obsidian
@@ -56,5 +57,17 @@ def test_writing_keeps_settings_and_annotations(tmp_path):
 
 
 def test_a_broken_link_is_found():
-    notes = {"a.md": "see [[b|B]] and [[a]]", "Folder/c.md": "[[a#Heading]]"}
-    assert obsidian.broken_links(notes) == ["b"]
+    notes = {"a.md": "see [[b|B]] and [[a]]", "Folder/c.md": "[[a#Heading]]\n| [[d\\|D]] | [[a\\|A]] |"}
+    assert obsidian.broken_links(notes) == ["b", "d"]
+
+
+def test_links_in_tables_do_not_split_cells():
+    """Inside a table row, a link's '|' must be written '\\|', or Obsidian reads it as a cell boundary (v7.10 shipped
+    41 malformed tables this way)."""
+    notes = obsidian.build(ROOT)
+    rows = [line for text in notes.values() for line in text.split("\n") if line.lstrip().startswith("|")]
+    linked = [row for row in rows if "[[" in row]
+    assert len(linked) > 100                                                        # the case is exercised
+    assert not [row for row in linked if re.search(r"\[\[[^\]]*(?<!\\)\|", row)]
+    prose = [line for text in notes.values() for line in text.split("\n") if line.startswith("- [[")]
+    assert prose and all("\\|" not in line for line in prose)                       # outside tables, a plain '|'

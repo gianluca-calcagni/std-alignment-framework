@@ -68,32 +68,32 @@ fields.
 
 | Symbol | Meaning | Introduced in |
 |---|---|---|
-| `X` | the outcomes | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] |
-| `Δ`, `Δ°` | all behaviours; the full-support ones | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] |
-| `E_p[F]`, `Var_p(F)`, `Cov_p(F, G)` | average, variance and covariance under `p` | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] |
-| `KL(p‖r)` | the Kullback–Leibler divergence, in nats | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] |
-| `tilt(r, F)` | `r` reweighted by `e^F` | [[D1 — Outcomes, behaviours, divergence and tilt|D1]] |
-| `q`, `F`, `t` | the default, an objective, an intensity | [[D2 — Pursuit of an objective|D2]] |
-| `p_{F,t}`, `R_F` | pursuit of `F` at intensity `t`; the pursuit ray | [[D2 — Pursuit of an objective|D2]] |
-| `(q, 𝓘)` | a specification, declared by the principal: the default and the intended behaviours | [[D3 — Specification, declaration and misalignment|D3]] |
-| `M(p̂)` | the misalignment of the actual behaviour `p̂` | [[D3 — Specification, declaration and misalignment|D3]] |
-| `ℬ`, `𝒜` | the principal's resolution; the actor's resolution | [[D4 — Resolution|D4]] |
-| `E_q[F\|𝒜]`, `F̄` | the cell average of `F` under the default | [[D4 — Resolution|D4]] |
-| `λ`, `S(p̂)` | the matched intensity; the shortfall, in the units of `F` | [[D5 — Stakes|D5]] |
-| `u`, `φ` | an intervention; the pass-through | [[D6 — Intervention and pass-through|D6]] |
-| `𝓕` | the actor's feasible set | [[D7 — Feasibility|D7]] |
-| `𝒞`, `(p_c)` | the conditions; the actor's response | [[D8 — Conditions, responses and views|D8]] |
-| `Z`, `V_c` | the actor's view: its signals, and their distribution in condition `c` | [[D8 — Conditions, responses and views|D8]] |
-| `O` | the observed conditions | [[D9 — Observation and identification|D9]] |
-| `F̂`, `m`, `R` | an evaluator; the regression of the target on it; the residual | [[D10 — Evaluator, regression and residual|D10]] |
-| `n`, `p̂_n` | the size of a sample; its empirical behaviour | [[D11 — Sample and evidence|D11]] |
-| `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [[P2 — Every change of behaviour follows a replicator equation|P2]] |
-| `J_t` | net value: the objective's average minus the cost of departing from the default | [[P4 — What KL measures|P4]] |
-| `t*`, `p°` | the revealed intensity; the nearest intended behaviour | [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] |
-| `KL(p̂‖q)` | the departure of the actual behaviour from the default | [[P6 — The departure from the default splits into pursuit and misalignment|P6]] |
-| `θ` | the angle between a revealed objective and the declared one | [[P11 — The misaligned share at the start of a change|P11]] |
-| `σ_q(F)` | the spread of `F` under the default: `Var_q(F)^{1/2}` | [[P13 — What the start of a change gains|P13]] |
-| `p*` | the best feasible behaviour | [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] |
+| `X` | the outcomes | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] |
+| `Δ`, `Δ°` | all behaviours; the full-support ones | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] |
+| `E_p[F]`, `Var_p(F)`, `Cov_p(F, G)` | average, variance and covariance under `p` | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] |
+| `KL(p‖r)` | the Kullback–Leibler divergence, in nats | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] |
+| `tilt(r, F)` | `r` reweighted by `e^F` | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] |
+| `q`, `F`, `t` | the default, an objective, an intensity | [[D2 — Pursuit of an objective\|D2]] |
+| `p_{F,t}`, `R_F` | pursuit of `F` at intensity `t`; the pursuit ray | [[D2 — Pursuit of an objective\|D2]] |
+| `(q, 𝓘)` | a specification, declared by the principal: the default and the intended behaviours | [[D3 — Specification, declaration and misalignment\|D3]] |
+| `M(p̂)` | the misalignment of the actual behaviour `p̂` | [[D3 — Specification, declaration and misalignment\|D3]] |
+| `ℬ`, `𝒜` | the principal's resolution; the actor's resolution | [[D4 — Resolution\|D4]] |
+| `E_q[F\|𝒜]`, `F̄` | the cell average of `F` under the default | [[D4 — Resolution\|D4]] |
+| `λ`, `S(p̂)` | the matched intensity; the shortfall, in the units of `F` | [[D5 — Stakes\|D5]] |
+| `u`, `φ` | an intervention; the pass-through | [[D6 — Intervention and pass-through\|D6]] |
+| `𝓕` | the actor's feasible set | [[D7 — Feasibility\|D7]] |
+| `𝒞`, `(p_c)` | the conditions; the actor's response | [[D8 — Conditions, responses and views\|D8]] |
+| `Z`, `V_c` | the actor's view: its signals, and their distribution in condition `c` | [[D8 — Conditions, responses and views\|D8]] |
+| `O` | the observed conditions | [[D9 — Observation and identification\|D9]] |
+| `F̂`, `m`, `R` | an evaluator; the regression of the target on it; the residual | [[D10 — Evaluator, regression and residual\|D10]] |
+| `n`, `p̂_n` | the size of a sample; its empirical behaviour | [[D11 — Sample and evidence\|D11]] |
+| `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [[P2 — Every change of behaviour follows a replicator equation\|P2]] |
+| `J_t` | net value: the objective's average minus the cost of departing from the default | [[P4 — What KL measures\|P4]] |
+| `t*`, `p°` | the revealed intensity; the nearest intended behaviour | [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] |
+| `KL(p̂‖q)` | the departure of the actual behaviour from the default | [[P6 — The departure from the default splits into pursuit and misalignment\|P6]] |
+| `θ` | the angle between a revealed objective and the declared one | [[P11 — The misaligned share at the start of a change\|P11]] |
+| `σ_q(F)` | the spread of `F` under the default: `Var_q(F)^{1/2}` | [[P13 — What the start of a change gains\|P13]] |
+| `p*` | the best feasible behaviour | [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]] |
 
 ## 1. Premises
 

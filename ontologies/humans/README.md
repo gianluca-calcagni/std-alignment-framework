@@ -55,9 +55,11 @@ higher level.
   that the default did more than favour one option, for example by pulling nearby rates toward it as advice would. The
   test needs the full distribution of contribution rates in both cohorts. *Tested in v7.10, before this ontology was
   written* (T7-2, T7-2b, T7-2d; data read from published tables and figures, without sampling errors, so a registered
-  tolerance `log 1.5` stood in for them). Against enrolment on request it held loosely: in three of four companies,
-  Madrian and Shea's among them, the ratios of non-default rates stayed within the tolerance; the fourth failed on a
-  cell of very few employees. Between two automatic-enrolment defaults, 3% and 6% in one company (Beshears, Choi,
+  tolerance `log 1.5` stood in for them). Against enrolment on request it held loosely. T7-2's registered test pooled
+  two companies and held (median `|δ|` 0.265, where `δ` is the difference of the log-ratios of the two non-default
+  categories), though one of them, taken alone, exceeds the tolerance (0.454, computed from the same table, not
+  registered). Of two further companies, Madrian and Shea's was within it (0.271) and the other was not (0.876, on a
+  cell of very few employees). Between two automatic-enrolment defaults, 3% and 6% in one company (Beshears, Choi,
   Laibson and Madrian, NBER w12009), it failed: the log-ratios of the other rates were `+0.65`, `+1.83`, `−0.27`,
   `−0.05` and `−0.56`, and the higher default moved some employees down. **Refuted in its two-default form.** Every one
   of these datasets has been seen, so a further test on them is exploratory; a confirmatory test needs a company not yet

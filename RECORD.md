@@ -3,7 +3,7 @@
 Lint rule R13 checks this file. It names only existing items. Its ledger has exactly one row for every prediction of
 the ontologies, with the prediction's label and a state that starts with one of: untested, held, refuted, untestable.
 Nothing here is deleted. A refuted prediction keeps its row and its result, and a retraction keeps its line
-(README, working agreements).
+(README, rules of evidence).
 
 ## 1. The honest position
 
@@ -36,7 +36,7 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 |---|---|---|---|---|
 | machine-learning | [P13] | empirical | untested. The published paper does not report what it needs (v7.10, T3); it needs samples of the initial policy (`NOTES.md` §3.2, D3) | `ontologies/machine-learning/`, sections 3 and 4 |
 | machine-learning | [P20] | empirical | untested | `ontologies/machine-learning/`, section 3 |
-| humans | [P12], [D6] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely, in three of four companies (T7-2, T7-2b). Those data are seen | `ontologies/humans/`, section 3 |
+| humans | [P12], [D6] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely: T7-2's registered test, pooling two companies, held, though one of them alone exceeds the tolerance; of two further companies, one was within it and one was not (T7-2b). Those data are seen | `ontologies/humans/`, section 3 |
 | institutions | [P12], [D6] | empirical | untested: the data are not public (`NOTES.md` §3.2, D5) | `ontologies/institutions/`, section 3 |
 | job-delegation | [P12], [D6] | empirical | untested | `ontologies/job-delegation/`, section 3 |
 | biology | [P13], [D1] | empirical | untested: neither paper reports the genome-level data | `ontologies/biology/`, section 3 |
@@ -48,7 +48,8 @@ approximately; the institutions and job-delegation predictions concern explicit 
 
 ### 2.2 The base rate
 
-**The archive.** v7.10 registered every empirical test before reading the data:
+**The archive.** v7.10 registered every empirical test before computing it; two amendments disclosed that some data
+had been seen (T7-1c, T7-2c).
 - T7, case 1 (evaluator length bias): 1 of 7 predictions held, plus 1 that could not fail. The one that held came after
   two failed designs.
 - T7, case 2 (retirement defaults): 4 of 8 held, and 1 could not be evaluated.
@@ -56,8 +57,8 @@ approximately; the institutions and job-delegation predictions concern explicit 
 - I1-dyn: could not fail, since its reference was fitted from the counts it judged.
 - I1-dyn2: not rejected, at power 0.51.
 
-Every verification prediction held. So the archive's empirical base rate is 5 of 15 in T7, the only study with several
-predictions.
+In T7, every verification prediction held, and 5 of 15 empirical predictions did: that is the base rate to quote.
+Elsewhere in v7.10, verification predictions did fail, on thresholds set without a scale (R7-7, R8-1; `NOTES.md` §1).
 
 **This core.** None of its six empirical predictions has been tested on data not seen before.
 
