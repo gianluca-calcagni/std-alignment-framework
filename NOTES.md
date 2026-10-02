@@ -85,6 +85,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q13 | the import plan of `IMPORT.md`, every recommendation, and its roadmap | PI: approved | `IMPORT.md` §6; phase R1 done |
 | Q14 | `derived/feasibility.md` moved after `identifiability.md` in the reading order, since [P27] uses [P9] and [P13] and no earlier file cites [P15] | executor, caught by lint R5 | `derived/README.md` |
 | Q15 | main's Thm 5 imported at an equal budget only, with the loss as the shortfall of [D5]; its part at a declared price dropped with the price convention. Lemma 8 kept as a lemma ([L1]), since it is about bounds, not about alignment | executor, under Q13 | [P29], [L1], [P30] |
+| Q16 | main's Prop 11 imported in its form on finite outcomes ([P31](vi)): a KL budget reaches a rare outcome at a cost `log(1/r)`, a `χ²` budget at `1/r − 1`; the statement on a continuum stays out of scope | executor, under Q13 | [P31] |
 
 ### 3.2 Papers and data the PI could supply
 

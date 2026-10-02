@@ -3,7 +3,9 @@
 When the actor's limits are linear, misalignment splits exactly into what the actor could have avoided and what it
 could not ([P15]). When the limit is a budget on how far the actor may depart from the default, the best it can do is
 to pursue and stop where the budget runs out, and the budget acts as a price ([P27]); the width of the budget along a
-function is how far the budget lets that function's average move ([P28]).
+function is how far the budget lets that function's average move ([P28]). Budgets of other shapes control other
+measures of a function's size, and a KL budget reaches rare outcomes cheaply ([P31]). An actor that must counter
+situations it does not choose spends departure to do so, which puts a floor under the variety of the result ([P32]).
 
 ### P15 — Misalignment splits into what the actor could avoid and what it could not
 **Statement.** Let `𝓕` be a convex feasible set ([D7]) that contains a full-support behaviour, and let `r ∈ Δ°`.
@@ -159,3 +161,93 @@ results imported next are built on (`IMPORT.md`, N3 and N4).
 
 **Lineage.** main: Def 6 (the width) and Prop 6 (the width, computed; its check V4). New: the term in `δ` of (ii), and
 with it the symmetry of the width to that order.
+
+### P31 — Budgets of other shapes
+**Statement.** Let `E : X → ℝ` and `p ∈ Δ`. Write `TV(p, q) = ½·Σ_x |p(x) − q(x)|`,
+`χ²(p‖q) = Σ_x (p(x) − q(x))²/q(x)`, `D_α(p‖q) = log(Σ_x p(x)^α·q(x)^{1−α})/(α − 1)` for `α > 1`, and
+`D_∞(p‖q) = log max_x p(x)/q(x)`.
+(i) `|E_p[E] − E_q[E]| ≤ (max E − min E)·TV(p, q)`.
+(ii) `E_p[E] − E_q[E] ≤ (KL(p‖q) + Λ(u))/u` for every `u > 0`, with `Λ` as in [P28].
+(iii) `|E_p[E] − E_q[E]| ≤ (χ²(p‖q)·Var_q(E))^{1/2}`.
+(iv) For `α > 1` and `α* = α/(α − 1)`, `E_p[|E|] ≤ e^{D_α(p‖q)/α*}·(E_q[|E|^{α*}])^{1/α*}`; and
+`E_p[|E|] ≤ e^{D_∞(p‖q)}·E_q[|E|] ≤ E_q[|E|]/min_x q(x)`.
+(v) For non-constant `E`, the bounds (i) and (iii) are attained by some `p` at every small enough value of the
+divergence, and (ii) at the minimizing `u` ([P28](i)).
+(vi) For an outcome `x` with `q(x) = r`, putting all mass on `x` costs `log(1/r)` in KL and `1/r − 1` in `χ²`. So for
+`E = M·1_x`, the largest rise of the average of `E` over the departure budget `δ` ([P27]) is at least
+`min(1, δ/log(1/r))·M·(1 − r)`, while over the `χ²` budget `δ` it is at most `(δ·M²·r·(1 − r))^{1/2}`. With the
+variance `M²·r·(1 − r)` held fixed, the first grows without bound as `r → 0`, and the second does not.
+
+**In plain terms.** Every way of limiting how far an actor departs from the default controls how far an average can
+move through one measure of the function's size: total variation through its range, KL through its exponential
+moments, `χ²` through its variance, a Rényi divergence through a power mean. Choosing the limit is choosing which size
+of an error matters. A KL limit lets an actor reach a rare outcome at a cost that grows only with the logarithm of its
+rarity, so a rare, large error can do unbounded harm under a KL limit and bounded harm under a `χ²` limit of the same
+size.
+
+**Proof.** (i) With `c` the midpoint of the range of `E`, `E_p[E] − E_q[E] = Σ_x (p(x) − q(x))·(E(x) − c)`, where
+`|E(x) − c| ≤ (max E − min E)/2` and `Σ_x |p(x) − q(x)| = 2·TV(p, q)`. (ii) is the first inequality in the proof of
+[P28](i). (iii) `E_p[E] − E_q[E] = E_q[(p/q − 1)·(E − E_q[E])]`, and Cauchy–Schwarz under `q` bounds it by
+`(E_q[(p/q − 1)²]·Var_q(E))^{1/2}`, where `E_q[(p/q − 1)²] = χ²(p‖q)`. (iv) Hölder's inequality under `q`:
+`E_p[|E|] = E_q[(p/q)·|E|] ≤ (E_q[(p/q)^α])^{1/α}·(E_q[|E|^{α*}])^{1/α*}`, and
+`(E_q[(p/q)^α])^{1/α} = e^{D_α(p‖q)/α*}`; for `α = ∞`, `E_q[(p/q)·|E|] ≤ max_x (p/q)·E_q[|E|]`, and
+`max_x p(x)/q(x) ≤ 1/min_x q(x)`. (v) For (i), with `δ` at most the default's mass on the lowest values of `E` and at
+most its mass off the highest, move mass `δ` from the lowest values to the highest, in proportion to `q`: the total
+variation is `δ` and the average rises by `δ·(max E − min E)`. For (iii), `p = q·(1 + s·Ẽ/Var_q(E)^{1/2})`, with
+`Ẽ = E − E_q[E]` and `s` small enough for `p` to stay positive, has `χ²(p‖q) = s²` and raises the average by
+`s·Var_q(E)^{1/2}`. (vi) For the point mass `1_x`, `KL(1_x‖q) = log(1/r)` and `χ²(1_x‖q) = (1 − r)²/r + (1 − r) =
+1/r − 1`. The mixture `(1 − ε)·q + ε·1_x` with `ε = min(1, δ/log(1/r))` has `KL ≤ ε·log(1/r) ≤ δ`, since KL is
+convex in its first argument, and raises the average of `E` by `ε·M·(1 − r)`; (iii) gives the `χ²` bound, with
+`Var_q(E) = M²·r·(1 − r)`. With that variance held at `v`, `M = (v/(r·(1 − r)))^{1/2}`, and
+`δ·M·(1 − r)/log(1/r) → ∞` as `r → 0`.
+
+**Checks.** checks/test_feasibility.py::test_feasible_sets_of_other_shapes
+
+**Notes.** Each budget is a convex feasible set ([D7]), so [P15](ii) applies to all of them. The pairs (divergence,
+measure of size) are conjugate: each bound is attained, at small budgets, which makes the measure of size the right
+one for that divergence and not merely a valid one. (vi) is the form on finitely many outcomes of a statement that
+needs infinitely many: on a continuum, an error whose tail is heavier than exponential makes the KL rise infinite at
+every budget, while a finite variance keeps the `χ²` rise finite. That statement is out of the core's scope
+(`CORE.md` §0) and is recorded in `IMPORT.md`. The measure of misalignment stays KL ([P14]); the shapes here are limits
+on what an actor can do, or costs an actor pays, not ways of measuring.
+
+**Lineage.** main: Prop 10 (the conjugate pairings), Prop 11 (the order is structural; here its form on finite
+outcomes) and the dictionary's entry B2 (the conjugacy scale). New: (v), the bounds attained, and (vi) in finite form.
+
+### P32 — Regulation costs departure
+**Statement.** Let the conditions `c` ([D8]) have frequencies `ρ(c) > 0` that the actor does not choose. Let the
+actor's response in condition `c` be a behaviour `p_c` on finitely many actions, all with one default `q`, and let the
+result of action `x` in condition `c` be `φ(c, x)`, with `φ(·, x)` injective for every action `x`: no action gives two
+conditions the same result. Under `ρ` and the response, write `C`, `X`, `Z` for the condition, the action and the
+result, `H` for entropy in nats, `p̄ = Σ_c ρ(c)·p_c` for the average action, and
+`I(C; X) = Σ_c ρ(c)·KL(p_c‖p̄)` for the information the actions carry about the conditions.
+(i) `Σ_c ρ(c)·KL(p_c‖q) = I(C; X) + KL(p̄‖q)`.
+(ii) `H(Z) ≥ H(C) − I(C; X)`.
+(iii) So a response whose average departure `Σ_c ρ(c)·KL(p_c‖q)` is at most `δ` leaves `H(Z) ≥ H(C) − δ`. For the
+objective of hitting a result `z₀`, the miss rate `g = P(Z ≠ z₀)` satisfies `h(g) + g·log(m − 1) ≥ H(C) − δ`, with
+`h` the entropy of a coin with bias `g` and `m` the number of results: a floor on the misses that falls as the budget
+grows.
+
+**In plain terms.** An actor that must counter situations it does not choose, to keep the result steady, has to act
+differently in different situations, and acting differently costs departure from its one default. So the variety of
+the situations, less the departure spent, is a floor on the variety of the result. With a small budget, an actor cannot
+hit a target reliably when the situations vary much.
+
+**Proof.** (i) `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/q(x))` splits as `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/p̄(x))` plus
+`Σ_x p̄(x)·log(p̄(x)/q(x))`. (ii) `H(Z) ≥ H(Z|X)`, since conditioning does not increase entropy. Given the action, the
+result determines the condition, by injectivity, and the condition determines the result, so `H(Z|X) = H(C|X)`, which
+is `H(C) − I(C; X)`. (iii) By (i), `I(C; X)` is at most the average departure. A distribution on `m` results with mass
+`1 − g` on `z₀` has entropy at most `h(g) + g·log(m − 1)`, the entropy when the rest is spread evenly [@cover2006].
+
+**Checks.** checks/test_feasibility.py::test_regulation_costs_departure
+
+**Notes.** (ii) is Ashby's law of requisite variety [@ashby1956] in Conant's information form [@conant1969]; (i) prices
+it in the core's unit, the departure from the default. The set of responses with average departure at most `δ` is the
+departure budget of [P27] on condition–action pairs, with the frequencies of the conditions fixed: a convex feasible
+set ([D7]). The check confirms that the floor can fail when an action gives two conditions the same result. In each
+condition, [P4] applies as stated; main's closed-loop lift also re-derived it there. When the default is itself chosen
+to minimize the average departure, it is the average action `p̄`, and the departure is the information `I(C; X)`:
+rational inattention (`RELATED.md`, bounded rationality), which is not imported yet.
+
+**Lineage.** main: the dictionary's entry B7, parts (a)–(d) (the closed-loop lift), and its check V9. Part (e), rational
+inattention, is not imported (`IMPORT.md`).

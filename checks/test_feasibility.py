@@ -2,7 +2,8 @@
 inequality and linear limits the equality, with the exponential form; the split is the accounting of net value; and
 misalignment splits into avoidable and unavoidable parts. For the Notes: contexts, a coarse actor and a random
 environment are linear limits, and a curved (non-convex) limit can break the split. P27: the best use of a departure
-budget, and the budget as a price. P28: the width of a departure budget."""
+budget, and the budget as a price. P28: the width of a departure budget. P31: budgets of other shapes. P32: regulation
+costs departure."""
 import itertools
 import numpy as np
 from scipy.optimize import minimize
@@ -299,3 +300,87 @@ def test_the_width_of_a_departure_budget():
         assert abs(rem[1] - k3 / (3 * V)) <= 3 * np.sqrt(1e-6) * (1 + abs(k3) / V ** 2) * scale ** 2
         w = sigma(q, E, 1e-6) + sigma(q, -E, 1e-6)
         assert abs(w - 2 * np.sqrt(2e-6 * V)) <= 3 * 1e-9 * (1 + abs(k3) / V ** 2) * scale ** 3
+
+
+def test_feasible_sets_of_other_shapes():
+    """P31: |E_p E − E_q E| ≤ osc(E)·TV, ≤ √(χ²·Var_q E); E_p E − E_q E ≤ (KL + Λ(u))/u;
+    E_p|E| ≤ e^{(α−1)D_α/α}·‖E‖_{α*} and ≤ e^{D_∞}·E_q|E|; the TV and χ² bounds are attained at small budgets; and a rare outcome is reached at a KL cost
+    log(1/r) but a χ² cost 1/r − 1, so with the variance fixed the KL rise grows without bound and the χ² rise does
+    not."""
+    r = rng(3101)
+    for _ in range(400):
+        n = int(r.integers(2, 10)); q = simplex_interior(r, n); E = r.standard_t(3, n); p = simplex_interior(r, n)
+        scale = 1 + np.abs(E).max(); d = p @ E - q @ E; Ec = E - q @ E
+        tv = 0.5 * np.abs(p - q).sum(); chi2 = ((p - q) ** 2 / q).sum()
+        assert abs(d) <= np.ptp(E) * tv + EXACT * scale
+        assert abs(d) <= np.sqrt(chi2 * (q @ Ec ** 2)) + EXACT * scale
+        for u in np.exp(r.normal(0, 1, 3)):
+            assert d <= (kl(p, q) + log_normalizer(q, u * Ec)) / u + EXACT * scale
+        for a in (1.5, 2.0, 4.0):
+            Da = np.log((p ** a * q ** (1 - a)).sum()) / (a - 1); astar = a / (a - 1)
+            assert p @ np.abs(E) <= np.exp((a - 1) / a * Da) * (q @ np.abs(E) ** astar) ** (1 / astar) + EXACT * scale
+        Dinf = np.log((p / q).max())
+        assert p @ np.abs(E) <= np.exp(Dinf) * (q @ np.abs(E)) + EXACT * scale
+        assert np.exp(Dinf) * (q @ np.abs(E)) <= (q @ np.abs(E)) / q.min() + EXACT * scale
+        delta = 0.5 * min(q[E <= E.min()].sum(), 1 - q[E >= E.max()].sum())        # attained: TV
+        pt = q.copy(); lo = np.flatnonzero(E <= E.min()); hi = np.flatnonzero(E >= E.max())
+        pt[lo] -= delta * q[lo] / q[lo].sum(); pt[hi] += delta * q[hi] / q[hi].sum()
+        assert abs(0.5 * np.abs(pt - q).sum() - delta) <= EXACT
+        assert abs((pt - q) @ E - delta * np.ptp(E)) <= EXACT * scale
+        s = 0.5 * np.sqrt(q @ Ec ** 2) / np.abs(Ec).max()                            # attained: χ²
+        pc = q * (1 + s * Ec / np.sqrt(q @ Ec ** 2))
+        assert abs(((pc - q) ** 2 / q).sum() - s ** 2) <= EXACT
+        assert abs(pc @ E - q @ E - s * np.sqrt(q @ Ec ** 2)) <= EXACT * scale
+    from_kl, from_chi2 = [], []
+    for rr in (1e-2, 1e-4, 1e-6, 1e-8):                                              # the finite form of heavy tails
+        q = np.array([rr, 1 - rr]); M = np.sqrt(1.0 / (rr * (1 - rr))); E = np.array([M, 0.0]); delta = 0.5
+        kl_rise = rise(q, E, delta)
+        assert kl_rise >= min(1, delta / np.log(1 / rr)) * M * (1 - rr) - EXACT * M
+        point = np.array([1.0, 0.0])                                                # all mass on the rare outcome
+        assert abs(kl(point, q) - np.log(1 / rr)) <= EXACT
+        assert abs(1 / rr - 1 - ((point - q) ** 2 / q).sum()) <= 1e-6 / rr
+        from_kl.append(kl_rise); from_chi2.append(np.sqrt(delta * M ** 2 * rr * (1 - rr)))
+    assert all(b > 3 * a for a, b in zip(from_kl, from_kl[1:]))                     # the KL rise grows without bound
+    assert max(from_chi2) <= np.sqrt(0.5) + EXACT and from_kl[-1] > 100 * max(from_chi2)  # the χ² rise does not
+
+
+def regulation_instance(r, injective=True):
+    """Conditions c with frequencies ρ, actions x with one default q, and a result z = φ(c, x), injective in c for each
+    x (a shifted index modulo the number of results) unless asked otherwise."""
+    k, n = int(r.integers(2, 6)), int(r.integers(2, 6)); m = k + int(r.integers(0, 3))
+    rho, q = simplex_interior(r, k), simplex_interior(r, n)
+    shift = r.integers(0, m, n)
+    phi = (np.arange(k)[:, None] + shift[None, :]) % m if injective else r.integers(0, 2, (k, n))
+    P = np.array([tilt(q, r.normal(0, r.uniform(0.1, 3), n)) for _ in range(k)])   # the response p_c, row by row
+    return rho, q, phi, P, m
+
+
+def entropy(p):
+    p = p[p > 0]
+    return float(-(p * np.log(p)).sum())
+
+
+def test_regulation_costs_departure():
+    """P32: Σ_c ρ(c)·KL(p_c‖q) = I(C;X) + KL(p̄‖q); H(Z) ≥ H(C) − I(C;X) when φ(·, x) is injective (and can fail when it
+    is not); so H(Z) ≥ H(C) − δ for an average departure δ, and the miss rate g of a target result satisfies
+    h(g) + g·log(|Z| − 1) ≥ H(C) − δ."""
+    r = rng(3201); failures_without = 0
+    for _ in range(500):
+        rho, q, phi, P, m = regulation_instance(r)
+        pbar = rho @ P; joint = rho[:, None] * P
+        I = float((joint * np.log(P / pbar[None, :])).sum())
+        avg = float(rho @ np.array([kl(P[c], q) for c in range(len(rho))]))
+        assert abs(avg - (I + kl(pbar, q))) <= 1e-12 * (1 + avg)
+        pz = np.bincount(phi.ravel(), weights=joint.ravel(), minlength=m)
+        assert entropy(pz) >= entropy(rho) - I - 1e-12
+        assert entropy(pz) >= entropy(rho) - avg - 1e-12
+        for z0 in range(m):
+            g = 1 - pz[z0]
+            h = entropy(np.array([g, 1 - g]))
+            assert h + g * np.log(m - 1) >= entropy(rho) - avg - 1e-12
+        rho, q, phi, P, m = regulation_instance(r, injective=False)
+        pbar = rho @ P; joint = rho[:, None] * P
+        I = float((joint * np.log(P / pbar[None, :])).sum())
+        pz = np.bincount(phi.ravel(), weights=joint.ravel(), minlength=max(m, 2))
+        failures_without += entropy(pz) < entropy(rho) - I - 1e-9
+    assert failures_without >= 50                                                   # injectivity is needed

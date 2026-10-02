@@ -3,11 +3,13 @@
 One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md`, `derived/`,
 `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here (lint rule R8).
 
+- [@ashby1956] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [@chernoff1952] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
+- [@conant1969] Conant, R. C. (1969), The information transfer required in regulatory processes. *IEEE Transactions on Systems Science and Cybernetics* 5(4), 334–338.
 - [@cover2006] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
 - [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
 - [@dranove2003] Dranove, D., Kessler, D., McClellan, M. and Satterthwaite, M. (2003), Is more information better? The effects of "report cards" on health care providers. *Journal of Political Economy* 111(3), 555–588.

@@ -12,7 +12,7 @@ assumption. A result may use only the core and the results before it in the read
 | 4 | `resolution.md` | P7, P8 | what declared indifference forgives; what an actor that cannot tell outcomes apart can achieve |
 | 5 | `stakes.md` | P9, P10 | the shortfall and its three causes; sensitivity to the declared default and objective |
 | 6 | `identifiability.md` | P11–P13, P16, P17 | the start of a change; pass-through; what an actor can hide where it is not observed |
-| 7 | `feasibility.md` | P15, P27, P28 | misalignment splits into avoidable and unavoidable parts, exactly for linear limits; within a departure budget, the best behaviour is pursuit cut off where the budget runs out, and the budget acts as a price; how far a budget lets an average move |
+| 7 | `feasibility.md` | P15, P27, P28, P31, P32 | misalignment splits into avoidable and unavoidable parts, exactly for linear limits; within a departure budget, the best behaviour is pursuit cut off where the budget runs out, and the budget acts as a price; how far a budget lets an average move; budgets of other shapes, and the cheap reach of a KL budget; regulation costs departure |
 | 8 | `evaluator.md` | P18–P20, P25, P26, P29, L1, P30 | through the evaluator only the regression counts; a monotone regression rules out overoptimization; where overoptimization starts and ends; the target's curve turns no more often than the regression; the regression on bins governs at small intensity; within a departure budget, the width along the evaluator's error is the exact worst case, and no bound separating error from budget is accurate at every budget |
 | 9 | `estimation.md` | P21–P24 | misalignment as the rate of evidence; detection; the distribution of estimated misalignment; the evaluation gap |
 
