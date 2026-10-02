@@ -79,7 +79,11 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6); PI: approved | [D11]; [P21]–[P24] |
 | Q8 | a file on related theories | PI | `RELATED.md`, lint R12 |
 | Q9 | derived results whose proof is a classical theorem | PI: approved, with a light simulation unless a discrepancy shows | [P22] (Chernoff), [P23] (Wilks): the theorem quoted with its hypotheses, and a check |
-| Q10 | [P25] (shape law, by Laguerre's rule of signs) and [P26] (binned evaluators, E8) | executor, in a turn the PI left free; **for the PI's review** | `derived/evaluator.md`; checks mutation-tested (eight mutants, all caught after two check fixes) |
+| Q10 | [P25] (shape law, by Laguerre's rule of signs) and [P26] (binned evaluators, E8) | executor, in a turn the PI left free; PI: worth merging | `derived/evaluator.md`; checks mutation-tested (eight mutants, all caught after two check fixes) |
+| Q11 | main's bounds on `F̂ − F` stated for known evaluators only, with the error as notation | PI: approved | `IMPORT.md` §2 |
+| Q12 | main's capacity imported as a feasible set, the **departure budget** | PI: approved | [P27], [P28] |
+| Q13 | the import plan of `IMPORT.md`, every recommendation, and its roadmap | PI: approved | `IMPORT.md` §6; phase R1 done |
+| Q14 | `derived/feasibility.md` moved after `identifiability.md` in the reading order, since [P27] uses [P9] and [P13] and no earlier file cites [P15] | executor, caught by lint R5 | `derived/README.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -146,7 +150,9 @@ item changes.
 
 ## 4. Order next
 
-The PI's review of v10 ([D10], [D11], [P18]–[P24]). Then, in this order:
+The plan to merge `core` into `main` is in `IMPORT.md`: twelve results to derive from the archive (six of them block
+the merge), `derived/forbids.md`, and decisions Q11 and Q12. Before it, the PI's review of v10. The items below come
+after the merge, or alongside it:
 1. A worked case on the data of §3.2, pre-registered: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak to
    test, and [P21] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`, section
    4). A case with a pass-or-fail verifier would test [P19] directly.

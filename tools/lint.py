@@ -35,7 +35,8 @@ Rules
       Sections 4 and 5 are not empty. Every item named in an ontology exists.
   R11 STANDARD.md names only existing items, and names every definition of the core: the reporting standard covers the
       whole shared vocabulary.
-  R12 RELATED.md, the survey of related theories, names only existing items; its citations count for R8.
+  R12 RELATED.md, the survey of related theories, and IMPORT.md, the map from the archive to the core, name only
+      existing items; their citations count for R8.
 """
 import re, sys
 from pathlib import Path
@@ -244,14 +245,15 @@ def lint(root):
                 errors.append(f"STANDARD.md: R11 the definition {it['id']} is not covered by the standard")
     elif any(it["kind"] == "D" for it in core_items):
         errors.append("STANDARD.md: R11 the reporting standard is missing")
-    related = root / "RELATED.md"
-    if related.exists():
-        rtext = related.read_text(encoding="utf-8")
-        cited |= {("RELATED.md", k) for k in CITE.findall(rtext)}
-        for n, line in enumerate(rtext.splitlines(), 1):
-            for ref in REF.findall(line):
-                if ref not in pos:
-                    errors.append(f"RELATED.md:{n}: R12 [{ref}] names no item")
+    for name in ("RELATED.md", "IMPORT.md"):
+        survey = root / name
+        if survey.exists():
+            rtext = survey.read_text(encoding="utf-8")
+            cited |= {(name, k) for k in CITE.findall(rtext)}
+            for n, line in enumerate(rtext.splitlines(), 1):
+                for ref in REF.findall(line):
+                    if ref not in pos:
+                        errors.append(f"{name}:{n}: R12 [{ref}] names no item")
 
     # R8
     refs_file = root / "REFERENCES.md"

@@ -18,6 +18,7 @@ else is derived from them, with proofs and checks, and reported through one stan
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `REFERENCES.md` | the sources cited anywhere in the framework |
 | `RELATED.md` | related theories: what each shares with the framework, what differs, what to import, and what it could take from us |
+| `IMPORT.md` | the map from every item of the archive (v7.10) to its fate in the core: in core, to derive, needing a concept, or dropped, with the reason; the plan for merging `core` into `main` |
 | `checks/` | one pytest check, at least, for every result |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
 | `ontologies/` | the core read in five disciplines, each in its own folder: machine learning, biology, humans, institutions, and job delegation from a manager to an employee. Each fills the same typed slots and reframes one known result. Not part of the core |
@@ -45,7 +46,7 @@ else is derived from them, with proofs and checks, and reported through one stan
   slot's item and how well it fits; has the five sections in order; cites the known result it reframes; and labels
   every claim as a consequence, a prediction (which says when it is refuted) or a reading, with the items it uses.
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
-- **R12.** `RELATED.md` names only existing items, and its citations are listed like all others.
+- **R12.** `RELATED.md` and `IMPORT.md` name only existing items, and their citations are listed like all others.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, and every check on two
 SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It must hold on both
@@ -96,7 +97,7 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `RELATED.md`, `NOTES.md` and
+Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and
 `ontologies/README.md`. Then,
 on `main`, read `70 Project/NOTES_claude.md` §1: the failure modes of
 past sessions, each with its evidence.
