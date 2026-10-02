@@ -6,7 +6,10 @@ regression of the target on it counts ([P18]). A regression that rises with the 
 current behaviour, and at high intensity it is decided by the evaluator's two highest values ([P20]). The target's curve
 turns no more often than the regression does, so a single-peaked regression gives at most one fall ([P25]). For an
 evaluator that scores every outcome differently, the regression on bins of its values governs the pursuit while the
-intensity is small against the bins ([P26]).
+intensity is small against the bins ([P26]). For an evaluator known in the objective's units, pursued within a
+departure budget, the objective lost is at most the width of the budget along the evaluator's error, and that bound is
+the exact worst case ([P29]); which of two errors is worse depends on the budget, so no bound that separates the error
+from the budget can be accurate at every budget ([L1], [P30]).
 
 ### P18 — Through the evaluator, only the regression counts
 **Statement.** Let `F̂` be an evaluator for the objective `F`, with regression `m`, residual `R` and resolution `𝒱` of
@@ -196,3 +199,86 @@ bound covers the pursuit of `F̂`, not best-of-`n`; for best-of-`n` the natural 
 `log Q(F̂)`, the log of the default's mass below a value, which is open (`NOTES.md` E8).
 
 **Lineage.** main: Prop 2 (Popoviciu's bound on the variance). New (`NOTES.md` E8).
+
+### P29 — The width is the exact worst case
+**Statement.** Let `F` be the objective, `F̂` an evaluator known in the units of `F` ([D10]), and `E = F̂ − F` its
+error, non-constant. Let `δ > 0`, and for `G = F` and `G = F̂` let `p*_G` be a behaviour with the largest average of
+`G` over the departure budget `𝓑_δ` ([P27](ii)). Let `L = E_{p*_F}[F] − E_{p*_F̂}[F]`: the objective lost by pursuing
+the evaluator instead of the objective within the budget.
+(i) `0 ≤ L ≤ E_{p*_F̂}[E] − E_{p*_F}[E] ≤ w_δ(E)`, the width of the budget along the error ([P28]).
+(ii) Over all objectives `F` with the same error, the largest `L` is `w_δ(E)`: `F = −c·E` gives `L = c·w_δ(E)`, for
+every `0 < c < 1`. So no bound on `L` that depends only on the error and the budget is smaller than `w_δ(E)`.
+(iii) If the budget binds for both, `δ < −log q(argmax F)` and `δ < −log q(argmax F̂)`, then `L` is the shortfall of
+`p*_F̂` ([D5]).
+
+**In plain terms.** An actor that has a fixed budget of departure and spends it on the evaluator instead of the
+objective loses some of the objective. The loss is never more than how far the budget lets the average of the error
+move, up and down together; and for some objective it is that much. So the width is not a loose bound: it is the
+worst case. When both pursuits use up the budget, the loss is the actor's stakes.
+
+**Proof.** (i) `p*_F` has the largest average of `F` over the budget and `p*_F̂` is in it, so `L ≥ 0`. `p*_F̂` has the
+largest average of `F̂ = F + E` and `p*_F` is in the budget, so
+`E_{p*_F̂}[F] + E_{p*_F̂}[E] ≥ E_{p*_F}[F] + E_{p*_F}[E]`, which rearranges to the middle inequality. Both behaviours
+are in the budget, so `E_{p*_F̂}[E] − E_q[E] ≤ σ_δ(E)` and `E_q[E] − E_{p*_F}[E] ≤ σ_δ(−E)`, whose sum is `w_δ(E)`. (ii)
+With `F = −c·E`, `F̂ = (1 − c)·E`. A positive multiple of an objective has the same best behaviours in the budget, since
+`λ_δ(a·G) = λ_δ(G)/a` and `p_{aG, λ/a} = p_{G,λ}` ([P27](ii)). So `p*_F̂` raises the average of `E` by `σ_δ(E)` and
+`p*_F` lowers it by `σ_δ(−E)`, and `L = c·(σ_δ(E) + σ_δ(−E)) = c·w_δ(E)`. With (i), the supremum over `c < 1` is
+`w_δ(E)`. (iii) When the budget binds for `F̂`, `KL(p*_F̂‖q) = δ` ([P27](ii)), so the matched intensity of `p*_F̂` is
+`λ_δ(F)` and its matched pursuit is `p_{F,λ_δ(F)} = p*_F` ([D5], [P27](ii)); the shortfall is then `L`.
+
+**Checks.** checks/test_evaluator.py::test_the_width_is_the_exact_worst_case
+
+**Notes.** The error `E = F̂ − F` needs the evaluator's scale, which behaviour never identifies ([D10]); this result is
+about evaluators known in the objective's units, such as a reward model trained to predict the objective. The
+comparison is at an equal budget, as stakes are ([D5]); main also compared net values at a declared price, which the
+core does not use. Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
+
+**Lineage.** main: Thm 5 (the width is the exact worst case), parts (i) and (ii) at `β = ∞`; part (iii), at a declared
+price, is not imported. New: (iii) here, the loss as the shortfall of [D5].
+
+### L1 — Separable bounds are loose when two quantities change rank
+**Statement.** Let `Q(E, δ) > 0` for `E` in a pair `{E₁, E₂}` and `δ` in a set `D`, let
+`ρ(δ) = Q(E₁, δ)/Q(E₂, δ)`, and `K = sup_D ρ / inf_D ρ`. If `B(E, δ) = a(E)·b(δ)` satisfies `Q ≤ B ≤ L·Q` on
+`{E₁, E₂} × D`, then `L ≥ √K`; and some separable `B` attains `L = √K`.
+
+**In plain terms.** A bound that multiplies a property of the error by a function of the budget cannot follow two errors
+whose ratio changes with the budget: if the ratio moves by a factor `K`, the bound is off by at least `√K` somewhere.
+
+**Proof.** For every `δ`, `κ = a(E₁)/a(E₂) = B(E₁, δ)/B(E₂, δ)` lies in `[ρ(δ)/L, L·ρ(δ)]`, so
+`sup_D ρ/L ≤ κ ≤ L·inf_D ρ`, which gives `L² ≥ K`. For the second part, take `a(E₂) = 1`,
+`a(E₁) = κ = (sup_D ρ · inf_D ρ)^{1/2}` and `b(δ) = Q(E₂, δ)·(ρ(δ)/κ)^{1/2}`: then `B/Q` is `(ρ/κ)^{1/2}` on `E₂` and
+`(κ/ρ)^{1/2}` on `E₁`, both between `K^{−1/4}` and `K^{1/4}`; rescaling `b` by `K^{1/4}` gives `Q ≤ B ≤ √K·Q`.
+
+**Checks.** checks/test_evaluator.py::test_no_separable_bound_on_the_worst_case
+
+**Lineage.** main: Lemma 8. New: that `√K` is attained.
+
+### P30 — No separable bound on the worst case
+**Statement.** Let `E₁` be non-constant and `A` a set of outcomes with `q(A) = r ∈ (0, 1)`.
+(i) As `δ → 0`, `w_δ(E₁)/w_δ(1_A) → (Var_q(E₁)/(r·(1 − r)))^{1/2}`; and `w_δ(E₁)/w_δ(1_A) = max E₁ − min E₁` for every
+`δ ≥ δ̄ = max{−log q(argmax E₁), −log q(argmin E₁), −log r, −log(1 − r)}`.
+(ii) Hence any bound `a(E)·b(δ)` on the worst case `w_δ(E)` of [P29] that holds within a factor `L` for the pair
+`{E₁, M·1_A}`, for some `M > 0`, over budgets that include arbitrarily small ones and one at least `δ̄`, has
+`L ≥ (K)^{1/2}` with `K ≥ Var_q(E₁)^{1/2} / ((max E₁ − min E₁)·(r·(1 − r))^{1/2})`; and this grows without bound as
+`q(A) → 0` with `Var_q(E₁)/(max E₁ − min E₁)²` bounded away from `0`.
+
+**In plain terms.** At a small budget, the error that does more damage is the one with more spread under the default;
+at a large budget, it is the one with the wider range. An error confined to a rare region has little spread but a full
+range, so it is harmless at small budgets and as bad as any at large ones. No ranking of errors holds at every budget,
+and no bound that scores the error once and the budget once can be accurate at every budget.
+
+**Proof.** (i) By [P28](ii), `w_δ(E) = 2·(2δ·Var_q(E))^{1/2} + O(δ^{3/2})` for both, and `Var_q(1_A) = r·(1 − r)`. By
+[P28](iii), once `δ ≥ δ̄` each width is its range: `max E₁ − min E₁`, and `1` for `1_A`, whose largest value is taken on
+`A` and smallest on its complement. (ii) The width is multiplied by `M` when the function is ([P28], Notes), so the
+ratio for `{E₁, M·1_A}` is that of (i) divided by `M`, and `K` does not depend on `M`. The supremum of the ratio over
+the budgets is at least its limit at `0` and its value at `δ̄`, and the infimum at most either, so `K` is at least their
+quotient. [L1] with `Q(E, δ) = w_δ(E)`, the worst case by [P29](ii), gives the bound on `L`.
+
+**Checks.** checks/test_evaluator.py::test_no_separable_bound_on_the_worst_case
+
+**Notes.** Main measured the same effect for one fixed objective, not only for the worst case: a dense error and a
+one-outcome spike swap ranks between small and large budgets, by a factor of about a hundred. The statement in the core
+is about the worst case only.
+
+**Lineage.** main: Thm 9 (the worst-case regret is not separable), with its check V5, and §11.1 (no capacity-free
+ranking of errors).

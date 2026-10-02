@@ -204,6 +204,12 @@ def budget_intensity(q, G, delta):
     return 0.5 * (lo + hi)
 
 
+def rise(q, E, delta):
+    """σ_δ(E): how far the departure budget δ lets the average of E rise above E_q[E] (P27(ii), P28)."""
+    lam = budget_intensity(q, E, delta)
+    return (tilt(q, lam * E) @ E if np.isfinite(lam) else E.max()) - q @ E
+
+
 def in_budget(r, q, delta):
     """A random behaviour with departure at most δ: a random tilt of q, pulled back toward q until it fits."""
     h = r.normal(0, 2, q.size)
@@ -272,8 +278,7 @@ def test_the_width_of_a_departure_budget():
     = max E − E_q[E] once δ ≥ −log q(argmax E), w_δ = osc(E) once the budget reaches both ends."""
     from scipy.optimize import minimize_scalar
     r = rng(2801)
-    sigma = lambda q, E, d: (tilt(q, budget_intensity(q, E, d) * E) @ E if np.isfinite(budget_intensity(q, E, d))
-                             else E.max()) - q @ E
+    sigma = rise
     for _ in range(300):
         n = int(r.integers(2, 9)); q = simplex_interior(r, n); E = r.normal(0, 1, n); scale = 1 + np.abs(E).max()
         cap = -np.log(q[E >= E.max()].sum()); delta = r.uniform(0.02, 0.95) * cap
