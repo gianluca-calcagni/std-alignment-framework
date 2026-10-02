@@ -1,7 +1,8 @@
 """Checks of P18 (through the evaluator, only the regression counts: the residual averages to zero for every behaviour
 that sees outcomes only through the evaluator; the covariance form of the target's gain; invariance under injective
-transformations of the evaluator), P19 (a monotone regression rules out overoptimization) and P20 (where
-overoptimization starts, and how it ends at high intensity)."""
+transformations of the evaluator), P19 (a monotone regression rules out overoptimization), P20 (where
+overoptimization starts, and how it ends at high intensity), P25 (the target's curve turns no more often than the
+regression), P26 (binned evaluators), P29 (the width is the exact worst case), L1 and P30 (no separable bound)."""
 import numpy as np
 from .common import EXACT, rng, simplex_interior, tilt
 
@@ -220,3 +221,70 @@ def test_binned_evaluators():
     for t in (1e-4, 1e-3):
         gap = abs(tilt(q, t * Fh) @ F)
         assert 0.999 * bound(t, 1, 2) <= gap <= bound(t, 1, 2)                       # attained to first order
+
+
+def best_in_budget(q, G, delta):
+    """A behaviour with the largest average of G over the departure budget δ (P27(ii)): p_{G,λ_δ}, or q(·|argmax G)."""
+    from .test_feasibility import budget_intensity
+    lam = budget_intensity(q, G, delta)
+    top = G >= G.max()
+    return tilt(q, lam * G) if np.isfinite(lam) else q * top / q[top].sum()
+
+
+def test_the_width_is_the_exact_worst_case():
+    """P29: for a known evaluator F̂ = F + E pursued within the departure budget δ, the objective lost,
+    L = E_{p*_F}[F] − E_{p*_F̂}[F], satisfies 0 ≤ L ≤ E_{p*_F̂}[E] − E_{p*_F}[E] ≤ w_δ(E); F = −cE gives L = c·w_δ(E);
+    and when the budget binds for both, L is the shortfall of D5."""
+    from .test_feasibility import rise
+    from .test_stakes import shortfall
+    r = rng(2901); ratios = []; bound = 0
+    for _ in range(600):
+        n = int(r.integers(2, 9)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        E = r.normal(0, r.uniform(0.1, 2), n)
+        Fh = F + E; scale = 1 + np.abs(F).max() + np.abs(E).max()
+        caps = [-np.log(q[G >= G.max()].sum()) for G in (F, Fh, E, -E)]
+        delta = min(caps) * (r.uniform(0.02, 0.9) if r.random() < 0.8 else r.uniform(1.0, 1.5))
+        pF, pFh = best_in_budget(q, F, delta), best_in_budget(q, Fh, delta)
+        L = pF @ F - pFh @ F; mid = pFh @ E - pF @ E; w = rise(q, E, delta) + rise(q, -E, delta)
+        assert -EXACT * scale <= L <= mid + EXACT * scale and mid <= w + EXACT * scale
+        ratios.append(L / w)
+        if delta < min(caps[:2]):                                                    # both budgets bind
+            S, lam = shortfall(pFh, q, F)
+            assert abs(S - L) <= 1e-8 * scale
+            bound += 1
+        for c in (0.5, 0.999):                                                       # the worst case is reached
+            Fc = -c * E; pc, pch = best_in_budget(q, Fc, delta), best_in_budget(q, Fc + E, delta)
+            assert abs((pc @ Fc - pch @ Fc) - c * w) <= 1e-8 * scale
+    assert bound >= 300 and np.median(ratios) < 0.5                                  # typical losses sit well inside
+
+
+def test_no_separable_bound_on_the_worst_case():
+    """L1: if Q ≤ a(E)·b(δ) ≤ L·Q on two errors, then L ≥ √K, K = sup ρ / inf ρ, and √K is attained. P30: the ratio of
+    the widths of a non-constant E₁ and of 1_A tends to √(Var_q(E₁)/(r(1−r))) as δ → 0 and is osc(E₁) once δ ≥ δ̄; so
+    K grows without bound as q(A) → 0."""
+    from .test_feasibility import rise
+    r = rng(3001)
+    for _ in range(300):                                                             # L1
+        k = int(r.integers(2, 12)); Q1, Q2 = np.exp(r.normal(0, 1, k)), np.exp(r.normal(0, 1, k))
+        rho = Q1 / Q2; K = rho.max() / rho.min()
+        a1, a2, b = np.exp(r.normal()), np.exp(r.normal()), np.exp(r.normal(0, 1, k))
+        ratios = np.concatenate([a1 * b / Q1, a2 * b / Q2])
+        assert ratios.max() / ratios.min() >= np.sqrt(K) * (1 - 1e-12)              # any separable bound
+        kappa = np.sqrt(rho.max() * rho.min()); g = np.sqrt(rho / kappa)            # the bound that attains √K
+        best = np.concatenate([kappa * Q2 * g / Q1, Q2 * g / Q2])
+        assert abs(best.max() / best.min() - np.sqrt(K)) <= 1e-9 * np.sqrt(K)
+    w = lambda q, E, d: rise(q, E, d) + rise(q, -E, d)
+    for _ in range(200):                                                             # P30
+        n = int(r.integers(3, 10)); q = simplex_interior(r, n); E1 = r.normal(0, 1, n)
+        A = np.zeros(n, bool); A[r.choice(n, int(r.integers(1, n)), replace=False)] = True; IA = A.astype(float)
+        rr = q[A].sum(); V = q @ (E1 - q @ E1) ** 2; scale = 1 + np.abs(E1).max()
+        small = w(q, E1, 1e-8) / w(q, IA, 1e-8)
+        assert abs(small - np.sqrt(V / (rr * (1 - rr)))) <= 1e-3 * np.sqrt(V / (rr * (1 - rr))) * scale
+        dbar = max(-np.log(q[E1 >= E1.max()].sum()), -np.log(q[E1 <= E1.min()].sum()), -np.log(rr), -np.log(1 - rr))
+        assert abs(w(q, E1, 1.01 * dbar) / w(q, IA, 1.01 * dbar) - np.ptp(E1)) <= 1e-9 * scale
+    growth = []
+    for rr in (1e-2, 1e-4, 1e-6):                                                    # K unbounded as q(A) → 0
+        q = np.array([rr, (1 - rr) / 3, (1 - rr) / 3, (1 - rr) / 3]); E1 = np.array([0.0, -1.0, 0.0, 1.0])
+        V = q @ (E1 - q @ E1) ** 2
+        growth.append(np.sqrt(V / (rr * (1 - rr))) / np.ptp(E1))
+    assert growth[0] > 3 and growth[1] > 10 * growth[0] * 0.9 and growth[2] > 10 * growth[1] * 0.9
