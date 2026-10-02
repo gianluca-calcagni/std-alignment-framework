@@ -72,6 +72,12 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two are
   uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero; that
   would mean the trained policies are not the optima the slots assume.
+- **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
+  started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
+  policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
+  have the opposite sign to the pursuit of the proxy itself. A language model has no logit per response, so its first
+  step pursues another function of the proxy, set by its parametrization; [P13](i) still gives the gold's first rate
+  as the covariance with that function, and the claim of [C5] about optimizers carries over.
 - **Consequence** of [P10]: within one prompt, the optimum for `β` lies on the proxy's pursuit ray, so its misalignment
   against the gold is at most `osc(F − r̂)/β`, where `osc` is taken over all responses ([P10](ii), with the proxy as the
   declared objective and the gold as the corrected one). Misalignment can grow at most in proportion to the intensity.

@@ -62,3 +62,6 @@ For each result: its value, whether it is identified, and the assumptions it use
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).
 - Call an unobserved condition aligned because an observed one is, without bounding `ε` ([P17]).
+- Take an evaluation under a strong incentive as evidence of alignment in use: where the incentive points at the
+  objective, every actor looks aligned ([P37]).
+- Rank two evaluator errors without naming the budget: no ranking holds at every budget ([C1]).

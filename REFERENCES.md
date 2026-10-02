@@ -22,6 +22,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@holmstrom1991] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
 - [@karwowski2024] Karwowski, J., Hayman, O., Bai, X., Kiendlhofer, K., Griffin, C. and Skalse, J. (2024), Goodhart's law in reinforcement learning. *The Twelfth International Conference on Learning Representations* (ICLR 2024).
 - [@kerr1975] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
+- [@laidlaw2025] Laidlaw, C., Singhal, S. and Dragan, A. (2025), Correlated proxies: a new definition and improved mitigation for reward hacking. *International Conference on Learning Representations* (ICLR 2025).
 - [@madrian2001] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
 - [@manski2003] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
 - [@matejka2015] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.

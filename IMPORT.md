@@ -67,8 +67,8 @@ and the closed-loop floor.
 | N8 | Floors and caps: the intended segment: **[P35]** | Defs 18, 20; Props 33, 35, 37(d) | should | `misalignment.md` | small (`NOTES.md` E2) |
 | N9 | Ordinal objectives, by isotonic regression: **[P36]** | Def 17 (ordinal part), Prop 32 | should | `misalignment.md` | medium (`NOTES.md` E3) |
 | N10 | Choosing by the evaluator from a common candidate set: **[P34]** | Prop 23 | should | `evaluator.md` | small |
-| N11 | A strong incentive masks the actor, and fakes alignment | Props 28, 30 (with interventions, not a coupling) | should | `estimation.md`, since it uses [P22] and [P24] | medium |
-| N12 | Any convex cost: the Bregman form of [P4] | Prop 15 | could | `value.md` | small |
+| N11 | A strong incentive masks the actor, and fakes alignment: **[P37]** | Props 28, 30 (with interventions, not a coupling) | should | `estimation.md`, since it uses [P22] and [P24] | medium |
+| N12 | Any convex cost: the Bregman form of [P4]: **[P38]** | Prop 15 | could | `value.md` | small |
 | — | `derived/forbids.md`: the statements the core rules out, each with its test: **[C1]–[C12]** | Core 11 | must | new file | medium |
 
 Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and needs no item of its own.
@@ -134,7 +134,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Cor 13.4 | second-order transverse and axial error | in core | the transverse part is [P11]; the axial part is the price convention |
 | Rem 13.5 | rescaling harms only under the price convention | drop | the core has no price convention |
 | Prop 14 | initial and terminal effects of optimization | in core | [P13](i), [P20] |
-| Prop 15 | the regret identity for any convex regularizer | derive, could | N12; the measure stays KL ([P14]) |
+| Prop 15 | the regret identity for any convex regularizer | in core | [P38], imported in R6; the measure stays KL ([P14]) |
 | Prop 16 | the gauge group and the identified quantities | in core | [P1], [D9], [D10] |
 | Rem 16.1 | the actor's own default is not identified apart from its evaluator | in core | [P1](i) and (iii) |
 | Thm 17 | every regret notion is a point on one convex curve | in core | convexity: [P5]; the budget point: [D5], [P9]; the price point is dropped |
@@ -143,15 +143,15 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Prop 19 | the evaluation gap | in core | [P24] |
 | Prop 20 | Goodhart as a covariance, for any optimizer | in core | [P18](ii) |
 | Prop 21 | no overoptimization under an affine regression | in core | [P19], which generalizes it |
-| Prop 22 | the first-order effect of any smooth optimizer | in core | [P13](i); the formula for vanilla policy gradient goes to `ontologies/machine-learning/` |
+| Prop 22 | the first-order effect of any smooth optimizer | in core | [P13](i); policy gradient as [C5](ii), and its reading in `ontologies/machine-learning/` (R6) |
 | Prop 23 | argmax selectors on a common candidate set | in core | [P34], imported in R5 |
 | Prop 24 | the v6.4 measures against the contract | drop | the contract is dropped (Def 11) |
 | Prop 25 | mechanism-relative comparisons against the contract | drop | as Def 14 |
 | Prop 26 | a misspecified default is measured misalignment | in core | [P1](i) and (iii): a pursuit from the actor's own default is a pursuit from the declared one, of another objective, so no behaviour separates the two |
 | Prop 27 | instrumental tracking: the weight on reward is a shadow price | needs | the strategic layer of Def 16 |
-| Prop 28 | incentive masking | derive, should | N11: an intervention with a large pass-through ([D6]) makes two actors indistinguishable ([P22]); no coupling needed |
+| Prop 28 | incentive masking | in core | [P37](i), imported in R6, from pass-through ([D6]) alone, with the leading form stated |
 | Prop 29 | the outer process sees only rewarded behaviour | needs | the strategic layer; its observational part is [D9] and [P17] |
-| Prop 30 | the fake-alignment gap | derive, should | N11, with [P24] |
+| Prop 30 | the fake-alignment gap | in core | [P37](ii) and (iii), imported in R6, without the reward coupling |
 | Prop 31 | target sets against the contract; ordinal below cardinal | in core | monotonicity in the intended set is immediate from [D3]; ordinal below cardinal is [P36](iv) |
 | Prop 32 | the ordinal measure, by isotonic regression | in core | [P36], imported in R5; its budget part (f) is dropped with the budget measure |
 | Prop 33 | capped measures, with an overshoot term | in core | [P35](i) and (iv), imported in R5; its contract part is dropped |
@@ -175,7 +175,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | B02, the conjugacy scale | in core | [P31], imported in R3; its literature rows are in `TERMS.md` §2, level C |
 | B03, Goodhart variants | in core | `TERMS.md` §2 (level C) and `RELATED.md` |
 | B04, reward-model overoptimization | in core | `ontologies/machine-learning/` |
-| B05, when optimizing a proxy helps | in core in part | `ontologies/job-delegation/`; Laidlaw et al. to add to `RELATED.md` once verified |
+| B05, when optimizing a proxy helps | in core | `ontologies/job-delegation/`; Laidlaw et al. [@laidlaw2025] in `RELATED.md` (R6) |
 | B06, the informativeness principle | in core | `ontologies/job-delegation/` |
 | B07, requisite variety and the good regulator | in core | [P32] for (a)–(d), imported in R3; (e), rational inattention, is `RELATED.md`'s endogenous default (later) |
 | B08, the handicap principle | could | `RELATED.md`, then `ontologies/biology/` |
@@ -208,7 +208,7 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | R3 | N5, feasible sets of other shapes; N6, the closed-loop floor | `feasibility.md` | yes | merged: [P31], [P32] |
 | R4 | `derived/forbids.md`: the nine statements of main's §11, each kept, re-derived or dropped, with its test | new file | yes | merged: [C1]–[C12]; nothing blocks the merge |
 | R5 | N7, error bounds for a known evaluator; N10, choosing from a common candidate set; N8, floors and caps; N9, ordinal objectives | `evaluator.md`, `misalignment.md` | no | done: [P33]–[P36]; for review |
-| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | |
+| R6 | N11, incentive masking and fake alignment; N12, any convex cost; the ontology follow-ups (vanilla policy gradient; Laidlaw et al. in `RELATED.md`) | `estimation.md`, `value.md`, `ontologies/` | no | done: [P37], [P38], the ontology and survey follow-ups; for review |
 | R7 | The merge: tag `main` as `v7.10`; merge `core` into `main`, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
 
 **Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been

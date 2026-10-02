@@ -94,7 +94,9 @@ that carry it.
 
 ## Goodhart's law and reward hacking
 
-- *Sources.* Gao et al. [@gao2023]; Skalse et al. [@skalse2022]; Karwowski et al. [@karwowski2024]; Manheim and
+- *Sources.* Gao et al. [@gao2023]; Skalse et al. [@skalse2022]; Karwowski et al. [@karwowski2024]; Laidlaw et al.
+  [@laidlaw2025], who define a proxy by its correlation with the target under a reference policy and propose `χ²`
+  regularization of occupancy measures, the `χ²` row of [P31] with the correlation of [P13]; Manheim and
   Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
   Goodhart *(to verify)*.
 - *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([D10]). Karwowski et al.
