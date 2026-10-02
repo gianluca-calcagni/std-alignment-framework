@@ -114,8 +114,8 @@ def log_tilt(lp, f):
 
 def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
     """P37: under an intervention u with a unique largest outcome and gap γ, two actors' behaviours after it,
-    tilt(p_i, κ·u), differ by KL = O(e^{−κγ}), with (1/κ)·log KL → −γ when their ratios differ at a runner-up; where u
-    and F share their unique best outcome, misalignment tends to 0 as κ grows, while unevaluated conditions keep the
+    tilt(p_i, φ·u), differ by KL = O(e^{−φγ}), with (1/φ)·log KL → −γ when their ratios differ at a runner-up; where u
+    and F share their unique best outcome, misalignment tends to 0 as φ grows, while unevaluated conditions keep the
     actor's own; and where u's best outcome is not among F's, misalignment tends to −log sup_t p_{F,t}(x_u) > 0."""
     from scipy.optimize import minimize_scalar
     r = rng(3701)
@@ -129,7 +129,7 @@ def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
             K = kl_stable(log_tilt(np.log(p1), k * u), log_tilt(np.log(p2), k * u))
             lead = (np.exp(-k * d[others]) * c[others]).sum()
             assert abs(K - lead) <= 1e-9 * lead
-        k = 400 / gamma                                                              # (1/κ)·log KL → −γ
+        k = 400 / gamma                                                              # (1/φ)·log KL → −γ
         K = kl_stable(log_tilt(np.log(p1), k * u), log_tilt(np.log(p2), k * u))
         assert abs(np.log(K) / k + gamma) <= 0.05 * gamma
     for _ in range(100):                                                                 # fake alignment
@@ -142,7 +142,7 @@ def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
                                                    options={"xatol": 1e-10}).fun)
         assert abs(mis(2.0) - misalignment(tilt(own, 2.0 * u), q, F)[0]) <= 1e-7      # agrees with the helper
         Ms = [mis(k) for k in (5.0, 50.0, 500.0)]
-        assert Ms[1] <= Ms[0] + 1e-12 and Ms[2] <= Ms[1] + 1e-12 and Ms[2] <= 1e-3    # → 0 as κ grows
+        assert Ms[1] <= Ms[0] + 1e-12 and Ms[2] <= Ms[1] + 1e-12 and Ms[2] <= 1e-3    # → 0 as φ grows
     for _ in range(100):                                                                 # reward hacking shows
         n = int(r.integers(3, 8)); q = simplex_interior(r, n); F = r.normal(0, 1, n); own = simplex_interior(r, n)
         u = r.normal(0, 1, n); xu = int(np.argmin(F)) if r.random() < 0.5 else int(np.argsort(F)[-2])

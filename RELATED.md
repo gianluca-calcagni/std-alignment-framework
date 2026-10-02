@@ -96,7 +96,8 @@ that carry it.
 
 - *Sources.* Gao et al. [@gao2023]; Skalse et al. [@skalse2022]; Karwowski et al. [@karwowski2024]; Laidlaw et al.
   [@laidlaw2025], who define a proxy by its correlation with the target under a reference policy and propose `χ²`
-  regularization of occupancy measures, the `χ²` row of [P31] with the correlation of [P13]; Manheim and
+  regularization of occupancy measures, the `χ²` row of [P31] with the correlation of [P13] (unlike KL, a `χ²` cost can
+  rule outcomes out at the optimum: [P38](ii)); Manheim and
   Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
   Goodhart *(to verify)*.
 - *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([D10]). Karwowski et al.
@@ -116,7 +117,9 @@ that carry it.
   the terminal rule of [P20](ii); and the shape law of [P25]: the target's curve turns no more often than the
   regression, so a single-peaked regression gives at most one overoptimization peak, for pursuit and for best-of-`n`
   alike. Whether Manheim and Garrabrant's regressional variant (proxy equals target plus
-  noise) has a monotone regression depends on the noise, which is a question for their definitions.
+  noise) has a monotone regression depends on the noise, which is a question for their definitions. For an evaluator
+  known in the target's units, the exact worst cases of the target lost, within a departure budget ([P29]) and among
+  shared candidates such as best-of-`n` ([P34]); and no ranking of errors that holds at every budget ([C1]).
 
 ## Principal–agent theory
 
@@ -164,7 +167,9 @@ that carry it.
 - *Import, later.* Audit protocols, trigger studies and measured evaluation awareness, as estimates of the divergence
   between views.
 - *What it could take from us.* Identified bounds, and the design rule of [P17](iv): audits that the actor cannot tell
-  from real use identify real use.
+  from real use identify real use. A behavioural form of faked alignment, with no model of intent: an incentive met
+  only in evaluation, pointing where the target does, drives the misalignment seen in evaluation to zero, and two
+  actors that pass it through alike become indistinguishable at an exponential rate ([P37]).
 
 ## Distribution shift
 

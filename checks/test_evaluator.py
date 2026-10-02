@@ -332,9 +332,10 @@ def test_error_bounds_for_a_known_evaluator():
 
 
 def test_choosing_from_a_common_candidate_set():
-    """P34: when the objective's choice and the evaluator's choice are made from the same candidate set, with one
-    tie-breaking order, then pathwise 0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*), with E = F̂ − F; so the same holds for the
-    averages under their laws."""
+    """P34: when the target's choice and the evaluator's choice are made from the same candidate set, with one
+    tie-breaking order, then pathwise 0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*) ≤ max_S E − min_S E, with E = F̂ − F; so the
+    same holds for the averages under their laws. The target F = −c·E loses exactly c·(max_S E − min_S E) on every S,
+    so the range is the supremum over targets with the same error."""
     r = rng(3401); losses = 0
     for _ in range(300):
         n = int(r.integers(3, 12)); q = simplex_interior(r, n)
@@ -342,12 +343,17 @@ def test_choosing_from_a_common_candidate_set():
         order = r.permutation(n)                                                      # the common tie-breaking order
         rank = np.empty(n, int); rank[order] = np.arange(n)
         pick = lambda S, G: S[np.lexsort((rank[S], -G[S]))[0]]
-        tot_R = tot_E = 0.0
+        c = r.uniform(0.05, 0.95); Fw = -c * E; Fwh = Fw + E                          # the worst target, F̂ = (1 − c)·E
+        tot_R = tot_E = tot_S = tot_W = 0.0
         for _ in range(50):
             S = r.choice(n, size=int(r.integers(1, 8)), p=q)
-            xs, xh = pick(S, F), pick(S, Fh)
+            xs, xh = pick(S, F), pick(S, Fh); spread = E[S].max() - E[S].min()
             assert -EXACT <= F[xs] - F[xh] <= E[xh] - E[xs] + EXACT
-            tot_R += F[xs] - F[xh]; tot_E += E[xh] - E[xs]
+            assert E[xh] - E[xs] <= spread + EXACT
+            ws, wh = pick(S, Fw), pick(S, Fwh)
+            assert abs((Fw[ws] - Fw[wh]) - c * spread) <= EXACT
+            tot_R += F[xs] - F[xh]; tot_E += E[xh] - E[xs]; tot_S += spread; tot_W += Fw[ws] - Fw[wh]
         losses += tot_R > 0
-        assert 0 <= tot_R <= tot_E + EXACT
+        assert 0 <= tot_R <= tot_E + EXACT and tot_E <= tot_S + EXACT
+        assert abs(tot_W - c * tot_S) <= EXACT * (1 + tot_S)
     assert losses >= 100                                                             # the evaluator does lose
