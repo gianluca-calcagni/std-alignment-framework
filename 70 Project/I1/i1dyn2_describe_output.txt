@@ -1,3 +1,0 @@
-(additive, dominance) coordinates in the (E1, E2) basis; Wright-Dobzhansky log(0.7, 1, 0.3): [0.424, 0.26]
-   young F: increment [0.467, 0.135]; additive part / W-D additive part 1.10; AR frequency 0.5550 (eggs 0.4633)
-   young M: increment [0.223, -0.027]; additive part / W-D additive part 0.53; AR frequency 0.5149 (eggs 0.4633)

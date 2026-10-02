@@ -1,9 +1,0 @@
-[W1] chi^2 regularizer: J(p*)-J(p) vs B_phi(p,p*)/beta
-  interior optima: n=1036, max |gap| = 9.1e-13   boundary optima: n=2964, min gap = 2.44e-07 (>= 0), violations = 0
-[W2] lambda_delta = 1/V'(delta)
-  max relative |1/V'(delta) - lambda| = 6.3e-05
-[W3] same-price vs same-budget counterfactual intended actor
-  pairs of errors: 1218; ranking by raw regret reverses between the two counterfactuals in 139 (11.4%); median |difference| for one error = 0.102
-[W4] max |tilt(tilt(q,G1),G2) - tilt(q, 1.3 G1 + 0.7 G2)| = 4.2e-17
-[W5] all regret notions are points on the convex curve M(t) = KL(p_hat || p_{F,t})
-  max|beta R_J - M(beta)| = 2.2e-14;  max|same-budget raw regret - M(lam)/lam| = 6.2e-13;  max convexity violation = 0.0e+00

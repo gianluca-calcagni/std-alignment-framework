@@ -1,5 +1,0 @@
-instances analysed: 1150  (index range 0..1149)
-Gibbs   tested 1147: middle-ineq violated   0 (0.0 %, min -3.69e-14);  R<0   0 (0.0 %, min -1.30e-14);  either 0 (0.0 %)
-BoN_n   tested 1150: middle-ineq violated   0 (0.0 %, min -4.46e-10);  R<0   0 (0.0 %, min -3.78e-10);  either 0 (0.0 %)
-BoN_KL  tested 1147: middle-ineq violated  23 (2.0 %, min -2.42e-01);  R<0  27 (2.4 %, min -1.51e-01);  either 49 (4.3 %)
-VPG     tested 1147: middle-ineq violated 149 (13.0 %, min -7.55e-01);  R<0 170 (14.8 %, min -4.87e-01);  either 293 (25.5 %)

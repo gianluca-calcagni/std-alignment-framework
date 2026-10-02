@@ -1,3 +1,0 @@
-NPG F: max dev (t<=20) 1.00e-05; first step with dev>1e-8: 74 (KL there 0.978); final KL 6.823; secs 138
-NPG E1: max dev (t<=20) 2.03e-05; first step with dev>1e-8: 62 (KL there 0.880); final KL 7.534; secs 136
-NPG E2: max dev (t<=20) 3.61e-06; first step with dev>1e-8: 73 (KL there 1.569); final KL 7.601; secs 144

@@ -1,4 +1,0 @@
-generic minus closed form, over 300 instances: generic above by > 1e-8 in 1; generic below by > 1e-8 in 0
-largest positive gaps (generic - closed form, n, levels): [('3.9e-16', 8, 3), ('4.4e-16', 6, 3), ('4.4e-16', 9, 4), ('5.6e-16', 7, 3), ('1.4e-03', 8, 8)]
-most negative gaps: [('-6.9e-16', 6, 6), ('-6.7e-16', 4, 4), ('-6.7e-16', 9, 3)]
-the failing instance (n = 8, 8 levels): closed form 0.3873765490; the registered 3 starts give 0.3887949519 (+1.4e-03); 40 starts reach 0.3873765490 (difference -1.7e-16)
