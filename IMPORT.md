@@ -2,9 +2,9 @@
 
 The archive, tagged `v7.10` (commit `9459c14`, the last commit of the vault on `main`), holds 75 items, the chapter
 "what the core forbids", 13 dictionary bridges, 15 boundary claims, 4 actor hypotheses and the empirical projects. This
-file maps each of them to its fate in the core, so that the work left before `core` can be merged into `main` can be
-counted, and so that, after the merge, every result of v7.10 can still be found. Lint rule R12 checks that it names only
-existing items.
+file maps each of them to its fate in the core. It counted the work left before `core` could replace the vault on
+`main`, which it did in R7; it remains the map by which every result of v7.10 can be found. Lint rule R12 checks that it
+names only existing items.
 
 Each entry gets one verdict:
 - **in core**: already derived, generalized or replaced; the entry names the item that holds it.
@@ -233,7 +233,7 @@ an order that respects the reading order of `derived/` (lint R5): a result may u
 | M1 | the defects found by the analysis of the archive: the humans prediction, references to the archive, uncertainty in `STANDARD.md`, stale records | many | yes | done |
 | M2 | `RECORD.md` (honest position, ledger of predictions, retractions; lint R13); labelled predictions (R10); the rules of evidence, the finish line and the version rule in the README; the decisions of section 5 | `RECORD.md`, `README.md`, `tools/` | yes | done |
 | O1 | a generated Obsidian view of the framework, checked fresh by CI | `obsidian/`, `tools/` | no | done |
-| R7 | The merge: tag `9459c14` as `v7.10`; merge `core` into `main` with a merge commit, replacing the vault; this file becomes the map from v7.10 to the core | — | — | |
+| R7 | The merge: tag `9459c14` as `v7.10`; merge `core` into `main` with a merge commit, replacing the vault; this file becomes the map from v7.10 to the core | — | — | merged: the annotated tag `v7.10` on `9459c14`; `core` merged into `main` with a merge commit |
 
 **Done means**, for every phase: lint reports no error; every new check passes on both SIMD paths and has been
 mutation-tested; each imported row of section 4 says "in core" and names its item; each new item's Lineage names the

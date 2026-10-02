@@ -195,11 +195,15 @@ item changes.
 
 ## 4. Order next
 
-**Before the merge** (`IMPORT.md` §5 and §6): fix the defects found by the analysis of the archive (M1); the record of
-predictions and retractions, and the rules of work (M2); a generated Obsidian view (O1). Then R7: tag v7.10, merge
-`core` into `main`. Every v7.10 item already has a recorded fate; nothing else blocks the merge.
+**Done:** the merge (`IMPORT.md` §6). The defects found in the archive were fixed (M1), the record and the rules of
+evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the vault, and the core replaced it on
+`main` (R7). The ontologies were then reworked around disciplines with numbers (Q22).
 
-**After it**, toward the finish line in the README:
+**Next, chosen by the PI:** outcomes that are not finite, so that the core covers continuous quantities (measurable
+spaces, and empirical distribution functions in place of counts); then a worked scenario, described three ways: in
+plain terms, in simple intuitive terms, and formally.
+
+**Then**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak
    to test, and [P21] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`,
    section 4); or D2 (two defaults in a company not used before) for the behavioural-economics ontology; or D6, the
