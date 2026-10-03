@@ -213,7 +213,7 @@ def test_the_scenario_the_roadmap_and_the_cases_name_only_existing_items(tmp_pat
     note = "# Text\n\n- uses [P1] [@cover2006]\n"
     extra = {"SCENARIO.md": note, "ROADMAP.md": note, "cases/c1-x/REGISTRATION.md": note}
     errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra=extra)
-    assert errors == [], errors
+    assert [e for e in errors if " R15 " not in e] == [], errors                 # R15 judges the registration apart
     for name in extra:
         errors, _ = make(tmp_path, extra={**extra, name: note + "- and [P9]\n"})
         assert any(f"{name}:4: R12 [P9] names no item" in e for e in errors), (name, errors)
@@ -226,10 +226,11 @@ def test_a_registration_cannot_change_after_its_result(tmp_path):
     digest = hashlib.sha256(registration.encode()).hexdigest()
     results = f"# C1 results\n\n**Registration SHA-256:** `{digest}`\n"
     case = {"cases/c1-x/REGISTRATION.md": registration}
+    r14 = lambda errors: [e for e in errors if " R14 " in e]                     # R15 judges the same file apart
     errors, _ = make(tmp_path, extra=case)
-    assert errors == [], errors
+    assert r14(errors) == [], errors
     errors, _ = make(tmp_path, extra={**case, "cases/c1-x/RESULTS.md": results})
-    assert errors == [], errors
+    assert r14(errors) == [], errors
     errors, _ = make(tmp_path, extra={**case, "cases/c1-x/RESULTS.md": "# C1 results\n"})
     assert any("R14 the SHA-256 of REGISTRATION.md is not recorded" in e for e in errors), errors
     changed = {"cases/c1-x/REGISTRATION.md": registration + "Amended.\n", "cases/c1-x/RESULTS.md": results}
@@ -406,3 +407,75 @@ def test_a_source_cited_only_in_an_ontology_counts(tmp_path):
 def test_the_repository_itself_passes():
     errors, _ = lint(Path(__file__).resolve().parent.parent)
     assert errors == [], errors
+
+
+GOOD_REGISTRATION = """# W9 — A question — Registration
+
+## Why
+
+Because [P1] predicts it.
+
+## Declaration
+
+| Field | Core | Entry |
+|---|---|---|
+| Outcomes | [D1] | the answers |
+| Objective | [D2] | the reward |
+
+## Auxiliary assumptions
+
+| # | Assumption | Tested how |
+|---|---|---|
+| A1 | the run converged | not needed |
+
+## Predictions
+
+| Id | From | Label | Prediction | Held if | Threshold from |
+|---|---|---|---|---|---|
+| S1 | [P1] | empirical | a direction | the interval is above 0 | a direction: none |
+| S2 | [P1] | empirical | a size | above 0.3 | the rehearsal's noise level |
+
+## Readings, fixed now
+
+What each outcome means.
+
+## Rehearsal
+
+On synthetic data; see `rehearsal.json`.
+
+## Licences
+
+Public.
+"""
+
+
+def test_a_new_registration_follows_the_template(tmp_path):
+    """R15: a case registered after the design rules has every section of the template, a declaration row for every
+    field of the standard, a source for every threshold, and the rehearsal's record; the cases registered before the
+    rules are exempt."""
+    count = iter(range(100))
+
+    def make_fresh(extra):                                                      # a new folder for each variant
+        d = tmp_path / str(next(count)); d.mkdir()
+        return make(d, extra=extra)
+    good = {"cases/w9-x/REGISTRATION.md": GOOD_REGISTRATION, "cases/w9-x/rehearsal.json": "{}"}
+    errors, _ = make_fresh(good)
+    assert errors == [], errors
+    for heading in ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
+                    "## Rehearsal", "## Licences"]:
+        errors, _ = make_fresh({**good, "cases/w9-x/REGISTRATION.md":
+                                          GOOD_REGISTRATION.replace(heading + "\n", "## Something else\n")})
+        assert any(f"R15 the section '{heading}' is missing" in e for e in errors), (heading, errors)
+    errors, _ = make_fresh({**good, "cases/w9-x/REGISTRATION.md":
+                                      GOOD_REGISTRATION.replace("| Objective | [D2] | the reward |\n", "")})
+    assert any("R15 the declaration has no row for the field 'Objective'" in e for e in errors), errors
+    errors, _ = make_fresh({**good, "cases/w9-x/REGISTRATION.md":
+                                      GOOD_REGISTRATION.replace("| the rehearsal's noise level |", "| |")})
+    assert any("R15 prediction S2 does not say where its threshold comes from" in e for e in errors), errors
+    errors, _ = make_fresh({**good, "cases/w9-x/REGISTRATION.md":
+                                      GOOD_REGISTRATION.replace("| Threshold from |", "| Source |")})
+    assert any("R15 the predictions table has no column 'Threshold from'" in e for e in errors), errors
+    errors, _ = make_fresh({"cases/w9-x/REGISTRATION.md": GOOD_REGISTRATION})
+    assert any("cases/w9-x: R15 the rehearsal's record, rehearsal.json, is missing" in e for e in errors), errors
+    errors, _ = make_fresh({"cases/w3-ppo-pursuit/REGISTRATION.md": "# W3\n\nPredict [P1].\n"})
+    assert not any(" R15 " in e for e in errors), errors                       # registered before the rules

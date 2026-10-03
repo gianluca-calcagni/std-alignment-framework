@@ -33,6 +33,26 @@ case says under which licences its inputs were released (README, working agreeme
 5. **One statistic per source.** When a sample mixes sources, such as the outputs of two models, the registered
    statistic is computed within each source, or the registration says why pooling answers the question.
 
+**Lessons as defaults.** A lesson written down applies only if someone remembers it; it applies by default once a
+template asks for it, a tool does it, or a check refuses work without it. Each design rule above, and the failure modes
+of the cases (`NOTES.md` §1), is held in one of these places:
+
+| Lesson | Held by |
+|---|---|
+| the declaration before the data; named objectives and runs declared (rule 1) | `cases/TEMPLATE.md`, and lint R15: a row for every field of `STANDARD.md` |
+| auxiliary assumptions named (rule 2) | `cases/TEMPLATE.md`, and lint R15: the section must exist |
+| no threshold without a source (rule 3) | lint R15: every prediction fills "Threshold from" |
+| a rehearsal with degenerate cases, timed (rule 4) | lint R15: `rehearsal.json` must be in the folder; `tools/casekit.py` (`seconds_per_item`) |
+| one statistic per source; shares in nats away from small departures (rule 5; [[P44 — What named objectives explain\|P44]]) | `cases/TEMPLATE.md`; not checkable by lint, so a reader's job |
+| per-item results saved before aggregating; a bootstrap that keeps every item | `tools/casekit.py` (`save_rows`, `bootstrap`), tested |
+| exact least squares when a regressor does not vary | `tools/casekit.py` (`least_squares`), tested |
+| ties broken at random; logarithms of averages without underflow | `tools/casekit.py` (`untie`, `log_mean_exp`), tested |
+| a registration does not change after its result | lint R14 |
+| stopping a process by its number, never by a pattern | nothing yet: the executor's habit, broken twice (`NOTES.md` §1) |
+
+Lint can check that a section exists, not that its content is right; that is what a reader is for, and none has read a
+registration before it was pushed (Q27).
+
 A case is of one of two kinds.
 - **World**: on data from the world, not seen before the registration. Its predictions come from an ontology, have rows
   in `RECORD.md`, and count toward the finish line and the base rate.

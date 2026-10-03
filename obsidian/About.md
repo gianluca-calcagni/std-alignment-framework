@@ -68,6 +68,9 @@ the general one; where a general result also holds on finite outcomes, it is pro
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 - **R14.** Every case in `cases/` has a registration; once it has a result, the result records the SHA-256 of the
   registration, and the hash still matches.
+- **R15.** A case registered after the design rules follows `cases/TEMPLATE.md`: its registration has every section of
+  the template, a row of its declaration for every field of `STANDARD.md`'s declaration, a source for every threshold,
+  and the rehearsal's record, `rehearsal.json`, in its folder. The four cases registered before the rules are exempt.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, the freshness of `obsidian/`,
 and every check on two SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It

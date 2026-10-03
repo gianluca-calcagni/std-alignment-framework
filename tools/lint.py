@@ -47,6 +47,10 @@ Rules
   R14 Cases. Every folder cases/<name>/ has a REGISTRATION.md. Once it has a RESULTS.md, that file records the SHA-256
       of REGISTRATION.md on a line starting '**Registration SHA-256:**', and the hash matches: a registration does not
       change after its result is written.
+  R15 Design rules. A registration made after the design rules (cases/README.md), that is, of every case but those in
+      BEFORE_THE_DESIGN_RULES, follows cases/TEMPLATE.md: it has the sections of REGISTRATION_SECTIONS; its declaration
+      has a row for every field of the first table of STANDARD.md (the declaration); its predictions table has a
+      column "Threshold from", filled in every row; and its folder holds rehearsal.json, the rehearsal's record.
 """
 import hashlib, re, sys
 from pathlib import Path
@@ -283,9 +287,12 @@ def lint(root):
                     if ref not in pos:
                         errors.append(f"{name}:{n}: R12 [{ref}] names no item")
 
-    # R14
+    # R14, R15
     if cases.exists():
         errors += lint_cases(cases)
+        standard_file = root / "STANDARD.md"
+        if standard_file.exists():
+            errors += lint_design_rules(cases, standard_file.read_text(encoding="utf-8"))
 
     # R8
     refs_file = root / "REFERENCES.md"
@@ -344,6 +351,52 @@ def lint_cases(cases):
             errors.append(f"{name}/RESULTS.md: R14 the SHA-256 of REGISTRATION.md is not recorded")
         elif recorded[0] != digest:
             errors.append(f"{name}/RESULTS.md: R14 REGISTRATION.md changed after its result: its SHA-256 is {digest}")
+    return errors
+
+
+BEFORE_THE_DESIGN_RULES = {"c1-collusion-simulation", "c2-stopping-rule", "w1-best-of-n-slope", "w3-ppo-pursuit"}
+REGISTRATION_SECTIONS = ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
+                         "## Rehearsal", "## Licences"]
+
+
+def sections(text):
+    """The lines of each '## ' section of a markdown text, by heading."""
+    out, cur = {}, None
+    for line in text.splitlines():
+        if line.startswith("## "):
+            cur = line.strip(); out[cur] = []
+        elif cur:
+            out[cur].append(line)
+    return out
+
+
+def lint_design_rules(cases, standard):
+    """R15: a registration made after the design rules follows cases/TEMPLATE.md."""
+    errors = []
+    first = next((block for block in re.split(r"\n\s*\n", standard) if block.lstrip().startswith("|")), "")
+    fields = [row[0] for row in table_rows(first.splitlines())[1:]]
+    for case in sorted(d for d in cases.iterdir() if d.is_dir() and d.name not in BEFORE_THE_DESIGN_RULES):
+        registration = case / "REGISTRATION.md"
+        if not registration.exists():
+            continue                                                                # R14 reports it
+        name, secs = f"cases/{case.name}/REGISTRATION.md", sections(registration.read_text(encoding="utf-8"))
+        for heading in REGISTRATION_SECTIONS:
+            if heading not in secs:
+                errors.append(f"{name}: R15 the section '{heading}' is missing (cases/TEMPLATE.md)")
+        declared = {row[0] for row in table_rows(secs.get("## Declaration", []))}
+        for field in fields:
+            if field not in declared:
+                errors.append(f"{name}: R15 the declaration has no row for the field '{field}' of STANDARD.md")
+        rows = table_rows(secs.get("## Predictions", []))
+        if not rows or "Threshold from" not in rows[0]:
+            errors.append(f"{name}: R15 the predictions table has no column 'Threshold from'")
+        else:
+            k = rows[0].index("Threshold from")
+            for row in rows[1:]:
+                if len(row) <= k or not row[k]:
+                    errors.append(f"{name}: R15 prediction {row[0]} does not say where its threshold comes from")
+        if not (case / "rehearsal.json").exists():
+            errors.append(f"cases/{case.name}: R15 the rehearsal's record, rehearsal.json, is missing")
     return errors
 
 
