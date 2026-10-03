@@ -23,6 +23,7 @@ the general one; where a general result also holds on finite outcomes, it is pro
 | `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
+| `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |
 | `REFERENCES.md` | the sources cited anywhere in the framework |
@@ -146,15 +147,16 @@ proof is a dependency claim).
 pip install -r requirements.txt       # Python 3.11
 python3 tools/lint.py                 # 0 errors required
 python3 tools/obsidian.py             # regenerate obsidian/ after any change to the sources (CI checks it)
-python3 -m pytest                     # checks and linter tests
+python3 -m pytest                     # checks, linter tests and the scenario's checks
 NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # the second SIMD path
 ```
 
 ## Starting a session
 
-Read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`,
-`NOTES.md` and `ontologies/README.md`; for outcomes that are not finite, `CORE-GENERAL.md` and `general/README.md`.
-`NOTES.md` §1 holds the failure modes of past sessions, each with its evidence: read it before starting work.
+To see the framework applied before reading it, start with `SCENARIO.md`. Read this file, `CORE.md`,
+`derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and
+`ontologies/README.md`; for outcomes that are not finite, `CORE-GENERAL.md` and `general/README.md`. `NOTES.md` §1 holds
+the failure modes of past sessions, each with its evidence: read it before starting work.
 
 ## License
 
