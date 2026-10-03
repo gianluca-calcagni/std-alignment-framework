@@ -25,7 +25,10 @@ hold. Everything else waits unless it serves one of them.
 
 ## Where we are (2026-10-03)
 
-- The core is v11: five premises, eleven definitions, 42 propositions; 163 checks pass on both paths.
+- The core is v11: five premises, eleven definitions, 47 propositions; 172 checks pass on both paths. The five new
+  results are diagnostics (`derived/diagnostics.md`, Q28): misalignment at any intensity and across conditions at one
+  intensity; what named objectives explain; drift between runs; what runs share between evaluation and use; the cost of
+  reweighting. Each follows from earlier results; no premise or definition changed.
 - **Base rate: one of three** predictions tested on data not seen before held (`RECORD.md`). Too few to say anything,
   beyond that the framework can fail.
 - **W1** (`cases/w1-best-of-n-slope/`): the prediction from [P13] about best-of-`n`, refuted. On 12.6 million answers,

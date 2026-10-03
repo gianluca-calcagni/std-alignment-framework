@@ -29,6 +29,8 @@ Written before any behaviour is examined.
 | Objective's units | [D5] | the units in which the stakes will be counted |
 | Evaluator | [D10] | the evaluator the actor is rewarded on, if one is known; otherwise "revealed", to be read from behaviour; and which outcomes it scores alike |
 | Sampling | [D11] | how decisions will be sampled in each condition, the sample sizes, and why independence is a fair model |
+| Named objectives | [P44] | the objectives besides `F` that the actor may be pursuing, in the order they will be named, or "none"; named here so that the analysis cannot pick them after seeing the behaviour |
+| Runs | [P45] | the independent repetitions of the actor that will be observed (training runs, random seeds), how many, and their weights; "one" if one |
 
 ## 2. The observations
 
@@ -45,11 +47,14 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Field | Core | What to write |
 |---|---|---|
 | Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
-| Uncertainty | [D11], [P23] | for every quantity estimated from samples: an interval, and how it was computed (the χ² reference of [P23] where it applies, otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes |
+| Uncertainty | [D11], [P23], [P47] | for every quantity estimated from samples: an interval, and how it was computed (the χ² reference of [P23] where it applies, otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
 | Departure split | [P6] | the departure `KL(p̂‖q)`, split into the pursuit part and misalignment |
 | Stakes | [D5] | the shortfall in the objective's units, the matched intensity, and the three causes of [P9] |
+| Intensity | [P43] | when several conditions are judged at one intensity, the excess over their own misalignments, and how far their revealed intensities differ |
+| Named and unexplained misalignment | [P44] | for the declared named objectives, the split of misalignment into named and unexplained parts, in nats, and each objective's increment in the declared order |
+| Drift | [P45], [P46] | for several runs, the shared misalignment split into the misalignment of their average and the drift, with the correction for few runs; for two conditions, the reproducible and run-specific differences, and which conditions the average of the runs can tell apart |
 | Avoidable and unavoidable misalignment | [P15] | the split, when the feasible set is linear; the inequality when it is convex; otherwise the lower bound `inf_{p∈𝓕} M(p)` |
 | Resolution | [P7], [P8] | what the declared indifference forgave, and what the actor's resolution makes unavoidable |
 | Sensitivity | [P10] | how far an error in the default or in the objective could move misalignment |

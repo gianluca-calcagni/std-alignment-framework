@@ -87,6 +87,16 @@ worked out.
 | **reversible** | [P41] | a record of transitions that looks the same run backward | standard | detailed balance (physics, Markov chains) | A |
 | **entropy production** | [P41] | the divergence of a record of transitions from its reversal | standard in physics | irreversibility, KL rate between forward and time-reversed paths | A |
 | **weighted misalignment** | [P42] | the misalignments of several principals, averaged with declared weights | plain | weighted social loss | A |
+| **intensity mismatch** | [P43] | how far a behaviour's nearest pursuit is from the pursuit at another intensity | plain | the axial term of v7.10's three-term decomposition | A |
+| **named objectives** | [P44] | other objectives an actor is suspected of pursuing, named before its behaviour is examined | plain | covariates, nuisance objectives; length or a second reward model (machine learning) | A |
+| **named pursuit** | [P44] | the behaviour nearest to the intended one that keeps the actor's averages of the objective and of the named objectives | plain: it pursues what was named | the I-projection onto a linear family; maximum-entropy model with moment constraints | A |
+| **unexplained misalignment** | [P44] | the misalignment that no named objective accounts for | plain | residual divergence (by analogy with a residual sum of squares) | A |
+| **named misalignment** | [P44] | the misalignment that the named objectives account for | plain | explained divergence (by analogy with an explained sum of squares) | A |
+| **runs** | [P45] | repetitions of an actor that should not matter to the principal, such as training runs or random seeds | plain, from machine learning | replicates (experimental science), seeds | A |
+| **drift** | [P45] | how much an outcome tells about which run produced it | the word for chance change between replicates, as in genetic drift | mutual information between run and outcome; generalized Jensen–Shannon divergence | A |
+| **shared misalignment** | [P45] | the misalignment of several runs judged against one intended behaviour | plain | — | A |
+| **reproducible difference** | [P46] | how differently the average of several runs acts in two conditions | plain: what every run would show | — | A |
+| **run-specific difference** | [P46] | the part of how differently runs act in two conditions that changes from run to run | plain | interaction of run and condition (analysis of variance) | A |
 
 ## 2. Correspondences not yet in the framework
 

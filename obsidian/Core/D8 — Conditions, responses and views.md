@@ -56,4 +56,5 @@ identifiability dynamics. The ontologies' "contexts" (v8, `NOTES.md`) are condit
 - [[P32 — Regulation costs departure|P32]] — Regulation costs departure
 - [[P24 — The evaluation gap|P24]] — The evaluation gap
 - [[P40 — Attention: misalignment against ignoring the situation|P40]] — Attention: misalignment against ignoring the situation
+- [[P46 — What runs share between conditions, and what they do not|P46]] — What runs share between conditions, and what they do not
 - [[C10 — An actor cannot behave more differently than it can tell conditions apart|C10]] — An actor cannot behave more differently than it can tell conditions apart

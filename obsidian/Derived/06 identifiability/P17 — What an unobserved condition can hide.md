@@ -66,4 +66,4 @@ New, on the PI's request to make deceptive alignment measurable. v7.10: none.
 - [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] — An actor cannot behave more differently than it can tell conditions apart
 
 ## Used by
-- no later item
+- [[P46 — What runs share between conditions, and what they do not|P46]] — What runs share between conditions, and what they do not

@@ -53,3 +53,4 @@ v7.10: ROADMAP §6 I1 and NOTES §9 (the dynamic angle, `D_⊥ ≈ sin²θ·KL`,
 
 ## Used by
 - [[P13 — What the start of a change gains|P13]] — What the start of a change gains
+- [[P44 — What named objectives explain|P44]] — What named objectives explain

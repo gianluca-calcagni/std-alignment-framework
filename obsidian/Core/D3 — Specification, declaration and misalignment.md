@@ -91,4 +91,5 @@ scored.
 - [[P39 — Several actors: coordination plus individual misalignment|P39]] — Several actors: coordination plus individual misalignment
 - [[P40 — Attention: misalignment against ignoring the situation|P40]] — Attention: misalignment against ignoring the situation
 - [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]] — Reversibility: the Jensen–Shannon divergence from the reversal
+- [[P45 — Drift: what runs share, and what they do not|P45]] — Drift: what runs share, and what they do not
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats

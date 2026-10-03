@@ -18,6 +18,7 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 - [[evaluator]]
 - [[estimation]]
 - [[structure]]
+- [[diagnostics]]
 - [[forbids]]
 
 ## Ontologies

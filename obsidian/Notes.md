@@ -177,6 +177,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q25 | a new version, v11, for Q24's change of scope: the version rule now counts the scope, and so does the finish line's stability criterion, which is not met again until three steps pass without a change. The specification of `ontologies/industrial-organization/` is the one that papers and public data can test: independent pursuit, within contexts, over declared episodes. The alternative, independence given the rival's past prices, fits the law better but needs a declared model of what each station observes, and is blind by construction to the known result's algorithms, which set prices from the last round's prices alone. Checking the data corrected the archive's licence and found that one of the known result's adoption markers measures a dependence between the stations; the prediction dates adoption without it | PI (a new version; the testable specification); executor (the stability criterion; which specification is testable) | `README.md` (versions, finish line), `ontologies/industrial-organization/`, `RECORD.md` |
 | Q26 | a freeze, after the executor's review: the framework had grown in theory, scope and disciplines while none of its predictions met data not seen before. Frozen until one does: the general core at draft 3, new disciplines, and any widening of the scope. Work goes to tests registered before they are computed, judged by the executor (`cases/`), and to a worked scenario in three registers (`SCENARIO.md`) | PI | `CORE-GENERAL.md`, `general/`, `ontologies/README.md`, `cases/`, `SCENARIO.md` |
 | Q27 | after W1: the freeze is kept, to build more confidence first, although Q26's condition is met; no external reviews yet; the W1 report may be written, without breaking any licence, and in doubt the safer way; consolidate; then design, choose public data for, and run one more test, on machine learning. Applied: the repository keeps no third-party data, weights, or item-by-item derivatives (README, working agreements); W1's proxy weights and per-prompt statistics were removed. They remain in two earlier commits (`f7a2665`, `899c721`); removing them from history needs a force-push, which waits for the PI. The test chosen: W3, whether a public PPO-tuned model is the pursuit of its reward, the framework's bet itself | PI; executor (the licence rule and its application; the choice of test) | `README.md`, `cases/w1-best-of-n-slope/`, `cases/w3-ppo-pursuit/`, `.gitignore` |
+| Q28 | after the retrospective of W1 and W3 (§6): every recommendation approved, that is, the retrospective recorded, the five design rules for cases (`cases/README.md`), and a registered follow-up to W3. And: derive more tools from the core for targeted diagnostics, such as telling drift apart from feigned alignment, even though the failures were not in the mathematics. New results in `derived/` serve that, as diagnostics; the freeze otherwise stands (no change of scope, premise or definition) | PI | `cases/README.md`, `derived/`, `NOTES.md` §6 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -420,3 +421,41 @@ misalignment (E1); the evaluation gap (v7.10's Prop 19) with [[D8 — Conditions
 *A policy question.* Wald, Chernoff, Stein and Wilks are classical theorems. Do derived results whose proof is a
 citation, checked by simulation, meet the standard of the derived folder? Executor's view: yes, with the theorem
 quoted with its hypotheses, and a check that would fail if a hypothesis did not hold.
+
+## 6. Retrospective after W1 and W3
+
+Two of the three predictions tested on data not seen before failed. The PI asked where the problem lies: in the
+framework, or in how it was read.
+
+**Four layers.** A failed prediction can come from the mathematics (the theorems and their checks), the instrument (the
+definitions and `STANDARD.md` applied to data), the bridge (what an ontology asserts about real systems), or the design
+(which statistic, which threshold, compared with what). Both failures sit in the bridge and the design. On real data the
+identities held to `10⁻¹⁰`.
+- **W1.** The framework's initial slope, `0.278` (`0.263` to `0.294`), was compared with the literature's coefficient
+  `a`, fitted over every `n` up to 12,500: `0.338`. Fitted over `n ≤ 16`, `a` is `0.290`, inside the framework's
+  interval. What failed is an auxiliary assumption the ontology had made, that the literature's form holds from the
+  start; the framework's own quantity looks right, in exploratory analysis only.
+- **W3, S1.** [[P4 — What KL measures|P4]] is a theorem about the optimum of KL-regularized training. S1 claimed that one trained model is near
+  that optimum, explaining "at least half": a guess about PPO with a round threshold. The training notebook itself says
+  the run had not converged, which was read before registering and not treated as fatal. The part of the change that
+  follows the reward has a slope near `1/β`, as [[P4 — What KL measures|P4]] says; it is small. Candidate explanations, all formed after the
+  data and each needing its own registered test: drift that a noisy gradient leaves and the KL penalty pulls back
+  slowly; sharpening, a second systematic objective `log π_ref`; the policy's capacity, which [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] would make
+  unavoidable misalignment, while the ontology declared the feasible set "everything"; and generalization from training
+  prompts.
+- **S2 held**, but it is the weakest of the three tests: a change that follows the reward at all tends to follow its
+  logit better than a squashed transform of it. Within each model's own outputs the margin is `+0.01`.
+
+**One conceptual gap.** Misalignment does not tell drift that would not recur in another run from the systematic pursuit
+of something else. For a principal both are "not what I asked for"; for a diagnosis they must be separated. The tools
+derived in response are in `derived/diagnostics.md`.
+
+**The revisions.** No registered analysis changed after its data were seen. The rest had four causes:
+
+| Cause | Instances | Caught by |
+|---|---|---|
+| engineering | W3's first sampler too slow; W1's report lost at its last step | a rehearsal, timed (design rule 4) |
+| degenerate cases in code | a reward that did not vary within a prompt; infinite intensities; a matched pursuit that underflowed | a rehearsal with the degenerate cases built in (rule 4); the core names each of them: [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]](iv), [[P9 — What is at stake\|P9]], [[D10 — Evaluator, regression and residual\|D10]] |
+| decisions never made | W3 pooled two models' outputs; S1's round threshold; best-of-`n` under ties; one intensity per prompt or one shared | the declaration of `STANDARD.md` in the registration (rule 1), which asks both of the last two; rules 3 and 5 |
+| one family of models designs, runs and judges | all of the above | no internal fix; an outside reader, on hold (Q27) |
+

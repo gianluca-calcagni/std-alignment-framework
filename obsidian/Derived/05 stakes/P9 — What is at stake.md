@@ -82,5 +82,6 @@ names.
 ## Used by
 - [[P17 — What an unobserved condition can hide|P17]] — What an unobserved condition can hide
 - [[P27 — The best use of a departure budget|P27]] — The best use of a departure budget
+- [[P43 — Misalignment at any intensity|P43]] — Misalignment at any intensity
 - [[C4 — Rescaling the objective is not misalignment|C4]] — Rescaling the objective is not misalignment
 - [[C12 — No misalignment, no stakes|C12]] — No misalignment, no stakes

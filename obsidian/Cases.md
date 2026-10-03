@@ -3,7 +3,8 @@
 A case is a test of the framework with a registration, a script and a result, in that order (README, rules of evidence
 (d) and (e)).
 1. `REGISTRATION.md` says what is computed, from which data or simulation, with every threshold and the reading of each
-   outcome, and who registered it. It is committed and pushed before any of its quantities is computed.
+   outcome, and who registered it, following the design rules below. It is committed and pushed before any of its
+   quantities is computed.
 2. The script computes exactly what the registration says. A departure from it is marked as such in the result, and
    anything that depends on it is not confirmatory.
 3. `RESULTS.md` gives each verdict, held or failed, with its numbers, the commit that registered the case, and the
@@ -14,6 +15,23 @@ A case is a test of the framework with a registration, a script and a result, in
 
 Inputs are fetched by each case's scripts, never stored here: the repository keeps only code and aggregates, and each
 case says under which licences its inputs were released (README, working agreements).
+
+**Design rules**, from what W1 and W3 taught (`NOTES.md` §6; approved by the PI, Q28). Before a registration is pushed:
+1. **The declaration first.** The registration contains the declaration of `STANDARD.md`, section 1, field by field. In
+   particular it fixes the specification across conditions (each condition at an intensity of its own, or one shared
+   intensity) and which outcomes the evaluator scores alike, ties included.
+2. **Auxiliary assumptions named.** Each prediction lists what it assumes beyond the framework, such as that a training
+   run converged or that a curve from the literature has a given form. The design either tests these assumptions or
+   keeps the framework's own claim independent of them, and the reading of each outcome says which of them a verdict
+   bears on.
+3. **Thresholds with a source.** A threshold is derived from a result or from a stated scale, such as a calibrated noise
+   level. A round number with neither is not registered; the prediction is then a direction, reported with its estimate
+   and interval.
+4. **A rehearsal.** The script runs end to end on synthetic data shaped like the real data, with the degenerate cases
+   built in (a regressor that does not vary, ties, intensities at their boundaries, values that underflow), and its run
+   time is measured on this machine.
+5. **One statistic per source.** When a sample mixes sources, such as the outputs of two models, the registered
+   statistic is computed within each source, or the registration says why pooling answers the question.
 
 A case is of one of two kinds.
 - **World**: on data from the world, not seen before the registration. Its predictions come from an ontology, have rows
