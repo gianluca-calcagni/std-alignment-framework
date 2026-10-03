@@ -20,7 +20,7 @@ that carry it.
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([[P40 — Attention: misalignment against ignoring the situation\|P40]]); tested in part: an endogenous default (`general/`) |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | now: identification across environments |
-| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
+| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested on unseen data: the best-of-`n` form against [[P13 — What the start of a change gains\|P13]] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
 | Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([[D11 — Sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]); later: Stein's exponent, the boundary case |
@@ -110,10 +110,10 @@ that carry it.
 
 ## Goodhart's law and reward hacking
 
-- *Sources.* Gao et al. [[References|@gao2023]]; Skalse et al. [[References|@skalse2022]]; Karwowski et al. [[References|@karwowski2024]]; Laidlaw et al.
-  [[References|@laidlaw2025]], who define a proxy by its correlation with the target under a reference policy and propose `χ²`
-  regularization of occupancy measures, the `χ²` row of [[P31 — Budgets of other shapes|P31]] with the correlation of [[P13 — What the start of a change gains|P13]] (unlike KL, a `χ²` cost can
-  rule outcomes out at the optimum: [[P38 — Any convex cost|P38]](ii)); Manheim and
+- *Sources.* Gao et al. [[References|@gao2023]]; Coste et al. [[References|@coste2024]], whose released answers W1 used; Skalse et al.
+  [[References|@skalse2022]]; Karwowski et al. [[References|@karwowski2024]]; Laidlaw et al. [[References|@laidlaw2025]], who define a proxy by its correlation
+  with the target under a reference policy and propose `χ²` regularization of occupancy measures, the `χ²` row of [[P31 — Budgets of other shapes|P31]]
+  with the correlation of [[P13 — What the start of a change gains|P13]] (unlike KL, a `χ²` cost can rule outcomes out at the optimum: [[P38 — Any convex cost|P38]](ii)); Manheim and
   Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
   Goodhart *(to verify)*.
 - *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([[D10 — Evaluator, regression and residual|D10]]). Karwowski et al.
@@ -124,6 +124,10 @@ that carry it.
 - *Import, done.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
   residual ([[D10 — Evaluator, regression and residual|D10]], [[P18 — Through the evaluator, only the regression counts|P18]]); a stopping rule, where the target and the evaluator become uncorrelated under the current
   behaviour ([[P20 — Where overoptimization starts, and how it ends|P20]](i)).
+- *Tested on unseen data* (case W1, `cases/w1-best-of-n-slope/`): Gao et al.'s best-of-`n` form `d·(a − b·d)`,
+  fitted over the usual range, overstates the initial slope that [[P13 — What the start of a change gains|P13]] computes from the initial policy, by 22%, on
+  12.6 million of Coste et al.'s answers with a proxy built here. The curve keeps [[P13 — What the start of a change gains|P13]]'s slope up to `n = 16` and then
+  saturates (exploratory), so the form's two numbers misstate both the start and the shape.
 - *Import, tested* (probes B4, B5; `general/transfer.md`). Under a default with a power-law upper tail, a KL budget
   buys unbounded gain, the case of Kwa et al. [[References|@kwa2024]], while a χ² budget `B` buys exactly `√(B·Var)`. Under χ²,
   Laidlaw et al.'s correlated proxy gains `√B·ρ·sd` in the target for every default; under KL the same law is exact

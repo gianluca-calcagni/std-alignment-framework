@@ -2,6 +2,7 @@
 
 A read-only view of the framework, generated from the repository by `tools/obsidian.py`. Edit the sources, not these notes; notes of your own go in `Annotations/`, which is never touched.
 
+- [[Roadmap]]: read it first · [[Worked scenario]]: the framework applied, three ways
 - [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · [[References]]
 - [[Core]]: premises and definitions
 - [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], [[Transfer to general spaces]], [[Derived spaces]], [[Disciplines on a continuum]], [[Everyday words]]
@@ -27,3 +28,10 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 - [[industrial-organization]]
 - [[machine-learning]]
 - [[medical-sciences]]
+
+## Cases
+- [[Cases]]: tests registered before they are computed
+- c1-collusion-simulation: [[c1-collusion-simulation registration]] · [[c1-collusion-simulation results]]
+- c2-stopping-rule: [[c2-stopping-rule registration]] · [[c2-stopping-rule results]]
+- w1-best-of-n-slope: [[w1-best-of-n-slope registration]] · [[w1-best-of-n-slope results]]
+- w3-ppo-pursuit: [[w3-ppo-pursuit registration]]

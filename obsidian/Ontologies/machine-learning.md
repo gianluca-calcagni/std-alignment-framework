@@ -89,6 +89,15 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   of the gain that decides which run looks best; a grid of `β` fine relative to the intensity at the peak; and, where
   the target has several peaks, the covariance's first zero is the first peak, which is the highest only when the
   regression is single-peaked ([[P25 — The target's curve turns no more often than the regression|P25]]).
+- **Prediction** (empirical) from [[P4 — What KL measures|P4]], [[D2 — Pursuit of an objective|D2]]: a policy tuned by KL-regularized reinforcement learning is, within each
+  prompt, close to the pursuit of its reward from the reference policy: its revealed objective, `log(π/π_ref)`, is
+  affine in the reward, which explains at least half of its variance within prompts, pooled over prompts. *Refuted if*
+  the 95% interval over prompts of the pooled within-prompt `R²` lies entirely below `0.5`. Tested in case W3
+  (`cases/w3-ppo-pursuit/`), on a public PPO-tuned model whose training had not converged.
+- **Prediction** (empirical) from [[P1 — Every behaviour is a tilt of any other|P1]], [[D2 — Pursuit of an objective|D2]]: what the tuned policy pursues is the reward as it was given in training,
+  not a monotone transform of it: its revealed objective is closer to affine in the reward than in the classifier's
+  probability of the rewarded class. *Refuted if* the pooled within-prompt `R²` on the reward does not exceed the `R²`
+  on the probability, the 95% interval of the difference over prompts not entirely above 0. Tested in case W3.
 - **Reading** with [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]], [[P13 — What the start of a change gains|P13]]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can

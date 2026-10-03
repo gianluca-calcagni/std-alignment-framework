@@ -21,7 +21,9 @@ DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": 
         "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies",
         "general/README.md": "General results", "general/transfer.md": "Transfer to general spaces",
         "general/derived-spaces.md": "Derived spaces", "general/disciplines.md": "Disciplines on a continuum",
-        "general/vocabulary.md": "Everyday words"}
+        "general/vocabulary.md": "Everyday words", "ROADMAP.md": "Roadmap", "SCENARIO.md": "Worked scenario",
+        "cases/README.md": "Cases"}
+CASE_DOCS = (("REGISTRATION.md", "registration"), ("RESULTS.md", "results"), ("REPORT.md", "report"))
 
 
 def anchor(heading):
@@ -89,12 +91,18 @@ def build(root):
     for src, name in DOCS.items():
         if (root / src).exists():
             notes[f"{name}.md"] = linked((root / src).read_text(encoding="utf-8"))
+    cases = sorted(d for d in (root / "cases").iterdir() if d.is_dir()) if (root / "cases").exists() else []
+    for d in cases:
+        for f, kind in CASE_DOCS:
+            if (d / f).exists():
+                notes[f"Cases/{d.name} {kind}.md"] = linked((d / f).read_text(encoding="utf-8"))
     ontologies = sorted((root / "ontologies").glob("*/README.md"))
     for o in ontologies:
         notes[f"Ontologies/{o.parent.name}.md"] = linked(o.read_text(encoding="utf-8"))
 
     home = ["# Home", "", "A read-only view of the framework, generated from the repository by `tools/obsidian.py`. "
             "Edit the sources, not these notes; notes of your own go in `Annotations/`, which is never touched.", "",
+            "- [[Roadmap]]: read it first · [[Worked scenario]]: the framework applied, three ways",
             "- [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · "
             "[[References]]", "- [[Core]]: premises and definitions",
             "- [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], "
@@ -103,6 +111,9 @@ def build(root):
             "## Derived, in reading order"]
     home += [f"- [[{folder.split(' ', 1)[1]}]]" for _, folder in sources[1:]]
     home += ["", "## Ontologies", "- [[Ontologies]]: the slots"] + [f"- [[{o.parent.name}]]" for o in ontologies]
+    home += ["", "## Cases", "- [[Cases]]: tests registered before they are computed"]
+    home += [f"- {d.name}: " + " · ".join(f"[[{d.name} {kind}]]" for f, kind in CASE_DOCS if (d / f).exists())
+             for d in cases]
     notes["00 Home.md"] = "\n".join(home) + "\n"
 
     names = [Path(p).stem for p in notes]
