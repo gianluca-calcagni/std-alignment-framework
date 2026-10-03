@@ -40,7 +40,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A prediction the design makes unfalsifiable** | T7-1: a within-cell share on a two-cell space is 1 by construction | compute every registered share or ratio on the design's degenerate cases first |
 | **A data column or a design parameter not checked before registering** | T7-1b: a column with 18 values; T7-2b: a test needing 3 bins below a default that left 2 | count non-missing values and read the design parameters before registering |
 | **A mask that blacklists leaks** | I1-dyn2: masking digits missed OCR's look-alikes, and two values showed through | mask by whitelist |
-| **Killing processes by pattern** | `pkill -f` matched its own shell, twice | stop processes by PID |
+| **Killing processes by pattern** | `pkill -f` matched its own shell, twice; and a third time while deriving the diagnostics (Q28), killing the edit it was chained with | stop processes by PID; nothing enforces it yet (`cases/README.md`, lessons as defaults) |
 
 **From this core.**
 
@@ -95,6 +95,13 @@ world whose gold falls at the top it was refuted. An earlier run on 200 prompts 
 flaw of the prediction; it was sampling noise, and the noise-free case showed it. The registration could then say what
 a refutation would mean. After the verdict, the executor's first explanation, the ties, was tested and failed (`D` moved
 from `+0.060` to `+0.062`); the shape of the curve was the explanation.
+
+**One that worked, in a rehearsal.** W4's rehearsal (`cases/w4-two-runs/rehearsal.json`), run before its registration as
+design rule 4 asks, failed on a degenerate case the real data could produce: a named objective with extreme values, the
+other run's log-probability of a draw it would almost never make, made Newton's method overflow. Named objectives are
+now scaled before matching. The same rehearsal measured each estimator's bias on synthetic runs at the real departures,
+and the registration's two thresholds are that bias plus two standard errors, not round numbers; it also showed that one
+of the two tests is the weaker, which the registration says.
 
 **Two from the consolidation.** The first check of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]](iv) drew some 2-state chains, which are always reversible; its
 assertion that the target is visible (the countermeasure of the degenerate-instance row) fired, so the check could not
@@ -178,6 +185,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q26 | a freeze, after the executor's review: the framework had grown in theory, scope and disciplines while none of its predictions met data not seen before. Frozen until one does: the general core at draft 3, new disciplines, and any widening of the scope. Work goes to tests registered before they are computed, judged by the executor (`cases/`), and to a worked scenario in three registers (`SCENARIO.md`) | PI | `CORE-GENERAL.md`, `general/`, `ontologies/README.md`, `cases/`, `SCENARIO.md` |
 | Q27 | after W1: the freeze is kept, to build more confidence first, although Q26's condition is met; no external reviews yet; the W1 report may be written, without breaking any licence, and in doubt the safer way; consolidate; then design, choose public data for, and run one more test, on machine learning. Applied: the repository keeps no third-party data, weights, or item-by-item derivatives (README, working agreements); W1's proxy weights and per-prompt statistics were removed. They remain in two earlier commits (`f7a2665`, `899c721`); removing them from history needs a force-push, which waits for the PI. The test chosen: W3, whether a public PPO-tuned model is the pursuit of its reward, the framework's bet itself | PI; executor (the licence rule and its application; the choice of test) | `README.md`, `cases/w1-best-of-n-slope/`, `cases/w3-ppo-pursuit/`, `.gitignore` |
 | Q28 | after the retrospective of W1 and W3 (§6): every recommendation approved, that is, the retrospective recorded, the five design rules for cases (`cases/README.md`), and a registered follow-up to W3. And: derive more tools from the core for targeted diagnostics, such as telling drift apart from feigned alignment, even though the failures were not in the mathematics. New results in `derived/` serve that, as diagnostics; the freeze otherwise stands (no change of scope, premise or definition) | PI | `cases/README.md`, `derived/`, `NOTES.md` §6 |
+| Q29 | test W4; and how can future designs include the lessons by default? Applied: a lesson becomes a default only when a template asks for it, a tool does it, or a check refuses work without it. So: `cases/TEMPLATE.md`; lint R15, which holds every registration made after the design rules to the template; `tools/casekit.py`, the fixes of W1's and W3's failures as tested helpers; and a map in `cases/README.md` from each lesson to what holds it, including the one nothing holds yet. W4 is the first case under them, of a new kind, diagnostic | PI; executor (the mechanisms) | `cases/TEMPLATE.md`, `tools/lint.py`, `tools/casekit.py`, `cases/README.md`, `cases/w4-two-runs/` |
 
 ### 3.2 Papers and data the PI could supply
 
