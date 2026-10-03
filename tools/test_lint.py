@@ -198,8 +198,8 @@ def test_the_general_core_names_only_existing_items(tmp_path):
 
 
 def test_the_general_results_name_only_existing_items(tmp_path):
-    """general/*.md, the general core's results, are checked like CORE-GENERAL.md: every item they name exists, and their
-    citations count for R8."""
+    """general/*.md, the general core's results, are checked like CORE-GENERAL.md: every item they name exists, and
+    their citations count for R8."""
     note = "# General results\n\n- carries [P1] [@cover2006]\n"
     errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra={"general/transfer.md": note})
     assert errors == [], errors
@@ -208,8 +208,8 @@ def test_the_general_results_name_only_existing_items(tmp_path):
 
 
 def test_the_scenario_the_roadmap_and_the_cases_name_only_existing_items(tmp_path):
-    """SCENARIO.md, ROADMAP.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and their
-    citations count for R8."""
+    """SCENARIO.md, ROADMAP.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and
+    their citations count for R8."""
     note = "# Text\n\n- uses [P1] [@cover2006]\n"
     extra = {"SCENARIO.md": note, "ROADMAP.md": note, "cases/c1-x/REGISTRATION.md": note}
     errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra=extra)
