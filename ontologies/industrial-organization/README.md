@@ -67,7 +67,12 @@ simulations of Calvano et al. come with public code and data.
 
 - Coordination is not collusion. Competing stations react to each other too, and a reaction creates dependence between
   moves: the specification of independent pursuit charges every reaction, so a positive coordination says that the
-  stations do not act independently, not that they agreed or colluded.
+  stations do not act independently, not that they agreed or colluded. Competition law is generally read as letting a
+  firm adapt to its rivals' observed conduct, so this specification is stricter than the law. Taking the rival's past
+  prices as contexts would permit that adaptation, but would also permit the punishments that sustain high prices in the
+  known result, since a punishment is a reaction to the rival's past prices too. Which of the two specifications the
+  authority declares is its choice, not the core's; the prediction uses the stricter one, and compares before with
+  after.
 - Contexts must include every common shock. One left out, such as a regional event, is counted as coordination.
 - Moves cut into three classes, and hours, see less than the record holds: grouping only hides ([P4](iv)), so the
   coordination measured is a lower bound on that of finer records.
@@ -78,6 +83,8 @@ simulations of Calvano et al. come with public code and data.
 ## 5. Open questions
 
 - Which episode length makes coordination visible without needing more data than the record has: an hour, a day, a week?
+- Is there a specification between the two of section 4, one that permits adaptation to a rival's prices but charges a
+  reaction that punishes a price cut, and can it be declared without a model of the firms' profits?
 - In the public simulations of Calvano et al., does the coordination of the algorithms show mostly over rounds rather
   than within a round, as two tit-for-tat players' does (`general/derived-spaces.md`)?
 - German retail prices change several times a day. Are their paths irreversible in the sense of [P41], and did adoption
