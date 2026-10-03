@@ -1,6 +1,6 @@
 # The core
 
-> **Status: v10, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
+> **Status: v11, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
 > framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
 > carries a formal statement and a plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format
 > is in `README.md`.

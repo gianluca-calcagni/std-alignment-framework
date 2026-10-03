@@ -1,6 +1,6 @@
 # The general core
 
-> **Status: draft 3, for review.** This file extends the core (`CORE.md`, v10) from finitely many outcomes to the
+> **Status: draft 3, for review.** This file extends the core (`CORE.md`, v11) from finitely many outcomes to the
 > outcome spaces met in practice: counts, waiting times, scores, texts, trait values. It holds premises and definitions
 > only, as `CORE.md` does for finite outcomes. Its results, expected, probed or tested, are in `general/`, as the finite
 > core's are in `derived/`, and nothing there is claimed until it is proved and checked. Items are numbered GA
@@ -196,7 +196,7 @@ yes-or-no questions about its outcomes.
 - *It is what GA1 presumes.* Behaviour is observed by counting, and a count is always of finitely many cells: a clock
   that reads minutes, a score kept to two digits. A quantity that finite descriptions do not determine could not be
   estimated from any record, however long.
-- *Reduction.* On a finite space the finest description is finite and is the limit: the premise adds nothing to v10.
+- *Reduction.* On a finite space the finest description is finite and is the limit: the premise adds nothing to the core.
 - *Invariance.* Partitions into events need no distance.
 - *No grid is chosen.* The limit runs over all finite partitions into events, ordered by refinement; a quantity that can
   only grow under refinement has the supremum as its limit. A grid of equal intervals is one particular family of
@@ -600,7 +600,7 @@ misalignment a record shows can only grow as its cells are refined.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
    resolution is the core's default in [[D4 — Resolution|D4]]. The alternative, the usual topology of each outcome space, would put a
    choice in the framework that the events do not make.
-3. Names and versions. This file is draft 3, with items GA and GD; `CORE.md` stays v10 and unchanged. The general
+3. Names and versions. This file is draft 3, with items GA and GD; `CORE.md` (v11) is unchanged by it. The general
    results stay in `general/` until they are proved and checked; then they become items of a derived folder of their
    own, as the finite results are in `derived/`.
 4. Two additions to the finite core, where checks are exact: the Sanov reading of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] and of misalignment, with the

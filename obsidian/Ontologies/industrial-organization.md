@@ -20,11 +20,11 @@ simulations, and margins that rose in German duopolies once both stations had ad
 | **objective** | [[D2 — Pursuit of an objective\|D2]] | each station's profit, its margin times its volume, which competition law means each to pursue on its own | margins over the wholesale price; volumes are not reported | assumed: volumes and costs other than the wholesale price are not observed |
 | **evaluator** | [[D10 — Evaluator, regression and residual\|D10]] | the objective an algorithm is set to pursue; the vendors' algorithms are not public, so it is known only as revealed by behaviour ([[P1 — Every behaviour is a tilt of any other\|P1]]) | the stations' price changes | assumed: revealed, not declared |
 | **intensity** | [[D2 — Pursuit of an objective\|D2]] | how strongly a station's prices respond to what it pursues: the settings of its algorithm, its staff's attention | not apart from the objective | approximate |
-| **specification** | [[D3 — Specification, declaration and misalignment\|D3]] | independent pursuit ([[P39 — Several actors: coordination plus individual misalignment\|P39]]): each station pursues its own profit, independently of the other, from the default of the earlier period. Competition law's requirement that each firm determine its conduct on the market independently, read as a specification | the law, and the authority's decisions | assumed: the law's requirement read as a declared set of intended behaviours |
+| **specification** | [[D3 — Specification, declaration and misalignment\|D3]] | independent pursuit ([[P39 — Several actors: coordination plus individual misalignment\|P39]]): each station pursues its own profit, independently of the other, from the default of the earlier period, given the contexts of this table and no others. Competition law's requirement that each firm determine its conduct on the market independently, read as a specification, in its stricter form: the one that papers and the public record can test (section 4) | the law, and the authority's decisions | assumed: stricter than the law, which lets a firm adapt to its rivals' observed conduct |
 | **principal's resolution** | [[D4 — Resolution\|D4]] | the finest: the authority sees every reported price change of every station | the reports to the regulator | exact |
 | **actor's resolution** | [[D4 — Resolution\|D4]] | each station, or its algorithm, sees the other's posted prices, which are public, and the wholesale price | the public posting of prices | approximate: what an algorithm uses is not disclosed |
 | **change** | [[P2 — Every change of behaviour follows a replicator equation\|P2]] | the path of the joint behaviour after adoption, including a learning period | the prices month by month | approximate: monthly steps |
-| **intervention** | [[D6 — Intervention and pass-through\|D6]] | the adoption of an algorithm by one station or by both, an event that changes what the actor does; a change of the wholesale price, which adds a known cost to every outcome | adoption is detected from changes in a station's pricing, such as the frequency of its price changes | approximate: adoption is inferred, not observed, and is not a known function of the outcomes |
+| **intervention** | [[D6 — Intervention and pass-through\|D6]] | the adoption of an algorithm by one station or by both, an event that changes what the actor does; a change of the wholesale price, which adds a known cost to every outcome | structural breaks in a station's own pricing, dated as in the Data paragraph | approximate: adoption is inferred, not observed, and is not a known function of the outcomes |
 | **stakes** | [[D5 — Stakes\|D5]] | cents per litre of margin, and what consumers pay | prices and wholesale prices | exact, given the objective |
 
 ## 2. Known result
@@ -39,10 +39,15 @@ local monopolies, adoption changed nothing. Margins began to rise about a year a
 the authors read as the algorithms learning to soften competition.
 
 **Data.** Every German petrol station reports every price change to the Markttransparenzstelle für Kraftstoffe of the
-Bundeskartellamt, and the record of all price changes since mid-2014, more than 15,000 stations, is public under a
-Creative Commons licence (CC BY 4.0), distributed by Tankerkönig. Assad et al. built their markets and their dating of
-adoption from these data; their results have been read here only in summary, and the price data have not been read. The
-simulations of Calvano et al. come with public code and data.
+Bundeskartellamt. Tankerkönig distributes the record of all price changes since June 2014, for about 15,000 stations,
+under a Creative Commons licence: by secondary sources, CC BY-NC-SA 4.0 for the archive, so for non-commercial use, and
+CC BY 4.0 for the live feed; the primary pages could not be reached from here. Assad et al. built their markets from
+these data, for 2016 to 2018, and dated adoption by structural breaks in four markers of a station's pricing: the number
+of its daily price changes, the speed of its response to its rivals' changes, its response to crude oil prices, and its
+response to local weather; a station adopted when two markers broke within four weeks [[References|@assad2024]]. Their replication
+package is listed on Harvard Dataverse; whether it holds the adoption dates has not been checked. Their results have
+been read here only in summary, and the price data have not been read. Whether the code of Calvano et al. is public has
+not been checked.
 
 ## 3. What the core says
 
@@ -54,38 +59,50 @@ simulations of Calvano et al. come with public code and data.
 - **Consequence** of [[P39 — Several actors: coordination plus individual misalignment|P39]]: coordination depends on what counts as one outcome. A station that matches its rival's price
   an hour later shows no coordination in a table of moves within the hour, and shows it in episodes that contain the
   response. The episode length is declared before the data are read (README, rule (d)).
+- **Consequence** of [[P39 — Several actors: coordination plus individual misalignment|P39]], [[D8 — Conditions, responses and views|D8]]: under the specification that takes the rival's past prices as contexts, the simulated
+  algorithms of the known result show no coordination at all. In the paper's baseline, each sets its price from the last
+  round's prices alone, exploring independently of the other, so given those prices their moves are independent,
+  punishments included. Their coordination lies between a deviation and its punishment, in time, and only a
+  specification that does not take past prices as contexts can see it, and only when deviations occur (section 4).
 - **Prediction** (empirical) from [[P39 — Several actors: coordination plus individual misalignment|P39]], [[D6 — Intervention and pass-through|D6]]: in German local duopolies, if the algorithms that both stations adopted
   learned to coordinate, the coordination of the two stations' joint price moves, within contexts and over episodes of a
-  declared length, is larger after both have adopted than before, and than in duopolies where only one adopted.
-  *Refuted if* it is not, beyond its sampling error computed by market. A refutation means the rise in margins came
-  about without coordination in the declared moves, for example by each algorithm raising prices on its own. The data
-  are public and unread; the known result is seen in summary only.
+  declared length, is larger after both have adopted than before, and than in duopolies where only one adopted. Adoption
+  is dated without the speed of response to the rival, the one marker that measures a dependence between the two
+  stations. *Refuted if* it is not, beyond its sampling error computed by market. A refutation means the rise in margins
+  came about without coordination in the declared moves, for example by each algorithm raising prices on its own. The
+  data are public and unread; the known result is seen in summary only.
 - **Reading** with [[P39 — Several actors: coordination plus individual misalignment|P39]]: the simulated algorithms of the known result sustain high prices by punishments that unfold
   over rounds, the case of [[P39 — Several actors: coordination plus individual misalignment|P39]](iii): coordination that a single round's table does not show.
 
 ## 4. Limits
 
 - Coordination is not collusion. Competing stations react to each other too, and a reaction creates dependence between
-  moves: the specification of independent pursuit charges every reaction, so a positive coordination says that the
-  stations do not act independently, not that they agreed or colluded. Competition law is generally read as letting a
-  firm adapt to its rivals' observed conduct, so this specification is stricter than the law. Taking the rival's past
-  prices as contexts would permit that adaptation, but would also permit the punishments that sustain high prices in the
-  known result, since a punishment is a reaction to the rival's past prices too. Which of the two specifications the
-  authority declares is its choice, not the core's; the prediction uses the stricter one, and compares before with
-  after.
+  moves: independent pursuit charges every reaction. Competition law is generally read as letting a firm adapt to its
+  rivals' observed conduct, so this specification is stricter than the law. It is declared because it is the one that
+  can be tested: taking the rival's past prices as contexts would permit that adaptation, but it would need a declared
+  model of what each station observes, and it is blind by construction to the known result's algorithms (section 3). So
+  a positive coordination says that the stations do not act independently, not that they agreed, colluded or broke the
+  law; the prediction compares before with after, where lawful adaptation is present on both sides.
+- A collusive steady state shows no coordination. Two stations that hold a high price and never deviate have a joint
+  behaviour that is a point mass, and a point mass is independent. Coordination shows only in how the stations respond
+  to shocks and to each other's moves; the record has many, in the wholesale price and in the daily cycle of prices, but
+  a market that never moves says nothing.
 - Contexts must include every common shock. One left out, such as a regional event, is counted as coordination.
 - Moves cut into three classes, and hours, see less than the record holds: grouping only hides ([[P4 — What KL measures|P4]](iv)), so the
   coordination measured is a lower bound on that of finer records.
-- Adoption is inferred from the stations' pricing, not observed, and its timing is uncertain.
+- Adoption is inferred from the stations' pricing, not observed, and its timing is uncertain. One of Assad et al.'s
+  markers, the speed of response to the rival, is itself a dependence between the stations: adoption dated with it would
+  make a rise in coordination partly true by construction, so the prediction dates adoption without it, and its dates
+  are not those of the known result.
 - Volumes and costs other than the wholesale price are unobserved, so each station's own misalignment, unlike the
   coordination, is not measured.
 
 ## 5. Open questions
 
 - Which episode length makes coordination visible without needing more data than the record has: an hour, a day, a week?
-- Is there a specification between the two of section 4, one that permits adaptation to a rival's prices but charges a
-  reaction that punishes a price cut, and can it be declared without a model of the firms' profits?
-- In the public simulations of Calvano et al., does the coordination of the algorithms show mostly over rounds rather
-  than within a round, as two tit-for-tat players' does (`general/derived-spaces.md`)?
+- Is there a specification between the two of sections 3 and 4, one that permits adaptation to a rival's prices but
+  charges a reaction that punishes a price cut, and can it be declared without a model of the firms' profits?
+- In simulations like those of Calvano et al., rerun with their exploration, does the coordination of the algorithms
+  show mostly over rounds rather than within a round, as two tit-for-tat players' does (`general/derived-spaces.md`)?
 - German retail prices change several times a day. Are their paths irreversible in the sense of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]], and did adoption
   change how irreversible they are?

@@ -1,4 +1,4 @@
-# std-alignment-framework — the core (v10, in progress)
+# std-alignment-framework — the core (v11, in progress)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -12,7 +12,7 @@ else is derived from them, with proofs and checks, and reported through one stan
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
-results in `derived/`, is v10 and claims what it proves. The general core, `CORE-GENERAL.md` with its results in
+results in `derived/`, is v11 and claims what it proves. The general core, `CORE-GENERAL.md` with its results in
 `general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite part depends on
 the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and cited from
 `general/`.
@@ -95,8 +95,10 @@ where each comes from):
 - **(f) Say who.** Every review, rating or audit says who made it: a person, or a model family. Errors within one model
   family are correlated, and "independent" then means less than it says.
 
-**Versions.** A version changes only when the Statement of a premise or a definition changes. Results, checks and
-ontologies are added within a version. The core is v10: no such Statement has changed since [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Sample and evidence|D11]] were added.
+**Versions.** A version changes only when the Statement of a premise or a definition changes, or the scope does
+(`CORE.md` §0): either changes what a reader may rely on. Results, checks and ontologies are added within a version.
+The core is v11: the scope was widened to groups, several principals with declared weights, rules as conditions and
+episodes as outcomes (`NOTES.md` §3.1, Q24, Q25); no Statement has changed since [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Sample and evidence|D11]] were added in v10.
 `CORE-GENERAL.md` is a draft with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
@@ -106,7 +108,7 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | Goal | Criterion | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
-| stable | no premise's or definition's Statement changes for three consecutive steps | met: none since v10 |
+| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps | not met: the scope changed in v11; no Statement has changed since v10 |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | not met (`RECORD.md`) |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met |

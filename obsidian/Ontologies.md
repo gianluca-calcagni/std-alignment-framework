@@ -33,7 +33,7 @@ in the discipline can be diagnosed or interpreted in the core's terms.
 | `evolutionary-biology/` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [[References\|@chippindale2001]], [[References\|@prasad2007]] | genotype counts and fitness assays |
 | `behavioural-economics/` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [[References\|@madrian2001]]; a fine that raised lateness [[References\|@gneezy2000]] | distributions of choices before and after a change |
 | `medical-sciences/` | medical sciences: performance measures in health care | a ministry or a regulator → hospitals and clinicians | the four-hour target [[References\|@mason2012]]; cardiac surgery report cards [[References\|@dranove2003]] | attendances by time in the department; patients by treatment and severity |
-| `industrial-organization/` | industrial organization: pricing algorithms and competition | a competition authority → the firms of a local market, as one actor | algorithmic pricing in German petrol duopolies [[References\|@assad2024]]; algorithms that learn to sustain high prices [[References\|@calvano2020]] | every price change of every station; public (CC BY 4.0) |
+| `industrial-organization/` | industrial organization: pricing algorithms and competition | a competition authority → the firms of a local market, as one actor | algorithmic pricing in German petrol duopolies [[References\|@assad2024]]; algorithms that learn to sustain high prices [[References\|@calvano2020]] | every price change of every station; public, for non-commercial use |
 | `experimental-economics/` | experimental economics: learning in games | an experimenter → a group of subjects, as one actor | cycles in Rock–Paper–Scissors played in continuous time [[References\|@cason2014]]; log-linear learning [[References\|@blume1993]] | each subject's strategy, moment by moment |
 
 **Considered and not adopted** (`NOTES.md` §3.1, Q22, Q24).
@@ -50,8 +50,8 @@ in the discipline can be diagnosed or interpreted in the core's terms.
 The institutions ontology became the medical-sciences one: its known result was already health care, and the four-hour
 target added a measure whose data are partly public. When [[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] brought groups, and several principals with
 declared weights, into the scope, condition 4 was revised (Q24). Game theory's experiments then met all four
-conditions, and industrial organization joined for its public record of prices, where competition law itself declares
-a specification of independent pursuit.
+conditions, and industrial organization joined for its public record of prices, where competition law's requirement
+of independent conduct gives a specification, in the stricter form that can be tested (Q25).
 
 ## The slots
 
