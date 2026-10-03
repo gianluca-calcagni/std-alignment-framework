@@ -66,6 +66,11 @@ with
 budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort law
 and exhibits a counterexample. The rule "a shape claim needs a random sample before it is said" (v7.10, §1) paid off.
 
+**Another.** In draft 2's tests of the general core (`probes/general/`), T5 found the compromise of three principals
+meeting each principal's floor exactly, and that read like a law ("a committee delivers each member's minimum"). A
+20-instance test registered before running it found it in 11 of 20 instances, against a predicted 15, so it is recorded
+as failed, and draft 2 says "often, not always".
+
 ## 2. Is the core a compelling standard yet?
 
 Closer, not yet. v9 applied the PI's decisions: the core held five premises and nine definitions; every result is
@@ -201,9 +206,9 @@ evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the v
 `main` (R7). The ontologies were then reworked around disciplines with numbers (Q22).
 
 **Next, chosen by the PI:** outcomes that are not finite, so that the core covers continuous quantities. Drafted as
-`CORE-GENERAL.md` (Q23): premises and definitions only, with the results expected in its §12 and the decisions left open
-in its §14. Then the general results, with checks; then a worked scenario, described three ways: in plain terms, in
-simple intuitive terms, and formally.
+`CORE-GENERAL.md` (Q23), now draft 2: premises and definitions, the results expected (§12), strategic scenarios lifted
+to derived spaces (§14), everyday words (§15), and the decisions left open (§16). Then the general results, with checks;
+then a worked scenario, described three ways: in plain terms, in simple intuitive terms, and formally.
 
 **Then**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [[P20 — Where overoptimization starts, and how it ends|P20]]'s peak
@@ -297,6 +302,17 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
 | H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [[P11 — The misaligned share at the start of a change\|P11]]'s `cos θ` in the incentive literature | C: verify the paper |
+| H9 | **The dimension law.** Against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, `d` the information dimension (Rényi): "digits decided" made exact | **tested** (T1): four cases, including the Cantor measure, which no count of atoms explains |
+| H10 | **No pursuit makes a pile.** A pile at a threshold is evidence that the actor does not pursue the evaluator | **tested** (T2); a theorem by the chain rule, to be written |
+| H11 | **Collusion is coordination, often in time.** Under independent pursuit, misalignment on joint actions = total correlation + individual misalignments, exactly | identity exact; **tested** (T3): tit-for-tat shows `0` per round and `0.231` nats per round over time |
+| H12 | **Strategic residue is irreversibility.** Learning that pursues a potential is reversible; misalignment against reversible processes ≤ EP/2, ≈ EP/4 at low intensity | **tested** (T4); found `EP = (t·C/8)²` in 2×2 games at low intensity, not predicted; to derive |
+| H13 | **Gridlock and pooling.** The default satisfies every standard specification; with floors the compromise pursues `Σ w_k·t_k·F_k` | **tested** (T5) |
+| H14 | **The compromise meets every floor exactly** | **failed** (T5b): 11 of 20 against 15 predicted |
+| H15 | **Lock-in has a rate, fixed by early chance** (corrects "no single rate") | **tested** (T6) |
+| H16 | **Information for the principal, geometry for the actor.** Gaming is cheap transport under a threshold evaluator; an actor's reach could enter as feasibility (GD7) | D: explore; the fudging probe only (2.3 against 15.6 patient-minutes) |
+| H17 | **Strategic scenarios lift to standard ones on derived spaces** (`CORE-GENERAL.md` §14) | C: a mapping, with T3–T6 as its first tests |
+| H18 | **Model space.** Training as a Gibbs posterior over models; PAC-Bayes's complexity term is the departure, which bounds the evaluation gap | D: explore |
+| H19 | **Schrödinger bridge.** An actor moving outcomes by noisy short steps, conditioned on its target, is a Schrödinger bridge: Sanov on trajectories | D: a guess |
 
 ### 5.5 Process
 

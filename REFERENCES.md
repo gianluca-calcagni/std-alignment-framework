@@ -4,10 +4,14 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 `CORE-GENERAL.md`, `derived/`, `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here
 (lint rule R8).
 
+- [@allen2017] Allen, E. J., Dechow, P. M., Pope, D. G. and Wu, G. (2017), Reference-dependent preferences: evidence from marathon runners. *Management Science* 63(6), 1657–1672.
 - [@ashby1956] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@beirami2024] Beirami, A., Agarwal, A., Berant, J., D'Amour, A., Eisenstein, J., Nagpal, C. and Suresh, A. T. (2024), Theoretical guarantees on the best-of-n alignment policy. arXiv:2401.01879.
+- [@blume1993] Blume, L. E. (1993), The statistical mechanics of strategic interaction. *Games and Economic Behavior* 5(3), 387–424.
+- [@calvano2020] Calvano, E., Calzolari, G., Denicolò, V. and Pastorello, S. (2020), Artificial intelligence, algorithmic pricing, and collusion. *American Economic Review* 110(10), 3267–3297.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
+- [@candogan2011] Candogan, O., Menache, I., Ozdaglar, A. and Parrilo, P. A. (2011), Flows and decompositions of games: harmonic and potential games. *Mathematics of Operations Research* 36(3), 474–503.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [@chernoff1952] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
@@ -15,6 +19,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@cover2006] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
 - [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
 - [@csiszar1984] Csiszár, I. (1984), Sanov property, generalized I-projection and a conditional limit theorem. *The Annals of Probability* 12(3), 768–793.
+- [@dee2019] Dee, T. S., Dobbie, W., Jacob, B. A. and Rockoff, J. (2019), The causes and consequences of test score manipulation: evidence from the New York Regents examinations. *American Economic Journal: Applied Economics* 11(3), 382–423.
 - [@dembo1998] Dembo, A. and Zeitouni, O. (1998), *Large Deviations Techniques and Applications*, 2nd edition. Springer.
 - [@dranove2003] Dranove, D., Kessler, D., McClellan, M. and Satterthwaite, M. (2003), Is more information better? The effects of "report cards" on health care providers. *Journal of Political Economy* 111(3), 555–588.
 - [@frank2018] Frank, S. A. (2018), The Price equation program: simple invariances unify population dynamics, thermodynamics, probability, information and inference. *Entropy* 20(12), 978.
@@ -39,14 +44,17 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@mckelvey1995] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [@ng2000] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [@ortega2013] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.
+- [@perdomo2020] Perdomo, J., Zrnic, T., Mendler-Dünner, C. and Hardt, M. (2020), Performative prediction. *Proceedings of the 37th International Conference on Machine Learning*, PMLR 119.
 - [@pinsker1964] Pinsker, M. S. (1964), *Information and Information Stability of Random Variables and Processes*. Holden-Day (Russian original 1960).
 - [@polya1976] Pólya, G. and Szegő, G. (1976), *Problems and Theorems in Analysis II: Theory of Functions, Zeros, Polynomials, Determinants, Number Theory, Geometry*. Springer (German original 1925). Part V, chapter 1: Rolle's theorem and Descartes' rule of signs, with Laguerre's extension to exponential sums.
 - [@prasad2007] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [@price1970] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
+- [@renyi1959] Rényi, A. (1959), On the dimension and entropy of probability distributions. *Acta Mathematica Academiae Scientiarum Hungaricae* 10, 193–215.
 - [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
+- [@taylor2016] Taylor, J. (2016), Quantilizers: a safer alternative to maximizers for limited optimization. *AAAI Workshop on AI, Ethics, and Society*.
 - [@wald1945] Wald, A. (1945), Sequential tests of statistical hypotheses. *The Annals of Mathematical Statistics* 16(2), 117–186.
 - [@wilks1938] Wilks, S. S. (1938), The large-sample distribution of the likelihood ratio for testing composite hypotheses. *The Annals of Mathematical Statistics* 9(1), 60–62.
 - [@ziebart2008] Ziebart, B. D., Maas, A. L., Bagnell, J. A. and Dey, A. K. (2008), Maximum entropy inverse reinforcement learning. *Proceedings of the 23rd AAAI Conference on Artificial Intelligence*, 1433–1438.

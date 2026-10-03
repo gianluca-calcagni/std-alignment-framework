@@ -1,11 +1,13 @@
 # The general core
 
-> **Status: draft 1, for review.** This file extends the core (`CORE.md`, v10) from finitely many outcomes to the
+> **Status: draft 2, for review.** This file extends the core (`CORE.md`, v10) from finitely many outcomes to the
 > outcome spaces met in practice: counts, waiting times, scores, texts, trait values. It holds premises and definitions
 > only, in the core's format. It claims no result: section 12 lists the results expected, each with the evidence that
 > suggests it, to be proved and checked in `derived/` once the definitions are approved. Items are numbered GA
-> (premises) and GD (definitions), and GD3 extends [D3]. Lint checks that every item this file names exists (R12); it
-> does not yet check the file's structure.
+> (premises) and GD (definitions), and GD3 extends [D3]. Draft 2 adds the dimension law (GD3, GD11), the lifts of
+> strategic scenarios to derived spaces (section 14), and everyday words matched to the formalism (section 15). Every
+> number the draft cites is reproduced by a script in `probes/general/`. Lint checks that every item this file names
+> exists (R12); it does not yet check the file's structure.
 
 ## 0. What this file is
 
@@ -44,9 +46,14 @@ resolution.
   (b) The tail of an objective can stop pursuit at a finite intensity; past it, more departure buys more of the
   objective only by betting on ever rarer extremes (GD2, GD5). Both say that the default decides more than it seemed to:
   which outcomes are possible, and how far pursuit can go.
+- *Strategic scenarios become standard ones on derived spaces.* Several actors, actors that respond to the measurement,
+  several principals and dependent samples each become a scenario with one principal and one actor, on a space of joint
+  actions, rules, principals or trajectories, most of them continua even when the outcomes are finite. What stays
+  strategic is measured as a divergence from a structure: independence, reversibility, regularity (section 14).
 
 **Scope.** As in `CORE.md` §0, with outcomes and conditions in standard Borel spaces in place of finite sets. Dependent
-samples, several actors and several principals stay out of scope.
+samples, several actors and several principals stay out of scope as definitions; section 14 proposes how each becomes a
+standard scenario on a derived space.
 
 **How to read.** Six premises, GA1–GA6, and eleven definitions, GD1–GD11. Each "Why this choice" starts with the three
 tests, then gives what is specific to outcomes that are not finite. A bracketed name, such as [D3] or [P5], is an item
@@ -316,9 +323,13 @@ principal says nothing, a limit counts only if every finite description agrees.
   misaligned under the usual nearness too: no intended behaviour can produce exact repeats of one point that the default
   never produces. In plain terms, to pin a real number is to decide every one of its digits, and each digit decided
   beyond what the objective asks is a choice the principal did not ask for. At a resolution of width `w` the count is
-  finite: the misalignment grows like `log(1/w)`, `2.3` nats per decimal digit (section 12). A principal who wants near
-  misses graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control (GD7). A
-  distance that grades them directly cannot be the measure: GA3 and GA4 force the divergence.
+  finite, and it grows at a precise rate: like `(D − d)·log(1/w)`, where `D` is the number of real coordinates of an
+  outcome and `d` the information dimension of the actor's behaviour [@renyi1959], `D` for a behaviour spread like the
+  default and `0` for one pinned to points. So each decimal digit of the record adds `2.3·(D − d)` nats: `2.3` for an
+  actor pinned to points on a line, a tenth of that for one that piles a tenth of its behaviour on one value, and again
+  `2.3` for one that pins one of two attributes and spreads the other (section 12). A principal who wants near misses
+  graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control (GD7). A distance
+  that grades them directly cannot be the measure: GA3 and GA4 force the divergence.
 - *The rest is [D3]'s.* The formula is forced by GA3 and GA4, the direction charges the unintended, and the infimum
   gives the benefit of the doubt.
 
@@ -551,7 +562,11 @@ misalignment a record shows can only grow as its cells are refined.
   probability zero, for every `n`, some behaviour within total variation `1/(100·n)` of an intended one, so that no test
   on `n` decisions tells them apart with a difference in rejection probability above `0.01`, has a misalignment as large
   as one likes: move a little probability to where the objective is low and the default rarely goes. So a report that
-  misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples alone.
+  misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples alone. What
+  records can show without a model is the rate: the misalignment of finer and finer records grows like
+  `(D − d)·log(1/w)` (GD3), so its slope against the logarithm of the resolution estimates the dimension deficit
+  `D − d`, within the resolutions that the sample size supports: on a line, the share of the behaviour piled on single
+  values, when the rest is spread.
 - *Evidence, and Sanov.* The expected evidence per decision is the divergence, as [P21] states. Misalignment has a
   further meaning: the probability that the most favourable intended behaviour produces a record that looks like the
   actual behaviour falls like `e^{−n·M(p̂)}`. On finite outcomes this is the method of types; on a continuum, Sanov's
@@ -580,8 +595,9 @@ misalignment a record shows can only grow as its cells are refined.
 ## 12. Expected results, before any proof
 
 None of these is claimed. Each is to be proved in `derived/` and checked, with its probe turned into a check where it
-applies. The probes are exploratory: computed in the executor's scratchpad while this draft was written, not registered,
-and not in the repository.
+applies. The probes are exploratory, not checks. Their scripts are in `probes/general/`: `draft1_examples.py` reproduces
+the numbers of draft 1, and T1–T7 are tests whose predictions were registered before they were run
+(`probes/general/PREDICTIONS.md`), with their verdicts in that folder's README.
 
 | Finite item | Expected on general spaces | Evidence so far |
 |---|---|---|
@@ -599,10 +615,16 @@ and not in the repository.
 | a record shows "at least" (new) | as in GD11, a Bahadur–Savage-type impossibility | the construction in GD11 |
 | [P36] | for an evaluator without atoms, once each score is replaced by its rank under the default, the ordinal specification is the set of non-decreasing ratios on `[0, 1]`, the same for every default, and its nearest member is the isotonic regression [@robertson1988] | none |
 | best-of-`n` | divergence exactly `log n − (n − 1)/n` for an evaluator without atoms [@beirami2024], and less with ties; the target's average is `∫₀¹ m(G⁻¹(u))·n·u^{n−1} du`, with `G` the evaluator's distribution function under the default: E8 for best-of-`n` | exact to six digits at `n = 2`, `4`, `16`; with five tied levels, `0.180` against `0.193` at `n = 2` |
-| [P37](i) | masking decays like `1/φ²` in the pass-through `φ`, not exponentially, when the incentive's best value is approached without a gap | a probe of `φ²·KL` gave `1.77`, `3.15`, `3.70`, `3.85` at `φ = 10`, `30`, `100`, `300`, against a predicted limit of `3.92` |
+| [P37](i) | masking decays like `1/φ²` in the pass-through `φ`, not exponentially, when the incentive's best value is approached without a gap | T7: `φ²·KL` is `3.04`, `3.60`, `3.92`, `4.02`, `4.06` at `φ = 10`, `30`, `100`, `300`, `1000`, against a predicted limit of `4.08`, the error shrinking like `1/φ`. Draft 1 cited another instance, whose script was not kept |
 | v7.10's Prop 11 | importable: an objective with a heavy upper tail is not pursuable (GD2) | Kwa et al. prove the phenomenon for reward errors, and measured the tails of reward models as light [@kwa2024] |
 | tilts and atoms (new) | a tilt cannot create an atom (GD6) | immediate from GD1 |
 | the on-target controller | `0` under the usual nearness and `+∞` with none; on a grid of width `w`, `0` or `log 2` depending on where the grid's edges fall, at every `w`; a controller `0.001` off target scores `0` on grids coarser than `0.001`, then grows like `log(1/w)`: `3.72` at `w = 10⁻⁴`, `8.33` at `10⁻⁶` | probe, standard normal default, `F(x) = −x²` |
+| the dimension law (new) | against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, with `d` the information dimension (GD3) | T1: slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` for a pile of a tenth, rounding, a line in the square and the Cantor measure, against `0.10`, `1`, `1` and `log 2/log 3 = 0.369` |
+| no piles from pursuit (new) | a pursuer never piles behaviour at a threshold, even acting step by step through time (section 14) | T2: the step-by-step pursuer's endpoint is the tilt, to `3·10⁻¹⁶` |
+| coordination (new) | under independent pursuit, misalignment on joint actions is coordination plus the individual misalignments, exactly; over a long record, a rate in time (section 14) | the identity, to `2·10⁻¹⁶`; T3: `0` in every round, `0.231` nats per round over time |
+| irreversibility (new) | learning that pursues a fixed objective is reversible; misalignment against reversible processes is at most half the entropy production, a quarter at low intensity (section 14) | T4 |
+| several principals (new) | gridlock under standard specifications; with floors, a pursuit of a weighted sum (section 14) | T5; T5b failed |
+| lock-in (new) | a rate in every run, fixed by early chance (section 14) | T6 |
 
 ## 13. The four disciplines on a continuum
 
@@ -654,13 +676,118 @@ hours and one above. So the shape of the waiting-time distribution inside each o
 et al.'s three intervals [@mason2012] and national counts by minute are two records of it, kept at two resolutions, and
 the departure inside the passing cell measured on either is a lower bound that rises with the resolution. A pile of
 departures in the last minutes before four hours is close to an atom, and its size in nats depends on the record's
-resolution, which is why that resolution is declared before the test (GA5). For the report cards, a patient's severity
-is a continuum, and the risk model reads a few recorded variables: a statistic that merges patients whom clinicians tell
-apart. The card judges at the resolution of that statistic, and the clinicians act at a finer one, inside cells of
-probability zero: a difference of resolution between principal and actor that needs σ-algebras. And each patient arrives
-once (GD9): the response to one patient is never observed, only how treatment goes with severity across patients.
+resolution, which is why that resolution is declared before the test (GA5). Since no pursuit of the target makes a pile
+(section 14), a pile is evidence of something the target does not explain; and from records at 20, 10, 5 and 1 minutes,
+the growth of the misalignment estimates how many patients were timed to the threshold (section 15, "fudging"). For the
+report cards, a patient's severity is a continuum, and the risk model reads a few recorded variables: a statistic that
+merges patients whom clinicians tell apart. The card judges at the resolution of that statistic, and the clinicians act
+at a finer one, inside cells of probability zero: a difference of resolution between principal and actor that needs
+σ-algebras. And each patient arrives once (GD9): the response to one patient is never observed, only how treatment goes
+with severity across patients.
 
-## 14. Open decisions
+## 14. Derived spaces: strategic scenarios as standard ones
+
+`CORE.md` §0 leaves out several actors, actors that respond to the measurement itself, several principals, and dependent
+samples. Each can become a standard scenario, one principal and one actor, on a derived outcome space. Most such spaces
+are continua even when the original outcomes are finite: trajectories, the shares of a large population, measurement
+rules, models. So this file is the way into those scenarios, not only into continuous outcomes. Nothing in this section
+is a definition yet (section 16).
+
+**When a lift is honest.** Any group of actors has a joint behaviour, so a lift is always possible. It gives a standard
+scenario only if, on the derived space, a default can be declared before the behaviour is seen (GA5), the principal's
+intended behaviours are a declared specification there (GD3), and records are independent draws, or one long record has
+a single rate. Where a condition fails, the failure is what is strategic about the scenario, and most often it can be
+measured.
+
+| Scenario | Derived outcome space | Derived default | Standard when | What stays strategic |
+|---|---|---|---|---|
+| dependent samples | trajectories: infinitely many steps of finitely many outcomes already form a continuum | the process with no pursuit | episodes are independent, or one long record has one rate: the divergence per step | lock-in: each run has a rate, but early chance fixes it (T6) |
+| several actors | joint actions; with many actors, the share of each action | the actors acting independently, each from its own default | the principal declares the joint behaviour it intends: independent pursuit, or a pursuit of a potential | coordination, measured exactly (T3); learning that goes round in circles, measured by its irreversibility (T4) |
+| actors that respond to the measurement | the possible measurement rules, as conditions (GD8) | the principal's declared randomization over rules | rules are randomized as declared; the response to a change of rule is then bounded by how differently the actor perceives the two rules, where performative prediction assumes such a bound [@perdomo2020] | a principal that changes its rule in response to the actor without having declared how: GA5 then fails at every level |
+| several principals | the principals, with declared weights | — | the weights are declared | the weights: who counts how much |
+| actors that learn | the models a learner can end with | the distribution of models at the start | training is a pursuit of its objective over models | the gap between actual training and a pursuit |
+
+**Structural specifications.** Four of the residues are misalignments against specifications defined by a structure, not
+by an objective. Each is a divergence, so the framework measures them in the unit it measures everything in.
+- *Independence: coordination.* If the principal intends each actor to pursue its own objective independently,
+  misalignment on joint actions is exactly the coordination between the actors, their total correlation, plus the sum of
+  their individual misalignments: the chain rule of [P4](iii), with intended behaviours that are products. Over a long
+  record it is a rate in time. Two tit-for-tat players with 5% errors do not coordinate at all within any round, mutual
+  information `0`, and coordinate by `0.231` nats per round over time (T3): a regulator reading one round's table sees
+  independent firms. Pricing algorithms that learn to sustain high prices [@calvano2020] are the case this reading is
+  for; whether their coordination shows mostly in time, as T3's does, is not checked.
+- *Reversibility: going round in circles.* In log-linear learning, players revise one at a time by a logit rule. In a
+  potential game its long-run behaviour is a pursuit of the potential on joint actions [@blume1993], and it is
+  reversible: the process watched backward looks like the process watched forward, and its entropy production, the
+  divergence per step between the two, is `0` (T4: below `10⁻²⁴` in 120 cases). In the other games tested it is not.
+  Misalignment against the reversible Markov chains is at most half the entropy production, and a quarter of it at low
+  intensity (T4: ratios `0.2500` and `0.2496` at `t = 0.01` and `0.1`; `0.156` at `t = 2`). For this learning rule, in
+  two-by-two games at low intensity, the entropy production is `(t·C/8)²`, where `C` is the payoff gained around the
+  cycle of single-player deviations: the part of the game that no potential explains, its harmonic part [@candogan2011].
+  Fifty random games gave `0.015624` for `EP/(t·C)²`, against `1/64 = 0.015625`: a constant the probe found and the
+  prediction did not state.
+- *Regularity: piles and pins.* If the intended behaviours have smooth ratios to the default, misalignment at a record
+  of width `w` grows like `(D − d)·log(1/w)` (GD3). T1 confirmed the slope for a pile, for rounding, for a behaviour
+  pinned in one of two attributes, and for the Cantor measure, whose dimension, `log 2/log 3`, no count of piles
+  explains.
+- *A fixed objective: no piles.* A pursuer of a threshold evaluator never piles behaviour at the threshold, even one
+  that acts step by step through time and watches the clock: its result is the tilt of the endpoint, exact to `3·10⁻¹⁶`
+  (T2). So a pile at a threshold, as with the four-hour target, the proficiency cut-offs of the New York Regents exams
+  [@dee2019] or round marathon times [@allen2017], is evidence that the actor does not pursue the evaluator. It pursues
+  something with a spike at the threshold, or it moves outcomes by short steps, which the framework sees only through
+  feasibility (GD7).
+
+**Several principals.** Under standard specifications the default is intended by every principal, so the behaviour least
+misaligned on weighted average is the default itself: gridlock, with misalignment `0` for every principal (T5). With
+floors ([P35]), the compromise is a pursuit of `Σ_k w_k·t_k·F_k`, with `w_k` the declared weights and `t_k` the
+intensity of the compromise's nearest intended behaviour for principal `k` (T5: residual `10⁻⁸`). The weights stay a
+declaration: who counts how much is not the framework's to say. The compromise often meets each principal's floor
+exactly, but not always: in 11 of 20 random instances, against a predicted 15 at least (T5b, failed).
+
+**Lock-in.** A record of a process that locks in, such as a Pólya urn, has a rate in every run, but early chance fixes
+it. Against independent fair draws, each run's rate is the divergence of its final share from one half, within
+`3.5·10⁻⁴`, and over 400 runs the rates have mean `0.199` and standard deviation `0.185` (T6). What fails is that one
+rate describes the actor, not that a rate exists.
+
+**What does not lift.** Internal states and beliefs about beliefs. A space for them exists, the universal type space,
+but no default on it can be observed, so no lift can be declared (GA5), and they stay out of scope by GA1.
+
+## 15. Everyday words, formally
+
+The formalism matched to the words people use for misalignment. "Tested" means a probe with a registered prediction
+(section 12); "probed", a computation without one; "reading", an interpretation that no computation backs.
+
+| Everyday words | Formal object | Where | Evidence |
+|---|---|---|---|
+| possible, impossible | positive or zero probability under the default | GD1, GD2 | definition |
+| unprecedented, never done before | behaviour the default never produces: not absolutely continuous with respect to it | GD2 | definition |
+| exactly, to the dot, pinned | an atom: one value with positive probability | GD3 | definition |
+| suspiciously precise; rounding off; formulaic, rigid in one respect | a dimension deficit: misalignment growing like `(D − d)·log(1/w)` | GD3 | tested (T1) |
+| a pile, bunching, just over the line | an atom at the evaluator's threshold, which no pursuit makes | GD6, section 14 | tested (T2) |
+| fudging | little moved, much misaligned: pulling breaches to land just inside a four-hour target moves 2.3 patient-minutes per patient, against 15.6 for an honest improvement to the same pass rate, and only the fudging is misaligned, by `0.1` to `0.7` nats as the record is refined | section 13 | probed |
+| close enough | a declared nearness | GD3 | definition |
+| tolerance | a declared resolution of width `w` | GD4 | definition |
+| blurry, cannot tell apart | a ratio to the default that is a function of a statistic: limited to its resolution | GD4 | definition |
+| noise protects | an actor with imprecision it does not control is never infinitely misaligned for pinning values | GD7 | definition |
+| a ceiling, hitting the wall | the end of pursuit, `t_max` | GD2 | probed |
+| lottery tickets, swinging for the fences | the frontier past the end of pursuit | GD5 | probed |
+| good enough, satisficing | a bounded ratio to the default: the top fraction `q` of the default has departure `log(1/q)`, a quantilizer [@taylor2016] | GD1 | known |
+| perfectionism | the limit of pursuit, singular on a continuum | GD3 | definition |
+| a needle in a haystack; a glitch found all at once | a narrow spike of the evaluator, of height `h` on a region of default probability `η`, found at intensity `log(1/η)/h`, in a switch of width `2·log 9/h` | GD2 | probed (`vocabulary_examples.py`) |
+| teaching to the test; a fixed exam | test conditions of probability zero in use: a single driving cycle, a fixed benchmark | GD9 | reading |
+| a surprise inspection | test frequencies comparable to those of use | GD9, section 14 | reading |
+| they cheat where you don't look | misalignment moving to conditions the test never covers | GD9 | reading |
+| acting for the camera | a gap between how test and use look to the actor, which bounds how differently it can act | GD8 | probed: the bound only |
+| collusion, tacit coordination | coordination: mutual information between actors, within a round or in time | section 14 | tested (T3) |
+| going round in circles, cat and mouse | irreversibility: entropy production; the harmonic part of a game | section 14 | tested (T4) |
+| gridlock, when in doubt do nothing | the default, intended by every principal | section 14 | tested (T5) |
+| who counts how much | the weights over principals | section 14 | a declaration |
+| lock-in, early luck decides | a rate in every run, fixed by early chance | section 14 | tested (T6) |
+| a track record | one sample on the space of trajectories | section 14 | reading |
+| splitting hairs | refining a description, which can only raise misalignment | GA6 | definition |
+| moving the goalposts, cherry-picking the bins | a nearness or a record's resolution chosen after the data | GA5 | definition |
+
+## 16. Open decisions
 
 1. GA6 as a sixth premise. It is the one premise this file adds; everything else extends the core's.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
@@ -672,3 +799,8 @@ once (GD9): the response to one patient is never observed, only how treatment go
    of misalignment, with the direction trap of GD11; and a record's resolution as a field of `STANDARD.md`.
 5. Whether section 13 moves into the ontologies, which needs lint R10 to allow a section for outcomes that are not
    finite.
+6. Whether the lifts of section 14 become definitions, a derived space with its default and its specification, which
+   would narrow the out-of-scope list of `CORE.md` §0.
+7. Whether the structural specifications of section 14 get names and results of their own. The coordination split is
+   exact on finite outcomes too, and could enter the core first, with the Sanov reading of decision 4.
+8. Whether `probes/` stays a folder of exploratory scripts, and whether CI should at least run them.
