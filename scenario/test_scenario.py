@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from compute import (compute, quoted, declared, evaluator_curve, regression, DEFAULT, VALUE, RATING, FIXED_RATING,   # noqa: E402
-                     TUNED_INTENSITY)
+from compute import (compute, quoted, declared, evaluator_curve, regression,    # noqa: E402
+                     DEFAULT, VALUE, RATING, FIXED_RATING, TUNED_INTENSITY)
 
 TOL = 1e-9
 
@@ -48,7 +48,7 @@ def test_the_rating_overoptimizes_and_the_repaired_rating_cannot(v):
     ts = np.linspace(0, 40, 4001)
     curve = np.array([value_at(t) for t in ts])
     falls, rises = np.diff(curve) < -1e-12, np.diff(curve) > 1e-12
-    assert falls.any() and not rises[np.argmax(falls):].any()                             # [P25](iii): no rise after a fall
+    assert falls.any() and not rises[np.argmax(falls):].any()                             # [P25](iii): no rise after it
     assert abs(curve[-1] - limit) < 1e-3 and limit == VALUE[RATING.argmax()]               # [P20](ii)
     fixed_at, _, _, _ = evaluator_curve(FIXED_RATING)
     fixed = np.array([fixed_at(t) for t in ts])

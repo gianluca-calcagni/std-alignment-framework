@@ -1,8 +1,8 @@
 """Every number of SCENARIO.md, computed with the helpers that the checks use (checks/common.py and the checks of [P5],
 [P9]). Usage: python3 scenario/compute.py   (prints each quoted value under its name)
 
-scenario/test_scenario.py recomputes these values, checks the identities they rest on, and checks that SCENARIO.md quotes
-each of them as printed here.
+scenario/test_scenario.py recomputes these values, checks the identities they rest on, and checks that SCENARIO.md
+quotes each of them as printed here.
 """
 import sys
 from pathlib import Path
@@ -148,11 +148,13 @@ def quoted(v):
         "M_interval": f"{v['M_low']:.3f} to {v['M_high']:.3f} nats", "S_low": e2(v["S_low"]), "S_high": e2(v["S_high"]),
         "leak": f"{LEAK:.2f} nats", "nats_for_ten_to_one": f"{np.log(10):.1f} nats",
         "revealed_slope": f"{v['revealed_slope']:.2f}",
-        "revealed_fit_rating": f"{v['revealed_fit_rating']:.4f}", "revealed_fit_value": f"{v['revealed_fit_value']:.2f}",
+        "revealed_fit_rating": f"{v['revealed_fit_rating']:.4f}",
+        "revealed_fit_value": f"{v['revealed_fit_value']:.2f}",
         "regression_cell": f"{v['regression'][0]:.2f}", "regression_cell_euros": e2(v["regression"][0]),
         "residual_share": f"{100 * v['residual_share']:.0f}%",
         "peak_t": f"{v['peak_t']:.2f}", "peak_value": e2(v["peak_value"]), "limit_value": e2(v["limit_value"]),
-        "cov_now": f"{v['cov_now']:.2f}".replace("-", "−"), "value_t1": e2(v["value_t1"]), "value_t2": e2(v["value_t2"]),
+        "cov_now": f"{v['cov_now']:.2f}".replace("-", "−"),
+        "value_t1": e2(v["value_t1"]), "value_t2": e2(v["value_t2"]),
         "rating_t1": f"{v['rating_t1']:.2f} stars", "rating_t2": f"{v['rating_t2']:.2f} stars",
         "leak_low": e2(v["leak_low"]), "leak_high": e2(v["leak_high"]),
         "fixed_t1": e2(v["fixed_t1"]), "fixed_t2": e2(v["fixed_t2"]), "fixed_limit": e2(v["fixed_limit"]),

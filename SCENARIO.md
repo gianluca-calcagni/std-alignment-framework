@@ -173,9 +173,11 @@ not non-decreasing, so [P19] gives no guarantee; single-peaked, so by [P25](iii)
 never rises again. By [P20](i), `d/dt E_{p_t}[F] = Cov_{p_t}(F̂, F)` along `p_t = tilt(q, t·F̂)`, which vanishes at
 `t = 0.42`, where `E_{p_t}[F] = €0.80`. At the tuned intensity `0.6`, `Cov_{p̂}(F̂, F) = −0.41`: past the peak. This
 covariance is the stopping rule for tuning that follows the pursuit of `F̂`, as here, and it can be estimated from
-reviewed conversations; along any other path the target's rate is `Cov_{p_s}(F_s, F)`, with `F_s` the path's revealed
-objective ([P13](i)), and the rule holds only as far as `F_s` stays close to a multiple of `F̂`. By [P20](ii), since
-`m(5) = −5 < m(4) = 1.82`, `E_{p_t}[F]` falls for all large `t` and tends to `m(5)`, −€5.00.
+reviewed conversations. It finds the first peak, which is the highest here because the regression is single-peaked
+([P25](iii)); case C2 tests it under practical training (`cases/c2-stopping-rule/`). Along any other path the target's
+rate is `Cov_{p_s}(F_s, F)`, with `F_s` the path's revealed objective ([P13](i)), and the rule holds only as far as
+`F_s` stays close to a multiple of `F̂`. By [P20](ii), since `m(5) = −5 < m(4) = 1.82`, `E_{p_t}[F]` falls for all large
+`t` and tends to `m(5)`, −€5.00.
 
 | Intensity on the rating | Expected stars | Value per conversation |
 |---|---|---|

@@ -75,7 +75,12 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   where the covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses
   zero. This is [[P20 — Where overoptimization starts, and how it ends|P20]](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two
   are uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero;
-  that would mean the trained policies are not the optima the slots assume.
+  that would mean the trained policies are not the optima the slots assume. Revised before any data were read, after
+  case C2 (`cases/c2-stopping-rule/`): the peak is the peak of the curve of optima, so the prediction needs several
+  training runs per `β`, or their scatter measured, since a single run's gold scatters around its optimum's by a share
+  of the gain that decides which run looks best; a grid of `β` fine relative to the intensity at the peak; and, where
+  the target has several peaks, the covariance's first zero is the first peak, which is the highest only when the
+  regression is single-peaked ([[P25 — The target's curve turns no more often than the regression|P25]]).
 - **Reading** with [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]], [[P13 — What the start of a change gains|P13]]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can

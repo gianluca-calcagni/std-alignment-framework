@@ -62,6 +62,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **Lineage amnesia after a restart** | [P13](ii) re-derived v7.10's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9 | before adding a result, search v7.10 (`git grep -i <idea> v7.10`) for its counterpart, and cite it in the Lineage |
 | **A data claim written from memory** | the industrial-organization ontology gave the German price archive the licence CC BY 4.0, the live feed's; by secondary sources the archive is CC BY-NC-SA 4.0, for non-commercial use. Found only when the PI asked which specification the public data can test | a Data paragraph says where each claim about licence and access comes from, and says so when the primary source was not reached |
 | **An intervention dated with the quantity it tests** | the known result dates adoption partly by the speed of a station's response to its rival, a dependence between the stations; a test of coordination before and after those dates would have been partly true by construction. Caught before registration | before registering, list how every intervention or group is defined, and drop any marker that measures the outcome tested |
+| **A threshold without its scale, in a registration** | case C2's verification required a recovery of `0.999` on a grid of step `0.05`, while a third of the peaks came before `t = 0.5`; and S1 scored the rule against the best of 32 noisy training runs, so its threshold measured luck. All three predictions failed; the exact pursuit on S1's own grid would have reached only 79% | before registering, compute every threshold on the design's noise-free case, with seeds the test will not use, and score against what the design can reach, not against the luckiest run |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with
@@ -235,7 +236,9 @@ the scope, until a prediction has been tested on data not seen before.
 **Next, chosen by the PI:** tests that build confidence, registered before they are computed (`cases/`), and a worked
 scenario described three ways, in plain terms, in simple intuitive terms and formally (`SCENARIO.md`). Case C1 is done:
 coordination does not detect collusion, and the industrial-organization prediction was revised before its data were
-read. Its data need credentials from Tankerkönig, which only the PI can request.
+read. Its data need credentials from Tankerkönig, which only the PI can request. Case C2 is done: the stopping rule of
+[P20] finds the peak of the curve of optima under practical training, but its registration failed on thresholds without
+a scale; the machine-learning prediction now states the training it needs.
 
 **Then**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak
