@@ -58,6 +58,9 @@ A case is of one of two kinds.
   in `RECORD.md`, and count toward the finish line and the base rate.
 - **Simulation**: on a system built to know the truth, such as learning algorithms whose collusion is known. It tests an
   instrument or a reading before the instrument meets the world, and counts toward neither.
+- **Diagnostic**: on data from the world, a hypothesis about the system that the framework does not itself predict, such
+  as what an optimizer changed beyond its reward, measured with the framework's instruments. It counts toward the fifth
+  row of the finish line (diagnostics), not toward the base rate, and its predictions have no rows in `RECORD.md`.
 
 | Case | Kind | Question | State |
 |---|---|---|---|
@@ -65,3 +68,4 @@ A case is of one of two kinds.
 | `c2-stopping-rule/` | simulation | does the stopping rule of [P20], stop where proxy and gold stop correlating, survive stochastic training, training without a KL term, and estimated covariances? | done: S1, S2 and S3 failed. The rule finds the peak of the curve of optima; the registration's thresholds had no scale, and the rule finds the first of several peaks |
 | `w1-best-of-n-slope/` | world | on 12.6 million answers no one had scored with this proxy, is the literature's fitted best-of-`n` coefficient the initial slope of [P13]? | done: refuted. The fitted coefficient overstates the initial slope by 22%; the curve keeps the predicted slope up to `n = 16`, then saturates. Reported to `STANDARD.md` (`REPORT.md`, exploratory) |
 | `w3-ppo-pursuit/` | world | is a public PPO-tuned language model, within each prompt, the pursuit of the reward it was tuned on? | done: S1 refuted (the reward explains a third of the revealed objective, not half, and a tenth within each model's own outputs); S2 held (it follows the reward's own scale) |
+| `w4-two-runs/` | diagnostic | is what PPO changed in W3's model beyond its reward systematic, shared by a second public run, or drift? | registered; running |

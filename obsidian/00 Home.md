@@ -36,3 +36,4 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 - c2-stopping-rule: [[c2-stopping-rule registration]] · [[c2-stopping-rule results]]
 - w1-best-of-n-slope: [[w1-best-of-n-slope registration]] · [[w1-best-of-n-slope results]] · [[w1-best-of-n-slope report]]
 - w3-ppo-pursuit: [[w3-ppo-pursuit registration]] · [[w3-ppo-pursuit results]]
+- w4-two-runs: [[w4-two-runs registration]]
