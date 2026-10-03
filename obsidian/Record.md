@@ -25,8 +25,8 @@ Jensen–Shannon divergence and its bound by Jeffreys' divergence, and logarithm
 reversible chain, is likely in the information geometry of Markov chains and has not been searched for. Novelty is not
 a goal; this list says where a reader should look first.
 
-**What it is not yet.** The core is a checked calculus. It has made eight predictions about the world and tested none of
-them on data not seen before (section 2). The finish line is in the README.
+**What it is not yet.** The core is a checked calculus. It has made eight predictions about the world and tested one of
+them on data not seen before, which was refuted (section 2). The finish line is in the README.
 
 ## 2. Predictions
 
@@ -37,7 +37,7 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 
 | Ontology | From | Label | State | Where |
 |---|---|---|---|---|
-| machine-learning | [[P13 — What the start of a change gains\|P13]] | empirical | untested. The published paper does not report what it needs (v7.10, T3); it needs samples of the initial policy (`NOTES.md` §3.2, D3) | `ontologies/machine-learning/`, sections 3 and 4 |
+| machine-learning | [[P13 — What the start of a change gains\|P13]] | empirical | refuted on data not seen before (case W1, `cases/w1-best-of-n-slope/`): the literature's fitted best-of-`n` coefficient is `0.338` against the predicted initial slope `0.278`, a difference of `+0.060` (95% interval `+0.040` to `+0.081`), on 1,000 prompts of Coste et al.'s answers with a proxy built and frozen here. The curve keeps the predicted slope up to `n = 16` and then saturates, which the form cannot follow (exploratory). The published paper had not reported what the test needs (v7.10, T3) | `ontologies/machine-learning/`, sections 3 and 4 |
 | machine-learning | [[P20 — Where overoptimization starts, and how it ends\|P20]] | empirical | untested; revised before any data were read, after case C2 (`cases/c2-stopping-rule/`), to require the curve of optima (several runs per `β`), a fine grid, and the first peak only where the regression has several | `ontologies/machine-learning/`, section 3 |
 | behavioural-economics | [[P12 — What interventions reveal\|P12]], [[D6 — Intervention and pass-through\|D6]] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely: T7-2's registered test, pooling two companies, held, though one of them alone exceeds the tolerance; of two further companies, one was within it and one was not (T7-2b). Those data are seen | `ontologies/behavioural-economics/`, section 3 |
 | medical-sciences | [[P12 — What interventions reveal\|P12]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the report cards' study used Medicare records, which are not public (`NOTES.md` §3.2, D5) | `ontologies/medical-sciences/`, section 3 |
@@ -69,7 +69,8 @@ had been seen (T7-1c, T7-2c).
 In T7, every verification prediction held, and 5 of 15 empirical predictions did: that is the base rate to quote.
 Elsewhere in v7.10, verification predictions did fail, on thresholds set without a scale (R7-7, R8-1; `NOTES.md` §1).
 
-**This core.** None of its eight empirical predictions has been tested on data not seen before.
+**This core.** One of its eight empirical predictions has been tested on data not seen before: the machine-learning
+prediction from [[P13 — What the start of a change gains|P13]], refuted (case W1). Zero of one held.
 
 ## 3. Retractions
 

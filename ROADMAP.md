@@ -16,23 +16,26 @@ row of the finish line is met.
 | solid | lint and every check pass on both SIMD paths; new checks are mutation-tested | met |
 | stable | neither the scope nor a premise's or definition's Statement changes for three consecutive steps | not met: the scope changed in v11 |
 | easy to import into | every item of the archive has a recorded fate | met |
-| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **not met: eight predictions, none tested on unseen data** |
-| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: `SCENARIO.md` is hypothetical, and no outside reader has run anything |
+| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **met, by a refutation**: case W1. Narrowly: it tested the literature's curve against the framework's initial slope, not the framework's bet that optimizers pursue |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: W1's data and code are public and could serve; no report to `STANDARD.md` yet, and no outside reader |
 
-**The one thing that matters now is the fourth row.** It has not moved since the restart. Everything else waits unless
-it unblocks that row or the fifth.
+**The one thing that matters now is the fifth row**, and then a test of the framework's own bet. Everything else waits
+unless it serves one of them.
 
 ## Where we are (2026-10-03)
 
 - The core is v11: five premises, eleven definitions, 42 propositions; 163 checks pass on both paths.
-- **Frozen** (`NOTES.md`, Q26): the general core at draft 3, new disciplines, any widening of the scope.
+- **W1**, the first test on data not seen before (`cases/w1-best-of-n-slope/`): the machine-learning prediction from
+  [P13], refuted. On 12.6 million answers, the literature's fitted best-of-`n` coefficient overstates the initial slope
+  by 22%; the curve keeps the framework's initial slope up to `n = 16`, then saturates (exploratory).
+- **Frozen** (`NOTES.md`, Q26): the general core at draft 3, new disciplines, any widening of the scope. Q26 set the
+  freeze "until a prediction has been tested on data not seen before", which W1 now meets; lifting it is the PI's
+  decision. The executor recommends keeping it until the fifth row is met as well.
 - Two simulation cases checked instruments before they met the world, and each revised a prediction before its data were
   read (`cases/`): C1, coordination does not detect collusion; C2, the stopping rule finds the peak of the curve of
   optima, the first of several peaks.
 - `SCENARIO.md` shows the framework applied, three ways; it is an illustration, not evidence.
-- **Blocked on the PI:** every world dataset the predictions need is out of this environment's reach (`NOTES.md` §3.2).
-  The PI supplied Coste et al.'s paper; its dataset needs `huggingface.co` allowed in the environment's network
-  settings.
+- **Blocked on the PI:** the German price archive (credentials), and an outside reader (`NOTES.md` §3.2).
 
 ## Next, in order
 
@@ -40,16 +43,16 @@ Each step names the row it serves and what it waits for. A step that serves no r
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
-| 1 | Data for a world test: the gold-labelled generations of Coste et al., the German price archive, Assad et al.'s replication package (`NOTES.md` §3.2, D3, D7) | 4 | the PI: downloads, credentials, or network domains |
-| 2 | **W1**, machine learning: register the ontology's prediction from [P13] (the best-of-`n` slope) on the gold-labelled generations, with a proxy reward model fixed in the registration; then run it once. The proxy is not released, so the smallest of the paper's sizes is trained here, on the paper's preference data, and a subset of prompts is scored. A weak test: best-of-`n` is computed from the same samples, so it tests the fitted form near `d = 0` more than the framework (ontology, section 3); it still meets row 4 | 4 | step 1; the dataset's card read, never its rows, before registration |
-| 3 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one), with markets, episodes, contexts and the dating of adoption fixed; then run it once | 4 | step 1 |
-| 4 | An outside reader runs one report end to end, on W1's or W2's data, from `STANDARD.md` and `SCENARIO.md` alone | 5 | W1 or W2 done; the PI finds a reader who is a person, not a Claude model |
+| 1 | W1 reported to `STANDARD.md`, with every field and interval, as the worked case an outside reader can rerun from public data | 5 | nothing |
+| 2 | An outside reader reruns that report end to end, from `STANDARD.md`, the case folder and the public data alone | 5 | the PI finds a reader who is a person, not a Claude model |
+| 3 | A test of the framework's bet, that an optimizer's behaviour is a pursuit of what it is rewarded on: trained policies with their reference model and log-probabilities, small enough for this machine, or published | 4, beyond the letter | a decision by the PI on which, and data |
+| 4 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
 | 5 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
 
 ## Not now, and why
 
 - The general core, new disciplines, wider scope: frozen until row 4 is met.
-- New results in `derived/`: only if W1 or W2 needs one to be stated.
+- New results in `derived/`: only if a test on the list above needs one to be stated.
 - More simulation cases: only to gate a named world test, at most one per test, before that test runs.
 - Hunches (`NOTES.md` §5.4): recorded, not pursued, unless a step above needs them.
 
@@ -71,3 +74,4 @@ One line per turn: date, what changed, which row it served.
 |---|---|---|
 | 2026-10-03 | consolidation; v11; the freeze; `cases/` and R14; cases C1 and C2, both revising a prediction before data; `SCENARIO.md`; this roadmap | 4 (instruments checked); 5 (scenario) |
 | 2026-10-03 | the PI supplied Coste et al.'s paper; read; W1's data located, and its access blocked on one network domain | 4 (step 1) |
+| 2026-10-03 | W1: proxy trained and frozen; procedure calibrated on synthetic prompts; registered; run once on 12.6 million unseen answers; refuted. The framework's first test on unseen data | 4: met, by a refutation |

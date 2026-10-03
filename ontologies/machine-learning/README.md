@@ -69,12 +69,16 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   policy, of the gold with the path's first revealed objective. The slope of the reinforcement-learning form,
   `a − b − b·log d`, grows without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the
   measured range only, and cannot hold down to `d = 0`. The best-of-`n` form has the finite slope `a` at `0`, as the
-  core requires.
+  core requires; but fitted over the usual range, its `a` need not be the initial slope: on unseen answers, the curve
+  kept the core's slope up to `n = 16` and then saturated, which the form cannot follow (case W1, below).
 - **Prediction** (empirical) from [P13]: for best-of-`n`, `a = √2·Cov_q(G, F)/σ_q(G)`, where `G` is `log Q(r̂)` centred
   within each prompt. Both sides come from samples of the initial policy scored by the gold and the proxy, with no
   optimization. *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the
   best-of-`n` curve is itself computed from such samples, this tests the functional form near `d = 0`, and the
-  small-mass idealization; it does not test language models.
+  small-mass idealization; it does not test language models. **Refuted** on data not seen before
+  (`cases/w1-best-of-n-slope/`): on 1,000 prompts with 12,600 answers each [@coste2024], scored by a proxy trained and
+  frozen before the test, the fitted `a` is `0.338` against `0.278` predicted, a difference of `+0.060` (95% interval
+  `+0.040` to `+0.081`). Exploratory: the curve keeps the slope `0.28` up to `n = 16`, then saturates.
 - **Prediction** (empirical) from [P20]: along a sweep of `β` with policies near their optima, the gold score peaks
   where the covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses
   zero. This is [P20](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two
@@ -130,10 +134,10 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   policy.
 - Best-of-`n` is a pursuit only in the small-mass idealization; over a small set of responses its exact distribution,
   and its KL, differ. [P19] covers its exact form, as a path whose revealed objectives rise with the proxy.
-- The best-of-`n` slope prediction of section 3 cannot be tested from the known result's paper: it reports the fitted
-  `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold under
-  the initial policy (v7.10, T3, a pre-registered attempt). The test needs samples of the initial policy scored by
-  both reward models (`NOTES.md` §3.2, D3).
+- The best-of-`n` slope prediction of section 3 could not be tested from the known result's paper: it reports the
+  fitted `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold
+  under the initial policy (v7.10, T3, a pre-registered attempt). It was tested on Coste et al.'s released answers,
+  with a proxy built here (case W1), and refuted; a learned neural proxy might give another shape of curve.
 
 ## 5. Open questions
 
