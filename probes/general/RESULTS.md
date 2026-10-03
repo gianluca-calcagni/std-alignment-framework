@@ -96,3 +96,81 @@ T6: largest |rate - KL(share||1/2)| 3.49e-04 (predicted < 1e-3); rates mean 0.19
 4. sigma=0.5: deployment vs test at most 0.6827; deployment vs halfway at most 0.3829
 ```
 
+
+# Second batch, as run on 2026-10-03
+
+Pasted from the runs of this session; `b3_diagnose.py` is shown after its fix.
+
+## b1_b2_reversibility.py
+
+```
+B1: misalignment against reversible chains, optimized, against the Jensen-Shannon divergence of the fluxes
+    matching pennies t=0.01: optimum 2.4998750056e-05, JS 2.4998750056e-05, EP 9.9997e-05
+    matching pennies t=0.1: optimum 2.4875553204e-03, JS 2.4875553204e-03, EP 9.9668e-03
+    matching pennies t=2.0: optimum 3.0152620640e-01, JS 3.0152620640e-01, EP 1.9281e+00
+    largest relative gap over the 13 cases: 2.2e-12  (predicted < 1e-6)
+B2: EP = cycle flux x cycle affinity; low-intensity constant from the edge fluxes
+    t=0.5: EP 6.1945971492e-03, J·t·C 6.1945971492e-03, ratio 1.000000000000  (predicted 1)
+    t=2.0: EP 6.3266409094e-02, J·t·C 6.3266409094e-02, ratio 1.000000000000  (predicted 1)
+    revision probabilities 0.7 and 0.3: EP/(t·C)^2 = 0.013125 ± 5.2e-09, predicted 0.013125
+```
+
+## b3_inattention.py
+
+```
+beta=   3.0: atoms  1 at [0.5]; spread of the default 0.0041; max |behaviour - tilt of default| 2.4e-06; predicted atoms ~ 0.7
+beta=   5.5: atoms  1 at [0.5]; spread of the default 0.0074; max |behaviour - tilt of default| 1.3e-06; predicted atoms ~ 1.0
+beta=   6.5: atoms  2 at [0.397 0.603]; spread of the default 0.1024; max |behaviour - tilt of default| 9.1e-07; predicted atoms ~ 1.0
+beta=   8.0: atoms  2 at [0.327 0.673]; spread of the default 0.1730; max |behaviour - tilt of default| 2.0e-06; predicted atoms ~ 1.2
+beta=  30.0: atoms  3 at [0.19 0.5  0.81]; spread of the default 0.2613; max |behaviour - tilt of default| 3.6e-06; predicted atoms ~ 2.2
+beta= 100.0: atoms  6 at [0.105 0.275 0.423 0.577 0.725 0.895]; spread of the default 0.2806; max |behaviour - tilt of default| 6.0e-06; predicted atoms ~ 4.1
+beta= 300.0: atoms 11 at [0.06  0.158 0.241 0.319 0.401 0.5   0.599 0.681 0.759 0.842 0.94 ]; spread of the default 0.2861; max |behaviour - tilt of default| 1.0e-05; predicted atoms ~ 7.1
+dimension slope of the optimized default at beta=30, w 0.1 -> 0.01: 0.751  (predicted > 0.9)
+```
+
+## b3_diagnose.py
+
+```
+iterations    2000: atom widths [0.0086, 0.0181, 0.0086], slope w 0.1->0.01 0.535, mass of grid points above 1e-3: 149
+iterations   20000: atom widths [0.0027, 0.0059, 0.0027], slope w 0.1->0.01 0.751, mass of grid points above 1e-3: 59
+iterations  100000: atom widths [0.0012, 0.0027, 0.0012], slope w 0.1->0.01 0.806, mass of grid points above 1e-3: 29
+iterations  300000: atom widths [0.0007, 0.0015, 0.0007], slope w 0.1->0.01 0.843, mass of grid points above 1e-3: 19
+```
+
+## b3b_followup.py
+
+```
+beta=50.0: 4 atoms, predicted between 2.9 and 5.8
+beta=200.0: 10 atoms, predicted between 5.8 and 11.5
+beta=5.85: spread of the default 0.0060
+beta=6.15: spread of the default 0.0601
+```
+
+## b4_b5_b6.py
+
+```
+B4a: L=   1e+01: gain in F    0.240
+B4a: L=   1e+02: gain in F    0.854
+B4a: L=   1e+03: gain in F    4.939
+B4a: L=   1e+04: gain in F   34.394
+B4a: L=   1e+06: gain in F 2127.136
+B4b: chi-squared budget used 0.100000; gain 0.273861; sqrt(0.1·Var) = 0.273861; positive everywhere: True
+B4c: B=0.1: chi-squared gain 0.223606798 vs sqrt(B)·rho·sd = 0.223606798; KL pursuit gain 0.3504 vs sqrt(2B)·rho·sd = 0.3162 (ratio 1.1081)
+B4c: B=0.3: chi-squared gain 0.387298335 vs sqrt(B)·rho·sd = 0.387298335; KL pursuit gain 0.6520 vs sqrt(2B)·rho·sd = 0.5477 (ratio 1.1903)
+B4c: B=0.5: chi-squared gain 0.500000000 vs sqrt(B)·rho·sd = 0.500000000; KL pursuit gain 0.8827 vs sqrt(2B)·rho·sd = 0.7071 (ratio 1.2483)
+B4c: B=1 (chi-squared infeasible beyond B = 0.5): KL pursuit gain 1.3577 vs 1.0000
+B5 Gaussian: largest relative error over 150 cases 3.6e-15  (predicted < 1e-9)
+B5 exponential product, t=0.1: M/departure 0.500000, sin^2 = 0.5   (registered: departs by >1% at t = 2; t_max = 1)
+B5 exponential product, t=0.5: M/departure 0.500000, sin^2 = 0.5   (registered: departs by >1% at t = 2; t_max = 1)
+B5 exponential product, t=0.9: M/departure 0.500000, sin^2 = 0.5   (registered: departs by >1% at t = 2; t_max = 1)
+B5 exploratory, Exp x Normal, t=0.05: M/departure 0.4829, sin^2 = 0.5
+B5 exploratory, Exp x Normal, t=0.2: M/departure 0.4268, sin^2 = 0.5
+B5 exploratory, Exp x Normal, t=0.5: M/departure 0.2895, sin^2 = 0.5
+B6: depends on r/sigma only (max gap 0.0e+00); non-increasing in r: True; zero from r = sigma·Phi^-1(1-alpha): True
+```
+
+## b7_attention.py
+
+```
+B7: largest gap between the misalignment against 'ignoring the situation' and the mutual information: 3.1e-16
+```

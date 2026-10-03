@@ -71,6 +71,11 @@ meeting each principal's floor exactly, and that read like a law ("a committee d
 20-instance test registered before running it found it in 11 of 20 instances, against a predicted 15, so it is recorded
 as failed, and draft 2 says "often, not always".
 
+**Two from the second batch.** B5 registered a prediction at intensity 2 for a default whose pursuit stops at 1: the
+object did not exist there. Countermeasure: compute the domain (`t_max`) of every registered quantity before
+registering. And the first run of a diagnosis of B3 contradicted B3 itself; checking the probe first, as the failure
+mode "a probe bug read as a refutation" says, found an operator-precedence bug (`pa * (rho / z) @ K`).
+
 ## 2. Is the core a compelling standard yet?
 
 Closer, not yet. v9 applied the PI's decisions: the core held five premises and nine definitions; every result is
@@ -299,13 +304,13 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H3 | **Goodhart's four variants are four objects of v9.** Regressional: the cell average and its Jensen gap ([[P8 — An actor that cannot tell outcomes apart\|P8]]); extremal: H2; causal: an intervention that changes more than it adds ([[D6 — Intervention and pass-through\|D6]], [[P12 — What interventions reveal\|P12]]); adversarial: an actor whose view separates observed from unobserved conditions ([[D8 — Conditions, responses and views\|D8]], [[P17 — What an unobserved condition can hide\|P17]]) | C: a mapping, to be checked against Manheim and Garrabrant's definitions |
 | H4 | **Value and evidence agree.** Misalignment is both the least value lost ([[A4 — Misalignment is value lost\|A4]]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [[A3 — Pursuit is the best trade-off\|A3]] | **stated as [[P21 — The expected evidence is misalignment\|P21]]**: with the log-likelihood ratio as evidence ([[D11 — Sample and evidence\|D11]]) and samples drawn from the actual behaviour, the rate is `KL(p̂‖·)`, form and direction, without [[A3 — Pursuit is the best trade-off\|A3]]; it rests on the choice of evidence (Neyman–Pearson) instead. [[D3 — Specification, declaration and misalignment\|D3]]'s Why gives the reading, and argues from value |
 | H5 | **The measure is not the actor's cost.** [[P14 — The cost of departing from the default is forced\|P14]] forces the measure to be KL; v7.10's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
-| H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore |
+| H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore; **Gaussian closed form probed** (B5): gain per √departure = √2·sd·cos θ and M = departure·sin²θ, exact to 4e-15; not exact beyond (an exponential × normal default departs) |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
 | H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [[P11 — The misaligned share at the start of a change\|P11]]'s `cos θ` in the incentive literature | C: verify the paper |
 | H9 | **The dimension law.** Against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, `d` the information dimension (Rényi): "digits decided" made exact | **tested** (T1): four cases, including the Cantor measure, which no count of atoms explains |
 | H10 | **No pursuit makes a pile.** A pile at a threshold is evidence that the actor does not pursue the evaluator | **tested** (T2); a theorem by the chain rule, to be written |
 | H11 | **Collusion is coordination, often in time.** Under independent pursuit, misalignment on joint actions = total correlation + individual misalignments, exactly | identity exact; **tested** (T3): tit-for-tat shows `0` per round and `0.231` nats per round over time |
-| H12 | **Strategic residue is irreversibility.** Learning that pursues a potential is reversible; misalignment against reversible processes ≤ EP/2, ≈ EP/4 at low intensity | **tested** (T4); found `EP = (t·C/8)²` in 2×2 games at low intensity, not predicted; to derive |
+| H12 | **Strategic residue is irreversibility.** Learning that pursues a potential is reversible; misalignment against reversible processes ≤ EP/2, ≈ EP/4 at low intensity | **tested** (T4); found `EP = (t·C/8)²` in 2×2 games at low intensity, not predicted; to derive; **explained** (B1, B2): misalignment against reversibility is the Jensen–Shannon divergence between forward and backward flux (to 2e-12), and EP = cycle flux × cycle affinity with affinity t·C, the 1/64 being the cycle's series conductance (out of sample: 0.013125) |
 | H13 | **Gridlock and pooling.** The default satisfies every standard specification; with floors the compromise pursues `Σ w_k·t_k·F_k` | **tested** (T5) |
 | H14 | **The compromise meets every floor exactly** | **failed** (T5b): 11 of 20 against 15 predicted |
 | H15 | **Lock-in has a rate, fixed by early chance** (corrects "no single rate") | **tested** (T6) |
@@ -313,6 +318,10 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H17 | **Strategic scenarios lift to standard ones on derived spaces** (`CORE-GENERAL.md` §14) | C: a mapping, with T3–T6 as its first tests |
 | H18 | **Model space.** Training as a Gibbs posterior over models; PAC-Bayes's complexity term is the departure, which bounds the evaluation gap | D: explore |
 | H19 | **Schrödinger bridge.** An actor moving outcomes by noisy short steps, conditioned on its target, is a Schrödinger bridge: Sanov on trajectories | D: a guess |
+| H20 | **Piles from an optimized default.** An actor with an information cost that chooses its own default (rational inattention) has a discrete default: one atom below beta_c = 1/(2·Var), splitting near it, with between √(β/6) and 2√(β/6) atoms; each condition's behaviour is still a tilt of that default. So piles have two sources: gaming, at the evaluator's thresholds, and inattention, at the actor's own atoms | **probed** (B3, B3b): split and range held; the first count prediction failed |
+| H21 | **Attention is mutual information.** Misalignment against "ignoring the situation" (one behaviour in every condition) is the mutual information between condition and action: a fifth structural specification, the cost of rational inattention | identity (B7) |
+| H22 | **The angle is exact under χ², local under KL.** Under a χ² budget the target gains √B·ρ·sd for any default (Cauchy–Schwarz), ρ the correlation under the default: Laidlaw et al.'s correlated proxy is the angle of [[P11 — The misaligned share at the start of a change\|P11]]. Under KL it is exact only for Gaussians | **probed** (B4c, B5) |
+| H23 | **Heavy tails: an infinite frontier at every budget.** With a power-law upper tail, `t_max = 0`, and any positive KL budget buys unbounded gain (like `L/log L`); a χ² budget buys `√(B·Var)` | **probed** (B4a, B4b) |
 
 ### 5.5 Process
 
