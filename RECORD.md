@@ -20,9 +20,12 @@ definitions, in which results from several fields are derived, checked, and repo
 - detection bounded by misalignment ([P22](iii)).
 
 The core's own results have not been searched for: [P15], [P16], [P17], [P25], [P26], [P36], and the leading form of
-[P37](i). Novelty is not a goal; this list says where a reader should look first.
+[P37](i). [P39]–[P42] restate known identities in the core's terms: total correlation, the compensation identity, the
+Jensen–Shannon divergence and its bound by Jeffreys' divergence, and logarithmic pooling. [P41](iv), the nearest
+reversible chain, is likely in the information geometry of Markov chains and has not been searched for. Novelty is not
+a goal; this list says where a reader should look first.
 
-**What it is not yet.** The core is a checked calculus. It has made six predictions about the world and tested none of
+**What it is not yet.** The core is a checked calculus. It has made eight predictions about the world and tested none of
 them on data not seen before (section 2). The finish line is in the README.
 
 ## 2. Predictions
@@ -40,6 +43,8 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 | medical-sciences | [P12], [D6] | empirical | untested: the report cards' study used Medicare records, which are not public (`NOTES.md` §3.2, D5) | `ontologies/medical-sciences/`, section 3 |
 | medical-sciences | [P1], [D6] | empirical | untested: the known result's tables have not been read, and its English data are seen in summary; a confirmatory test needs a system whose data have not been read (`NOTES.md` §3.2, D6) | `ontologies/medical-sciences/`, section 3 |
 | evolutionary-biology | [P13], [D1] | empirical | untested: neither paper reports the genome-level data | `ontologies/evolutionary-biology/`, section 3 |
+| industrial-organization | [P39], [D6] | empirical | untested: the German price data are public (CC BY 4.0) and unread; the known result is seen in summary | `ontologies/industrial-organization/`, section 3 |
+| experimental-economics | [P41] | empirical | untested: the Rock–Paper–Scissors arm is seen in summary, and whether its records are public has not been checked; the potential-game arm is new | `ontologies/experimental-economics/`, section 3 |
 
 The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it
 as untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known
@@ -64,7 +69,7 @@ had been seen (T7-1c, T7-2c).
 In T7, every verification prediction held, and 5 of 15 empirical predictions did: that is the base rate to quote.
 Elsewhere in v7.10, verification predictions did fail, on thresholds set without a scale (R7-7, R8-1; `NOTES.md` §1).
 
-**This core.** None of its six empirical predictions has been tested on data not seen before.
+**This core.** None of its eight empirical predictions has been tested on data not seen before.
 
 ## 3. Retractions
 

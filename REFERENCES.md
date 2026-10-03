@@ -1,17 +1,19 @@
 # References
 
 One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md`,
-`CORE-GENERAL.md`, `derived/`, `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here
+`CORE-GENERAL.md`, `general/`, `derived/`, `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here
 (lint rule R8).
 
 - [@allen2017] Allen, E. J., Dechow, P. M., Pope, D. G. and Wu, G. (2017), Reference-dependent preferences: evidence from marathon runners. *Management Science* 63(6), 1657–1672.
 - [@ashby1956] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
+- [@assad2024] Assad, S., Clark, R., Ershov, D. and Xu, L. (2024), Algorithmic pricing and competition: empirical evidence from the German retail gasoline market. *Journal of Political Economy* 132(3), 723–771.
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@beirami2024] Beirami, A., Agarwal, A., Berant, J., D'Amour, A., Eisenstein, J., Nagpal, C. and Suresh, A. T. (2024), Theoretical guarantees on the best-of-n alignment policy. arXiv:2401.01879.
 - [@blume1993] Blume, L. E. (1993), The statistical mechanics of strategic interaction. *Games and Economic Behavior* 5(3), 387–424.
 - [@calvano2020] Calvano, E., Calzolari, G., Denicolò, V. and Pastorello, S. (2020), Artificial intelligence, algorithmic pricing, and collusion. *American Economic Review* 110(10), 3267–3297.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
 - [@candogan2011] Candogan, O., Menache, I., Ozdaglar, A. and Parrilo, P. A. (2011), Flows and decompositions of games: harmonic and potential games. *Mathematics of Operations Research* 36(3), 474–503.
+- [@cason2014] Cason, T. N., Friedman, D. and Hopkins, E. (2014), Cycles and instability in a rock–paper–scissors population game: a continuous time experiment. *The Review of Economic Studies* 81(1), 112–136.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [@chernoff1952] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
@@ -52,6 +54,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
 - [@renyi1959] Rényi, A. (1959), On the dimension and entropy of probability distributions. *Acta Mathematica Academiae Scientiarum Hungaricae* 10, 193–215.
 - [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
+- [@schnakenberg1976] Schnakenberg, J. (1976), Network theory of microscopic and macroscopic behavior of master equation systems. *Reviews of Modern Physics* 48(4), 571–585.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
 - [@taylor2016] Taylor, J. (2016), Quantilizers: a safer alternative to maximizers for limited optimization. *AAAI Workshop on AI, Ethics, and Society*.

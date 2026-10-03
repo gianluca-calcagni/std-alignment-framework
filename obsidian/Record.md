@@ -20,9 +20,12 @@ definitions, in which results from several fields are derived, checked, and repo
 - detection bounded by misalignment ([[P22 — No test detects misalignment faster than misalignment|P22]](iii)).
 
 The core's own results have not been searched for: [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]], [[P25 — The target's curve turns no more often than the regression|P25]], [[P26 — The regression on bins governs at small intensity|P26]], [[P36 — Ordinal objectives|P36]], and the leading form of
-[[P37 — A strong incentive masks the actor, and can fake alignment|P37]](i). Novelty is not a goal; this list says where a reader should look first.
+[[P37 — A strong incentive masks the actor, and can fake alignment|P37]](i). [[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] restate known identities in the core's terms: total correlation, the compensation identity, the
+Jensen–Shannon divergence and its bound by Jeffreys' divergence, and logarithmic pooling. [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]](iv), the nearest
+reversible chain, is likely in the information geometry of Markov chains and has not been searched for. Novelty is not
+a goal; this list says where a reader should look first.
 
-**What it is not yet.** The core is a checked calculus. It has made six predictions about the world and tested none of
+**What it is not yet.** The core is a checked calculus. It has made eight predictions about the world and tested none of
 them on data not seen before (section 2). The finish line is in the README.
 
 ## 2. Predictions
@@ -40,6 +43,8 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 | medical-sciences | [[P12 — What interventions reveal\|P12]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the report cards' study used Medicare records, which are not public (`NOTES.md` §3.2, D5) | `ontologies/medical-sciences/`, section 3 |
 | medical-sciences | [[P1 — Every behaviour is a tilt of any other\|P1]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the known result's tables have not been read, and its English data are seen in summary; a confirmatory test needs a system whose data have not been read (`NOTES.md` §3.2, D6) | `ontologies/medical-sciences/`, section 3 |
 | evolutionary-biology | [[P13 — What the start of a change gains\|P13]], [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | empirical | untested: neither paper reports the genome-level data | `ontologies/evolutionary-biology/`, section 3 |
+| industrial-organization | [[P39 — Several actors: coordination plus individual misalignment\|P39]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the German price data are public (CC BY 4.0) and unread; the known result is seen in summary | `ontologies/industrial-organization/`, section 3 |
+| experimental-economics | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | empirical | untested: the Rock–Paper–Scissors arm is seen in summary, and whether its records are public has not been checked; the potential-game arm is new | `ontologies/experimental-economics/`, section 3 |
 
 The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it
 as untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known
@@ -64,7 +69,7 @@ had been seen (T7-1c, T7-2c).
 In T7, every verification prediction held, and 5 of 15 empirical predictions did: that is the base rate to quote.
 Elsewhere in v7.10, verification predictions did fail, on thresholds set without a scale (R7-7, R8-1; `NOTES.md` §1).
 
-**This core.** None of its six empirical predictions has been tested on data not seen before.
+**This core.** None of its eight empirical predictions has been tested on data not seen before.
 
 ## 3. Retractions
 

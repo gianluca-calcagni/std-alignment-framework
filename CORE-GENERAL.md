@@ -1,13 +1,12 @@
 # The general core
 
-> **Status: draft 2, for review.** This file extends the core (`CORE.md`, v10) from finitely many outcomes to the
+> **Status: draft 3, for review.** This file extends the core (`CORE.md`, v10) from finitely many outcomes to the
 > outcome spaces met in practice: counts, waiting times, scores, texts, trait values. It holds premises and definitions
-> only, in the core's format. It claims no result: section 12 lists the results expected, each with the evidence that
-> suggests it, to be proved and checked in `derived/` once the definitions are approved. Items are numbered GA
-> (premises) and GD (definitions), and GD3 extends [D3]. Draft 2 adds the dimension law (GD3, GD11), the lifts of
-> strategic scenarios to derived spaces (section 14), and everyday words matched to the formalism (section 15). Every
-> number the draft cites is reproduced by a script in `probes/general/`. Lint checks that every item this file names
-> exists (R12); it does not yet check the file's structure.
+> only, as `CORE.md` does for finite outcomes. Its results, expected, probed or tested, are in `general/`, as the finite
+> core's are in `derived/`, and nothing there is claimed until it is proved and checked. Items are numbered GA
+> (premises) and GD (definitions), and GD3 extends [D3]. Every number the draft cites is reproduced by a script in
+> `probes/general/`. Lint checks that every item this file and `general/` name exists (R12); it does not yet check their
+> structure.
 
 ## 0. What this file is
 
@@ -49,15 +48,18 @@ resolution.
 - *Strategic scenarios become standard ones on derived spaces.* Several actors, actors that respond to the measurement,
   several principals and dependent samples each become a scenario with one principal and one actor, on a space of joint
   actions, rules, principals or trajectories, most of them continua even when the outcomes are finite. What stays
-  strategic is measured as a divergence from a structure: independence, reversibility, regularity (section 14).
+  strategic is measured as a divergence from a structure: independence, attention, reversibility, regularity
+  (`general/derived-spaces.md`; on finite derived spaces, these are results of the finite core, `derived/structure.md`).
 
-**Scope.** As in `CORE.md` §0, with outcomes and conditions in standard Borel spaces in place of finite sets. Dependent
-samples, several actors and several principals stay out of scope as definitions; section 14 proposes how each becomes a
-standard scenario on a derived space.
+**Scope.** As in `CORE.md` §0, with outcomes and conditions in standard Borel spaces in place of finite sets. The finite
+core takes groups of actors, several principals with declared weights, measurement rules as conditions and episodes of
+dependent decisions into scope on finite outcomes; `general/derived-spaces.md` proposes the same on spaces that are not
+finite: long records, large populations, continuous rules, models.
 
 **How to read.** Six premises, GA1–GA6, and eleven definitions, GD1–GD11. Each "Why this choice" starts with the three
-tests, then gives what is specific to outcomes that are not finite. A bracketed name, such as [D3] or [P5], is an item
-of `CORE.md` or a result in `derived/`; GD3, without brackets, is an item of this file.
+tests, then gives what is specific to outcomes that are not finite. The results are in `general/`, whose README gives
+their reading order and the status of each. A bracketed name, such as [D3] or [P5], is an item of `CORE.md` or a result
+in `derived/`; GD3, without brackets, is an item of this file.
 
 | Symbol | Meaning | Introduced in |
 |---|---|---|
@@ -118,7 +120,7 @@ counts as most direct must not depend on how finely we describe what happens.
   (Čencov's theorem [@cencov1982]). Since they approximate every behaviour, the geometry is the Fisher metric
   `⟨h, k⟩_p = E_p[h·k]` on directions `h` with `E_p[h] = 0` and `E_p[h²] < ∞`; the steepest climb of `E_p[F]` is the
   direction `F − E_p[F]`, and its flow from `q` is `tilt(q, s·F)` for as long as that tilt exists (GD2). To be proved
-  (section 12).
+  (`general/transfer.md`).
 
 **Lineage.** [A2]. Ay, Jost, Lê and Schwachhöfer extend Čencov's theorem to general spaces directly, by invariance under
 sufficient statistics *(to verify)*; GA6 gives a route that reuses the finite theorem instead.
@@ -137,8 +139,8 @@ the cost depends only on how the behaviour changes.
 - *Invariance.* ✓: the cost is a function of behaviours.
 - *Finite determination.* On each finite description, [P14] forces the cost to be the KL divergence from the default, up
   to a constant. The limit over finer descriptions is the supremum of those divergences, which is the divergence of GD1
-  (the Gelfand–Yaglom–Perez theorem [@pinsker1964]). So the cost is forced on every outcome space. To be proved (section
-  12).
+  (the Gelfand–Yaglom–Perez theorem [@pinsker1964]). So the cost is forced on every outcome space. To be proved
+  (`general/transfer.md`).
 - *When no trade-off exists.* By the Donsker–Varadhan formula, the best net value at intensity `t` is
   `(1/t)·log E_q[e^{t·F}]`. When that is infinite, every behaviour is beaten by one that moves a little more probability
   into the objective's upper tail, and no behaviour is the best trade-off: the objective cannot be pursued at that
@@ -175,7 +177,7 @@ kept, before looking at what the actor did.
   the medical-sciences ontology, is declared before the data too.
 - *Why the record's resolution.* Misalignment at a resolution can only grow as its cells are refined ([P4](iv)), so
   cells chosen after seeing the data can be chosen to raise it or to lower it. Two grids of the same width give a
-  controller that always hits its target exactly the misalignment `0` or `log 2` (section 12).
+  controller that always hits its target exactly the misalignment `0` or `log 2` (`general/transfer.md`).
 - *Why the nearness.* It decides which limits of intended behaviours are intended (GD3), and so whether an actor is
   aligned.
 
@@ -199,9 +201,9 @@ yes-or-no questions about its outcomes.
 - *No grid is chosen.* The limit runs over all finite partitions into events, ordered by refinement; a quantity that can
   only grow under refinement has the supremum as its limit. A grid of equal intervals is one particular family of
   descriptions, and it can decide a verdict: two grids of the same width give a controller that always hits its target
-  exactly the misalignment `0` or `log 2` (section 12). A grid is therefore a declaration, of the principal's nearness
-  (GD3) or of a record's resolution (GD11), never part of the framework.
-- *What it forces*, each to be proved (section 12):
+  exactly the misalignment `0` or `log 2` (`general/transfer.md`). A grid is therefore a declaration, of the principal's
+  nearness (GD3) or of a record's resolution (GD11), never part of the framework.
+- *What it forces*, each to be proved (`general/transfer.md`):
   - the KL divergence as the cost on every outcome space (GA3);
   - the framework's only nearness between behaviours: two behaviours are near when every finite description finds their
     cell probabilities near, which needs no topology on the outcomes;
@@ -266,8 +268,8 @@ behaviour: the actor's own way of acting when it pursues nothing.
 - *Canonical, given GA2 and GA3,* as in [D2]: the flow of the steepest climb and the best trade-off are this tilt, for
   as long as it exists.
 - *Where it stops is forced, not chosen.* Past `t_max`, the best net value of GA3 is infinite and no behaviour attains
-  it, so no pursuit exists there. A ray can stop with its averages still finite: section 12 gives a default under which
-  the pursuit of `F(x) = x` stops at intensity `1`, with the average of `F` stuck at `1`.
+  it, so no pursuit exists there. A ray can stop with its averages still finite: `general/transfer.md` gives a default
+  under which the pursuit of `F(x) = x` stops at intensity `1`, with the average of `F` stuck at `1`.
 - *The default must be a probability.* The cost of departure, `KL(p‖q)`, is non-negative and zero only at `q` when `q`
   is a behaviour. Maximum-entropy reinforcement learning on unbounded continuous actions rewards entropy measured
   against length or volume, which is not a behaviour: "doing nothing" then does not exist, and the "cost" can be
@@ -310,10 +312,10 @@ principal says nothing, a limit counts only if every finite description agrees.
 - *Finite determination forces the limits in.* Leaving out a behaviour that no finite description can tell apart from
   the intended ones would make misalignment depend on what no record can see. With densities proportional to
   `1 + ½·sin(k·x)` on a circle, the uniform behaviour's divergence from each of them is `0.069`, for every `k`, yet
-  every finite description finds them converging to it (section 12). With those densities declared and the limit left
-  out, the uniform behaviour would be misaligned by `0.069` while every record says `0`. Whether adding the limits is
-  enough for misalignment to be the limit of its values on finite descriptions, in every case, is the first result to
-  prove (section 12).
+  every finite description finds them converging to it (`general/transfer.md`). With those densities declared and the
+  limit left out, the uniform behaviour would be misaligned by `0.069` while every record says `0`. Whether adding the
+  limits is enough for misalignment to be the limit of its values on finite descriptions, in every case, is the first
+  result to prove (`general/transfer.md`).
 - *What a nearness decides: the on-target controller.* With a standard normal default on the real line and `F(x) = −x²`,
   pursuit narrows toward `0`. An actor that always outputs exactly `0` is, under the usual nearness of the line, the
   limit of pursuit, so its misalignment is `0`, as in the third case of [P5](iv). With no nearness, the finite
@@ -327,9 +329,9 @@ principal says nothing, a limit counts only if every finite description agrees.
   outcome and `d` the information dimension of the actor's behaviour [@renyi1959], `D` for a behaviour spread like the
   default and `0` for one pinned to points. So each decimal digit of the record adds `2.3·(D − d)` nats: `2.3` for an
   actor pinned to points on a line, a tenth of that for one that piles a tenth of its behaviour on one value, and again
-  `2.3` for one that pins one of two attributes and spreads the other (section 12). A principal who wants near misses
-  graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control (GD7). A distance
-  that grades them directly cannot be the measure: GA3 and GA4 force the divergence.
+  `2.3` for one that pins one of two attributes and spreads the other (`general/transfer.md`). A principal who wants
+  near misses graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control
+  (GD7). A distance that grades them directly cannot be the measure: GA3 and GA4 force the divergence.
 - *The rest is [D3]'s.* The formula is forced by GA3 and GA4, the direction charges the unintended, and the infimum
   gives the benefit of the doubt.
 
@@ -408,8 +410,8 @@ rarer extremes, and no behaviour buys the most.
 - *Invariance; finite determination.* The frontier is a supremum of averages under a bound on a divergence, both of
   which finite descriptions approximate.
 - *The frontier, not the matched pursuit.* [D5] compares the actor with the pursuit of equal departure, which exists on
-  finite outcomes. With a tail, the ray can stop at a finite departure. In section 12's example the ray stops at
-  intensity `1`, with departure `0.483` and average `1`; half a nat more departure buys `0.39`, `0.47`, `0.494` and
+  finite outcomes. With a tail, the ray can stop at a finite departure. In `general/transfer.md`'s example the ray stops
+  at intensity `1`, with departure `0.483` and average `1`; half a nat more departure buys `0.39`, `0.47`, `0.494` and
   `0.499` of `F` as the extra probability is placed near `10`, `100`, `1000` and `10000`, approaching `0.5`, the extra
   departure divided by the last intensity, without reaching it. The frontier always exists; the matched pursuit may not.
 - *An actor that left the default entirely,* with infinite departure, is compared with the best that any departure can
@@ -433,7 +435,7 @@ at an exact value that nobody chose before.
 - *A tilt keeps the events of probability zero.* `tilt(p, φ·u)` is equivalent to `p`. So a change that creates an atom,
   an exact value now chosen with positive probability where before it had probability zero, is not the pass-through of
   any intervention, whatever `u`: the divergence between before and after is infinite. Economists measure such atoms as
-  bunching [@kleven2016]; section 13 reads the behavioural-economics ontology with them.
+  bunching [@kleven2016]; `general/disciplines.md` reads the behavioural-economics ontology with them.
 
 **Lineage.** [D6].
 
@@ -529,7 +531,7 @@ at each value of the evaluator, under the default.
   passed or failed.
 - *One-dimensional by construction.* The regression is a function on the real line, whatever the outcomes are. So the
   evaluator's scores, one number per outcome, are its natural record, and their empirical distribution function (GD11)
-  carries best-of-`n`, the ordinal specification and their error bands (section 12).
+  carries best-of-`n`, the ordinal specification and their error bands (`general/transfer.md`).
 
 **Lineage.** [D10]. Corrects `NOTES.md` §3.3, E8, which expected continuous outcomes to make the regression informative
 without bins.
@@ -558,12 +560,12 @@ misalignment a record shows can only grow as its cells are refined.
   its divergence from every intended behaviour is infinite. Misalignment is never estimated by plugging it in, as [P23]
   does on finite outcomes. It is estimated at a record's resolution, where [P23] applies to the cells, and the value is
   a lower bound ([P4](iv)) that rises toward the misalignment as the record is refined (GA6).
-- *A record shows "at least", not "at most"* (expected, section 12). When the default gives every single outcome
-  probability zero, for every `n`, some behaviour within total variation `1/(100·n)` of an intended one, so that no test
-  on `n` decisions tells them apart with a difference in rejection probability above `0.01`, has a misalignment as large
-  as one likes: move a little probability to where the objective is low and the default rarely goes. So a report that
-  misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples alone. What
-  records can show without a model is the rate: the misalignment of finer and finer records grows like
+- *A record shows "at least", not "at most"* (expected, `general/transfer.md`). When the default gives every single
+  outcome probability zero, for every `n`, some behaviour within total variation `1/(100·n)` of an intended one, so that
+  no test on `n` decisions tells them apart with a difference in rejection probability above `0.01`, has a misalignment
+  as large as one likes: move a little probability to where the objective is low and the default rarely goes. So a
+  report that misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples
+  alone. What records can show without a model is the rate: the misalignment of finer and finer records grows like
   `(D − d)·log(1/w)` (GD3), so its slope against the logarithm of the resolution estimates the dimension deficit
   `D − d`, within the resolutions that the sample size supports: on a line, the share of the behaviour piled on single
   values, when the rest is spread.
@@ -592,215 +594,19 @@ misalignment a record shows can only grow as its cells are refined.
 | resolutions | — | by the principal (indifference); of the actor (its limits); by whoever keeps a record (GD4, GD11); the finest when nothing is said |
 | bins and grids | — | a record's resolution or a nearness, before the data (GA5) |
 
-## 12. Expected results, before any proof
-
-None of these is claimed. Each is to be proved in `derived/` and checked, with its probe turned into a check where it
-applies. The probes are exploratory, not checks. Their scripts are in `probes/general/`: `draft1_examples.py` reproduces
-the numbers of draft 1, and T1–T7 are tests whose predictions were registered before they were run
-(`probes/general/PREDICTIONS.md`), with their verdicts in that folder's README.
-
-| Finite item | Expected on general spaces | Evidence so far |
-|---|---|---|
-| [P1], [P2](iii), [P4] | carry, for tilts that exist; the chain rule with conditional behaviours | none |
-| [P14] | carries, by GA6 and the Gelfand–Yaglom–Perez theorem | none |
-| a transfer lemma (new) | when the intended behaviours include their limits (GD3), misalignment is the limit of its values on finite descriptions; the conditions are to be found | the limits are necessary: `0.069` against `0` (GD3) |
-| [P5] | (i) attainment needs a compactness to be found; (ii) as in GD3; (iv) gains a fourth case: the ray stops at `t_max` with its average of `F` capped, and a behaviour with a larger average is nearest to the end of the ray, so averages are no longer matched | default with density proportional to `e^{−x}/(1 + x)³` on `x ≥ 0`, and `F(x) = x`: the ray's average is `0.354`, `0.474`, `0.736`, `0.937`, `0.989` at `t = 0`, `0.5`, `0.9`, `0.99`, `0.999`, and stops at `1` at `t = 1`; for an exponential behaviour of mean `2` the divergence to the ray falls all the way to `t = 1` |
-| [P9] | the frontier is a straight line of slope `1/t_max` past the end of the ray, approached and never attained | GD5's numbers |
-| [P15] | carries for linear limits [@csiszar1975]. The unavoidable part is the rate at which the nearest intended behaviour produces, by chance, a record that meets the actor's limits; conditioned on that, its record looks like the best feasible behaviour [@csiszar1984]. This reading holds on finite outcomes too, and belongs in the core first | exact multinomial sums on three outcomes: rates `0.175`, `0.139`, `0.128` at `n = 50`, `200`, `800`, toward `0.123`; the conditional behaviour of one draw tends to the best feasible behaviour |
-| [P16], [P17] | carry, by data processing; regularity across a continuum of conditions comes from the view (GD8) | none |
-| [P19] | carries: the association inequality holds under any behaviour | none |
-| [P20] | the end of pursuit changes when the evaluator's largest value has probability zero, or is never reached | none |
-| [P21], [P22] | carry: both concern the log-ratio, a real number per decision | none |
-| [P23] | holds only at a record's resolution (GD11) | none |
-| a record shows "at least" (new) | as in GD11, a Bahadur–Savage-type impossibility | the construction in GD11 |
-| [P36] | for an evaluator without atoms, once each score is replaced by its rank under the default, the ordinal specification is the set of non-decreasing ratios on `[0, 1]`, the same for every default, and its nearest member is the isotonic regression [@robertson1988] | none |
-| best-of-`n` | divergence exactly `log n − (n − 1)/n` for an evaluator without atoms [@beirami2024], and less with ties; the target's average is `∫₀¹ m(G⁻¹(u))·n·u^{n−1} du`, with `G` the evaluator's distribution function under the default: E8 for best-of-`n` | exact to six digits at `n = 2`, `4`, `16`; with five tied levels, `0.180` against `0.193` at `n = 2` |
-| [P37](i) | masking decays like `1/φ²` in the pass-through `φ`, not exponentially, when the incentive's best value is approached without a gap | T7: `φ²·KL` is `3.04`, `3.60`, `3.92`, `4.02`, `4.06` at `φ = 10`, `30`, `100`, `300`, `1000`, against a predicted limit of `4.08`, the error shrinking like `1/φ`. Draft 1 cited another instance, whose script was not kept |
-| v7.10's Prop 11 | importable: an objective with a heavy upper tail is not pursuable (GD2) | Kwa et al. prove the phenomenon for reward errors, and measured the tails of reward models as light [@kwa2024] |
-| tilts and atoms (new) | a tilt cannot create an atom (GD6) | immediate from GD1 |
-| the on-target controller | `0` under the usual nearness and `+∞` with none; on a grid of width `w`, `0` or `log 2` depending on where the grid's edges fall, at every `w`; a controller `0.001` off target scores `0` on grids coarser than `0.001`, then grows like `log(1/w)`: `3.72` at `w = 10⁻⁴`, `8.33` at `10⁻⁶` | probe, standard normal default, `F(x) = −x²` |
-| the dimension law (new) | against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, with `d` the information dimension (GD3) | T1: slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` for a pile of a tenth, rounding, a line in the square and the Cantor measure, against `0.10`, `1`, `1` and `log 2/log 3 = 0.369` |
-| no piles from pursuit (new) | a pursuer never piles behaviour at a threshold, even acting step by step through time (section 14) | T2: the step-by-step pursuer's endpoint is the tilt, to `3·10⁻¹⁶` |
-| coordination (new) | under independent pursuit, misalignment on joint actions is coordination plus the individual misalignments, exactly; over a long record, a rate in time (section 14) | the identity, to `2·10⁻¹⁶`; T3: `0` in every round, `0.231` nats per round over time |
-| irreversibility (new) | learning that pursues a fixed objective is reversible; misalignment against reversible processes is at most half the entropy production, a quarter at low intensity (section 14) | T4 |
-| several principals (new) | gridlock under standard specifications; with floors, a pursuit of a weighted sum (section 14) | T5; T5b failed |
-| lock-in (new) | a rate in every run, fixed by early chance (section 14) | T6 |
-
-## 13. The four disciplines on a continuum
-
-The ontologies (`ontologies/`) are written for finite outcomes, and lint fixes their sections, so their continuous
-reading lives here until the definitions are approved. Each discipline shows one phenomenon of the general case. These
-are readings, not predictions.
-
-| Discipline | What is continuous | Phenomenon | What must be declared |
-|---|---|---|---|
-| machine learning | the reward model's score; actions in continuous control. Responses are texts, countably many: no σ-algebras beyond partitions, only tails | one-dimensional evaluators; tails | a proper default; a nearness for deterministic policies |
-| evolutionary biology | trait values; fitness | noise: a phenotype is never pinned | nothing beyond the core |
-| behavioural economics | amounts chosen, with piles at exact values | atoms, which a tilt cannot create | a record's resolution |
-| medical sciences | time in the department; a patient's severity | resolutions of statistics that merge outcomes; conditions met once | a record's resolution; the risk model's statistic |
-
-**Machine learning.** Responses are sequences of tokens: countably many outcomes, so every resolution is a partition, as
-in the core, and what changes is the tails. A reward model's score is unbounded in principle. If its error has a heavy
-upper tail under the base policy, the evaluator is not pursuable (GD2), and regularizing fine-tuning by KL cannot
-contain it; Kwa et al. measured the tails of reward models and found them light, so this is a possibility the framework
-can test, not a finding [@kwa2024]. The score is one number per response, so its distribution under the base policy,
-recorded by an empirical distribution function with its bands (GD11), carries best-of-`n`: its divergence exactly, and
-its gold curve from the regression of the gold score on the proxy score (section 12). The ontology's prediction from
-[P20] could then be stated for best-of-`n`. In continuous control, actions are vectors: a deterministic policy pins
-values, and needs a declared nearness to score `0` at its target, and noise or a resolution to be graded near it (GD3,
-GD7). Maximum-entropy methods need a proper default (GD2).
-
-**Evolutionary biology.** Trait values and fitness components are continuous. Selection with log-fitness `F` for `t`
-generations, for types passed on intact, is pursuit at intensity `t` ([D2], Notes), and stabilizing selection,
-`F(x) = −(x − θ)²`, on a normal default is section 12's on-target example. A population never pins a phenotype, because
-phenotypes include environmental variation that the genotype does not control: biology supplies the precision of GD7 as
-a fact, and the singular case does not arise. Selection gradients are regressions of relative fitness on traits
-[@lande1983]; with normal traits, the plane spanned by two objectives (`NOTES.md` §5.4, H6) has closed forms. In the
-ontology's known result, fitness through males is the evaluator and fitness through females the target. With fitness
-measured as a continuous quantity, the regression is the average fitness through females at each value of fitness
-through males: informative because one number summarizes a genotype of many loci, and so merges genotypes.
-
-**Behavioural economics.** A default produces a pile of people at one exact choice. Where choices are amounts, such as
-savings in money or taxable income near a kink in a tax schedule, a pile is an atom: an exact value chosen with positive
-probability. A tilt keeps the events of probability zero (GD6), so a pile at a value that had probability zero before is
-not the pass-through of any incentive, whatever its form; economists measure such piles as bunching [@kleven2016]. Where
-choices are whole percentages, as contribution rates usually are, outcomes are finite and the core applies as it stands.
-The continuous reading is consistent with the refutation of the two-default prediction (`RECORD.md` §2.1): a default is
-not a bonus added to what people pursue, but a change in which choices are made exactly. A pass-through test then
-applies to the shape of the distribution away from the piles.
-
-**Medical sciences.** Time in the department is continuous; the four-hour target, pass or breach, has two cells on a
-continuum too. "Departments only add the target to what they pursue" now says that the ratio of the distribution of
-waiting times after the target to the distribution before is a function of the target's statistic: one value below four
-hours and one above. So the shape of the waiting-time distribution inside each of the two intervals is unchanged. Mason
-et al.'s three intervals [@mason2012] and national counts by minute are two records of it, kept at two resolutions, and
-the departure inside the passing cell measured on either is a lower bound that rises with the resolution. A pile of
-departures in the last minutes before four hours is close to an atom, and its size in nats depends on the record's
-resolution, which is why that resolution is declared before the test (GA5). Since no pursuit of the target makes a pile
-(section 14), a pile is evidence of something the target does not explain; and from records at 20, 10, 5 and 1 minutes,
-the growth of the misalignment estimates how many patients were timed to the threshold (section 15, "fudging"). For the
-report cards, a patient's severity is a continuum, and the risk model reads a few recorded variables: a statistic that
-merges patients whom clinicians tell apart. The card judges at the resolution of that statistic, and the clinicians act
-at a finer one, inside cells of probability zero: a difference of resolution between principal and actor that needs
-σ-algebras. And each patient arrives once (GD9): the response to one patient is never observed, only how treatment goes
-with severity across patients.
-
-## 14. Derived spaces: strategic scenarios as standard ones
-
-`CORE.md` §0 leaves out several actors, actors that respond to the measurement itself, several principals, and dependent
-samples. Each can become a standard scenario, one principal and one actor, on a derived outcome space. Most such spaces
-are continua even when the original outcomes are finite: trajectories, the shares of a large population, measurement
-rules, models. So this file is the way into those scenarios, not only into continuous outcomes. Nothing in this section
-is a definition yet (section 16).
-
-**When a lift is honest.** Any group of actors has a joint behaviour, so a lift is always possible. It gives a standard
-scenario only if, on the derived space, a default can be declared before the behaviour is seen (GA5), the principal's
-intended behaviours are a declared specification there (GD3), and records are independent draws, or one long record has
-a single rate. Where a condition fails, the failure is what is strategic about the scenario, and most often it can be
-measured.
-
-| Scenario | Derived outcome space | Derived default | Standard when | What stays strategic |
-|---|---|---|---|---|
-| dependent samples | trajectories: infinitely many steps of finitely many outcomes already form a continuum | the process with no pursuit | episodes are independent, or one long record has one rate: the divergence per step | lock-in: each run has a rate, but early chance fixes it (T6) |
-| several actors | joint actions; with many actors, the share of each action | the actors acting independently, each from its own default | the principal declares the joint behaviour it intends: independent pursuit, or a pursuit of a potential | coordination, measured exactly (T3); learning that goes round in circles, measured by its irreversibility (T4) |
-| actors that respond to the measurement | the possible measurement rules, as conditions (GD8) | the principal's declared randomization over rules | rules are randomized as declared; the response to a change of rule is then bounded by how differently the actor perceives the two rules, where performative prediction assumes such a bound [@perdomo2020] | a principal that changes its rule in response to the actor without having declared how: GA5 then fails at every level |
-| several principals | the principals, with declared weights | — | the weights are declared | the weights: who counts how much |
-| actors that learn | the models a learner can end with | the distribution of models at the start | training is a pursuit of its objective over models | the gap between actual training and a pursuit |
-
-**Structural specifications.** Four of the residues are misalignments against specifications defined by a structure, not
-by an objective. Each is a divergence, so the framework measures them in the unit it measures everything in.
-- *Independence: coordination.* If the principal intends each actor to pursue its own objective independently,
-  misalignment on joint actions is exactly the coordination between the actors, their total correlation, plus the sum of
-  their individual misalignments: the chain rule of [P4](iii), with intended behaviours that are products. Over a long
-  record it is a rate in time. Two tit-for-tat players with 5% errors do not coordinate at all within any round, mutual
-  information `0`, and coordinate by `0.231` nats per round over time (T3): a regulator reading one round's table sees
-  independent firms. Pricing algorithms that learn to sustain high prices [@calvano2020] are the case this reading is
-  for; whether their coordination shows mostly in time, as T3's does, is not checked.
-- *Reversibility: going round in circles.* In log-linear learning, players revise one at a time by a logit rule. In a
-  potential game its long-run behaviour is a pursuit of the potential on joint actions [@blume1993], and it is
-  reversible: the process watched backward looks like the process watched forward, and its entropy production, the
-  divergence per step between the two, is `0` (T4: below `10⁻²⁴` in 120 cases). In the other games tested it is not.
-  Misalignment against the reversible Markov chains is at most half the entropy production, and a quarter of it at low
-  intensity (T4: ratios `0.2500` and `0.2496` at `t = 0.01` and `0.1`; `0.156` at `t = 2`). For this learning rule, in
-  two-by-two games at low intensity, the entropy production is `(t·C/8)²`, where `C` is the payoff gained around the
-  cycle of single-player deviations: the part of the game that no potential explains, its harmonic part [@candogan2011].
-  Fifty random games gave `0.015624` for `EP/(t·C)²`, against `1/64 = 0.015625`: a constant the probe found and the
-  prediction did not state.
-- *Regularity: piles and pins.* If the intended behaviours have smooth ratios to the default, misalignment at a record
-  of width `w` grows like `(D − d)·log(1/w)` (GD3). T1 confirmed the slope for a pile, for rounding, for a behaviour
-  pinned in one of two attributes, and for the Cantor measure, whose dimension, `log 2/log 3`, no count of piles
-  explains.
-- *A fixed objective: no piles.* A pursuer of a threshold evaluator never piles behaviour at the threshold, even one
-  that acts step by step through time and watches the clock: its result is the tilt of the endpoint, exact to `3·10⁻¹⁶`
-  (T2). So a pile at a threshold, as with the four-hour target, the proficiency cut-offs of the New York Regents exams
-  [@dee2019] or round marathon times [@allen2017], is evidence that the actor does not pursue the evaluator. It pursues
-  something with a spike at the threshold, or it moves outcomes by short steps, which the framework sees only through
-  feasibility (GD7).
-
-**Several principals.** Under standard specifications the default is intended by every principal, so the behaviour least
-misaligned on weighted average is the default itself: gridlock, with misalignment `0` for every principal (T5). With
-floors ([P35]), the compromise is a pursuit of `Σ_k w_k·t_k·F_k`, with `w_k` the declared weights and `t_k` the
-intensity of the compromise's nearest intended behaviour for principal `k` (T5: residual `10⁻⁸`). The weights stay a
-declaration: who counts how much is not the framework's to say. The compromise often meets each principal's floor
-exactly, but not always: in 11 of 20 random instances, against a predicted 15 at least (T5b, failed).
-
-**Lock-in.** A record of a process that locks in, such as a Pólya urn, has a rate in every run, but early chance fixes
-it. Against independent fair draws, each run's rate is the divergence of its final share from one half, within
-`3.5·10⁻⁴`, and over 400 runs the rates have mean `0.199` and standard deviation `0.185` (T6). What fails is that one
-rate describes the actor, not that a rate exists.
-
-**What does not lift.** Internal states and beliefs about beliefs. A space for them exists, the universal type space,
-but no default on it can be observed, so no lift can be declared (GA5), and they stay out of scope by GA1.
-
-## 15. Everyday words, formally
-
-The formalism matched to the words people use for misalignment. "Tested" means a probe with a registered prediction
-(section 12); "probed", a computation without one; "reading", an interpretation that no computation backs.
-
-| Everyday words | Formal object | Where | Evidence |
-|---|---|---|---|
-| possible, impossible | positive or zero probability under the default | GD1, GD2 | definition |
-| unprecedented, never done before | behaviour the default never produces: not absolutely continuous with respect to it | GD2 | definition |
-| exactly, to the dot, pinned | an atom: one value with positive probability | GD3 | definition |
-| suspiciously precise; rounding off; formulaic, rigid in one respect | a dimension deficit: misalignment growing like `(D − d)·log(1/w)` | GD3 | tested (T1) |
-| a pile, bunching, just over the line | an atom at the evaluator's threshold, which no pursuit makes | GD6, section 14 | tested (T2) |
-| fudging | little moved, much misaligned: pulling breaches to land just inside a four-hour target moves 2.3 patient-minutes per patient, against 15.6 for an honest improvement to the same pass rate, and only the fudging is misaligned, by `0.1` to `0.7` nats as the record is refined | section 13 | probed |
-| close enough | a declared nearness | GD3 | definition |
-| tolerance | a declared resolution of width `w` | GD4 | definition |
-| blurry, cannot tell apart | a ratio to the default that is a function of a statistic: limited to its resolution | GD4 | definition |
-| noise protects | an actor with imprecision it does not control is never infinitely misaligned for pinning values | GD7 | definition |
-| a ceiling, hitting the wall | the end of pursuit, `t_max` | GD2 | probed |
-| lottery tickets, swinging for the fences | the frontier past the end of pursuit | GD5 | probed |
-| good enough, satisficing | a bounded ratio to the default: the top fraction `q` of the default has departure `log(1/q)`, a quantilizer [@taylor2016] | GD1 | known |
-| perfectionism | the limit of pursuit, singular on a continuum | GD3 | definition |
-| a needle in a haystack; a glitch found all at once | a narrow spike of the evaluator, of height `h` on a region of default probability `η`, found at intensity `log(1/η)/h`, in a switch of width `2·log 9/h` | GD2 | probed (`vocabulary_examples.py`) |
-| teaching to the test; a fixed exam | test conditions of probability zero in use: a single driving cycle, a fixed benchmark | GD9 | reading |
-| a surprise inspection | test frequencies comparable to those of use | GD9, section 14 | reading |
-| they cheat where you don't look | misalignment moving to conditions the test never covers | GD9 | reading |
-| acting for the camera | a gap between how test and use look to the actor, which bounds how differently it can act | GD8 | probed: the bound only |
-| collusion, tacit coordination | coordination: mutual information between actors, within a round or in time | section 14 | tested (T3) |
-| going round in circles, cat and mouse | irreversibility: entropy production; the harmonic part of a game | section 14 | tested (T4) |
-| gridlock, when in doubt do nothing | the default, intended by every principal | section 14 | tested (T5) |
-| who counts how much | the weights over principals | section 14 | a declaration |
-| lock-in, early luck decides | a rate in every run, fixed by early chance | section 14 | tested (T6) |
-| a track record | one sample on the space of trajectories | section 14 | reading |
-| splitting hairs | refining a description, which can only raise misalignment | GA6 | definition |
-| moving the goalposts, cherry-picking the bins | a nearness or a record's resolution chosen after the data | GA5 | definition |
-
-## 16. Open decisions
+## 12. Open decisions
 
 1. GA6 as a sixth premise. It is the one premise this file adds; everything else extends the core's.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
    resolution is the core's default in [D4]. The alternative, the usual topology of each outcome space, would put a
    choice in the framework that the events do not make.
-3. Names and versions. This file is draft 1, with items GA and GD; `CORE.md` stays v10 and unchanged. When approved, the
-   results go to `derived/`, in files of their own.
-4. Before the general results, two additions to the finite core, where checks are exact: the Sanov reading of [P15] and
-   of misalignment, with the direction trap of GD11; and a record's resolution as a field of `STANDARD.md`.
-5. Whether section 13 moves into the ontologies, which needs lint R10 to allow a section for outcomes that are not
-   finite.
-6. Whether the lifts of section 14 become definitions, a derived space with its default and its specification, which
-   would narrow the out-of-scope list of `CORE.md` §0.
-7. Whether the structural specifications of section 14 get names and results of their own. The coordination split is
-   exact on finite outcomes too, and could enter the core first, with the Sanov reading of decision 4.
-8. Whether `probes/` stays a folder of exploratory scripts, and whether CI should at least run them.
+3. Names and versions. This file is draft 3, with items GA and GD; `CORE.md` stays v10 and unchanged. The general
+   results stay in `general/` until they are proved and checked; then they become items of a derived folder of their
+   own, as the finite results are in `derived/`.
+4. Two additions to the finite core, where checks are exact: the Sanov reading of [P15] and of misalignment, with the
+   direction trap of GD11; and a record's resolution as a field of `STANDARD.md`.
+5. Whether `general/disciplines.md` moves into the ontologies, which needs lint R10 to allow a section for outcomes that
+   are not finite.
+6. Whether the derived spaces of `general/derived-spaces.md` become definitions of this file: a derived space, with its
+   default and its specification.
+7. Whether `probes/` stays a folder of exploratory scripts, and whether CI should at least run them.

@@ -80,6 +80,13 @@ worked out.
 | **empirical behaviour** | [[D11 — Sample and evidence\|D11]] | how often each outcome occurs in a sample | parallels "behaviour" | empirical distribution, type (information theory) | A |
 | **evidence** | [[D11 — Sample and evidence\|D11]] | how much more likely a record is under one behaviour than under another, in nats | plain, and I. J. Good's "weight of evidence" | log-likelihood ratio, weight of evidence | A |
 | **evaluation gap** | [[P24 — The evaluation gap\|P24]] | how much the misalignment of real use exceeds that of an evaluation that meets situations in other proportions | v7.10's name, kept | the cost of a shift in the distribution of situations | A |
+| **coordination** | [[P39 — Several actors: coordination plus individual misalignment\|P39]] | how much several actors' outcomes go together, beyond what each does on its own | plain: what a regulator means by it | total correlation (Watanabe), mutual information (two actors), multi-information | A |
+| **independent pursuit** | [[P39 — Several actors: coordination plus individual misalignment\|P39]] | the specification that each actor pursues its own objective, independently of the others | plain | product specification; competitive conduct (industrial organization) | A |
+| **attention** | [[P40 — Attention: misalignment against ignoring the situation\|P40]] | how much behaviour depends on the situation, in nats | plain, and the quantity rational inattention charges for | mutual information between condition and action (rational inattention), channel rate | A |
+| **reversal** | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | the record of transitions run backward | plain | time reversal | A |
+| **reversible** | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | a record of transitions that looks the same run backward | standard | detailed balance (physics, Markov chains) | A |
+| **entropy production** | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | the divergence of a record of transitions from its reversal | standard in physics | irreversibility, KL rate between forward and time-reversed paths | A |
+| **weighted misalignment** | [[P42 — Several principals: gridlock, and the pooled pursuit\|P42]] | the misalignments of several principals, averaged with declared weights | plain | weighted social loss | A |
 
 ## 2. Correspondences not yet in the framework
 

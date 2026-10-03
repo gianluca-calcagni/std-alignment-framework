@@ -197,6 +197,16 @@ def test_the_general_core_names_only_existing_items(tmp_path):
     assert any("CORE-GENERAL.md:5: R12 [P9] names no item" in e for e in errors), errors
 
 
+def test_the_general_results_name_only_existing_items(tmp_path):
+    """general/*.md, the general core's results, are checked like CORE-GENERAL.md: every item they name exists, and their
+    citations count for R8."""
+    note = "# General results\n\n- carries [P1] [@cover2006]\n"
+    errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra={"general/transfer.md": note})
+    assert errors == [], errors
+    errors, _ = make(tmp_path, extra={"general/transfer.md": note + "- and [P9]\n"})
+    assert any("general/transfer.md:4: R12 [P9] names no item" in e for e in errors), errors
+
+
 def test_the_standard_must_cover_every_definition(tmp_path):
     errors, _ = make(tmp_path, standard=None)
     assert any("R11 the reporting standard is missing" in e for e in errors), errors

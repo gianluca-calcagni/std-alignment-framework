@@ -1,4 +1,4 @@
-# Ontologies — the core, read in four disciplines
+# Ontologies — the core, read in six disciplines
 
 An ontology says what each object of the core is in one discipline: what an outcome is, who the principal is, what the
 default is, and so on. It is a dictionary, not a theorem. It proves nothing, and the core's results reach a discipline
@@ -17,12 +17,15 @@ data that did not suggest it.
 A discipline gets an ontology only if it meets all four conditions. The second is the point: without numbers, nothing
 in the discipline can be diagnosed or interpreted in the core's terms.
 1. **A principal and an actor.** One party's purpose, or a question declared in advance, and another party's behaviour
-   judged against it: the core's scope (`CORE.md` §0).
+   judged against it: the core's scope (`CORE.md` §0). The other party may be a group, taken as one actor on joint
+   outcomes ([[P39 — Several actors: coordination plus individual misalignment|P39]]).
 2. **Behaviour reported in numbers.** Its papers report counts or shares over finitely many outcomes, ideally before
    and after a change, so that a default and a behaviour can be read off.
 3. **Data that can be read.** Such data are public, or can be supplied, and the ontology records which have already
    been seen (README, rule (e)). Each ontology says so in its **Data** paragraph.
-4. **Inside the scope.** Not several interacting actors, and not a choice of which objective is right.
+4. **Inside the scope.** Not a choice of which objective is right. Several actors only as one actor on joint outcomes,
+   with a declared specification of their joint behaviour ([[P39 — Several actors: coordination plus individual misalignment|P39]]); several principals only with declared weights
+   ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]]).
 
 | File | Discipline | Principal → actor | Known result | Numbers |
 |---|---|---|---|---|
@@ -30,20 +33,25 @@ in the discipline can be diagnosed or interpreted in the core's terms.
 | `evolutionary-biology/` | evolutionary biology: selection between the sexes | an analyst's question → a population under selection | sexually antagonistic fitness [[References\|@chippindale2001]], [[References\|@prasad2007]] | genotype counts and fitness assays |
 | `behavioural-economics/` | behavioural economics: choices under defaults and incentives | an employer or an institution → people choosing | default effects [[References\|@madrian2001]]; a fine that raised lateness [[References\|@gneezy2000]] | distributions of choices before and after a change |
 | `medical-sciences/` | medical sciences: performance measures in health care | a ministry or a regulator → hospitals and clinicians | the four-hour target [[References\|@mason2012]]; cardiac surgery report cards [[References\|@dranove2003]] | attendances by time in the department; patients by treatment and severity |
+| `industrial-organization/` | industrial organization: pricing algorithms and competition | a competition authority → the firms of a local market, as one actor | algorithmic pricing in German petrol duopolies [[References\|@assad2024]]; algorithms that learn to sustain high prices [[References\|@calvano2020]] | every price change of every station; public (CC BY 4.0) |
+| `experimental-economics/` | experimental economics: learning in games | an experimenter → a group of subjects, as one actor | cycles in Rock–Paper–Scissors played in continuous time [[References\|@cason2014]]; log-linear learning [[References\|@blume1993]] | each subject's strategy, moment by moment |
 
-**Considered and not adopted** (`NOTES.md` §3.1, Q22).
+**Considered and not adopted** (`NOTES.md` §3.1, Q22, Q24).
 
 | Discipline | Numbers | Why not |
 |---|---|---|
 | job delegation (dropped) | none in its known result, an essay and a model; its running example was invented | fails condition 2. Its consequences hold wherever a bonus is paid on an indicator, and behavioural economics carries incentives with data |
 | ethics and philosophy | few; surveys of moral choices are numerical, but record what people say should be pursued | fails condition 4: which objective is right is outside the core. Such surveys could inform a declared specification; they do not judge an actor |
 | normative sciences | norms are not data; compliance with them is, and is behavioural economics | fails condition 4 for the norms; compliance belongs to behavioural economics |
-| game theory | experimental games are numerical | fails condition 4: strategic play needs several actors. One player facing a fixed rule is behavioural economics |
-| network science | large datasets | fails conditions 1 and 4: structure among many agents, with no principal and actor |
-| complexity theory | mostly models and simulations | fails conditions 1, 2 and 4 |
+| game theory (became experimental economics) | its models report no behaviour; its experiments do | its models fail condition 2. Its experiments failed condition 4 until a group could be read as one actor on joint outcomes ([[P39 — Several actors: coordination plus individual misalignment\|P39]]); they are now `experimental-economics/` |
+| network science | large datasets | fails condition 1: structure among many agents, with no principal whose purpose judges it. Many agents are now one actor on joint outcomes ([[P39 — Several actors: coordination plus individual misalignment\|P39]]), so condition 4 no longer excludes it |
+| complexity theory | mostly models and simulations | fails conditions 1 and 2 |
 
 The institutions ontology became the medical-sciences one: its known result was already health care, and the four-hour
-target added a measure whose data are partly public.
+target added a measure whose data are partly public. When [[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] brought groups, and several principals with
+declared weights, into the scope, condition 4 was revised (Q24). Game theory's experiments then met all four
+conditions, and industrial organization joined for its public record of prices, where competition law itself declares
+a specification of independent pursuit.
 
 ## The slots
 

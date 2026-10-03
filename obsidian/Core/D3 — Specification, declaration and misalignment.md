@@ -88,4 +88,7 @@ scored.
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives
 - [[P33 — Error bounds for a known evaluator|P33]] — Error bounds for a known evaluator
 - [[P24 — The evaluation gap|P24]] — The evaluation gap
+- [[P39 — Several actors: coordination plus individual misalignment|P39]] — Several actors: coordination plus individual misalignment
+- [[P40 — Attention: misalignment against ignoring the situation|P40]] — Attention: misalignment against ignoring the situation
+- [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]] — Reversibility: the Jensen–Shannon divergence from the reversal
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats

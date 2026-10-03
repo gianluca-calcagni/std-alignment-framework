@@ -52,4 +52,5 @@ v7.10: Def 9 (contexts, with evaluation and deployment frequencies) and Prop 19 
 
 ## Used by
 - [[P37 — A strong incentive masks the actor, and can fake alignment|P37]] — A strong incentive masks the actor, and can fake alignment
+- [[P40 — Attention: misalignment against ignoring the situation|P40]] — Attention: misalignment against ignoring the situation
 - [[C8 — An evaluation weighted unlike use misses the evaluation gap|C8]] — An evaluation weighted unlike use misses the evaluation gap

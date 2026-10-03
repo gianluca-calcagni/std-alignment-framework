@@ -18,7 +18,10 @@ REPO = "https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/"
 KEEP = {".obsidian", "Annotations"}
 DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": "Standard", "RECORD.md": "Record",
         "TERMS.md": "Terms", "RELATED.md": "Related", "IMPORT.md": "Import", "NOTES.md": "Notes",
-        "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies"}
+        "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies",
+        "general/README.md": "General results", "general/transfer.md": "Transfer to general spaces",
+        "general/derived-spaces.md": "Derived spaces", "general/disciplines.md": "Disciplines on a continuum",
+        "general/vocabulary.md": "Everyday words"}
 
 
 def anchor(heading):
@@ -94,7 +97,10 @@ def build(root):
             "Edit the sources, not these notes; notes of your own go in `Annotations/`, which is never touched.", "",
             "- [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · "
             "[[References]]", "- [[Core]]: premises and definitions",
-            "- [[General core]]: the draft for outcomes that are not finite", "", "## Derived, in reading order"]
+            "- [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], "
+            "[[Transfer to general spaces]], [[Derived spaces]], [[Disciplines on a continuum]], "
+            "[[Everyday words]]", "",
+            "## Derived, in reading order"]
     home += [f"- [[{folder.split(' ', 1)[1]}]]" for _, folder in sources[1:]]
     home += ["", "## Ontologies", "- [[Ontologies]]: the slots"] + [f"- [[{o.parent.name}]]" for o in ontologies]
     notes["00 Home.md"] = "\n".join(home) + "\n"
