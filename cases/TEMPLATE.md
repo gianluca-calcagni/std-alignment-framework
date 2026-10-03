@@ -33,7 +33,9 @@ objectives in their order ([P44]) and the runs ([P45]).*
 
 *What the script computes, step by step, with every seed. A statistic on a sample that mixes sources is computed within
 each source (design rule 5). Quantities are estimated in nats where the departure is not small ([P44], Notes), and the
-cost of every reweighting is stated ([P47]).*
+cost of every reweighting is stated ([P47]). The per-item values behind every estimate, down to each draw, are saved
+outside the repository before aggregating (`tools/casekit.py`), so that an analysis after the verdict needs no second
+run.*
 
 ## Auxiliary assumptions
 

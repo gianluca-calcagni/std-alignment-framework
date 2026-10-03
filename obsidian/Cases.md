@@ -44,7 +44,7 @@ of the cases (`NOTES.md` §1), is held in one of these places:
 | no threshold without a source (rule 3) | lint R15: every prediction fills "Threshold from" |
 | a rehearsal with degenerate cases, timed (rule 4) | lint R15: `rehearsal.json` must be in the folder; `tools/casekit.py` (`seconds_per_item`) |
 | one statistic per source; shares in nats away from small departures (rule 5; [[P44 — What named objectives explain\|P44]]) | `cases/TEMPLATE.md`; not checkable by lint, so a reader's job |
-| per-item results saved before aggregating; a bootstrap that keeps every item | `tools/casekit.py` (`save_rows`, `bootstrap`), tested |
+| per-item results saved before aggregating, down to each draw, not only per-context estimates (W4); a bootstrap that keeps every item | `tools/casekit.py` (`save_rows`, `bootstrap`), tested; `cases/TEMPLATE.md` asks for the per-draw values |
 | exact least squares when a regressor does not vary | `tools/casekit.py` (`least_squares`), tested |
 | ties broken at random; logarithms of averages without underflow | `tools/casekit.py` (`untie`, `log_mean_exp`), tested |
 | a registration does not change after its result | lint R14 |
@@ -68,4 +68,4 @@ A case is of one of two kinds.
 | `c2-stopping-rule/` | simulation | does the stopping rule of [[P20 — Where overoptimization starts, and how it ends\|P20]], stop where proxy and gold stop correlating, survive stochastic training, training without a KL term, and estimated covariances? | done: S1, S2 and S3 failed. The rule finds the peak of the curve of optima; the registration's thresholds had no scale, and the rule finds the first of several peaks |
 | `w1-best-of-n-slope/` | world | on 12.6 million answers no one had scored with this proxy, is the literature's fitted best-of-`n` coefficient the initial slope of [[P13 — What the start of a change gains\|P13]]? | done: refuted. The fitted coefficient overstates the initial slope by 22%; the curve keeps the predicted slope up to `n = 16`, then saturates. Reported to `STANDARD.md` (`REPORT.md`, exploratory) |
 | `w3-ppo-pursuit/` | world | is a public PPO-tuned language model, within each prompt, the pursuit of the reward it was tuned on? | done: S1 refuted (the reward explains a third of the revealed objective, not half, and a tenth within each model's own outputs); S2 held (it follows the reward's own scale) |
-| `w4-two-runs/` | diagnostic | is what PPO changed in W3's model beyond its reward systematic, shared by a second public run, or drift? | registered; running |
+| `w4-two-runs/` | diagnostic | is what PPO changed in W3's model beyond its reward systematic, shared by a second public run, or drift? | done: S1 refuted (no sharpening); S2 held (a change beyond the reward that the other run shares). The shared part is small: naming everything explains `0.14` of the misalignment, and the runs are further apart than either is from the reference |

@@ -41,6 +41,13 @@ hold. Everything else waits unless it serves one of them.
   `1/β`, but within prompts the reward explains only `0.358` of what the tuning changed (S1 refuted: the registered
   threshold was a half), and `0.10` to `0.12` within each model's own continuations (exploratory). By the framework's
   own measure, most of that model's departure from its reference is misalignment against its reward.
+- **W4** (`cases/w4-two-runs/`), the first diagnostic case: what PPO changed in W3's model beyond its reward is not a
+  sharpening of the reference (S1 refuted), and part of it recurs in a second public run from the same reference (S2
+  held): systematic, not all drift. But the shared part is small: naming sharpening, the other reward and the other
+  run's change explains `0.14` of the misalignment, and the runs are further apart than either is from the reference.
+  Separating drift from procedure needs replicate runs of one procedure; none is public.
+- **Lessons as defaults** (Q29): new registrations follow `cases/TEMPLATE.md`, held to it by lint R15; case scripts use
+  `tools/casekit.py`; `cases/README.md` maps each lesson to what holds it.
 - **Frozen** (`NOTES.md`, Q26, Q27): the general core at draft 3, new disciplines, any widening of the scope. Q26's
   condition is met; the PI keeps the freeze, to build more confidence first. No external reviews yet.
 - **Licences** (Q27): the repository keeps code, aggregates and citations only; no third-party data, weights, papers, or
@@ -58,7 +65,7 @@ Each step names the row it serves and what it waits for. A step that serves no r
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
-| 1 | **W4** (`cases/w4-two-runs/`), a diagnostic case: is what PPO changed in W3's model beyond its reward systematic, shared by a second public run, or drift? Registered from `cases/TEMPLATE.md`, the first under lint R15, after a rehearsal that caught one estimator failure and set both thresholds from measured bias | 5 (diagnostics) | the run, about 2.5 hours; then its result |
+| 1 | A test of a framework prediction on public data, to move the base rate (one of three held): the candidates are [P41]'s Rock–Paper–Scissors arm in experimental economics, if its records are public (`NOTES.md` §3.2, D9), and [P20]'s stopping rule on gold-labelled data not used before. Registered from the template | 4 | a check of which data are public and unseen |
 | 2 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
 | 3 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone | 5 | the PI lifts the hold on external review (Q27) and finds a reader who is a person |
 | 4 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
@@ -91,3 +98,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-03 | W1: proxy trained and frozen; procedure calibrated on synthetic prompts; registered; run once on 12.6 million unseen answers; refuted. The framework's first test on unseen data | 4: met, by a refutation |
 | 2026-10-03 | licence rule applied (Q27); W1 reported to `STANDARD.md`; W3 designed, calibrated, registered and run once on a public PPO model: the bet held in part; consolidation | 4 (the bet tested); 5 (the report) |
 | 2026-10-03 | retrospective of W1 and W3 (`NOTES.md` §6); five design rules for cases; five diagnostic results derived from the core, P43–P47 (Q28); W4 designed, its second run's provenance traced | 4 (W4); 5 (diagnostics) |
+| 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
