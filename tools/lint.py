@@ -38,14 +38,17 @@ Rules
   R11 STANDARD.md names only existing items, and names every definition of the core: the reporting standard covers the
       whole shared vocabulary.
   R12 RELATED.md, the survey of related theories, IMPORT.md, the map from the archive to the core, CORE-GENERAL.md, the
-      draft of the core for outcomes that are not finite, and general/*.md, its results, name only existing items; their
-      citations count for R8.
+      draft of the core for outcomes that are not finite, general/*.md, its results, SCENARIO.md, the worked scenario,
+      and cases/**/*.md, the registered tests, name only existing items; their citations count for R8.
   R13 RECORD.md, the record of predictions and retractions, names only existing items, and its citations count for
       R8. Its ledger (the table with the columns LEDGER_COLUMNS) has exactly one row for every prediction of the
       ontologies, keyed by the ontology's folder and the items the prediction is from, with the same label, and a
       state that starts with one of STATES; and no other row. RECORD.md must exist once any ontology predicts.
+  R14 Cases. Every folder cases/<name>/ has a REGISTRATION.md. Once it has a RESULTS.md, that file records the SHA-256
+      of REGISTRATION.md on a line starting '**Registration SHA-256:**', and the hash matches: a registration does not
+      change after its result is written.
 """
-import re, sys
+import hashlib, re, sys
 from pathlib import Path
 
 KINDS = {"A": "premise", "D": "definition", "P": "proposition", "T": "theorem", "L": "lemma", "C": "corollary",
@@ -267,9 +270,10 @@ def lint(root):
         errors += lint_ledger(rtext, predictions)
     elif predictions:
         errors.append("RECORD.md: R13 the record, with the ledger of the ontologies' predictions, is missing")
-    folder = root / "general"
+    folder, cases = root / "general", root / "cases"
     general = sorted(f.relative_to(root).as_posix() for f in folder.glob("*.md")) if folder.exists() else []
-    for name in ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md"] + general:
+    case_docs = sorted(f.relative_to(root).as_posix() for f in cases.rglob("*.md")) if cases.exists() else []
+    for name in ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md"] + general + case_docs:
         survey = root / name
         if survey.exists():
             rtext = survey.read_text(encoding="utf-8")
@@ -278,6 +282,10 @@ def lint(root):
                 for ref in REF.findall(line):
                     if ref not in pos:
                         errors.append(f"{name}:{n}: R12 [{ref}] names no item")
+
+    # R14
+    if cases.exists():
+        errors += lint_cases(cases)
 
     # R8
     refs_file = root / "REFERENCES.md"
@@ -317,6 +325,26 @@ def lint(root):
                "checks": sum(len(v) for v in test_defs.values()), "references": len(set(listed)),
                "terms": len(glossary), "ontologies": n_onto}
     return errors, summary
+
+
+def lint_cases(cases):
+    """R14: every case has a registration, and a result records the registration's hash, which still matches."""
+    errors = []
+    for case in sorted(d for d in cases.iterdir() if d.is_dir()):
+        name, registration, results = f"cases/{case.name}", case / "REGISTRATION.md", case / "RESULTS.md"
+        if not registration.exists():
+            errors.append(f"{name}: R14 a case has no REGISTRATION.md")
+            continue
+        if not results.exists():
+            continue
+        digest = hashlib.sha256(registration.read_bytes()).hexdigest()
+        text = results.read_text(encoding="utf-8")
+        recorded = re.findall(r"^\*\*Registration SHA-256:\*\*\s*`?([0-9a-f]{64})`?", text, re.M)
+        if not recorded:
+            errors.append(f"{name}/RESULTS.md: R14 the SHA-256 of REGISTRATION.md is not recorded")
+        elif recorded[0] != digest:
+            errors.append(f"{name}/RESULTS.md: R14 REGISTRATION.md changed after its result: its SHA-256 is {digest}")
+    return errors
 
 
 def table_rows(lines):

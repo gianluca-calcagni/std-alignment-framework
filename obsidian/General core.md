@@ -1,12 +1,12 @@
 # The general core
 
-> **Status: draft 3, for review.** This file extends the core (`CORE.md`, v11) from finitely many outcomes to the
-> outcome spaces met in practice: counts, waiting times, scores, texts, trait values. It holds premises and definitions
-> only, as `CORE.md` does for finite outcomes. Its results, expected, probed or tested, are in `general/`, as the finite
-> core's are in `derived/`, and nothing there is claimed until it is proved and checked. Items are numbered GA
-> (premises) and GD (definitions), and GD3 extends [[D3 — Specification, declaration and misalignment|D3]]. Every number the draft cites is reproduced by a script in
-> `probes/general/`. Lint checks that every item this file and `general/` name exists (R12); it does not yet check their
-> structure.
+> **Status: draft 3, frozen** until a prediction of the core is tested on data not seen before (`NOTES.md` §3.1, Q26).
+> This file extends the core (`CORE.md`, v11) from finitely many outcomes to the outcome spaces met in practice: counts,
+> waiting times, scores, texts, trait values. It holds premises and definitions only, as `CORE.md` does for finite
+> outcomes. Its results, expected, probed or tested, are in `general/`, as the finite core's are in `derived/`, and
+> nothing there is claimed until it is proved and checked. Items are numbered GA (premises) and GD (definitions), and
+> GD3 extends [[D3 — Specification, declaration and misalignment|D3]]. Every number the draft cites is reproduced by a script in `probes/general/`. Lint checks that every
+> item this file and `general/` name exists (R12); it does not yet check their structure.
 
 ## 0. What this file is
 
@@ -196,7 +196,8 @@ yes-or-no questions about its outcomes.
 - *It is what GA1 presumes.* Behaviour is observed by counting, and a count is always of finitely many cells: a clock
   that reads minutes, a score kept to two digits. A quantity that finite descriptions do not determine could not be
   estimated from any record, however long.
-- *Reduction.* On a finite space the finest description is finite and is the limit: the premise adds nothing to the core.
+- *Reduction.* On a finite space the finest description is finite and is the limit: the premise adds nothing to the
+  core.
 - *Invariance.* Partitions into events need no distance.
 - *No grid is chosen.* The limit runs over all finite partitions into events, ordered by refinement; a quantity that can
   only grow under refinement has the supremum as its limit. A grid of equal intervals is one particular family of

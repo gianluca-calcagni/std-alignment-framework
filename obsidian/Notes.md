@@ -151,6 +151,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q23 | outcomes that are not finite: a separate draft, `CORE-GENERAL.md`, built as the core was, by canonicity, with a plain-terms twin for every item and a reading in the four disciplines. The framework commits to no topology on outcomes: the principal and the actor supply one where it matters. Executor: three tests (reduction, invariance, finite determination) and one new premise, GA6 | PI (route and topology); executor (the tests, GA6) | `CORE-GENERAL.md`, from draft 1; open decisions now in its §12 |
 | Q24 | consolidation. The finite and the general parts are kept apart, in definitions and in results: `CORE.md` with `derived/` (v10, claims what it proves) and `CORE-GENERAL.md` with `general/` (draft 3, claims nothing). The results of draft 2 that hold on finite outcomes became [[P39 — Several actors: coordination plus individual misalignment\|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit\|P42]] in `derived/structure.md`, proved and checked. Scope revised (`CORE.md` §0): in, a group as one actor on joint outcomes, several principals with declared weights, rules as conditions, an episode as one outcome; out, why a group behaves as it does, choosing the weights, outcomes that are not finite, one long record of dependent decisions. Ontologies: condition 4 revised, and two added, industrial organization and experimental economics, each with a prediction (`RECORD.md`). The executor kept v10, since the scope is not the Statement of a premise or a definition; the PI overruled it (Q25) | PI (consolidate, keep the two parts apart, more disciplines, revisit the scope); executor (how to separate, which disciplines, the scope's wording) | `CORE.md` §0, `derived/structure.md`, `general/`, `ontologies/`, `RECORD.md` |
 | Q25 | a new version, v11, for Q24's change of scope: the version rule now counts the scope, and so does the finish line's stability criterion, which is not met again until three steps pass without a change. The specification of `ontologies/industrial-organization/` is the one that papers and public data can test: independent pursuit, within contexts, over declared episodes. The alternative, independence given the rival's past prices, fits the law better but needs a declared model of what each station observes, and is blind by construction to the known result's algorithms, which set prices from the last round's prices alone. Checking the data corrected the archive's licence and found that one of the known result's adoption markers measures a dependence between the stations; the prediction dates adoption without it | PI (a new version; the testable specification); executor (the stability criterion; which specification is testable) | `README.md` (versions, finish line), `ontologies/industrial-organization/`, `RECORD.md` |
+| Q26 | a freeze, after the executor's review: the framework had grown in theory, scope and disciplines while none of its predictions met data not seen before. Frozen until one does: the general core at draft 3, new disciplines, and any widening of the scope. Work goes to tests registered before they are computed, judged by the executor (`cases/`), and to a worked scenario in three registers (`SCENARIO.md`) | PI | `CORE-GENERAL.md`, `general/`, `ontologies/README.md`, `cases/`, `SCENARIO.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -222,11 +223,11 @@ item changes.
 evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the vault, and the core replaced it on
 `main` (R7). The ontologies were then reworked around disciplines with numbers (Q22).
 
-**Next, chosen by the PI:** outcomes that are not finite, so that the core covers continuous quantities. Drafted as
-`CORE-GENERAL.md` (Q23), now draft 3: premises and definitions only, with the decisions left open in its §12. Its
-expected results are in `general/`, each marked expected, probed, tested or proved (Q24); those that hold on finite
-outcomes are proved in `derived/structure.md` ([[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]]). Then the general results, with checks; then a worked
-scenario, described three ways: in plain terms, in simple intuitive terms, and formally.
+**Frozen** (Q26): the general core, at draft 3 (`CORE-GENERAL.md`, `general/`), new disciplines, and any widening of
+the scope, until a prediction has been tested on data not seen before.
+
+**Next, chosen by the PI:** tests that build confidence, registered before they are computed (`cases/`), and a worked
+scenario described three ways, in plain terms, in simple intuitive terms and formally (`SCENARIO.md`).
 
 **Then**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [[P20 — Where overoptimization starts, and how it ends|P20]]'s peak

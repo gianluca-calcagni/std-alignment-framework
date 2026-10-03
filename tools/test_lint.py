@@ -207,6 +207,39 @@ def test_the_general_results_name_only_existing_items(tmp_path):
     assert any("general/transfer.md:4: R12 [P9] names no item" in e for e in errors), errors
 
 
+def test_the_scenario_and_the_cases_name_only_existing_items(tmp_path):
+    """SCENARIO.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and their citations
+    count for R8."""
+    note = "# Text\n\n- uses [P1] [@cover2006]\n"
+    extra = {"SCENARIO.md": note, "cases/c1-x/REGISTRATION.md": note}
+    errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra=extra)
+    assert errors == [], errors
+    for name in extra:
+        errors, _ = make(tmp_path, extra={**extra, name: note + "- and [P9]\n"})
+        assert any(f"{name}:4: R12 [P9] names no item" in e for e in errors), (name, errors)
+
+
+def test_a_registration_cannot_change_after_its_result(tmp_path):
+    """R14: a case needs a registration; its result records the registration's SHA-256, and lint recomputes it."""
+    import hashlib
+    registration = "# C1 registration\n\nPredict that [P1] holds.\n"
+    digest = hashlib.sha256(registration.encode()).hexdigest()
+    results = f"# C1 results\n\n**Registration SHA-256:** `{digest}`\n"
+    case = {"cases/c1-x/REGISTRATION.md": registration}
+    errors, _ = make(tmp_path, extra=case)
+    assert errors == [], errors
+    errors, _ = make(tmp_path, extra={**case, "cases/c1-x/RESULTS.md": results})
+    assert errors == [], errors
+    errors, _ = make(tmp_path, extra={**case, "cases/c1-x/RESULTS.md": "# C1 results\n"})
+    assert any("R14 the SHA-256 of REGISTRATION.md is not recorded" in e for e in errors), errors
+    changed = {"cases/c1-x/REGISTRATION.md": registration + "Amended.\n", "cases/c1-x/RESULTS.md": results}
+    errors, _ = make(tmp_path, extra=changed)
+    assert any("R14 REGISTRATION.md changed after its result" in e for e in errors), errors
+    (tmp_path / "cases" / "c2-y").mkdir(parents=True)
+    errors, _ = make(tmp_path, extra=case)
+    assert any("cases/c2-y: R14 a case has no REGISTRATION.md" in e for e in errors), errors
+
+
 def test_the_standard_must_cover_every_definition(tmp_path):
     errors, _ = make(tmp_path, standard=None)
     assert any("R11 the reporting standard is missing" in e for e in errors), errors

@@ -36,6 +36,9 @@ in the discipline can be diagnosed or interpreted in the core's terms.
 | `industrial-organization/` | industrial organization: pricing algorithms and competition | a competition authority → the firms of a local market, as one actor | algorithmic pricing in German petrol duopolies [@assad2024]; algorithms that learn to sustain high prices [@calvano2020] | every price change of every station; public, for non-commercial use |
 | `experimental-economics/` | experimental economics: learning in games | an experimenter → a group of subjects, as one actor | cycles in Rock–Paper–Scissors played in continuous time [@cason2014]; log-linear learning [@blume1993] | each subject's strategy, moment by moment |
 
+No discipline is added while the framework is frozen, until a prediction has been tested on data not seen before
+(`NOTES.md` §3.1, Q26).
+
 **Considered and not adopted** (`NOTES.md` §3.1, Q22, Q24).
 
 | Discipline | Numbers | Why not |
