@@ -20,3 +20,4 @@ A case is of one of two kinds.
 |---|---|---|---|
 | `c1-collusion-simulation/` | simulation | does the coordination of [P39] tell algorithms that learned to collude from players that only adapt? | done: V1, V2, S3 and S4 held; S1 and S2 failed. Coordination detects learning algorithms reacting to each other, not collusion |
 | `c2-stopping-rule/` | simulation | does the stopping rule of [P20], stop where proxy and gold stop correlating, survive stochastic training, training without a KL term, and estimated covariances? | done: S1, S2 and S3 failed. The rule finds the peak of the curve of optima; the registration's thresholds had no scale, and the rule finds the first of several peaks |
+| `w1-best-of-n-slope/` | world | on 12.6 million answers no one had scored with this proxy, is the literature's fitted best-of-`n` coefficient the initial slope of [P13]? | registered |
