@@ -9,3 +9,6 @@ __pycache__/
 .trash/
 # Obsidian: settings of the generated view are per user
 obsidian/.obsidian/
+
+# Model weights trained on third-party data stay out of the repository (licences); scripts rebuild them
+cases/**/*.npz

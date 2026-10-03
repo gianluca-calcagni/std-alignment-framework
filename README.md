@@ -84,6 +84,9 @@ must hold on both paths, rather than reproduce printed digits.
 - **Lineage** names the items of v7.10 that an item replaces and the retraction rows that touch them
   (`v7.10: 60 Status/retractions/`), or says "New".
 - **One step, one branch, one pull request**, merged with a merge commit, so that every commit keeps its date.
+- **No third-party material.** The repository keeps no third-party data, papers, model weights, or anything computed
+  item by item from third-party data; only code, aggregates and citations. A case's script fetches what it needs and
+  rebuilds what it trains, and the case says under which licences its inputs were released.
 
 **Rules of evidence** (working agreements too, adopted by the PI from v7.10's rules and failures; `IMPORT.md` §5 says
 where each comes from):

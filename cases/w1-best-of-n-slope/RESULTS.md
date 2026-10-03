@@ -7,6 +7,12 @@
 **Departures from the registration:** none. Prompts are numbered in the order `split_1`, …, `split_10` (stated in
 `run.py`).
 
+**Licences.** The answers and gold scores are released without a declared licence, on AlpacaFarm prompts under CC BY-NC
+4.0, and the proxy's training pairs likewise. Since this repository is under the AGPL, it keeps none of them, nor
+anything trained or computed answer by answer from them: the proxy's weights (`proxy.npz`) and the per-prompt statistics
+were removed after the run. `train_proxy.py` rebuilds the proxy exactly (the same SHA-256 on two runs), and `run.py`
+checks the hash before scoring; `output.json` keeps only aggregates.
+
 ## Verdict
 
 | Quantity | Value | 95% interval (2,000 resamples of prompts) |
