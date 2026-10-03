@@ -92,12 +92,15 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
 - **Prediction** (empirical) from [P4], [D2]: a policy tuned by KL-regularized reinforcement learning is, within each
   prompt, close to the pursuit of its reward from the reference policy: its revealed objective, `log(π/π_ref)`, is
   affine in the reward, which explains at least half of its variance within prompts, pooled over prompts. *Refuted if*
-  the 95% interval over prompts of the pooled within-prompt `R²` lies entirely below `0.5`. Tested in case W3
-  (`cases/w3-ppo-pursuit/`), on a public PPO-tuned model whose training had not converged.
+  the 95% interval over prompts of the pooled within-prompt `R²` lies entirely below `0.5`. **Refuted** on data not
+  seen before (`cases/w3-ppo-pursuit/`), on a public PPO-tuned model whose training had not converged: `R²` is `0.358`
+  (95% interval `0.326` to `0.390`). Exploratory: within each model's own continuations, the reward explains about a
+  tenth of the revealed objective.
 - **Prediction** (empirical) from [P1], [D2]: what the tuned policy pursues is the reward as it was given in training,
   not a monotone transform of it: its revealed objective is closer to affine in the reward than in the classifier's
   probability of the rewarded class. *Refuted if* the pooled within-prompt `R²` on the reward does not exceed the `R²`
-  on the probability, the 95% interval of the difference over prompts not entirely above 0. Tested in case W3.
+  on the probability, the 95% interval of the difference over prompts not entirely above 0. **Held** on data not seen
+  before (case W3): the difference is `+0.059` (95% interval `+0.053` to `+0.065`).
 - **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can

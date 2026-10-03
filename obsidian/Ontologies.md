@@ -112,7 +112,8 @@ The section "What the core says" holds the claims, one per bullet. Each starts w
 - **Consequence** of [items]: follows from the items and the slot entries, with no data. It fails only if a slot entry
   is wrong.
 - **Prediction** from [items]: says what data would show, and when it is *Refuted if*. Testing it on the data that
-  suggested it is not a test; tests are pre-registered (see the rules in the top-level `README.md`).
+  suggested it is not a test; tests are pre-registered and run as cases (`cases/`, and the rules in the top-level
+  `README.md`).
 - **Reading** with [items]: redescribes a known result in the core's terms. It explains nothing by itself and is no
   evidence for the core. It earns its place by making a consequence or a prediction possible.
 

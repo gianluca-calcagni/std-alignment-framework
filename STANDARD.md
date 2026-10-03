@@ -8,6 +8,9 @@ A report has three parts, written in this order. The declaration is fixed before
 is dated and stored where it cannot be changed afterwards. The observations follow. The results come last, and each
 result says whether it is identified ([D9]).
 
+A report on real data, field by field: `cases/w1-best-of-n-slope/REPORT.md` (best-of-`n` selection by a learned
+proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`.
+
 ## 1. The declaration
 
 Written before any behaviour is examined.
