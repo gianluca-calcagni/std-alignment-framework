@@ -31,6 +31,8 @@ it unblocks that row or the fifth.
   optima, the first of several peaks.
 - `SCENARIO.md` shows the framework applied, three ways; it is an illustration, not evidence.
 - **Blocked on the PI:** every world dataset the predictions need is out of this environment's reach (`NOTES.md` §3.2).
+  The PI supplied Coste et al.'s paper; its dataset needs `huggingface.co` allowed in the environment's network
+  settings.
 
 ## Next, in order
 
@@ -39,7 +41,7 @@ Each step names the row it serves and what it waits for. A step that serves no r
 | # | Step | Row | Waits for |
 |---|---|---|---|
 | 1 | Data for a world test: the gold-labelled generations of Coste et al., the German price archive, Assad et al.'s replication package (`NOTES.md` §3.2, D3, D7) | 4 | the PI: downloads, credentials, or network domains |
-| 2 | **W1**, machine learning: register the ontology's prediction from [P13] (the best-of-`n` slope) on the gold-labelled generations, with a proxy reward model fixed in the registration; then run it once | 4 | step 1; the dataset's card read, never its rows, before registration |
+| 2 | **W1**, machine learning: register the ontology's prediction from [P13] (the best-of-`n` slope) on the gold-labelled generations, with a proxy reward model fixed in the registration; then run it once. The proxy is not released, so the smallest of the paper's sizes is trained here, on the paper's preference data, and a subset of prompts is scored. A weak test: best-of-`n` is computed from the same samples, so it tests the fitted form near `d = 0` more than the framework (ontology, section 3); it still meets row 4 | 4 | step 1; the dataset's card read, never its rows, before registration |
 | 3 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one), with markets, episodes, contexts and the dating of adoption fixed; then run it once | 4 | step 1 |
 | 4 | An outside reader runs one report end to end, on W1's or W2's data, from `STANDARD.md` and `SCENARIO.md` alone | 5 | W1 or W2 done; the PI finds a reader who is a person, not a Claude model |
 | 5 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
@@ -68,3 +70,4 @@ One line per turn: date, what changed, which row it served.
 | Date | Change | Row |
 |---|---|---|
 | 2026-10-03 | consolidation; v11; the freeze; `cases/` and R14; cases C1 and C2, both revising a prediction before data; `SCENARIO.md`; this roadmap | 4 (instruments checked); 5 (scenario) |
+| 2026-10-03 | the PI supplied Coste et al.'s paper; read; W1's data located, and its access blocked on one network domain | 4 (step 1) |

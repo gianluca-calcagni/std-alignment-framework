@@ -36,7 +36,11 @@ proxy reward model.
 prediction untestable from the paper (T3; section 4). Public numerical data that fit the slots exist. Leaderboards and
 preference benchmarks, such as those v7.10 used for evaluator length bias (AlpacaEval 2, Chatbot Arena and LLMBar, in
 T7-1), give scores and preferences per response, and are seen. Any open policy with an open reward model gives the
-log-probability and the score of every response it samples.
+log-probability and the score of every response it samples. Coste et al. repeated Gao et al.'s setup with open models
+[@coste2024]: a 1.4B Pythia policy, AlpacaFarm prompts, and AlpacaFarm's 7B human-preference reward model as the gold.
+They released the policy's answers to validation prompts, each with its gold score (described as 12,600 generations;
+their best-of-`n` used at least 12,500 answers per prompt for 1,000 prompts), but not their proxy reward models' scores,
+so a proxy must be added. The paper has been read; the answers have not.
 
 ## 3. What the core says
 
