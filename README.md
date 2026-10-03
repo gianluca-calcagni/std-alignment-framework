@@ -19,6 +19,7 @@ the general one; where a general result also holds on finite outcomes, it is pro
 
 | | |
 |---|---|
+| `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
@@ -61,8 +62,8 @@ the general one; where a general result also holds on finite outcomes, it is pro
   reading, with the items it uses. A prediction says when it is refuted, and is labelled empirical (it can be wrong
   about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
-- **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md` and the files of
-  `cases/` name only existing items, and their citations are listed like all others.
+- **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md`, `ROADMAP.md` and the
+  files of `cases/` name only existing items, and their citations are listed like all others.
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 - **R14.** Every case in `cases/` has a registration; once it has a result, the result records the SHA-256 of the
@@ -153,10 +154,10 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-To see the framework applied before reading it, start with `SCENARIO.md`. Read this file, `CORE.md`,
-`derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and
-`ontologies/README.md`; for outcomes that are not finite, `CORE-GENERAL.md` and `general/README.md`. `NOTES.md` §1 holds
-the failure modes of past sessions, each with its evidence: read it before starting work.
+Read `ROADMAP.md` first, and run its drift checks before any new work. To see the framework applied, read `SCENARIO.md`.
+Then read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`,
+`NOTES.md` and `ontologies/README.md`; for outcomes that are not finite, `CORE-GENERAL.md` and `general/README.md`.
+`NOTES.md` §1 holds the failure modes of past sessions, each with its evidence: read it before starting work.
 
 ## License
 

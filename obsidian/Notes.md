@@ -166,12 +166,20 @@ Everything waiting on the PI or deferred by agreement, in one place.
 |---|---|---|---|---|
 | D1 | behavioural economics (fine) | Gneezy and Rustichini (2000), weekly counts of late parents per centre | the pair test (fine, removal) of `ontologies/behavioural-economics/` | a copy of the data appears to be public (`users.stat.ufl.edu/~winner/data/fineprice.txt`, seen in a search result, not opened) |
 | D2 | behavioural economics (defaults) | the distribution of contribution rates under two defaults, in a company not used before | a confirmatory pass-through ratio test | v7.10 already read Madrian and Shea (2001), Choi et al. (2004) and Beshears et al. (w12009) from their figures and tables (T7-2, 2b, 2d), so tests on them are exploratory; the result is in `ontologies/behavioural-economics/`, section 3 |
-| D3 | machine learning | samples from an initial policy, scored by a gold and a proxy reward model | the best-of-`n` slope and the covariance-at-the-peak predictions | an open RLHF setup would do; Gao et al.'s own data is not known to be public |
+| D3 | machine learning | samples from an initial policy, scored by a gold and a proxy reward model | the best-of-`n` slope and the covariance-at-the-peak predictions | found: Coste et al. (ICLR 2024), 12,600 outputs of a 1.4B Pythia policy on AlpacaFarm prompts, gold-scored, at `huggingface.co/datasets/tlc4418/gold_labelled_gens`; the paper is arXiv 2310.02743. Not read. A proxy's scores must be added |
 | D4 | evolutionary biology | Chippindale et al. (2001), the hemiclone fitness values per sex | the angle and the shortfall of ordinary selection | supplementary data, if any |
 | D5 | medical sciences (report cards) | Dranove et al. (2003): treatment by severity class, before and after the cards | the log-odds prediction | Medicare data are not public; the published cards give hospital-level deaths, not treatment by severity. Low priority |
 | D6 | medical sciences (four-hour target) | Mason et al. (2012): the shares of the three time intervals by year, trust and admission; or the same intervals in a system whose data have not been read | the ratio test and the within-cell misalignment | the paper's tables (not reachable from here); a House of Commons Library briefing charts the minute at which patients leave, from national records; England's data are seen in summary |
+| D7 | industrial organization | the German price archive, 2016 to 2018, with the station list; Assad et al. (2024) and its replication package; their method paper (2022) | W2 (`ROADMAP.md`) | the archive needs credentials from Tankerkönig (`creativecommons.tankerkoenig.de`); the package is `doi.org/10.7910/DVN/X4MSWW`; the papers are at `discovery.ucl.ac.uk/10187765/1/draft_v15_JPE_main.pdf` and `discovery.ucl.ac.uk/10187769/1/ACEX_PP_2022.pdf`. Not read |
+| D8 | deceptive alignment (H27) | Needham et al. (2025), and their evaluation-awareness dataset | a world test of [[P17 — What an unobserved condition can hide\|P17]]'s reach | arXiv 2505.23836; `huggingface.co/datasets/jjpn2/eval_awareness`. Not read |
+| D9 | experimental economics | Cason, Friedman and Hopkins (2014), and its data, if published with it | the Rock–Paper–Scissors arm of the ontology's prediction | `doi.org/10.1093/restud/rdt023`. Low priority: the potential-game arm needs new sessions in a laboratory |
 
 Every test is pre-registered and pushed before any computation (README rules).
+
+**Handing sources over.** This repository is public, so papers and third-party data go into a private repository that
+the session can read, not into this one. Papers are read at once. A data file is listed, its documentation and codebook
+read, and its rows left unopened until the registration of the test that uses it has been pushed; then only that test's
+script opens it, and the result says when the file arrived and what of it had been seen.
 
 ### 3.3 Open proposals
 
@@ -226,38 +234,23 @@ item changes.
 
 ## 4. Order next
 
-**Done:** the merge (`IMPORT.md` §6). The defects found in the archive were fixed (M1), the record and the rules of
-evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the vault, and the core replaced it on
-`main` (R7). The ontologies were then reworked around disciplines with numbers (Q22).
+The order of work, its blockers and the checks against drift are in `ROADMAP.md`, the one place they are kept. This
+section keeps the history of what was done.
 
-**Frozen** (Q26): the general core, at draft 3 (`CORE-GENERAL.md`, `general/`), new disciplines, and any widening of
-the scope, until a prediction has been tested on data not seen before.
+**Done before v11:** the merge (`IMPORT.md` §6). The defects found in the archive were fixed (M1), the record and the
+rules of evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the vault, and the core replaced it
+on `main` (R7). The ontologies were then reworked around disciplines with numbers (Q22). Since v10: evaluator and
+sample slots in the ontologies, with the claims they allow; [[P25 — The target's curve turns no more often than the regression|P25]], the shape law; [[P26 — The regression on bins governs at small intensity|P26]], binned evaluators for the
+pursuit; the import of v7.10 (R1–R6: [[P27 — The best use of a departure budget|P27]]–[[P38 — Any convex cost|P38]], [[L1 — Separable bounds are loose when two quantities change rank|L1]], [[C1 — No ranking of errors holds at every budget|C1]]–[[C12 — No misalignment, no stakes|C12]]) and its review (`IMPORT.md` §7). The general core,
+drafts 1 to 3 (Q23, Q24).
 
-**Next, chosen by the PI:** tests that build confidence, registered before they are computed (`cases/`), and a worked
-scenario described three ways, in plain terms, in simple intuitive terms and formally (`SCENARIO.md`). Case C1 is done:
-coordination does not detect collusion, and the industrial-organization prediction was revised before its data were
-read. Its data need credentials from Tankerkönig, which only the PI can request. Case C2 is done: the stopping rule of
-[[P20 — Where overoptimization starts, and how it ends|P20]] finds the peak of the curve of optima under practical training, but its registration failed on thresholds without
-a scale; the machine-learning prediction now states the training it needs.
+**Done in v11:** the scope widened to groups and several principals with declared weights ([[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]], Q24, Q25);
+the freeze (Q26); `cases/` with lint R14, and cases C1 and C2, each revising a prediction before its data were read;
+`SCENARIO.md`; `ROADMAP.md`.
 
-**Then**, toward the finish line in the README:
-1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [[P20 — Where overoptimization starts, and how it ends|P20]]'s peak
-   to test, and [[P21 — The expected evidence is misalignment|P21]] gives an estimator of misalignment from log-probabilities (`ontologies/machine-learning/`,
-   section 4); or D2 (two defaults in a company not used before) for the behavioural-economics ontology; or D6, the
-   time intervals before and after a time target, for the medical-sciences ontology. A case with a pass-or-fail
-   verifier would test [[P19 — A monotone regression rules out overoptimization|P19]] directly. The industrial-organization prediction ([[P39 — Several actors: coordination plus individual misalignment|P39]]) is the only one whose data are
-   public and unread: the German price record. It needs the episode length, the contexts, the comparison markets and a
-   dating of adoption without the response to the rival declared before the data are read, and the archive's licence
-   and access confirmed at the source.
-2. E8 for best-of-`n`: [[P26 — The regression on bins governs at small intensity|P26]] covers the pursuit only. The ML ontology's open question asks whether the margin is
-   small enough, with bins that samples can fill, to predict the peak: a computation on D3's data would answer it.
-3. The alignment plane (H6).
-4. Before the first worked case: lint checks pre-registrations against their recorded hashes (README rule (d)); port
-   v7.10's F2, an exact check of [[P22 — No test detects misalignment faster than misalignment|P22]](i), and F4, edge cases in log space for the checks' helpers.
-
-Done since v10: evaluator and sample slots in the five ontologies, with the claims they allow; [[P25 — The target's curve turns no more often than the regression|P25]], the shape law;
-[[P26 — The regression on bins governs at small intensity|P26]], binned evaluators for the pursuit; the import of v7.10 (R1–R6: [[P27 — The best use of a departure budget|P27]]–[[P38 — Any convex cost|P38]], [[L1 — Separable bounds are loose when two quantities change rank|L1]], [[C1 — No ranking of errors holds at every budget|C1]]–[[C12 — No misalignment, no stakes|C12]]) and its review
-(`IMPORT.md` §7).
+**Kept from the earlier list, not scheduled** (`ROADMAP.md`, "Not now"): E8 for best-of-`n` ([[P26 — The regression on bins governs at small intensity|P26]] covers the pursuit
+only); the alignment plane (H6); porting v7.10's F2, an exact check of [[P22 — No test detects misalignment faster than misalignment|P22]](i), and F4, edge cases in log space for the
+checks' helpers.
 
 ## 5. Retrospective after v9, and hunches for v10
 
@@ -350,6 +343,12 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H21 | **Attention is mutual information.** Misalignment against "ignoring the situation" (one behaviour in every condition) is the mutual information between condition and action: a fifth structural specification, the cost of rational inattention | **proved as [[P40 — Attention: misalignment against ignoring the situation\|P40]]**; identity (B7) |
 | H22 | **The angle is exact under χ², local under KL.** Under a χ² budget the target gains √B·ρ·sd for any default (Cauchy–Schwarz), ρ the correlation under the default: Laidlaw et al.'s correlated proxy is the angle of [[P11 — The misaligned share at the start of a change\|P11]]. Under KL it is exact only for Gaussians | **probed** (B4c, B5) |
 | H23 | **Heavy tails: an infinite frontier at every budget.** With a power-law upper tail, `t_max = 0`, and any positive KL budget buys unbounded gain (like `L/log L`); a χ² budget buys `√(B·Var)` | **probed** (B4a, B4b) |
+| H24 | **Collusion is a question about the revealed objective, not about dependence.** Case C1: coordination tracks firms reacting to each other, colluding or not. What separates collusion is that the joint moves pursue joint profit rather than each firm's own: each firm's revealed objective ([[P1 — Every behaviour is a tilt of any other\|P1]], [[D10 — Evaluator, regression and residual\|D10]]), given the rival's last price, correlates with joint profit beyond its own. That needs the profit of every joint move, so a demand model: known in C1's simulation, estimated in industrial organization, absent from the German record, which has no volumes | D: not scheduled (`ROADMAP.md`, "Not now"); a case on C1's sessions only if W2 needs it |
+| H25 | **The width bounds the scatter of a training run.** A trained policy within `δ` nats of its optimum has a target average within the width of that KL ball along `F` ([[P29 — The width is the exact worst case\|P29]]), about `√(2δ)·σ(F)` for small `δ`. No stopping rule resolves gains closer than that. C2: median `KL` to the optimum `0.010` nats gives about `0.14·σ`, against a median observed scatter of `0.016`: a loose bound, as worst cases are | D: exploratory on C2's output, only if a world test needs a stopping rule |
+| H26 | **Single-peakedness can be checked before trusting the stopping rule.** The regression on bins of the evaluator, estimated from labelled outputs ([[D10 — Evaluator, regression and residual\|D10]], [[P26 — The regression on bins governs at small intensity\|P26]]), says whether the first zero of the covariance is the highest peak ([[P25 — The target's curve turns no more often than the regression\|P25]](iii)); `STANDARD.md`'s evaluator row already asks for it. Open: the sample size at which bins judge single-peakedness correctly, given [[P26 — The regression on bins governs at small intensity\|P26]]'s margin | C: follows from [[P25 — The target's curve turns no more often than the regression\|P25]] and [[P26 — The regression on bins governs at small intensity\|P26]]; the sample size is to be worked out |
+| H27 | **Evaluation awareness bounds the leak from below, not from above.** [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]](iii) and [[P17 — What an unobserved condition can hide\|P17]] need an upper bound on how far an actor can tell evaluation from use. Studies of evaluation awareness give lower bounds: on 1,000 transcripts from 61 datasets, humans tell evaluation from deployment with an AUC of 0.92 and the best model 0.83 (Needham et al. 2025, arXiv 2505.23836, read in a search summary only). Any score's AUC satisfies `AUC − ½ = ∫(F_Q − F_P) dF_P ≤ TV`, so by data processing and Pinsker the inputs differ by at least `2·(AUC − ½)²` nats: 0.35 for an AUC of 0.92 (derived here, not checked; a first guess, `TV ≥ 2·AUC − 1`, was false: uniform inputs on `[0.5, 1.5]` and `[0, 1]` give an AUC of 0.875 and a TV of 0.5). That is more than the 0.10 nats that already made `SCENARIO.md`'s bounds span −€4.80 to €5.64, so for typical suites [[P17 — What an unobserved condition can hide\|P17]]'s bounds say little, and only [[P17 — What an unobserved condition can hide\|P17]](iv), audits indistinguishable from use, helps. Their dataset is public and unread | D: a candidate world test of a negative prediction, after W1 |
+| H28 | **The best-of-`n` prediction needs no training.** Coste et al. released 12,600 outputs of their initial policy, each with a gold score (`NOTES.md` §3.2, D3). With a proxy reward model fixed in the registration, the best-of-`n` curve of the gold, and the slope of [[P13 — What the start of a change gains\|P13]], follow from resampling the outputs within each prompt | B: this is W1 (`ROADMAP.md`, step 2) |
+| H29 | **The executor's simulations test the executor as much as the framework.** C1 and C2 were designed, run and judged by the model family that wrote the predictions, and four of their seven predictions failed on the executor's own thresholds or design. A registration read by the PI, or by an outside reader, before it is pushed would catch some of this (rule (f)) | proposal to the PI |
 
 ### 5.5 Process
 

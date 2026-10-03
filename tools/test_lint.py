@@ -207,11 +207,11 @@ def test_the_general_results_name_only_existing_items(tmp_path):
     assert any("general/transfer.md:4: R12 [P9] names no item" in e for e in errors), errors
 
 
-def test_the_scenario_and_the_cases_name_only_existing_items(tmp_path):
-    """SCENARIO.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and their citations
-    count for R8."""
+def test_the_scenario_the_roadmap_and_the_cases_name_only_existing_items(tmp_path):
+    """SCENARIO.md, ROADMAP.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and their
+    citations count for R8."""
     note = "# Text\n\n- uses [P1] [@cover2006]\n"
-    extra = {"SCENARIO.md": note, "cases/c1-x/REGISTRATION.md": note}
+    extra = {"SCENARIO.md": note, "ROADMAP.md": note, "cases/c1-x/REGISTRATION.md": note}
     errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra=extra)
     assert errors == [], errors
     for name in extra:

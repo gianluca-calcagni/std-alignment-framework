@@ -39,7 +39,7 @@ Rules
       whole shared vocabulary.
   R12 RELATED.md, the survey of related theories, IMPORT.md, the map from the archive to the core, CORE-GENERAL.md, the
       draft of the core for outcomes that are not finite, general/*.md, its results, SCENARIO.md, the worked scenario,
-      and cases/**/*.md, the registered tests, name only existing items; their citations count for R8.
+      ROADMAP.md, and cases/**/*.md, the registered tests, name only existing items; their citations count for R8.
   R13 RECORD.md, the record of predictions and retractions, names only existing items, and its citations count for
       R8. Its ledger (the table with the columns LEDGER_COLUMNS) has exactly one row for every prediction of the
       ontologies, keyed by the ontology's folder and the items the prediction is from, with the same label, and a
@@ -273,7 +273,7 @@ def lint(root):
     folder, cases = root / "general", root / "cases"
     general = sorted(f.relative_to(root).as_posix() for f in folder.glob("*.md")) if folder.exists() else []
     case_docs = sorted(f.relative_to(root).as_posix() for f in cases.rglob("*.md")) if cases.exists() else []
-    for name in ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md"] + general + case_docs:
+    for name in ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md"] + general + case_docs:
         survey = root / name
         if survey.exists():
             rtext = survey.read_text(encoding="utf-8")
