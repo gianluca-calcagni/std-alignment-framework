@@ -56,13 +56,17 @@ and misalignment is reported as an order of magnitude, about one tenth pursuit, 
 
 ## Exploratory, after the verdicts
 
-Fitted separately on each model's own 32 continuations, the reward explains `0.116` of the revealed objective among the
-reference's continuations and `0.101` among the tuned model's; pooled over all 64, `0.358`. The tuned model's
-continuations score `16.5` nats higher on the revealed objective than the reference's, and also higher on the reward, so
-most of the pooled `R²` comes from that difference between the two sets. Under an exact pursuit, the revealed objective
-is a fixed affine function of the reward, and `R²` would be 1 in any subset of continuations. So the refutation is
-stronger than the registered number shows: among the continuations each model actually produces, the tuned model's
-change is mostly unrelated to its reward.
+Computed by `explore.py` from the saved rows, with the same resamples; its output is `explore.json`. Fitted separately
+on each model's own 32 continuations, the reward explains `0.116` (`0.101` to `0.134`) of the revealed objective among
+the reference's continuations and `0.101` (`0.086` to `0.118`) among the tuned model's; pooled over all 64, `0.358`. The
+tuned model's continuations score `16.5` nats higher on the revealed objective than the reference's, and `1.21` higher
+on the reward, so most of the pooled `R²` comes from that difference between the two sets (`NOTES.md` §1: a registered
+statistic that the design's mixture inflates). Under an exact pursuit, the revealed objective is a fixed affine function
+of the reward, and `R²` would be 1 in any subset of continuations. So the refutation is stronger than the registered
+number shows: among the continuations each model actually produces, the tuned model's change is mostly unrelated to its
+reward. S2's direction survives the same split: within each model's own continuations the logit beats the probability by
+`+0.010` (`+0.006` to `+0.014`) among the reference's and `+0.014` (`+0.009` to `+0.020`) among the tuned model's,
+smaller than the registered `+0.059`, and above 0.
 
 **What this case says.** PPO, run with a KL penalty and stopped before convergence, produced a model that does pursue
 its reward, at roughly the scale the penalty implies and in the reward's own units, and that also changed in ways that

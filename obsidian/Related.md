@@ -15,7 +15,7 @@ that carry it.
 
 | Theory | Shares with us | The main difference | Import |
 |---|---|---|---|
-| KL control and control as inference | pursuit, net value, the maximum-entropy policy | it optimizes; we measure | later: soft dynamic programming for sequential feasibility |
+| KL control and control as inference | pursuit, net value, the maximum-entropy policy | it optimizes; we measure | tested on unseen data: is a PPO-tuned model the pursuit of its reward (W3, in part); later: soft dynamic programming for sequential feasibility |
 | Information geometry | the Fisher metric, I-projections, Pythagorean identities | no principal, no specification | done: total correlation and the Jensen–Shannon divergence as misalignments ([[P39 — Several actors: coordination plus individual misalignment\|P39]], [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]]); now: the alignment plane, exact for a Gaussian default (`general/`) |
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([[P40 — Attention: misalignment against ignoring the situation\|P40]]); tested in part: an endogenous default (`general/`) |
@@ -41,6 +41,11 @@ that carry it.
   behaviour in a random environment ([[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], Notes).
 - *Different.* These theories compute optimal behaviour. We judge actual behaviour against declared behaviour, and
   report stakes and identification.
+- *Tested on unseen data* (case W3, `cases/w3-ppo-pursuit/`): whether a policy tuned by PPO with a KL penalty, a public
+  GPT-2 tuned on a sentiment reward by von Werra et al.'s library [[References|@vonwerra2020]], is the KL-regularized optimum that
+  these theories compute. In part: the change follows the reward in the reward's own scale, with a slope near `1/β`, but
+  within prompts the reward explains only a third of the change, and about a tenth within each model's own outputs. The
+  optimum is what a run aims at, not what it delivers; the framework measures the gap.
 - *Import, later.* Soft dynamic programming, to state [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]'s sequential case as an item of its own.
 - *What it could take from us.* The split of the KL "budget" into pursuit and misalignment ([[P6 — The departure from the default splits into pursuit and misalignment|P6]]), and of misalignment
   into avoidable and unavoidable parts ([[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]).

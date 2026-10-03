@@ -33,5 +33,5 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 - [[Cases]]: tests registered before they are computed
 - c1-collusion-simulation: [[c1-collusion-simulation registration]] · [[c1-collusion-simulation results]]
 - c2-stopping-rule: [[c2-stopping-rule registration]] · [[c2-stopping-rule results]]
-- w1-best-of-n-slope: [[w1-best-of-n-slope registration]] · [[w1-best-of-n-slope results]]
+- w1-best-of-n-slope: [[w1-best-of-n-slope registration]] · [[w1-best-of-n-slope results]] · [[w1-best-of-n-slope report]]
 - w3-ppo-pursuit: [[w3-ppo-pursuit registration]] · [[w3-ppo-pursuit results]]

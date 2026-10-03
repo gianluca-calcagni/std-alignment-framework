@@ -118,8 +118,8 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
 | stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps | not met: the scope changed in v11; no Statement has changed since v10 |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
-| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met, by a refutation: case W1 (`RECORD.md`) |
-| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met |
+| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`) |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported; no outside reader yet |
 
 One case suffices for the last two rows, in any discipline: v7.10's attempts showed that data access, not the
 framework, decides which disciplines can be done.

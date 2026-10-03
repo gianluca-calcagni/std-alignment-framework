@@ -100,7 +100,8 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   not a monotone transform of it: its revealed objective is closer to affine in the reward than in the classifier's
   probability of the rewarded class. *Refuted if* the pooled within-prompt `R²` on the reward does not exceed the `R²`
   on the probability, the 95% interval of the difference over prompts not entirely above 0. **Held** on data not seen
-  before (case W3): the difference is `+0.059` (95% interval `+0.053` to `+0.065`).
+  before (case W3): the difference is `+0.059` (95% interval `+0.053` to `+0.065`). Exploratory: within each model's own
+  continuations it is smaller, about `+0.01`, and still above 0.
 - **Reading** with [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]], [[P13 — What the start of a change gains|P13]]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
