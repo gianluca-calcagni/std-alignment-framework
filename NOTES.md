@@ -78,6 +78,12 @@ object did not exist there. Countermeasure: compute the domain (`t_max`) of ever
 registering. And the first run of a diagnosis of B3 contradicted B3 itself; checking the probe first, as the failure
 mode "a probe bug read as a refutation" says, found an operator-precedence bug (`pa * (rho / z) @ K`).
 
+**One that worked, in a case.** Before the industrial-organization prediction met German prices, case C1 tested its
+instrument in simulation, where the truth is known (`cases/c1-collusion-simulation/`). Coordination over episodes did
+not separate algorithms that learned to collude from players that only adapt (S1 failed, `p = 0.019`), and, outside the
+registration, not from learning algorithms that barely collude either. The prediction was revised before any data were
+read. Countermeasure, now a habit: test an instrument where the truth is known before spending data on it.
+
 **Two from the consolidation.** The first check of [P41](iv) drew some 2-state chains, which are always reversible; its
 assertion that the target is visible (the countermeasure of the degenerate-instance row) fired, so the check could not
 pass vacuously. Instances now have 3 to 5 states. And the first check of [P41](iii)'s quarter law used an asymmetry of
@@ -227,7 +233,9 @@ evidence written (M2), the Obsidian view built (O1); the tag `v7.10` marks the v
 the scope, until a prediction has been tested on data not seen before.
 
 **Next, chosen by the PI:** tests that build confidence, registered before they are computed (`cases/`), and a worked
-scenario described three ways, in plain terms, in simple intuitive terms and formally (`SCENARIO.md`).
+scenario described three ways, in plain terms, in simple intuitive terms and formally (`SCENARIO.md`). Case C1 is done:
+coordination does not detect collusion, and the industrial-organization prediction was revised before its data were
+read. Its data need credentials from Tankerkönig, which only the PI can request.
 
 **Then**, toward the finish line in the README:
 1. A worked case, pre-registered, on data not seen before: D3 (best-of-`n` on a proxy reward model) has [P20]'s peak

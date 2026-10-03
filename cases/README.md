@@ -18,4 +18,4 @@ A case is of one of two kinds.
 
 | Case | Kind | Question | State |
 |---|---|---|---|
-| `c1-collusion-simulation/` | simulation | does the coordination of [P39] tell algorithms that learned to collude from players that only adapt? | registered |
+| `c1-collusion-simulation/` | simulation | does the coordination of [P39] tell algorithms that learned to collude from players that only adapt? | done: V1, V2, S3 and S4 held; S1 and S2 failed. Coordination detects learning algorithms reacting to each other, not collusion |

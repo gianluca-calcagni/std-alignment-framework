@@ -63,16 +63,20 @@ not been checked.
   algorithms of the known result show no coordination at all. In the paper's baseline, each sets its price from the last
   round's prices alone, exploring independently of the other, so given those prices their moves are independent,
   punishments included. Their coordination lies between a deviation and its punishment, in time, and only a
-  specification that does not take past prices as contexts can see it, and only when deviations occur (section 4).
-- **Prediction** (empirical) from [[P39 — Several actors: coordination plus individual misalignment|P39]], [[D6 — Intervention and pass-through|D6]]: in German local duopolies, if the algorithms that both stations adopted
-  learned to coordinate, the coordination of the two stations' joint price moves, within contexts and over episodes of a
-  declared length, is larger after both have adopted than before, and than in duopolies where only one adopted. Adoption
-  is dated without the speed of response to the rival, the one marker that measures a dependence between the two
-  stations. *Refuted if* it is not, beyond its sampling error computed by market. A refutation means the rise in margins
-  came about without coordination in the declared moves, for example by each algorithm raising prices on its own. The
-  data are public and unread; the known result is seen in summary only.
+  specification that does not take past prices as contexts can see it, and only when deviations occur (section 4). Case
+  C1 found it so in every session (`cases/c1-collusion-simulation/`, S3).
+- **Prediction** (empirical) from [[P39 — Several actors: coordination plus individual misalignment|P39]], [[D6 — Intervention and pass-through|D6]]: in German local duopolies, the coordination of the two stations' joint
+  price moves, within contexts and over episodes of a declared length, is larger where both stations have adopted
+  pricing algorithms than where only one has, over the same calendar periods. Adoption is dated without the speed of
+  response to the rival, the one marker that measures a dependence between the two stations. *Refuted if* it is not,
+  beyond its sampling error computed by market. In simulation the comparison holds for learning algorithms whether or
+  not they collude (`cases/c1-collusion-simulation/`), so a held prediction says that both stations' algorithms react to
+  each other, not that they collude. Revised before any data were read: the comparison with the period before adoption
+  was dropped, because in the same case players who only adapt coordinated almost as much as algorithms that collude.
+  The data are public for non-commercial use and unread; the known result is seen in summary only.
 - **Reading** with [[P39 — Several actors: coordination plus individual misalignment|P39]]: the simulated algorithms of the known result sustain high prices by punishments that unfold
-  over rounds, the case of [[P39 — Several actors: coordination plus individual misalignment|P39]](iii): coordination that a single round's table does not show.
+  over rounds, the case of [[P39 — Several actors: coordination plus individual misalignment|P39]](iii): coordination that a single round's table does not show. Case C1 found it in 21 of
+  24 simulated markets, against 22 predicted (S2, failed).
 
 ## 4. Limits
 
@@ -83,6 +87,10 @@ not been checked.
   model of what each station observes, and it is blind by construction to the known result's algorithms (section 3). So
   a positive coordination says that the stations do not act independently, not that they agreed, colluded or broke the
   law; the prediction compares before with after, where lawful adaptation is present on both sides.
+- Coordination does not detect collusion. In simulation, learning algorithms that barely collude coordinate as much as
+  algorithms that do, and players who only adapt almost as much (case C1). Collusion differs in the objective the joint
+  behaviour pursues, the two firms' joint profit rather than each one's own, and reading that objective ([[P1 — Every behaviour is a tilt of any other|P1]], [[D10 — Evaluator, regression and residual|D10]])
+  needs the profit of each joint move: a model of demand, which the public record does not give.
 - A collusive steady state shows no coordination. Two stations that hold a high price and never deviate have a joint
   behaviour that is a point mass, and a point mass is independent. Coordination shows only in how the stations respond
   to shocks and to each other's moves; the record has many, in the wholesale price and in the daily cycle of prices, but
@@ -101,7 +109,8 @@ not been checked.
 
 - Which episode length makes coordination visible without needing more data than the record has: an hour, a day, a week?
 - Is there a specification between the two of sections 3 and 4, one that permits adaptation to a rival's prices but
-  charges a reaction that punishes a price cut, and can it be declared without a model of the firms' profits?
+  charges a reaction that punishes a price cut, and can it be declared without a model of the firms' profits? Case C1
+  suggests not without a model of demand: what separates collusion from adaptation is which profit the moves pursue.
 - In simulations like those of Calvano et al., rerun with their exploration, does the coordination of the algorithms
   show mostly over rounds rather than within a round, as two tit-for-tat players' does (`general/derived-spaces.md`)?
 - German retail prices change several times a day. Are their paths irreversible in the sense of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]], and did adoption
