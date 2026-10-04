@@ -1,4 +1,4 @@
-"""Probe for a candidate result (NOTES.md section 7, H32): when the principal's objective is known only to lie in the span
+"""Probe for what became [P48] (first NOTES.md section 7, H32): when the principal's objective is known only to lie in the span
 of given functions F, G_1, ..., G_k, the least misalignment any such principal finds is the unexplained misalignment of
 [P44], KL(p || p~), attained by the principal whose objective is the named pursuit's exponent; the largest is the
 departure KL(p || q). Exploratory, not a check. Usage: python3 probes/diagnostics/probe_charitable.py

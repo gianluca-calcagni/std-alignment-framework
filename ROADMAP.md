@@ -25,10 +25,14 @@ hold. Everything else waits unless it serves one of them.
 
 ## Where we are (2026-10-03)
 
-- The core is v11: five premises, eleven definitions, 47 propositions; 172 checks pass on both paths. The five new
-  results are diagnostics (`derived/diagnostics.md`, Q28): misalignment at any intensity and across conditions at one
+- The core is v11: five premises, eleven definitions, 48 propositions; 180 checks pass on both paths. Six results are
+  diagnostics (`derived/diagnostics.md`, Q28, Q30): misalignment at any intensity and across conditions at one
   intensity; what named objectives explain; drift between runs; what runs share between evaluation and use; the cost of
-  reweighting. Each follows from earlier results; no premise or definition changed.
+  reweighting; and the interval of misalignment when the target is known only to lie in a family. Each follows from
+  earlier results; no premise or definition changed.
+- **Whose target** (`NOTES.md` §7, Q30): W3 and W4 measured the trainer's formal objective, not what any user wants, for
+  which no gold exists. Every declaration now names its principal (`STANDARD.md`), and an uncertain target is declared
+  as a family, whose interval [P48] gives.
 - **Base rate: one of three** predictions tested on data not seen before held (`RECORD.md`). Too few to say anything,
   beyond that the framework can fail.
 - **W1** (`cases/w1-best-of-n-slope/`): the prediction from [P13] about best-of-`n`, refuted. On 12.6 million answers,
@@ -99,3 +103,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-03 | licence rule applied (Q27); W1 reported to `STANDARD.md`; W3 designed, calibrated, registered and run once on a public PPO model: the bet held in part; consolidation | 4 (the bet tested); 5 (the report) |
 | 2026-10-03 | retrospective of W1 and W3 (`NOTES.md` §6); five design rules for cases; five diagnostic results derived from the core, P43–P47 (Q28); W4 designed, its second run's provenance traced | 4 (W4); 5 (diagnostics) |
 | 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
+| 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [P48], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |

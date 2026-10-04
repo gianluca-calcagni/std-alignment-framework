@@ -479,3 +479,10 @@ def test_a_new_registration_follows_the_template(tmp_path):
     assert any("cases/w9-x: R15 the rehearsal's record, rehearsal.json, is missing" in e for e in errors), errors
     errors, _ = make_fresh({"cases/w3-ppo-pursuit/REGISTRATION.md": "# W3\n\nPredict [P1].\n"})
     assert not any(" R15 " in e for e in errors), errors                       # registered before the rules
+    later = STANDARD + "| Principal | [D3] |\n"                                  # a field added after W4 was registered
+    for name, exempt in (("w4-two-runs", True), ("w9-x", False)):
+        d = tmp_path / f"later-{name}"; d.mkdir()
+        errors, _ = make(d, standard=later, extra={f"cases/{name}/REGISTRATION.md": GOOD_REGISTRATION,
+                                                   f"cases/{name}/rehearsal.json": "{}"})
+        missing = any("R15 the declaration has no row for the field 'Principal'" in e for e in errors)
+        assert missing != exempt, (name, errors)

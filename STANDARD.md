@@ -20,6 +20,7 @@ Written before any behaviour is examined.
 | Outcomes | [D1] | the finite set of outcomes, and how any continuum was cut into it |
 | Conditions | [D8] | the conditions considered, and their frequencies when the actor does not choose them |
 | Default | [D2] | the default behaviour in each condition, and how it was measured apart from the behaviour to be judged |
+| Principal | [D3] | whose target the specification states: the party whose aims the report judges against, such as a trainer's formal objective, a user's, or a regulator's, which is not the evaluator unless the report says so; and, when that target is known only to lie in a family of objectives, the family ([P48]) |
 | Specification | [D3] | the intended set: "pursue `F`" with `F` written out, with a floor or a cap if any ([P35]), its order only ([P36]), or another closed set; who declared it, when, and where it is recorded |
 | Principal's resolution | [D4] | the distinctions declared irrelevant, or "finest" |
 | Feasible set | [D7] | what the actor is assumed able to do, and whether the set is linear, convex or neither; "everything" if nothing is assumed; a departure budget `δ` ([P27]) when only the departure from the default is limited, or a budget of another shape ([P31]) |
@@ -54,6 +55,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Stakes | [D5] | the shortfall in the objective's units, the matched intensity, and the three causes of [P9] |
 | Intensity | [P43] | when several conditions are judged at one intensity, the excess over their own misalignments, and how far their revealed intensities differ |
 | Named and unexplained misalignment | [P44] | for the declared named objectives, the split of misalignment into named and unexplained parts, in nats, and each objective's increment in the declared order |
+| Uncertain target | [P48] | for a declared family of targets, the interval of misalignment over it: the least, found by the most charitable principal, and the departure |
 | Drift | [P45], [P46] | for several runs, the shared misalignment split into the misalignment of their average and the drift, with the correction for few runs; for two conditions, the reproducible and run-specific differences, and which conditions the average of the runs can tell apart |
 | Avoidable and unavoidable misalignment | [P15] | the split, when the feasible set is linear; the inequality when it is convex; otherwise the lower bound `inf_{p∈𝓕} M(p)` |
 | Resolution | [P7], [P8] | what the declared indifference forgave, and what the actor's resolution makes unavoidable |

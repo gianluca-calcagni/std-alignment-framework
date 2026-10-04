@@ -98,4 +98,5 @@ and the name "revealed intensity".
 - [[P22 — No test detects misalignment faster than misalignment|P22]] — No test detects misalignment faster than misalignment
 - [[P43 — Misalignment at any intensity|P43]] — Misalignment at any intensity
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
+- [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
 - [[C4 — Rescaling the objective is not misalignment|C4]] — Rescaling the objective is not misalignment

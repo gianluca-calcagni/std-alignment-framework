@@ -21,12 +21,15 @@ earlier cases left open.*
 
 ## Declaration
 
-*Every field of `STANDARD.md`, section 1, one row each. Fix here the specification across conditions (each at its own
+*Every field of `STANDARD.md`, section 1, one row each. Name the principal whose target the specification states, which
+is not the evaluator unless the registration says so; when that target is known only to lie in a family, declare the
+family and register the interval it gives ([P48]). Fix here the specification across conditions (each at its own
 intensity, or one shared: [P43]), which outcomes the evaluator scores alike, ties included ([D10]), the named
 objectives in their order ([P44]) and the runs ([P45]).*
 
 | Field | Core | Entry |
 |---|---|---|
+| Principal | [D3] | |
 | Outcomes | [D1] | |
 
 ## The procedure

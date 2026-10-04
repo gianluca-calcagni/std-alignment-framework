@@ -316,3 +316,38 @@ def test_reweighting_costs_exponentially():
         q = simplex_interior(r, n); F = r.normal(0, 1, n); t = float(r.uniform(0, 3)); pt = tilt(q, t * F)
         ex = np.exp(t * F); rel_var = (q @ ex ** 2 - (q @ ex) ** 2) / (q @ ex) ** 2
         assert abs(rel_var - (reweighting_moments(q, pt)[1] - 1)) <= 1e-9 * (1 + rel_var)
+
+
+def most_charitable(p, q, Phi):
+    """P48: the tilt of q by a combination of the rows of Phi with p's averages of them, and that combination's
+    coefficients (read off its log-ratio to q)."""
+    pt = project_linear(q, Phi, Phi @ p)
+    B = np.column_stack([np.ones(q.size), Phi.T])
+    return pt, np.linalg.lstsq(B, np.log(pt / q), rcond=None)[0][1:]
+
+
+def test_an_uncertain_target_gives_an_interval():
+    """P48: no principal whose objective lies in the span of Phi finds less misalignment than KL(p || p̃), the
+    principal at p̃'s combination finds exactly that, and the Pythagorean identity behind it holds for every
+    combination; the largest misalignment over the span is the departure, reached by F' or by −F'; when p has q's
+    averages of Phi every principal finds the departure; and with Phi = (F, G...) the lower end is P44's unexplained
+    misalignment."""
+    r = rng(4801); positive = 0
+    for _ in range(100):
+        n = int(r.integers(6, 11)); k = int(r.integers(2, 4)); q = simplex_interior(r, n); p = simplex_interior(r, n)
+        Phi = r.normal(0, 1, (k, n)); pt, c = most_charitable(p, q, Phi); low, dep = kl(p, pt), kl(p, q)
+        assert np.abs(Phi @ pt - Phi @ p).max() <= 1e-10
+        assert abs(misalignment(p, q, c @ Phi)[0] - low) <= 1e-9 * (1 + low)          # attained
+        for d in r.normal(0, 1, (40, k)):
+            M = misalignment(p, q, d @ Phi)[0]
+            assert low - 1e-9 <= M <= dep + 1e-9                                       # inside the interval
+            assert abs(max(M, misalignment(p, q, -d @ Phi)[0]) - dep) <= 1e-9 * (1 + dep)   # F' or −F'
+            tl = tilt(q, d @ Phi)
+            assert abs(kl(p, tl) - low - kl(pt, tl)) <= 1e-9 * (1 + kl(p, tl))       # the identity behind (i)
+        positive += low > 1e-3
+        assert abs(low - kl(p, named_pursuit(p, q, Phi[0], list(Phi[1:])))) <= 1e-9    # (iii): P44's named pursuit
+        pq = project_linear(p, Phi, Phi @ q)                                           # p with q's averages of Phi
+        assert kl(pq, most_charitable(pq, q, Phi)[0]) - kl(pq, q) <= 1e-9
+        for d in r.normal(0, 1, (10, k)):
+            assert abs(misalignment(pq, q, d @ Phi)[0] - kl(pq, q)) <= 1e-9 * (1 + kl(pq, q))
+    assert positive >= 80

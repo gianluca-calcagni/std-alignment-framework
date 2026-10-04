@@ -50,7 +50,8 @@ Rules
   R15 Design rules. A registration made after the design rules (cases/README.md), that is, of every case but those in
       BEFORE_THE_DESIGN_RULES, follows cases/TEMPLATE.md: it has the sections of REGISTRATION_SECTIONS; its declaration
       has a row for every field of the first table of STANDARD.md (the declaration); its predictions table has a
-      column "Threshold from", filled in every row; and its folder holds rehearsal.json, the rehearsal's record.
+      column "Threshold from", filled in every row; and its folder holds rehearsal.json, the rehearsal's record. A field
+      added to the declaration later is not required of the cases registered before it (FIELDS_ADDED_LATER).
 """
 import hashlib, re, sys
 from pathlib import Path
@@ -355,6 +356,7 @@ def lint_cases(cases):
 
 
 BEFORE_THE_DESIGN_RULES = {"c1-collusion-simulation", "c2-stopping-rule", "w1-best-of-n-slope", "w3-ppo-pursuit"}
+FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}}                            # field: cases registered before it
 REGISTRATION_SECTIONS = ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
                          "## Rehearsal", "## Licences"]
 
@@ -385,7 +387,7 @@ def lint_design_rules(cases, standard):
                 errors.append(f"{name}: R15 the section '{heading}' is missing (cases/TEMPLATE.md)")
         declared = {row[0] for row in table_rows(secs.get("## Declaration", []))}
         for field in fields:
-            if field not in declared:
+            if field not in declared and case.name not in FIELDS_ADDED_LATER.get(field, set()):
                 errors.append(f"{name}: R15 the declaration has no row for the field '{field}' of STANDARD.md")
         rows = table_rows(secs.get("## Predictions", []))
         if not rows or "Threshold from" not in rows[0]:

@@ -117,6 +117,8 @@ disappears: following it can only help the company, at every setting of the dial
 
 - **Outcomes** ([[D1 — Outcomes, behaviours, divergence and tilt|D1]]): `X = {res, hand, wrong, vague, credit}`.
 - **Default** ([[D2 — Pursuit of an objective|D2]]): `q = (0.40, 0.15, 0.15, 0.25, 0.05)`, the pilot, measured before tuning.
+- **Principal** ([[D3 — Specification, declaration and misalignment|D3]]): the company. Its target is `F`, in euros; the rating model below is its evaluator, not its
+  target.
 - **Specification** ([[D3 — Specification, declaration and misalignment|D3]]): the standard specification `(q, R_F)` of the objective `F = (10, 2, −20, −2, −5)`, in euros
   per conversation ([[D5 — Stakes|D5]]): pursuit of `F` from `q` at every intensity. Declared by the company before tuning.
 - **Resolutions** ([[D4 — Resolution|D4]]): the finest, for the principal and, since nothing is known of the assistant's limits, for the

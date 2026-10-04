@@ -84,4 +84,4 @@ part of a change unexplained.
 - [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] — Misalignment splits into what the actor could avoid and what it could not
 
 ## Used by
-- no later item
+- [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain

@@ -121,6 +121,7 @@ matched pursuit underflowed to zeros; under-pursuit is now computed in closed fo
 | Outcomes | [D1] | within each prompt, its 12,600 sampled answers; nothing was cut |
 | Conditions | [D8] | the 1,000 prompts of AlpacaFarm's validation split used by Coste et al. [@coste2024], at equal frequencies; each prompt is a context, whose frequency the actor does not choose |
 | Default | [D2] | within each prompt, the initial policy's behaviour, estimated by the empirical distribution of its 12,600 answers |
+| Principal | [D3] | Coste et al. [@coste2024], who fixed the gold before their experiments; its target is the gold reward model, as a stand-in for the people whose preferences trained it, and the proxy is the evaluator |
 | Specification | [D3] | the standard specification of the gold reward `F`, AlpacaFarm's 7B human-preference reward model: in each prompt, pursue `F` from the default. Two forms: each prompt at an intensity of its own, judged on its own terms; and every prompt at one shared intensity, the stricter (`derived/estimation.md`, the Notes of [P24]), which KL-regularized training with one coefficient aims at. Declared by the executor for this report, after W1's data were seen (section 2) |
 | Principal's resolution | [D4] | finest |
 | Feasible set | [D7] | everything: nothing is assumed about what selection could do |

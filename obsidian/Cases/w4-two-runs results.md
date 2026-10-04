@@ -88,7 +88,7 @@ The specification here is the training objective of each run, the trainer's, not
 exists. Two things hold whatever the target. First, the named pursuits depend only on the span of the functions named,
 so S1 and S2, and the drift, are statements about the change, not about a principal. Second, over every principal whose
 objective combines the run's reward, `log R`, the other run's reward and the other run's revealed objective, the least
-misalignment is the unexplained part of [[P44 — What named objectives explain|P44]] (`probes/diagnostics/probe_charitable.py`): for A, `9.46` (`9.24` to
+misalignment is the unexplained part of [[P44 — What named objectives explain|P44]], as [[P48 — Misalignment when the target is uncertain|P48]] now states: for A, `9.46` (`9.24` to
 `9.67`) nats of its `12.28`-nat departure, or `0.77`; for B, `6.94` (`6.76` to `7.13`) of `10.77`, or `0.65`. Most of
 each run's change pursues nothing in that family, for any principal in it. The coefficient of S2 is positive in `98.5%`
 of the contexts, with quartiles `0.24` and `0.36`, so the shared change is not carried by a few prompts. These estimates

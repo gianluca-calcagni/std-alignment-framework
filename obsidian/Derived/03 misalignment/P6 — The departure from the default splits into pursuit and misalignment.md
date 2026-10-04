@@ -46,3 +46,4 @@ reading as a split of the departure.
 
 ## Used by
 - [[P47 — The cost of reweighting|P47]] — The cost of reweighting
+- [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain

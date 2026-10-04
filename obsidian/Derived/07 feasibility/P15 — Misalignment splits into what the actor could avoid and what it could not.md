@@ -88,3 +88,4 @@ contexts (`NOTES.md`), which (v) answers: across contexts, the shared intensity 
 ## Used by
 - [[P27 — The best use of a departure budget|P27]] — The best use of a departure budget
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
+- [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain

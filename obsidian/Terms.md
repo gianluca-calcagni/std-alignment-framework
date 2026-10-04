@@ -97,6 +97,7 @@ worked out.
 | **shared misalignment** | [[P45 — Drift: what runs share, and what they do not\|P45]] | the misalignment of several runs judged against one intended behaviour | plain | — | A |
 | **reproducible difference** | [[P46 — What runs share between conditions, and what they do not\|P46]] | how differently the average of several runs acts in two conditions | plain: what every run would show | — | A |
 | **run-specific difference** | [[P46 — What runs share between conditions, and what they do not\|P46]] | the part of how differently runs act in two conditions that changes from run to run | plain | interaction of run and condition (analysis of variance) | A |
+| **most charitable principal** | [[P48 — Misalignment when the target is uncertain\|P48]] | among principals whose objective is any mix of given functions, the one who finds the least misalignment | plain: the most favourable reading of an uncertain target | the M-projection onto an exponential family; the reward most consistent with behaviour (inverse reinforcement learning) | A |
 
 ## 2. Correspondences not yet in the framework
 
