@@ -68,6 +68,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A registered statistic that the design's mixture inflates** | W3 pooled, within each prompt, 32 continuations of the reference and 32 of the tuned model, and registered the `R²` of the revealed objective on the reward over all 64. The two sets differ by 16.5 nats on the objective and also on the reward, so most of the registered `0.358` comes from that difference; within either model's own continuations it is `0.10` to `0.12`. The verdict (refuted) stands, but the registered number understates the refutation, and a model whose change were pure pursuit of something correlated with the reward across the two sets could have passed S1 | before registering a statistic on a sample that mixes sources, compute it on each source alone in the calibration, and register the one that answers the question |
 | **A tie-breaking order charged as departure** | W1's report broke ties in the proxy's score by one fixed random order, as `run.py` does for the gold curve, where it changes nothing in expectation. A divergence is convex, so a fixed order adds itself to the departure and to misalignment: on a synthetic prompt with a tied block near the top, `KL` at `n = 16` was `1.84` instead of `1.40` nats. Caught on re-reading the report's declaration ("it scores nothing else alike", which was also false), halfway through the third computation | compute a divergence on the behaviour averaged over its tie-breaking, which by symmetry is uniform within each tie; check it against a simulation of the selector |
 | **Saving the estimates, not the data behind them** | W4 saved, outside the repository, each context's estimates but not the per-draw log-probabilities and rewards, so an analysis needing no reweighting, how far one run's draws move along the other's revealed objective, needed a second run of 2.2 hours | save every per-draw value before aggregating; the template now asks for it |
+| **A specification with no named principal** | W3 and W4 declared as the target the reward the policy was trained on, the evaluator itself, while the machine-learning ontology's specification asks for a gold objective distinct from it; the executor declared it, for no principal in particular. What they measured is misalignment against the trainer's formal objective, and their texts said "misalignment" without saying whose. Caught by the PI | name the principal in the declaration; when the target is uncertain, declare the family of targets and report the interval it gives (§7) |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -379,6 +380,7 @@ models are hypotheses that [P3] and [P12] test.
 | H29 | **The executor's simulations test the executor as much as the framework.** C1 and C2 were designed, run and judged by the model family that wrote the predictions, and four of their seven predictions failed on the executor's own thresholds or design. A registration read by the PI, or by an outside reader, before it is pushed would catch some of this (rule (f)) | proposal to the PI |
 | H30 | **Saturation, not decline, and the shape is the finding.** In W1 the gold curve under best-of-`n` keeps the framework's initial slope up to `n = 16` and then saturates, with almost no fall; the literature's two numbers, `a` and `b`, hide that shape and misstate the slope. A report of overoptimization should give the curve's local slopes in `d` against the initial slope of [P13], not a fitted form. Whether a neural proxy gives the same shape is open | D: a candidate field for `STANDARD.md`'s evaluator row, not scheduled |
 | H31 | **Unconverged reinforcement learning changes more than it pursues.** In W3, the part of `log(π/π_ref)` along the reward has a slope near `1/β` (`4.27` against `5` at the starting KL coefficient), as [P4] says, yet within each model's own continuations the reward explains only a tenth of it. The rest may be the drift a noisy policy gradient accumulates, which the KL penalty slows but does not aim. If so, along one run the reward's share of the revealed objective, within the tuned model's own continuations, should rise towards 1 as the run converges; a share that stays low at convergence would mean the rest is not drift but a systematic pull, of the value estimate or the adaptive coefficient, which the framework would then have to name. Test: checkpoints of one run, or runs at several `β`, with their reward model, all public | open: needs public checkpoints. W4 (`ROADMAP.md`, step 1) asks the part two public runs can answer: whether the off-reward change recurs in another run |
+| H32 | **The most charitable principal.** When the principal's objective is known only to lie in the span of given functions, the least misalignment any such principal finds is the unexplained misalignment of [P44], attained by the principal whose objective is the named pursuit's exponent, and the largest is the departure. So an uncertain target turns misalignment into an interval, as an unobserved condition does in [P17]. Proof sketch: over the span, `inf_{c, t ≥ 0} KL(p̂‖tilt(q, t·c·Φ))` is the infimum over the whole exponential family, attained at the moment-matching tilt, which is the named pursuit ([P44](i)); one of `±F'` never beats the default, so [P5](iv) gives the departure | probed: `probes/diagnostics/probe_charitable.py` (exact to `10⁻¹⁵` on 200 instances, no random principal below it in 40,000); to be stated with a proof and checks if the PI agrees |
 
 ### 5.5 Process
 
@@ -467,4 +469,41 @@ derived in response are in `derived/diagnostics.md`.
 | degenerate cases in code | a reward that did not vary within a prompt; infinite intensities; a matched pursuit that underflowed | a rehearsal with the degenerate cases built in (rule 4); the core names each of them: [P5](iv), [P9], [D10] |
 | decisions never made | W3 pooled two models' outputs; S1's round threshold; best-of-`n` under ties; one intensity per prompt or one shared | the declaration of `STANDARD.md` in the registration (rule 1), which asks both of the last two; rules 3 and 5 |
 | one family of models designs, runs and judges | all of the above | no internal fix; an outside reader, on hold (Q27) |
+
+## 7. Whose target? After W4
+
+The PI asked whether W3 and W4 had a proper target for the principal. They had one for one principal and none for
+another.
+- **The trainer** declared, in code, a formal objective: the reward minus `β` times the KL from the reference. Its
+  optima, at every `β`, are the pursuit ray of the reward, which is the specification W3 and W4 used. Against it, their
+  misalignment is well defined: how far PPO's result is from anything its own objective could produce at convergence.
+  That is the fidelity of the optimizer, the bet of the framework, not alignment with what anyone wanted.
+- **The user**, someone who wants positive and readable reviews, declared nothing, and no gold stands in for them; the
+  machine-learning ontology's specification asks for one, and W1 had one. So W3's and W4's "`0.90` of the change is
+  misaligned" says that the change is mostly not what the training objective asks; it says nothing on whether the change
+  is good or bad for anyone.
+
+**What the framework can still say without the user's target.**
+1. *Nothing about alignment, with no target at all*: by [P1] every behaviour pursues its own revealed objective, so some
+   principal always finds it perfectly aligned.
+2. *Everything that needs no target*: the departure; whether one fixed objective explains the changes across contexts
+   ([P3]); drift and what runs share ([P45], [P46]). Most of W4 is of this kind: the named pursuit depends only on the
+   span of the functions named, not on which one is called the target, so S1 and S2, and the finding that the two runs
+   are 15 nats apart and nearly always tell themselves apart, hold for any principal.
+3. *An interval, when the target is uncertain but confined to a declared family* (H32): the least misalignment over the
+   family is [P44]'s unexplained part, the largest the departure. In W4, any principal whose objective combines the
+   reward, typicality (`log R`), the other run's reward and the other run's change finds A at least `9.46` (`9.24` to
+   `9.67`) nats misaligned of a `12.28`-nat departure, and B at least `6.94` of `10.77`: most of each change pursues
+   nothing in that family. Families with signs, such as "more positive is better", would narrow the upper end; [P36]
+   covers an order without a scale.
+4. *What survives the principal's indifference*: a declared resolution forgives what happens inside cells ([D4], [P7]),
+   and grouping never shows more misalignment ([C9]). Whether W4's unexplained change survives grouping by what a user
+   could see (sentiment, fluency, length, repetition) would tell style drift from visible change; it needs the per-draw
+   values W4 did not save.
+5. *Stand-in targets*: independent evaluators of what a user wants (another sentiment model, a fluency score from a
+   larger model, a toxicity classifier), each a declared target, or together a family for item 3.
+6. *Two principals at once*: the trainer and the user, with declared weights ([P42]), when both targets exist.
+
+For the confidence the PI wants (`ROADMAP.md`, row 4), tests should either have a declared gold, as W1 did, or declare a
+family of targets and register the interval.
 
