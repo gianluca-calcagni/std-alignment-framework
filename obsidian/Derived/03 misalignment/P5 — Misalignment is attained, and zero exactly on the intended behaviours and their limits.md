@@ -99,4 +99,5 @@ and the name "revealed intensity".
 - [[P43 — Misalignment at any intensity|P43]] — Misalignment at any intensity
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
 - [[C4 — Rescaling the objective is not misalignment|C4]] — Rescaling the objective is not misalignment

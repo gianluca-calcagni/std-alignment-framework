@@ -25,11 +25,11 @@ hold. Everything else waits unless it serves one of them.
 
 ## Where we are (2026-10-03)
 
-- The core is v11: five premises, eleven definitions, 48 propositions; 180 checks pass on both paths. Six results are
-  diagnostics (`derived/diagnostics.md`, Q28, Q30): misalignment at any intensity and across conditions at one
+- The core is v11: five premises, eleven definitions, 49 propositions; 181 checks pass on both paths. Seven results are
+  diagnostics (`derived/diagnostics.md`, Q28, Q30, Q31): misalignment at any intensity and across conditions at one
   intensity; what named objectives explain; drift between runs; what runs share between evaluation and use; the cost of
-  reweighting; and the interval of misalignment when the target is known only to lie in a family. Each follows from
-  earlier results; no premise or definition changed.
+  reweighting; the interval of misalignment when the target is known only to lie in a family; and outer and inner
+  misalignment, with their exact split. Each follows from earlier results; no premise or definition changed.
 - **Whose target** (`NOTES.md` §7, Q30): W3 and W4 measured the trainer's formal objective, not what any user wants, for
   which no gold exists. Every declaration now names its principal (`STANDARD.md`), and an uncertain target is declared
   as a family, whose interval [[P48 — Misalignment when the target is uncertain|P48]] gives.
@@ -104,3 +104,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-03 | retrospective of W1 and W3 (`NOTES.md` §6); five design rules for cases; five diagnostic results derived from the core, P43–P47 (Q28); W4 designed, its second run's provenance traced | 4 (W4); 5 (diagnostics) |
 | 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
 | 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [[P48 — Misalignment when the target is uncertain\|P48]], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |
+| 2026-10-04 | [[P49 — Outer and inner misalignment\|P49]], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |

@@ -20,6 +20,7 @@ that carry it.
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([[P40 — Attention: misalignment against ignoring the situation\|P40]]); tested in part: an endogenous default (`general/`) |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | done: misalignment over a family of objectives, an interval whose lower end the most charitable principal finds ([[P48 — Misalignment when the target is uncertain\|P48]]); now: identification across environments |
+| Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([[P49 — Outer and inner misalignment\|P49]]); partly: reward tampering (`IMPORT.md`, section 8) |
 | Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested on unseen data: the best-of-`n` form against [[P13 — What the start of a change gains\|P13]] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
@@ -112,6 +113,25 @@ that carry it.
   ([[D8 — Conditions, responses and views|D8]]) or interventions ([[D6 — Intervention and pass-through|D6]]); the invariance classes of rewards that leave optimal behaviour unchanged.
 - *What it could take from us.* A measure of how much an unidentified part of the reward matters: its effect on
   misalignment and stakes.
+
+## Outer and inner alignment
+
+- *Sources.* Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), "Risks from learned optimization in advanced
+  machine learning systems", arXiv:1906.01820 *(to verify: recorded in v7.10, not checked from here)*, who name outer
+  alignment, between the principal's target and the training objective, and inner alignment, between the training
+  objective and what the trained system pursues.
+- *Shared.* A chain of two links: target, evaluator, actor. In the core, the target is the principal's ([[D3 — Specification, declaration and misalignment|D3]];
+  `STANDARD.md`, the field Principal), the evaluator the trainer's ([[D10 — Evaluator, regression and residual|D10]]), and the actor's behaviour is judged against
+  both.
+- *Different.* Hubinger et al. define inner alignment through the objective a learned optimizer represents; the core
+  judges behaviour only ([[A1 — Behaviour suffices|A1]]), so inner misalignment is how far behaviour is from every optimum of the training
+  objective, whatever the system represents.
+- *Import, done* ([[P49 — Outer and inner misalignment|P49]]). Outer misalignment is the principal's misalignment of the trainer's own optimum, a function of
+  intensity, zero exactly when the evaluator is the target rescaled. Inner misalignment is the trainer's misalignment of
+  the actor. The two share one part exactly, the change that pursues neither target nor evaluator. Case W1 had a gold
+  target and so an outer side; W3 and W4 measured inner misalignment only.
+- *Import, later.* Reward tampering, where the actor changes the evaluator rather than outcomes (`IMPORT.md`, section
+  8).
 
 ## Goodhart's law and reward hacking
 

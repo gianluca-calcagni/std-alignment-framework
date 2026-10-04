@@ -85,3 +85,4 @@ part of a change unexplained.
 
 ## Used by
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment

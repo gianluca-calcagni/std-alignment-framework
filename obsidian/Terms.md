@@ -98,6 +98,9 @@ worked out.
 | **reproducible difference** | [[P46 — What runs share between conditions, and what they do not\|P46]] | how differently the average of several runs acts in two conditions | plain: what every run would show | — | A |
 | **run-specific difference** | [[P46 — What runs share between conditions, and what they do not\|P46]] | the part of how differently runs act in two conditions that changes from run to run | plain | interaction of run and condition (analysis of variance) | A |
 | **most charitable principal** | [[P48 — Misalignment when the target is uncertain\|P48]] | among principals whose objective is any mix of given functions, the one who finds the least misalignment | plain: the most favourable reading of an uncertain target | the M-projection onto an exponential family; the reward most consistent with behaviour (inverse reinforcement learning) | A |
+| **outer misalignment** | [[P49 — Outer and inner misalignment\|P49]] | how far, for the principal, the optimum of training on the evaluator is from what the principal wants | standard in AI safety: the fault of the specification | outer alignment (Hubinger et al. 2019, to verify); the specification gap of the archive's subframework | A |
+| **inner misalignment** | [[P49 — Outer and inner misalignment\|P49]] | how far the trained actor is from anything the training objective could produce | standard in AI safety: the fault of the optimizer | inner alignment (Hubinger et al. 2019, to verify); optimization fidelity | A |
+| **strict inner misalignment** | [[P49 — Outer and inner misalignment\|P49]] | the part of the actor's change that pursues neither the target nor the evaluator, shared by principal and trainer | plain: the inner fault no principal of that kind forgives | — | A |
 
 ## 2. Correspondences not yet in the framework
 

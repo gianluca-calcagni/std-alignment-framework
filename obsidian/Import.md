@@ -270,3 +270,22 @@ of low value or used nowhere yet; the first candidates to drop if `derived/` sho
 Nothing imported conflicts with the core. In [[P29 — The width is the exact worst case|P29]]–[[P34 — Choosing by the evaluator from a common candidate set|P34]] the principal's objective is now called the target, as
 [[D10 — Evaluator, regression and residual|D10]] calls it in the evaluator's section. Symbols are local to each item: `φ` is the pass-through in [[D6 — Intervention and pass-through|D6]] and [[P37 — A strong incentive masks the actor, and can fake alignment|P37]],
 but the result map in [[P32 — Regulation costs departure|P32]] and the cost in [[P38 — Any convex cost|P38]]; each item defines it before use.
+
+## 8. The five gaps of the Alignment Subframework
+
+The archive's source of v5–v6, `archive/alignment_subframework/02_decomposition.md`, split alignment into five gaps. Its
+frame, "alignment holds iff all five gaps close", was retracted in v7 as circular (R001), and so was "three of the five
+gaps cannot be closed in principle" (R003). The gaps are kept as channels through which misalignment arises, each mapped
+to what the core now measures (Q31).
+
+| Gap | Known as | Verdict | Where |
+|---|---|---|---|
+| 1 Specification | outer alignment; Goodhart | in core | outer misalignment ([[P49 — Outer and inner misalignment\|P49]](i)); the regression and overoptimization ([[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]], [[P25 — The target's curve turns no more often than the regression\|P25]], [[P26 — The regression on bins governs at small intensity\|P26]]); worst cases ([[P29 — The width is the exact worst case\|P29]], [[P30 — No separable bound on the worst case\|P30]]); an uncertain target ([[P48 — Misalignment when the target is uncertain\|P48]]) |
+| 2 Transmission: observability, retention | no standard name | in core | the principal's and the actor's resolutions ([[D4 — Resolution\|D4]], [[P7 — Indifference forgives exactly what happens inside cells\|P7]], [[P8 — An actor that cannot tell outcomes apart\|P8]]); views ([[D8 — Conditions, responses and views\|D8]], [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]]); what the actor's limits make unavoidable ([[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]]) |
+| 3 Grounding | wireheading; reward tampering | partly; needs | a tampered measurement as an outcome the evaluator scores high and the target low: evaluator error at the top ([[P20 — Where overoptimization starts, and how it ends\|P20]], [[P29 — The width is the exact worst case\|P29]], [[P37 — A strong incentive masks the actor, and can fake alignment\|P37]](iii)). An actor that changes the evaluator itself is not covered: [[D10 — Evaluator, regression and residual\|D10]] fixes the evaluator as a function of outcomes |
+| 4 Persistence | goal misgeneralization | in core | conditions and views: what an unobserved condition can hide ([[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]]), the evaluation gap ([[P24 — The evaluation gap\|P24]]), what runs share between evaluation and use ([[P46 — What runs share between conditions, and what they do not\|P46]]) |
+| 5 Verification | eliciting latent knowledge | drop | outside by [[A1 — Behaviour suffices\|A1]]: the core judges behaviour, not the actor's internal maps; it bounds what behaviour can hide ([[P17 — What an unobserved condition can hide\|P17]]) |
+
+Inner alignment spans gaps 3 and 4, as the subframework said; [[P49 — Outer and inner misalignment|P49]](ii) splits the principal's misalignment exactly into
+the part shared with the trainer's, the change that pursues neither target nor evaluator, and the part within their
+span, which v7.10's H12 had conjectured the chain rule of KL would give.

@@ -54,4 +54,5 @@ is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) i
 - [[P9 — What is at stake|P9]] — What is at stake
 - [[P10 — Sensitivity to the specification|P10]] — Sensitivity to the specification
 - [[P33 — Error bounds for a known evaluator|P33]] — Error bounds for a known evaluator
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats

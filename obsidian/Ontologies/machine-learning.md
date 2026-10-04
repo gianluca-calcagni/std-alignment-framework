@@ -105,7 +105,8 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   what the rest of the change is: not a sharpening of the reference, and partly a change that a second public PPO run
   from the same reference shares, but mostly specific to the run or its procedure. W3 and W4 had no gold, so their
   specification was the trainer's own reward: where no gold exists, a declared family of targets gives an interval
-  of misalignment instead ([[P48 — Misalignment when the target is uncertain|P48]]).
+  of misalignment instead ([[P48 — Misalignment when the target is uncertain|P48]]). In the terms of [[P49 — Outer and inner misalignment|P49]], W1, with a gold, could measure outer misalignment, and W3 and
+  W4 measured inner misalignment only.
 - **Reading** with [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]], [[P13 — What the start of a change gains|P13]]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can

@@ -56,6 +56,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Intensity | [P43] | when several conditions are judged at one intensity, the excess over their own misalignments, and how far their revealed intensities differ |
 | Named and unexplained misalignment | [P44] | for the declared named objectives, the split of misalignment into named and unexplained parts, in nats, and each objective's increment in the declared order |
 | Uncertain target | [P48] | for a declared family of targets, the interval of misalignment over it: the least, found by the most charitable principal, and the departure |
+| Outer and inner misalignment | [P49] | when both a principal's target and a trainer's evaluator are declared: the outer misalignment at the training's intensity, the inner misalignment, and the principal's misalignment split into its strict inner part and the part within the span of target and evaluator |
 | Drift | [P45], [P46] | for several runs, the shared misalignment split into the misalignment of their average and the drift, with the correction for few runs; for two conditions, the reproducible and run-specific differences, and which conditions the average of the runs can tell apart |
 | Avoidable and unavoidable misalignment | [P15] | the split, when the feasible set is linear; the inequality when it is convex; otherwise the lower bound `inf_{p∈𝓕} M(p)` |
 | Resolution | [P7], [P8] | what the declared indifference forgave, and what the actor's resolution makes unavoidable |

@@ -79,5 +79,6 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 - [[P28 — The width of a departure budget|P28]] — The width of a departure budget
 - [[P37 — A strong incentive masks the actor, and can fake alignment|P37]] — A strong incentive masks the actor, and can fake alignment
 - [[P42 — Several principals: gridlock, and the pooled pursuit|P42]] — Several principals: gridlock, and the pooled pursuit
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats
 - [[C9 — Grouping outcomes never shows more misalignment|C9]] — Grouping outcomes never shows more misalignment

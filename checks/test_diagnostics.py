@@ -351,3 +351,45 @@ def test_an_uncertain_target_gives_an_interval():
         for d in r.normal(0, 1, (10, k)):
             assert abs(misalignment(pq, q, d @ Phi)[0] - kl(pq, q)) <= 1e-9 * (1 + kl(pq, q))
     assert positive >= 80
+
+
+def outer(q, F, Fh, t):
+    """P49(i): the principal's misalignment of the trainer's optimum at intensity t."""
+    return misalignment(tilt(q, t * Fh), q, F)[0]
+
+
+def inner_split(p, q, F, Fh):
+    """P49(ii): the strict inner misalignment U, and the parts left to principal and trainer, from the one tilt of q by
+    a combination of F and Fh with p's averages of both."""
+    pt = most_charitable(p, q, np.vstack([F, Fh]))[0]
+    return kl(p, pt), misalignment(pt, q, F)[0], misalignment(pt, q, Fh)[0]
+
+
+def test_outer_and_inner_misalignment():
+    """P49: outer misalignment is 0 at every intensity for a positively rescaled target and positive otherwise, with
+    the small-intensity limit of P11; the principal's and the trainer's misalignments share the strict inner part U
+    exactly, which no principal in the span undercuts; a perfect optimizer of the training objective is all outer, and
+    a rescaled target makes all misalignment inner."""
+    r = rng(4901); positive = 0
+    for _ in range(120):
+        n = int(r.integers(5, 10)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        Fh = 0.6 * F + 0.8 * r.normal(0, 1, n); a, c = float(r.uniform(0.2, 3)), float(r.normal())
+        for t in (0.3, 1.0, 4.0):
+            assert outer(q, F, a * F + c, t) <= EXACT                                  # a rescaled target
+            assert outer(q, F, Fh, t) > 1e-8                                           # any other evaluator
+        cos = cov(q, Fh, F) / np.sqrt(var(q, Fh) * var(q, F))
+        target = 1 - cos ** 2 if cos >= 0 else 1.0
+        e3, e4 = (abs(outer(q, F, Fh, t) / kl(tilt(q, t * Fh), q) - target) for t in (1e-3, 1e-4))
+        assert e4 <= 2e-3 and (e4 <= 0.5 * e3 + 1e-6 or cos < 0)                    # converging as t shrinks
+        p = simplex_interior(r, n)
+        U, in_P, in_T = inner_split(p, q, F, Fh); MP, MT = misalignment(p, q, F)[0], misalignment(p, q, Fh)[0]
+        assert abs(MP - (U + in_P)) <= 1e-9 * (1 + MP) and abs(MT - (U + in_T)) <= 1e-9 * (1 + MT)
+        positive += U > 1e-3
+        for d in r.normal(0, 1, (20, 2)):                                              # no principal in the span below U
+            assert misalignment(p, q, d[0] * F + d[1] * Fh)[0] >= U - 1e-9
+        t = float(r.uniform(0.2, 3)); pe = tilt(q, t * Fh)                             # a perfect optimizer
+        U_e, _, _ = inner_split(pe, q, F, Fh)
+        assert U_e <= 1e-10 and misalignment(pe, q, Fh)[0] <= EXACT
+        assert abs(misalignment(pe, q, F)[0] - outer(q, F, Fh, t)) <= EXACT
+        assert abs(misalignment(p, q, a * F + c)[0] - MP) <= 1e-9 * (1 + MP)          # all inner when Fh rescales F
+    assert positive >= 100

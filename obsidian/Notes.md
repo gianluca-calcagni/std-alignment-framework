@@ -189,6 +189,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q28 | after the retrospective of W1 and W3 (§6): every recommendation approved, that is, the retrospective recorded, the five design rules for cases (`cases/README.md`), and a registered follow-up to W3. And: derive more tools from the core for targeted diagnostics, such as telling drift apart from feigned alignment, even though the failures were not in the mathematics. New results in `derived/` serve that, as diagnostics; the freeze otherwise stands (no change of scope, premise or definition) | PI | `cases/README.md`, `derived/`, `NOTES.md` §6 |
 | Q29 | test W4; and how can future designs include the lessons by default? Applied: a lesson becomes a default only when a template asks for it, a tool does it, or a check refuses work without it. So: `cases/TEMPLATE.md`; lint R15, which holds every registration made after the design rules to the template; `tools/casekit.py`, the fixes of W1's and W3's failures as tested helpers; and a map in `cases/README.md` from each lesson to what holds it, including the one nothing holds yet. W4 is the first case under them, of a new kind, diagnostic | PI; executor (the mechanisms) | `cases/TEMPLATE.md`, `tools/lint.py`, `tools/casekit.py`, `cases/README.md`, `cases/w4-two-runs/` |
 | Q30 | after the question "whose target?" (§7): approved. The interval of misalignment over a family of targets becomes a result, [[P48 — Misalignment when the target is uncertain\|P48]]; every declaration names its principal, and a declaration whose target is uncertain declares the family and registers the interval (`STANDARD.md`, the field Principal; `cases/TEMPLATE.md`; lint R15, from which W4 is exempt for that field only, having been registered before it) | PI; executor (the statement and its wiring) | `derived/diagnostics.md`, `STANDARD.md`, `cases/TEMPLATE.md`, `tools/lint.py` |
+| Q31 | how does the framework now relate to outer and inner alignment, Goodhart and the archive's five gaps? Outer alignment needed a definition the tools now give. Applied: [[P49 — Outer and inner misalignment\|P49]], outer misalignment as a function of intensity, inner misalignment, and their exact split; the five gaps mapped in `IMPORT.md`, section 8, where grounding (reward tampering) is only partly covered. Next, by the PI's request: a brainstorm on grounding, its definition and its diagnosis | PI; executor (the statement) | `derived/diagnostics.md`, `IMPORT.md`, `RELATED.md`, `STANDARD.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -203,6 +204,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | D7 | industrial organization | the German price archive, 2016 to 2018, with the station list; Assad et al. (2024) and its replication package; their method paper (2022) | W2 (`ROADMAP.md`) | the archive needs credentials from Tankerkönig (`creativecommons.tankerkoenig.de`); the package is `doi.org/10.7910/DVN/X4MSWW`; the papers are at `discovery.ucl.ac.uk/10187765/1/draft_v15_JPE_main.pdf` and `discovery.ucl.ac.uk/10187769/1/ACEX_PP_2022.pdf`. Not read |
 | D8 | deceptive alignment (H27) | Needham et al. (2025), and their evaluation-awareness dataset | a world test of [[P17 — What an unobserved condition can hide\|P17]]'s reach | arXiv 2505.23836; `huggingface.co/datasets/jjpn2/eval_awareness`. Not read |
 | D9 | experimental economics | Cason, Friedman and Hopkins (2014), and its data, if published with it | the Rock–Paper–Scissors arm of the ontology's prediction | `doi.org/10.1093/restud/rdt023`. Low priority: the potential-game arm needs new sessions in a laboratory |
+| D10 | outer and inner alignment ([[P49 — Outer and inner misalignment\|P49]]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | to verify the citation before it enters `REFERENCES.md` | recorded in v7.10; arXiv is not reachable from this environment |
 
 Every test is pre-registered and pushed before any computation (README rules).
 
@@ -491,12 +493,12 @@ another.
    ([[P3 — A fixed objective is visible in the changes of behaviour|P3]]); drift and what runs share ([[P45 — Drift: what runs share, and what they do not|P45]], [[P46 — What runs share between conditions, and what they do not|P46]]). Most of W4 is of this kind: the named pursuit depends only on the
    span of the functions named, not on which one is called the target, so S1 and S2, and the finding that the two runs
    are 15 nats apart and nearly always tell themselves apart, hold for any principal.
-3. *An interval, when the target is uncertain but confined to a declared family* (H32, now [[P48 — Misalignment when the target is uncertain|P48]]): the least
-   misalignment over the family is [[P44 — What named objectives explain|P44]]'s unexplained part, the largest the departure. In W4, any principal whose
-   objective combines the reward, typicality (`log R`), the other run's reward and the other run's change finds A at
-   least `9.46` (`9.24` to `9.67`) nats misaligned of a `12.28`-nat departure, and B at least `6.94` of `10.77`: most of
-   each change pursues nothing in that family. Families with signs, such as "more positive is better", would narrow the
-   upper end; [[P36 — Ordinal objectives|P36]] covers an order without a scale.
+3. *An interval, when the target is uncertain but confined to a declared family* (H32, now [[P48 — Misalignment when the target is uncertain|P48]]); and outer and inner
+   misalignment, with their exact split ([[P49 — Outer and inner misalignment|P49]], Q31): the least misalignment over the family is [[P44 — What named objectives explain|P44]]'s unexplained
+   part, the largest the departure. In W4, any principal whose objective combines the reward, typicality (`log R`), the
+   other run's reward and the other run's change finds A at least `9.46` (`9.24` to `9.67`) nats misaligned of a
+   `12.28`-nat departure, and B at least `6.94` of `10.77`: most of each change pursues nothing in that family. Families
+   with signs, such as "more positive is better", would narrow the upper end; [[P36 — Ordinal objectives|P36]] covers an order without a scale.
 4. *What survives the principal's indifference*: a declared resolution forgives what happens inside cells ([[D4 — Resolution|D4]], [[P7 — Indifference forgives exactly what happens inside cells|P7]]),
    and grouping never shows more misalignment ([[C9 — Grouping outcomes never shows more misalignment|C9]]). Whether W4's unexplained change survives grouping by what a user
    could see (sentiment, fluency, length, repetition) would tell style drift from visible change; it needs the per-draw
