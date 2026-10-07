@@ -53,3 +53,6 @@ v7.10: ROADMAP §6 I1 and NOTES §9 (the dynamic angle, `D_⊥ ≈ sin²θ·KL`,
 
 ## Used by
 - [[P13 — What the start of a change gains|P13]] — What the start of a change gains
+- [[P44 — What named objectives explain|P44]] — What named objectives explain
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world

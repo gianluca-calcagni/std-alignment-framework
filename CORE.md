@@ -1,6 +1,6 @@
 # The core
 
-> **Status: v10, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
+> **Status: v11, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
 > framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
 > carries a formal statement and a plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format
 > is in `README.md`.
@@ -37,26 +37,34 @@ The framework in ten steps:
 10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
     against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
-What the core rules out, the statements that data could contradict, is collected in `derived/forbids.md`.
+Specifications defined by a structure rather than by an objective need no definition of their own: several actors
+meant to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
+several principals with declared weights (`derived/structure.md`). What the core rules out, the statements that data
+could contradict, is collected in `derived/forbids.md`.
 
-**In scope.** One principal and one actor; finitely many outcomes; behaviour in each of finitely many conditions; any
-declared set of acceptable behaviours, with closed forms for "pursue `F`"; what the actor cannot distinguish, cannot do,
-or cannot perceive; what observation identifies, including misalignment that an actor shows only when it is not
-observed; the evaluator an actor pursues, and what pursuing it does to the principal's objective; and what independent
-samples reveal.
+**In scope.** One principal and one actor, where the actor may be a group acting on joint outcomes ([P39]) and the
+principal several principals with declared weights ([P42]); finitely many outcomes; behaviour in each of finitely many
+conditions, which may be the measurement rules the actor faces; any declared set of acceptable behaviours, with closed
+forms for "pursue `F`" and for the structural specifications of `derived/structure.md`; what the actor cannot
+distinguish, cannot do, or cannot perceive; what observation identifies, including misalignment that an actor shows
+only when it is not observed; the evaluator an actor pursues, and what pursuing it does to the principal's objective;
+and what independent samples reveal, where one sample may be a whole episode of dependent decisions.
 
 **Out of scope**, stated so that no result is read as covering it:
 - *Internal states.* The core judges behaviour ([A1]). Two actors that behave alike in every condition are the same
   actor for the core, whatever their internal goals. An actor that behaves differently when it is not observed is in
   scope: its misalignment in unobserved conditions is a quantity with an identified set ([D9]).
-- *Several actors*, and actors that respond to the measurement itself in ways not captured by a stated view and fixed
-  interventions.
-- *Aggregating several principals.* The core takes one specification at a time; unions and intersections of intended
-  sets are specifications too, but weighing principals against each other is not defined.
-- *Continuous outcomes.* Deferred. The results are expected to carry over with integrability conditions; none is
-  claimed.
-- *Dependent samples.* Samples are independent draws ([D11]); successive decisions that depend on each other are not
-  covered yet.
+- *Why a group behaves as it does.* A group is one actor on joint outcomes, and its coordination is measured ([P39]);
+  how it reaches its joint behaviour, its equilibria and which of them it selects, is not modelled. An actor that
+  responds to the measurement is in scope when the rules it may face are conditions ([D8]); a principal that changes its
+  rule in response to the actor without having declared how breaks [A5].
+- *Choosing the weights of several principals.* Several principals with declared weights are in scope ([P42]); deriving
+  the weights, by aggregating preferences, is not.
+- *Outcomes that are not finite.* Drafted separately in `CORE-GENERAL.md`, with its results, expected and probed, in
+  `general/`. Nothing there is claimed here.
+- *One long record of dependent decisions.* Samples are independent draws ([D11]). Decisions that depend on each other
+  within an episode are in scope, the episode being one outcome; one long record without episodes needs rates on
+  trajectories, which are not finite (`CORE-GENERAL.md`).
 - *Which objective is right.* The principal declares it; the core does not choose it.
 - *Explanations beyond the evaluator.* Why an actor pursues the evaluator it does, and by what mechanism, is not
   measured. The evaluator itself is in scope, as a hypothesis about behaviour that samples can test ([D10], [D11]).

@@ -1,0 +1,59 @@
+{
+ "registered": {
+  "S0": {
+   "worst_abs_difference": 1.1368683772161603e-13,
+   "held": true
+  },
+  "S1": {
+   "R2_r": 0.35831352825077745,
+   "interval_95": [
+    0.3264629374643461,
+    0.3898853233198108
+   ],
+   "verdict": "refuted"
+  },
+  "S2": {
+   "R2_r": 0.35831352825077745,
+   "R2_p": 0.29927020947305927,
+   "difference": 0.05904331877771818,
+   "interval_95": [
+    0.05281843337732528,
+    0.0654041188892555
+   ],
+   "verdict": "held"
+  }
+ },
+ "reported": {
+  "R2_p_interval_95": [
+   0.2651331751052408,
+   0.3321619122258307
+  ],
+  "R2_logodds": 0.3583427684902344,
+  "shared_slope": 4.267956525726801,
+  "R2_shared_slope": 0.2933696848934514,
+  "slope_quartiles": [
+   2.4226550025613536,
+   3.762999143812112,
+   5.501541124422738
+  ],
+  "contexts_where_the_regressor_does_not_vary": {
+   "r": 1,
+   "p": 1,
+   "logodds": 1
+  },
+  "mean_reward_reference": 0.2511390477047098,
+  "mean_reward_policy": 1.4649418167929495,
+  "departure_mean": 7.421329870929526,
+  "departure_quartiles": [
+   4.612403211978115,
+   6.99242854006293,
+   9.843425649859704
+  ],
+  "t_star_median_finite": 1.2931700771813486,
+  "t_star_share_infinite": 0.05333333333333334,
+  "pursuit_part_mean_where_estimable": 0.7449141632297845,
+  "departure_mean_where_estimable": 7.1561696321336035,
+  "contexts_estimable": 284,
+  "contexts": 300
+ }
+}

@@ -15,20 +15,24 @@ that carry it.
 
 | Theory | Shares with us | The main difference | Import |
 |---|---|---|---|
-| KL control and control as inference | pursuit, net value, the maximum-entropy policy | it optimizes; we measure | later: soft dynamic programming for sequential feasibility |
-| Information geometry | the Fisher metric, I-projections, Pythagorean identities | no principal, no specification | now: the geometry of two objectives (the alignment plane) |
+| KL control and control as inference | pursuit, net value, the maximum-entropy policy | it optimizes; we measure | tested on unseen data: is a PPO-tuned model the pursuit of its reward (W3, in part); later: soft dynamic programming for sequential feasibility |
+| Information geometry | the Fisher metric, I-projections, Pythagorean identities | no principal, no specification | done: total correlation and the Jensen–Shannon divergence as misalignments ([P39], [P41]); nested I-projections split misalignment into named and unexplained parts ([P44]); now: the alignment plane, exact for a Gaussian default (`general/`) |
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
-| Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | later: an endogenous default |
-| Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | now: identification across environments |
-| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([D10], [P18]–[P20]); later: early stopping compared, hackability over a feasible set |
+| Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([P40]); tested in part: an endogenous default (`general/`) |
+| Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | done: misalignment over a family of objectives, an interval whose lower end the most charitable principal finds ([P48]); now: identification across environments |
+| Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([P49]) |
+| Reward tampering and wireheading | an evaluator computed from a measurement the actor can influence | causal incentives of agent designs, not a measure of behaviour | done: tampering as a divergence from a declared honest channel, split exactly from the change of the world; its bounds from signals, audits and re-measurements ([P50], [P51]); later: designs that remove the incentive, as interventions on the channel |
+| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([D10], [P18]–[P20]); tested on unseen data: the best-of-`n` form against [P13] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
-| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([D11], [P21]–[P23]); later: Stein's exponent, the boundary case |
-| Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | later: audit protocols |
+| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([D11], [P21]–[P23]); the cost of reweighting ([P47]); later: Stein's exponent, the boundary case |
+| Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | done: across runs, differences between evaluation and use split into reproducible and run-specific parts ([P46]); later: audit protocols |
 | Distribution shift | bounds across conditions | prediction error, not misalignment | later: divergence-based transfer bounds |
 | Active inference | a KL from predicted to preferred outcomes | a process theory of brains | never, beyond the correspondence |
-| Formal specification | specifications as sets, fixed in advance | deterministic traces | later: quantitative semantics |
-| Social choice | several principals | aggregation of preferences | never, while several principals are out of scope |
+| Formal specification | specifications as sets, fixed in advance | deterministic traces | tested: a robustness degree that orders as misalignment does (`general/`); later: quantitative semantics |
+| Learning in games and algorithmic collusion | several actors, potential games, learning dynamics | equilibria and their selection | done: a group as one actor ([P39]), reversible learning in potential games ([P41], Notes) |
+| Network theory of irreversible processes | entropy production, cycle fluxes and affinities | thermodynamics of Markov chains, no principal | done: entropy production bounds the Jensen–Shannon divergence ([P41]) |
+| Social choice | several principals | aggregation of preferences | never for the weights; several principals with declared weights are in scope ([P42]) |
 | Metrology and reporting standards | a standard for reports | not about alignment | now: how to report uncertainty |
 
 ## KL control and control as inference
@@ -39,6 +43,11 @@ that carry it.
   behaviour in a random environment ([P15], Notes).
 - *Different.* These theories compute optimal behaviour. We judge actual behaviour against declared behaviour, and
   report stakes and identification.
+- *Tested on unseen data* (case W3, `cases/w3-ppo-pursuit/`): whether a policy tuned by PPO with a KL penalty, a public
+  GPT-2 tuned on a sentiment reward by von Werra et al.'s library [@vonwerra2020], is the KL-regularized optimum that
+  these theories compute. In part: the change follows the reward in the reward's own scale, with a slope near `1/β`, but
+  within prompts the reward explains only a third of the change, and about a tenth within each model's own outputs. The
+  optimum is what a run aims at, not what it delivers; the framework measures the gap.
 - *Import, later.* Soft dynamic programming, to state [P15]'s sequential case as an item of its own.
 - *What it could take from us.* The split of the KL "budget" into pursuit and misalignment ([P6]), and of misalignment
   into avoidable and unavoidable parts ([P15]).
@@ -47,10 +56,19 @@ that carry it.
 
 - *Sources.* Čencov [@cencov1982]; Campbell [@campbell1986]; Csiszár [@csiszar1975]; Amari's monographs *(to verify)*.
 - *Shared.* The Fisher metric and its uniqueness ([A2], [P2]); I-projections and the Pythagorean theorem ([P6], [P15]);
-  the second-order expansion of KL ([P11], [P13]).
+  the second-order expansion of KL ([P11], [P13]); total correlation, the misalignment of several actors against
+  independent pursuit ([P39]); the Jensen–Shannon divergence, the misalignment of a record of transitions against
+  reversibility, where the nearest reversible record is the midpoint of the record and its reversal ([P41]).
 - *Different.* No principal and no specification: the geometry is the same, the question is not.
+- *Import, done.* Total correlation ([P39]) and the Jensen–Shannon divergence ([P41]); the bound of the latter by half
+  the entropy production is Jeffreys' divergence bound. Probe B1 found the midpoint to be the nearest reversible record
+  before [P41] proved it.
 - *Import, now.* The dual (mixture and exponential) flat structures, for the two-parameter family spanned by a target
-  and an evaluator through the default (`NOTES.md` §5, H6).
+  and an evaluator through the default (`NOTES.md` §5, H6). For a Gaussian default and linear objectives the plane is
+  exact: the departure splits like a right triangle, `cos²θ` into the target and `sin²θ` into misalignment, at every
+  intensity (probe B5, `general/transfer.md`). With other defaults the law is local only, and B5's registered
+  exponential case failed as posed, at an intensity where pursuit does not exist. Whether [P41](iv) is the mixture
+  projection of the information geometry of Markov chains has not been searched for.
 - *What it could take from us.* An interpretation of its projections as value lost, avoidable and unavoidable.
 
 ## The Price equation and selection theory
@@ -74,8 +92,13 @@ that carry it.
   McKay derive the multinomial logit from a cost of information, an independent route to the KL cost of [P14].
 - *Different.* In rational inattention the default (the prior over choices) is chosen optimally and the cost is a
   mutual information; here the default is declared ([A5]).
-- *Import, later.* An endogenous default, as a derived case: when the default is itself optimal, which quantities
-  change?
+- *Import, done.* The information cost: misalignment against ignoring the situation is the mutual information between
+  the condition and the response, and the average response is the nearest default to all conditions at once ([P40]).
+- *Import, tested in part.* An endogenous default (probes B3, B3b; `general/derived-spaces.md`). On a continuum, the
+  optimized default is discrete: for a state uniform on `[0, 1]` and squared loss, one atom until the precision `β`
+  reaches `1/(2·Var) = 6`, where it splits, and between `√(β/6)` and `2·√(β/6)` atoms after that (B3b, held). B3's
+  registered atom counts failed (3, 6 and 11 against 2.2, 4.1 and 7.1 ± 1), and its dimension slope did too, from the
+  algorithm's slow convergence; both failures are recorded. Not claimed until proved.
 - *What it could take from us.* A measure of how far observed choices are from a declared intention, with its stakes.
 
 ## Inverse reinforcement learning and reward identifiability
@@ -92,12 +115,55 @@ that carry it.
 - *What it could take from us.* A measure of how much an unidentified part of the reward matters: its effect on
   misalignment and stakes.
 
+## Outer and inner alignment
+
+- *Sources.* Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), "Risks from learned optimization in advanced
+  machine learning systems", arXiv:1906.01820 *(to verify: recorded in v7.10, not checked from here)*, who name outer
+  alignment, between the principal's target and the training objective, and inner alignment, between the training
+  objective and what the trained system pursues.
+- *Shared.* A chain of two links: target, evaluator, actor. In the core, the target is the principal's ([D3];
+  `STANDARD.md`, the field Principal), the evaluator the trainer's ([D10]), and the actor's behaviour is judged against
+  both.
+- *Different.* Hubinger et al. define inner alignment through the objective a learned optimizer represents; the core
+  judges behaviour only ([A1]), so inner misalignment is how far behaviour is from every optimum of the training
+  objective, whatever the system represents.
+- *Import, done* ([P49]). Outer misalignment is the principal's misalignment of the trainer's own optimum, a function of
+  intensity, zero exactly when the evaluator is the target rescaled. Inner misalignment is the trainer's misalignment of
+  the actor. The two share one part exactly, the change that pursues neither target nor evaluator. Case W1 had a gold
+  target and so an outer side; W3 and W4 measured inner misalignment only.
+- *Import, done.* Reward tampering, where the actor changes the measurement rather than the world: the next section.
+
+## Reward tampering and wireheading
+
+- *Sources.* Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), reinforcement
+  learning with a corrupted reward channel, with a no-free-lunch result for learning the true reward from a corrupted
+  one and a remedy that checks rewards across several sources; Everitt, Hutter, Kumar and Krakovna (2021), reward
+  tampering analysed with causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, whose
+  tomato-watering environment lets the agent tamper with its observation. All *(to verify: from memory, `NOTES.md` §3.2,
+  D11)*.
+- *Shared.* A true state and an observed reward or signal that the agent may corrupt; tampering as the gap between them;
+  checking one source of reward against another.
+- *Different.* These works ask which agent designs have an incentive to tamper, through the structure of causal
+  diagrams, and whether a learner can recover the true reward. The core measures behaviour ([A1]): tampering is how far
+  the actor's measurements depart from a declared honest channel, in nats, whatever the agent's design or incentives.
+- *Import, done* ([P50], [P51]). With the measurement part of the outcome, the departure from the default splits exactly
+  into the change of the world and the tampering; a target on the world charges all of the tampering as misalignment;
+  and the optimum of training on a measured signal tampers at every intensity, with a share at the start equal to the
+  share of the evaluator's variance that is noise of the measurement. From signals alone, tampering is bounded below by
+  an attained minimum and never ruled out ([P51](ii)), the principal's side of the no-free-lunch result; an audit
+  through a channel the actor cannot influence raises the lower bound, and identifies tampering when it is exact, as the
+  cross-checking of several sources does.
+- *Import, later.* Designs that remove the incentive to tamper, read as interventions ([D6]) on what the actor can
+  influence, and their cost in the net value of [P50](iv).
+- *What it could take from us.* A measure of tampering from behaviour, with its identified set from signals and the gain
+  of each audit, in one currency with outer and inner misalignment ([P49]).
+
 ## Goodhart's law and reward hacking
 
-- *Sources.* Gao et al. [@gao2023]; Skalse et al. [@skalse2022]; Karwowski et al. [@karwowski2024]; Laidlaw et al.
-  [@laidlaw2025], who define a proxy by its correlation with the target under a reference policy and propose `χ²`
-  regularization of occupancy measures, the `χ²` row of [P31] with the correlation of [P13] (unlike KL, a `χ²` cost can
-  rule outcomes out at the optimum: [P38](ii)); Manheim and
+- *Sources.* Gao et al. [@gao2023]; Coste et al. [@coste2024], whose released answers W1 used; Skalse et al.
+  [@skalse2022]; Karwowski et al. [@karwowski2024]; Laidlaw et al. [@laidlaw2025], who define a proxy by its correlation
+  with the target under a reference policy and propose `χ²` regularization of occupancy measures, the `χ²` row of [P31]
+  with the correlation of [P13] (unlike KL, a `χ²` cost can rule outcomes out at the optimum: [P38](ii)); Manheim and
   Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
   Goodhart *(to verify)*.
 - *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([D10]). Karwowski et al.
@@ -108,6 +174,14 @@ that carry it.
 - *Import, done.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
   residual ([D10], [P18]); a stopping rule, where the target and the evaluator become uncorrelated under the current
   behaviour ([P20](i)).
+- *Tested on unseen data* (case W1, `cases/w1-best-of-n-slope/`): Gao et al.'s best-of-`n` form `d·(a − b·d)`,
+  fitted over the usual range, overstates the initial slope that [P13] computes from the initial policy, by 22%, on
+  12.6 million of Coste et al.'s answers with a proxy built here. The curve keeps [P13]'s slope up to `n = 16` and then
+  saturates (exploratory), so the form's two numbers misstate both the start and the shape.
+- *Import, tested* (probes B4, B5; `general/transfer.md`). Under a default with a power-law upper tail, a KL budget
+  buys unbounded gain, the case of Kwa et al. [@kwa2024], while a χ² budget `B` buys exactly `√(B·Var)`. Under χ²,
+  Laidlaw et al.'s correlated proxy gains `√B·ρ·sd` in the target for every default; under KL the same law is exact
+  only for Gaussian defaults. These are statements about outcomes that are not finite, and claimed nowhere yet.
 - *Import, later.* Whether Karwowski et al.'s early stopping is the rule of [P20](i) (`TERMS.md`, section 2, level B);
   hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's
   four variants, once their definitions are checked against [P8], [P20](ii), [P12] and [P17] (`NOTES.md` §5, H3).
@@ -191,13 +265,49 @@ that carry it.
 - *Sources.* Quantitative semantics of temporal logics *(to verify)*.
 - *Shared.* A specification as a set of acceptable behaviours, fixed in advance ([D3], [A5]).
 - *Different.* Deterministic traces and satisfaction degrees, not distributions.
-- *Import, later.* A case in which a robustness degree and misalignment order behaviours alike (`TERMS.md` §2).
+- *Import, tested* (probe B6, `general/transfer.md`). The case in which a robustness degree and misalignment order
+  behaviours alike (`TERMS.md` §2): an actor that aims deterministically at a margin `r` inside a threshold, blurred by
+  noise of size `σ`, judged by "pass with probability at least `1 − α`", has misalignment that depends on `r/σ` alone,
+  never increases with `r`, and vanishes from `r = σ·Φ⁻¹(1 − α)`. Robustness counts in units of the actor's noise.
+- *Import, later.* Quantitative semantics for temporal properties of whole episodes, each episode one outcome.
+
+## Learning in games and algorithmic collusion
+
+- *Sources.* Blume [@blume1993]; Candogan et al. [@candogan2011]; Calvano et al. [@calvano2020]; Cason et al.
+  [@cason2014]; Assad et al. [@assad2024].
+- *Shared.* Several actors, read as one actor on joint outcomes ([P39]). Log-linear learning in a potential game is a
+  pursuit of the potential and is reversible; in a game with a harmonic part, learning circulates ([P41], Notes).
+  Algorithms that learn to sustain high prices coordinate over rounds, the case of [P39](iii).
+- *Different.* These theories solve for equilibria and ask which one is selected. The core does not model how a group
+  reaches its joint behaviour (`CORE.md` §0); it measures the coordination, against independent pursuit, and the
+  irreversibility, against a reversible record.
+- *Import, done.* The structural specifications of [P39] and [P41], with the ontologies `industrial-organization/` and
+  `experimental-economics/`.
+- *Import, later.* Whether the harmonic part of a game, computed from its payoffs, predicts how irreversible play will
+  be (`ontologies/experimental-economics/`, open questions).
+- *What it could take from us.* A number for collusion that needs no model of the firms' profits, and that charges
+  every departure from independence, agreed or not.
+
+## Network theory of irreversible processes
+
+- *Sources.* Schnakenberg [@schnakenberg1976].
+- *Shared.* The entropy production of a Markov chain, `KL` of its record of transitions from the reversal; on a single
+  cycle, the cycle's flux times its affinity.
+- *Different.* Thermodynamics, with no principal and no specification.
+- *Import, done.* The entropy production bounds the misalignment against reversibility, the Jensen–Shannon divergence,
+  by half, and their ratio tends to a quarter when the asymmetry is small ([P41]). For log-linear learning in a
+  two-by-two game, the affinity is the intensity times the payoff gained around the cycle of single-player deviations
+  (probe B2; `general/derived-spaces.md`).
+- *What it could take from us.* Irreversibility measured against a declared reversible model, with its stakes.
 
 ## Social choice
 
 - *Shared.* The question of several principals.
-- *Different.* It aggregates preferences, which the core declares out of scope.
-- *Import, never*, while several principals are out of scope; unions and intersections of intended sets need no import.
+- *Different.* It aggregates preferences into weights, which the core does not choose.
+- *Import, never* for the weights. Several principals with declared weights are in scope: their best compromise is a
+  logarithmic pool of their intended behaviours, a single pursuit when each names an intensity, and with no intensity
+  named every principal is satisfied by doing nothing ([P42]). Unions and intersections of intended sets need no
+  import.
 
 ## Metrology and reporting standards
 

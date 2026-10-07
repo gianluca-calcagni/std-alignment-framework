@@ -20,10 +20,13 @@ definitions, in which results from several fields are derived, checked, and repo
 - detection bounded by misalignment ([[P22 — No test detects misalignment faster than misalignment|P22]](iii)).
 
 The core's own results have not been searched for: [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]], [[P25 — The target's curve turns no more often than the regression|P25]], [[P26 — The regression on bins governs at small intensity|P26]], [[P36 — Ordinal objectives|P36]], and the leading form of
-[[P37 — A strong incentive masks the actor, and can fake alignment|P37]](i). Novelty is not a goal; this list says where a reader should look first.
+[[P37 — A strong incentive masks the actor, and can fake alignment|P37]](i). [[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] restate known identities in the core's terms: total correlation, the compensation identity, the
+Jensen–Shannon divergence and its bound by Jeffreys' divergence, and logarithmic pooling. [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]](iv), the nearest
+reversible chain, is likely in the information geometry of Markov chains and has not been searched for. Novelty is not
+a goal; this list says where a reader should look first.
 
-**What it is not yet.** The core is a checked calculus. It has made six predictions about the world and tested none of
-them on data not seen before (section 2). The finish line is in the README.
+**What it is not yet.** The core is a checked calculus. It has made ten predictions about the world and tested three of
+them on data not seen before: one held, two were refuted (section 2). The finish line is in the README.
 
 ## 2. Predictions
 
@@ -34,12 +37,16 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 
 | Ontology | From | Label | State | Where |
 |---|---|---|---|---|
-| machine-learning | [[P13 — What the start of a change gains\|P13]] | empirical | untested. The published paper does not report what it needs (v7.10, T3); it needs samples of the initial policy (`NOTES.md` §3.2, D3) | `ontologies/machine-learning/`, sections 3 and 4 |
-| machine-learning | [[P20 — Where overoptimization starts, and how it ends\|P20]] | empirical | untested | `ontologies/machine-learning/`, section 3 |
+| machine-learning | [[P13 — What the start of a change gains\|P13]] | empirical | refuted on data not seen before (case W1, `cases/w1-best-of-n-slope/`): the literature's fitted best-of-`n` coefficient is `0.338` against the predicted initial slope `0.278`, a difference of `+0.060` (95% interval `+0.040` to `+0.081`), on 1,000 prompts of Coste et al.'s answers with a proxy built and frozen here. The curve keeps the predicted slope up to `n = 16` and then saturates, which the form cannot follow (exploratory). The published paper had not reported what the test needs (v7.10, T3) | `ontologies/machine-learning/`, sections 3 and 4 |
+| machine-learning | [[P20 — Where overoptimization starts, and how it ends\|P20]] | empirical | untested; revised before any data were read, after case C2 (`cases/c2-stopping-rule/`), to require the curve of optima (several runs per `β`), a fine grid, and the first peak only where the regression has several | `ontologies/machine-learning/`, section 3 |
+| machine-learning | [[P4 — What KL measures\|P4]], [[D2 — Pursuit of an objective\|D2]] | empirical | refuted on data not seen before (case W3, `cases/w3-ppo-pursuit/`): on `lvwerra/gpt2-imdb-pos-v2` against its reference and its reward, the reward explains `0.358` of the revealed objective within prompts (95% interval `0.326` to `0.390`), not the predicted half; about a tenth within each model's own continuations (exploratory) | `ontologies/machine-learning/`, section 3 |
+| machine-learning | [[P1 — Every behaviour is a tilt of any other\|P1]], [[D2 — Pursuit of an objective\|D2]] | empirical | held on data not seen before (case W3): the revealed objective fits the reward's logit better than the classifier's probability, by `+0.059` in `R²` (95% interval `+0.053` to `+0.065`) | `ontologies/machine-learning/`, section 3 |
 | behavioural-economics | [[P12 — What interventions reveal\|P12]], [[D6 — Intervention and pass-through\|D6]] | empirical | refuted in its two-default form (v7.10, T7-2d); against enrolment on request it held loosely: T7-2's registered test, pooling two companies, held, though one of them alone exceeds the tolerance; of two further companies, one was within it and one was not (T7-2b). Those data are seen | `ontologies/behavioural-economics/`, section 3 |
 | medical-sciences | [[P12 — What interventions reveal\|P12]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the report cards' study used Medicare records, which are not public (`NOTES.md` §3.2, D5) | `ontologies/medical-sciences/`, section 3 |
 | medical-sciences | [[P1 — Every behaviour is a tilt of any other\|P1]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the known result's tables have not been read, and its English data are seen in summary; a confirmatory test needs a system whose data have not been read (`NOTES.md` §3.2, D6) | `ontologies/medical-sciences/`, section 3 |
 | evolutionary-biology | [[P13 — What the start of a change gains\|P13]], [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | empirical | untested: neither paper reports the genome-level data | `ontologies/evolutionary-biology/`, section 3 |
+| industrial-organization | [[P39 — Several actors: coordination plus individual misalignment\|P39]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested; revised before any data were read, after case C1 found that coordination does not separate collusion from adaptation (`cases/c1-collusion-simulation/`): the comparison with the period before adoption was dropped, and a held prediction now says only that both stations' algorithms react to each other. The German price archive is public for non-commercial use, unread, and needs credentials from Tankerkönig; adoption must be dated without the response to the rival | `ontologies/industrial-organization/`, section 3 |
+| experimental-economics | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | empirical | untested: the Rock–Paper–Scissors arm is seen in summary, and whether its records are public has not been checked; the potential-game arm is new | `ontologies/experimental-economics/`, section 3 |
 
 The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it
 as untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known
@@ -64,7 +71,9 @@ had been seen (T7-1c, T7-2c).
 In T7, every verification prediction held, and 5 of 15 empirical predictions did: that is the base rate to quote.
 Elsewhere in v7.10, verification predictions did fail, on thresholds set without a scale (R7-7, R8-1; `NOTES.md` §1).
 
-**This core.** None of its six empirical predictions has been tested on data not seen before.
+**This core.** Three of its ten empirical predictions have been tested on data not seen before, all in machine
+learning: from [[P13 — What the start of a change gains|P13]], refuted (case W1); from [[P4 — What KL measures|P4]] and [[D2 — Pursuit of an objective|D2]], refuted, and from [[P1 — Every behaviour is a tilt of any other|P1]] and [[D2 — Pursuit of an objective|D2]], held (case W3). One of
+three held.
 
 ## 3. Retractions
 

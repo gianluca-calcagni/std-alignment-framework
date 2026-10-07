@@ -96,4 +96,8 @@ and the name "revealed intensity".
 - [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] — Misalignment splits into what the actor could avoid and what it could not
 - [[P21 — The expected evidence is misalignment|P21]] — The expected evidence is misalignment
 - [[P22 — No test detects misalignment faster than misalignment|P22]] — No test detects misalignment faster than misalignment
+- [[P43 — Misalignment at any intensity|P43]] — Misalignment at any intensity
+- [[P44 — What named objectives explain|P44]] — What named objectives explain
+- [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
+- [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
 - [[C4 — Rescaling the objective is not misalignment|C4]] — Rescaling the objective is not misalignment

@@ -44,3 +44,4 @@ New. v7.10: ROADMAP §6 I1 (the ladder: declare, measure, identify through inter
 ## Used by
 - [[D11 — Sample and evidence|D11]] — Sample and evidence
 - [[P17 — What an unobserved condition can hide|P17]] — What an unobserved condition can hide
+- [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] — What signals, audits and re-measurements reveal of tampering

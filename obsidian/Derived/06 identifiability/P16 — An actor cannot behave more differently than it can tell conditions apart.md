@@ -46,4 +46,5 @@ New. v7.10: ROADMAP §6 I1 (identification through interventions).
 
 ## Used by
 - [[P17 — What an unobserved condition can hide|P17]] — What an unobserved condition can hide
+- [[P46 — What runs share between conditions, and what they do not|P46]] — What runs share between conditions, and what they do not
 - [[C10 — An actor cannot behave more differently than it can tell conditions apart|C10]] — An actor cannot behave more differently than it can tell conditions apart

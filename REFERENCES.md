@@ -1,17 +1,29 @@
 # References
 
-One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md`, `derived/`,
-`ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here (lint rule R8).
+One line per source, written `- [@key] Authors (year), title.` Every source listed here is cited in `CORE.md`,
+`CORE-GENERAL.md`, `general/`, `derived/`, `ontologies/`, `STANDARD.md` or `RELATED.md`, and every citation there is listed here
+(lint rule R8).
 
+- [@allen2017] Allen, E. J., Dechow, P. M., Pope, D. G. and Wu, G. (2017), Reference-dependent preferences: evidence from marathon runners. *Management Science* 63(6), 1657–1672.
 - [@ashby1956] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
+- [@assad2024] Assad, S., Clark, R., Ershov, D. and Xu, L. (2024), Algorithmic pricing and competition: empirical evidence from the German retail gasoline market. *Journal of Political Economy* 132(3), 723–771.
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
+- [@beirami2024] Beirami, A., Agarwal, A., Berant, J., D'Amour, A., Eisenstein, J., Nagpal, C. and Suresh, A. T. (2024), Theoretical guarantees on the best-of-n alignment policy. arXiv:2401.01879.
+- [@blume1993] Blume, L. E. (1993), The statistical mechanics of strategic interaction. *Games and Economic Behavior* 5(3), 387–424.
+- [@calvano2020] Calvano, E., Calzolari, G., Denicolò, V. and Pastorello, S. (2020), Artificial intelligence, algorithmic pricing, and collusion. *American Economic Review* 110(10), 3267–3297.
 - [@campbell1986] Campbell, L. L. (1986), An extended Čencov characterization of the information metric. *Proceedings of the American Mathematical Society* 98(1), 135–141.
+- [@candogan2011] Candogan, O., Menache, I., Ozdaglar, A. and Parrilo, P. A. (2011), Flows and decompositions of games: harmonic and potential games. *Mathematics of Operations Research* 36(3), 474–503.
+- [@cason2014] Cason, T. N., Friedman, D. and Hopkins, E. (2014), Cycles and instability in a rock–paper–scissors population game: a continuous time experiment. *The Review of Economic Studies* 81(1), 112–136.
+- [@coste2024] Coste, T., Anwar, U., Kirk, R. and Krueger, D. (2024), Reward model ensembles help mitigate overoptimization. *International Conference on Learning Representations (ICLR 2024)*. arXiv:2310.02743. Read in full (v2, supplied by the PI); its released dataset `tlc4418/gold_labelled_gens` is not read.
 - [@cencov1982] Čencov, N. N. (1982), *Statistical Decision Rules and Optimal Inference*. Translations of Mathematical Monographs 53, American Mathematical Society (Russian original 1972).
 - [@chernoff1952] Chernoff, H. (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations. *The Annals of Mathematical Statistics* 23(4), 493–507.
 - [@chippindale2001] Chippindale, A. K., Gibson, J. R. and Rice, W. R. (2001), Negative genetic correlation for adult fitness between sexes reveals ontogenetic conflict in *Drosophila*. *Proceedings of the National Academy of Sciences USA* 98(4), 1671–1675.
 - [@conant1969] Conant, R. C. (1969), The information transfer required in regulatory processes. *IEEE Transactions on Systems Science and Cybernetics* 5(4), 334–338.
 - [@cover2006] Cover, T. M. and Thomas, J. A. (2006), *Elements of Information Theory*, 2nd edition. Wiley.
 - [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems. *The Annals of Probability* 3(1), 146–158.
+- [@csiszar1984] Csiszár, I. (1984), Sanov property, generalized I-projection and a conditional limit theorem. *The Annals of Probability* 12(3), 768–793.
+- [@dee2019] Dee, T. S., Dobbie, W., Jacob, B. A. and Rockoff, J. (2019), The causes and consequences of test score manipulation: evidence from the New York Regents examinations. *American Economic Journal: Applied Economics* 11(3), 382–423.
+- [@dembo1998] Dembo, A. and Zeitouni, O. (1998), *Large Deviations Techniques and Applications*, 2nd edition. Springer.
 - [@dranove2003] Dranove, D., Kessler, D., McClellan, M. and Satterthwaite, M. (2003), Is more information better? The effects of "report cards" on health care providers. *Journal of Political Economy* 111(3), 555–588.
 - [@frank2018] Frank, S. A. (2018), The Price equation program: simple invariances unify population dynamics, thermodynamics, probability, information and inference. *Entropy* 20(12), 978.
 - [@frey2001] Frey, B. S. and Jegen, R. (2001), Motivation crowding theory. *Journal of Economic Surveys* 15(5), 589–611.
@@ -21,22 +33,34 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@holmstrom1979] Holmström, B. (1979), Moral hazard and observability. *The Bell Journal of Economics* 10(1), 74–91.
 - [@holmstrom1991] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
 - [@karwowski2024] Karwowski, J., Hayman, O., Bai, X., Kiendlhofer, K., Griffin, C. and Skalse, J. (2024), Goodhart's law in reinforcement learning. *The Twelfth International Conference on Learning Representations* (ICLR 2024).
+- [@kechris1995] Kechris, A. S. (1995), *Classical Descriptive Set Theory*. Graduate Texts in Mathematics 156, Springer.
 - [@kerr1975] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
+- [@kleven2016] Kleven, H. J. (2016), Bunching. *Annual Review of Economics* 8, 435–464.
+- [@kwa2024] Kwa, T., Thomas, D. and Garriga-Alonso, A. (2024), Catastrophic Goodhart: regularizing RLHF with KL divergence does not mitigate heavy-tailed reward misspecification. *Advances in Neural Information Processing Systems* 37 (NeurIPS 2024).
 - [@laidlaw2025] Laidlaw, C., Singhal, S. and Dragan, A. (2025), Correlated proxies: a new definition and improved mitigation for reward hacking. *International Conference on Learning Representations* (ICLR 2025).
+- [@lande1983] Lande, R. and Arnold, S. J. (1983), The measurement of selection on correlated characters. *Evolution* 37(6), 1210–1226.
+- [@maas2011] Maas, A. L., Daly, R. E., Pham, P. T., Huang, D., Ng, A. Y. and Potts, C. (2011), Learning word vectors for sentiment analysis. *Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies*, 142–150. The IMDB movie-review dataset; on Hugging Face as `stanfordnlp/imdb`, licence declared "other".
 - [@madrian2001] Madrian, B. C. and Shea, D. F. (2001), The power of suggestion: inertia in 401(k) participation and savings behavior. *The Quarterly Journal of Economics* 116(4), 1149–1187.
 - [@manski2003] Manski, C. F. (2003), *Partial Identification of Probability Distributions*. Springer Series in Statistics, Springer.
-- [@matejka2015] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
 - [@mason2012] Mason, S., Weber, E. J., Coster, J., Freeman, J. and Locker, T. (2012), Time patients spend in the emergency department: England's 4-hour rule — a case of hitting the target but missing the point? *Annals of Emergency Medicine* 59(5), 341–349.
+- [@massart1990] Massart, P. (1990), The tight constant in the Dvoretzky–Kiefer–Wolfowitz inequality. *The Annals of Probability* 18(3), 1269–1283.
+- [@matejka2015] Matějka, F. and McKay, A. (2015), Rational inattention to discrete choices: a new foundation for the multinomial logit model. *American Economic Review* 105(1), 272–298.
 - [@mckelvey1995] McKelvey, R. D. and Palfrey, T. R. (1995), Quantal response equilibria for normal form games. *Games and Economic Behavior* 10(1), 6–38.
 - [@ng2000] Ng, A. Y. and Russell, S. J. (2000), Algorithms for inverse reinforcement learning. *Proceedings of the 17th International Conference on Machine Learning*, 663–670.
 - [@ortega2013] Ortega, P. A. and Braun, D. A. (2013), Thermodynamics as a theory of decision-making with information-processing costs. *Proceedings of the Royal Society A* 469, 20120683.
+- [@perdomo2020] Perdomo, J., Zrnic, T., Mendler-Dünner, C. and Hardt, M. (2020), Performative prediction. *Proceedings of the 37th International Conference on Machine Learning*, PMLR 119.
+- [@pinsker1964] Pinsker, M. S. (1964), *Information and Information Stability of Random Variables and Processes*. Holden-Day (Russian original 1960).
 - [@polya1976] Pólya, G. and Szegő, G. (1976), *Problems and Theorems in Analysis II: Theory of Functions, Zeros, Polynomials, Determinants, Number Theory, Geometry*. Springer (German original 1925). Part V, chapter 1: Rolle's theorem and Descartes' rule of signs, with Laguerre's extension to exponential sums.
 - [@prasad2007] Prasad, N. G., Bedhomme, S., Day, T. and Chippindale, A. K. (2007), An evolutionary cost of separate genders revealed by male-limited evolution. *The American Naturalist* 169(1), 29–37.
 - [@price1970] Price, G. R. (1970), Selection and covariance. *Nature* 227, 520–521.
 - [@rafailov2023] Rafailov, R., Sharma, A., Mitchell, E., Ermon, S., Manning, C. D. and Finn, C. (2023), Direct preference optimization: your language model is secretly a reward model. *Advances in Neural Information Processing Systems* 36.
+- [@renyi1959] Rényi, A. (1959), On the dimension and entropy of probability distributions. *Acta Mathematica Academiae Scientiarum Hungaricae* 10, 193–215.
 - [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
+- [@schnakenberg1976] Schnakenberg, J. (1976), Network theory of microscopic and macroscopic behavior of master equation systems. *Reviews of Modern Physics* 48(4), 571–585.
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
+- [@taylor2016] Taylor, J. (2016), Quantilizers: a safer alternative to maximizers for limited optimization. *AAAI Workshop on AI, Ethics, and Society*.
+- [@vonwerra2020] von Werra, L., Belkada, Y., Tunstall, L., Beeching, E., Thrush, T., Lambert, N., Huang, S., Rasul, K. and Gallouédec, Q. (2020), *TRL: Transformers Reinforcement Learning*, software, `github.com/huggingface/trl`, Apache-2.0. Its sentiment notebook at tag v0.2.0 (read) trained `lvwerra/gpt2-imdb-pos-v2` from `lvwerra/gpt2-imdb`, rewarded by the positive logit of `lvwerra/distilbert-imdb`.
 - [@wald1945] Wald, A. (1945), Sequential tests of statistical hypotheses. *The Annals of Mathematical Statistics* 16(2), 117–186.
 - [@wilks1938] Wilks, S. S. (1938), The large-sample distribution of the likelihood ratio for testing composite hypotheses. *The Annals of Mathematical Statistics* 9(1), 60–62.
 - [@ziebart2008] Ziebart, B. D., Maas, A. L., Bagnell, J. A. and Dey, A. K. (2008), Maximum entropy inverse reinforcement learning. *Proceedings of the 23rd AAAI Conference on Artificial Intelligence*, 1433–1438.

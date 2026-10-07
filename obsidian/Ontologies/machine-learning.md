@@ -36,7 +36,11 @@ proxy reward model.
 prediction untestable from the paper (T3; section 4). Public numerical data that fit the slots exist. Leaderboards and
 preference benchmarks, such as those v7.10 used for evaluator length bias (AlpacaEval 2, Chatbot Arena and LLMBar, in
 T7-1), give scores and preferences per response, and are seen. Any open policy with an open reward model gives the
-log-probability and the score of every response it samples.
+log-probability and the score of every response it samples. Coste et al. repeated Gao et al.'s setup with open models
+[[References|@coste2024]]: a 1.4B Pythia policy, AlpacaFarm prompts, and AlpacaFarm's 7B human-preference reward model as the gold.
+They released the policy's answers to validation prompts, each with its gold score (described as 12,600 generations;
+their best-of-`n` used at least 12,500 answers per prompt for 1,000 prompts), but not their proxy reward models' scores,
+so a proxy must be added. The paper has been read; the answers have not.
 
 ## 3. What the core says
 
@@ -65,17 +69,51 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   policy, of the gold with the path's first revealed objective. The slope of the reinforcement-learning form,
   `a − b − b·log d`, grows without bound as `d → 0` when `b > 0`, which the fall requires. So that form describes the
   measured range only, and cannot hold down to `d = 0`. The best-of-`n` form has the finite slope `a` at `0`, as the
-  core requires.
+  core requires; but fitted over the usual range, its `a` need not be the initial slope: on unseen answers, the curve
+  kept the core's slope up to `n = 16` and then saturated, which the form cannot follow (case W1, below).
 - **Prediction** (empirical) from [[P13 — What the start of a change gains|P13]]: for best-of-`n`, `a = √2·Cov_q(G, F)/σ_q(G)`, where `G` is `log Q(r̂)` centred
   within each prompt. Both sides come from samples of the initial policy scored by the gold and the proxy, with no
   optimization. *Refuted if* the fitted `a` differs from this value by more than its sampling error. Since the
   best-of-`n` curve is itself computed from such samples, this tests the functional form near `d = 0`, and the
-  small-mass idealization; it does not test language models.
+  small-mass idealization; it does not test language models. **Refuted** on data not seen before
+  (`cases/w1-best-of-n-slope/`): on 1,000 prompts with 12,600 answers each [[References|@coste2024]], scored by a proxy trained and
+  frozen before the test, the fitted `a` is `0.338` against `0.278` predicted, a difference of `+0.060` (95% interval
+  `+0.040` to `+0.081`). Exploratory: the curve keeps the slope `0.28` up to `n = 16`, then saturates.
 - **Prediction** (empirical) from [[P20 — Where overoptimization starts, and how it ends|P20]]: along a sweep of `β` with policies near their optima, the gold score peaks
   where the covariance of proxy and gold, within prompts and under the optimized policy, averaged over prompts, crosses
   zero. This is [[P20 — Where overoptimization starts, and how it ends|P20]](i): along the pursuit of an evaluator, the objective's average is stationary exactly where the two
   are uncorrelated under the current behaviour. *Refuted if* at the peak the measured covariance is clearly non-zero;
-  that would mean the trained policies are not the optima the slots assume.
+  that would mean the trained policies are not the optima the slots assume. Revised before any data were read, after
+  case C2 (`cases/c2-stopping-rule/`): the peak is the peak of the curve of optima, so the prediction needs several
+  training runs per `β`, or their scatter measured, since a single run's gold scatters around its optimum's by a share
+  of the gain that decides which run looks best; a grid of `β` fine relative to the intensity at the peak; and, where
+  the target has several peaks, the covariance's first zero is the first peak, which is the highest only when the
+  regression is single-peaked ([[P25 — The target's curve turns no more often than the regression|P25]]).
+- **Prediction** (empirical) from [[P4 — What KL measures|P4]], [[D2 — Pursuit of an objective|D2]]: a policy tuned by KL-regularized reinforcement learning is, within each
+  prompt, close to the pursuit of its reward from the reference policy: its revealed objective, `log(π/π_ref)`, is
+  affine in the reward, which explains at least half of its variance within prompts, pooled over prompts. *Refuted if*
+  the 95% interval over prompts of the pooled within-prompt `R²` lies entirely below `0.5`. **Refuted** on data not
+  seen before (`cases/w3-ppo-pursuit/`), on a public PPO-tuned model whose training had not converged: `R²` is `0.358`
+  (95% interval `0.326` to `0.390`). Exploratory: within each model's own continuations, the reward explains about a
+  tenth of the revealed objective.
+- **Prediction** (empirical) from [[P1 — Every behaviour is a tilt of any other|P1]], [[D2 — Pursuit of an objective|D2]]: what the tuned policy pursues is the reward as it was given in training,
+  not a monotone transform of it: its revealed objective is closer to affine in the reward than in the classifier's
+  probability of the rewarded class. *Refuted if* the pooled within-prompt `R²` on the reward does not exceed the `R²`
+  on the probability, the 95% interval of the difference over prompts not entirely above 0. **Held** on data not seen
+  before (case W3): the difference is `+0.059` (95% interval `+0.053` to `+0.065`). Exploratory: within each model's own
+  continuations it is smaller, about `+0.01`, and still above 0. A diagnostic case, W4 (`cases/w4-two-runs/`), asked
+  what the rest of the change is: not a sharpening of the reference, and partly a change that a second public PPO run
+  from the same reference shares, but mostly specific to the run or its procedure. W3 and W4 had no gold, so their
+  specification was the trainer's own reward: where no gold exists, a declared family of targets gives an interval
+  of misalignment instead ([[P48 — Misalignment when the target is uncertain|P48]]). In the terms of [[P49 — Outer and inner misalignment|P49]], W1, with a gold, could measure outer misalignment, and W3 and
+  W4 measured inner misalignment only.
+- **Reading** with [[P50 — Tampering: a change of the measurement, not of the world|P50]], [[P51 — What signals, audits and re-measurements reveal of tampering|P51]]: a reward model that is a fixed function of the response cannot be tampered with by
+  the policy, as the outcome is the response; every gap between proxy and gold there is outer misalignment ([[P49 — Outer and inner misalignment|P49]]).
+  Tampering needs a measurement that the policy can influence beyond its response: a reward computed in an environment
+  the agent acts in, a judge sampled with noise and asked again until it approves, or a rater whose verdict on the same
+  facts the response can sway, when the facts are declared as the world. There the departure splits exactly into the
+  change of the world and the tampering, the judge's verdicts alone bound the tampering from below, and judging the same
+  responses again, through a judge the policy cannot influence, separates the honest gain from the channel gain.
 - **Reading** with [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]], [[P13 — What the start of a change gains|P13]]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
@@ -121,10 +159,10 @@ prompt by prompt, and [[P15 — Misalignment splits into what the actor could av
   policy.
 - Best-of-`n` is a pursuit only in the small-mass idealization; over a small set of responses its exact distribution,
   and its KL, differ. [[P19 — A monotone regression rules out overoptimization|P19]] covers its exact form, as a path whose revealed objectives rise with the proxy.
-- The best-of-`n` slope prediction of section 3 cannot be tested from the known result's paper: it reports the fitted
-  `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold under
-  the initial policy (v7.10, T3, a pre-registered attempt). The test needs samples of the initial policy scored by
-  both reward models (`NOTES.md` §3.2, D3).
+- The best-of-`n` slope prediction of section 3 could not be tested from the known result's paper: it reports the
+  fitted `a` only in a figure, normalizes the gold's spread to 1, and does not report the covariance of proxy and gold
+  under the initial policy (v7.10, T3, a pre-registered attempt). It was tested on Coste et al.'s released answers,
+  with a proxy built here (case W1), and refuted; a learned neural proxy might give another shape of curve.
 
 ## 5. Open questions
 
