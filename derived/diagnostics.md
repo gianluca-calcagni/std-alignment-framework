@@ -2,9 +2,10 @@
 
 Results that take a measured misalignment apart, so that a test can ask where it comes from: the intensity at which it
 is judged, the other objectives the actor may be pursuing, the runs of one procedure that differ by chance, the
-situations an actor can tell apart, a target known only to lie in a family, and how training on an evaluator splits
-misalignment into outer and inner parts. One result says what the estimates cost in samples. Each follows from earlier
-results; they were derived after the first tests on data not seen before (`NOTES.md` §6), to design the next ones.
+situations an actor can tell apart, a target known only to lie in a family, how training on an evaluator splits
+misalignment into outer and inner parts, and how much of a change acts on the measurement rather than on the world. One
+result says what the estimates cost in samples. Each follows from earlier results; they were derived after the first
+tests on data not seen before (`NOTES.md` §6), to design the next ones.
 
 ### P43 — Misalignment at any intensity
 **Statement.** Under the standard specification of a non-constant `F`, let `p̂ ∈ Δ`, with revealed intensity `t*` and
@@ -354,3 +355,180 @@ two defaults, the change of default adds a term of its own.
 **Lineage.** v7.10: Cor 1.5 and A16 (stacked stages, with an outer–inner cross term at second order), and H12 (the chain
 rule of KL may give the archive's five gaps back as additive terms); the outer and inner alignment of Hubinger et al.
 (2019), as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of intensity.
+
+### P50 — Tampering: a change of the measurement, not of the world
+**Statement.** Let the outcomes be pairs, `X = W × S`: a state `w` of the world, and a signal `s`, the measurement from
+which an evaluator is computed. Let the default be `q(w, s) = q_W(w)·K(s|w)`, with `q_W` a full-support distribution on
+`W` and `K` a **channel**: for each `w`, a full-support distribution `K(·|w)` on `S`, the honest measurement of `w`. For
+`p ∈ Δ`, let `p_W` be its distribution of worlds and, where `p_W(w) > 0`, `p(·|w)` its distribution of signals given
+`w`; for a distribution `r_W` on `W`, let `r_W ⊗ K` be the behaviour `r_W(w)·K(s|w)`. The **tampering** of `p` is
+`T(p) = Σ_{w : p_W(w) > 0} p_W(w)·KL(p(·|w)‖K(·|w))`, and `p` is **grounded** if `T(p) = 0`, that is, if `p = p_W ⊗ K`.
+A function on `W` or on `S` is read as a function on `X`.
+(i) **The split.** For every `p ∈ Δ` and every distribution `r_W` on `W`, `KL(p‖r_W ⊗ K) = KL(p_W‖r_W) + T(p)`. In
+particular `KL(p‖q) = KL(p_W‖q_W) + T(p)`: the departure is the change of the world plus the tampering.
+(ii) **A target on the world charges all tampering.** Let `F` be a non-constant function on `W`. The intended behaviours
+of the standard specification of `F` are `p_{F,t} = tilt(q_W, t·F) ⊗ K`, all grounded, and for every `p̂ ∈ Δ`,
+`M_F(p̂) = M^W_F(p̂_W) + T(p̂)`, where `M^W_F` is misalignment under the standard specification of `F` on `W`, from
+`q_W`.
+(iii) **The trainer's optimum tampers.** Let the evaluator `F̂` be a non-constant function on `S`, and let
+`m(w) = E_{K(·|w)}[F̂]` be the expected score of the world `w`. For `t > 0`, `p_{F̂,t}` has worlds `tilt(q_W, Λ_t)`,
+with `Λ_t(w) = log E_{K(·|w)}[e^{t·F̂}]`, and signals `tilt(K(·|w), t·F̂)` given `w`, so `T(p_{F̂,t}) > 0`. As `t → 0`,
+`T(p_{F̂,t})/KL(p_{F̂,t}‖q) → 1 − R²`, where `R² = Var_{q_W}(m)/Var_q(F̂)` is the share of the evaluator's variance
+under the default that the world explains. For a target `F` on `W`, let `θ` be the angle of [P11] between `F̂` and `F`,
+and `θ_W` the angle between `m` and `F` under `q_W` (with `R²·sin²θ_W` read as `0` when `m` is constant). Then
+`sin²θ = (1 − R²) + R²·sin²θ_W`; the outer misalignment of [P49] splits as `O(t) = M^W_F((p_{F̂,t})_W) + T(p_{F̂,t})`;
+and as `t → 0` the world's part, divided by `KL(p_{F̂,t}‖q)`, tends to `R²·sin²θ_W` if `cos θ ≥ 0` and to `R²`
+otherwise, so that outer misalignment's share at the start, `sin²θ` or `1`, is the tampering share `1 − R²` plus the
+world's.
+(iv) **The best grounded behaviour.** The grounded behaviours form a linear feasible set ([D7]) that contains `q`. Among
+them, the unique maximizer of the net value `J_t` of `F̂` ([P4]) is `p^g_t = tilt(q_W, t·m) ⊗ K`: the world pursues the
+expected score at the same intensity, and the measurement is left alone. It is the best feasible behaviour for
+`r = p_{F̂,t}` ([P15]), and what tampering adds to the net value is
+`t·(J_t(p_{F̂,t}) − J_t(p^g_t)) = KL(p^g_t‖p_{F̂,t}) = log E_q[e^{t·F̂}] − log E_{q_W}[e^{t·m}]`.
+
+**In plain terms.** Make the measurement part of what happens: each outcome records what the world became and what the
+evaluator was shown. The default measures each world honestly, through a declared channel. Tampering is how far the
+actor's measurements depart from the honest channel, given the world it produced; an actor that leaves the measurement
+alone is grounded. The departure from the default is exactly the change of the world plus the tampering, and a principal
+whose goal is stated on the world charges every nat of tampering as misalignment. The optimum of training on the
+measured signal tampers at every intensity, because reweighting the signals of a world raises the score as surely as
+changing the world does; at the start, the share of its change that is tampering is the share of the evaluator's
+variance that is noise of the measurement. An actor that cannot tamper does best by pursuing each world's expected
+score, at the same intensity, and the difference in net value is what tampering is worth.
+
+**Proof.** (i) Where `p(w, s) > 0`, `log(p(w, s)/(r_W(w)·K(s|w))) = log(p_W(w)/r_W(w)) + log(p(s|w)/K(s|w))`; averaging
+under `p` gives the identity, with both sides infinite when `r_W` misses a world that `p` produces. With `r_W = q_W` it
+is the departure.
+(ii) `tilt(q, t·F)(w, s) = q_W(w)·e^{t·F(w)}·K(s|w)/E_{q_W}[e^{t·F}] = tilt(q_W, t·F)(w)·K(s|w)`. By (i),
+`KL(p̂‖p_{F,t}) = KL(p̂_W‖tilt(q_W, t·F)) + T(p̂)` for every `t ≥ 0`; the second term does not depend on `t`, so the
+infimum over `t` ([D3]) gives the identity.
+(iii) With `Z = E_{q_W}[e^{Λ_t}]`, `q_W(w)·K(s|w)·e^{t·F̂(s)}/Z = [q_W(w)·e^{Λ_t(w)}/Z]·[K(s|w)·e^{t·F̂(s)−Λ_t(w)}]`,
+which gives the worlds and the signals. Each `tilt(K(·|w), t·F̂)` differs from `K(·|w)` when `t > 0`, by [P1](ii),
+because `F̂` is not constant on `S`, the support of `K(·|w)`; and every world has positive mass, so `T > 0`. The
+expansion in the proof of [P11] gives `KL(tilt(K(·|w), t·F̂)‖K(·|w)) = ½·t²·Var_{K(·|w)}(F̂) + O(t³)` and
+`KL(p_{F̂,t}‖q) = ½·t²·Var_q(F̂) + O(t³)`; as the worlds tend to `q_W`, the ratio tends to
+`E_{q_W}[Var_{K(·|w)}(F̂)]/Var_q(F̂)`, which is `1 − R²` by the law of total variance,
+`Var_q(F̂) = Var_{q_W}(m) + E_{q_W}[Var_{K(·|w)}(F̂)]`. Since `F` depends on `w` only, `Cov_q(F̂, F) = Cov_{q_W}(m, F)`
+and `Var_q(F) = Var_{q_W}(F)`, so `cos θ = R·cos θ_W`, with `R = (R²)^{1/2}`, and
+`sin²θ = 1 − R²·cos²θ_W = (1 − R²) + R²·sin²θ_W`; when `m` is constant, `cos θ = 0` and `R = 0`. The split of `O(t)` is
+(ii) at `p̂ = p_{F̂,t}`. Its share at the start is `sin²θ` if `cos θ ≥ 0` and `1` otherwise ([P49](i)); subtracting the
+tampering share `1 − R²` leaves the world's.
+(iv) The grounded set is cut out by the equations `p(w, s)·K(s'|w) = p(w, s')·K(s|w)`, for all `w`, `s`, `s'`, each of
+the form `E_p[f] = 0`; they say that `p(·|w)` is `K(·|w)` wherever `p_W(w) > 0`. For grounded `p = p_W ⊗ K`, (i) gives
+`KL(p‖q) = KL(p_W‖q_W)`, and `E_p[F̂] = E_{p_W}[m]`, so `J_t(p) = E_{p_W}[m] − KL(p_W‖q_W)/t`, the net value of `m` on
+`W`, whose unique maximizer is `tilt(q_W, t·m)` by [P4](i). By [P15](iv) the maximizer over the feasible set is the best
+feasible behaviour for `r = p_{F̂,t}`, and `t·(J_t(p_{F̂,t}) − J_t(p^g_t)) = KL(p^g_t‖p_{F̂,t})`. By the proof of
+[P4](i), `t·J_t(p_{F̂,t}) = log E_q[e^{t·F̂}]` and, on `W`, `t·J_t(p^g_t) = log E_{q_W}[e^{t·m}]`.
+
+**Checks.** checks/test_diagnostics.py::test_tampering_splits_the_departure
+
+**Notes.** Tampering counts every influence of the actor on the measurement, given the world: a reward rewritten, a
+sensor covered or replaced, a rater persuaded, or a measurement repeated until it comes out well. [P51] says what
+signals, audits and re-measurements reveal of it, and separates the last kind from the others. What is world and what is
+signal is declared, as the principal and the target are ([P48]), and the declaration decides what counts as tampering: a
+text that persuades a rater is world if the world is the text, and a channel if the world is the facts the text reports
+and the signal is the rater's verdict. The channel is declared with the default, before the behaviour is seen ([D3]); a
+channel known only to lie in a family would give an interval, as a target does in [P48], not stated here. An evaluator
+that is a fixed function of the outcome, as the reward models of cases W1 to W4 were of the text, is the case where
+every `K(·|w)` is a point mass: the default then lacks full support and the statement does not apply, and nothing could
+be tampered without leaving the default's support. There every gap between evaluator and target is in the world, and is
+outer misalignment ([P49]), not tampering. The share `1 − R²` holds at the start only: in
+`probes/diagnostics/probe_grounding.py`, with 4 worlds and 5 signals, the trainer's optimum at intensity 2 tampers by a
+median `0.47` nats, and its tampering share differs from `1 − R²` by `−0.51` to `+0.21`. Two things stay outside: an
+actor that changes what the principal wants, because the target is fixed by the declaration; and a change of the
+evaluator's function `F̂`, unless the evaluator's output is taken as the signal, when changing it is tampering with the
+channel.
+
+**Lineage.** v7.10 archive, gap 3 (grounding: wireheading and reward tampering), which `IMPORT.md` §8 mapped as "partly;
+needs": a tampered measurement there was only an outcome that the evaluator scores high and the target low. New: the
+measurement as part of the outcome, tampering as a divergence from a declared channel, and its split from the change of
+the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering and the corrupted reward
+channel of Everitt and coauthors are the nearest work (`RELATED.md`, to verify).
+
+### P51 — What signals, audits and re-measurements reveal of tampering
+**Statement.** In the setting of [P50], let `p ∈ Δ`, with distribution of signals `p_S`. For a channel `C` from `W` to a
+finite set `Z`, whose distributions `C(·|w)` need not have full support, and a distribution `μ` on `Z`, let
+`L_C(μ) = min_{r_W} KL(μ‖C^⊤r_W)` over the distributions `r_W` on `W`, where `(C^⊤r_W)(z) = Σ_w r_W(w)·C(z|w)` is what
+the world `r_W` produces through `C`; write `L = L_K`.
+(i) **The least tampering the signals show.** The minimum is attained, and `T(p) ≥ L(p_S)`. If `r*_W` attains `L(p_S)`,
+the behaviour `p*(w, s) = r*_W(w)·K(s|w)·p_S(s)/(K^⊤r*_W)(s)` has signals `p_S` and tampering `L(p_S)`, so no smaller
+tampering is consistent with the signals; and `L(p_S) = 0` exactly when some distribution of worlds produces `p_S`
+through `K`. For every `r_W` with `KL(μ‖C^⊤r_W)` finite, with `c(w) = Σ_{z : μ(z) > 0} C(z|w)·μ(z)/(C^⊤r_W)(z)`,
+`KL(μ‖C^⊤r_W) − log max_w c(w) ≤ L_C(μ) ≤ KL(μ‖C^⊤r_W)`: a certificate for any computed `r_W`.
+(ii) **The most.** The values of `T` over the behaviours with signals `p_S` form the interval `[L(p_S), Ū(p_S)]`, where
+`Ū(p_S)` is the largest tampering among the behaviours in which every signal comes from a single world:
+`p_a(w, s) = p_S(s)` if `w = a(s)` and `0` otherwise, for a map `a` from `S` to `W`. `Ū(p_S) ≥ max_w KL(p_S‖K(·|w))`,
+and if `W` and `S` each have at least two elements, `Ū(p_S) > 0` for every `p_S`: no distribution of signals, not even
+the default's, rules tampering out.
+(iii) **An audit.** Let each world be measured a second time through a channel `K'` from `W` to a finite set `S'` that
+the actor cannot influence, so that the actor's behaviour on `(w, s, s')` is `p(w, s)·K'(s'|w)`, and let `p_{SS'}` be
+its distribution of the two signals. With `(K⊗K')(s, s'|w) = K(s|w)·K'(s'|w)`, `L(p_S) ≤ L_{K⊗K'}(p_{SS'}) ≤ T(p)`. If
+the audit is exact, `S' = W` and `K'(·|w)` the point mass at `w`, then `L_{K⊗K'}(p_{SS'}) = T(p)`, and tampering is
+identified ([D9]).
+(iv) **A re-measurement.** If `K' = K`, a second honest measurement through the same channel, the evaluator's gain over
+the default splits exactly into an **honest gain** and a **channel gain**:
+`E_p[F̂] − E_q[F̂] = (E_{p_W}[m] − E_{q_W}[m]) + (E[F̂(s)] − E[F̂(s')])`, where both averages of the second term are
+under the actor's behaviour on `(w, s, s')`, and `E[F̂(s')] = E_{p_W}[m]`. The channel gain, the fall of the average
+score from the first measurement to the second, satisfies `|E[F̂(s)] − E[F̂(s')]| ≤ (max F̂ − min F̂)·(T(p)/2)^{1/2}`,
+and `KL(p_S‖p_{S'}) ≤ T(p)`.
+
+**In plain terms.** From the signals alone a principal sees only part of the tampering: the least that any actor would
+need to produce signals like these, which is positive when the scores come out in a way no honest measurement of any
+world produces. Some actor tampers exactly that much, so the signals cannot show more; and they cannot rule tampering
+out, because every distribution of signals, even the default's, could come from an actor that tampers. An audit through
+a measurement the actor cannot touch raises the lower end, up to the whole tampering when the audit sees the world
+exactly. Measuring the same worlds again through the honest channel separates what the actor gained by changing the
+world from what it gained through the measurement: the second shows as the fall of the score on re-measurement, and it
+bounds the tampering from below.
+
+**Proof.** (i) `r_W ↦ KL(μ‖C^⊤r_W)` is lower semicontinuous on the compact set of distributions on `W`, so the minimum
+is attained; for `C = K` it is finite, as `K` has full support. By [P50](i), `T(p) = KL(p‖p_W ⊗ K)`, and merging the
+pairs into their signals never increases KL ([P4](iv), whose proof needs only that the second behaviour be positive
+wherever the first is), so `T(p) ≥ KL(p_S‖K^⊤p_W) ≥ L(p_S)`. The signals of `p*` are
+`p_S(s)·(K^⊤r*_W)(s)/(K^⊤r*_W)(s) = p_S(s)`, and its worlds are `r*_W(w)·c*(w)`, with `c*` the `c` of the certificate at
+`r*_W`, for `C = K` and `μ = p_S`. The function `r_W ↦ −Σ_s p_S(s)·log (K^⊤r_W)(s)` is convex, with partial derivatives
+`−c(w)`, so at its minimum `c*(w) ≤ λ` for every `w`, with equality where `r*_W(w) > 0`; as
+`Σ_w r*_W(w)·c*(w) = Σ_s p_S(s) = 1`, `λ = 1`. So the worlds of `p*` are `r*_W`, its signals given `w` are `K(·|w)·ρ`
+with `ρ = p_S/(K^⊤r*_W)`, and `T(p*) = Σ_w r*_W(w)·Σ_s K(s|w)·ρ(s)·log ρ(s) = Σ_s p_S(s)·log ρ(s) = L(p_S)`.
+`L(p_S) = 0` exactly when `p_S = K^⊤r_W` for some `r_W`, by Gibbs' inequality. For the certificate, let `r*_W` attain
+`L_C(μ)`; by Jensen's inequality,
+`KL(μ‖C^⊤r_W) − L_C(μ) = Σ_{z : μ(z) > 0} μ(z)·log((C^⊤r*_W)(z)/(C^⊤r_W)(z)) ≤ log Σ_w r*_W(w)·c(w) ≤ log max_w c(w)`.
+(ii) The behaviours with signals `p_S` form a polytope: for each `s`, `p(·, s)` is `p_S(s)` times a distribution on `W`,
+so the vertices are the `p_a`. `T(p) = KL(p‖p_W ⊗ K)` is convex in `p`, because KL is jointly convex and `p ↦ p_W ⊗ K`
+is linear, and it is continuous, because `K` has full support. A convex function on a polytope attains its maximum at a
+vertex, and a continuous function maps the connected polytope onto an interval, which contains `L(p_S)` by (i). The
+constant map at `w` gives the behaviour with the single world `w` and signals `p_S`, whose tampering is
+`KL(p_S‖K(·|w))`. That is positive unless `K(·|w) = p_S`. If every `K(·|w)` equals `p_S`, then `p_S` has full support on
+`S`, which has two elements, so some signal `s₁` has `0 < p_S(s₁) < 1`; mapping `s₁` to one world and every other signal
+to another gives tampering at least `p_S(s₁)·KL(δ_{s₁}‖p_S) = −p_S(s₁)·log p_S(s₁) > 0`, where `δ_{s₁}` is the point
+mass at `s₁`.
+(iii) Where `p(w, s)·K'(s'|w) > 0`, the ratio of the actor's behaviour on `(w, s, s')` to `p_W(w)·K(s|w)·K'(s'|w)` is
+`p(s|w)/K(s|w)`, so the divergence between them is `T(p)`. Merging into `(s, s')`, as in (i), gives
+`T(p) ≥ KL(p_{SS'}‖(K⊗K')^⊤p_W) ≥ L_{K⊗K'}(p_{SS'})`, and merging away `s'` gives
+`KL(p_{SS'}‖(K⊗K')^⊤r_W) ≥ KL(p_S‖K^⊤r_W)` for every `r_W`, so `L_{K⊗K'}(p_{SS'}) ≥ L(p_S)`. For an exact audit,
+`(K⊗K')^⊤r_W(s, w) = r_W(w)·K(s|w)` and `p_{SS'}(s, w) = p(w, s)`, so the divergence is
+`KL(p‖r_W ⊗ K) = KL(p_W‖r_W) + T(p)` by [P50](i), least at `r_W = p_W`.
+(iv) `E[F̂(s')] = Σ_{w,s,s'} p(w, s)·K(s'|w)·F̂(s') = E_{p_W}[m]`, and `E_q[F̂] = E_{q_W}[m]`, so the split is an
+identity. `E_{p_W}[m]` is also the average of `F̂` under `p_W ⊗ K`, from which `p` departs by `T(p)` ([P50](i)); the
+difference of two averages of `F̂` is at most `max F̂ − min F̂` times the total variation distance, which Pinsker's
+inequality bounds by `(KL/2)^{1/2}` [@cover2006]. Finally `p_{S'} = K^⊤p_W`, so `KL(p_S‖p_{S'}) ≤ T(p)` by (i).
+
+**Checks.** checks/test_diagnostics.py::test_signals_and_audits_bound_tampering
+
+**Notes.** (ii) is the identified set ([D9]) of tampering for a principal who sees signals only, and (iii) is the audit
+as a designed observation that narrows it, as an intervention does for the pass-through ([D6]). `L(p_S)` is a problem of
+maximum likelihood: the least divergence of the signals from the mixtures of the honest channel's distributions, as in
+estimating the weights of a mixture. The check computes it by the fixed point `r_W ← r_W·c`, the EM iteration for those
+weights, polished by a constrained solver; the certificate of (i) makes any computed `r_W` a bracket, whatever the
+solver. In `probes/diagnostics/probe_grounding.py`, an actor that leaves the world at the default and measures each
+world `n` times, keeping the signal the evaluator scores highest, has no honest gain, and all its gain is channel gain.
+The signals alone reveal a median of about half its tampering (`49%`, `52%` and `46%` for `n` = 2, 4 and 16, from `0%`
+to `98%` across instances), the fall on re-measurement through (iv)'s bound a median `30%` for `n = 4`, and an exact
+audit all of it. (iv) needs the second measurement to be honest. If the actor's influence persists, as with a sensor
+replaced, the second measurement goes through the actor's channel, and the fall can be `0` while `T > 0`: a
+re-measurement through the same instrument exposes selection on the noise of measurement, not every tampering. Only a
+channel the actor cannot influence, as in (iii), bounds both kinds from below.
+
+**Lineage.** New, from the grounding brainstorm (`NOTES.md`, Q32). The optimality conditions in the proof of (i) are
+those of a log-optimal portfolio [@cover2006], with the honest channel's distributions in the place of the assets; the
+certificate follows from Jensen's inequality.

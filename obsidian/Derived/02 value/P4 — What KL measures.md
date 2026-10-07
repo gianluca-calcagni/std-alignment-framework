@@ -80,5 +80,7 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 - [[P37 — A strong incentive masks the actor, and can fake alignment|P37]] — A strong incentive masks the actor, and can fake alignment
 - [[P42 — Several principals: gridlock, and the pooled pursuit|P42]] — Several principals: gridlock, and the pooled pursuit
 - [[P49 — Outer and inner misalignment|P49]] — Outer and inner misalignment
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world
+- [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] — What signals, audits and re-measurements reveal of tampering
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats
 - [[C9 — Grouping outcomes never shows more misalignment|C9]] — Grouping outcomes never shows more misalignment

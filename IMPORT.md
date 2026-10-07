@@ -276,13 +276,13 @@ but the result map in [P32] and the cost in [P38]; each item defines it before u
 The archive's source of v5–v6, `archive/alignment_subframework/02_decomposition.md`, split alignment into five gaps. Its
 frame, "alignment holds iff all five gaps close", was retracted in v7 as circular (R001), and so was "three of the five
 gaps cannot be closed in principle" (R003). The gaps are kept as channels through which misalignment arises, each mapped
-to what the core now measures (Q31).
+to what the core now measures (Q31, Q32).
 
 | Gap | Known as | Verdict | Where |
 |---|---|---|---|
 | 1 Specification | outer alignment; Goodhart | in core | outer misalignment ([P49](i)); the regression and overoptimization ([P18]–[P20], [P25], [P26]); worst cases ([P29], [P30]); an uncertain target ([P48]) |
 | 2 Transmission: observability, retention | no standard name | in core | the principal's and the actor's resolutions ([D4], [P7], [P8]); views ([D8], [P16]); what the actor's limits make unavoidable ([P15]) |
-| 3 Grounding | wireheading; reward tampering | partly; needs | a tampered measurement as an outcome the evaluator scores high and the target low: evaluator error at the top ([P20], [P29], [P37](iii)). An actor that changes the evaluator itself is not covered: [D10] fixes the evaluator as a function of outcomes |
+| 3 Grounding | wireheading; reward tampering | in core, for a declared channel | tampering ([P50]): with the measurement part of the outcome, the departure splits exactly into the change of the world and the tampering, a target on the world charges all of it, and the optimum of training on a measured signal tampers at every intensity; what signals, audits and re-measurements reveal of it ([P51]). Outside: a channel not declared, an actor that changes the principal's target, and an evaluator that is a fixed function of the outcome, where every gap is outer misalignment ([P49]) |
 | 4 Persistence | goal misgeneralization | in core | conditions and views: what an unobserved condition can hide ([P16], [P17]), the evaluation gap ([P24]), what runs share between evaluation and use ([P46]) |
 | 5 Verification | eliciting latent knowledge | drop | outside by [A1]: the core judges behaviour, not the actor's internal maps; it bounds what behaviour can hide ([P17]) |
 

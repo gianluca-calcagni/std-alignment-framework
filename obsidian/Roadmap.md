@@ -23,13 +23,19 @@ row of the finish line is met.
 registered before it is computed, until the base rate says something; then the outside reader, when the PI lifts the
 hold. Everything else waits unless it serves one of them.
 
-## Where we are (2026-10-03)
+## Where we are (2026-10-07)
 
-- The core is v11: five premises, eleven definitions, 49 propositions; 181 checks pass on both paths. Seven results are
-  diagnostics (`derived/diagnostics.md`, Q28, Q30, Q31): misalignment at any intensity and across conditions at one
+- The core is v11: five premises, eleven definitions, 51 propositions; 183 checks pass on both paths. Nine results are
+  diagnostics (`derived/diagnostics.md`, Q28, Q30–Q32): misalignment at any intensity and across conditions at one
   intensity; what named objectives explain; drift between runs; what runs share between evaluation and use; the cost of
-  reweighting; the interval of misalignment when the target is known only to lie in a family; and outer and inner
-  misalignment, with their exact split. Each follows from earlier results; no premise or definition changed.
+  reweighting; the interval of misalignment when the target is known only to lie in a family; outer and inner
+  misalignment, with their exact split; and tampering, with what signals, audits and re-measurements reveal of it. Each
+  follows from earlier results; no premise or definition changed. Five of the nine were used in a case, all in W4;
+  [[P46 — What runs share between conditions, and what they do not|P46]], [[P49 — Outer and inner misalignment|P49]], [[P50 — Tampering: a change of the measurement, not of the world|P50]] and [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] in none yet.
+- **Grounding** (Q32): with the measurement part of the outcome, the departure splits exactly into the change of the
+  world and the tampering, and a target on the world charges all of it ([[P50 — Tampering: a change of the measurement, not of the world|P50]]); from signals alone tampering has an
+  attained lower bound and is never ruled out, and an audit raises the bound ([[P51 — What signals, audits and re-measurements reveal of tampering|P51]]). In W1–W4 tampering was zero by
+  construction: their evaluators were fixed functions of the text.
 - **Whose target** (`NOTES.md` §7, Q30): W3 and W4 measured the trainer's formal objective, not what any user wants, for
   which no gold exists. Every declaration now names its principal (`STANDARD.md`), and an uncertain target is declared
   as a family, whose interval [[P48 — Misalignment when the target is uncertain|P48]] gives.
@@ -69,15 +75,18 @@ Each step names the row it serves and what it waits for. A step that serves no r
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
-| 1 | A test of a framework prediction on public data, to move the base rate (one of three held): the candidates are [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]]'s Rock–Paper–Scissors arm in experimental economics, if its records are public (`NOTES.md` §3.2, D9), and [[P20 — Where overoptimization starts, and how it ends\|P20]]'s stopping rule on gold-labelled data not used before. Registered from the template | 4 | a check of which data are public and unseen |
-| 2 | **W2**, industrial organization: register the revised prediction from [[P39 — Several actors: coordination plus individual misalignment\|P39]] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
-| 3 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone | 5 | the PI lifts the hold on external review (Q27) and finds a reader who is a person |
-| 4 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
+| 1 | **[[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The Rock–Paper–Scissors arm alone is weak, since its cycles are known in summary (D9); the risky arm is the potential game, and every two-strategy population game has a potential, so a public continuous-time experiment with two strategies would serve. First check which records are public and not yet read; then register from the template, with a declared principal | 4 | the check of the data, which the executor can make |
+| 2 | **[[P20 — Where overoptimization starts, and how it ends\|P20]], the stopping rule** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero. As revised after C2, it needs several runs per `β` on a fine grid, with a gold distinct from the proxy. First check whether such a sweep is public and unseen; otherwise measure what training one on small models costs on this machine, as W3 measured its sampler; then register | 4 | the check of the data, or the measured cost of making them |
+| 3 | **C3, tampering** (simulation, approved in Q32): a small environment, built here, where the actor can change the world or its measurement, in the manner of the tomato-watering gridworld (D11). It checks [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii) says, with its share at the start | 5 | steps 1 and 2; it gates no named world test yet |
+| 4 | **W2**, industrial organization: register the revised prediction from [[P39 — Several actors: coordination plus individual misalignment\|P39]] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
+| 5 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone; and a mathematician reads the core and `derived/` | 5 | the PI lifts the hold on external review (Q27) and finds readers who are people |
+| 6 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
 
 ## Not now, and why
 
 - The general core, new disciplines, wider scope: frozen by the PI (Q26, Q27), although row 4 is met.
-- New results in `derived/`: only if a test on the list above needs one to be stated.
+- New results in `derived/`: only if a test on the list above needs one to be stated. The rule was set aside, with the
+  PI's approval, for [[P48 — Misalignment when the target is uncertain|P48]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]; it applies again from here.
 - More simulation cases: only to gate a named world test, at most one per test, before that test runs.
 - Hunches (`NOTES.md` §5.4): recorded, not pursued, unless a step above needs them.
 
@@ -105,3 +114,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
 | 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [[P48 — Misalignment when the target is uncertain\|P48]], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |
 | 2026-10-04 | [[P49 — Outer and inner misalignment\|P49]], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |
+| 2026-10-07 | [[P50 — Tampering: a change of the measurement, not of the world\|P50]], tampering, and [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], what signals, audits and re-measurements reveal of it, with checks and mutation tests; the grounding gap mapped as in the core for a declared channel; the two pending framework tests, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] and [[P20 — Where overoptimization starts, and how it ends\|P20]], made steps 1 and 2, and the tampering simulation step 3 (Q32) | 4 (steps 1–3 set); 5 (diagnostics) |

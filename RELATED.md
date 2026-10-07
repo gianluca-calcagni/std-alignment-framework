@@ -20,7 +20,8 @@ that carry it.
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([P40]); tested in part: an endogenous default (`general/`) |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | done: misalignment over a family of objectives, an interval whose lower end the most charitable principal finds ([P48]); now: identification across environments |
-| Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([P49]); partly: reward tampering (`IMPORT.md`, section 8) |
+| Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([P49]) |
+| Reward tampering and wireheading | an evaluator computed from a measurement the actor can influence | causal incentives of agent designs, not a measure of behaviour | done: tampering as a divergence from a declared honest channel, split exactly from the change of the world; its bounds from signals, audits and re-measurements ([P50], [P51]); later: designs that remove the incentive, as interventions on the channel |
 | Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([D10], [P18]–[P20]); tested on unseen data: the best-of-`n` form against [P13] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
@@ -130,8 +131,32 @@ that carry it.
   intensity, zero exactly when the evaluator is the target rescaled. Inner misalignment is the trainer's misalignment of
   the actor. The two share one part exactly, the change that pursues neither target nor evaluator. Case W1 had a gold
   target and so an outer side; W3 and W4 measured inner misalignment only.
-- *Import, later.* Reward tampering, where the actor changes the evaluator rather than outcomes (`IMPORT.md`, section
-  8).
+- *Import, done.* Reward tampering, where the actor changes the measurement rather than the world: the next section.
+
+## Reward tampering and wireheading
+
+- *Sources.* Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), reinforcement
+  learning with a corrupted reward channel, with a no-free-lunch result for learning the true reward from a corrupted
+  one and a remedy that checks rewards across several sources; Everitt, Hutter, Kumar and Krakovna (2021), reward
+  tampering analysed with causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, whose
+  tomato-watering environment lets the agent tamper with its observation. All *(to verify: from memory, `NOTES.md` §3.2,
+  D11)*.
+- *Shared.* A true state and an observed reward or signal that the agent may corrupt; tampering as the gap between them;
+  checking one source of reward against another.
+- *Different.* These works ask which agent designs have an incentive to tamper, through the structure of causal
+  diagrams, and whether a learner can recover the true reward. The core measures behaviour ([A1]): tampering is how far
+  the actor's measurements depart from a declared honest channel, in nats, whatever the agent's design or incentives.
+- *Import, done* ([P50], [P51]). With the measurement part of the outcome, the departure from the default splits exactly
+  into the change of the world and the tampering; a target on the world charges all of the tampering as misalignment;
+  and the optimum of training on a measured signal tampers at every intensity, with a share at the start equal to the
+  share of the evaluator's variance that is noise of the measurement. From signals alone, tampering is bounded below by
+  an attained minimum and never ruled out ([P51](ii)), the principal's side of the no-free-lunch result; an audit
+  through a channel the actor cannot influence raises the lower bound, and identifies tampering when it is exact, as the
+  cross-checking of several sources does.
+- *Import, later.* Designs that remove the incentive to tamper, read as interventions ([D6]) on what the actor can
+  influence, and their cost in the net value of [P50](iv).
+- *What it could take from us.* A measure of tampering from behaviour, with its identified set from signals and the gain
+  of each audit, in one currency with outer and inner misalignment ([P49]).
 
 ## Goodhart's law and reward hacking
 

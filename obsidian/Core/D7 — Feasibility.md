@@ -52,3 +52,4 @@ which the split is exact.
 - [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] — Misalignment splits into what the actor could avoid and what it could not
 - [[P27 — The best use of a departure budget|P27]] — The best use of a departure budget
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world

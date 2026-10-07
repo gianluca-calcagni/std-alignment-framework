@@ -107,6 +107,13 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   specification was the trainer's own reward: where no gold exists, a declared family of targets gives an interval
   of misalignment instead ([P48]). In the terms of [P49], W1, with a gold, could measure outer misalignment, and W3 and
   W4 measured inner misalignment only.
+- **Reading** with [P50], [P51]: a reward model that is a fixed function of the response cannot be tampered with by
+  the policy, as the outcome is the response; every gap between proxy and gold there is outer misalignment ([P49]).
+  Tampering needs a measurement that the policy can influence beyond its response: a reward computed in an environment
+  the agent acts in, a judge sampled with noise and asked again until it approves, or a rater whose verdict on the same
+  facts the response can sway, when the facts are declared as the world. There the departure splits exactly into the
+  change of the world and the tampering, the judge's verdicts alone bound the tampering from below, and judging the same
+  responses again, through a judge the policy cannot influence, separates the honest gain from the channel gain.
 - **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
   policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can

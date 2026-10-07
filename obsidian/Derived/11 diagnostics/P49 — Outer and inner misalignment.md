@@ -73,4 +73,4 @@ rule of KL may give the archive's five gaps back as additive terms); the outer a
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
 
 ## Used by
-- no later item
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world

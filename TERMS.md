@@ -101,6 +101,11 @@ worked out.
 | **outer misalignment** | [P49] | how far, for the principal, the optimum of training on the evaluator is from what the principal wants | standard in AI safety: the fault of the specification | outer alignment (Hubinger et al. 2019, to verify); the specification gap of the archive's subframework | A |
 | **inner misalignment** | [P49] | how far the trained actor is from anything the training objective could produce | standard in AI safety: the fault of the optimizer | inner alignment (Hubinger et al. 2019, to verify); optimization fidelity | A |
 | **strict inner misalignment** | [P49] | the part of the actor's change that pursues neither the target nor the evaluator, shared by principal and trainer | plain: the inner fault no principal of that kind forgives | — | A |
+| **channel** | [P50] | the honest measurement of each state of the world: a distribution of the signals the evaluator is computed from | the information-theory word for a conditional distribution of outputs given inputs | a measurement model; an observation model (partially observed control) | A |
+| **tampering** | [P50] | how far the actor's measurements depart from the honest channel, given the world it produced | standard in AI safety, with a divergence in place of a causal path | reward tampering and wireheading (Everitt and coauthors, to verify); a corrupted reward channel | A |
+| **grounded** | [P50] | a behaviour that leaves the measurement alone: zero tampering | the archive's gap 3, grounding | — | A |
+| **honest gain** | [P51] | the part of an actor's gain in the evaluator that comes from changing the world, read by measuring again | plain | — | A |
+| **channel gain** | [P51] | the part of an actor's gain in the evaluator that comes through the measurement: how much the score falls when the same worlds are measured again | plain | regression to the mean on re-measurement, when the gain is selection on noise | A |
 
 ## 2. Correspondences not yet in the framework
 

@@ -89,3 +89,4 @@ contexts (`NOTES.md`), which (v) answers: across contexts, the shared intensity 
 - [[P27 — The best use of a departure budget|P27]] — The best use of a departure budget
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world

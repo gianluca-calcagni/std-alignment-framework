@@ -1,9 +1,10 @@
 """Checks of P43 (misalignment at any intensity), P44 (named objectives), P45 (drift across runs), P46 (runs in two
-conditions) and P47 (the cost of reweighting). Each claim is computed by a helper below, so that breaking a helper on
-purpose makes its checks fail."""
+conditions), P47 (the cost of reweighting), P48 (an uncertain target), P49 (outer and inner misalignment), P50
+(tampering) and P51 (what signals, audits and re-measurements reveal of it). Each claim is computed by a helper below,
+so that breaking a helper on purpose makes its checks fail."""
 import itertools
 import numpy as np
-from scipy.optimize import minimize_scalar, brentq
+from scipy.optimize import minimize, minimize_scalar, brentq
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt, kl_tilts
 from .test_misalignment import misalignment, nearest, ray_minimizer
 from .test_feasibility import project_linear
@@ -393,3 +394,166 @@ def test_outer_and_inner_misalignment():
         assert abs(misalignment(pe, q, F)[0] - outer(q, F, Fh, t)) <= EXACT
         assert abs(misalignment(p, q, a * F + c)[0] - MP) <= 1e-9 * (1 + MP)          # all inner when Fh rescales F
     assert positive >= 100
+
+
+def pairs(pW, K):
+    """P50: the behaviour on world–signal pairs that produces the world as pW and measures it through the channel K, as
+    a |W| × |S| array: p(w, s) = pW(w)·K(s|w)."""
+    return pW[:, None] * K
+
+
+def tampering(p, K):
+    """P50: T(p) = Σ_w p_W(w)·KL(p(·|w) ‖ K(·|w)), for a behaviour p on world–signal pairs given as a |W| × |S| array."""
+    pW = p.sum(1)
+    return sum(pW[w] * kl(p[w] / pW[w], K[w]) for w in range(len(pW)) if pW[w] > 0)
+
+
+def grounded_pursuit(qW, K, Fh, t):
+    """P50(iv): the best grounded behaviour for the evaluator Fh on signals at intensity t: the world pursues the expected
+    signal score E_K[Fh | w] at the same intensity, and the channel is left alone."""
+    return pairs(tilt(qW, t * (K @ Fh)), K)
+
+
+def least_tampering(pS, K):
+    """P51(i): L = min over world behaviours pW of KL(pS ‖ Kᵀ pW). The multiplicative fixed point of its optimality
+    conditions, pW ← pW·c with c(w) = Σ_s K(s|w)·pS(s)/(Kᵀ pW)(s), is slow near the boundary, so a constrained solver
+    polishes it between two runs of it. Whatever the solver, the certificate of (i) bounds the distance to the minimum
+    by log max_w c(w). Returns the value at the last pW, that certified gap, and the joint of (i) built from pW."""
+    W = K.shape[0]
+    def fixed_point(pW, steps):
+        for _ in range(steps):
+            mu = pW @ K; ratio = np.divide(pS, mu, out=np.zeros_like(pS), where=pS > 0); c = K @ ratio
+            if np.log(c.max()) <= 1e-12:
+                break
+            pW = pW * c
+        return pW
+    f = lambda x: -pS @ np.log(np.maximum(x @ K, 1e-300))
+    g = lambda x: -(K @ (pS / np.maximum(x @ K, 1e-300)))
+    pW = fixed_point(np.full(W, 1 / W), 500)
+    res = minimize(f, pW, jac=g, method="SLSQP", bounds=[(0, 1)] * W, options={"ftol": 1e-16, "maxiter": 1000},
+                   constraints=[{"type": "eq", "fun": lambda x: x.sum() - 1, "jac": lambda x: np.ones(W)}])
+    pW = np.clip(res.x, 0, None) + 1e-9 / W                       # back inside, so the fixed point can move every pW(w)
+    pW = fixed_point(pW / pW.sum(), 2000)
+    mu = pW @ K; ratio = np.divide(pS, mu, out=np.zeros_like(pS), where=pS > 0); c = K @ ratio
+    return kl(pS, mu), float(np.log(c.max())), pW[:, None] * K * ratio[None, :]
+
+
+def most_tampering(pS, K):
+    """P51(ii): the largest tampering among the joints with signal marginal pS in which every signal comes from a single
+    world, by enumerating the maps from signals to worlds."""
+    W, S = K.shape; best = 0.0
+    for a in itertools.product(range(W), repeat=S):
+        p = np.zeros((W, S)); p[list(a), range(S)] = pS
+        best = max(best, tampering(p, K))
+    return best
+
+
+def remeasured(p, K, Fh, qW):
+    """P51(iv): each world measured a second time through the honest channel K, as the joint of the two signals; the
+    evaluator's honest gain over the default, E_{p_W}[E_K[Fh|w]] − E_{q_W}[E_K[Fh|w]]; and its channel gain, how much
+    the average score falls from the first measurement to the second."""
+    again = np.einsum("ws,wv->sv", p, K)
+    return p.sum(1) @ (K @ Fh) - qW @ (K @ Fh), again.sum(1) @ Fh - again.sum(0) @ Fh, again
+
+
+def random_channel(r, W, S, zeros=False):
+    """A channel from W worlds to S signals: each row a distribution on the signals, with full support unless zeros."""
+    return np.array([with_zeros(r, S) if zeros else simplex_interior(r, S) for _ in range(W)])
+
+
+def test_tampering_splits_the_departure():
+    """P50: the departure from any grounded behaviour splits into the world's departure and the tampering; a target on
+    the world is misaligned by exactly its misalignment in the world plus the tampering; the trainer's optimum on a
+    signal evaluator tampers at every positive intensity, with share 1 − R² at the start, and the small-intensity limit
+    of P49 splits accordingly; the best grounded behaviour pursues the expected signal score, is the I-projection of the
+    trainer's optimum, and gives up exactly the difference of log-normalizers."""
+    r = rng(5001); world_share_seen = {True: 0, False: 0}
+    for _ in range(100):
+        W, S = int(r.integers(2, 6)), int(r.integers(2, 6))
+        qW = simplex_interior(r, W); K = random_channel(r, W, S); q = pairs(qW, K)
+        p = (with_zeros(r, W * S) if r.random() < 0.3 else simplex_interior(r, W * S)).reshape(W, S); pW = p.sum(1)
+        T = tampering(p, K); p2 = simplex_interior(r, W)
+        assert abs(kl(p.ravel(), pairs(p2, K).ravel()) - (kl(pW, p2) + T)) <= EXACT * (1 + T)       # (i)
+        assert abs(kl(p.ravel(), q.ravel()) - (kl(pW, qW) + T)) <= EXACT * (1 + T)
+        F = r.normal(0, 1, W); FX = np.repeat(F, S)                                             # (ii)
+        for t in (0.0, 0.7, 3.0):
+            assert np.abs(tilt(q.ravel(), t * FX) - pairs(tilt(qW, t * F), K).ravel()).max() <= EXACT
+        MX = misalignment(p.ravel(), q.ravel(), FX)[0]
+        assert abs(MX - (misalignment(pW, qW, F)[0] + T)) <= 1e-9 * (1 + MX)
+        Fh = r.normal(0, 1, S); FhX = np.tile(Fh, W); m = K @ Fh                                 # (iii)
+        for t in (0.5, 2.0):
+            assert tampering(tilt(q.ravel(), t * FhX).reshape(W, S), K) > 1e-10
+        R2 = var(qW, m) / var(q.ravel(), FhX)
+        share = lambda t: (lambda pt: tampering(pt.reshape(W, S), K) / kl(pt, q.ravel()))(tilt(q.ravel(), t * FhX))
+        e2, e3 = abs(share(1e-2) - (1 - R2)), abs(share(1e-3) - (1 - R2))                       # float64 below
+        assert e3 <= 1e-3 and e3 <= 0.5 * e2 + 1e-7                                              # converging
+        cos = cov(q.ravel(), FX, FhX) / np.sqrt(var(q.ravel(), FX) * var(q.ravel(), FhX))
+        cos_W = cov(qW, F, m) / np.sqrt(var(qW, F) * var(qW, m))
+        assert abs((1 - cos ** 2) - ((1 - R2) + R2 * (1 - cos_W ** 2))) <= 1e-12                # sin²θ splits
+        target = R2 * (1 - cos_W ** 2) if cos >= 0 else R2
+        world = lambda t: (lambda pt: misalignment(pt.reshape(W, S).sum(1), qW, F)[0] / kl(pt, q.ravel()))(
+            tilt(q.ravel(), t * FhX))
+        w2, w3 = abs(world(1e-2) - target), abs(world(1e-3) - target)
+        assert w3 <= 2e-3 and (w3 <= 0.5 * w2 + 1e-6 or cos < 0)
+        world_share_seen[bool(cos >= 0)] += 1
+        t = float(r.uniform(0.3, 3)); pt = tilt(q.ravel(), t * FhX); O = misalignment(pt, q.ravel(), FX)[0]
+        assert abs(O - (misalignment(pt.reshape(W, S).sum(1), qW, F)[0] + tampering(pt.reshape(W, S), K))) \
+            <= 1e-9 * (1 + O)                                                                    # outer splits too
+        pg = grounded_pursuit(qW, K, Fh, t).ravel()                                              # (iv)
+        J = lambda x: x @ FhX - kl(x, q.ravel()) / t
+        for pw in (simplex_interior(r, W) for _ in range(10)):
+            x = pairs(pw, K).ravel()
+            assert abs(t * (J(pg) - J(x)) - kl(x, pg)) <= 1e-9 * (1 + kl(x, pg))
+            assert abs(kl(x, pt) - (kl(x, pg) + kl(pg, pt))) <= 1e-9 * (1 + kl(x, pt))
+        gain = np.log(q.ravel() @ np.exp(t * FhX)) - np.log(qW @ np.exp(t * m))
+        assert abs(t * (J(pt) - J(pg)) - gain) <= 1e-9 * (1 + gain) and abs(kl(pg, pt) - gain) <= 1e-9 * (1 + gain)
+    assert min(world_share_seen.values()) >= 10
+
+
+def test_signals_and_audits_bound_tampering():
+    """P51: from signals alone, tampering is at least L(p_S), which the constructed joint attains, with the certificate
+    of (i); at most the largest tampering of a joint in which every signal comes from one world, which is positive for
+    every p_S; an audit through a channel the actor cannot influence tightens the lower end, up to T itself for an
+    exact audit; and a re-measurement splits the evaluator's gain into an honest and a channel part, bounded by T."""
+    r = rng(5101); outside, above_constant = 0, 0
+    for k in range(120):
+        W, S = int(r.integers(2, 5)), int(r.integers(2, 5))
+        K = random_channel(r, W, S); p = simplex_interior(r, W * S).reshape(W, S); pS = p.sum(0); T = tampering(p, K)
+        L, gap, joint = least_tampering(pS, K)
+        assert 0 <= gap <= 1e-8 and L - gap <= T + EXACT                                       # (i) the bound
+        assert np.abs(joint.sum(0) - pS).max() <= EXACT
+        assert L - gap - EXACT <= tampering(joint, K) <= L + EXACT                               # attained
+        for pw in (simplex_interior(r, W) for _ in range(10)):
+            assert L - gap <= kl(pS, pw @ K) + EXACT                                             # the minimum
+            c = K @ (pS / (pw @ K))
+            assert L >= kl(pS, pw @ K) - np.log(c.max()) - EXACT                                 # the certificate
+        honest = simplex_interior(r, W) @ K
+        assert least_tampering(honest, K)[0] <= 1e-8                                             # in the hull
+        outside += L > 1e-3
+        U = most_tampering(pS, K)                                                                # (ii)
+        assert U >= max(kl(pS, K[w]) for w in range(W)) - EXACT and U > 0
+        above_constant += U > max(kl(pS, K[w]) for w in range(W)) + 1e-6
+        for _ in range(30):                                                                      # near the vertices
+            x = np.array([pS[s] * r.dirichlet(np.full(W, 0.05)) for s in range(S)]).T
+            assert tampering(x, K) <= U + 1e-9
+        assert most_tampering(honest, K) > 0                                                     # even the default's
+        same = np.tile(pS, (W, 1)); assert most_tampering(pS, same) > 0                          # rows all equal p_S
+        Ka = random_channel(r, W, int(r.integers(2, 5)), zeros=True)                              # (iii) an audit
+        C = np.einsum("ws,wv->wsv", K, Ka).reshape(W, -1); pSA = np.einsum("ws,wv->sv", p, Ka).ravel()
+        La, gap_a, _ = least_tampering(pSA, C)
+        assert gap_a <= 1e-8 and La - gap_a >= L - 1e-9 and La - gap_a <= T + EXACT              # L <= La <= T
+        Ex = np.einsum("ws,wv->wsv", K, np.eye(W)).reshape(W, -1); pSE = np.einsum("ws,wv->sv", p, np.eye(W)).ravel()
+        assert abs(least_tampering(pSE, Ex)[0] - T) <= 1e-9                                     # an exact audit
+        Fh = r.normal(0, 1, S); qW = simplex_interior(r, W)                                      # (iv)
+        honest_gain, channel_gain, again = remeasured(p, K, Fh, qW)
+        first, second = again.sum(1) @ Fh, again.sum(0) @ Fh
+        assert abs(second - p.sum(1) @ (K @ Fh)) <= EXACT
+        assert abs((first - pairs(qW, K).sum(0) @ Fh) - (honest_gain + channel_gain)) <= EXACT
+        assert abs(channel_gain) <= (Fh.max() - Fh.min()) * np.sqrt(T / 2) + EXACT
+        assert kl(again.sum(1), again.sum(0)) <= T + EXACT
+        n = int(r.integers(2, 6)); order = np.argsort(Fh)                                       # re-rolls
+        below = np.cumsum(K[:, order], 1); best = np.zeros_like(K)
+        best[:, order] = below ** n - np.c_[np.zeros(W), below[:, :-1]] ** n
+        reroll = pairs(qW, best / best.sum(1, keepdims=True)); hg, cg, _ = remeasured(reroll, K, Fh, qW)
+        assert abs(hg) <= EXACT and cg > 0 and tampering(reroll, K) >= 2 * cg ** 2 / (Fh.max() - Fh.min()) ** 2
+    assert outside >= 30 and above_constant >= 10

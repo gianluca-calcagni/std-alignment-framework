@@ -92,4 +92,5 @@ scored.
 - [[P40 — Attention: misalignment against ignoring the situation|P40]] — Attention: misalignment against ignoring the situation
 - [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]] — Reversibility: the Jensen–Shannon divergence from the reversal
 - [[P45 — Drift: what runs share, and what they do not|P45]] — Drift: what runs share, and what they do not
+- [[P50 — Tampering: a change of the measurement, not of the world|P50]] — Tampering: a change of the measurement, not of the world
 - [[C3 — An error confined to one region costs bounded nats|C3]] — An error confined to one region costs bounded nats
