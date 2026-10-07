@@ -5,8 +5,10 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 (lint rule R8).
 
 - [@allen2017] Allen, E. J., Dechow, P. M., Pope, D. G. and Wu, G. (2017), Reference-dependent preferences: evidence from marathon runners. *Management Science* 63(6), 1657–1672.
+- [@armstrong2018] Armstrong, S. and Mindermann, S. (2018), Occam's razor is insufficient to infer the preferences of irrational agents. *Advances in Neural Information Processing Systems* 31 (NeurIPS 2018). arXiv:1712.05812. Its setting and main results read (arXiv, 2026-10-07).
 - [@ashby1956] Ashby, W. R. (1956), *An Introduction to Cybernetics*. Chapman & Hall.
 - [@assad2024] Assad, S., Clark, R., Ershov, D. and Xu, L. (2024), Algorithmic pricing and competition: empirical evidence from the German retail gasoline market. *Journal of Political Economy* 132(3), 723–771.
+- [@audiffren2026] Audiffren, J., Valko, M., Lazaric, A. and Ghavamzadeh, M. (2026), Maximum entropy semi-supervised inverse reinforcement learning. arXiv:2604.20074 (v1). Its setting and main results read (arXiv, 2026-10-07).
 - [@aumann1976] Aumann, R. J. (1976), Agreeing to disagree. *The Annals of Statistics* 4(6), 1236–1239.
 - [@ay2015] Ay, N., Jost, J., Lê, H. V. and Schwachhöfer, L. (2015), Information geometry and sufficient statistics. *Probability Theory and Related Fields* 162(1–2), 327–364. arXiv:1207.6736. Its abstract, introduction and section 5 read (arXiv v4, 2026-10-07).
 - [@baker2002] Baker, G. (2002), Distortion and risk in optimal incentive contracts. *Journal of Human Resources* 37(4), 728–751. Verified from its record and abstract (2026-10-07); not read in full.
@@ -39,6 +41,9 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@frey2001] Frey, B. S. and Jegen, R. (2001), Motivation crowding theory. *Journal of Economic Surveys* 15(5), 589–611.
 - [@gao2023] Gao, L., Schulman, J. and Hilton, J. (2023), Scaling laws for reward model overoptimization. *Proceedings of the 40th International Conference on Machine Learning*, PMLR 202, 10835–10866.
 - [@gneezy2000] Gneezy, U. and Rustichini, A. (2000), A fine is a price. *The Journal of Legal Studies* 29(1), 1–17.
+- [@hadfieldmenell2016] Hadfield-Menell, D., Dragan, A., Abbeel, P. and Russell, S. (2016), Cooperative inverse reinforcement learning. *Advances in Neural Information Processing Systems* 29 (NeurIPS 2016). arXiv:1606.03137. Its setting and main results read (arXiv, 2026-10-07).
+- [@hadfieldmenell2017] Hadfield-Menell, D., Milli, S., Abbeel, P., Russell, S. and Dragan, A. (2017), Inverse reward design. *Advances in Neural Information Processing Systems* 30 (NeurIPS 2017). arXiv:1711.02827. Its setting and main results read (arXiv, 2026-10-07).
+- [@hadfieldmenell2019] Hadfield-Menell, D. and Hadfield, G. K. (2019), Incomplete contracting and AI alignment. *Proceedings of the 2019 AAAI/ACM Conference on AI, Ethics, and Society*. arXiv:1804.04268. Its introduction read (arXiv, 2026-10-07).
 - [@hobson1969] Hobson, A. (1969), A new theorem of information theory. *Journal of Statistical Physics* 1, 383–391.
 - [@holmstrom1979] Holmström, B. (1979), Moral hazard and observability. *The Bell Journal of Economics* 10(1), 74–91.
 - [@holmstrom1991] Holmström, B. and Milgrom, P. (1991), Multitask principal–agent analyses: incentive contracts, asset ownership, and job design. *Journal of Law, Economics, and Organization* 7 (special issue), 24–52.
@@ -76,6 +81,7 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@ring2011] Ring, M. and Orseau, L. (2011), Delusion, survival, and intelligent agents. *Artificial General Intelligence: 4th International Conference (AGI 2011)*, 11–20. Verified from its record and abstract (2026-10-07); not read in full.
 - [@robertson1988] Robertson, T., Wright, F. T. and Dykstra, R. L. (1988), *Order Restricted Statistical Inference*. Wiley.
 - [@schnakenberg1976] Schnakenberg, J. (1976), Network theory of microscopic and macroscopic behavior of master equation systems. *Reviews of Modern Physics* 48(4), 571–585.
+- [@shah2019] Shah, R., Krasheninnikov, D., Alexander, J., Abbeel, P. and Dragan, A. (2019), Preferences implicit in the state of the world. *International Conference on Learning Representations* (ICLR 2019). arXiv:1902.04198. Its setting and main results read (arXiv, 2026-10-07).
 - [@shahshahani1979] Shahshahani, S. (1979), A new mathematical framework for the study of linkage and selection. *Memoirs of the American Mathematical Society* 17(211).
 - [@skalse2022] Skalse, J., Howe, N. H. R., Krasheninnikov, D. and Krueger, D. (2022), Defining and characterizing reward hacking. *Advances in Neural Information Processing Systems* 35 (NeurIPS 2022).
 - [@taylor2016] Taylor, J. (2016), Quantilizers: a safer alternative to maximizers for limited optimization. *AAAI Workshop on AI, Ethics, and Society*.
@@ -86,3 +92,4 @@ One line per source, written `- [@key] Authors (year), title.` Every source list
 - [@wilks1938] Wilks, S. S. (1938), The large-sample distribution of the likelihood ratio for testing composite hypotheses. *The Annals of Mathematical Statistics* 9(1), 60–62.
 - [@zhuang2020] Zhuang, S. and Hadfield-Menell, D. (2020), Consequences of misaligned AI. *Advances in Neural Information Processing Systems* 33 (NeurIPS 2020). arXiv:2102.03896. Its model and Theorems 1 and 2 read (2026-10-07).
 - [@ziebart2008] Ziebart, B. D., Maas, A. L., Bagnell, J. A. and Dey, A. K. (2008), Maximum entropy inverse reinforcement learning. *Proceedings of the 23rd AAAI Conference on Artificial Intelligence*, 1433–1438.
+- [@ziebart2010] Ziebart, B. D., Bagnell, J. A. and Dey, A. K. (2010), Modeling interaction via the principle of maximum causal entropy. *Proceedings of the 27th International Conference on Machine Learning* (ICML 2010), 1255–1262. Verified from its record (2026-10-07); not read.

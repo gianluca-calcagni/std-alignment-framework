@@ -20,6 +20,7 @@ that carry it.
 | The Price equation and selection theory | the replicator equation, the covariance form of change | descriptive; no specification | now: selection gradients as evaluators |
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([P40]); tested in part: an endogenous default (`general/`) |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | done: misalignment over a family of objectives, an interval whose lower end the most charitable principal finds ([P48]); now: identification across environments |
+| Cooperative inverse reinforcement learning and assistance | a principal whose target the agent does not know; a request read as evidence; norms taken for granted | designs agents that infer the target; we measure against a declared one | done, by correspondence: the posterior-mean target is the pooled pursuit of [P42](ii); later: the request as evidence, as a declared family of targets ([P48]) |
 | Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([P49]) |
 | Reward tampering and wireheading | an evaluator computed from a measurement the actor can influence | causal incentives of agent designs, not a measure of behaviour | done: tampering as a divergence from a declared honest channel, split exactly from the change of the world; its bounds from signals, audits and re-measurements ([P50], [P51]); later: designs that remove the incentive, as interventions on the channel; rewards the actor can influence |
 | Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([D10], [P18]–[P20]); tested on unseen data: the best-of-`n` form against [P13] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); now: heavy tails as a condition of the general core; later: early stopping compared, hackability over a feasible set, proxies that omit attributes, quantilizers as a budget |
@@ -112,15 +113,61 @@ that carry it.
 
 - *Sources.* Ng and Russell [@ng2000]; Ziebart et al. [@ziebart2008]; work on partial identifiability of rewards by
   Skalse and coauthors, and by Cao, Cohen and Szpruch *(to verify)*.
-- *Shared.* A behaviour reveals its objective only up to a constant, and with an intensity only the product
-  ([P1]); the revealed intensity is the maximum-entropy fit ([P5]); identification needs variation in conditions
-  ([D9], [P12]).
+- *Shared.* A behaviour reveals its objective only up to a constant, and with an intensity only the product ([P1]); the
+  revealed intensity is the maximum-entropy fit ([P5]); identification needs variation in conditions ([D9], [P12]).
+  Maximum-entropy IRL models a behaviour as the tilt of a base behaviour by a linear reward, which is a pursuit ([D2]),
+  and its maximum-likelihood reward over the span of given features is [P48]'s most charitable principal of that span;
+  what no reward in the span explains is [P44]'s unexplained misalignment (probed to `10⁻⁸`,
+  `probes/diagnostics/probe_requests.py`). With stochastic dynamics, the trajectory model of [@ziebart2008] lets the
+  agent choose its transitions; the causal version [@ziebart2010] does not, and is the best feasible behaviour of [P15]
+  for an actor whose limits fix the environment's transitions (`NOTES.md` §1, the probe bug of [P15]). A semi-supervised
+  variant [@audiffren2026] adds trajectories drawn from a mixture of behaviours under different rewards, used only to
+  smooth the fitted reward; in our terms, a population of principals ([P42], [P45]).
 - *Different.* These theories aim to recover rewards. We take the principal's objective as declared and measure the
   distance to it; we need the actor's objective only as the evaluator.
 - *Import, now.* Identification of an objective across several environments, which in our terms are conditions
   ([D8]) or interventions ([D6]); the invariance classes of rewards that leave optimal behaviour unchanged.
 - *What it could take from us.* A measure of how much an unidentified part of the reward matters: its effect on
   misalignment and stakes.
+
+## Cooperative inverse reinforcement learning and assistance
+
+- *Sources.* Hadfield-Menell, Dragan, Abbeel and Russell [@hadfieldmenell2016], cooperative inverse reinforcement
+  learning (CIRL): a two-player game with identical payoffs, in which the human knows the reward's parameter and the
+  robot does not; Hadfield-Menell, Milli, Abbeel, Russell and Dragan [@hadfieldmenell2017], inverse reward design (IRD):
+  the reward a designer writes is evidence about the true one, likely to the extent that its optimum behaves well in the
+  environment the designer had in mind; Shah, Krasheninnikov, Alexander, Abbeel and Dragan [@shah2019], preferences
+  implicit in the state of the world, which humans have already shaped toward what they want; Armstrong and Mindermann
+  [@armstrong2018], a no-free-lunch theorem: every policy is the result of every reward under some planner;
+  Hadfield-Menell and Hadfield [@hadfieldmenell2019], AI alignment as incomplete contracting, whose gaps people fill
+  with norms.
+- *Shared.* A principal whose target is not fully stated; a request read as more than its letter; norms that go without
+  saying.
+- *Different.* These works design an agent that infers the principal's target and acts on its belief. The core infers
+  nothing about the principal: the target is declared ([A5]), a family when it is uncertain ([P48]), and behaviour is
+  measured against it. The two are complementary: an inference can supply the declaration, and the core can judge the
+  agent that acts on it.
+- *Correspondences, checked* (`probes/diagnostics/probe_requests.py`). CIRL's deployment theorem, that the robot
+  optimizes the reward of the posterior mean, is [P42](ii): with the posterior's weights and each possible target
+  pursued at intensity `1`, the behaviour least far from them on average is the pursuit of the posterior-mean target.
+  Armstrong and Mindermann's theorem says that observation alone cannot split a policy into a planner and a reward
+  without a normative assumption; the core makes that assumption by its premises, pursuit as the steepest climb and the
+  best trade-off ([A2], [A3]), which is why a behaviour's revealed objective is identified up to a constant ([P1]). Its
+  price: a principal who is not a pursuer, such as CIRL's teaching human, whose best demonstrations depart from its own
+  optimum, has a revealed objective that includes the teaching.
+- *What a request leaves unsaid* (`NOTES.md` §10). Inverse reward design's observation model makes a written reward
+  informative only about the features that varied where it was written; in the core, a request made in one condition and
+  used in another ([D8], [P24]) leaves the weights of the features that did not vary undeclared, and the honest report
+  is [P48]'s interval over them. Preferences implicit in the state of the world are, in the core, carried by the
+  default: a pursuit keeps the default's proportions among outcomes the request scores alike, so whatever the request
+  does not mention moves only through its regression on the request under the default ([P18]). The cost of departure
+  from the default is an impact penalty of this kind, and a principal who means "within the usual norms" declares a cap
+  on intensity ([P35]) or a feasible set ([D7]), not the whole ray.
+- *Import, later.* The posterior of inverse reward design as the declared family of [P48]: the least and most
+  misalignment over the targets consistent with a request (`NOTES.md` §5.4, H35). The default estimated from how a
+  population usually acts, the state of the world in Shah et al.'s sense (H36).
+- *What it could take from us.* A measure of how far an assistant's behaviour is from every target its belief allows,
+  with the split of [P49] between what the request gets wrong and what the assistant does wrong.
 
 ## Outer and inner alignment
 

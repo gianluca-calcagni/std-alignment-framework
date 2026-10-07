@@ -3,7 +3,7 @@
 Each object of the framework, written three ways: as the finite core states it (`CORE.md`, `derived/`), as the general
 core states it (`CORE-GENERAL.md`, `transfer.md`), and as the imported sources treat it when they treat the continuous
 case at all. Asked by the PI (Q34), to see what changes between the two, and to prepare the general core's draft 4
-(`ROADMAP.md`, step 4). Nothing here is claimed: the general column has the statuses of `README.md` in this folder, and
+(`ROADMAP.md`, step 3). Nothing here is claimed: the general column has the statuses of `README.md` in this folder, and
 a source is marked **read** when its setting and the theorem cited were read in its text (arXiv, 2026-10-07), and
 **abstract** when only its record and abstract were (`NOTES.md` §3.2, D12).
 

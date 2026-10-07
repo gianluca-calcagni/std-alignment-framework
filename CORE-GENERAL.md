@@ -1,7 +1,7 @@
 # The general core
 
 > **Status: draft 3.** Frozen by Q26, and unfrozen by Q33 for outcomes that are not finite and for estimation, which
-> draft 4 takes up (`ROADMAP.md`, step 4); `general/dictionary.md` maps each object from the finite core to this file.
+> draft 4 takes up (`ROADMAP.md`, step 3); `general/dictionary.md` maps each object from the finite core to this file.
 > This file extends the core (`CORE.md`, v11) from finitely many outcomes to the outcome spaces met in practice: counts,
 > waiting times, scores, texts, trait values. It holds premises and definitions only, as `CORE.md` does for finite
 > outcomes. Its results, expected, probed or tested, are in `general/`, as the finite core's are in `derived/`, and
