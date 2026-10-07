@@ -66,7 +66,10 @@ hold. Everything else waits unless it serves one of them.
   specifications), the `e^{KL}` sample-size law of importance sampling, and what samples alone can certify. In
   alignment, Baker's distortion and risk of a performance measure, Courty and Marschke's test of distortion, and the
   obfuscation of a monitor trained against map onto existing items ([[P11 — The misaligned share at the start of a change|P11]], [[P50 — Tampering: a change of the measurement, not of the world|P50]], [[P20 — Where overoptimization starts, and how it ends|P20]], H34). Sources were verified
-  from records and abstracts; full texts are needed before a theorem is imported (D12).
+  from records and abstracts, and those on arXiv read in their text (Q34); a theorem is imported only after its
+  statement is read (D12). How each object of the framework changes from finite to continuous outcomes, and what the
+  imports say about the continuum, is in `general/dictionary.md` (Q34): one function, the log-normalizer, decides most
+  of it.
 - **Licences** (Q27): the repository keeps code, aggregates and citations only; no third-party data, weights, papers, or
   item-by-item derivatives. W1's proxy weights and per-prompt statistics were removed from the tree; they remain in two
   earlier commits, and the PI keeps the history as it is (Q33).
@@ -74,7 +77,7 @@ hold. Everything else waits unless it serves one of them.
   read (`cases/`): C1 and C2.
 - `SCENARIO.md` shows the framework applied, three ways; it is an illustration, not evidence.
 - **Blocked on the PI:** the German price archive (credentials, W2); readers who are people (Q33); the full texts of the
-  imports marked "now" (D12).
+  imports that are not on arXiv (D12).
 
 ## Next, in order
 
@@ -124,3 +127,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-04 | [[P49 — Outer and inner misalignment\|P49]], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |
 | 2026-10-07 | [[P50 — Tampering: a change of the measurement, not of the world\|P50]], tampering, and [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], what signals, audits and re-measurements reveal of it, with checks and mutation tests; the grounding gap mapped as in the core for a declared channel; the two pending framework tests, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] and [[P20 — Where overoptimization starts, and how it ends\|P20]], made steps 1 and 2, and the tampering simulation step 3 (Q32) | 4 (steps 1–3 set); 5 (diagnostics) |
 | 2026-10-07 | pull request #29 merged with its history; the PI approved: one mathematical reader, H34 as C3's second arm, the general core unfrozen for outcomes that are not finite and estimation (step 4), the history kept (Q33). A survey of what the framework can import: twenty sources verified from their records, filed in `RELATED.md`, ranked in `NOTES.md` §9 | 5 (imports for the estimation work); 2 (the count restarts with step 4) |
+| 2026-10-07 | with arXiv allowed, eleven imported sources read in their text; `general/dictionary.md`, each object of the framework in its finite and its continuous form, with what the imports say about the continuum (Q34); McAllester and Stratos's limit corrected after reading its theorem | 5 (step 4 prepared) |

@@ -1,6 +1,7 @@
 # The general core
 
-> **Status: draft 3, frozen** until a prediction of the core is tested on data not seen before (`NOTES.md` §3.1, Q26).
+> **Status: draft 3.** Frozen by Q26, and unfrozen by Q33 for outcomes that are not finite and for estimation, which
+> draft 4 takes up (`ROADMAP.md`, step 4); `general/dictionary.md` maps each object from the finite core to this file.
 > This file extends the core (`CORE.md`, v11) from finitely many outcomes to the outcome spaces met in practice: counts,
 > waiting times, scores, texts, trait values. It holds premises and definitions only, as `CORE.md` does for finite
 > outcomes. Its results, expected, probed or tested, are in `general/`, as the finite core's are in `derived/`, and
@@ -123,7 +124,7 @@ counts as most direct must not depend on how finely we describe what happens.
   (`general/transfer.md`).
 
 **Lineage.** [[A2 — Pursuit is the steepest climb|A2]]. Ay, Jost, Lê and Schwachhöfer extend Čencov's theorem to general spaces directly, by invariance under
-sufficient statistics *(to verify)*; GA6 gives a route that reuses the finite theorem instead.
+sufficient statistics [[References|@ay2015]]; GA6 gives a route that reuses the finite theorem instead.
 
 ### GA3 — Pursuit is the best trade-off
 **Statement.** As [[A3 — Pursuit is the best trade-off|A3]], with the cost differentiable along segments: to pursue an objective at an intensity is to choose

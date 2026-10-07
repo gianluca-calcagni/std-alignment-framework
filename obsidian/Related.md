@@ -59,7 +59,9 @@ that carry it.
 
 - *Sources.* Čencov [[References|@cencov1982]]; Campbell [[References|@campbell1986]]; Csiszár [[References|@csiszar1975]]; Polyanskiy and Wu
   [[References|@polyanskiy2025]], for divergences on general spaces and their variational forms, which the general core needs for
-  outcomes that are not finite (Q33); Amari's monographs *(to verify)*.
+  outcomes that are not finite (Q33); Ay, Jost, Lê and Schwachhöfer [[References|@ay2015]], who extend Čencov's uniqueness of the
+  Fisher metric to infinite sample spaces; Pistone and Sempi [[References|@pistone1995]], the manifold of behaviours equivalent to a
+  given one, on which the tilts that exist live; Amari's monographs *(to verify)*.
 - *Shared.* The Fisher metric and its uniqueness ([[A2 — Pursuit is the steepest climb|A2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
   the second-order expansion of KL ([[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]); total correlation, the misalignment of several actors against
   independent pursuit ([[P39 — Several actors: coordination plus individual misalignment|P39]]); the Jensen–Shannon divergence, the misalignment of a record of transitions against
@@ -161,6 +163,8 @@ that carry it.
   influence, and their cost in the net value of [[P50 — Tampering: a change of the measurement, not of the world|P50]](iv). Carroll et al.'s influenceable rewards, for what [[P50 — Tampering: a change of the measurement, not of the world|P50]] leaves
   outside, an actor that changes the principal's target; their finding that each of eight candidate definitions of
   alignment either allows unwanted influence or is too cautious to be useful is a warning for any extension that tries.
+  For worlds and signals that are not finite, the least tampering of [[P51 — What signals, audits and re-measurements reveal of tampering|P51]](i) is the maximum-likelihood estimate of a
+  mixing distribution, whose existence and finite support Lindsay established [[References|@lindsay1983]].
 - *What it could take from us.* A measure of tampering from behaviour, with its identified set from signals and the gain
   of each audit, in one currency with outer and inner misalignment ([[P49 — Outer and inner misalignment|P49]]).
 
@@ -255,10 +259,12 @@ that carry it.
 - *Import, now* (for the estimation work, Q33). Chatterjee and Diaconis's law: reweighting draws of one behaviour to
   stand for another needs about `e^{KL}` draws, necessary and sufficient, with a cut-off on the logarithmic scale; the
   sharp form of [[P47 — The cost of reweighting|P47]]'s `E[w²] ≥ e^{KL}`, and the rule for every diagnostic computed by reweighting. McAllester and
-  Stratos's limit: a high-confidence, distribution-free lower bound on mutual information from `N` samples cannot exceed
-  about `log N`. So divergences between behaviours whose log-probabilities are known, as in W3 and W4, are estimable
-  from samples, and divergences between high-dimensional distributions known only through samples, such as H33's
-  activations, are not without a model.
+  Stratos's limit: with one behaviour known and samples from the other, a high-confidence, distribution-free lower bound
+  on `KL(known‖sampled)` stays below `ln N`, and the same holds for mutual information. Misalignment is the other way
+  round, with the actor sampled and the intended behaviour known; there it is the general core's limit that applies: no
+  sample certifies that misalignment is small (GD11). So which behaviour is sampled, and which log-ratios are known,
+  decides what a case can certify (`general/dictionary.md`, §2): with log-probabilities known, as in W3 and W4, the
+  core's quantities are Monte Carlo averages.
 - *Import, later.* Stein's exponent, for a test that fixes the error of one kind; the chi-bar-square limit at the
   boundary `t* = 0`; confidence sets for the other quantities of the standard.
 - *What it could take from us.* Misalignment as the quantity a test of "the actor behaves as intended" is about.
