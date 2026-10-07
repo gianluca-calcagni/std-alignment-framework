@@ -95,8 +95,8 @@ channel.
 v7.10 archive, gap 3 (grounding: wireheading and reward tampering), which `IMPORT.md` §8 mapped as "partly;
 needs": a tampered measurement there was only an outcome that the evaluator scores high and the target low. New: the
 measurement as part of the outcome, tampering as a divergence from a declared channel, and its split from the change of
-the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering and the corrupted reward
-channel of Everitt and coauthors are the nearest work (`RELATED.md`, to verify).
+the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering [[References|@everitt2021]] and the
+corrupted reward channel [[References|@everitt2017]] are the nearest work (`RELATED.md`).
 
 ## Checks
 - [`checks/test_diagnostics.py::test_tampering_splits_the_departure`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_diagnostics.py)

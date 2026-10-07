@@ -21,13 +21,16 @@ that carry it.
 | Bounded rationality and discrete choice | the logit rule as a pursuit; a KL cost | the default is chosen by the agent | done: attention as mutual information ([[P40 — Attention: misalignment against ignoring the situation\|P40]]); tested in part: an endogenous default (`general/`) |
 | Inverse RL and reward identifiability | objectives revealed up to a constant; identification | recovers rewards, does not score misalignment | done: misalignment over a family of objectives, an interval whose lower end the most charitable principal finds ([[P48 — Misalignment when the target is uncertain\|P48]]); now: identification across environments |
 | Outer and inner alignment | a target, an evaluator trained on, and the trained actor | the two failures named, not measured | done: outer misalignment, inner misalignment, and their exact split ([[P49 — Outer and inner misalignment\|P49]]) |
-| Reward tampering and wireheading | an evaluator computed from a measurement the actor can influence | causal incentives of agent designs, not a measure of behaviour | done: tampering as a divergence from a declared honest channel, split exactly from the change of the world; its bounds from signals, audits and re-measurements ([[P50 — Tampering: a change of the measurement, not of the world\|P50]], [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]); later: designs that remove the incentive, as interventions on the channel |
-| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested on unseen data: the best-of-`n` form against [[P13 — What the start of a change gains\|P13]] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); later: early stopping compared, hackability over a feasible set |
-| Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | later: the angle of a performance measure |
-| Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets |
-| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([[D11 — Sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]); the cost of reweighting ([[P47 — The cost of reweighting\|P47]]); later: Stein's exponent, the boundary case |
-| Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | done: across runs, differences between evaluation and use split into reproducible and run-specific parts ([[P46 — What runs share between conditions, and what they do not\|P46]]); later: audit protocols |
+| Reward tampering and wireheading | an evaluator computed from a measurement the actor can influence | causal incentives of agent designs, not a measure of behaviour | done: tampering as a divergence from a declared honest channel, split exactly from the change of the world; its bounds from signals, audits and re-measurements ([[P50 — Tampering: a change of the measurement, not of the world\|P50]], [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]); later: designs that remove the incentive, as interventions on the channel; rewards the actor can influence |
+| Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested on unseen data: the best-of-`n` form against [[P13 — What the start of a change gains\|P13]] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); now: heavy tails as a condition of the general core; later: early stopping compared, hackability over a feasible set, proxies that omit attributes, quantilizers as a budget |
+| Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | now: distortion and risk of a measure, read against [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii)'s split of the misaligned share; a test of distortion from how a measure degrades, as a world design for [[P20 — Where overoptimization starts, and how it ends\|P20]] |
+| Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets; later: transportability from evaluation to use; comparison of experiments for views |
+| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([[D11 — Sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]); the cost of reweighting ([[P47 — The cost of reweighting\|P47]]); now: reweighting needs about `e^{KL}` draws; what samples alone can certify; later: Stein's exponent, the boundary case |
+| Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | done: across runs, differences between evaluation and use split into reproducible and run-specific parts ([[P46 — What runs share between conditions, and what they do not\|P46]]); now: a monitor trained against, as a tampered channel (H34, case C3); later: audit protocols |
 | Distribution shift | bounds across conditions | prediction error, not misalignment | later: divergence-based transfer bounds |
+| Statistics of misspecified models | the best fit of a family that excludes the truth, and the divergence left | estimation and model choice, not alignment | now: intervals at the revealed intensity; a test of which specification fits an actor better |
+| Distributionally robust optimization | the worst average over a divergence ball | an optimizer's guard, not a measure of an actor | later: duals for every divergence ball, and its radius from data |
+| Information elicitation without verification | reports judged without the truth, by measures that obey data processing | mechanism design: paying for truthful reports | later: audits without ground truth ([[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]) |
 | Active inference | a KL from predicted to preferred outcomes | a process theory of brains | never, beyond the correspondence |
 | Formal specification | specifications as sets, fixed in advance | deterministic traces | tested: a robustness degree that orders as misalignment does (`general/`); later: quantitative semantics |
 | Learning in games and algorithmic collusion | several actors, potential games, learning dynamics | equilibria and their selection | done: a group as one actor ([[P39 — Several actors: coordination plus individual misalignment\|P39]]), reversible learning in potential games ([[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], Notes) |
@@ -54,7 +57,9 @@ that carry it.
 
 ## Information geometry
 
-- *Sources.* Čencov [[References|@cencov1982]]; Campbell [[References|@campbell1986]]; Csiszár [[References|@csiszar1975]]; Amari's monographs *(to verify)*.
+- *Sources.* Čencov [[References|@cencov1982]]; Campbell [[References|@campbell1986]]; Csiszár [[References|@csiszar1975]]; Polyanskiy and Wu
+  [[References|@polyanskiy2025]], for divergences on general spaces and their variational forms, which the general core needs for
+  outcomes that are not finite (Q33); Amari's monographs *(to verify)*.
 - *Shared.* The Fisher metric and its uniqueness ([[A2 — Pursuit is the steepest climb|A2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
   the second-order expansion of KL ([[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]); total correlation, the misalignment of several actors against
   independent pursuit ([[P39 — Several actors: coordination plus individual misalignment|P39]]); the Jensen–Shannon divergence, the misalignment of a record of transitions against
@@ -117,10 +122,9 @@ that carry it.
 
 ## Outer and inner alignment
 
-- *Sources.* Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), "Risks from learned optimization in advanced
-  machine learning systems", arXiv:1906.01820 *(to verify: recorded in v7.10, not checked from here)*, who name outer
-  alignment, between the principal's target and the training objective, and inner alignment, between the training
-  objective and what the trained system pursues.
+- *Sources.* Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant [[References|@hubinger2019]], who name outer alignment, between
+  the principal's target and the training objective, and inner alignment, between the training objective and what the
+  trained system pursues.
 - *Shared.* A chain of two links: target, evaluator, actor. In the core, the target is the principal's ([[D3 — Specification, declaration and misalignment|D3]];
   `STANDARD.md`, the field Principal), the evaluator the trainer's ([[D10 — Evaluator, regression and residual|D10]]), and the actor's behaviour is judged against
   both.
@@ -135,12 +139,12 @@ that carry it.
 
 ## Reward tampering and wireheading
 
-- *Sources.* Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), reinforcement
-  learning with a corrupted reward channel, with a no-free-lunch result for learning the true reward from a corrupted
-  one and a remedy that checks rewards across several sources; Everitt, Hutter, Kumar and Krakovna (2021), reward
-  tampering analysed with causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, whose
-  tomato-watering environment lets the agent tamper with its observation. All *(to verify: from memory, `NOTES.md` §3.2,
-  D11)*.
+- *Sources.* Ring and Orseau [[References|@ring2011]], the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg [[References|@everitt2017]],
+  reinforcement learning with a corrupted reward channel, with a no-free-lunch theorem for learning the true reward from
+  a corrupted one, and decoupled feedback, which checks rewards across sources; Everitt, Hutter, Kumar and Krakovna
+  [[References|@everitt2021]], reward tampering analysed with causal influence diagrams; Leike et al. [[References|@leike2017]], the AI safety
+  gridworlds, whose tomato-watering environment lets the agent make the tomatoes look watered; Carroll, Foote,
+  Siththaranjan, Russell and Dragan [[References|@carroll2024]], reward functions that change and that the agent can influence.
 - *Shared.* A true state and an observed reward or signal that the agent may corrupt; tampering as the gap between them;
   checking one source of reward against another.
 - *Different.* These works ask which agent designs have an incentive to tamper, through the structure of causal
@@ -154,7 +158,9 @@ that carry it.
   through a channel the actor cannot influence raises the lower bound, and identifies tampering when it is exact, as the
   cross-checking of several sources does.
 - *Import, later.* Designs that remove the incentive to tamper, read as interventions ([[D6 — Intervention and pass-through|D6]]) on what the actor can
-  influence, and their cost in the net value of [[P50 — Tampering: a change of the measurement, not of the world|P50]](iv).
+  influence, and their cost in the net value of [[P50 — Tampering: a change of the measurement, not of the world|P50]](iv). Carroll et al.'s influenceable rewards, for what [[P50 — Tampering: a change of the measurement, not of the world|P50]] leaves
+  outside, an actor that changes the principal's target; their finding that each of eight candidate definitions of
+  alignment either allows unwanted influence or is too cautious to be useful is a warning for any extension that tries.
 - *What it could take from us.* A measure of tampering from behaviour, with its identified set from signals and the gain
   of each audit, in one currency with outer and inner misalignment ([[P49 — Outer and inner misalignment|P49]]).
 
@@ -163,9 +169,9 @@ that carry it.
 - *Sources.* Gao et al. [[References|@gao2023]]; Coste et al. [[References|@coste2024]], whose released answers W1 used; Skalse et al.
   [[References|@skalse2022]]; Karwowski et al. [[References|@karwowski2024]]; Laidlaw et al. [[References|@laidlaw2025]], who define a proxy by its correlation
   with the target under a reference policy and propose `χ²` regularization of occupancy measures, the `χ²` row of [[P31 — Budgets of other shapes|P31]]
-  with the correlation of [[P13 — What the start of a change gains|P13]] (unlike KL, a `χ²` cost can rule outcomes out at the optimum: [[P38 — Any convex cost|P38]](ii)); Manheim and
-  Garrabrant's taxonomy, Zhuang and Hadfield-Menell on unmentioned attributes, El-Mhamdi and Hoang on weak and strong
-  Goodhart *(to verify)*.
+  with the correlation of [[P13 — What the start of a change gains|P13]] (unlike KL, a `χ²` cost can rule outcomes out at the optimum: [[P38 — Any convex cost|P38]](ii)); Zhuang and
+  Hadfield-Menell [[References|@zhuang2020]], on proxies that omit attributes of the state; Taylor's quantilizers [[References|@taylor2016]];
+  Manheim and Garrabrant's taxonomy, and El-Mhamdi and Hoang on weak and strong Goodhart *(to verify)*.
 - *Shared.* An evaluator that differs from the target, and what pursuing it does to the target ([[D10 — Evaluator, regression and residual|D10]]). Karwowski et al.
   explain Goodhart by angles between reward vectors in the polytope of occupancy measures: a linear feasible set ([[D7 — Feasibility|D7]])
   and the angle of [[P11 — The misaligned share at the start of a change|P11]]. Skalse et al. show that over all stochastic policies only trivial pairs are unhackable.
@@ -182,9 +188,16 @@ that carry it.
   buys unbounded gain, the case of Kwa et al. [[References|@kwa2024]], while a χ² budget `B` buys exactly `√(B·Var)`. Under χ²,
   Laidlaw et al.'s correlated proxy gains `√B·ρ·sd` in the target for every default; under KL the same law is exact
   only for Gaussian defaults. These are statements about outcomes that are not finite, and claimed nowhere yet.
+- *Import, now* (for the general core's outcomes that are not finite, Q33). Kwa et al.'s condition on tails: a KL
+  penalty protects the target when the evaluator's error is light-tailed, and not when it is heavy-tailed, a distinction
+  finite outcomes cannot show, so the general core must carry it.
 - *Import, later.* Whether Karwowski et al.'s early stopping is the rule of [[P20 — Where overoptimization starts, and how it ends|P20]](i) (`TERMS.md`, section 2, level B);
-  hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's
-  four variants, once their definitions are checked against [[P8 — An actor that cannot tell outcomes apart|P8]], [[P20 — Where overoptimization starts, and how it ends|P20]](ii), [[P12 — What interventions reveal|P12]] and [[P17 — What an unobserved condition can hide|P17]] (`NOTES.md` §5, H3).
+  hackability as a property of a target and an evaluator over a feasible set; Manheim and Garrabrant's four variants,
+  once their definitions are checked against [[P8 — An actor that cannot tell outcomes apart|P8]], [[P20 — Where overoptimization starts, and how it ends|P20]](ii), [[P12 — What interventions reveal|P12]] and [[P17 — What an unobserved condition can hide|P17]] (`NOTES.md` §5, H3); Zhuang and
+  Hadfield-Menell's necessary and sufficient conditions under which optimizing a proxy that omits attributes drives
+  utility arbitrarily low, against the residual of [[D10 — Evaluator, regression and residual|D10]] and the worst cases of [[P29 — The width is the exact worst case|P29]]; a quantilizer, whose
+  probabilities are at most a fixed multiple of the default's, as a departure budget of another shape ([[P31 — Budgets of other shapes|P31]]): a bound
+  on the max-divergence.
 - *What it could take from us.* Exact results for actors that see only the evaluator: a monotone regression rules out
   overoptimization ([[P19 — A monotone regression rules out overoptimization|P19]]), so a proxy that only averages the target over what it can tell apart cannot lower it, and
   neither can a pass-or-fail verifier whose passing outcomes are better on average (`ontologies/machine-learning/`);
@@ -198,46 +211,71 @@ that carry it.
 ## Principal–agent theory
 
 - *Sources.* Holmström [[References|@holmstrom1979]]; Holmström and Milgrom [[References|@holmstrom1991]]; Kerr [[References|@kerr1975]]; Frey and Jegen
-  [[References|@frey2001]]; Gneezy and Rustichini [[References|@gneezy2000]]; Baker's distortion of performance measures *(to verify)*.
+  [[References|@frey2001]]; Gneezy and Rustichini [[References|@gneezy2000]]; Baker [[References|@baker2002]], who characterizes a performance measure by two
+  parameters, its distortion and its risk; Courty and Marschke [[References|@courty2008]], a test for distortion from how a measure's
+  association with the true goal changes once the measure is used.
 - *Shared.* Delegation, a performance measure that differs from value, and the response to incentives
   ([[D6 — Intervention and pass-through|D6]], [[P12 — What interventions reveal|P12]]); the medical-sciences ontology, where the measures are written rules.
 - *Different.* These theories solve for optimal contracts, with risk, participation and the cost of pay. We measure,
   and do not model the principal's optimization.
-- *Import, later.* Baker's alignment of a performance measure as an angle between marginal effects, if it is the angle
-  of [[P11 — The misaligned share at the start of a change|P11]] (`NOTES.md` §5, H8); the informativeness principle as a statement about the principal's observation.
+- *Import, now.* Baker's two parameters, read against [[P50 — Tampering: a change of the measurement, not of the world|P50]](iii): at the start of a pursuit of a measured evaluator, the
+  misaligned share `sin²θ` splits into the share of the evaluator's variance that is noise of the measurement, `1 − R²`,
+  and `R²` times the world's misaligned share `sin²θ_W`. Whether his distortion is that angle needs his text, which is
+  not open (`NOTES.md`, H8). Courty and Marschke read distortion from how a measure's association with the goal weakens
+  once its weight in pay rises: in the core, the covariance of target and evaluator under the current behaviour as
+  intensity grows, whose zero is [[P20 — Where overoptimization starts, and how it ends|P20]](i)'s stopping point. Their design is a candidate world test of [[P20 — Where overoptimization starts, and how it ends|P20]], if its data
+  are public.
+- *Import, later.* The informativeness principle, as a statement about the principal's observation.
 - *What it could take from us.* A measure of misalignment that needs no model of the agent's preferences.
 
 ## Identification and causal inference
 
-- *Sources.* Manski [[References|@manski2003]]; Pearl's causal models, and causal analyses of agent incentives by Everitt, Carey and
-  coauthors *(to verify)*.
+- *Sources.* Manski [[References|@manski2003]]; Pearl and Bareinboim [[References|@pearl2014]], on transporting what is learned in one population
+  to another; Blackwell [[References|@blackwell1953]], on comparing experiments; causal analyses of agent incentives by Everitt and
+  coauthors [[References|@everitt2021]].
 - *Shared.* Identified and identified sets ([[D9 — Observation and identification|D9]]); interventions as designed changes of condition ([[D6 — Intervention and pass-through|D6]]); bounds from
   assumptions rather than point estimates ([[P17 — What an unobserved condition can hide|P17]]).
 - *Different.* No notion of misalignment or of a specification.
-- *Import, now.* Sharp identified sets; instrumental variables as a model for interventions that change only one
-  thing.
+- *Import, now.* Sharp identified sets; instrumental variables as a model for interventions that change only one thing.
+- *Import, later.* Transportability's graphical criteria, for when what is seen in evaluation carries to use: an
+  assumption that can make [[P17 — What an unobserved condition can hide|P17]]'s unobserved condition identified ([[P24 — The evaluation gap|P24]], [[P46 — What runs share between conditions, and what they do not|P46]]). Blackwell's comparison of
+  experiments, for sharper identified sets of views ([[D8 — Conditions, responses and views|D8]]; `NOTES.md` §3.3, E5).
 - *What it could take from us.* Misalignment and stakes as targets of identification.
 
 ## Hypothesis testing and sequential analysis
 
 - *Sources.* Cover and Thomas [[References|@cover2006]] (Stein's lemma, Chernoff information); Wald [[References|@wald1945]]; Chernoff
-  [[References|@chernoff1952]]; Wilks [[References|@wilks1938]].
+  [[References|@chernoff1952]]; Wilks [[References|@wilks1938]]; Chatterjee and Diaconis [[References|@chatterjee2018]], on the sample size of importance
+  sampling; McAllester and Stratos [[References|@mcallester2020]], on what samples can certify about information.
 - *Shared.* KL is the expected evidence per observation under the true behaviour ([[D11 — Sample and evidence|D11]], [[P21 — The expected evidence is misalignment|P21]]); `2n·M(p̂)` is a
   likelihood-ratio statistic ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]]).
 - *Different.* A theory of tests; it does not define alignment.
 - *Import, done.* Sampling, as the act of measurement that connects behaviours to data ([[D11 — Sample and evidence|D11]]), with evidence ([[P21 — The expected evidence is misalignment|P21]],
   Wald in its Notes), detection ([[P22 — No test detects misalignment faster than misalignment|P22]], Chernoff) and estimation ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], Wilks) as derived results.
+- *Import, now* (for the estimation work, Q33). Chatterjee and Diaconis's law: reweighting draws of one behaviour to
+  stand for another needs about `e^{KL}` draws, necessary and sufficient, with a cut-off on the logarithmic scale; the
+  sharp form of [[P47 — The cost of reweighting|P47]]'s `E[w²] ≥ e^{KL}`, and the rule for every diagnostic computed by reweighting. McAllester and
+  Stratos's limit: a high-confidence, distribution-free lower bound on mutual information from `N` samples cannot exceed
+  about `log N`. So divergences between behaviours whose log-probabilities are known, as in W3 and W4, are estimable
+  from samples, and divergences between high-dimensional distributions known only through samples, such as H33's
+  activations, are not without a model.
 - *Import, later.* Stein's exponent, for a test that fixes the error of one kind; the chi-bar-square limit at the
   boundary `t* = 0`; confidence sets for the other quantities of the standard.
 - *What it could take from us.* Misalignment as the quantity a test of "the actor behaves as intended" is about.
 
 ## Deceptive alignment and AI evaluation
 
-- *Sources.* Hubinger et al. on risks from learned optimization, the sleeper agents study, studies of evaluation
-  awareness, and Ward et al.'s causal definition of deception *(to verify)*.
+- *Sources.* Hubinger et al. [[References|@hubinger2019]] on risks from learned optimization; Baker, Huizinga and coauthors
+  [[References|@baker2025]], on monitoring the reasoning of a model trained against its monitor; the sleeper agents study, studies of
+  evaluation awareness, and Ward et al.'s causal definition of deception *(to verify)*.
 - *Shared.* An actor that behaves differently when it is observed ([[D8 — Conditions, responses and views|D8]], [[D9 — Observation and identification|D9]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]]).
 - *Different.* Several of these define deception by beliefs or intent, internal states that the core does not judge
   ([[A1 — Behaviour suffices|A1]]). We bound what an unobserved condition can hide from what the actor can perceive.
+- *Import, now* (H34, case C3). Baker et al. found that a monitor reading a reasoning model's chain of thought catches
+  reward hacking, and that adding the monitor to the training reward helps at low optimization strength, while at higher
+  strength the model learns to hide its intent and goes on hacking. That is H34's case (`NOTES.md` §5.4): training
+  against a monitor that reads a channel the actor can influence tampers with the channel ([[P50 — Tampering: a change of the measurement, not of the world|P50]](iii)). A quantitative
+  comparison needs the channel declared, which their setting does not give; case C3's second arm simulates it.
 - *Import, later.* Audit protocols, trigger studies and measured evaluation awareness, as estimates of the divergence
   between views.
 - *What it could take from us.* Identified bounds, and the design rule of [[P17 — What an unobserved condition can hide|P17]](iv): audits that the actor cannot tell
@@ -252,6 +290,42 @@ that carry it.
   evaluation gap (Prop 19), which shifts the weights of conditions.
 - *Different.* Bounds on prediction error, not on misalignment.
 - *Import, later.* Divergences other than KL for transfer bounds, which may narrow [[P17 — What an unobserved condition can hide|P17]]'s identified set.
+
+## Statistics of misspecified models
+
+- *Sources.* White [[References|@white1982]]; Vuong [[References|@vuong1989]].
+- *Shared.* Fitting a family that does not contain the truth. The maximum-likelihood fit of a pursuit ray to an actor's
+  sample estimates the intensity that minimizes `KL(p̂‖p_{F,t})`, White's pseudo-true parameter, which is the revealed
+  intensity `t*` of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv); the divergence left is the misalignment.
+- *Different.* These theories estimate and choose models; they do not read the divergence left as an actor's failure to
+  do as intended.
+- *Import, now* (for the estimation work, Q33). White's limit theory for a fit under misspecification: intervals for
+  `t*` and the quantities computed at it, with the sandwich variance, where W1–W4 used the bootstrap. Vuong's test of
+  which of two families is closer in KL to the truth: whether one specification fits an actor better than another, such
+  as two principals ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]], [[P48 — Misalignment when the target is uncertain|P48]]), a trainer and a principal ([[P49 — Outer and inner misalignment|P49]]), or a specification with and without a named
+  objective ([[P44 — What named objectives explain|P44]]). His nested case, with the saturated model, should give the limit of `2n·M(p̂_n)` when `M > 0`,
+  where [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s χ² reference does not apply; to be checked in the text before an item imports it.
+- *What it could take from us.* The divergence left read as misalignment, with its stakes and its splits.
+
+## Distributionally robust optimization
+
+- *Sources.* Ben-Tal, den Hertog, De Waegenaere, Melenberg and Rennen [[References|@bental2013]].
+- *Shared.* The worst average over a ball of behaviours around a nominal one, in a divergence such as KL or `χ²`:
+  [[P17 — What an unobserved condition can hide|P17]]'s bound on what an unobserved condition can hide, and the departure budgets of [[P27 — The best use of a departure budget|P27]] and [[P31 — Budgets of other shapes|P31]].
+- *Different.* An optimizer's guard against uncertain probabilities, not a measure of an actor.
+- *Import, later.* The tractable dual of the worst case for every divergence of this kind, and the ball's radius chosen
+  as a confidence region from goodness-of-fit statistics: a way to set [[P17 — What an unobserved condition can hide|P17]]'s `ε` from data rather than by assumption.
+
+## Information elicitation without verification
+
+- *Sources.* Kong and Schoenebeck [[References|@kong2019]].
+- *Shared.* Reports that cannot be checked against the truth, judged by information measures that obey data processing,
+  as [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] judges signals.
+- *Different.* Mechanism design: their mechanisms pay for reports so that telling the truth pays most; we measure what a
+  behaviour reveals.
+- *Import, later.* Their information-monotone measures and their impossibility result, for audits without ground truth
+  ([[P51 — What signals, audits and re-measurements reveal of tampering|P51]]) and, if the archive's gap 5 is reopened, for H33's latent knowledge.
+- *What it could take from us.* Tampering, and its identified set, as the quantity a truthful mechanism drives to zero.
 
 ## Active inference
 

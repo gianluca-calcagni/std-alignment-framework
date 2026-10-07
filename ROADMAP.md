@@ -58,16 +58,23 @@ hold. Everything else waits unless it serves one of them.
   Separating drift from procedure needs replicate runs of one procedure; none is public.
 - **Lessons as defaults** (Q29): new registrations follow `cases/TEMPLATE.md`, held to it by lint R15; case scripts use
   `tools/casekit.py`; `cases/README.md` maps each lesson to what holds it.
-- **Frozen** (`NOTES.md`, Q26, Q27): the general core at draft 3, new disciplines, any widening of the scope. Q26's
-  condition is met; the PI keeps the freeze, to build more confidence first. No external reviews yet.
+- **Frozen** (`NOTES.md`, Q26, Q27, Q33): new disciplines, any widening of the scope, and the general core except for
+  outcomes that are not finite and estimation guarantees, which Q33 unfroze (step 4). External review: one mathematical
+  reader of the core and `derived/` is allowed (Q33).
+- **Imports** (Q33, `NOTES.md` §9): a survey of what the framework can import found the most weight in statistics: the
+  theory of misspecified models (the revealed intensity is White's pseudo-true parameter; Vuong's test compares
+  specifications), the `e^{KL}` sample-size law of importance sampling, and what samples alone can certify. In
+  alignment, Baker's distortion and risk of a performance measure, Courty and Marschke's test of distortion, and the
+  obfuscation of a monitor trained against map onto existing items ([P11], [P50], [P20], H34). Sources were verified
+  from records and abstracts; full texts are needed before a theorem is imported (D12).
 - **Licences** (Q27): the repository keeps code, aggregates and citations only; no third-party data, weights, papers, or
   item-by-item derivatives. W1's proxy weights and per-prompt statistics were removed from the tree; they remain in two
-  earlier commits until the PI decides on a force-push.
+  earlier commits, and the PI keeps the history as it is (Q33).
 - Two simulation cases checked instruments before they met the world, and each revised a prediction before its data were
   read (`cases/`): C1 and C2.
 - `SCENARIO.md` shows the framework applied, three ways; it is an illustration, not evidence.
-- **Blocked on the PI:** the German price archive (credentials, W2); the history purge (a force-push); the outside
-  reader (on hold).
+- **Blocked on the PI:** the German price archive (credentials, W2); readers who are people (Q33); the full texts of the
+  imports marked "now" (D12).
 
 ## Next, in order
 
@@ -77,14 +84,15 @@ Each step names the row it serves and what it waits for. A step that serves no r
 |---|---|---|---|
 | 1 | **[P41], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The Rock–Paper–Scissors arm alone is weak, since its cycles are known in summary (D9); the risky arm is the potential game, and every two-strategy population game has a potential, so a public continuous-time experiment with two strategies would serve. First check which records are public and not yet read; then register from the template, with a declared principal | 4 | the check of the data, which the executor can make |
 | 2 | **[P20], the stopping rule** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero. As revised after C2, it needs several runs per `β` on a fine grid, with a gold distinct from the proxy. First check whether such a sweep is public and unseen; otherwise measure what training one on small models costs on this machine, as W3 measured its sampler; then register | 4 | the check of the data, or the measured cost of making them |
-| 3 | **C3, tampering** (simulation, approved in Q32): a small environment, built here, where the actor can change the world or its measurement, in the manner of the tomato-watering gridworld (D11). It checks [P51]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [P50](iii) says, with its share at the start | 5 | steps 1 and 2; it gates no named world test yet |
-| 4 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
-| 5 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone; and a mathematician reads the core and `derived/` | 5 | the PI lifts the hold on external review (Q27) and finds readers who are people |
-| 6 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
+| 3 | **C3, tampering** (simulation, approved in Q32): a small environment, built here, where the actor can change the world or its measurement, in the manner of the tomato-watering gridworld (D11). It checks [P51]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [P50](iii) says, with its share at the start. A second arm (H34, Q33): a monitor that reads a channel the actor can influence, trained against, as Baker et al. found with chain-of-thought monitors | 5 | steps 1 and 2; it gates no named world test yet |
+| 4 | **The general core, draft 4** (Q33): outcomes that are not finite, with the condition on tails that finite outcomes hide (Kwa et al.), and estimation guarantees for the core's quantities, imported where they exist: White's and Vuong's theory of misspecified fits, the `e^{KL}` law of reweighting, and the limit on what samples alone certify (`NOTES.md` §9). Drafted alongside steps 1–3, while they wait on data | 5 | the full texts (D12) before any theorem is imported; the stability row's count restarts when a definition changes |
+| 5 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
+| 6 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone; and a mathematician reads the core and `derived/` | 5 | the PI finds readers who are people; the hold is lifted for the mathematician (Q33) |
+| 7 | Three steps with no change of scope, premise or definition | 2 | the freeze, once step 4 has changed what it changes |
 
 ## Not now, and why
 
-- The general core, new disciplines, wider scope: frozen by the PI (Q26, Q27), although row 4 is met.
+- New disciplines and wider scope: frozen by the PI (Q26, Q27); the general core too, except step 4 (Q33).
 - New results in `derived/`: only if a test on the list above needs one to be stated. The rule was set aside, with the
   PI's approval, for [P48]–[P51]; it applies again from here.
 - More simulation cases: only to gate a named world test, at most one per test, before that test runs.
@@ -115,3 +123,4 @@ One line per turn: date, what changed, which row it served.
 | 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [P48], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |
 | 2026-10-04 | [P49], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |
 | 2026-10-07 | [P50], tampering, and [P51], what signals, audits and re-measurements reveal of it, with checks and mutation tests; the grounding gap mapped as in the core for a declared channel; the two pending framework tests, [P41] and [P20], made steps 1 and 2, and the tampering simulation step 3 (Q32) | 4 (steps 1–3 set); 5 (diagnostics) |
+| 2026-10-07 | pull request #29 merged with its history; the PI approved: one mathematical reader, H34 as C3's second arm, the general core unfrozen for outcomes that are not finite and estimation (step 4), the history kept (Q33). A survey of what the framework can import: twenty sources verified from their records, filed in `RELATED.md`, ranked in `NOTES.md` §9 | 5 (imports for the estimation work); 2 (the count restarts with step 4) |

@@ -354,7 +354,8 @@ two defaults, the change of default adds a term of its own.
 
 **Lineage.** v7.10: Cor 1.5 and A16 (stacked stages, with an outer–inner cross term at second order), and H12 (the chain
 rule of KL may give the archive's five gaps back as additive terms); the outer and inner alignment of Hubinger et al.
-(2019), as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of intensity.
+[@hubinger2019], as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of
+intensity.
 
 ### P50 — Tampering: a change of the measurement, not of the world
 **Statement.** Let the outcomes be pairs, `X = W × S`: a state `w` of the world, and a signal `s`, the measurement from
@@ -442,8 +443,8 @@ channel.
 **Lineage.** v7.10 archive, gap 3 (grounding: wireheading and reward tampering), which `IMPORT.md` §8 mapped as "partly;
 needs": a tampered measurement there was only an outcome that the evaluator scores high and the target low. New: the
 measurement as part of the outcome, tampering as a divergence from a declared channel, and its split from the change of
-the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering and the corrupted reward
-channel of Everitt and coauthors are the nearest work (`RELATED.md`, to verify).
+the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering [@everitt2021] and the
+corrupted reward channel [@everitt2017] are the nearest work (`RELATED.md`).
 
 ### P51 — What signals, audits and re-measurements reveal of tampering
 **Statement.** In the setting of [P50], let `p ∈ Δ`, with distribution of signals `p_S`. For a channel `C` from `W` to a

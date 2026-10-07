@@ -192,6 +192,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q30 | after the question "whose target?" (§7): approved. The interval of misalignment over a family of targets becomes a result, [P48]; every declaration names its principal, and a declaration whose target is uncertain declares the family and registers the interval (`STANDARD.md`, the field Principal; `cases/TEMPLATE.md`; lint R15, from which W4 is exempt for that field only, having been registered before it) | PI; executor (the statement and its wiring) | `derived/diagnostics.md`, `STANDARD.md`, `cases/TEMPLATE.md`, `tools/lint.py` |
 | Q31 | how does the framework now relate to outer and inner alignment, Goodhart and the archive's five gaps? Outer alignment needed a definition the tools now give. Applied: [P49], outer misalignment as a function of intensity, inner misalignment, and their exact split; the five gaps mapped in `IMPORT.md`, section 8, where grounding (reward tampering) is only partly covered. Next, by the PI's request: a brainstorm on grounding, its definition and its diagnosis | PI; executor (the statement) | `derived/diagnostics.md`, `IMPORT.md`, `RELATED.md`, `STANDARD.md` |
 | Q32 | grounding: can the framework define wireheading and diagnose it? Approved: [P50], tampering as a divergence from a declared honest channel, with no new definition, and [P51], what signals, audits and re-measurements reveal of it; a simulation case before any world case. With it, the two tests of framework predictions pending since W1, [P41]'s Rock–Paper–Scissors arm and [P20]'s stopping rule on gold-labelled data not used before, become the next work items. The PI also asked whether logs of a black box could make the unobservable observable (H33), and whether the framework's new tools are real or a biased perception (§8) | PI; executor (the statements, checks and wiring) | `derived/diagnostics.md`, `STANDARD.md`, `IMPORT.md`, `RELATED.md`, `ROADMAP.md` |
+| Q33 | after pull request #29 was merged, with its history, and the other branches deleted: the executor's recommendations approved. (i) The hold on external review is lifted narrowly: one mathematical reader of `CORE.md` and `derived/`, and the literature checked, done for D10 and D11 from records and abstracts. (ii) H34 becomes the second arm of case C3. (iii) The general core is unfrozen for outcomes that are not finite and for estimation guarantees, and for nothing else; the stability row's count restarts when its definitions change. (iv) No history rewrite: the files removed under Q27 stay in the history. (v) Novelty was never the point; the question is which theories the framework can import from (§9) | PI; executor (the survey) | `ROADMAP.md`, `RELATED.md`, `REFERENCES.md`, `NOTES.md` §9 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -206,8 +207,9 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | D7 | industrial organization | the German price archive, 2016 to 2018, with the station list; Assad et al. (2024) and its replication package; their method paper (2022) | W2 (`ROADMAP.md`) | the archive needs credentials from Tankerkönig (`creativecommons.tankerkoenig.de`); the package is `doi.org/10.7910/DVN/X4MSWW`; the papers are at `discovery.ucl.ac.uk/10187765/1/draft_v15_JPE_main.pdf` and `discovery.ucl.ac.uk/10187769/1/ACEX_PP_2022.pdf`. Not read |
 | D8 | deceptive alignment (H27) | Needham et al. (2025), and their evaluation-awareness dataset | a world test of [P17]'s reach | arXiv 2505.23836; `huggingface.co/datasets/jjpn2/eval_awareness`. Not read |
 | D9 | experimental economics | Cason, Friedman and Hopkins (2014), and its data, if published with it | the Rock–Paper–Scissors arm of the ontology's prediction | `doi.org/10.1093/restud/rdt023`. Low priority: the potential-game arm needs new sessions in a laboratory |
-| D10 | outer and inner alignment ([P49]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | to verify the citation before it enters `REFERENCES.md` | recorded in v7.10; arXiv is not reachable from this environment |
-| D11 | reward tampering ([P50], [P51]) | Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), the corrupted reward channel; Everitt, Hutter, Kumar and Krakovna (2021), reward tampering in causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, arXiv:1711.09883 | to verify the citations before they enter `REFERENCES.md`, and the gridworlds' licence before a simulation case borrows a layout from them | from memory; arXiv is not reachable from this environment |
+| D10 | outer and inner alignment ([P49]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | verified from its record and abstract (2026-10-07), and listed in `REFERENCES.md` | recorded in v7.10; found by web search, as arXiv is not reachable from this environment |
+| D11 | reward tampering ([P50], [P51]) | Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), the corrupted reward channel; Everitt, Hutter, Kumar and Krakovna (2021), reward tampering in causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, arXiv:1711.09883 | verified from their records and abstracts (2026-10-07), and listed in `REFERENCES.md`; the gridworlds' code is reported under the Apache 2.0 licence, to be confirmed from the repository before case C3 borrows a layout | from memory, then found by web search |
+| D12 | the imports of §9 marked "now" | the full texts of White (1982), Vuong (1989), Chatterjee and Diaconis (2018), McAllester and Stratos (2020), Kwa et al. (2024), Baker (2002), Courty and Marschke (2008) and Baker et al. (2025) | a theorem enters `derived/` only after its statement is read in the source, not in an abstract | their records and abstracts were found by web search; arXiv and the publishers are not reachable from this environment |
 
 Every test is pre-registered and pushed before any computation (README rules).
 
@@ -333,7 +335,7 @@ performance measure, a fine or a selection regime, or revealed, as `log(p̂/q)` 
 - *The geometry.* Target and evaluator span a two-parameter family `{tilt(q, a·F + b·F̂)}` through the default: the
   alignment plane (H6). Every Goodhart quantity lives in it.
 - *Where to look for it in existing theory.* The angle between a performance measure and value in the economics of
-  incentives (Baker's "distortion" of performance measures, 2002: to verify); the angle between true and proxy rewards
+  incentives (Baker's "distortion" of performance measures, 2002); the angle between true and proxy rewards
   in occupancy space (Karwowski et al., ICLR 2024); hackability of reward pairs (Skalse et al., NeurIPS 2022); selection
   gradients and the secondary theorem of selection in biology (Lande and Arnold; Robertson; Price); Manheim and
   Garrabrant's taxonomy.
@@ -362,7 +364,7 @@ models are hypotheses that [P3] and [P12] test.
 | H5 | **The measure is not the actor's cost.** [P14] forces the measure to be KL; v7.10's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
 | H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore; **Gaussian closed form probed** (B5): gain per √departure = √2·sd·cos θ and M = departure·sin²θ, exact to 4e-15; not exact beyond (an exponential × normal default departs) |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
-| H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [P11]'s `cos θ` in the incentive literature | C: verify the paper |
+| H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [P11]'s `cos θ` in the incentive literature | C: the paper exists (Baker 2002, verified from its record); whether its distortion is this angle needs its text, which is not open. [P50](iii) suggests a sharper reading: his two parameters, distortion and risk, as the world's misaligned share and the noise share (`RELATED.md`, principal–agent theory) |
 | H9 | **The dimension law.** Against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, `d` the information dimension (Rényi): "digits decided" made exact | **tested** (T1): four cases, including the Cantor measure, which no count of atoms explains |
 | H10 | **No pursuit makes a pile.** A pile at a threshold is evidence that the actor does not pursue the evaluator | **tested** (T2); a theorem by the chain rule, to be written |
 | H11 | **Collusion is coordination, often in time.** Under independent pursuit, misalignment on joint actions = total correlation + individual misalignments, exactly | **proved as [P39]**; **tested** (T3): tit-for-tat shows `0` per round and `0.231` nats per round over time |
@@ -544,3 +546,33 @@ fixed functions of the text. The roadmap's rule, new results only when a test ne
 PI's approval, for four results in a row ([P48]–[P51]); that would be the recorded failure "internal refinement over
 external contact" (§1) if the next steps were not external. They are: the two tests of Q32, then the tampering
 simulation.
+
+## 9. What the framework can import, after the survey of 2026-10-07 (Q33)
+
+The PI asked which frameworks or theories the framework can import from. A web search found the sources below; their
+records and abstracts were read, not their full texts, since arXiv and the publishers are not reachable from here (D12).
+Each is filed in `RELATED.md` under its theory, with what it shares with the core and what it would add. Ranked by what
+each would add to the steps now open:
+
+| # | Source | What it gives the framework | Into | Kind | When |
+|---|---|---|---|---|---|
+| 1 | White (1982); Vuong (1989): misspecified models | the revealed intensity is White's pseudo-true parameter, so his limit theory gives intervals for `t*` and the quantities at it; Vuong's test says which of two specifications fits an actor better, and should give the limit of `2n·M(p̂_n)` when `M > 0`, which [P23] lacks | [P5], [P23], [P44], [P48], [P49]; the estimation work | theorems and a test | now |
+| 2 | Chatterjee and Diaconis (2018) | reweighting needs about `e^{KL}` draws, necessary and sufficient | [P47], every diagnostic computed by reweighting | theorem | now |
+| 3 | McAllester and Stratos (2020) | samples alone certify at most about `log N` nats of information | the estimation work; the limit of H33 | theorem | now |
+| 4 | Kwa et al. (2024) | a KL penalty protects the target against a light-tailed evaluator error and not against a heavy-tailed one | the general core, for outcomes that are not finite | theorem | now |
+| 5 | Baker (2002); Courty and Marschke (2008) | a measure's distortion and risk, against [P50](iii)'s split of the misaligned share into world and noise; a test of distortion from how a measure degrades once it is paid on, a candidate world design for [P20] | [P11], [P50]; step 2 | correspondence and a design | now, if the texts and data are open |
+| 6 | Baker et al. (2025) | a monitor trained against hides the intent it was meant to catch, at high optimization strength | H34; case C3's second arm | evidence | now |
+| 7 | Polyanskiy and Wu (2025) | divergences on general spaces, and their variational forms | the general core | textbook | now |
+| 8 | Ben-Tal et al. (2013): robust optimization over divergence balls | the dual of the worst case for every divergence ball, and its radius from data | [P17], [P27], [P31] | method | later |
+| 9 | Pearl and Bareinboim (2014): transportability | when what is seen in evaluation carries to use | [P17], [P24], [P46] | assumptions with criteria | later |
+| 10 | Blackwell (1953): comparison of experiments | sharper identified sets for views | [D8], E5 | theorem | later |
+| 11 | Kong and Schoenebeck (2019): elicitation without verification | information measures that obey data processing, for reports with no ground truth | [P51]; H33 if gap 5 reopens | theory | later |
+| 12 | Zhuang and Hadfield-Menell (2020) | when optimizing a proxy that omits attributes drives utility arbitrarily low | [D10]'s residual, [P29] | theorem | later |
+| 13 | Carroll et al. (2024): influenceable rewards | an actor that changes the principal's target, outside [P50] | a scope question | theory and a warning | later, if the scope widens |
+
+Two readings of the list. The imports with most weight are statistical, not about alignment: the core's quantities are
+divergences from a misspecified family, and the statistics of such fits, of reweighting and of what samples can certify
+is mature, so the estimation work is mostly import. And several alignment results map onto existing items rather than
+adding new ones (Baker on [P11] and [P50], Baker et al. on H34, Everitt et al. on [P50] and [P51]), which is what a
+framework meant to be imported into should find.
+
