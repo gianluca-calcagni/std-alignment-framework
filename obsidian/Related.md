@@ -359,7 +359,7 @@ that carry it.
   estimate is Amini, Vieira and Cotterell's control-variate estimator with coefficient `1`, forced rather than chosen.
 - *Import, later.* Vuong's test of which of two families is closer in KL to the truth: whether one specification fits
   an actor better than another, such as two principals ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]], [[P48 — Misalignment when the target is uncertain|P48]]), a trainer and a principal ([[P49 — Outer and inner misalignment|P49]]), or a
-  specification with and without a named objective ([[P44 — What named objectives explain|P44]]); his working paper is open, on a host not yet allowed.
+  specification with and without a named objective ([[P44 — What named objectives explain|P44]]); his working paper is open, and on file (`REQUESTS.md`).
   White's theorem, needed only beyond finite outcomes, where Huber's paper serves as well.
 - *What it could take from us.* The divergence left read as misalignment, with its stakes and its splits.
 

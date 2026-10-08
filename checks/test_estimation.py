@@ -6,6 +6,7 @@ import numpy as np
 from scipy.optimize import minimize_scalar
 from .common import EXACT, rng, simplex_interior, kl, tilt
 from .test_misalignment import misalignment
+import stdalign
 
 
 def test_expected_evidence_is_misalignment():
@@ -154,46 +155,25 @@ def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
         assert limit > 0 and abs(M - limit) <= 1e-3 * (1 + limit)
 
 
-def _root(dphi, R, hi=50.0, iters=90):
-    """For each of R replicates, the s in [0, hi] where an increasing function dphi(s) crosses zero; 0 if dphi(0) >= 0
-    (vectorized bisection: dphi maps an array of R values of s to R derivatives)."""
-    lo, up = np.zeros(R), np.full(R, hi)
-    for _ in range(iters):
-        mid = 0.5 * (lo + up); neg = dphi(mid) < 0
-        lo, up = np.where(neg, mid, lo), np.where(neg, up, mid)
-    s = 0.5 * (lo + up)
-    return np.where(dphi(np.zeros(R)) >= 0, 0.0, s)
+def _counts_rows(C, q, F):
+    """P52(i) by the library, for each row of counts in C: the estimated misalignment and revealed intensity."""
+    est = [stdalign.from_counts(c, q, F) for c in C]
+    return np.array([e.value for e in est]), np.array([e.revealed_intensity for e in est])
 
 
-def _weighted(counts, logw, F):
-    """Per replicate: log Σ_x counts·e^{logw}, and the mean of F under the weights counts·e^{logw}."""
-    a = np.where(counts > 0, np.log(np.maximum(counts, 1)) + logw, -np.inf)
-    m = a.max(axis=1, keepdims=True); e = np.exp(a - m)
-    return m[:, 0] + np.log(e.sum(axis=1)), (e @ F) / e.sum(axis=1)
-
-
-def by_counts(C, q, F):
-    """P52(i): the misalignment M(p̂) and revealed intensity of each empirical behaviour p̂ = C/n (rows of C)."""
-    n = C.sum(axis=1)[:, None]; ph = C / n; R = len(C)
-    s = _root(lambda s: _weighted(np.ones_like(ph), np.log(q) + s[:, None] * F, F)[1] - ph @ F, R)
-    lw = np.log(q) + s[:, None] * F; lw = lw - _weighted(np.ones_like(ph), lw, F)[0][:, None]
-    with np.errstate(divide="ignore", invalid="ignore"):
-        M = np.where(ph > 0, ph * (np.log(ph) - lw), 0.0).sum(axis=1)
-    return M, s
+def _draws(row):
+    """The draws counted in a row, as outcome indices."""
+    return np.repeat(np.arange(row.size), row.astype(int))
 
 
 def by_log_ratios(C, l, F):
-    """P52(ii): min_{s≥0} [mean ℓ − s·mean F + log mean e^{sF−ℓ}] over the draws counted in each row of C."""
-    n = C.sum(axis=1); R = len(C)
-    s = _root(lambda s: _weighted(C, s[:, None] * F - l, F)[1] - (C @ F) / n, R)
-    return (C @ l) / n - s * (C @ F) / n + _weighted(C, s[:, None] * F - l, F)[0] - np.log(n)
+    """P52(ii) by the library, for each row of counts in C, with log-ratios l and objective F per outcome."""
+    return np.array([stdalign.from_log_ratios(l[x], F[x]).value for x in map(_draws, C)])
 
 
 def by_two_samples(C, Cq, l, F):
-    """P52(iii): as by_log_ratios, with the normalizer averaged over the reference's draws counted in Cq."""
-    n, m = C.sum(axis=1), Cq.sum(axis=1); R = len(C)
-    s = _root(lambda s: _weighted(Cq, s[:, None] * F, F)[1] - (C @ F) / n, R)
-    return (C @ l) / n - s * (C @ F) / n + _weighted(Cq, s[:, None] * F, F)[0] - np.log(m)
+    """P52(iii) by the library, for each row of C and the matching row of the default's counts Cq."""
+    return np.array([stdalign.from_two_samples(l[x], F[x], F[y]).value for x, y in zip(map(_draws, C), map(_draws, Cq))])
 
 
 def test_what_a_sample_certifies_by_access():
@@ -230,7 +210,7 @@ def test_what_a_sample_certifies_by_access():
         po = tilt(q, ts * F); w = po / p; l = np.log(p / q)
         var = lambda g, d: d @ g ** 2 - (d @ g) ** 2
         C = r.multinomial(n, p, size=R).astype(float); Cq = r.multinomial(n, q, size=R).astype(float)
-        MA, tA = by_counts(C, q, F)
+        MA, tA = _counts_rows(C, q, F)
         assert abs(n * MA.var() / var(np.log(w), p) - 1) <= tol
         for c in (1, 3):                                       # the revealed intensity of c·F is t̂/c: the law scales
             assert abs(n * (tA / c).var() / (var(c * F, p) / var(c * F, po) ** 2) - 1) <= tol

@@ -20,8 +20,9 @@ the general one; where a general result also holds on finite outcomes, it is pro
 | | |
 |---|---|
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
+| `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
-| `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
+| `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
@@ -31,6 +32,7 @@ the general one; where a general result also holds on finite outcomes, it is pro
 | `RELATED.md` | related theories: what each shares with the framework, what differs, what to import, and what it could take from us |
 | `IMPORT.md` | the map from every item of the archive (v7.10) to its fate in the core: in core, to derive, needing a concept, or dropped, with the reason; and how the core came to replace the vault on `main` |
 | `checks/` | one pytest check, at least, for every result |
+| `stdalign/` | the library: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify; so far misalignment, its split and its estimates by access (`ROADMAP.md`, step E1). Version 0.1, on finite outcomes; install with `pip install -e .`, and read its `README.md` |
 | `cases/` | tests registered before they are computed, each with its registration, script and result: on the world (they count toward the finish line) or in simulation (they test an instrument where the truth is known). `cases/README.md` lists them |
 | `probes/` | exploratory scripts behind the numbers of `CORE-GENERAL.md` and `general/`, with the predictions registered before they were run and their verdicts, failures included. Not checks: CI does not run them, and no result rests on them |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
@@ -62,8 +64,8 @@ the general one; where a general result also holds on finite outcomes, it is pro
   reading, with the items it uses. A prediction says when it is refuted, and is labelled empirical (it can be wrong
   about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
-- **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md`, `ROADMAP.md` and the
-  files of `cases/` name only existing items, and their citations are listed like all others.
+- **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md`, `ROADMAP.md`,
+  `REQUESTS.md` and the files of `cases/` name only existing items, and their citations are listed like all others.
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 - **R14.** Every case in `cases/` has a registration; once it has a result, the result records the SHA-256 of the
@@ -74,8 +76,9 @@ the general one; where a general result also holds on finite outcomes, it is pro
   and a field added to the declaration later is not required of the cases registered before it.
 
 **Enforced by CI** (`.github/workflows/checks.yml`, on every push and pull request): lint, the freshness of `obsidian/`,
-and every check on two SIMD paths. A check asserts its claim with a tolerance derived from the scale of the quantity. It
-must hold on both paths, rather than reproduce printed digits.
+the build of the library as a package, and every check on two SIMD paths, with the library's own tests. A check asserts
+its claim with a tolerance derived from the scale of the quantity. It must hold on both paths, rather than reproduce
+printed digits.
 
 **Working agreements** (no tool checks these, so they are commitments, not claimed properties):
 - **The core holds what cannot be derived**, and the definitions used everywhere. A result belongs in `derived/`. A
@@ -158,7 +161,7 @@ proof is a dependency claim).
 pip install -r requirements.txt       # Python 3.11
 python3 tools/lint.py                 # 0 errors required
 python3 tools/obsidian.py             # regenerate obsidian/ after any change to the sources (CI checks it)
-python3 -m pytest                     # checks, linter tests and the scenario's checks
+python3 -m pytest                     # checks, linter tests, the scenario's checks and the library's tests
 NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # the second SIMD path
 ```
 

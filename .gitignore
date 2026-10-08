@@ -12,3 +12,8 @@ obsidian/.obsidian/
 
 # Model weights trained on third-party data stay out of the repository (licences); scripts rebuild them
 cases/**/*.npz
+
+# Python packaging outputs
+build/
+dist/
+*.egg-info/

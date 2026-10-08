@@ -71,6 +71,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A specification with no named principal** | W3 and W4 declared as the target the reward the policy was trained on, the evaluator itself, while the machine-learning ontology's specification asks for a gold objective distinct from it; the executor declared it, for no principal in particular. What they measured is misalignment against the trainer's formal objective, and their texts said "misalignment" without saying whose. Caught by the PI | name the principal in the declaration; when the target is uncertain, declare the family of targets and report the interval it gives (§7) |
 | **An optimum taken from a solver's word** | the first check of [P51](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
+| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -197,6 +198,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q34 | with arXiv allowed: collect how the imports treat the continuous case, and a table mapping each term, concept and definition to its finite and its continuous formal form. Applied: `general/dictionary.md`, from the texts of eleven sources on arXiv and the records of the rest; its findings: alignment theory mostly stays finite on purpose; one function, the log-normalizer, decides most of the continuous case; atoms are the hinge; existence becomes conditional; some finite bounds become infinite; estimation depends on which log-ratios are known more than on the space | PI; executor (the reading and the table) | `general/dictionary.md`, `REFERENCES.md`, `RELATED.md`, `CORE-GENERAL.md` |
 | Q35 | how does the framework relate to cooperative inverse reinforcement learning and its variants, and is a request made with poor consideration ("get rich", ethically taken for granted) a coarse resolution of the principal? Answered in §10: not a resolution, which would forgive what it merges; a request that is an evaluator coarser than the target, norms carried by the default, and weights the request never fixed, a family of targets. With it: consolidate, rework the roadmap, archive what is done, re-prioritize, and say which papers are needed | PI; executor (the analysis, the roadmap) | `NOTES.md` §10, `RELATED.md`, `ROADMAP.md` |
 | Q36 | the PI has no academic access, so papers behind paywalls are out of reach; hosts are allowed on request. Applied: an imported theorem is read in a text anyone can read without paying, or derived here with a proof and a check, or not imported (`README.md`, working agreements); the limit laws White and Vuong were to supply derived for finite outcomes as [P52], with Huber's open paper read for the general case of (i); the field Access in `STANDARD.md`; the requests to the PI now name hosts to allow and data to ask for, not papers (`ROADMAP.md`) | PI; executor (the rule, [P52], the field) | `README.md`; [P52]; `STANDARD.md`; §3.2, D12; §9; `ROADMAP.md` |
+| Q37 | consolidate what the executor needs from the PI in one file, and make the framework's engineering side more solid before some steps are actioned. Applied: `REQUESTS.md`, with the hosts allowed; the engineering steps E1–E5 first in `ROADMAP.md`; `stdalign` 0.1, the library, with misalignment, its split and its estimates by access, the checks of those items pointed at it, tests of its interface, and its functions mutation-tested; `pyproject.toml` | PI; executor (the plan, the library) | `REQUESTS.md`; `ROADMAP.md`; `stdalign/`; `README.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -213,7 +215,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | D9 | experimental economics | Cason, Friedman and Hopkins (2014), and its data, if published with it | the Rock–Paper–Scissors arm of the ontology's prediction | `doi.org/10.1093/restud/rdt023`. Low priority: the potential-game arm needs new sessions in a laboratory |
 | D10 | outer and inner alignment ([P49]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | verified from its record and abstract (2026-10-07), and listed in `REFERENCES.md` | recorded in v7.10; found by web search, as arXiv is not reachable from this environment |
 | D11 | reward tampering ([P50], [P51]) | Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), the corrupted reward channel; Everitt, Hutter, Kumar and Krakovna (2021), reward tampering in causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, arXiv:1711.09883 | verified from their records and abstracts (2026-10-07), and listed in `REFERENCES.md`; the gridworlds' code is reported under the Apache 2.0 licence, to be confirmed from the repository before case C3 borrows a layout | from memory, then found by web search |
-| D12 | the imports of §9 marked "now" | the full texts of White (1982), Vuong (1989), Baker (2002), Courty and Marschke (2008), Ben-Tal et al. (2013) and Polyanskiy and Wu (2025); those on arXiv were read once the PI allowed it (Q34), and Blackwell (1953), Csiszár (1975), Lindsay (1983) and Pistone and Sempi (1995) in their scans on Project Euclid | a theorem enters `derived/` only after its statement is read in the source, not in an abstract | their records and abstracts were found by web search; arXiv and Project Euclid are reachable since Q34, the other publishers are not. Since Q36 no paywalled text is sought: White's limit theory, and Vuong's case with the saturated model, are not needed for finite outcomes, where [P52] derives the laws, and Huber (1967), open on Project Euclid, was read for the general case; Vuong's working paper (Caltech Social Science Working Paper 605) is open, on a host not yet allowed (`authors.library.caltech.edu`); Polyanskiy and Wu's draft is reachable since 2026-10-08, not yet read; Ben-Tal et al.'s preprint is on `optimization-online.org`, not yet allowed; no open text of Baker (2002) or of Courty and Marschke (2008) was found |
+| D12 | the imports of §9 marked "now" | the full texts of White (1982), Vuong (1989), Baker (2002), Courty and Marschke (2008), Ben-Tal et al. (2013) and Polyanskiy and Wu (2025); those on arXiv were read once the PI allowed it (Q34), and Blackwell (1953), Csiszár (1975), Lindsay (1983) and Pistone and Sempi (1995) in their scans on Project Euclid | a theorem enters `derived/` only after its statement is read in the source, not in an abstract | their records and abstracts were found by web search; arXiv and Project Euclid are reachable since Q34, the other publishers are not. Since Q36 no paywalled text is sought: White's limit theory, and Vuong's case with the saturated model, are not needed for finite outcomes, where [P52] derives the laws, and Huber (1967), open on Project Euclid, was read for the general case; Vuong's working paper (Caltech Social Science Working Paper 605) and Ben-Tal et al.'s preprint (CentER Discussion Paper 2011-061) are on file since their hosts were allowed (2026-10-08), not yet read; Polyanskiy and Wu's draft is reachable since 2026-10-08, not yet read; no open text of Baker (2002) or of Courty and Marschke (2008) was found |
 | D13 | experimental economics ([P41], `ROADMAP.md` step 5) | the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time with one-population matching, a symmetric game with two strategies and so a potential game; and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same lab's continuous-time protocol | the potential arm of step 5, under a protocol comparable with the Rock–Paper–Scissors arm | no public copy found (2026-10-07); the authors, at the LEEPS laboratory of UC Santa Cruz, are the source. The Rock–Paper–Scissors arm alone has public records, Wang, Xu and Zhou (2014), in discrete time, in the R package stratEst under GPL-3, but their cycles are already reported, so a test on them alone risks little |
 
 Every test is pre-registered and pushed before any computation (README rules).
@@ -606,7 +608,7 @@ each would add to the steps now open:
 | 5 | Baker (2002); Courty and Marschke (2008) | a measure's distortion and risk, against [P50](iii)'s split of the misaligned share into world and noise; a test of distortion from how a measure degrades once it is paid on, a candidate world design for [P20] | [P11], [P50]; step 1 | correspondence and a design | no open text found (Q36); W5's design does not wait on it |
 | 6 | Baker et al. (2025) | a monitor trained against hides the intent it was meant to catch, at high optimization strength | H34; case C3's second arm | evidence | now |
 | 7 | Polyanskiy and Wu (2025) | divergences on general spaces, and their variational forms | the general core | textbook | now: the authors' draft is reachable (Q36) |
-| 8 | Ben-Tal et al. (2013): robust optimization over divergence balls | the dual of the worst case for every divergence ball, and its radius from data | [P17], [P27], [P31] | method | later; its preprint is on a host not yet allowed |
+| 8 | Ben-Tal et al. (2013): robust optimization over divergence balls | the dual of the worst case for every divergence ball, and its radius from data | [P17], [P27], [P31] | method | later; its preprint is on file |
 | 9 | Pearl and Bareinboim (2014): transportability | when what is seen in evaluation carries to use | [P17], [P24], [P46] | assumptions with criteria | later |
 | 10 | Blackwell (1953): comparison of experiments | sharper identified sets for views | [D8], E5 | theorem | later |
 | 11 | Kong and Schoenebeck (2019): elicitation without verification | information measures that obey data processing, for reports with no ground truth | [P51]; H33 if gap 5 reopens | theory | later |
@@ -682,3 +684,36 @@ The difference that stays: those works build an assistant that infers; the core 
 target. An assistant built that way is an actor like any other, and the core can report how far it is from every target
 its own belief allows.
 
+
+## 11. The engineering side, after Q37
+
+The PI asked for a more solid engineering side before some steps are actioned. An audit of what a practitioner, or an
+outside reader rerunning a case, would meet on 2026-10-08:
+1. **No library.** Each quantity of `STANDARD.md` was implemented once, but as a helper inside a test file of `checks/`,
+   and the cases did not import them: C2 wrote its own tilt, W4 its own estimates. Nothing could be installed or
+   imported by someone else.
+2. **Claims checked on code no one ships.** The checks verified the items on those helpers; a case's script could
+   compute something else under the same name.
+3. **Reports as prose only.** `STANDARD.md` lists the fields, and W1's `REPORT.md` fills them, but nothing checks a
+   report the way lint R15 checks a registration.
+4. **Nothing to rerun in a minute.** The smallest end-to-end run is W1, which needs the public data, a trained proxy and
+   hours.
+5. **Unpinned environments.** `requirements.txt` pins NumPy, SciPy and pytest, which the checks need; the world cases
+   import PyTorch, Transformers, Datasets or Numba, and no case records their versions, so a rerun may not reproduce a
+   number.
+6. **What is solid already.** Lint and CI on two SIMD paths, mutation-tested checks, registrations hashed before
+   results, licences recorded, per-draw values saved outside the repository (`tools/casekit.py`).
+
+The plan is the steps E1–E5 of `ROADMAP.md`, put first. E1(a) is done: `stdalign` 0.1 holds misalignment, its split and
+its estimates by access; the checks of [P5], [P6], [P23] and [P52] run on it, its interface has tests of its own, and
+its functions were mutation-tested: 17 mutants, all caught in the end. One survived at first, an infinite divergence
+computed with a warning, the same value otherwise; and no test compared the reported standard errors with the spread of
+the estimates, so mutants that widened them would have passed. Two tests of the interface were added for them. Point 5
+joins E3: every world case's environment pinned in its folder, so that W1 can be rerun as `REQUESTS.md` R1 asks.
+
+**For the PI.** The repository is under the GNU Affero GPL. For the library, that means a program that incorporates it
+and is offered to its users over a network must offer them its complete source under the same licence; many
+organizations avoid such dependencies for that reason, which may keep practitioners from importing `stdalign`. If the
+aim is that others compute the standard's quantities, a permissive licence for the library alone, such as Apache 2.0,
+would remove that obstacle while the framework's text keeps its licence. This is the PI's decision, as the copyright
+holder; it is recorded here, not acted on.

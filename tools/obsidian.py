@@ -22,7 +22,7 @@ DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": 
         "general/README.md": "General results", "general/transfer.md": "Transfer to general spaces",
         "general/derived-spaces.md": "Derived spaces", "general/disciplines.md": "Disciplines on a continuum",
         "general/vocabulary.md": "Everyday words", "general/dictionary.md": "Finite and continuous",
-        "ROADMAP.md": "Roadmap", "SCENARIO.md": "Worked scenario",
+        "ROADMAP.md": "Roadmap", "REQUESTS.md": "Requests to the PI", "SCENARIO.md": "Worked scenario",
         "cases/README.md": "Cases"}
 CASE_DOCS = (("REGISTRATION.md", "registration"), ("RESULTS.md", "results"), ("REPORT.md", "report"))
 
