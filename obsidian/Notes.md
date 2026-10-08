@@ -199,6 +199,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q35 | how does the framework relate to cooperative inverse reinforcement learning and its variants, and is a request made with poor consideration ("get rich", ethically taken for granted) a coarse resolution of the principal? Answered in §10: not a resolution, which would forgive what it merges; a request that is an evaluator coarser than the target, norms carried by the default, and weights the request never fixed, a family of targets. With it: consolidate, rework the roadmap, archive what is done, re-prioritize, and say which papers are needed | PI; executor (the analysis, the roadmap) | `NOTES.md` §10, `RELATED.md`, `ROADMAP.md` |
 | Q36 | the PI has no academic access, so papers behind paywalls are out of reach; hosts are allowed on request. Applied: an imported theorem is read in a text anyone can read without paying, or derived here with a proof and a check, or not imported (`README.md`, working agreements); the limit laws White and Vuong were to supply derived for finite outcomes as [[P52 — What a sample certifies about misalignment, by access\|P52]], with Huber's open paper read for the general case of (i); the field Access in `STANDARD.md`; the requests to the PI now name hosts to allow and data to ask for, not papers (`ROADMAP.md`) | PI; executor (the rule, [[P52 — What a sample certifies about misalignment, by access\|P52]], the field) | `README.md`; [[P52 — What a sample certifies about misalignment, by access\|P52]]; `STANDARD.md`; §3.2, D12; §9; `ROADMAP.md` |
 | Q37 | consolidate what the executor needs from the PI in one file, and make the framework's engineering side more solid before some steps are actioned. Applied: `REQUESTS.md`, with the hosts allowed; the engineering steps E1–E5 first in `ROADMAP.md`; `stdalign` 0.1, the library, with misalignment, its split and its estimates by access, the checks of those items pointed at it, tests of its interface, and its functions mutation-tested; `pyproject.toml` | PI; executor (the plan, the library) | `REQUESTS.md`; `ROADMAP.md`; `stdalign/`; `README.md` |
+| Q38 | the licence of the library and of the framework: the GNU Affero GPL is kept, since the framework is a work in progress the PI hopes the community will support rather than copy; it is to be revisited if the framework gains predictive or diagnostic power, which is not taken for granted. Applied: §11, with what the licence does not cover (the ideas) and what a later change needs (every copyright holder's consent) | PI | §11; `ROADMAP.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -711,9 +712,11 @@ computed with a warning, the same value otherwise; and no test compared the repo
 the estimates, so mutants that widened them would have passed. Two tests of the interface were added for them. Point 5
 joins E3: every world case's environment pinned in its folder, so that W1 can be rerun as `REQUESTS.md` R1 asks.
 
-**For the PI.** The repository is under the GNU Affero GPL. For the library, that means a program that incorporates it
-and is offered to its users over a network must offer them its complete source under the same licence; many
-organizations avoid such dependencies for that reason, which may keep practitioners from importing `stdalign`. If the
-aim is that others compute the standard's quantities, a permissive licence for the library alone, such as Apache 2.0,
-would remove that obstacle while the framework's text keeps its licence. This is the PI's decision, as the copyright
-holder; it is recorded here, not acted on.
+**The licence, decided (Q38).** The PI keeps the GNU Affero GPL, for the library too: the framework is a work in
+progress, which the PI hopes the community will support and improve rather than copy, and the licence is to be revisited
+if the framework gains predictive or diagnostic power, which is not taken for granted. Two facts bear on that aim and on
+the revisit. The licence covers this code and this text, not the ideas: anyone may implement the framework's definitions
+and results anew, under any licence, and what makes them cite it is the norm of citation, not the licence. And a change
+of licence needs the consent of every holder of the copyright; while the PI is the only one, the PI can relicense at
+will, and once others contribute, keeping that freedom needs their agreement in advance, as a contributor agreement
+gives.

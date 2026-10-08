@@ -46,7 +46,8 @@ theory grows where one of these needs it, and the archive of what is done is in 
 - **Frozen** (`NOTES.md`, Q26, Q27, Q33): new disciplines, any widening of the scope, and the general core except for
   outcomes that are not finite and estimation guarantees (step 3).
 - **Licences** (Q27): the repository keeps code, aggregates and citations only: no third-party data, weights, papers, or
-  item-by-item derivatives.
+  item-by-item derivatives. Its own licence, the GNU Affero GPL, is kept for the framework and the library, to be
+  revisited if the framework gains predictive or diagnostic power (Q38).
 - **Waiting on the PI:** `REQUESTS.md`, which lists every request with the step it unblocks, and the hosts allowed.
 
 ## Next, by priority
@@ -111,3 +112,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-07 | cooperative inverse reinforcement learning and its variants mapped to the core, and a request made without full consideration read as an evaluator coarser than the target, not a resolution (`NOTES.md` §10, Q35); the roadmap reworked: what is done archived, the next steps re-prioritized, and what the PI can supply listed | 4, 5 (priorities); 3 (imports) |
 | 2026-10-08 | the PI has no academic access (Q36): imported theorems are read in open texts or derived; [P52], what a sample certifies about misalignment by what is known of each draw, derived with Huber's open paper, checked, and mutation-tested (eight mutants); the field Access in `STANDARD.md`; the requests to the PI are now hosts and data, not papers | 5 (step 3: estimation); 1 (a new check, mutation-tested) |
 | 2026-10-08 | the PI asked for one file of requests and a more solid engineering side before some steps are actioned (Q37): `REQUESTS.md`; the engineering steps E1–E5 put first; `stdalign` 0.1, misalignment, its split and its estimates by access, with the checks of [P5], [P6], [P23] and [P52] pointed at it, tests of its interface, and its functions mutation-tested; the Caltech record given on 2026-10-08 corrected | 5 (E1); 1 (the library mutation-tested) |
+| 2026-10-08 | the licence decided (Q38): the GNU Affero GPL kept, to be revisited if the framework gains predictive or diagnostic power; what the licence does not cover, and what a later change needs, recorded in `NOTES.md` §11 | none: a decision of the PI's, recorded |
