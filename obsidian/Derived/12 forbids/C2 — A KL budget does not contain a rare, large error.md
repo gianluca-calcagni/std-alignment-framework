@@ -8,9 +8,9 @@ source: "derived/forbids.md"
 > [!info] Generated from [derived/forbids.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/forbids.md#c2--a-kl-budget-does-not-contain-a-rare-large-error). Edit the source, not this note.
 
 ## Statement
-For every budget `δ > 0` and every number `B`, there are a default and an error `E` with
-`Var_q(E) = 1` whose largest rise over the departure budget `δ` ([[P27 — The best use of a departure budget|P27]]) exceeds `B`, while its largest rise over the
-`χ²` budget `δ` is at most `δ^{1/2}`.
+For every budget `δ > 0` and every number `B`, there are a default and an error `E` with `Var_q(E) = 1`
+whose largest rise over the departure budget `δ` ([[P27 — The best use of a departure budget|P27]]) exceeds `B`, while its largest rise over the `χ²` budget `δ` is
+at most `δ^{1/2}`.
 
 ## In plain terms
 Limiting how far an actor departs in KL does not limit the damage of an error that is rare but

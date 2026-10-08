@@ -1,6 +1,5 @@
 # General results — the disciplines on a continuum
 
-
 The ontologies (`ontologies/`) are written for the finite core, and lint fixes their sections, so their reading on a
 continuum lives here. Each discipline shows one phenomenon of the general case. These are readings, not predictions; the
 predictions are in the ontologies, on finite records.

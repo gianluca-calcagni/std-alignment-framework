@@ -31,15 +31,15 @@ budget and a price are one quantity in two forms: a budget is spent exactly by p
 Write `d(t) = KL(p_{G,t}‖q)`. By the proof of [[P9 — What is at stake|P9]](i), `d` increases continuously and strictly from `0`
 toward `−log q(A)`, with `d'(t) = t·Var_{p_{G,t}}(G)`; so `λ_δ` is finite exactly when `δ < −log q(A)`, and then
 `d(λ_δ) = δ`. (i) If `t ≤ λ_δ`, then `d(t) ≤ δ`, so `p_{G,t}` is in the budget, and [[P4 — What KL measures|P4]](i) gives
-`J_t(p_{G,t}) − J_t(p) = KL(p‖p_{G,t})/t` for every `p`. If `t > λ_δ = λ`, then for `p ∈ 𝓑_δ`, [[P4 — What KL measures|P4]](i) at intensity
-`λ` gives `E_p[G] − KL(p‖q)/λ = E_{p*}[G] − δ/λ − KL(p‖p*)/λ`, so
-`J_t(p) = J_t(p*) − KL(p‖p*)/λ + (KL(p‖q) − δ)·(1/λ − 1/t) ≤ J_t(p*) − KL(p‖p*)/λ`, since `KL(p‖q) ≤ δ` and
-`1/λ > 1/t`. In both cases the maximizer is unique. And since `J_t(p) = J_t(p_{G,t}) − KL(p‖p_{G,t})/t` for every `p`
-([[P4 — What KL measures|P4]](i)), maximizing `J_t` over `𝓑_δ` is minimizing `KL(p‖p_{G,t})` over it. (ii) If `δ < −log q(A)`, the argument of
+`J_t(p_{G,t}) − J_t(p) = KL(p‖p_{G,t})/t` for every `p`. If `t > λ_δ = λ`, then for `p ∈ 𝓑_δ`, [[P4 — What KL measures|P4]](i) at intensity `λ`
+gives `E_p[G] − KL(p‖q)/λ = E_{p*}[G] − δ/λ − KL(p‖p*)/λ`, so
+`J_t(p) = J_t(p*) − KL(p‖p*)/λ + (KL(p‖q) − δ)·(1/λ − 1/t) ≤ J_t(p*) − KL(p‖p*)/λ`, since `KL(p‖q) ≤ δ` and `1/λ > 1/t`.
+In both cases the maximizer is unique. And since `J_t(p) = J_t(p_{G,t}) − KL(p‖p_{G,t})/t` for every `p` ([[P4 — What KL measures|P4]](i)),
+maximizing `J_t` over `𝓑_δ` is minimizing `KL(p‖p_{G,t})` over it. (ii) If `δ < −log q(A)`, the argument of
 (i) with `1/t` replaced by `0` gives `E_{p*}[G] − E_p[G] ≥ KL(p‖p*)/λ_δ` for every `p ∈ 𝓑_δ`. Otherwise `q(·|A)` is in
 the budget, since its departure is `−log q(A)`, and has the average `max G`; a behaviour reaches `max G` exactly when it
-puts all its mass on `A`, and such a behaviour departs by `KL(p‖q) = −log q(A) + KL(p‖q(·|A))`, so at
-`δ = −log q(A)` only `q(·|A)` fits. (iii) For `0 < δ < −log q(A)`, `V(δ) = m(λ_δ)` with `m(t) = E_{p_{G,t}}[G]`, and
+puts all its mass on `A`, and such a behaviour departs by `KL(p‖q) = −log q(A) + KL(p‖q(·|A))`, so at `δ = −log q(A)`
+only `q(·|A)` fits. (iii) For `0 < δ < −log q(A)`, `V(δ) = m(λ_δ)` with `m(t) = E_{p_{G,t}}[G]`, and
 `m'(t) = Var_{p_{G,t}}(G)` by [[P13 — What the start of a change gains|P13]](i), since the revealed objective of the pursuit is `G` centred. By the inverse
 function theorem, `V'(δ) = m'(λ_δ)/d'(λ_δ) = 1/λ_δ`. As `δ` grows, `λ_δ` grows, so `V'` falls; as `δ → −log q(A)`,
 `λ_δ → ∞`, `V(δ) → max G` and `V'(δ) → 0`, which joins the constant `max G` beyond with a continuous, non-increasing,

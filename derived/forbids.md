@@ -1,8 +1,7 @@
 # Derived — what the core forbids
 
-Each item states something the core rules out, as a corollary of earlier results, with the checks that would fail if
-it happened. A framework that forbids nothing says nothing; this file collects, in one place, what data could
-contradict.
+Each item states something the core rules out, as a corollary of earlier results, with the checks that would fail if it
+happened. A framework that forbids nothing says nothing; this file collects, in one place, what data could contradict.
 
 The archive's chapter "what the core forbids" (v7.10, §11) had nine statements. Eight are kept here, re-derived from the
 core: C1–C8. The ninth said that the price and the budget conventions rank errors differently; it is about the price
@@ -12,10 +11,10 @@ convention, which the core does not use (`IMPORT.md`). C9–C12 are statements t
 
 ### C1 — No ranking of errors holds at every budget
 **Statement.** Let `E₁` and `E₂` be the errors of two evaluators known in the objective's units ([P29]), with
-`Var_q(E₁) > Var_q(E₂)` and `max E₁ − min E₁ < max E₂ − min E₂`. Then `w_δ(E₁) > w_δ(E₂)` for every small enough
-budget `δ`, and `w_δ(E₁) < w_δ(E₂)` for every `δ` at least as large as each `−log q(argmax E_i)` and
-`−log q(argmin E_i)`. So the worst case of the objective lost ([P29](ii)) ranks the two errors one way at small budgets
-and the other way at large ones.
+`Var_q(E₁) > Var_q(E₂)` and `max E₁ − min E₁ < max E₂ − min E₂`. Then `w_δ(E₁) > w_δ(E₂)` for every small enough budget
+`δ`, and `w_δ(E₁) < w_δ(E₂)` for every `δ` at least as large as each `−log q(argmax E_i)` and `−log q(argmin E_i)`. So
+the worst case of the objective lost ([P29](ii)) ranks the two errors one way at small budgets and the other way at
+large ones.
 
 **In plain terms.** An error that is spread out and an error that is rare but large cannot be ranked once and for all.
 Under a small budget of departure the spread-out error does more damage; under a large one, the rare large error does.
@@ -33,9 +32,9 @@ measurements; the core proves the crossing for the worst case only, and a worked
 **Lineage.** v7.10: §11.1, Thm 9 and the boundary claim C8 (crossing curves). The core's form uses [P28] and [P29].
 
 ### C2 — A KL budget does not contain a rare, large error
-**Statement.** For every budget `δ > 0` and every number `B`, there are a default and an error `E` with
-`Var_q(E) = 1` whose largest rise over the departure budget `δ` ([P27]) exceeds `B`, while its largest rise over the
-`χ²` budget `δ` is at most `δ^{1/2}`.
+**Statement.** For every budget `δ > 0` and every number `B`, there are a default and an error `E` with `Var_q(E) = 1`
+whose largest rise over the departure budget `δ` ([P27]) exceeds `B`, while its largest rise over the `χ²` budget `δ` is
+at most `δ^{1/2}`.
 
 **In plain terms.** Limiting how far an actor departs in KL does not limit the damage of an error that is rare but
 large, however small the error's variance; limiting it in `χ²` does.
@@ -58,10 +57,10 @@ actor that pursues it is capped by how much of the pursuit's mass the region alr
 bound in value: the stakes can still be large.
 
 **Proof.** By [P1](iii), `p̂ = tilt(p_{F,t}, t·M·1_A)`, a reweighting by a function constant on `A` and on its
-complement, so `p̂` splits each of the two as `p_{F,t}` does. By the chain rule [P4](iii), `KL(p̂‖p_{F,t})` is then
-the divergence between the masses of `A`, `kl(p̂(A)‖a)`. As a function of `p̂(A)`, `kl(·‖a)` is convex, so it is at
-most its larger value at the ends: `kl(1‖a) = log(1/a)` and `kl(0‖a) = log(1/(1 − a))`. As `M → ∞`, `p̂(A) → 1`, and
-as `M → −∞`, `p̂(A) → 0`. Finally, `p_{F,t}` is on the pursuit ray, so `M(p̂) ≤ KL(p̂‖p_{F,t})` ([D3]).
+complement, so `p̂` splits each of the two as `p_{F,t}` does. By the chain rule [P4](iii), `KL(p̂‖p_{F,t})` is then the
+divergence between the masses of `A`, `kl(p̂(A)‖a)`. As a function of `p̂(A)`, `kl(·‖a)` is convex, so it is at most its
+larger value at the ends: `kl(1‖a) = log(1/a)` and `kl(0‖a) = log(1/(1 − a))`. As `M → ∞`, `p̂(A) → 1`, and as `M → −∞`,
+`p̂(A) → 0`. Finally, `p_{F,t}` is on the pursuit ray, so `M(p̂) ≤ KL(p̂‖p_{F,t})` ([D3]).
 
 **Checks.** checks/test_forbids.py::test_an_error_confined_to_one_region_costs_bounded_nats
 
@@ -158,8 +157,8 @@ than real use has, by a computable amount.
 ## Added by the core
 
 ### C9 — Grouping outcomes never shows more misalignment
-**Statement.** For any specification `(q, 𝓘)`, resolution `ℬ` and `p̂ ∈ Δ`,
-`inf_{p∈𝓘} KL(p̂_ℬ‖p_ℬ) ≤ M(p̂)`, where `p_ℬ` gives each cell of `ℬ` its mass under `p`.
+**Statement.** For any specification `(q, 𝓘)`, resolution `ℬ` and `p̂ ∈ Δ`, `inf_{p∈𝓘} KL(p̂_ℬ‖p_ℬ) ≤ M(p̂)`, where
+`p_ℬ` gives each cell of `ℬ` its mass under `p`.
 
 **In plain terms.** A principal who sees only coarse records never sees more misalignment than there is.
 
@@ -173,8 +172,7 @@ checks/test_value.py::test_merging_never_increases
 ### C10 — An actor cannot behave more differently than it can tell conditions apart
 **Statement.** If the actor's response depends on the condition only through its view ([D8]), then
 `KL(p_c‖p_{c'}) ≤ KL(V_c‖V_{c'})` for any two conditions, and conditions it cannot tell apart get the same behaviour
-([P16]). In particular, it does not behave differently when observed and when not unless its view tells the two
-apart.
+([P16]). In particular, it does not behave differently when observed and when not unless its view tells the two apart.
 
 **In plain terms.** Behaving well only when watched requires being able to tell when one is watched.
 

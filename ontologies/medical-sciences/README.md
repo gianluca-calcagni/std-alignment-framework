@@ -1,7 +1,7 @@
 # Ontology — medical sciences: performance measures in health care
 
-A health system judges its providers by measures: a time target in emergency departments, a report card of deaths
-after surgery. The ministry or regulator is the principal; hospitals and their clinicians are the actor. A measure is an
+A health system judges its providers by measures: a time target in emergency departments, a report card of deaths after
+surgery. The ministry or regulator is the principal; hospitals and their clinicians are the actor. A measure is an
 evaluator ([D10]), introduced as an intervention ([D6]); patient welfare is the objective. Medicine records what
 providers do as counts, such as attendances by time in the department or patients by treatment and severity, so
 behaviour is observed as frequencies and a diagnosis is a computation. Two known results are reframed: the four-hour
@@ -53,9 +53,9 @@ For the target, write `e`, `l` and `b` for the three intervals (early, the last 
 shares before the target and `p̂` for the shares after.
 
 - **Consequence** of [D6], [P1]: if departments only add the target to what they pursue, with pass-through `φ`, then
-  `p̂ = tilt(q, φ·u)` multiplies the early and the last-twenty-minute shares by one factor, so `p̂(l)/p̂(e) = q(l)/q(e)`.
-  Any change of that ratio is a departure the target does not explain: the revealed objective ([P1]) gives the last
-  twenty minutes a weight of its own, `log((p̂(l)/q(l))/(p̂(e)/q(e)))` nats beyond the target's.
+  `p̂ = tilt(q, φ·u)` multiplies the early and the last-twenty-minute shares by one factor, so
+  `p̂(l)/p̂(e) = q(l)/q(e)`. Any change of that ratio is a departure the target does not explain: the revealed objective
+  ([P1]) gives the last twenty minutes a weight of its own, `log((p̂(l)/q(l))/(p̂(e)/q(e)))` nats beyond the target's.
 - **Consequence** of [P5], [P7]: measured against the target itself, the standard specification of `F = u`, the
   misalignment of departments that pass more often than before is the within-cell departure of [P7](ii),
   `p̂(pass)·KL(p̂(·|pass)‖q(·|pass))`, computable from the three shares before and after. Under the target as declared,
@@ -104,8 +104,8 @@ and the patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery m
   passing cell is invisible in the target's pass rate; both show only in data at a finer resolution, such as the
   clinical records the card study used, or the time intervals of the target study.
 - **Reading** with [D3]: a comparison group, states without cards or the year before a target, estimates the default:
-  what would have happened with no pursuit of the measure. The core requires it to be declared apart from the
-  behaviour judged, which is what a pre-specified comparison group does.
+  what would have happened with no pursuit of the measure. The core requires it to be declared apart from the behaviour
+  judged, which is what a pre-specified comparison group does.
 
 ## 4. Limits
 
@@ -115,19 +115,19 @@ and the patient's benefit is `F(s, ·)`. Write `Δu_s` and `ΔF_s` for surgery m
   understates what departments choose.
 - Welfare, and a patient's benefit from surgery, are estimated, not observed; the core's verdicts about them inherit
   the errors of the estimates ([P10]).
-- Attendances in one department on one day, and patients of one hospital, are not independent draws ([D11]): error
-  bars that assume independence are too narrow, and should be computed by department or hospital.
+- Attendances in one department on one day, and patients of one hospital, are not independent draws ([D11]): error bars
+  that assume independence are too narrow, and should be computed by department or hospital.
 - Severity is a context only in part: hospitals and cardiologists choose whom to refer and admit, so the per-class
   reading of the cards understates the choice of patients.
-- Two treatments per class leave the cards' pass-through test without power class by class; it assumes one
-  pass-through across classes, which [P15] shows the best feasible pursuit has, but hospitals need not respond that way.
+- Two treatments per class leave the cards' pass-through test without power class by class; it assumes one pass-through
+  across classes, which [P15] shows the best feasible pursuit has, but hospitals need not respond that way.
 
 ## 5. Open questions
 
 - Does the departure inside the passing cell carry a cost to patients, such as admissions decided in the last twenty
   minutes that a later review judges unneeded? The core locates where to measure it; the clinical records would say.
-- Can the first-order formula for a card, computed from data before the card and its published risk model, predict
-  the sign of its effect before it is published?
+- Can the first-order formula for a card, computed from data before the card and its published risk model, predict the
+  sign of its effect before it is published?
 - Is a finer risk model always better for patients? The consequence above suggests that what matters is whether the
   signs of `Δu_s` and `ΔF_s` agree in every class, not the model's accuracy as such.
 - A regulator answers to a government, and a department to its hospital. Do specifications compose along such chains?

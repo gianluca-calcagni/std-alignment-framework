@@ -29,12 +29,12 @@ Write `Ẽ = E − E_q[E]`. (i) For `u > 0`, [[P4 — What KL measures|P4]](i) f
 behaviour has more net value than its pursuit, whose net value is `Λ(u)/u`; so for every `p ∈ 𝓑_δ`,
 `E_p[Ẽ] ≤ (KL(p‖q) + Λ(u))/u ≤ (δ + Λ(u))/u`. By [[P27 — The best use of a departure budget|P27]](ii) with `G = E`, the maximum is reached at `p_{E,λ}`,
 `λ = λ_δ(E)`, when `λ` is finite. There `KL(p_{E,λ}‖q) = δ` and `KL(p_{E,λ}‖q) = λ·E_{p_{E,λ}}[Ẽ] − Λ(λ)`, so the bound
-at `u = λ` is an equality. When `λ = ∞`, the maximum is `max E − E_q[E]` ([[P27 — The best use of a departure budget|P27]](ii)), and `(δ + Λ(u))/u` tends to it
-as `u → ∞`, because `Λ(u)/u` does. (ii) At `λ = λ_δ(E)`, `σ_δ(E) = E_{p_{E,λ}}[Ẽ] = Λ'(λ)` and
-`δ = λ·Λ'(λ) − Λ(λ)`, with `λ → 0` as `δ → 0`. With `V = Var_q(E)`, `Λ(u) = V·u²/2 + κ₃·u³/6 + O(u⁴)`, so
-`δ = V·λ²/2 + κ₃·λ³/3 + O(λ⁴)`, which inverts to `λ = √(2δ/V) − 2κ₃·δ/(3V²) + O(δ^{3/2})`. Then
-`σ_δ(E) = V·λ + κ₃·λ²/2 + O(λ³) = √(2δV) + κ₃·δ/(3V) + O(δ^{3/2})`. For `−E`, `κ₃` changes sign and `V` does not, so
-the terms in `δ` cancel in `w_δ(E)`. (iii) By [[P27 — The best use of a departure budget|P27]](ii), the largest average of `E` over the budget is `max E` once
+at `u = λ` is an equality. When `λ = ∞`, the maximum is `max E − E_q[E]` ([[P27 — The best use of a departure budget|P27]](ii)), and `(δ + Λ(u))/u` tends to it as
+`u → ∞`, because `Λ(u)/u` does. (ii) At `λ = λ_δ(E)`, `σ_δ(E) = E_{p_{E,λ}}[Ẽ] = Λ'(λ)` and `δ = λ·Λ'(λ) − Λ(λ)`, with
+`λ → 0` as `δ → 0`. With `V = Var_q(E)`, `Λ(u) = V·u²/2 + κ₃·u³/6 + O(u⁴)`, so `δ = V·λ²/2 + κ₃·λ³/3 + O(λ⁴)`, which
+inverts to `λ = √(2δ/V) − 2κ₃·δ/(3V²) + O(δ^{3/2})`. Then
+`σ_δ(E) = V·λ + κ₃·λ²/2 + O(λ³) = √(2δV) + κ₃·δ/(3V) + O(δ^{3/2})`. For `−E`, `κ₃` changes sign and `V` does not, so the
+terms in `δ` cancel in `w_δ(E)`. (iii) By [[P27 — The best use of a departure budget|P27]](ii), the largest average of `E` over the budget is `max E` once
 `δ ≥ −log q(argmax E)`; applied to `−E`, the smallest is `min E` once `δ ≥ −log q(argmin E)`.
 
 ## Notes

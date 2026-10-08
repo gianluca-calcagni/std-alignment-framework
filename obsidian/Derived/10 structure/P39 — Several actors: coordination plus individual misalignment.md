@@ -22,20 +22,20 @@ coordination is `0` in each round and `2·log 2` on the two rounds taken togethe
 ## In plain terms
 When the principal wants several actors each to pursue its own objective on its own, their joint
 misalignment is the sum of their own misalignments plus one more term that no single actor's record shows: how much
-their outcomes go together, their coordination. Coordination can hide in time. Two actors can look independent in
-every round and still be tightly coordinated across rounds.
+their outcomes go together, their coordination. Coordination can hide in time. Two actors can look independent in every
+round and still be tightly coordinated across rounds.
 
 ## Proof
 (i) Where `p(x) > 0`, every `p_i(x_i) > 0`, and
 `log(p(x)/Π_i r_i(x_i)) = log(p(x)/Π_i p_i(x_i)) + Σ_i log(p_i(x_i)/r_i(x_i))`. Averaging under `p`, each last term
 gives `KL(p_i‖r_i)`, since `x_i` has the distribution `p_i` under `p`.
 (ii) The default and every `⊗_i r_i` with `r_i ∈ Δ°(X_i)` have full support. The intended set is closed in `Δ°(X)`: if
-`⊗_i r_i^{(n)} → s ∈ Δ°(X)`, the marginals converge, `r_i^{(n)} → s_i`, with `s_i ∈ 𝓘_i` because each `𝓘_i` is closed
-in `Δ°(X_i)`, and `s = ⊗_i s_i` by continuity. So [[D3 — Specification, declaration and misalignment|D3]] holds. By (i), the infimum over products splits into one
-infimum per actor, which is `M_i(p_i)`. `K(p)` is a divergence, zero exactly when `p = ⊗_i p_i`.
+`⊗_i r_i^{(n)} → s ∈ Δ°(X)`, the marginals converge, `r_i^{(n)} → s_i`, with `s_i ∈ 𝓘_i` because each `𝓘_i` is closed in
+`Δ°(X_i)`, and `s = ⊗_i s_i` by continuity. So [[D3 — Specification, declaration and misalignment|D3]] holds. By (i), the infimum over products splits into one infimum per
+actor, which is `M_i(p_i)`. `K(p)` is a divergence, zero exactly when `p = ⊗_i p_i`.
 (iii) Draw two fair coins `z_1` and `z_2` independently; actor 1 plays `z_1` then `z_2`, and actor 2 plays `z_2` then
-`z_1`. In each round the two plays are independent fair coins, so the coordination is `0`. On the two rounds each actor's
-outcome is uniform on four values, and so is the joint outcome, so `K = log 4 + log 4 − log 4 = 2·log 2`.
+`z_1`. In each round the two plays are independent fair coins, so the coordination is `0`. On the two rounds each
+actor's outcome is uniform on four values, and so is the joint outcome, so `K = log 4 + log 4 − log 4 = 2·log 2`.
 
 ## Notes
 Coordination is the total correlation of the actors' outcomes, the mutual information when there are two.

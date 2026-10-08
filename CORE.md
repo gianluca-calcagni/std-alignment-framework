@@ -37,8 +37,8 @@ The framework in ten steps:
 10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
     against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
-Specifications defined by a structure rather than by an objective need no definition of their own: several actors
-meant to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
+Specifications defined by a structure rather than by an objective need no definition of their own: several actors meant
+to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
 several principals with declared weights (`derived/structure.md`). What the core rules out, the statements that data
 could contradict, is collected in `derived/forbids.md`.
 
@@ -124,8 +124,7 @@ may face. Alignment is judged from that description alone, never from how the be
   suffer.
 
 **Lineage.** v7.10: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an
-argument.
-New: behaviour in every condition, so that deceptive alignment is in scope.
+argument. New: behaviour in every condition, so that deceptive alignment is in scope.
 
 ### A2 — Pursuit is the steepest climb
 **Statement.** To pursue an objective is to raise its average as steeply as possible, with steepness measured in a
@@ -138,8 +137,7 @@ direct must not depend on how finely we describe what happens.
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
 - *It is enough.* By Čencov's theorem [@cencov1982] it fixes the geometry, up to a constant factor, and with it the form
-  of pursuit,
-  a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
+  of pursuit, a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
 
 **Lineage.** v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where
 this was the one premise.
@@ -198,11 +196,10 @@ judged, and its test could not fail. Pre-registration in science makes the same 
 ### D1 — Outcomes, behaviours, divergence and tilt
 **Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
 distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
-`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and
-`Var_p(F) = E_p[F²] − E_p[F]²`, and `Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`,
-`p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
-the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when
-`r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
+`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and `Var_p(F) = E_p[F²] − E_p[F]²`, and
+`Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For
+`p, r ∈ Δ`, the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite
+when `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
 `tilt(r, F) = r·e^F / E_r[e^F]`.
 
 **In plain terms.** Outcomes are the things that can happen, and a behaviour says how often each one happens; full
@@ -229,9 +226,9 @@ R7-8 (measurable spaces) stays deferred, as it was there.
 ### D2 — Pursuit of an objective
 **Statement.** Let `q ∈ Δ°`, the **default**, and let `F : X → ℝ` be a function, an **objective**. The **pursuit** of
 `F` from `q` at **intensity** `t ≥ 0` is `p_{F,t} = tilt(q, t·F)`. The **pursuit ray** of `F` from `q` is
-`R_F = {p_{F,t} : t ≥ 0}`; for a constant `F` it is the single point `q`. A continuously differentiable path
-`s ↦ p_s` in `Δ°`, over an interval containing `0`, **pursues** `F` if `p_s = tilt(p_0, τ(s)·F)` for a
-differentiable, non-decreasing `τ` with `τ(0) = 0`.
+`R_F = {p_{F,t} : t ≥ 0}`; for a constant `F` it is the single point `q`. A continuously differentiable path `s ↦ p_s`
+in `Δ°`, over an interval containing `0`, **pursues** `F` if `p_s = tilt(p_0, τ(s)·F)` for a differentiable,
+non-decreasing `τ` with `τ(0) = 0`.
 
 **In plain terms.** Pursuing an objective means reweighting the default behaviour toward the outcomes that the objective
 scores higher, and the intensity says how strongly. Intensity zero is the default itself, and the pursuit ray collects
@@ -248,23 +245,21 @@ away from it, from wherever it starts.
 - *It is canonical, given [A2].* Pursuing `F` means climbing `E_p[F]` as steeply as possible, in a Riemannian geometry
   on behaviours that is unchanged when outcomes are split into sub-outcomes in fixed proportions. Up to a constant
   factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's theorem
-  [@cencov1982]; [@campbell1986]). In the Fisher metric the steepest climb is the replicator field
-  ([P2](ii)), and its flow from `q` is `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time,
-  so the ray is the same. A notion of pursuit that must not depend on how finely outcomes are described is therefore
-  led to this ray.
+  [@cencov1982]; [@campbell1986]). In the Fisher metric the steepest climb is the replicator field ([P2](ii)), and its
+  flow from `q` is `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the
+  same. A notion of pursuit that must not depend on how finely outcomes are described is therefore led to this ray.
 - *The ray needs a default; the path does not.* The same objective pursued from two defaults gives two different rays,
   so the specification of section 3 fixes the default. Whether a path pursues `F` needs no default at all, which is why
   derived results can read pursuit from changes of behaviour without declaring one.
 
 **Notes.** Names in other fields. The default is the reference policy of RL fine-tuning, the prior of KL control, the
-base measure of an exponential family, the status quo of behavioural economics, and the population before selection
-in biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of
-KL-regularized
-reward maximization with coefficient `1/t` in RL fine-tuning, for one prompt (across prompts, which the policy does
-not choose, the optimum reweights each prompt's responses separately, which is not a pursuit on prompt–response pairs);
-with a uniform default it is the logit choice rule, or quantal response, with rationality `t` [@mckelvey1995]; and it
-is the result of `t` generations of constant selection with fitness `e^F`, for types that are passed on intact, as in
-clonal reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
+base measure of an exponential family, the status quo of behavioural economics, and the population before selection in
+biology. The objective is a reward, a utility, or a log-fitness. The pursuit `p_{F,t}` is the optimum of KL-regularized
+reward maximization with coefficient `1/t` in RL fine-tuning, for one prompt (across prompts, which the policy does not
+choose, the optimum reweights each prompt's responses separately, which is not a pursuit on prompt–response pairs); with
+a uniform default it is the logit choice rule, or quantal response, with rationality `t` [@mckelvey1995]; and it is the
+result of `t` generations of constant selection with fitness `e^F`, for types that are passed on intact, as in clonal
+reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
 
 **Lineage.** v7.10: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
 whose optimum is the tilt: here a property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray
@@ -275,11 +270,10 @@ actor's model instead of by what their proofs need, and the core keeps the two a
 
 ### D3 — Specification, declaration and misalignment
 **Statement.** A **specification** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
-**intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is
-`M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`. The **standard specification** of an objective `F` is `(q, R_F)`: pursuit of `F` from
-`q` at every intensity, including none.
-A specification is **declared** when it is fixed as [A5] requires: before, and without using, the behaviour it will
-judge.
+**intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
+The **standard specification** of an objective `F` is `(q, R_F)`: pursuit of `F` from `q` at every intensity, including
+none. A specification is **declared** when it is fixed as [A5] requires: before, and without using, the behaviour it
+will judge.
 
 **In plain terms.** Before looking at what the actor does, the principal states a default behaviour and the set of
 behaviours it would accept. Misalignment is how far the actual behaviour is from the nearest acceptable one, in nats.
@@ -287,13 +281,12 @@ When the request is "pursue this objective", every intensity of pursuing it is a
 that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
 **Why this choice.**
-- *The formula is forced.* By [A3], pursuit is the best trade-off between an objective and a cost of departing from
-  the default, and by [P14] that cost can only be KL. Each intended behaviour `p` is then the best trade-off for its own
+- *The formula is forced.* By [A3], pursuit is the best trade-off between an objective and a cost of departing from the
+  default, and by [P14] that cost can only be KL. Each intended behaviour `p` is then the best trade-off for its own
   objective, `log(p/q)` at intensity 1 ([P4](ii)), and `KL(p̂‖p)` is exactly the net value, in nats, that `p̂` loses
-  against it. [A4] takes the least such loss over the acceptable behaviours: that is `M(p̂)`, including the order of
-  the arguments. The cost term is
-  what makes the reading general: without it, the only fully intended behaviours of an objective would be those on its
-  best outcomes, and every behaviour that puts any mass elsewhere would be charged.
+  against it. [A4] takes the least such loss over the acceptable behaviours: that is `M(p̂)`, including the order of the
+  arguments. The cost term is what makes the reading general: without it, the only fully intended behaviours of an
+  objective would be those on its best outcomes, and every behaviour that puts any mass elsewhere would be charged.
 - *What the number means.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on average
   `KL(p̂‖p)` nats to the log-likelihood ratio in favour of `p̂` over `p`. So `M(p̂)` is the slowest rate at which an
   observer gathers evidence that the actor is not behaving as intended: about `1/M(p̂)` decisions give one nat, odds of
@@ -319,12 +312,11 @@ that stays at the default is not misaligned, though it may be useless, which is 
 - *Stakes are reported separately.* Misalignment in nats says nothing about how much of `F` is at stake. Section 5
   reports the shortfall in `F`'s own units (v7.10: Def 22 and R8-1, where this lesson was learned).
 - *Slim on purpose.* v7.10's declaration (Def 23, the same object under its old name) had nine slots. Only four changed
-  the measure, and all four are ways of
-  generating `𝓘`. Rules, instruments, feasibility and the environment did not enter the measure, so they are not
-  part of the specification. Instruments return as interventions (section 6), and feasibility as a property of the
-  actor (section 7), where it splits misalignment instead of changing it. The default enters the measure through `𝓘`
-  (the pursuit ray starts at `q`), and other definitions use it directly. A slot is added only with a case where it
-  changes a verdict, and with the value it takes when nothing is declared.
+  the measure, and all four are ways of generating `𝓘`. Rules, instruments, feasibility and the environment did not
+  enter the measure, so they are not part of the specification. Instruments return as interventions (section 6), and
+  feasibility as a property of the actor (section 7), where it splits misalignment instead of changing it. The default
+  enters the measure through `𝓘` (the pursuit ray starts at `q`), and other definitions use it directly. A slot is added
+  only with a case where it changes a verdict, and with the value it takes when nothing is declared.
 
 **Notes.** The principal declares; what it declares is the specification, the word AI safety and formal verification use
 for the set of acceptable behaviours. Misalignment is then a quantitative distance from the specification. The direction
@@ -340,15 +332,13 @@ scored.
 
 ### D4 — Resolution
 **Statement.** A **resolution** is a partition `𝒢` of `X` into non-empty **cells**. A function is constant on cells if
-it
-takes one value on each cell. For `p ∈ Δ`, `p_𝒢` is the distribution of the cell masses `p(C)`. For `q ∈ Δ°` and
+it takes one value on each cell. For `p ∈ Δ`, `p_𝒢` is the distribution of the cell masses `p(C)`. For `q ∈ Δ°` and
 `F : X → ℝ`, the **cell average** `E_q[F|𝒢]` is the function equal, on each cell `C`, to `E_{q(·|C)}[F]`. Resolutions
 are used in two positions.
-- A specification `(q, 𝓘)` is **stated at resolution** `ℬ` if `𝓘 = {p ∈ Δ° : p_ℬ ∈ 𝓘_ℬ}` for a non-empty set `𝓘_ℬ`
-  of full-support distributions on the cells, closed in the set of all full-support distributions on the cells. The
-  principal is then **indifferent** inside the cells of `ℬ`. For an objective `F` constant on the cells of `ℬ`,
-  the **standard specification at resolution** `ℬ` takes
-  `𝓘_ℬ` to be the pursuit ray of `F`, read on the cells, from `q_ℬ`.
+- A specification `(q, 𝓘)` is **stated at resolution** `ℬ` if `𝓘 = {p ∈ Δ° : p_ℬ ∈ 𝓘_ℬ}` for a non-empty set `𝓘_ℬ` of
+  full-support distributions on the cells, closed in the set of all full-support distributions on the cells. The
+  principal is then **indifferent** inside the cells of `ℬ`. For an objective `F` constant on the cells of `ℬ`, the
+  **standard specification at resolution** `ℬ` takes `𝓘_ℬ` to be the pursuit ray of `F`, read on the cells, from `q_ℬ`.
 - A behaviour `p` is **limited to** a resolution `𝒜` if it splits every cell as the default does: `p(·|A) = q(·|A)` for
   every cell `A` of `𝒜` with `p(A) > 0`. An actor **has resolution** `𝒜` if every behaviour it can produce is limited
   to `𝒜`.
@@ -375,17 +365,15 @@ occurs, but inside a cell the outcomes keep the proportions they have by default
   behaviour rather than declared.
 - *Not the meet.* The finest partition coarser than both resolutions (their meet) holds the events both sides can
   describe, which are common knowledge in Aumann's sense [@aumann1976]. Misalignment computed there is a lower bound
-  both
-  can verify ([P4](iv)), but it is blind to every gap between the two resolutions, so it is not the score.
+  both can verify ([P4](iv)), but it is blind to every gap between the two resolutions, so it is not the score.
 
 **Notes.** The actor's position is a case of feasibility: the behaviours limited to `𝒜` form a linear feasible set
-([D7]). In reinforcement learning, an actor's resolution is a state abstraction, and outcomes it cannot tell apart
-are aliased. A principal's resolution is a coarse-graining of the outcomes.
+([D7]). In reinforcement learning, an actor's resolution is a state abstraction, and outcomes it cannot tell apart are
+aliased. A principal's resolution is a coarse-graining of the outcomes.
 
 **Lineage.** v7.10: Def 21 (the declared resolution: the principal's position), B1 and NOTES H14 (one object in several
 positions; retention), and ROADMAP §6 G1, G2 and G4. New: the actor's position as a definition, with the default
-deciding
-inside cells.
+deciding inside cells.
 
 ## 5. Stakes
 
@@ -401,13 +389,11 @@ the objective's own units.
 
 **Why this choice.**
 - *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
-  (`derived/stakes.md`), so it
-  cannot say how much of the objective is lost; a principal needs that in its own units. In v7.10 this was learned the
-  hard way (R8-1).
+  (`derived/stakes.md`), so it cannot say how much of the objective is lost; a principal needs that in its own units. In
+  v7.10 this was learned the hard way (R8-1).
 - *Compare at the same departure.* The departure is what the actor spent, and the matched pursuit is the most of `F`
   that departure can buy (`derived/stakes.md`). Comparing with the nearest intended behaviour would say nothing: in the
-  second
-  case of [P5](iv) it reaches the same average of `F` by construction.
+  second case of [P5](iv) it reaches the same average of `F` by construction.
 - *Not the best outcome.* Comparing with `max F` would charge every cautious actor for not being reckless, although the
   specification ([D3]) counts departing from the default as a cost.
 - *Defined by an infimum,* so that the definition needs no result: a derived result shows that the departure is matched
@@ -420,22 +406,18 @@ the objective's own units.
 ### D6 — Intervention and pass-through
 **Statement.** An **intervention** changes what the actor faces by a known non-constant function `u : X → ℝ`: an
 incentive, a fine, or a known shift of the actor's own default. With `p ∈ Δ°` the actor's behaviour before it and
-`p' ∈ Δ°` after,
-the actor passes the intervention through, with **pass-through** `φ ∈ ℝ`, if `p' = tilt(p, φ·u)`.
+`p' ∈ Δ°` after, the actor passes the intervention through, with **pass-through** `φ ∈ ℝ`, if `p' = tilt(p, φ·u)`.
 
 **In plain terms.** An intervention is a known nudge added to the situation: a bonus for some outcomes, a fine for
 others, or a shift in what the actor would do by default. The actor passes it through when its behaviour changes exactly
-by reweighting
-with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value follows it,
-and
-a negative value means the nudge backfires.
+by reweighting with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value
+follows it, and a negative value means the nudge backfires.
 
 **Why this choice.**
 - *The simplest response that can fail.* Any change of behaviour is a reweighting by some function ([P1](i)). The claim
   that this function is a multiple of the intervention is testable, and a derived result tests it
-  (`derived/identifiability.md`). When it fails, more
-  happened between the two behaviours than adding `u`: the intervention also changed what the actor pursues or where
-  it starts from, or something else changed at the same time.
+  (`derived/identifiability.md`). When it fails, more happened between the two behaviours than adding `u`: the
+  intervention also changed what the actor pursues or where it starts from, or something else changed at the same time.
 - *It needs no model of the actor.* The pass-through is defined from behaviour before and after; the actor's objective,
   default and intensity never appear. An actor that pursues `F̂` at intensity `t` from its own default (every behaviour
   can be written so, by [P1]), and adds `w·u` to `F̂`, has pass-through `φ = t·w` by [P1](iii); only that product is
@@ -444,8 +426,7 @@ a negative value means the nudge backfires.
   objective is unchanged, its behaviour moves to `tilt(p, h)` by [P1](iii): pass-through `1` for `u = h`.
 
 **Lineage.** v7.10: ROADMAP §6 I1 (instrument pass-through: regress the increments on the fine), Def 23's instruments
-slot,
-made measurable, and T7-2d (a change of default that moved the evaluator).
+slot, made measurable, and T7-2d (a change of default that moved the evaluator).
 
 ## 7. Feasibility
 
@@ -511,8 +492,8 @@ where it perceives a difference.
 
 **Notes.** In control theory the response is an input–output map and the view is the actor's observation of its input;
 here observability runs from the condition to the actor. In reinforcement learning the conditions are states or prompts
-and the response is the policy. In statistics, a response that depends on the condition only through a view is a
-Markov kernel composed with a channel.
+and the response is the policy. In statistics, a response that depends on the condition only through a view is a Markov
+kernel composed with a channel.
 
 **Lineage.** New. v7.10: ROADMAP §6 I1 (identification through interventions) and the brainstorm's point on
 identifiability dynamics. The ontologies' "contexts" (v8, `NOTES.md`) are conditions with fixed frequencies.
@@ -575,11 +556,11 @@ principal's objective that the evaluator does not see.
 - *Regression in the statistical sense.* `m` is the best predictor of `F` from `F̂` in mean square under the default.
 
 **Notes.** The evaluator is a proxy or reward model in machine learning, a performance measure in the economics of
-incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and
-a target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit. When
-`F̂` gives distinct outcomes distinct values, every cell of `𝒱` is a single outcome, so `m = F` and `R = 0`. The
-regression says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or
-failed, a grade, a count or an indicator is.
+incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and a
+target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit. When `F̂`
+gives distinct outcomes distinct values, every cell of `𝒱` is a single outcome, so `m = F` and `R = 0`. The regression
+says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or failed, a
+grade, a count or an indicator is.
 
 **Lineage.** v7.10: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
 evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.

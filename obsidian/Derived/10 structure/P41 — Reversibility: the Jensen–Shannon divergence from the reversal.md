@@ -12,8 +12,8 @@ Let `S` be a finite set of states, and take as outcomes the transitions, the ord
 `(x, y) ∈ S × S`. The **reversal** of a behaviour `F` on transitions is `F^T(x, y) = F(y, x)`, and `F` is
 **reversible** if `F = F^T`. Take a reversible default in `Δ°(S × S)`, and as intended behaviours the reversible ones in
 `Δ°(S × S)`. For `F ∈ Δ(S × S)` let `m = (F + F^T)/2`, and let its **entropy production** be `e(F) = KL(F‖F^T)`.
-(i) `M(F) = KL(F‖m) = ½·KL(F‖m) + ½·KL(F^T‖m)`, the Jensen–Shannon divergence between `F` and its reversal. The
-infimum is attained at `m` when `m` has full support, and approached otherwise.
+(i) `M(F) = KL(F‖m) = ½·KL(F‖m) + ½·KL(F^T‖m)`, the Jensen–Shannon divergence between `F` and its reversal. The infimum
+is attained at `m` when `m` has full support, and approached otherwise.
 (ii) `M(F) ≤ e(F)/2`.
 (iii) If `F_s = m + s·A`, with `m ∈ Δ°(S × S)` reversible and `A ≠ 0` with `A^T = −A`, then `M(F_s)/e(F_s) → 1/4` as
 `s → 0`.
@@ -23,16 +23,16 @@ positive wherever `P` is, the smallest value of `Σ_x π(x)·KL(P(x,·)‖R(x,·
 `R(x, y) = m(x, y)/π(x)` alone.
 
 ## In plain terms
-Record transitions and compare the film run forward with the film run backward. If they look
-alike, the process is reversible. Measured against reversibility, misalignment is the Jensen–Shannon divergence between
-the two films: at most half of the entropy production, the plain divergence from the backward film, and a quarter of it
-when the asymmetry is small. For a Markov chain, the nearest reversible chain runs each transition as often as the two
-films do on average.
+Record transitions and compare the film run forward with the film run backward. If they look alike,
+the process is reversible. Measured against reversibility, misalignment is the Jensen–Shannon divergence between the two
+films: at most half of the entropy production, the plain divergence from the backward film, and a quarter of it when the
+asymmetry is small. For a Markov chain, the nearest reversible chain runs each transition as often as the two films do
+on average.
 
 ## Proof
-(i) For a reversible `W`, `Σ F·log W = Σ F^T·log W = Σ m·log W`, so `KL(F‖W) = Σ F·log F − Σ m·log W`.
-This holds for `W = m`, which is reversible, so `KL(F‖W) − KL(F‖m) = Σ m·log(m/W) = KL(m‖W) ≥ 0`, with equality exactly
-at `W = m`. If `m` has zeros, the reversible behaviours `(1 − ε)·m + ε·u`, with `u` uniform, have full support, and
+(i) For a reversible `W`, `Σ F·log W = Σ F^T·log W = Σ m·log W`, so `KL(F‖W) = Σ F·log F − Σ m·log W`. This
+holds for `W = m`, which is reversible, so `KL(F‖W) − KL(F‖m) = Σ m·log(m/W) = KL(m‖W) ≥ 0`, with equality exactly at
+`W = m`. If `m` has zeros, the reversible behaviours `(1 − ε)·m + ε·u`, with `u` uniform, have full support, and
 `KL(F‖·)` at them tends to `KL(F‖m)` as `ε → 0`, because `m > 0` wherever `F > 0`. And
 `KL(F^T‖m) = KL(F‖m^T) = KL(F‖m)`. The reversible behaviours of full support form a closed set in `Δ°(S × S)`, so this
 is a specification ([[D3 — Specification, declaration and misalignment|D3]]).

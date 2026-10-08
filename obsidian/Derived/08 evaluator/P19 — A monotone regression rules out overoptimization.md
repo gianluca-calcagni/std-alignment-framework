@@ -16,8 +16,8 @@ non-decreasing.
 ## In plain terms
 If, under the default, outcomes the evaluator scores higher are never worse on average for the
 principal, then an actor that follows the evaluator, or anything that rises with it, harder and harder, never makes the
-principal worse off on average. Pursuing the evaluator itself, or any increasing transformation of it, and picking
-the best of more and more samples are all covered.
+principal worse off on average. Pursuing the evaluator itself, or any increasing transformation of it, and picking the
+best of more and more samples are all covered.
 
 ## Proof
 Each `F_s` is constant on the level sets of `F̂`, so `log(p_s/q) = ∫_0^s F_u du` is too, and every `p_s` is
@@ -31,12 +31,12 @@ It generalizes v7.10's Prop 21, where the regression is affine, and v7.10's B §
 are jointly Gaussian. Monotonicity is a property of the default's joint law of target and evaluator, so it can be
 checked before any optimization. The check shows that, without it, overoptimization is common. For an evaluator with
 distinct values on distinct outcomes, `m = F` ([[D10 — Evaluator, regression and residual|D10]], Notes), and the hypothesis asks that `F̂` never score an outcome
-above another that the target strictly prefers.
-Best-of-`n`, the best of `n` draws from `q` by `F̂` as a path in a real `n ≥ 1`, stays in `Δ°`, and its revealed
-objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B` the default's mass of `F̂ ≤ v` and of
-`F̂ < v`, it is `(A^n·log A − B^n·log B)/(A^n − B^n)`, with `0·log 0 = 0`: the average of `log u` over `[B, A]` with
-weight `u^{n−1}`, plus `1/n`. Keeping only the outcomes above a threshold leaves `Δ°`, so it is not such a path, but the
-conclusion holds for it directly: raising the threshold drops the level sets with the lowest regression.
+above another that the target strictly prefers. Best-of-`n`, the best of `n` draws from `q` by `F̂` as a path in a real
+`n ≥ 1`, stays in `Δ°`, and its revealed objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B`
+the default's mass of `F̂ ≤ v` and of `F̂ < v`, it is `(A^n·log A − B^n·log B)/(A^n − B^n)`, with `0·log 0 = 0`: the
+average of `log u` over `[B, A]` with weight `u^{n−1}`, plus `1/n`. Keeping only the outcomes above a threshold leaves
+`Δ°`, so it is not such a path, but the conclusion holds for it directly: raising the threshold drops the level sets
+with the lowest regression.
 
 ## Lineage
 v7.10: Prop 21 and B §4. New: the monotone case, and the proof by association.

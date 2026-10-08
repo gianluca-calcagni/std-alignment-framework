@@ -28,8 +28,7 @@ We judge what the actor does, in every situation it may meet, and not what goes 
 
 ## Lineage
 v7.10: R7-1 (the actual behaviour is any distribution, Def 13). v8: [[D1 — Outcomes, behaviours, divergence and tilt|D1]]'s "why", where this was an
-argument.
-New: behaviour in every condition, so that deceptive alignment is in scope.
+argument. New: behaviour in every condition, so that deceptive alignment is in scope.
 
 ## Depends on
 - nothing

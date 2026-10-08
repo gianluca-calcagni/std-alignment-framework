@@ -23,16 +23,15 @@ maximizer that picks one of several tied best outcomes is charged when the ties 
 principal declares them equivalent.
 
 ## Proof
-(i) By [[P4 — What KL measures|P4]](iii), for every `p ∈ 𝓘`,
-`KL(p̂‖p) = KL(p̂_ℬ‖p_ℬ) + Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖p(·|C))`. Membership in `𝓘` constrains only `p_ℬ`: any
-full-support splits inside the cells can be combined with any `p_ℬ ∈ 𝓘_ℬ`. Choosing splits that approach `p̂(·|C)` makes
-the second term tend to `0`, so the infimum over `𝓘` is the infimum over `𝓘_ℬ` of the first term.
+(i) By [[P4 — What KL measures|P4]](iii), for every `p ∈ 𝓘`, `KL(p̂‖p) = KL(p̂_ℬ‖p_ℬ) + Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖p(·|C))`.
+Membership in `𝓘` constrains only `p_ℬ`: any full-support splits inside the cells can be combined with any `p_ℬ ∈ 𝓘_ℬ`.
+Choosing splits that approach `p̂(·|C)` makes the second term tend to `0`, so the infimum over `𝓘` is the infimum over
+`𝓘_ℬ` of the first term.
 (ii) Since `F` is constant on each cell, `p_{F,t}(·|C) = q(·|C)` for every `t` and every cell `C`, and `(p_{F,t})_ℬ` is
-the
-pursuit of `F`, read on the cells, from `q_ℬ`. By [[P4 — What KL measures|P4]](iii), applied with `r = p_{F,t}` and with `r = q`,
-`KL(p̂‖p_{F,t}) = KL(p̂_ℬ‖(p_{F,t})_ℬ) + W(p̂)`, where `W(p̂) = Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖q(·|C))
-= KL(p̂‖q) − KL(p̂_ℬ‖q_ℬ)` does not depend on `t`. Taking the infimum over `t ≥ 0`, and using (i) for `M_ℬ`, gives
-`M(p̂) = M_ℬ(p̂) + W(p̂)`.
+the pursuit of `F`, read on the cells, from `q_ℬ`. By [[P4 — What KL measures|P4]](iii), applied with `r = p_{F,t}` and with `r = q`,
+`KL(p̂‖p_{F,t}) = KL(p̂_ℬ‖(p_{F,t})_ℬ) + W(p̂)`, where
+`W(p̂) = Σ_{C : p̂(C) > 0} p̂(C)·KL(p̂(·|C)‖q(·|C)) = KL(p̂‖q) − KL(p̂_ℬ‖q_ℬ)` does not depend on `t`. Taking the
+infimum over `t ≥ 0`, and using (i) for `M_ℬ`, gives `M(p̂) = M_ℬ(p̂) + W(p̂)`.
 
 ## Notes
 The tie case settles the charge noted in [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]]: the maximizer was charged only for a distinction the principal

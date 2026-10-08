@@ -18,8 +18,8 @@ distribution `W_c` in condition `c`, and distributions `K_w` on `Z` with `V_c = 
 
 ## In plain terms
 An actor that perceives two situations alike acts alike in them. More generally, how differently it
-can act in two situations is bounded by how well it can tell them apart, and it cannot tell them apart better than
-what it receives in them differs.
+can act in two situations is bounded by how well it can tell them apart, and it cannot tell them apart better than what
+it receives in them differs.
 
 ## Proof
 (i) `p_c = Σ_z V_c(z)·π_z` depends on `c` only through `V_c`. (ii) If some `z` has `V_c(z) > 0 = V_{c'}(z)`,

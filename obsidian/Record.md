@@ -1,9 +1,9 @@
 # RECORD — what the framework claims about the world, and what it has taken back
 
-Lint rule R13 checks this file. It names only existing items. Its ledger has exactly one row for every prediction of
-the ontologies, with the prediction's label and a state that starts with one of: untested, held, refuted, untestable.
-Nothing here is deleted. A refuted prediction keeps its row and its result, and a retraction keeps its line
-(README, rules of evidence).
+Lint rule R13 checks this file. It names only existing items. Its ledger has exactly one row for every prediction of the
+ontologies, with the prediction's label and a state that starts with one of: untested, held, refuted, untestable.
+Nothing here is deleted. A refuted prediction keeps its row and its result, and a retraction keeps its line (README,
+rules of evidence).
 
 ## 1. The honest position
 
@@ -22,8 +22,10 @@ definitions, in which results from several fields are derived, checked, and repo
 The core's own results have not been searched for: [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]], [[P25 — The target's curve turns no more often than the regression|P25]], [[P26 — The regression on bins governs at small intensity|P26]], [[P36 — Ordinal objectives|P36]], and the leading form of
 [[P37 — A strong incentive masks the actor, and can fake alignment|P37]](i). [[P39 — Several actors: coordination plus individual misalignment|P39]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] restate known identities in the core's terms: total correlation, the compensation identity, the
 Jensen–Shannon divergence and its bound by Jeffreys' divergence, and logarithmic pooling. [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]](iv), the nearest
-reversible chain, is likely in the information geometry of Markov chains and has not been searched for. Novelty is not
-a goal; this list says where a reader should look first.
+reversible chain, is likely in the information geometry of Markov chains and has not been searched for. The diagnostics
+[[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] are mapped to related work in `RELATED.md`, not searched for as results; [[P52 — What a sample certifies about misalignment, by access|P52]](i) specializes Huber's
+corollary on misspecified fits, and the estimate of [[P52 — What a sample certifies about misalignment, by access|P52]](ii) is, to first order, a known control-variate estimator of
+KL. Novelty is not a goal; this list says where a reader should look first.
 
 **What it is not yet.** The core is a checked calculus. It has made ten predictions about the world and tested three of
 them on data not seen before: one held, two were refuted (section 2). The finish line is in the README.
@@ -46,12 +48,12 @@ which can fail only through a bug or a badly scaled threshold, does not count to
 | medical-sciences | [[P1 — Every behaviour is a tilt of any other\|P1]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested: the known result's tables have not been read, and its English data are seen in summary; a confirmatory test needs a system whose data have not been read (`NOTES.md` §3.2, D6) | `ontologies/medical-sciences/`, section 3 |
 | evolutionary-biology | [[P13 — What the start of a change gains\|P13]], [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | empirical | untested: neither paper reports the genome-level data | `ontologies/evolutionary-biology/`, section 3 |
 | industrial-organization | [[P39 — Several actors: coordination plus individual misalignment\|P39]], [[D6 — Intervention and pass-through\|D6]] | empirical | untested; revised before any data were read, after case C1 found that coordination does not separate collusion from adaptation (`cases/c1-collusion-simulation/`): the comparison with the period before adoption was dropped, and a held prediction now says only that both stations' algorithms react to each other. The German price archive is public for non-commercial use, unread, and needs credentials from Tankerkönig; adoption must be dated without the response to the rival | `ontologies/industrial-organization/`, section 3 |
-| experimental-economics | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | empirical | untested: the Rock–Paper–Scissors arm is seen in summary, and whether its records are public has not been checked; the potential-game arm is new | `ontologies/experimental-economics/`, section 3 |
+| experimental-economics | [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | empirical | untested: the Rock–Paper–Scissors arm has public records in discrete time (Wang, Xu and Zhou, 2014, in the R package stratEst), whose cycles are already reported; the potential-game arm has no public record, and its data are asked of the authors (`NOTES.md` §3.2, D13; `REQUESTS.md`, R2) | `ontologies/experimental-economics/`, section 3 |
 
-The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it
-as untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known
-nudge keeps the ratios among the outcomes the nudge does not tell apart. The refutation concerns a new default option,
-which [[D6 — Intervention and pass-through|D6]] models as a bonus only approximately; the medical predictions concern measures written as rules.
+The behavioural-economics prediction was tested before its ontology was written, and the ontology first presented it as
+untested (section 3, row 4). The two medical-sciences predictions share its form: an actor that only adds a known nudge
+keeps the ratios among the outcomes the nudge does not tell apart. The refutation concerns a new default option, which
+[[D6 — Intervention and pass-through|D6]] models as a bonus only approximately; the medical predictions concern measures written as rules.
 
 **Withdrawn untested** (`NOTES.md` §3.1, Q22): the job-delegation ontology's prediction from [[P12 — What interventions reveal|P12]] and [[D6 — Intervention and pass-through|D6]], that a
 bonus on measured outcomes leaves the ratios among the unmeasured ones unchanged. It was dropped with its ontology,
@@ -59,8 +61,8 @@ which had no data to test it, not because of a result.
 
 ### 2.2 The base rate
 
-**The archive.** v7.10 registered every empirical test before computing it; two amendments disclosed that some data
-had been seen (T7-1c, T7-2c).
+**The archive.** v7.10 registered every empirical test before computing it; two amendments disclosed that some data had
+been seen (T7-1c, T7-2c).
 - T7, case 1 (evaluator length bias): 1 of 7 predictions held, plus 1 that could not fail. The one that held came after
   two failed designs.
 - T7, case 2 (retirement defaults): 4 of 8 held, and 1 could not be evaluated.
@@ -73,7 +75,8 @@ Elsewhere in v7.10, verification predictions did fail, on thresholds set without
 
 **This core.** Three of its ten empirical predictions have been tested on data not seen before, all in machine
 learning: from [[P13 — What the start of a change gains|P13]], refuted (case W1); from [[P4 — What KL measures|P4]] and [[D2 — Pursuit of an objective|D2]], refuted, and from [[P1 — Every behaviour is a tilt of any other|P1]] and [[D2 — Pursuit of an objective|D2]], held (case W3). One of
-three held.
+three held. Case W4 tested two hypotheses about one tuned model with the diagnostics, not predictions of the framework:
+one refuted, one held (`cases/w4-two-runs/`); they do not enter the base rate.
 
 ## 3. Retractions
 
@@ -89,5 +92,5 @@ The core's own log, from the restart on. v7.10's 78 rows stay in the archive, ta
 | 5 | `IMPORT.md` §5: T3 "in core" in the machine-learning ontology's Limits; the census "could" be re-routed against the core | the Limits did not mention T3, and now do; the PI froze the census in v6.4 | the same analysis |
 | 6 | `ontologies/biology/`: v7.10's I1-dyn "found no power" | I1-dyn could not fail; I1-dyn2 did not reject one objective, at power 0.51 | the same analysis |
 
-Rows 4 and 6 name the ontologies as they were then called: `humans/` is now `behavioural-economics/`, and
-`biology/` is now `evolutionary-biology/` (Q22).
+Rows 4 and 6 name the ontologies as they were then called: `humans/` is now `behavioural-economics/`, and `biology/` is
+now `evolutionary-biology/` (Q22).

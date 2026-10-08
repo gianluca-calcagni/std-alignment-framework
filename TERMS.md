@@ -2,10 +2,8 @@
 
 This file gathers every naming choice of the core and every correspondence with the literature, each with a confidence
 level. Lint rule R9 checks two things: every term the core or a derived result defines (in bold, in a Statement) has an
-entry
-in section 1, and every item named here exists. Only level A may appear in `CORE.md` or `derived/`; the other levels
-stay here until they are
-worked out.
+entry in section 1, and every item named here exists. Only level A may appear in `CORE.md` or `derived/`; the other
+levels stay here until they are worked out.
 
 | Level | Meaning |
 |---|---|

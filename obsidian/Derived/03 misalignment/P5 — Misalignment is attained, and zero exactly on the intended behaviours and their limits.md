@@ -25,20 +25,19 @@ intensity of `p°`, the **revealed intensity**:
 For a full-support behaviour there is always a nearest acceptable behaviour. Misalignment is zero
 only for acceptable behaviours and their limits. When the default is acceptable, misalignment is never more than the
 actual behaviour's departure from the default. For "pursue `F`": a behaviour that does no better than the default is
-charged its whole departure from it; one that does better is compared with the pursuit that reaches the same average
-of `F`, whose intensity is the one the behaviour reveals; and one that only ever picks the best outcomes is aligned
-exactly when it splits its choices among tied best outcomes as the default would. In particular, a maximizer with a
-single best outcome is aligned.
+charged its whole departure from it; one that does better is compared with the pursuit that reaches the same average of
+`F`, whose intensity is the one the behaviour reveals; and one that only ever picks the best outcomes is aligned exactly
+when it splits its choices among tied best outcomes as the default would. In particular, a maximizer with a single best
+outcome is aligned.
 
 ## Proof
 (i) Pick `p₀ ∈ 𝓘` and let `c = KL(p̂‖p₀)` and `H(p̂) = −Σ_x p̂(x)·log p̂(x)`. For any `p ∈ Δ°`,
 `KL(p̂‖p) = −H(p̂) − Σ_y p̂(y)·log p(y)`, and every term `−p̂(y)·log p(y)` is non-negative. So `KL(p̂‖p) ≤ c` implies
 `p(x) ≥ exp(−(c + H(p̂))/p̂(x)) > 0` for every `x`, since `p̂(x) > 0`. The set `K = {p ∈ Δ : KL(p̂‖p) ≤ c}` is closed in
 `Δ`, because `KL(p̂‖·)` is lower semicontinuous on `Δ` (with value `+∞` where some `p(x) = 0`). So `K` is compact, and
-by
-the bound it lies in `Δ°`. Since `𝓘` is closed in `Δ°`, the set `𝓘 ∩ K` is closed in `K`, hence compact, and it contains
-`p₀`. The continuous function `KL(p̂‖·)` attains its minimum on `𝓘 ∩ K`, and that minimum is `M(p̂)`, because every
-point of `𝓘` outside `K` has `KL(p̂‖p) > c`.
+by the bound it lies in `Δ°`. Since `𝓘` is closed in `Δ°`, the set `𝓘 ∩ K` is closed in `K`, hence compact, and it
+contains `p₀`. The continuous function `KL(p̂‖·)` attains its minimum on `𝓘 ∩ K`, and that minimum is `M(p̂)`, because
+every point of `𝓘` outside `K` has `KL(p̂‖p) > c`.
 (ii) If `M(p̂) = 0`, there are `p_k ∈ 𝓘` with `KL(p̂‖p_k) → 0`, and by Pinsker's inequality
 `Σ_x |p̂(x) − p_k(x)| ≤ (2·KL(p̂‖p_k))^{1/2} → 0`, so `p̂` is in the closure of `𝓘`. Conversely, if `p_k ∈ 𝓘` and
 `p_k → p̂`, then `KL(p̂‖p_k) = Σ_{p̂(x) > 0} p̂(x)·log(p̂(x)/p_k(x)) → 0`, because `p_k(x) → p̂(x) > 0` on every term.
@@ -54,26 +53,22 @@ full support; so `g` is strictly convex. As `t → ∞`, `E_{p_{F,t}}[F]` increa
 `g'` has a unique root `t* > 0`, where `g` is minimal. If `E_{p̂}[F] = max F`, then `g' < 0` everywhere, so `g`
 decreases toward its limit, which is not attained: with `m = max F`,
 `g(t) = KL(p̂‖q) − t·m + log E_q[e^{tF}] = KL(p̂‖q) + log E_q[e^{t(F − m)}] → KL(p̂‖q) + log q(A) = KL(p̂‖q(·|A))`,
-using
-that `p̂` puts all its mass on `A`. That limit is `0` exactly when `p̂ = q(·|A)`.
+using that `p̂` puts all its mass on `A`. That limit is `0` exactly when `p̂ = q(·|A)`.
 
 ## Notes
 The checks exercise the standard specification; parts (i)–(iii) for a general closed `𝓘` rest on the proof
 alone. Pinsker's inequality is standard [[References|@cover2006]]. The revealed intensity is the weight that maximum-entropy inverse
-reinforcement learning, in its one-step form, fits for the single feature `F` [[References|@ziebart2008]], restricted to `t ≥ 0`:
-in the first case the unrestricted fit is zero or negative, and in the third it is infinite. For `n` independent
-decisions with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted
-model against the best pursuit of `F` is `n·M(p̂)`, so `2n·M(p̂)` is the deviance of the model "the actor pursues `F`
-from the default" (checked in the second and first cases). In the third case, a maximizer that breaks ties among the
-best outcomes differently from the default is charged; a principal who is indifferent among tied outcomes says so with
-a resolution ([[D4 — Resolution|D4]]).
+reinforcement learning, in its one-step form, fits for the single feature `F` [[References|@ziebart2008]], restricted to `t ≥ 0`: in
+the first case the unrestricted fit is zero or negative, and in the third it is infinite. For `n` independent decisions
+with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted model against the best pursuit of `F` is
+`n·M(p̂)`, so `2n·M(p̂)` is the deviance of the model "the actor pursues `F` from the default" (checked in the second
+and first cases). In the third case, a maximizer that breaks ties among the best outcomes differently from the default
+is charged; a principal who is indifferent among tied outcomes says so with a resolution ([[D4 — Resolution|D4]]).
 
 ## Lineage
 v7.10: Prop 34(b) for (i) and (ii); Thm 13 and Thm 17(i) for the first two cases of (iv) (the transverse
-error
-`D_⊥`, attained at `t̂⁺`). New: behaviours that rule outcomes out, including the deterministic maximizer (the third
-case),
-and the name "revealed intensity".
+error `D_⊥`, attained at `t̂⁺`). New: behaviours that rule outcomes out, including the deterministic maximizer (the
+third case), and the name "revealed intensity".
 
 ## Checks
 - [`checks/test_misalignment.py::test_minimum_on_the_ray_is_attained_at_the_closed_form`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_misalignment.py)

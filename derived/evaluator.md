@@ -6,20 +6,19 @@ regression of the target on it counts ([P18]). A regression that rises with the 
 current behaviour, and at high intensity it is decided by the evaluator's two highest values ([P20]). The target's curve
 turns no more often than the regression does, so a single-peaked regression gives at most one fall ([P25]). For an
 evaluator that scores every outcome differently, the regression on bins of its values governs the pursuit while the
-intensity is small against the bins ([P26]). For an evaluator known in the target's units, pursued within a
-departure budget, the target lost is at most the width of the budget along the evaluator's error, and that bound is
-the exact worst case ([P29]); which of two errors is worse depends on the budget, so no bound that separates the error
-from the budget can be accurate at every budget ([L1], [P30]). Computable bounds on misalignment and on the width
-follow from the error's range and tails ([P33]); and when the evaluator and the target choose from the same
-candidates, the loss is at most the error's spread over them, draw by draw, which is again the exact worst case ([P34]).
+intensity is small against the bins ([P26]). For an evaluator known in the target's units, pursued within a departure
+budget, the target lost is at most the width of the budget along the evaluator's error, and that bound is the exact
+worst case ([P29]); which of two errors is worse depends on the budget, so no bound that separates the error from the
+budget can be accurate at every budget ([L1], [P30]). Computable bounds on misalignment and on the width follow from the
+error's range and tails ([P33]); and when the evaluator and the target choose from the same candidates, the loss is at
+most the error's spread over them, draw by draw, which is again the exact worst case ([P34]).
 
 ### P18 — Through the evaluator, only the regression counts
 **Statement.** Let `F̂` be an evaluator for the objective `F`, with regression `m`, residual `R` and resolution `𝒱` of
 its level sets ([D10]).
 (i) `E_q[R] = 0`, and for every behaviour `p` limited to `𝒱` ([D4]), `E_p[R] = 0` and `E_p[F] = E_p[m]`.
-(ii) For every full-support `p`, with `w = p/q`,
-`E_p[F] − E_q[F] = Cov_q(w, m) + Cov_q(w, R)`, and `Cov_q(w, R) = E_p[R]`: the target's gain is the regression's gain
-plus the residual's.
+(ii) For every full-support `p`, with `w = p/q`, `E_p[F] − E_q[F] = Cov_q(w, m) + Cov_q(w, R)`, and
+`Cov_q(w, R) = E_p[R]`: the target's gain is the regression's gain plus the residual's.
 (iii) For every injective `h : ℝ → ℝ`, the evaluator `h(F̂)` has the same regression and residual as `F̂`; and if `h` is
 increasing, `m` rises with `h(F̂)` exactly when it rises with `F̂`.
 
@@ -53,8 +52,8 @@ non-decreasing.
 
 **In plain terms.** If, under the default, outcomes the evaluator scores higher are never worse on average for the
 principal, then an actor that follows the evaluator, or anything that rises with it, harder and harder, never makes the
-principal worse off on average. Pursuing the evaluator itself, or any increasing transformation of it, and picking
-the best of more and more samples are all covered.
+principal worse off on average. Pursuing the evaluator itself, or any increasing transformation of it, and picking the
+best of more and more samples are all covered.
 
 **Proof.** Each `F_s` is constant on the level sets of `F̂`, so `log(p_s/q) = ∫_0^s F_u du` is too, and every `p_s` is
 limited to `𝒱`. By [P18](i), `E_{p_s}[F] = E_{p_s}[m]`, and by [P13](i), applied to `m`, its derivative is
@@ -68,12 +67,12 @@ limited to `𝒱`. By [P18](i), `E_{p_s}[F] = E_{p_s}[m]`, and by [P13](i), appl
 are jointly Gaussian. Monotonicity is a property of the default's joint law of target and evaluator, so it can be
 checked before any optimization. The check shows that, without it, overoptimization is common. For an evaluator with
 distinct values on distinct outcomes, `m = F` ([D10], Notes), and the hypothesis asks that `F̂` never score an outcome
-above another that the target strictly prefers.
-Best-of-`n`, the best of `n` draws from `q` by `F̂` as a path in a real `n ≥ 1`, stays in `Δ°`, and its revealed
-objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B` the default's mass of `F̂ ≤ v` and of
-`F̂ < v`, it is `(A^n·log A − B^n·log B)/(A^n − B^n)`, with `0·log 0 = 0`: the average of `log u` over `[B, A]` with
-weight `u^{n−1}`, plus `1/n`. Keeping only the outcomes above a threshold leaves `Δ°`, so it is not such a path, but the
-conclusion holds for it directly: raising the threshold drops the level sets with the lowest regression.
+above another that the target strictly prefers. Best-of-`n`, the best of `n` draws from `q` by `F̂` as a path in a real
+`n ≥ 1`, stays in `Δ°`, and its revealed objective is non-decreasing in `F̂`. On the level set of `v`, with `A` and `B`
+the default's mass of `F̂ ≤ v` and of `F̂ < v`, it is `(A^n·log A − B^n·log B)/(A^n − B^n)`, with `0·log 0 = 0`: the
+average of `log u` over `[B, A]` with weight `u^{n−1}`, plus `1/n`. Keeping only the outcomes above a threshold leaves
+`Δ°`, so it is not such a path, but the conclusion holds for it directly: raising the threshold drops the level sets
+with the lowest regression.
 
 **Lineage.** v7.10: Prop 21 and B §4. New: the monotone case, and the proof by association.
 
@@ -148,15 +147,14 @@ most once, which `+`, `−`, `+` needs twice.
 
 **Checks.** checks/test_evaluator.py::test_the_target_curve_turns_no_more_often_than_the_regression
 
-**Notes.** (i) is the variation-diminishing property of the exponential kernel, a case of total positivity. It holds
-for the pursuit of any increasing transformation of `F̂`, which has the same level sets in the same order, and so for
-the pursuit of ranks. Best-of-`n`, as a path in a real `n ≥ 1`, obeys (ii) and (iii) too: with `A_j` the default's
-mass of `F̂ ≤ v_j`, its average is `E_n[F] − c = (m_k − c) + Σ_{j<k} (m_j − m_{j+1})·A_j^n`, an exponential sum in `n`
-with exponents `log A_1 < … < log A_k = 0`. For a single-peaked regression its coefficients are negative, then
-positive, then of the sign of `m_k − c`, and the argument of (iii) applies. [P20](ii) gives where a single-peaked curve
-ends; (iii) adds that it gets there with one turn at most. For an evaluator that scores every outcome differently, the
-sequence `m_j` is the target itself in the evaluator's order, and (i) is a bound on noisy data; [P26] gives its
-bin-wise form.
+**Notes.** (i) is the variation-diminishing property of the exponential kernel, a case of total positivity. It holds for
+the pursuit of any increasing transformation of `F̂`, which has the same level sets in the same order, and so for the
+pursuit of ranks. Best-of-`n`, as a path in a real `n ≥ 1`, obeys (ii) and (iii) too: with `A_j` the default's mass of
+`F̂ ≤ v_j`, its average is `E_n[F] − c = (m_k − c) + Σ_{j<k} (m_j − m_{j+1})·A_j^n`, an exponential sum in `n` with
+exponents `log A_1 < … < log A_k = 0`. For a single-peaked regression its coefficients are negative, then positive, then
+of the sign of `m_k − c`, and the argument of (iii) applies. [P20](ii) gives where a single-peaked curve ends; (iii)
+adds that it gets there with one turn at most. For an evaluator that scores every outcome differently, the sequence
+`m_j` is the target itself in the evaluator's order, and (i) is a bound on noisy data; [P26] gives its bin-wise form.
 
 **Lineage.** New (`NOTES.md` E8). v7.10: Prop 14 (initial and terminal effects) said where the curve starts and ends;
 nothing on its shape in between.
@@ -203,10 +201,10 @@ bound covers the pursuit of `F̂`, not best-of-`n`; for best-of-`n` the natural 
 **Lineage.** v7.10: Prop 2 (Popoviciu's bound on the variance). New (`NOTES.md` E8).
 
 ### P29 — The width is the exact worst case
-**Statement.** Let `F` be the target, `F̂` an evaluator known in the units of `F` ([D10]), and `E = F̂ − F` its
-error, non-constant. Let `δ > 0`, and for `G = F` and `G = F̂` let `p*_G` be a behaviour with the largest average of
-`G` over the departure budget `𝓑_δ` ([P27](ii)). Let `L = E_{p*_F}[F] − E_{p*_F̂}[F]`: the target lost by pursuing
-the evaluator instead of the target within the budget.
+**Statement.** Let `F` be the target, `F̂` an evaluator known in the units of `F` ([D10]), and `E = F̂ − F` its error,
+non-constant. Let `δ > 0`, and for `G = F` and `G = F̂` let `p*_G` be a behaviour with the largest average of `G` over
+the departure budget `𝓑_δ` ([P27](ii)). Let `L = E_{p*_F}[F] − E_{p*_F̂}[F]`: the target lost by pursuing the evaluator
+instead of the target within the budget.
 (i) `0 ≤ L ≤ E_{p*_F̂}[E] − E_{p*_F}[E] ≤ w_δ(E)`, the width of the budget along the error ([P28]).
 (ii) Over all targets `F` with the same error, the supremum of `L` is `w_δ(E)`: `F = −c·E` gives `L = c·w_δ(E)`, for
 every `0 < c < 1`. So no bound on `L` that depends only on the error and the budget is smaller than `w_δ(E)`.
@@ -231,17 +229,17 @@ With `F = −c·E`, `F̂ = (1 − c)·E`. A positive multiple of an objective ha
 **Checks.** checks/test_evaluator.py::test_the_width_is_the_exact_worst_case
 
 **Notes.** The error `E = F̂ − F` needs the evaluator's scale, which behaviour never identifies ([D10]); this result is
-about evaluators known in the target's units, such as a reward model trained to predict the target. The
-comparison is at an equal budget, as stakes are ([D5]); v7.10 also compared net values at a declared price, which the
-core does not use. Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
+about evaluators known in the target's units, such as a reward model trained to predict the target. The comparison is at
+an equal budget, as stakes are ([D5]); v7.10 also compared net values at a declared price, which the core does not use.
+Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
 
 **Lineage.** v7.10: Thm 5 (the width is the exact worst case), parts (i) and (ii) at `β = ∞`; part (iii), at a declared
 price, is not imported. New: (iii) here, the loss as the shortfall of [D5].
 
 ### L1 — Separable bounds are loose when two quantities change rank
-**Statement.** Let `Q(E, δ) > 0` for `E` in a pair `{E₁, E₂}` and `δ` in a set `D`, let
-`ρ(δ) = Q(E₁, δ)/Q(E₂, δ)`, and `K = sup_D ρ / inf_D ρ`. If `B(E, δ) = a(E)·b(δ)` satisfies `Q ≤ B ≤ L·Q` on
-`{E₁, E₂} × D`, then `L ≥ √K`; and some separable `B` attains `L = √K`.
+**Statement.** Let `Q(E, δ) > 0` for `E` in a pair `{E₁, E₂}` and `δ` in a set `D`, let `ρ(δ) = Q(E₁, δ)/Q(E₂, δ)`, and
+`K = sup_D ρ / inf_D ρ`. If `B(E, δ) = a(E)·b(δ)` satisfies `Q ≤ B ≤ L·Q` on `{E₁, E₂} × D`, then `L ≥ √K`; and some
+separable `B` attains `L = √K`.
 
 **In plain terms.** A bound that multiplies a property of the error by a function of the budget cannot follow two errors
 whose ratio changes with the budget: if the ratio moves by a factor `K`, the bound is off by at least `√K` somewhere.
@@ -302,15 +300,15 @@ loss is at most the square root of twice the budget times the error's sub-Gaussi
 
 **Proof.** (i) `r` is on the pursuit ray of `F`, so `M(p̂) ≤ KL(p̂‖r)` ([D3]). By [P1](iii), `p̂ = tilt(r, t·E)`. With
 `g(s) = KL(tilt(r, s·E)‖r) = s·Λ_r'(s) − Λ_r(s)`, `g(0) = 0` and `g'(s) = s·Λ_r''(s) = s·Var_{tilt(r, s·E)}(E)`.
-(ii) A function whose values lie in an interval of length `d` has variance at most `d²/4` under any behaviour (the
-mean square distance to the interval's midpoint; Popoviciu's inequality, as in [P26]), so (i) gives at most
-`(d²/4)·t²/2`. If `E` takes two values on sets of `r`-mass one half each, `Var_r(E) = d²/4`, so `g(t) = d²·t²/8 + O(t³)`
-and the ratio of the two sides tends to `1` as `t → 0`. (iii) `Λ_r` is convex, so `Λ_r(2t) ≥ Λ_r(t) + t·Λ_r'(t)`, that
-is, `g(t) = t·Λ_r'(t) − Λ_r(t) ≤ Λ_r(2t) − 2Λ_r(t)`. (iv) For `u > 0` and `p` in the budget,
-`E_p[E] − E_q[E] ≤ (δ + Λ_q(u))/u ≤ δ/u + σ₊²·u/2` (the proof of [P28](i)), which is smallest at
-`u = (2δ/σ₊²)^{1/2}`; so `σ_δ(E) ≤ (2δ·σ₊²)^{1/2}`, and likewise `σ_δ(−E) ≤ (2δ·σ₋²)^{1/2}`. [P29](i) bounds the loss
-by their sum. Finally, `Λ_q(u) = ∫_0^u (u − s)·Var_{tilt(q, s·E)}(E) ds ≤ (max E − min E)²·u²/8` by the same variance
-bound, so `σ± ≤ (max E − min E)/2`.
+(ii) A function whose values lie in an interval of length `d` has variance at most `d²/4` under any behaviour (the mean
+square distance to the interval's midpoint; Popoviciu's inequality, as in [P26]), so (i) gives at most `(d²/4)·t²/2`. If
+`E` takes two values on sets of `r`-mass one half each, `Var_r(E) = d²/4`, so `g(t) = d²·t²/8 + O(t³)` and the ratio of
+the two sides tends to `1` as `t → 0`. (iii) `Λ_r` is convex, so `Λ_r(2t) ≥ Λ_r(t) + t·Λ_r'(t)`, that is,
+`g(t) = t·Λ_r'(t) − Λ_r(t) ≤ Λ_r(2t) − 2Λ_r(t)`. (iv) For `u > 0` and `p` in the budget,
+`E_p[E] − E_q[E] ≤ (δ + Λ_q(u))/u ≤ δ/u + σ₊²·u/2` (the proof of [P28](i)), which is smallest at `u = (2δ/σ₊²)^{1/2}`;
+so `σ_δ(E) ≤ (2δ·σ₊²)^{1/2}`, and likewise `σ_δ(−E) ≤ (2δ·σ₋²)^{1/2}`. [P29](i) bounds the loss by their sum. Finally,
+`Λ_q(u) = ∫_0^u (u − s)·Var_{tilt(q, s·E)}(E) ds ≤ (max E − min E)²·u²/8` by the same variance bound, so
+`σ± ≤ (max E − min E)/2`.
 
 **Checks.** checks/test_evaluator.py::test_error_bounds_for_a_known_evaluator
 
@@ -337,11 +335,11 @@ distributions.
 `F = −c·E` gives `F(x*) − F(x̂) = c·(max_S E − min_S E)` for every `S`, for every `0 < c < 1`. So no bound on the
 average loss that depends only on the error and the way `S` is drawn is smaller than `E[max_S E − min_S E]`.
 
-**In plain terms.** When the evaluator and the target choose among the same candidates, the target lost is at most
-how much more the evaluator overrates its own pick than the target's pick, and so at most the spread of the error over
-the candidates. That spread is the exact worst case: for some target it is lost. Best-of-`n` by the evaluator,
-compared with best-of-`n` by the target at the same `n`, is the case in point: the worst average loss is the average
-spread of the error over `n` draws.
+**In plain terms.** When the evaluator and the target choose among the same candidates, the target lost is at most how
+much more the evaluator overrates its own pick than the target's pick, and so at most the spread of the error over the
+candidates. That spread is the exact worst case: for some target it is lost. Best-of-`n` by the evaluator, compared with
+best-of-`n` by the target at the same `n`, is the case in point: the worst average loss is the average spread of the
+error over `n` draws.
 
 **Proof.** `x̂ ∈ S`, so `F(x*) ≥ F(x̂)`; and `x* ∈ S`, so `F̂(x̂) ≥ F̂(x*)`, that is, `F(x̂) + E(x̂) ≥ F(x*) + E(x*)`.
 Together, `0 ≤ F(x*) − F(x̂) ≤ E(x̂) − E(x*)`, and both candidates are in `S`. Taking averages over `S` gives the rest

@@ -7,9 +7,8 @@ with a key in brackets is verified and listed in `REFERENCES.md`; one marked *(t
 checked before an item cites it. Lint rule R12 checks that this file names only existing items and cites only listed
 sources.
 
-**Import priority.** *Now*: needed by the next items of the core. *Later*: useful once a later item needs it.
-*Never*: outside the framework's scope, recorded so the question is not reopened. *Done*: imported, with the items
-that carry it.
+**Import priority.** *Now*: needed by the next items of the core. *Later*: useful once a later item needs it. *Never*:
+outside the framework's scope, recorded so the question is not reopened. *Done*: imported, with the items that carry it.
 
 ## Overview
 
@@ -125,8 +124,8 @@ that carry it.
   smooth the fitted reward; in our terms, a population of principals ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]], [[P45 — Drift: what runs share, and what they do not|P45]]).
 - *Different.* These theories aim to recover rewards. We take the principal's objective as declared and measure the
   distance to it; we need the actor's objective only as the evaluator.
-- *Import, now.* Identification of an objective across several environments, which in our terms are conditions
-  ([[D8 — Conditions, responses and views|D8]]) or interventions ([[D6 — Intervention and pass-through|D6]]); the invariance classes of rewards that leave optimal behaviour unchanged.
+- *Import, now.* Identification of an objective across several environments, which in our terms are conditions ([[D8 — Conditions, responses and views|D8]]) or
+  interventions ([[D6 — Intervention and pass-through|D6]]); the invariance classes of rewards that leave optimal behaviour unchanged.
 - *What it could take from us.* A measure of how much an unidentified part of the reward matters: its effect on
   misalignment and stakes.
 
@@ -231,9 +230,9 @@ that carry it.
 - *Import, done.* The evaluator, with the decomposition of the target into its regression on the evaluator and a
   residual ([[D10 — Evaluator, regression and residual|D10]], [[P18 — Through the evaluator, only the regression counts|P18]]); a stopping rule, where the target and the evaluator become uncorrelated under the current
   behaviour ([[P20 — Where overoptimization starts, and how it ends|P20]](i)).
-- *Tested on unseen data* (case W1, `cases/w1-best-of-n-slope/`): Gao et al.'s best-of-`n` form `d·(a − b·d)`,
-  fitted over the usual range, overstates the initial slope that [[P13 — What the start of a change gains|P13]] computes from the initial policy, by 22%, on
-  12.6 million of Coste et al.'s answers with a proxy built here. The curve keeps [[P13 — What the start of a change gains|P13]]'s slope up to `n = 16` and then
+- *Tested on unseen data* (case W1, `cases/w1-best-of-n-slope/`): Gao et al.'s best-of-`n` form `d·(a − b·d)`, fitted
+  over the usual range, overstates the initial slope that [[P13 — What the start of a change gains|P13]] computes from the initial policy, by 22%, on 12.6
+  million of Coste et al.'s answers with a proxy built here. The curve keeps [[P13 — What the start of a change gains|P13]]'s slope up to `n = 16` and then
   saturates (exploratory), so the form's two numbers misstate both the start and the shape.
 - *Import, tested* (probes B4, B5; `general/transfer.md`). Under a default with a power-law upper tail, a KL budget
   buys unbounded gain, the case of Kwa et al. [[References|@kwa2024]], while a χ² budget `B` buys exactly `√(B·Var)`. Under χ²,
@@ -251,13 +250,13 @@ that carry it.
   on the max-divergence.
 - *What it could take from us.* Exact results for actors that see only the evaluator: a monotone regression rules out
   overoptimization ([[P19 — A monotone regression rules out overoptimization|P19]]), so a proxy that only averages the target over what it can tell apart cannot lower it, and
-  neither can a pass-or-fail verifier whose passing outcomes are better on average (`ontologies/machine-learning/`);
-  the terminal rule of [[P20 — Where overoptimization starts, and how it ends|P20]](ii); and the shape law of [[P25 — The target's curve turns no more often than the regression|P25]]: the target's curve turns no more often than the
-  regression, so a single-peaked regression gives at most one overoptimization peak, for pursuit and for best-of-`n`
-  alike. Whether Manheim and Garrabrant's regressional variant (proxy equals target plus
-  noise) has a monotone regression depends on the noise, which is a question for their definitions. For an evaluator
-  known in the target's units, the exact worst cases of the target lost, within a departure budget ([[P29 — The width is the exact worst case|P29]]) and among
-  shared candidates such as best-of-`n` ([[P34 — Choosing by the evaluator from a common candidate set|P34]]); and no ranking of errors that holds at every budget ([[C1 — No ranking of errors holds at every budget|C1]]).
+  neither can a pass-or-fail verifier whose passing outcomes are better on average (`ontologies/machine-learning/`); the
+  terminal rule of [[P20 — Where overoptimization starts, and how it ends|P20]](ii); and the shape law of [[P25 — The target's curve turns no more often than the regression|P25]]: the target's curve turns no more often than the regression, so
+  a single-peaked regression gives at most one overoptimization peak, for pursuit and for best-of-`n` alike. Whether
+  Manheim and Garrabrant's regressional variant (proxy equals target plus noise) has a monotone regression depends on
+  the noise, which is a question for their definitions. For an evaluator known in the target's units, the exact worst
+  cases of the target lost, within a departure budget ([[P29 — The width is the exact worst case|P29]]) and among shared candidates such as best-of-`n` ([[P34 — Choosing by the evaluator from a common candidate set|P34]]);
+  and no ranking of errors that holds at every budget ([[C1 — No ranking of errors holds at every budget|C1]]).
 
 ## Principal–agent theory
 
@@ -265,8 +264,8 @@ that carry it.
   [[References|@frey2001]]; Gneezy and Rustichini [[References|@gneezy2000]]; Baker [[References|@baker2002]], who characterizes a performance measure by two
   parameters, its distortion and its risk; Courty and Marschke [[References|@courty2008]], a test for distortion from how a measure's
   association with the true goal changes once the measure is used.
-- *Shared.* Delegation, a performance measure that differs from value, and the response to incentives
-  ([[D6 — Intervention and pass-through|D6]], [[P12 — What interventions reveal|P12]]); the medical-sciences ontology, where the measures are written rules.
+- *Shared.* Delegation, a performance measure that differs from value, and the response to incentives ([[D6 — Intervention and pass-through|D6]], [[P12 — What interventions reveal|P12]]); the
+  medical-sciences ontology, where the measures are written rules.
 - *Different.* These theories solve for optimal contracts, with risk, participation and the cost of pay. We measure,
   and do not model the principal's optimization.
 - *Import, now.* Baker's two parameters, read against [[P50 — Tampering: a change of the measurement, not of the world|P50]](iii): at the start of a pursuit of a measured evaluator, the

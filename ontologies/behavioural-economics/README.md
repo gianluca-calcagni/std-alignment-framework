@@ -93,8 +93,8 @@ replication files with counts per option, which is what the slots need.
 - Which objective is a person's own welfare is contested. The core needs one to be declared, and does not choose it.
 - The default option of behavioural economics is not the core's default; the two must not be confused.
 - A new default option is not a known bonus on it ([D6]): the two-default test of section 3 rejects that model, while a
-  fine or a match is a known function of the option chosen. The rejection bears on defaults, not on explicit
-  incentives such as the fine here or the measures of the medical-sciences ontology.
+  fine or a match is a known function of the option chosen. The rejection bears on defaults, not on explicit incentives
+  such as the fine here or the measures of the medical-sciences ontology.
 
 ## 5. Open questions
 

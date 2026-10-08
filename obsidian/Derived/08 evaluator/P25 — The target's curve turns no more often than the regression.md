@@ -46,15 +46,14 @@ one interval, and negative again, and `+`, `−`, `+` is impossible. With at mos
 most once, which `+`, `−`, `+` needs twice.
 
 ## Notes
-(i) is the variation-diminishing property of the exponential kernel, a case of total positivity. It holds
-for the pursuit of any increasing transformation of `F̂`, which has the same level sets in the same order, and so for
-the pursuit of ranks. Best-of-`n`, as a path in a real `n ≥ 1`, obeys (ii) and (iii) too: with `A_j` the default's
-mass of `F̂ ≤ v_j`, its average is `E_n[F] − c = (m_k − c) + Σ_{j<k} (m_j − m_{j+1})·A_j^n`, an exponential sum in `n`
-with exponents `log A_1 < … < log A_k = 0`. For a single-peaked regression its coefficients are negative, then
-positive, then of the sign of `m_k − c`, and the argument of (iii) applies. [[P20 — Where overoptimization starts, and how it ends|P20]](ii) gives where a single-peaked curve
-ends; (iii) adds that it gets there with one turn at most. For an evaluator that scores every outcome differently, the
-sequence `m_j` is the target itself in the evaluator's order, and (i) is a bound on noisy data; [[P26 — The regression on bins governs at small intensity|P26]] gives its
-bin-wise form.
+(i) is the variation-diminishing property of the exponential kernel, a case of total positivity. It holds for
+the pursuit of any increasing transformation of `F̂`, which has the same level sets in the same order, and so for the
+pursuit of ranks. Best-of-`n`, as a path in a real `n ≥ 1`, obeys (ii) and (iii) too: with `A_j` the default's mass of
+`F̂ ≤ v_j`, its average is `E_n[F] − c = (m_k − c) + Σ_{j<k} (m_j − m_{j+1})·A_j^n`, an exponential sum in `n` with
+exponents `log A_1 < … < log A_k = 0`. For a single-peaked regression its coefficients are negative, then positive, then
+of the sign of `m_k − c`, and the argument of (iii) applies. [[P20 — Where overoptimization starts, and how it ends|P20]](ii) gives where a single-peaked curve ends; (iii)
+adds that it gets there with one turn at most. For an evaluator that scores every outcome differently, the sequence
+`m_j` is the target itself in the evaluator's order, and (i) is a bound on noisy data; [[P26 — The regression on bins governs at small intensity|P26]] gives its bin-wise form.
 
 ## Lineage
 New (`NOTES.md` E8). v7.10: Prop 14 (initial and terminal effects) said where the curve starts and ends;

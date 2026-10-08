@@ -22,6 +22,8 @@ wait for them is the PI's call.
 | R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder and the public data; one mathematician reads `CORE.md` and `derived/` | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
 | R2 | an email to the LEEPS laboratory at UC Santa Cruz, asking for the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time, and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same protocol; no affiliation is needed to ask | step 5, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | the potential arm of the test of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] has no public record (D13) | 2026-10-07 |
 | R3 | registering for the Tankerkönig price archive (`creativecommons.tankerkoenig.de`), and its password as the environment variable `TANKERKOENIG_PASSWORD` | step 6, W2 | W2's data (D7) | 2026-10-03 |
+| R4 | approve, change or replace the contribution terms of `CONTRIBUTING.md`, proposed on 2026-10-08 | outside contributions | the terms keep a later change of licence possible (Q38); they should be settled before the first outside contribution | 2026-10-08 (Q39) |
+| R5 | decide what counts as a step for the finish line's row "stable": the executor proposes a merged pull request, counted from the merge of the review of 2026-10-08 | step 7, stability | as written, the row has no unit and cannot be met on a checkable date (`NOTES.md` §12, finding 5) | 2026-10-08 (Q39) |
 
 ## Hosts allowed
 

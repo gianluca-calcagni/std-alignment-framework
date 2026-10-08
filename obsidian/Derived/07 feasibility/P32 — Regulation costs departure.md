@@ -8,24 +8,23 @@ source: "derived/feasibility.md"
 > [!info] Generated from [derived/feasibility.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/feasibility.md#p32--regulation-costs-departure). Edit the source, not this note.
 
 ## Statement
-Let the conditions `c` ([[D8 — Conditions, responses and views|D8]]) have frequencies `ρ(c) > 0` that the actor does not choose. Let the
-actor's response in condition `c` be a behaviour `p_c` on finitely many actions, all with one default `q`, and let the
-result of action `x` in condition `c` be `φ(c, x)`, with `φ(·, x)` injective for every action `x`: no action gives two
-conditions the same result. Under `ρ` and the response, write `C`, `X`, `Z` for the condition, the action and the
-result, `H` for entropy in nats, `p̄ = Σ_c ρ(c)·p_c` for the average action, and
-`I(C; X) = Σ_c ρ(c)·KL(p_c‖p̄)` for the information the actions carry about the conditions.
+Let the conditions `c` ([[D8 — Conditions, responses and views|D8]]) have frequencies `ρ(c) > 0` that the actor does not choose. Let the actor's
+response in condition `c` be a behaviour `p_c` on finitely many actions, all with one default `q`, and let the result of
+action `x` in condition `c` be `φ(c, x)`, with `φ(·, x)` injective for every action `x`: no action gives two conditions
+the same result. Under `ρ` and the response, write `C`, `X`, `Z` for the condition, the action and the result, `H` for
+entropy in nats, `p̄ = Σ_c ρ(c)·p_c` for the average action, and `I(C; X) = Σ_c ρ(c)·KL(p_c‖p̄)` for the information the
+actions carry about the conditions.
 (i) `Σ_c ρ(c)·KL(p_c‖q) = I(C; X) + KL(p̄‖q)`.
 (ii) `H(Z) ≥ H(C) − I(C; X)`.
 (iii) So a response whose average departure `Σ_c ρ(c)·KL(p_c‖q)` is at most `δ` leaves `H(Z) ≥ H(C) − δ`. For the
-objective of hitting a result `z₀`, the miss rate `g = P(Z ≠ z₀)` satisfies `h(g) + g·log(m − 1) ≥ H(C) − δ`, with
-`h` the entropy of a coin with bias `g` and `m` the number of results: a floor on the misses that falls as the budget
-grows.
+objective of hitting a result `z₀`, the miss rate `g = P(Z ≠ z₀)` satisfies `h(g) + g·log(m − 1) ≥ H(C) − δ`, with `h`
+the entropy of a coin with bias `g` and `m` the number of results: a floor on the misses that falls as the budget grows.
 
 ## In plain terms
 An actor that must counter situations it does not choose, to keep the result steady, has to act
-differently in different situations, and acting differently costs departure from its one default. So the variety of
-the situations, less the departure spent, is a floor on the variety of the result. With a small budget, an actor cannot
-hit a target reliably when the situations vary much.
+differently in different situations, and acting differently costs departure from its one default. So the variety of the
+situations, less the departure spent, is a floor on the variety of the result. With a small budget, an actor cannot hit
+a target reliably when the situations vary much.
 
 ## Proof
 (i) `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/q(x))` splits as `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/p̄(x))` plus

@@ -39,11 +39,11 @@ principal's objective that the evaluator does not see.
 
 ## Notes
 The evaluator is a proxy or reward model in machine learning, a performance measure in the economics of
-incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and
-a target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit. When
-`F̂` gives distinct outcomes distinct values, every cell of `𝒱` is a single outcome, so `m = F` and `R = 0`. The
-regression says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or
-failed, a grade, a count or an indicator is.
+incentives, and the fitness of a selection regime in biology. Goodhart's law is about the gap between an evaluator and a
+target; the residual separates the part of that gap that an actor seeing only the evaluator cannot exploit. When `F̂`
+gives distinct outcomes distinct values, every cell of `𝒱` is a single outcome, so `m = F` and `R = 0`. The regression
+says more than the target itself only when the evaluator is coarser than the outcomes, as a test passed or failed, a
+grade, a count or an indicator is.
 
 ## Lineage
 v7.10: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an

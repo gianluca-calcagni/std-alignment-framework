@@ -9,14 +9,13 @@ pursuit `p_{F,λ}` and nearest intended behaviour `p°` ([P5](iv)).
 (i) **The best use of the departure.** If `λ < ∞`, then `KL(p_{F,λ}‖q) = KL(p̂‖q)`, and `p_{F,λ}` has the largest
 average of `F` among all behaviours whose departure is at most `KL(p̂‖q)`. If `λ = ∞`, then `S(p̂) = max F − E_{p̂}[F]`.
 In both cases `S(p̂) ≥ 0`.
-(ii) **Three causes.** If `0 < λ < ∞`, then
-`λ·S(p̂) = M(p̂) + KL(p°‖p_{F,λ}) + λ·[E_q[F] − E_{p̂}[F]]⁺`:
-misalignment, **under-pursuit** (pursuing at a lower intensity than the departure allows), and **anti-pursuit** (moving
-against the objective).
+(ii) **Three causes.** If `0 < λ < ∞`, then `λ·S(p̂) = M(p̂) + KL(p°‖p_{F,λ}) + λ·[E_q[F] − E_{p̂}[F]]⁺`: misalignment,
+**under-pursuit** (pursuing at a lower intensity than the departure allows), and **anti-pursuit** (moving against the
+objective).
 (iii) **Units.** Replacing `F` by `a·F + c`, with `a > 0`, leaves `M(p̂)` unchanged and multiplies `S(p̂)` by `a`.
-(iv) **Zero stakes.** `S(p̂) = 0` if and only if `p̂` is on the pursuit ray or puts all its mass on `A`. So
-`M(p̂) = 0` implies `S(p̂) = 0`, and `S(p̂) = 0 < M(p̂)` exactly when `p̂` puts all its mass on `A` but splits it
-differently from `q(·|A)`.
+(iv) **Zero stakes.** `S(p̂) = 0` if and only if `p̂` is on the pursuit ray or puts all its mass on `A`. So `M(p̂) = 0`
+implies `S(p̂) = 0`, and `S(p̂) = 0 < M(p̂)` exactly when `p̂` puts all its mass on `A` but splits it differently from
+`q(·|A)`.
 
 **In plain terms.** The matched pursuit is the best use of the actor's departure from the default, so the shortfall is
 never negative. Multiplied by the matched intensity, it splits into three causes: misalignment, pursuing too timidly for
@@ -35,22 +34,20 @@ to `0` (the mass outside `A` decays exponentially in `t`) and the second to `−
 (ii) Since `KL(p̂‖q) = KL(p_{F,λ}‖q)`, [P4](i) at `t = λ` gives `λ·S(p̂) = λ·(J_λ(p_{F,λ}) − J_λ(p̂)) = KL(p̂‖p_{F,λ})`.
 A finite `λ` rules out the third case of [P5](iv), because a behaviour on `A` departs by at least `−log q(A)`. In the
 second case, `p° = p_{F,t*}` with `E_{p°}[F] = E_{p̂}[F]`, so
-`KL(p̂‖p_{F,λ}) − KL(p̂‖p°) = E_{p̂}[log(p°/p_{F,λ})] = (t* − λ)·E_{p̂}[F] − Λ(t*) + Λ(λ) = E_{p°}[log(p°/p_{F,λ})]
-= KL(p°‖p_{F,λ})`, and `E_{p̂}[F] > E_q[F]`. In the first case, `p° = q`, `M(p̂) = KL(p̂‖q)`, and
+`KL(p̂‖p_{F,λ}) − KL(p̂‖p°) = E_{p̂}[log(p°/p_{F,λ})] = (t* − λ)·E_{p̂}[F] − Λ(t*) + Λ(λ) = E_{p°}[log(p°/p_{F,λ})] = KL(p°‖p_{F,λ})`,
+and `E_{p̂}[F] > E_q[F]`. In the first case, `p° = q`, `M(p̂) = KL(p̂‖q)`, and
 `KL(p̂‖p_{F,λ}) = KL(p̂‖q) − λ·E_{p̂}[F] + Λ(λ) = M(p̂) + KL(q‖p_{F,λ}) + λ·(E_q[F] − E_{p̂}[F])`, because
 `KL(q‖p_{F,λ}) = −λ·E_q[F] + Λ(λ)`.
-(iii) By [P1](ii), `tilt(q, t·(a·F + c)) = tilt(q, (t·a)·F)`, so the pursuit ray of `a·F + c` is the same set as that
-of `F`, and `M(p̂)` is unchanged. The matched pursuit is the same behaviour, since it is the point of the same ray with
-the
+(iii) By [P1](ii), `tilt(q, t·(a·F + c)) = tilt(q, (t·a)·F)`, so the pursuit ray of `a·F + c` is the same set as that of
+`F`, and `M(p̂)` is unchanged. The matched pursuit is the same behaviour, since it is the point of the same ray with the
 same departure, so both averages are transformed by `v ↦ a·v + c`, and their difference is multiplied by `a`.
 (iv) If `λ = 0`, then `p̂ = q`, on the ray. If `0 < λ < ∞`, then by (ii) `S(p̂) = KL(p̂‖p_{F,λ})/λ`, which is `0`
-exactly
-when `p̂ = p_{F,λ}`, on the ray. If `λ = ∞`, then `S(p̂) = 0` exactly when `E_{p̂}[F] = max F`, that is, when `p̂` puts
-all its mass on `A`; by [P5](iv) `M(p̂) = KL(p̂‖q(·|A))` there, which is `0` exactly when `p̂ = q(·|A)`. Finally, the
-closure of the ray in `Δ` is the ray together with `q(·|A)`: a sequence
-on the ray either has bounded intensities, and then a subsequence converges to a point of the ray (as in the proof
-of [P5](iv)), or has a subsequence with intensities tending to `∞`, which converges to `q(·|A)`. By [P5](ii),
-`M(p̂) = 0` means that `p̂` is in that closure, and in both cases `S(p̂) = 0`.
+exactly when `p̂ = p_{F,λ}`, on the ray. If `λ = ∞`, then `S(p̂) = 0` exactly when `E_{p̂}[F] = max F`, that is, when
+`p̂` puts all its mass on `A`; by [P5](iv) `M(p̂) = KL(p̂‖q(·|A))` there, which is `0` exactly when `p̂ = q(·|A)`.
+Finally, the closure of the ray in `Δ` is the ray together with `q(·|A)`: a sequence on the ray either has bounded
+intensities, and then a subsequence converges to a point of the ray (as in the proof of [P5](iv)), or has a subsequence
+with intensities tending to `∞`, which converges to `q(·|A)`. By [P5](ii), `M(p̂) = 0` means that `p̂` is in that
+closure, and in both cases `S(p̂) = 0`.
 
 **Checks.** checks/test_stakes.py::test_matched_pursuit_gets_the_most_from_the_departure,
 checks/test_stakes.py::test_stakes_split_into_three_causes,
@@ -76,13 +73,11 @@ log-ratio between the right default and the wrong one. If the objective is wrong
 spread of the error times the intensity the behaviour reveals: the harder the actor pursues, the more an error in the
 objective matters.
 
-**Proof.** First, for every `r ∈ Δ°`, `p ∈ Δ` and `h : X → ℝ`,
-`KL(p‖tilt(r, h)) − KL(p‖r) = log E_r[e^h] − E_p[h]`, and both terms lie in `[min h, max h]`, so the difference lies in
-`[−osc(h), osc(h)]`.
+**Proof.** First, for every `r ∈ Δ°`, `p ∈ Δ` and `h : X → ℝ`, `KL(p‖tilt(r, h)) − KL(p‖r) = log E_r[e^h] − E_p[h]`, and
+both terms lie in `[min h, max h]`, so the difference lies in `[−osc(h), osc(h)]`.
 (i) Let `h = log(q'/q)`. By [P1](iii), `tilt(q', t·F) = tilt(tilt(q, h), t·F) = tilt(p_{F,t}, h)`, where `p_{F,t}` is
-the
-pursuit from `q`. By the first step, `KL(p̂‖tilt(q', t·F))` and `KL(p̂‖p_{F,t})` differ by at most `osc(h)` for every
-`t ≥ 0`, and so do their infima over `t ≥ 0`, which are the two misalignments.
+the pursuit from `q`. By the first step, `KL(p̂‖tilt(q', t·F))` and `KL(p̂‖p_{F,t})` differ by at most `osc(h)` for
+every `t ≥ 0`, and so do their infima over `t ≥ 0`, which are the two misalignments.
 (ii) Let `p_{F,t*}` be the nearest intended behaviour under `F`, so `M_{q,F}(p̂) = KL(p̂‖p_{F,t*})`. The pursuit of
 `F + g` at intensity `t*` is `tilt(q, t*·(F + g)) = tilt(p_{F,t*}, t*·g)`, which is on the ray of `F + g`. By the first
 step, `M_{q,F+g}(p̂) ≤ KL(p̂‖tilt(p_{F,t*}, t*·g)) ≤ M_{q,F}(p̂) + t*·osc(g)`.

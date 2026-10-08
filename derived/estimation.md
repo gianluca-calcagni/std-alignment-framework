@@ -130,10 +130,10 @@ behaviour becomes `p^φ = tilt(p, φ·u)`.
 Chernoff information between the two actors, the best error exponent of any test between them, at least as fast
 ([P22](ii)); and `(1/φ)·log KL(p_1^φ‖p_2^φ) → −γ` when `c > 0` at some outcome with `d = γ`.
 (ii) **Fake alignment.** In a condition where `u` and the objective `F` have the same unique best outcome, the
-misalignment of `p^φ` under the standard specification of `F` tends to `0` as `φ → ∞`. So if an actor faces `u` only
-in the conditions where it is evaluated, judged as in [P24], its misalignment in evaluation can be made as small as
-one likes by a strong enough incentive, while in the conditions of use, where it faces no incentive, its misalignment
-is that of its own behaviour, and the evaluation gap tends to the whole misalignment in use.
+misalignment of `p^φ` under the standard specification of `F` tends to `0` as `φ → ∞`. So if an actor faces `u` only in
+the conditions where it is evaluated, judged as in [P24], its misalignment in evaluation can be made as small as one
+likes by a strong enough incentive, while in the conditions of use, where it faces no incentive, its misalignment is
+that of its own behaviour, and the evaluation gap tends to the whole misalignment in use.
 (iii) **Reward hacking shows.** In a condition where the unique best outcome `x_u` of `u` is not among the best
 outcomes of `F`, the misalignment of `p^φ` tends to `−log sup_{t≥0} p_{F,t}(x_u) > 0`.
 

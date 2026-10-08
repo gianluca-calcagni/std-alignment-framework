@@ -28,8 +28,8 @@ rational inattention charge an actor for exactly this quantity; here it is measu
 (ii) For pairs, `log(ρ(c)·p_c(x)/(ρ(c)·r(x))) = log(p_c(x)/r(x))`, so the divergence of the pair behaviour from an
 intended one is `Σ_c ρ(c)·KL(p_c‖r)`, as in [[P24 — The evaluation gap|P24]](i). By (i) its infimum over `r` is attained at `r = p̄`, which has
 full support, and only there. The intended set is closed in `Δ°` of the pairs: if `ρ(c)·r_n(x) → s(c, x)` with `s` of
-full support, then `r_n` converges to the outcome marginal of `s`, which is in `Δ°`, and `s` is `ρ` times it. So
-[[D3 — Specification, declaration and misalignment|D3]] holds. The value is the mutual information between condition and outcome, since `p̄` is the outcome marginal.
+full support, then `r_n` converges to the outcome marginal of `s`, which is in `Δ°`, and `s` is `ρ` times it. So [[D3 — Specification, declaration and misalignment|D3]]
+holds. The value is the mutual information between condition and outcome, since `p̄` is the outcome marginal.
 (iii) A divergence is `0` exactly at equality, so every `p_c = p̄`.
 
 ## Notes

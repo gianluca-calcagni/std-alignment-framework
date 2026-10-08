@@ -9,11 +9,10 @@ source: "CORE.md"
 
 ## Statement
 A **specification** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
-**intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is
-`M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`. The **standard specification** of an objective `F` is `(q, R_F)`: pursuit of `F` from
-`q` at every intensity, including none.
-A specification is **declared** when it is fixed as [[A5 — Declared before|A5]] requires: before, and without using, the behaviour it will
-judge.
+**intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
+The **standard specification** of an objective `F` is `(q, R_F)`: pursuit of `F` from `q` at every intensity, including
+none. A specification is **declared** when it is fixed as [[A5 — Declared before|A5]] requires: before, and without using, the behaviour it
+will judge.
 
 ## In plain terms
 Before looking at what the actor does, the principal states a default behaviour and the set of
@@ -22,13 +21,12 @@ When the request is "pursue this objective", every intensity of pursuing it is a
 that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
 ## Why this choice
-- *The formula is forced.* By [[A3 — Pursuit is the best trade-off|A3]], pursuit is the best trade-off between an objective and a cost of departing from
-  the default, and by [[P14 — The cost of departing from the default is forced|P14]] that cost can only be KL. Each intended behaviour `p` is then the best trade-off for its own
+- *The formula is forced.* By [[A3 — Pursuit is the best trade-off|A3]], pursuit is the best trade-off between an objective and a cost of departing from the
+  default, and by [[P14 — The cost of departing from the default is forced|P14]] that cost can only be KL. Each intended behaviour `p` is then the best trade-off for its own
   objective, `log(p/q)` at intensity 1 ([[P4 — What KL measures|P4]](ii)), and `KL(p̂‖p)` is exactly the net value, in nats, that `p̂` loses
-  against it. [[A4 — Misalignment is value lost|A4]] takes the least such loss over the acceptable behaviours: that is `M(p̂)`, including the order of
-  the arguments. The cost term is
-  what makes the reading general: without it, the only fully intended behaviours of an objective would be those on its
-  best outcomes, and every behaviour that puts any mass elsewhere would be charged.
+  against it. [[A4 — Misalignment is value lost|A4]] takes the least such loss over the acceptable behaviours: that is `M(p̂)`, including the order of the
+  arguments. The cost term is what makes the reading general: without it, the only fully intended behaviours of an
+  objective would be those on its best outcomes, and every behaviour that puts any mass elsewhere would be charged.
 - *What the number means.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on average
   `KL(p̂‖p)` nats to the log-likelihood ratio in favour of `p̂` over `p`. So `M(p̂)` is the slowest rate at which an
   observer gathers evidence that the actor is not behaving as intended: about `1/M(p̂)` decisions give one nat, odds of
@@ -54,12 +52,11 @@ that stays at the default is not misaligned, though it may be useless, which is 
 - *Stakes are reported separately.* Misalignment in nats says nothing about how much of `F` is at stake. Section 5
   reports the shortfall in `F`'s own units (v7.10: Def 22 and R8-1, where this lesson was learned).
 - *Slim on purpose.* v7.10's declaration (Def 23, the same object under its old name) had nine slots. Only four changed
-  the measure, and all four are ways of
-  generating `𝓘`. Rules, instruments, feasibility and the environment did not enter the measure, so they are not
-  part of the specification. Instruments return as interventions (section 6), and feasibility as a property of the
-  actor (section 7), where it splits misalignment instead of changing it. The default enters the measure through `𝓘`
-  (the pursuit ray starts at `q`), and other definitions use it directly. A slot is added only with a case where it
-  changes a verdict, and with the value it takes when nothing is declared.
+  the measure, and all four are ways of generating `𝓘`. Rules, instruments, feasibility and the environment did not
+  enter the measure, so they are not part of the specification. Instruments return as interventions (section 6), and
+  feasibility as a property of the actor (section 7), where it splits misalignment instead of changing it. The default
+  enters the measure through `𝓘` (the pursuit ray starts at `q`), and other definitions use it directly. A slot is added
+  only with a case where it changes a verdict, and with the value it takes when nothing is declared.
 
 ## Notes
 The principal declares; what it declares is the specification, the word AI safety and formal verification use

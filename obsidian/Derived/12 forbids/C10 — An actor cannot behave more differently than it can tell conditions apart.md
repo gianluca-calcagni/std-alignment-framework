@@ -10,8 +10,7 @@ source: "derived/forbids.md"
 ## Statement
 If the actor's response depends on the condition only through its view ([[D8 — Conditions, responses and views|D8]]), then
 `KL(p_c‖p_{c'}) ≤ KL(V_c‖V_{c'})` for any two conditions, and conditions it cannot tell apart get the same behaviour
-([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]]). In particular, it does not behave differently when observed and when not unless its view tells the two
-apart.
+([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]]). In particular, it does not behave differently when observed and when not unless its view tells the two apart.
 
 ## In plain terms
 Behaving well only when watched requires being able to tell when one is watched.

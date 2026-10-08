@@ -6,8 +6,8 @@ A standard formal framework for alignment problems in general, not only in machi
 institutions and organisms. The aim is a framework that is solid enough to build on, substrate-independent, easy to
 import existing theorems into, and able to make testable predictions, support diagnostics, and show its own limits.
 
-The core holds only what cannot be derived: five premises and the definitions the whole framework uses. Everything
-else is derived from them, with proofs and checks, and reported through one standard.
+The core holds only what cannot be derived: five premises and the definitions the whole framework uses. Everything else
+is derived from them, with proofs and checks, and reported through one standard.
 
 ## Where things are
 
@@ -21,6 +21,7 @@ the general one; where a general result also holds on finite outcomes, it is pro
 |---|---|
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
+| `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
 | `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
@@ -65,7 +66,8 @@ the general one; where a general result also holds on finite outcomes, it is pro
   about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
 - **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md`, `ROADMAP.md`,
-  `REQUESTS.md` and the files of `cases/` name only existing items, and their citations are listed like all others.
+  `REQUESTS.md`, `CONTRIBUTING.md` and the files of `cases/` name only existing items, and their citations are listed
+  like all others.
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 - **R14.** Every case in `cases/` has a registration; once it has a result, the result records the SHA-256 of the
@@ -102,10 +104,10 @@ printed digits.
 where each comes from):
 - **(a) Record, do not repair.** A prediction that fails stays in its ontology and in `RECORD.md`, with its result. A
   retraction is a row of `RECORD.md`, and is never deleted. v7.10's 78 rows stay in the tag `v7.10`.
-- **(b) Label every prediction** empirical or verification (lint R10). Only empirical predictions count toward the
-  base rate: in v7.10's worked cases (T7), every verification prediction held, and 5 empirical ones in 15.
-- **(c) Name what changes.** A new item or work step names a verdict, a number or a decision it would change, or the
-  PI approves it.
+- **(b) Label every prediction** empirical or verification (lint R10). Only empirical predictions count toward the base
+  rate: in v7.10's worked cases (T7), every verification prediction held, and 5 empirical ones in 15.
+- **(c) Name what changes.** A new item or work step names a verdict, a number or a decision it would change, or the PI
+  approves it.
 - **(d) Register, then compute.** An empirical test is pre-registered and pushed before any computation, in `cases/`;
   lint checks each result against the hash of its registration (R14).
 - **(e) Seen data are exploratory.** A test on data already looked at, including every dataset of v7.10, supports
@@ -167,10 +169,11 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 ## Starting a session
 
-Read `ROADMAP.md` first, and run its drift checks before any new work. To see the framework applied, read `SCENARIO.md`.
-Then read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`,
-`NOTES.md` and `ontologies/README.md`; for outcomes that are not finite, `CORE-GENERAL.md` and `general/README.md`.
-`NOTES.md` §1 holds the failure modes of past sessions, each with its evidence: read it before starting work.
+Read `ROADMAP.md` first, and run its drift checks before any new work; `REQUESTS.md` lists what waits on the PI. To see
+the framework applied, read `SCENARIO.md`. Then read this file, `CORE.md`, `derived/README.md`, `STANDARD.md`,
+`RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `NOTES.md` and `ontologies/README.md`; for outcomes that are not
+finite, `CORE-GENERAL.md` and `general/README.md`. `NOTES.md` §1 holds the failure modes of past sessions, each with its
+evidence: read it before starting work.
 
 ## License
 

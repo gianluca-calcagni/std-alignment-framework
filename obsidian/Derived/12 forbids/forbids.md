@@ -1,8 +1,7 @@
 # Derived — what the core forbids
 
-Each item states something the core rules out, as a corollary of earlier results, with the checks that would fail if
-it happened. A framework that forbids nothing says nothing; this file collects, in one place, what data could
-contradict.
+Each item states something the core rules out, as a corollary of earlier results, with the checks that would fail if it
+happened. A framework that forbids nothing says nothing; this file collects, in one place, what data could contradict.
 
 The archive's chapter "what the core forbids" (v7.10, §11) had nine statements. Eight are kept here, re-derived from the
 core: C1–C8. The ninth said that the price and the budget conventions rank errors differently; it is about the price

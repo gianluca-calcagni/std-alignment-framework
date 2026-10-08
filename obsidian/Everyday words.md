@@ -1,6 +1,5 @@
 # General results — everyday words
 
-
 The formalism matched to the words people use for misalignment. The evidence uses the statuses of `README.md` in this
 folder; "reading" is an interpretation that no computation backs, and "definition" a word for something
 `CORE-GENERAL.md` defines.

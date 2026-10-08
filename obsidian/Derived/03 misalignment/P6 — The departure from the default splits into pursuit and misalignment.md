@@ -9,9 +9,8 @@ source: "derived/misalignment.md"
 
 ## Statement
 Under the standard specification of a non-constant `F`, let `p̂ ∈ Δ` and let `p°` be as in [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv). The
-**departure** of `p̂` from the default is `KL(p̂‖q)`, and
-`KL(p̂‖q) = KL(p°‖q) + M(p̂)`.
-So `0 ≤ M(p̂) ≤ KL(p̂‖q)`, and `M(p̂) = KL(p̂‖q)` when `E_{p̂}[F] ≤ E_q[F]`.
+**departure** of `p̂` from the default is `KL(p̂‖q)`, and `KL(p̂‖q) = KL(p°‖q) + M(p̂)`. So `0 ≤ M(p̂) ≤ KL(p̂‖q)`, and
+`M(p̂) = KL(p̂‖q)` when `E_{p̂}[F] ≤ E_q[F]`.
 
 ## In plain terms
 How far the actor moved away from the default splits exactly into two parts: the movement explained
@@ -20,13 +19,10 @@ counted as misalignment.
 
 ## Proof
 In the first case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv), `p° = q` and `KL(q‖q) = 0`. In the second,
-`log(p°/q) = t*·F − log E_q[e^{t*F}]`,
-so `KL(p̂‖q) − KL(p̂‖p°) = E_{p̂}[log(p°/q)] = t*·E_{p̂}[F] − log E_q[e^{t*F}]`. Since `E_{p̂}[F] = E_{p°}[F]`, this
-equals
-`t*·E_{p°}[F] − log E_q[e^{t*F}] = E_{p°}[log(p°/q)] = KL(p°‖q)`. In the third, `p̂` and `q(·|A)` put all their mass on
-`A`, so `KL(p̂‖q) − KL(p̂‖q(·|A)) = −log q(A) = KL(q(·|A)‖q)`. The bounds follow because KL is non-negative, and the
-last
-claim is the first case.
+`log(p°/q) = t*·F − log E_q[e^{t*F}]`, so `KL(p̂‖q) − KL(p̂‖p°) = E_{p̂}[log(p°/q)] = t*·E_{p̂}[F] − log E_q[e^{t*F}]`.
+Since `E_{p̂}[F] = E_{p°}[F]`, this equals `t*·E_{p°}[F] − log E_q[e^{t*F}] = E_{p°}[log(p°/q)] = KL(p°‖q)`. In the
+third, `p̂` and `q(·|A)` put all their mass on `A`, so `KL(p̂‖q) − KL(p̂‖q(·|A)) = −log q(A) = KL(q(·|A)‖q)`. The bounds
+follow because KL is non-negative, and the last claim is the first case.
 
 ## Notes
 The identity is a Pythagorean relation for KL along the pursuit ray. In RL fine-tuning the departure is the
