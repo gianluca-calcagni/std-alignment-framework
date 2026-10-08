@@ -76,13 +76,16 @@ a source is marked **read** when its setting and the theorem cited were read in 
      [@mcallester2020];
    - both are only sampled: both limits apply.
    So the engineering question for continuous outcomes is which log-ratios a case can compute, more than which space its
-   outcomes live in.
+   outcomes live in. On finite outcomes, [P52] gives the limit laws of estimated misalignment by counts, by log-ratios,
+   and by log-ratios with draws of the default: near the ray the log-ratios are far sharper, away from it counting is;
+   beyond finite outcomes the last two need χ² divergences finite, a condition stronger than KL's.
 
 ## 3. What was read, and what is still needed
 
 Read in their text on arXiv: [@kwa2024], [@chatterjee2018], [@mcallester2020], [@ay2015], [@beirami2024], [@zhuang2020],
 [@everitt2017], [@everitt2021], [@carroll2024], [@kong2019], [@pearl2014], each for its setting and the theorems cited
-above. Read in their scans on Project Euclid: [@blackwell1953], [@csiszar1975], [@lindsay1983], [@pistone1995]. Known
-from records and abstracts only, since their publishers are not reachable from here: [@white1982], [@vuong1989],
-[@bental2013], [@polyanskiy2025]. Before draft 4 imports
-a theorem from one of those, its statement is read in the source (D12).
+above. Read in their scans on Project Euclid: [@blackwell1953], [@csiszar1975], [@lindsay1983], [@pistone1995], and
+[@huber1967], whose corollary [P52](i) specializes. Read on arXiv for [P52]'s Notes: [@amini2025]. Known from records
+and abstracts only, since their publishers are not reachable from here: [@white1982], [@vuong1989], [@bental2013];
+[@polyanskiy2025]'s draft is reachable since 2026-10-08 and not yet read. Since Q36, a theorem stated only in a
+paywalled text is derived here, with a proof and a check, or not imported.

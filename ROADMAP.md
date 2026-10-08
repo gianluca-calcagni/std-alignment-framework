@@ -26,10 +26,11 @@ access a case really has. The theory grows where one of these needs it, and the 
 
 ## Where we are (2026-10-07)
 
-- **The core** is v11: five premises, eleven definitions, 51 propositions; 183 checks pass on both paths. Nine results
-  are diagnostics ([P43]–[P51]); five were used in a case, all in W4, and [P46], [P49], [P50] and [P51] in none yet. The
-  general core is at draft 3, with a dictionary of every object from finite to continuous outcomes
-  (`general/dictionary.md`).
+- **The core** is v11: five premises, eleven definitions, 52 propositions; 184 checks pass on both paths. Nine results
+  are diagnostics ([P43]–[P51]); five were used in a case, all in W4, and [P46], [P49], [P50] and [P51] in none yet.
+  [P52] says what a sample certifies about misalignment, by what is known of each draw, and `STANDARD.md` now asks each
+  case to declare that access. The general core is at draft 3, with a dictionary of every object from finite to
+  continuous outcomes (`general/dictionary.md`).
 - **Contact with the world:** one of three framework predictions tested on data not seen before held (`RECORD.md`): W1
   refuted, W3 one held and one refuted. W4 was diagnostic, and two simulation cases, C1 and C2, each revised a
   prediction before its data were read (`cases/`). Too few tests to say more than that the framework can fail.
@@ -52,7 +53,7 @@ the executor's and run alongside one another; steps 4–6 wait on the PI.
 |---|---|---|---|
 | 1 | **W5, the stopping rule of [P20] on trained policies** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero, with several runs per `β` (as revised after C2). No public sweep exists; one is made here, on W3's reference, with W3's reward as the proxy and W4's other reward as the gold: `3.8` s per step, about 4 to 10 hours per sweep (`probes/cases/`). Next: calibrate how many steps bring each run near its optimum, then design, rehearse and register from `cases/TEMPLATE.md` | 4 | nothing |
 | 2 | **C3, tampering** (simulation, Q32): a small environment, built here, where the actor can change the world or its measurement, as in the tomato-watering gridworld [@leike2017]. It checks [P51]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [P50](iii) says. Second arm (H34, Q33): a monitor reading a channel the actor can influence, trained against, as Baker et al. found with chain-of-thought monitors. Light enough to run while W5 computes | 5 | nothing |
-| 3 | **The general core, draft 4** (Q33): estimation first, what a case can certify with the access it has (log-ratios known, the actor sampled, the reference sampled), misspecified fits and the `e^{KL}` law of reweighting; then outcomes that are not finite, with the conditions on tails and on existence that `general/dictionary.md` lists | 5; 2 (the count restarts) | for each imported theorem, its text (D12); drafting waits for nothing |
+| 3 | **Estimation, then the general core's draft 4** (Q33, Q36). Done for misalignment on finite outcomes: [P52], its limit law under each access, derived rather than imported. Next, the same for the other quantities a report gives (the pursuit part, named misalignment, [P48]'s interval), with the sample sizes they imply; then outcomes that are not finite, where [P52]'s laws need χ² divergences finite, with the conditions on tails and on existence that `general/dictionary.md` lists | 5; 2 (the count restarts) | nothing: open texts or derivations (Q36) |
 | 4 | **Readers:** a person reruns W1's report end to end from `STANDARD.md`, the case folder and the public data; a mathematician reads `CORE.md` and `derived/` | 5 | the PI finds them |
 | 5 | **[P41], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The potential arm is the risky one; no public record under a comparable protocol was found (D13) | 4 | the records, from the authors (D13) |
 | 6 | **W2**, industrial organization: register the revised prediction from [P39] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
@@ -65,19 +66,19 @@ tests, blocked on data that only the PI can obtain.
 
 ## What the PI can supply
 
-Papers go nowhere near this public repository (Q27). Either attach them to a message in the session, or put them in a
-private GitHub repository and give its name, which the executor can attach read-only to the session; or allow a host
-that serves them, as was done for arXiv and Project Euclid.
+Since Q36 no paper behind a paywall is asked for: a theorem is read in a text anyone can read, or derived here with a
+proof and a check, or not imported. White's limit theory, and Vuong's case with the saturated model, were replaced by
+[P52]; Baker (2002) and Courty and Marschke (2008) have no open text, so step 1's design does without them. What helps
+is allowing a host when a step needs one, and asking people for data and for readings. Papers and third-party data still
+go nowhere near this public repository (Q27).
 
 | For | What | Why |
 |---|---|---|
-| step 3 | White (1982) and Vuong (1989), *Econometrica* | the estimation theorems draft 4 would import: misspecified fits, and the test between two specifications |
-| step 3 | Polyanskiy and Wu (2025): allowing `people.lids.mit.edu`, where the authors keep a draft, is enough | divergences on general spaces, for the continuous part of draft 4 |
-| step 1, row 5 | Baker (2002), *Journal of Human Resources*; Courty and Marschke (2008), *Review of Economics and Statistics* | whether Baker's distortion is the core's angle (H8), and a world design for [P20] |
-| later | Ben-Tal et al. (2013), *Management Science* | robust bounds over divergence balls, for [P17] |
-| step 5 | the session records of Oprea, Henwood and Friedman (2011) and of Cason, Friedman and Hopkins (2014), from the authors at UC Santa Cruz | the potential arm of [P41] (D13) |
-| step 6 | the Tankerkönig credentials, as the environment variable `TANKERKOENIG_PASSWORD`, never in a message | W2 |
 | step 4 | two readers who are people | row 5 |
+| step 5 | an email to the LEEPS laboratory at UC Santa Cruz asking for the session records of Oprea, Henwood and Friedman (2011) and of Cason, Friedman and Hopkins (2014); no affiliation is needed to ask | the potential arm of [P41] (D13) |
+| step 6 | registering for the Tankerkönig archive (`creativecommons.tankerkoenig.de`), and its password as the environment variable `TANKERKOENIG_PASSWORD`, never in a message | W2 |
+| step 3, later | allowing `authors.library.caltech.edu` | Vuong's working paper, open there: the test between two specifications ([P42], [P44], [P48], [P49]) |
+| later | allowing `optimization-online.org` | Ben-Tal et al.'s preprint: robust bounds over divergence balls, for [P17] |
 
 ## Not now, and why
 
@@ -107,3 +108,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | Date | Change | Row |
 |---|---|---|
 | 2026-10-07 | cooperative inverse reinforcement learning and its variants mapped to the core, and a request made without full consideration read as an evaluator coarser than the target, not a resolution (`NOTES.md` §10, Q35); the roadmap reworked: what is done archived, the next steps re-prioritized, and what the PI can supply listed | 4, 5 (priorities); 3 (imports) |
+| 2026-10-08 | the PI has no academic access (Q36): imported theorems are read in open texts or derived; [P52], what a sample certifies about misalignment by what is known of each draw, derived with Huber's open paper, checked, and mutation-tested (eight mutants); the field Access in `STANDARD.md`; the requests to the PI are now hosts and data, not papers | 5 (step 3: estimation); 1 (a new check, mutation-tested) |

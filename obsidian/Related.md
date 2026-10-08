@@ -311,7 +311,7 @@ that carry it.
   round, with the actor sampled and the intended behaviour known; there it is the general core's limit that applies: no
   sample certifies that misalignment is small (GD11). So which behaviour is sampled, and which log-ratios are known,
   decides what a case can certify (`general/dictionary.md`, §2): with log-probabilities known, as in W3 and W4, the
-  core's quantities are Monte Carlo averages.
+  core's quantities are Monte Carlo averages, whose limit laws [[P52 — What a sample certifies about misalignment, by access|P52]] gives on finite outcomes.
 - *Import, later.* Stein's exponent, for a test that fixes the error of one kind; the chi-bar-square limit at the
   boundary `t* = 0`; confidence sets for the other quantities of the standard.
 - *What it could take from us.* Misalignment as the quantity a test of "the actor behaves as intended" is about.
@@ -346,18 +346,21 @@ that carry it.
 
 ## Statistics of misspecified models
 
-- *Sources.* White [[References|@white1982]]; Vuong [[References|@vuong1989]].
+- *Sources.* Huber [[References|@huber1967]]; White [[References|@white1982]]; Vuong [[References|@vuong1989]]; Amini, Vieira and Cotterell [[References|@amini2025]], on
+  estimating KL between language models.
 - *Shared.* Fitting a family that does not contain the truth. The maximum-likelihood fit of a pursuit ray to an actor's
   sample estimates the intensity that minimizes `KL(p̂‖p_{F,t})`, White's pseudo-true parameter, which is the revealed
   intensity `t*` of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv); the divergence left is the misalignment.
 - *Different.* These theories estimate and choose models; they do not read the divergence left as an actor's failure to
   do as intended.
-- *Import, now* (for the estimation work, Q33). White's limit theory for a fit under misspecification: intervals for
-  `t*` and the quantities computed at it, with the sandwich variance, where W1–W4 used the bootstrap. Vuong's test of
-  which of two families is closer in KL to the truth: whether one specification fits an actor better than another, such
-  as two principals ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]], [[P48 — Misalignment when the target is uncertain|P48]]), a trainer and a principal ([[P49 — Outer and inner misalignment|P49]]), or a specification with and without a named
-  objective ([[P44 — What named objectives explain|P44]]). His nested case, with the saturated model, should give the limit of `2n·M(p̂_n)` when `M > 0`,
-  where [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s χ² reference does not apply; to be checked in the text before an item imports it.
+- *Import, done* (Q36). [[P52 — What a sample certifies about misalignment, by access|P52]]: on finite outcomes the limit laws are derived here rather than imported, with Huber's
+  corollary, read in its scan, as the general form of (i): the sandwich variance of the revealed intensity, and a normal
+  law for estimated misalignment off the ray, where [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s χ² reference does not apply. With log-ratios known, the
+  estimate is Amini, Vieira and Cotterell's control-variate estimator with coefficient `1`, forced rather than chosen.
+- *Import, later.* Vuong's test of which of two families is closer in KL to the truth: whether one specification fits
+  an actor better than another, such as two principals ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]], [[P48 — Misalignment when the target is uncertain|P48]]), a trainer and a principal ([[P49 — Outer and inner misalignment|P49]]), or a
+  specification with and without a named objective ([[P44 — What named objectives explain|P44]]); his working paper is open, on a host not yet allowed.
+  White's theorem, needed only beyond finite outcomes, where Huber's paper serves as well.
 - *What it could take from us.* The divergence left read as misalignment, with its stakes and its splits.
 
 ## Distributionally robust optimization

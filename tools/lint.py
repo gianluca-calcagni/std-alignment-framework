@@ -356,7 +356,7 @@ def lint_cases(cases):
 
 
 BEFORE_THE_DESIGN_RULES = {"c1-collusion-simulation", "c2-stopping-rule", "w1-best-of-n-slope", "w3-ppo-pursuit"}
-FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}}                            # field: cases registered before it
+FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}, "Access": {"w4-two-runs"}}   # field: cases registered before it
 REGISTRATION_SECTIONS = ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
                          "## Rehearsal", "## Licences"]
 

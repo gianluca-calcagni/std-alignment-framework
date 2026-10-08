@@ -91,6 +91,9 @@ must hold on both paths, rather than reproduce printed digits.
 - **No third-party material.** The repository keeps no third-party data, papers, model weights, or anything computed
   item by item from third-party data; only code, aggregates and citations. A case's script fetches what it needs and
   rebuilds what it trains, and the case says under which licences its inputs were released.
+- **Open sources.** A theorem the framework imports is read in a text anyone can read without paying: an open archive,
+  an author's page, a working paper. If only a paywalled text states it, it is derived here, with a proof and a check,
+  or it is not imported; its record may still be cited in `RELATED.md` (Q36).
 
 **Rules of evidence** (working agreements too, adopted by the PI from v7.10's rules and failures; `IMPORT.md` §5 says
 where each comes from):
