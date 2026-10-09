@@ -1,11 +1,12 @@
 # Diagnostics: what misalignment is made of
 
 Results that take a measured misalignment apart, so that a test can ask where it comes from: the intensity at which it
-is judged, the other objectives the actor may be pursuing, the runs of one procedure that differ by chance, the
-situations an actor can tell apart, a target known only to lie in a family, how training on an evaluator splits
-misalignment into outer and inner parts, and how much of a change acts on the measurement rather than on the world. One
-result says what the estimates cost in samples. Each follows from earlier results; they were derived after the first
-tests on data not seen before (`NOTES.md` §6), to design the next ones.
+is judged ([P43]), the other objectives the actor may be pursuing ([P44]), the runs of one procedure that differ by
+chance ([P45]), and what runs share between two conditions, such as evaluation and use ([P46]); a target known only to
+lie in a family ([P48]); how training on an evaluator splits misalignment into outer and inner parts ([P49]); and how
+much of a change acts on the measurement rather than on the world, and what signals, audits and re-measurements reveal
+of it ([P50], [P51]). One result says what the estimates cost in samples ([P47]). Each follows from earlier results;
+they were derived after the first tests on data not seen before (`NOTES.md` §6), to design the next ones.
 
 ### P43 — Misalignment at any intensity
 **Statement.** Under the standard specification of a non-constant `F`, let `p̂ ∈ Δ`, with revealed intensity `t*` and
@@ -16,9 +17,9 @@ nearest intended behaviour `p°` (or its limit `q(·|A)`) ([P5](iv)).
 be the default, `F_c` a non-constant objective, and `p_c ∈ Δ` a behaviour with misalignment `M_c`, finite revealed
 intensity `t*_c` and nearest intended behaviour `p°_c`. With `a_c = [E_{q_c}[F_c] − E_{p_c}[F_c]]⁺`, the misalignment at
 one shared intensity ([P24], Notes) is
-`min_{t≥0} Σ_c ρ(c)·KL(p_c‖p_{c,F_c,t}) = Σ_c ρ(c)·M_c + min_{t≥0} Σ_c ρ(c)·[KL(p°_c‖p_{c,F_c,t}) + t·a_c]`,
-and both minima are attained. The excess over `Σ_c ρ(c)·M_c` depends on each condition only through `q_c`, `F_c`, `t*_c`
-and `a_c`, and it is `0` exactly when all the `t*_c` are equal.
+`min_{t≥0} Σ_c ρ(c)·KL(p_c‖p_{c,F_c,t}) = Σ_c ρ(c)·M_c + min_{t≥0} Σ_c ρ(c)·[KL(p°_c‖p_{c,F_c,t}) + t·a_c]`, and both
+minima are attained. The excess over `Σ_c ρ(c)·M_c` depends on each condition only through `q_c`, `F_c`, `t*_c` and
+`a_c`, and it is `0` exactly when all the `t*_c` are equal.
 
 **In plain terms.** Judged against a pursuit at some other strength than its own, a behaviour carries two costs beyond
 its misalignment: how far its nearest pursuit is from the pursuit at that strength, and, if it did worse than the
@@ -354,7 +355,8 @@ two defaults, the change of default adds a term of its own.
 
 **Lineage.** v7.10: Cor 1.5 and A16 (stacked stages, with an outer–inner cross term at second order), and H12 (the chain
 rule of KL may give the archive's five gaps back as additive terms); the outer and inner alignment of Hubinger et al.
-(2019), as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of intensity.
+[@hubinger2019], as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of
+intensity.
 
 ### P50 — Tampering: a change of the measurement, not of the world
 **Statement.** Let the outcomes be pairs, `X = W × S`: a state `w` of the world, and a signal `s`, the measurement from
@@ -442,8 +444,8 @@ channel.
 **Lineage.** v7.10 archive, gap 3 (grounding: wireheading and reward tampering), which `IMPORT.md` §8 mapped as "partly;
 needs": a tampered measurement there was only an outcome that the evaluator scores high and the target low. New: the
 measurement as part of the outcome, tampering as a divergence from a declared channel, and its split from the change of
-the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering and the corrupted reward
-channel of Everitt and coauthors are the nearest work (`RELATED.md`, to verify).
+the world, from the PI's question in `NOTES.md` (Q32). The causal analyses of reward tampering [@everitt2021] and the
+corrupted reward channel [@everitt2017] are the nearest work (`RELATED.md`).
 
 ### P51 — What signals, audits and re-measurements reveal of tampering
 **Statement.** In the setting of [P50], let `p ∈ Δ`, with distribution of signals `p_S`. For a channel `C` from `W` to a

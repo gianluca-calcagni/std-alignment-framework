@@ -25,7 +25,8 @@ earlier cases left open.*
 is not the evaluator unless the registration says so; when that target is known only to lie in a family, declare the
 family and register the interval it gives ([P48]). Fix here the specification across conditions (each at its own
 intensity, or one shared: [P43]), which outcomes the evaluator scores alike, ties included ([D10]), the named
-objectives in their order ([P44]) and the runs ([P45]).*
+objectives in their order ([P44]), the runs ([P45]), and the access, with the estimate of misalignment it allows
+([P52]).*
 
 | Field | Core | Entry |
 |---|---|---|

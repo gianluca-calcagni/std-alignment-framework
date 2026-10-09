@@ -22,6 +22,8 @@ jobs:
         run: python3 tools/lint.py
       - name: the Obsidian view in obsidian/ is fresh (python3 tools/obsidian.py regenerates it)
         run: python3 tools/obsidian.py --check
+      - name: the library stdalign builds as a package
+        run: python3 -m pip wheel . --no-deps -w /tmp/wheel
 
   checks:
     name: checks (${{ matrix.simd }} SIMD path)

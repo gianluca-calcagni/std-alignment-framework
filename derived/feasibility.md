@@ -13,9 +13,8 @@ situations it does not choose spends departure to do so, which puts a floor unde
 (ii) **Convex limits.** For every `p ∈ 𝓕`, `KL(p‖r) ≥ KL(p‖p*) + KL(p*‖r)`.
 (iii) **Linear limits.** If `𝓕` is linear, with functions `f_1, …, f_m`, then `p* = tilt(r, Σ_i θ_i·f_i)` for some
 numbers `θ_i`, and equality holds in (ii) for every `p ∈ 𝓕`.
-(iv) **Value.** If `r = p_{F,t}` with `t > 0`, then `p*` is the unique maximizer over `𝓕` of the net value `J_t`
-of [P4];
-for every `p ∈ 𝓕`, `t·(J_t(p*) − J_t(p)) ≥ KL(p‖p*)`, with equality when `𝓕` is linear; and
+(iv) **Value.** If `r = p_{F,t}` with `t > 0`, then `p*` is the unique maximizer over `𝓕` of the net value `J_t` of
+[P4]; for every `p ∈ 𝓕`, `t·(J_t(p*) − J_t(p)) ≥ KL(p‖p*)`, with equality when `𝓕` is linear; and
 `t·(J_t(p_{F,t}) − J_t(p*)) = KL(p*‖p_{F,t})`.
 (v) **The split.** Under the standard specification of a non-constant `F`, let `𝓕` be linear, let `p̂ ∈ 𝓕` have a finite
 revealed intensity `t*` with nearest intended behaviour `p° = p_{F,t*}` ([P5](iv)), and let `p*°` be the best feasible
@@ -27,16 +26,15 @@ behaviour. When the actor's limits take the form "these averages cannot change",
 intended splits exactly into two parts: how far it is from the best it could have done, and how far that best is from
 what was intended. The first is what the actor would not do, and the second what it could not. In value, the first is
 what the actor left unclaimed, and the second what no feasible behaviour reaches. For limits of other shapes the split
-is
-only an inequality, or fails.
+is only an inequality, or fails.
 
 **Proof.** (i) Since `r` has full support, `KL(·‖r)` is continuous on `Δ` and strictly convex. `𝓕` is closed in the
-compact `Δ`, so a minimizer exists, and it is unique because `𝓕` is convex. Let `p̃ ∈ 𝓕` have full support, and
-suppose `p*(x) = 0` for some `x`. Along `p_λ = (1 − λ)·p* + λ·p̃`, which stays in `𝓕`, the terms of `KL(p_λ‖r)` at the
-outcomes where `p*` vanishes have derivative `−∞` as `λ → 0+` (the derivative of `u·log u` at `0`), while the other
-terms have finite derivatives. So `KL(p_λ‖r) < KL(p*‖r)` for small `λ > 0`, a contradiction.
-(ii) For `p ∈ 𝓕` the segment `p_λ = (1 − λ)·p* + λ·p` stays in `𝓕`, so the derivative of `KL(p_λ‖r)` at `λ = 0+` is
-not negative. Since `p*` has full support and `Σ_x (p(x) − p*(x)) = 0`, that derivative is
+compact `Δ`, so a minimizer exists, and it is unique because `𝓕` is convex. Let `p̃ ∈ 𝓕` have full support, and suppose
+`p*(x) = 0` for some `x`. Along `p_λ = (1 − λ)·p* + λ·p̃`, which stays in `𝓕`, the terms of `KL(p_λ‖r)` at the outcomes
+where `p*` vanishes have derivative `−∞` as `λ → 0+` (the derivative of `u·log u` at `0`), while the other terms have
+finite derivatives. So `KL(p_λ‖r) < KL(p*‖r)` for small `λ > 0`, a contradiction.
+(ii) For `p ∈ 𝓕` the segment `p_λ = (1 − λ)·p* + λ·p` stays in `𝓕`, so the derivative of `KL(p_λ‖r)` at `λ = 0+` is not
+negative. Since `p*` has full support and `Σ_x (p(x) − p*(x)) = 0`, that derivative is
 `Σ_x (p(x) − p*(x))·log(p*(x)/r(x))`, so `E_p[log(p*/r)] ≥ KL(p*‖r)`. For every `p ∈ Δ`,
 `KL(p‖r) − KL(p‖p*) = E_p[log(p*/r)]`, which gives (ii).
 (iii) Near `p*`, which has full support, `𝓕` coincides with the affine set `{p : Σ_x p(x) = 1, E_p[f_i] = a_i}`, and
@@ -97,15 +95,15 @@ budget and a price are one quantity in two forms: a budget is spent exactly by p
 **Proof.** Write `d(t) = KL(p_{G,t}‖q)`. By the proof of [P9](i), `d` increases continuously and strictly from `0`
 toward `−log q(A)`, with `d'(t) = t·Var_{p_{G,t}}(G)`; so `λ_δ` is finite exactly when `δ < −log q(A)`, and then
 `d(λ_δ) = δ`. (i) If `t ≤ λ_δ`, then `d(t) ≤ δ`, so `p_{G,t}` is in the budget, and [P4](i) gives
-`J_t(p_{G,t}) − J_t(p) = KL(p‖p_{G,t})/t` for every `p`. If `t > λ_δ = λ`, then for `p ∈ 𝓑_δ`, [P4](i) at intensity
-`λ` gives `E_p[G] − KL(p‖q)/λ = E_{p*}[G] − δ/λ − KL(p‖p*)/λ`, so
-`J_t(p) = J_t(p*) − KL(p‖p*)/λ + (KL(p‖q) − δ)·(1/λ − 1/t) ≤ J_t(p*) − KL(p‖p*)/λ`, since `KL(p‖q) ≤ δ` and
-`1/λ > 1/t`. In both cases the maximizer is unique. And since `J_t(p) = J_t(p_{G,t}) − KL(p‖p_{G,t})/t` for every `p`
-([P4](i)), maximizing `J_t` over `𝓑_δ` is minimizing `KL(p‖p_{G,t})` over it. (ii) If `δ < −log q(A)`, the argument of
+`J_t(p_{G,t}) − J_t(p) = KL(p‖p_{G,t})/t` for every `p`. If `t > λ_δ = λ`, then for `p ∈ 𝓑_δ`, [P4](i) at intensity `λ`
+gives `E_p[G] − KL(p‖q)/λ = E_{p*}[G] − δ/λ − KL(p‖p*)/λ`, so
+`J_t(p) = J_t(p*) − KL(p‖p*)/λ + (KL(p‖q) − δ)·(1/λ − 1/t) ≤ J_t(p*) − KL(p‖p*)/λ`, since `KL(p‖q) ≤ δ` and `1/λ > 1/t`.
+In both cases the maximizer is unique. And since `J_t(p) = J_t(p_{G,t}) − KL(p‖p_{G,t})/t` for every `p` ([P4](i)),
+maximizing `J_t` over `𝓑_δ` is minimizing `KL(p‖p_{G,t})` over it. (ii) If `δ < −log q(A)`, the argument of
 (i) with `1/t` replaced by `0` gives `E_{p*}[G] − E_p[G] ≥ KL(p‖p*)/λ_δ` for every `p ∈ 𝓑_δ`. Otherwise `q(·|A)` is in
 the budget, since its departure is `−log q(A)`, and has the average `max G`; a behaviour reaches `max G` exactly when it
-puts all its mass on `A`, and such a behaviour departs by `KL(p‖q) = −log q(A) + KL(p‖q(·|A))`, so at
-`δ = −log q(A)` only `q(·|A)` fits. (iii) For `0 < δ < −log q(A)`, `V(δ) = m(λ_δ)` with `m(t) = E_{p_{G,t}}[G]`, and
+puts all its mass on `A`, and such a behaviour departs by `KL(p‖q) = −log q(A) + KL(p‖q(·|A))`, so at `δ = −log q(A)`
+only `q(·|A)` fits. (iii) For `0 < δ < −log q(A)`, `V(δ) = m(λ_δ)` with `m(t) = E_{p_{G,t}}[G]`, and
 `m'(t) = Var_{p_{G,t}}(G)` by [P13](i), since the revealed objective of the pursuit is `G` centred. By the inverse
 function theorem, `V'(δ) = m'(λ_δ)/d'(λ_δ) = 1/λ_δ`. As `δ` grows, `λ_δ` grows, so `V'` falls; as `δ → −log q(A)`,
 `λ_δ → ∞`, `V(δ) → max G` and `V'(δ) → 0`, which joins the constant `max G` beyond with a continuous, non-increasing,
@@ -144,12 +142,12 @@ the average move over the function's whole range.
 behaviour has more net value than its pursuit, whose net value is `Λ(u)/u`; so for every `p ∈ 𝓑_δ`,
 `E_p[Ẽ] ≤ (KL(p‖q) + Λ(u))/u ≤ (δ + Λ(u))/u`. By [P27](ii) with `G = E`, the maximum is reached at `p_{E,λ}`,
 `λ = λ_δ(E)`, when `λ` is finite. There `KL(p_{E,λ}‖q) = δ` and `KL(p_{E,λ}‖q) = λ·E_{p_{E,λ}}[Ẽ] − Λ(λ)`, so the bound
-at `u = λ` is an equality. When `λ = ∞`, the maximum is `max E − E_q[E]` ([P27](ii)), and `(δ + Λ(u))/u` tends to it
-as `u → ∞`, because `Λ(u)/u` does. (ii) At `λ = λ_δ(E)`, `σ_δ(E) = E_{p_{E,λ}}[Ẽ] = Λ'(λ)` and
-`δ = λ·Λ'(λ) − Λ(λ)`, with `λ → 0` as `δ → 0`. With `V = Var_q(E)`, `Λ(u) = V·u²/2 + κ₃·u³/6 + O(u⁴)`, so
-`δ = V·λ²/2 + κ₃·λ³/3 + O(λ⁴)`, which inverts to `λ = √(2δ/V) − 2κ₃·δ/(3V²) + O(δ^{3/2})`. Then
-`σ_δ(E) = V·λ + κ₃·λ²/2 + O(λ³) = √(2δV) + κ₃·δ/(3V) + O(δ^{3/2})`. For `−E`, `κ₃` changes sign and `V` does not, so
-the terms in `δ` cancel in `w_δ(E)`. (iii) By [P27](ii), the largest average of `E` over the budget is `max E` once
+at `u = λ` is an equality. When `λ = ∞`, the maximum is `max E − E_q[E]` ([P27](ii)), and `(δ + Λ(u))/u` tends to it as
+`u → ∞`, because `Λ(u)/u` does. (ii) At `λ = λ_δ(E)`, `σ_δ(E) = E_{p_{E,λ}}[Ẽ] = Λ'(λ)` and `δ = λ·Λ'(λ) − Λ(λ)`, with
+`λ → 0` as `δ → 0`. With `V = Var_q(E)`, `Λ(u) = V·u²/2 + κ₃·u³/6 + O(u⁴)`, so `δ = V·λ²/2 + κ₃·λ³/3 + O(λ⁴)`, which
+inverts to `λ = √(2δ/V) − 2κ₃·δ/(3V²) + O(δ^{3/2})`. Then
+`σ_δ(E) = V·λ + κ₃·λ²/2 + O(λ³) = √(2δV) + κ₃·δ/(3V) + O(δ^{3/2})`. For `−E`, `κ₃` changes sign and `V` does not, so the
+terms in `δ` cancel in `w_δ(E)`. (iii) By [P27](ii), the largest average of `E` over the budget is `max E` once
 `δ ≥ −log q(argmax E)`; applied to `−E`, the smallest is `min E` once `δ ≥ −log q(argmin E)`.
 
 **Checks.** checks/test_feasibility.py::test_the_width_of_a_departure_budget
@@ -178,60 +176,57 @@ divergence, and (ii) at the minimizing `u` ([P28](i)).
 `min(1, δ/log(1/r))·M·(1 − r)`, while over the `χ²` budget `δ` it is at most `(δ·M²·r·(1 − r))^{1/2}`. With the
 variance `M²·r·(1 − r)` held fixed, the first grows without bound as `r → 0`, and the second does not.
 
-**In plain terms.** Every way of limiting how far an actor departs from the default controls how far an average can
-move through one measure of the function's size: total variation through its range, KL through its exponential
-moments, `χ²` through its variance, a Rényi divergence through a power mean. Choosing the limit is choosing which size
-of an error matters. A KL limit lets an actor reach a rare outcome at a cost that grows only with the logarithm of its
-rarity, so a rare, large error can do unbounded harm under a KL limit and bounded harm under a `χ²` limit of the same
-size.
+**In plain terms.** Every way of limiting how far an actor departs from the default controls how far an average can move
+through one measure of the function's size: total variation through its range, KL through its exponential moments, `χ²`
+through its variance, a Rényi divergence through a power mean. Choosing the limit is choosing which size of an error
+matters. A KL limit lets an actor reach a rare outcome at a cost that grows only with the logarithm of its rarity, so a
+rare, large error can do unbounded harm under a KL limit and bounded harm under a `χ²` limit of the same size.
 
 **Proof.** (i) With `c` the midpoint of the range of `E`, `E_p[E] − E_q[E] = Σ_x (p(x) − q(x))·(E(x) − c)`, where
 `|E(x) − c| ≤ (max E − min E)/2` and `Σ_x |p(x) − q(x)| = 2·TV(p, q)`. (ii) is the first inequality in the proof of
 [P28](i). (iii) `E_p[E] − E_q[E] = E_q[(p/q − 1)·(E − E_q[E])]`, and Cauchy–Schwarz under `q` bounds it by
 `(E_q[(p/q − 1)²]·Var_q(E))^{1/2}`, where `E_q[(p/q − 1)²] = χ²(p‖q)`. (iv) Hölder's inequality under `q`:
-`E_p[|E|] = E_q[(p/q)·|E|] ≤ (E_q[(p/q)^α])^{1/α}·(E_q[|E|^{α*}])^{1/α*}`, and
-`(E_q[(p/q)^α])^{1/α} = e^{D_α(p‖q)/α*}`; for `α = ∞`, `E_q[(p/q)·|E|] ≤ max_x (p/q)·E_q[|E|]`, and
-`max_x p(x)/q(x) ≤ 1/min_x q(x)`. (v) For (i), with `δ` at most the default's mass on the lowest values of `E` and at
-most its mass off the highest, move mass `δ` from the lowest values to the highest, in proportion to `q`: the total
-variation is `δ` and the average rises by `δ·(max E − min E)`. For (iii), `p = q·(1 + s·Ẽ/Var_q(E)^{1/2})`, with
-`Ẽ = E − E_q[E]` and `s` small enough for `p` to stay positive, has `χ²(p‖q) = s²` and raises the average by
-`s·Var_q(E)^{1/2}`. (vi) For the point mass `1_x`, `KL(1_x‖q) = log(1/r)` and `χ²(1_x‖q) = (1 − r)²/r + (1 − r) =
-1/r − 1`. The mixture `(1 − ε)·q + ε·1_x` with `ε = min(1, δ/log(1/r))` has `KL ≤ ε·log(1/r) ≤ δ`, since KL is
-convex in its first argument, and raises the average of `E` by `ε·M·(1 − r)`; (iii) gives the `χ²` bound, with
-`Var_q(E) = M²·r·(1 − r)`. With that variance held at `v`, `M = (v/(r·(1 − r)))^{1/2}`, and
+`E_p[|E|] = E_q[(p/q)·|E|] ≤ (E_q[(p/q)^α])^{1/α}·(E_q[|E|^{α*}])^{1/α*}`, and `(E_q[(p/q)^α])^{1/α} = e^{D_α(p‖q)/α*}`;
+for `α = ∞`, `E_q[(p/q)·|E|] ≤ max_x (p/q)·E_q[|E|]`, and `max_x p(x)/q(x) ≤ 1/min_x q(x)`. (v) For (i), with `δ` at
+most the default's mass on the lowest values of `E` and at most its mass off the highest, move mass `δ` from the lowest
+values to the highest, in proportion to `q`: the total variation is `δ` and the average rises by `δ·(max E − min E)`.
+For (iii), `p = q·(1 + s·Ẽ/Var_q(E)^{1/2})`, with `Ẽ = E − E_q[E]` and `s` small enough for `p` to stay positive, has
+`χ²(p‖q) = s²` and raises the average by `s·Var_q(E)^{1/2}`. (vi) For the point mass `1_x`, `KL(1_x‖q) = log(1/r)` and
+`χ²(1_x‖q) = (1 − r)²/r + (1 − r) = 1/r − 1`. The mixture `(1 − ε)·q + ε·1_x` with `ε = min(1, δ/log(1/r))` has
+`KL ≤ ε·log(1/r) ≤ δ`, since KL is convex in its first argument, and raises the average of `E` by `ε·M·(1 − r)`; (iii)
+gives the `χ²` bound, with `Var_q(E) = M²·r·(1 − r)`. With that variance held at `v`, `M = (v/(r·(1 − r)))^{1/2}`, and
 `δ·M·(1 − r)/log(1/r) → ∞` as `r → 0`.
 
 **Checks.** checks/test_feasibility.py::test_feasible_sets_of_other_shapes
 
 **Notes.** Each budget is a convex feasible set ([D7]), so [P15](ii) applies to all of them. The pairs (divergence,
-measure of size) are conjugate: each bound is attained, at small budgets, which makes the measure of size the right
-one for that divergence and not merely a valid one. (vi) is the form on finitely many outcomes of a statement that
-needs infinitely many: on a continuum, an error whose tail is heavier than exponential makes the KL rise infinite at
-every budget, while a finite variance keeps the `χ²` rise finite. That statement is out of the core's scope
-(`CORE.md` §0) and is recorded in `IMPORT.md`. The measure of misalignment stays KL ([P14]); the shapes here are limits
-on what an actor can do, or costs an actor pays, not ways of measuring.
+measure of size) are conjugate: each bound is attained, at small budgets, which makes the measure of size the right one
+for that divergence and not merely a valid one. (vi) is the form on finitely many outcomes of a statement that needs
+infinitely many: on a continuum, an error whose tail is heavier than exponential makes the KL rise infinite at every
+budget, while a finite variance keeps the `χ²` rise finite. That statement is out of the core's scope (`CORE.md` §0) and
+is recorded in `IMPORT.md`. The measure of misalignment stays KL ([P14]); the shapes here are limits on what an actor
+can do, or costs an actor pays, not ways of measuring.
 
 **Lineage.** v7.10: Prop 10 (the conjugate pairings), Prop 11 (the order is structural; here its form on finite
 outcomes) and the dictionary's entry B2 (the conjugacy scale). New: (v), the bounds attained, and (vi) in finite form.
 
 ### P32 — Regulation costs departure
-**Statement.** Let the conditions `c` ([D8]) have frequencies `ρ(c) > 0` that the actor does not choose. Let the
-actor's response in condition `c` be a behaviour `p_c` on finitely many actions, all with one default `q`, and let the
-result of action `x` in condition `c` be `φ(c, x)`, with `φ(·, x)` injective for every action `x`: no action gives two
-conditions the same result. Under `ρ` and the response, write `C`, `X`, `Z` for the condition, the action and the
-result, `H` for entropy in nats, `p̄ = Σ_c ρ(c)·p_c` for the average action, and
-`I(C; X) = Σ_c ρ(c)·KL(p_c‖p̄)` for the information the actions carry about the conditions.
+**Statement.** Let the conditions `c` ([D8]) have frequencies `ρ(c) > 0` that the actor does not choose. Let the actor's
+response in condition `c` be a behaviour `p_c` on finitely many actions, all with one default `q`, and let the result of
+action `x` in condition `c` be `φ(c, x)`, with `φ(·, x)` injective for every action `x`: no action gives two conditions
+the same result. Under `ρ` and the response, write `C`, `X`, `Z` for the condition, the action and the result, `H` for
+entropy in nats, `p̄ = Σ_c ρ(c)·p_c` for the average action, and `I(C; X) = Σ_c ρ(c)·KL(p_c‖p̄)` for the information the
+actions carry about the conditions.
 (i) `Σ_c ρ(c)·KL(p_c‖q) = I(C; X) + KL(p̄‖q)`.
 (ii) `H(Z) ≥ H(C) − I(C; X)`.
 (iii) So a response whose average departure `Σ_c ρ(c)·KL(p_c‖q)` is at most `δ` leaves `H(Z) ≥ H(C) − δ`. For the
-objective of hitting a result `z₀`, the miss rate `g = P(Z ≠ z₀)` satisfies `h(g) + g·log(m − 1) ≥ H(C) − δ`, with
-`h` the entropy of a coin with bias `g` and `m` the number of results: a floor on the misses that falls as the budget
-grows.
+objective of hitting a result `z₀`, the miss rate `g = P(Z ≠ z₀)` satisfies `h(g) + g·log(m − 1) ≥ H(C) − δ`, with `h`
+the entropy of a coin with bias `g` and `m` the number of results: a floor on the misses that falls as the budget grows.
 
 **In plain terms.** An actor that must counter situations it does not choose, to keep the result steady, has to act
-differently in different situations, and acting differently costs departure from its one default. So the variety of
-the situations, less the departure spent, is a floor on the variety of the result. With a small budget, an actor cannot
-hit a target reliably when the situations vary much.
+differently in different situations, and acting differently costs departure from its one default. So the variety of the
+situations, less the departure spent, is a floor on the variety of the result. With a small budget, an actor cannot hit
+a target reliably when the situations vary much.
 
 **Proof.** (i) `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/q(x))` splits as `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/p̄(x))` plus
 `Σ_x p̄(x)·log(p̄(x)/q(x))`. (ii) `H(Z) ≥ H(Z|X)`, since conditioning does not increase entropy. Given the action, the

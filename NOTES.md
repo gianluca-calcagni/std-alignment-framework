@@ -1,9 +1,8 @@
 # NOTES — the executor's working notes
 
 Not part of the core, and not checked by lint. Blunt on purpose. A hunch is not a claim: nothing moves into `CORE.md` or
-`derived/`
-without a proof and a check. Names, and correspondences with the literature, with their confidence levels, live in
-`TERMS.md`.
+`derived/` without a proof and a check. Names, and correspondences with the literature, with their confidence levels,
+live in `TERMS.md`.
 
 ## 1. Failure modes
 
@@ -70,6 +69,8 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **Saving the estimates, not the data behind them** | W4 saved, outside the repository, each context's estimates but not the per-draw log-probabilities and rewards, so an analysis needing no reweighting, how far one run's draws move along the other's revealed objective, needed a second run of 2.2 hours | save every per-draw value before aggregating; the template now asks for it |
 | **A specification with no named principal** | W3 and W4 declared as the target the reward the policy was trained on, the evaluator itself, while the machine-learning ontology's specification asks for a gold objective distinct from it; the executor declared it, for no principal in particular. What they measured is misalignment against the trainer's formal objective, and their texts said "misalignment" without saying whose. Caught by the PI | name the principal in the declaration; when the target is uncertain, declare the family of targets and report the interval it gives (§7) |
 | **An optimum taken from a solver's word** | the first check of [P51](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
+| **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
+| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -118,21 +119,23 @@ dominates rounding. A tolerance without its scale, a third time.
 
 Closer, not yet. v9 applied the PI's decisions: the core held five premises and nine definitions; every result is
 derived; the cost of departing from the default is derived ([P14]), not assumed; feasibility separates "cannot" from
-"will not" ([P15]); conditions, views and identification make deceptive alignment a measurable quantity ([P16],
-[P17]); and a reporting standard names every definition (`STANDARD.md`, lint R11).
+"will not" ([P15]); conditions, views and identification make deceptive alignment a measurable quantity ([P16], [P17]);
+and a reporting standard names every definition (`STANDARD.md`, lint R11).
 
 v10 added the two concepts approved after the retrospective (§5): the evaluator ([D10]), from which the Goodhart results
 of v7.10 are derived ([P18]–[P20]), and sampling ([D11]), which gives misalignment its second meaning as a rate of
 evidence and brings detection, estimation and the evaluation gap ([P21]–[P24]). The core holds five premises and eleven
 definitions. Since then the import of v7.10 added [P27]–[P38], [L1] and the forbidden statements ([C1]–[C12]).
 
-v11 widened the scope to groups and several principals with declared weights ([P39]–[P42]), and the framework met
-data for the first time: W1 tested the machine-learning prediction from [P13] on answers no one had scored, and
-refuted it (`cases/w1-best-of-n-slope/`); W3 tested the bet itself, on a public model tuned by PPO, and it held in
-part: the model pursues its reward in the reward's own scale, but most of what the tuning changed is not that pursuit
+v11 widened the scope to groups and several principals with declared weights ([P39]–[P42]), and the framework met data
+for the first time: W1 tested the machine-learning prediction from [P13] on answers no one had scored, and refuted it
+(`cases/w1-best-of-n-slope/`); W3 tested the bet itself, on a public model tuned by PPO, and it held in part: the model
+pursues its reward in the reward's own scale, but most of what the tuning changed is not that pursuit
 (`cases/w3-ppo-pursuit/`). One of three predictions held. The finish line's prediction row is met; the row for a worked
-case run by an outside reader is not: W1 is reported to `STANDARD.md`, and outside reviews wait (Q27). Where the
-framework stands, and what comes next, is kept in `ROADMAP.md`; this table keeps the gaps the core has closed.
+case run by an outside reader is not: W1 is reported to `STANDARD.md`, and the readers are requested (`REQUESTS.md`,
+R1), the hold on review having been lifted for one mathematical reader (Q33). Since then: nine diagnostics
+([P43]–[P51]), the law of estimated misalignment by access ([P52]), a diagnostic case (W4), and a library (Q37). Where
+the framework stands, and what comes next, is kept in `ROADMAP.md`; this table keeps the gaps the core has closed.
 
 | Gap | State |
 |---|---|
@@ -142,13 +145,15 @@ framework stands, and what comes next, is kept in `ROADMAP.md`; this table keeps
 | contexts (v8 design question Q1) | **closed by [P15]**: the shared intensity across contexts is derived, not chosen |
 | deceptive alignment | **opened as a measurable quantity**: [D8], [D9], [P16], [P17]; bounds on the objective's average in an unobserved condition, sharp given `ε` |
 | a standard for reports | **closed by `STANDARD.md`** (lint R11) |
-| no estimation layer | **closed in part by [P23]**: the estimated misalignment under the standard specification, at a positive intensity; the boundary `t* = 0` and confidence sets for the other quantities are open |
+| no estimation layer | **closed in part by [P23] and [P52]**: the law of estimated misalignment on the ray ([P23]) and off it, by what is known of each draw ([P52]), with the revealed intensity's; the boundary `t* = 0` and confidence sets for the other quantities (the pursuit part, named misalignment, [P48]'s interval) are open |
 | no theory of what optimizing a proxy does | **opened by [D10]**: [P18] (only the regression counts), [P19] (a monotone regression rules out overoptimization), [P20] (where it starts, how it ends) |
 | detection, and the gap between evaluation and use | **closed by [P22] and [P24]** |
 | the regression of a real-valued evaluator | **closed in part by [P26]**: on finitely many outcomes it is the target itself; the regression on bins governs the pursuit up to `t·w·D/4`. Best-of-`n` with bins is open (E8) |
 | the shape of the overoptimization curve | **closed by [P25]**: the target's curve turns no more often than the regression; a single-peaked regression gives at most one fall, for pursuit and best-of-`n` |
 | several actors, several principals | **in scope since v11**: a group as one actor ([P39]), several principals with declared weights ([P42]) |
-| worked cases | **opened**: W1 and W3 on unseen data (one prediction held of three), W1 reported to `STANDARD.md`; C1 and C2 in simulation (`cases/`); no outside reader yet |
+| what a measured misalignment is made of | **opened by the diagnostics** [P43]–[P51]: the intensity at which it is judged, named objectives, drift between runs, the cost of reweighting, a family of targets, outer and inner misalignment, tampering |
+| worked cases | **opened**: W1 and W3 on unseen data (one prediction held of three), W4 a diagnostic case, W1 reported to `STANDARD.md`; C1 and C2 in simulation (`cases/`); no outside reader yet |
+| a library for the standard's quantities | **opened** (Q37): `stdalign` 0.1, misalignment, its split and its estimates by access, on which their checks run; the rest of the quantities to follow (`ROADMAP.md`, E1) |
 
 **Deferred from identifiability.** The "dynamic rank" generalizes [P3] beyond rank one. No ontology needed it.
 
@@ -192,6 +197,13 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q30 | after the question "whose target?" (§7): approved. The interval of misalignment over a family of targets becomes a result, [P48]; every declaration names its principal, and a declaration whose target is uncertain declares the family and registers the interval (`STANDARD.md`, the field Principal; `cases/TEMPLATE.md`; lint R15, from which W4 is exempt for that field only, having been registered before it) | PI; executor (the statement and its wiring) | `derived/diagnostics.md`, `STANDARD.md`, `cases/TEMPLATE.md`, `tools/lint.py` |
 | Q31 | how does the framework now relate to outer and inner alignment, Goodhart and the archive's five gaps? Outer alignment needed a definition the tools now give. Applied: [P49], outer misalignment as a function of intensity, inner misalignment, and their exact split; the five gaps mapped in `IMPORT.md`, section 8, where grounding (reward tampering) is only partly covered. Next, by the PI's request: a brainstorm on grounding, its definition and its diagnosis | PI; executor (the statement) | `derived/diagnostics.md`, `IMPORT.md`, `RELATED.md`, `STANDARD.md` |
 | Q32 | grounding: can the framework define wireheading and diagnose it? Approved: [P50], tampering as a divergence from a declared honest channel, with no new definition, and [P51], what signals, audits and re-measurements reveal of it; a simulation case before any world case. With it, the two tests of framework predictions pending since W1, [P41]'s Rock–Paper–Scissors arm and [P20]'s stopping rule on gold-labelled data not used before, become the next work items. The PI also asked whether logs of a black box could make the unobservable observable (H33), and whether the framework's new tools are real or a biased perception (§8) | PI; executor (the statements, checks and wiring) | `derived/diagnostics.md`, `STANDARD.md`, `IMPORT.md`, `RELATED.md`, `ROADMAP.md` |
+| Q33 | after pull request #29 was merged, with its history, and the other branches deleted: the executor's recommendations approved. (i) The hold on external review is lifted narrowly: one mathematical reader of `CORE.md` and `derived/`, and the literature checked, done for D10 and D11 from records and abstracts. (ii) H34 becomes the second arm of case C3. (iii) The general core is unfrozen for outcomes that are not finite and for estimation guarantees, and for nothing else; the stability row's count restarts when its definitions change. (iv) No history rewrite: the files removed under Q27 stay in the history. (v) Novelty was never the point; the question is which theories the framework can import from (§9) | PI; executor (the survey) | `ROADMAP.md`, `RELATED.md`, `REFERENCES.md`, `NOTES.md` §9 |
+| Q34 | with arXiv allowed: collect how the imports treat the continuous case, and a table mapping each term, concept and definition to its finite and its continuous formal form. Applied: `general/dictionary.md`, from the texts of eleven sources on arXiv and the records of the rest; its findings: alignment theory mostly stays finite on purpose; one function, the log-normalizer, decides most of the continuous case; atoms are the hinge; existence becomes conditional; some finite bounds become infinite; estimation depends on which log-ratios are known more than on the space | PI; executor (the reading and the table) | `general/dictionary.md`, `REFERENCES.md`, `RELATED.md`, `CORE-GENERAL.md` |
+| Q35 | how does the framework relate to cooperative inverse reinforcement learning and its variants, and is a request made with poor consideration ("get rich", ethically taken for granted) a coarse resolution of the principal? Answered in §10: not a resolution, which would forgive what it merges; a request that is an evaluator coarser than the target, norms carried by the default, and weights the request never fixed, a family of targets. With it: consolidate, rework the roadmap, archive what is done, re-prioritize, and say which papers are needed | PI; executor (the analysis, the roadmap) | `NOTES.md` §10, `RELATED.md`, `ROADMAP.md` |
+| Q36 | the PI has no academic access, so papers behind paywalls are out of reach; hosts are allowed on request. Applied: an imported theorem is read in a text anyone can read without paying, or derived here with a proof and a check, or not imported (`README.md`, working agreements); the limit laws White and Vuong were to supply derived for finite outcomes as [P52], with Huber's open paper read for the general case of (i); the field Access in `STANDARD.md`; the requests to the PI now name hosts to allow and data to ask for, not papers (`ROADMAP.md`) | PI; executor (the rule, [P52], the field) | `README.md`; [P52]; `STANDARD.md`; §3.2, D12; §9; `ROADMAP.md` |
+| Q37 | consolidate what the executor needs from the PI in one file, and make the framework's engineering side more solid before some steps are actioned. Applied: `REQUESTS.md`, with the hosts allowed; the engineering steps E1–E5 first in `ROADMAP.md`; `stdalign` 0.1, the library, with misalignment, its split and its estimates by access, the checks of those items pointed at it, tests of its interface, and its functions mutation-tested; `pyproject.toml` | PI; executor (the plan, the library) | `REQUESTS.md`; `ROADMAP.md`; `stdalign/`; `README.md` |
+| Q38 | the licence of the library and of the framework: the GNU Affero GPL is kept, since the framework is a work in progress the PI hopes the community will support rather than copy; it is to be revisited if the framework gains predictive or diagnostic power, which is not taken for granted. Applied: §11, with what the licence does not cover (the ideas) and what a later change needs (every copyright holder's consent) | PI | §11; `ROADMAP.md` |
+| Q39 | a file for contributors, a review of the whole framework with doc hygiene, then a merge into `main`, and advice for the project. Applied: `CONTRIBUTING.md`, its terms proposed for the PI's approval; the review and its advice in §12; the fixes it lists | PI; executor (the review) | `CONTRIBUTING.md`; §12; `README.md`; `RECORD.md`; `ROADMAP.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -206,8 +218,10 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | D7 | industrial organization | the German price archive, 2016 to 2018, with the station list; Assad et al. (2024) and its replication package; their method paper (2022) | W2 (`ROADMAP.md`) | the archive needs credentials from Tankerkönig (`creativecommons.tankerkoenig.de`); the package is `doi.org/10.7910/DVN/X4MSWW`; the papers are at `discovery.ucl.ac.uk/10187765/1/draft_v15_JPE_main.pdf` and `discovery.ucl.ac.uk/10187769/1/ACEX_PP_2022.pdf`. Not read |
 | D8 | deceptive alignment (H27) | Needham et al. (2025), and their evaluation-awareness dataset | a world test of [P17]'s reach | arXiv 2505.23836; `huggingface.co/datasets/jjpn2/eval_awareness`. Not read |
 | D9 | experimental economics | Cason, Friedman and Hopkins (2014), and its data, if published with it | the Rock–Paper–Scissors arm of the ontology's prediction | `doi.org/10.1093/restud/rdt023`. Low priority: the potential-game arm needs new sessions in a laboratory |
-| D10 | outer and inner alignment ([P49]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | to verify the citation before it enters `REFERENCES.md` | recorded in v7.10; arXiv is not reachable from this environment |
-| D11 | reward tampering ([P50], [P51]) | Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), the corrupted reward channel; Everitt, Hutter, Kumar and Krakovna (2021), reward tampering in causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, arXiv:1711.09883 | to verify the citations before they enter `REFERENCES.md`, and the gridworlds' licence before a simulation case borrows a layout from them | from memory; arXiv is not reachable from this environment |
+| D10 | outer and inner alignment ([P49]) | Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), arXiv:1906.01820 | verified from its record and abstract (2026-10-07), and listed in `REFERENCES.md` | recorded in v7.10; found by web search, as arXiv is not reachable from this environment |
+| D11 | reward tampering ([P50], [P51]) | Ring and Orseau (2011), the delusion box; Everitt, Krakovna, Orseau, Hutter and Legg (2017), the corrupted reward channel; Everitt, Hutter, Kumar and Krakovna (2021), reward tampering in causal influence diagrams; Leike et al. (2017), the AI safety gridworlds, arXiv:1711.09883 | verified from their records and abstracts (2026-10-07), and listed in `REFERENCES.md`; the gridworlds' code is reported under the Apache 2.0 licence, to be confirmed from the repository before case C3 borrows a layout | from memory, then found by web search |
+| D12 | the imports of §9 marked "now" | the full texts of White (1982), Vuong (1989), Baker (2002), Courty and Marschke (2008), Ben-Tal et al. (2013) and Polyanskiy and Wu (2025); those on arXiv were read once the PI allowed it (Q34), and Blackwell (1953), Csiszár (1975), Lindsay (1983) and Pistone and Sempi (1995) in their scans on Project Euclid | a theorem enters `derived/` only after its statement is read in the source, not in an abstract | their records and abstracts were found by web search; arXiv and Project Euclid are reachable since Q34, the other publishers are not. Since Q36 no paywalled text is sought: White's limit theory, and Vuong's case with the saturated model, are not needed for finite outcomes, where [P52] derives the laws, and Huber (1967), open on Project Euclid, was read for the general case; Vuong's working paper (Caltech Social Science Working Paper 605) and Ben-Tal et al.'s preprint (CentER Discussion Paper 2011-061) are on file since their hosts were allowed (2026-10-08), not yet read; Polyanskiy and Wu's draft is reachable since 2026-10-08, not yet read; no open text of Baker (2002) or of Courty and Marschke (2008) was found |
+| D13 | experimental economics ([P41], `ROADMAP.md` step 5) | the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time with one-population matching, a symmetric game with two strategies and so a potential game; and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same lab's continuous-time protocol | the potential arm of step 5, under a protocol comparable with the Rock–Paper–Scissors arm | no public copy found (2026-10-07); the authors, at the LEEPS laboratory of UC Santa Cruz, are the source. The Rock–Paper–Scissors arm alone has public records, Wang, Xu and Zhou (2014), in discrete time, in the R package stratEst under GPL-3, but their cycles are already reported, so a test on them alone risks little |
 
 Every test is pre-registered and pushed before any computation (README rules).
 
@@ -237,7 +251,6 @@ fixed-objective test by more than `10⁻³`.
 
 Resolved in v9 by [P15]: see §3.1, Q1. The v8 analysis is kept below for the record.
 
-
 **What was found.** In four of the five ontologies, part of an outcome is fixed before the actor acts: the prompt a
 model answers, the patient who arrives, the request a manager sends, a person's circumstances. The actor chooses only
 what happens within each context. The core's pursuit ray reweights whole outcomes, contexts included, which the actor
@@ -245,9 +258,9 @@ cannot do. So within one context every item applies as stated, but "pursue `F`" 
 the core.
 
 **What the ontologies do meanwhile.** They apply every item context by context. Across contexts they use the
-specification "pursue `F` in every context, at any intensity in each", which is a specification by [D3]; when the
-actual behaviour has the default's context masses, its misalignment is the average of the per-context misalignments,
-by [P4](iii). [P13](i), and the first limit of [P13](ii), hold across contexts as stated.
+specification "pursue `F` in every context, at any intensity in each", which is a specification by [D3]; when the actual
+behaviour has the default's context masses, its misalignment is the average of the per-context misalignments, by
+[P4](iii). [P13](i), and the first limit of [P13](ii), hold across contexts as stated.
 
 **Options.**
 - **A (recommended): one shared intensity.** A definition: a resolution of *contexts* is one whose cell masses every
@@ -279,13 +292,48 @@ sample slots in the ontologies, with the claims they allow; [P25], the shape law
 pursuit; the import of v7.10 (R1–R6: [P27]–[P38], [L1], [C1]–[C12]) and its review (`IMPORT.md` §7). The general core,
 drafts 1 to 3 (Q23, Q24).
 
-**Done in v11:** the scope widened to groups and several principals with declared weights ([P39]–[P42], Q24, Q25);
-the freeze (Q26); `cases/` with lint R14, and cases C1 and C2, each revising a prediction before its data were read;
+**Done in v11:** the scope widened to groups and several principals with declared weights ([P39]–[P42], Q24, Q25); the
+freeze (Q26); `cases/` with lint R14, and cases C1 and C2, each revising a prediction before its data were read;
 `SCENARIO.md`; `ROADMAP.md`; W1, the first prediction tested on data not seen before: refuted.
 
 **Kept from the earlier list, not scheduled** (`ROADMAP.md`, "Not now"): E8 for best-of-`n` ([P26] covers the pursuit
 only); the alignment plane (H6); porting v7.10's F2, an exact check of [P22](i), and F4, edge cases in log space for the
 checks' helpers.
+
+**Done since W1** (2026-10-03 to 2026-10-07; archived from `ROADMAP.md`'s "Where we are" on 2026-10-07, Q35). The
+licence rule (Q27). W3 (`cases/w3-ppo-pursuit/`), the first test of the bet that an optimizer pursues what it is
+rewarded on: a public GPT-2 tuned by PPO pursues its reward in the reward's own scale, with a slope near `1/β` (S2
+held), but within prompts the reward explains only `0.358` of what the tuning changed (S1 refuted at the registered
+half). W1's report to `STANDARD.md`, exploratory: about three quarters of best-of-`n`'s departure is misalignment
+against the gold, at every `n`; the literature's coefficient overstates the initial slope by 22%. The retrospective of
+W1 and W3 (§6) and five diagnostics, [P43]–[P47] (Q28). Lessons as defaults: `cases/TEMPLATE.md`, lint R15,
+`tools/casekit.py` (Q29). W4 (`cases/w4-two-runs/`), the first diagnostic case: what PPO changed beyond its reward is
+not a sharpening (S1 refuted) and part of it recurs in a second public run (S2 held), but naming sharpening, the other
+reward and the other run's change explains `0.14` of the misalignment. Whose target (§7, Q30): W3 and W4 measured the
+trainer's objective, every declaration now names its principal, and an uncertain target is a family ([P48]). Outer and
+inner misalignment ([P49], Q31). Grounding ([P50], [P51], Q32): tampering, zero by construction in W1–W4. The cases C1
+and C2, and `SCENARIO.md`. Pull request #29 merged (Q33); the survey of imports (§9, Q33); the dictionary from finite to
+continuous outcomes (Q34); steps 1 and 2 of that roadmap checked against public data (no record of a potential game,
+D13; no public sweep) and the sweep timed.
+
+### 4.1 The roadmap's log, to 2026-10-07
+
+Archived from `ROADMAP.md` on 2026-10-07 (Q35); the step numbers are those of the roadmap at the time.
+
+| Date | Change | Row |
+|---|---|---|
+| 2026-10-03 | consolidation; v11; the freeze; `cases/` and R14; cases C1 and C2, both revising a prediction before data; `SCENARIO.md`; this roadmap | 4 (instruments checked); 5 (scenario) |
+| 2026-10-03 | the PI supplied Coste et al.'s paper; read; W1's data located, and its access blocked on one network domain | 4 (step 1) |
+| 2026-10-03 | W1: proxy trained and frozen; procedure calibrated on synthetic prompts; registered; run once on 12.6 million unseen answers; refuted. The framework's first test on unseen data | 4: met, by a refutation |
+| 2026-10-03 | licence rule applied (Q27); W1 reported to `STANDARD.md`; W3 designed, calibrated, registered and run once on a public PPO model: the bet held in part; consolidation | 4 (the bet tested); 5 (the report) |
+| 2026-10-03 | retrospective of W1 and W3 (`NOTES.md` §6); five design rules for cases; five diagnostic results derived from the core, P43–P47 (Q28); W4 designed, its second run's provenance traced | 4 (W4); 5 (diagnostics) |
+| 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
+| 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [P48], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |
+| 2026-10-04 | [P49], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |
+| 2026-10-07 | [P50], tampering, and [P51], what signals, audits and re-measurements reveal of it, with checks and mutation tests; the grounding gap mapped as in the core for a declared channel; the two pending framework tests, [P41] and [P20], made steps 1 and 2, and the tampering simulation step 3 (Q32) | 4 (steps 1–3 set); 5 (diagnostics) |
+| 2026-10-07 | pull request #29 merged with its history; the PI approved: one mathematical reader, H34 as C3's second arm, the general core unfrozen for outcomes that are not finite and estimation (step 4), the history kept (Q33). A survey of what the framework can import: twenty sources verified from their records, filed in `RELATED.md`, ranked in `NOTES.md` §9 | 5 (imports for the estimation work); 2 (the count restarts with step 4) |
+| 2026-10-07 | with arXiv allowed, eleven imported sources read in their text; `general/dictionary.md`, each object of the framework in its finite and its continuous form, with what the imports say about the continuum (Q34); McAllester and Stratos's limit corrected after reading its theorem | 5 (step 4 prepared) |
+| 2026-10-07 | four sources read in their scans on Project Euclid (Blackwell, Csiszár, Lindsay, Pistone and Sempi), the dictionary updated; steps 1 and 2 checked: no public record of a potential game (requested, D13), no public sweep; a sweep's cost measured on this machine (`probes/cases/`) | 4 (steps 1 and 2 checked) |
 
 ## 5. Retrospective after v9, and hunches for v10
 
@@ -333,10 +381,10 @@ performance measure, a fine or a selection regime, or revealed, as `log(p̂/q)` 
 - *The geometry.* Target and evaluator span a two-parameter family `{tilt(q, a·F + b·F̂)}` through the default: the
   alignment plane (H6). Every Goodhart quantity lives in it.
 - *Where to look for it in existing theory.* The angle between a performance measure and value in the economics of
-  incentives (Baker's "distortion" of performance measures, 2002: to verify); the angle between true and proxy rewards
-  in occupancy space (Karwowski et al., ICLR 2024); hackability of reward pairs (Skalse et al., NeurIPS 2022); selection
-  gradients and the secondary theorem of selection in biology (Lande and Arnold; Robertson; Price); Manheim and
-  Garrabrant's taxonomy.
+  incentives (Baker's "distortion" of performance measures, 2002); the angle between true and proxy rewards in occupancy
+  space (Karwowski et al., ICLR 2024); hackability of reward pairs (Skalse et al., NeurIPS 2022); selection gradients
+  and the secondary theorem of selection in biology (Lande and Arnold; Robertson; Price); Manheim and Garrabrant's
+  taxonomy.
 
 **Candidate 2, a possible second: sampling.** Observation through `n` independent decisions.
 - *Why it is canonical.* It gives misalignment a second, independent meaning that agrees with the first (H4): the
@@ -362,7 +410,7 @@ models are hypotheses that [P3] and [P12] test.
 | H5 | **The measure is not the actor's cost.** [P14] forces the measure to be KL; v7.10's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
 | H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore; **Gaussian closed form probed** (B5): gain per √departure = √2·sd·cos θ and M = departure·sin²θ, exact to 4e-15; not exact beyond (an exponential × normal default departs) |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
-| H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [P11]'s `cos θ` in the incentive literature | C: verify the paper |
+| H8 | **Baker's distortion is our angle.** The alignment of a performance measure with value, as a cosine of marginal effects, would be [P11]'s `cos θ` in the incentive literature | C: the paper exists (Baker 2002, verified from its record); whether its distortion is this angle needs its text, which is not open. [P50](iii) suggests a sharper reading: his two parameters, distortion and risk, as the world's misaligned share and the noise share (`RELATED.md`, principal–agent theory) |
 | H9 | **The dimension law.** Against a fixed smooth behaviour, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, `d` the information dimension (Rényi): "digits decided" made exact | **tested** (T1): four cases, including the Cantor measure, which no count of atoms explains |
 | H10 | **No pursuit makes a pile.** A pile at a threshold is evidence that the actor does not pursue the evaluator | **tested** (T2); a theorem by the chain rule, to be written |
 | H11 | **Collusion is coordination, often in time.** Under independent pursuit, misalignment on joint actions = total correlation + individual misalignments, exactly | **proved as [P39]**; **tested** (T3): tit-for-tat shows `0` per round and `0.231` nats per round over time |
@@ -385,10 +433,12 @@ models are hypotheses that [P3] and [P12] test.
 | H28 | **The best-of-`n` prediction needs no training.** Coste et al. released 12,600 outputs of their initial policy, each with a gold score (`NOTES.md` §3.2, D3). With a proxy reward model fixed in the registration, the best-of-`n` curve of the gold, and the slope of [P13], follow from resampling the outputs within each prompt | **tested** as W1 (`cases/w1-best-of-n-slope/`): run on 12.6 million unseen answers with a proxy trained here; the prediction from [P13] was refuted |
 | H29 | **The executor's simulations test the executor as much as the framework.** C1 and C2 were designed, run and judged by the model family that wrote the predictions, and four of their seven predictions failed on the executor's own thresholds or design. A registration read by the PI, or by an outside reader, before it is pushed would catch some of this (rule (f)) | proposal to the PI |
 | H30 | **Saturation, not decline, and the shape is the finding.** In W1 the gold curve under best-of-`n` keeps the framework's initial slope up to `n = 16` and then saturates, with almost no fall; the literature's two numbers, `a` and `b`, hide that shape and misstate the slope. A report of overoptimization should give the curve's local slopes in `d` against the initial slope of [P13], not a fitted form. Whether a neural proxy gives the same shape is open | D: a candidate field for `STANDARD.md`'s evaluator row, not scheduled |
-| H31 | **Unconverged reinforcement learning changes more than it pursues.** In W3, the part of `log(π/π_ref)` along the reward has a slope near `1/β` (`4.27` against `5` at the starting KL coefficient), as [P4] says, yet within each model's own continuations the reward explains only a tenth of it. The rest may be the drift a noisy policy gradient accumulates, which the KL penalty slows but does not aim. If so, along one run the reward's share of the revealed objective, within the tuned model's own continuations, should rise towards 1 as the run converges; a share that stays low at convergence would mean the rest is not drift but a systematic pull, of the value estimate or the adaptive coefficient, which the framework would then have to name. Test: checkpoints of one run, or runs at several `β`, with their reward model, all public | open: needs public checkpoints. W4 (`ROADMAP.md`, step 1) asks the part two public runs can answer: whether the off-reward change recurs in another run |
+| H31 | **Unconverged reinforcement learning changes more than it pursues.** In W3, the part of `log(π/π_ref)` along the reward has a slope near `1/β` (`4.27` against `5` at the starting KL coefficient), as [P4] says, yet within each model's own continuations the reward explains only a tenth of it. The rest may be the drift a noisy policy gradient accumulates, which the KL penalty slows but does not aim. If so, along one run the reward's share of the revealed objective, within the tuned model's own continuations, should rise towards 1 as the run converges; a share that stays low at convergence would mean the rest is not drift but a systematic pull, of the value estimate or the adaptive coefficient, which the framework would then have to name. Test: checkpoints of one run, or runs at several `β`, with their reward model, all public | open: needs public checkpoints. W4 (`cases/w4-two-runs/`) asks the part two public runs can answer: whether the off-reward change recurs in another run |
 | H32 | **The most charitable principal.** When the principal's objective is known only to lie in the span of given functions, the least misalignment any such principal finds is the unexplained misalignment of [P44], attained by the principal whose objective is the named pursuit's exponent, and the largest is the departure. So an uncertain target turns misalignment into an interval, as an unobserved condition does in [P17]. Proof sketch: over the span, `inf_{c, t ≥ 0} KL(p̂‖tilt(q, t·c·Φ))` is the infimum over the whole exponential family, attained at the moment-matching tilt, which is the named pursuit ([P44](i)); one of `±F'` never beats the default, so [P5](iv) gives the departure | **applied as [P48]**, with a direct proof and a check (Q30); first probed in `probes/diagnostics/probe_charitable.py` |
 | H33 | **Logs as outcomes.** Activations logged from a black box are observations, so making them part of the declared outcome keeps [A1]: the core would judge their distribution, not their meaning, the move [P50] made for measurements. Three consequences, none yet a result. (a) If the outputs are computed from the logged activations, these are a view of the condition ([D8]), so by [P16] the divergence of activations between evaluation and use bounds from above how differently the actor can act there: the `ε` that [P17] needs and that studies of evaluation awareness cannot give (H27). But an upper bound on a divergence between high-dimensional distributions cannot be estimated from samples without a model, so the bound inherits the model's error. (b) A surrogate, a white-box model trained on the logs, transfers its findings to the black box only within its fidelity, a divergence measurable where the surrogate was fitted and bounded elsewhere only by [P17] again. (c) What the black box "knows" is identified from logs only under stated assumptions ([D9]): where the labels come from a fallible observer, a reporter that says the truth and one that says what the observer would believe fit the same data, and logs narrow the identified set only through assumptions such as consistency or sparsity. This is the programme of probing and dictionary learning in interpretability, not new; the framework would add its accounting: fidelity in nats, identified sets, the view bound | E: outside the scope (`IMPORT.md` §8, gap 5, "drop"); reopening it is the PI's decision under the freeze. A narrow test, if reopened: a small network whose internals are known, where the view bound and the surrogate's transfer are checked against the truth |
 | H34 | **A monitor trained against is tampered with.** A monitor whose verdict is computed from a channel the actor can influence, such as a probe on activations, is a signal in [P50]'s sense, and training against it is the trainer's optimum of [P50](iii): it tampers at every positive intensity, with a share at the start equal to the share of the monitor's variance not explained by what it is meant to detect. So optimizing against an imperfect monitor buys, from the first step, a change of what the monitor reads as well as of what it monitors. The reading needs the channel declared (the activations each behaviour would produce, before any training against the monitor), and the trainer's optimum idealizes training | D: a candidate simulation, after the tampering case; no world test named |
+| H35 | **The request as evidence, as a declared family.** Inverse reward design's posterior over true rewards, given a written one and the environment it was written for [@hadfieldmenell2017], could be the family of [P48] that a principal declares when the request is all there is: the least misalignment over it is the most charitable reading of the request, and the largest is the departure. Features that did not vary where the request was written get the prior's spread, so the interval widens exactly where the request was silent | D: a derived result only if a test needs it |
+| H36 | **The default from how people usually act.** Preferences implicit in the state of the world [@shah2019] suggest estimating the default from a population's ordinary behaviour, so that the norms nobody states are carried by the cost of departure. Since a pursuit keeps the default's proportions among outcomes the request scores alike, an unstated norm then moves only through its regression on the request ([P18]) | D: a declaration practice for `STANDARD.md`, to try in a case |
 
 ### 5.5 Process
 
@@ -438,8 +488,8 @@ needs them.
 to reject the specification; Chernoff and Stein exponents for detection (v7.10's Prop 18); Wilks for the estimated
 misalignment (E1); the evaluation gap (v7.10's Prop 19) with [D8].
 *A policy question.* Wald, Chernoff, Stein and Wilks are classical theorems. Do derived results whose proof is a
-citation, checked by simulation, meet the standard of the derived folder? Executor's view: yes, with the theorem
-quoted with its hypotheses, and a check that would fail if a hypothesis did not hold.
+citation, checked by simulation, meet the standard of the derived folder? Executor's view: yes, with the theorem quoted
+with its hypotheses, and a check that would fail if a hypothesis did not hold.
 
 ## 6. Retrospective after W1 and W3
 
@@ -544,3 +594,197 @@ fixed functions of the text. The roadmap's rule, new results only when a test ne
 PI's approval, for four results in a row ([P48]–[P51]); that would be the recorded failure "internal refinement over
 external contact" (§1) if the next steps were not external. They are: the two tests of Q32, then the tampering
 simulation.
+
+## 9. What the framework can import, after the survey of 2026-10-07 (Q33)
+
+The PI asked which frameworks or theories the framework can import from. A web search found the sources below; their
+records and abstracts were read, not their full texts, since arXiv and the publishers are not reachable from here (D12).
+Each is filed in `RELATED.md` under its theory, with what it shares with the core and what it would add. Ranked by what
+each would add to the steps now open:
+
+| # | Source | What it gives the framework | Into | Kind | When |
+|---|---|---|---|---|---|
+| 1 | White (1982); Vuong (1989): misspecified models | the revealed intensity is White's pseudo-true parameter, so his limit theory gives intervals for `t*` and the quantities at it; Vuong's test says which of two specifications fits an actor better, and should give the limit of `2n·M(p̂_n)` when `M > 0`, which [P23] lacks | [P5], [P23], [P44], [P48], [P49]; the estimation work | theorems and a test | finite outcomes: derived as [P52], with Huber's open paper (Q36); the test between two specifications later |
+| 2 | Chatterjee and Diaconis (2018) | reweighting needs about `e^{KL}` draws, necessary and sufficient | [P47], every diagnostic computed by reweighting | theorem | now |
+| 3 | McAllester and Stratos (2020) | with one behaviour known and the other sampled, no distribution-free lower bound on the divergence above `ln N`; the same for mutual information (read in full, Q34) | the estimation work; the limit of H33 | theorem | now |
+| 4 | Kwa et al. (2024) | a KL penalty protects the target against a light-tailed evaluator error and not against a heavy-tailed one | the general core, for outcomes that are not finite | theorem | now |
+| 5 | Baker (2002); Courty and Marschke (2008) | a measure's distortion and risk, against [P50](iii)'s split of the misaligned share into world and noise; a test of distortion from how a measure degrades once it is paid on, a candidate world design for [P20] | [P11], [P50]; step 1 | correspondence and a design | no open text found (Q36); W5's design does not wait on it |
+| 6 | Baker et al. (2025) | a monitor trained against hides the intent it was meant to catch, at high optimization strength | H34; case C3's second arm | evidence | now |
+| 7 | Polyanskiy and Wu (2025) | divergences on general spaces, and their variational forms | the general core | textbook | now: the authors' draft is reachable (Q36) |
+| 8 | Ben-Tal et al. (2013): robust optimization over divergence balls | the dual of the worst case for every divergence ball, and its radius from data | [P17], [P27], [P31] | method | later; its preprint is on file |
+| 9 | Pearl and Bareinboim (2014): transportability | when what is seen in evaluation carries to use | [P17], [P24], [P46] | assumptions with criteria | later |
+| 10 | Blackwell (1953): comparison of experiments | sharper identified sets for views | [D8], E5 | theorem | later |
+| 11 | Kong and Schoenebeck (2019): elicitation without verification | information measures that obey data processing, for reports with no ground truth | [P51]; H33 if gap 5 reopens | theory | later |
+| 12 | Zhuang and Hadfield-Menell (2020) | when optimizing a proxy that omits attributes drives utility arbitrarily low | [D10]'s residual, [P29] | theorem | later |
+| 13 | Carroll et al. (2024): influenceable rewards | an actor that changes the principal's target, outside [P50] | a scope question | theory and a warning | later, if the scope widens |
+
+Two readings of the list. The imports with most weight are statistical, not about alignment: the core's quantities are
+divergences from a misspecified family, and the statistics of such fits, of reweighting and of what samples can certify
+is mature, so the estimation work is mostly import. And several alignment results map onto existing items rather than
+adding new ones (Baker on [P11] and [P50], Baker et al. on H34, Everitt et al. on [P50] and [P51]), which is what a
+framework meant to be imported into should find.
+
+**After Q36 (2026-10-08).** With paywalled texts out of reach, the first import of the list was derived instead of read:
+on finite outcomes, the limit laws of the revealed intensity and of misalignment off the ray are a few lines of the
+central limit theorem and the delta method, since the pursuit ray is an exponential family, and they are [P52], with
+Huber's corollary, open on Project Euclid, as their general form. The derivation found more than the import promised:
+what a sample certifies depends on what is known of each draw, and with log-ratios known the estimate is never negative,
+exactly zero on the ray, and near the ray of the order of `M²` in variance rather than `M`, while far from the ray
+counting does better. The rule that follows, to read imported theorems only in open texts or derive them, suits a
+standard: an outside reader without an affiliation can then check every theorem the framework rests on.
+
+## 10. Requests made without full consideration, and cooperative inverse reinforcement learning (Q35)
+
+The PI's example: someone asks to get rich, without saying "ethically", because it goes without saying. Is that a coarse
+resolution of the principal? It is not, and the difference matters.
+
+**Why not a resolution.** In the core a principal's resolution is a declaration of indifference ([D4]): outcomes in one
+cell are equally acceptable, and [P7] shows that such a declaration forgives exactly the departure inside the cells.
+Read as a resolution, "get rich" would make ethical and unethical wealth equally acceptable, and an actor that got rich
+dishonestly would be aligned by the principal's own declaration. The requester is not indifferent; they did not say.
+What is coarse is the request, not the requester's indifference.
+
+**What it is, in the core's objects.** Three things, which combine.
+1. *A request that is an evaluator coarser than the target* ([D10]). The request scores outcomes by wealth; the target
+   distinguishes outcomes the request scores alike, and what the request does not see is the residual. Along the pursuit
+   of the request, the default's proportions among outcomes of equal wealth are kept, so anything the request does not
+   mention, honesty included, moves only through its regression on wealth under the default ([P18]; checked in
+   `probes/diagnostics/probe_requests.py`). Where the dishonest ways are also the richer ones, pursuing wealth buys
+   dishonesty: in the probe's toy, where the dishonest way is a tenth as common under the default and 1.5 richer, the
+   dishonest share rises from `9%` at the default to `31%` at intensity `1` and `67%` at intensity `2`. Against the
+   requester's real target, wealth minus 3 for each dishonest outcome, the outer misalignment of [P49] is `0.11`, `0.52`
+   and `2.23` nats at intensities `0.5`, `1` and `2`, of departures `0.27`, `1.10` and `3.02`.
+2. *Norms carried by the default.* What goes without saying is how things are usually done: the default. The cost of
+   departing from it is what keeps a pursuit near the usual norms, and the standard specification, which accepts every
+   intensity, is where the request overreaches. "Get rich, within the usual norms" is a cap on intensity ([P35]), or a
+   feasible set that excludes some outcomes ([D7]); "get rich" alone accepts the end of the ray.
+3. *Weights the request never fixed* ([P48]). A request formed where honesty never varied fixes nothing about honesty's
+   weight. When the actor meets a condition where it varies ([D8], [P24]), the honest report is the interval of
+   misalignment over targets "wealth plus some non-negative weight on honesty": its lower end, the most charitable
+   reading, can be zero while its upper end is the whole departure.
+
+*Wrong perception altogether*, a requester who misjudges what outcomes are like, is different again: the principal then
+judges through a measurement, as in [P50], or declares a target on the wrong objects. The core can say only what the
+declaration implies; observation alone cannot separate a principal's mistaken beliefs from their preferences
+[@armstrong2018].
+
+**Cooperative inverse reinforcement learning and its variants** (`RELATED.md`). CIRL designs an assistant that does not
+know the principal's target and infers it while acting [@hadfieldmenell2016]; inverse reward design reads a written
+reward as evidence about the true one [@hadfieldmenell2017]; preferences implicit in the state of the world read
+unstated norms from the world as people left it [@shah2019]; maximum-entropy IRL and its semi-supervised variant fit
+rewards to behaviour [@ziebart2008], [@audiffren2026]. The map, checked numerically where it is a statement:
+- maximum-entropy IRL's fitted reward over a span of features is [P48]'s most charitable principal of that span, and
+  what it cannot explain is [P44]'s unexplained misalignment;
+- CIRL's deployment theorem, acting on the posterior-mean reward, is [P42](ii), the pooled pursuit, with posterior
+  weights;
+- Armstrong and Mindermann's theorem asks for a normative assumption to identify a reward; the core's premises [A2] and
+  [A3] are that assumption, and the price is that a principal who teaches rather than pursues has the teaching in its
+  revealed objective;
+- inverse reward design and preferences implicit in the state are the two halves of the example above: what the request
+  fixes (H35), and what the default carries (H36).
+
+The difference that stays: those works build an assistant that infers; the core measures any actor against a declared
+target. An assistant built that way is an actor like any other, and the core can report how far it is from every target
+its own belief allows.
+
+## 11. The engineering side, after Q37
+
+The PI asked for a more solid engineering side before some steps are actioned. An audit of what a practitioner, or an
+outside reader rerunning a case, would meet on 2026-10-08:
+1. **No library.** Each quantity of `STANDARD.md` was implemented once, but as a helper inside a test file of `checks/`,
+   and the cases did not import them: C2 wrote its own tilt, W4 its own estimates. Nothing could be installed or
+   imported by someone else.
+2. **Claims checked on code no one ships.** The checks verified the items on those helpers; a case's script could
+   compute something else under the same name.
+3. **Reports as prose only.** `STANDARD.md` lists the fields, and W1's `REPORT.md` fills them, but nothing checks a
+   report the way lint R15 checks a registration.
+4. **Nothing to rerun in a minute.** The smallest end-to-end run is W1, which needs the public data, a trained proxy and
+   hours.
+5. **Unpinned environments.** `requirements.txt` pins NumPy, SciPy and pytest, which the checks need; the world cases
+   import PyTorch, Transformers, Datasets or Numba, and no case records their versions, so a rerun may not reproduce a
+   number.
+6. **What is solid already.** Lint and CI on two SIMD paths, mutation-tested checks, registrations hashed before
+   results, licences recorded, per-draw values saved outside the repository (`tools/casekit.py`).
+
+The plan is the steps E1–E5 of `ROADMAP.md`, put first. E1(a) is done: `stdalign` 0.1 holds misalignment, its split and
+its estimates by access; the checks of [P5], [P6], [P23] and [P52] run on it, its interface has tests of its own, and
+its functions were mutation-tested: 17 mutants, all caught in the end. One survived at first, an infinite divergence
+computed with a warning, the same value otherwise; and no test compared the reported standard errors with the spread of
+the estimates, so mutants that widened them would have passed. Two tests of the interface were added for them. Point 5
+joins E3: every world case's environment pinned in its folder, so that W1 can be rerun as `REQUESTS.md` R1 asks.
+
+**The licence, decided (Q38).** The PI keeps the GNU Affero GPL, for the library too: the framework is a work in
+progress, which the PI hopes the community will support and improve rather than copy, and the licence is to be revisited
+if the framework gains predictive or diagnostic power, which is not taken for granted. Two facts bear on that aim and on
+the revisit. The licence covers this code and this text, not the ideas: anyone may implement the framework's definitions
+and results anew, under any licence, and what makes them cite it is the norm of citation, not the licence. And a change
+of licence needs the consent of every holder of the copyright; while the PI is the only one, the PI can relicense at
+will, and once others contribute, keeping that freedom needs their agreement in advance, as a contributor agreement
+gives.
+
+## 12. A review of the whole framework, 2026-10-08 (Q39)
+
+By the executor, a model of the Claude family, at the PI's request. It is not independent (rule (f)): the same model
+family wrote most of what it reviews, so its blind spots are likely the framework's.
+
+**What was read and run.** In full: `README.md`, `ROADMAP.md`, `REQUESTS.md`, `CORE.md`, `STANDARD.md`, `RECORD.md`,
+`NOTES.md` §2, `cases/README.md`, `ontologies/README.md`; the introductions and statements of `derived/`. Over every
+Markdown file, by script: claims of counts, paths and links that do not exist, lines over 120 columns, American
+spellings, whitespace, and paragraphs broken mid-sentence. The dependency graph of the items, from lint's parser.
+
+**Fixed in this review.**
+- 153 paragraphs whose lines broke mid-sentence, left by insertions made without rewrapping, most in `CORE.md` and
+  `derived/`; rewrapped with their text unchanged, checked to be identical up to whitespace and to start no new list or
+  heading. The registrations and results of cases were left untouched: lint checks their hashes.
+- Stale statements: `RECORD.md`'s experimental-economics row (the public Rock–Paper–Scissors records and D13 have been
+  known since 2026-10-07), its base rate silent on W4, and its prior art stopping at [P42]; §2 of these notes, silent on
+  the diagnostics, [P52], W4 and the library, and saying that outside reviews wait; `ontologies/README.md`'s freeze
+  "until a prediction has been tested on data not seen before", met by W1 and kept by Q27; `README.md`'s session start
+  without `REQUESTS.md`.
+- Three introductions in `derived/` that did not name their items.
+- Double blank lines, and three lines over 120 columns.
+- `CONTRIBUTING.md`, with terms proposed for the PI's approval.
+
+**Found, and open.** On the theoretical side:
+1. *What misalignment means for a trained model.* W3 and W4 measured several nats of misalignment of a PPO-tuned model
+   against its own reward, most of its departure. By the definitions that is misalignment; whether it is a failure of
+   the model or the noise of an unconverged optimizer is not known (H31), and [P45] can tell the two apart only with
+   replicate runs of one procedure, which no public sweep provides. Until a case supplies them, the largest numbers the
+   framework has measured have no settled reading.
+2. *The standard specification is strict by design.* It accepts the pursuit ray only, so any optimizer that is not an
+   exact tilt is charged, and misalignment of real systems is large by default. The diagnostics that split it
+   ([P43]–[P51]) then carry the practical weight, and a reader who sees only `M` will over-read it.
+3. *Uncertain targets give wide intervals.* For a real principal, [P48]'s interval runs from the most charitable
+   reading, which can be zero, to the whole departure. That is honest, and may be uninformative: no case has yet
+   produced an interval narrow enough to decide something.
+4. *Estimation at scale.* For outcomes as many as texts, only log-ratios and two samples are available ([P52]), and far
+   from the ray, where W3 and W4 lay, the reweighting cost dominates. Confidence sets for the pursuit part, named
+   misalignment and [P48]'s interval are not derived.
+5. *Stability has no unit.* The finish line counts steps without a change of scope, premise or definition, but a step is
+   not defined, and `ROADMAP.md` ties the count to the general core's draft 4, which changes no Statement of the finite
+   core. As written, the row cannot be met on a date anyone could check.
+6. *Where the weight rests.* Five results carry most of the framework: [P1], on which 62 items depend, directly or not;
+   [P4], 57; [P2], 51; [P5] and [P14], 43 each. Their proofs have been checked only by this model family.
+
+On the engineering side:
+7. The library covers four of the twenty result fields of `STANDARD.md` (misalignment, uncertainty, revealed intensity,
+   the departure split); the rest are helpers inside `checks/`.
+8. No report schema, no case that runs end to end in a minute, and the world cases' environments are unpinned (§11).
+9. The entry cost is high: fourteen Markdown files at the root, and these notes at over 700 lines, mixing 52 failure
+   modes, 39 decisions, 36 hunches and the history. A reader has no ten-minute path into the framework; `SCENARIO.md`
+   comes closest.
+
+**Advice.**
+1. Define a step as a merged pull request, and count stability from the merge of this one, which changes no scope,
+   premise or definition; untie the count from the general core.
+2. Timebox the engineering to what row 5 needs: E1's diagnostics, then E2 and E3 together, then the readers. E4 with W5;
+   E5 after the readers have said what was hard.
+3. Make W5 the next test, with replicate runs at each intensity: it tests [P20], and its replicates give [P45] what it
+   needs to read W3's and W4's misalignment (point 1).
+4. In reports, lead with the splits and the intervals, then the total: the departure split ([P6]), the named and
+   unexplained parts ([P44]), the interval over the targets ([P48]), and only then `M`.
+5. Lower the entry cost: a short overview for a mathematical reader, about ten pages, with the core, the five results of
+   point 6 with their proofs, and one case; and these notes split into decisions, failure modes and hunches, with the
+   history archived.
+6. Ask the first reader for something small and checkable: the proofs of [P1], [P2], [P4], [P5] and [P14], with the
+   checks that test them. A clean reading there covers most of what the framework rests on.

@@ -10,11 +10,10 @@ source: "CORE.md"
 ## Statement
 `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
 distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
-`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and
-`Var_p(F) = E_p[F²] − E_p[F]²`, and `Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`,
-`p(·|C)` is `p` conditioned on `C`. For `p, r ∈ Δ`,
-the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite when
-`r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
+`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and `Var_p(F) = E_p[F²] − E_p[F]²`, and
+`Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For
+`p, r ∈ Δ`, the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite
+when `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
 `tilt(r, F) = r·e^F / E_r[e^F]`.
 
 ## In plain terms

@@ -11,9 +11,8 @@ source: "derived/evaluator.md"
 Let `F̂` be an evaluator for the objective `F`, with regression `m`, residual `R` and resolution `𝒱` of
 its level sets ([[D10 — Evaluator, regression and residual|D10]]).
 (i) `E_q[R] = 0`, and for every behaviour `p` limited to `𝒱` ([[D4 — Resolution|D4]]), `E_p[R] = 0` and `E_p[F] = E_p[m]`.
-(ii) For every full-support `p`, with `w = p/q`,
-`E_p[F] − E_q[F] = Cov_q(w, m) + Cov_q(w, R)`, and `Cov_q(w, R) = E_p[R]`: the target's gain is the regression's gain
-plus the residual's.
+(ii) For every full-support `p`, with `w = p/q`, `E_p[F] − E_q[F] = Cov_q(w, m) + Cov_q(w, R)`, and
+`Cov_q(w, R) = E_p[R]`: the target's gain is the regression's gain plus the residual's.
 (iii) For every injective `h : ℝ → ℝ`, the evaluator `h(F̂)` has the same regression and residual as `F̂`; and if `h` is
 increasing, `m` rises with `h(F̂)` exactly when it rises with `F̂`.
 

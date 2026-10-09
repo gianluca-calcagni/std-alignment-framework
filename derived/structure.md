@@ -21,19 +21,19 @@ coordination is `0` in each round and `2·log 2` on the two rounds taken togethe
 
 **In plain terms.** When the principal wants several actors each to pursue its own objective on its own, their joint
 misalignment is the sum of their own misalignments plus one more term that no single actor's record shows: how much
-their outcomes go together, their coordination. Coordination can hide in time. Two actors can look independent in
-every round and still be tightly coordinated across rounds.
+their outcomes go together, their coordination. Coordination can hide in time. Two actors can look independent in every
+round and still be tightly coordinated across rounds.
 
 **Proof.** (i) Where `p(x) > 0`, every `p_i(x_i) > 0`, and
 `log(p(x)/Π_i r_i(x_i)) = log(p(x)/Π_i p_i(x_i)) + Σ_i log(p_i(x_i)/r_i(x_i))`. Averaging under `p`, each last term
 gives `KL(p_i‖r_i)`, since `x_i` has the distribution `p_i` under `p`.
 (ii) The default and every `⊗_i r_i` with `r_i ∈ Δ°(X_i)` have full support. The intended set is closed in `Δ°(X)`: if
-`⊗_i r_i^{(n)} → s ∈ Δ°(X)`, the marginals converge, `r_i^{(n)} → s_i`, with `s_i ∈ 𝓘_i` because each `𝓘_i` is closed
-in `Δ°(X_i)`, and `s = ⊗_i s_i` by continuity. So [D3] holds. By (i), the infimum over products splits into one
-infimum per actor, which is `M_i(p_i)`. `K(p)` is a divergence, zero exactly when `p = ⊗_i p_i`.
+`⊗_i r_i^{(n)} → s ∈ Δ°(X)`, the marginals converge, `r_i^{(n)} → s_i`, with `s_i ∈ 𝓘_i` because each `𝓘_i` is closed in
+`Δ°(X_i)`, and `s = ⊗_i s_i` by continuity. So [D3] holds. By (i), the infimum over products splits into one infimum per
+actor, which is `M_i(p_i)`. `K(p)` is a divergence, zero exactly when `p = ⊗_i p_i`.
 (iii) Draw two fair coins `z_1` and `z_2` independently; actor 1 plays `z_1` then `z_2`, and actor 2 plays `z_2` then
-`z_1`. In each round the two plays are independent fair coins, so the coordination is `0`. On the two rounds each actor's
-outcome is uniform on four values, and so is the joint outcome, so `K = log 4 + log 4 − log 4 = 2·log 2`.
+`z_1`. In each round the two plays are independent fair coins, so the coordination is `0`. On the two rounds each
+actor's outcome is uniform on four values, and so is the joint outcome, so `K = log 4 + log 4 − log 4 = 2·log 2`.
 
 **Checks.** checks/test_structure.py::test_coordination_splits_misalignment,
 checks/test_structure.py::test_coordination_can_hide_in_time
@@ -65,8 +65,8 @@ rational inattention charge an actor for exactly this quantity; here it is measu
 (ii) For pairs, `log(ρ(c)·p_c(x)/(ρ(c)·r(x))) = log(p_c(x)/r(x))`, so the divergence of the pair behaviour from an
 intended one is `Σ_c ρ(c)·KL(p_c‖r)`, as in [P24](i). By (i) its infimum over `r` is attained at `r = p̄`, which has
 full support, and only there. The intended set is closed in `Δ°` of the pairs: if `ρ(c)·r_n(x) → s(c, x)` with `s` of
-full support, then `r_n` converges to the outcome marginal of `s`, which is in `Δ°`, and `s` is `ρ` times it. So
-[D3] holds. The value is the mutual information between condition and outcome, since `p̄` is the outcome marginal.
+full support, then `r_n` converges to the outcome marginal of `s`, which is in `Δ°`, and `s` is `ρ` times it. So [D3]
+holds. The value is the mutual information between condition and outcome, since `p̄` is the outcome marginal.
 (iii) A divergence is `0` exactly at equality, so every `p_c = p̄`.
 
 **Checks.** checks/test_structure.py::test_attention_is_mutual_information
@@ -82,8 +82,8 @@ Pythagorean identity for a mixture: the average of the behaviours is the nearest
 `(x, y) ∈ S × S`. The **reversal** of a behaviour `F` on transitions is `F^T(x, y) = F(y, x)`, and `F` is
 **reversible** if `F = F^T`. Take a reversible default in `Δ°(S × S)`, and as intended behaviours the reversible ones in
 `Δ°(S × S)`. For `F ∈ Δ(S × S)` let `m = (F + F^T)/2`, and let its **entropy production** be `e(F) = KL(F‖F^T)`.
-(i) `M(F) = KL(F‖m) = ½·KL(F‖m) + ½·KL(F^T‖m)`, the Jensen–Shannon divergence between `F` and its reversal. The
-infimum is attained at `m` when `m` has full support, and approached otherwise.
+(i) `M(F) = KL(F‖m) = ½·KL(F‖m) + ½·KL(F^T‖m)`, the Jensen–Shannon divergence between `F` and its reversal. The infimum
+is attained at `m` when `m` has full support, and approached otherwise.
 (ii) `M(F) ≤ e(F)/2`.
 (iii) If `F_s = m + s·A`, with `m ∈ Δ°(S × S)` reversible and `A ≠ 0` with `A^T = −A`, then `M(F_s)/e(F_s) → 1/4` as
 `s → 0`.
@@ -92,15 +92,15 @@ infimum is attained at `m` when `m` has full support, and approached otherwise.
 positive wherever `P` is, the smallest value of `Σ_x π(x)·KL(P(x,·)‖R(x,·))` is `M(F)`, attained at
 `R(x, y) = m(x, y)/π(x)` alone.
 
-**In plain terms.** Record transitions and compare the film run forward with the film run backward. If they look
-alike, the process is reversible. Measured against reversibility, misalignment is the Jensen–Shannon divergence between
-the two films: at most half of the entropy production, the plain divergence from the backward film, and a quarter of it
-when the asymmetry is small. For a Markov chain, the nearest reversible chain runs each transition as often as the two
-films do on average.
+**In plain terms.** Record transitions and compare the film run forward with the film run backward. If they look alike,
+the process is reversible. Measured against reversibility, misalignment is the Jensen–Shannon divergence between the two
+films: at most half of the entropy production, the plain divergence from the backward film, and a quarter of it when the
+asymmetry is small. For a Markov chain, the nearest reversible chain runs each transition as often as the two films do
+on average.
 
-**Proof.** (i) For a reversible `W`, `Σ F·log W = Σ F^T·log W = Σ m·log W`, so `KL(F‖W) = Σ F·log F − Σ m·log W`.
-This holds for `W = m`, which is reversible, so `KL(F‖W) − KL(F‖m) = Σ m·log(m/W) = KL(m‖W) ≥ 0`, with equality exactly
-at `W = m`. If `m` has zeros, the reversible behaviours `(1 − ε)·m + ε·u`, with `u` uniform, have full support, and
+**Proof.** (i) For a reversible `W`, `Σ F·log W = Σ F^T·log W = Σ m·log W`, so `KL(F‖W) = Σ F·log F − Σ m·log W`. This
+holds for `W = m`, which is reversible, so `KL(F‖W) − KL(F‖m) = Σ m·log(m/W) = KL(m‖W) ≥ 0`, with equality exactly at
+`W = m`. If `m` has zeros, the reversible behaviours `(1 − ε)·m + ε·u`, with `u` uniform, have full support, and
 `KL(F‖·)` at them tends to `KL(F‖m)` as `ε → 0`, because `m > 0` wherever `F > 0`. And
 `KL(F^T‖m) = KL(F‖m^T) = KL(F‖m)`. The reversible behaviours of full support form a closed set in `Δ°(S × S)`, so this
 is a specification ([D3]).
@@ -151,8 +151,7 @@ terms with positive weights is `0` exactly when each term is.
 `Σ_k w_k·KL(p‖p_k) = KL(p‖q) − E_p[G] + Σ_k w_k·log E_q[e^{t_k F_k}]`. By [P4](i) at intensity `1` with the objective
 `G`, `KL(p‖q) − E_p[G] = KL(p‖p_{G,1}) − log E_q[e^G]`, since the net value of `p_{G,1}` is `log E_q[e^G]`.
 
-**Checks.** checks/test_structure.py::test_gridlock,
-checks/test_structure.py::test_pooling_with_declared_intensities
+**Checks.** checks/test_structure.py::test_gridlock, checks/test_structure.py::test_pooling_with_declared_intensities
 
 **Notes.** (ii) is logarithmic pooling: the compromise multiplies the intended behaviours, each raised to its weight.
 With floors ([P35]) in place of fixed intensities, a probe found the compromise to be a pursuit of `Σ_k w_k·t_k·F_k`,

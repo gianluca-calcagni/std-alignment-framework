@@ -17,8 +17,8 @@ Each entry gets one verdict:
 
 ## 1. The estimate
 
-The counts below are those at the start of the import. Section 4 gives the current state of each item, and the
-roadmap (section 6) the state of each phase.
+The counts below are those at the start of the import. Section 4 gives the current state of each item, and the roadmap
+(section 6) the state of each phase.
 
 | Kind in v7.10 | Count | In core | Derive (must / should / could) | Needs | Drop |
 |---|---|---|---|---|---|
@@ -31,17 +31,17 @@ the core lacks: two need a strategic layer (an external reward and the agent's s
 many outcomes. Eight are dropped by design. Of the 26 items to derive, many are parts of one result, so they become
 **12 new results**, listed in section 3, plus `derived/forbids.md`.
 
-**Effort.** The v10 step (two definitions, nine results, the ontologies) took three working turns. At that rate:
-the six "must" results and `forbids.md` take three to four turns; the "should" results two to three more; the merge
-itself one. **About six to eight turns to a merge with everything recommended; four to five with the "must" items
-only.** Re-running v7.10's empirical cases under the core's definitions (section 5) is not needed for the merge and
-would add two to four turns, data permitting.
+**Effort.** The v10 step (two definitions, nine results, the ontologies) took three working turns. At that rate: the six
+"must" results and `forbids.md` take three to four turns; the "should" results two to three more; the merge itself one.
+**About six to eight turns to a merge with everything recommended; four to five with the "must" items only.** Re-running
+v7.10's empirical cases under the core's definitions (section 5) is not needed for the merge and would add two to four
+turns, data permitting.
 
-**What blocks the merge.** The results v7.10 itself found stated nowhere else (its "honest position") and its
-forbidden statements: merging without them would lose what was distinctive. Of the six, three are already in the
-core (the intent-ray decomposition, the one-curve view of conventions without the price, the detection bound); the
-other three are the "must" items: the width as the exact worst case with non-separability, the conjugate pairings,
-and the closed-loop floor.
+**What blocks the merge.** The results v7.10 itself found stated nowhere else (its "honest position") and its forbidden
+statements: merging without them would lose what was distinctive. Of the six, three are already in the core (the
+intent-ray decomposition, the one-curve view of conventions without the price, the detection bound); the other three are
+the "must" items: the width as the exact worst case with non-separability, the conjugate pairings, and the closed-loop
+floor.
 
 ## 2. Two decisions the imports need (approved)
 
@@ -219,8 +219,8 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 
 ## 6. Roadmap
 
-The PI approved every recommendation of this file. The import runs in phases, each one pull request into `core`, in
-an order that respects the reading order of `derived/` (lint R5): a result may use only results before it.
+The PI approved every recommendation of this file. The import runs in phases, each one pull request into `core`, in an
+order that respects the reading order of `derived/` (lint R5): a result may use only results before it.
 
 | Phase | Content | Files | Blocks the merge | State |
 |---|---|---|---|---|
@@ -244,11 +244,11 @@ are proposals for later versions, not debts of this one.
 
 ## 7. Compatibility review of the imported items
 
-After R6, every imported item was read again against the core: whether it uses only the premises and definitions
-(no price convention, no contract, no internal state, [A1]); whether a result on the error `F̂ − F` is stated for known
+After R6, every imported item was read again against the core: whether it uses only the premises and definitions (no
+price convention, no contract, no internal state, [A1]); whether a result on the error `F̂ − F` is stated for known
 evaluators only (Q11); whether its proof holds as written; and whether it earns its place, by being used, or by saying
-something no earlier item says. Verdicts: *keep*; *keep, changed* (fixed in the review); *keep, flagged* (sound, but
-of low value or used nowhere yet; the first candidates to drop if `derived/` should be leaner).
+something no earlier item says. Verdicts: *keep*; *keep, changed* (fixed in the review); *keep, flagged* (sound, but of
+low value or used nowhere yet; the first candidates to drop if `derived/` should be leaner).
 
 | Item | Verdict | Compatibility | Why it stays, and what the review changed |
 |---|---|---|---|
@@ -267,9 +267,9 @@ of low value or used nowhere yet; the first candidates to drop if `derived/` sho
 | [P37] | keep, changed | behaviour only ([A1]): faked alignment is a difference of behaviour between conditions, not an intent | Changed: the pass-through is now written `φ`, as in [D6], not `κ`; (i) said the Chernoff information vanishes "like" the divergence, now "at least as fast" ([P22](ii)); a Note that claimed "exactly to the extent" without a measure now says what (ii) and (iii) give. Now cited by `RELATED.md` (deceptive alignment) |
 | [P38] | keep, flagged | the measure stays KL; other costs describe other actors | the weakest import: a textbook identity (first-order optimality and a Bregman divergence). It earns its place only by showing which part of [P4] depends on KL: for every convex cost the loss off the optimum is at least a Bregman divergence, and equal to it at full support, but full support can fail ((ii)), which the `χ²` comparison in `RELATED.md` now cites |
 
-Nothing imported conflicts with the core. In [P29]–[P34] the principal's objective is now called the target, as
-[D10] calls it in the evaluator's section. Symbols are local to each item: `φ` is the pass-through in [D6] and [P37],
-but the result map in [P32] and the cost in [P38]; each item defines it before use.
+Nothing imported conflicts with the core. In [P29]–[P34] the principal's objective is now called the target, as [D10]
+calls it in the evaluator's section. Symbols are local to each item: `φ` is the pass-through in [D6] and [P37], but the
+result map in [P32] and the cost in [P38]; each item defines it before use.
 
 ## 8. The five gaps of the Alignment Subframework
 

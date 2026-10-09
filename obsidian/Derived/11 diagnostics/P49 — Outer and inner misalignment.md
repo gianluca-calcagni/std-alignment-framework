@@ -58,7 +58,8 @@ two defaults, the change of default adds a term of its own.
 ## Lineage
 v7.10: Cor 1.5 and A16 (stacked stages, with an outer–inner cross term at second order), and H12 (the chain
 rule of KL may give the archive's five gaps back as additive terms); the outer and inner alignment of Hubinger et al.
-(2019), as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of intensity.
+[[References|@hubinger2019]], as a two-link chain (`RELATED.md`). New: the exact split, and outer misalignment as a function of
+intensity.
 
 ## Checks
 - [`checks/test_diagnostics.py::test_outer_and_inner_misalignment`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_diagnostics.py)

@@ -36,8 +36,9 @@ in the discipline can be diagnosed or interpreted in the core's terms.
 | `industrial-organization/` | industrial organization: pricing algorithms and competition | a competition authority → the firms of a local market, as one actor | algorithmic pricing in German petrol duopolies [@assad2024]; algorithms that learn to sustain high prices [@calvano2020] | every price change of every station; public, for non-commercial use |
 | `experimental-economics/` | experimental economics: learning in games | an experimenter → a group of subjects, as one actor | cycles in Rock–Paper–Scissors played in continuous time [@cason2014]; log-linear learning [@blume1993] | each subject's strategy, moment by moment |
 
-No discipline is added while the framework is frozen, until a prediction has been tested on data not seen before
-(`NOTES.md` §3.1, Q26).
+No discipline is added while the framework is frozen (`NOTES.md` §3.1, Q26). The freeze was to last until a prediction
+had been tested on data not seen before; W1 met that condition, and the PI kept the freeze to build confidence first
+(Q27).
 
 **Considered and not adopted** (`NOTES.md` §3.1, Q22, Q24).
 
@@ -52,9 +53,9 @@ No discipline is added while the framework is frozen, until a prediction has bee
 
 The institutions ontology became the medical-sciences one: its known result was already health care, and the four-hour
 target added a measure whose data are partly public. When [P39]–[P42] brought groups, and several principals with
-declared weights, into the scope, condition 4 was revised (Q24). Game theory's experiments then met all four
-conditions, and industrial organization joined for its public record of prices, where competition law's requirement
-of independent conduct gives a specification, in the stricter form that can be tested (Q25).
+declared weights, into the scope, condition 4 was revised (Q24). Game theory's experiments then met all four conditions,
+and industrial organization joined for its public record of prices, where competition law's requirement of independent
+conduct gives a specification, in the stricter form that can be tested (Q25).
 
 ## The slots
 
@@ -89,9 +90,9 @@ of [P13](ii) for any path as in [P11], so both apply across contexts as stated.
 **Evaluator.** The regression of the objective on the evaluator ([D10]) says more than the objective itself only when
 the evaluator scores several outcomes alike: a test passed or failed, a grade, an indicator, a fine. A real-valued
 evaluator, such as a reward model's score or a genome's fitness, gives distinct outcomes distinct values, so each level
-set is one outcome, the regression is the objective, and the residual is zero. Then the regression on bins of its
-values governs the pursuit, up to a margin that grows with the intensity and the width of the bins ([P26]). Every
-entry says which case holds.
+set is one outcome, the regression is the objective, and the residual is zero. Then the regression on bins of its values
+governs the pursuit, up to a margin that grows with the intensity and the width of the bins ([P26]). Every entry says
+which case holds.
 
 **Sample.** Every behaviour in an ontology is known through samples ([D11]). [P23] needs each outcome counted many
 times, and independent draws. With very many outcomes, counts are grouped into the cells of a resolution, and grouping

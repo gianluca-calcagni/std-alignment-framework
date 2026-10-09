@@ -21,13 +21,11 @@ spread of the error times the intensity the behaviour reveals: the harder the ac
 objective matters.
 
 ## Proof
-First, for every `r ∈ Δ°`, `p ∈ Δ` and `h : X → ℝ`,
-`KL(p‖tilt(r, h)) − KL(p‖r) = log E_r[e^h] − E_p[h]`, and both terms lie in `[min h, max h]`, so the difference lies in
-`[−osc(h), osc(h)]`.
+First, for every `r ∈ Δ°`, `p ∈ Δ` and `h : X → ℝ`, `KL(p‖tilt(r, h)) − KL(p‖r) = log E_r[e^h] − E_p[h]`, and
+both terms lie in `[min h, max h]`, so the difference lies in `[−osc(h), osc(h)]`.
 (i) Let `h = log(q'/q)`. By [[P1 — Every behaviour is a tilt of any other|P1]](iii), `tilt(q', t·F) = tilt(tilt(q, h), t·F) = tilt(p_{F,t}, h)`, where `p_{F,t}` is
-the
-pursuit from `q`. By the first step, `KL(p̂‖tilt(q', t·F))` and `KL(p̂‖p_{F,t})` differ by at most `osc(h)` for every
-`t ≥ 0`, and so do their infima over `t ≥ 0`, which are the two misalignments.
+the pursuit from `q`. By the first step, `KL(p̂‖tilt(q', t·F))` and `KL(p̂‖p_{F,t})` differ by at most `osc(h)` for
+every `t ≥ 0`, and so do their infima over `t ≥ 0`, which are the two misalignments.
 (ii) Let `p_{F,t*}` be the nearest intended behaviour under `F`, so `M_{q,F}(p̂) = KL(p̂‖p_{F,t*})`. The pursuit of
 `F + g` at intensity `t*` is `tilt(q, t*·(F + g)) = tilt(p_{F,t*}, t*·g)`, which is on the ray of `F + g`. By the first
 step, `M_{q,F+g}(p̂) ≤ KL(p̂‖tilt(p_{F,t*}, t*·g)) ≤ M_{q,F}(p̂) + t*·osc(g)`.

@@ -8,9 +8,9 @@ source: "derived/evaluator.md"
 > [!info] Generated from [derived/evaluator.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/evaluator.md#l1--separable-bounds-are-loose-when-two-quantities-change-rank). Edit the source, not this note.
 
 ## Statement
-Let `Q(E, δ) > 0` for `E` in a pair `{E₁, E₂}` and `δ` in a set `D`, let
-`ρ(δ) = Q(E₁, δ)/Q(E₂, δ)`, and `K = sup_D ρ / inf_D ρ`. If `B(E, δ) = a(E)·b(δ)` satisfies `Q ≤ B ≤ L·Q` on
-`{E₁, E₂} × D`, then `L ≥ √K`; and some separable `B` attains `L = √K`.
+Let `Q(E, δ) > 0` for `E` in a pair `{E₁, E₂}` and `δ` in a set `D`, let `ρ(δ) = Q(E₁, δ)/Q(E₂, δ)`, and
+`K = sup_D ρ / inf_D ρ`. If `B(E, δ) = a(E)·b(δ)` satisfies `Q ≤ B ≤ L·Q` on `{E₁, E₂} × D`, then `L ≥ √K`; and some
+separable `B` attains `L = √K`.
 
 ## In plain terms
 A bound that multiplies a property of the error by a function of the budget cannot follow two errors

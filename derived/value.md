@@ -1,8 +1,9 @@
 # Derived — value
 
-What the KL divergence measures: the net value lost against a pursuit ([P4]). And why the cost of departing from
-the default is KL: it is the only cost for which pursuit, the steepest climb of [A2], is also the best trade-off of
-[A3] ([P14]).
+What the KL divergence measures: the net value lost against a pursuit ([P4]). And why the cost of departing from the
+default is KL: it is the only cost for which pursuit, the steepest climb of [A2], is also the best trade-off of [A3]
+([P14]). The identity of [P4] has a counterpart for any convex cost and any concave value, with a Bregman divergence in
+place of KL ([P38]).
 
 ### P4 — What KL measures
 **Statement.** Let `q ∈ Δ°`, `F : X → ℝ` and `t > 0`. The **net value** of `p ∈ Δ` is `J_t(p) = E_p[F] − KL(p‖q)/t`:
@@ -39,11 +40,10 @@ checks/test_value.py::test_chain_rule, checks/test_value.py::test_merging_never_
 checks/test_value.py::test_other_divergences_break_the_chain_rule
 
 **Notes.** (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and
-a
-free energy in the literature on bounded rationality [@ortega2013]. The same ray therefore arises twice: as the steepest
-climb of [D2] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are standard
-[@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the chain
-rule
+a free energy in the literature on bounded rationality [@ortega2013]. The same ray therefore arises twice: as the
+steepest climb of [D2] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are
+standard [@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the
+chain rule
 (iii) [@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
 break it.
 
@@ -61,12 +61,12 @@ cost makes the two agree.
 
 **Proof.** Write `Dc(p)·v` for the derivative of `c` at `p` along a tangent vector `v`, one with `Σ_x v(x) = 0`. If
 `c = KL(·‖q) + C`, then `E_p[F] − c(p)/t = J_t(p) − C/t`, which [P4](i) maximizes at `p_{F,t}`. Conversely, `p_{F,t}`
-has full support, so it is an interior point of the plane `Σ_x p(x) = 1`, and at a maximizer the derivative along
-every tangent `v` vanishes: `Σ_x t·F(x)·v(x) = Dc(p_{F,t})·v`. Since `log(p_{F,t}/q) = t·F − log E_q[e^{tF}]` and
-`Σ_x v(x) = 0`, this says `Dc(p)·v = Σ_x log(p(x)/q(x))·v(x)` at `p = p_{F,t}`, and the right side is
-`D KL(·‖q)(p)·v`. Every `p ∈ Δ°` is such a pursuit: `p = p_{G,1}` with `G = log(p/q)` ([P1](i)). So `h = c − KL(·‖q)`
-has zero derivative along every tangent direction at every point of `Δ°`. `Δ°` is convex, so `h` is constant along
-every segment in it, hence constant.
+has full support, so it is an interior point of the plane `Σ_x p(x) = 1`, and at a maximizer the derivative along every
+tangent `v` vanishes: `Σ_x t·F(x)·v(x) = Dc(p_{F,t})·v`. Since `log(p_{F,t}/q) = t·F − log E_q[e^{tF}]` and
+`Σ_x v(x) = 0`, this says `Dc(p)·v = Σ_x log(p(x)/q(x))·v(x)` at `p = p_{F,t}`, and the right side is `D KL(·‖q)(p)·v`.
+Every `p ∈ Δ°` is such a pursuit: `p = p_{G,1}` with `G = log(p/q)` ([P1](i)). So `h = c − KL(·‖q)` has zero derivative
+along every tangent direction at every point of `Δ°`. `Δ°` is convex, so `h` is constant along every segment in it,
+hence constant.
 
 **Checks.** checks/test_value.py::test_the_cost_is_forced,
 checks/test_value.py::test_a_function_of_kl_moves_only_the_intensity

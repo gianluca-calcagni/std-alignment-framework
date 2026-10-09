@@ -37,8 +37,8 @@ The framework in ten steps:
 10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
     against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
-Specifications defined by a structure rather than by an objective need no definition of their own: several actors
-meant to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
+Specifications defined by a structure rather than by an objective need no definition of their own: several actors meant
+to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
 several principals with declared weights (`derived/structure.md`). What the core rules out, the statements that data
 could contradict, is collected in `derived/forbids.md`.
 

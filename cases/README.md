@@ -10,7 +10,7 @@ A case is a test of the framework with a registration, a script and a result, in
 3. `RESULTS.md` gives each verdict, held or failed, with its numbers, the commit that registered the case, and the
    SHA-256 of `REGISTRATION.md`. Lint rule R14 recomputes the hash, so a registration cannot change after its result is
    written. A failed prediction keeps its row (rule (a)). The registration commits of C1, C2, W1, W3 and W4 were made on
-   the branch of pull request #29, and stay reachable through that pull request whatever the method of its merge.
+   the branch of pull request #29, which was merged into `main` with its history.
 4. For a world case, `REPORT.md` may follow: the case reported to `STANDARD.md`, field by field, with intervals. It is
    descriptive, computed after the verdict, and changes no verdict.
 

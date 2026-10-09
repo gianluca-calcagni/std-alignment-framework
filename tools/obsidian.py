@@ -21,7 +21,8 @@ DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": 
         "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies",
         "general/README.md": "General results", "general/transfer.md": "Transfer to general spaces",
         "general/derived-spaces.md": "Derived spaces", "general/disciplines.md": "Disciplines on a continuum",
-        "general/vocabulary.md": "Everyday words", "ROADMAP.md": "Roadmap", "SCENARIO.md": "Worked scenario",
+        "general/vocabulary.md": "Everyday words", "general/dictionary.md": "Finite and continuous",
+        "ROADMAP.md": "Roadmap", "REQUESTS.md": "Requests to the PI", "CONTRIBUTING.md": "Contributing", "SCENARIO.md": "Worked scenario",
         "cases/README.md": "Cases"}
 CASE_DOCS = (("REGISTRATION.md", "registration"), ("RESULTS.md", "results"), ("REPORT.md", "report"))
 
@@ -106,8 +107,8 @@ def build(root):
             "- [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · "
             "[[References]]", "- [[Core]]: premises and definitions",
             "- [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], "
-            "[[Transfer to general spaces]], [[Derived spaces]], [[Disciplines on a continuum]], "
-            "[[Everyday words]]", "",
+            "[[Finite and continuous]], [[Transfer to general spaces]], [[Derived spaces]], "
+            "[[Disciplines on a continuum]], [[Everyday words]]", "",
             "## Derived, in reading order"]
     home += [f"- [[{folder.split(' ', 1)[1]}]]" for _, folder in sources[1:]]
     home += ["", "## Ontologies", "- [[Ontologies]]: the slots"] + [f"- [[{o.parent.name}]]" for o in ontologies]

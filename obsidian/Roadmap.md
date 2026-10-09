@@ -17,77 +17,79 @@ row of the finish line is met.
 | stable | neither the scope nor a premise's or definition's Statement changes for three consecutive steps | not met: the scope changed in v11 |
 | easy to import into | every item of the archive has a recorded fate | met |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **met**: W1 refuted a prediction about the literature's curve; W3 tested the framework's bet itself, on a model tuned by PPO, and the bet held in part (one prediction held, one refuted). Three predictions tested on unseen data, one held |
-| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: W1 is reported to `STANDARD.md` with intervals, from public data and code (`cases/w1-best-of-n-slope/REPORT.md`); no outside reader has run it, and external review is on hold (Q27) |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: W1 is reported to `STANDARD.md` with intervals, from public data and code (`cases/w1-best-of-n-slope/REPORT.md`); no outside reader has run it. The hold on review is lifted for one mathematical reader (Q33) |
 
-**What matters now:** confidence, as the PI asked (Q27): more tests of the framework's bet on public data, each
-registered before it is computed, until the base rate says something; then the outside reader, when the PI lifts the
-hold. Everything else waits unless it serves one of them.
+**What matters now** (Q35, Q37): contact with the world, and a bridge from theory to practice. Contact means tests that
+can fail and readers who are not the executor; the bridge means estimates a reader can compute, with intervals, from the
+access a case really has. The PI asked for the bridge's engineering to be solid before some steps are actioned (Q37): a
+library that computes what the standard asks, a report that can be checked as data, and a case anyone can rerun. The
+theory grows where one of these needs it, and the archive of what is done is in `NOTES.md` §4.
 
-## Where we are (2026-10-07)
+## Where we are (2026-10-08)
 
-- The core is v11: five premises, eleven definitions, 51 propositions; 183 checks pass on both paths. Nine results are
-  diagnostics (`derived/diagnostics.md`, Q28, Q30–Q32): misalignment at any intensity and across conditions at one
-  intensity; what named objectives explain; drift between runs; what runs share between evaluation and use; the cost of
-  reweighting; the interval of misalignment when the target is known only to lie in a family; outer and inner
-  misalignment, with their exact split; and tampering, with what signals, audits and re-measurements reveal of it. Each
-  follows from earlier results; no premise or definition changed. Five of the nine were used in a case, all in W4;
-  [[P46 — What runs share between conditions, and what they do not|P46]], [[P49 — Outer and inner misalignment|P49]], [[P50 — Tampering: a change of the measurement, not of the world|P50]] and [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] in none yet.
-- **Grounding** (Q32): with the measurement part of the outcome, the departure splits exactly into the change of the
-  world and the tampering, and a target on the world charges all of it ([[P50 — Tampering: a change of the measurement, not of the world|P50]]); from signals alone tampering has an
-  attained lower bound and is never ruled out, and an audit raises the bound ([[P51 — What signals, audits and re-measurements reveal of tampering|P51]]). In W1–W4 tampering was zero by
-  construction: their evaluators were fixed functions of the text.
-- **Whose target** (`NOTES.md` §7, Q30): W3 and W4 measured the trainer's formal objective, not what any user wants, for
-  which no gold exists. Every declaration now names its principal (`STANDARD.md`), and an uncertain target is declared
-  as a family, whose interval [[P48 — Misalignment when the target is uncertain|P48]] gives.
-- **Base rate: one of three** predictions tested on data not seen before held (`RECORD.md`). Too few to say anything,
-  beyond that the framework can fail.
-- **W1** (`cases/w1-best-of-n-slope/`): the prediction from [[P13 — What the start of a change gains|P13]] about best-of-`n`, refuted. On 12.6 million answers,
-  the literature's fitted coefficient overstates the initial slope by 22%; the curve keeps the framework's initial slope
-  up to `n = 16`, then saturates (exploratory). Reported to `STANDARD.md` in `REPORT.md`, exploratory, since its
-  declaration was written after the data were seen: about three quarters of best-of-`n`'s departure from the default is
-  misalignment against the gold, at every `n`.
-- **W3** (`cases/w3-ppo-pursuit/`), the first test of the bet that an optimizer pursues what it is rewarded on: a public
-  GPT-2 tuned by PPO on a sentiment reward. It pursues the reward in the reward's own scale (S2 held), with a slope near
-  `1/β`, but within prompts the reward explains only `0.358` of what the tuning changed (S1 refuted: the registered
-  threshold was a half), and `0.10` to `0.12` within each model's own continuations (exploratory). By the framework's
-  own measure, most of that model's departure from its reference is misalignment against its reward.
-- **W4** (`cases/w4-two-runs/`), the first diagnostic case: what PPO changed in W3's model beyond its reward is not a
-  sharpening of the reference (S1 refuted), and part of it recurs in a second public run from the same reference (S2
-  held): systematic, not all drift. But the shared part is small: naming sharpening, the other reward and the other
-  run's change explains `0.14` of the misalignment, and the runs are further apart than either is from the reference.
-  Separating drift from procedure needs replicate runs of one procedure; none is public.
-- **Lessons as defaults** (Q29): new registrations follow `cases/TEMPLATE.md`, held to it by lint R15; case scripts use
-  `tools/casekit.py`; `cases/README.md` maps each lesson to what holds it.
-- **Frozen** (`NOTES.md`, Q26, Q27): the general core at draft 3, new disciplines, any widening of the scope. Q26's
-  condition is met; the PI keeps the freeze, to build more confidence first. No external reviews yet.
-- **Licences** (Q27): the repository keeps code, aggregates and citations only; no third-party data, weights, papers, or
-  item-by-item derivatives. W1's proxy weights and per-prompt statistics were removed from the tree; they remain in two
-  earlier commits until the PI decides on a force-push.
-- Two simulation cases checked instruments before they met the world, and each revised a prediction before its data were
-  read (`cases/`): C1 and C2.
-- `SCENARIO.md` shows the framework applied, three ways; it is an illustration, not evidence.
-- **Blocked on the PI:** the German price archive (credentials, W2); the history purge (a force-push); the outside
-  reader (on hold).
+- **The core** is v11: five premises, eleven definitions, 52 propositions; 184 checks pass on both paths. Nine results
+  are diagnostics ([[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]); five were used in a case, all in W4, and [[P46 — What runs share between conditions, and what they do not|P46]], [[P49 — Outer and inner misalignment|P49]], [[P50 — Tampering: a change of the measurement, not of the world|P50]] and [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] in none yet.
+  [[P52 — What a sample certifies about misalignment, by access|P52]] says what a sample certifies about misalignment, by what is known of each draw, and `STANDARD.md` now asks each
+  case to declare that access. The general core is at draft 3, with a dictionary of every object from finite to
+  continuous outcomes (`general/dictionary.md`).
+- **Engineering** (Q37): `stdalign` 0.1, the library, holds misalignment, the revealed intensity and the split of the
+  departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), and the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]); the checks of those
+  items now run on it, and its own tests cover its interface. The rest of the standard's quantities are still computed
+  by helpers inside `checks/`, and each case still carries scripts of its own.
+- **Contact with the world:** one of three framework predictions tested on data not seen before held (`RECORD.md`): W1
+  refuted, W3 one held and one refuted. W4 was diagnostic, and two simulation cases, C1 and C2, each revised a
+  prediction before its data were read (`cases/`). Too few tests to say more than that the framework can fail.
+- **Imports:** what the framework can import, ranked (`NOTES.md` §9): the heaviest is statistics (misspecified fits,
+  reweighting, what samples certify). How the imports treat the continuum (`general/dictionary.md`); cooperative inverse
+  reinforcement learning and its variants, mapped, with a request made without full consideration read in the core's
+  objects (`NOTES.md` §10).
+- **Frozen** (`NOTES.md`, Q26, Q27, Q33): new disciplines, any widening of the scope, and the general core except for
+  outcomes that are not finite and estimation guarantees (step 3).
+- **Licences** (Q27): the repository keeps code, aggregates and citations only: no third-party data, weights, papers, or
+  item-by-item derivatives. Its own licence, the GNU Affero GPL, is kept for the framework and the library, to be
+  revisited if the framework gains predictive or diagnostic power (Q38).
+- **Waiting on the PI:** `REQUESTS.md`, which lists every request with the step it unblocks, and the hosts allowed.
 
-## Next, in order
+## Next, by priority
 
-Each step names the row it serves and what it waits for. A step that serves no row is not on this list.
+Each step names the row it serves and what it waits for. A step that serves no row is not on this list. The engineering
+steps E1–E5 come first (Q37); W5 and C3 are then built on the library rather than on scripts of their own, which also
+tests the library. Steps 4–6 wait on the PI.
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
-| 1 | **[[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The Rock–Paper–Scissors arm alone is weak, since its cycles are known in summary (D9); the risky arm is the potential game, and every two-strategy population game has a potential, so a public continuous-time experiment with two strategies would serve. First check which records are public and not yet read; then register from the template, with a declared principal | 4 | the check of the data, which the executor can make |
-| 2 | **[[P20 — Where overoptimization starts, and how it ends\|P20]], the stopping rule** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero. As revised after C2, it needs several runs per `β` on a fine grid, with a gold distinct from the proxy. First check whether such a sweep is public and unseen; otherwise measure what training one on small models costs on this machine, as W3 measured its sampler; then register | 4 | the check of the data, or the measured cost of making them |
-| 3 | **C3, tampering** (simulation, approved in Q32): a small environment, built here, where the actor can change the world or its measurement, in the manner of the tomato-watering gridworld (D11). It checks [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii) says, with its share at the start | 5 | steps 1 and 2; it gates no named world test yet |
-| 4 | **W2**, industrial organization: register the revised prediction from [[P39 — Several actors: coordination plus individual misalignment\|P39]] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials |
-| 5 | An outside reader reruns W1's report end to end, from `STANDARD.md`, the case folder and the public data alone; and a mathematician reads the core and `derived/` | 5 | the PI lifts the hold on external review (Q27) and finds readers who are people |
-| 6 | Three steps with no change of scope, premise or definition | 2 | nothing: the freeze provides it |
+| E1 | **The library, `stdalign`**: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify, so that what a case imports is what was proved and mutation-tested. Done (a): misalignment, its split and its estimates by access ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]], [[P6 — The departure from the default splits into pursuit and misalignment\|P6]], [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]], [[P47 — The cost of reweighting\|P47]], [[P52 — What a sample certifies about misalignment, by access\|P52]]). Next: (b) the diagnostics [[P43 — Misalignment at any intensity\|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]; (c) stakes, the evaluator's results and feasibility; each moved with its check pointed at it and its functions mutation-tested | 5 | nothing |
+| E2 | **The report as data**: a schema for `STANDARD.md`'s three sections, a validator run by lint on every case's report, and W1's report migrated to it; a reader can then check a report field by field | 5 | E1 (b) |
+| E3 | **A case anyone can rerun in a minute**: a synthetic declaration, its draws, the library, a report and the validator, run end to end by CI; the first thing an outside reader runs. With it, every world case's environment pinned in its folder, so that W1 can be rerun as `REQUESTS.md` R1 asks (`NOTES.md` §11) | 5 | E1, E2 |
+| E4 | **Adapters for sequence models**: log-ratios and objectives from two causal language models, by sums over tokens, and the departure by Amini et al.'s Rao–Blackwellized estimator; an optional dependency, on which W5 runs | 4, 5 | E1 |
+| E5 | **A guide for practitioners**: which access to declare, which function to call, how to read each field of the report; written from E3 | 5 | E3 |
+| 1 | **W5, the stopping rule of [[P20 — Where overoptimization starts, and how it ends\|P20]] on trained policies** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero, with several runs per `β` (as revised after C2). No public sweep exists; one is made here, on W3's reference, with W3's reward as the proxy and W4's other reward as the gold: `3.8` s per step, about 4 to 10 hours per sweep (`probes/cases/`). Next: calibrate how many steps bring each run near its optimum, then design, rehearse and register from `cases/TEMPLATE.md` | 4 | E1, E4 (Q37) |
+| 2 | **C3, tampering** (simulation, Q32): a small environment, built here, where the actor can change the world or its measurement, as in the tomato-watering gridworld [[References\|@leike2017]]. It checks [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii) says. Second arm (H34, Q33): a monitor reading a channel the actor can influence, trained against, as Baker et al. found with chain-of-thought monitors. Light enough to run while W5 computes | 5 | E1 (Q37) |
+| 3 | **Estimation, then the general core's draft 4** (Q33, Q36). Done for misalignment on finite outcomes: [[P52 — What a sample certifies about misalignment, by access\|P52]], its limit law under each access, derived rather than imported. Next, the same for the other quantities a report gives (the pursuit part, named misalignment, [[P48 — Misalignment when the target is uncertain\|P48]]'s interval), with the sample sizes they imply; then outcomes that are not finite, where [[P52 — What a sample certifies about misalignment, by access\|P52]]'s laws need χ² divergences finite, with the conditions on tails and on existence that `general/dictionary.md` lists | 5; 2 (the count restarts) | nothing: open texts or derivations (Q36) |
+| 4 | **Readers:** a person reruns W1's report end to end from `STANDARD.md`, the case folder and the public data; a mathematician reads `CORE.md` and `derived/` | 5 | the PI finds them (`REQUESTS.md`, R1), once E1–E3 are done (Q37) |
+| 5 | **[[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The potential arm is the risky one; no public record under a comparable protocol was found (D13) | 4 | the records, from the authors (`REQUESTS.md`, R2) |
+| 6 | **W2**, industrial organization: register the revised prediction from [[P39 — Several actors: coordination plus individual misalignment\|P39]] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials (`REQUESTS.md`, R3) |
+| 7 | Three steps with no change of scope, premise or definition | 2 | the PI's choice of what counts as a step (`REQUESTS.md`, R5); the executor proposes a merged pull request, which would make the merge of the review of 2026-10-08 the first (`NOTES.md` §12) |
+
+**Why this order.** The PI asked for a solid engineering side first (Q37), and row 5's criterion is itself an
+engineering one: an outside reader must be able to run a case end to end. E1–E3 give that reader a library, a report
+that can be checked, and a case that runs in a minute; E4 and E5 serve W5 and the readers. W5 and C3 are then the only
+tests the executor can run without waiting, and each can fail; built on the library, they test it too. Step 3 turns the
+remaining diagnostics into numbers with intervals, and feeds E1. The readers are the binding constraint on row 5, and
+only the PI can find them. [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]] and W2 are good tests, blocked on data that only the PI can obtain.
+
+## What the PI can supply
+
+In `REQUESTS.md`: every open request, with the step it unblocks and how to hand it over, the hosts the PI has allowed,
+and what is done. Since Q36 no paper behind a paywall is asked for.
 
 ## Not now, and why
 
-- The general core, new disciplines, wider scope: frozen by the PI (Q26, Q27), although row 4 is met.
-- New results in `derived/`: only if a test on the list above needs one to be stated. The rule was set aside, with the
-  PI's approval, for [[P48 — Misalignment when the target is uncertain|P48]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]; it applies again from here.
-- More simulation cases: only to gate a named world test, at most one per test, before that test runs.
+- New disciplines and wider scope: frozen by the PI (Q26, Q27).
+- New results in `derived/`: only when a step above needs one. Waiting candidates: H34 (C3's second arm will test it),
+  H35 (a request as evidence, a declared family), H36 (the default from how a population usually acts) (`NOTES.md`
+  §5.4).
+- More simulation cases: only to gate a world test, or when the PI approves one, as for C3.
 - Hunches (`NOTES.md` §5.4): recorded, not pursued, unless a step above needs them.
 
 ## Drift checks
@@ -98,20 +100,17 @@ Before starting any piece of work, answer these; if an answer is "no", stop and 
 3. Is it the smallest piece of work that moves the step? Exploration beyond it goes into a hunch, not into the turn.
 4. For a test: is every threshold calibrated on the design's noise-free case, with seeds the test will not use, before
    the registration is pushed (`NOTES.md` §1)?
-5. At the end of the turn: is this file's "Where we are" true, and does the log below have a line?
+5. At the end of the turn: is this file's "Where we are" true, does the log below have a line, and does `REQUESTS.md`
+   list every open request?
 
 ## Log
 
-One line per turn: date, what changed, which row it served.
+One line per turn: date, what changed, which row it served. Earlier lines are archived in `NOTES.md` §4.1.
 
 | Date | Change | Row |
 |---|---|---|
-| 2026-10-03 | consolidation; v11; the freeze; `cases/` and R14; cases C1 and C2, both revising a prediction before data; `SCENARIO.md`; this roadmap | 4 (instruments checked); 5 (scenario) |
-| 2026-10-03 | the PI supplied Coste et al.'s paper; read; W1's data located, and its access blocked on one network domain | 4 (step 1) |
-| 2026-10-03 | W1: proxy trained and frozen; procedure calibrated on synthetic prompts; registered; run once on 12.6 million unseen answers; refuted. The framework's first test on unseen data | 4: met, by a refutation |
-| 2026-10-03 | licence rule applied (Q27); W1 reported to `STANDARD.md`; W3 designed, calibrated, registered and run once on a public PPO model: the bet held in part; consolidation | 4 (the bet tested); 5 (the report) |
-| 2026-10-03 | retrospective of W1 and W3 (`NOTES.md` §6); five design rules for cases; five diagnostic results derived from the core, P43–P47 (Q28); W4 designed, its second run's provenance traced | 4 (W4); 5 (diagnostics) |
-| 2026-10-03 | lessons as defaults: `cases/TEMPLATE.md`, lint R15, `tools/casekit.py` (Q29); W4 rehearsed, registered and run: no sharpening; a small shared change beyond the reward | 5 (W4, a diagnostic) |
-| 2026-10-04 | whose target? W3 and W4 measured the trainer's objective; [[P48 — Misalignment when the target is uncertain\|P48]], the interval of misalignment over a family of targets; the field Principal in the standard, the template and lint R15 (Q30) | 5 (diagnostics) |
-| 2026-10-04 | [[P49 — Outer and inner misalignment\|P49]], outer and inner misalignment and their exact split; the archive's five gaps mapped (`IMPORT.md`, section 8), grounding only partly covered (Q31) | 5 (diagnostics) |
-| 2026-10-07 | [[P50 — Tampering: a change of the measurement, not of the world\|P50]], tampering, and [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], what signals, audits and re-measurements reveal of it, with checks and mutation tests; the grounding gap mapped as in the core for a declared channel; the two pending framework tests, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] and [[P20 — Where overoptimization starts, and how it ends\|P20]], made steps 1 and 2, and the tampering simulation step 3 (Q32) | 4 (steps 1–3 set); 5 (diagnostics) |
+| 2026-10-07 | cooperative inverse reinforcement learning and its variants mapped to the core, and a request made without full consideration read as an evaluator coarser than the target, not a resolution (`NOTES.md` §10, Q35); the roadmap reworked: what is done archived, the next steps re-prioritized, and what the PI can supply listed | 4, 5 (priorities); 3 (imports) |
+| 2026-10-08 | the PI has no academic access (Q36): imported theorems are read in open texts or derived; [[P52 — What a sample certifies about misalignment, by access\|P52]], what a sample certifies about misalignment by what is known of each draw, derived with Huber's open paper, checked, and mutation-tested (eight mutants); the field Access in `STANDARD.md`; the requests to the PI are now hosts and data, not papers | 5 (step 3: estimation); 1 (a new check, mutation-tested) |
+| 2026-10-08 | the PI asked for one file of requests and a more solid engineering side before some steps are actioned (Q37): `REQUESTS.md`; the engineering steps E1–E5 put first; `stdalign` 0.1, misalignment, its split and its estimates by access, with the checks of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]], [[P6 — The departure from the default splits into pursuit and misalignment\|P6]], [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]] and [[P52 — What a sample certifies about misalignment, by access\|P52]] pointed at it, tests of its interface, and its functions mutation-tested; the Caltech record given on 2026-10-08 corrected | 5 (E1); 1 (the library mutation-tested) |
+| 2026-10-08 | the licence decided (Q38): the GNU Affero GPL kept, to be revisited if the framework gains predictive or diagnostic power; what the licence does not cover, and what a later change needs, recorded in `NOTES.md` §11 | none: a decision of the PI's, recorded |
+| 2026-10-08 | a review of the whole framework (Q39, `NOTES.md` §12): 153 broken paragraphs rewrapped, stale statements fixed in `RECORD.md`, these notes, `ontologies/README.md` and `README.md`; nine open findings and six pieces of advice; `CONTRIBUTING.md`, its terms proposed; two decisions asked of the PI (`REQUESTS.md`, R4 and R5) | 2 (a unit for stability proposed); 5 (the path to readers) |

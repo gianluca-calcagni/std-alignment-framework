@@ -6,6 +6,7 @@ import numpy as np
 from scipy.optimize import minimize_scalar
 from .common import EXACT, rng, simplex_interior, kl, tilt
 from .test_misalignment import misalignment
+import stdalign
 
 
 def test_expected_evidence_is_misalignment():
@@ -152,3 +153,71 @@ def test_a_strong_incentive_masks_the_actor_and_can_fake_alignment():
         limit = -np.log(sup)
         M, _ = misalignment(tilt(own, 25.0 * u), q, F)
         assert limit > 0 and abs(M - limit) <= 1e-3 * (1 + limit)
+
+
+def _counts_rows(C, q, F):
+    """P52(i) by the library, for each row of counts in C: the estimated misalignment and revealed intensity."""
+    est = [stdalign.from_counts(c, q, F) for c in C]
+    return np.array([e.value for e in est]), np.array([e.revealed_intensity for e in est])
+
+
+def _draws(row):
+    """The draws counted in a row, as outcome indices."""
+    return np.repeat(np.arange(row.size), row.astype(int))
+
+
+def by_log_ratios(C, l, F):
+    """P52(ii) by the library, for each row of counts in C, with log-ratios l and objective F per outcome."""
+    return np.array([stdalign.from_log_ratios(l[x], F[x]).value for x in map(_draws, C)])
+
+
+def by_two_samples(C, Cq, l, F):
+    """P52(iii) by the library, for each row of C and the matching row of the default's counts Cq."""
+    return np.array([stdalign.from_two_samples(l[x], F[x], F[y]).value for x, y in zip(map(_draws, C), map(_draws, Cq))])
+
+
+def test_what_a_sample_certifies_by_access():
+    """P52: with log-ratios, the estimate is never negative, is exactly zero for an actor on the ray, and is zero only
+    if the sampled log-ratios are affine in F; and (light simulation) n·Var of each estimate matches its limit law:
+    Var_p(log w) by counts, with Var_p(F)/Var_{p°}(F)² for the revealed intensity; Var_p(w − log w) by log-ratios;
+    Var_p(log w) + (n/m)·χ²(p°‖q) with draws of the default, which on the ray is negative about half the time."""
+    r = rng(5201)
+    for _ in range(200):                                                      # (ii): exact, for any sample
+        k = int(r.integers(3, 8)); q = simplex_interior(r, k); F = r.normal(0, 2, k); n = int(r.integers(2, 60))
+        on_ray = r.random() < 0.5
+        p = tilt(q, r.uniform(0, 2) * F) if on_ray else simplex_interior(r, k); l = np.log(p / q)
+        C = r.multinomial(n, p, size=20).astype(float)
+        est = by_log_ratios(C, l, F)
+        assert est.min() >= -1e-12
+        if on_ray:
+            assert est.max() <= 1e-12
+        away = by_log_ratios(C, np.log(tilt(q, -r.uniform(0.5, 2) * F) / q), F)   # affine, but s < 0: not zero
+        assert np.all(away[(C > 0).sum(axis=1) >= 2] > 1e-12)
+        for row, e in zip(C, est):                                           # zero only if ℓ is affine in F
+            seen = row > 0
+            if seen.sum() >= 3:
+                A = np.column_stack([np.ones(seen.sum()), F[seen]])
+                resid = l[seen] - A @ np.linalg.lstsq(A, l[seen], rcond=None)[0]
+                if np.abs(resid).max() > 1e-3:
+                    assert e > 1e-12
+    R, n = 800, 2000; tol = 5 * np.sqrt(2 / (R - 1))
+    for k in (4, 6):                                                          # the laws, off the ray
+        while True:
+            q = simplex_interior(r, k); F = r.normal(0, 2, k); p = tilt(q, F + r.normal(0, 0.6, k))
+            M, ts = misalignment(p, q, F)
+            if 0.2 < ts < 3 and 0.02 < M < 0.5:
+                break
+        po = tilt(q, ts * F); w = po / p; l = np.log(p / q)
+        var = lambda g, d: d @ g ** 2 - (d @ g) ** 2
+        C = r.multinomial(n, p, size=R).astype(float); Cq = r.multinomial(n, q, size=R).astype(float)
+        MA, tA = _counts_rows(C, q, F)
+        assert abs(n * MA.var() / var(np.log(w), p) - 1) <= tol
+        for c in (1, 3):                                       # the revealed intensity of c·F is t̂/c: the law scales
+            assert abs(n * (tA / c).var() / (var(c * F, p) / var(c * F, po) ** 2) - 1) <= tol
+        assert abs(n * by_log_ratios(C, l, F).var() / var(w - np.log(w), p) - 1) <= tol
+        assert abs(n * by_two_samples(C, Cq, l, F).var() / (var(np.log(w), p) + var(po / q, q)) - 1) <= tol
+    q = simplex_interior(r, 5); F = r.normal(0, 2, 5); p = tilt(q, 0.8 * F); l = np.log(p / q)   # (iii), on the ray
+    C = r.multinomial(n, p, size=R).astype(float); Cq = r.multinomial(n, q, size=R).astype(float)
+    est = by_two_samples(C, Cq, l, F); chi2 = q @ (p / q) ** 2 - 1
+    assert abs(np.mean(est < 0) - 0.5) <= 5 * np.sqrt(0.25 / R)
+    assert abs(n * est.var() / chi2 - 1) <= tol

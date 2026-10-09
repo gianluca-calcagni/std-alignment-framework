@@ -8,10 +8,10 @@ source: "derived/evaluator.md"
 > [!info] Generated from [derived/evaluator.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/evaluator.md#p29--the-width-is-the-exact-worst-case). Edit the source, not this note.
 
 ## Statement
-Let `F` be the target, `F̂` an evaluator known in the units of `F` ([[D10 — Evaluator, regression and residual|D10]]), and `E = F̂ − F` its
-error, non-constant. Let `δ > 0`, and for `G = F` and `G = F̂` let `p*_G` be a behaviour with the largest average of
-`G` over the departure budget `𝓑_δ` ([[P27 — The best use of a departure budget|P27]](ii)). Let `L = E_{p*_F}[F] − E_{p*_F̂}[F]`: the target lost by pursuing
-the evaluator instead of the target within the budget.
+Let `F` be the target, `F̂` an evaluator known in the units of `F` ([[D10 — Evaluator, regression and residual|D10]]), and `E = F̂ − F` its error,
+non-constant. Let `δ > 0`, and for `G = F` and `G = F̂` let `p*_G` be a behaviour with the largest average of `G` over
+the departure budget `𝓑_δ` ([[P27 — The best use of a departure budget|P27]](ii)). Let `L = E_{p*_F}[F] − E_{p*_F̂}[F]`: the target lost by pursuing the evaluator
+instead of the target within the budget.
 (i) `0 ≤ L ≤ E_{p*_F̂}[E] − E_{p*_F}[E] ≤ w_δ(E)`, the width of the budget along the error ([[P28 — The width of a departure budget|P28]]).
 (ii) Over all targets `F` with the same error, the supremum of `L` is `w_δ(E)`: `F = −c·E` gives `L = c·w_δ(E)`, for
 every `0 < c < 1`. So no bound on `L` that depends only on the error and the budget is smaller than `w_δ(E)`.
@@ -37,9 +37,9 @@ With `F = −c·E`, `F̂ = (1 − c)·E`. A positive multiple of an objective ha
 
 ## Notes
 The error `E = F̂ − F` needs the evaluator's scale, which behaviour never identifies ([[D10 — Evaluator, regression and residual|D10]]); this result is
-about evaluators known in the target's units, such as a reward model trained to predict the target. The
-comparison is at an equal budget, as stakes are ([[D5 — Stakes|D5]]); v7.10 also compared net values at a declared price, which the
-core does not use. Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
+about evaluators known in the target's units, such as a reward model trained to predict the target. The comparison is at
+an equal budget, as stakes are ([[D5 — Stakes|D5]]); v7.10 also compared net values at a declared price, which the core does not use.
+Typical losses sit well inside the width: in the check, the median of `L/w_δ(E)` is below one half.
 
 ## Lineage
 v7.10: Thm 5 (the width is the exact worst case), parts (i) and (ii) at `β = ∞`; part (iii), at a declared

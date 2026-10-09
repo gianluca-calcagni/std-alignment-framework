@@ -20,13 +20,11 @@ the objective's own units.
 
 ## Why this choice
 - *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
-  (`derived/stakes.md`), so it
-  cannot say how much of the objective is lost; a principal needs that in its own units. In v7.10 this was learned the
-  hard way (R8-1).
+  (`derived/stakes.md`), so it cannot say how much of the objective is lost; a principal needs that in its own units. In
+  v7.10 this was learned the hard way (R8-1).
 - *Compare at the same departure.* The departure is what the actor spent, and the matched pursuit is the most of `F`
   that departure can buy (`derived/stakes.md`). Comparing with the nearest intended behaviour would say nothing: in the
-  second
-  case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv) it reaches the same average of `F` by construction.
+  second case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv) it reaches the same average of `F` by construction.
 - *Not the best outcome.* Comparing with `max F` would charge every cautious actor for not being reckless, although the
   specification ([[D3 — Specification, declaration and misalignment|D3]]) counts departing from the default as a cost.
 - *Defined by an infimum,* so that the definition needs no result: a derived result shows that the departure is matched

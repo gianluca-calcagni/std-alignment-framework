@@ -8,8 +8,8 @@ source: "derived/forbids.md"
 > [!info] Generated from [derived/forbids.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/forbids.md#c9--grouping-outcomes-never-shows-more-misalignment). Edit the source, not this note.
 
 ## Statement
-For any specification `(q, 𝓘)`, resolution `ℬ` and `p̂ ∈ Δ`,
-`inf_{p∈𝓘} KL(p̂_ℬ‖p_ℬ) ≤ M(p̂)`, where `p_ℬ` gives each cell of `ℬ` its mass under `p`.
+For any specification `(q, 𝓘)`, resolution `ℬ` and `p̂ ∈ Δ`, `inf_{p∈𝓘} KL(p̂_ℬ‖p_ℬ) ≤ M(p̂)`, where
+`p_ℬ` gives each cell of `ℬ` its mass under `p`.
 
 ## In plain terms
 A principal who sees only coarse records never sees more misalignment than there is.

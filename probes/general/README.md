@@ -4,8 +4,8 @@ Exploratory scripts behind the numbers in `CORE-GENERAL.md`. They are not checks
 on them, and a probe that agrees with a prediction proves nothing beyond its instance. A result enters `derived/` only
 with a proof and a check (README). They are kept so that every number the draft cites can be reproduced.
 
-Run any of them with `python3 <file>` from this folder; together they take a few minutes. Their output, as run once,
-is in `RESULTS.md`.
+Run any of them with `python3 <file>` from this folder; together they take a few minutes. Their output, as run once, is
+in `RESULTS.md`.
 
 ## The probes and their verdicts
 

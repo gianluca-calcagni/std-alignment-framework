@@ -19,12 +19,12 @@ cost makes the two agree.
 ## Proof
 Write `Dc(p)·v` for the derivative of `c` at `p` along a tangent vector `v`, one with `Σ_x v(x) = 0`. If
 `c = KL(·‖q) + C`, then `E_p[F] − c(p)/t = J_t(p) − C/t`, which [[P4 — What KL measures|P4]](i) maximizes at `p_{F,t}`. Conversely, `p_{F,t}`
-has full support, so it is an interior point of the plane `Σ_x p(x) = 1`, and at a maximizer the derivative along
-every tangent `v` vanishes: `Σ_x t·F(x)·v(x) = Dc(p_{F,t})·v`. Since `log(p_{F,t}/q) = t·F − log E_q[e^{tF}]` and
-`Σ_x v(x) = 0`, this says `Dc(p)·v = Σ_x log(p(x)/q(x))·v(x)` at `p = p_{F,t}`, and the right side is
-`D KL(·‖q)(p)·v`. Every `p ∈ Δ°` is such a pursuit: `p = p_{G,1}` with `G = log(p/q)` ([[P1 — Every behaviour is a tilt of any other|P1]](i)). So `h = c − KL(·‖q)`
-has zero derivative along every tangent direction at every point of `Δ°`. `Δ°` is convex, so `h` is constant along
-every segment in it, hence constant.
+has full support, so it is an interior point of the plane `Σ_x p(x) = 1`, and at a maximizer the derivative along every
+tangent `v` vanishes: `Σ_x t·F(x)·v(x) = Dc(p_{F,t})·v`. Since `log(p_{F,t}/q) = t·F − log E_q[e^{tF}]` and
+`Σ_x v(x) = 0`, this says `Dc(p)·v = Σ_x log(p(x)/q(x))·v(x)` at `p = p_{F,t}`, and the right side is `D KL(·‖q)(p)·v`.
+Every `p ∈ Δ°` is such a pursuit: `p = p_{G,1}` with `G = log(p/q)` ([[P1 — Every behaviour is a tilt of any other|P1]](i)). So `h = c − KL(·‖q)` has zero derivative
+along every tangent direction at every point of `Δ°`. `Δ°` is convex, so `h` is constant along every segment in it,
+hence constant.
 
 ## Notes
 [[A2 — Pursuit is the steepest climb|A2]] says what pursuit is geometrically, and [[A3 — Pursuit is the best trade-off|A3]] economically. [[P2 — Every change of behaviour follows a replicator equation|P2]] shows that the first gives the

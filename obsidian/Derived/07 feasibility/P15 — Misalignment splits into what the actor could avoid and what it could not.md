@@ -13,9 +13,8 @@ Let `𝓕` be a convex feasible set ([[D7 — Feasibility|D7]]) that contains a 
 (ii) **Convex limits.** For every `p ∈ 𝓕`, `KL(p‖r) ≥ KL(p‖p*) + KL(p*‖r)`.
 (iii) **Linear limits.** If `𝓕` is linear, with functions `f_1, …, f_m`, then `p* = tilt(r, Σ_i θ_i·f_i)` for some
 numbers `θ_i`, and equality holds in (ii) for every `p ∈ 𝓕`.
-(iv) **Value.** If `r = p_{F,t}` with `t > 0`, then `p*` is the unique maximizer over `𝓕` of the net value `J_t`
-of [[P4 — What KL measures|P4]];
-for every `p ∈ 𝓕`, `t·(J_t(p*) − J_t(p)) ≥ KL(p‖p*)`, with equality when `𝓕` is linear; and
+(iv) **Value.** If `r = p_{F,t}` with `t > 0`, then `p*` is the unique maximizer over `𝓕` of the net value `J_t` of
+[[P4 — What KL measures|P4]]; for every `p ∈ 𝓕`, `t·(J_t(p*) − J_t(p)) ≥ KL(p‖p*)`, with equality when `𝓕` is linear; and
 `t·(J_t(p_{F,t}) − J_t(p*)) = KL(p*‖p_{F,t})`.
 (v) **The split.** Under the standard specification of a non-constant `F`, let `𝓕` be linear, let `p̂ ∈ 𝓕` have a finite
 revealed intensity `t*` with nearest intended behaviour `p° = p_{F,t*}` ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv)), and let `p*°` be the best feasible
@@ -28,17 +27,16 @@ behaviour. When the actor's limits take the form "these averages cannot change",
 intended splits exactly into two parts: how far it is from the best it could have done, and how far that best is from
 what was intended. The first is what the actor would not do, and the second what it could not. In value, the first is
 what the actor left unclaimed, and the second what no feasible behaviour reaches. For limits of other shapes the split
-is
-only an inequality, or fails.
+is only an inequality, or fails.
 
 ## Proof
 (i) Since `r` has full support, `KL(·‖r)` is continuous on `Δ` and strictly convex. `𝓕` is closed in the
-compact `Δ`, so a minimizer exists, and it is unique because `𝓕` is convex. Let `p̃ ∈ 𝓕` have full support, and
-suppose `p*(x) = 0` for some `x`. Along `p_λ = (1 − λ)·p* + λ·p̃`, which stays in `𝓕`, the terms of `KL(p_λ‖r)` at the
-outcomes where `p*` vanishes have derivative `−∞` as `λ → 0+` (the derivative of `u·log u` at `0`), while the other
-terms have finite derivatives. So `KL(p_λ‖r) < KL(p*‖r)` for small `λ > 0`, a contradiction.
-(ii) For `p ∈ 𝓕` the segment `p_λ = (1 − λ)·p* + λ·p` stays in `𝓕`, so the derivative of `KL(p_λ‖r)` at `λ = 0+` is
-not negative. Since `p*` has full support and `Σ_x (p(x) − p*(x)) = 0`, that derivative is
+compact `Δ`, so a minimizer exists, and it is unique because `𝓕` is convex. Let `p̃ ∈ 𝓕` have full support, and suppose
+`p*(x) = 0` for some `x`. Along `p_λ = (1 − λ)·p* + λ·p̃`, which stays in `𝓕`, the terms of `KL(p_λ‖r)` at the outcomes
+where `p*` vanishes have derivative `−∞` as `λ → 0+` (the derivative of `u·log u` at `0`), while the other terms have
+finite derivatives. So `KL(p_λ‖r) < KL(p*‖r)` for small `λ > 0`, a contradiction.
+(ii) For `p ∈ 𝓕` the segment `p_λ = (1 − λ)·p* + λ·p` stays in `𝓕`, so the derivative of `KL(p_λ‖r)` at `λ = 0+` is not
+negative. Since `p*` has full support and `Σ_x (p(x) − p*(x)) = 0`, that derivative is
 `Σ_x (p(x) − p*(x))·log(p*(x)/r(x))`, so `E_p[log(p*/r)] ≥ KL(p*‖r)`. For every `p ∈ Δ`,
 `KL(p‖r) − KL(p‖p*) = E_p[log(p*/r)]`, which gives (ii).
 (iii) Near `p*`, which has full support, `𝓕` coincides with the affine set `{p : Σ_x p(x) = 1, E_p[f_i] = a_i}`, and

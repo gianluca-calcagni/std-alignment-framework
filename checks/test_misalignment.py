@@ -6,32 +6,16 @@ import numpy as np
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt
 
 
-def ray_minimizer(ph, q, F):
-    """t* of P5(iv): 0 if E_ph F <= E_q F; inf if E_ph F = max F; otherwise the root of E_{p_t} F = E_ph F (bisection;
-    E_{p_t} F increases in t)."""
-    target = ph @ F
-    if target <= q @ F:
-        return 0.0
-    if target >= F.max() - 1e-12 * (1 + np.abs(F).max()):
-        return np.inf
-    lo, hi = 0.0, 1.0
-    while tilt(q, hi * F) @ F < target:
-        hi *= 2
-    for _ in range(200):
-        mid = 0.5 * (lo + hi)
-        lo, hi = (mid, hi) if tilt(q, mid * F) @ F < target else (lo, mid)
-    return 0.5 * (lo + hi)
+import stdalign
+from stdalign.misalignment import best_outcomes as best_outcomes_limit                  # noqa: F401  (used by other checks)
 
-
-def best_outcomes_limit(q, F):
-    """q conditioned on the outcomes where F is largest: the limit of the ray as t -> inf."""
-    A = F >= F.max()
-    return np.where(A, q, 0.0) / q[A].sum()
+ray_minimizer = stdalign.revealed_intensity                                             # t* of P5(iv), from the library
 
 
 def misalignment(ph, q, F):
-    ts = ray_minimizer(ph, q, F)
-    return (kl(ph, best_outcomes_limit(q, F)) if np.isinf(ts) else kl(ph, tilt(q, ts * F))), ts
+    """(M(ph), t*) under the standard specification of F, computed by the library."""
+    a = stdalign.assess(ph, q, F)
+    return a.misalignment, a.revealed_intensity
 
 
 def test_minimum_on_the_ray_is_attained_at_the_closed_form():
@@ -111,10 +95,7 @@ def test_the_ray_leaves_every_compact_set():
         assert tilt(q, 100.0 / osc * F)[lo] <= q[lo] / q[hi] * np.exp(-100.0) * (1 + EXACT)
 
 
-def nearest(ph, q, F):
-    """The nearest intended behaviour on the closure of the ray: q, p_{F,t*}, or q(.|A)."""
-    ts = ray_minimizer(ph, q, F)
-    return best_outcomes_limit(q, F) if np.isinf(ts) else tilt(q, ts * F)
+nearest = stdalign.nearest_intended                                                     # p° of P5(iv)
 
 
 def test_departure_splits_into_pursuit_and_misalignment():

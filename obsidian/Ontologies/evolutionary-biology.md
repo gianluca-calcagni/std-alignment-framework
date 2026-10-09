@@ -49,14 +49,14 @@ females, and `F = G_f` is the declared objective.
   `q·w/E_q[w] = tilt(q, log w)`, the pursuit of log fitness at intensity `1`; `t` generations of constant fitness give
   intensity `t`, exactly when genomes are passed on intact. The revealed objective of any change of frequencies is
   Malthusian fitness, centred ([[P2 — Every change of behaviour follows a replicator equation|P2]]). In the core, selection is the model case of pursuit.
-- **Consequence** of [[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]: let selection act through males only, starting from `q`. Its first revealed
-  objective is `G_m`, centred, and `cos θ` is the correlation of `G_m` and `G_f` under `q`. If `cos θ < 0`, all of the
-  initial departure is misaligned with fitness through females ([[P11 — The misaligned share at the start of a change|P11]]), and mean log fitness through females falls at
-  the rate `Cov_q(G_m, G_f)` at the start ([[P13 — What the start of a change gains|P13]](i)). The reported `−0.30` is a correlation of fitness, not log
-  fitness, over sampled genomes weighted equally. It estimates `cos θ` when fitness varies little around its mean, so
-  that `log w` is close to `w/E[w] − 1`, and when the sample represents `q`. Under those conditions, the core implies
-  the direction of Prasad et al.'s outcome at the start of their experiment. It says nothing about generation 25:
-  along the pursuit, the covariance can change sign. Both results were known, so this is a retrodiction, not a test.
+- **Consequence** of [[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]: let selection act through males only, starting from `q`. Its first revealed objective
+  is `G_m`, centred, and `cos θ` is the correlation of `G_m` and `G_f` under `q`. If `cos θ < 0`, all of the initial
+  departure is misaligned with fitness through females ([[P11 — The misaligned share at the start of a change|P11]]), and mean log fitness through females falls at the rate
+  `Cov_q(G_m, G_f)` at the start ([[P13 — What the start of a change gains|P13]](i)). The reported `−0.30` is a correlation of fitness, not log fitness, over
+  sampled genomes weighted equally. It estimates `cos θ` when fitness varies little around its mean, so that `log w` is
+  close to `w/E[w] − 1`, and when the sample represents `q`. Under those conditions, the core implies the direction of
+  Prasad et al.'s outcome at the start of their experiment. It says nothing about generation 25: along the pursuit, the
+  covariance can change sign. Both results were known, so this is a retrodiction, not a test.
 - **Consequence** of [[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]: under ordinary selection a genome passes its copies through sons and daughters
   alike, so when selection is weak its log fitness is close to `G = ½·(G_m + G_f)`. With spreads `σ_m`, `σ_f` and
   correlation `r` under `q`, the angle between ordinary selection and fitness through females has
@@ -91,8 +91,8 @@ females, and `F = G_f` is the declared objective.
 
 - Chippindale et al.'s title contrasts life stages. Whether one objective governs selection across stages is what [[P3 — A fixed objective is visible in the changes of behaviour|P3]]
   tests. v7.10 ran that test twice on Dobzhansky's 1947 cage data, across groups of flies rather than life stages:
-  I1-dyn fitted its reference from the counts it judged, so its test could not fail; I1-dyn2, across the sexes, did
-  not reject one objective (`p = 0.34`) at power 0.51. Those data are exhausted for this test.
+  I1-dyn fitted its reference from the counts it judged, so its test could not fail; I1-dyn2, across the sexes, did not
+  reject one objective (`p = 0.34`) at power 0.51. Those data are exhausted for this test.
 - Sex-limited expression is thought to resolve the conflict. In the core, it would let the genome act differently in
   each sex, refining what selection can distinguish. Is that a refinement of the actor's resolution, with the Jensen gap
   of [[P8 — An actor that cannot tell outcomes apart|P8]](iii) as the cost it removes?

@@ -20,10 +20,10 @@ bound in value: the stakes can still be large.
 
 ## Proof
 By [[P1 — Every behaviour is a tilt of any other|P1]](iii), `p̂ = tilt(p_{F,t}, t·M·1_A)`, a reweighting by a function constant on `A` and on its
-complement, so `p̂` splits each of the two as `p_{F,t}` does. By the chain rule [[P4 — What KL measures|P4]](iii), `KL(p̂‖p_{F,t})` is then
-the divergence between the masses of `A`, `kl(p̂(A)‖a)`. As a function of `p̂(A)`, `kl(·‖a)` is convex, so it is at
-most its larger value at the ends: `kl(1‖a) = log(1/a)` and `kl(0‖a) = log(1/(1 − a))`. As `M → ∞`, `p̂(A) → 1`, and
-as `M → −∞`, `p̂(A) → 0`. Finally, `p_{F,t}` is on the pursuit ray, so `M(p̂) ≤ KL(p̂‖p_{F,t})` ([[D3 — Specification, declaration and misalignment|D3]]).
+complement, so `p̂` splits each of the two as `p_{F,t}` does. By the chain rule [[P4 — What KL measures|P4]](iii), `KL(p̂‖p_{F,t})` is then the
+divergence between the masses of `A`, `kl(p̂(A)‖a)`. As a function of `p̂(A)`, `kl(·‖a)` is convex, so it is at most its
+larger value at the ends: `kl(1‖a) = log(1/a)` and `kl(0‖a) = log(1/(1 − a))`. As `M → ∞`, `p̂(A) → 1`, and as `M → −∞`,
+`p̂(A) → 0`. Finally, `p_{F,t}` is on the pursuit ray, so `M(p̂) ≤ KL(p̂‖p_{F,t})` ([[D3 — Specification, declaration and misalignment|D3]]).
 
 ## Lineage
 v7.10: §11.3 and Prop 4 (an error confined to one region saturates), imported here.

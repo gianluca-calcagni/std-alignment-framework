@@ -26,15 +26,15 @@ loss is at most the square root of twice the budget times the error's sub-Gaussi
 ## Proof
 (i) `r` is on the pursuit ray of `F`, so `M(p̂) ≤ KL(p̂‖r)` ([[D3 — Specification, declaration and misalignment|D3]]). By [[P1 — Every behaviour is a tilt of any other|P1]](iii), `p̂ = tilt(r, t·E)`. With
 `g(s) = KL(tilt(r, s·E)‖r) = s·Λ_r'(s) − Λ_r(s)`, `g(0) = 0` and `g'(s) = s·Λ_r''(s) = s·Var_{tilt(r, s·E)}(E)`.
-(ii) A function whose values lie in an interval of length `d` has variance at most `d²/4` under any behaviour (the
-mean square distance to the interval's midpoint; Popoviciu's inequality, as in [[P26 — The regression on bins governs at small intensity|P26]]), so (i) gives at most
-`(d²/4)·t²/2`. If `E` takes two values on sets of `r`-mass one half each, `Var_r(E) = d²/4`, so `g(t) = d²·t²/8 + O(t³)`
-and the ratio of the two sides tends to `1` as `t → 0`. (iii) `Λ_r` is convex, so `Λ_r(2t) ≥ Λ_r(t) + t·Λ_r'(t)`, that
-is, `g(t) = t·Λ_r'(t) − Λ_r(t) ≤ Λ_r(2t) − 2Λ_r(t)`. (iv) For `u > 0` and `p` in the budget,
-`E_p[E] − E_q[E] ≤ (δ + Λ_q(u))/u ≤ δ/u + σ₊²·u/2` (the proof of [[P28 — The width of a departure budget|P28]](i)), which is smallest at
-`u = (2δ/σ₊²)^{1/2}`; so `σ_δ(E) ≤ (2δ·σ₊²)^{1/2}`, and likewise `σ_δ(−E) ≤ (2δ·σ₋²)^{1/2}`. [[P29 — The width is the exact worst case|P29]](i) bounds the loss
-by their sum. Finally, `Λ_q(u) = ∫_0^u (u − s)·Var_{tilt(q, s·E)}(E) ds ≤ (max E − min E)²·u²/8` by the same variance
-bound, so `σ± ≤ (max E − min E)/2`.
+(ii) A function whose values lie in an interval of length `d` has variance at most `d²/4` under any behaviour (the mean
+square distance to the interval's midpoint; Popoviciu's inequality, as in [[P26 — The regression on bins governs at small intensity|P26]]), so (i) gives at most `(d²/4)·t²/2`. If
+`E` takes two values on sets of `r`-mass one half each, `Var_r(E) = d²/4`, so `g(t) = d²·t²/8 + O(t³)` and the ratio of
+the two sides tends to `1` as `t → 0`. (iii) `Λ_r` is convex, so `Λ_r(2t) ≥ Λ_r(t) + t·Λ_r'(t)`, that is,
+`g(t) = t·Λ_r'(t) − Λ_r(t) ≤ Λ_r(2t) − 2Λ_r(t)`. (iv) For `u > 0` and `p` in the budget,
+`E_p[E] − E_q[E] ≤ (δ + Λ_q(u))/u ≤ δ/u + σ₊²·u/2` (the proof of [[P28 — The width of a departure budget|P28]](i)), which is smallest at `u = (2δ/σ₊²)^{1/2}`;
+so `σ_δ(E) ≤ (2δ·σ₊²)^{1/2}`, and likewise `σ_δ(−E) ≤ (2δ·σ₋²)^{1/2}`. [[P29 — The width is the exact worst case|P29]](i) bounds the loss by their sum. Finally,
+`Λ_q(u) = ∫_0^u (u − s)·Var_{tilt(q, s·E)}(E) ds ≤ (max E − min E)²·u²/8` by the same variance bound, so
+`σ± ≤ (max E − min E)/2`.
 
 ## Notes
 [[P10 — Sensitivity to the specification|P10]](ii) gives the linear bound `M(p̂) ≤ t·(max E − min E)`; (ii) is the smaller of the two when the error's

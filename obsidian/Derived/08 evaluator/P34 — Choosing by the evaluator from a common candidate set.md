@@ -19,11 +19,11 @@ distributions.
 average loss that depends only on the error and the way `S` is drawn is smaller than `E[max_S E − min_S E]`.
 
 ## In plain terms
-When the evaluator and the target choose among the same candidates, the target lost is at most
-how much more the evaluator overrates its own pick than the target's pick, and so at most the spread of the error over
-the candidates. That spread is the exact worst case: for some target it is lost. Best-of-`n` by the evaluator,
-compared with best-of-`n` by the target at the same `n`, is the case in point: the worst average loss is the average
-spread of the error over `n` draws.
+When the evaluator and the target choose among the same candidates, the target lost is at most how
+much more the evaluator overrates its own pick than the target's pick, and so at most the spread of the error over the
+candidates. That spread is the exact worst case: for some target it is lost. Best-of-`n` by the evaluator, compared with
+best-of-`n` by the target at the same `n`, is the case in point: the worst average loss is the average spread of the
+error over `n` draws.
 
 ## Proof
 `x̂ ∈ S`, so `F(x*) ≥ F(x̂)`; and `x* ∈ S`, so `F̂(x̂) ≥ F̂(x*)`, that is, `F(x̂) + E(x̂) ≥ F(x*) + E(x*)`.

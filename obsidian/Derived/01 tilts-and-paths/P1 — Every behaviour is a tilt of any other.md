@@ -26,8 +26,7 @@ normalization. Conversely, if the tilts are equal, then `F − log E_r[e^F] = G 
 
 ## Notes
 `log(p/r)` is the log-likelihood ratio of `p` to `r`. Recovering an objective from behaviour is the problem
-of
-inverse reinforcement learning, which is known to be ill-posed [[References|@ng2000]]; (ii) is the form the ambiguity takes here:
+of inverse reinforcement learning, which is known to be ill-posed [[References|@ng2000]]; (ii) is the form the ambiguity takes here:
 given the default, a behaviour reveals its objective up to a constant. Written with an intensity, `tilt(r, t·F)`, it
 reveals only the product `t·F`.
 

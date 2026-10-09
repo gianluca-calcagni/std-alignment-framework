@@ -37,8 +37,8 @@ where it perceives a difference.
 ## Notes
 In control theory the response is an input–output map and the view is the actor's observation of its input;
 here observability runs from the condition to the actor. In reinforcement learning the conditions are states or prompts
-and the response is the policy. In statistics, a response that depends on the condition only through a view is a
-Markov kernel composed with a channel.
+and the response is the policy. In statistics, a response that depends on the condition only through a view is a Markov
+kernel composed with a channel.
 
 ## Lineage
 New. v7.10: ROADMAP §6 I1 (identification through interventions) and the brainstorm's point on

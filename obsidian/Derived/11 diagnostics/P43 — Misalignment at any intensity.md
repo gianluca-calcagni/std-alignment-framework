@@ -16,9 +16,9 @@ nearest intended behaviour `p°` (or its limit `q(·|A)`) ([[P5 — Misalignment
 be the default, `F_c` a non-constant objective, and `p_c ∈ Δ` a behaviour with misalignment `M_c`, finite revealed
 intensity `t*_c` and nearest intended behaviour `p°_c`. With `a_c = [E_{q_c}[F_c] − E_{p_c}[F_c]]⁺`, the misalignment at
 one shared intensity ([[P24 — The evaluation gap|P24]], Notes) is
-`min_{t≥0} Σ_c ρ(c)·KL(p_c‖p_{c,F_c,t}) = Σ_c ρ(c)·M_c + min_{t≥0} Σ_c ρ(c)·[KL(p°_c‖p_{c,F_c,t}) + t·a_c]`,
-and both minima are attained. The excess over `Σ_c ρ(c)·M_c` depends on each condition only through `q_c`, `F_c`, `t*_c`
-and `a_c`, and it is `0` exactly when all the `t*_c` are equal.
+`min_{t≥0} Σ_c ρ(c)·KL(p_c‖p_{c,F_c,t}) = Σ_c ρ(c)·M_c + min_{t≥0} Σ_c ρ(c)·[KL(p°_c‖p_{c,F_c,t}) + t·a_c]`, and both
+minima are attained. The excess over `Σ_c ρ(c)·M_c` depends on each condition only through `q_c`, `F_c`, `t*_c` and
+`a_c`, and it is `0` exactly when all the `t*_c` are equal.
 
 ## In plain terms
 Judged against a pursuit at some other strength than its own, a behaviour carries two costs beyond

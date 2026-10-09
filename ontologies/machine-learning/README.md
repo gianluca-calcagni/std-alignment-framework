@@ -45,15 +45,14 @@ so a proxy must be added. The paper has been read; the answers have not.
 ## 3. What the core says
 
 Within one prompt, `q` is the initial policy, `F` the gold objective and `r̂` the proxy. Across prompts, every claim
-holds
-prompt by prompt, and [P15] relates them across prompts (see Contexts in `../README.md`).
+holds prompt by prompt, and [P15] relates them across prompts (see Contexts in `../README.md`).
 
 - **Consequence** of [P4]: within one prompt, KL-regularized fine-tuning maximizes `E_π[r̂] − β·KL(π‖q)`, which is the
   net value `J_t` of the proxy with `t = 1/β`. So its optimum is the pursuit of the proxy at intensity `1/β`, as known
   in the literature [@rafailov2023]. Across prompts, the optimum pursues the proxy within each prompt at one shared
   intensity. That is not the pursuit ray of [D2] on prompt–response pairs, which would also reweight the prompts; by
-  [P15] it is the best feasible behaviour for that ray, and what it cannot reach is how much the ray would reweight
-  the prompts.
+  [P15] it is the best feasible behaviour for that ray, and what it cannot reach is how much the ray would reweight the
+  prompts.
 - **Reading** with [P1], [D2]: best-of-`n` is almost a pursuit too. When every response has a small probability and the
   proxy has no ties, best-of-`n` draws a response with probability close to `n·q(y)·Q(r̂(y))^{n−1}`, where `Q(v)` is the
   probability under `q` of a proxy score at most `v`. That is the pursuit of `log Q(r̂)` at intensity `n − 1`, in the
@@ -104,11 +103,11 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   continuations it is smaller, about `+0.01`, and still above 0. A diagnostic case, W4 (`cases/w4-two-runs/`), asked
   what the rest of the change is: not a sharpening of the reference, and partly a change that a second public PPO run
   from the same reference shares, but mostly specific to the run or its procedure. W3 and W4 had no gold, so their
-  specification was the trainer's own reward: where no gold exists, a declared family of targets gives an interval
-  of misalignment instead ([P48]). In the terms of [P49], W1, with a gold, could measure outer misalignment, and W3 and
-  W4 measured inner misalignment only.
-- **Reading** with [P50], [P51]: a reward model that is a fixed function of the response cannot be tampered with by
-  the policy, as the outcome is the response; every gap between proxy and gold there is outer misalignment ([P49]).
+  specification was the trainer's own reward: where no gold exists, a declared family of targets gives an interval of
+  misalignment instead ([P48]). In the terms of [P49], W1, with a gold, could measure outer misalignment, and W3 and W4
+  measured inner misalignment only.
+- **Reading** with [P50], [P51]: a reward model that is a fixed function of the response cannot be tampered with by the
+  policy, as the outcome is the response; every gap between proxy and gold there is outer misalignment ([P49]).
   Tampering needs a measurement that the policy can influence beyond its response: a reward computed in an environment
   the agent acts in, a judge sampled with noise and asked again until it approves, or a rater whose verdict on the same
   facts the response can sway, when the facts are declared as the world. There the departure splits exactly into the
@@ -116,10 +115,10 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   responses again, through a judge the policy cannot influence, separates the honest gain from the channel gain.
 - **Reading** with [C5], [P13]: one step of softmax policy gradient on the proxy, with one logit per response and
   started at the initial policy, is the pursuit of `q·(r̂ − E_q[r̂])`: the proxy weighted by how likely the initial
-  policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can
-  have the opposite sign to the pursuit of the proxy itself. A language model has no logit per response, so its first
-  step pursues another function of the proxy, set by its parametrization; [P13](i) still gives the gold's first rate
-  as the covariance with that function, and the claim of [C5] about optimizers carries over.
+  policy already is to give each response. Its first effect on the gold is a covariance weighted by `q²`, which can have
+  the opposite sign to the pursuit of the proxy itself. A language model has no logit per response, so its first step
+  pursues another function of the proxy, set by its parametrization; [P13](i) still gives the gold's first rate as the
+  covariance with that function, and the claim of [C5] about optimizers carries over.
 - **Consequence** of [P10]: within one prompt, the optimum for `β` lies on the proxy's pursuit ray, so its misalignment
   against the gold is at most `osc(F − r̂)/β`, where `osc` is taken over all responses ([P10](ii), with the proxy as the
   declared objective and the gold as the corrected one). Misalignment can grow at most in proportion to the intensity.
@@ -150,8 +149,8 @@ prompt by prompt, and [P15] relates them across prompts (see Contexts in `../REA
   per response for the policy against a pursuit of the gold, `log π − log q − t·F + log E_q[e^{t·F}]`, can be averaged
   over the policy's samples, and its average is the KL divergence of [P21]. The last term needs samples of the initial
   policy, and its estimate is biased at large `t`. [P23] does not apply as stated: it needs counts.
-- Prompts are contexts. [P15] splits misalignment across prompts into avoidable and unavoidable parts; the known
-  curves average over prompts and report neither.
+- Prompts are contexts. [P15] splits misalignment across prompts into avoidable and unavoidable parts; the known curves
+  average over prompts and report neither.
 - The gold objective is a model in the known result. With human raters, the objective is not fixed; [P3] can test
   whether it is, from changes of behaviour.
 - The core does not predict how `a` and `b` scale with the size of the proxy, nor where the gold peaks: it says what

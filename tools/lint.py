@@ -39,7 +39,8 @@ Rules
       whole shared vocabulary.
   R12 RELATED.md, the survey of related theories, IMPORT.md, the map from the archive to the core, CORE-GENERAL.md, the
       draft of the core for outcomes that are not finite, general/*.md, its results, SCENARIO.md, the worked scenario,
-      ROADMAP.md, and cases/**/*.md, the registered tests, name only existing items; their citations count for R8.
+      ROADMAP.md, REQUESTS.md, CONTRIBUTING.md, and cases/**/*.md, the registered tests, name only existing items;
+      their citations count for R8.
   R13 RECORD.md, the record of predictions and retractions, names only existing items, and its citations count for
       R8. Its ledger (the table with the columns LEDGER_COLUMNS) has exactly one row for every prediction of the
       ontologies, keyed by the ontology's folder and the items the prediction is from, with the same label, and a
@@ -278,7 +279,8 @@ def lint(root):
     folder, cases = root / "general", root / "cases"
     general = sorted(f.relative_to(root).as_posix() for f in folder.glob("*.md")) if folder.exists() else []
     case_docs = sorted(f.relative_to(root).as_posix() for f in cases.rglob("*.md")) if cases.exists() else []
-    for name in ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md"] + general + case_docs:
+    docs = ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md", "REQUESTS.md", "CONTRIBUTING.md"]
+    for name in docs + general + case_docs:
         survey = root / name
         if survey.exists():
             rtext = survey.read_text(encoding="utf-8")
@@ -356,7 +358,7 @@ def lint_cases(cases):
 
 
 BEFORE_THE_DESIGN_RULES = {"c1-collusion-simulation", "c2-stopping-rule", "w1-best-of-n-slope", "w3-ppo-pursuit"}
-FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}}                            # field: cases registered before it
+FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}, "Access": {"w4-two-runs"}}   # field: cases registered before it
 REGISTRATION_SECTIONS = ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
                          "## Rehearsal", "## Licences"]
 

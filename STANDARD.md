@@ -8,8 +8,9 @@ A report has three parts, written in this order. The declaration is fixed before
 is dated and stored where it cannot be changed afterwards. The observations follow. The results come last, and each
 result says whether it is identified ([D9]).
 
-A report on real data, field by field: `cases/w1-best-of-n-slope/REPORT.md` (best-of-`n` selection by a learned
-proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`.
+The library `stdalign` computes the fields it holds so far, with the functions its `README.md` lists, verified by the
+checks of the items they name. A report on real data, field by field: `cases/w1-best-of-n-slope/REPORT.md` (best-of-`n`
+selection by a learned proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`.
 
 ## 1. The declaration
 
@@ -30,6 +31,7 @@ Written before any behaviour is examined.
 | Objective's units | [D5] | the units in which the stakes will be counted |
 | Evaluator | [D10] | the evaluator the actor is rewarded on, if one is known; otherwise "revealed", to be read from behaviour; and which outcomes it scores alike. When it is computed from a measurement the actor may influence, which part of an outcome is the world and which the signal, and the honest channel from one to the other ([P50]) |
 | Sampling | [D11] | how decisions will be sampled in each condition, the sample sizes, and why independence is a fair model |
+| Access | [P52] | what is known of each draw: its outcome only, with the default known (counts); its log-ratio against the default (log-ratios); or that, with draws of the default as well (two samples); and which estimate of misalignment the report will give, chosen from [P52]'s variances before any behaviour is examined |
 | Named objectives | [P44] | the objectives besides `F` that the actor may be pursuing, in the order they will be named, or "none"; named here so that the analysis cannot pick them after seeing the behaviour |
 | Runs | [P45] | the independent repetitions of the actor that will be observed (training runs, random seeds), how many, and their weights; "one" if one |
 
@@ -48,7 +50,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Field | Core | What to write |
 |---|---|---|
 | Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
-| Uncertainty | [D11], [P23], [P47] | for every quantity estimated from samples: an interval, and how it was computed (the χ² reference of [P23] where it applies, otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
+| Uncertainty | [D11], [P23], [P47], [P52] | for every quantity estimated from samples: an interval, and how it was computed (for misalignment off the ray, the normal law of [P52] under the declared access; on it, the χ² reference of [P23] where it applies; otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
 | Departure split | [P6] | the departure `KL(p̂‖q)`, split into the pursuit part and misalignment |

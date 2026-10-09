@@ -9,10 +9,10 @@ source: "derived/forbids.md"
 
 ## Statement
 Let `E₁` and `E₂` be the errors of two evaluators known in the objective's units ([[P29 — The width is the exact worst case|P29]]), with
-`Var_q(E₁) > Var_q(E₂)` and `max E₁ − min E₁ < max E₂ − min E₂`. Then `w_δ(E₁) > w_δ(E₂)` for every small enough
-budget `δ`, and `w_δ(E₁) < w_δ(E₂)` for every `δ` at least as large as each `−log q(argmax E_i)` and
-`−log q(argmin E_i)`. So the worst case of the objective lost ([[P29 — The width is the exact worst case|P29]](ii)) ranks the two errors one way at small budgets
-and the other way at large ones.
+`Var_q(E₁) > Var_q(E₂)` and `max E₁ − min E₁ < max E₂ − min E₂`. Then `w_δ(E₁) > w_δ(E₂)` for every small enough budget
+`δ`, and `w_δ(E₁) < w_δ(E₂)` for every `δ` at least as large as each `−log q(argmax E_i)` and `−log q(argmin E_i)`. So
+the worst case of the objective lost ([[P29 — The width is the exact worst case|P29]](ii)) ranks the two errors one way at small budgets and the other way at
+large ones.
 
 ## In plain terms
 An error that is spread out and an error that is rare but large cannot be ranked once and for all.
