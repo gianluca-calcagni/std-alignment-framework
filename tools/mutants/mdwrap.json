@@ -1,0 +1,78 @@
+{
+ "about": "tools/mdwrap.py, against its tests (2026-10-09).",
+ "tests": [
+  "tools/test_mdwrap.py"
+ ],
+ "mutants": [
+  {
+   "name": "a narrower width",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "WIDTH = 120\n",
+     "WIDTH = 100\n"
+    ]
+   ]
+  },
+  {
+   "name": "field labels not block starts",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "(- |\\d+\\. |\\*\\*[^*]+\\*\\*|",
+     "(- |\\d+\\. |"
+    ]
+   ]
+  },
+  {
+   "name": "breaks detected only when short",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "len(a) + 1 + len(w[0]) <= WIDTH - 1:",
+     "len(a) + 1 + len(w[0]) <= WIDTH - 40:"
+    ]
+   ]
+  },
+  {
+   "name": "code spans split",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "        if ch == \"`\":\n            inside = not inside\n",
+     "        if ch == \"`\":\n            inside = False\n"
+    ]
+   ]
+  },
+  {
+   "name": "three newlines kept",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "out = re.sub(r\"\\n{3,}\", \"\\n\\n\",",
+     "out = re.sub(r\"\\n{4,}\", \"\\n\\n\","
+    ]
+   ]
+  },
+  {
+   "name": "case records treated as sources",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "        if re.match(r\"cases/[^/]+/\", rel) or rel in",
+     "        if False and re.match(r\"cases/[^/]+/\", rel) or rel in"
+    ]
+   ]
+  },
+  {
+   "name": "check mode writes",
+   "edits": [
+    [
+     "tools/mdwrap.py",
+     "            if not check:\n",
+     "            if True:\n"
+    ]
+   ]
+  }
+ ]
+}

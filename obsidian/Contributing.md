@@ -40,13 +40,14 @@ established contributor licence agreement can replace them if the PI prefers.
    change would change; register a test before computing it; treat seen data as exploratory; say who made every review,
    rating or audit, a person or a model family.
 3. A new result comes with a proof and a check that could fail, and the check is mutation-tested: break the mathematics
-   on purpose, and watch the check fail.
+   on purpose, and watch the check fail. Mutants are listed in `tools/mutants/` and run by `tools/mutate.py`.
 4. Keep no third-party data, papers, model weights, or anything computed item by item from third-party data in the
    repository; a case's script fetches what it needs. Cite theorems from texts anyone can read without paying, or derive
    them here.
 5. Before opening a pull request, run:
 
 ```bash
+python3 tools/mdwrap.py               # wrap the Markdown sources at 120 columns
 python3 tools/lint.py                 # 0 errors
 python3 tools/obsidian.py             # regenerate the read-only view, then commit it
 python3 -m pytest                     # the checks, the linter's tests, the scenario's and the library's tests
@@ -54,5 +55,5 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 ```
 
 6. Write as the repository does: British spelling with `-ize` (behaviour, organization), plain words, one idea per
-   sentence, lines wrapped at 120 columns, and a plain-terms twin for every formal statement.
+   sentence, and a plain-terms twin for every formal statement; `tools/mdwrap.py` wraps the lines.
 7. One step, one branch, one pull request, merged with a merge commit.

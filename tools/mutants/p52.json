@@ -1,0 +1,50 @@
+{
+ "about": "The check of [P52] (checks/test_estimation.py): wrong limit laws, and estimators that break the statement's constraint, must fail it. Its first eight mutants (2026-10-08) targeted the check's own helpers, since replaced by the library; the library's mutants are in stdalign.json.",
+ "tests": [
+  "checks/test_estimation.py",
+  "-k",
+  "certifies"
+ ],
+ "mutants": [
+  {
+   "name": "log-ratio law with the counts variance",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "var(w - np.log(w), p)",
+     "var(np.log(w), p)"
+    ]
+   ]
+  },
+  {
+   "name": "two-sample law without the reference's term",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "(var(np.log(w), p) + var(po / q, q))",
+     "var(np.log(w), p)"
+    ]
+   ]
+  },
+  {
+   "name": "intensity law without the square",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "var(c * F, po) ** 2",
+     "var(c * F, po)"
+    ]
+   ]
+  },
+  {
+   "name": "counts law under the intended behaviour",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "assert abs(n * MA.var() / var(np.log(w), p) - 1)",
+     "assert abs(n * MA.var() / var(np.log(w), po) - 1)"
+    ]
+   ]
+  }
+ ]
+}

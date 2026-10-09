@@ -204,6 +204,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q37 | consolidate what the executor needs from the PI in one file, and make the framework's engineering side more solid before some steps are actioned. Applied: `REQUESTS.md`, with the hosts allowed; the engineering steps E1–E5 first in `ROADMAP.md`; `stdalign` 0.1, the library, with misalignment, its split and its estimates by access, the checks of those items pointed at it, tests of its interface, and its functions mutation-tested; `pyproject.toml` | PI; executor (the plan, the library) | `REQUESTS.md`; `ROADMAP.md`; `stdalign/`; `README.md` |
 | Q38 | the licence of the library and of the framework: the GNU Affero GPL is kept, since the framework is a work in progress the PI hopes the community will support rather than copy; it is to be revisited if the framework gains predictive or diagnostic power, which is not taken for granted. Applied: §11, with what the licence does not cover (the ideas) and what a later change needs (every copyright holder's consent) | PI | §11; `ROADMAP.md` |
 | Q39 | a file for contributors, a review of the whole framework with doc hygiene, then a merge into `main`, and advice for the project. Applied: `CONTRIBUTING.md`, its terms proposed for the PI's approval; the review and its advice in §12; the fixes it lists | PI; executor (the review) | `CONTRIBUTING.md`; §12; `README.md`; `RECORD.md`; `ROADMAP.md` |
+| Q40 | close up and hand over, in the order the executor proposed: a close-out (the executor's tools and working rules into the repository, a handover note), then a reader package with a defined end, then the handover, to readers and to a fresh session. Applied: `tools/mdwrap.py`, `tools/mutate.py` and `tools/mutants/`, with tests; `CLAUDE.md`; §13; steps H1 and H2 | PI; executor (the plan) | `CLAUDE.md`; `tools/`; §13; `ROADMAP.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -788,3 +789,38 @@ On the engineering side:
    history archived.
 6. Ask the first reader for something small and checkable: the proofs of [P1], [P2], [P4], [P5] and [P14], with the
    checks that test them. A clean reading there covers most of what the framework rests on.
+
+## 13. Handover, 2026-10-09 (Q40)
+
+The PI approved ending this phase with a handover: a close-out, then a reader package with a defined end, then the
+handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H2). This note is the state at the
+close-out, for whoever takes the work up.
+
+**State.** The core is v11: five premises, eleven definitions, 52 propositions, 184 checks on both SIMD paths, lint
+clean, CI green. The library `stdalign` 0.1 holds misalignment, its split and its estimates by access. Pull request #30
+is merged; nothing else is in flight: no case is registered and not run, and no branch holds unmerged work but the
+close-out's own.
+
+**Lost with the session's container**, by design outside the repository, and how to get each back:
+- the per-draw values of W3 and W4 (`w3_rows.pkl`, `w4_rows.pkl`), saved by `tools/casekit.py` in the session's scratch
+  directory: an analysis after the verdict needs a rerun of the case's script;
+- W1's trained proxy (`cases/w1-best-of-n-slope/proxy.npz`, ignored by git) and the public data of W1 and W3 (about 6
+  GB): rebuilt by `train_proxy.py` and fetched by the scripts, from the hosts in `REQUESTS.md`;
+- the papers and scans read on arXiv, Project Euclid, the Caltech library and Optimization Online: fetched again from
+  the same hosts;
+- the executor's scratch scripts: what was reusable is now in `tools/` (`mdwrap.py`, `mutate.py`, the mutant lists); the
+  rest were one-off probes, whose numbers are recorded where they are cited.
+
+**Next.** The reader package: E1's diagnostics in the library, E2 and E3 with every world case's environment pinned, and
+H1, an overview for a mathematical reader; then H2. The open decisions are in `REQUESTS.md`: readers (R1), the LEEPS
+records (R2), the Tankerkönig archive (R3), the contribution terms (R4), and what counts as a step for stability (R5).
+
+**What the next executor should know.**
+- Read §1 before anything: its rows are the mistakes this work made, each with its evidence, and most were made more
+  than once before a countermeasure held.
+- Mutation testing found gaps in tests that looked complete: [P52]'s check had two survivors at its first run, the
+  library two. Run it before recording a result.
+- The PI wants a recommendation with its reasons, and a challenge where one is due, not a list of options or agreement
+  for its own sake; and asks to be consulted only on what is the PI's to decide.
+- `ROADMAP.md` was kept from a source written one line per paragraph; with `tools/mdwrap.py` that source is no longer
+  needed: edit the file, then wrap it.
