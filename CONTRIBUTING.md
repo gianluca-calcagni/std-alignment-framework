@@ -49,8 +49,8 @@ established contributor licence agreement can replace them if the PI prefers.
 ```bash
 python3 tools/mdwrap.py               # wrap the Markdown sources at 120 columns
 python3 tools/lint.py                 # 0 errors
-python3 tools/obsidian.py             # regenerate the read-only view, then commit it
 python3 tools/overview.py             # regenerate OVERVIEW.md, then commit it
+python3 tools/obsidian.py             # regenerate the read-only view, then commit it
 python3 -m pytest                     # the checks, the tools' tests, the scenario's, the library's, the quickstart
 NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # the second SIMD path
 ```

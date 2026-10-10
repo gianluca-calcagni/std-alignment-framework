@@ -55,6 +55,7 @@ One line per source, written `- [[References|@key]] Authors (year), title.` Ever
 - [[References|@kechris1995]] Kechris, A. S. (1995), *Classical Descriptive Set Theory*. Graduate Texts in Mathematics 156, Springer.
 - [[References|@kerr1975]] Kerr, S. (1975), On the folly of rewarding A, while hoping for B. *Academy of Management Journal* 18(4), 769–783.
 - [[References|@kleven2016]] Kleven, H. J. (2016), Bunching. *Annual Review of Economics* 8, 435–464.
+- [[References|@korbak2022]] Korbak, T., Perez, E. and Buckley, C. L. (2022), RL with KL penalties is better viewed as Bayesian inference. *Findings of EMNLP 2022*. arXiv:2205.11275. Known from its record and abstract, read 2026-10-10.
 - [[References|@kong2019]] Kong, Y. and Schoenebeck, G. (2019), An information theoretic framework for designing information elicitation mechanisms that reward truth-telling. *ACM Transactions on Economics and Computation* 7(1). arXiv:1605.01021. Its setting read (2026-10-07).
 - [[References|@kwa2024]] Kwa, T., Thomas, D. and Garriga-Alonso, A. (2024), Catastrophic Goodhart: regularizing RLHF with KL divergence does not mitigate heavy-tailed reward misspecification. *Advances in Neural Information Processing Systems* 37 (NeurIPS 2024). Its definitions and Theorems 1–6 read (arXiv:2407.14503, 2026-10-07).
 - [[References|@laidlaw2025]] Laidlaw, C., Singhal, S. and Dragan, A. (2025), Correlated proxies: a new definition and improved mitigation for reward hacking. *International Conference on Learning Representations* (ICLR 2025).

@@ -41,15 +41,21 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   every case's report to it, and W1's is the first. `examples/quickstart.py` runs a case on simulated data, from the
   declaration to a valid report, in under a minute, and CI runs it. Every case pins its environment, which lint R14
   checks against its scripts' imports. Stakes, the evaluator's results and feasibility are still computed by helpers
-  inside `checks/` (E1(c)). The executor's tools are in the repository (Q40): `tools/mdwrap.py`, `tools/mutate.py` with
-  the mutant lists of `tools/mutants/`, `tools/overview.py`, and `CLAUDE.md`.
+  inside `checks/` (E1(c)). The review of 2026-10-10 (`NOTES.md` §15) found two errors at the library's edges, an
+  infinite misalignment for an actor of full support near the best outcomes and [P23]'s χ² reference used at `t = 0`,
+  and intervals from log-ratios that cover about 85% at 32 draws: E1(d). The executor's tools are in the repository
+  (Q40): `tools/mdwrap.py`, `tools/mutate.py` with the mutant lists of `tools/mutants/`, `tools/overview.py`, and
+  `CLAUDE.md`.
 - **The reader package** (H1, H2): `OVERVIEW.md`, about ten pages for a mathematical reader, generated from the items;
   the quickstart; W1's folder with its pinned environment. It is ready for the readers of `REQUESTS.md` R1. Writing it
   found that [A2] and [D2] rested on a theorem never read in an open text; that is fixed, and so are the seven other
   sources step 8 listed: each theorem is now read in an open text or derived where it is used (Q44).
 - **Contact with the world:** one of three framework predictions tested on data not seen before held (`RECORD.md`): W1
   refuted, W3 one held and one refuted. W4 was diagnostic, and two simulation cases, C1 and C2, each revised a
-  prediction before its data were read (`cases/`). Too few tests to say more than that the framework can fail.
+  prediction before its data were read (`cases/`). Too few tests to say more than that the framework can fail. The
+  review of 2026-10-10 found that these predictions bear on the optimum of KL-regularized training and on a fitted curve
+  more than on the framework, and that `M` alone can rank an exact pursuit of a wrong proxy below a faithful optimizer
+  of the right target (`NOTES.md` §15, points 1 and 2; `REQUESTS.md`, R8 and R10).
 - **Imports:** what the framework can import, ranked (`NOTES.md` §9): the heaviest is statistics (misspecified fits,
   reweighting, what samples certify). How the imports treat the continuum (`general/dictionary.md`); cooperative inverse
   reinforcement learning and its variants, mapped, with a request made without full consideration read in the core's
@@ -70,13 +76,14 @@ to that next phase. Steps 4–6 wait on the PI.
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
-| E1 | **The library, `stdalign`**: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify, so that what a case imports is what was proved and mutation-tested. Done (a): misalignment, its split and its estimates by access ([P5], [P6], [P23], [P47], [P52]); (b), 2026-10-09: the diagnostics [P43]–[P51] and the projection of [P15]. Next: (c) stakes, the evaluator's results and the rest of feasibility; each moved with its check pointed at it and its functions mutation-tested | 5 | nothing; the next phase (Q40) |
+| E1 | **The library, `stdalign`**: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify, so that what a case imports is what was proved and mutation-tested. Done (a): misalignment, its split and its estimates by access ([P5], [P6], [P23], [P47], [P52]); (b), 2026-10-09: the diagnostics [P43]–[P51] and the projection of [P15]. Next: (c) stakes, the evaluator's results and the rest of feasibility; each moved with its check pointed at it and its functions mutation-tested; (d), from the review of 2026-10-10 (`NOTES.md` §15): the revealed intensity's third case taken only when no mass lies off the best outcomes; the χ̄² law at `t = 0` in `from_counts`; an `Estimate` flagged when its effective draws fall below a threshold calibrated by coverage; and, if the PI approves (R8), the ordinal misalignment of [P36] | 5 | nothing; the next phase (Q40) |
 | E2 | **The report as data**: a schema for `STANDARD.md`'s three sections, a validator run by lint on every case's report, and W1's report migrated to it; a reader can then check a report field by field. Done, 2026-10-09: `stdalign/report.py`, lint R16, `cases/w1-best-of-n-slope/standard-report.json` | 5 | done |
 | E3 | **A case anyone can rerun in a minute**: a synthetic declaration, its draws, the library, a report and the validator, run end to end by CI; the first thing an outside reader runs. With it, every world case's environment pinned in its folder, so that W1 can be rerun as `REQUESTS.md` R1 asks (`NOTES.md` §11). Done, 2026-10-10: `examples/quickstart.py`; a `requirements.txt` in every case, which lint R14 checks against the scripts' imports. The versions were read from the environment the cases ran in, after the runs, which did not record them | 5 | done |
 | H1 | **An overview for a mathematical reader**: about ten pages, with the core, the five results the rest depends on most ([P1], [P2], [P4], [P5], [P14]) and their proofs, and one case; what the reading of `REQUESTS.md` R1 starts from (`NOTES.md` §12). Done, 2026-10-09: `OVERVIEW.md`, generated from the items by `tools/overview.py` and checked fresh by CI, with [P6] added and the places a reader should push | 5 | done |
 | H2 | **Handover**: the package of E1–E3 and H1 to the readers (`REQUESTS.md`, R1), and the work to a fresh session, which reads `CLAUDE.md` and `NOTES.md` §13 and starts the next phase with W5. Done, 2026-10-10: §13 and `REQUESTS.md` updated, and the pull request of Q41 | 5 | done |
 | E4 | **Adapters for sequence models**: log-ratios and objectives from two causal language models, by sums over tokens, and the departure by Amini et al.'s Rao–Blackwellized estimator; an optional dependency, on which W5 runs | 4, 5 | E1 |
 | E5 | **A guide for practitioners**: which access to declare, which function to call, how to read each field of the report; written from E3 | 5 | E3 |
+| C4 | **Known groups** (simulation, proposed by the review of 2026-10-10, `NOTES.md` §15): optimizers of the right objective by several routes (policy gradient, best-of-`n`, PPO with and without a KL term) and of proxies at known correlations, several runs of each; registered: [P36], [P44] and [P45] separate the groups at stated error rates, and `M` alone does not. Minutes of computation; it can fail, and it reads what `M` means for a trained model where the truth is known | 5; a row "valid", if R10 | the PI's approval (`REQUESTS.md`, R8) |
 | 1 | **W5, the stopping rule of [P20] on trained policies** (machine learning): along a sweep of `β`, the gold peaks where the covariance of proxy and gold under the optimized policy crosses zero, with several runs per `β` (as revised after C2). No public sweep exists; one is made here, on W3's reference, with W3's reward as the proxy and W4's other reward as the gold: `3.8` s per step, about 4 to 10 hours per sweep (`probes/cases/`). Next: calibrate how many steps bring each run near its optimum, then design, rehearse and register from `cases/TEMPLATE.md` | 4 | E1, E4 (Q37); the next phase (Q40) |
 | 2 | **C3, tampering** (simulation, Q32): a small environment, built here, where the actor can change the world or its measurement, as in the tomato-watering gridworld [@leike2017]. It checks [P51]'s bounds from finite samples against a known truth, and whether a learner trained on the signal tampers as [P50](iii) says. Second arm (H34, Q33): a monitor reading a channel the actor can influence, trained against, as Baker et al. found with chain-of-thought monitors. Light enough to run while W5 computes | 5 | E1 (Q37); the next phase (Q40) |
 | 3 | **Estimation, then the general core's draft 4** (Q33, Q36). Done for misalignment on finite outcomes: [P52], its limit law under each access, derived rather than imported. Next, the same for the other quantities a report gives (the pursuit part, named misalignment, [P48]'s interval), with the sample sizes they imply; then outcomes that are not finite, where [P52]'s laws need χ² divergences finite, with the conditions on tails and on existence that `general/dictionary.md` lists | 5; 2 (the count restarts) | nothing: open texts or derivations (Q36) |
@@ -90,11 +97,13 @@ to that next phase. Steps 4–6 wait on the PI.
 what a reader and a fresh executor need. The PI asked for a solid engineering side first (Q37), and row 5's criterion is
 itself an engineering one: an outside reader must be able to run a case end to end. E1–E3 gave that reader a library, a
 report that can be checked, and a case that runs in a minute; E4 and E5 serve W5 and the readers. W5 and C3 are then the
-only tests the executor can run without waiting, and each can fail; built on the library, they test it too. Step 3 turns
-the remaining diagnostics into numbers with intervals, and feeds E1; it would also replace the quickstart's bootstrap
-intervals that under-cover near zero. Step 8 clears the last sources not read in open texts. The readers are the binding
-constraint on row 5, and only the PI can find them. [P41] and W2 are good tests, blocked on data that only the PI can
-obtain.
+only tests the executor can run without waiting, and each can fail; built on the library, they test it too. If the PI
+approves C4, it comes before them: it takes minutes, can fail, and says what `M` means for a trained model where the
+truth is known, which W5's reading needs (`NOTES.md` §15). E1(d) fixes errors in what cases already import, so it comes
+before any new function. Step 3 turns the remaining diagnostics into numbers with intervals, and feeds E1; it would also
+replace the quickstart's bootstrap intervals that under-cover near zero. Step 8 clears the last sources not read in open
+texts. The readers are the binding constraint on row 5, and only the PI can find them. [P41] and W2 are good tests,
+blocked on data that only the PI can obtain.
 
 ## What the PI can supply
 
@@ -141,3 +150,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-10 | Johnson and Huo (2026) reviewed at the PI's request (Q43, `NOTES.md` §14): its formula is exact for its one-head toy, but the evidence does not test that mechanism, and the mechanism is out of scope ([A1]); not a step. The behavioural question it raises recorded as H37, after E4 and below W5 and C3; the paper in `RELATED.md` | none: the priorities are kept |
 | 2026-10-10 | the handover strengthened before it is used (Q44–Q47): [A2] says "a Riemannian geometry", so the core is v12; step 8 done, every imported theorem now read in an open text or derived; the contribution terms approved; a step for "stable" is a merged pull request, counted after v12; no release tag | 1 (sources); 2 (a unit for stability; the count restarts); 5 (the package) |
 | 2026-10-10 | handover (Q48): a starting message for the independent reviewer of `REQUESTS.md` R1, given to the PI to relay; the pull request that brings Q43–Q47 into `main` opened, so that the reviewer reads v12 | 5 (readers) |
+| 2026-10-10 | a review of the whole framework at the PI's request (Q49, `NOTES.md` §15), in twelve focus areas, by the executor, not independent: the six results the rest stands on read without an error; `M` charges an optimizer of the right target by a route that is not a tilt (median share `0.16` for policy gradient) and can rank an exact pursuit of a wrong proxy below it (AUC `0.35`), where [P36]'s ordinal misalignment separates them; two errors at the library's edges and an under-covering interval, as E1(d); `OVERVIEW.md`'s count of predictions fixed; C4, a row "valid" and the licence asked of the PI (R8–R10); probes in `probes/review/`; the order of the commands before a push fixed. It changes no Statement and no scope | 1 (the library's errors); 5 (what the diagnostics measure); 2 (if merged, the first step after v12) |

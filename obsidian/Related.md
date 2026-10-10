@@ -40,8 +40,8 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
 
 ## KL control and control as inference
 
-- *Sources.* Rafailov et al. [[References|@rafailov2023]]; Ziebart et al. [[References|@ziebart2008]]; Todorov's linearly solvable control and
-  Levine's review of control as inference *(to verify)*.
+- *Sources.* Rafailov et al. [[References|@rafailov2023]]; Korbak, Perez and Buckley [[References|@korbak2022]]; Ziebart et al. [[References|@ziebart2008]];
+  Todorov's linearly solvable control and Levine's review of control as inference *(to verify)*.
 - *Shared.* Pursuit is the KL-regularized optimum ([[D2 — Pursuit of an objective|D2]], [[P4 — What KL measures|P4]](i)). The maximum-entropy policy is the best feasible
   behaviour in a random environment ([[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], Notes).
 - *Different.* These theories compute optimal behaviour. We judge actual behaviour against declared behaviour, and

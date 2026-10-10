@@ -48,7 +48,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
 | **A tolerance without its scale, again** | the ray-closedness check compared a tight bound with no rounding margin (1.79134602e-43 against itself) | every comparison gets the relative margin of `EXACT`, including the "obvious" ones |
 | **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it | keep R5; write the "why" from what is above |
-| **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴` | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp |
+| **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴`; and in the library itself, whose revealed intensity takes the best-outcomes case within `10⁻¹²` of `max F` and returns `M = ∞` for an actor of full support, in the regime that the checks of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] and [[P9 — What is at stake\|P9]] skip (§15, point 3) | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp; a regime that a check skips is one the library either refuses with an error or computes another way, with a test there |
 | **A familiar formula that hides a typing error** | "the KL-regularized optimum is `tilt(π_ref, r/β)`" is true prompt by prompt, and false on prompt–response pairs: the pursuit ray of [[D2 — Pursuit of an objective\|D2]] would also reweight the prompts, which no policy can do. Found only when the ontologies had to say what an outcome is | typed slots in every ontology, including **contexts**; a formula from the literature enters only with its outcome space stated |
 | **A probe bug read as a refutation** | the first probe of [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact. The same slip, from the other side, in the grounding probe (Q32): the best grounded behaviour was first written with `log E_K[e^{t·F̂}|w]`, the trainer's optimum's own weights of worlds, where an actor that cannot touch the channel faces its average, `E_K[F̂|w]`; the numerical projection disagreed by `0.37`, and the derivation was redone | when a probe contradicts a derivation, check each against the other before concluding anything; what the actor cannot control enters by its average, not by its log-mean-exp; the slip is now a mutation in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check |
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
@@ -72,6 +72,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
 | **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
 | **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
+| **A result's hypothesis dropped in the code that applies it** | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -216,6 +217,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q46 | a step, for the finish line's row "stable", is a merged pull request (R5); the count starts with the first pull request merged after the one that made v12 | PI | `README.md`; `ROADMAP.md`, step 7 |
 | Q47 | no release tag for the handover (R7): readers review `main` as it is when they start | PI | `REQUESTS.md` |
 | Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
+| Q49 | review the framework in general: get familiar with its files, methodology and ethos, plan an exhaustive list of focus areas, then review them in turn, with challenges and constructive criticism. Applied: §15, with twelve focus areas, eleven findings and seven pieces of advice; `probes/review/`; `OVERVIEW.md`'s count of predictions and an orientation for a mathematician; Korbak, Perez and Buckley in `RELATED.md`; a row of §1 extended and one added; the order of the commands before a push fixed; three decisions asked (`REQUESTS.md`, R8–R10) | PI; executor (the review) | §15; `probes/review/`; `tools/overview_template.md`; `ROADMAP.md`; `REQUESTS.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -901,3 +903,116 @@ framework already has the instruments for it: misalignment along a conversation 
 diagnostic, not a test of the framework's predictions, and it needs E4's adapters for sequence models, as W5 does. It
 waits below W5 and C3, which test predictions of the framework. What the framework could give the paper is in
 `RELATED.md`.
+
+## 15. A review of the whole framework, 2026-10-10 (Q49)
+
+By the executor, a model of the Claude family, at the PI's request: get familiar with the project, plan an exhaustive
+list of focus areas, and review the framework area by area, with challenges and constructive criticism. It is not
+independent (rule (f)): the same model family wrote what it reviews. A reader who is a person is still what row 5 needs.
+
+**What was read and run.** In full: `ROADMAP.md`, `REQUESTS.md`, `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`, `CORE.md`,
+`STANDARD.md`, `RECORD.md`, `cases/README.md`, §1 and §12–§14 of these notes; `derived/tilts-and-paths.md`, `value.md`,
+`misalignment.md` and `estimation.md`; the statements of `derived/diagnostics.md`; the library's `core.py`,
+`misalignment.py`, `estimation.py` and `report.py`; W3's registration and results, and W4's results; `OVERVIEW.md`'s
+sections 1 and 6 to 8; the checks of [[P1 — Every behaviour is a tilt of any other|P1]]–[[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P9 — What is at stake|P9]] and [[P14 — The cost of departing from the default is forced|P14]]; every mutant list. Run: lint, the freshness of the
+generated views, and the full suite (228 passed in 5 min 43 s, on Python 3.13). Six probes, in three scripts of
+`probes/review/`, give every number below.
+
+The focus areas, planned before the reading went further: the premises; the definitions; the six results the rest stands
+on; novelty and prior art; estimation and the diagnostics; the checks and their mutation testing; the library; the
+standard and its validator; the cases and the record; tooling and CI; governance; documentation.
+
+**What holds.** Credit first, since the findings below are narrower than this.
+- The proofs of [[P1 — Every behaviour is a tilt of any other|P1]], [[P2 — Every change of behaviour follows a replicator equation|P2]], [[P4 — What KL measures|P4]]–[[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P14 — The cost of departing from the default is forced|P14]], [[P21 — The expected evidence is misalignment|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P35 — Floors and caps|P35]]–[[P37 — A strong incentive masks the actor, and can fake alignment|P37]] and [[P52 — What a sample certifies about misalignment, by access|P52]] read without an error found. [[P14 — The cost of departing from the default is forced|P14]]
+  says where it needs [[A3 — Pursuit is the best trade-off|A3]]'s price of `1/t`, and [[P23 — The estimated misalignment of an actor that pursues the objective|P23]] says that it excludes `t = 0`.
+- The checks are built as §1 asks: random instances, tolerances with a scale, negative cases, and assertions that a
+  degenerate case is visible. Each check names the parts it covers, and leaves imported parts to the proof.
+- The record is honest: departures from a registration are recorded in order, refutations keep their rows, and the
+  exploratory is labelled as such.
+- Every edit of `tools/mutants/` still applies, and a test keeps it so.
+
+**Found, and open.** Ranked by what each could change.
+1. *Misalignment charges the route as well as the goal.* Under the standard specification, an optimizer of the right
+   objective is charged when it is not an exact tilt. With no proxy at all, vanilla policy gradient on `F` leaves a
+   median misaligned share of `0.16` up to step 1,600 and `0.065` at step 4,000 (90th percentile `0.35` to `0.48`);
+   best-of-2 on `F` leaves `0.15`, and best-of-16 `0.036` (`probes/review/faithful_optimizers.py`, 200 random
+   instances). In known groups (`probes/review/known_groups.py`), with a proxy that correlates about `0.96` with the
+   target, the share ranks the exact pursuit of the wrong proxy as less misaligned than best-of-4 on the right target in
+   65% of pairs (AUC `0.35`). With a noisier proxy it separates them (AUC `0.81` to `0.83`). The ordinal misalignment of
+   [[P36 — Ordinal objectives|P36]] separates them in every row (AUC `0.98` to `1.00`). Part of that is by construction, since best-of-`n` on `F`
+   is ordinally aligned ([[P36 — Ordinal objectives|P36]](i)); policy gradient on `F` keeps a median ordinal share of `0.004`, at most `0.29`. §12
+   (point 2) said that the standard specification is strict by design; this puts numbers on what that costs a reader of
+   `M`. Neither the library nor the results of `STANDARD.md` ask for `M_ord`.
+2. *What the predictions tested.* W3's S1 and S2 test the optimum of KL-regularized training, the tilt of the reference
+   by `r/β`, which the literature derived before the framework, as the machine-learning ontology says [[References|@rafailov2023]],
+   and the convergence of one PPO run. Korbak, Perez and Buckley (2022, arXiv:2205.11275, known here from its record and
+   abstract) state the same reading as Bayesian inference. S1's refutation falls on the assumption that the run
+   converged; S2 tests which reward was used. W1 tests an expansion against a curve that the literature fitted. The
+   premises define terms, and data cannot refute a definition; data can refute a claim that an instrument measures what
+   its name says. So the row "makes testable predictions" is met in its letter and says little about the framework.
+   Tests of known groups, as in point 1, test what it does claim.
+3. *The library returns `M = ∞` for an actor of full support.* `_intensity` takes the third case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv) whenever
+   `E_p[F]` is within `10⁻¹²·(1 + max|F|)` of `max F`. With `q = (0.25, 0.25, 0.5)`, `F = (0, 1, 2)` and mass `10⁻¹²`
+   off the best outcome, it returns `∞`, where the minimum is `1.27·10⁻¹¹` (`probes/review/library_edges.py
+   infinite`). The checks of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] and [[P9 — What is at stake|P9]] skip exactly that regime, so nothing catches it (§1). A fix: take the third
+   case only when `p` puts no mass off the best outcomes, and solve the moment equation in log space otherwise.
+4. *The χ² reference at the boundary.* `from_counts` returns [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s `χ²(|X| − 2)` p-value at every intensity. [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]
+   excludes `t = 0`, and proposal E1 of §3.3 already named the χ̄² law there. For an actor at the default, which the
+   standard specification intends, the test rejects at a nominal 5% in `10.3%`, `7.1%` and `6.7%` of samples for
+   `|X| = 3, 5, 10`. The mixture `½χ²(|X| − 2) + ½χ²(|X| − 1)` gives `5.7%`, `4.8%` and `5.1%`, and `2.3%` to `4.0%` at
+   interior intensities (`library_edges.py boundary`).
+5. *Intervals from log-ratios with few draws.* With 32 draws per context, as in W3 and W4, the 95% interval of
+   `from_log_ratios` covers `84%` to `87%` near the ray, and `46%` at `M ≈ 2.2` nats, where the estimate is `18%` low.
+   With 1,024 draws it covers `93.7%` to `95.5%` near the ray, and `77%` far from it (`library_edges.py log-ratios`).
+   The library reports the effective draws, with no threshold. `cases/README.md` lists "coverage measured before an
+   interval is reported" as held by nothing yet; this is what that gap costs. By counts, the interval held (`94.0%` to
+   `96.5%`) even where `M` was under a tenth of the plug-in's bias, because the plug-in's variance grows with the bias.
+   That was a hunch of this review, and its probe refuted it (`library_edges.py counts`).
+6. *The validator checks form, not substance.* An entry marked `exact`, on any stated basis, needs no interval; W1's
+   report gives eight medians of estimated intensities that way. An interval need not state its level.
+   `declared_before_data` is a boolean that the report asserts; it is not tied to a registration's commit and hash, as
+   lint R14 ties a case's result.
+7. *Mutation evidence that can be rerun.* The mutant lists in the repository cover the library, through the checks that
+   call it, [[P52 — What a sample certifies about misalignment, by access|P52]]'s check and the tools: 74 mutants. Most checks of [[P1 — Every behaviour is a tilt of any other|P1]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] have none; by the records they were
+   mutation-tested in earlier sessions, by scripts lost with their containers (§13), which this review could not verify.
+   So the row "solid" rests, for those checks, on records rather than on anything a reader can rerun.
+8. *The overview's count of predictions* said that three registered predictions failed and two held, counting W4's
+   diagnostic hypotheses; `RECORD.md` says one of the framework's three held. Fixed in this review.
+9. *Process.* The nine commits since Q38, in three pull requests, registered no test and derived no result: they were
+   engineering for the handover, the handover itself, hygiene and reviews, at the PI's direction. The reading asked
+   before any work is about 13,500 words, and these notes are about 1,000 lines; the advice of §12 to split them was not
+   taken. The next test, W5, waits on E4 and on sweeps of 4 to 10 hours each.
+10. *The licence.* The AGPL is kept until the framework gains predictive or diagnostic power (Q38). The readers that row
+    5 needs may have to come first: many companies do not allow AGPL code, and a standard serves those who report to
+    it. The contribution terms already allow a change (Q45).
+11. *Minor.* `pyproject.toml` declares Python 3.10 and NumPy 1.26 as floors, and CI tests only Python 3.11 with the
+    pins. Korbak, Perez and Buckley (2022) was not in `RELATED.md`; it is now [[References|@korbak2022]].
+
+**Fixed in this review.** `OVERVIEW.md`, through `tools/overview_template.md`: the count of point 8, with a sentence on
+what the tested predictions test; and a paragraph that tells a mathematician that the pursuits of `F` form a
+one-parameter exponential family, with [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]] and [[P23 — The estimated misalignment of an actor that pursues the objective|P23]] as its moment equation, its Pythagorean identity and Wilks's
+theorem. Korbak, Perez and Buckley in `RELATED.md` and `REFERENCES.md` (point 11). The order of the commands before a
+push, in `CLAUDE.md`, `CONTRIBUTING.md` and `README.md`: `overview.py` now runs before `obsidian.py`, since the view
+copies `OVERVIEW.md`; in the old order a change to the overview left the view stale, and the suite failed on it in this
+review's first run. In §1, a row's evidence extended for point 3 and a row added for point 4. The probes of
+`probes/review/`.
+
+**Advice.**
+1. Report the ordinal misalignment beside `M`, and lead with it when the optimizer is not known to be a tilt: in
+   `stdalign`, with [[P36 — Ordinal objectives|P36]]'s check pointed at it, and in the results of `STANDARD.md` (`REQUESTS.md`, R8).
+2. Before W5, register a simulation case of known groups (C4): optimizers of the right objective by several routes
+   (policy gradient, best-of-`n`, PPO with and without a KL term), optimizers of proxies at known correlations, and
+   several runs of each. Register that [[P36 — Ordinal objectives|P36]], [[P44 — What named objectives explain|P44]] and [[P45 — Drift: what runs share, and what they do not|P45]] separate the groups at stated error rates and that `M`
+   alone does not. It takes minutes, waits on nothing but the PI's approval (R8), can fail, and reads §12's first point,
+   what `M` means for a trained model, where the truth is known.
+3. Fix points 3 and 4 in `stdalign`, each with a test and a mutant, and flag an `Estimate` whose effective draws fall
+   below a threshold calibrated by coverage, as in point 5 (`ROADMAP.md`, E1(d)).
+4. Add a row "valid" to the finish line: on systems whose truth is known, each reported quantity separates what its
+   name says it separates, at measured error rates. After point 2, this is the row that would say most about the
+   framework (R10).
+5. Tie a report's `declared_before_data` to a registration's commit and hash, as R14 does for cases; require an
+   interval's level; and restrict `exact` to a few named kinds of basis.
+6. Reconsider the licence before the readers of R1 rather than after: Apache-2.0 for `stdalign` and CC BY 4.0 for the
+   documents, or the LGPL for the library at least (R9).
+7. Put mutant lists for the older checks back in the repository, a few per file of `derived/`, so that the row "solid"
+   can be rerun.

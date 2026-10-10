@@ -18,6 +18,13 @@ intensity `t ≥ 0`.
 The framework does not assume KL, reweighting or the order of KL's arguments. It derives them from five premises
 (section 2) through the results of section 4, so a reader who rejects a premise can see which results fall with it.
 
+In familiar terms: the pursuits of `F` form the one-parameter exponential family with base `q`, statistic `F` and
+natural parameter `t ≥ 0`. Misalignment is the KL divergence from the actual behaviour to that family, which maximum
+likelihood minimizes; `2n` times it is the family's deviance on `n` counted draws. [P5] and [P6] are then the moment
+equation and the Pythagorean identity of the family, and [P23] is Wilks's theorem for it. Nothing here is new
+mathematics (`RECORD.md` §1); what the framework adds is the premises that single out this family, and what is built on
+it.
+
 It serves two purposes. The first is a common unit for reports of misalignment, so that two reports on the same actor
 can be compared (`STANDARD.md`). The second is a set of diagnostics that split a measured misalignment into named parts:
 what a named objective explains, the drift between training runs, and the tampering with a measurement. It is not a
@@ -461,7 +468,9 @@ Open an issue, or a pull request under the terms of `CONTRIBUTING.md`.
 - **Premises are choices.** Each premise is argued for in its "Why this choice" in `CORE.md`, not proved.
 - **Imported theorems.** Every theorem a result imports is read in an open text or derived where it is used, and
   `REFERENCES.md` says which. Čencov's own proof is not in the open texts read here; an extension of it is.
-- **Prediction.** On real data, as of 2026-10-09, three registered predictions failed and two held (section 6). The
-  framework's worth as a predictive theory is not established. Its worth as a common unit and a set of diagnostics is
-  what the next cases test.
+- **Prediction.** On data not seen before, three predictions of the framework were tested and one held (W1 and W3,
+  `RECORD.md` §2); W4's two diagnostic hypotheses, which are not the framework's predictions, were one refuted and one
+  held (section 6). Those predictions test the optimum of KL-regularized training and a fitted curve, more than any
+  premise of the framework's own (`NOTES.md` §15). The framework's worth as a predictive theory is not established. Its
+  worth as a common unit and a set of diagnostics is what the next cases test.
 - **Review.** No independent reader has checked the proofs.
