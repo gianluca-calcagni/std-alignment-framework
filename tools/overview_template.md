@@ -13,7 +13,7 @@ behaviour and a set of acceptable behaviours. Misalignment is the KL divergence 
 acceptable one, in nats. The usual acceptable set is "pursue `F`": the default reweighted by `e^{t·F}`, at every
 intensity `t ≥ 0`.
 
-The framework does not assume KL, reweighting or the order of KL's arguments. It derives them from five premises
+The framework does not assume KL, reweighting or the order of KL's arguments. It derives them from six premises
 (section 2) through the results of section 4, so a reader who rejects a premise can see which results fall with it.
 
 In familiar terms: the pursuits of `F` form the one-parameter exponential family with base `q`, statistic `F` and
@@ -37,7 +37,9 @@ what this overview asks for (`REQUESTS.md`, R1).
 ## 2. Setting and premises
 
 Notation first. The premises then say what alignment is judged on (A1), what pursuing an objective means, geometrically
-(A2) and economically (A3), what misalignment measures (A4), and when the standard of judgement is fixed (A5).
+(A2) and economically (A3), what misalignment measures (A4), when the standard of judgement is fixed (A5), and how fine
+it may be (A6). This is the draft v13 (`NOTES.md` §16): in v12, A4 said that misalignment is value lost, and there was
+no A6.
 
 {{item D1}}
 
@@ -50,6 +52,8 @@ Notation first. The premises then say what alignment is judged on (A1), what pur
 {{item A4 why}}
 
 {{item A5}}
+
+{{item A6 why}}
 
 ## 3. Pursuit and misalignment
 
@@ -65,7 +69,7 @@ declared set of acceptable behaviours. The standard specification, "pursue `F`",
 Six results, in their reading order.
 - [P1]: nothing is lost by writing behaviour as a reweighted default.
 - [P2]: reweighting toward a fixed objective is the steepest climb of A2.
-- [P4]: KL is exactly the value lost against a pursuit, which is A4's reading of misalignment.
+- [P4]: KL is exactly the value lost against a pursuit, a second reading of A4's evidence.
 - [P14]: A2 and A3 together leave one cost of departing from the default, KL.
 - [P5]: misalignment is attained, is zero exactly where it should be, and has closed forms for "pursue `F`".
 - [P6]: the departure from the default splits into pursuit and misalignment, a split the standard asks every report for.
@@ -121,11 +125,14 @@ The proofs above, line by line. These are the places where a careful reader shou
    then loses its reading as the steepest climb, though not its algebra.
 2. **The price in A3.** [P14] forces KL because A3 prices departure at exactly `1/t`. If the best trade-offs are only
    asked to lie somewhere on the pursuit ray, any increasing function of KL passes ([P14], Notes).
-3. **The benefit of the doubt in A4.** Misalignment takes the least loss over the acceptable behaviours, each judged by
-   its own objective. That choice fixes the order of KL's arguments ([P4](ii)). The loss in the principal's own units is
-   a different quantity, the stakes ([D5]).
+3. **Evidence in A4.** Misalignment is the rate of evidence, under the actual behaviour, against the nearest acceptable
+   behaviour; that choice fixes the order of KL's arguments. Value lost is the same number ([P4](ii)), and the loss in
+   the principal's own units is a different quantity, the stakes ([D5]).
 4. **The edge cases of [P5](iv).** An actor that only ever picks the best outcomes is charged unless it splits its
    choices among tied outcomes as the default does.
+5. **The rule in A6.** Declaring the standard specification only for an actor declared to pursue moves a judgement into
+   the declaration: someone must say how the actor acts. A reader may prefer one specification for every actor, for
+   comparability, and pay for it with charges for the method rather than the goal.
 
 The checks of these six results run in a few seconds, from the repository's root, after
 `pip install -r requirements.txt`:

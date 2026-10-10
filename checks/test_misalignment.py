@@ -121,6 +121,57 @@ def test_departure_splits_into_pursuit_and_misalignment():
     assert min(cases.values()) >= 50                                           # every case exercised
 
 
+def same_average(r, q, F, target, n):
+    """A random behaviour with average `target` of F: a random full-support r tilted by s·F, s found by bisection."""
+    base = simplex_interior(r, n); lo, hi = -1.0, 1.0
+    while tilt(base, lo * F) @ F > target:
+        lo *= 2
+    while tilt(base, hi * F) @ F < target:
+        hi *= 2
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if tilt(base, mid * F) @ F < target else (lo, mid)
+    return tilt(base, 0.5 * (lo + hi) * F)
+
+
+def test_excess_departure():
+    """P6(ii): when the actor does better than the default, KL(p || q) = KL(p° || q) + KL(p || p°) for every p with its
+    average of F, so p° has the least departure among them and M = KL(ph || q) − KL(p° || q); in the third case of
+    P5(iv), every behaviour on the best outcomes departs by at least −log q(A), with equality only at q(·|A). A behaviour
+    with another average breaks the identity, so the check sees the constraint."""
+    r = rng(408); seen = {"between": 0, "best": 0, "off": 0}
+    for _ in range(400):
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        ph = tilt(q, float(r.uniform(0.2, 3)) * F + r.normal(0, 0.7, n))
+        if ph @ F <= q @ F + 1e-3 or ph @ F >= F.max() - 1e-3:
+            continue
+        seen["between"] += 1
+        m, ts = misalignment(ph, q, F); po = nearest(ph, q, F)
+        scale = 1 + kl(ph, q)
+        assert abs(m - (kl(ph, q) - kl(po, q))) <= 1e-9 * scale
+        for _ in range(5):
+            p = same_average(r, q, F, ph @ F, n)
+            assert abs(p @ F - ph @ F) <= 1e-9 * (1 + np.abs(F).max())
+            gap = kl(p, q) - (kl(po, q) + kl(p, po))
+            assert abs(gap) <= 1e-9 * (1 + kl(p, q))
+            assert kl(p, q) >= kl(po, q) - EXACT * scale
+        other = same_average(r, q, F, 0.5 * (ph @ F + F.max()), n)     # a different average: the identity fails
+        if kl(other, po) > 1e-3:
+            seen["off"] += 1
+            assert abs(kl(other, q) - (kl(po, q) + kl(other, po))) > 1e-6
+    for _ in range(200):                                                # the third case: all mass on the best outcomes
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        top = np.argsort(F)[-2:]; F[top[0]] = F[top[1]]; A = F >= F.max(); qA = q[A].sum()
+        lim = best_outcomes_limit(q, F)
+        assert abs(kl(lim, q) + np.log(qA)) <= EXACT * (1 + abs(np.log(qA)))
+        p = np.zeros(n); p[A] = r.dirichlet(np.ones(A.sum()))
+        assert kl(p, q) >= -np.log(qA) - EXACT * (1 + abs(np.log(qA)))
+        if np.abs(p - lim).sum() > 1e-3:
+            seen["best"] += 1
+            assert kl(p, q) > -np.log(qA) + 1e-9
+    assert min(seen.values()) >= 50                                     # every case exercised
+
+
 def test_deviance_identity():
     """P5 Notes: for counts with frequencies ph, the log-likelihood ratio of the unrestricted multinomial against the best
     pursuit of F equals n * M(ph)."""

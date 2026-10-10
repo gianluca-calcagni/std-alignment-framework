@@ -33,7 +33,8 @@ the reciprocal of the price of departure. Without that reading, asking only that
 ray at some intensity, any increasing function of KL would also do; the second check shows `KL + KL²`, whose best
 trade-off at price `1/t` is the pursuit at intensity `t/(1 + 2·KL)`. The first check shows that χ², reverse KL and
 squared Hellinger make no point of the ray a best trade-off, with three or more outcomes. Hobson reached KL from other
-conditions [[References|@hobson1969]].
+conditions [[References|@hobson1969]]. Since v13 the measure rests on evidence ([[A4 — Misalignment is evidence|A4]]), not on this result: what it adds is that
+misalignment under the standard specification is also value lost at the one price on which [[A2 — Pursuit is the steepest climb|A2]] and [[A3 — Pursuit is the best trade-off|A3]] agree.
 
 ## Lineage
 v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived.
@@ -47,4 +48,5 @@ v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the c
 - [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment

@@ -6,7 +6,7 @@ A standard formal framework for alignment problems in general, not only in machi
 institutions and organisms. The aim is a framework that is solid enough to build on, substrate-independent, easy to
 import existing theorems into, and able to make testable predictions, support diagnostics, and show its own limits.
 
-The core holds only what cannot be derived: five premises and the definitions the whole framework uses. Everything else
+The core holds only what cannot be derived: six premises and the definitions the whole framework uses. Everything else
 is derived from them, with proofs and checks, and reported through one standard.
 
 **Start here.** A mathematical reader: `OVERVIEW.md`, about ten pages, with the results the rest stands on and their
@@ -16,10 +16,10 @@ report that keeps the standard, in under a minute.
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
-results in `derived/`, is v12 and claims what it proves. The general core, `CORE-GENERAL.md` with its results in
-`general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite part depends on
-the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and cited from
-`general/`.
+results in `derived/`, is v13 on this branch, a draft for the PI's evaluation (`NOTES.md` §16; `main` holds v12), and
+claims what it proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that
+are not finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general result
+also holds on finite outcomes, it is proved in `derived/` and cited from `general/`.
 
 | | |
 |---|---|
@@ -128,11 +128,15 @@ where each comes from):
   family are correlated, and "independent" then means less than it says.
 
 **Versions.** A version changes only when the Statement of a premise or a definition changes, or the scope does
-(`CORE.md` §0): either changes what a reader may rely on. Results, checks and ontologies are added within a version.
-The core is v12: [[A2 — Pursuit is the steepest climb|A2]]'s Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires
-(`NOTES.md` §3.1, Q44). v11 widened the scope to groups, several principals with declared weights, rules as conditions
-and episodes as outcomes (Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46).
-`CORE-GENERAL.md` is a draft with its own numbering; until it is approved, it changes no Statement of the core.
+(`CORE.md` §0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. On
+this branch the core is a draft v13 for the PI's evaluation (`NOTES.md` §16): [[A4 — Misalignment is evidence|A4]] says that misalignment is the rate of
+evidence against the specification, the reading as value lost becoming a consequence; [[A6 — Declared no finer than identified|A6]], a sixth premise, declares no
+specification finer than the actor's way of acting can carry; and [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal specification beside the
+standard one, with the one matched to an actor. `main` holds v12, in which [[A2 — Pursuit is the steepest climb|A2]]'s Statement says that the geometry of
+pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md` §3.1, Q44). v11 widened the scope to groups, several
+principals with declared weights, rules as conditions and episodes as outcomes (Q24, Q25). A step, for the finish line's
+row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is a draft with its own numbering; until it is approved,
+it changes no Statement of the core.
 
 ## The finish line
 

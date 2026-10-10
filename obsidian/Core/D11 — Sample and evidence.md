@@ -24,10 +24,9 @@ how much more likely the record is under the first than under the second, on a l
   all samples.
 - *Evidence is the canonical statistic.* Between two behaviours, the most powerful test thresholds the likelihood ratio
   (the Neyman–Pearson lemma [[References|@cover2006]], read in the open draft of [[References|@polyanskiy2025]], Theorem 14.11).
-- *It gives misalignment a second meaning.* The expected evidence per decision, under the actual behaviour, for it
-  against the nearest intended behaviour is the misalignment (`derived/estimation.md`). Value lost ([[A4 — Misalignment is value lost|A4]]) and evidence
-  gained agree, in the same direction of KL, as the steepest climb ([[A2 — Pursuit is the steepest climb|A2]]) and the best trade-off ([[A3 — Pursuit is the best trade-off|A3]]) agree on the
-  cost.
+- *It makes [[A4 — Misalignment is evidence|A4]] exact.* The expected evidence per decision, under the actual behaviour, for it against the nearest
+  intended behaviour is the misalignment (`derived/estimation.md`). Evidence gained ([[A4 — Misalignment is evidence|A4]]) and value lost ([[P4 — What KL measures|P4]](ii))
+  agree, in the same direction of KL, as the steepest climb ([[A2 — Pursuit is the steepest climb|A2]]) and the best trade-off ([[A3 — Pursuit is the best trade-off|A3]]) agree on the cost.
 - *It compares explanations in the same unit.* Two evaluators proposed for one actor are compared by the evidence a
   sample gives for one pursuit against the other, in nats, the unit of misalignment and of value.
 - *Independence is the default model.* Successive decisions of one actor can depend on each other; dependent samples
@@ -45,8 +44,9 @@ New: the definition, and evidence as the second meaning of misalignment.
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
 - [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
 - [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
-- [[A4 — Misalignment is value lost|A4]] — Misalignment is value lost
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D9 — Observation and identification|D9]] — Observation and identification
+- [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
 - [[P21 — The expected evidence is misalignment|P21]] — The expected evidence is misalignment

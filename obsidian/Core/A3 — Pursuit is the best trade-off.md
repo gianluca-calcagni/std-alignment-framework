@@ -21,7 +21,8 @@ depends only on how the behaviour changes, not on what is pursued.
   objective's units: an actor that pursues intensely treats departure as cheap.
 - *Together with A2 it fixes the cost.* The steepest climb is also the best trade-off for exactly one cost: the KL
   divergence from the default (`derived/value.md`). A2 is a geometric premise and A3 an economic one; they agree in one
-  way only.
+  way only. Since v13 that cost gives misalignment a second reading, as value lost (A4); the measure does not rest on
+  it.
 
 ## Lineage
 v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived, not
@@ -31,6 +32,8 @@ assumed.
 - nothing
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
+- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D10 — Evaluator, regression and residual|D10]] — Evaluator, regression and residual
 - [[D11 — Sample and evidence|D11]] — Sample and evidence

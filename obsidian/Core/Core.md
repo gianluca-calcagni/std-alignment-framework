@@ -1,9 +1,9 @@
 # The core
 
-> **Status: v12, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
-> framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
-> carries a formal statement and a plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format
-> is in `README.md`.
+> **Status: v13, a draft for the PI's evaluation** (branch `claude/core-reframe`, `NOTES.md` §16); `main` holds v12. The
+> core holds what cannot be derived: six premises, and the definitions that the whole framework uses. Everything that
+> follows from them is in `derived/`, with proofs and checks that run in CI. Each item carries a formal statement and a
+> plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format is in `README.md`.
 
 ## 0. What the core is
 
@@ -14,13 +14,17 @@ A definition may cite a result to justify itself, provided that no chain of depe
 
 The framework in ten steps:
 1. **Premises** (section 1). Alignment is judged from behaviour in every condition; pursuit is the steepest climb, and
-   the best trade-off; misalignment is value lost; specifications are declared before they judge.
+   the best trade-off; misalignment is the rate of evidence against what was intended; specifications are declared
+   before they judge, and no finer than the actor's way of acting can carry.
 2. **Behaviour and pursuit** (section 2). Behaviour is a distribution over outcomes. Pursuing an objective reweights a
    default toward it. Derived: nothing is lost by this description, pursuit is the steepest climb, and the cost of
    departing from the default can only be the KL divergence (`derived/tilts-and-paths.md`, `derived/value.md`).
-3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts.
-   Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one. Derived: when it is zero,
-   its closed forms for "pursue `F`", and the split of the departure (`derived/misalignment.md`).
+3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts: for
+   "pursue `F`", the pursuit ray of `F` for an actor that pursues, and the order of `F` for one that ranks or whose
+   method is unknown. Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one, the
+   rate of evidence against the specification. Derived: when it is zero, its closed forms for "pursue `F`", that for a
+   pursuer it is the departure spent beyond the cheapest way to the same average of `F`, and the split of the departure
+   (`derived/misalignment.md`).
 4. **Resolution** (section 4). Distinctions the principal does not care about, and distinctions the actor cannot make
    (`derived/resolution.md`).
 5. **Stakes** (section 5). How much of the objective is lost, in its own units (`derived/stakes.md`).
@@ -84,6 +88,7 @@ fields.
 | `q`, `F`, `t` | the default, an objective, an intensity | [[D2 — Pursuit of an objective\|D2]] |
 | `p_{F,t}`, `R_F` | pursuit of `F` at intensity `t`; the pursuit ray | [[D2 — Pursuit of an objective\|D2]] |
 | `(q, 𝓘)` | a specification, declared by the principal: the default and the intended behaviours | [[D3 — Specification, declaration and misalignment\|D3]] |
+| `C_F` | the intended behaviours of the ordinal specification of `F` | [[D3 — Specification, declaration and misalignment\|D3]] |
 | `M(p̂)` | the misalignment of the actual behaviour `p̂` | [[D3 — Specification, declaration and misalignment\|D3]] |
 | `ℬ`, `𝒜` | the principal's resolution; the actor's resolution | [[D4 — Resolution\|D4]] |
 | `E_q[F\|𝒜]`, `F̄` | the cell average of `F` under the default | [[D4 — Resolution\|D4]] |
@@ -109,8 +114,9 @@ fields.
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
 - [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
 - [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
-- [[A4 — Misalignment is value lost|A4]] — Misalignment is value lost
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[A5 — Declared before|A5]] — Declared before
+- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D1 — Outcomes, behaviours, divergence and tilt|D1]] — Outcomes, behaviours, divergence and tilt
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment

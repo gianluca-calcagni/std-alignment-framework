@@ -47,7 +47,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 |---|---|---|
 | **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
 | **A tolerance without its scale, again** | the ray-closedness check compared a tight bound with no rounding margin (1.79134602e-43 against itself) | every comparison gets the relative margin of `EXACT`, including the "obvious" ones |
-| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it | keep R5; write the "why" from what is above |
+| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it. Again in the draft v13 (2026-10-10, §16): [A4] and [A6] were first argued from [D11], [P21], [P24] and [P36], built on [D3], which cites [A6]; R5 found seven cycles | keep R5; write the "why" from what is above; evidence that uses later results goes in Notes |
 | **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [P50]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴`; and in the library itself, whose revealed intensity takes the best-outcomes case within `10⁻¹²` of `max F` and returns `M = ∞` for an actor of full support, in the regime that the checks of [P5] and [P9] skip (§15, point 3) | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp; a regime that a check skips is one the library either refuses with an error or computes another way, with a test there |
 | **A familiar formula that hides a typing error** | "the KL-regularized optimum is `tilt(π_ref, r/β)`" is true prompt by prompt, and false on prompt–response pairs: the pursuit ray of [D2] would also reweight the prompts, which no policy can do. Found only when the ontologies had to say what an outcome is | typed slots in every ontology, including **contexts**; a formula from the literature enters only with its outcome space stated |
 | **A probe bug read as a refutation** | the first probe of [P15] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact. The same slip, from the other side, in the grounding probe (Q32): the best grounded behaviour was first written with `log E_K[e^{t·F̂}|w]`, the trainer's optimum's own weights of worlds, where an actor that cannot touch the channel faces its average, `E_K[F̂|w]`; the numerical projection disagreed by `0.37`, and the derivation was redone | when a probe contradicts a derivation, check each against the other before concluding anything; what the actor cannot control enters by its average, not by its log-mean-exp; the slip is now a mutation in [P50]'s check |
@@ -219,6 +219,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
 | Q49 | review the framework in general: get familiar with its files, methodology and ethos, plan an exhaustive list of focus areas, then review them in turn, with challenges and constructive criticism. Applied: §15, with twelve focus areas, eleven findings and seven pieces of advice; `probes/review/`; `OVERVIEW.md`'s count of predictions and an orientation for a mathematician; Korbak, Perez and Buckley in `RELATED.md`; a row of §1 extended and one added; the order of the commands before a push fixed; three decisions asked (`REQUESTS.md`, R8–R10) | PI; executor (the review) | §15; `probes/review/`; `tools/overview_template.md`; `ROADMAP.md`; `REQUESTS.md` |
 | Q50 | the licence's aim during research: progress on the framework, by people or by models working on copies of it, is shared with everyone; the GNU Affero GPL, version 3 or later, is kept for the code and the text, and the adoption it costs is accepted; it is to be relaxed once research gives way to use. So R9 is declined, and the executor withdraws the recommendation behind it (§15, advice 6). Applied: §11, what a copyleft licence reaches and what it does not, and what gets closer; proposed and awaiting the PI: additional terms under the licence's section 7, a request to AI agents that work on copies, and a citation file with a DOI per release (`REQUESTS.md`, R11) | PI; executor (the analysis) | §11; §15; `REQUESTS.md`; `ROADMAP.md` |
+| Q51 | draft on a new branch the core the review's advice would give, and review whether it is more compelling and more solid than v12. Applied: branch `claude/core-reframe`, a draft v13: [A4] misalignment is evidence, [A6] declared no finer than identified, [D3] with the ordinal and the matched specification, [P6](ii) the excess departure with its check and mutants (5 of 5 caught), `GA4`, `STANDARD.md`, `TERMS.md`, `README.md`, `RECORD.md` and the overview; §16 the review: adopt [A4], [P6](ii), the ordinal specification as an option and the paired report, not [A6] (R12) | PI; executor (the draft and the review) | §16; the branch |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1081,3 +1082,83 @@ review's first run. In §1, a row's evidence extended for point 3 and a row adde
    what it reaches and what else gets closer.
 7. Put mutant lists for the older checks back in the repository, a few per file of `derived/`, so that the row "solid"
    can be rerun.
+
+## 16. The reframe, drafted and reviewed, 2026-10-10 (Q51)
+
+By the executor, a model of the Claude family, at the PI's request: draft on a new branch the core that the review's
+advice would give (§15, and the answers that followed it), then review whether it is more compelling and more solid than
+v12. Not independent (rule (f)), and the drafter reviews its own proposal, which is the case §1 warns about most.
+
+**What the draft changes** (branch `claude/core-reframe`, called v13 there).
+- [A4] says that misalignment is evidence: the least rate, per independent decision, at which a record of the behaviour
+  gathers evidence against an accepted behaviour. "Value lost", v12's [A4], becomes a reading of the same number
+  ([P4](ii)), which needs [A2] and [A3] for its price ([P14]); the measure no longer does. `GA4` follows, as `GA2`
+  followed [A2] in Q44.
+- [A6], a sixth premise: a specification distinguishes no more than the actor's way of acting can carry, its values for
+  an actor declared to pursue, its order otherwise, unless the declaration says why. It is the archive's identification
+  rule (§15, point 1, Lineage).
+- [D3] defines the ordinal specification beside the standard one, moved from [P36], and the specification **matched**
+  to an actor. The name "standard specification" stays, since hashed registrations use it.
+- [P6](ii): for an actor that does better than the default, the nearest intended behaviour has the least departure among
+  those with the actor's average of `F`, so misalignment is the departure spent beyond the cheapest way to that average.
+  Checked (`test_excess_departure`), and mutation-tested: `tools/mutants/p6.json`, 5 of 5 caught.
+- `STANDARD.md`: the specification says how the actor acts, and misalignment under the standard specification is
+  reported with the ordinal misalignment beside it. `TERMS.md`, `README.md`, `RECORD.md` and the overview follow.
+
+**Found while drafting.** The first draft argued [A4] and [A6] from results built on [D3] ([P21], [P24], [P36]), while
+[D3] cites [A6]: lint R5 found seven cycles. That is a recorded failure (§1, "a justification leaning on a later
+result"), and the check that holds it worked. The premises now argue from elementary facts and earlier items, and the
+evidence that uses later results sits in their Notes, which carry no dependency.
+
+**The review.**
+1. *What the measure rests on: more solid.* In v12, misalignment is value lost judged at a KL price, and the price is
+   KL only through [A2] (pursuit as the steepest climb, by Čencov's theorem) and [A3] (pursuit as a trade-off priced at
+   `1/t`), with [P14] joining them: three premises, two of them models of an idealized optimizer. In the draft it rests
+   on one: evidence counted as the log-likelihood ratio, at its rate under the actual behaviour, against the nearest
+   accepted behaviour. Those are statistical conventions, the first canonical by the Neyman–Pearson lemma, the second a
+   choice (the rate under the intended behaviour, or Chernoff's exponent, would weigh errors differently), the third the
+   same benefit of the doubt as v12's. No number changes: for every declared set, the two readings give the same
+   divergence ([P4](ii) holds for every full-support behaviour). What changes is what a reader must accept to trust the
+   number, and the optimizer's model moves from the foundation of the measure to the description of one kind of actor.
+2. *The excess-departure reading: a clear gain.* [P6](ii) says plainly what the standard specification charges:
+   departure that buys no `F`, whatever its cause. It needs no premise, and it explains, in one sentence, why
+   best-of-`n` and policy gradient are charged (§15, point 1). It should be kept whatever happens to the rest.
+3. *[A6]: the wrong move, as drafted.* It fixes the case it was built for, best-of-`n` judged by values, and in the
+   known groups of §15 it makes best-of-`n` on the right objective exactly aligned. But it conflicts with three
+   commitments the core rests on.
+   - [A1] judges behaviour "never from how the behaviour is produced"; under [A6], two actors with the same behaviour in
+     every condition get different misalignment when one is declared to pursue and the other to rank. Best-of-4 on the
+     principal's own objective is charged a median `0.067` nats, `0.11` of its departure, as a pursuer, and `0` as a
+     ranker (`probes/review/faithful_optimizers.py`, `probes/review/known_groups.py`). A behavioural reading exists, a
+     declared repertoire of behaviours as the objective varies, but it is a counterfactual few cases can observe.
+   - [D3] keeps the actor's limits out of the measure: feasibility "splits misalignment instead of changing it". [A6]
+     lets the actor's way of acting change the measure.
+   - H5 (§5.4) says the actor's cost belongs to its feasibility or its mechanism, never to the measure; [A6] puts it in
+     the declaration.
+   The alternative the core already has does not do the job either: as a feasible set ([D7]), best-of-`n` includes
+   `n = 1`, the default, which is intended, so [P15] excuses nothing; excusing a method at the actor's own average of
+   `F` would need a new quantity. And the archive itself settled that cardinal or ordinal is the principal's
+   declaration, not the framework's choice (its notes, §4, "target sets"): [A6] makes it the actor's.
+4. *The trained models are not helped.* W3's and W4's PPO runs trained with a KL penalty, so under [A6] they are
+   declared to pursue, judged by the standard specification, and charged exactly as before: the route that unconverged
+   training took is still counted as misalignment. What would separate route from goal there is the learner's kernel as
+   a named objective (H3 of the archive's notes; §15's answers), not a declaration.
+5. *Costs.* A sixth premise; the count for "stable" restarts (Q46); a report under the matched specification is not
+   comparable with one under another, unless both numbers are given, as the draft's `STANDARD.md` asks; the default for
+   an actor whose way of acting is unknown becomes the ordinal specification, which forgives the shape of any
+   reweighting; and W1's report, a best-of-`n` case, would read differently under the draft, while its record stays as
+   computed.
+6. *Compelling?* v12 tells a stronger story, "everything is forced", and it overstates: the force is conditional on
+   modelling pursuit as a gradient flow on behaviours and on pricing departure at exactly `1/t`. The draft tells a
+   plainer one: a measure from evidence, a declared set, and a rule for which set. A mathematician will find its
+   premises easier to accept; a practitioner will find the excess-departure reading and the paired report more useful.
+   Part of the draft is more compelling, and [A6] is less, because it adds a judgement about the actor that a principal
+   often cannot make and that contradicts [A1].
+
+**Verdict.** Adopt part of it: [A4] as evidence (with `GA4`), [P6](ii), the ordinal specification defined in [D3] as a
+principal's option, and the paired report in `STANDARD.md` (misalignment under the standard specification, with the
+ordinal misalignment and the excess-departure reading beside it). Do not adopt [A6] as a premise; keep instead, in
+`STANDARD.md`'s declaration, a field that says how the actor is known to act, so that a reader can see when misalignment
+charges a method. For trained models, test the learner's kernel as a named objective before any further change to the
+core. The partial version still changes [A4]'s and [D3]'s Statements, so it is a v13, and the count for "stable"
+restarts. The decision is the PI's (`REQUESTS.md`, R12).

@@ -23,6 +23,8 @@ happens.
 - *It is enough.* By Čencov's theorem [[References|@cencov1982]], whose statement is read in the open text [[References|@le2016]] (Proposition
   6.1), it fixes the geometry, up to a constant factor, and with it the form of pursuit, a reweighting of the default
   (section 2 and `derived/tilts-and-paths.md`).
+- *What it covers.* With A3, it says what pursuing is, and so which specification fits an actor that pursues: the
+  pursuit ray (section 3, and A6). It does not fix the measure, which rests on evidence (A4).
 - *Riemannian.* Steepness needs a length for each direction of change. An inner product gives one, and Čencov's theorem
   is stated for these. A geometry whose lengths come from a norm that is not an inner product would need a uniqueness
   theorem of its own, and none is known here; the premise does not cover it.
@@ -36,5 +38,8 @@ this was the one premise. v12: "Riemannian" made explicit, as [[D2 — Pursuit o
 - nothing
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
+- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
+- [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D11 — Sample and evidence|D11]] — Sample and evidence

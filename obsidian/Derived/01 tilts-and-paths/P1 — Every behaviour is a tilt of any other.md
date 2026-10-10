@@ -44,6 +44,7 @@ is a tilt" as an insight (NOTES §2.1) without stating it. The freedom in (ii) i
 - nothing
 
 ## Used by
+- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[D6 — Intervention and pass-through|D6]] — Intervention and pass-through
 - [[D10 — Evaluator, regression and residual|D10]] — Evaluator, regression and residual

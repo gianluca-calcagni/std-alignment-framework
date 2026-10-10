@@ -1,0 +1,59 @@
+{
+ "tests": [
+  "checks/test_misalignment.py",
+  "-k",
+  "excess_departure"
+ ],
+ "mutants": [
+  {
+   "name": "[P6](ii) Pythagoras the wrong way",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "gap = kl(p, q) - (kl(po, q) + kl(p, po))",
+     "gap = kl(p, q) - (kl(po, q) + kl(po, p))"
+    ]
+   ]
+  },
+  {
+   "name": "[P6](ii) the nearest behaviour at a nearby intensity",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "        m, ts = misalignment(ph, q, F); po = nearest(ph, q, F)\n        scale = 1 + kl(ph, q)",
+     "        m, ts = misalignment(ph, q, F); po = tilt(q, 1.01 * ts * F)\n        scale = 1 + kl(ph, q)"
+    ]
+   ]
+  },
+  {
+   "name": "[P6](ii) the third case without conditioning on the best outcomes",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "        lim = best_outcomes_limit(q, F)\n        assert abs(kl(lim, q) + np.log(qA))",
+     "        lim = q.copy()\n        assert abs(kl(lim, q) + np.log(qA))"
+    ]
+   ]
+  },
+  {
+   "name": "[P6](ii) excess departure measured from the default",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "assert abs(m - (kl(ph, q) - kl(po, q))) <= 1e-9 * scale",
+     "assert abs(m - kl(ph, q)) <= 1e-9 * scale"
+    ]
+   ]
+  },
+  {
+   "name": "library: the revealed intensity off by one part in a million",
+   "edits": [
+    [
+     "stdalign/misalignment.py",
+     "    return 0.5 * (lo + hi)",
+     "    return 0.5 * (lo + hi) * (1 + 1e-6)"
+    ]
+   ]
+  }
+ ]
+}

@@ -151,20 +151,22 @@ the cost depends only on how the behaviour changes.
 
 **Lineage.** [[A3 — Pursuit is the best trade-off|A3]]; [[P14 — The cost of departing from the default is forced|P14]]. v7.10: Prop 11 (a KL limit cannot contain heavy-tailed errors), which becomes importable.
 
-### GA4 — Misalignment is value lost
-**Statement.** As [[A4 — Misalignment is value lost|A4]]: the misalignment of a behaviour is the least value it loses against a behaviour the principal
-accepts, each accepted behaviour judged by its own objective at its own intensity, with value counted in nats.
+### GA4 — Misalignment is evidence
+**Statement.** As [[A4 — Misalignment is evidence|A4]]: the misalignment of a behaviour, against the behaviours a principal accepts, is the least rate,
+per independent decision drawn from it, at which a record of the behaviour gathers evidence against an accepted
+behaviour, with evidence counted as the logarithm of the ratio of the record's likelihoods.
 
-**In plain terms.** As in the core: misalignment is how much worse the actor did than the closest acceptable way of
-acting, judged by the standard of that acceptable way.
+**In plain terms.** As in the core: misalignment is how fast a record of the actor builds a case that it is not acting
+in any acceptable way.
 
 **Why this choice.**
-- *Reduction; invariance.* The Statement is [[A4 — Misalignment is value lost|A4]]'s, and names no structure on the outcomes.
-- *Finite determination.* Each accepted behaviour `p` equivalent to the default is the best trade-off for its own
-  objective, `log(dp/dq)` at intensity `1`, as on finite outcomes ([[P4 — What KL measures|P4]](ii)); the value lost against it is a divergence,
-  which finite descriptions determine (GD1).
+- *Reduction; invariance.* The Statement is [[A4 — Misalignment is evidence|A4]]'s, and names no structure on the outcomes.
+- *Finite determination.* The expected evidence per decision against an accepted behaviour is a divergence, which
+  finite descriptions determine (GD1); and, since each accepted behaviour `p` equivalent to the default is the best
+  trade-off for its own objective, `log(dp/dq)` at intensity `1`, as on finite outcomes ([[P4 — What KL measures|P4]](ii)), it is also the value
+  lost against it.
 
-**Lineage.** [[A4 — Misalignment is value lost|A4]].
+**Lineage.** [[A4 — Misalignment is evidence|A4]]; until v12 of the core, "misalignment is value lost" (`NOTES.md` §16).
 
 ### GA5 — Declared before
 **Statement.** The default, the intended behaviours, and every nearness and resolution that enters a judgement,
@@ -334,9 +336,9 @@ principal says nothing, a limit counts only if every finite description agrees.
   actor pinned to points on a line, a tenth of that for one that piles a tenth of its behaviour on one value, and again
   `2.3` for one that pins one of two attributes and spreads the other (`general/transfer.md`). A principal who wants
   near misses graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control
-  (GD7). A distance that grades them directly cannot be the measure: GA3 and GA4 force the divergence.
-- *The rest is [[D3 — Specification, declaration and misalignment|D3]]'s.* The formula is forced by GA3 and GA4, the direction charges the unintended, and the infimum
-  gives the benefit of the doubt.
+  (GD7). A distance that grades them directly cannot be the measure: GA4 forces the divergence.
+- *The rest is [[D3 — Specification, declaration and misalignment|D3]]'s.* The formula is GA4's, the direction charges the unintended, and the infimum gives the benefit of
+  the doubt.
 
 **Notes.** Under a nearness, indistinguishability is the closure for weak convergence; with none, for setwise
 convergence, the topology in which large deviations of empirical behaviours are stated on general spaces [[References|@dembo1998]].

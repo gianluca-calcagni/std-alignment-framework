@@ -91,7 +91,7 @@ Cor 1.3 (the CGF and integral forms) enters the proofs of N1–N4 and N7 and nee
 | Def 8 | conventions: free, budget, price | in core | free: [[D3 — Specification, declaration and misalignment\|D3]]; budget: [[D5 — Stakes\|D5]] as a report; price: dropped, as for Def 3 |
 | Def 9 | contexts with evaluation and deployment frequencies | in core | [[D8 — Conditions, responses and views\|D8]], [[P24 — The evaluation gap\|P24]] |
 | Def 10 | the intent ray and the measures on it | in core | [[D2 — Pursuit of an objective\|D2]], [[D3 — Specification, declaration and misalignment\|D3]], [[D5 — Stakes\|D5]] |
-| Def 11 | the misalignment contract, axioms M1–M8 | drop | replaced by the premises: [[A4 — Misalignment is value lost\|A4]] and [[P14 — The cost of departing from the default is forced\|P14]] force the measure that the contract only constrained |
+| Def 11 | the misalignment contract, axioms M1–M8 | drop | replaced by the premises: [[A4 — Misalignment is evidence\|A4]] and [[P14 — The cost of departing from the default is forced\|P14]] force the measure that the contract only constrained |
 | Def 12 | the alignment instance | in core | [[D3 — Specification, declaration and misalignment\|D3]] |
 | Def 13 | evaluator `F̂ = F + E`; actor models | in core | [[D10 — Evaluator, regression and residual\|D10]]; the error as notation for known evaluators (Q11); actor models are paths ([[P2 — Every change of behaviour follows a replicator equation\|P2]]) |
 | Def 14 | mechanism-relative comparison `M_own` | drop | not identified from behaviour, as v7.10's own Prop 25(c) shows; [[D9 — Observation and identification\|D9]] |

@@ -65,8 +65,10 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 - [[P1 — Every behaviour is a tilt of any other|P1]] — Every behaviour is a tilt of any other
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D4 — Resolution|D4]] — Resolution
+- [[D11 — Sample and evidence|D11]] — Sample and evidence
 - [[P14 — The cost of departing from the default is forced|P14]] — The cost of departing from the default is forced
 - [[P38 — Any convex cost|P38]] — Any convex cost
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives

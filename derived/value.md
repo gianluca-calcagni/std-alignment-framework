@@ -78,7 +78,8 @@ the reciprocal of the price of departure. Without that reading, asking only that
 ray at some intensity, any increasing function of KL would also do; the second check shows `KL + KL²`, whose best
 trade-off at price `1/t` is the pursuit at intensity `t/(1 + 2·KL)`. The first check shows that χ², reverse KL and
 squared Hellinger make no point of the ray a best trade-off, with three or more outcomes. Hobson reached KL from other
-conditions [@hobson1969].
+conditions [@hobson1969]. Since v13 the measure rests on evidence ([A4]), not on this result: what it adds is that
+misalignment under the standard specification is also value lost at the one price on which [A2] and [A3] agree.
 
 **Lineage.** v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived.
 

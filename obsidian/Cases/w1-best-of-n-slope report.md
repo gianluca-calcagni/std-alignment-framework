@@ -140,6 +140,6 @@ misalignment at `n = 16` is higher by `0.138` (`0.126` to `0.151`) nats. These a
 much simpler than Coste et al.'s neural ones, on one policy's answers; they are exploratory, and a registered test would
 be needed to rely on any of them.
 
-**Premises** ([[A1 — Behaviour suffices|A1]]–[[A4 — Misalignment is value lost|A4]]). The gold is a reward model, not people: the report measures misalignment against that model.
+**Premises** ([[A1 — Behaviour suffices|A1]]–[[A4 — Misalignment is evidence|A4]]). The gold is a reward model, not people: the report measures misalignment against that model.
 The default is an estimate from 12,600 answers; quantities that depend on the policy's rarest answers, such as
 best-of-`n` at `n` near 12,600, are not reported.
