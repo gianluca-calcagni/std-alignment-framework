@@ -23,7 +23,7 @@ how much more likely the record is under the first than under the second, on a l
 - *It is universal.* Counted choices, sampled genotypes, sampled responses, case records and logged units of work are
   all samples.
 - *Evidence is the canonical statistic.* Between two behaviours, the most powerful test thresholds the likelihood ratio
-  (the Neyman–Pearson lemma [[References|@cover2006]]).
+  (the Neyman–Pearson lemma [[References|@cover2006]], read in the open draft of [[References|@polyanskiy2025]], Theorem 14.11).
 - *It gives misalignment a second meaning.* The expected evidence per decision, under the actual behaviour, for it
   against the nearest intended behaviour is the misalignment (`derived/estimation.md`). Value lost ([[A4 — Misalignment is value lost|A4]]) and evidence
   gained agree, in the same direction of KL, as the steepest climb ([[A2 — Pursuit is the steepest climb|A2]]) and the best trade-off ([[A3 — Pursuit is the best trade-off|A3]]) agree on the

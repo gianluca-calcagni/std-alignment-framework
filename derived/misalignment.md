@@ -168,9 +168,13 @@ ratios increasing strictly, then `p = p_{φ∘F,1}` for an increasing `φ` with 
 otherwise `p` is a limit of such behaviours. Best-of-`n` by `F` has the level ratio `(A_j^n − A_{j−1}^n)/q(L_j)`, with
 `A_j` the default's mass of `F ≤ v_j`, which is `n` times the average of `u^{n−1}` over `[A_{j−1}, A_j]`, non-decreasing
 in `j`. (iii) Let `y = p̂/q`, a function on `X`, and `K` the convex cone of non-decreasing functions of `F`. `r°` is the
-projection of `y` onto `K` in `L²(q)` [@robertson1988]; hence `E_q[(y − r°)·g] ≤ 0` for every `g ∈ K`, and
-`E_q[(y − r°)·h] = 0` for every `h` constant on each pooled block, since `r°` is the `q`-average of `y` there. With
-`h = 1`, `p°` sums to one, and `r° > 0`, so `p° ∈ C_F`. For `p = q·ρ ∈ C_F`,
+projection of `y` onto `K` in `L²(q)`: functions in `K` are constant on the level sets, on which `y` averages to the
+level ratios, so the weighted least squares of the Statement is this projection. `K` is a closed convex cone. For
+`g ∈ K` and small `s > 0`, `r° + s·(g − r°) ∈ K` is no nearer to `y`, so `E_q[(y − r°)·(g − r°)] ≤ 0`; with `g = 0` and
+`g = 2·r°`, `E_q[(y − r°)·r°] = 0`, hence `E_q[(y − r°)·g] ≤ 0` for every `g ∈ K`. On a pooled block `B`, `r° ± s·1_B`
+stays in `K` for small `s > 0`, since `r°` jumps strictly between maximal blocks, so `E_q[(y − r°)·1_B] = 0`: `r°` is
+the `q`-average of `y` on `B`, and `E_q[(y − r°)·h] = 0` for every `h` constant on each pooled block. With `h = 1`, `p°`
+sums to one, and `r° > 0`, so `p° ∈ C_F`. For `p = q·ρ ∈ C_F`,
 `KL(p̂‖p) − KL(p̂‖p°) − KL(p°‖p) = E_q[(y − r°)·log(r°/ρ)]`; the part with `log r°` is `0`, since `log r°` is constant
 on blocks, and the part with `−log ρ` is at least `0`, since `log ρ ∈ K`. At `p = q`, `log ρ = 0`. (ii) By (iii),
 `KL(p̂‖p) > KL(p̂‖p°)` for every `p ≠ p°` in `C_F`. On a block `B`, `p°(B) = p̂(B)` and `p°(·|B) = q(·|B)`, so the chain

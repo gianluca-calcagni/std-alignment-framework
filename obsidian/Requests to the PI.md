@@ -20,12 +20,9 @@ PI's call.
 
 | # | What | Unblocks | Why | Asked |
 |---|---|---|---|---|
-| R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder, its pinned `requirements.txt` and the public data, after `examples/quickstart.py`; one mathematician reads `OVERVIEW.md`, then `CORE.md` and `derived/`. The package is ready (H2, 2026-10-10) | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
+| R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder, its pinned `requirements.txt` and the public data, after `examples/quickstart.py`; one mathematician reads `OVERVIEW.md`, then `CORE.md` and `derived/`. The package is ready (H2, 2026-10-10), and a starting message for the mathematical reader was given to the PI to relay (Q48) | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
 | R2 | an email to the LEEPS laboratory at UC Santa Cruz, asking for the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time, and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same protocol; no affiliation is needed to ask | step 5, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | the potential arm of the test of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] has no public record (D13) | 2026-10-07 |
 | R3 | registering for the Tankerkönig price archive (`creativecommons.tankerkoenig.de`), and its password as the environment variable `TANKERKOENIG_PASSWORD` | step 6, W2 | W2's data (D7) | 2026-10-03 |
-| R4 | approve, change or replace the contribution terms of `CONTRIBUTING.md`, proposed on 2026-10-08 | outside contributions | the terms keep a later change of licence possible (Q38); they should be settled before the first outside contribution | 2026-10-08 (Q39) |
-| R5 | decide what counts as a step for the finish line's row "stable": the executor proposes a merged pull request, counted from the merge of the review of 2026-10-08 | step 7, stability | as written, the row has no unit and cannot be met on a checkable date (`NOTES.md` §12, finding 5) | 2026-10-08 (Q39) |
-| R6 | decide whether [[A2 — Pursuit is the steepest climb\|A2]]'s Statement says "a Riemannian geometry" instead of "a geometry". The executor recommends it: Čencov's theorem, which leads from [[A2 — Pursuit is the steepest climb\|A2]] to the Fisher metric, covers Riemannian geometries only, as [[D2 — Pursuit of an objective\|D2]]'s reason already says, and a steepness measured by a norm that is not an inner product is not covered. It changes a premise's Statement, so it restarts the count of row "stable" | the premises, and row 2 | found while writing `OVERVIEW.md` (H1), which says so to its reader (`NOTES.md` §13) | 2026-10-09 |
 
 ## Hosts allowed
 
@@ -52,3 +49,7 @@ Known to be refused, and not needed: `econometricsociety.org`, `r-packages.io`, 
 | Project Euclid allowed | 2026-10-07 |
 | `people.lids.mit.edu`, `authors.library.caltech.edu`, `optimization-online.org` and `jstor.org` allowed | 2026-10-08 |
 | papers behind paywalls (White, Vuong, Baker, Courty and Marschke, Ben-Tal et al., Polyanskiy and Wu): withdrawn; theorems are read in open texts or derived (Q36) | 2026-10-08 |
+| R4: the contribution terms of `CONTRIBUTING.md` approved as drafted (Q45) | 2026-10-10 |
+| R5: a step for the row "stable" is a merged pull request, counted after v12 (Q46) | 2026-10-10 |
+| R6: [[A2 — Pursuit is the steepest climb\|A2]] says "a Riemannian geometry"; the core is v12 (Q44) | 2026-10-10 |
+| R7: no release tag for the handover (Q47) | 2026-10-10 |

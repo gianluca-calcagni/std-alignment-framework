@@ -127,15 +127,15 @@ and then falls, pursuit can help and then hurt, but only once: there is no recov
 
 **Proof.** By [P18](i), `E_{p_t}[F] = Σ_j a_j·m_j·e^{t·v_j} / Σ_j a_j·e^{t·v_j}`, so `E_{p_t}[F] − c` has the sign of
 `f(t) = Σ_j c_j·e^{t·v_j}`, with `c_j = a_j·(m_j − c)` of the sign of `m_j − c`. (i) Laguerre's rule of signs
-[@polya1976]: an exponential sum `Σ_j c_j·e^{t·v_j}`, with `v_1 < … < v_k` and real coefficients not all zero, has at
-most as many real zeros, counted with multiplicity, as its coefficients have sign changes. By induction on the number
-`s` of sign changes: if `s = 0`, all non-zero terms have one sign and there is no zero. Otherwise take `μ` strictly
-between the exponents of two consecutive non-zero coefficients of opposite signs. Then `g = e^{−μt}·f` has the zeros of
-`f`, and `g' = Σ_j (v_j − μ)·c_j·e^{(v_j − μ)·t}` has coefficients with `s − 1` sign changes, since the factor `v_j − μ`
-flips the signs of exactly the terms before `μ`. By Rolle's theorem `g'` has at least one zero fewer than `g`, so `g`
-has at most `s`. A function with at most `s` zeros changes sign at most `s` times. As `t → +∞` the non-zero term with
-the largest exponent dominates, and as `t → −∞` the one with the smallest. (ii) For every `c`, the non-zero terms of
-`m_j − c` are negative and then positive. By (i), `f` is either of one sign, or negative and then positive with one
+[@polya1976], proved here: an exponential sum `Σ_j c_j·e^{t·v_j}`, with `v_1 < … < v_k` and real coefficients not all
+zero, has at most as many real zeros, counted with multiplicity, as its coefficients have sign changes. By induction on
+the number `s` of sign changes: if `s = 0`, all non-zero terms have one sign and there is no zero. Otherwise take `μ`
+strictly between the exponents of two consecutive non-zero coefficients of opposite signs. Then `g = e^{−μt}·f` has the
+zeros of `f`, and `g' = Σ_j (v_j − μ)·c_j·e^{(v_j − μ)·t}` has coefficients with `s − 1` sign changes, since the factor
+`v_j − μ` flips the signs of exactly the terms before `μ`. By Rolle's theorem `g'` has at least one zero fewer than `g`,
+so `g` has at most `s`. A function with at most `s` zeros changes sign at most `s` times. As `t → +∞` the non-zero term
+with the largest exponent dominates, and as `t → −∞` the one with the smallest. (ii) For every `c`, the non-zero terms
+of `m_j − c` are negative and then positive. By (i), `f` is either of one sign, or negative and then positive with one
 simple zero; so `{t : E_{p_t}[F] > c}` is empty, `ℝ`, or a half-line `(t_0, ∞)`. If `E_{p_s}[F] > E_{p_u}[F]` for some
 `s < u`, a `c` strictly between them would put `s` in that set and not `u`. (iii) Suppose `s < t < u` with
 `E_{p_t}[F] < c < min(E_{p_s}[F], E_{p_u}[F])`, so that `f` takes the signs `+`, `−`, `+` at `s`, `t`, `u`. For a

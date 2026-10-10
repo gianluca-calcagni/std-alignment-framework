@@ -22,7 +22,9 @@ them apart, from samples, faster than the misalignment allows. A small misalignm
 
 ## Proof
 (i) is Chernoff's theorem for two simple hypotheses, with independent samples on a finite set
-[[References|@chernoff1952]]; [[References|@cover2006]] gives a proof. (ii) For `λ ∈ [0, 1]`, Jensen's inequality gives
+[[References|@chernoff1952]]; its statement and a proof are read in the open draft of [[References|@polyanskiy2025]] (Theorem 16.1 and Corollary
+16.2, for any prior that gives both hypotheses positive probability; on a finite set with full support the moment
+generating functions it needs are finite). (ii) For `λ ∈ [0, 1]`, Jensen's inequality gives
 `−log Σ_x p̂^λ·p^{1−λ} = −log E_{p̂}[(p/p̂)^{1−λ}] ≤ (1 − λ)·KL(p̂‖p) ≤ KL(p̂‖p)`, and symmetrically
 `−log E_p[(p̂/p)^λ] ≤ λ·KL(p‖p̂) ≤ KL(p‖p̂)`; the maximum over `λ` keeps both bounds. (iii) is (ii) with `p = p°`, since
 `KL(p̂‖p°) = M(p̂)` ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](i)).

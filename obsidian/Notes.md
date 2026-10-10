@@ -71,7 +71,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **An optimum taken from a solver's word** | the first check of [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
 | **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
-| **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
+| **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -136,8 +136,8 @@ pursues its reward in the reward's own scale, but most of what the tuning change
 case run by an outside reader is not: W1 is reported to `STANDARD.md`, and the readers are requested (`REQUESTS.md`,
 R1), the hold on review having been lifted for one mathematical reader (Q33). Since then: nine diagnostics
 ([[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]), the law of estimated misalignment by access ([[P52 — What a sample certifies about misalignment, by access|P52]]), a diagnostic case (W4), a library (Q37), and a
-reader package (Q41). Where the framework stands, and what comes next, is kept in `ROADMAP.md`; this table keeps the
-gaps the core has closed.
+reader package (Q41). v12 made [[A2 — Pursuit is the steepest climb|A2]]'s geometry Riemannian, as Čencov's theorem requires (Q44). Where the framework
+stands, and what comes next, is kept in `ROADMAP.md`; this table keeps the gaps the core has closed.
 
 | Gap | State |
 |---|---|
@@ -156,7 +156,7 @@ gaps the core has closed.
 | what a measured misalignment is made of | **opened by the diagnostics** [[P43 — Misalignment at any intensity\|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]: the intensity at which it is judged, named objectives, drift between runs, the cost of reweighting, a family of targets, outer and inner misalignment, tampering |
 | worked cases | **opened**: W1 and W3 on unseen data (one prediction held of three), W4 a diagnostic case, W1 reported to `STANDARD.md` and as data; C1 and C2 in simulation (`cases/`); a case on simulated data any reader can rerun (`examples/quickstart.py`); no outside reader yet |
 | a library for the standard's quantities | **opened** (Q37, Q41): `stdalign` 0.2, misalignment, its split, its estimates by access and the diagnostics [[P43 — Misalignment at any intensity\|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], on which their checks run, and the validator of reports as data; stakes, the evaluator's results and feasibility to follow (`ROADMAP.md`, E1(c)) |
-| imported theorems read in open texts (Q36) | **closed in part**: the theorems behind [[A2 — Pursuit is the steepest climb\|A2]], [[D2 — Pursuit of an objective\|D2]], [[P4 — What KL measures\|P4]] and [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] are read in open texts; seven sources cited in nine items are not yet (`ROADMAP.md`, step 8) |
+| imported theorems read in open texts (Q36) | **closed** (Q44): every theorem a Statement, Proof or reason imports is read in an open text or derived where it is used; `REFERENCES.md` says which |
 
 **Deferred from identifiability.** The "dynamic rank" generalizes [[P3 — A fixed objective is visible in the changes of behaviour|P3]] beyond rank one. No ontology needed it.
 
@@ -210,6 +210,12 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q40 | close up and hand over, in the order the executor proposed: a close-out (the executor's tools and working rules into the repository, a handover note), then a reader package with a defined end, then the handover, to readers and to a fresh session. Applied: `tools/mdwrap.py`, `tools/mutate.py` and `tools/mutants/`, with tests; `CLAUDE.md`; §13; steps H1 and H2 | PI; executor (the plan) | `CLAUDE.md`; `tools/`; §13; `ROADMAP.md` |
 | Q41 | continue until every step of the handover is done, then open one pull request into `main`. Applied: E1(b), the diagnostics in `stdalign` 0.2; E2, the report as data, with its validator and lint R16, and W1's report migrated; E3, `examples/quickstart.py`, run by CI, and every case's environment pinned, which lint R14 now requires; H1, `OVERVIEW.md`, generated from the items; H2, §13 and the requests updated; and the pull request | PI; executor (the package) | §13; `ROADMAP.md`; `REQUESTS.md`; `OVERVIEW.md`; `stdalign/`; `examples/` |
 | Q42 | a general doc hygiene before the handover's pull request is updated. Applied: the scripted sweep of §12 run again, statements the handover made stale fixed (`ROADMAP.md`, §2, §13, `REQUESTS.md`, `README.md`, `cases/README.md`), and pull request #31 updated | PI | `ROADMAP.md`; §2; §13 |
+| Q43 | review Johnson and Huo (2026), and put in the roadmap, with a priority of the executor's choosing, anything compelling for the framework. Applied: §14; the paper is in `RELATED.md`; nothing in it becomes a step: its theory is a mechanism ([[A1 — Behaviour suffices\|A1]]) and its evidence too thin to build a prediction on; the behavioural question it raises is H37, after E4 and below W5 and C3 (`ROADMAP.md`, not now) | PI; executor (the review and the priority) | §14; `RELATED.md`; `ROADMAP.md` |
+| Q44 | [[A2 — Pursuit is the steepest climb\|A2]]'s Statement says "a Riemannian geometry", as the executor recommended (`REQUESTS.md`, R6). Applied: [[A2 — Pursuit is the steepest climb\|A2]] with a reason on what "Riemannian" excludes and a Lineage line; GA2 follows it; the core is v12; `OVERVIEW.md`'s point of pressure restated. With it, step 8 done: every imported theorem read in an open text or derived where it is used (`REFERENCES.md`) | PI; executor (step 8) | `CORE.md`; `CORE-GENERAL.md`; `OVERVIEW.md`; `derived/`; `REFERENCES.md`; `ROADMAP.md` |
+| Q45 | the contribution terms of `CONTRIBUTING.md` approved as drafted (R4): AGPL in and out, with a grant to relicense under another licence approved by the Open Source Initiative, recorded by a `Signed-off-by:` line | PI | `CONTRIBUTING.md` |
+| Q46 | a step, for the finish line's row "stable", is a merged pull request (R5); the count starts with the first pull request merged after the one that made v12 | PI | `README.md`; `ROADMAP.md`, step 7 |
+| Q47 | no release tag for the handover (R7): readers review `main` as it is when they start | PI | `REQUESTS.md` |
+| Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -445,6 +451,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H34 | **A monitor trained against is tampered with.** A monitor whose verdict is computed from a channel the actor can influence, such as a probe on activations, is a signal in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s sense, and training against it is the trainer's optimum of [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii): it tampers at every positive intensity, with a share at the start equal to the share of the monitor's variance not explained by what it is meant to detect. So optimizing against an imperfect monitor buys, from the first step, a change of what the monitor reads as well as of what it monitors. The reading needs the channel declared (the activations each behaviour would produce, before any training against the monitor), and the trainer's optimum idealizes training | D: a candidate simulation, after the tampering case; no world test named |
 | H35 | **The request as evidence, as a declared family.** Inverse reward design's posterior over true rewards, given a written one and the environment it was written for [[References\|@hadfieldmenell2017]], could be the family of [[P48 — Misalignment when the target is uncertain\|P48]] that a principal declares when the request is all there is: the least misalignment over it is the most charitable reading of the request, and the largest is the departure. Features that did not vary where the request was written get the prior's spread, so the interval widens exactly where the request was silent | D: a derived result only if a test needs it |
 | H36 | **The default from how people usually act.** Preferences implicit in the state of the world [[References\|@shah2019]] suggest estimating the default from a population's ordinary behaviour, so that the norms nobody states are carried by the cost of departure. Since a pursuit keeps the default's proportions among outcomes the request scores alike, an unstated norm then moves only through its regression on the request ([[P18 — Through the evaluator, only the regression counts\|P18]]) | D: a declaration practice for `STANDARD.md`, to try in a case |
+| H37 | **Misalignment along a conversation.** Each prefix of a conversation is a condition ([[D8 — Conditions, responses and views\|D8]]), so a model's next-turn behaviour over declared classes of outcome, good, bad and other (a resolution, [[D4 — Resolution\|D4]]), can be judged at each position against the standard specification of `F = 1_good − 1_bad`, and the path of behaviours tested for a fixed objective ([[P3 — A fixed objective is visible in the changes of behaviour\|P3]]). Evaluations that sample first turns and use that runs long meet these conditions in different proportions, so [[P24 — The evaluation gap\|P24]]'s gap applies, and [[P17 — What an unobserved condition can hide\|P17]] says first-turn alignment certifies nothing about later turns without a bound on how far the model tells them apart. Johnson and Huo's good-to-bad tipping [[References\|@johnson2026]] would be the case where the revealed objective turns from good to bad at a definite position (§14) | D: a diagnostic case, after E4, below W5 and C3 |
 
 ### 5.5 Process
 
@@ -802,21 +809,23 @@ handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H
 same day the PI asked for every step of the handover to be finished and merged in one pull request (Q41). This note is
 the state at the handover, for whoever takes the work up.
 
-**State.** The core is v11: five premises, eleven definitions, 52 propositions; lint is clean, and every test passes on
-both SIMD paths. The library `stdalign` 0.2 holds misalignment, its split and its estimates by access, the diagnostics
-[[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]], the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], and the validator of reports as data. W1's report is the first held to it (lint
-R16). `examples/quickstart.py` runs a case on simulated data, from the declaration to a valid report, in under a minute,
-and CI runs it. Every case pins its environment, and lint R14 checks the pins against the scripts' imports.
-`OVERVIEW.md` gives a mathematical reader the premises and the six results the rest stands on, with their proofs, and CI
-keeps it equal to the items. Each function and tool added for the package has a mutant list in `tools/mutants/`, all
-caught.
+**State.** The core is v12, [[A2 — Pursuit is the steepest climb|A2]] saying that the geometry of pursuit is Riemannian (Q44): five premises, eleven
+definitions, 52 propositions; every theorem a result imports is read in an open text or derived where it is used; lint
+is clean, and every test passes on both SIMD paths. The library `stdalign` 0.2 holds misalignment, its split and its
+estimates by access, the diagnostics [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]], the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], and the validator of reports as data. W1's
+report is the first held to it (lint R16). `examples/quickstart.py` runs a case on simulated data, from the declaration
+to a valid report, in under a minute, and CI runs it. Every case pins its environment, and lint R14 checks the pins
+against the scripts' imports. `OVERVIEW.md` gives a mathematical reader the premises and the six results the rest stands
+on, with their proofs, and CI keeps it equal to the items. Each function and tool added for the package has a mutant
+list in `tools/mutants/`, all caught.
 
 **Found while building the package**, each recorded where it is acted on:
 - [[A2 — Pursuit is the steepest climb|A2]] and [[D2 — Pursuit of an objective|D2]] rested on Čencov's theorem, cited only from a monograph behind a paywall; the review of 2026-10-08 did
   not catch it (§1). Its statement is now read in Lê's open text, and Gibbs' and Pinsker's inequalities in Polyanskiy
-  and Wu's draft. Seven more sources, cited in nine items, have no record of being read: step 8 of `ROADMAP.md`.
-- [[A2 — Pursuit is the steepest climb|A2]] says "a geometry", while Čencov's theorem covers Riemannian ones only. Changing a premise is the PI's decision
-  (`REQUESTS.md`, R6); `OVERVIEW.md` tells its reader.
+  and Wu's draft. Seven more sources, cited in nine items, had no record of being read; step 8 read or derived each
+  (Q44).
+- [[A2 — Pursuit is the steepest climb|A2]] said "a geometry", while Čencov's theorem covers Riemannian ones only. The PI decided to amend it (Q44), so the
+  core is v12, and the count for "stable" restarts (Q46).
 - Two mutants of [[P44 — What named objectives explain|P44]]'s named split survived, and both are equivalent, for one reason: the named pursuit depends only
   on the span of `F` and the named objectives. Projecting from the default instead of from `p°` stays in the same
   family, since `F` is in the span; naming the evaluator `F + 0.8·flattery` instead of flattery leaves the span
@@ -837,16 +846,17 @@ caught.
   directory: an analysis after the verdict needs a rerun of the case's script;
 - W1's trained proxy (`cases/w1-best-of-n-slope/proxy.npz`, ignored by git) and the public data of W1 and W3 (about 6
   GB): rebuilt by `train_proxy.py` and fetched by the scripts, from the hosts in `REQUESTS.md`;
-- the papers and scans read on arXiv, Project Euclid, the Caltech library, Optimization Online and Polyanskiy and Wu's
-  server: fetched again from the same hosts;
+- the papers and scans read on arXiv, Project Euclid (Wilks and Aumann among them), the Caltech library, Optimization
+  Online and Polyanskiy and Wu's server: fetched again from the same hosts;
 - the executor's scratch scripts: what was reusable is now in `tools/` (`mdwrap.py`, `mutate.py`, the mutant lists); the
   rest were one-off probes, whose numbers are recorded where they are cited.
 
-**Next.** The next phase starts with W5, after E4, and with C3, both on the library; E1(c) moves stakes, the
-evaluator's results and feasibility into it; step 3 gives the other quantities of a report their limit laws, which would
-replace the quickstart's bootstrap; step 8 settles the remaining sources. The open decisions are in `REQUESTS.md`:
-readers (R1), whose package is ready; the LEEPS records (R2); the Tankerkönig archive (R3); the contribution terms (R4);
-what counts as a step for stability (R5); and [[A2 — Pursuit is the steepest climb|A2]]'s wording (R6).
+**Next.** The next phase starts with W5, after E4, and with C3, both on the library; E1(c) moves stakes, the evaluator's
+results and feasibility into it; step 3 gives the other quantities of a report their limit laws, which would replace the
+quickstart's bootstrap; and three merged pull requests that change no Statement and no scope meet the row "stable"
+(Q46). The open requests are in `REQUESTS.md`: readers (R1), whose package is ready; the LEEPS records (R2); and the
+Tankerkönig archive (R3). The contribution terms (Q45), the unit for stability (Q46), [[A2 — Pursuit is the steepest climb|A2]]'s wording (Q44) and the tag
+(Q47) are decided.
 
 **What the next executor should know.**
 - Read §1 before anything: its rows are the mistakes this work made, each with its evidence, and most were made more
@@ -858,3 +868,36 @@ what counts as a step for stability (R5); and [[A2 — Pursuit is the steepest c
   for its own sake; and asks to be consulted only on what is the PI's to decide.
 - `ROADMAP.md` was kept from a source written one line per paragraph; with `tools/mdwrap.py` that source is no longer
   needed: edit the file, then wrap it.
+
+## 14. A review of Johnson and Huo (2026), 2026-10-10 (Q43)
+
+By the executor, at the PI's request, from the paper's record and main text on arXiv (v2); the supplementary
+information, which the main text cites for the derivation and every table, and the code are not public, and the source
+on arXiv holds neither. Not independent (rule (f)).
+
+**What it claims.** Outputs of a language model, coarse-grained into a neutral prompt `A`, good content `B`, bad content
+`D` and the rest, tip from good to bad because of competition for attention. In a single attention head whose context
+vector is the attention-weighted mean of the conversation's symbols, the next symbol is the class whose centroid has the
+larger dot product with that vector; when `B·D > B·B`, each new `B` pulls the context towards `D`, and the output tips
+after `n*` good symbols, given by a closed formula (its Eq. 2). It reports agreement with six models of 124M to 410M
+parameters, and compatibility with a report on ChatGPT-4o.
+
+**What holds.** Eq. 2 is exact for that toy: it is the step at which `c·D` first exceeds `c·B`. A check here put it
+within one step of the simulated head in 65 random instances of 65 (`probes/related/attention_tipping_toy.py`).
+
+**What does not, yet.**
+- The toy has no query, key or value projections and no unembedding. The vectors the paper measures are mean-pooled
+  hidden states of the penultimate layer for whole phrases, which are none of the head's quantities. So the evidence
+  tests a geometric heuristic that correlates with the output, not the mechanism the formula describes.
+- 18 cases, on base models that were never instruction-tuned, under greedy decoding. 13 of the 18 tip at once, so a
+  baseline that always predicts immediate tipping scores 13; the formula scores 16. Its p-values compare with chance,
+  not with that baseline, and two near-boundary cases were excluded from the timing-class count.
+- The claim that the mechanism persists at production scale rests on four qualitative compatibilities with a report
+  whose transcripts are not public.
+
+**For the framework.** The mechanism is out of scope: the core judges behaviour, not how it is produced ([[A1 — Behaviour suffices|A1]]), and no
+result of the core would change if the paper is right or wrong. The question it raises is behavioural, and the
+framework already has the instruments for it: misalignment along a conversation (H37). A case on it would be
+diagnostic, not a test of the framework's predictions, and it needs E4's adapters for sequence models, as W5 does. It
+waits below W5 and C3, which test predictions of the framework. What the framework could give the paper is in
+`RELATED.md`.

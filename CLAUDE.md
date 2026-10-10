@@ -27,6 +27,8 @@ framework. It is a working agreement, not a claimed property.
 - End each commit message with the attribution lines the session prescribes. Never write a model's name or identifier
   into a commit, a pull request or a file of the repository.
 - After a push, wait for CI and report its result; a red CI is the next piece of work.
+- After the branch's pull request is merged, follow-up work starts from `main`: when the branch holds nothing unmerged,
+  `git merge --ff-only origin/main` moves it there. The session's safety check refuses `git checkout -B` and resets.
 
 ## Evidence and data
 

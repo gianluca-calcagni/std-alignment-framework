@@ -59,3 +59,4 @@ cancel the default).
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[P13 — What the start of a change gains|P13]] — What the start of a change gains
 - [[P19 — A monotone regression rules out overoptimization|P19]] — A monotone regression rules out overoptimization
+- [[P23 — The estimated misalignment of an actor that pursues the objective|P23]] — The estimated misalignment of an actor that pursues the objective

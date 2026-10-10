@@ -29,9 +29,11 @@ a target reliably when the situations vary much.
 ## Proof
 (i) `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/q(x))` splits as `Σ_c ρ(c)·Σ_x p_c(x)·log(p_c(x)/p̄(x))` plus
 `Σ_x p̄(x)·log(p̄(x)/q(x))`. (ii) `H(Z) ≥ H(Z|X)`, since conditioning does not increase entropy. Given the action, the
-result determines the condition, by injectivity, and the condition determines the result, so `H(Z|X) = H(C|X)`, which
-is `H(C) − I(C; X)`. (iii) By (i), `I(C; X)` is at most the average departure. A distribution on `m` results with mass
-`1 − g` on `z₀` has entropy at most `h(g) + g·log(m − 1)`, the entropy when the rest is spread evenly [[References|@cover2006]].
+result determines the condition, by injectivity, and the condition determines the result, so `H(Z|X) = H(C|X)`, which is
+`H(C) − I(C; X)`. (iii) By (i), `I(C; X)` is at most the average departure. A distribution on `m` results with mass
+`1 − g` on `z₀` has entropy at most `h(g) + g·log(m − 1)`: by the chain rule of entropy it is `h(g)` plus `g` times the
+entropy of the result given that it is not `z₀`, and a distribution `r` on `m − 1` results has entropy
+`log(m − 1) − KL(r‖u)` for the uniform `u`, at most `log(m − 1)` by Gibbs' inequality.
 
 ## Notes
 (ii) is Ashby's law of requisite variety [[References|@ashby1956]] in Conant's information form [[References|@conant1969]]; (i) prices

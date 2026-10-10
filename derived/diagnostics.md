@@ -513,7 +513,8 @@ mass at `s₁`.
 (iv) `E[F̂(s')] = Σ_{w,s,s'} p(w, s)·K(s'|w)·F̂(s') = E_{p_W}[m]`, and `E_q[F̂] = E_{q_W}[m]`, so the split is an
 identity. `E_{p_W}[m]` is also the average of `F̂` under `p_W ⊗ K`, from which `p` departs by `T(p)` ([P50](i)); the
 difference of two averages of `F̂` is at most `max F̂ − min F̂` times the total variation distance, which Pinsker's
-inequality bounds by `(KL/2)^{1/2}` [@cover2006]. Finally `p_{S'} = K^⊤p_W`, so `KL(p_S‖p_{S'}) ≤ T(p)` by (i).
+inequality bounds by `(KL/2)^{1/2}` ([@polyanskiy2025], Theorem 7.10, read in its open draft). Finally
+`p_{S'} = K^⊤p_W`, so `KL(p_S‖p_{S'}) ≤ T(p)` by (i).
 
 **Checks.** checks/test_diagnostics.py::test_signals_and_audits_bound_tampering
 

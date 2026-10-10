@@ -47,7 +47,9 @@ tells the actor from its nearest intended behaviour at an exponential rate above
 them apart, from samples, faster than the misalignment allows. A small misalignment is, necessarily, hard to detect.
 
 **Proof.** (i) is Chernoff's theorem for two simple hypotheses, with independent samples on a finite set
-[@chernoff1952]; [@cover2006] gives a proof. (ii) For `λ ∈ [0, 1]`, Jensen's inequality gives
+[@chernoff1952]; its statement and a proof are read in the open draft of [@polyanskiy2025] (Theorem 16.1 and Corollary
+16.2, for any prior that gives both hypotheses positive probability; on a finite set with full support the moment
+generating functions it needs are finite). (ii) For `λ ∈ [0, 1]`, Jensen's inequality gives
 `−log Σ_x p̂^λ·p^{1−λ} = −log E_{p̂}[(p/p̂)^{1−λ}] ≤ (1 − λ)·KL(p̂‖p) ≤ KL(p̂‖p)`, and symmetrically
 `−log E_p[(p̂/p)^λ] ≤ λ·KL(p‖p̂) ≤ KL(p‖p̂)`; the maximum over `λ` keeps both bounds. (iii) is (ii) with `p = p°`, since
 `KL(p̂‖p°) = M(p̂)` ([P5](i)).
@@ -76,8 +78,11 @@ evidence of real misalignment.
 **Proof.** `n·M(p̂_n) = n·min_{s≥0} KL(p̂_n‖p_{F,s})` is the logarithm of the ratio between the largest likelihood of
 the sample over all behaviours, reached at `p̂_n`, and over the pursuit ray. The ray is a smooth one-parameter family
 inside the `(|X| − 1)`-parameter family of all full-support behaviours, and the true intensity `t > 0` is an interior
-point of the half-line `s ≥ 0`. Wilks's theorem then gives the χ² limit with `(|X| − 1) − 1 = |X| − 2` degrees of
-freedom [@wilks1938].
+point of the half-line `s ≥ 0`. Wilks's theorem [@wilks1938] is stated for a hypothesis that fixes `h − m` of `h`
+coordinates of the parameter, and gives `−2·log λ` the χ² limit with `h − m` degrees of freedom. Near the true behaviour
+the ray is the axis of some coordinates, since it is a smooth curve whose velocity `p·(F − E_p[F])` ([P2](iii)) does not
+vanish for non-constant `F`, and the likelihood ratio does not depend on the coordinates. Here `h = |X| − 1` and
+`m = 1`, so the limit has `|X| − 2` degrees of freedom.
 
 **Checks.** checks/test_estimation.py::test_estimated_misalignment_is_chi_squared
 

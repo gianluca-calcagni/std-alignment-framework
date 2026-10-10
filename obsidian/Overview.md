@@ -59,17 +59,22 @@ may face. Alignment is judged from that description alone, never from how the be
 ### A2 — Pursuit is the steepest climb
 
 **Statement.** To pursue an objective is to raise its average as steeply as possible, with steepness measured in a
-geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed proportions.
+Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
+proportions.
 
-**In plain terms.** Wanting more of something means moving toward it by the most direct route, and what counts as most
-direct must not depend on how finely we describe what happens.
+**In plain terms.** Wanting more of something means moving toward it by the most direct route, with lengths and angles
+measured as in ordinary geometry, and what counts as most direct must not depend on how finely we describe what
+happens.
 
 **Why this choice.**
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
 - *It is enough.* By Čencov's theorem [[References|@cencov1982]], whose statement is read in the open text [[References|@le2016]] (Proposition
-  6.1), it fixes the geometry among the Riemannian ones, up to a constant factor, and with it the form of pursuit, a
-  reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
+  6.1), it fixes the geometry, up to a constant factor, and with it the form of pursuit, a reweighting of the default
+  (section 2 and `derived/tilts-and-paths.md`).
+- *Riemannian.* Steepness needs a length for each direction of change. An inner product gives one, and Čencov's theorem
+  is stated for these. A geometry whose lengths come from a norm that is not an inner product would need a uniqueness
+  theorem of its own, and none is known here; the premise does not cover it.
 
 ### A3 — Pursuit is the best trade-off
 
@@ -402,9 +407,9 @@ standard's validator accepts.
 
 The proofs above, line by line. These are the places where a careful reader should push.
 1. **From A2 to the Fisher metric.** Čencov's theorem needs a Riemannian geometry, and invariance under splitting
-   outcomes for outcome sets of every size at once. A2 asks for the invariance, but says only "a geometry"; D2's reason
-   says "Riemannian". A geometry that measures steepness by a norm that is not an inner product is not covered. A
-   reader may reject either requirement, and [[P2 — Every change of behaviour follows a replicator equation|P2]] then loses its reading as the steepest climb, though not its algebra.
+   outcomes for outcome sets of every size at once. A2 asks for both, the first since v12. A geometry that measures
+   steepness by a norm that is not an inner product is not covered. A reader may reject either requirement, and [[P2 — Every change of behaviour follows a replicator equation|P2]]
+   then loses its reading as the steepest climb, though not its algebra.
 2. **The price in A3.** [[P14 — The cost of departing from the default is forced|P14]] forces KL because A3 prices departure at exactly `1/t`. If the best trade-offs are only
    asked to lie somewhere on the pursuit ray, any increasing function of KL passes ([[P14 — The cost of departing from the default is forced|P14]], Notes).
 3. **The benefit of the doubt in A4.** Misalignment takes the least loss over the acceptable behaviours, each judged by
@@ -454,8 +459,8 @@ Open an issue, or a pull request under the terms of `CONTRIBUTING.md`.
 - **Finite outcomes.** Outcomes that are not finite are drafted in `CORE-GENERAL.md`, and nothing there is claimed.
 - **Behaviour only.** Two actors that behave alike in every condition are the same actor for the framework ([[A1 — Behaviour suffices|A1]]).
 - **Premises are choices.** Each premise is argued for in its "Why this choice" in `CORE.md`, not proved.
-- **Imported theorems.** Some later results still cite theorems from texts behind paywalls. Reading them in open texts,
-  deriving them, or dropping them is an open step (`ROADMAP.md`).
+- **Imported theorems.** Every theorem a result imports is read in an open text or derived where it is used, and
+  `REFERENCES.md` says which. Čencov's own proof is not in the open texts read here; an extension of it is.
 - **Prediction.** On real data, as of 2026-10-09, three registered predictions failed and two held (section 6). The
   framework's worth as a predictive theory is not established. Its worth as a common unit and a set of diagnostics is
   what the next cases test.

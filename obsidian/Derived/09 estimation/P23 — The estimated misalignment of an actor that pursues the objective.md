@@ -23,8 +23,11 @@ evidence of real misalignment.
 `n·M(p̂_n) = n·min_{s≥0} KL(p̂_n‖p_{F,s})` is the logarithm of the ratio between the largest likelihood of
 the sample over all behaviours, reached at `p̂_n`, and over the pursuit ray. The ray is a smooth one-parameter family
 inside the `(|X| − 1)`-parameter family of all full-support behaviours, and the true intensity `t > 0` is an interior
-point of the half-line `s ≥ 0`. Wilks's theorem then gives the χ² limit with `(|X| − 1) − 1 = |X| − 2` degrees of
-freedom [[References|@wilks1938]].
+point of the half-line `s ≥ 0`. Wilks's theorem [[References|@wilks1938]] is stated for a hypothesis that fixes `h − m` of `h`
+coordinates of the parameter, and gives `−2·log λ` the χ² limit with `h − m` degrees of freedom. Near the true behaviour
+the ray is the axis of some coordinates, since it is a smooth curve whose velocity `p·(F − E_p[F])` ([[P2 — Every change of behaviour follows a replicator equation|P2]](iii)) does not
+vanish for non-constant `F`, and the likelihood ratio does not depend on the coordinates. Here `h = |X| − 1` and
+`m = 1`, so the limit has `|X| − 2` degrees of freedom.
 
 ## Notes
 At `t = 0`, the true intensity is on the boundary of the half-line and the limit is a mixture of χ²
@@ -38,7 +41,7 @@ v8: the deviance of [[P5 — Misalignment is attained, and zero exactly on the i
 - [`checks/test_estimation.py::test_estimated_misalignment_is_chi_squared`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_estimation.py)
 
 ## Depends on
-- nothing
+- [[P2 — Every change of behaviour follows a replicator equation|P2]] — Every change of behaviour follows a replicator equation
 
 ## Used by
 - no later item
