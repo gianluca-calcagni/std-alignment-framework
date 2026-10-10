@@ -74,8 +74,8 @@ the general one; where a general result also holds on finite outcomes, it is pro
   about the world) or verification (it can fail only through a bug).
 - **R11.** `STANDARD.md` names only existing items, and names every definition of the core.
 - **R12.** `RELATED.md`, `IMPORT.md`, `CORE-GENERAL.md`, the files of `general/`, `SCENARIO.md`, `ROADMAP.md`,
-  `REQUESTS.md`, `CONTRIBUTING.md` and the files of `cases/` name only existing items, and their citations are listed
-  like all others.
+  `REQUESTS.md`, `CONTRIBUTING.md`, `CLAUDE.md`, `OVERVIEW.md` and the files of `cases/` name only existing items, and
+  their citations are listed like all others.
 - **R13.** `RECORD.md` names only existing items. Its ledger has exactly one row for every prediction of the
   ontologies, with the same label and a state (untested, held, refuted or untestable), and no other row.
 - **R14.** Every case in `cases/` has a registration, and a `requirements.txt` of pins, `package==version`, that names

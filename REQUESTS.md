@@ -14,13 +14,13 @@ every turn that opens, changes or closes a request; `ROADMAP.md` says which step
 ## Open
 
 The PI asked for a more solid engineering side before some steps are actioned (Q37). The engineering steps E1(b), E2
-and E3 of `ROADMAP.md` are done, and so is the overview H1 (2026-10-09): a reader now has a library to compute with, a
+and E3 of `ROADMAP.md` are done, and so is the overview H1 (2026-10-10): a reader now has a library to compute with, a
 report to check, a case to rerun in a minute, and ten pages to start from. Which of these requests come first is the
 PI's call.
 
 | # | What | Unblocks | Why | Asked |
 |---|---|---|---|---|
-| R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder, its pinned `requirements.txt` and the public data, after `examples/quickstart.py`; one mathematician reads `OVERVIEW.md`, then `CORE.md` and `derived/`. The package is ready (H2, 2026-10-09) | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
+| R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder, its pinned `requirements.txt` and the public data, after `examples/quickstart.py`; one mathematician reads `OVERVIEW.md`, then `CORE.md` and `derived/`. The package is ready (H2, 2026-10-10) | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
 | R2 | an email to the LEEPS laboratory at UC Santa Cruz, asking for the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time, and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same protocol; no affiliation is needed to ask | step 5, [P41] | the potential arm of the test of [P41] has no public record (D13) | 2026-10-07 |
 | R3 | registering for the Tankerkönig price archive (`creativecommons.tankerkoenig.de`), and its password as the environment variable `TANKERKOENIG_PASSWORD` | step 6, W2 | W2's data (D7) | 2026-10-03 |
 | R4 | approve, change or replace the contribution terms of `CONTRIBUTING.md`, proposed on 2026-10-08 | outside contributions | the terms keep a later change of licence possible (Q38); they should be settled before the first outside contribution | 2026-10-08 (Q39) |
