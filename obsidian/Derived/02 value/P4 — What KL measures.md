@@ -43,7 +43,8 @@ cell with `p(C) > 0`, that is, if and only if `p/r` is constant there.
 (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and
 a free energy in the literature on bounded rationality [[References|@ortega2013]]. The same ray therefore arises twice: as the
 steepest climb of [[D2 — Pursuit of an objective|D2]] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are
-standard [[References|@cover2006]]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the
+standard [[References|@cover2006]]; Gibbs' inequality is read in the open draft of [[References|@polyanskiy2025]], Theorem 2.3, and the chain rule
+is proved in (iii). Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the
 chain rule
 (iii) [[References|@hobson1969]]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
 break it.

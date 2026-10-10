@@ -18,8 +18,9 @@ direct must not depend on how finely we describe what happens.
 ## Why this choice
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
-- *It is enough.* By Čencov's theorem [[References|@cencov1982]] it fixes the geometry, up to a constant factor, and with it the form
-  of pursuit, a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
+- *It is enough.* By Čencov's theorem [[References|@cencov1982]], whose statement is read in the open text [[References|@le2016]] (Proposition
+  6.1), it fixes the geometry among the Riemannian ones, up to a constant factor, and with it the form of pursuit, a
+  reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
 
 ## Lineage
 v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [[D2 — Pursuit of an objective|D2]]'s "why", where

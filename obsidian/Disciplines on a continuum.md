@@ -73,4 +73,3 @@ finite episode. On a continuum of time it becomes a rate: the mutual information
 paths, which can be positive while every snapshot of the two prices shows none (T3). Assad et al. found margins rising
 in duopolies only when both stations had adopted pricing algorithms, and only about a year later [[References|@assad2024]]: the
 reading here is that what the algorithms learned shows in the paths, not in any one snapshot.
-

@@ -12,7 +12,8 @@ A case is a test of the framework with a registration, a script and a result, in
    written. A failed prediction keeps its row (rule (a)). The registration commits of C1, C2, W1, W3 and W4 were made on
    the branch of pull request #29, which was merged into `main` with its history.
 4. For a world case, `REPORT.md` may follow: the case reported to `STANDARD.md`, field by field, with intervals. It is
-   descriptive, computed after the verdict, and changes no verdict.
+   descriptive, computed after the verdict, and changes no verdict. Its data are in `standard-report.json`, which lint
+   R16 holds to the standard (`stdalign/report.py`); W1's is built by `make_standard_report.py`.
 
 Inputs are fetched by each case's scripts, never stored here: the repository keeps only code and aggregates, and each
 case says under which licences its inputs were released (README, working agreements).
@@ -49,6 +50,9 @@ of the cases (`NOTES.md` §1), is held in one of these places:
 | exact least squares when a regressor does not vary | `tools/casekit.py` (`least_squares`), tested |
 | ties broken at random; logarithms of averages without underflow | `tools/casekit.py` (`untie`, `log_mean_exp`), tested |
 | a registration does not change after its result | lint R14 |
+| the environment a case ran in, pinned so that a reader can rerun it; the first five cases' versions were read after their runs, which had not recorded them | lint R14: a `requirements.txt` of pins that covers every import of the case's scripts |
+| a report written so that it can be checked field by field | lint R16: `standard-report.json` keeps the standard (`stdalign/report.py`) |
+| an interval's coverage measured where the truth is known, before the interval is reported | nothing yet: `probes/examples/quickstart_coverage.py` is the model; three of the quickstart's intervals, near zero, covered 90% |
 | stopping a process by its number, never by a pattern | nothing yet: the executor's habit, broken twice (`NOTES.md` §1) |
 
 Lint can check that a section exists, not that its content is right; that is what a reader is for, and none has read a

@@ -1,0 +1,186 @@
+{
+ "about": "The library stdalign (E1(a), Q37): its functions, against its own tests and the checks of the items it computes. 17 mutants, all caught on 2026-10-08, after two tests were added for the two that survived at first.",
+ "tests": [
+  "stdalign",
+  "checks",
+  "scenario"
+ ],
+ "mutants": [
+  {
+   "name": "tilt by -F",
+   "edits": [
+    [
+     "stdalign/core.py",
+     "    w = _log(r) + F\n",
+     "    w = _log(r) - F\n"
+    ]
+   ]
+  },
+  {
+   "name": "kl the wrong way inside the log",
+   "edits": [
+    [
+     "stdalign/core.py",
+     "np.sum(pm * np.log(pm / rm))",
+     "np.sum(pm * np.log(rm / pm))"
+    ]
+   ]
+  },
+  {
+   "name": "kl finite where r is zero",
+   "note": "the value is the same, with a warning; caught by the test that no warning is raised",
+   "edits": [
+    [
+     "stdalign/core.py",
+     "    if rm.min() <= 0:\n        return float(\"inf\")\n",
+     "    if rm.min() < 0:\n        return float(\"inf\")\n"
+    ]
+   ]
+  },
+  {
+   "name": "log-normalizer of the mean",
+   "edits": [
+    [
+     "stdalign/core.py",
+     "    return float(m + np.log(np.exp(w - m).sum()))",
+     "    return float(m + np.log(np.exp(w - m).mean()))"
+    ]
+   ]
+  },
+  {
+   "name": "intensity: the default case missed",
+   "edits": [
+    [
+     "stdalign/misalignment.py",
+     "    if target <= q @ F:\n        return 0.0\n",
+     "    if target < q @ F - 1.0:\n        return 0.0\n"
+    ]
+   ]
+  },
+  {
+   "name": "intensity: coarse bisection",
+   "edits": [
+    [
+     "stdalign/misalignment.py",
+     "    for _ in range(200):",
+     "    for _ in range(12):"
+    ]
+   ]
+  },
+  {
+   "name": "best outcomes are the worst",
+   "edits": [
+    [
+     "stdalign/misalignment.py",
+     "    A = F >= F.max()",
+     "    A = F <= F.min()"
+    ]
+   ]
+  },
+  {
+   "name": "pursuit part the wrong way",
+   "edits": [
+    [
+     "stdalign/misalignment.py",
+     "    return Assessment(M, t, case, po, departure, kl(po, q))",
+     "    return Assessment(M, t, case, po, departure, kl(q, po))"
+    ]
+   ]
+  },
+  {
+   "name": "counts: variance without the mean",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    var_M = ph[seen] @ lw ** 2 - (ph[seen] @ lw) ** 2 if",
+     "    var_M = ph[seen] @ lw ** 2 if"
+    ]
+   ]
+  },
+  {
+   "name": "counts: intensity variance unsquared",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "np.sqrt(vF / vFo ** 2 / n)",
+     "np.sqrt(vF / vFo / n)"
+    ]
+   ]
+  },
+  {
+   "name": "counts: chi2 with |X| - 1 degrees",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    df = ph.size - 2\n",
+     "    df = ph.size - 1\n"
+    ]
+   ]
+  },
+  {
+   "name": "log-ratios: the counting variance",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    g = np.exp(log_w) - log_w\n",
+     "    g = -log_w\n"
+    ]
+   ]
+  },
+  {
+   "name": "log-ratios: the normalizer of the default",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    lme = log_mean_exp(a)\n",
+     "    lme = log_mean_exp(s * f)\n"
+    ]
+   ]
+  },
+  {
+   "name": "two samples: no reference term",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     " + np.var(np.exp(log_v), ddof=1) / m))",
+     "))"
+    ]
+   ]
+  },
+  {
+   "name": "minimum over all s",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    if dphi(0.0) >= 0 or f_max",
+     "    if False and dphi(0.0) >= 0 or f_max"
+    ],
+    [
+     "stdalign/estimation.py",
+     "    return brentq(dphi, 0.0, hi,",
+     "    return brentq(dphi, -50.0, hi,"
+    ]
+   ]
+  },
+  {
+   "name": "effective draws without the square",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    return float(w.sum() ** 2 / (w ** 2).sum())",
+     "    return float(w.sum() / (w ** 2).sum())"
+    ]
+   ]
+  },
+  {
+   "name": "interval at one standard error",
+   "edits": [
+    [
+     "stdalign/estimation.py",
+     "    z = norm.ppf(0.5 + level / 2)",
+     "    z = 1.0"
+    ]
+   ]
+  }
+ ]
+}

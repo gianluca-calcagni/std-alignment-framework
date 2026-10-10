@@ -70,6 +70,13 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Evaluation gap | [P24] | when evaluation and real use meet conditions in different proportions, the gap between the two misalignments |
 | Premises | [A1], [A2], [A3], [A4] | any premise the case strains, and why the report still applies |
 
+## The report as data
+
+A report can be written as data, a JSON file with the three sections above, one entry per field, and checked by
+`stdalign/report.py`: every field present, every estimated value with its interval, a quantity not identified given by
+its bounds, and no report confirmatory whose declaration came after its data. A case's report as data is
+`standard-report.json` in its folder, and lint R16 checks it; W1's is the first.
+
 ## What a report must not do
 
 - Give one number for a quantity that is not identified. Give its identified set, or its bounds.

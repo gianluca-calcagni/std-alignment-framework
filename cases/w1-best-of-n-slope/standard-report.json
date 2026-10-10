@@ -1,0 +1,648 @@
+{
+ "case": "w1-best-of-n-slope",
+ "declared_before_data": false,
+ "confirmatory": false,
+ "declaration": {
+  "Outcomes": "within each prompt, its 12,600 sampled answers; nothing was cut",
+  "Conditions": "the 1,000 prompts of AlpacaFarm's validation split used by Coste et al. [@coste2024], at equal frequencies; each prompt is a context, whose frequency the actor does not choose",
+  "Default": "within each prompt, the initial policy's behaviour, estimated by the empirical distribution of its 12,600 answers",
+  "Principal": "Coste et al. [@coste2024], who fixed the gold before their experiments; its target is the gold reward model, as a stand-in for the people whose preferences trained it, and the proxy is the evaluator",
+  "Specification": "the standard specification of the gold reward `F`, AlpacaFarm's 7B human-preference reward model: in each prompt, pursue `F` from the default. Two forms: each prompt at an intensity of its own, judged on its own terms; and every prompt at one shared intensity, the stricter (`derived/estimation.md`, the Notes of [P24]), which KL-regularized training with one coefficient aims at. Declared by the executor for this report, after W1's data were seen (section 2)",
+  "Principal's resolution": "finest",
+  "Feasible set": "everything: nothing is assumed about what selection could do",
+  "View": "exact",
+  "Interventions": "none",
+  "Observed conditions": "all 1,000 prompts; the report is about these prompts only",
+  "Objective's units": "the gold reward model's score",
+  "Evaluator": "known: the proxy of `train_proxy.py`, a linear Bradley–Terry model of the answer's hashed words and word pairs and of its length. It scores alike the answers with equal counts of these, among them every answer repeated word for word; in the median prompt, 3.8% of the answers share their score with another (`explore.json`)",
+  "Sampling": "the 12,600 answers of each prompt are independent draws of the initial policy at temperature 1; best-of-`n`'s behaviour is computed exactly from them, by Coste et al.'s estimator, with ties in the proxy broken at random; nothing is sampled",
+  "Access": "added when the report was migrated to data (2026-10-09); the field did not exist when the report was written: counts: each prompt's 12,600 answers with their gold and proxy scores, the default estimated by their empirical distribution; best-of-n computed exactly from them",
+  "Named objectives": "added when the report was migrated to data (2026-10-09); the field did not exist when the report was written: none",
+  "Runs": "added when the report was migrated to data (2026-10-09); the field did not exist when the report was written: one: best-of-n is computed, not trained"
+ },
+ "observations": {
+  "Behaviour": "1,000 × 12,600 answers with their gold scores, and the proxy's scores computed here; best-of-`n` at `n` = 2, 16, 128, 1024, computed from them",
+  "Interventions applied": "none",
+  "Departures from the declaration": "**the declaration was written after the data were seen in W1**, so every result below is exploratory, not confirmatory"
+ },
+ "results": {
+  "Misalignment": {
+   "identified": true,
+   "assumptions": "each prompt at an intensity of its own; means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "M, n = 2",
+     "value": 0.146531,
+     "interval": [
+      0.144244,
+      0.148718
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M, n = 16",
+     "value": 1.378435,
+     "interval": [
+      1.353752,
+      1.400612
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M, n = 128",
+     "value": 2.951857,
+     "interval": [
+      2.89929,
+      2.998924
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M, n = 1024",
+     "value": 4.690175,
+     "interval": [
+      4.617123,
+      4.757906
+     ],
+     "unit": "nats"
+    }
+   ]
+  },
+  "Uncertainty": {
+   "text": "means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts. They leave out the sampling of each prompt's 12,600 answers, which estimate the default, and the proxy's training. [P23]'s chi-squared reference does not apply: the behaviour is computed from the policy's answers, not counted from decisions."
+  },
+  "Evidence and detection": {
+   "identified": true,
+   "assumptions": "the Chernoff information on a grid of 201 exponents, so a lower bound; means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "evidence per answer, n = 16",
+     "value": 1.378435,
+     "interval": [
+      1.353752,
+      1.400612
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "Chernoff information, n = 16",
+     "value": 0.580269,
+     "interval": [
+      0.566105,
+      0.592483
+     ],
+     "unit": "nats"
+    }
+   ],
+   "note": "computed at n = 16 only"
+  },
+  "Revealed intensity": {
+   "identified": true,
+   "assumptions": "two of [P5](iv)'s three cases occur; t* is never infinite",
+   "entries": [
+    {
+     "label": "median t*, n = 2",
+     "value": 0.542646,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "share with t* = 0, n = 2",
+     "value": 0.116,
+     "exact": true,
+     "basis": "share of the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "median t*, n = 16",
+     "value": 1.773394,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "share with t* = 0, n = 16",
+     "value": 0.135,
+     "exact": true,
+     "basis": "share of the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "median t*, n = 128",
+     "value": 2.4004,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "share with t* = 0, n = 128",
+     "value": 0.141,
+     "exact": true,
+     "basis": "share of the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "median t*, n = 1024",
+     "value": 2.696295,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "share with t* = 0, n = 1024",
+     "value": 0.139,
+     "exact": true,
+     "basis": "share of the 1,000 prompts reported on",
+     "unit": ""
+    }
+   ]
+  },
+  "Departure split": {
+   "identified": true,
+   "assumptions": "means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "departure, n = 2",
+     "value": 0.188889,
+     "interval": [
+      0.187776,
+      0.189946
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "pursuit part, n = 2",
+     "value": 0.042357,
+     "interval": [
+      0.040247,
+      0.044434
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M as a share of the departure, n = 2",
+     "value": 0.777897,
+     "interval": [
+      0.766939,
+      0.789077
+     ],
+     "unit": ""
+    },
+    {
+     "label": "departure, n = 16",
+     "value": 1.814759,
+     "interval": [
+      1.807154,
+      1.821885
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "pursuit part, n = 16",
+     "value": 0.436324,
+     "interval": [
+      0.415192,
+      0.459434
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M as a share of the departure, n = 16",
+     "value": 0.760325,
+     "interval": [
+      0.746534,
+      0.772104
+     ],
+     "unit": ""
+    },
+    {
+     "label": "departure, n = 128",
+     "value": 3.83748,
+     "interval": [
+      3.824024,
+      3.849809
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "pursuit part, n = 128",
+     "value": 0.885623,
+     "interval": [
+      0.839502,
+      0.934945
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M as a share of the departure, n = 128",
+     "value": 0.768651,
+     "interval": [
+      0.755453,
+      0.780709
+     ],
+     "unit": ""
+    },
+    {
+     "label": "departure, n = 1024",
+     "value": 5.939144,
+     "interval": [
+      5.91666,
+      5.958577
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "pursuit part, n = 1024",
+     "value": 1.248969,
+     "interval": [
+      1.181594,
+      1.319769
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "M as a share of the departure, n = 1024",
+     "value": 0.788645,
+     "interval": [
+      0.776486,
+      0.800065
+     ],
+     "unit": ""
+    }
+   ]
+  },
+  "Stakes": {
+   "identified": true,
+   "assumptions": "the gold reward model's units; the matched intensity is infinite or zero in a few prompts, where under-pursuit is not defined; means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "shortfall S, n = 2",
+     "value": 0.166902,
+     "interval": [
+      0.161194,
+      0.1725
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "gold gained over the default, n = 2",
+     "value": 0.124947,
+     "interval": [
+      0.117992,
+      0.132014
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "median matched intensity, n = 2",
+     "value": 1.370846,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "shortfall S, n = 16",
+     "value": 0.473043,
+     "interval": [
+      0.457128,
+      0.48815
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "gold gained over the default, n = 16",
+     "value": 0.38573,
+     "interval": [
+      0.365235,
+      0.407419
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "median matched intensity, n = 16",
+     "value": 4.611868,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "shortfall S, n = 128",
+     "value": 0.682666,
+     "interval": [
+      0.660077,
+      0.704412
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "gold gained over the default, n = 128",
+     "value": 0.534989,
+     "interval": [
+      0.506978,
+      0.565456
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "median matched intensity, n = 128",
+     "value": 7.202469,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    },
+    {
+     "label": "shortfall S, n = 1024",
+     "value": 0.864579,
+     "interval": [
+      0.838099,
+      0.890631
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "gold gained over the default, n = 1024",
+     "value": 0.617389,
+     "interval": [
+      0.583603,
+      0.652107
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "median matched intensity, n = 1024",
+     "value": 10.302228,
+     "exact": true,
+     "basis": "median over the 1,000 prompts reported on; each prompt's value is computed from its estimated default",
+     "unit": ""
+    }
+   ],
+   "note": "under-pursuit at n = 16 over the 996 prompts where the matched intensity is finite and positive: 1.268 nats"
+  },
+  "Intensity": {
+   "identified": true,
+   "assumptions": "one intensity for all prompts, the best of 701 on a grid from 1e-3 to 1e4; means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "misalignment at one shared intensity, n = 2",
+     "value": 0.159273,
+     "interval": [
+      0.156462,
+      0.161967
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "excess over each prompt's own, n = 2",
+     "value": 0.012742,
+     "interval": [
+      0.01141,
+      0.014244
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "the shared intensity, n = 2",
+     "value": 0.47863,
+     "exact": true,
+     "basis": "the minimizer on the grid, for the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "misalignment at one shared intensity, n = 16",
+     "value": 1.516784,
+     "interval": [
+      1.48687,
+      1.543801
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "excess over each prompt's own, n = 16",
+     "value": 0.138349,
+     "interval": [
+      0.125635,
+      0.151167
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "the shared intensity, n = 16",
+     "value": 1.584893,
+     "exact": true,
+     "basis": "the minimizer on the grid, for the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "misalignment at one shared intensity, n = 128",
+     "value": 3.253988,
+     "interval": [
+      3.195572,
+      3.305268
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "excess over each prompt's own, n = 128",
+     "value": 0.302131,
+     "interval": [
+      0.278952,
+      0.323223
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "the shared intensity, n = 128",
+     "value": 2.238721,
+     "exact": true,
+     "basis": "the minimizer on the grid, for the 1,000 prompts reported on",
+     "unit": ""
+    },
+    {
+     "label": "misalignment at one shared intensity, n = 1024",
+     "value": 5.157944,
+     "interval": [
+      5.078188,
+      5.230407
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "excess over each prompt's own, n = 1024",
+     "value": 0.467769,
+     "interval": [
+      0.433517,
+      0.499582
+     ],
+     "unit": "nats"
+    },
+    {
+     "label": "the shared intensity, n = 1024",
+     "value": 2.570396,
+     "exact": true,
+     "basis": "the minimizer on the grid, for the 1,000 prompts reported on",
+     "unit": ""
+    }
+   ]
+  },
+  "Named and unexplained misalignment": {
+   "not_reported": "no named objectives were declared"
+  },
+  "Uncertain target": {
+   "not_reported": "the target was declared as one objective, the gold, not a family"
+  },
+  "Outer and inner misalignment": {
+   "not_reported": "not computed in this report"
+  },
+  "Tampering": {
+   "not_reported": "no channel: both rewards are fixed functions of the answer's text"
+  },
+  "Drift": {
+   "not_reported": "one run"
+  },
+  "Avoidable and unavoidable misalignment": {
+   "text": "with the feasible set declared as everything, all of it is avoidable; what a selector bound to the proxy's ranking could do is not analysed"
+  },
+  "Resolution": {
+   "text": "the principal's resolution is the finest, so nothing was forgiven; the actor's, the proxy's ties, is not analysed"
+  },
+  "Sensitivity": {
+   "not_reported": "not computed"
+  },
+  "Evaluator": {
+   "identified": true,
+   "assumptions": "the gold averaged over prompts in bins of the proxy's rank within each prompt ([P26]); this says nothing within a prompt; means over the 1,000 prompts, with 95% intervals from 1,000 resamples of the prompts",
+   "entries": [
+    {
+     "label": "mean gold, proxy rank 0-0.1",
+     "value": -0.203965,
+     "interval": [
+      -0.241521,
+      -0.166186
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.1-0.2",
+     "value": -0.066299,
+     "interval": [
+      -0.099084,
+      -0.030857
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.2-0.3",
+     "value": 0.016122,
+     "interval": [
+      -0.017214,
+      0.052356
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.3-0.4",
+     "value": 0.075667,
+     "interval": [
+      0.040918,
+      0.112192
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.4-0.5",
+     "value": 0.133072,
+     "interval": [
+      0.096967,
+      0.17087
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.5-0.6",
+     "value": 0.194196,
+     "interval": [
+      0.15767,
+      0.229949
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.6-0.7",
+     "value": 0.256313,
+     "interval": [
+      0.220763,
+      0.292003
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.7-0.8",
+     "value": 0.332399,
+     "interval": [
+      0.298746,
+      0.369425
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.8-0.9",
+     "value": 0.404521,
+     "interval": [
+      0.367464,
+      0.44229
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.9-0.99",
+     "value": 0.537111,
+     "interval": [
+      0.50191,
+      0.573144
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.99-0.999",
+     "value": 0.70708,
+     "interval": [
+      0.670089,
+      0.745863
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "mean gold, proxy rank 0.999-1",
+     "value": 0.797269,
+     "interval": [
+      0.758526,
+      0.836944
+     ],
+     "unit": "gold units"
+    },
+    {
+     "label": "residual share of the gold's variance, 100 bins of rank",
+     "value": 0.593356,
+     "interval": [
+      0.57921,
+      0.606505
+     ],
+     "unit": ""
+    }
+   ]
+  },
+  "Pass-through": {
+   "not_reported": "no intervention"
+  },
+  "Unobserved conditions": {
+   "text": "none within the report; prompts outside AlpacaFarm's validation split are not identified by it"
+  },
+  "Evaluation gap": {
+   "not_reported": "evaluation and use are not told apart"
+  },
+  "Premises": {
+   "text": "the gold is a reward model, not people: the report measures misalignment against that model. The default is an estimate from 12,600 answers; quantities that depend on the policy's rarest answers are not reported."
+  }
+ }
+}

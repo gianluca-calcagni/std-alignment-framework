@@ -1,0 +1,109 @@
+{
+ "about": "The report as data (E2, 2026-10-09): stdalign/report.py and lint's R16, against their tests.",
+ "tests": [
+  "stdalign/tests/test_report.py",
+  "tools/test_lint.py"
+ ],
+ "mutants": [
+  {
+   "name": "estimated value without interval allowed",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "    if not (isinstance(i, list) and len(i) == 2 and all(map(_number, i))):",
+     "    if False:"
+    ]
+   ]
+  },
+  {
+   "name": "a single number for a quantity not identified",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "    if not identified:\n",
+     "    if False:\n"
+    ]
+   ]
+  },
+  {
+   "name": "confirmatory after the data allowed",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "if report.get(\"confirmatory\") is True and report.get(\"declared_before_data\") is not True:",
+     "if report.get(\"confirmatory\") is True and report.get(\"declared_before_data\") is True:"
+    ]
+   ]
+  },
+  {
+   "name": "unknown fields allowed",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "    for name in sorted(set(data) - set(names)):",
+     "    for name in []:"
+    ]
+   ]
+  },
+  {
+   "name": "missing results allowed",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "            errors.append(f\"{where}: missing; if it is not reported, say why with 'not_reported'\")",
+     "            pass"
+    ]
+   ]
+  },
+  {
+   "name": "exact without a basis",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "        if not isinstance(e.get(\"basis\"), str) or not e[\"basis\"].strip():",
+     "        if False:"
+    ]
+   ]
+  },
+  {
+   "name": "value outside its interval",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "    elif not i[0] <= e[\"value\"] <= i[1]:",
+     "    elif False:"
+    ]
+   ]
+  },
+  {
+   "name": "a field dropped from the declaration",
+   "edits": [
+    [
+     "stdalign/report.py",
+     "\"Sampling\", \"Access\", \"Named objectives\", \"Runs\")",
+     "\"Sampling\", \"Named objectives\", \"Runs\")"
+    ]
+   ]
+  },
+  {
+   "name": "R16 not run",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        errors += lint_reports(root)",
+     "        errors += []"
+    ]
+   ]
+  },
+  {
+   "name": "R16 fields not compared",
+   "edits": [
+    [
+     "tools/lint.py",
+     "            if tuple(fields) != tables[key]:",
+     "            if False:"
+    ]
+   ]
+  }
+ ]
+}

@@ -18,10 +18,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: lint — 0 errors (rules R1–R13 in tools/lint.py)
+      - name: lint — 0 errors (rules R1–R16 in tools/lint.py)
         run: python3 tools/lint.py
       - name: the Obsidian view in obsidian/ is fresh (python3 tools/obsidian.py regenerates it)
         run: python3 tools/obsidian.py --check
+      - name: the overview OVERVIEW.md is fresh (python3 tools/overview.py regenerates it)
+        run: python3 tools/overview.py --check
       - name: the library stdalign builds as a package
         run: python3 -m pip wheel . --no-deps -w /tmp/wheel
 

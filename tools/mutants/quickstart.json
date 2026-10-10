@@ -1,0 +1,69 @@
+{
+ "about": "examples/quickstart.py, against its test (2026-10-10).",
+ "tests": [
+  "examples/test_quickstart.py"
+ ],
+ "mutants": [
+  {
+   "name": "a named objective outside the span",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "        unexplained, named = sa.named_split(p, Q, F, [FLATTERY])",
+     "        unexplained, named = sa.named_split(p, Q, F, [FLATTERY ** 2])"
+    ]
+   ],
+   "note": "Naming the evaluator FH instead of flattery survived a first run, and is equivalent: FH = F + 0.8·flattery, so matching the averages of F and FH is matching those of F and flattery, and [P44]'s named pursuit depends only on the span of F and the named objectives. Squaring flattery leaves that span."
+  },
+  {
+   "name": "bootstrap from the default, not the counts",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "    boot = [plug_in(rng.multinomial(N, counts / N).astype(float)) for _ in range(BOOT)]",
+     "    boot = [plug_in(rng.multinomial(N, Q).astype(float)) for _ in range(BOOT)]"
+    ]
+   ]
+  },
+  {
+   "name": "misalignment without its interval",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "                         \"entries\": [entry(\"M\", est.value, list(est.interval))]},",
+     "                         \"entries\": [entry(\"M\", est.value, [est.value, est.value])]},"
+    ]
+   ]
+  },
+  {
+   "name": "outer misalignment at twice the intensity",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "                                                      \"value\": round(sa.outer_misalignment(Q, F, FH, T_TRAIN), 6),",
+     "                                                      \"value\": round(sa.outer_misalignment(Q, F, FH, 2 * T_TRAIN), 6),"
+    ]
+   ]
+  },
+  {
+   "name": "the declaration dated after the data",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "    return {\"case\": \"examples/quickstart\", \"declared_before_data\": True, \"confirmatory\": False,",
+     "    return {\"case\": \"examples/quickstart\", \"declared_before_data\": False, \"confirmatory\": False,"
+    ]
+   ]
+  },
+  {
+   "name": "the assistant drawn from the default",
+   "edits": [
+    [
+     "examples/quickstart.py",
+     "    return sa.tilt(Q, T_TRAIN * FH + np.array([0.0, 0.15, -0.1, 0.0, 0.05, 0.1]))",
+     "    return sa.tilt(Q, 0 * FH + np.array([0.0, 0.15, -0.1, 0.0, 0.05, 0.1]))"
+    ]
+   ]
+  }
+ ]
+}

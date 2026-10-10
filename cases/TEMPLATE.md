@@ -2,8 +2,10 @@
 
 Copy this file to `cases/<case>/REGISTRATION.md` and fill every section; delete this paragraph and the guidance in
 italics. Lint rule R15 checks that every section below is present, that the declaration has a row for every field of
-`STANDARD.md`, section 1, that every prediction says where its threshold comes from, and that the rehearsal's record,
-`rehearsal.json`, is in the case folder. Lint cannot check that the entries are right: that is what a reader is for.
+`STANDARD.md`, section 1, that every prediction says where its threshold comes from, that the rehearsal's record,
+`rehearsal.json`, is in the case folder, and, by R14, that a `requirements.txt` there pins the version of every package
+the case's scripts import, so that a reader reruns the case in the environment it ran in. Lint cannot check that the
+entries are right: that is what a reader is for.
 
 # <Id> — <the question> — Registration
 

@@ -1,7 +1,7 @@
 """Checks of P43 (misalignment at any intensity), P44 (named objectives), P45 (drift across runs), P46 (runs in two
 conditions), P47 (the cost of reweighting), P48 (an uncertain target), P49 (outer and inner misalignment), P50
-(tampering) and P51 (what signals, audits and re-measurements reveal of it). Each claim is computed by a helper below,
-so that breaking a helper on purpose makes its checks fail."""
+(tampering) and P51 (what signals, audits and re-measurements reveal of it). Each claim is computed by the library's
+functions (stdalign/diagnostics.py), so that breaking one on purpose makes its checks fail (tools/mutants/)."""
 import itertools
 import numpy as np
 from scipy.optimize import minimize, minimize_scalar, brentq
@@ -9,27 +9,16 @@ from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt, kl_tilts
 from .test_misalignment import misalignment, nearest, ray_minimizer
 from .test_feasibility import project_linear
 from .test_identifiability import actor, extreme, var, cov
-
-
-def intensity_terms(p, q, F):
-    """P43(i): what KL(p || p_{F,t}) depends on besides t: the misalignment, the nearest intended behaviour, and the
-    anti-pursuit gap [E_q F − E_p F]⁺."""
-    return misalignment(p, q, F)[0], nearest(p, q, F), max(q @ F - p @ F, 0.0)
+from stdalign.diagnostics import (intensity_terms, min_over_intensity as shared_intensity,         # noqa: F401
+                                  named_pursuit, drift, condition_split, reweighting_moments, most_charitable,
+                                  outer_misalignment as outer, inner_split, pairs, tampering, grounded_pursuit,
+                                  least_tampering, most_tampering, remeasured)
+import stdalign
 
 
 def intensity_split(terms, q, F, t):
-    """P43(i): the three terms of KL(p || p_{F,t}): misalignment, intensity mismatch, and t times the anti-pursuit."""
-    M, pn, gap = terms
-    return M, kl(pn, tilt(q, t * F)), t * gap
-
-
-def shared_intensity(f):
-    """The minimum over t >= 0 of a convex function of t, located on a grid and refined by a bounded search."""
-    grid = np.r_[0.0, np.logspace(-3, 2, 300)]
-    k = int(np.argmin([f(t) for t in grid]))
-    lo, hi = grid[max(k - 1, 0)], grid[min(k + 1, len(grid) - 1)]
-    res = minimize_scalar(f, bounds=(lo, hi), method="bounded", options={"xatol": 1e-13})
-    return min(res.fun, f(lo), f(hi))
+    """P43(i): the three terms of KL(p || p_{F,t}) at t, from the library's IntensityTerms (q and F are in them)."""
+    return terms.at(t)
 
 
 def with_intensity(r, q, F, tau, n):
@@ -86,6 +75,9 @@ def test_one_intensity_for_several_conditions():
         for t in (0.0, 0.3, 1.1, 4.0):
             assert abs(direct(t) - (own + excess(t))) <= EXACT * (1 + direct(t))
         assert abs(shared_intensity(direct) - (own + shared_intensity(excess))) <= 1e-9
+        si = stdalign.shared_intensity(ps, qs, [F] * C, rho)                        # the library's whole quantity
+        assert abs(si.misalignment - shared_intensity(direct)) <= 1e-12 and abs(si.own - own) <= 1e-9
+        assert abs(si.excess - shared_intensity(excess)) <= 1e-9
         # another behaviour in condition 0 with the same t* (hence the same average of F) and the same a_0
         ts0 = ray_minimizer(ps[0], qs[0], F)
         if 0 < ts0 < np.inf:
@@ -101,12 +93,6 @@ def test_one_intensity_for_several_conditions():
         e = shared_intensity(excess_of([with_intensity(r, qc, F, tau * (1 + c), n) for c, qc in enumerate(qs)]))
         assert e > 1e-6; positive += e > 1e-3
     assert positive >= 40
-
-
-def named_pursuit(p, q, F, Gs):
-    """P44: the behaviour nearest to p° among those with p's averages of F and of the named objectives Gs."""
-    A = np.vstack([F, *Gs])
-    return project_linear(nearest(p, q, F), A, A @ p)
 
 
 def member(r, q, F, Gs, p):
@@ -175,12 +161,6 @@ def test_named_shares_at_the_start():
     assert used >= 30
 
 
-def drift(ps, w):
-    """P45: D = Σ_i w_i KL(p_i || p̄), and p̄."""
-    pbar = sum(wi * pi for wi, pi in zip(w, ps))
-    return sum(wi * kl(pi, pbar) for wi, pi in zip(w, ps)), pbar
-
-
 def test_drift_splits_shared_misalignment():
     """P45(i), (ii): Σ w_i KL(p_i || r) = KL(p̄ || r) + D for every r; the shared misalignment under the standard
     specification, found by minimizing over the ray, is M(p̄) + D and at least the average own misalignment;
@@ -237,14 +217,6 @@ def test_drift_from_few_runs():
         assert errs[1] <= 2e-4 and errs[1] <= 0.2 * errs[0] + 1e-7
 
 
-def condition_split(pe, pu, w):
-    """P46(i): the reproducible difference KL(p̄_u || p̄_e), and the run-specific difference Σ_x p̄_u(x)·KL(ν_u || ν_e)."""
-    bu, be = sum(a * b for a, b in zip(w, pu)), sum(a * b for a, b in zip(w, pe))
-    nu_u = np.array([a * b for a, b in zip(w, pu)]); nu_e = np.array([a * b for a, b in zip(w, pe)]) / be
-    specific = sum(bu[x] * kl(nu_u[:, x] / bu[x], nu_e[:, x]) for x in range(bu.size) if bu[x] > 0)
-    return kl(bu, be), specific
-
-
 def test_runs_split_differences_between_conditions():
     """P46(i), (iii), (iv): the average divergence between conditions is the reproducible plus the run-specific
     difference; the gap in shared misalignment is the gap of the averages plus the gap of the drifts; and from few runs
@@ -294,12 +266,6 @@ def test_average_of_runs_stays_within_the_leak():
     assert max(used) > 0.2                                                             # the bound is not vacuous
 
 
-def reweighting_moments(p, rr):
-    """P47: E_p[w] and E_p[w²] for w = r/p on the support of p."""
-    s = p > 0
-    return float(np.sum(rr[s])), float(np.sum(rr[s] ** 2 / p[s]))
-
-
 def test_reweighting_costs_exponentially():
     """P47(i), (ii): E_p[w] = 1, E_p[w²] = 1 + χ²(r || p) >= e^{KL(r || p)}, with equality when r is p restricted to
     a set; and the relative variance of the average of e^{tF} under q is χ²(p_{F,t} || q) per draw."""
@@ -317,14 +283,6 @@ def test_reweighting_costs_exponentially():
         q = simplex_interior(r, n); F = r.normal(0, 1, n); t = float(r.uniform(0, 3)); pt = tilt(q, t * F)
         ex = np.exp(t * F); rel_var = (q @ ex ** 2 - (q @ ex) ** 2) / (q @ ex) ** 2
         assert abs(rel_var - (reweighting_moments(q, pt)[1] - 1)) <= 1e-9 * (1 + rel_var)
-
-
-def most_charitable(p, q, Phi):
-    """P48: the tilt of q by a combination of the rows of Phi with p's averages of them, and that combination's
-    coefficients (read off its log-ratio to q)."""
-    pt = project_linear(q, Phi, Phi @ p)
-    B = np.column_stack([np.ones(q.size), Phi.T])
-    return pt, np.linalg.lstsq(B, np.log(pt / q), rcond=None)[0][1:]
 
 
 def test_an_uncertain_target_gives_an_interval():
@@ -352,18 +310,6 @@ def test_an_uncertain_target_gives_an_interval():
         for d in r.normal(0, 1, (10, k)):
             assert abs(misalignment(pq, q, d @ Phi)[0] - kl(pq, q)) <= 1e-9 * (1 + kl(pq, q))
     assert positive >= 80
-
-
-def outer(q, F, Fh, t):
-    """P49(i): the principal's misalignment of the trainer's optimum at intensity t."""
-    return misalignment(tilt(q, t * Fh), q, F)[0]
-
-
-def inner_split(p, q, F, Fh):
-    """P49(ii): the strict inner misalignment U, and the parts left to principal and trainer, from the one tilt of q by
-    a combination of F and Fh with p's averages of both."""
-    pt = most_charitable(p, q, np.vstack([F, Fh]))[0]
-    return kl(p, pt), misalignment(pt, q, F)[0], misalignment(pt, q, Fh)[0]
 
 
 def test_outer_and_inner_misalignment():
@@ -394,66 +340,6 @@ def test_outer_and_inner_misalignment():
         assert abs(misalignment(pe, q, F)[0] - outer(q, F, Fh, t)) <= EXACT
         assert abs(misalignment(p, q, a * F + c)[0] - MP) <= 1e-9 * (1 + MP)          # all inner when Fh rescales F
     assert positive >= 100
-
-
-def pairs(pW, K):
-    """P50: the behaviour on world–signal pairs that produces the world as pW and measures it through the channel K, as
-    a |W| × |S| array: p(w, s) = pW(w)·K(s|w)."""
-    return pW[:, None] * K
-
-
-def tampering(p, K):
-    """P50: T(p) = Σ_w p_W(w)·KL(p(·|w) ‖ K(·|w)), for a behaviour p on world–signal pairs given as a |W| × |S| array."""
-    pW = p.sum(1)
-    return sum(pW[w] * kl(p[w] / pW[w], K[w]) for w in range(len(pW)) if pW[w] > 0)
-
-
-def grounded_pursuit(qW, K, Fh, t):
-    """P50(iv): the best grounded behaviour for the evaluator Fh on signals at intensity t: the world pursues the expected
-    signal score E_K[Fh | w] at the same intensity, and the channel is left alone."""
-    return pairs(tilt(qW, t * (K @ Fh)), K)
-
-
-def least_tampering(pS, K):
-    """P51(i): L = min over world behaviours pW of KL(pS ‖ Kᵀ pW). The multiplicative fixed point of its optimality
-    conditions, pW ← pW·c with c(w) = Σ_s K(s|w)·pS(s)/(Kᵀ pW)(s), is slow near the boundary, so a constrained solver
-    polishes it between two runs of it. Whatever the solver, the certificate of (i) bounds the distance to the minimum
-    by log max_w c(w). Returns the value at the last pW, that certified gap, and the joint of (i) built from pW."""
-    W = K.shape[0]
-    def fixed_point(pW, steps):
-        for _ in range(steps):
-            mu = pW @ K; ratio = np.divide(pS, mu, out=np.zeros_like(pS), where=pS > 0); c = K @ ratio
-            if np.log(c.max()) <= 1e-12:
-                break
-            pW = pW * c
-        return pW
-    f = lambda x: -pS @ np.log(np.maximum(x @ K, 1e-300))
-    g = lambda x: -(K @ (pS / np.maximum(x @ K, 1e-300)))
-    pW = fixed_point(np.full(W, 1 / W), 500)
-    res = minimize(f, pW, jac=g, method="SLSQP", bounds=[(0, 1)] * W, options={"ftol": 1e-16, "maxiter": 1000},
-                   constraints=[{"type": "eq", "fun": lambda x: x.sum() - 1, "jac": lambda x: np.ones(W)}])
-    pW = np.clip(res.x, 0, None) + 1e-9 / W                       # back inside, so the fixed point can move every pW(w)
-    pW = fixed_point(pW / pW.sum(), 2000)
-    mu = pW @ K; ratio = np.divide(pS, mu, out=np.zeros_like(pS), where=pS > 0); c = K @ ratio
-    return kl(pS, mu), float(np.log(c.max())), pW[:, None] * K * ratio[None, :]
-
-
-def most_tampering(pS, K):
-    """P51(ii): the largest tampering among the joints with signal marginal pS in which every signal comes from a single
-    world, by enumerating the maps from signals to worlds."""
-    W, S = K.shape; best = 0.0
-    for a in itertools.product(range(W), repeat=S):
-        p = np.zeros((W, S)); p[list(a), range(S)] = pS
-        best = max(best, tampering(p, K))
-    return best
-
-
-def remeasured(p, K, Fh, qW):
-    """P51(iv): each world measured a second time through the honest channel K, as the joint of the two signals; the
-    evaluator's honest gain over the default, E_{p_W}[E_K[Fh|w]] − E_{q_W}[E_K[Fh|w]]; and its channel gain, how much
-    the average score falls from the first measurement to the second."""
-    again = np.einsum("ws,wv->sv", p, K)
-    return p.sum(1) @ (K @ Fh) - qW @ (K @ Fh), again.sum(1) @ Fh - again.sum(0) @ Fh, again
 
 
 def random_channel(r, W, S, zeros=False):

@@ -57,7 +57,8 @@ using that `p̂` puts all its mass on `A`. That limit is `0` exactly when `p̂ =
 
 ## Notes
 The checks exercise the standard specification; parts (i)–(iii) for a general closed `𝓘` rest on the proof
-alone. Pinsker's inequality is standard [[References|@cover2006]]. The revealed intensity is the weight that maximum-entropy inverse
+alone. Pinsker's inequality is standard [[References|@cover2006]], and is read in the open draft of [[References|@polyanskiy2025]], Theorem 7.10,
+whose total variation is half the sum in the proof. The revealed intensity is the weight that maximum-entropy inverse
 reinforcement learning, in its one-step form, fits for the single feature `F` [[References|@ziebart2008]], restricted to `t ≥ 0`: in
 the first case the unrestricted fit is zero or negative, and in the third it is infinite. For `n` independent decisions
 with observed frequencies `p̂`, the log-likelihood ratio of an unrestricted model against the best pursuit of `F` is

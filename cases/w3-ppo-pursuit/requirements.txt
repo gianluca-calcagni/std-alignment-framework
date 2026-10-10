@@ -1,0 +1,10 @@
+# Versions installed in the environment where this case ran (Python 3.11.15), read on 2026-10-09: the run itself
+# did not record them. Install with pip install -r requirements.txt; the scripts also import this repository's
+# own packages, from its root.
+numpy==2.4.4
+torch==2.14.1
+transformers==5.18.0
+tokenizers==0.23.2
+safetensors==0.8.0
+datasets==5.0.1
+huggingface_hub==1.33.0

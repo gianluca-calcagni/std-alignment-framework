@@ -1,0 +1,80 @@
+{
+ "about": "tools/overview.py, against its tests (2026-10-09). The freshness test is deselected: it fails on any change of the output, so it would catch every mutant whatever the other tests do; the mutants check those, as if OVERVIEW.md had been rebuilt by the broken tool.",
+ "tests": [
+  "tools/test_overview.py",
+  "-k",
+  "not fresh"
+ ],
+ "mutants": [
+  {
+   "name": "results without their proofs",
+   "edits": [
+    [
+     "tools/overview.py",
+     "RESULT_FIELDS = (\"Statement\", \"In plain terms\", \"Proof\", \"Checks\")",
+     "RESULT_FIELDS = (\"Statement\", \"In plain terms\", \"Checks\")"
+    ]
+   ]
+  },
+  {
+   "name": "the reasons always left out",
+   "edits": [
+    [
+     "tools/overview.py",
+     "    for label in labels[:2] + (\"Why this choice\",) * why + labels[2:]:",
+     "    for label in labels:"
+    ]
+   ]
+  },
+  {
+   "name": "the reasons always added",
+   "edits": [
+    [
+     "tools/overview.py",
+     "            out.append(render(found[args[0]], why=\"why\" in args[1:]))",
+     "            out.append(render(found[args[0]], why=True))"
+    ]
+   ]
+  },
+  {
+   "name": "a table cut one row short",
+   "edits": [
+    [
+     "tools/overview.py",
+     "    return \"\\n\".join(lines[start:end])",
+     "    return \"\\n\".join(lines[start:end - 1])"
+    ]
+   ]
+  },
+  {
+   "name": "the checks of the first item only",
+   "edits": [
+    [
+     "tools/overview.py",
+     "            ids = [c.strip() for a in args for c in found[a][\"fields\"][\"Checks\"].replace(\"\\n\", \" \").split(\",\")]",
+     "            ids = [c.strip() for a in args[:1] for c in found[a][\"fields\"][\"Checks\"].replace(\"\\n\", \" \").split(\",\")]"
+    ]
+   ]
+  },
+  {
+   "name": "an unknown directive passed through",
+   "edits": [
+    [
+     "tools/overview.py",
+     "            raise ValueError(f\"{TEMPLATE}: unknown directive {{{{{kind}}}}}\")",
+     "            out.append(line)"
+    ]
+   ]
+  },
+  {
+   "name": "fields copied without their trailing text",
+   "edits": [
+    [
+     "tools/overview.py",
+     "            out += [f\"**{label}.**{it['fields'][label].rstrip()}\", \"\"]",
+     "            out += [f\"**{label}.**{it['fields'][label].splitlines()[0]}\", \"\"]"
+    ]
+   ]
+  }
+ ]
+}

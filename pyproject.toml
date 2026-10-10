@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stdalign"
-version = "0.1.0"
+version = "0.2.0"
 description = "The quantities of the std-alignment-framework's reporting standard: misalignment, its split, and its estimates from samples, on finite outcomes."
 readme = "stdalign/README.md"
 requires-python = ">=3.10"

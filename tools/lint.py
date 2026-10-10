@@ -39,22 +39,28 @@ Rules
       whole shared vocabulary.
   R12 RELATED.md, the survey of related theories, IMPORT.md, the map from the archive to the core, CORE-GENERAL.md, the
       draft of the core for outcomes that are not finite, general/*.md, its results, SCENARIO.md, the worked scenario,
-      ROADMAP.md, REQUESTS.md, CONTRIBUTING.md, and cases/**/*.md, the registered tests, name only existing items;
-      their citations count for R8.
+      ROADMAP.md, REQUESTS.md, CONTRIBUTING.md, CLAUDE.md, OVERVIEW.md, and cases/**/*.md, the registered tests, name only existing
+      items; their citations count for R8.
   R13 RECORD.md, the record of predictions and retractions, names only existing items, and its citations count for
       R8. Its ledger (the table with the columns LEDGER_COLUMNS) has exactly one row for every prediction of the
       ontologies, keyed by the ontology's folder and the items the prediction is from, with the same label, and a
       state that starts with one of STATES; and no other row. RECORD.md must exist once any ontology predicts.
-  R14 Cases. Every folder cases/<name>/ has a REGISTRATION.md. Once it has a RESULTS.md, that file records the SHA-256
-      of REGISTRATION.md on a line starting '**Registration SHA-256:**', and the hash matches: a registration does not
-      change after its result is written.
+  R14 Cases. Every folder cases/<name>/ has a REGISTRATION.md, and a requirements.txt in which every line is a
+      pin, 'package==version', and every package its scripts import is pinned: every module that is neither in the
+      standard library nor in the repository (the case's own scripts, tools/, or a top-level folder), named as PyPI
+      names it (PACKAGE_NAMES). Once it has a RESULTS.md, that file records the SHA-256 of REGISTRATION.md on a line starting
+      '**Registration SHA-256:**', and the hash matches: a registration does not change after its result is written.
   R15 Design rules. A registration made after the design rules (cases/README.md), that is, of every case but those in
       BEFORE_THE_DESIGN_RULES, follows cases/TEMPLATE.md: it has the sections of REGISTRATION_SECTIONS; its declaration
       has a row for every field of the first table of STANDARD.md (the declaration); its predictions table has a
       column "Threshold from", filled in every row; and its folder holds rehearsal.json, the rehearsal's record. A field
       added to the declaration later is not required of the cases registered before it (FIELDS_ADDED_LATER).
+  R16 Reports as data. Where the repository holds stdalign/report.py, its field lists are those of STANDARD.md's three
+      tables, in order, and every cases/<name>/standard-report.json passes its validator: every field present, every
+      estimated value with its interval, a quantity not identified given as bounds, and no report confirmatory whose
+      declaration came after its data.
 """
-import hashlib, re, sys
+import ast, hashlib, re, sys
 from pathlib import Path
 
 KINDS = {"A": "premise", "D": "definition", "P": "proposition", "T": "theorem", "L": "lemma", "C": "corollary",
@@ -279,7 +285,8 @@ def lint(root):
     folder, cases = root / "general", root / "cases"
     general = sorted(f.relative_to(root).as_posix() for f in folder.glob("*.md")) if folder.exists() else []
     case_docs = sorted(f.relative_to(root).as_posix() for f in cases.rglob("*.md")) if cases.exists() else []
-    docs = ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md", "REQUESTS.md", "CONTRIBUTING.md"]
+    docs = ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md", "REQUESTS.md", "CONTRIBUTING.md",
+            "CLAUDE.md", "OVERVIEW.md"]
     for name in docs + general + case_docs:
         survey = root / name
         if survey.exists():
@@ -296,6 +303,10 @@ def lint(root):
         standard_file = root / "STANDARD.md"
         if standard_file.exists():
             errors += lint_design_rules(cases, standard_file.read_text(encoding="utf-8"))
+
+    # R16
+    if (root / "stdalign" / "report.py").exists():
+        errors += lint_reports(root)
 
     # R8
     refs_file = root / "REFERENCES.md"
@@ -337,14 +348,46 @@ def lint(root):
     return errors, summary
 
 
+PACKAGE_NAMES = {"sklearn": "scikit-learn"}             # modules whose package on PyPI has another name
+
+
+def third_party_imports(case):
+    """The top-level modules the scripts of a case import that are neither standard nor in the repository (R14)."""
+    root, mods = case.parent.parent, set()
+    for f in case.rglob("*.py"):
+        for node in ast.walk(ast.parse(f.read_text(encoding="utf-8"))):
+            if isinstance(node, ast.Import):
+                mods |= {a.name.split(".")[0] for a in node.names}
+            elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
+                mods.add(node.module.split(".")[0])
+    local = lambda m: any((d / f"{m}.py").exists() for d in (case, root, root / "tools")) or (root / m).is_dir()
+    return sorted(m for m in mods if m not in sys.stdlib_module_names and not local(m))
+
+
 def lint_cases(cases):
-    """R14: every case has a registration, and a result records the registration's hash, which still matches."""
+    """R14: every case has a registration and pins what its scripts import, and a result records the registration's
+    hash, which still matches."""
     errors = []
     for case in sorted(d for d in cases.iterdir() if d.is_dir()):
         name, registration, results = f"cases/{case.name}", case / "REGISTRATION.md", case / "RESULTS.md"
         if not registration.exists():
             errors.append(f"{name}: R14 a case has no REGISTRATION.md")
             continue
+        reqs = case / "requirements.txt"
+        if not reqs.exists():
+            errors.append(f"{name}: R14 a case has no requirements.txt pinning the packages its scripts import")
+        else:
+            pinned = set()
+            for n, line in enumerate(reqs.read_text(encoding="utf-8").splitlines(), 1):
+                if line.strip() and not line.startswith("#"):
+                    m = re.fullmatch(r"([A-Za-z0-9_.-]+)==[A-Za-z0-9_.+-]+", line.strip())
+                    if not m:
+                        errors.append(f"{name}/requirements.txt:{n}: R14 a line that is not a pin 'package==version'")
+                    else:
+                        pinned.add(m[1].lower().replace("_", "-"))
+            for mod in third_party_imports(case):
+                if PACKAGE_NAMES.get(mod, mod).lower().replace("_", "-") not in pinned:
+                    errors.append(f"{name}: R14 its scripts import {mod}, which requirements.txt does not pin")
         if not results.exists():
             continue
         digest = hashlib.sha256(registration.read_bytes()).hexdigest()
@@ -361,6 +404,39 @@ BEFORE_THE_DESIGN_RULES = {"c1-collusion-simulation", "c2-stopping-rule", "w1-be
 FIELDS_ADDED_LATER = {"Principal": {"w4-two-runs"}, "Access": {"w4-two-runs"}}   # field: cases registered before it
 REGISTRATION_SECTIONS = ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
                          "## Rehearsal", "## Licences"]
+
+
+def standard_tables(text):
+    """The field names of STANDARD.md's three tables, by section: declaration, observations, results."""
+    out = {}
+    for key, heading in (("declaration", "## 1. The declaration"), ("observations", "## 2. The observations"),
+                         ("results", "## 3. The results")):
+        part = text.split(heading, 1)[1].split("\n## ", 1)[0] if heading in text else ""
+        out[key] = tuple(m[1] for m in re.finditer(r"^\| ([^|]+?) \| \[", part, re.M))
+    return out
+
+
+def lint_reports(root):
+    """R16: the validator's fields are the standard's, and every case's report as data keeps the standard."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("stdalign_report", root / "stdalign" / "report.py")
+    report = importlib.util.module_from_spec(spec); spec.loader.exec_module(report)
+    errors = []
+    standard = root / "STANDARD.md"
+    if standard.exists():
+        tables = standard_tables(standard.read_text(encoding="utf-8"))
+        for key, fields in (("declaration", report.DECLARATION), ("observations", report.OBSERVATIONS),
+                            ("results", report.RESULTS)):
+            if tuple(fields) != tables[key]:
+                errors.append(f"stdalign/report.py: R16 the {key} fields differ from STANDARD.md's table")
+    for path in sorted((root / "cases").glob("*/standard-report.json")):
+        name = path.relative_to(root).as_posix()
+        try:
+            found = report.validate(report.load(path))
+        except ValueError as e:
+            found = [f"not valid JSON: {e}"]
+        errors += [f"{name}: R16 {e}" for e in found]
+    return errors
 
 
 def sections(text):

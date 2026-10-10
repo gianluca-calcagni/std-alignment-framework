@@ -9,23 +9,7 @@ import numpy as np
 from scipy.optimize import minimize
 from .common import EXACT, rng, simplex_interior, kl, tilt, log_normalizer, random_partition
 from .test_misalignment import misalignment
-
-
-def project_linear(r, A, b):
-    """argmin over {p in Δ : A p = b} of KL(p || r). By (iii) it is tilt(r, Aᵀθ), with θ minimizing the convex dual
-    log E_r[exp(Aᵀθ)] − θ·b; solved by BFGS, then polished by damped Newton steps."""
-    dual = lambda th: log_normalizer(r, A.T @ th) - th @ b
-    grad = lambda th: A @ tilt(r, A.T @ th) - b
-    th = minimize(dual, np.zeros(A.shape[0]), jac=grad, method="BFGS", options={"gtol": 1e-13, "maxiter": 10000}).x
-    for _ in range(30):
-        p = tilt(r, A.T @ th)
-        H = (A * p) @ A.T - np.outer(A @ p, A @ p)
-        step = np.linalg.lstsq(H, grad(th), rcond=None)[0]
-        lam = 1.0
-        while dual(th - lam * step) > dual(th) + 1e-15 and lam > 1e-8:
-            lam /= 2
-        th = th - lam * step
-    return tilt(r, A.T @ th)
+from stdalign.projection import project_linear                                         # noqa: F401  (P15(i))
 
 
 def a_member(r, A, b):
