@@ -211,10 +211,11 @@ def test_the_scenario_the_roadmap_and_the_cases_name_only_existing_items(tmp_pat
     """SCENARIO.md, ROADMAP.md and cases/**/*.md are checked like CORE-GENERAL.md: every item they name exists, and
     their citations count for R8."""
     note = "# Text\n\n- uses [P1] [@cover2006]\n"
-    extra = {"SCENARIO.md": note, "ROADMAP.md": note, "cases/c1-x/REGISTRATION.md": note}
+    extra = {"SCENARIO.md": note, "ROADMAP.md": note, "cases/c1-x/REGISTRATION.md": note,
+             "cases/c1-x/requirements.txt": "numpy==2.4.4\n"}
     errors, _ = make(tmp_path, core=CORE.replace(" [@cover2006]", ""), extra=extra)
     assert [e for e in errors if " R15 " not in e] == [], errors                 # R15 judges the registration apart
-    for name in extra:
+    for name in [n for n in extra if n.endswith(".md")]:
         errors, _ = make(tmp_path, extra={**extra, name: note + "- and [P9]\n"})
         assert any(f"{name}:4: R12 [P9] names no item" in e for e in errors), (name, errors)
 
@@ -225,7 +226,7 @@ def test_a_registration_cannot_change_after_its_result(tmp_path):
     registration = "# C1 registration\n\nPredict that [P1] holds.\n"
     digest = hashlib.sha256(registration.encode()).hexdigest()
     results = f"# C1 results\n\n**Registration SHA-256:** `{digest}`\n"
-    case = {"cases/c1-x/REGISTRATION.md": registration}
+    case = {"cases/c1-x/REGISTRATION.md": registration, "cases/c1-x/requirements.txt": "numpy==2.4.4\n"}
     r14 = lambda errors: [e for e in errors if " R14 " in e]                     # R15 judges the same file apart
     errors, _ = make(tmp_path, extra=case)
     assert r14(errors) == [], errors
@@ -233,12 +234,32 @@ def test_a_registration_cannot_change_after_its_result(tmp_path):
     assert r14(errors) == [], errors
     errors, _ = make(tmp_path, extra={**case, "cases/c1-x/RESULTS.md": "# C1 results\n"})
     assert any("R14 the SHA-256 of REGISTRATION.md is not recorded" in e for e in errors), errors
-    changed = {"cases/c1-x/REGISTRATION.md": registration + "Amended.\n", "cases/c1-x/RESULTS.md": results}
+    changed = {**case, "cases/c1-x/REGISTRATION.md": registration + "Amended.\n", "cases/c1-x/RESULTS.md": results}
     errors, _ = make(tmp_path, extra=changed)
     assert any("R14 REGISTRATION.md changed after its result" in e for e in errors), errors
     (tmp_path / "cases" / "c2-y").mkdir(parents=True)
     errors, _ = make(tmp_path, extra=case)
     assert any("cases/c2-y: R14 a case has no REGISTRATION.md" in e for e in errors), errors
+    (tmp_path / "cases" / "c1-x" / "requirements.txt").unlink()
+    errors, _ = make(tmp_path, extra={"cases/c1-x/REGISTRATION.md": registration})
+    assert any("cases/c1-x: R14 a case has no requirements.txt" in e for e in errors), errors
+
+
+def test_a_case_pins_what_its_scripts_import(tmp_path):
+    """R14: every line of requirements.txt is a pin, and every module a case's scripts import is pinned, unless it is in
+    the standard library or in the repository; a module is pinned under its name on PyPI."""
+    script = "import json\nimport numpy as np\nfrom scipy import stats\nimport sklearn.linear_model\nimport helper\n"
+    case = {"cases/c1-x/REGISTRATION.md": "# C1 registration\n", "cases/c1-x/run.py": script,
+            "cases/c1-x/helper.py": "X = 1\n",
+            "cases/c1-x/requirements.txt": "# read on 2026-10-09\nnumpy==2.4.4\nscipy==1.17.1\nscikit-learn==1.9.1\n"}
+    r14 = lambda errors: [e for e in errors if " R14 " in e]
+    errors, _ = make(tmp_path, extra=case)
+    assert r14(errors) == [], errors
+    errors, _ = make(tmp_path, extra={**case, "cases/c1-x/requirements.txt": "numpy==2.4.4\nscikit-learn==1.9.1\n"})
+    assert r14(errors) == ["cases/c1-x: R14 its scripts import scipy, which requirements.txt does not pin"], errors
+    loose = "numpy==2.4.4\nscipy>=1.0\nscikit-learn==1.9.1\n"
+    errors, _ = make(tmp_path, extra={**case, "cases/c1-x/requirements.txt": loose})
+    assert any("requirements.txt:2: R14 a line that is not a pin" in e for e in r14(errors)), errors
 
 
 def test_the_standard_must_cover_every_definition(tmp_path):
@@ -458,7 +479,8 @@ def test_a_new_registration_follows_the_template(tmp_path):
     def make_fresh(extra):                                                      # a new folder for each variant
         d = tmp_path / str(next(count)); d.mkdir()
         return make(d, extra=extra)
-    good = {"cases/w9-x/REGISTRATION.md": GOOD_REGISTRATION, "cases/w9-x/rehearsal.json": "{}"}
+    good = {"cases/w9-x/REGISTRATION.md": GOOD_REGISTRATION, "cases/w9-x/rehearsal.json": "{}",
+            "cases/w9-x/requirements.txt": "numpy==2.4.4\n"}
     errors, _ = make_fresh(good)
     assert errors == [], errors
     for heading in ["## Declaration", "## Auxiliary assumptions", "## Predictions", "## Readings, fixed now",
@@ -486,3 +508,18 @@ def test_a_new_registration_follows_the_template(tmp_path):
                                                    f"cases/{name}/rehearsal.json": "{}"})
         missing = any("R15 the declaration has no row for the field 'Principal'" in e for e in errors)
         assert missing != exempt, (name, errors)
+
+
+def test_reports_as_data_keep_the_standard(tmp_path):
+    """R16: a case's standard-report.json that breaks the standard, and fields out of step with STANDARD.md, are named."""
+    root = Path(__file__).resolve().parents[1]
+    import json
+    bad = json.loads((root / "cases" / "w1-best-of-n-slope" / "standard-report.json").read_text(encoding="utf-8"))
+    bad["results"]["Misalignment"]["entries"][0].pop("interval")
+    extra = {"stdalign/report.py": (root / "stdalign" / "report.py").read_text(encoding="utf-8"),
+             "cases/x/standard-report.json": json.dumps(bad)}
+    errors, _ = make(tmp_path, standard=(root / "STANDARD.md").read_text(encoding="utf-8"), extra=extra)
+    assert any("cases/x/standard-report.json: R16" in e and "needs its interval" in e for e in errors)
+    assert not any("R16 the" in e for e in errors)                          # the real fields match the real standard
+    errors, _ = make(tmp_path, extra=extra)                                  # a standard with other tables
+    assert any("stdalign/report.py: R16 the declaration fields differ" in e for e in errors)

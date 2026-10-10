@@ -7,8 +7,9 @@ code, quotes, list items, field labels (**Statement.**), parts ((i), (ii), ...) 
 rendered text never changes, only where its source lines break. Text in `code` is never broken. Trailing spaces, runs
 of blank lines and a missing final newline are fixed too.
 
-Not touched: the generated view (obsidian/), REFERENCES.md (one entry per line), and the files inside each case's folder
-and probes/general/PREDICTIONS.md, whose hashes or registrations must not change (lint R14).
+Not touched: the generated view (obsidian/) and overview (OVERVIEW.md), REFERENCES.md (one entry per line), and the
+files inside each case's folder and probes/general/PREDICTIONS.md, whose hashes or registrations must not change (lint
+R14).
 
 Usage: python3 tools/mdwrap.py [--check] [file ...]     (no file: every Markdown source of the repository)
 With --check, nothing is written; the exit status is 1 if any file would change, and the files are listed.
@@ -29,7 +30,8 @@ def sources(root=ROOT):
     out = []
     for p in sorted(root.rglob("*.md")):
         rel = p.relative_to(root).as_posix()
-        if rel.startswith((".git/", "obsidian/", ".pytest_cache/", "build/", "dist/")) or rel == "REFERENCES.md":
+        if rel.startswith((".git/", "obsidian/", ".pytest_cache/", "build/", "dist/")) or rel in ("REFERENCES.md",
+                                                                                          "OVERVIEW.md"):
             continue
         if re.match(r"cases/[^/]+/", rel) or rel in ("probes/general/PREDICTIONS.md", "probes/general/RESULTS.md"):
             continue

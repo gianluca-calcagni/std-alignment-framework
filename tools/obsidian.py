@@ -16,7 +16,7 @@ import lint  # one definition of what an item is, and of what it depends on
 
 REPO = "https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/"
 KEEP = {".obsidian", "Annotations"}
-DOCS = {"README.md": "About", "CORE-GENERAL.md": "General core", "STANDARD.md": "Standard", "RECORD.md": "Record",
+DOCS = {"README.md": "About", "OVERVIEW.md": "Overview", "CORE-GENERAL.md": "General core", "STANDARD.md": "Standard", "RECORD.md": "Record",
         "TERMS.md": "Terms", "RELATED.md": "Related", "IMPORT.md": "Import", "NOTES.md": "Notes",
         "REFERENCES.md": "References", "derived/README.md": "Reading order", "ontologies/README.md": "Ontologies",
         "general/README.md": "General results", "general/transfer.md": "Transfer to general spaces",

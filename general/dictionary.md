@@ -87,5 +87,5 @@ Read in their text on arXiv: [@kwa2024], [@chatterjee2018], [@mcallester2020], [
 above. Read in their scans on Project Euclid: [@blackwell1953], [@csiszar1975], [@lindsay1983], [@pistone1995], and
 [@huber1967], whose corollary [P52](i) specializes. Read on arXiv for [P52]'s Notes: [@amini2025]. Known from records
 and abstracts only, since their publishers are not reachable from here: [@white1982], [@vuong1989], [@bental2013];
-[@polyanskiy2025]'s draft is reachable since 2026-10-08 and not yet read. Since Q36, a theorem stated only in a
-paywalled text is derived here, with a proof and a check, or not imported.
+[@polyanskiy2025]'s draft is read for the two inequalities [P4] and [P5] use, and not yet for divergences on general
+spaces. Since Q36, a theorem stated only in a paywalled text is derived here, with a proof and a check, or not imported.

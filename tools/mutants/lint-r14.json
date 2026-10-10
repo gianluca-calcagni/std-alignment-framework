@@ -1,0 +1,70 @@
+{
+ "about": "Lint rule R14's pins (2026-10-09): tools/lint.py against its tests, and lint on the repository's own cases.",
+ "tests": [
+  "tools/test_lint.py",
+  "-k",
+  "pins or registration_cannot or repository"
+ ],
+ "mutants": [
+  {
+   "name": "R14 any line accepted as a pin",
+   "edits": [
+    [
+     "tools/lint.py",
+     "                    m = re.fullmatch(r\"([A-Za-z0-9_.-]+)==[A-Za-z0-9_.+-]+\", line.strip())",
+     "                    m = re.match(r\"([A-Za-z0-9_.-]+)\", line.strip())"
+    ]
+   ]
+  },
+  {
+   "name": "R14 the standard library not excluded",
+   "edits": [
+    [
+     "tools/lint.py",
+     "    return sorted(m for m in mods if m not in sys.stdlib_module_names and not local(m))",
+     "    return sorted(m for m in mods if not local(m))"
+    ]
+   ]
+  },
+  {
+   "name": "R14 the case's own modules not excluded",
+   "edits": [
+    [
+     "tools/lint.py",
+     "    local = lambda m: any((d / f\"{m}.py\").exists() for d in (case, root, root / \"tools\")) or (root / m).is_dir()",
+     "    local = lambda m: any((d / f\"{m}.py\").exists() for d in (root, root / \"tools\")) or (root / m).is_dir()"
+    ]
+   ]
+  },
+  {
+   "name": "R14 PyPI names ignored",
+   "edits": [
+    [
+     "tools/lint.py",
+     "                if PACKAGE_NAMES.get(mod, mod).lower().replace(\"_\", \"-\") not in pinned:",
+     "                if mod.lower().replace(\"_\", \"-\") not in pinned:"
+    ]
+   ]
+  },
+  {
+   "name": "R14 imports never checked",
+   "edits": [
+    [
+     "tools/lint.py",
+     "            for mod in third_party_imports(case):",
+     "            for mod in []:"
+    ]
+   ]
+  },
+  {
+   "name": "R14 from-imports ignored",
+   "edits": [
+    [
+     "tools/lint.py",
+     "            elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:",
+     "            elif False:"
+    ]
+   ]
+  }
+ ]
+}

@@ -87,5 +87,5 @@ Read in their text on arXiv: [[References|@kwa2024]], [[References|@chatterjee20
 above. Read in their scans on Project Euclid: [[References|@blackwell1953]], [[References|@csiszar1975]], [[References|@lindsay1983]], [[References|@pistone1995]], and
 [[References|@huber1967]], whose corollary [[P52 — What a sample certifies about misalignment, by access|P52]](i) specializes. Read on arXiv for [[P52 — What a sample certifies about misalignment, by access|P52]]'s Notes: [[References|@amini2025]]. Known from records
 and abstracts only, since their publishers are not reachable from here: [[References|@white1982]], [[References|@vuong1989]], [[References|@bental2013]];
-[[References|@polyanskiy2025]]'s draft is reachable since 2026-10-08 and not yet read. Since Q36, a theorem stated only in a
-paywalled text is derived here, with a proof and a check, or not imported.
+[[References|@polyanskiy2025]]'s draft is read for the two inequalities [[P4 — What KL measures|P4]] and [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] use, and not yet for divergences on general
+spaces. Since Q36, a theorem stated only in a paywalled text is derived here, with a proof and a check, or not imported.

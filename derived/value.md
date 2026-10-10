@@ -42,7 +42,8 @@ checks/test_value.py::test_other_divergences_break_the_chain_rule
 **Notes.** (i) is the Gibbs variational principle. The net value is the objective of KL-regularized RL fine-tuning, and
 a free energy in the literature on bounded rationality [@ortega2013]. The same ray therefore arises twice: as the
 steepest climb of [D2] and as the set of best behaviours at every price in (i). The chain rule and Gibbs' inequality are
-standard [@cover2006]. Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the
+standard [@cover2006]; Gibbs' inequality is read in the open draft of [@polyanskiy2025], Theorem 2.3, and the chain rule
+is proved in (iii). Hobson characterized KL, up to a positive factor, by a small set of conditions that includes the
 chain rule
 (iii) [@hobson1969]. The last check confirms that three common alternatives (χ², squared Hellinger, total variation)
 break it.

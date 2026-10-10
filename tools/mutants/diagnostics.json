@@ -1,0 +1,181 @@
+{
+ "about": "The diagnostics of the library (E1(b), 2026-10-09): stdalign/diagnostics.py and stdalign/projection.py, against the library's tests and the checks of [P43]-[P51] and [P15].",
+ "tests": [
+  "stdalign",
+  "checks/test_diagnostics.py",
+  "checks/test_feasibility.py"
+ ],
+ "mutants": [
+  {
+   "name": "[P43] mismatch toward -F",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "kl(self.nearest, tilt(self.q, t * self.F))",
+     "kl(self.nearest, tilt(self.q, -t * self.F))"
+    ]
+   ]
+  },
+  {
+   "name": "[P43] anti-pursuit gap reversed",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "max(q @ F - np.asarray(p) @ F, 0.0)",
+     "max(np.asarray(p) @ F - q @ F, 0.0)"
+    ]
+   ]
+  },
+  {
+   "name": "[P43] grid without zero",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    grid = np.r_[0.0, np.logspace(-3, 2, 300)]",
+     "    grid = np.r_[0.5, np.logspace(-0.3, 2, 300)]"
+    ]
+   ]
+  },
+  {
+   "name": "[P43] excess with the wrong sign",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return SharedIntensity(shared, own, shared - own)",
+     "    return SharedIntensity(shared, own, own - shared)"
+    ]
+   ]
+  },
+  {
+   "name": "[P44] named pursuit from the behaviour",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return project_linear(nearest_intended(p, q, F), A, A @ np.asarray(p, dtype=float))",
+     "    return project_linear(np.asarray(p, dtype=float), A, A @ np.asarray(p, dtype=float))"
+    ]
+   ],
+   "note": "Projecting from the default q instead of p° survived a first run, and is equivalent: F is a row of A, so tilt(p°, Aᵀθ) and tilt(q, Aᵀθ) range over the same family, and the I-projection onto {A·p = A·p̂} is unique ([P15](iii)); the two agree wherever both are defined (t* < ∞), to 5e-16 on 200 random instances. Projecting from the behaviour itself is not equivalent: it returns p̂, and nothing is left unexplained."
+  },
+  {
+   "name": "[P45] drift the wrong way",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return sum(wi * kl(pi, pbar) for wi, pi in zip(w, ps)), pbar",
+     "    return sum(wi * kl(pbar, pi) for wi, pi in zip(w, ps)), pbar"
+    ]
+   ]
+  },
+  {
+   "name": "[P46] run-specific part weighted by evaluation",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    specific = sum(bu[x] * kl(nu_u[:, x] / bu[x], nu_e[:, x])",
+     "    specific = sum(be[x] * kl(nu_u[:, x] / bu[x], nu_e[:, x])"
+    ]
+   ]
+  },
+  {
+   "name": "[P47] second moment without the square",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "float(np.sum(r[s] ** 2 / p[s]))",
+     "float(np.sum(r[s] / p[s]))"
+    ]
+   ]
+  },
+  {
+   "name": "[P48] most charitable from the behaviour",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    pt = project_linear(q, Phi, Phi @ np.asarray(p, dtype=float))",
+     "    pt = project_linear(np.asarray(p, dtype=float) * 0.5 + np.asarray(q) * 0.5, Phi, Phi @ np.asarray(p, dtype=float))"
+    ]
+   ]
+  },
+  {
+   "name": "[P49] outer judged on the evaluator",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return misalignment(tilt(q, t * np.asarray(Fh, dtype=float)), q, F)",
+     "    return misalignment(tilt(q, t * np.asarray(Fh, dtype=float)), q, Fh)"
+    ]
+   ]
+  },
+  {
+   "name": "[P49] inner split from the target alone",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    pt = most_charitable(p, q, np.vstack([F, Fh]))[0]",
+     "    pt = most_charitable(p, q, np.vstack([F]))[0]"
+    ]
+   ]
+  },
+  {
+   "name": "[P50] tampering the wrong way",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return sum(pW[w] * kl(p[w] / pW[w], K[w]) for w in range(len(pW)) if pW[w] > 0)",
+     "    return sum(pW[w] * kl(K[w], p[w] / pW[w]) for w in range(len(pW)) if pW[w] > 0)"
+    ]
+   ]
+  },
+  {
+   "name": "[P50] grounded pursuit of nothing",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return pairs(tilt(qW, t * (np.asarray(K, dtype=float) @ np.asarray(Fh, dtype=float))), K)",
+     "    return pairs(np.asarray(qW, dtype=float), K)"
+    ]
+   ]
+  },
+  {
+   "name": "[P51] least tampering the wrong way",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "    return kl(pS, mu), float(np.log(c.max())), pW[:, None] * K * ratio[None, :]",
+     "    return kl(mu, pS), float(np.log(c.max())), pW[:, None] * K * ratio[None, :]"
+    ]
+   ]
+  },
+  {
+   "name": "[P51] most tampering is the least",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "        best = max(best, tampering(p, K))",
+     "        best = min(best, tampering(p, K))"
+    ]
+   ]
+  },
+  {
+   "name": "[P51] channel gain with the wrong sign",
+   "edits": [
+    [
+     "stdalign/diagnostics.py",
+     "again.sum(1) @ Fh - again.sum(0) @ Fh, again",
+     "again.sum(0) @ Fh - again.sum(1) @ Fh, again"
+    ]
+   ]
+  },
+  {
+   "name": "[P15] projection with the wrong gradient",
+   "edits": [
+    [
+     "stdalign/projection.py",
+     "    grad = lambda th: A @ tilt(r, A.T @ th) - b",
+     "    grad = lambda th: b - A @ tilt(r, A.T @ th)"
+    ]
+   ]
+  }
+ ]
+}

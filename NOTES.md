@@ -71,6 +71,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **An optimum taken from a solver's word** | the first check of [P51](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
 | **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
+| **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [A2] and [D2] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([P4], [P5]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -205,6 +206,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q38 | the licence of the library and of the framework: the GNU Affero GPL is kept, since the framework is a work in progress the PI hopes the community will support rather than copy; it is to be revisited if the framework gains predictive or diagnostic power, which is not taken for granted. Applied: §11, with what the licence does not cover (the ideas) and what a later change needs (every copyright holder's consent) | PI | §11; `ROADMAP.md` |
 | Q39 | a file for contributors, a review of the whole framework with doc hygiene, then a merge into `main`, and advice for the project. Applied: `CONTRIBUTING.md`, its terms proposed for the PI's approval; the review and its advice in §12; the fixes it lists | PI; executor (the review) | `CONTRIBUTING.md`; §12; `README.md`; `RECORD.md`; `ROADMAP.md` |
 | Q40 | close up and hand over, in the order the executor proposed: a close-out (the executor's tools and working rules into the repository, a handover note), then a reader package with a defined end, then the handover, to readers and to a fresh session. Applied: `tools/mdwrap.py`, `tools/mutate.py` and `tools/mutants/`, with tests; `CLAUDE.md`; §13; steps H1 and H2 | PI; executor (the plan) | `CLAUDE.md`; `tools/`; §13; `ROADMAP.md` |
+| Q41 | continue until every step of the handover is done, then open one pull request into `main`. Applied: E1(b), the diagnostics in `stdalign` 0.2; E2, the report as data, with its validator and lint R16, and W1's report migrated; E3, `examples/quickstart.py`, run by CI, and every case's environment pinned, which lint R14 now requires; H1, `OVERVIEW.md`, generated from the items; H2, §13 and the requests updated; and the pull request | PI; executor (the package) | §13; `ROADMAP.md`; `REQUESTS.md`; `OVERVIEW.md`; `stdalign/`; `examples/` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -790,16 +792,41 @@ On the engineering side:
 6. Ask the first reader for something small and checkable: the proofs of [P1], [P2], [P4], [P5] and [P14], with the
    checks that test them. A clean reading there covers most of what the framework rests on.
 
-## 13. Handover, 2026-10-09 (Q40)
+## 13. Handover, 2026-10-09 (Q40, Q41)
 
 The PI approved ending this phase with a handover: a close-out, then a reader package with a defined end, then the
-handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H2). This note is the state at the
-close-out, for whoever takes the work up.
+handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H2). The close-out came first; on the
+same day the PI asked for every step of the handover to be finished and merged in one pull request (Q41). This note is
+the state at the handover, for whoever takes the work up.
 
-**State.** The core is v11: five premises, eleven definitions, 52 propositions, 184 checks on both SIMD paths, lint
-clean, CI green. The library `stdalign` 0.1 holds misalignment, its split and its estimates by access. Pull request #30
-is merged; nothing else is in flight: no case is registered and not run, and no branch holds unmerged work but the
-close-out's own.
+**State.** The core is v11: five premises, eleven definitions, 52 propositions; lint is clean, and every test passes on
+both SIMD paths. The library `stdalign` 0.2 holds misalignment, its split and its estimates by access, the diagnostics
+[P43]–[P51], the projection of [P15], and the validator of reports as data. W1's report is the first held to it (lint
+R16). `examples/quickstart.py` runs a case on simulated data, from the declaration to a valid report, in under a minute,
+and CI runs it. Every case pins its environment, and lint R14 checks the pins against the scripts' imports.
+`OVERVIEW.md` gives a mathematical reader the premises and the six results the rest stands on, with their proofs, and
+CI keeps it equal to the items. Every new function and tool has a mutant list in `tools/mutants/`, all caught.
+
+**Found while building the package**, each recorded where it is acted on:
+- [A2] and [D2] rested on Čencov's theorem, cited only from a monograph behind a paywall; the review of 2026-10-08 did
+  not catch it (§1). Its statement is now read in Lê's open text, and Gibbs' and Pinsker's inequalities in Polyanskiy
+  and Wu's draft. Seven more sources, cited in nine items, have no record of being read: step 8 of `ROADMAP.md`.
+- [A2] says "a geometry", while Čencov's theorem covers Riemannian ones only. Changing a premise is the PI's decision
+  (`REQUESTS.md`, R6); `OVERVIEW.md` tells its reader.
+- Two mutants of [P44]'s named split survived, and both are equivalent, for one reason: the named pursuit depends only
+  on the span of `F` and the named objectives. Projecting from the default instead of from `p°` stays in the same
+  family, since `F` is in the span; naming the evaluator `F + 0.8·flattery` instead of flattery leaves the span
+  unchanged. Their notes in `tools/mutants/diagnostics.json` and `quickstart.json` say so, and mutants that are not
+  equivalent replaced them.
+- The quickstart's interval of misalignment misses the simulated truth at its own seed, by 2.4 standard errors. Over
+  2,000 runs it covers 95.8%, so the seed was kept: choosing another after seeing this one would choose by outcome. Its
+  test checks coverage over 1,000 runs, not one.
+- The quickstart's other quantities have bootstrap intervals, and their coverage was measured before they were reported:
+  over 400 runs, 94.5% to 95.5% at a nominal 95%, but 90.0% for three parts near zero (the unexplained part, the least
+  over the targets and the strict inner part, about `0.0016` nats), where the plug-in's upward bias is half its standard
+  deviation (`probes/examples/`). The basic bootstrap, which reflects the interval to undo the bias, did no better there
+  (90.0%) and worse for the trainer's part (78.0%), because these estimates are skewed near zero. The report states the
+  measured coverage rather than claim 95%; limit laws for these parts are step 3.
 
 **Lost with the session's container**, by design outside the repository, and how to get each back:
 - the per-draw values of W3 and W4 (`w3_rows.pkl`, `w4_rows.pkl`), saved by `tools/casekit.py` in the session's scratch
@@ -811,9 +838,11 @@ close-out's own.
 - the executor's scratch scripts: what was reusable is now in `tools/` (`mdwrap.py`, `mutate.py`, the mutant lists); the
   rest were one-off probes, whose numbers are recorded where they are cited.
 
-**Next.** The reader package: E1's diagnostics in the library, E2 and E3 with every world case's environment pinned, and
-H1, an overview for a mathematical reader; then H2. The open decisions are in `REQUESTS.md`: readers (R1), the LEEPS
-records (R2), the Tankerkönig archive (R3), the contribution terms (R4), and what counts as a step for stability (R5).
+**Next.** The next phase starts with W5, after E4, and with C3, both on the library; E1(c) moves stakes, the
+evaluator's results and feasibility into it; step 3 gives the other quantities of a report their limit laws, which would
+replace the quickstart's bootstrap; step 8 settles the remaining sources. The open decisions are in `REQUESTS.md`:
+readers (R1), whose package is ready; the LEEPS records (R2); the Tankerkönig archive (R3); the contribution terms (R4);
+what counts as a step for stability (R5); and [A2]'s wording (R6).
 
 **What the next executor should know.**
 - Read §1 before anything: its rows are the mistakes this work made, each with its evidence, and most were made more

@@ -66,7 +66,8 @@ framework. It is a working agreement, not a claimed property.
 python3 tools/mdwrap.py               # wrap the Markdown sources
 python3 tools/lint.py                 # 0 errors
 python3 tools/obsidian.py             # regenerate the read-only view
-python3 -m pytest                     # checks, tool tests, scenario, library
+python3 tools/overview.py             # regenerate OVERVIEW.md
+python3 -m pytest                     # checks, tool tests, scenario, library, quickstart
 NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # the second SIMD path
 ```
 

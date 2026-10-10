@@ -136,8 +136,9 @@ direct must not depend on how finely we describe what happens.
 **Why this choice.**
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
-- *It is enough.* By Čencov's theorem [@cencov1982] it fixes the geometry, up to a constant factor, and with it the form
-  of pursuit, a reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
+- *It is enough.* By Čencov's theorem [@cencov1982], whose statement is read in the open text [@le2016] (Proposition
+  6.1), it fixes the geometry among the Riemannian ones, up to a constant factor, and with it the form of pursuit, a
+  reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
 
 **Lineage.** v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where
 this was the one premise.
@@ -245,9 +246,10 @@ away from it, from wherever it starts.
 - *It is canonical, given [A2].* Pursuing `F` means climbing `E_p[F]` as steeply as possible, in a Riemannian geometry
   on behaviours that is unchanged when outcomes are split into sub-outcomes in fixed proportions. Up to a constant
   factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's theorem
-  [@cencov1982]; [@campbell1986]). In the Fisher metric the steepest climb is the replicator field ([P2](ii)), and its
-  flow from `q` is `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the
-  same. A notion of pursuit that must not depend on how finely outcomes are described is therefore led to this ray.
+  [@cencov1982], extended by [@campbell1986]; read in the open texts [@le2016], Proposition 6.1, and [@ay2015],
+  Corollary 3.20). In the Fisher metric the steepest climb is the replicator field ([P2](ii)), and its flow from `q` is
+  `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the same. A notion of
+  pursuit that must not depend on how finely outcomes are described is therefore led to this ray.
 - *The ray needs a default; the path does not.* The same objective pursued from two defaults gives two different rays,
   so the specification of section 3 fixes the default. Whether a path pursues `F` needs no default at all, which is why
   derived results can read pursuit from changes of behaviour without declaring one.
