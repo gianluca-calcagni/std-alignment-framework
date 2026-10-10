@@ -210,6 +210,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q40 | close up and hand over, in the order the executor proposed: a close-out (the executor's tools and working rules into the repository, a handover note), then a reader package with a defined end, then the handover, to readers and to a fresh session. Applied: `tools/mdwrap.py`, `tools/mutate.py` and `tools/mutants/`, with tests; `CLAUDE.md`; §13; steps H1 and H2 | PI; executor (the plan) | `CLAUDE.md`; `tools/`; §13; `ROADMAP.md` |
 | Q41 | continue until every step of the handover is done, then open one pull request into `main`. Applied: E1(b), the diagnostics in `stdalign` 0.2; E2, the report as data, with its validator and lint R16, and W1's report migrated; E3, `examples/quickstart.py`, run by CI, and every case's environment pinned, which lint R14 now requires; H1, `OVERVIEW.md`, generated from the items; H2, §13 and the requests updated; and the pull request | PI; executor (the package) | §13; `ROADMAP.md`; `REQUESTS.md`; `OVERVIEW.md`; `stdalign/`; `examples/` |
 | Q42 | a general doc hygiene before the handover's pull request is updated. Applied: the scripted sweep of §12 run again, statements the handover made stale fixed (`ROADMAP.md`, §2, §13, `REQUESTS.md`, `README.md`, `cases/README.md`), and pull request #31 updated | PI | `ROADMAP.md`; §2; §13 |
+| Q43 | review Johnson and Huo (2026), and put in the roadmap, with a priority of the executor's choosing, anything compelling for the framework. Applied: §14; the paper is in `RELATED.md`; nothing in it becomes a step: its theory is a mechanism ([[A1 — Behaviour suffices\|A1]]) and its evidence too thin to build a prediction on; the behavioural question it raises is H37, after E4 and below W5 and C3 (`ROADMAP.md`, not now) | PI; executor (the review and the priority) | §14; `RELATED.md`; `ROADMAP.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -445,6 +446,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H34 | **A monitor trained against is tampered with.** A monitor whose verdict is computed from a channel the actor can influence, such as a probe on activations, is a signal in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s sense, and training against it is the trainer's optimum of [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii): it tampers at every positive intensity, with a share at the start equal to the share of the monitor's variance not explained by what it is meant to detect. So optimizing against an imperfect monitor buys, from the first step, a change of what the monitor reads as well as of what it monitors. The reading needs the channel declared (the activations each behaviour would produce, before any training against the monitor), and the trainer's optimum idealizes training | D: a candidate simulation, after the tampering case; no world test named |
 | H35 | **The request as evidence, as a declared family.** Inverse reward design's posterior over true rewards, given a written one and the environment it was written for [[References\|@hadfieldmenell2017]], could be the family of [[P48 — Misalignment when the target is uncertain\|P48]] that a principal declares when the request is all there is: the least misalignment over it is the most charitable reading of the request, and the largest is the departure. Features that did not vary where the request was written get the prior's spread, so the interval widens exactly where the request was silent | D: a derived result only if a test needs it |
 | H36 | **The default from how people usually act.** Preferences implicit in the state of the world [[References\|@shah2019]] suggest estimating the default from a population's ordinary behaviour, so that the norms nobody states are carried by the cost of departure. Since a pursuit keeps the default's proportions among outcomes the request scores alike, an unstated norm then moves only through its regression on the request ([[P18 — Through the evaluator, only the regression counts\|P18]]) | D: a declaration practice for `STANDARD.md`, to try in a case |
+| H37 | **Misalignment along a conversation.** Each prefix of a conversation is a condition ([[D8 — Conditions, responses and views\|D8]]), so a model's next-turn behaviour over declared classes of outcome, good, bad and other (a resolution, [[D4 — Resolution\|D4]]), can be judged at each position against the standard specification of `F = 1_good − 1_bad`, and the path of behaviours tested for a fixed objective ([[P3 — A fixed objective is visible in the changes of behaviour\|P3]]). Evaluations that sample first turns and use that runs long meet these conditions in different proportions, so [[P24 — The evaluation gap\|P24]]'s gap applies, and [[P17 — What an unobserved condition can hide\|P17]] says first-turn alignment certifies nothing about later turns without a bound on how far the model tells them apart. Johnson and Huo's good-to-bad tipping [[References\|@johnson2026]] would be the case where the revealed objective turns from good to bad at a definite position (§14) | D: a diagnostic case, after E4, below W5 and C3 |
 
 ### 5.5 Process
 
@@ -846,7 +848,7 @@ caught.
 evaluator's results and feasibility into it; step 3 gives the other quantities of a report their limit laws, which would
 replace the quickstart's bootstrap; step 8 settles the remaining sources. The open decisions are in `REQUESTS.md`:
 readers (R1), whose package is ready; the LEEPS records (R2); the Tankerkönig archive (R3); the contribution terms (R4);
-what counts as a step for stability (R5); and [[A2 — Pursuit is the steepest climb|A2]]'s wording (R6).
+what counts as a step for stability (R5); [[A2 — Pursuit is the steepest climb|A2]]'s wording (R6); and a tag for the handover's state (R7).
 
 **What the next executor should know.**
 - Read §1 before anything: its rows are the mistakes this work made, each with its evidence, and most were made more
@@ -858,3 +860,36 @@ what counts as a step for stability (R5); and [[A2 — Pursuit is the steepest c
   for its own sake; and asks to be consulted only on what is the PI's to decide.
 - `ROADMAP.md` was kept from a source written one line per paragraph; with `tools/mdwrap.py` that source is no longer
   needed: edit the file, then wrap it.
+
+## 14. A review of Johnson and Huo (2026), 2026-10-10 (Q43)
+
+By the executor, at the PI's request, from the paper's record and main text on arXiv (v2); the supplementary
+information, which the main text cites for the derivation and every table, and the code are not public, and the source
+on arXiv holds neither. Not independent (rule (f)).
+
+**What it claims.** Outputs of a language model, coarse-grained into a neutral prompt `A`, good content `B`, bad content
+`D` and the rest, tip from good to bad because of competition for attention. In a single attention head whose context
+vector is the attention-weighted mean of the conversation's symbols, the next symbol is the class whose centroid has the
+larger dot product with that vector; when `B·D > B·B`, each new `B` pulls the context towards `D`, and the output tips
+after `n*` good symbols, given by a closed formula (its Eq. 2). It reports agreement with six models of 124M to 410M
+parameters, and compatibility with a report on ChatGPT-4o.
+
+**What holds.** Eq. 2 is exact for that toy: it is the step at which `c·D` first exceeds `c·B`. A check here put it
+within one step of the simulated head in 65 random instances of 65 (`probes/related/attention_tipping_toy.py`).
+
+**What does not, yet.**
+- The toy has no query, key or value projections and no unembedding. The vectors the paper measures are mean-pooled
+  hidden states of the penultimate layer for whole phrases, which are none of the head's quantities. So the evidence
+  tests a geometric heuristic that correlates with the output, not the mechanism the formula describes.
+- 18 cases, on base models that were never instruction-tuned, under greedy decoding. 13 of the 18 tip at once, so a
+  baseline that always predicts immediate tipping scores 13; the formula scores 16. Its p-values compare with chance,
+  not with that baseline, and two near-boundary cases were excluded from the timing-class count.
+- The claim that the mechanism persists at production scale rests on four qualitative compatibilities with a report
+  whose transcripts are not public.
+
+**For the framework.** The mechanism is out of scope: the core judges behaviour, not how it is produced ([[A1 — Behaviour suffices|A1]]), and no
+result of the core would change if the paper is right or wrong. The question it raises is behavioural, and the
+framework already has the instruments for it: misalignment along a conversation (H37). A case on it would be
+diagnostic, not a test of the framework's predictions, and it needs E4's adapters for sequence models, as W5 does. It
+waits below W5 and C3, which test predictions of the framework. What the framework could give the paper is in
+`RELATED.md`.

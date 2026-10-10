@@ -109,6 +109,9 @@ and what is done. Since Q36 no paper behind a paywall is asked for.
   §5.4).
 - More simulation cases: only to gate a world test, or when the PI approves one, as for C3.
 - Hunches (`NOTES.md` §5.4): recorded, not pursued, unless a step above needs them.
+- Mechanistic accounts of when a model's output tips, such as Johnson and Huo's competition for attention (Q43,
+  `NOTES.md` §14): out of scope ([[A1 — Behaviour suffices|A1]]). The behavioural question they raise, misalignment along a conversation, is H37:
+  a diagnostic case after E4, below W5 and C3.
 
 ## Drift checks
 
@@ -135,3 +138,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-09 | close-out for the handover (Q40): `tools/mdwrap.py` and `tools/mutate.py` with tests, the mutant lists of the library, of [[P52 — What a sample certifies about misalignment, by access\|P52]]'s check and of `mdwrap` (all caught), `CLAUDE.md`, and the handover note (`NOTES.md` §13); the reader package and the handover set as steps H1 and H2 | 5 (H2 prepared); 1 (mutation testing reproducible from the repository) |
 | 2026-10-10 | the handover finished, as the PI asked (Q41): E1(b), the diagnostics in `stdalign` 0.2, mutation-tested, one equivalent mutant explained; E2, the report as data, its validator, lint R16, W1's report migrated; E3, `examples/quickstart.py` run by CI, its intervals' coverage measured (90% for three parts near zero, stated in its report), and every case's environment pinned, which lint R14 checks against the scripts' imports; H1, `OVERVIEW.md`, generated from the items; H2, `NOTES.md` §13 and `REQUESTS.md` (R1's package ready, R6 asked). Writing H1 found that [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] rested on an unread paywalled source: fixed with open texts read, a failure-mode row, and step 8 for the seven sources left | 5 (the reader package); 1 (sources, mutants) |
 | 2026-10-10 | doc hygiene before the handover is merged, at the PI's request (Q42): a scripted sweep of counts, paths, links, wrapping, spelling and whitespace, and a reading for statements the handover made stale; fixed in this file, `NOTES.md` §2 and §13, `REQUESTS.md`, `README.md` (R12) and `cases/README.md` (three lessons and what holds them) | 2 (the records true); 5 (the package) |
+| 2026-10-10 | Johnson and Huo (2026) reviewed at the PI's request (Q43, `NOTES.md` §14): its formula is exact for its one-head toy, but the evidence does not test that mechanism, and the mechanism is out of scope ([[A1 — Behaviour suffices\|A1]]); not a step. The behavioural question it raises recorded as H37, after E4 and below W5 and C3; the paper in `RELATED.md` | none: the priorities are kept |

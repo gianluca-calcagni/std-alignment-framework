@@ -335,6 +335,29 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   only in evaluation, pointing where the target does, drives the misalignment seen in evaluation to zero, and two
   actors that pass it through alike become indistinguishable at an exponential rate ([P37]).
 
+## Attention dynamics and tipping in conversations
+
+- *Sources.* Johnson and Huo [@johnson2026], read on arXiv in its main text; its supplementary information, which holds
+  the derivation and the tables, and its code are not public.
+- *Shared.* Outcomes are coarse-grained into classes a deployer declares, good, bad, neutral and other, which is a
+  resolution ([D4]) and a declared specification ([D3]). The conversation so far is a condition ([D8]), and the
+  question is how behaviour changes along it.
+- *Different.* The paper explains when output tips from good to bad by a mechanism: one attention head, whose context
+  vector is a weighted mean of the conversation's symbols, picks the next symbol by its dot products with the two
+  classes' centroids; tipping after `n*` good symbols is the crossing of those dot products. The formula for `n*` is
+  exact for that toy (`NOTES.md` §14), but the vectors the paper measures, mean-pooled hidden states of phrases, are
+  not the queries and keys of any head, and the core does not judge mechanisms ([A1]). Its evidence is 18 cases on six
+  base models of 124M to 410M parameters, greedy decoding, 13 of them tipping at once; a baseline that always predicts
+  immediate tipping gets 13 of 18, the formula 16. Its claims about production models rest on a qualitative match with
+  the Center for Countering Digital Hate's report on ChatGPT-4o, whose transcripts are not public.
+- *Import, later* (H37). Not the mechanism: the behavioural question. Along a conversation, a model's behaviour over the
+  declared classes can be judged at each position against the standard specification, the path tested for a fixed
+  objective ([P3]), and first-turn evaluation compared with use in long conversations ([P24]); [P17] says first-turn
+  alignment certifies nothing about later turns without a bound on how far the model can tell them apart.
+- *What it could take from us.* Behaviour as a distribution rather than a greedy path, so that tipping becomes a
+  probability that grows with position and can be tested at any temperature; a registration with a baseline before the
+  cases are run; and detection rates for its proposed monitor ([P22]).
+
 ## Distribution shift
 
 - *Sources.* Domain adaptation bounds (Ben-David and coauthors) and covariate shift *(to verify)*.

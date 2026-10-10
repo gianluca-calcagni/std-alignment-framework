@@ -26,6 +26,7 @@ PI's call.
 | R4 | approve, change or replace the contribution terms of `CONTRIBUTING.md`, proposed on 2026-10-08 | outside contributions | the terms keep a later change of licence possible (Q38); they should be settled before the first outside contribution | 2026-10-08 (Q39) |
 | R5 | decide what counts as a step for the finish line's row "stable": the executor proposes a merged pull request, counted from the merge of the review of 2026-10-08 | step 7, stability | as written, the row has no unit and cannot be met on a checkable date (`NOTES.md` §12, finding 5) | 2026-10-08 (Q39) |
 | R6 | decide whether [A2]'s Statement says "a Riemannian geometry" instead of "a geometry". The executor recommends it: Čencov's theorem, which leads from [A2] to the Fisher metric, covers Riemannian geometries only, as [D2]'s reason already says, and a steepness measured by a norm that is not an inner product is not covered. It changes a premise's Statement, so it restarts the count of row "stable" | the premises, and row 2 | found while writing `OVERVIEW.md` (H1), which says so to its reader (`NOTES.md` §13) | 2026-10-09 |
+| R7 | allow the executor to tag the merged handover (`main` at `1f5ab5d`) as a release, such as `v11-handover`, so that the readers of R1 and the next session refer to one fixed state while `main` moves on | R1, readers; H2 | a reader who spends weeks on the proofs should review the version the overview describes; a tag costs nothing and is visible on GitHub | 2026-10-10 |
 
 ## Hosts allowed
 
