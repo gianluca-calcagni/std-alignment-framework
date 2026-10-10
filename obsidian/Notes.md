@@ -215,6 +215,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q45 | the contribution terms of `CONTRIBUTING.md` approved as drafted (R4): AGPL in and out, with a grant to relicense under another licence approved by the Open Source Initiative, recorded by a `Signed-off-by:` line | PI | `CONTRIBUTING.md` |
 | Q46 | a step, for the finish line's row "stable", is a merged pull request (R5); the count starts with the first pull request merged after the one that made v12 | PI | `README.md`; `ROADMAP.md`, step 7 |
 | Q47 | no release tag for the handover (R7): readers review `main` as it is when they start | PI | `REQUESTS.md` |
+| Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
 
 ### 3.2 Papers and data the PI could supply
 
