@@ -70,7 +70,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A specification with no named principal** | W3 and W4 declared as the target the reward the policy was trained on, the evaluator itself, while the machine-learning ontology's specification asks for a gold objective distinct from it; the executor declared it, for no principal in particular. What they measured is misalignment against the trainer's formal objective, and their texts said "misalignment" without saying whose. Caught by the PI | name the principal in the declaration; when the target is uncertain, declare the family of targets and report the interval it gives (§7) |
 | **An optimum taken from a solver's word** | the first check of [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
-| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
+| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08). Again on 2026-10-10: the answer on the licence's aim (Q50) passed on nine links found by web search, on licences and on copyright in AI-written text, without opening them; when they were then fetched for these notes, their hosts were not allowed, so §11 says that those facts come from search results and that the primary pages were not read | open a record and match its title and authors before citing or passing on its link; when the host is not reachable, say so with the link, or ask the PI to allow it |
 | **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 | **A result's hypothesis dropped in the code that applies it** | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
 
@@ -218,6 +218,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q47 | no release tag for the handover (R7): readers review `main` as it is when they start | PI | `REQUESTS.md` |
 | Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
 | Q49 | review the framework in general: get familiar with its files, methodology and ethos, plan an exhaustive list of focus areas, then review them in turn, with challenges and constructive criticism. Applied: §15, with twelve focus areas, eleven findings and seven pieces of advice; `probes/review/`; `OVERVIEW.md`'s count of predictions and an orientation for a mathematician; Korbak, Perez and Buckley in `RELATED.md`; a row of §1 extended and one added; the order of the commands before a push fixed; three decisions asked (`REQUESTS.md`, R8–R10) | PI; executor (the review) | §15; `probes/review/`; `tools/overview_template.md`; `ROADMAP.md`; `REQUESTS.md` |
+| Q50 | the licence's aim during research: progress on the framework, by people or by models working on copies of it, is shared with everyone; the GNU Affero GPL, version 3 or later, is kept for the code and the text, and the adoption it costs is accepted; it is to be relaxed once research gives way to use. So R9 is declined, and the executor withdraws the recommendation behind it (§15, advice 6). Applied: §11, what a copyleft licence reaches and what it does not, and what gets closer; proposed and awaiting the PI: additional terms under the licence's section 7, a request to AI agents that work on copies, and a citation file with a DOI per release (`REQUESTS.md`, R11) | PI; executor (the analysis) | §11; §15; `REQUESTS.md`; `ROADMAP.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -737,6 +738,62 @@ of licence needs the consent of every holder of the copyright; while the PI is t
 will, and once others contribute, keeping that freedom needs their agreement in advance, as a contributor agreement
 gives.
 
+**The licence's aim, made precise (Q50).** The PI wants progress on the framework, by people or by models working on
+copies of it, to be shared with everyone while the work is research, and accepts that the licence will cost some
+adoption meanwhile. What the GNU Affero GPL does toward that aim, read in this repository's `LICENSE`:
+- *A copy published or given to others*, of the code or of the text, modified or not, stays under the licence, with its
+  source, for those who receive it (sections 4 to 6 and 10). They are free to pass it on; nothing makes them send it
+  upstream, and a licence that did so would no longer be free.
+- *A modified program offered over a network*, such as an audit service built on a changed `stdalign`, must offer its
+  users the source of that version (section 13). This is what the Affero licence adds to the GPL, and the reason to keep
+  it.
+- *Private copies* owe nothing. A laboratory whose model improves the framework in-house, and never publishes or serves
+  it, is free to keep the result, under this licence and under every free one. The only licence approved by the Open
+  Source Initiative that tries to reach private use, the Reciprocal Public License, is counted non-free by the Free
+  Software Foundation for that reason, is incompatible with the GPL, and is rarely used; it is not recommended.
+- *Ideas* are not covered, as Q38 said. New results stated in one's own words, a new proof, or the library written anew
+  owe nothing to any licence of this repository. The framework's value is mostly mathematical, so this is the largest
+  gap between the aim and what a licence can do.
+- *Text and code written by a model* may not be protected at all. In the United States copyright requires a human
+  author: the Copyright Office's report on copyrightability (January 2025) holds that prompts alone are not enough, and
+  the Court of Appeals for the District of Columbia Circuit held in Thaler v. Perlmutter (March 2025) that a work needs
+  a human author. Much of this repository was written by an executor at the PI's direction; what is protected is likely
+  the PI's selection, arrangement, decisions and edits, and a licence binds only what copyright protects. The decisions
+  of §3.1 are a record of that human contribution, and are worth keeping as such. This is not legal advice.
+
+What gets closer to the aim, beyond the licence:
+1. *A notice every copy keeps.* Section 7(b) lets a licensor require that "specified reasonable legal notices or author
+   attributions" be preserved: an attribution naming the original work and its address on GitHub, with the request to
+   share progress beside it rather than inside it, since a bare request is not clearly a legal notice.
+2. *The original stays the original.* Section 7(c) lets a licensor require that modified versions be "marked in
+   reasonable ways as different from the original version", so that no copy presents itself as the framework or its
+   standard; improvements then have a reason to come back to where the standard is kept.
+3. *A request to the models that work on copies.* An agent working on a clone reads `CLAUDE.md` or `AGENTS.md`. A
+   section addressed to such agents can ask them to tell their user that this research asks for progress to be shared,
+   and to offer to prepare an issue or a pull request upstream. It asks them to tell their user, never to send anything
+   on their own: an instruction to act without the user would rightly be refused as an injection, and would be wrong.
+4. *Credit for sharing.* A citation file, `CITATION.cff`, a DOI for each release (through Zenodo, say), outside
+   contributors credited by name where `RECORD.md` and `RELATED.md` already say who found what, and issue templates for
+   a result, a counterexample and a case. Researchers share where sharing is credited.
+5. *Early publication.* Dated public commits, DOIs and preprints make the framework prior art, so that no one who builds
+   on it in private can claim its results first or patent them; the licence's section 11 grants the patent rights of
+   those who contribute.
+
+The prose stays under the same licence as the code. The Creative Commons Attribution-ShareAlike licence, version 4.0,
+is also share-alike once a work is published, and is one-way compatible with the GPL, version 3 (declared by Creative
+Commons in October 2015), so it remains an option for the text when the licence is relaxed; switching now would cost
+work and buy only familiarity for academic readers. A relaxation later can cover what was contributed upstream, under
+the grant of Q45; what others keep in their own copies stays under the Affero GPL unless its authors agree.
+
+*Sources.* The licence's sections 4–7, 9–11 and 13 were read in `LICENSE`. The other facts above come from web search
+results on 2026-10-10, whose primary pages were not read, since their hosts are not allowed (§1): on the Reciprocal
+Public License, its Wikipedia entry (`en.wikipedia.org/wiki/Reciprocal_Public_License`) and two posts to the Open Source
+Initiative's license-discuss list (2006, the FSF's objections; 2009, the licences approved by the OSI and listed
+non-free by the FSF); on Creative Commons, the announcement of 8 October 2015 and its wiki page on compatibility with
+GPLv3; on copyright in AI-written text, summaries by DLA Piper (March 2025) and by Sidley Austin (February 2025) of the
+Copyright Office's report and of Thaler v. Perlmutter. A point that matters, before it is acted on, is to be read in its
+primary source or checked by a lawyer.
+
 ## 12. A review of the whole framework, 2026-10-08 (Q39)
 
 By the executor, a model of the Claude family, at the PI's request. It is not independent (rule (f)): the same model
@@ -984,7 +1041,8 @@ standard and its validator; the cases and the record; tooling and CI; governance
    taken. The next test, W5, waits on E4 and on sweeps of 4 to 10 hours each.
 10. *The licence.* The AGPL is kept until the framework gains predictive or diagnostic power (Q38). The readers that row
     5 needs may have to come first: many companies do not allow AGPL code, and a standard serves those who report to
-    it. The contribution terms already allow a change (Q45).
+    it. The contribution terms already allow a change (Q45). *Answered by Q50:* the PI accepts that cost while the work
+    is research, for the sake of sharing (§11).
 11. *Minor.* `pyproject.toml` declares Python 3.10 and NumPy 1.26 as floors, and CI tests only Python 3.11 with the
     pins. Korbak, Perez and Buckley (2022) was not in `RELATED.md`; it is now [[References|@korbak2022]].
 
@@ -1013,6 +1071,8 @@ review's first run. In §1, a row's evidence extended for point 3 and a row adde
 5. Tie a report's `declared_before_data` to a registration's commit and hash, as R14 does for cases; require an
    interval's level; and restrict `exact` to a few named kinds of basis.
 6. Reconsider the licence before the readers of R1 rather than after: Apache-2.0 for `stdalign` and CC BY 4.0 for the
-   documents, or the LGPL for the library at least (R9).
+   documents, or the LGPL for the library at least (R9). *Withdrawn after Q50:* the PI's aim during research is that
+   progress be shared, not that the framework be adopted widely, and for that aim a strong copyleft is right; §11 says
+   what it reaches and what else gets closer.
 7. Put mutant lists for the older checks back in the repository, a few per file of `derived/`, so that the row "solid"
    can be rerun.

@@ -64,7 +64,10 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   outcomes that are not finite and estimation guarantees (step 3).
 - **Licences** (Q27): the repository keeps code, aggregates and citations only: no third-party data, weights, papers, or
   item-by-item derivatives. Its own licence, the GNU Affero GPL, is kept for the framework and the library, to be
-  revisited if the framework gains predictive or diagnostic power (Q38).
+  revisited if the framework gains predictive or diagnostic power (Q38). Its aim while the work is research is that
+  progress on the framework be shared by everyone, and the adoption it costs is accepted (Q50); what a copyleft licence
+  reaches, and what gets closer, is in `NOTES.md` §11, and a package for the second waits on the PI (`REQUESTS.md`,
+  R11).
 - **Waiting on the PI:** `REQUESTS.md`, which lists every request with the step it unblocks, and the hosts allowed.
 
 ## Next, by priority
@@ -151,3 +154,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-10 | the handover strengthened before it is used (Q44–Q47): [[A2 — Pursuit is the steepest climb\|A2]] says "a Riemannian geometry", so the core is v12; step 8 done, every imported theorem now read in an open text or derived; the contribution terms approved; a step for "stable" is a merged pull request, counted after v12; no release tag | 1 (sources); 2 (a unit for stability; the count restarts); 5 (the package) |
 | 2026-10-10 | handover (Q48): a starting message for the independent reviewer of `REQUESTS.md` R1, given to the PI to relay; the pull request that brings Q43–Q47 into `main` opened, so that the reviewer reads v12 | 5 (readers) |
 | 2026-10-10 | a review of the whole framework at the PI's request (Q49, `NOTES.md` §15), in twelve focus areas, by the executor, not independent: the six results the rest stands on read without an error; `M` charges an optimizer of the right target by a route that is not a tilt (median share `0.16` for policy gradient) and can rank an exact pursuit of a wrong proxy below it (AUC `0.35`), where [[P36 — Ordinal objectives\|P36]]'s ordinal misalignment separates them; two errors at the library's edges and an under-covering interval, as E1(d); `OVERVIEW.md`'s count of predictions fixed; C4, a row "valid" and the licence asked of the PI (R8–R10); probes in `probes/review/`; the order of the commands before a push fixed. It changes no Statement and no scope | 1 (the library's errors); 5 (what the diagnostics measure); 2 (if merged, the first step after v12) |
+| 2026-10-10 | the licence's aim recorded (Q50): progress shared by everyone while the work is research, the Affero GPL kept for the code and the text, R9 declined and the executor's recommendation withdrawn; `NOTES.md` §11 says what the licence reaches (published and served copies) and what it does not (private copies, ideas, and perhaps text a model wrote), and what gets closer: notices under section 7, a request to agents that work on copies, credit and early publication (R11). A §1 row extended: links passed on unopened | none: a decision of the PI's, recorded |
