@@ -1,6 +1,6 @@
 # The core
 
-> **Status: v11, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
+> **Status: v12, in progress.** The core holds what cannot be derived: five premises, and the definitions that the whole
 > framework uses. Everything that follows from them is in `derived/`, with proofs and checks that run in CI. Each item
 > carries a formal statement and a plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format
 > is in `README.md`.
@@ -128,20 +128,26 @@ argument. New: behaviour in every condition, so that deceptive alignment is in s
 
 ### A2 — Pursuit is the steepest climb
 **Statement.** To pursue an objective is to raise its average as steeply as possible, with steepness measured in a
-geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed proportions.
+Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
+proportions.
 
-**In plain terms.** Wanting more of something means moving toward it by the most direct route, and what counts as most
-direct must not depend on how finely we describe what happens.
+**In plain terms.** Wanting more of something means moving toward it by the most direct route, with lengths and angles
+measured as in ordinary geometry, and what counts as most direct must not depend on how finely we describe what
+happens.
 
 **Why this choice.**
 - *Description-independence is the least we can ask.* Two observers who describe the same events at different
   granularity must agree on what pursuing an objective means.
 - *It is enough.* By Čencov's theorem [@cencov1982], whose statement is read in the open text [@le2016] (Proposition
-  6.1), it fixes the geometry among the Riemannian ones, up to a constant factor, and with it the form of pursuit, a
-  reweighting of the default (section 2 and `derived/tilts-and-paths.md`).
+  6.1), it fixes the geometry, up to a constant factor, and with it the form of pursuit, a reweighting of the default
+  (section 2 and `derived/tilts-and-paths.md`).
+- *Riemannian.* Steepness needs a length for each direction of change. An inner product gives one, and Čencov's theorem
+  is stated for these. A geometry whose lengths come from a norm that is not an inner product would need a uniqueness
+  theorem of its own, and none is known here; the premise does not cover it.
 
 **Lineage.** v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where
-this was the one premise.
+this was the one premise. v12: "Riemannian" made explicit, as [D2]'s reason already said and Čencov's theorem requires
+(Q44).
 
 ### A3 — Pursuit is the best trade-off
 **Statement.** To pursue an objective at an intensity is to choose the behaviour with the largest average of the
@@ -584,7 +590,7 @@ how much more likely the record is under the first than under the second, on a l
 - *It is universal.* Counted choices, sampled genotypes, sampled responses, case records and logged units of work are
   all samples.
 - *Evidence is the canonical statistic.* Between two behaviours, the most powerful test thresholds the likelihood ratio
-  (the Neyman–Pearson lemma [@cover2006]).
+  (the Neyman–Pearson lemma [@cover2006], read in the open draft of [@polyanskiy2025], Theorem 14.11).
 - *It gives misalignment a second meaning.* The expected evidence per decision, under the actual behaviour, for it
   against the nearest intended behaviour is the misalignment (`derived/estimation.md`). Value lost ([A4]) and evidence
   gained agree, in the same direction of KL, as the steepest climb ([A2]) and the best trade-off ([A3]) agree on the

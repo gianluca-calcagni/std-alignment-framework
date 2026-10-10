@@ -109,9 +109,9 @@ standard's validator accepts.
 
 The proofs above, line by line. These are the places where a careful reader should push.
 1. **From A2 to the Fisher metric.** Čencov's theorem needs a Riemannian geometry, and invariance under splitting
-   outcomes for outcome sets of every size at once. A2 asks for the invariance, but says only "a geometry"; D2's reason
-   says "Riemannian". A geometry that measures steepness by a norm that is not an inner product is not covered. A
-   reader may reject either requirement, and [P2] then loses its reading as the steepest climb, though not its algebra.
+   outcomes for outcome sets of every size at once. A2 asks for both, the first since v12. A geometry that measures
+   steepness by a norm that is not an inner product is not covered. A reader may reject either requirement, and [P2]
+   then loses its reading as the steepest climb, though not its algebra.
 2. **The price in A3.** [P14] forces KL because A3 prices departure at exactly `1/t`. If the best trade-offs are only
    asked to lie somewhere on the pursuit ray, any increasing function of KL passes ([P14], Notes).
 3. **The benefit of the doubt in A4.** Misalignment takes the least loss over the acceptable behaviours, each judged by
@@ -139,8 +139,8 @@ Open an issue, or a pull request under the terms of `CONTRIBUTING.md`.
 - **Finite outcomes.** Outcomes that are not finite are drafted in `CORE-GENERAL.md`, and nothing there is claimed.
 - **Behaviour only.** Two actors that behave alike in every condition are the same actor for the framework ([A1]).
 - **Premises are choices.** Each premise is argued for in its "Why this choice" in `CORE.md`, not proved.
-- **Imported theorems.** Some later results still cite theorems from texts behind paywalls. Reading them in open texts,
-  deriving them, or dropping them is an open step (`ROADMAP.md`).
+- **Imported theorems.** Every theorem a result imports is read in an open text or derived where it is used, and
+  `REFERENCES.md` says which. Čencov's own proof is not in the open texts read here; an extension of it is.
 - **Prediction.** On real data, as of 2026-10-09, three registered predictions failed and two held (section 6). The
   framework's worth as a predictive theory is not established. Its worth as a common unit and a set of diagnostics is
   what the next cases test.

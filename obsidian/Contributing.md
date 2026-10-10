@@ -20,8 +20,8 @@ file says what contributions are welcome, on what terms, and how to make one tha
 
 ## Terms
 
-*Proposed, pending the PI's approval.* The repository is under the GNU Affero General Public License, version 3 or later
-(`LICENSE`). By submitting a contribution, you agree that:
+*Approved by the PI on 2026-10-10 (Q45).* The repository is under the GNU Affero General Public License, version 3 or
+later (`LICENSE`). By submitting a contribution, you agree that:
 1. you have the right to submit it, and it is your own work or work you may license on these terms;
 2. it is licensed under the GNU Affero General Public License, version 3 or later, as the rest of the repository is;
 3. the PI may also distribute it under another licence approved by the Open Source Initiative, if the framework's

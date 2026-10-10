@@ -2,7 +2,7 @@
 
 > **Status: draft 3.** Frozen by Q26, and unfrozen by Q33 for outcomes that are not finite and for estimation, which
 > draft 4 takes up (`ROADMAP.md`, step 3); `general/dictionary.md` maps each object from the finite core to this file.
-> This file extends the core (`CORE.md`, v11) from finitely many outcomes to the outcome spaces met in practice: counts,
+> This file extends the core (`CORE.md`, v12) from finitely many outcomes to the outcome spaces met in practice: counts,
 > waiting times, scores, texts, trait values. It holds premises and definitions only, as `CORE.md` does for finite
 > outcomes. Its results, expected, probed or tested, are in `general/`, as the finite core's are in `derived/`, and
 > nothing there is claimed until it is proved and checked. Items are numbered GA (premises) and GD (definitions), and
@@ -107,7 +107,8 @@ such as a wait of exactly 2.5 hours, may have probability zero.
 
 ### GA2 — Pursuit is the steepest climb
 **Statement.** As [A2]: to pursue an objective is to raise its average as steeply as possible, with steepness measured
-in a geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed proportions.
+in a Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
+proportions.
 
 **In plain terms.** As in the core: wanting more of something means moving toward it by the most direct route, and what
 counts as most direct must not depend on how finely we describe what happens.
@@ -602,7 +603,7 @@ misalignment a record shows can only grow as its cells are refined.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
    resolution is the core's default in [D4]. The alternative, the usual topology of each outcome space, would put a
    choice in the framework that the events do not make.
-3. Names and versions. This file is draft 3, with items GA and GD; `CORE.md` (v11) is unchanged by it. The general
+3. Names and versions. This file is draft 3, with items GA and GD; `CORE.md` (v12) is unchanged by it. The general
    results stay in `general/` until they are proved and checked; then they become items of a derived folder of their
    own, as the finite results are in `derived/`.
 4. Two additions to the finite core, where checks are exact: the Sanov reading of [P15] and of misalignment, with the
