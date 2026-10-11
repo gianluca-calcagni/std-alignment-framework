@@ -144,13 +144,14 @@ the core is v13, approved by the PI (Q52; `NOTES.md` §16, §17), built by the m
 from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of item, and
 every definition declares and justifies its interpretation. [A4] says that misalignment is the rate of evidence against
 the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are reasons of [D2], as no
-result used them; and [D3] defines the ordinal specification beside the standard one, reported side by side. At the
-PI's seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, which needs no independence of the
-actor; [D3] gained families of targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. `main`
-holds v12, in which A2's Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires
-(`NOTES.md` §3.1, Q44). v11 widened the scope to groups, several principals with declared weights, rules as conditions
-and episodes as outcomes (Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46).
-`CORE-GENERAL.md` is a draft with its own numbering; until it is approved, it changes no Statement of the core.
+result used them; and [D3] defines the ordinal specification beside the standard one, reported side by side. At the PI's
+seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, a measure that needs no independence of
+the actor, though the test from counts may accuse a dependent actor for its dependence alone; [D3] gained families of
+targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. `main` holds v12, in which A2's
+Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md` §3.1, Q44). v11
+widened the scope to groups, several principals with declared weights, rules as conditions and episodes as outcomes
+(Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is a draft
+with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
 

@@ -93,6 +93,7 @@ third case), and the name "revealed intensity".
 - [[P21 — The expected evidence is misalignment|P21]] — The expected evidence is misalignment
 - [[P22 — No test detects misalignment faster than misalignment|P22]] — No test detects misalignment faster than misalignment
 - [[P52 — What a sample certifies about misalignment, by access|P52]] — What a sample certifies about misalignment, by access
+- [[P54 — Dependence and drift only add evidence|P54]] — Dependence and drift only add evidence
 - [[P43 — Misalignment at any intensity|P43]] — Misalignment at any intensity
 - [[P44 — What named objectives explain|P44]] — What named objectives explain
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain

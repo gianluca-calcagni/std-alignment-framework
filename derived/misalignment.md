@@ -261,17 +261,20 @@ the excess of `KL(p̂‖q)` over that least value is `Σ_B p̂(B)·KL(p̂(·|B)�
 **Checks.** checks/test_misalignment.py::test_credited_statistics
 
 **Notes.** (iv) is Csiszár's I-projection of `q` onto the convex set `C`, with its Pythagorean inequality
-([@polyanskiy2025], Theorem 15.10), and (iii) is the matching inequality for the reverse projection onto `𝓘_𝓚`; the
-cone is what joins them. [P6] is the case of one objective; [P48] is the span, where the least misalignment over the
-principals whose target lies in it is the misalignment against the whole family, since the union of their rays is
-`𝓘_𝓚`; [P44]'s named pursuit is the span of `F` and the named objectives, taken from `p°` rather than from `q`. That
-`C` is stochastic dominance for the ordinal specification says what the order credits: that the actor reaches every
-threshold of `F` at least as often as the cheapest behaviour that does so. So the paired report of `STANDARD.md` reads
-as two credits for one departure, and their difference is departure that the order of `F` credits and its values do
-not. A family that is not convex, such as two candidate targets that may not be mixed, is the union of the
-specifications of its convex parts, and its misalignment is the least of theirs. Read with Sanov's theorem ([P55],
-Notes), the credited departure is the rate at which a default actor would do at least as well as the actor on every
-target, and misalignment the rate of the actor's shares given that.
+([@polyanskiy2025], Theorem 15.10), and (iii) is the matching inequality for the reverse projection onto `𝓘_𝓚`; the cone
+is what joins them. [P6] is the case of one objective; [P48] is the span, where the least misalignment over the
+principals whose target lies in it is the misalignment against the whole family, since the union of their rays is `𝓘_𝓚`;
+[P44]'s named pursuit is the span of `F` and the named objectives, taken from `p°` rather than from `q`. That `C` is
+stochastic dominance for the ordinal specification says what the order credits: how often the actor reaches every
+threshold of `F`. Misalignment is the departure beyond the cheapest behaviour that reaches each threshold at least as
+often as the actor does. So the paired report of `STANDARD.md` reads as two credits for one departure, and their
+difference is departure that the order of `F` credits and its values do not. A family that is not convex, such as two
+candidate targets that may not be mixed, is the union of the specifications of its convex parts, and its misalignment is
+the least of theirs. Read with Sanov's theorem ([P55], Notes), the credited departure is the rate at which a default
+actor would do at least as well as the actor on every target, and misalignment the rate of the actor's shares given
+that. This needs `C` to have an interior, as it has under the standard and the ordinal specification for an actor of
+full support. For a span, `C` is a set of equalities, which empirical behaviours may never meet exactly; the credited
+departure is then the limit, as the margin shrinks, of the rate of doing as well within a margin.
 
 **Lineage.** New in v13 (`NOTES.md` §17, §18): the excess-departure reading of [P6](ii) (`NOTES.md` §16), extended first
 to the ordinal specification and to families of named statistics, then, at the PI's question whether a family of targets

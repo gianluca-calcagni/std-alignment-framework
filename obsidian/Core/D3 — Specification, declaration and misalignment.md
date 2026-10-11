@@ -35,11 +35,13 @@ family that holds `F`, and "favour what `F` ranks higher" the family of its orde
 decision, at which a record's counts become improbable under every accepted behaviour ([[A4 — Misalignment is evidence|A4]]): about `1/M` decisions make
 them `e` times less probable. *Verified.* "Misaligned", `M > 0`, is verifiable in the statistical sense, by a test whose
 rate of false accusation is bounded at every size of record and whose power tends to one, with no model of how the actor
-decides (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides independently.
-"Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned within a stated
-margin, never exactly aligned. *Justified.* Counts are what a record supplies ([[A4 — Misalignment is evidence|A4]]); fixing the standard first is what
-makes the judgement a test ([[A5 — Declared before|A5]]); and the statements above are verifiable or refutable because of their shape, open or
-closed in the behaviours, as the statistical form of reverse physics requires (Notes).
+decides beyond what acceptance asks: an intended actor decides independently, and one that does not may be accused for
+that alone (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides
+independently. "Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned
+within a stated margin, never exactly aligned, unless the specification accepts every behaviour. *Justified.* Counts are
+what a record supplies ([[A4 — Misalignment is evidence|A4]]); fixing the standard first is what makes the judgement a test ([[A5 — Declared before|A5]]); and the statements
+above are verifiable or refutable because of their shape, open or closed in the behaviours, as the statistical form of
+reverse physics requires (Notes).
 
 ## Why this choice
 - *The formula is [[A4 — Misalignment is evidence|A4]] made exact.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on
@@ -108,11 +110,13 @@ that its misalignment and the shape's add up to at most the standard one are [[P
 intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii), and
 that, for every family of targets, the specification is closed, its nearest intended behaviour unique, and misalignment
 the departure beyond the cheapest behaviour that does at least as well on every target, is [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]. The test that makes
-"misaligned" verifiable at every size, and the interval that makes "aligned within `ε`" verifiable, are [[P55 — What a record of counts certifies, at every size|P55]]; that the
-statements so verifiable are the open sets of behaviours, and the refutable ones the closed sets, is Genin and Kelly's
-theorem [[References|@genin2017]], the statistical form of the verifiable and refutable statements of reverse physics [[References|@carcassi2021]]
-([[P55 — What a record of counts certifies, at every size|P55]], Notes). In statistics, the standard specification is a one-parameter exponential family and the ordinal one a
-cone of monotone likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
+"misaligned" verifiable at every size, and the interval that makes "aligned within `ε`" verifiable, are [[P55 — What a record of counts certifies, at every size|P55]]; its level
+holds for intended behaviours deciding independently, and for independent decisions that drift, but an actor whose
+decisions depend on each other may be accused for its dependence alone ([[P55 — What a record of counts certifies, at every size|P55]], Notes); that the statements so verifiable
+are the open sets of behaviours, and the refutable ones the closed sets, is Genin and Kelly's theorem [[References|@genin2017]], the
+statistical form of the verifiable and refutable statements of reverse physics [[References|@carcassi2021]] ([[P55 — What a record of counts certifies, at every size|P55]], Notes). In
+statistics, the standard specification is a one-parameter exponential family and the ordinal one a cone of monotone
+likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
 
 ## Lineage
 v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the

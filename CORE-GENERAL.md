@@ -757,9 +757,9 @@ decision.
   continuum, Sanov's theorem, under its condition on Polish spaces ([@polyanskiy2025], Theorem 15.13), or as the limit
   of the finite one [@dembo1998].
 - *Dependence and drift.* As in [P54], a record whose decisions depend on each other, or drift, holds more evidence than
-  its counts, by its dependence and its drift; the identity is the chain rule, which holds on standard Borel spaces
-  (expected, `general/transfer.md`). Two directions must not be confused: the probability that a misaligned actor's
-  record looks intended falls at the rate `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
+  the misalignment of its average behaviour, by its dependence and its drift; the identity is the chain rule, which
+  holds on standard Borel spaces (expected, `general/transfer.md`). Two directions must not be confused: the probability
+  that a misaligned actor's record looks intended falls at the rate `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
 - *Distribution functions are exact for one number per outcome.* For a one-dimensional statistic, such as an evaluator's
   score or a waiting time, the empirical distribution function is within `√(log(2/α)/(2n))` of the true one everywhere,
   with probability at least `1 − α`, at every `n` and for every behaviour (the Dvoretzky–Kiefer–Wolfowitz inequality,

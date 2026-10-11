@@ -146,9 +146,9 @@ situations the actor may meet, not only those recorded.
 ### A4 — Misalignment is evidence
 
 **Statement.** The misalignment of the shares that a record of decisions shows, against the behaviours a principal
-accepts, is the rate per decision at which, as records with those shares grow, the largest probability that an accepted
-behaviour gives them falls, each accepted behaviour deciding independently. The misalignment of a behaviour is that of
-the shares that approach it.
+accepts, is the rate per decision at which, as records with those shares grow, the highest probability that accepted
+behaviours give them, a supremum, falls, each accepted behaviour deciding independently. The misalignment of a behaviour
+is that of the shares that approach it.
 
 **In plain terms.** Watch the actor decide, and count what it does. Misalignment is how fast those counts become
 improbable for every acceptable way of acting, judged by the acceptable way that makes them most probable. It needs no
@@ -168,7 +168,7 @@ decide independently, unless the principal declares episodes ([B2]).
   are evidence that the actor acts in no accepted way. Judging a set of hypotheses by its member most favourable to the
   data is the generalized likelihood ratio test ([@polyanskiy2025], §16.4), which gives the actor the benefit of the
   doubt and charges it only for what no accepted behaviour explains.
-- *The measure follows.* The largest probability that an accepted behaviour gives the shares `s` falls at the rate
+- *The measure follows.* The highest probability that accepted behaviours give the shares `s` falls at the rate
   `inf_{p∈𝓘} KL(s‖p)` (Notes): that is the measure, its form and the order of its arguments.
 - *For an actor that decides independently, it is the rate of likelihood-ratio evidence.* Each independent decision
   drawn from `p̂` adds on average `KL(p̂‖p)` nats to the evidence for `p̂` against `p` (the Neyman–Pearson lemma makes
@@ -303,11 +303,13 @@ family that holds `F`, and "favour what `F` ranks higher" the family of its orde
 decision, at which a record's counts become improbable under every accepted behaviour ([A4]): about `1/M` decisions make
 them `e` times less probable. *Verified.* "Misaligned", `M > 0`, is verifiable in the statistical sense, by a test whose
 rate of false accusation is bounded at every size of record and whose power tends to one, with no model of how the actor
-decides (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides independently.
-"Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned within a stated
-margin, never exactly aligned. *Justified.* Counts are what a record supplies ([A4]); fixing the standard first is what
-makes the judgement a test ([A5]); and the statements above are verifiable or refutable because of their shape, open or
-closed in the behaviours, as the statistical form of reverse physics requires (Notes).
+decides beyond what acceptance asks: an intended actor decides independently, and one that does not may be accused for
+that alone (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides
+independently. "Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned
+within a stated margin, never exactly aligned, unless the specification accepts every behaviour. *Justified.* Counts are
+what a record supplies ([A4]); fixing the standard first is what makes the judgement a test ([A5]); and the statements
+above are verifiable or refutable because of their shape, open or closed in the behaviours, as the statistical form of
+reverse physics requires (Notes).
 
 ## 4. The results the rest stands on
 

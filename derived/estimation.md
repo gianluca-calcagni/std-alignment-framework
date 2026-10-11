@@ -278,25 +278,26 @@ continuum (GD11).
 `δ = (1/n)·Σ_i KL(p̂_i‖p̄)` its drift, and `κ = (1/n)·KL(P‖p̂_1 ⊗ … ⊗ p̂_n)` its **dependence**, per decision.
 (i) For every `p ∈ Δ°`, `(1/n)·KL(P‖p^{⊗n}) = KL(p̄‖p) + δ + κ`, where `p^{⊗n}` is `n` independent decisions from `p`.
 (ii) Under a specification `(q, 𝓘)`, the least expected evidence per decision that the record gives for its joint
-behaviour against an intended behaviour deciding independently, `inf_{p∈𝓘} (1/n)·KL(P‖p^{⊗n})`, is `M(p̄) + δ + κ`, and
-a nearest intended behaviour for `p̄` attains it. `δ = 0` exactly when the decisions are identically distributed, and
-`κ = 0` exactly when they are independent.
+behaviour against an intended behaviour deciding independently, `inf_{p∈𝓘} (1/n)·KL(P‖p^{⊗n})`, is `M(p̄) + δ + κ`,
+attained by a nearest intended behaviour for `p̄` when `p̄ ∈ Δ°` ([P5](i)). `δ = 0` exactly when the decisions are
+identically distributed, and `κ = 0` exactly when they are independent.
 (iii) The record's empirical behaviour has expectation `p̄`, whatever the dependence and the drift.
 
 **In plain terms.** When an actor's decisions depend on one another, or change over the record, the record holds more
-evidence against every intended behaviour than its counts alone show, and exactly two terms more: how much the
-decisions drift, and how much they depend on one another. Misalignment computed from the counts judges the actor's
-average behaviour, which the counts estimate without bias, and it is the whole evidence exactly when the decisions are
-independent and alike. So independence of the actor is not needed for the measure; what it adds, when it fails, is
-reported beside it.
+evidence against every intended behaviour than the misalignment of its average behaviour, and exactly two terms more:
+how much the decisions drift, and how much they depend on one another. Misalignment computed from the counts judges the
+actor's average behaviour, which the counts estimate without bias, though they settle on it only when the dependence
+between decisions fades over the record; and it is the whole evidence exactly when the decisions are independent and
+alike. So independence of the actor is not needed for the measure; what it adds, when it fails, is reported beside it.
 
 **Proof.** (i) `P` gives positive probability only to sequences whose outcomes each have positive probability under
 their marginal, so `log(P(x)/p^{⊗n}(x)) = log(P(x)/Π_i p̂_i(x_i)) + Σ_i log(p̂_i(x_i)/p(x_i))` wherever `P(x) > 0`. The
 average under `P` of the first term is `n·κ`, and that of the `i`-th term of the sum depends only on the marginal
 `p̂_i`, so it is `KL(p̂_i‖p)`. Then
 `(1/n)·Σ_i KL(p̂_i‖p) = (1/n)·Σ_i Σ_x p̂_i(x)·(log(p̂_i(x)/p̄(x)) + log(p̄(x)/p(x))) = δ + KL(p̄‖p)`. (ii) `δ` and `κ`
-do not depend on `p`, so the infimum over `𝓘` is `M(p̄) + δ + κ`, attained where `KL(p̄‖p)` is least. By Gibbs'
-inequality, `δ = 0` exactly when every `p̂_i` equals `p̄`, and `κ = 0` exactly when `P` is the product of its marginals.
+do not depend on `p`, so the infimum over `𝓘` is `M(p̄) + δ + κ`, attained where `KL(p̄‖p)` is least, which some `p ∈ 𝓘`
+is when `p̄ ∈ Δ°` ([P5](i)). By Gibbs' inequality, `δ = 0` exactly when every `p̂_i` equals `p̄`, and `κ = 0` exactly
+when `P` is the product of its marginals.
 (iii) The expected share of an outcome `x` is `(1/n)·Σ_i P(x_i = x) = p̄(x)`.
 
 **Checks.** checks/test_estimation.py::test_dependence_and_drift_only_add
@@ -304,10 +305,10 @@ inequality, `δ = 0` exactly when every `p̂_i` equals `p̄`, and `κ = 0` exact
 **Notes.** (i) is the chain rule for a product reference ([@polyanskiy2025], Theorem 2.16(c), (2.27)) followed by the
 split of [P45](i) over the decisions, read in time rather than across runs; `κ` is the coordination of [P39] with the
 decisions as the actors, and it is often called the total correlation or the multi-information. For a sample ([D11]),
-`δ = κ = 0` and (ii) is [P21](ii). What the record's counts certify about `M(p̄)`, with no assumption on how the actor
-decides, is [P55]. Estimating `κ` needs the order of the decisions, not only their counts, and many episodes per
-dependent block; a case that suspects dependence between episodes reports it as a diagnostic, beside the misalignment
-of the counts.
+`δ = κ = 0` and (ii) is [P21](ii). What the record's counts certify is [P55]: its test keeps its level for independent
+decisions that drift, but not for decisions that depend on each other, whose counts may stay far from `p̄` ([P55],
+Notes). Estimating `κ` needs the order of the decisions, not only their counts, and many episodes per dependent block; a
+case that suspects dependence between episodes reports it as a diagnostic, beside the misalignment of the counts.
 
 **Lineage.** New in v13 (`NOTES.md` §18): the independence of the actor's decisions, a phenomenological assumption of
 [A4] until then, replaced by this account of what dependence and drift add (Q53).
@@ -316,8 +317,8 @@ of the counts.
 **Statement.** Let `(q, 𝓘)` be a specification, `n ≥ 1`, and `k_n = (n + |X| − 1)!/(n!·(|X| − 1)!)`, the number of
 empirical behaviours that `n` decisions can have ([D11]).
 (i) For every `p ∈ Δ` and every such empirical behaviour `s`, a sample of size `n` from `p` has empirical behaviour `s`
-with probability at most `e^{−n·KL(s‖p)}` and at least `e^{−n·KL(s‖p)}/k_n`. So the largest probability with which an
-intended behaviour gives `s` lies between `e^{−n·M(s)}/k_n` and `e^{−n·M(s)}`.
+with probability at most `e^{−n·KL(s‖p)}` and at least `e^{−n·KL(s‖p)}/k_n`. So the supremum of the probabilities with
+which intended behaviours give `s` lies between `e^{−n·M(s)}/k_n` and `e^{−n·M(s)}`.
 (ii) **The test.** If the record is a sample from a behaviour in the closure of `𝓘` in `Δ`, then
 `P(n·M(p̂_n) ≥ λ) ≤ k_n·e^{−λ}` for every `λ ≥ 0`. So the test that declares the actor misaligned when
 `n·M(p̂_n) ≥ log(k_n/α)` declares an intended actor misaligned with probability at most `α`, at every size `n`.
@@ -331,10 +332,12 @@ intended behaviour gives `s` lies between `e^{−n·M(s)}/k_n` and `e^{−n·M(s
 
 **In plain terms.** Whatever the principal declared, and at every size of record, one rule says when counts show
 misalignment: when the number of decisions times the misalignment of the counts passes a threshold that grows only with
-the logarithm of the size. It accuses an intended actor no more often than the rate chosen, needs no approximation and
-no model of how the actor decides, and catches every actor whose counts settle away from what is intended. The same
-bounds give an interval for an actor that decides independently, valid at every size but wide, and with it a way to show
-that an actor is aligned within a margin. That an actor is exactly aligned can never be shown.
+the logarithm of the size. It accuses an intended actor no more often than the rate chosen, needs no approximation, and
+catches every actor whose counts settle away from what is intended. An intended actor decides independently, as
+acceptance asks ([A4]); one that is intended on average but whose decisions depend on each other can be accused more
+often, for its dependence alone. The same bounds give an interval for an actor that decides independently, valid at
+every size but wide, and with it a way to show that an actor is aligned within a margin. That an actor is exactly
+aligned can never be shown, unless every behaviour is accepted.
 
 **Proof.** (i) Let `a = n·s` be the counts. The probability is `m(a)·Π_x p(x)^{a_x}`, with `m(a)` the multinomial
 coefficient. Under `s` itself, `m(a)·Π_x s(x)^{a_x} ≤ 1`, so the probability is at most
@@ -350,32 +353,46 @@ counts `b`, `P_s(a)/P_s(b) = Π_x (b_x!/a_x!)·s(x)^{a_x−b_x}`, over the `x` w
 `ρ > 0` and `η > 0` have `M(s) ≥ η` whenever `Σ_x |s(x) − p̂(x)| < ρ`: otherwise there are `s_m → p̂` and `p_m ∈ 𝓘` with
 `KL(s_m‖p_m) → 0`, so `Σ_x |s_m(x) − p_m(x)| → 0` by Pinsker's inequality, and `p_m → p̂`, which is then in the closure.
 Since `k_n ≤ (n + 1)^{|X|−1}`, `log(k_n/α) < n·η` for every large `n`, and the empirical behaviour is within `ρ` of `p̂`
-with probability tending to `1`. (iv) The bound is (ii) for the specification whose only intended behaviour is `r`,
-where `M(s) = KL(s‖r)`. On the event `r ∈ R_α`, `M(r)` lies between the infimum and the supremum over `R_α`. If
-`M(r) ≥ ε`, then on that event the supremum is at least `ε`, so "aligned within `ε`" is declared with probability at
-most `α`. If `M(r) < ε`: `M` is an infimum of functions `KL(·‖p)`, `p ∈ 𝓘 ⊆ Δ°`, each continuous on `Δ`, so `M(s) < ε`
-for `s` near `r`; and every `s ∈ R_α` has `Σ_x |s(x) − p̂_n(x)| ≤ (2·log(k_n/α)/n)^{1/2}` by Pinsker's inequality, which
-tends to `0`, while `p̂_n → r` in probability ([M2]). So `R_α` lies near `r` with probability tending to `1`.
+with probability tending to `1`. (iv) By (i), the probability is at most the sum of `e^{−n·KL(s‖r)}` over the `s` with
+`n·KL(s‖r) ≥ λ`, at most `k_n·e^{−λ}`. On the event `r ∈ R_α`, `M(r)` lies between the infimum and the supremum over
+`R_α`. If `M(r) ≥ ε`, then on that event the supremum is at least `ε`, so "aligned within `ε`" is declared with
+probability at most `α`. If `M(r) < ε`, take `ε'` with `M(r) < ε' < ε`: `M` is an infimum of functions `KL(·‖p)`,
+`p ∈ 𝓘 ⊆ Δ°`, each continuous on `Δ`, so `M(s) < ε'` for `s` near `r`; and every `s ∈ R_α` has
+`Σ_x |s(x) − p̂_n(x)| ≤ (2·log(k_n/α)/n)^{1/2}` by Pinsker's inequality, which tends to `0`, while `p̂_n → r` in
+probability ([M2]). So `R_α` lies near `r`, and `sup_{s∈R_α} M(s) ≤ ε' < ε`, with probability tending to `1`.
 
 **Checks.** checks/test_estimation.py::test_what_a_record_certifies
 
 **Notes.** (i) is the method of types ([@polyanskiy2025], Proposition 1.5 and Exercise I.1), proved here. With it comes
 Sanov's theorem ([@polyanskiy2025], Theorem 15.13, proved for finite outcomes in Exercise III.23): a default actor shows
-empirical behaviours in a closed convex set `E` with probability that falls at the rate `min_{s∈E} KL(s‖q)`. Read with
+empirical behaviours in a closed convex set `E` with non-empty interior with probability that falls at the rate
+`min_{s∈E} KL(s‖q)`. Without an interior the rate can fail, as for a set that no empirical behaviour reaches; (i),
+summed over the empirical behaviours in `E`, still bounds the probability by `k_n·e^{−n·inf_{s∈E} KL(s‖q)}`. Read with
 [P53], the departure `KL(p̂‖q)` is the rate at which a default actor would show the actor's shares; the credited
-departure is the rate at which it would do at least as well as the actor on every target of the family; and misalignment
-is the rest, the rate of the shares given that achievement. The test of (ii) is a generalized likelihood ratio test
-([@polyanskiy2025], §16.4) with a threshold that needs no limit theorem: [P23]'s χ² reference needs one, and fails at
-intensity `0` ([P23], Notes; `NOTES.md` §15). The price is width: `log k_n` grows like `(|X| − 1)·log n`, so for many
-outcomes the test needs many decisions, and the interval of (iv) is conservative; [P52] gives the tighter asymptotic
-intervals by access. Its level is computed under the intended behaviours deciding independently, so it needs nothing of
-the actor; for an actor whose decisions depend on each other the counts estimate `M(p̄)` ([P54]). In Genin and Kelly's
-terms [@genin2017], (ii) and (iii) make "misaligned" verifiable in chance, wrong at most `α` at every size and right
-with probability tending to `1`, and (iv) does the same for "aligned within `ε`" when the actor decides independently.
-Their Theorem 4.1 says that the statements so verifiable are exactly the open sets of the weak topology, on a sample
-space such as a finite set of outcomes, where that topology is the ordinary one on `Δ`: "misaligned" and "aligned within
-`ε`" are open, while "exactly aligned", `M = 0`, is closed, and so can be refuted but never verified. That is the
-statistical form of the verifiable and refutable statements of reverse physics [@carcassi2021].
+departure is the rate at which it would do at least as well as the actor on every target of the family, when that set
+has an interior ([P53], Notes); and misalignment is the rest, the rate of the shares given that achievement. The test of
+(ii) is a generalized likelihood ratio test ([@polyanskiy2025], §16.4) with a threshold that needs no limit theorem:
+[P23]'s χ² reference needs one, and fails at intensity `0` ([P23], Notes; `NOTES.md` §15). The price is width: `log k_n`
+grows like `(|X| − 1)·log n`, so for many outcomes the test needs many decisions, and the interval of (iv) is
+conservative; [P52] gives the tighter asymptotic intervals by access. Its level is computed under the intended
+behaviours deciding independently, which [A4] makes part of acceptance. It holds as well for independent decisions that
+drift, when their average behaviour `p̄` is in the closure of `𝓘`: for every `θ : X → [−∞, ∞)`, the probability of the
+counts `a` is at most `E[e^{Σ_i θ(x_i)}]·e^{−Σ_x θ(x)·a_x}`, which the inequality of arithmetic and geometric means
+bounds by `(E_{p̄}[e^θ])^n·e^{−Σ_x θ(x)·a_x}`, and `θ = log(s/p̄)` gives `e^{−n·KL(s‖p̄)}`, so the proof of (ii) applies
+with `p̄`. It does not hold for decisions that depend on each other: their counts still estimate `p̄` without bias
+([P54](iii)), but `M(p̂_n)` need not approach `M(p̄)`. Under the specification `{q}` with `q = (1/2, 1/2)`, an actor
+whose every decision copies its first has `p̄ = q`, yet the test at `α = 0.05` accuses it in every record of 8 decisions
+or more; a Markov chain with the same average that keeps its outcome with probability `0.9` is accused in `17.9%` of
+records of 200 decisions, and independent decisions alternating between `(0.8, 0.2)` and `(0.2, 0.8)` in none of 20,000
+(`probes/review/p55_dependence.py`). Under [A4] both dependent actors are accused rightly, since their decisions are not
+independent as acceptance asks; what the counts cannot do, without episodes ([B2]) or a model of the dependence, is tell
+that from a misaligned average. In Genin and Kelly's terms [@genin2017], (ii) and (iii) make "misaligned" verifiable in
+chance, wrong at most `α` at every size and right with probability tending to `1`, and (iv) does the same for "aligned
+within `ε`" when the actor decides independently. Their Theorem 4.1 says that the statements so verifiable are exactly
+the open sets of the weak topology, on a sample space such as a finite set of outcomes, where that topology is the
+ordinary one on `Δ`: "misaligned" and "aligned within `ε`" are open, while "exactly aligned", `M = 0`, is closed, and so
+can be refuted but never verified, unless every behaviour is accepted, when it is all of `Δ`. That is the statistical
+form of the verifiable and refutable statements of reverse physics [@carcassi2021].
 
 **Lineage.** New in v13 (`NOTES.md` §18), at the PI's request for tests that make the verifications of the
 interpretations meaningful (Q53).

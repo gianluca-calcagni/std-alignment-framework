@@ -9,9 +9,9 @@ source: "CORE.md"
 
 ## Statement
 The misalignment of the shares that a record of decisions shows, against the behaviours a principal
-accepts, is the rate per decision at which, as records with those shares grow, the largest probability that an accepted
-behaviour gives them falls, each accepted behaviour deciding independently. The misalignment of a behaviour is that of
-the shares that approach it.
+accepts, is the rate per decision at which, as records with those shares grow, the highest probability that accepted
+behaviours give them, a supremum, falls, each accepted behaviour deciding independently. The misalignment of a behaviour
+is that of the shares that approach it.
 
 ## In plain terms
 Watch the actor decide, and count what it does. Misalignment is how fast those counts become
@@ -33,7 +33,7 @@ decide independently, unless the principal declares episodes ([[B2 — Episodes 
   are evidence that the actor acts in no accepted way. Judging a set of hypotheses by its member most favourable to the
   data is the generalized likelihood ratio test ([[References|@polyanskiy2025]], §16.4), which gives the actor the benefit of the
   doubt and charges it only for what no accepted behaviour explains.
-- *The measure follows.* The largest probability that an accepted behaviour gives the shares `s` falls at the rate
+- *The measure follows.* The highest probability that accepted behaviours give the shares `s` falls at the rate
   `inf_{p∈𝓘} KL(s‖p)` (Notes): that is the measure, its form and the order of its arguments.
 - *For an actor that decides independently, it is the rate of likelihood-ratio evidence.* Each independent decision
   drawn from `p̂` adds on average `KL(p̂‖p)` nats to the evidence for `p̂` against `p` (the Neyman–Pearson lemma makes
