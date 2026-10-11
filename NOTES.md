@@ -77,7 +77,7 @@ later results goes in Notes |
 | **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08). Again on 2026-10-10: the answer on the licence's aim (Q50) passed on nine links found by web search, on licences and on copyright in AI-written text, without opening them; when they were then fetched for these notes, their hosts were not allowed, so §11 says that those facts come from search results and that the primary pages were not read | open a record and match its title and authors before citing or passing on its link; when the host is not reachable, say so with the link, or ask the PI to allow it |
 | **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [A2] and [D2] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([P4], [P5]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 | **A result's hypothesis dropped in the code that applies it** | [P23]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
-| **A hypothesis dropped in the Notes** | [P55]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [P54]'s that [P55] certifies `M(p̄)` with no assumption on how the actor decides; [P54](iii) gives only that the counts estimate `p̄` without bias, and [P55]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [P53]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [P53]–[P55] before the pull request, not independent (rule (f)) | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
+| **A hypothesis dropped in the Notes** | [P55]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [P54]'s that [P55] certifies `M(p̄)` with no assumption on how the actor decides; [P54](iii) gives only that the counts estimate `p̄` without bias, and [P55]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [P53]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [P53]–[P55] before the pull request, not independent (rule (f)). Again in the general core's new results (2026-10-11, §20): the dimension law's hypotheses dropped where GD3 and GD11 cite it, and its grid stated so that it did not cover the space; the τ-topology named where a nearness gives weak convergence; "aligned within `ε`" said never to be verifiable, without the finite case. Found by a subagent's reading of the proofs, the second time this check has found what the executor's own reading missed | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -1425,3 +1425,74 @@ a demonstration rather than a hard one.
   [A5], [D1], [D2], [D4]–[D10] and every other result. (Corrected in the reread before the pull request: this line first
   said that every Statement changed.) The general core's draft 4 claims nothing, and several of its imports are still
   unread.
+
+## 20. The general core, made correct and coherent, 2026-10-11 (Q56)
+
+By the executor, a model of the Claude family, at the PI's request (Q56): the mathematics first, and the general core
+correct and coherent before anything is split or restructured. Not independent (rule (f)); a subagent of the executor's
+read the new proofs (below).
+
+**What draft 4 got wrong or left open.**
+- *The transfer lemma was a sketch, and misdescribed its own example.* GD3 said that misalignment and the divergence to
+  the nearest intended behaviour differ "where intended behaviours escape every compact set", and gave as the example
+  densities `1 + ½·sin(k·x)` on a circle. Their closure is compact: it adds the uniform behaviour, the one limit the set
+  omits. The two differ in two ways, not one: a set that omits some of its limits, and a set that no compact set holds.
+- *Verifiability under a nearness was overclaimed.* GD3 said that the test of [P55] at a decidable description makes
+  "misaligned" verifiable. Whether a description is decidable depends on the actor, which a description fixed before the
+  record cannot know. Under the usual nearness of the line, the on-target controller, whose misalignment is `0`, is
+  accused by the test at the cells `(−∞, 0]` and `(0, ∞)`, since it puts every decision in one and every pursuit splits
+  evenly.
+- *Citations not read.* Pinsker (1964) for the divergence as a supremum over partitions, read instead in Polyanskiy and
+  Wu; Dembo and Zeitouni (1998) for Sanov's theorem on general spaces, and Polyanskiy and Wu's Theorem 15.13, which
+  states it "under regularity conditions" and proves it only for finite outcomes; Massart (1990), whose bound is for a
+  continuous distribution function, though the draft applied it to every behaviour; Rényi (1959); Kechris (1995), for
+  three facts of descriptive set theory; and the existence of conditional behaviours.
+
+**What was done.**
+- *Eight results proved* in `general/transfer.md`, from results read in open texts and from `derived/`, with the status
+  "proved here" added to `general/README.md`, since no check runs them in CI yet. TR1: every tilt is a limit, in total
+  variation, of tilts by objectives with finitely many values. TR2: the descriptions a record can decide, or the
+  partitions of any algebra that generates the events, recover the divergence. TR3: when the closure of the intended
+  behaviours, under the convergence of every event's probability (Csiszár's τ-topology), is compact, misalignment is the
+  least divergence over that closure, attained, whatever the nearness. TR4: compact families, and the pursuit ray when
+  its intensities form a closed bounded interval or when the best outcomes of `F` have positive probability under the
+  default, the third case of [P5](iv) on general spaces. TR5: under that compactness, a test on refining descriptions
+  makes "misaligned" verifiable in chance for samples. TR6: the dimension law, against intended behaviours with
+  densities bounded above and below. TR7 and TR8: [P16] and [P54] on standard Borel spaces, by Polyanskiy and Wu's
+  data-processing inequality and chain rule; in [P54]'s identity, the divergence to the nearest intended behaviour takes
+  the place of misalignment, the two being equal under TR3's compactness.
+- *A probe* (`probes/general/t8_transfer.py`): on the circle, misalignment over finer arcs rises to `0.005616`, the
+  least divergence over the closure; on a ray whose limit is an atom of the default, to `0.105103`, both with that atom
+  in a cell of its own and under the usual nearness, where it cannot be.
+- *Sources read:* Csiszár (1984), (1.4), (2.14) and Theorem 1, which replace Dembo and Zeitouni; Massart (1990),
+  Corollary 1, with the extension to distribution functions with jumps derived by the quantile transform; Polyanskiy and
+  Wu's Theorem 2.11, disintegration on standard Borel spaces; Haghighatshoar and Abbe's account of Rényi's definition
+  and theorems. That the events fix no topology is now shown by an example, the line and the line cut at `0`, instead of
+  a citation. Kuratowski's and the Lusin–Souslin theorems wait on a host (`REQUESTS.md`, R14).
+- *Corrections* in `CORE-GENERAL.md`: GD3's Interpretation, Why and Notes; two rows of the conventions, whose column on
+  verdicts now says that each changes one only where compactness fails; GM1–GM3's read status; GD1, GD2 and GD11's
+  citations; §0 and §12. `general/dictionary.md` follows.
+
+**The review of the proofs.** A subagent read TR1–TR6 and the sentences that cite them. It found no false step in
+TR1–TR5, and eleven points, each verified here before it was acted on. One error in TR6: its grid of half-open cubes
+left out the faces where a coordinate equals `1`, so an actor with probability there broke the bounds; the last cube on
+each axis is now closed, and the gap to Rényi's grid, at most `D·log 2`, is in the proof. Two sentences false as
+written: GA1 named the τ-topology as the framework's nearness between behaviours even under a declared nearness, where
+the descriptions a record can decide give weak convergence instead; and "aligned within `ε`" was said never to be
+verifiable, false on finite outcomes and for a specification that accepts nearly everything. Gaps, now closed: the
+monotonicity under merging was cited from [P4](iv), stated only for behaviours of full support, and is now data
+processing; TR5 left implicit why a cell misalignment above `0` puts the actor outside the closure; the third case of
+[P5](iv) needed a two-line computation, now TR4(iii). Overclaims, now qualified: "continuous in a compact parameter"
+must mean the ratios; under a nearness TR5's cells must be drawn at random before the data to be decidable for every
+actor; the dimension law was cited outside its hypotheses, and per digit where it holds only on average; compactness was
+said to make a description decidable, where it makes every description's misalignment a lower bound. TR7 and TR8 were
+added after the review began, and were checked only by the executor.
+
+**What the proofs say about alignment.** Compactness is the hinge. Where the closure of the intended behaviours is
+compact, misalignment is a minimum, the nearness the principal declares changes nothing, and a misaligned actor can be
+caught by one test fixed in advance. Where it is not, the nearness decides, and so does the actor's own precision; that
+is where every phenomenon the general core added lives: piles, near misses, the on-target controller. On finite
+outcomes compactness is free, which is why the finite core never met them (H39).
+
+**Open.** Checks in CI for TR1–TR8, which needs a decision on where checks of the general core live; R14; the rows of
+`general/transfer.md` still expected; H40 and H41.

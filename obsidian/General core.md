@@ -61,9 +61,10 @@ choose one: where a topology matters, the principal or the actor supplies it, as
   declarations of nearness, never through the framework.
 - *Two phenomena that finite outcomes hide.* (a) An actor can do what the default never does: pin one exact value, which
   the default produces with probability zero. Its misalignment is then infinite unless a declared nearness makes the
-  exact value one that no record can decide (GD3). (b) The tail of an objective can stop pursuit at a finite intensity;
-  past it, more departure buys more of the objective only by betting on ever rarer extremes (GD2, GD5). Both say that
-  the default decides more than it seemed to: which outcomes are possible, and how far pursuit can go.
+  exact value one that no record can decide, and the intended behaviours approach it (GD3). (b) The tail of an objective
+  can stop pursuit at a finite intensity; past it, more departure buys more of the objective only by betting on ever
+  rarer extremes (GD2, GD5). Both say that the default decides more than it seemed to: which outcomes are possible, and
+  how far pursuit can go.
 - *Strategic scenarios become standard ones on derived spaces.* Several actors, actors that respond to the measurement,
   several principals and dependent samples each become a scenario with one principal and one actor, on a space of joint
   actions, rules, principals or trajectories, most of them continua even when the outcomes are finite. What stays
@@ -266,9 +267,10 @@ about behaviour as records see it.
   - the KL divergence as the cost of departure on every outcome space: on each finite description [[P14 — The cost of departing from the default is forced|P14]] forces it, and
     the divergence is the supremum of its finite values ([[References|@polyanskiy2025]], Theorem 4.5);
   - the framework's only nearness between behaviours: two behaviours are near when every finite description that a
-    record can decide finds their cell probabilities near: Csiszár's τ-topology, the one of TR2 to TR5; - misalignment
-    as a supremum over finite descriptions (GD3), which under compactness is the least divergence to the closure of the
-    intended behaviours (TR3);
+    record can decide finds their cell probabilities near: with no nearness, Csiszár's τ-topology, the convergence of
+    every event's probability; under a nearness, weak convergence, since the decidable descriptions are those whose
+    edges the limit does not charge. TR3 to TR5 use τ in every case; - misalignment as a supremum over finite
+    descriptions (GD3), which under compactness is the least divergence to the closure of the intended behaviours (TR3);
   - the exclusion of quantities with no finite limit. The entropy of finer and finer descriptions of a continuous
     behaviour grows without bound, so differential entropy, which also changes with the units of measurement, is not a
     quantity of the framework; neither is a default that is not a probability (GD2).
@@ -444,14 +446,16 @@ with the usual nearness of a clock, "the wait was between two and three hours" i
 waits exactly two hours, and "the wait was exactly two hours" is not decidable for one that often does. *Verified.* At a
 description declared before the record, the test of [[P55 — What a record of counts certifies, at every size|P55]] on the counts of the cells certifies, exactly at every size
 and for decisions that are independent, that the misalignment of the cells is positive. That certifies "misaligned" when
-the description is decidable for the actor: always with no nearness, and under any nearness when the closure of the
-intended behaviours is compact; with that compactness, refining descriptions make "misaligned" verifiable in chance
-(`general/transfer.md`, TR3, TR5). Without it, under a nearness, decidability is an assumption about the actor, which a
-record kept at that description cannot check, as in Genin and Kelly's theorem. "Aligned within `ε`" is not verifiable
-from records alone: some behaviour as close as one likes to an intended one, in total variation, has misalignment as
-large as one likes (GD11), so it needs a declared resolution or a model. *Justified.* GA1 and GA4: the supremum is what
-records can show, and the divergence to the nearest intended behaviour, when it is larger, asserts what no record could
-support.
+the description is decidable for the actor, as it always is with no nearness. When the closure of the intended
+behaviours is compact, the misalignment of every finite description, decidable or not, is a lower bound
+(`general/transfer.md`, TR3), and refining descriptions make "misaligned" verifiable in chance, with cell edges drawn at
+random before the data when a nearness is declared (TR5). Without compactness, under a nearness, decidability is an
+assumption about the actor, which a record kept at that description cannot check, as in Genin and Kelly's theorem.
+"Aligned within `ε`" is not verifiable from records alone in general: with no nearness, some behaviour as close as one
+likes to an intended one, in total variation, has misalignment as large as one likes (GD11), so it needs a declared
+resolution or a model. It is verifiable on finite outcomes ([[P55 — What a record of counts certifies, at every size|P55]](iv)), and trivially when the specification accepts so
+much that every behaviour is aligned within `ε`. *Justified.* GA1 and GA4: the supremum is what records can show, and
+the divergence to the nearest intended behaviour, when it is larger, asserts what no record could support.
 
 **Why this choice.**
 - *Reduction.* On a finite set the only nearness is the discrete one, every event is decidable, and the supremum is
@@ -466,15 +470,16 @@ support.
 - *The supremum, not the divergence to the nearest.* By data processing, `M_𝒫(p̂) ≤ inf_{p∈𝓘} KL(p̂‖p)` for every `𝒫`,
   so misalignment is at most the divergence to the nearest intended behaviour. When the closure of the intended
   behaviours, under the convergence of every event's probability, is compact, misalignment is the least divergence to
-  that closure, under any nearness or none (`general/transfer.md`, TR3). This covers every family continuous in a
-  compact parameter, and the pursuit ray when its intensities form a closed bounded interval or when the best outcomes
-  of `F` have positive probability under the default (TR4). So the two differ in only two ways. *The intended set omits
-  some of its limits.* With densities proportional to `1 + ½·sin(k·x)` on a circle declared intended, the uniform
-  behaviour's divergence from each is `0.069`, for every `k`, while every event's probability under them converges to
-  its probability under the uniform: the closure adds the uniform, and misalignment is `0`, which is what every record
-  says. Draft 3 reached the same `0` by adding the limits to the intended set; the supremum reaches it by defining
-  misalignment as what records show. *No compact set holds the intended set,* as when pursuit drives probability toward
-  an outcome the default gives probability zero; then the nearness decides, as the next case shows.
+  that closure, under any nearness or none (`general/transfer.md`, TR3). This covers every family whose ratios to the
+  default are continuous in a compact parameter, and the pursuit ray when its intensities form a closed bounded interval
+  or when the best outcomes of `F` have positive probability under the default (TR4). So the two differ in only two
+  ways. *The intended set omits some of its limits.* With densities proportional to `1 + ½·sin(k·x)` on a circle
+  declared intended, the uniform behaviour's divergence from each is `0.069`, for every `k`, while every event's
+  probability under them converges to its probability under the uniform: the closure adds the uniform, and misalignment
+  is `0`, which is what every record says. Draft 3 reached the same `0` by adding the limits to the intended set; the
+  supremum reaches it by defining misalignment as what records show. *No compact set holds the intended set,* as when
+  pursuit drives probability toward an outcome the default gives probability zero; then the nearness decides, as the
+  next case shows.
 - *What a nearness decides: the on-target controller.* With a standard normal default on the real line and `F(x) = −x²`,
   pursuit narrows toward `0`. For an actor that always outputs exactly `0`, under the usual nearness of the line the
   event `{0}` is not decidable, since its boundary has probability one; every decidable description puts `0` inside a
@@ -485,14 +490,16 @@ support.
   misaligned under the usual nearness too: decidable cells separate `0.001` from `0`, and no intended behaviour gives a
   small cell around `0.001` much probability. In plain terms, to pin a real number is to decide every one of its digits,
   and each digit decided beyond what the objective asks is a choice the principal did not ask for. At a resolution of
-  width `w` the count is finite, and it grows at a precise rate: like `(D − d)·log(1/w)`, where `D` is the number of
-  real coordinates of an outcome and `d` the information dimension of the actor's behaviour [[References|@renyi1959]], `D` for a
-  behaviour spread like the default and `0` for one pinned to points (`general/transfer.md`, TR6, against intended
-  behaviours with densities bounded above and below). So each decimal digit of the record adds `2.3·(D − d)` nats: `2.3`
-  for an actor pinned to points on a line, a tenth of that for one that piles a tenth of its behaviour on one value, and
-  again `2.3` for one that pins one of two attributes and spreads the other (`general/transfer.md`). A principal who
-  wants near misses graded declares a resolution (GD4), or judges outcomes that include noise the actor does not control
-  (GD7).
+  width `w` the count is finite. Against intended behaviours with densities bounded above and below on a cube, it grows,
+  asymptotically, like `(D − d)·log(1/w)`, where `D` is the number of real coordinates of an outcome and `d` the
+  information dimension of the actor's behaviour [[References|@renyi1959]], `D` for a behaviour with a density and `0` for one pinned
+  to points (`general/transfer.md`, TR6). So, on average over many digits, each decimal digit of the record adds about
+  `2.3·(D − d)` nats: `2.3` for an actor pinned to points on a line, a tenth of that for one that piles a tenth of its
+  behaviour on one value, and again `2.3` for one that pins one of two attributes and spreads the other. The pursuit
+  here narrows toward `0`, so its densities are not bounded, and TR6 does not apply; the controller `0.001` off target
+  is computed directly, and grows at the same rate, `3.72` at `w = 10⁻⁴` and `8.33` at `10⁻⁶` (`general/transfer.md`). A
+  principal who wants near misses graded declares a resolution (GD4), or judges outcomes that include noise the actor
+  does not control (GD7).
 - *Families of targets.* As in [[D3 — Specification, declaration and misalignment|D3]]; on a continuum their tilts exist only where the log-normalizer is finite (GD2), so
   a family of objectives with heavy tails may have few intended behaviours. The credited reading of [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] is expected to
   carry where they exist, the cheapest behaviour that does at least as well being Csiszár's I-projection on a general
@@ -769,12 +776,14 @@ decision.
 - *A record shows "at least", not "at most"* (expected, `general/transfer.md`). When the default gives every single
   outcome probability zero, for every `n`, some behaviour within total variation `1/(100·n)` of an intended one, so that
   no test on `n` decisions tells them apart with a difference in rejection probability above `0.01`, has a misalignment
-  as large as one likes: move a little probability to where the objective is low and the default rarely goes. So a
-  report that misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples
-  alone. What records can show without a model is the rate: the misalignment of finer and finer records grows like
-  `(D − d)·log(1/w)` (GD3), so its slope against the logarithm of the resolution estimates the dimension deficit
-  `D − d`, within the resolutions that the sample size supports: on a line, the share of the behaviour piled on single
-  values, when the rest is spread.
+  as large as one likes: with no nearness, move a little probability onto one outcome; under a nearness, onto a small
+  region where the objective is low and every intended behaviour rarely goes, as pursuit rarely goes where its objective
+  is low. So a report that misalignment is small rests on a declared resolution, or on a model of the behaviour, never
+  on samples alone. What records can show without a model is the rate: against intended behaviours with densities
+  bounded above and below on a cube, the misalignment of finer and finer records grows, asymptotically, like
+  `(D − d)·log(1/w)` (GD3; `general/transfer.md`, TR6), so its slope against the logarithm of the resolution estimates
+  the dimension deficit `D − d`, within the resolutions that the sample size supports: on a line, the share of the
+  behaviour piled on single values, when the rest is spread.
 - *Evidence, and Sanov.* The expected evidence per decision is the divergence, as [[P21 — The expected evidence is misalignment|P21]] states for samples. As in [[A4 — Misalignment is evidence|A4]],
   misalignment is the rate at which the most favourable intended behaviour makes the record's counts improbable: on
   finite outcomes and on each finite description, the method of types, with the test of [[P55 — What a record of counts certifies, at every size|P55]], exact at every size; on a

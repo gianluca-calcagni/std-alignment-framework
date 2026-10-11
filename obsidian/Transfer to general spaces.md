@@ -8,8 +8,8 @@ the probes of `probes/general/`.
 |---|---|---|
 | [[P1 — Every behaviour is a tilt of any other\|P1]], [[P2 — Every change of behaviour follows a replicator equation\|P2]](iii), [[P4 — What KL measures\|P4]] | carry, for tilts that exist; the chain rule with conditional behaviours | expected |
 | [[P14 — The cost of departing from the default is forced\|P14]] | carries, by finite determination (GA1) and the Gelfand–Yaglom–Perez theorem ([[References\|@polyanskiy2025]], Theorem 4.5) | expected |
-| the transfer lemma (new, restated in draft 4) | misalignment, the supremum over decidable finite descriptions (GD3), is the least divergence over the closure of the intended behaviours whenever that closure is compact for the convergence of every event's probability, with or without a nearness: TR3 below. Compact closures include every family continuous in a compact parameter, and the pursuit ray when its intensities form a closed bounded interval or when the objective's largest value has positive probability under the default (TR4) | proved here (TR1–TR4), not yet checked in CI; probed: `probes/general/t8_transfer.py`, two instances, where the misalignment of finer descriptions rises to the least divergence over the closure (`0.005616` on a circle; `0.105103` on a ray with an atom at its limit, with and without a nearness) |
-| [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] | (i) attainment holds on the closure of the intended behaviours when it is compact (TR3); (ii) as in GD3; (iv) gains a fourth case: the ray stops at `t_max` with its average of `F` capped, and a behaviour with a larger average is nearest to the end of the ray, so averages are no longer matched; the third case, the limit `q(·|A)` of the ray, carries when `A` has positive probability under the default (TR4) | proved for (i) and the third case of (iv) (TR3, TR4); probed for the fourth: default with density proportional to `e^{−x}/(1 + x)³` on `x ≥ 0`, and `F(x) = x`: the ray's average is `0.354`, `0.474`, `0.736`, `0.937`, `0.989` at `t = 0`, `0.5`, `0.9`, `0.99`, `0.999`, and stops at `1` at `t = 1`; for an exponential behaviour of mean `2` the divergence to the ray falls all the way to `t = 1` |
+| the transfer lemma (new, restated in draft 4) | misalignment, the supremum over decidable finite descriptions (GD3), is the least divergence over the closure of the intended behaviours whenever that closure is compact for the convergence of every event's probability, with or without a nearness: TR3 below. Compact closures include every family whose ratios to the default are continuous in a compact parameter, and the pursuit ray when its intensities form a closed bounded interval or when the objective's largest value has positive probability under the default (TR4) | proved here (TR1–TR4), not yet checked in CI; probed: `probes/general/t8_transfer.py`, two instances, where the misalignment of finer descriptions rises to the least divergence over the closure (`0.005616` on a circle; `0.105103` on a ray with an atom at its limit, with and without a nearness) |
+| [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] | (i) attainment holds on the closure of the intended behaviours when it is compact (TR3); (ii) as in GD3; (iv) gains a fourth case: the ray stops at `t_max` with its average of `F` capped, and a behaviour with a larger average is nearest to the end of the ray, so averages are no longer matched; the third case, the limit `q(·|A)` of the ray, carries when `A` has positive probability under the default, and is the nearest behaviour to an actor with `p̂(A) = 1` and finite divergence from the default (TR4(iii)) | proved for (i) and the third case of (iv) (TR3, TR4); probed for the fourth: default with density proportional to `e^{−x}/(1 + x)³` on `x ≥ 0`, and `F(x) = x`: the ray's average is `0.354`, `0.474`, `0.736`, `0.937`, `0.989` at `t = 0`, `0.5`, `0.9`, `0.99`, `0.999`, and stops at `1` at `t = 1`; for an exponential behaviour of mean `2` the divergence to the ray falls all the way to `t = 1` |
 | [[P9 — What is at stake\|P9]] | past the end of the ray, the frontier is a straight line of slope `1/t_max`, approached and never attained; with a power-law upper tail, `t_max = 0` and every positive KL budget buys unbounded gain, while a χ² budget `B` buys exactly `√(B·Var)` | probed (GD5's numbers); tested (B4a, B4b): gains `0.24`, `0.85`, `4.9`, `34`, `2127` as the extra probability moves to `10`, …, `10⁶`, under a Pareto default with index `3`; `0.273861` exactly under χ² |
 | [[P11 — The misaligned share at the start of a change\|P11]], [[P13 — What the start of a change gains\|P13]]: the alignment plane | with a Gaussian default and linear target and proxy, along the pursuit of the proxy the target gains `√2·sd·cos θ` per square root of departure, and the misalignment is the departure times `sin²θ` (the whole departure when `cos θ < 0`), at every intensity: the departure splits like a right triangle. Under a χ² budget `B` the target gains `√B·ρ·sd` for every default, `ρ` the correlation under the default, the correlated proxy of Laidlaw et al. [[References\|@laidlaw2025]]. Under KL beyond Gaussians the law is local only | tested (B5, B4c): exact to `4·10⁻¹⁵` and `10⁻⁹`. B5's registered exponential case failed as posed: at intensity `2` the pursuit does not exist, and below `1` the law is exact for a product of identical exponentials. An exponential × normal default departs from it: `0.48`, `0.43`, `0.29` against `0.5` (exploratory) |
 | [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]] | carries where the tilts of the family exist: the cheapest behaviour that does at least as well on every target is Csiszár's I-projection onto a convex set, which exists when that set is closed in variation and holds a behaviour of finite divergence [[References\|@csiszar1975]], Theorem 2.1; the cone of targets must then be a cone of functions with an exponential moment under the default | expected |
@@ -19,7 +19,7 @@ the probes of `probes/general/`.
 | [[P20 — Where overoptimization starts, and how it ends\|P20]] | the end of pursuit changes when the evaluator's largest value has probability zero, or is never reached | expected |
 | [[P21 — The expected evidence is misalignment\|P21]], [[P22 — No test detects misalignment faster than misalignment\|P22]] | carry: both concern the log-ratio, a real number per decision | expected |
 | [[P54 — Dependence and drift only add evidence\|P54]] | carries, with the divergence to the nearest intended behaviour in place of misalignment, the two being equal when the intended behaviours are closed with a compact closure (TR8) | proved here (TR8), not yet checked in CI |
-| [[P55 — What a record of counts certifies, at every size\|P55]] | holds exactly on the counts of the cells of every finite description, for independent decisions, where it certifies the misalignment at that description; that is a lower bound of misalignment when the description is decidable for the actor, which it always is with no nearness, and whatever the nearness when the closure of the intended behaviours is compact (TR3). Under that compactness, a test on refining descriptions makes "misaligned" verifiable in chance (TR5). Without it, under a nearness, a description fixed in advance can accuse an actor whose misalignment is `0`: the on-target controller, with a cell edge at its target. "Aligned within `ε`" is not verifiable from records alone (GD11), with or without compactness; under a nearness with a countable basis of decidable events, Genin and Kelly's theorem says why: its set is not open in the weak topology [[References\|@genin2017]] | proved here for the compact case (TR5), not yet checked in CI; expected otherwise |
+| [[P55 — What a record of counts certifies, at every size\|P55]] | holds exactly on the counts of the cells of every finite description, for independent decisions, where it certifies the misalignment at that description. That is a lower bound of misalignment when the description is decidable for the actor, which it always is with no nearness; and when the closure of the intended behaviours is compact it is a lower bound for every finite description, decidable or not (TR3, with the algebra of all events). Under that compactness, a test on refining descriptions makes "misaligned" verifiable in chance (TR5). Without it, under a nearness, a description fixed in advance can accuse an actor whose misalignment is `0`: the on-target controller, with a cell edge at its target. "Aligned within `ε`" is not verifiable from records alone in general (GD11): with no nearness and an outcome of probability zero under the default, a little probability moved there makes misalignment infinite, with or without compactness; it is verifiable on finite outcomes, and trivially when every behaviour is aligned within `ε`. Under a nearness with a countable basis of decidable events, Genin and Kelly's theorem says what is needed: that its set be open in the weak topology [[References\|@genin2017]] | proved here for the compact case (TR5), not yet checked in CI; expected otherwise |
 | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]] | holds only at a record's resolution (GD11) | expected |
 | [[P36 — Ordinal objectives\|P36]] | for an evaluator without atoms, once each score is replaced by its rank under the default, the ordinal specification is the set of non-decreasing ratios on `[0, 1]`, the same for every default, and its nearest member is the isotonic regression [[References\|@robertson1988]] | expected |
 | [[P37 — A strong incentive masks the actor, and can fake alignment\|P37]](i) | masking decays like `1/φ²` in the pass-through `φ`, not exponentially, when the incentive's best value is approached without a gap | tested (T7): `φ²·KL` is `3.04`, `3.60`, `3.92`, `4.02`, `4.06` at `φ = 10`, `30`, `100`, `300`, `1000`, against a predicted limit of `4.08`, the error shrinking like `1/φ` |
@@ -28,18 +28,21 @@ the probes of `probes/general/`.
 | a record shows "at least" (new) | as in GD11: samples alone never certify that misalignment is small, a Bahadur–Savage-type impossibility | expected, with the construction in GD11 |
 | tilts and atoms (new) | a tilt cannot create an atom (GD6) | immediate from GD1 |
 | the on-target controller (new) | `0` under the usual nearness and `+∞` with none; on a grid of width `w`, `0` or `log 2` depending on where the grid's edges fall, at every `w`; a controller `0.001` off target scores `0` on grids coarser than `0.001`, then grows like `log(1/w)`: `3.72` at `w = 10⁻⁴`, `8.33` at `10⁻⁶` | probed: standard normal default, `F(x) = −x²` |
-| the dimension law (new) | against intended behaviours with densities bounded above and below, misalignment at a record of width `w` grows like `(D − d)·log(1/w)`, with `d` the information dimension [[References\|@renyi1959]] (GD3): TR6 below | proved here (TR6), not yet checked in CI; tested (T1): slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` for a pile of a tenth, rounding, a line in the square and the Cantor measure, against `0.10`, `1`, `1` and `log 2/log 3 = 0.369` |
+| the dimension law (new) | against intended behaviours with densities bounded above and below on a cube, misalignment at a grid of width `w` grows, asymptotically, like `(D − d)·log(1/w)`, with `d` the information dimension [[References\|@renyi1959]] (GD3): TR6 below. Outside those bounds it can fail: the on-target controller scores `0` or `log 2` at every width | proved here (TR6), not yet checked in CI; tested (T1): slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` for a pile of a tenth, rounding, a line in the square and the Cantor measure, against `0.10`, `1`, `1` and `log 2/log 3 = 0.369` |
 | a robustness degree (new) | an actor that aims deterministically at a margin `r` inside a threshold, blurred by noise of size `σ`, judged by "pass with probability at least `1 − α`" at the pass-or-fail resolution: its misalignment depends on `r/σ` alone, does not increase with `r`, and is `0` from `r = σ·Φ⁻¹(1 − α)`. Robustness in a formal specification, counted in units of the actor's noise, orders behaviours as misalignment does | tested (B6) |
 
 ## Proved here
 
-Five statements that the rows above lean on, proved from GM1, the Gelfand–Yaglom–Perez theorem as stated in
-[[References|@polyanskiy2025]], Theorem 4.5 (the divergence is the supremum, over all finite partitions into events, of the
-divergence between cell probabilities), and results of `derived/`. No check runs them in CI yet; the probe
-`probes/general/t8_transfer.py` computes TR3 on two instances. Throughout, `𝒫 = (C_1, …, C_k)` is a finite description,
-`p_𝒫 = (p(C_1), …, p(C_k))`, and **τ** is the topology on `Δ` in which a net of behaviours converges when the
-probability of every event converges: Csiszár's τ-topology ([[References|@csiszar1984]], (2.14)), the "convergence of every event's
-probability" of GA1. It is Hausdorff, since two behaviours differ on some event.
+Eight statements that the rows above lean on, proved from GM1 and from results read in open texts: the
+Gelfand–Yaglom–Perez theorem as stated in [[References|@polyanskiy2025]], Theorem 4.5 (the divergence is the supremum, over all
+finite partitions into events, of the divergence between cell probabilities), the same book's chain rule and
+data-processing inequality (Theorems 2.16 and 2.17), Rényi's information dimension as stated in [[References|@haghighatshoar2017]],
+and results of `derived/`. No check runs them in CI yet; the probe `probes/general/t8_transfer.py` computes TR3 on two
+instances. Throughout, `𝒫 = (C_1, …, C_k)` is a finite description, `p_𝒫 = (p(C_1), …, p(C_k))`, and **τ** is the
+topology on `Δ` in which a net of behaviours converges when the probability of every event converges: Csiszár's
+τ-topology ([[References|@csiszar1984]], (2.14)), the "convergence of every event's probability" of GA1. It is Hausdorff, since two
+behaviours differ on some event. None of the statements uses that intended behaviours are equivalent to the default, as
+GD3 requires; they hold for any set of behaviours.
 
 Two facts on finitely many cells are used. (a) For fixed `a`, `b ↦ KL(a‖b)` is continuous from the simplex to `[0, ∞]`:
 where `b_i > 0` whenever `a_i > 0` it is a finite sum of continuous terms, and where some `b_i = 0 < a_i` it is `∞` and
@@ -106,9 +109,10 @@ answer.
 `g(p) = KL(p̂‖p)` is the supremum of the `f_𝒫`, so it is τ-lower semicontinuous and attains a minimum `m` on the compact
 `𝒦`. For every `𝒫`, `inf_𝒦 f_𝒫 ≤ inf_𝒦 g = m`, so `M(p̂) ≤ m`. Conversely, let `c < m`. Each `p ∈ 𝒦` has `g(p) > c`, so
 some `𝒫_p ∈ 𝔇` has `f_{𝒫_p}(p) > c`, and `{f_{𝒫_p} > c}` is a τ-open set containing `p`. Finitely many of these sets
-cover `𝒦`; let `𝒫*` in `𝔇` refine their descriptions (TR2). Merging cells never increases a divergence ([[P4 — What KL measures|P4]](iv)), so
-`f_{𝒫*} > c` on all of `𝒦`, and its minimum there, attained since `f_{𝒫*}` is continuous and `𝒦` compact, exceeds `c`.
-So `M(p̂) ≥ inf_𝓘 f_{𝒫*} > c` for every `c < m`.
+cover `𝒦`; let `𝒫*` in `𝔇` refine their descriptions (TR2). Merging cells never increases a divergence, by data
+processing for the kernel that merges them ([[References|@polyanskiy2025]], Theorem 2.17), so `f_{𝒫*} > c` on all of `𝒦`, and its
+minimum there, attained since `f_{𝒫*}` is continuous and `𝒦` compact, exceeds `c`. So `M(p̂) ≥ inf_𝓘 f_{𝒫*} > c` for
+every `c < m`.
 
 ### TR4 — Compact families, and the pursuit ray
 **Statement.** (i) Let `Θ` be a compact metric space and `𝓘 = {p_θ : θ ∈ Θ}` with each `p_θ` absolutely continuous with
@@ -116,13 +120,17 @@ respect to `q`, of ratio `r_θ`, such that `θ ↦ r_θ(x)` is continuous for `q
 and `M(p̂) = min_θ KL(p̂‖p_θ)`. (ii) Let `F` be an objective. If `T_F = [0, t_max]` with `t_max < ∞`, the pursuit ray is
 τ-compact. If `F ≤ m` with probability one under `q` for a number `m`, and `A = {F = m}` has `q(A) > 0`, the closure of
 the ray is the ray with `q(·|A)` added, and it is τ-compact. In both cases `M(p̂)` is the least divergence from `p̂` to
-that compact set.
+that compact set. (iii) In the second case, if `p̂(A) = 1` and `KL(p̂‖q) < ∞`, then
+`KL(p̂‖p_{F,t}) = KL(p̂‖q) + log E_q[e^{t·(F − m)}]`, which decreases to `KL(p̂‖q(·|A))` as `t → ∞`, strictly unless
+`q(A) = 1`: so `M(p̂) = KL(p̂‖q(·|A))`, approached along the ray and attained at its limit. If `p̂(A) < 1`, the limit is
+at divergence `∞` and adds nothing; if `KL(p̂‖q) = ∞`, every divergence to the closure is `∞`.
 
-**In plain terms.** A family of acceptable behaviours that varies continuously over a bounded, closed range of
-parameters is compact, and misalignment is the divergence to its nearest member. Pursuit of an objective qualifies when
-it stops at a finite intensity that it still reaches, or when its best outcomes have positive probability by default:
-then the limit of ever stronger pursuit, the default restricted to the best outcomes, is the one behaviour added, as in
-the third case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv).
+**In plain terms.** A family of acceptable behaviours whose ratios to the default vary continuously over a bounded,
+closed range of parameters is compact, and misalignment is the divergence to its nearest member. Continuity of the
+behaviours in a weaker sense, such as their averages of continuous functions, is not enough. Pursuit of an objective
+qualifies when it stops at a finite intensity that it still reaches, or when its best outcomes have positive probability
+by default: then the limit of ever stronger pursuit, the default restricted to the best outcomes, is the one behaviour
+added, and it is the nearest one to an actor that only ever picks best outcomes, as in the third case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv).
 
 **Proof.** (i) If `θ_n → θ`, then `r_{θ_n} → r_θ` almost everywhere, and since all integrate to `1` under `q`,
 `E_q|r_{θ_n} − r_θ| = 2·E_q[(r_θ − r_{θ_n})⁺] → 0` by dominated convergence (`0 ≤ (r_θ − r_{θ_n})⁺ ≤ r_θ`), Scheffé's
@@ -132,7 +140,13 @@ so `t ↦ E_q[e^{t·F}]` is continuous on `[0, t_max]` and (i) applies with `Θ 
 let the ratio be `e^{t·(F − m)}/E_q[e^{t·(F − m)}]` for finite `t`, and `1_A/q(A)` at `∞`; as `t → ∞`,
 `e^{t·(F − m)} → 1_A` pointwise, bounded by `1`, so the normalizer tends to `q(A) > 0`, and the ratios converge almost
 everywhere. (i) applies with `Θ = [0, ∞]`, a compact metric space. The image is closed and contains the ray, and its one
-added point is a τ-limit of the ray, so it is the ray's closure.
+added point is a τ-limit of the ray, so it is the ray's closure. (iii)
+`log(dp_{F,t}/dq) = t·(F − m) − log E_q[e^{t·(F − m)}]`, which is constant, `p̂`-almost surely, when `p̂(A) = 1`;
+subtracting its `p̂`-average from `KL(p̂‖q)` gives the identity. `E_q[e^{t·(F − m)}]` decreases to `q(A)`, strictly
+unless `F = m` almost surely, and `KL(p̂‖q) + log q(A) = KL(p̂‖q(·|A))`, since the ratio of `p̂` to `q(·|A)` is `q(A)`
+times its ratio to `q`. If `p̂(A) < 1`, `p̂` is not absolutely continuous with respect to `q(·|A)`. If `KL(p̂‖q) = ∞`,
+then since `dp_{F,t}/dq ≤ 1/E_q[e^{t·(F − m)}]`, `KL(p̂‖p_{F,t}) ≥ KL(p̂‖q) − log(1/E_q[e^{t·(F − m)}]) = ∞`, and
+likewise at the limit.
 
 ### TR5 — "Misaligned" is verifiable in chance, under compactness
 **Statement.** Let `𝒦`, the τ-closure of `𝓘`, be τ-compact. There are finite descriptions `𝒫_1, 𝒫_2, …`, each refining
@@ -146,50 +160,67 @@ accuses an acceptable one no more often than the rate chosen, at every size.
 
 **Proof.** `𝔅` is generated by a countable base of the Polish topology of GB1, so by a countable algebra `𝒜_0`, whose
 finite partitions are countably many; let `𝒫_j` be the common refinement of the first `j` of them. Every partition of
-`𝒜_0` is refined by some `𝒫_j`, and refining never lowers a divergence ([[P4 — What KL measures|P4]](iv)), so by TR3 with `𝒜_0`,
-`M(p̂) = lim_j M_{𝒫_j}(p̂)`. *Level.* For `p ∈ 𝒦`, `p_{𝒫}` is a limit of the cell probabilities of intended behaviours,
-since `p ↦ p_𝒫` is τ-continuous, and the proof of [[P55 — What a record of counts certifies, at every size|P55]](ii) uses only that, on the cells: with the method of types of
-[[P55 — What a record of counts certifies, at every size|P55]](i), it bounds the chance of accusing a sample from `p` by `α`. *Power.* If `M(p̂) > 0`, some `j_0` has
-`M_{𝒫_{j_0}}(p̂) > 0`. For `j ≥ j_0` and every empirical behaviour `s`, `M_{𝒫_j}(s) ≥ M_{𝒫_{j_0}}(s)`, by [[P4 — What KL measures|P4]](iv) for
-each intended behaviour. By the argument of [[P55 — What a record of counts certifies, at every size|P55]](iii) on the cells of `𝒫_{j_0}`, where `p̂_{𝒫_{j_0}}` is outside the
-closure of the intended cell probabilities, some `η > 0` has `M_{𝒫_{j_0}}(p̂_n) ≥ η` with probability tending to `1`.
-The threshold is `log(k/α)` with `k ≤ (n + 1)^{|𝒫_{j(n)}| − 1}`; choosing `j(n)` so that `|𝒫_{j(n)}|·log(n + 1)/n → 0`,
-it falls below `n·η` for every large `n`.
+`𝒜_0` is refined by some `𝒫_j`, and refining never lowers a divergence (data processing, as in TR3), so by TR3 with
+`𝒜_0`, `M(p̂) = lim_j M_{𝒫_j}(p̂)`. *Level.* For `p ∈ 𝒦`, `p_{𝒫}` is a limit of the cell probabilities of intended
+behaviours, since `p ↦ p_𝒫` is τ-continuous, and the proof of [[P55 — What a record of counts certifies, at every size|P55]](ii) uses only that, on the cells: with the method of
+types of [[P55 — What a record of counts certifies, at every size|P55]](i), it bounds the chance of accusing a sample from `p` by `α`. *Power.* If `M(p̂) > 0`, some `j_0` has
+`M_{𝒫_{j_0}}(p̂) > 0`. For `j ≥ j_0` and every empirical behaviour `s`, `M_{𝒫_j}(s) ≥ M_{𝒫_{j_0}}(s)`, by data
+processing for each intended behaviour. By the argument of [[P55 — What a record of counts certifies, at every size|P55]](iii) on the cells of `𝒫_{j_0}`, where `p̂_{𝒫_{j_0}}` is
+outside the closure of the intended cell probabilities, since by fact (a) a point of that closure has cell misalignment
+`0`, some `η > 0` has `M_{𝒫_{j_0}}(p̂_n) ≥ η` with probability tending to `1`. The threshold is `log(k/α)` with
+`k ≤ (n + 1)^{|𝒫_{j(n)}| − 1}`; choosing `j(n)` so that `|𝒫_{j(n)}|·log(n + 1)/n → 0`, it falls below `n·η` for every
+large `n`.
 
-**Notes.** Under compactness, misalignment does not depend on the nearness (TR3), so the same test serves under any
-nearness. Without compactness the nearness can decide a verdict, and a description fixed in advance can then accuse an
-actor whose misalignment is `0`: under the usual nearness of the line, the on-target controller of GD3, tested at the
-cells `(−∞, 0]` and `(0, ∞)`, puts all its decisions in one and every pursuit splits evenly, though its misalignment is
-`0`. As on finite outcomes, an actor whose decisions depend on each other can be accused for that alone ([[P55 — What a record of counts certifies, at every size|P55]], Notes).
-"Aligned within `ε`" stays unverifiable from samples even under compactness: mixing an intended behaviour with a little
-probability on a value the default never produces gives a behaviour as close as one likes in total variation and
-infinitely misaligned (GD11).
+**Notes.** Under compactness, misalignment does not depend on the nearness (TR3). Under a nearness, though, the cells of
+a fixed countable algebra need not be decidable for every actor: one that puts probability on a cell's edge cannot have
+that cell counted by a record kept under that nearness (GD3). Drawing the edges at random before the data, from a law
+without atoms, mends this: the balls of TR2, with each radius drawn from an interval of rational ends, have edges that
+an actor charges for at most countably many radii, so with probability one every cell is decidable for it, the balls
+still form a base, and the proof holds given the draw. Without compactness the nearness can decide a verdict, and a
+description fixed in advance can then accuse an actor whose misalignment is `0`: under the usual nearness of the line,
+the on-target controller of GD3, tested at the cells `(−∞, 0]` and `(0, ∞)`, puts all its decisions in one and every
+pursuit splits evenly, though its misalignment is `0`. As on finite outcomes, an actor whose decisions depend on each
+other can be accused for that alone ([[P55 — What a record of counts certifies, at every size|P55]], Notes). "Aligned within `ε`" is not verifiable from samples in general, even
+under compactness: with no nearness, mixing an intended behaviour with a little probability on a value the default never
+produces gives a behaviour as close as one likes in total variation and infinitely misaligned (GD11). It is verifiable
+on finite outcomes ([[P55 — What a record of counts certifies, at every size|P55]](iv)), and trivially when every behaviour is aligned within `ε`.
 
 ### TR6 — The dimension law
-**Statement.** Let `X = [0, 1]^D`, let `𝒫_w`, for `w = 1/k` with `k` a whole number, be the grid of half-open cubes of
-side `w`, and let every intended behaviour have a density, against volume, between numbers `a > 0` and `A < ∞` on `X`.
-Then for every `p̂`, `M_{𝒫_w}(p̂) = D·log(1/w) − H(p̂_{𝒫_w}) + θ_w`, with `H` the entropy of the cell probabilities and
+**Statement.** Let `X = [0, 1]^D`, and for `w = 1/k`, `k` a whole number, let `𝒫_w` be the grid of cubes of side `w`:
+the products of the intervals `[i·w, (i + 1)·w)`, the last one on each axis closed at `1`. Let every intended behaviour
+have a density, against volume, between numbers `a > 0` and `A < ∞` on `X`. Then for every `p̂`,
+`M_{𝒫_w}(p̂) = D·log(1/w) − H(p̂_{𝒫_w}) + θ_w`, with `H` the entropy of the cell probabilities and
 `log(1/A) ≤ θ_w ≤ log(1/a)`. So if `p̂` has information dimension `d` in Rényi's sense, `M_{𝒫_w}(p̂)/log(1/w) → D − d`
-as `w → 0`. On the line, a mixture that gives weight `α` to a behaviour with a density and the rest to finitely or
-countably many points, of finite entropy, has `d = α`, so `D − d = 1 − α`.
+as `w → 0`. In particular `d = D` for a behaviour with a density; `d = 0` for one on finitely or countably many points;
+on the line, `d = α` for a mixture that gives weight `α` to a behaviour with a density and the rest to finitely or
+countably many points of finite entropy; and in the square, `d = 1` for one that pins one coordinate to a value and
+gives the other a density.
 
-**In plain terms.** Against acceptable behaviours that spread over the space with no gaps and no spikes, each finer
-digit of the record adds, per decision, the logarithm of the number of new cells it splits into, less what the actor's
-own spread uses: an actor pinned to points pays all of it, one spread like the default pays nothing, and one that piles
-a share of its decisions on single values pays that share.
+**In plain terms.** Against acceptable behaviours that spread over the space with no gaps and no spikes, misalignment at
+a grid of width `w` grows, asymptotically, like `log(1/w)` times the number of coordinates the actor does not spread:
+about `2.3` nats per decimal digit of the record, on average over many digits, for each coordinate it pins, nothing for
+one it spreads like the default, and, on the line, the piled share of `2.3` for an actor that piles a share of its
+decisions on single values.
 
 **Proof.** Every cell `C` of `𝒫_w` has volume `w^D`, so `p(C)` lies between `a·w^D` and `A·w^D` for every intended `p`.
 Then `KL(p̂_{𝒫_w}‖p_{𝒫_w}) = −H(p̂_{𝒫_w}) − Σ_C p̂(C)·log p(C)`, and the sum lies between `D·log(1/w) − log A` and
 `D·log(1/w) − log a`, for every intended `p`; so does the infimum over them, after adding `−H(p̂_{𝒫_w})`. Rényi's
-information dimension of `p̂` is the limit of `H(p̂_{𝒫_w})/log(1/w)`, the grid of the definition being these cubes, and
-he showed that it is `D` for a behaviour with a density on `[0, 1]^D`, and, on the line, the weight of the part with a
-density for the mixture above (both as stated in [[References|@haghighatshoar2017]], section II, which cites [[References|@renyi1959]]). Dividing
-by `log(1/w)` gives the limit.
+information dimension is the limit of `H/log(1/w)` on the grid of the cells of `⌊x/w⌋`, coordinate by coordinate, which
+differs from `𝒫_w` only in setting apart the outcomes with a coordinate equal to `1`; each cell of `𝒫_w` is a union of
+at most `2^D` cells of that grid, so the two entropies differ by at most `D·log 2`, and the limits agree. Rényi showed
+that `d = D` for a density on `[0, 1]^D`, and, on the line, `d = α` for the mixture above (both as stated in
+[[References|@haghighatshoar2017]], section II, which cites [[References|@renyi1959]]). For points: given `ε > 0`, some finite set `S` has
+`p̂(S) > 1 − ε`, and at most `|S|` cells meet it, so, splitting `p̂` into its parts on `S` and off it,
+`H(p̂_{𝒫_w}) ≤ log 2 + log|S| + ε·D·log k`, and `d ≤ ε·D` for every `ε`. For a point times a density, the cell
+probabilities are those of the second coordinate's grid on the line, where `d = 1`. Dividing by `log(1/w)` gives the
+limit.
 
 **Notes.** This is the grid that GA5 asks to be declared before the data: on another grid the leading term is the same,
-while `θ_w` can differ. Probed in T1 (`probes/general/`), with slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` against
-`0.10`, `1`, `1` and `log 2/log 3`; the last, the Cantor measure, has no density and no atoms, and its information
-dimension is not given by the mixture theorem.
+while `θ_w` can differ. The law is asymptotic: the increment of one digit varies with `θ_w`, an interval of width
+`log(A/a)`, and with the increments of `H`, which need not settle. Probed in T1 (`probes/general/`), with slopes
+`0.0998`, `1.0000`, `0.9997` and `0.3691` against `0.10`, `1`, `1` and `log 2/log 3`; the last, the Cantor measure, has
+no density and no atoms, and its information dimension is not given by the theorems used here. Behaviours that violate
+the bounds, such as pursuit that narrows toward a point, are outside the law; the near miss of GD3 is computed directly.
 
 ### TR7 — What a view allows, on standard Borel spaces
 **Statement.** Let conditions, signals and outcomes form standard Borel spaces, and let the response depend on the

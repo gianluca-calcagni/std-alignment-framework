@@ -29,7 +29,7 @@ finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
-| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover |
+| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, and §20 the work on the general core since |
 | `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
