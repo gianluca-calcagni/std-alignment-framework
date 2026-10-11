@@ -18,10 +18,10 @@ report that keeps the standard, in under a minute.
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
-results in `derived/`, is v13 on this branch, approved by the PI (Q52; `main` holds v12 until it is merged), and claims
-what it proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not
-finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds
-on finite outcomes, it is proved in `derived/` and cited from `general/`.
+results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
+proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not finite,
+and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds on
+finite outcomes, it is proved in `derived/` and cited from `general/`.
 
 | | |
 |---|---|
@@ -139,19 +139,19 @@ where each comes from):
   family are correlated, and "independent" then means less than it says.
 
 **Versions.** A version changes only when the Statement of an item of the core changes, or the scope does (`CORE.md`
-§0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. On this branch
-the core is v13, approved by the PI (Q52; `NOTES.md` §16, §17), built by the method of reverse physics: what is imported
-from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of item, and
-every definition declares and justifies its interpretation. [A4] says that misalignment is the rate of evidence against
-the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are reasons of [D2], as no
-result used them; and [D3] defines the ordinal specification beside the standard one, reported side by side. At the PI's
-seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, a measure that needs no independence of
-the actor, though the test from counts may accuse a dependent actor for its dependence alone; [D3] gained families of
-targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. `main` holds v12, in which A2's
-Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md` §3.1, Q44). v11
-widened the scope to groups, several principals with declared weights, rules as conditions and episodes as outcomes
-(Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is a draft
-with its own numbering; until it is approved, it changes no Statement of the core.
+§0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. The core is
+v13, approved by the PI (Q52; `NOTES.md` §16, §17) and merged (Q55), built by the method of reverse physics: what is
+imported from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of
+item, and every definition declares and justifies its interpretation. [A4] says that misalignment is the rate of
+evidence against the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are
+reasons of [D2], as no result used them; and [D3] defines the ordinal specification beside the standard one, reported
+side by side. At the PI's seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, a measure that
+needs no independence of the actor, though the test from counts may accuse a dependent actor for its dependence alone;
+[D3] gained families of targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. v12, which v13
+replaced, had A2's Statement say that the geometry of pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md`
+§3.1, Q44). v11 widened the scope to groups, several principals with declared weights, rules as conditions and episodes
+as outcomes (Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is
+a draft with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
 
@@ -160,7 +160,7 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | Goal | Criterion | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
-| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changes the core's Statements; the count starts with the next merged pull request after it |
+| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changed the core's Statements, merged on 2026-10-11 (Q55); the count starts with the next merged pull request, 0 of 3 so far |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`) |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported, and the reader package is ready; no outside reader yet |

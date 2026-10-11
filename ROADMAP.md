@@ -28,19 +28,19 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
 
 ## Where we are (2026-10-11)
 
-- **On this branch**, `claude/core-reframe`, the core is v13, approved by the PI (Q52, `NOTES.md` §17) and built by the
-  method of reverse physics: three axioms imported from probability theory, four background conditions assumed without
-  loss of generality, three premises, each with its Status ([A1] behaviour suffices, [A4] misalignment is evidence, [A5]
-  declared before), and eleven definitions, each with its Interpretation, declared and justified. v12's A2 and A3 are
-  reasons of [D2], as no result used them; the draft's A6 was not adopted. [D3] defines the ordinal specification, which
-  `STANDARD.md` asks to report beside the standard one. Then, at the PI's seven requests (Q53, `NOTES.md` §18): a table
-  of conventions, each justified, which lint R17 holds; [A4] on the record's counts, which needs no independence of the
-  actor, with [P54] for what dependence and drift add; families of targets in [D3], with [P53] for every family; [P55],
-  tests and intervals from counts, exact at every size, with Genin and Kelly's verifiability; the general core's draft 4
-  on v13's kinds; the ontologies' declarations; and H38 on activations. The PI accepted it all (Q54): case C5 ran, all
-  held, and the docs were swept (`NOTES.md` §19, the last handover). No result cites a premise in its Statement or Proof
-  (`probes/review/premise_reach.py`). 55 propositions; 102 checks of the items, and 148 tests of the tools, the
-  scenario, the library and the quickstart, pass on both paths. On `main`:
+- **On `main`**, since pull request #33 was merged (Q55), the core is v13, approved by the PI (Q52, `NOTES.md` §17) and
+  built by the method of reverse physics: three axioms imported from probability theory, four background conditions
+  assumed without loss of generality, three premises, each with its Status ([A1] behaviour suffices, [A4] misalignment
+  is evidence, [A5] declared before), and eleven definitions, each with its Interpretation, declared and justified.
+  v12's A2 and A3 are reasons of [D2], as no result used them; the draft's A6 was not adopted. [D3] defines the ordinal
+  specification, which `STANDARD.md` asks to report beside the standard one. Then, at the PI's seven requests (Q53,
+  `NOTES.md` §18): a table of conventions, each justified, which lint R17 holds; [A4] on the record's counts, which
+  needs no independence of the actor, with [P54] for what dependence and drift add; families of targets in [D3], with
+  [P53] for every family; [P55], tests and intervals from counts, exact at every size, with Genin and Kelly's
+  verifiability; the general core's draft 4 on v13's kinds; the ontologies' declarations; and H38 on activations. The PI
+  accepted it all (Q54): case C5 ran, all held, and the docs were swept (`NOTES.md` §19, the last handover). No result
+  cites a premise in its Statement or Proof (`probes/review/premise_reach.py`). 55 propositions; 102 checks of the
+  items, and 148 tests of the tools, the scenario, the library and the quickstart, pass on both paths. On `main`:
 - **The core** is v12, A2 now saying that the geometry of pursuit is Riemannian (Q44): five premises, eleven
   definitions, 52 propositions; 98 checks of the items, and 130 tests of the tools, the scenario, the library and the
   quickstart, pass on both paths. Nine results are diagnostics ([P43]–[P51]); five were used in a case, all in W4, and
@@ -178,3 +178,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-11 | the PI's seven requests (Q53, `NOTES.md` §18): conventions justified in a table that lint R17 holds; independence of the actor dropped from [A4], with [P54]; families of targets, with [P53] for every family; [P55], exact tests and intervals from counts, and statistical verifiability after Genin and Kelly; `CORE-GENERAL.md` draft 4 on v13's kinds, misalignment as what records can decide, with the dictionary and the transfer table; the ontologies' slots and declarations; H38 on activations, reopening H33 asked of the PI (R13). Every new check and lint rule mutation-tested | 1 (new checks, mutation-tested); 5 (tests exact at every size; the paired report's interval); 2 (v13's Statements, not yet merged) |
 | 2026-10-11 | all accepted (Q54): draft 4's continuous misalignment decided; activations reopened, and case C5 registered, pushed, run and held in all eight predictions, a demonstration rather than a hard test; a push without the pre-push block turned one CI run red, recorded (§1); doc hygiene by a sweep now kept in `probes/review/doc_sweep.py`, six stale statements fixed; `NOTES.md` §19 is the new handover | 5 (C5: what activations verify); 2 (the records true) |
 | 2026-10-11 | a reread of the branch before its pull request, at the PI's request: `CORE.md`'s count of kinds, its table of symbols (record, `𝓚`) and the conventions row on pursuit corrected; `README.md`'s format of an item brought to v13 (Interpretation, Status); `NOTES.md` §19's claim that every Statement changed corrected to the ones that did; `STANDARD.md` and E1(d) now say that W1's report, `SCENARIO.md` and the quickstart do not yet meet v13's standard; a subagent's reading of [P53]–[P55] found no false Statement, and two overclaims in their Notes, both fixed: that the counts certify the misalignment of a dependent actor's average behaviour (they do not: `probes/review/p55_dependence.py`), and Sanov's theorem without its interior; with smaller fixes to [P54](ii), [P55](iv)'s proof, the plain terms and the conventions row on independence (`NOTES.md` §1, §19) | 2 (the records true) |
+| 2026-10-11 | pull request #33 merged by the PI (Q55): v13 is on `main`; the records that said it was not yet merged updated, and the count for "stable" restarts at 0 of 3 | 2 (the count restarts; the records true) |
