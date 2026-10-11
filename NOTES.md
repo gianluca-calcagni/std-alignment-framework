@@ -46,13 +46,16 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | Failure mode | Evidence | Countermeasure |
 |---|---|---|
 | **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
+| **A mutant caught by a crash** | the first mutant list of [P53] (2026-10-11) restricted a minimization to one direction with a gradient of the wrong shape; the check failed with a `ValueError`, counted as "caught", though no assertion had judged the mathematics | read why each mutant is caught: an error raised by the mutated code itself tests nothing, so rewrite the mutant until an assertion fails |
 | **A tolerance without its scale, again** | the ray-closedness check compared a tight bound with no rounding margin (1.79134602e-43 against itself) | every comparison gets the relative margin of `EXACT`, including the "obvious" ones |
-| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it. Again in the draft v13 (2026-10-10, §16): [A4] and [A6] were first argued from [D11], [P21], [P24] and [P36], built on [D3], which cites [A6]; R5 found seven cycles | keep R5; write the "why" from what is above; evidence that uses later results goes in Notes |
+| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it. Again in the draft v13 (2026-10-10, §16): [A4] and [A6] were first argued from [D11], [P21], [P24] and [P36], built on [D3], which cites [A6]; R5 found seven cycles. Again in v13 as built (2026-10-11, §17): [D1]'s Interpretation cites
+[M2], and [M2]'s reason cited [D1]; R5 found the cycle | keep R5; write the "why" from what is above; evidence that uses
+later results goes in Notes |
 | **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [P50]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴`; and in the library itself, whose revealed intensity takes the best-outcomes case within `10⁻¹²` of `max F` and returns `M = ∞` for an actor of full support, in the regime that the checks of [P5] and [P9] skip (§15, point 3) | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp; a regime that a check skips is one the library either refuses with an error or computes another way, with a test there |
 | **A familiar formula that hides a typing error** | "the KL-regularized optimum is `tilt(π_ref, r/β)`" is true prompt by prompt, and false on prompt–response pairs: the pursuit ray of [D2] would also reweight the prompts, which no policy can do. Found only when the ontologies had to say what an outcome is | typed slots in every ontology, including **contexts**; a formula from the literature enters only with its outcome space stated |
 | **A probe bug read as a refutation** | the first probe of [P15] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact. The same slip, from the other side, in the grounding probe (Q32): the best grounded behaviour was first written with `log E_K[e^{t·F̂}|w]`, the trainer's optimum's own weights of worlds, where an actor that cannot touch the channel faces its average, `E_K[F̂|w]`; the numerical projection disagreed by `0.37`, and the derivation was redone | when a probe contradicts a derivation, check each against the other before concluding anything; what the actor cannot control enters by its average, not by its log-mean-exp; the slip is now a mutation in [P50]'s check |
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
-| **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
+| **A degenerate random instance hiding the property** | the first check of [P16](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5). Again in [P53]'s first check (2026-10-11): with `d` statistics on `d + 1` outcomes, the behaviours with given averages are a single point, so "another behaviour with the same averages" was not one; its own assertion caught it | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
 | **A plain-terms twin that claims more than the statement** | [P19]'s plain terms listed threshold selection among the covered paths; a threshold leaves `Δ°`, so the statement does not cover it (the conclusion holds there by a direct argument). Found in the review before the v10 commit | read each "In plain terms" against the Statement's hypotheses, one named example at a time |
 | **A rate copied from a sketch** | [P22]'s Notes said the Chernoff bound is approached like `1/log(1/ε)`; a computation across seven decades of `ε` showed `log log(1/ε)/log(1/ε)` | a rate in a Note is computed across several decades before it is written |
 | **A check whose instance generator kills the case it tests** | the first single-peaked regressions of [P26]'s check capped the falling part at the peak, so every "falling" part was flat; a mutant claiming monotone curves survived until the counts were printed | assert that the hypothesis is visible in the instances (here: some curves do fall), as the failure mode on degenerate instances already asks |
@@ -220,6 +223,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q49 | review the framework in general: get familiar with its files, methodology and ethos, plan an exhaustive list of focus areas, then review them in turn, with challenges and constructive criticism. Applied: §15, with twelve focus areas, eleven findings and seven pieces of advice; `probes/review/`; `OVERVIEW.md`'s count of predictions and an orientation for a mathematician; Korbak, Perez and Buckley in `RELATED.md`; a row of §1 extended and one added; the order of the commands before a push fixed; three decisions asked (`REQUESTS.md`, R8–R10) | PI; executor (the review) | §15; `probes/review/`; `tools/overview_template.md`; `ROADMAP.md`; `REQUESTS.md` |
 | Q50 | the licence's aim during research: progress on the framework, by people or by models working on copies of it, is shared with everyone; the GNU Affero GPL, version 3 or later, is kept for the code and the text, and the adoption it costs is accepted; it is to be relaxed once research gives way to use. So R9 is declined, and the executor withdraws the recommendation behind it (§15, advice 6). Applied: §11, what a copyleft licence reaches and what it does not, and what gets closer; proposed and awaiting the PI: additional terms under the licence's section 7, a request to AI agents that work on copies, and a citation file with a DOI per release (`REQUESTS.md`, R11) | PI; executor (the analysis) | §11; §15; `REQUESTS.md`; `ROADMAP.md` |
 | Q51 | draft on a new branch the core the review's advice would give, and review whether it is more compelling and more solid than v12. Applied: branch `claude/core-reframe`, a draft v13: [A4] misalignment is evidence, [A6] declared no finer than identified, [D3] with the ordinal and the matched specification, [P6](ii) the excess departure with its check and mutants (5 of 5 caught), `GA4`, `STANDARD.md`, `TERMS.md`, `README.md`, `RECORD.md` and the overview; §16 the review: adopt [A4], [P6](ii), the ordinal specification as an option and the paired report, not [A6] (R12) | PI; executor (the draft and the review) | §16; the branch |
+| Q52 | v13 approved, in the lean form the executor proposed after Q51's review: three premises, [A1] behaviour suffices, [A4] misalignment is evidence and [A5] declared before; v12's A2 and A3 made reasons of [D2], since no result used them; A6 not adopted; the identity that misalignment is the departure beyond what a specification credits, as a result with its check and mutants; the paired report in `STANDARD.md`; the dependencies measured again; the estimation and diagnostics of the ordinal specification as steps. Applied on the existing branch, not a new one, and built by the method of Carcassi's reverse physics: what is imported from probability theory (M), what is assumed without loss of generality (B) and what is assumed (A) named apart, each with a Status saying what kind of starting point it is, and every definition with a physical or behavioural interpretation, declared and justified | PI; executor (the structure, the interpretations, [P53]) | `CORE.md` v13; [P53]; `STANDARD.md`; lint R1, R3–R5; `ROADMAP.md` O1, O2 and step 3; §17 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1162,3 +1166,78 @@ ordinal misalignment and the excess-departure reading beside it). Do not adopt [
 charges a method. For trained models, test the learner's kernel as a named objective before any further change to the
 core. The partial version still changes [A4]'s and [D3]'s Statements, so it is a v13, and the count for "stable"
 restarts. The decision is the PI's (`REQUESTS.md`, R12).
+
+## 17. v13 as built, 2026-10-11 (Q52)
+
+By the executor, a model of the Claude family, at the PI's request; not independent (rule (f)). The PI approved the lean
+core the executor proposed in answer to "can we assume less and keep the results?", and asked for it to be built on the
+existing branch by the method of reverse physics: name what is imported from mathematics, what is assumed without loss
+of generality, and what is assumed, and give every definition an interpretation, declared and justified.
+
+**The sources, read.** Four open texts, each read in full on arXiv, titles and authors matched (`REFERENCES.md`).
+Carcassi and Aidala (2022), the method: find the assumptions from which a theory's laws follow, and classify each as a
+principle or an assumption, conceptual (a logical necessity or a consequence of definitions) or phenomenological.
+Carcassi, Thrien and Aidala (2026), on quantum mechanics: separate the mathematical and the physical content, map every
+mathematical object to a physical one, and state the background conditions under which equivalences hold. Carcassi and
+Aidala (2021), on verifiability: verifiable, refutable and decidable statements, and the principle of scientific
+objectivity. Carcassi, Aidala and Thrien (2026), on ensembles: ensembles mix, the classical ones on finitely many
+outcomes form a simplex, and statistical quantities are affine in them.
+
+**What was built.**
+- *Kinds.* Three imported axioms: [M1] probability on finitely many outcomes, [M2] independent repetition with
+  Chebyshev's bound, [M3] the list of imported theorems. Four background conditions assumed without loss of generality,
+  each with its qualifier: [B1] finitely many outcomes, [B2] episodes and conditions as outcomes, [B3] an objective up
+  to scale and constant, [B4] one actor and one principal. Three premises, each with its Status: [A1] a principle,
+  conceptual; [A4] a principle in its form, resting on one phenomenological assumption, independence between episodes;
+  [A5] a principle, conceptual, a necessity of testing. Eleven definitions, each with an Interpretation in three parts:
+  *Declared* (what the object is in the world), *Verified* (how a record verifies or refutes a statement about it), and
+  *Justified* (why the map is right).
+- *Lint.* R1 admits the kinds M and B; R3 orders the new fields; R4 requires a Status of M, B and A items and an
+  Interpretation of every definition; R5 counts both fields as dependencies, so an interpretation cannot lean on a
+  result that rests on its own definition. Mutants: `tools/mutants/lint-core.json`, 8 of 8 caught; the overview's list
+  updated, 9 of 9.
+- *[P53].* For named statistics `T`, the behaviour of least departure with the actor's averages of `T` is a tilt of the
+  default by `θ·T`, with a Pythagorean identity against every such tilt; so misalignment against the family is the
+  departure beyond it. The standard specification credits the average of `F`, only above the default's; the ordinal one
+  the masses of its pooled blocks. Part (i) is Csiszár's I-projection; what is new is one reading of the three
+  specifications. Checked (`test_credited_statistics`, about five seconds) and mutation-tested, 8 of 8 caught.
+- *Propagated.* [D2]'s reasons now hold v12's A2 and A3; [D3] loses "matched" and A6; `STANDARD.md` asks for the ordinal
+  misalignment beside `M` in every report under the standard specification, and lists [A1], [A4], [A5] and [B1]–[B4] as
+  the premises a case may strain; `README.md`, `TERMS.md`, `RECORD.md`, `RELATED.md`, `CORE-GENERAL.md` (GA2 and GA3 as
+  reasons, its move to v13 a step), the overview and the derived notes follow.
+
+**The dependencies, measured again** (`probes/review/premise_reach.py`). No result of `derived/` cites an imported
+axiom, a background condition or a premise in its Statement or Proof. One definition's Statement cites a premise: [D3]
+defines "declared" by [A5], so 16 results reach [A5] through [D3]; no proof uses the word. Through the reasons, statuses
+and interpretations, 38 results reach [A4] and [A5], 13 reach [A1], and 38 to 43 reach [B1]–[B3]. The counts are by
+citation: most results use [D1]'s objects without citing it, so the counts for definitions understate their use. The
+reading stands: the results are facts about finite distributions given the definitions; the premises and the
+interpretations carry the bridge to judging an actor.
+
+**Where the method fits loosely.** Said so that no reader takes the label for more than it is.
+1. *Verifiability is statistical here.* Carcassi and Aidala's verifiable statements are settled by a test that ends in
+   finite time. A behaviour is never verified exactly: records give statements with error rates that vanish as they
+   grow ([M2]). The interpretations say "verifiable in the statistical sense" where that is all that holds.
+2. *Some principles are norms.* [A5] is a rule of testing, not a fact about the world; it is classed conceptual because
+   a standard fitted to its data cannot be refuted by them, which is a consequence of definitions.
+3. *Interpretations are claims, not checked properties.* Lint checks that every definition has one and that it does not
+   cite into a cycle; nothing checks that it is right. A reader who rejects one keeps the results and loses their
+   reading.
+4. *"Without loss of generality" has qualifiers.* [B1] loses nothing a finite record measures, but the existence of
+   nearest behaviours, heavy tails and atoms do not carry over (`CORE-GENERAL.md`); [B2] moves independence between
+   episodes, where [A4] assumes it.
+
+**Found while building.**
+- [D1]'s Interpretation cites [M2], and [M2]'s reason cited [D1]; R5 found the cycle (§1, "a justification leaning on a
+  later result").
+- [P53]'s first check drew `d` statistics on `d + 1` outcomes, where the behaviours with given averages are one point
+  (§1, "a degenerate random instance"); and its first mutant list counted a crash as a catch (§1, "a mutant caught by a
+  crash").
+- `stdalign.project_linear` raises a `LinAlgError` from inside its Newton steps when no full-support behaviour has the
+  averages asked for, rather than saying so; its docstring states the condition. A clear error is added to E1(d).
+
+**What remains** (`ROADMAP.md`). O1, an interval for the ordinal misalignment, which the paired report now asks for and
+which has only a bootstrap so far; O2, the ordinal versions of the named, drift and run splits, where the projection is
+onto a cone and the splits may not be exact; the general core on v13's kinds, with step 3's draft 4. W1's registered
+report used the standard specification only; it stays as computed. Every core Statement changed, so the count for
+"stable" restarts when v13 is merged (Q46).

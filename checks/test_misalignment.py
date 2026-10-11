@@ -1,8 +1,10 @@
 """Checks of P5 (misalignment is attained for full-support behaviour, zero exactly on the closure of the intended set, at
 most the departure from the default when the default is intended; its closed form on the pursuit ray in all three cases;
 the deviance identity of its Notes), of P6 (the departure from the default splits into pursuit and misalignment), of
-P35 (floors and caps) and of P36 (ordinal objectives)."""
+P35 (floors and caps), of P36 (ordinal objectives) and of P53 (misalignment is the departure beyond what the
+specification credits)."""
 import numpy as np
+from scipy.optimize import minimize
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt
 
 
@@ -291,3 +293,76 @@ def test_ordinal_objectives():
             rcb = isotonic(Lb / qL, qL)
             assert kl(bon, q * rcb[np.searchsorted(levels, F)]) <= 1e-12
     assert strict >= 100                                                             # the cardinal adds a shape term
+
+
+def test_credited_statistics():
+    """P53: for named statistics T, the behaviour p* of least departure among those with p̂'s averages of T is a tilt of
+    q by some θ·T; KL(p || r) = KL(p || p*) + KL(p* || r) for every p with those averages and every tilt r of q by θ·T;
+    so the misalignment against the family is KL(p̂ || q) − KL(p* || q), compared with a direct minimization over θ. A
+    behaviour with other averages breaks the identity. The standard specification credits the average of F when p̂
+    does better than q, and nothing otherwise; the ordinal one credits the masses of its pooled blocks."""
+    r = rng(5301); seen = {"family": 0, "off": 0, "better": 0, "worse": 0, "pooled": 0}
+    for _ in range(150):                                                    # (i), (ii): random statistics, d = 1 to 3
+        d = int(r.integers(1, 4)); n = int(r.integers(d + 3, 12)); q = simplex_interior(r, n)          # L is not a point
+        T = r.normal(0, 1, (d, n)); ph = simplex_interior(r, n); b = T @ ph
+        ps = stdalign.project_linear(q, T, b)
+        assert np.abs(T @ ps - b).max() <= 1e-9 and ps.min() > 0                      # p* reproduces the averages
+        V = np.vstack([np.ones(n), T]).T
+        coef = np.linalg.lstsq(V, np.log(ps / q), rcond=None)[0]
+        assert np.abs(V @ coef - np.log(ps / q)).max() <= 1e-8                         # p* is a tilt of q by θ·T
+        MT = kl(ph, q) - kl(ps, q)
+        dual = lambda th: kl(ph, tilt(q, th @ T)); slope = lambda th: T @ tilt(q, th @ T) - b
+        best = min(minimize(dual, x0, jac=slope, method="BFGS", options={"gtol": 1e-12}).fun
+                   for x0 in (np.zeros(d), coef[1:]))
+        assert abs(MT - best) <= 1e-8 * (1 + kl(ph, q))                                 # the misalignment, credited
+        assert abs(MT - kl(ph, ps)) <= 1e-9 * (1 + kl(ph, q))
+        for k in range(4):                                                             # other behaviours of L
+            v = r.normal(0, 1, n); v -= V @ np.linalg.lstsq(V, v, rcond=None)[0]       # a direction within L
+            reach = np.min(ps[v < 0] / -v[v < 0])                                      # to the edge of Δ
+            p = np.maximum(ps + (1.0 if k == 0 else r.uniform(0.1, 0.99)) * reach * v, 0.0)
+            assert np.abs(T @ p - b).max() <= 1e-9 and abs(p.sum() - 1) <= 1e-12
+            rr = tilt(q, r.normal(0, 1.5, d) @ T)                                      # a member of the family
+            gap = kl(p, rr) - (kl(p, ps) + kl(ps, rr))
+            assert abs(gap) <= 1e-8 * (1 + kl(p, rr))
+            assert kl(p, q) >= kl(ps, q) - EXACT
+            assert kl(ph, rr) >= kl(ph, ps) - EXACT
+        seen["family"] += 1
+        other = simplex_interior(r, n)                                                  # other averages
+        rr = tilt(q, r.normal(0, 1.5, d) @ T)
+        if np.abs(T @ other - b).max() > 1e-2:                                         # the identity fails
+            seen["off"] += 1
+            assert abs(kl(other, rr) - (kl(other, ps) + kl(ps, rr))) > 1e-6
+    for _ in range(300):                                                    # (iii): the standard specification
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        ph = simplex_interior(r, n); m, ts = misalignment(ph, q, F)
+        if ph @ F > q @ F + 1e-6:
+            seen["better"] += 1
+            ps = stdalign.project_linear(q, F[None, :], np.array([ph @ F]))
+            assert ts > 0 and np.abs(ps - nearest(ph, q, F)).max() <= 1e-8           # p* is on the ray
+            assert abs(m - (kl(ph, q) - kl(ps, q))) <= 1e-9 * (1 + kl(ph, q))
+        elif ph @ F < q @ F - 1e-6:
+            seen["worse"] += 1
+            assert abs(m - kl(ph, q)) <= 1e-9 * (1 + kl(ph, q))                         # nothing is credited
+    for _ in range(300):                                                    # (iv): the ordinal specification
+        n = int(r.integers(3, 10)); q = simplex_interior(r, n)
+        F = r.integers(0, int(r.integers(2, n + 1)), n).astype(float)
+        if np.ptp(F) == 0:
+            F[0] += 1
+        ph = simplex_interior(r, n); levels = np.unique(F); at = np.searchsorted(levels, F)
+        qL = np.array([q[F == v].sum() for v in levels]); pL = np.array([ph[F == v].sum() for v in levels])
+        rc = isotonic(pL / qL, qL); po = q * rc[at]; Mord = kl(ph, po)
+        blocks = np.unique(np.round(rc, 12), return_inverse=True)[1][at]
+        nb = blocks.max() + 1; seen["pooled"] += nb < len(levels)
+        mass = np.array([ph[blocks == j].sum() for j in range(nb)])
+        cheapest = q * (mass / np.array([q[blocks == j].sum() for j in range(nb)]))[blocks]
+        ind = (blocks[None, :] == np.arange(nb)[:, None]).astype(float)
+        if seen["pooled"] <= 60:
+            assert np.abs(stdalign.project_linear(q, ind, mass) - cheapest).max() <= 1e-9   # the p* of the blocks
+        assert np.abs(cheapest - po).max() <= 1e-10                                    # is p° of P36
+        assert abs(Mord - (kl(ph, q) - kl(cheapest, q))) <= 1e-10 * (1 + kl(ph, q))
+        for _ in range(4):                                                             # others with the block masses
+            p = np.zeros(n)
+            for j in range(nb):
+                p[blocks == j] = mass[j] * r.dirichlet(np.ones((blocks == j).sum()))
+            assert kl(p, q) >= kl(cheapest, q) - EXACT
+    assert min(seen.values()) >= 50                                                    # every part exercised

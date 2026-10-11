@@ -39,7 +39,8 @@ KL from the reference policy, often treated as a budget; the identity splits tha
 objective and the misaligned part. Whenever the actor departs from the default, `M(p̂)/KL(p̂‖q)` is the misaligned share
 of its departure, between 0 and 1. (ii) is the maximum-entropy principle relative to the default, Csiszár's
 I-projection of `q` onto the behaviours with a given average of `F`; read with it, the standard specification charges
-departure that buys no `F`, whatever its cause, which is why [[A6 — Declared no finer than identified|A6]] declares it only for actors that pursue.
+departure that buys no `F`, whatever its cause, which is why the standard asks for the ordinal misalignment beside it
+([[P53 — Misalignment is the departure beyond what the specification credits|P53]], `STANDARD.md`).
 
 ## Lineage
 v7.10: Thm 13 (the intent-ray decomposition) and NOTES §2.5 (the intent ray). New: the third case, and the
@@ -53,5 +54,6 @@ reading as a split of the departure. v13: (ii), the reading as excess departure 
 - [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] — Misalignment is attained, and zero exactly on the intended behaviours and their limits
 
 ## Used by
+- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits
 - [[P47 — The cost of reweighting|P47]] — The cost of reweighting
 - [[P48 — Misalignment when the target is uncertain|P48]] — Misalignment when the target is uncertain

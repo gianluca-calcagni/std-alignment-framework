@@ -7,11 +7,30 @@ from lint import lint
 CORE = textwrap.dedent("""\
     # The core
 
+    ## Imported mathematics
+
+    ### M1 — Probability
+    **Statement.** Masses on finitely many outcomes are non-negative and add up to one.
+    **In plain terms.** How often things happen is counted as shares that add up to the whole.
+    **Status.** Imported from probability theory, as it is.
+    **Why this choice.** It is the mathematics of frequencies.
+    **Lineage.** New.
+
+    ## Background conditions
+
+    ### B1 — Finite outcomes
+    **Statement.** Only finitely many outcomes are considered.
+    **In plain terms.** A record of finitely many decisions tells finitely many things apart.
+    **Status.** Assumed without loss of generality, by [M1].
+    **Why this choice.** Finite sums can be checked exactly [@cover2006].
+    **Lineage.** New.
+
     ## Premises
 
     ### A1 — Finite
-    **Statement.** Only finitely many outcomes are considered.
+    **Statement.** Only finitely many outcomes are considered, as [B1] says.
     **In plain terms.** Only finitely many different things can happen in any one decision.
+    **Status.** A principle, conceptual.
     **Why this choice.** Finite sums can be checked exactly [@cover2006].
     **Lineage.** New.
 
@@ -20,12 +39,14 @@ CORE = textwrap.dedent("""\
     ### D1 — Outcomes
     **Statement.** A finite set `X`, with a full-support reference `q`, as [A1] allows.
     **In plain terms.** The things that can happen, and how often they happen by default.
+    **Interpretation.** The results a record of one decision tells apart, and their shares when nothing is pursued.
     **Why this choice.** Finite first, so that every claim can be checked exactly.
     **Lineage.** New.
 
     ### D2 — Objectives
     **Statement.** A function `F` on `X`.
     **In plain terms.** What the principal wants, written as a score for each outcome.
+    **Interpretation.** A score the principal gives each result, declared before the record is read.
     **Why this choice.** Every behaviour is a reweighting of the default by some function, as [P1] shows.
     **Lineage.** New.
     """)
@@ -69,7 +90,8 @@ def codes(errors):
 def test_good_framework_passes(tmp_path):
     errors, summary = make(tmp_path)
     assert errors == [], errors
-    assert summary["items"] == 4 and summary["premise"] == 1 and summary["definition"] == 2
+    assert summary["items"] == 6 and summary["premise"] == 1 and summary["definition"] == 2
+    assert summary["imported axiom"] == 1 and summary["background condition"] == 1
     assert summary["proposition"] == 1 and summary["checks"] == 1
 
 
@@ -84,6 +106,16 @@ def test_good_framework_passes(tmp_path):
     ("core", "**In plain terms.** The things that can happen, and how often they happen by default.\n", "", "4"),
     ("core", "**Why this choice.** Finite sums can be checked exactly [@cover2006].\n", "", "4"),  # a premise needs a why
     ("derived", "**Proof.** Take `F = log(p/q)`.", "", "4"),                                     # a result needs a proof
+    ("core", "**Interpretation.** The results a record of one decision tells apart, and their shares when nothing is "
+             "pursued.\n", "", "4"),                                                             # a definition needs one
+    ("core", "**Status.** A principle, conceptual.\n", "", "4"),                                # a premise needs a status
+    ("core", "**Status.** Imported from probability theory, as it is.\n", "", "4"),             # so does an import
+    ("core", "**Status.** Assumed without loss of generality, by [M1].\n", "", "4"),             # and a background one
+    ("core", "**Interpretation.** A score the principal gives each result", "**Lineage.** New.\n**Interpretation.** A "
+             "score the principal gives each result", "3"),                                     # fields out of order
+    ("core", "**Status.** Imported from probability theory, as it is.", "**Status.** Imported, as [B1] needs.", "5"),
+    ("core", "**Interpretation.** The results a record", "**Interpretation.** By [P1], the results a record", "5"),
+    ("derived", "### P1 — A fact", "### M2 — A fact", "1"),                                     # an import in derived/
     ("core", "Every behaviour is a reweighting", "Every behaviour, by [P7], is a reweighting", "5"),  # names no item
     ("core", "as [A1] allows.", "as [P1] shows.", "5"),                                         # a core Statement uses a result
     ("core", "**Statement.** A finite set `X`", "**Statement.** With `F` of [D2], a finite set `X`", "5"),  # a later item

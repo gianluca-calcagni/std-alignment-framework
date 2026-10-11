@@ -4,7 +4,7 @@ A read-only view of the framework, generated from the repository by `tools/obsid
 
 - [[Roadmap]]: read it first · [[Worked scenario]]: the framework applied, three ways
 - [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · [[References]]
-- [[Core]]: premises and definitions
+- [[Core]]: imported axioms, background conditions, premises and definitions
 - [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], [[Finite and continuous]], [[Transfer to general spaces]], [[Derived spaces]], [[Disciplines on a continuum]], [[Everyday words]]
 
 ## Derived, in reading order

@@ -18,6 +18,14 @@ others, or a shift in what the actor would do by default. The actor passes it th
 by reweighting with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value
 follows it, and a negative value means the nudge backfires.
 
+## Interpretation
+*Declared.* An intervention is a change the principal makes and knows, such as a bonus, a fine or a
+new default option, written as a score `u` of outcomes. The pass-through is how strongly the actor's behaviour follows
+it: `0` ignores it, a positive value follows it, and a negative value means it backfires. *Verified.* From records
+before and after: the change of `log p` must lie in `span{u, 1}`, which a record can refute, and the coefficient on `u`
+is the pass-through. *Justified.* Any change of behaviour is a reweighting by some function
+(`derived/tilts-and-paths.md`), so "it follows the intervention" means that this function is a multiple of `u`.
+
 ## Why this choice
 - *The simplest response that can fail.* Any change of behaviour is a reweighting by some function ([[P1 — Every behaviour is a tilt of any other|P1]](i)). The claim
   that this function is a multiple of the intervention is testable, and a derived result tests it

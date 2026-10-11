@@ -62,7 +62,7 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   outcomes that are not finite (Q33); Ay, Jost, Lê and Schwachhöfer [[References|@ay2015]], who extend Čencov's uniqueness of the
   Fisher metric to infinite sample spaces; Pistone and Sempi [[References|@pistone1995]], the manifold of behaviours equivalent to a
   given one, on which the tilts that exist live; Amari's monographs *(to verify)*.
-- *Shared.* The Fisher metric and its uniqueness ([[A2 — Pursuit is the steepest climb|A2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
+- *Shared.* The Fisher metric and its uniqueness ([[D2 — Pursuit of an objective|D2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
   the second-order expansion of KL ([[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]); total correlation, the misalignment of several actors against
   independent pursuit ([[P39 — Several actors: coordination plus individual misalignment|P39]]); the Jensen–Shannon divergence, the misalignment of a record of transitions against
   reversibility, where the nearest reversible record is the midpoint of the record and its reversal ([[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]]).
@@ -150,8 +150,8 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   optimizes the reward of the posterior mean, is [[P42 — Several principals: gridlock, and the pooled pursuit|P42]](ii): with the posterior's weights and each possible target
   pursued at intensity `1`, the behaviour least far from them on average is the pursuit of the posterior-mean target.
   Armstrong and Mindermann's theorem says that observation alone cannot split a policy into a planner and a reward
-  without a normative assumption; the core makes that assumption by its premises, pursuit as the steepest climb and the
-  best trade-off ([[A2 — Pursuit is the steepest climb|A2]], [[A3 — Pursuit is the best trade-off|A3]]), which is why a behaviour's revealed objective is identified up to a constant ([[P1 — Every behaviour is a tilt of any other|P1]]). Its
+  without a normative assumption; the core makes that assumption by its definition of pursuit, the steepest climb and
+  the best trade-off ([[D2 — Pursuit of an objective|D2]]), which is why a behaviour's revealed objective is identified up to a constant ([[P1 — Every behaviour is a tilt of any other|P1]]). Its
   price: a principal who is not a pursuer, such as CIRL's teaching human, whose best demonstrations depart from its own
   optimum, has a revealed objective that includes the teaching.
 - *What a request leaves unsaid* (`NOTES.md` §10). Inverse reward design's observation model makes a written reward

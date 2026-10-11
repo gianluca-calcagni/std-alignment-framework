@@ -21,6 +21,20 @@ Outcomes are the things that can happen, and a behaviour says how often each one
 support means that nothing is ruled out entirely. KL measures how far one behaviour is from another; it is not
 symmetric, so the order matters. Tilting reweights a behaviour toward the outcomes that a function scores higher.
 
+## Interpretation
+*Declared.* An outcome is the narrowest result that a record of one decision tells apart from the
+others, such as the answer an assistant gave or whether a patient was seen within four hours. A behaviour is the actor's
+ensemble in one condition: the shares its outcomes take over unboundedly many independent decisions ([[M2 — Independent repetition|M2]]). `E_p[F]` is
+the average score of those decisions. `KL(p‖r)` is the evidence one decision of an actor behaving as `p` gives, on
+average, against `r` ([[A4 — Misalignment is evidence|A4]]). `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
+probability proportional to `e^F`: a selection a principal could carry out, by accepting or rejecting decisions.
+*Verified.* Which outcome occurred is decided by the record of one decision. A behaviour is approached by the shares in
+a record, never reached ([[M2 — Independent repetition|M2]]): `p(x) > 0` is verified by a single occurrence of `x`, while `p(x) = 0` can only be
+refuted, and no record verifies an exact mass. *Justified.* Outcomes exclude each other and are decidable, and ensembles
+of decisions mix, so the behaviours are the points of a simplex, and averages are affine in them ([[M1 — Probability on finitely many outcomes|M1]]). Masses that are
+exactly zero, or irrational, are idealizations no record verifies; the definitions that follow ask for full support
+where a divergence must stay finite.
+
 ## Why this choice
 - *Finite outcomes.* Every statement can then be proved with finite sums, and checked exactly on random instances.
   General outcome spaces add conditions (absolute continuity, integrability of `e^F`, and compactness in the existence
@@ -41,7 +55,10 @@ v7.10: Def 1 (the objects), and R7-1's rule that the actual behaviour is any dis
 R7-8 (measurable spaces) stays deferred, as it was there.
 
 ## Depends on
+- [[M1 — Probability on finitely many outcomes|M1]] — Probability on finitely many outcomes
+- [[M2 — Independent repetition|M2]] — Independent repetition
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 
 ## Used by
 - [[C5 — The first effect of optimization depends on the optimizer; its end, on the evaluator's top|C5]] — The first effect of optimization depends on the optimizer; its end, on the evaluator's top

@@ -55,4 +55,5 @@ New. `CORE-GENERAL.md`, draft 2, independence as a structural specification; `NO
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 
 ## Used by
+- [[B4 — One actor and one principal|B4]] — One actor and one principal
 - [[P45 — Drift: what runs share, and what they do not|P45]] — Drift: what runs share, and what they do not

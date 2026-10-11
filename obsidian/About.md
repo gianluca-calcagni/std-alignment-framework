@@ -1,4 +1,4 @@
-# std-alignment-framework — the core (v12, in progress)
+# std-alignment-framework — the core (v13, in progress)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -6,20 +6,22 @@ A standard formal framework for alignment problems in general, not only in machi
 institutions and organisms. The aim is a framework that is solid enough to build on, substrate-independent, easy to
 import existing theorems into, and able to make testable predictions, support diagnostics, and show its own limits.
 
-The core holds only what cannot be derived: six premises and the definitions the whole framework uses. Everything else
-is derived from them, with proofs and checks, and reported through one standard.
+The core holds only what cannot be derived: three axioms imported from probability theory, four background conditions
+assumed without loss of generality, three premises, and the definitions the whole framework uses, each with its
+interpretation in the world. Everything else is derived from them, with proofs and checks, and reported through one
+standard.
 
-**Start here.** A mathematical reader: `OVERVIEW.md`, about ten pages, with the results the rest stands on and their
+**Start here.** A mathematical reader: `OVERVIEW.md`, about fifteen pages, with the results the rest stands on and their
 proofs. Anyone who wants to run it: `python3 examples/quickstart.py`, a case on simulated data from declaration to a
 report that keeps the standard, in under a minute.
 
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
-results in `derived/`, is v13 on this branch, a draft for the PI's evaluation (`NOTES.md` §16; `main` holds v12), and
-claims what it proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that
-are not finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general result
-also holds on finite outcomes, it is proved in `derived/` and cited from `general/`.
+results in `derived/`, is v13 on this branch, approved by the PI (Q52; `main` holds v12 until it is merged), and claims
+what it proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not
+finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds
+on finite outcomes, it is proved in `derived/` and cited from `general/`.
 
 | | |
 |---|---|
@@ -28,7 +30,7 @@ also holds on finite outcomes, it is proved in `derived/` and cited from `genera
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
 | `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §13 is the last handover |
-| `CORE.md` | the core: scope, premises (A) and definitions (D), read top to bottom |
+| `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 3, frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Premises (GA) and definitions (GD) only, which reduce to the core's on finite outcomes, use only events, and are limits of their values on finite descriptions; its last section lists the decisions open to the PI. `CORE.md` is unchanged |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
@@ -54,15 +56,17 @@ also holds on finite outcomes, it is proved in `derived/` and cited from `genera
 ## Rules
 
 **Enforced by lint** (`python3 tools/lint.py`; a property of the framework is claimed only if lint checks it):
-- **R1–R2.** Every `###` heading in `CORE.md` and `derived/` is an item: `### D1 — title`. `CORE.md` holds premises (A)
-  and definitions (D); `derived/` holds results (P proposition, T theorem, L lemma, C corollary) and remarks (R), in
-  files that `derived/README.md` lists in reading order. Ids are unique, and numbers increase within each kind in each
-  file.
-- **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. A premise or definition also
-  has a **Why this choice**; a result has a **Proof** and **Checks**. Fields come in a fixed order, with no field empty.
+- **R1–R2.** Every `###` heading in `CORE.md` and `derived/` is an item: `### D1 — title`. `CORE.md` holds imported
+  axioms (M), background conditions (B), premises (A) and definitions (D); `derived/` holds results (P proposition, T
+  theorem, L lemma, C corollary) and remarks (R), in files that `derived/README.md` lists in reading order. Ids are
+  unique, and numbers increase within each kind in each file.
+- **R3–R4.** Every item has a **Statement**, an **In plain terms** twin and a **Lineage**. An item of the core also has
+  a **Why this choice**; an imported axiom, a background condition or a premise has a **Status**, what kind of starting
+  point it is; a definition has an **Interpretation**, what its object is in the world, how a record verifies it, and
+  why the map is justified; a result has a **Proof** and **Checks**. Fields come in a fixed order, with no field empty.
 - **R5.** References are written `[[D1 — Outcomes, behaviours, divergence and tilt|D1]]`, `[[P3 — A fixed objective is visible in the changes of behaviour|P3]]`, and name existing items. A core Statement uses only earlier core
-  items; a result uses only the core and results earlier in the reading order; a core "why" may cite a result. The
-  dependencies form no cycle.
+  items; a result uses only the core and results earlier in the reading order; a core "why", Status or Interpretation
+  may cite a result. The dependencies, the references of those fields and of Statements and Proofs, form no cycle.
 - **R6–R7.** Every check a result cites exists in `checks/`, and every check there is cited by some item.
 - **R8.** Every citation `[[References|@key]]` is listed in `REFERENCES.md`, and every listed source is cited somewhere.
 - **R9.** Every term an item defines (bold in its Statement) has an entry in `TERMS.md`, and every item `TERMS.md` names
@@ -101,6 +105,10 @@ on both paths, rather than reproduce printed digits.
   degenerate and sign cases, and tolerances derived from the quantity's scale. Every new check is mutation-tested.
 - **Every choice is justified.** "Why this choice" argues it, by generality, by canonicity, or by a named case where the
   alternative gives a wrong verdict. Assume less and derive more.
+- **Every interpretation is declared and justified.** A definition says what its object is in the world, how a record
+  verifies or refutes a statement about it, and why that map is right; a mathematical object with no such map does not
+  enter the core. A starting point says what kind it is: imported, assumed without loss of generality, or assumed, as a
+  principle or an assumption that may fail (`CORE.md` §0).
 - **Plain terms keep the qualifiers** of the formal statement.
 - **Lineage** names the items of v7.10 that an item replaces and the retraction rows that touch them
   (`v7.10: 60 Status/retractions/`), or says "New".
@@ -127,16 +135,17 @@ where each comes from):
 - **(f) Say who.** Every review, rating or audit says who made it: a person, or a model family. Errors within one model
   family are correlated, and "independent" then means less than it says.
 
-**Versions.** A version changes only when the Statement of a premise or a definition changes, or the scope does
-(`CORE.md` §0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. On
-this branch the core is a draft v13 for the PI's evaluation (`NOTES.md` §16): [[A4 — Misalignment is evidence|A4]] says that misalignment is the rate of
-evidence against the specification, the reading as value lost becoming a consequence; [[A6 — Declared no finer than identified|A6]], a sixth premise, declares no
-specification finer than the actor's way of acting can carry; and [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal specification beside the
-standard one, with the one matched to an actor. `main` holds v12, in which [[A2 — Pursuit is the steepest climb|A2]]'s Statement says that the geometry of
-pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md` §3.1, Q44). v11 widened the scope to groups, several
-principals with declared weights, rules as conditions and episodes as outcomes (Q24, Q25). A step, for the finish line's
-row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is a draft with its own numbering; until it is approved,
-it changes no Statement of the core.
+**Versions.** A version changes only when the Statement of an item of the core changes, or the scope does (`CORE.md`
+§0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. On this branch
+the core is v13, approved by the PI (Q52; `NOTES.md` §16, §17), built by the method of reverse physics: what is imported
+from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of item, and
+every definition declares and justifies its interpretation. [[A4 — Misalignment is evidence|A4]] says that misalignment is the rate of evidence against
+the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are reasons of [[D2 — Pursuit of an objective|D2]], as no
+result used them; and [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal specification beside the standard one, reported side by side. `main`
+holds v12, in which A2's Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires
+(`NOTES.md` §3.1, Q44). v11 widened the scope to groups, several principals with declared weights, rules as conditions
+and episodes as outcomes (Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46).
+`CORE-GENERAL.md` is a draft with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
 
@@ -145,7 +154,7 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | Goal | Criterion | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
-| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: [[A2 — Pursuit is the steepest climb\|A2]]'s Statement changed in v12; the count starts with the next merged pull request |
+| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changes the core's Statements; the count starts with the next merged pull request after it |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`) |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported, and the reader package is ready; no outside reader yet |

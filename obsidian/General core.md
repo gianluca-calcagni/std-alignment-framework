@@ -7,7 +7,9 @@
 > outcomes. Its results, expected, probed or tested, are in `general/`, as the finite core's are in `derived/`, and
 > nothing there is claimed until it is proved and checked. Items are numbered GA (premises) and GD (definitions), and
 > GD3 extends [[D3 — Specification, declaration and misalignment|D3]]. Every number the draft cites is reproduced by a script in `probes/general/`. Lint checks that every
-> item this file and `general/` name exists (R12); it does not yet check their structure.
+> item this file and `general/` name exists (R12); it does not yet check their structure. It still follows v12: in v13
+> its GA2 and GA3 extend reasons of [[D2 — Pursuit of an objective|D2]], not premises, and putting it on v13's kinds, with interpretations, is a step
+> of `ROADMAP.md`.
 
 ## 0. What this file is
 
@@ -106,38 +108,39 @@ such as a wait of exactly 2.5 hours, may have probability zero.
 (deterministic behaviour on a continuous `X`).
 
 ### GA2 — Pursuit is the steepest climb
-**Statement.** As [[A2 — Pursuit is the steepest climb|A2]]: to pursue an objective is to raise its average as steeply as possible, with steepness measured
-in a Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
-proportions.
+**Statement.** As the first reason of [[D2 — Pursuit of an objective|D2]], v12's premise A2: to pursue an objective is to raise its average as steeply
+as possible, with steepness measured in a Riemannian geometry on behaviours that does not change when outcomes are split
+into finer outcomes in fixed proportions.
 
 **In plain terms.** As in the core: wanting more of something means moving toward it by the most direct route, and what
 counts as most direct must not depend on how finely we describe what happens.
 
 **Why this choice.**
-- *Reduction.* The Statement is [[A2 — Pursuit is the steepest climb|A2]]'s.
+- *Reduction.* The Statement is that reason's.
 - *Invariance.* Splitting outcomes in fixed proportions needs no distance: it is a kernel from coarse outcomes to fine
   ones.
 - *Finite determination.* A behaviour whose ratio to another is constant on the cells of a finite description is a
-  behaviour on those cells, split inside each in fixed proportions. Among such behaviours [[A2 — Pursuit is the steepest climb|A2]] gives the Fisher metric
-  (Čencov's theorem [[References|@cencov1982]]). Since they approximate every behaviour, the geometry is the Fisher metric
+  behaviour on those cells, split inside each in fixed proportions. Among such behaviours that reason gives the Fisher
+  metric (Čencov's theorem [[References|@cencov1982]]). Since they approximate every behaviour, the geometry is the Fisher metric
   `⟨h, k⟩_p = E_p[h·k]` on directions `h` with `E_p[h] = 0` and `E_p[h²] < ∞`; the steepest climb of `E_p[F]` is the
   direction `F − E_p[F]`, and its flow from `q` is `tilt(q, s·F)` for as long as that tilt exists (GD2). To be proved
   (`general/transfer.md`).
 
-**Lineage.** [[A2 — Pursuit is the steepest climb|A2]]. Ay, Jost, Lê and Schwachhöfer extend Čencov's theorem to general spaces directly, by invariance under
-sufficient statistics [[References|@ay2015]]; GA6 gives a route that reuses the finite theorem instead.
+**Lineage.** v12's A2, a reason of [[D2 — Pursuit of an objective|D2]] since v13. Ay, Jost, Lê and Schwachhöfer extend Čencov's theorem to general
+spaces directly, by invariance under sufficient statistics [[References|@ay2015]]; GA6 gives a route that reuses the finite theorem
+instead.
 
 ### GA3 — Pursuit is the best trade-off
-**Statement.** As [[A3 — Pursuit is the best trade-off|A3]], with the cost differentiable along segments: to pursue an objective at an intensity is to choose
-the behaviour with the largest average of the objective minus a cost of departing from the default, priced at the
-reciprocal of the intensity. With the default fixed, the cost depends only on the behaviour, and is differentiable along
-every segment between two behaviours equivalent to the default.
+**Statement.** As the second reason of [[D2 — Pursuit of an objective|D2]], v12's premise A3, with the cost differentiable along segments: to pursue an
+objective at an intensity is to choose the behaviour with the largest average of the objective minus a cost of departing
+from the default, priced at the reciprocal of the intensity. With the default fixed, the cost depends only on the
+behaviour, and is differentiable along every segment between two behaviours equivalent to the default.
 
 **In plain terms.** As in the core: pursuing harder means accepting more cost of change for more of what is pursued, and
 the cost depends only on how the behaviour changes.
 
 **Why this choice.**
-- *Reduction.* [[A3 — Pursuit is the best trade-off|A3]], with differentiability stated along segments.
+- *Reduction.* That reason, with differentiability stated along segments.
 - *Invariance.* ✓: the cost is a function of behaviours.
 - *Finite determination.* On each finite description, [[P14 — The cost of departing from the default is forced|P14]] forces the cost to be the KL divergence from the default, up
   to a constant. The limit over finer descriptions is the supremum of those divergences, which is the divergence of GD1
@@ -149,7 +152,8 @@ the cost depends only on how the behaviour changes.
   intensity (GD2). For a reward model whose error has a heavy upper tail, this is the catastrophic Goodhart of Kwa,
   Thomas and Garriga-Alonso [[References|@kwa2024]].
 
-**Lineage.** [[A3 — Pursuit is the best trade-off|A3]]; [[P14 — The cost of departing from the default is forced|P14]]. v7.10: Prop 11 (a KL limit cannot contain heavy-tailed errors), which becomes importable.
+**Lineage.** v12's A3, a reason of [[D2 — Pursuit of an objective|D2]] since v13; [[P14 — The cost of departing from the default is forced|P14]]. v7.10: Prop 11 (a KL limit cannot contain heavy-tailed
+errors), which becomes importable.
 
 ### GA4 — Misalignment is evidence
 **Statement.** As [[A4 — Misalignment is evidence|A4]]: the misalignment of a behaviour, against the behaviours a principal accepts, is the least rate,

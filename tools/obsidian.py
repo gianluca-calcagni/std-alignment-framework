@@ -105,7 +105,7 @@ def build(root):
             "Edit the sources, not these notes; notes of your own go in `Annotations/`, which is never touched.", "",
             "- [[Roadmap]]: read it first · [[Worked scenario]]: the framework applied, three ways",
             "- [[About]] · [[Standard]] · [[Record]] · [[Terms]] · [[Related]] · [[Import]] · [[Notes]] · "
-            "[[References]]", "- [[Core]]: premises and definitions",
+            "[[References]]", "- [[Core]]: imported axioms, background conditions, premises and definitions",
             "- [[General core]]: the draft for outcomes that are not finite; its results: [[General results]], "
             "[[Finite and continuous]], [[Transfer to general spaces]], [[Derived spaces]], "
             "[[Disciplines on a continuum]], [[Everyday words]]", "",

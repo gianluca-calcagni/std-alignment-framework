@@ -16,6 +16,12 @@ with evidence counted as the logarithm of the ratio of the record's likelihoods.
 Watch the actor decide, one occasion after another. Misalignment is how fast the record builds a
 case that the actor is not acting in any acceptable way, against the acceptable way it resembles most.
 
+## Status
+Its form is a principle, conceptual: once evidence is the log-likelihood ratio and misalignment its rate
+under the actual behaviour against the nearest accepted one, the measure follows from the definitions, with no further
+assumption. It rests on one assumption, phenomenological: that decisions are drawn independently from one behaviour,
+between episodes ([[B2 — Episodes and conditions as outcomes|B2]]). A case states it, and can test it (`STANDARD.md`, the field Sampling).
+
 ## Why this choice
 - *It needs nothing about the actor.* Evidence is defined by the record and the two behaviours compared, so the measure
   applies to any actor and any declared set of acceptable behaviours, with no model of how the actor chooses, and no
@@ -30,20 +36,20 @@ case that the actor is not acting in any acceptable way, against the acceptable 
   the record exact.
 - *Value lost, as a reading.* Every full-support behaviour is the best trade-off for its own objective at a KL price
   ([[P4 — What KL measures|P4]](ii)), so the same number is the least net value lost against an accepted behaviour, judged by that behaviour's
-  own objective. Until v12 that reading was the premise, and it needed [[A2 — Pursuit is the steepest climb|A2]] and [[A3 — Pursuit is the best trade-off|A3]] to make the price KL ([[P14 — The cost of departing from the default is forced|P14]]); here
-  it is a consequence, and the measure rests on evidence alone.
+  own objective. Until v12 that reading was the premise, and it needed two premises on pursuit to make the price KL
+  ([[P14 — The cost of departing from the default is forced|P14]]); here it is a consequence, and the measure rests on evidence alone.
 
 ## Lineage
 v7.10: Thm 1 (regret is a divergence) and Prop 18 (detection). v8: [[D3 — Specification, declaration and misalignment|D3]]'s "what the number means". v12:
-"misalignment is value lost", which this premise replaces, its reading kept as a consequence (`NOTES.md` §16). The idea
-is the hunch H4 of `NOTES.md` §5.4.
+"misalignment is value lost", which this premise replaces, its reading kept as a consequence (`NOTES.md` §16, §17). The
+idea is the hunch H4 of `NOTES.md` §5.4.
 
 ## Depends on
-- [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
-- [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
+- [[B2 — Episodes and conditions as outcomes|B2]] — Episodes and conditions as outcomes
 - [[P4 — What KL measures|P4]] — What KL measures
 - [[P14 — The cost of departing from the default is forced|P14]] — The cost of departing from the default is forced
 
 ## Used by
+- [[D1 — Outcomes, behaviours, divergence and tilt|D1]] — Outcomes, behaviours, divergence and tilt
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D11 — Sample and evidence|D11]] — Sample and evidence

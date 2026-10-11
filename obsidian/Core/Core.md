@@ -1,30 +1,52 @@
 # The core
 
-> **Status: v13, a draft for the PI's evaluation** (branch `claude/core-reframe`, `NOTES.md` §16); `main` holds v12. The
-> core holds what cannot be derived: six premises, and the definitions that the whole framework uses. Everything that
-> follows from them is in `derived/`, with proofs and checks that run in CI. Each item carries a formal statement and a
-> plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format is in `README.md`.
+> **Status: v13, on branch `claude/core-reframe`, approved by the PI (Q52); `main` holds v12 until it is merged.** The
+> core holds what the framework takes from outside and what it cannot derive: three imported axioms of probability,
+> four background conditions assumed without loss of generality, three premises, and the definitions the whole
+> framework uses, each with the interpretation it declares. Everything that follows from them is in `derived/`, with
+> proofs and checks that run in CI. The format is in `README.md`.
 
 ## 0. What the core is
 
-Alignment compares what an actor does with what a principal intended. The core fixes the terms of that comparison and
-the few premises it rests on. Section 1 states the premises. Sections 2–10 give the definitions, each with the reasons
-for it. The results, which follow from these by proofs, are in `derived/`, whose `README.md` gives their reading order.
-A definition may cite a result to justify itself, provided that no chain of dependencies leads back to it.
+Alignment compares what an actor does with what a principal intended. The core fixes the terms of that comparison, and
+says of each starting point what kind of starting point it is.
+
+**How the core is built.** It follows the method of reverse physics [[References|@carcassi2022]], [[References|@carcassi2026]]: separate what a
+theory takes from mathematics from what it assumes about the world, say of each assumption what kind it is, and map
+every mathematical object to what it stands for, declaring the map and justifying it, so that only objects with a
+meaning in the world enter. The core has four kinds of item.
+- **Imported axioms** (M): mathematics taken as it is, from probability theory. They assume nothing about actors or
+  principals.
+- **Background conditions** (B): choices of representation assumed without loss of generality, each with the reason
+  that no case is lost, and the qualifier where something is.
+- **Premises** (A): what the framework assumes about judging alignment. Each says its status in the terms of reverse
+  physics: a *principle*, taken to be true, or an *assumption*, which may fail; *conceptual*, a logical necessity or a
+  consequence of definitions, or *phenomenological*, justified by observation [[References|@carcassi2022]].
+- **Definitions** (D): each declares its **interpretation**, what its object is in the world and how a record verifies
+  it, and justifies it. A statement about behaviour is *verifiable* when a test exists that ends in finite time if it is
+  true, and *refutable* when its negation is verifiable [[References|@carcassi2021]]. Most statements about a behaviour are
+  verifiable only in the statistical sense, with error rates that vanish as the record grows; the interpretations say
+  which.
+No result in `derived/` cites a premise in its Statement or its Proof, and the one premise a definition's Statement
+cites, [[A5 — Declared before|A5]] in [[D3 — Specification, declaration and misalignment|D3]], defines a word, "declared", that no proof uses: the results are facts about finite distributions,
+given the definitions. The premises and the interpretations carry the meaning, the bridge from those facts to judging
+an actor (`NOTES.md` §17). Ids of retired items are not reused: v12's premises A2 and A3, on what pursuit is, are now
+reasons of [[D2 — Pursuit of an objective|D2]], and the draft's A6 was not adopted (`NOTES.md` §16).
 
 The framework in ten steps:
-1. **Premises** (section 1). Alignment is judged from behaviour in every condition; pursuit is the steepest climb, and
-   the best trade-off; misalignment is the rate of evidence against what was intended; specifications are declared
-   before they judge, and no finer than the actor's way of acting can carry.
+1. **Foundations** (section 1). Probability on finitely many outcomes, and independent repetition, as mathematics gives
+   them; finitely many outcomes, episodes and conditions as outcomes, objectives up to scale, one actor and one
+   principal, as background conditions; and three premises: alignment is judged from behaviour in every condition,
+   misalignment is the rate of evidence against what was intended, and specifications are declared before they judge.
 2. **Behaviour and pursuit** (section 2). Behaviour is a distribution over outcomes. Pursuing an objective reweights a
    default toward it. Derived: nothing is lost by this description, pursuit is the steepest climb, and the cost of
-   departing from the default can only be the KL divergence (`derived/tilts-and-paths.md`, `derived/value.md`).
+   departing from the default for which it is the best trade-off can only be the KL divergence
+   (`derived/tilts-and-paths.md`, `derived/value.md`).
 3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts: for
-   "pursue `F`", the pursuit ray of `F` for an actor that pursues, and the order of `F` for one that ranks or whose
-   method is unknown. Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one, the
-   rate of evidence against the specification. Derived: when it is zero, its closed forms for "pursue `F`", that for a
-   pursuer it is the departure spent beyond the cheapest way to the same average of `F`, and the split of the departure
-   (`derived/misalignment.md`).
+   "pursue `F`", every strength of pursuing `F`, or every behaviour that respects the order of `F`. Misalignment is the
+   KL divergence from the actual behaviour to the nearest acceptable one, the rate of evidence against the
+   specification. Derived: when it is zero, its closed forms, and that it is the departure spent beyond the cheapest
+   behaviour that reproduces what the specification credits (`derived/misalignment.md`).
 4. **Resolution** (section 4). Distinctions the principal does not care about, and distinctions the actor cannot make
    (`derived/resolution.md`).
 5. **Stakes** (section 5). How much of the objective is lost, in its own units (`derived/stakes.md`).
@@ -38,8 +60,8 @@ The framework in ten steps:
 9. **The evaluator** (section 9). What the actor actually pursues, and what it tells about the principal's objective.
    Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization, and a
    single-peaked one allows at most one fall (`derived/evaluator.md`).
-10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
-    against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
+10. **Samples and evidence** (section 10). The record that every claim reaches the world through. Derived: the expected
+    evidence per decision is misalignment; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
 Specifications defined by a structure rather than by an objective need no definition of their own: several actors meant
 to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
@@ -73,10 +95,10 @@ and what independent samples reveal, where one sample may be a whole episode of 
 - *Explanations beyond the evaluator.* Why an actor pursues the evaluator it does, and by what mechanism, is not
   measured. The evaluator itself is in scope, as a hypothesis about behaviour that samples can test ([[D10 — Evaluator, regression and residual|D10]], [[D11 — Sample and evidence|D11]]).
 
-**How to read.** Items are numbered by kind: A for premises and D for definitions, in this file; P for propositions, in
-`derived/`. `[[P2 — Every change of behaviour follows a replicator equation|P2]](iii)` means part (iii) of P2. Logarithms are natural, so divergences are in nats. Operations on
-functions (`p/r`, `log`, `e^F`) act outcome by outcome. The Notes of each item give the names its objects carry in other
-fields.
+**How to read.** Items are numbered by kind: M for imported axioms, B for background conditions, A for premises and D
+for definitions, in this file; P for propositions, in `derived/`. `[[P2 — Every change of behaviour follows a replicator equation|P2]](iii)` means part (iii) of P2. Logarithms are
+natural, so divergences are in nats. Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome. The Notes of
+each item give the names its objects carry in other fields.
 
 | Symbol | Meaning | Introduced in |
 |---|---|---|
@@ -108,15 +130,22 @@ fields.
 | `σ_q(F)` | the spread of `F` under the default: `Var_q(F)^{1/2}` | [[P13 — What the start of a change gains\|P13]] |
 | `p*` | the best feasible behaviour | [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]] |
 
-## 1. Premises
+## 1. Foundations
+
+What the framework takes from mathematics, the representation it assumes without loss of generality, and what it
+assumes about judging alignment, in that order.
 
 ## Items, in order
+- [[M1 — Probability on finitely many outcomes|M1]] — Probability on finitely many outcomes
+- [[M2 — Independent repetition|M2]] — Independent repetition
+- [[M3 — Imported theorems|M3]] — Imported theorems
+- [[B1 — Finitely many outcomes|B1]] — Finitely many outcomes
+- [[B2 — Episodes and conditions as outcomes|B2]] — Episodes and conditions as outcomes
+- [[B3 — An objective up to scale and constant|B3]] — An objective up to scale and constant
+- [[B4 — One actor and one principal|B4]] — One actor and one principal
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
-- [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
-- [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[A5 — Declared before|A5]] — Declared before
-- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D1 — Outcomes, behaviours, divergence and tilt|D1]] — Outcomes, behaviours, divergence and tilt
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment

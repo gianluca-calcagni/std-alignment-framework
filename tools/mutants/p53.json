@@ -1,0 +1,89 @@
+{
+ "tests": [
+  "checks/test_misalignment.py",
+  "-k",
+  "credited_statistics"
+ ],
+ "mutants": [
+  {
+   "name": "[P53](i) Pythagoras the wrong way",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "gap = kl(p, rr) - (kl(p, ps) + kl(ps, rr))",
+     "gap = kl(p, rr) - (kl(p, ps) + kl(rr, ps))"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](i) p* projected to the default's averages",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "ps = stdalign.project_linear(q, T, b)\n",
+     "ps = stdalign.project_linear(q, T, T @ q)\n"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](i) p* the actor itself",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "ps = stdalign.project_linear(q, T, b)\n",
+     "ps = ph.copy()\n"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](ii) the credit measured from the actor",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "MT = kl(ph, q) - kl(ps, q)",
+     "MT = kl(ph, q) - kl(ph, ps)"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](ii) the family cut to non-negative directions, as the ray is",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "best = min(minimize(dual, x0, jac=slope, method=\"BFGS\", options={\"gtol\": 1e-12}).fun",
+     "best = min(minimize(dual, x0, jac=slope, method=\"L-BFGS-B\", bounds=[(0, None)] * d, options={\"gtol\": 1e-12}).fun"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](iii) the average of F credited below the default too",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "            assert abs(m - kl(ph, q)) <= 1e-9 * (1 + kl(ph, q))                         # nothing is credited",
+     "            ps = stdalign.project_linear(q, F[None, :], np.array([ph @ F]))\n            assert abs(m - (kl(ph, q) - kl(ps, q))) <= 1e-9 * (1 + kl(ph, q))"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](iv) the level sets in place of the pooled blocks",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "blocks = np.unique(np.round(rc, 12), return_inverse=True)[1][at]",
+     "blocks = at"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](iv) mass spread inside a block as the actor spreads it",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "cheapest = q * (mass / np.array([q[blocks == j].sum() for j in range(nb)]))[blocks]",
+     "cheapest = ph.copy()"
+    ]
+   ]
+  }
+ ]
+}

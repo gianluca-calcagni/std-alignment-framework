@@ -18,6 +18,14 @@ Stakes ask how much of the objective was actually lost. The actor is compared wi
 departs from the default by the same amount, and the shortfall is how much more of the objective that pursuit gets, in
 the objective's own units.
 
+## Interpretation
+*Declared.* The shortfall is what the principal loses in the objective's own units, such as euros,
+points of accuracy or hours of delay, against the pursuit that departs from the default as much as the actor did.
+*Verified.* Estimated from a record and the declared objective, with its interval. The departure is matched, not the
+intensity, because the departure is what a record measures, while the intensity is a property of a pursuit.
+*Justified.* Misalignment does not change when the objective is rescaled ([[B3 — An objective up to scale and constant|B3]]), so it cannot carry the units; the
+shortfall carries them.
+
 ## Why this choice
 - *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
   (`derived/stakes.md`), so it cannot say how much of the objective is lost; a principal needs that in its own units. In
@@ -34,6 +42,7 @@ the objective's own units.
 v7.10: Def 22 (the value shortfall `ΔV`), Thm 17(iii) (the same-budget counterfactual), and R8-1.
 
 ## Depends on
+- [[B3 — An objective up to scale and constant|B3]] — An objective up to scale and constant
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] — Misalignment is attained, and zero exactly on the intended behaviours and their limits
 

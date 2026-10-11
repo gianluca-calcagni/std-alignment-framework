@@ -22,7 +22,7 @@ Written before any behaviour is examined.
 | Conditions | [D8] | the conditions considered, and their frequencies when the actor does not choose them |
 | Default | [D2] | the default behaviour in each condition, and how it was measured apart from the behaviour to be judged |
 | Principal | [D3] | whose target the specification states: the party whose aims the report judges against, such as a trainer's formal objective, a user's, or a regulator's, which is not the evaluator unless the report says so; and, when that target is known only to lie in a family of objectives, the family ([P48]) |
-| Specification | [D3] | the intended set: for "pursue `F`", with `F` written out, the standard specification for an actor declared to pursue, or the ordinal specification for one that ranks or whose way of acting is not known, with a floor or a cap if any ([P35]); or another closed set. How the actor is known to act, and why, if the declaration is finer than the matched one ([A6]); who declared it, when, and where it is recorded |
+| Specification | [D3] | the intended set: for "pursue `F`", with `F` written out, the standard specification or the ordinal one, and why that one (the standard one charges the shape of the reweighting as well as the order, so it fits an actor declared to pursue; the ordinal one charges only what contradicts the order, so it fits an actor that ranks or whose way of acting is not known), with a floor or a cap if any ([P35]); or another closed set. Who declared it, when, and where it is recorded |
 | Principal's resolution | [D4] | the distinctions declared irrelevant, or "finest" |
 | Feasible set | [D7] | what the actor is assumed able to do, and whether the set is linear, convex or neither; "everything" if nothing is assumed; a departure budget `δ` ([P27]) when only the departure from the default is limited, or a budget of another shape ([P31]) |
 | View | [D8] | what the actor is assumed to perceive of its conditions, including memory and side channels; "exact" if nothing is assumed |
@@ -49,7 +49,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 
 | Field | Core | What to write |
 |---|---|---|
-| Misalignment | [D3], [P6], [P23], [P36] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; under the standard specification, the ordinal misalignment of [P36] beside it, the part that contradicts the objective's order, the rest being the shape of the reweighting, and `M(p̂)` read as excess departure ([P6](ii)); for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
+| Misalignment | [D3], [P6], [P23], [P36], [P53] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; under the standard specification, the ordinal misalignment of [P36] beside it, the part that contradicts the objective's order, the rest being the shape of the reweighting; each read as the departure beyond what its specification credits ([P53]), the average of `F` for the standard one and the masses of the pooled blocks for the ordinal one; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
 | Uncertainty | [D11], [P23], [P47], [P52] | for every quantity estimated from samples: an interval, and how it was computed (for misalignment off the ray, the normal law of [P52] under the declared access; on it, the χ² reference of [P23] where it applies; otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
@@ -68,7 +68,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Pass-through | [P12] | for each intervention, the coefficient of `u`, and the distance of `log(p'/p)` from `span{u, 1}` |
 | Unobserved conditions | [D9], [P16], [P17] | for each condition the report is about but did not observe: whether its behaviour is identified; otherwise `ε`, how it was bounded (from the inputs, [P16](iii)), and the bounds of [P17] on the objective's average there |
 | Evaluation gap | [P24] | when evaluation and real use meet conditions in different proportions, the gap between the two misalignments |
-| Premises | [A1], [A2], [A3], [A4], [A6] | any premise the case strains, and why the report still applies |
+| Premises | [A1], [A4], [A5], [B1], [B2], [B3], [B4] | any premise or background condition the case strains, and why the report still applies: above all whether decisions are independent between episodes ([A4], [B2]) |
 
 ## The report as data
 
@@ -83,8 +83,9 @@ its bounds, and no report confirmatory whose declaration came after its data. A 
 - Give a value estimated from samples without its interval ([D11]).
 - Call a test confirmatory when its data were seen before its prediction was registered ([A5]).
 - Fit the default or the specification to the behaviour it judges ([A5]).
-- Declare a specification finer than the actor's way of acting can carry without saying why ([A6]): best-of-`n` judged
-  by the values of its objective is charged for its method, not for its goal.
+- Report misalignment under the standard specification without the ordinal misalignment beside it ([P36], [P53]):
+  best-of-`n` judged by the values of its objective is charged for its method as well as its goal, and only the pair
+  shows how much of each.
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).
 - Call an unobserved condition aligned because an observed one is, without bounding `ε` ([P17]).

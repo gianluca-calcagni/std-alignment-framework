@@ -1,0 +1,88 @@
+{
+ "about": "v13's kinds and fields (2026-10-11): imported axioms (M), background conditions (B), Status and Interpretation, in tools/lint.py against its tests and lint on the repository itself.",
+ "tests": [
+  "tools/test_lint.py"
+ ],
+ "mutants": [
+  {
+   "name": "R4 a definition needs no Interpretation",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if it[\"kind\"] == \"D\":\n            required.append(\"Interpretation\")\n",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "R4 a premise needs no Status",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if it[\"kind\"] in \"MBA\":",
+     "        if it[\"kind\"] in \"MB\":"
+    ]
+   ]
+  },
+  {
+   "name": "R4 an imported axiom needs no Status",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if it[\"kind\"] in \"MBA\":",
+     "        if it[\"kind\"] in \"BA\":"
+    ]
+   ]
+  },
+  {
+   "name": "R4 a background condition needs no Status",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if it[\"kind\"] in \"MBA\":",
+     "        if it[\"kind\"] in \"MA\":"
+    ]
+   ]
+  },
+  {
+   "name": "R5 an Interpretation carries no dependency",
+   "edits": [
+    [
+     "tools/lint.py",
+     "DEPENDENCY_FIELDS = {\"Statement\", \"Interpretation\", \"Status\", \"Why this choice\", \"Proof\"}",
+     "DEPENDENCY_FIELDS = {\"Statement\", \"Status\", \"Why this choice\", \"Proof\"}"
+    ]
+   ]
+  },
+  {
+   "name": "R5 a Status carries no dependency",
+   "edits": [
+    [
+     "tools/lint.py",
+     "DEPENDENCY_FIELDS = {\"Statement\", \"Interpretation\", \"Status\", \"Why this choice\", \"Proof\"}",
+     "DEPENDENCY_FIELDS = {\"Statement\", \"Interpretation\", \"Why this choice\", \"Proof\"}"
+    ]
+   ]
+  },
+  {
+   "name": "R1 an imported axiom allowed in derived/",
+   "edits": [
+    [
+     "tools/lint.py",
+     "set(\"PTLCR\")\nFIELDS",
+     "set(\"PTLCRM\")\nFIELDS"
+    ]
+   ]
+  },
+  {
+   "name": "R3 Interpretation allowed after Lineage",
+   "edits": [
+    [
+     "tools/lint.py",
+     "FIELDS = [\"Statement\", \"In plain terms\", \"Interpretation\", \"Status\", \"Why this choice\", \"Proof\", \"Example\", \"Checks\",\n          \"Notes\", \"Lineage\"]",
+     "FIELDS = [\"Statement\", \"In plain terms\", \"Status\", \"Why this choice\", \"Proof\", \"Example\", \"Checks\",\n          \"Notes\", \"Lineage\", \"Interpretation\"]"
+    ]
+   ]
+  }
+ ]
+}

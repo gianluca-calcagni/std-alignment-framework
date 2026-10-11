@@ -21,6 +21,14 @@ response collects what the actor does in each. The view describes what the actor
 whose response depends only on its view must act alike in situations it perceives alike, and can act differently only
 where it perceives a difference.
 
+## Interpretation
+*Declared.* A condition is a situation the actor faces and does not choose, such as a prompt, a
+client, a test or real use. The response is its behaviour in each condition, and a view is what it perceives of the
+condition: a channel from conditions to the signals it receives. *Verified.* Responses are recorded condition by
+condition; that a response depends on the condition only through a declared view can be refuted from them
+(`derived/identifiability.md`). *Justified.* [[A1 — Behaviour suffices|A1]] judges behaviour in every condition, and a situation the actor does
+not choose is part of the outcome without loss of generality ([[B2 — Episodes and conditions as outcomes|B2]]).
+
 ## Why this choice
 - *[[A1 — Behaviour suffices|A1]] judges behaviour in every condition.* A single behaviour is the case of one condition. Situations whose
   frequencies the actor does not choose, such as prompts or arriving patients, are conditions: a response weighted by
@@ -45,6 +53,7 @@ New. v7.10: ROADMAP §6 I1 (identification through interventions) and the brains
 identifiability dynamics. The ontologies' "contexts" (v8, `NOTES.md`) are conditions with fixed frequencies.
 
 ## Depends on
+- [[B2 — Episodes and conditions as outcomes|B2]] — Episodes and conditions as outcomes
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
 - [[D4 — Resolution|D4]] — Resolution
 - [[D7 — Feasibility|D7]] — Feasibility

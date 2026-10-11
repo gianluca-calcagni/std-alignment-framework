@@ -12,10 +12,8 @@ A **specification** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-emp
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
 For an objective `F`, the **standard specification** is `(q, R_F)`: pursuit of `F` from `q` at every intensity,
 including none; the **ordinal specification** is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of
-F}`. A specification of `F` is **matched** to an actor if it is the standard specification and the actor is declared to
-pursue as [[A2 — Pursuit is the steepest climb|A2]] and [[A3 — Pursuit is the best trade-off|A3]] say, or the ordinal specification and the actor is not. A specification is **declared** when it
-is fixed as [[A5 — Declared before|A5]] and [[A6 — Declared no finer than identified|A6]] require: before, and without using, the behaviour it will judge, and no finer than the matched
-one unless the declaration says why.
+F}`. A specification is **declared** when it is fixed as [[A5 — Declared before|A5]] requires: before, and without using, the behaviour it
+will judge.
 
 ## In plain terms
 Before looking at what the actor does, the principal states a default behaviour and the set of
@@ -26,12 +24,24 @@ objective is acceptable, including none. For an actor that only ranks outcomes, 
 behaviour that favours better outcomes at least as much as worse ones, relative to the default, is acceptable. Under
 either, an actor that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
+## Interpretation
+*Declared.* A specification is the principal's standard, written down and dated before the record it
+judges is read ([[A5 — Declared before|A5]]): a default, and the ensembles the principal accepts. Misalignment is the rate, in nats per
+decision, at which a record of the actor builds the case that it acts in no accepted way ([[A4 — Misalignment is evidence|A4]]): about `1/M` decisions
+give one nat, odds of about `e` to one. The standard specification accepts every strength of pursuing `F`, none
+included; the ordinal one accepts every ensemble that favours each outcome at least as much as any outcome `F` scores
+lower, relative to the default. *Verified.* `M > ε`, for `ε > 0`, is verifiable in the statistical sense: the evidence
+of a growing record crosses any threshold with a probability that tends to one. `M = 0` can only be refuted. An actor
+can be shown to be misaligned; it can never be shown to be exactly aligned, only consistent with alignment at a stated
+precision. *Justified.* Evidence is what a record supplies ([[A4 — Misalignment is evidence|A4]]), and fixing the standard first is what makes the
+judgement a test ([[A5 — Declared before|A5]]).
+
 ## Why this choice
 - *The formula is [[A4 — Misalignment is evidence|A4]] made exact.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on
   average `KL(p̂‖p)` nats to the log-likelihood ratio in favour of `p̂` over `p`; the least such rate over the intended
   behaviours is `M(p̂)`, including the order of the arguments. Each intended behaviour is also the best trade-off for
-  its own objective at a KL price ([[P4 — What KL measures|P4]](ii)), so `M(p̂)` is as well the least net value lost, in nats; under [[A2 — Pursuit is the steepest climb|A2]] and
-  [[A3 — Pursuit is the best trade-off|A3]] that price is the only one ([[P14 — The cost of departing from the default is forced|P14]]).
+  its own objective at a KL price ([[P4 — What KL measures|P4]](ii)), so `M(p̂)` is as well the least net value lost, in nats; for a pursuit
+  that is both the steepest climb and the best trade-off ([[D2 — Pursuit of an objective|D2]]), that price is the only one ([[P14 — The cost of departing from the default is forced|P14]]).
 - *What the number means.* About `1/M(p̂)` decisions give one nat of evidence that the actor is not behaving as
   intended, odds of about `e` to 1.
 - *The direction charges the unintended.* `KL(p̂‖p)` is large when the actor often does what `p` rarely does, and
@@ -45,19 +55,24 @@ either, an actor that stays at the default is not misaligned, though it may be u
   intensity it never asked about (v7.10: row 74, the price measure is a regret, not misalignment). A single intended
   behaviour is the case `𝓘 = {p*}`.
 - *The standard specification is the pursuit ray,* because "pursue `F`" states a fixed objective ([[D2 — Pursuit of an objective|D2]]) at an unstated
-  intensity, for an actor that weighs outcomes by their values ([[A2 — Pursuit is the steepest climb|A2]], [[A3 — Pursuit is the best trade-off|A3]]). It includes doing nothing; a principal for
-  whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing is what
-  makes it a set of compromises: without it, the only fully intended behaviours would be those on the best outcomes of
-  `F`.
-- *For a pursuer, misalignment is excess departure.* When the actor does better than the default, the nearest intended
-  behaviour is the one of least departure among those with the actor's average of `F` (Notes), so `M(p̂)` is the
-  departure spent beyond the cheapest way to that average. That is what the standard specification charges: departure
-  that buys no `F`, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
+  intensity, for an actor that weighs outcomes by their values ([[D2 — Pursuit of an objective|D2]], its reasons). It includes doing nothing; a
+  principal for whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing
+  is what makes it a set of compromises: without it, the only fully intended behaviours would be those on the best
+  outcomes of `F`.
+- *Misalignment is excess departure.* Each of the two specifications credits the actor with some statistics of its
+  behaviour, and `M(p̂)` is the departure spent beyond the cheapest behaviour that reproduces them (Notes). The standard
+  specification credits the average of `F`, when the actor does better than the default; the ordinal one credits the
+  masses of the groups of outcomes that the order of `F` pools. What is charged is departure that buys nothing the
+  specification credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
 - *The ordinal specification, for actors that rank.* An actor that picks by rank, such as best-of-`n`, behaves alike
   for every increasing transformation of `F`, and keeps the default's proportions within each level set of `F`. Its
   specification is the order of `F`, which accepts every pursuit of an increasing transformation of `F` and every
   best-of-`n` by `F` (Notes). Under it, misalignment charges only what contradicts the order; the standard
-  specification charges, besides, the shape of the reweighting. [[A6 — Declared no finer than identified|A6]] says which to declare.
+  specification charges, besides, the shape of the reweighting.
+- *Both, side by side.* The declaration names the specification that judges. No premise chooses it for the principal: a
+  rule that tied the choice to how the actor is declared to act would move a judgement about the actor into the
+  standard. A report under the standard specification gives the ordinal misalignment beside it, so that the part charged
+  for the shape of the reweighting is visible (Notes; `STANDARD.md`).
 - *The actual behaviour may rule outcomes out; the intended ones may not.* A deterministic actor still gets a score.
   Intended behaviours keep full support so that the score is finite.
 - *Declared before, not fitted after.* A default or an intended set fitted from the behaviour being judged removes
@@ -79,22 +94,22 @@ of KL used here is the one called zero-forcing in variational inference. That th
 specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv); for a constant `F` the ray is the
 single point `q`, which is closed. That the ordinal specification is one, that it contains every best-of-`n` by `F`, and
 that its misalignment and the shape's add up to at most the standard one are [[P36 — Ordinal objectives|P36]](i) and (iv). That the nearest
-intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii). In
-statistics, the standard specification is a one-parameter exponential family and the ordinal one a cone of monotone
-likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
+intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii), and
+that misalignment is the departure beyond what the specification credits, for both specifications and for every family
+of pursuits of named statistics, is [[P53 — Misalignment is the departure beyond what the specification credits|P53]]. In statistics, the standard specification is a one-parameter exponential
+family and the ordinal one a cone of monotone likelihood ratios, and misalignment is the divergence from the actual
+behaviour to either.
 
 ## Lineage
 v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), row 74, and the target sets of R7-7, cardinal or
 ordinal by the principal's declaration. New: behaviours that rule outcomes out are scored. v13: the ordinal
-specification moved here from [[P36 — Ordinal objectives|P36]]; the matched specification ([[A6 — Declared no finer than identified|A6]]); misalignment read first as evidence ([[A4 — Misalignment is evidence|A4]]).
+specification moved here from [[P36 — Ordinal objectives|P36]]; misalignment read first as evidence ([[A4 — Misalignment is evidence|A4]]); the draft's rule of a matched
+specification (its A6) replaced by the paired report (Q52).
 
 ## Depends on
-- [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
-- [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[A5 — Declared before|A5]] — Declared before
-- [[A6 — Declared no finer than identified|A6]] — Declared no finer than identified
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[P4 — What KL measures|P4]] — What KL measures
 - [[P14 — The cost of departing from the default is forced|P14]] — The cost of departing from the default is forced
@@ -104,6 +119,7 @@ specification moved here from [[P36 — Ordinal objectives|P36]]; the matched sp
 - [[D7 — Feasibility|D7]] — Feasibility
 - [[P35 — Floors and caps|P35]] — Floors and caps
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives
+- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits
 - [[P33 — Error bounds for a known evaluator|P33]] — Error bounds for a known evaluator
 - [[P24 — The evaluation gap|P24]] — The evaluation gap
 - [[P39 — Several actors: coordination plus individual misalignment|P39]] — Several actors: coordination plus individual misalignment

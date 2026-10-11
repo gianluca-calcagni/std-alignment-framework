@@ -8,7 +8,7 @@ assumption. A result may use only the core and the results before it in the read
 |---|---|---|---|
 | 1 | `tilts-and-paths.md` | P1–P3 | every behaviour is a tilt of the default; every change of behaviour follows a replicator equation, the steepest climb; a fixed objective is visible in the changes |
 | 2 | `value.md` | P4, P14, P38 | KL is exactly the net value lost against a pursuit; the cost of departing from the default can only be KL; the same identity for any convex cost |
-| 3 | `misalignment.md` | P5, P6, P35, P36 | when misalignment is attained and zero; its closed forms for "pursue `F`"; the split of the departure; floors and caps on the strength of pursuit; ordinal objectives |
+| 3 | `misalignment.md` | P5, P6, P35, P36, P53 | when misalignment is attained and zero; its closed forms for "pursue `F`"; the split of the departure; floors and caps on the strength of pursuit; ordinal objectives; what each specification credits, and misalignment as the departure beyond it |
 | 4 | `resolution.md` | P7, P8 | what declared indifference forgives; what an actor that cannot tell outcomes apart can achieve |
 | 5 | `stakes.md` | P9, P10 | the shortfall and its three causes; sensitivity to the declared default and objective |
 | 6 | `identifiability.md` | P11–P13, P16, P17 | the start of a change; pass-through; what an actor can hide where it is not observed |

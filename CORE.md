@@ -1,30 +1,52 @@
 # The core
 
-> **Status: v13, a draft for the PI's evaluation** (branch `claude/core-reframe`, `NOTES.md` §16); `main` holds v12. The
-> core holds what cannot be derived: six premises, and the definitions that the whole framework uses. Everything that
-> follows from them is in `derived/`, with proofs and checks that run in CI. Each item carries a formal statement and a
-> plain-terms twin, and gives its lineage from the archive, tagged `v7.10`. The format is in `README.md`.
+> **Status: v13, on branch `claude/core-reframe`, approved by the PI (Q52); `main` holds v12 until it is merged.** The
+> core holds what the framework takes from outside and what it cannot derive: three imported axioms of probability,
+> four background conditions assumed without loss of generality, three premises, and the definitions the whole
+> framework uses, each with the interpretation it declares. Everything that follows from them is in `derived/`, with
+> proofs and checks that run in CI. The format is in `README.md`.
 
 ## 0. What the core is
 
-Alignment compares what an actor does with what a principal intended. The core fixes the terms of that comparison and
-the few premises it rests on. Section 1 states the premises. Sections 2–10 give the definitions, each with the reasons
-for it. The results, which follow from these by proofs, are in `derived/`, whose `README.md` gives their reading order.
-A definition may cite a result to justify itself, provided that no chain of dependencies leads back to it.
+Alignment compares what an actor does with what a principal intended. The core fixes the terms of that comparison, and
+says of each starting point what kind of starting point it is.
+
+**How the core is built.** It follows the method of reverse physics [@carcassi2022], [@carcassi2026]: separate what a
+theory takes from mathematics from what it assumes about the world, say of each assumption what kind it is, and map
+every mathematical object to what it stands for, declaring the map and justifying it, so that only objects with a
+meaning in the world enter. The core has four kinds of item.
+- **Imported axioms** (M): mathematics taken as it is, from probability theory. They assume nothing about actors or
+  principals.
+- **Background conditions** (B): choices of representation assumed without loss of generality, each with the reason
+  that no case is lost, and the qualifier where something is.
+- **Premises** (A): what the framework assumes about judging alignment. Each says its status in the terms of reverse
+  physics: a *principle*, taken to be true, or an *assumption*, which may fail; *conceptual*, a logical necessity or a
+  consequence of definitions, or *phenomenological*, justified by observation [@carcassi2022].
+- **Definitions** (D): each declares its **interpretation**, what its object is in the world and how a record verifies
+  it, and justifies it. A statement about behaviour is *verifiable* when a test exists that ends in finite time if it is
+  true, and *refutable* when its negation is verifiable [@carcassi2021]. Most statements about a behaviour are
+  verifiable only in the statistical sense, with error rates that vanish as the record grows; the interpretations say
+  which.
+No result in `derived/` cites a premise in its Statement or its Proof, and the one premise a definition's Statement
+cites, [A5] in [D3], defines a word, "declared", that no proof uses: the results are facts about finite distributions,
+given the definitions. The premises and the interpretations carry the meaning, the bridge from those facts to judging
+an actor (`NOTES.md` §17). Ids of retired items are not reused: v12's premises A2 and A3, on what pursuit is, are now
+reasons of [D2], and the draft's A6 was not adopted (`NOTES.md` §16).
 
 The framework in ten steps:
-1. **Premises** (section 1). Alignment is judged from behaviour in every condition; pursuit is the steepest climb, and
-   the best trade-off; misalignment is the rate of evidence against what was intended; specifications are declared
-   before they judge, and no finer than the actor's way of acting can carry.
+1. **Foundations** (section 1). Probability on finitely many outcomes, and independent repetition, as mathematics gives
+   them; finitely many outcomes, episodes and conditions as outcomes, objectives up to scale, one actor and one
+   principal, as background conditions; and three premises: alignment is judged from behaviour in every condition,
+   misalignment is the rate of evidence against what was intended, and specifications are declared before they judge.
 2. **Behaviour and pursuit** (section 2). Behaviour is a distribution over outcomes. Pursuing an objective reweights a
    default toward it. Derived: nothing is lost by this description, pursuit is the steepest climb, and the cost of
-   departing from the default can only be the KL divergence (`derived/tilts-and-paths.md`, `derived/value.md`).
+   departing from the default for which it is the best trade-off can only be the KL divergence
+   (`derived/tilts-and-paths.md`, `derived/value.md`).
 3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts: for
-   "pursue `F`", the pursuit ray of `F` for an actor that pursues, and the order of `F` for one that ranks or whose
-   method is unknown. Misalignment is the KL divergence from the actual behaviour to the nearest acceptable one, the
-   rate of evidence against the specification. Derived: when it is zero, its closed forms for "pursue `F`", that for a
-   pursuer it is the departure spent beyond the cheapest way to the same average of `F`, and the split of the departure
-   (`derived/misalignment.md`).
+   "pursue `F`", every strength of pursuing `F`, or every behaviour that respects the order of `F`. Misalignment is the
+   KL divergence from the actual behaviour to the nearest acceptable one, the rate of evidence against the
+   specification. Derived: when it is zero, its closed forms, and that it is the departure spent beyond the cheapest
+   behaviour that reproduces what the specification credits (`derived/misalignment.md`).
 4. **Resolution** (section 4). Distinctions the principal does not care about, and distinctions the actor cannot make
    (`derived/resolution.md`).
 5. **Stakes** (section 5). How much of the objective is lost, in its own units (`derived/stakes.md`).
@@ -38,8 +60,8 @@ The framework in ten steps:
 9. **The evaluator** (section 9). What the actor actually pursues, and what it tells about the principal's objective.
    Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization, and a
    single-peaked one allows at most one fall (`derived/evaluator.md`).
-10. **Samples and evidence** (section 10). The act of measurement. Derived: misalignment is the rate of evidence
-    against the specification; detection, estimation and the evaluation gap (`derived/estimation.md`).
+10. **Samples and evidence** (section 10). The record that every claim reaches the world through. Derived: the expected
+    evidence per decision is misalignment; detection, estimation and the evaluation gap (`derived/estimation.md`).
 
 Specifications defined by a structure rather than by an objective need no definition of their own: several actors meant
 to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
@@ -73,10 +95,10 @@ and what independent samples reveal, where one sample may be a whole episode of 
 - *Explanations beyond the evaluator.* Why an actor pursues the evaluator it does, and by what mechanism, is not
   measured. The evaluator itself is in scope, as a hypothesis about behaviour that samples can test ([D10], [D11]).
 
-**How to read.** Items are numbered by kind: A for premises and D for definitions, in this file; P for propositions, in
-`derived/`. `[P2](iii)` means part (iii) of P2. Logarithms are natural, so divergences are in nats. Operations on
-functions (`p/r`, `log`, `e^F`) act outcome by outcome. The Notes of each item give the names its objects carry in other
-fields.
+**How to read.** Items are numbered by kind: M for imported axioms, B for background conditions, A for premises and D
+for definitions, in this file; P for propositions, in `derived/`. `[P2](iii)` means part (iii) of P2. Logarithms are
+natural, so divergences are in nats. Operations on functions (`p/r`, `log`, `e^F`) act outcome by outcome. The Notes of
+each item give the names its objects carry in other fields.
 
 | Symbol | Meaning | Introduced in |
 |---|---|---|
@@ -108,13 +130,153 @@ fields.
 | `σ_q(F)` | the spread of `F` under the default: `Var_q(F)^{1/2}` | [P13] |
 | `p*` | the best feasible behaviour | [P15] |
 
-## 1. Premises
+## 1. Foundations
+
+What the framework takes from mathematics, the representation it assumes without loss of generality, and what it
+assumes about judging alignment, in that order.
+
+### M1 — Probability on finitely many outcomes
+**Statement.** On a finite set, a probability gives each element a non-negative mass, and the masses add up to one. The
+probability of a subset is the sum of the masses of its elements; given a subset of positive probability, the
+probability of another is the probability of their intersection divided by that of the first. The average of a function
+is the sum of its values, each weighted by its mass.
+
+**In plain terms.** Shares of a whole: each thing that can happen gets a share, the shares add up to one, and an
+average weighs each value by its share.
+
+**Status.** Imported from probability theory as it is: Kolmogorov's axioms in their finite case, where additivity over
+countably many sets reduces to finite sums. It assumes nothing about actors or principals.
+
+**Why this choice.**
+- *It is the mathematics of ensembles.* Decisions can be mixed: an actor that acts one way on a share `a` of occasions
+  and another way on the rest acts as their mixture with weights `a` and `1 − a`. With finitely many outcomes that
+  exclude each other, every ensemble is one such mixture of the outcomes, in one way only, so the ensembles are the
+  points of a simplex, as classical ensembles are, and an average is an affine function of the ensemble, as statistical
+  quantities are [@carcassi2026e].
+- *Nothing more is needed.* Every result of the finite core uses finite sums. The general core replaces the sums by
+  integrals against a measure, and ratios of masses by densities (`CORE-GENERAL.md`).
+
+**Lineage.** New in v13: used silently before, in [D1].
+
+### M2 — Independent repetition
+**Statement.** Decisions drawn independently from one probability have, jointly, the product of their probabilities.
+The share of an outcome `x` among `n` such decisions has average `p(x)` and variance `p(x)·(1 − p(x))/n`, so it lies
+within `ε > 0` of `p(x)` with probability at least `1 − p(x)·(1 − p(x))/(n·ε²)`.
+
+**In plain terms.** When decisions do not influence each other, the shares in a long record come as close as one likes
+to the actor's behaviour, with a known chance of missing.
+
+**Status.** Imported from probability theory: independence as the product of probabilities. The bound is Chebyshev's
+inequality, shown below; nothing else is imported.
+
+**Why this choice.**
+- *It is the bridge from records to behaviours.* A behaviour is never observed; the shares in a record are. This is what
+  lets a record verify a behaviour to any precision, in the statistical sense, and why section 2 reads a behaviour as
+  the shares over unboundedly many decisions.
+- *The bound, in one line.* The share is the average of `n` independent indicators, each of average `p(x)` and variance
+  `p(x)·(1 − p(x))`, so its variance is `p(x)·(1 − p(x))/n`, and Chebyshev's inequality bounds the chance of a
+  deviation of at least `ε` by that variance over `ε²`.
+
+**Lineage.** New in v13: before, part of [D11]'s reasons.
+
+### M3 — Imported theorems
+**Statement.** Besides finite sums and [M2], the results of `derived/` use these theorems: Gibbs' and Pinsker's
+inequalities; the Neyman–Pearson lemma; the central limit theorem and the delta method; Wilks's theorem; Chernoff's
+theorem; Huber's limit law for estimates that solve an equation; and Čencov's theorem, which gives one reason for the
+definition of pursuit (section 2) and nothing a result rests on.
+
+**In plain terms.** The framework borrows a short list of standard theorems, each checked in a text anyone can read,
+and assumes nothing else from outside.
+
+**Status.** Imported, each with its hypotheses quoted where a result uses it, and read in a text anyone can read without
+paying, or derived where it is used; `REFERENCES.md` says where each is read.
+
+**Why this choice.** Proving classical theorems again adds nothing a reader can check better in their source. Quoting
+their hypotheses where they are used keeps each result honest about what it needs, and listing them here makes the
+boundary between what the framework assumes and what it borrows visible at once.
+
+**Lineage.** New in v13: the list was implicit in the results and in `REFERENCES.md`.
+
+### B1 — Finitely many outcomes
+**Statement.** The outcomes of a decision are finitely many.
+
+**In plain terms.** Whatever happens is sorted into one of finitely many results that a record can tell apart.
+
+**Status.** A background condition, assumed without loss of generality for every quantity that finite descriptions
+determine.
+
+**Why this choice.**
+- *A record decides finitely many events.* A record of finitely many decisions, each read at finite precision, settles
+  which of finitely many results occurred, and nothing finer. The outcomes are the possibilities of a domain in which
+  every statement about one decision is decidable, and such a domain is discrete [@carcassi2021]: finitely many outcomes
+  are the general case of what a finite record can tell apart.
+- *Nothing a record measures is lost.* On outcomes that are not finite, the divergence is the supremum of its values
+  over finite descriptions, so each misalignment the framework reports there is a limit of misalignments on finitely
+  many outcomes (`CORE-GENERAL.md`, GA6; `general/dictionary.md`). What does not carry over, the existence of nearest
+  behaviours, heavy tails and atoms, is listed there, and is the qualifier of this condition.
+- *Exactness.* Every statement can be proved with finite sums and checked exactly on random instances.
+
+**Lineage.** v12: [A1]'s "finitely many outcomes" and [D1]'s first reason; new as a condition in v13.
+
+### B2 — Episodes and conditions as outcomes
+**Statement.** Decisions that depend on each other within an episode count as one outcome, the episode; and a situation
+the actor does not choose counts as part of the outcome, with its frequency fixed.
+
+**In plain terms.** A whole conversation, game or treatment can be one outcome, and the situation it happened in can be
+part of it.
+
+**Status.** A background condition, assumed without loss of generality: episodes, and pairs of a situation and an
+outcome, are again finitely many outcomes ([B1]), with a behaviour on them. What it moves is independence, assumed
+between episodes rather than within them (section 1, premise A4).
+
+**Why this choice.** A record of dependent decisions grouped into episodes, or of situations with their frequencies, is
+again a record of outcomes on a finite set, so every result applies to it unchanged; results about several situations
+are stated on pairs of a situation and an outcome (`derived/estimation.md`). One long record with no episodes is not
+covered (section 0, out of scope).
+
+**Lineage.** v12: §0's scope ("the episode being one outcome") and the contexts of the ontologies; new as a condition in
+v13.
+
+### B3 — An objective up to scale and constant
+**Statement.** An objective `F` and `a·F + c`, for numbers `a > 0` and `c`, state the same aim; the units of `F` matter
+only to the stakes.
+
+**In plain terms.** Doubling every score, or adding the same amount to all of them, does not change what is asked for.
+
+**Status.** A background condition, assumed without loss of generality: pursuit, every specification built from `F`,
+and misalignment are unchanged by the change; the stakes are reported in the declared units, and scale with `a`.
+
+**Why this choice.** A pursuit reveals its objective only up to a positive factor and a constant ([P1](ii)), so no
+behaviour can tell the two statements apart. Fixing one of them loses nothing a record could show; the units return
+where the principal needs them, in the stakes (section 5).
+
+**Lineage.** v7.10: Prop 16's gauge; new as a condition in v13.
+
+### B4 — One actor and one principal
+**Statement.** Several actors acting on joint outcomes count as one actor, and several principals with declared weights
+count as one principal.
+
+**In plain terms.** A team is judged as one player on what the team does, and a committee with agreed weights as one
+judge.
+
+**Status.** A background condition, assumed without loss of generality once the joint outcomes and the weights are
+declared. How a group reaches its joint behaviour, and how the weights are chosen, are out of scope (section 0).
+
+**Why this choice.** On joint outcomes, the coordination of a group is a measured quantity rather than an assumption
+([P39]), and several principals with declared weights pool exactly into one ([P42]).
+
+**Lineage.** v11: the scope widened to groups and to several principals (Q24, Q25); new as a condition in v13.
 
 ### A1 — Behaviour suffices
-**Statement.** What an actor does is described by how often each of finitely many outcomes occurs, in each condition it
-may face. Alignment is judged from that description alone, never from how the behaviour is produced.
+**Statement.** What an actor does is described by how often each outcome occurs, in each condition it may face.
+Alignment is judged from that description alone, never from how the behaviour is produced.
 
 **In plain terms.** We judge what the actor does, in every situation it may meet, and not what goes on inside it.
+
+**Status.** A principle, conceptual. A judgement that a principal can check rests on what a record can verify, and a
+record verifies what the actor does, not how it does it: the principle that science is universal, non-contradictory and
+evidence based [@carcassi2021], applied to judging an actor. "In every condition" makes it a principle about all the
+situations the actor may meet, not only those recorded.
 
 **Why this choice.**
 - *It can be observed.* Behaviour can be counted. Internal goals and mechanisms differ across AI systems, people,
@@ -122,58 +284,13 @@ may face. Alignment is judged from that description alone, never from how the be
 - *In every condition, not in one.* Judging a single behaviour would miss an actor that behaves well when it is
   observed and badly otherwise. Requiring behaviour in every condition keeps such deceptive alignment inside the
   framework, as misalignment in conditions that are not observed (section 8).
-- *Finitely many outcomes.* Every statement can then be proved with finite sums and checked exactly on random
-  instances. General outcome spaces are out of scope for now.
 - *What it costs.* Two actors that behave alike in every condition are the same actor for the core, whatever their
   internal goals. That is deliberate: a difference that shows in no condition has no consequence a principal could
   suffer.
 
 **Lineage.** v7.10: R7-1 (the actual behaviour is any distribution, Def 13). v8: [D1]'s "why", where this was an
-argument. New: behaviour in every condition, so that deceptive alignment is in scope.
-
-### A2 — Pursuit is the steepest climb
-**Statement.** To pursue an objective is to raise its average as steeply as possible, with steepness measured in a
-Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
-proportions.
-
-**In plain terms.** Wanting more of something means moving toward it by the most direct route, with lengths and angles
-measured as in ordinary geometry, and what counts as most direct must not depend on how finely we describe what
-happens.
-
-**Why this choice.**
-- *Description-independence is the least we can ask.* Two observers who describe the same events at different
-  granularity must agree on what pursuing an objective means.
-- *It is enough.* By Čencov's theorem [@cencov1982], whose statement is read in the open text [@le2016] (Proposition
-  6.1), it fixes the geometry, up to a constant factor, and with it the form of pursuit, a reweighting of the default
-  (section 2 and `derived/tilts-and-paths.md`).
-- *What it covers.* With A3, it says what pursuing is, and so which specification fits an actor that pursues: the
-  pursuit ray (section 3, and A6). It does not fix the measure, which rests on evidence (A4).
-- *Riemannian.* Steepness needs a length for each direction of change. An inner product gives one, and Čencov's theorem
-  is stated for these. A geometry whose lengths come from a norm that is not an inner product would need a uniqueness
-  theorem of its own, and none is known here; the premise does not cover it.
-
-**Lineage.** v7.10: Def 1 (the Gibbs tilt as the form of intended behaviour, assumed there). v8: [D2]'s "why", where
-this was the one premise. v12: "Riemannian" made explicit, as [D2]'s reason already said and Čencov's theorem requires
-(Q44).
-
-### A3 — Pursuit is the best trade-off
-**Statement.** To pursue an objective at an intensity is to choose the behaviour with the largest average of the
-objective minus a cost of departing from the default, priced at the reciprocal of the intensity. With the default
-fixed, the cost depends only on the behaviour, and is differentiable.
-
-**In plain terms.** Pursuing harder means accepting more cost of change for more of what is pursued. The cost of change
-depends only on how the behaviour changes, not on what is pursued.
-
-**Why this choice.**
-- *It says what intensity means.* The reciprocal of the intensity is the price of one nat of departure, in the
-  objective's units: an actor that pursues intensely treats departure as cheap.
-- *Together with A2 it fixes the cost.* The steepest climb is also the best trade-off for exactly one cost: the KL
-  divergence from the default (`derived/value.md`). A2 is a geometric premise and A3 an economic one; they agree in one
-  way only. Since v13 that cost gives misalignment a second reading, as value lost (A4); the measure does not rest on
-  it.
-
-**Lineage.** v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived, not
-assumed.
+argument. New: behaviour in every condition, so that deceptive alignment is in scope. v13: "finitely many outcomes"
+moved to [B1].
 
 ### A4 — Misalignment is evidence
 **Statement.** The misalignment of a behaviour, against the behaviours a principal accepts, is the least rate, per
@@ -182,6 +299,11 @@ with evidence counted as the logarithm of the ratio of the record's likelihoods.
 
 **In plain terms.** Watch the actor decide, one occasion after another. Misalignment is how fast the record builds a
 case that the actor is not acting in any acceptable way, against the acceptable way it resembles most.
+
+**Status.** Its form is a principle, conceptual: once evidence is the log-likelihood ratio and misalignment its rate
+under the actual behaviour against the nearest accepted one, the measure follows from the definitions, with no further
+assumption. It rests on one assumption, phenomenological: that decisions are drawn independently from one behaviour,
+between episodes ([B2]). A case states it, and can test it (`STANDARD.md`, the field Sampling).
 
 **Why this choice.**
 - *It needs nothing about the actor.* Evidence is defined by the record and the two behaviours compared, so the measure
@@ -197,12 +319,12 @@ case that the actor is not acting in any acceptable way, against the acceptable 
   the record exact.
 - *Value lost, as a reading.* Every full-support behaviour is the best trade-off for its own objective at a KL price
   ([P4](ii)), so the same number is the least net value lost against an accepted behaviour, judged by that behaviour's
-  own objective. Until v12 that reading was the premise, and it needed [A2] and [A3] to make the price KL ([P14]); here
-  it is a consequence, and the measure rests on evidence alone.
+  own objective. Until v12 that reading was the premise, and it needed two premises on pursuit to make the price KL
+  ([P14]); here it is a consequence, and the measure rests on evidence alone.
 
 **Lineage.** v7.10: Thm 1 (regret is a divergence) and Prop 18 (detection). v8: [D3]'s "what the number means". v12:
-"misalignment is value lost", which this premise replaces, its reading kept as a consequence (`NOTES.md` §16). The idea
-is the hunch H4 of `NOTES.md` §5.4.
+"misalignment is value lost", which this premise replaces, its reading kept as a consequence (`NOTES.md` §16, §17). The
+idea is the hunch H4 of `NOTES.md` §5.4.
 
 ### A5 — Declared before
 **Statement.** The default and the acceptable behaviours are fixed before, and without using, the behaviour they will
@@ -210,44 +332,14 @@ judge.
 
 **In plain terms.** Decide what counts as acceptable before looking at what the actor did.
 
+**Status.** A principle, conceptual: a standard fitted to the behaviour it judges cannot be refuted by that behaviour,
+so fixing it first is what makes the judgement a test. It is a logical necessity of testing, not an observation.
+
 **Why this choice.** A default or an acceptable set fitted to the behaviour being judged removes exactly the
 differences the judgement needs. In v7.10, I1-dyn fitted its default (a Hardy–Weinberg expectation) from the counts it
 judged, and its test could not fail. Pre-registration in science makes the same demand.
 
 **Lineage.** v7.10: Def 23's timing slot. v8: [D3]'s rule of use.
-
-### A6 — Declared no finer than identified
-**Statement.** A specification of an objective distinguishes no more than the actor's way of acting can carry: its
-values, up to a positive factor and a constant, for an actor that pursues as [A2] and [A3] say; only its order for an
-actor that ranks outcomes, or whose way of acting is not known; unless the declaration says why a finer one applies.
-
-**In plain terms.** Judge an actor only on what its way of acting can express. An actor that weighs outcomes by how
-much better they are is judged on the objective's values; one that only picks the better of what it sees, or whose
-method is unknown, is judged on their order.
-
-**Why this choice.**
-- *A finer declaration charges what no behaviour of that kind could show.* An actor that keeps the best of `n` draws by
-  `F` compares draws only by their order under `F`, so it behaves alike for every increasing transformation of `F`, and
-  nothing in its behaviour depends on the values of `F` beyond their order. Judged by those values, it is charged for
-  its method rather than for its goal (Notes).
-- *A pursuer's class.* A pursuit reveals its objective up to a positive factor and a constant ([P1](ii)), and the
-  pursuit ray, which accepts every intensity, declares exactly that.
-- *Other channels.* A learner of preferences compared within one context identifies the objective only up to a constant
-  in each context: a specification across contexts that charges those constants is finer than the channel, while one
-  stated condition by condition is not.
-- *Coarser is allowed; finer needs a reason.* A principal may declare less than the actor's way of acting carries, and
-  lose sensitivity. Declaring more is a claim about the actor, which the declaration states and a case can test.
-
-**Notes.** The ordinal specification of [D3] contains every best-of-`n` by `F` and is unchanged under increasing
-transformations of `F` ([P36](i) and (v)). In random instances, best-of-4 on the principal's own objective is charged a
-median `0.13` of its departure under the standard specification, and is exactly aligned under the ordinal one; with a
-proxy that correlates about `0.96` with the objective, the standard specification ranks the exact pursuit of the proxy
-as less misaligned than best-of-4 on the objective in 65% of pairs (`probes/review/known_groups.py`, `NOTES.md` §15).
-Whether the actor pursues, as declared, can itself be tested ([P3], [P12]).
-
-**Lineage.** v7.10: the brainstorm B1 (identification classes, and the rule "no target set finer than the channel
-identifies, or say why", which its protocol adopted), its notes' H8 and H10(a), and item 2 of its review of v7.3.3; the
-restart did not carry them over (`NOTES.md` §1). New in the core.
 
 ## 2. Behaviour and pursuit
 
@@ -263,6 +355,19 @@ when `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r �
 **In plain terms.** Outcomes are the things that can happen, and a behaviour says how often each one happens; full
 support means that nothing is ruled out entirely. KL measures how far one behaviour is from another; it is not
 symmetric, so the order matters. Tilting reweights a behaviour toward the outcomes that a function scores higher.
+
+**Interpretation.** *Declared.* An outcome is the narrowest result that a record of one decision tells apart from the
+others, such as the answer an assistant gave or whether a patient was seen within four hours. A behaviour is the actor's
+ensemble in one condition: the shares its outcomes take over unboundedly many independent decisions ([M2]). `E_p[F]` is
+the average score of those decisions. `KL(p‖r)` is the evidence one decision of an actor behaving as `p` gives, on
+average, against `r` ([A4]). `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
+probability proportional to `e^F`: a selection a principal could carry out, by accepting or rejecting decisions.
+*Verified.* Which outcome occurred is decided by the record of one decision. A behaviour is approached by the shares in
+a record, never reached ([M2]): `p(x) > 0` is verified by a single occurrence of `x`, while `p(x) = 0` can only be
+refuted, and no record verifies an exact mass. *Justified.* Outcomes exclude each other and are decidable, and ensembles
+of decisions mix, so the behaviours are the points of a simplex, and averages are affine in them ([M1]). Masses that are
+exactly zero, or irrational, are idealizations no record verifies; the definitions that follow ask for full support
+where a divergence must stay finite.
 
 **Why this choice.**
 - *Finite outcomes.* Every statement can then be proved with finite sums, and checked exactly on random instances.
@@ -293,6 +398,16 @@ scores higher, and the intensity says how strongly. Intensity zero is the defaul
 every intensity. A path of behaviours pursues an objective when it keeps reweighting toward that same objective, never
 away from it, from wherever it starts.
 
+**Interpretation.** *Declared.* The default is what the actor does when it pursues nothing in particular: the base
+policy before tuning, the status quo, the population before selection, measured apart from the behaviour to be judged.
+An objective is a score of outcomes. To pursue it at intensity `t` is to keep the default's decisions in proportion to
+`e^{t·F}`: selection with fitness `e^F` for `t` generations, the logit choice of an actor whose rationality is `t`, or
+the optimum of training on `F` with a penalty of `1/t` on the departure from the default. A path pursues `F` when every
+change along it reweights toward that one score. *Verified.* That an actor pursues `F` from `q` can be refuted from
+records: its revealed objective `log(p/q)` must be an affine function of `F`, with a slope that is not negative, in
+every condition (`derived/tilts-and-paths.md`). Only the product `t·F` is identified ([B3]). *Justified.* below: the
+reasons for the ray are geometric and economic, and the two agree on it.
+
 **Why this choice.**
 - *It loses no generality.* Every full-support behaviour `p` lies on the pursuit ray of some objective, from any
   default: `p = p_{F,1}` with `F = log(p/q)` ([P1](i)). Every path of behaviours follows the replicator equation of an
@@ -300,13 +415,23 @@ away from it, from wherever it starts.
   stays fixed, which a derived result makes testable (`derived/tilts-and-paths.md`). Mixing a behaviour with another,
   for example, generally gives a path whose objective turns, as that result's check shows; cut-offs that exclude
   outcomes leave `Δ°` altogether.
-- *It is canonical, given [A2].* Pursuing `F` means climbing `E_p[F]` as steeply as possible, in a Riemannian geometry
-  on behaviours that is unchanged when outcomes are split into sub-outcomes in fixed proportions. Up to a constant
-  factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's theorem
-  [@cencov1982], extended by [@campbell1986]; read in the open texts [@le2016], Proposition 6.1, and [@ay2015],
+- *The steepest climb.* To pursue an objective is to raise its average as steeply as possible, with steepness measured
+  in a Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
+  proportions: two observers who describe the same events at different granularity must agree on what pursuing means.
+  Up to a constant factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's
+  theorem [@cencov1982], extended by [@campbell1986]; read in the open texts [@le2016], Proposition 6.1, and [@ay2015],
   Corollary 3.20). In the Fisher metric the steepest climb is the replicator field ([P2](ii)), and its flow from `q` is
-  `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the same. A notion of
-  pursuit that must not depend on how finely outcomes are described is therefore led to this ray.
+  `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the same. A geometry
+  whose lengths come from a norm that is not an inner product would need a uniqueness theorem of its own; none is known
+  here, and this reason does not cover it.
+- *The best trade-off.* To pursue at intensity `t` is also to choose the behaviour with the largest average of `F` minus
+  a cost of departing from the default, priced at `1/t` in the units of `F`, the cost depending only on the behaviour:
+  an actor that pursues intensely treats departure as cheap. The ray is that choice for exactly one differentiable cost,
+  up to a constant, the KL divergence from the default, so the geometric reason and the economic one agree in one way
+  only (Notes).
+- *Reasons, not premises.* Until v12 the two reasons above were the premises A2 and A3. No result uses them: the
+  results hold of the ray as defined. They carry its interpretation, that the ray is what pursuing means; a reader who
+  rejects both keeps every result, and loses that reading (`NOTES.md` §17).
 - *The ray needs a default; the path does not.* The same objective pursued from two defaults gives two different rays,
   so the specification of section 3 fixes the default. Whether a path pursues `F` needs no default at all, which is why
   derived results can read pursuit from changes of behaviour without declaring one.
@@ -318,12 +443,17 @@ reward maximization with coefficient `1/t` in RL fine-tuning, for one prompt (ac
 choose, the optimum reweights each prompt's responses separately, which is not a pursuit on prompt–response pairs); with
 a uniform default it is the logit choice rule, or quantal response, with rationality `t` [@mckelvey1995]; and it is the
 result of `t` generations of constant selection with fitness `e^F`, for types that are passed on intact, as in clonal
-reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety.
+reproduction. The intensity is an inverse temperature in physics, and "optimization pressure" in AI safety. That the
+ray is the best trade-off for the KL cost is [P4](i); that KL is the only cost for which the steepest climb is the best
+trade-off is [P14], and if the best trade-offs are only asked to lie somewhere on the ray, any increasing function of KL
+passes ([P14], Notes).
 
 **Lineage.** v7.10: Def 1 (the Gibbs tilt `p_{G,t}`, with `q` there called the reference), Def 2 (the bounded actor,
 whose optimum is the tilt: here a property, [P4](i)), Prop 15 (the carrier), and Prop 16 (g4) (the half-ray). The ray
 defines intended pursuit; it is not a model of the actor. v7.10's rows 67–68 and 76–78 filed results by the intended
-actor's model instead of by what their proofs need, and the core keeps the two apart by construction.
+actor's model instead of by what their proofs need, and the core keeps the two apart by construction. v13: v12's
+premises A2 (pursuit is the steepest climb) and A3 (pursuit is the best trade-off) became the first two reasons above,
+as no result used them (Q52).
 
 ## 3. The specification and misalignment
 
@@ -332,10 +462,8 @@ actor's model instead of by what their proofs need, and the core keeps the two a
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
 For an objective `F`, the **standard specification** is `(q, R_F)`: pursuit of `F` from `q` at every intensity,
 including none; the **ordinal specification** is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of
-F}`. A specification of `F` is **matched** to an actor if it is the standard specification and the actor is declared to
-pursue as [A2] and [A3] say, or the ordinal specification and the actor is not. A specification is **declared** when it
-is fixed as [A5] and [A6] require: before, and without using, the behaviour it will judge, and no finer than the matched
-one unless the declaration says why.
+F}`. A specification is **declared** when it is fixed as [A5] requires: before, and without using, the behaviour it
+will judge.
 
 **In plain terms.** Before looking at what the actor does, the principal states a default behaviour and the set of
 behaviours it would accept. Misalignment is how far the actual behaviour is from the nearest acceptable one, in nats:
@@ -345,12 +473,23 @@ objective is acceptable, including none. For an actor that only ranks outcomes, 
 behaviour that favours better outcomes at least as much as worse ones, relative to the default, is acceptable. Under
 either, an actor that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
+**Interpretation.** *Declared.* A specification is the principal's standard, written down and dated before the record it
+judges is read ([A5]): a default, and the ensembles the principal accepts. Misalignment is the rate, in nats per
+decision, at which a record of the actor builds the case that it acts in no accepted way ([A4]): about `1/M` decisions
+give one nat, odds of about `e` to one. The standard specification accepts every strength of pursuing `F`, none
+included; the ordinal one accepts every ensemble that favours each outcome at least as much as any outcome `F` scores
+lower, relative to the default. *Verified.* `M > ε`, for `ε > 0`, is verifiable in the statistical sense: the evidence
+of a growing record crosses any threshold with a probability that tends to one. `M = 0` can only be refuted. An actor
+can be shown to be misaligned; it can never be shown to be exactly aligned, only consistent with alignment at a stated
+precision. *Justified.* Evidence is what a record supplies ([A4]), and fixing the standard first is what makes the
+judgement a test ([A5]).
+
 **Why this choice.**
 - *The formula is [A4] made exact.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on
   average `KL(p̂‖p)` nats to the log-likelihood ratio in favour of `p̂` over `p`; the least such rate over the intended
   behaviours is `M(p̂)`, including the order of the arguments. Each intended behaviour is also the best trade-off for
-  its own objective at a KL price ([P4](ii)), so `M(p̂)` is as well the least net value lost, in nats; under [A2] and
-  [A3] that price is the only one ([P14]).
+  its own objective at a KL price ([P4](ii)), so `M(p̂)` is as well the least net value lost, in nats; for a pursuit
+  that is both the steepest climb and the best trade-off ([D2]), that price is the only one ([P14]).
 - *What the number means.* About `1/M(p̂)` decisions give one nat of evidence that the actor is not behaving as
   intended, odds of about `e` to 1.
 - *The direction charges the unintended.* `KL(p̂‖p)` is large when the actor often does what `p` rarely does, and
@@ -364,19 +503,24 @@ either, an actor that stays at the default is not misaligned, though it may be u
   intensity it never asked about (v7.10: row 74, the price measure is a regret, not misalignment). A single intended
   behaviour is the case `𝓘 = {p*}`.
 - *The standard specification is the pursuit ray,* because "pursue `F`" states a fixed objective ([D2]) at an unstated
-  intensity, for an actor that weighs outcomes by their values ([A2], [A3]). It includes doing nothing; a principal for
-  whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing is what
-  makes it a set of compromises: without it, the only fully intended behaviours would be those on the best outcomes of
-  `F`.
-- *For a pursuer, misalignment is excess departure.* When the actor does better than the default, the nearest intended
-  behaviour is the one of least departure among those with the actor's average of `F` (Notes), so `M(p̂)` is the
-  departure spent beyond the cheapest way to that average. That is what the standard specification charges: departure
-  that buys no `F`, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
+  intensity, for an actor that weighs outcomes by their values ([D2], its reasons). It includes doing nothing; a
+  principal for whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing
+  is what makes it a set of compromises: without it, the only fully intended behaviours would be those on the best
+  outcomes of `F`.
+- *Misalignment is excess departure.* Each of the two specifications credits the actor with some statistics of its
+  behaviour, and `M(p̂)` is the departure spent beyond the cheapest behaviour that reproduces them (Notes). The standard
+  specification credits the average of `F`, when the actor does better than the default; the ordinal one credits the
+  masses of the groups of outcomes that the order of `F` pools. What is charged is departure that buys nothing the
+  specification credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
 - *The ordinal specification, for actors that rank.* An actor that picks by rank, such as best-of-`n`, behaves alike
   for every increasing transformation of `F`, and keeps the default's proportions within each level set of `F`. Its
   specification is the order of `F`, which accepts every pursuit of an increasing transformation of `F` and every
   best-of-`n` by `F` (Notes). Under it, misalignment charges only what contradicts the order; the standard
-  specification charges, besides, the shape of the reweighting. [A6] says which to declare.
+  specification charges, besides, the shape of the reweighting.
+- *Both, side by side.* The declaration names the specification that judges. No premise chooses it for the principal: a
+  rule that tied the choice to how the actor is declared to act would move a judgement about the actor into the
+  standard. A report under the standard specification gives the ordinal misalignment beside it, so that the part charged
+  for the shape of the reweighting is visible (Notes; `STANDARD.md`).
 - *The actual behaviour may rule outcomes out; the intended ones may not.* A deterministic actor still gets a score.
   Intended behaviours keep full support so that the score is finite.
 - *Declared before, not fitted after.* A default or an intended set fitted from the behaviour being judged removes
@@ -397,14 +541,17 @@ of KL used here is the one called zero-forcing in variational inference. That th
 specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [P5](iv); for a constant `F` the ray is the
 single point `q`, which is closed. That the ordinal specification is one, that it contains every best-of-`n` by `F`, and
 that its misalignment and the shape's add up to at most the standard one are [P36](i) and (iv). That the nearest
-intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [P6](ii). In
-statistics, the standard specification is a one-parameter exponential family and the ordinal one a cone of monotone
-likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
+intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [P6](ii), and
+that misalignment is the departure beyond what the specification credits, for both specifications and for every family
+of pursuits of named statistics, is [P53]. In statistics, the standard specification is a one-parameter exponential
+family and the ordinal one a cone of monotone likelihood ratios, and misalignment is the divergence from the actual
+behaviour to either.
 
 **Lineage.** v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), row 74, and the target sets of R7-7, cardinal or
 ordinal by the principal's declaration. New: behaviours that rule outcomes out are scored. v13: the ordinal
-specification moved here from [P36]; the matched specification ([A6]); misalignment read first as evidence ([A4]).
+specification moved here from [P36]; misalignment read first as evidence ([A4]); the draft's rule of a matched
+specification (its A6) replaced by the paired report (Q52).
 
 ## 4. Resolution: what each side distinguishes
 
@@ -427,6 +574,14 @@ When nothing is declared or known, the resolution is the finest one, with one ou
 specification on cells declares that it does not care how outcomes inside a cell are split, only how often each cell
 occurs. An actor with a resolution cannot tell the outcomes inside a cell apart: it can change how often each cell
 occurs, but inside a cell the outcomes keep the proportions they have by default.
+
+**Interpretation.** *Declared.* The principal's resolution groups outcomes it declares equally acceptable, such as
+answers that differ only in wording. The actor's resolution groups outcomes it cannot act on separately: inside a cell,
+its decisions keep the default's proportions, as a selection that cannot see inside the cell must. *Verified.* The
+principal's resolution is declared, not measured. The actor's can be refuted from records: if the ratio of two outcomes
+in one cell moves away from the default's, the actor tells them apart (`derived/identifiability.md`). *Justified.* On
+finitely many outcomes, the events a description can decide are the unions of the cells of one partition ([B1]), so a
+partition is the general form of what either side can tell apart.
 
 **Why this choice.**
 - *One object, two positions.* The same kind of object describes what the principal cares to distinguish and what the
@@ -465,6 +620,13 @@ is `S(p̂) = E_{p_{F,λ}}[F] − E_{p̂}[F]`, in the units of `F`.
 departs from the default by the same amount, and the shortfall is how much more of the objective that pursuit gets, in
 the objective's own units.
 
+**Interpretation.** *Declared.* The shortfall is what the principal loses in the objective's own units, such as euros,
+points of accuracy or hours of delay, against the pursuit that departs from the default as much as the actor did.
+*Verified.* Estimated from a record and the declared objective, with its interval. The departure is matched, not the
+intensity, because the departure is what a record measures, while the intensity is a property of a pursuit.
+*Justified.* Misalignment does not change when the objective is rescaled ([B3]), so it cannot carry the units; the
+shortfall carries them.
+
 **Why this choice.**
 - *Misalignment is silent about stakes.* Misalignment does not change when the objective is rescaled
   (`derived/stakes.md`), so it cannot say how much of the objective is lost; a principal needs that in its own units. In
@@ -490,6 +652,13 @@ incentive, a fine, or a known shift of the actor's own default. With `p ∈ Δ°
 others, or a shift in what the actor would do by default. The actor passes it through when its behaviour changes exactly
 by reweighting with that nudge. The pass-through says how strongly it responds: zero ignores the nudge, a positive value
 follows it, and a negative value means the nudge backfires.
+
+**Interpretation.** *Declared.* An intervention is a change the principal makes and knows, such as a bonus, a fine or a
+new default option, written as a score `u` of outcomes. The pass-through is how strongly the actor's behaviour follows
+it: `0` ignores it, a positive value follows it, and a negative value means it backfires. *Verified.* From records
+before and after: the change of `log p` must lie in `span{u, 1}`, which a record can refute, and the coefficient on `u`
+is the pass-through. *Justified.* Any change of behaviour is a reweighting by some function
+(`derived/tilts-and-paths.md`), so "it follows the intervention" means that this function is a multiple of `u`.
 
 **Why this choice.**
 - *The simplest response that can fail.* Any change of behaviour is a reweighting by some function ([P1](i)). The claim
@@ -517,6 +686,13 @@ about what the actor can do, `𝓕 = Δ`.
 **In plain terms.** The feasible set is what the actor can do. It is linear when the actor's limits take the form "these
 averages cannot change": how often each situation arises, how the actor splits outcomes it cannot tell apart, how the
 environment responds to what the actor does.
+
+**Interpretation.** *Declared.* The feasible set is what the actor can produce: given by its design, such as a class of
+policies or a budget; by the world, such as how often situations arise and how the environment responds; or by its
+resolution. *Verified.* Declared from knowledge of the actor and the world. A behaviour seen in a record is feasible, so
+records can refute a declared feasible set, but never confirm it. *Justified.* A principal charges what the actor chose,
+not what no behaviour in its reach could avoid; the split between the two is exact for linear limits
+(`derived/feasibility.md`).
 
 **Why this choice.**
 - *It separates "cannot" from "will not".* Misalignment ([D3]) judges what the actor did; the feasible set says what it
@@ -555,6 +731,13 @@ response collects what the actor does in each. The view describes what the actor
 whose response depends only on its view must act alike in situations it perceives alike, and can act differently only
 where it perceives a difference.
 
+**Interpretation.** *Declared.* A condition is a situation the actor faces and does not choose, such as a prompt, a
+client, a test or real use. The response is its behaviour in each condition, and a view is what it perceives of the
+condition: a channel from conditions to the signals it receives. *Verified.* Responses are recorded condition by
+condition; that a response depends on the condition only through a declared view can be refuted from them
+(`derived/identifiability.md`). *Justified.* [A1] judges behaviour in every condition, and a situation the actor does
+not choose is part of the outcome without loss of generality ([B2]).
+
 **Why this choice.**
 - *[A1] judges behaviour in every condition.* A single behaviour is the case of one condition. Situations whose
   frequencies the actor does not choose, such as prompts or arriving patients, are conditions: a response weighted by
@@ -585,6 +768,13 @@ for `c ∈ O`, gives it the same value. Otherwise the set of values that those r
 **In plain terms.** The principal watches the actor only in some situations. A quantity is identified when everything
 that fits what was watched, and what is assumed, gives it one value. Otherwise the honest report is the range of values
 it could take.
+
+**Interpretation.** *Declared.* The observed conditions are those for which a record exists. A quantity is identified
+when every response that agrees with the records and with the declared assumptions gives it one value; its identified
+set is the range of values they give otherwise. *Verified.* Identification is a property of the records and the
+declaration together, checked by computing the identified set. *Justified.* A report that gives one number for what the
+records and the assumptions leave open hides an assumption [@manski2003]; what no record can verify enters only as a
+declared assumption, and the report says which.
 
 **Why this choice.**
 - *It reports what the evidence and the assumptions determine, and no more.* This is partial identification
@@ -617,8 +807,16 @@ judged by, or, when nothing else is known, the objective its own behaviour revea
 evaluator tells, on average under the default, about the principal's objective; the residual is the part of the
 principal's objective that the evaluator does not see.
 
+**Interpretation.** *Declared.* An evaluator is the score the actor is trained, paid or selected on, such as a reward
+model, a performance measure or a fitness; or, when none is known, the objective its own behaviour reveals. The
+regression is what the evaluator says, on average under the default, about the principal's objective, and the residual
+is what it misses. *Verified.* From outcomes drawn from the default and scored by both the principal and the evaluator;
+that the actor pursues a known evaluator can be refuted as any pursuit can ([D2]). *Justified.* The regression depends
+on the evaluator only through the outcomes it scores alike, which is all that a ranking or a selection by the evaluator
+can use.
+
 **Why this choice.**
-- *It adds no assumption.* By [A3] and [P1], every full-support behaviour is the best trade-off for one objective,
+- *It adds no assumption.* By [P4](ii) and [P1], every full-support behaviour is the best trade-off for one objective,
   `log(p̂/q)` at intensity 1, fixed up to a constant ([P1](ii)): every actor has a revealed evaluator. A known evaluator
   is a hypothesis about the actor, which behaviour can test ([P1], [P3]).
 - *It is the actor's counterpart of the principal's objective.* The principal declares a pursuit of `F` from `q`; the
@@ -654,6 +852,13 @@ from `p`. Its **empirical behaviour** `p̂_n` gives each outcome its frequency i
 independently of the others. Counting gives the empirical behaviour. The evidence for one behaviour against another is
 how much more likely the record is under the first than under the second, on a logarithmic scale.
 
+**Interpretation.** *Declared.* A sample is a record of decisions made on separate occasions, independent of each other
+([A4]); the empirical behaviour is the shares in that record; the evidence for one behaviour against another is how much
+more likely the record is under the first, in nats. *Verified.* The record is what is verified; every claim about
+behaviour reaches the world through it. *Justified.* Independence is what makes the shares approach the behaviour ([M2])
+and the evidence add up decision by decision ([A4]); decisions that depend on each other within an episode are one
+outcome ([B2]).
+
 **Why this choice.**
 - *Behaviours are never observed; samples are.* This is the act of measurement that [A1] presumes when it says that
   behaviour can be counted, and that [D9]'s observed conditions stand for.
@@ -663,7 +868,8 @@ how much more likely the record is under the first than under the second, on a l
   (the Neyman–Pearson lemma [@cover2006], read in the open draft of [@polyanskiy2025], Theorem 14.11).
 - *It makes [A4] exact.* The expected evidence per decision, under the actual behaviour, for it against the nearest
   intended behaviour is the misalignment (`derived/estimation.md`). Evidence gained ([A4]) and value lost ([P4](ii))
-  agree, in the same direction of KL, as the steepest climb ([A2]) and the best trade-off ([A3]) agree on the cost.
+  agree, in the same direction of KL, as the steepest climb and the best trade-off, the reasons of [D2], agree on the
+  cost.
 - *It compares explanations in the same unit.* Two evaluators proposed for one actor are compared by the evidence a
   sample gives for one pursuit against the other, in nats, the unit of misalignment and of value.
 - *Independence is the default model.* Successive decisions of one actor can depend on each other; dependent samples

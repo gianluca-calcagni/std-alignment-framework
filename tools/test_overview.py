@@ -23,9 +23,11 @@ def test_items_are_copied_verbatim_with_their_fields():
     for label in ("Statement", "In plain terms", "Proof", "Checks"):
         assert f"**{label}.**" + found["P5"]["fields"][label].rstrip() in p5
     assert "**Notes.**" not in p5 and "**Lineage.**" not in p5
-    a2, a1 = (section(text, f"### {k} — " + found[k]["title"]) for k in ("A2", "A1"))
-    assert "**Why this choice.**" in a2 and "**Why this choice.**" not in a1          # only where the template asks
-    assert "**Proof.**" not in a2
+    a4, a1 = (section(text, f"### {k} — " + found[k]["title"]) for k in ("A4", "A1"))
+    assert "**Why this choice.**" in a4 and "**Why this choice.**" not in a1          # only where the template asks
+    assert "**Proof.**" not in a4 and "**Status.**" + found["A4"]["fields"]["Status"].rstrip() in a4
+    d2 = section(text, "### D2 — " + found["D2"]["title"])
+    assert "**Interpretation.**" + found["D2"]["fields"]["Interpretation"].rstrip() in d2
 
 
 def test_tables_are_copied_whole():

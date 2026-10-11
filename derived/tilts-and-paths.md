@@ -1,8 +1,8 @@
 # Derived — tilts and paths
 
 Every full-support behaviour is a tilt of any other, so describing behaviour as a reweighted default loses nothing
-([P1]). Every change of behaviour follows a replicator equation, which is the steepest climb of [A2] ([P2]). Whether a
-change keeps one objective can be read from the change alone ([P3]).
+([P1]). Every change of behaviour follows a replicator equation, which is the steepest climb in the Fisher metric, the
+first reason of [D2] ([P2]). Whether a change keeps one objective can be read from the change alone ([P3]).
 
 ### P1 — Every behaviour is a tilt of any other
 **Statement.** Let `r ∈ Δ°`.

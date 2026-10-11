@@ -28,6 +28,15 @@ specification on cells declares that it does not care how outcomes inside a cell
 occurs. An actor with a resolution cannot tell the outcomes inside a cell apart: it can change how often each cell
 occurs, but inside a cell the outcomes keep the proportions they have by default.
 
+## Interpretation
+*Declared.* The principal's resolution groups outcomes it declares equally acceptable, such as
+answers that differ only in wording. The actor's resolution groups outcomes it cannot act on separately: inside a cell,
+its decisions keep the default's proportions, as a selection that cannot see inside the cell must. *Verified.* The
+principal's resolution is declared, not measured. The actor's can be refuted from records: if the ratio of two outcomes
+in one cell moves away from the default's, the actor tells them apart (`derived/identifiability.md`). *Justified.* On
+finitely many outcomes, the events a description can decide are the unions of the cells of one partition ([[B1 — Finitely many outcomes|B1]]), so a
+partition is the general form of what either side can tell apart.
+
 ## Why this choice
 - *One object, two positions.* The same kind of object describes what the principal cares to distinguish and what the
   actor can distinguish. Gaps between the two cover two familiar failures: a principal who cares about distinctions the
@@ -56,6 +65,7 @@ positions; retention), and ROADMAP §6 G1, G2 and G4. New: the actor's position 
 deciding inside cells.
 
 ## Depends on
+- [[B1 — Finitely many outcomes|B1]] — Finitely many outcomes
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[P4 — What KL measures|P4]] — What KL measures
 

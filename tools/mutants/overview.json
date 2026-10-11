@@ -1,5 +1,5 @@
 {
- "about": "tools/overview.py, against its tests (2026-10-09). The freshness test is deselected: it fails on any change of the output, so it would catch every mutant whatever the other tests do; the mutants check those, as if OVERVIEW.md had been rebuilt by the broken tool.",
+ "about": "tools/overview.py, against its tests (2026-10-09; v13's fields, 2026-10-11). The freshness test is deselected: it fails on any change of the output, so it would catch every mutant whatever the other tests do; the mutants check those, as if OVERVIEW.md had been rebuilt by the broken tool.",
  "tests": [
   "tools/test_overview.py",
   "-k",
@@ -21,8 +21,8 @@
    "edits": [
     [
      "tools/overview.py",
-     "    for label in labels[:2] + (\"Why this choice\",) * why + labels[2:]:",
-     "    for label in labels:"
+     "    labels = sorted(FIELDS.get(it[\"kind\"], RESULT_FIELDS) + (\"Why this choice\",) * why, key=lint.FIELDS.index)",
+     "    labels = sorted(FIELDS.get(it[\"kind\"], RESULT_FIELDS), key=lint.FIELDS.index)"
     ]
    ]
   },
@@ -73,6 +73,26 @@
      "tools/overview.py",
      "            out += [f\"**{label}.**{it['fields'][label].rstrip()}\", \"\"]",
      "            out += [f\"**{label}.**{it['fields'][label].splitlines()[0]}\", \"\"]"
+    ]
+   ]
+  },
+  {
+   "name": "premises without their Status",
+   "edits": [
+    [
+     "tools/overview.py",
+     "CORE_FIELDS = (\"Statement\", \"In plain terms\", \"Status\")",
+     "CORE_FIELDS = (\"Statement\", \"In plain terms\")"
+    ]
+   ]
+  },
+  {
+   "name": "definitions without their Interpretation",
+   "edits": [
+    [
+     "tools/overview.py",
+     "\"D\": (\"Statement\", \"In plain terms\", \"Interpretation\")}",
+     "\"D\": (\"Statement\", \"In plain terms\")}"
     ]
    ]
   }

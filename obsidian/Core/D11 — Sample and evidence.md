@@ -17,6 +17,14 @@ A sample is a record of what the actor did on separate occasions, each drawn fro
 independently of the others. Counting gives the empirical behaviour. The evidence for one behaviour against another is
 how much more likely the record is under the first than under the second, on a logarithmic scale.
 
+## Interpretation
+*Declared.* A sample is a record of decisions made on separate occasions, independent of each other
+([[A4 — Misalignment is evidence|A4]]); the empirical behaviour is the shares in that record; the evidence for one behaviour against another is how much
+more likely the record is under the first, in nats. *Verified.* The record is what is verified; every claim about
+behaviour reaches the world through it. *Justified.* Independence is what makes the shares approach the behaviour ([[M2 — Independent repetition|M2]])
+and the evidence add up decision by decision ([[A4 — Misalignment is evidence|A4]]); decisions that depend on each other within an episode are one
+outcome ([[B2 — Episodes and conditions as outcomes|B2]]).
+
 ## Why this choice
 - *Behaviours are never observed; samples are.* This is the act of measurement that [[A1 — Behaviour suffices|A1]] presumes when it says that
   behaviour can be counted, and that [[D9 — Observation and identification|D9]]'s observed conditions stand for.
@@ -26,7 +34,8 @@ how much more likely the record is under the first than under the second, on a l
   (the Neyman–Pearson lemma [[References|@cover2006]], read in the open draft of [[References|@polyanskiy2025]], Theorem 14.11).
 - *It makes [[A4 — Misalignment is evidence|A4]] exact.* The expected evidence per decision, under the actual behaviour, for it against the nearest
   intended behaviour is the misalignment (`derived/estimation.md`). Evidence gained ([[A4 — Misalignment is evidence|A4]]) and value lost ([[P4 — What KL measures|P4]](ii))
-  agree, in the same direction of KL, as the steepest climb ([[A2 — Pursuit is the steepest climb|A2]]) and the best trade-off ([[A3 — Pursuit is the best trade-off|A3]]) agree on the cost.
+  agree, in the same direction of KL, as the steepest climb and the best trade-off, the reasons of [[D2 — Pursuit of an objective|D2]], agree on the
+  cost.
 - *It compares explanations in the same unit.* Two evaluators proposed for one actor are compared by the evidence a
   sample gives for one pursuit against the other, in nats, the unit of misalignment and of value.
 - *Independence is the default model.* Successive decisions of one actor can depend on each other; dependent samples
@@ -41,10 +50,11 @@ v7.10: Prop 18 (detection) and the deviance of v8's [[P5 — Misalignment is att
 New: the definition, and evidence as the second meaning of misalignment.
 
 ## Depends on
+- [[M2 — Independent repetition|M2]] — Independent repetition
+- [[B2 — Episodes and conditions as outcomes|B2]] — Episodes and conditions as outcomes
 - [[A1 — Behaviour suffices|A1]] — Behaviour suffices
-- [[A2 — Pursuit is the steepest climb|A2]] — Pursuit is the steepest climb
-- [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
+- [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[D9 — Observation and identification|D9]] — Observation and identification
 - [[P4 — What KL measures|P4]] — What KL measures
 

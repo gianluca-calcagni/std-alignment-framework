@@ -56,7 +56,8 @@ gap between the ordinal and the budget measure is of second order in `M_ord`; th
 
 ## Lineage
 v7.10: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure), with Prop 31 (c); R7-7.
-v13: the definition moved to [[D3 — Specification, declaration and misalignment|D3]], where [[A6 — Declared no finer than identified|A6]] makes it the specification for actors that rank.
+v13: the definition moved to [[D3 — Specification, declaration and misalignment|D3]], as a specification a principal may declare, and reported beside the standard one
+(`STANDARD.md`).
 
 ## Checks
 - [`checks/test_misalignment.py::test_ordinal_objectives`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_misalignment.py)
@@ -66,4 +67,4 @@ v13: the definition moved to [[D3 — Specification, declaration and misalignmen
 - [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
-- no later item
+- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits

@@ -68,10 +68,12 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D4 — Resolution|D4]] — Resolution
+- [[D10 — Evaluator, regression and residual|D10]] — Evaluator, regression and residual
 - [[D11 — Sample and evidence|D11]] — Sample and evidence
 - [[P14 — The cost of departing from the default is forced|P14]] — The cost of departing from the default is forced
 - [[P38 — Any convex cost|P38]] — Any convex cost
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives
+- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits
 - [[P7 — Indifference forgives exactly what happens inside cells|P7]] — Indifference forgives exactly what happens inside cells
 - [[P8 — An actor that cannot tell outcomes apart|P8]] — An actor that cannot tell outcomes apart
 - [[P9 — What is at stake|P9]] — What is at stake

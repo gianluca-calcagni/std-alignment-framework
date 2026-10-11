@@ -15,8 +15,10 @@ behaviour and a set of acceptable behaviours. Misalignment is the KL divergence 
 acceptable one, in nats. The usual acceptable set is "pursue `F`": the default reweighted by `e^{t·F}`, at every
 intensity `t ≥ 0`.
 
-The framework does not assume KL, reweighting or the order of KL's arguments. It derives them from six premises
-(section 2) through the results of section 4, so a reader who rejects a premise can see which results fall with it.
+The framework does not assume KL or the order of its arguments: they follow from the premise that misalignment is a
+rate of evidence (A4, section 2). Reweighting is the definition of pursuit, and its two reasons, the steepest climb and
+the best trade-off, agree on it and on KL (section 3, and [P2] and [P14] in section 4). No result cites a premise in its
+proof: a reader who rejects a premise keeps every result, and loses the meaning the premise gives it.
 
 In familiar terms: the pursuits of `F` form the one-parameter exponential family with base `q`, statistic `F` and
 natural parameter `t ≥ 0`. Misalignment is the KL divergence from the actual behaviour to that family, which maximum
@@ -30,79 +32,115 @@ can be compared (`STANDARD.md`). The second is a set of diagnostics that split a
 what a named objective explains, the drift between training runs, and the tampering with a measurement. It is not a
 theory of how an actor comes to behave as it does, nor of which objective is right.
 
-The core has 6 premises and 11 definitions. From them `derived/` proves 52 propositions and 1 lemma, and states 12
-things the core rules out (C1–C12).
+The core imports 3 axioms from probability theory, sets 4 background conditions without loss of generality, rests on 3
+premises, and makes 11 definitions. From them `derived/` proves 53 propositions and 1 lemma, and states 12 things the
+core rules out (C1–C12).
 
 Each result has a proof and checks that run in CI. The checks are numerical, so they catch slips in a statement or in
 code; they do not replace the proofs. No reader independent of the project has checked the proofs yet. That check is
 what this overview asks for (`REQUESTS.md`, R1).
 
-## 2. Setting and premises
+## 2. Foundations
 
-Notation first. The premises then say what alignment is judged on (A1), what pursuing an objective means, geometrically
-(A2) and economically (A3), what misalignment measures (A4), when the standard of judgement is fixed (A5), and how fine
-it may be (A6). This is the draft v13 (`NOTES.md` §16): in v12, A4 said that misalignment is value lost, and there was
-no A6.
+The core is built by the method of reverse physics (`CORE.md` §0): it separates what it imports from probability theory
+(M), the representation it assumes without loss of generality (B), and what it assumes about judging alignment (A), and
+each of these says, in its Status, what kind of starting point it is. Every definition declares its interpretation: what
+its object is in the world, how a record verifies it, and why that map is right. The premises say what alignment is
+judged on (A1), what misalignment measures (A4), and when the standard of judgement is fixed (A5). This is v13
+(`NOTES.md` §16, §17): in v12, A4 said that misalignment is value lost, and two more premises, A2 and A3, said what
+pursuing is; they are now the reasons of D2, as no result used them.
 
-### D1 — Outcomes, behaviours, divergence and tilt
+### M1 — Probability on finitely many outcomes
 
-**Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
-distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
-`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and `Var_p(F) = E_p[F²] − E_p[F]²`, and
-`Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For
-`p, r ∈ Δ`, the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite
-when `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
-`tilt(r, F) = r·e^F / E_r[e^F]`.
+**Statement.** On a finite set, a probability gives each element a non-negative mass, and the masses add up to one. The
+probability of a subset is the sum of the masses of its elements; given a subset of positive probability, the
+probability of another is the probability of their intersection divided by that of the first. The average of a function
+is the sum of its values, each weighted by its mass.
 
-**In plain terms.** Outcomes are the things that can happen, and a behaviour says how often each one happens; full
-support means that nothing is ruled out entirely. KL measures how far one behaviour is from another; it is not
-symmetric, so the order matters. Tilting reweights a behaviour toward the outcomes that a function scores higher.
+**In plain terms.** Shares of a whole: each thing that can happen gets a share, the shares add up to one, and an
+average weighs each value by its share.
+
+**Status.** Imported from probability theory as it is: Kolmogorov's axioms in their finite case, where additivity over
+countably many sets reduces to finite sums. It assumes nothing about actors or principals.
+
+### M2 — Independent repetition
+
+**Statement.** Decisions drawn independently from one probability have, jointly, the product of their probabilities.
+The share of an outcome `x` among `n` such decisions has average `p(x)` and variance `p(x)·(1 − p(x))/n`, so it lies
+within `ε > 0` of `p(x)` with probability at least `1 − p(x)·(1 − p(x))/(n·ε²)`.
+
+**In plain terms.** When decisions do not influence each other, the shares in a long record come as close as one likes
+to the actor's behaviour, with a known chance of missing.
+
+**Status.** Imported from probability theory: independence as the product of probabilities. The bound is Chebyshev's
+inequality, shown below; nothing else is imported.
+
+### M3 — Imported theorems
+
+**Statement.** Besides finite sums and [M2], the results of `derived/` use these theorems: Gibbs' and Pinsker's
+inequalities; the Neyman–Pearson lemma; the central limit theorem and the delta method; Wilks's theorem; Chernoff's
+theorem; Huber's limit law for estimates that solve an equation; and Čencov's theorem, which gives one reason for the
+definition of pursuit (section 2) and nothing a result rests on.
+
+**In plain terms.** The framework borrows a short list of standard theorems, each checked in a text anyone can read,
+and assumes nothing else from outside.
+
+**Status.** Imported, each with its hypotheses quoted where a result uses it, and read in a text anyone can read without
+paying, or derived where it is used; `REFERENCES.md` says where each is read.
+
+### B1 — Finitely many outcomes
+
+**Statement.** The outcomes of a decision are finitely many.
+
+**In plain terms.** Whatever happens is sorted into one of finitely many results that a record can tell apart.
+
+**Status.** A background condition, assumed without loss of generality for every quantity that finite descriptions
+determine.
+
+### B2 — Episodes and conditions as outcomes
+
+**Statement.** Decisions that depend on each other within an episode count as one outcome, the episode; and a situation
+the actor does not choose counts as part of the outcome, with its frequency fixed.
+
+**In plain terms.** A whole conversation, game or treatment can be one outcome, and the situation it happened in can be
+part of it.
+
+**Status.** A background condition, assumed without loss of generality: episodes, and pairs of a situation and an
+outcome, are again finitely many outcomes ([B1]), with a behaviour on them. What it moves is independence, assumed
+between episodes rather than within them (section 1, premise A4).
+
+### B3 — An objective up to scale and constant
+
+**Statement.** An objective `F` and `a·F + c`, for numbers `a > 0` and `c`, state the same aim; the units of `F` matter
+only to the stakes.
+
+**In plain terms.** Doubling every score, or adding the same amount to all of them, does not change what is asked for.
+
+**Status.** A background condition, assumed without loss of generality: pursuit, every specification built from `F`,
+and misalignment are unchanged by the change; the stakes are reported in the declared units, and scale with `a`.
+
+### B4 — One actor and one principal
+
+**Statement.** Several actors acting on joint outcomes count as one actor, and several principals with declared weights
+count as one principal.
+
+**In plain terms.** A team is judged as one player on what the team does, and a committee with agreed weights as one
+judge.
+
+**Status.** A background condition, assumed without loss of generality once the joint outcomes and the weights are
+declared. How a group reaches its joint behaviour, and how the weights are chosen, are out of scope (section 0).
 
 ### A1 — Behaviour suffices
 
-**Statement.** What an actor does is described by how often each of finitely many outcomes occurs, in each condition it
-may face. Alignment is judged from that description alone, never from how the behaviour is produced.
+**Statement.** What an actor does is described by how often each outcome occurs, in each condition it may face.
+Alignment is judged from that description alone, never from how the behaviour is produced.
 
 **In plain terms.** We judge what the actor does, in every situation it may meet, and not what goes on inside it.
 
-### A2 — Pursuit is the steepest climb
-
-**Statement.** To pursue an objective is to raise its average as steeply as possible, with steepness measured in a
-Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
-proportions.
-
-**In plain terms.** Wanting more of something means moving toward it by the most direct route, with lengths and angles
-measured as in ordinary geometry, and what counts as most direct must not depend on how finely we describe what
-happens.
-
-**Why this choice.**
-- *Description-independence is the least we can ask.* Two observers who describe the same events at different
-  granularity must agree on what pursuing an objective means.
-- *It is enough.* By Čencov's theorem [@cencov1982], whose statement is read in the open text [@le2016] (Proposition
-  6.1), it fixes the geometry, up to a constant factor, and with it the form of pursuit, a reweighting of the default
-  (section 2 and `derived/tilts-and-paths.md`).
-- *What it covers.* With A3, it says what pursuing is, and so which specification fits an actor that pursues: the
-  pursuit ray (section 3, and A6). It does not fix the measure, which rests on evidence (A4).
-- *Riemannian.* Steepness needs a length for each direction of change. An inner product gives one, and Čencov's theorem
-  is stated for these. A geometry whose lengths come from a norm that is not an inner product would need a uniqueness
-  theorem of its own, and none is known here; the premise does not cover it.
-
-### A3 — Pursuit is the best trade-off
-
-**Statement.** To pursue an objective at an intensity is to choose the behaviour with the largest average of the
-objective minus a cost of departing from the default, priced at the reciprocal of the intensity. With the default
-fixed, the cost depends only on the behaviour, and is differentiable.
-
-**In plain terms.** Pursuing harder means accepting more cost of change for more of what is pursued. The cost of change
-depends only on how the behaviour changes, not on what is pursued.
-
-**Why this choice.**
-- *It says what intensity means.* The reciprocal of the intensity is the price of one nat of departure, in the
-  objective's units: an actor that pursues intensely treats departure as cheap.
-- *Together with A2 it fixes the cost.* The steepest climb is also the best trade-off for exactly one cost: the KL
-  divergence from the default (`derived/value.md`). A2 is a geometric premise and A3 an economic one; they agree in one
-  way only. Since v13 that cost gives misalignment a second reading, as value lost (A4); the measure does not rest on
-  it.
+**Status.** A principle, conceptual. A judgement that a principal can check rests on what a record can verify, and a
+record verifies what the actor does, not how it does it: the principle that science is universal, non-contradictory and
+evidence based [@carcassi2021], applied to judging an actor. "In every condition" makes it a principle about all the
+situations the actor may meet, not only those recorded.
 
 ### A4 — Misalignment is evidence
 
@@ -112,6 +150,11 @@ with evidence counted as the logarithm of the ratio of the record's likelihoods.
 
 **In plain terms.** Watch the actor decide, one occasion after another. Misalignment is how fast the record builds a
 case that the actor is not acting in any acceptable way, against the acceptable way it resembles most.
+
+**Status.** Its form is a principle, conceptual: once evidence is the log-likelihood ratio and misalignment its rate
+under the actual behaviour against the nearest accepted one, the measure follows from the definitions, with no further
+assumption. It rests on one assumption, phenomenological: that decisions are drawn independently from one behaviour,
+between episodes ([B2]). A case states it, and can test it (`STANDARD.md`, the field Sampling).
 
 **Why this choice.**
 - *It needs nothing about the actor.* Evidence is defined by the record and the two behaviours compared, so the measure
@@ -127,8 +170,8 @@ case that the actor is not acting in any acceptable way, against the acceptable 
   the record exact.
 - *Value lost, as a reading.* Every full-support behaviour is the best trade-off for its own objective at a KL price
   ([P4](ii)), so the same number is the least net value lost against an accepted behaviour, judged by that behaviour's
-  own objective. Until v12 that reading was the premise, and it needed [A2] and [A3] to make the price KL ([P14]); here
-  it is a consequence, and the measure rests on evidence alone.
+  own objective. Until v12 that reading was the premise, and it needed two premises on pursuit to make the price KL
+  ([P14]); here it is a consequence, and the measure rests on evidence alone.
 
 ### A5 — Declared before
 
@@ -137,33 +180,42 @@ judge.
 
 **In plain terms.** Decide what counts as acceptable before looking at what the actor did.
 
-### A6 — Declared no finer than identified
+**Status.** A principle, conceptual: a standard fitted to the behaviour it judges cannot be refuted by that behaviour,
+so fixing it first is what makes the judgement a test. It is a logical necessity of testing, not an observation.
 
-**Statement.** A specification of an objective distinguishes no more than the actor's way of acting can carry: its
-values, up to a positive factor and a constant, for an actor that pursues as [A2] and [A3] say; only its order for an
-actor that ranks outcomes, or whose way of acting is not known; unless the declaration says why a finer one applies.
+## 3. Behaviour, pursuit and misalignment
 
-**In plain terms.** Judge an actor only on what its way of acting can express. An actor that weighs outcomes by how
-much better they are is judged on the objective's values; one that only picks the better of what it sees, or whose
-method is unknown, is judged on their order.
+Notation first. Pursuit is then defined as a reweighting of the default, and its reasons say why; section 4 proves
+them. Misalignment is defined for any declared set of acceptable behaviours. The standard specification, "pursue `F`",
+is the case with closed forms; the ordinal one, which accepts every behaviour that respects the order of `F`, is
+reported beside it.
 
-**Why this choice.**
-- *A finer declaration charges what no behaviour of that kind could show.* An actor that keeps the best of `n` draws by
-  `F` compares draws only by their order under `F`, so it behaves alike for every increasing transformation of `F`, and
-  nothing in its behaviour depends on the values of `F` beyond their order. Judged by those values, it is charged for
-  its method rather than for its goal (Notes).
-- *A pursuer's class.* A pursuit reveals its objective up to a positive factor and a constant ([P1](ii)), and the
-  pursuit ray, which accepts every intensity, declares exactly that.
-- *Other channels.* A learner of preferences compared within one context identifies the objective only up to a constant
-  in each context: a specification across contexts that charges those constants is finer than the channel, while one
-  stated condition by condition is not.
-- *Coarser is allowed; finer needs a reason.* A principal may declare less than the actor's way of acting carries, and
-  lose sensitivity. Declaring more is a claim about the actor, which the declaration states and a case can test.
+### D1 — Outcomes, behaviours, divergence and tilt
 
-## 3. Pursuit and misalignment
+**Statement.** `X` is a finite set of **outcomes**, with at least two elements. A **behaviour** is a probability
+distribution `p` on `X`. `Δ` is the set of behaviours, and `Δ°` the set of **full-support** behaviours, those with
+`p(x) > 0` for every `x`. For `p ∈ Δ` and `F : X → ℝ`, `E_p[F] = Σ_x p(x)·F(x)` and `Var_p(F) = E_p[F²] − E_p[F]²`, and
+`Cov_p(F, G) = E_p[F·G] − E_p[F]·E_p[G]`; for a set `C ⊆ X` with `p(C) > 0`, `p(·|C)` is `p` conditioned on `C`. For
+`p, r ∈ Δ`, the **Kullback–Leibler divergence** is `KL(p‖r) = Σ_{x : p(x) > 0} p(x)·log(p(x)/r(x))`, which is finite
+when `r(x) > 0` wherever `p(x) > 0`, and `+∞` otherwise. The **tilt** of `r ∈ Δ°` by `F : X → ℝ` is the behaviour
+`tilt(r, F) = r·e^F / E_r[e^F]`.
 
-Pursuit is defined as a reweighting of the default. Section 4 shows that A2 leads to it. Misalignment is defined for any
-declared set of acceptable behaviours. The standard specification, "pursue `F`", is the case with closed forms.
+**In plain terms.** Outcomes are the things that can happen, and a behaviour says how often each one happens; full
+support means that nothing is ruled out entirely. KL measures how far one behaviour is from another; it is not
+symmetric, so the order matters. Tilting reweights a behaviour toward the outcomes that a function scores higher.
+
+**Interpretation.** *Declared.* An outcome is the narrowest result that a record of one decision tells apart from the
+others, such as the answer an assistant gave or whether a patient was seen within four hours. A behaviour is the actor's
+ensemble in one condition: the shares its outcomes take over unboundedly many independent decisions ([M2]). `E_p[F]` is
+the average score of those decisions. `KL(p‖r)` is the evidence one decision of an actor behaving as `p` gives, on
+average, against `r` ([A4]). `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
+probability proportional to `e^F`: a selection a principal could carry out, by accepting or rejecting decisions.
+*Verified.* Which outcome occurred is decided by the record of one decision. A behaviour is approached by the shares in
+a record, never reached ([M2]): `p(x) > 0` is verified by a single occurrence of `x`, while `p(x) = 0` can only be
+refuted, and no record verifies an exact mass. *Justified.* Outcomes exclude each other and are decidable, and ensembles
+of decisions mix, so the behaviours are the points of a simplex, and averages are affine in them ([M1]). Masses that are
+exactly zero, or irrational, are idealizations no record verifies; the definitions that follow ask for full support
+where a divergence must stay finite.
 
 ### D2 — Pursuit of an objective
 
@@ -178,6 +230,16 @@ scores higher, and the intensity says how strongly. Intensity zero is the defaul
 every intensity. A path of behaviours pursues an objective when it keeps reweighting toward that same objective, never
 away from it, from wherever it starts.
 
+**Interpretation.** *Declared.* The default is what the actor does when it pursues nothing in particular: the base
+policy before tuning, the status quo, the population before selection, measured apart from the behaviour to be judged.
+An objective is a score of outcomes. To pursue it at intensity `t` is to keep the default's decisions in proportion to
+`e^{t·F}`: selection with fitness `e^F` for `t` generations, the logit choice of an actor whose rationality is `t`, or
+the optimum of training on `F` with a penalty of `1/t` on the departure from the default. A path pursues `F` when every
+change along it reweights toward that one score. *Verified.* That an actor pursues `F` from `q` can be refuted from
+records: its revealed objective `log(p/q)` must be an affine function of `F`, with a slope that is not negative, in
+every condition (`derived/tilts-and-paths.md`). Only the product `t·F` is identified ([B3]). *Justified.* below: the
+reasons for the ray are geometric and economic, and the two agree on it.
+
 **Why this choice.**
 - *It loses no generality.* Every full-support behaviour `p` lies on the pursuit ray of some objective, from any
   default: `p = p_{F,1}` with `F = log(p/q)` ([P1](i)). Every path of behaviours follows the replicator equation of an
@@ -185,13 +247,23 @@ away from it, from wherever it starts.
   stays fixed, which a derived result makes testable (`derived/tilts-and-paths.md`). Mixing a behaviour with another,
   for example, generally gives a path whose objective turns, as that result's check shows; cut-offs that exclude
   outcomes leave `Δ°` altogether.
-- *It is canonical, given [A2].* Pursuing `F` means climbing `E_p[F]` as steeply as possible, in a Riemannian geometry
-  on behaviours that is unchanged when outcomes are split into sub-outcomes in fixed proportions. Up to a constant
-  factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's theorem
-  [@cencov1982], extended by [@campbell1986]; read in the open texts [@le2016], Proposition 6.1, and [@ay2015],
+- *The steepest climb.* To pursue an objective is to raise its average as steeply as possible, with steepness measured
+  in a Riemannian geometry on behaviours that does not change when outcomes are split into finer outcomes in fixed
+  proportions: two observers who describe the same events at different granularity must agree on what pursuing means.
+  Up to a constant factor, the Fisher metric is the only such geometry, across outcome spaces of every size (Čencov's
+  theorem [@cencov1982], extended by [@campbell1986]; read in the open texts [@le2016], Proposition 6.1, and [@ay2015],
   Corollary 3.20). In the Fisher metric the steepest climb is the replicator field ([P2](ii)), and its flow from `q` is
-  `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the same. A notion of
-  pursuit that must not depend on how finely outcomes are described is therefore led to this ray.
+  `tilt(q, s·F)` ([P2](iii)). A constant factor in the metric only rescales time, so the ray is the same. A geometry
+  whose lengths come from a norm that is not an inner product would need a uniqueness theorem of its own; none is known
+  here, and this reason does not cover it.
+- *The best trade-off.* To pursue at intensity `t` is also to choose the behaviour with the largest average of `F` minus
+  a cost of departing from the default, priced at `1/t` in the units of `F`, the cost depending only on the behaviour:
+  an actor that pursues intensely treats departure as cheap. The ray is that choice for exactly one differentiable cost,
+  up to a constant, the KL divergence from the default, so the geometric reason and the economic one agree in one way
+  only (Notes).
+- *Reasons, not premises.* Until v12 the two reasons above were the premises A2 and A3. No result uses them: the
+  results hold of the ray as defined. They carry its interpretation, that the ray is what pursuing means; a reader who
+  rejects both keeps every result, and loses that reading (`NOTES.md` §17).
 - *The ray needs a default; the path does not.* The same objective pursued from two defaults gives two different rays,
   so the specification of section 3 fixes the default. Whether a path pursues `F` needs no default at all, which is why
   derived results can read pursuit from changes of behaviour without declaring one.
@@ -202,10 +274,8 @@ away from it, from wherever it starts.
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
 For an objective `F`, the **standard specification** is `(q, R_F)`: pursuit of `F` from `q` at every intensity,
 including none; the **ordinal specification** is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of
-F}`. A specification of `F` is **matched** to an actor if it is the standard specification and the actor is declared to
-pursue as [A2] and [A3] say, or the ordinal specification and the actor is not. A specification is **declared** when it
-is fixed as [A5] and [A6] require: before, and without using, the behaviour it will judge, and no finer than the matched
-one unless the declaration says why.
+F}`. A specification is **declared** when it is fixed as [A5] requires: before, and without using, the behaviour it
+will judge.
 
 **In plain terms.** Before looking at what the actor does, the principal states a default behaviour and the set of
 behaviours it would accept. Misalignment is how far the actual behaviour is from the nearest acceptable one, in nats:
@@ -215,19 +285,33 @@ objective is acceptable, including none. For an actor that only ranks outcomes, 
 behaviour that favours better outcomes at least as much as worse ones, relative to the default, is acceptable. Under
 either, an actor that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
+**Interpretation.** *Declared.* A specification is the principal's standard, written down and dated before the record it
+judges is read ([A5]): a default, and the ensembles the principal accepts. Misalignment is the rate, in nats per
+decision, at which a record of the actor builds the case that it acts in no accepted way ([A4]): about `1/M` decisions
+give one nat, odds of about `e` to one. The standard specification accepts every strength of pursuing `F`, none
+included; the ordinal one accepts every ensemble that favours each outcome at least as much as any outcome `F` scores
+lower, relative to the default. *Verified.* `M > ε`, for `ε > 0`, is verifiable in the statistical sense: the evidence
+of a growing record crosses any threshold with a probability that tends to one. `M = 0` can only be refuted. An actor
+can be shown to be misaligned; it can never be shown to be exactly aligned, only consistent with alignment at a stated
+precision. *Justified.* Evidence is what a record supplies ([A4]), and fixing the standard first is what makes the
+judgement a test ([A5]).
+
 ## 4. The results the rest stands on
 
 Six results, in their reading order.
 - [P1]: nothing is lost by writing behaviour as a reweighted default.
-- [P2]: reweighting toward a fixed objective is the steepest climb of A2.
+- [P2]: reweighting toward a fixed objective is the steepest climb in the Fisher metric, D2's first reason.
 - [P4]: KL is exactly the value lost against a pursuit, a second reading of A4's evidence.
-- [P14]: A2 and A3 together leave one cost of departing from the default, KL.
+- [P14]: the steepest climb is the best trade-off, D2's second reason, for one cost of departing from the default, KL.
 - [P5]: misalignment is attained, is zero exactly where it should be, and has closed forms for "pursue `F`".
 - [P6]: the departure from the default splits into pursuit and misalignment, a split the standard asks every report for.
+  [P53], in `derived/`, reads the split for every specification the core defines: misalignment is the departure beyond
+  what the specification credits.
 
-Each proof is complete given the items it cites and the facts it names as standard. Five of those facts are imported.
-- Čencov's theorem enters through the reasons for A2 and D2, above. Its statement is read in the open text they cite,
-  and its proof is Čencov's.
+Each proof is complete given the items it cites and the facts it names as standard. Five of those facts are imported
+(M3 lists every theorem the results import).
+- Čencov's theorem enters through the first reason of D2, above. Its statement is read in the open text they cite, and
+  its proof is Čencov's.
 - Gibbs' and Pinsker's inequalities are read in an open text, which the Notes of [P4] and [P5] in `derived/` cite.
 - Cauchy–Schwarz, and the uniqueness of solutions of an ODE with a locally Lipschitz field, are textbook facts.
 
@@ -323,9 +407,9 @@ checks/test_value.py::test_other_divergences_break_the_chain_rule
 **Statement.** Let `q ∈ Δ°` and let `c : Δ° → ℝ` be differentiable. For every `F : X → ℝ` and every `t > 0`, the pursuit
 `p_{F,t}` maximizes `E_p[F] − c(p)/t` over `Δ°` if and only if `c(p) = KL(p‖q) + C` for a constant `C`.
 
-**In plain terms.** If pursuing an objective by the steepest route ([A2]) is also the best trade-off between the
-objective and a cost of change ([A3]), then the cost of change can only be the KL divergence from the default. No other
-cost makes the two agree.
+**In plain terms.** If pursuing an objective by the steepest route is also the best trade-off between the objective and
+a cost of change, the two reasons of [D2], then the cost of change can only be the KL divergence from the default. No
+other cost makes the two agree.
 
 **Proof.** Write `Dc(p)·v` for the derivative of `c` at `p` along a tangent vector `v`, one with `Σ_x v(x) = 0`. If
 `c = KL(·‖q) + C`, then `E_p[F] − c(p)/t = J_t(p) − C/t`, which [P4](i) maximizes at `p_{F,t}`. Conversely, `p_{F,t}`
@@ -429,7 +513,7 @@ the results before it, which lint rule R5 enforces.
 |---|---|---|---|
 | 1 | `tilts-and-paths.md` | P1–P3 | every behaviour is a tilt of the default; every change of behaviour follows a replicator equation, the steepest climb; a fixed objective is visible in the changes |
 | 2 | `value.md` | P4, P14, P38 | KL is exactly the net value lost against a pursuit; the cost of departing from the default can only be KL; the same identity for any convex cost |
-| 3 | `misalignment.md` | P5, P6, P35, P36 | when misalignment is attained and zero; its closed forms for "pursue `F`"; the split of the departure; floors and caps on the strength of pursuit; ordinal objectives |
+| 3 | `misalignment.md` | P5, P6, P35, P36, P53 | when misalignment is attained and zero; its closed forms for "pursue `F`"; the split of the departure; floors and caps on the strength of pursuit; ordinal objectives; what each specification credits, and misalignment as the departure beyond it |
 | 4 | `resolution.md` | P7, P8 | what declared indifference forgives; what an actor that cannot tell outcomes apart can achieve |
 | 5 | `stakes.md` | P9, P10 | the shortfall and its three causes; sensitivity to the declared default and objective |
 | 6 | `identifiability.md` | P11–P13, P16, P17 | the start of a change; pass-through; what an actor can hide where it is not observed |
@@ -466,20 +550,25 @@ standard's validator accepts.
 ## 7. What to check
 
 The proofs above, line by line. These are the places where a careful reader should push.
-1. **From A2 to the Fisher metric.** Čencov's theorem needs a Riemannian geometry, and invariance under splitting
-   outcomes for outcome sets of every size at once. A2 asks for both, the first since v12. A geometry that measures
+1. **From the steepest climb to the Fisher metric.** Čencov's theorem needs a Riemannian geometry, and invariance under
+   splitting outcomes for outcome sets of every size at once. D2's first reason asks for both. A geometry that measures
    steepness by a norm that is not an inner product is not covered. A reader may reject either requirement, and [P2]
    then loses its reading as the steepest climb, though not its algebra.
-2. **The price in A3.** [P14] forces KL because A3 prices departure at exactly `1/t`. If the best trade-offs are only
-   asked to lie somewhere on the pursuit ray, any increasing function of KL passes ([P14], Notes).
+2. **The price in the best trade-off.** [P14] forces KL because D2's second reason prices departure at exactly `1/t`.
+   If the best trade-offs are only asked to lie somewhere on the pursuit ray, any increasing function of KL passes
+   ([P14], Notes). Since v13 the measure does not rest on this: A4 fixes it.
 3. **Evidence in A4.** Misalignment is the rate of evidence, under the actual behaviour, against the nearest acceptable
    behaviour; that choice fixes the order of KL's arguments. Value lost is the same number ([P4](ii)), and the loss in
-   the principal's own units is a different quantity, the stakes ([D5]).
+   the principal's own units is a different quantity, the stakes ([D5]). The assumption in A4 that can fail is
+   independence between episodes (B2).
 4. **The edge cases of [P5](iv).** An actor that only ever picks the best outcomes is charged unless it splits its
    choices among tied outcomes as the default does.
-5. **The rule in A6.** Declaring the standard specification only for an actor declared to pursue moves a judgement into
-   the declaration: someone must say how the actor acts. A reader may prefer one specification for every actor, for
-   comparability, and pay for it with charges for the method rather than the goal.
+5. **Which specification.** No premise says which specification a principal declares. The standard one charges
+   best-of-`n` on `F` for its method as well as its goal ([P36], [P53]); the standard asks for the ordinal misalignment
+   beside it, so that the charge is visible. A5 fixes the choice before the data; nothing fixes it across principals.
+6. **The interpretations.** Each definition declares what its object is in the world and how a record verifies it. They
+   carry the bridge from the results to judging an actor, and no check tests them: a reader may reject one, and the
+   results stand while their reading falls.
 
 The checks of these six results run in a few seconds, from the repository's root, after
 `pip install -r requirements.txt`:
@@ -522,7 +611,8 @@ Open an issue, or a pull request under the terms of `CONTRIBUTING.md`.
 
 - **Finite outcomes.** Outcomes that are not finite are drafted in `CORE-GENERAL.md`, and nothing there is claimed.
 - **Behaviour only.** Two actors that behave alike in every condition are the same actor for the framework ([A1]).
-- **Premises are choices.** Each premise is argued for in its "Why this choice" in `CORE.md`, not proved.
+- **Premises are choices.** Each premise is argued for in its "Why this choice" in `CORE.md`, not proved, and its
+  Status says whether it is a principle or an assumption that may fail.
 - **Imported theorems.** Every theorem a result imports is read in an open text or derived where it is used, and
   `REFERENCES.md` says which. Čencov's own proof is not in the open texts read here; an extension of it is.
 - **Prediction.** On data not seen before, three predictions of the framework were tested and one held (W1 and W3,
