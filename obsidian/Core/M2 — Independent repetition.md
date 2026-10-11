@@ -29,7 +29,7 @@ inequality, shown below; nothing else is imported.
   deviation of at least `ε` by that variance over `ε²`.
 
 ## Lineage
-New in v13: before, part of [[D11 — Sample and evidence|D11]]'s reasons.
+New in v13: before, part of [[D11 — Record, sample and evidence|D11]]'s reasons.
 
 ## Depends on
 - nothing
@@ -37,4 +37,5 @@ New in v13: before, part of [[D11 — Sample and evidence|D11]]'s reasons.
 ## Used by
 - [[M3 — Imported theorems|M3]] — Imported theorems
 - [[D1 — Outcomes, behaviours, divergence and tilt|D1]] — Outcomes, behaviours, divergence and tilt
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
+- [[P55 — What a record of counts certifies, at every size|P55]] — What a record of counts certifies, at every size

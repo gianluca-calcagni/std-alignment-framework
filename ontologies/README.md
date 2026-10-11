@@ -67,12 +67,12 @@ The Core column names the item below.
 | **outcomes** | [D1] | a finite set | what one outcome is, and how a continuum is cut into finitely many |
 | **contexts** | [D8] | conditions whose frequencies the actor does not choose | the part of an outcome that is fixed before the actor acts, or "none" |
 | **behaviour** | [D1] | a distribution on the outcomes | whose behaviour, counted over what (people, occasions, generations), and how it is measured |
-| **sample** | [D11] | independent draws from a behaviour | what one draw is, how many there are in each condition, and why independence is a fair model |
+| **sample** | [D11] | a record of decisions; a sample when they are independent draws from one behaviour | what one decision is, how many there are in each condition, what one episode is, and whether independence between episodes is a fair model for the intervals; the test of [P55] needs none |
 | **default** | [D2] | a full-support distribution on the outcomes | what happens with no pursuit, and how it is measured apart from the behaviour it will judge |
 | **objective** | [D2] | a function on the outcomes, up to a constant | what the principal wants pursued, in whose units |
 | **evaluator** | [D10] | a function on the outcomes, known or revealed | what the actor is rewarded or selected on, if that is known, and its level sets: which outcomes it scores alike |
 | **intensity** | [D2] | a number, at least 0 | what makes pursuit stronger or weaker; only the product of intensity and objective is identified ([P1]) |
-| **specification** | [D3] | a default and a closed set of intended behaviours | who declares it, when, and where it is written down |
+| **specification** | [D3] | a default and a family of targets, or another closed set of intended behaviours | which family the principal declares (one objective, its order, or the span of candidate objectives), who declares it, when, and where it is written down |
 | **principal's resolution** | [D4] | a partition, the finest unless declared | the distinctions the principal declares it does not care about |
 | **actor's resolution** | [D4] | a partition | the distinctions the actor cannot make |
 | **change** | [P2] | a differentiable path of behaviours | what moves behaviour over time, and what its revealed objective is |
@@ -94,10 +94,17 @@ set is one outcome, the regression is the objective, and the residual is zero. T
 governs the pursuit, up to a margin that grows with the intensity and the width of the bins ([P26]). Every entry says
 which case holds.
 
-**Sample.** Every behaviour in an ontology is known through samples ([D11]). [P23] needs each outcome counted many
+**Sample.** Every behaviour in an ontology is known through records ([D11]). [P23] needs each outcome counted many
 times, and independent draws. With very many outcomes, counts are grouped into the cells of a resolution, and grouping
-only hides misalignment ([P4](iv)), so what is estimated is a lower bound on misalignment. Draws that depend on each
-other, such as one person's successive decisions, make the error bars of [P23] too narrow.
+only hides misalignment ([P4](iv)), so what is estimated is a lower bound on misalignment. Decisions that depend on
+each other, such as one person's successive decisions, make the error bars of [P23] too narrow; the test of [P55] keeps
+its level, since it is computed under the intended behaviours; the counts then judge the average behaviour, and [P54]
+says what the dependence adds.
+
+**Interpretation.** Since v13 every definition of the core declares what its object is in the world, how a record
+verifies it, and why the map is justified (`CORE.md` §0). An ontology does the same in one discipline, slot by slot:
+the column "In this discipline" is the declared object, "Observed as" is how a record of the discipline verifies it,
+and "Fit" is how far the map is justified. An ontology is the core's interpretation, made for one discipline.
 
 **Fit.** The last column says how well the discipline's object has the slot's type. It starts with one of four words.
 - **exact**: the object has the type, by definition or by a cited result.

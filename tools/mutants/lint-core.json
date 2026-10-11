@@ -1,5 +1,5 @@
 {
- "about": "v13's kinds and fields (2026-10-11): imported axioms (M), background conditions (B), Status and Interpretation, in tools/lint.py against its tests and lint on the repository itself.",
+ "about": "v13's kinds and fields (2026-10-11): imported axioms (M), background conditions (B), Status and Interpretation, in tools/lint.py against its tests and lint on the repository itself; and R17, the table of conventions (2026-10-11).",
  "tests": [
   "tools/test_lint.py"
  ],
@@ -81,6 +81,56 @@
      "tools/lint.py",
      "FIELDS = [\"Statement\", \"In plain terms\", \"Interpretation\", \"Status\", \"Why this choice\", \"Proof\", \"Example\", \"Checks\",\n          \"Notes\", \"Lineage\"]",
      "FIELDS = [\"Statement\", \"In plain terms\", \"Status\", \"Why this choice\", \"Proof\", \"Example\", \"Checks\",\n          \"Notes\", \"Lineage\", \"Interpretation\"]"
+    ]
+   ]
+  },
+  {
+   "name": "R17 any justification accepted",
+   "edits": [
+    [
+     "tools/lint.py",
+     "if not row[2].strip() or any(k not in JUSTIFICATIONS for k in kinds):",
+     "if not row[2].strip():"
+    ]
+   ]
+  },
+  {
+   "name": "R17 a convention declared in a result accepted",
+   "edits": [
+    [
+     "tools/lint.py",
+     "            elif ref[0] not in CORE_KINDS:\n",
+     "            elif ref[0] not in CORE_KINDS | {\"P\"}:\n"
+    ]
+   ]
+  },
+  {
+   "name": "R17 a Status that speaks of a convention may be left out of the table",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if iid not in named:\n",
+     "        if iid not in named and False:\n"
+    ]
+   ]
+  },
+  {
+   "name": "R17 the verdict column not read",
+   "edits": [
+    [
+     "tools/lint.py",
+     "if row[3].split(\":\")[0].split()[:1] not in ([\"yes\"], [\"no\"], [\"only\"]):",
+     "if not row[3]:"
+    ]
+   ]
+  },
+  {
+   "name": "R17 a short row accepted",
+   "edits": [
+    [
+     "tools/lint.py",
+     "        if len(row) != len(CONVENTION_COLUMNS):\n            errors.append",
+     "        if len(row) < 4:\n            errors.append"
     ]
    ]
   }

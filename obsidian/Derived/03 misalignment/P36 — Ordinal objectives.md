@@ -67,4 +67,4 @@ v13: the definition moved to [[D3 — Specification, declaration and misalignmen
 - [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
-- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits
+- [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] — Misalignment is the departure beyond what the family of targets credits

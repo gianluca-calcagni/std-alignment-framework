@@ -48,7 +48,7 @@ two rehearsal contexts drawn with seed `20261007`.
 | Observed conditions | [[D9 — Observation and identification\|D9]] | the 200 contexts; the case is about them only |
 | Objective's units | [[D5 — Stakes\|D5]] | the positive logit of the run's own reward model |
 | Evaluator | [[D10 — Evaluator, regression and residual\|D10]] | known: each run's reward model, which scores alike the continuations that decode to the same text; a draw repeated within a context counts as many times as it is drawn |
-| Sampling | [[D11 — Sample and evidence\|D11]] | in each context, 64 independent draws from each of A, B and R, at temperature 1 from the full softmax, without stopping at the end-of-text token, as both runs were trained; log-probabilities exact |
+| Sampling | [[D11 — Record, sample and evidence\|D11]] | in each context, 64 independent draws from each of A, B and R, at temperature 1 from the full softmax, without stopping at the end-of-text token, as both runs were trained; log-probabilities exact |
 | Named objectives | [[P44 — What named objectives explain\|P44]] | for A, in this order: `log R` (sharpening), `fB` (the other run's reward), `log(B/R)` (the other run's revealed objective); for B, `log R`, `fA`, `log(A/R)` |
 | Runs | [[P45 — Drift: what runs share, and what they do not\|P45]] | two, A and B, with equal weights. They are not replicates of one procedure: their rewards and prompt formats differ, which is why the other run's reward is named before its revealed objective |
 

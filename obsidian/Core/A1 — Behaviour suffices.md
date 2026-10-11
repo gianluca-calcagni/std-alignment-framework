@@ -39,6 +39,7 @@ moved to [[B1 — Finitely many outcomes|B1]].
 - nothing
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D1 — Outcomes, behaviours, divergence and tilt|D1]] — Outcomes, behaviours, divergence and tilt
 - [[D8 — Conditions, responses and views|D8]] — Conditions, responses and views
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence

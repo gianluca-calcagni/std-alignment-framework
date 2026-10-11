@@ -1,0 +1,80 @@
+{
+ "about": "P55's check (2026-10-11). The last mutant tests the count of empirical behaviours against its closed form.",
+ "tests": [
+  "checks/test_estimation.py",
+  "-k",
+  "record_certifies"
+ ],
+ "mutants": [
+  {
+   "name": "[P55](ii) one empirical behaviour's bound, without the factor k_n",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "                assert prob <= k * np.exp(-lam) + 1e-12\n                seen",
+     "                assert prob <= np.exp(-lam) + 1e-12\n                seen"
+    ]
+   ]
+  },
+  {
+   "name": "[P55](i) the lower bound without 1/k_n",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "assert np.all(lp[ok] >= -n * d[ok] - np.log(k) - 1e-9)",
+     "assert np.all(lp[ok] >= -n * d[ok] - 1e-9)"
+    ]
+   ]
+  },
+  {
+   "name": "[P55](i) the divergence the wrong way round",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "d = np.array([kl(s, p) for s in S]); ok",
+     "d = np.array([kl(p, s) for s in S]); ok"
+    ]
+   ]
+  },
+  {
+   "name": "[P55](ii) the ordinal statistic replaced by the standard one",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "Mord = np.array([ordinal_misalignment_of(s, q, F) for s in S])",
+     "Mord = Mray.copy()"
+    ]
+   ]
+  },
+  {
+   "name": "[P55](iii) a threshold that grows with n",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "caught += n * misalignment(r.multinomial(n, ph) / n, q, F)[0] >= np.log(k / alpha)",
+     "caught += n * misalignment(r.multinomial(n, ph) / n, q, F)[0] >= n * 0.5"
+    ]
+   ]
+  },
+  {
+   "name": "[P55] the number of empirical behaviours miscounted",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "C = np.array(compositions(n, K)); S = C / n; k = len(C)",
+     "C = np.array(compositions(n, K)); S = C / n; k = len(C) - 1"
+    ]
+   ]
+  },
+  {
+   "name": "[P55](ii) the limit of the ray judged as if intended at the default",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "for pp in [tilt(q, t * F) for t in (0.0, 0.3, 1.5, 6.0)] + [best_outcomes_limit(q, F)]:",
+     "for pp in [tilt(q, t * F) for t in (0.0, 0.3, 1.5, 6.0)] + [best_outcomes_limit(q, -F)]:"
+    ]
+   ]
+  }
+ ]
+}

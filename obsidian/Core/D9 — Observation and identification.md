@@ -50,6 +50,6 @@ New. v7.10: ROADMAP §6 I1 (the ladder: declare, measure, identify through inter
 - [[D8 — Conditions, responses and views|D8]] — Conditions, responses and views
 
 ## Used by
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
 - [[P17 — What an unobserved condition can hide|P17]] — What an unobserved condition can hide
 - [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] — What signals, audits and re-measurements reveal of tampering

@@ -24,8 +24,8 @@ determine.
   are the general case of what a finite record can tell apart.
 - *Nothing a record measures is lost.* On outcomes that are not finite, the divergence is the supremum of its values
   over finite descriptions, so each misalignment the framework reports there is a limit of misalignments on finitely
-  many outcomes (`CORE-GENERAL.md`, GA6; `general/dictionary.md`). What does not carry over, the existence of nearest
-  behaviours, heavy tails and atoms, is listed there, and is the qualifier of this condition.
+  many outcomes (`CORE-GENERAL.md`, GA1 and GD3; `general/dictionary.md`). What does not carry over, the existence of
+  nearest behaviours, heavy tails and atoms, is listed there, and is the qualifier of this condition.
 - *Exactness.* Every statement can be proved with finite sums and checked exactly on random instances.
 
 ## Lineage

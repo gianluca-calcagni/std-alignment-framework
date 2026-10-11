@@ -42,7 +42,7 @@ gives the margin.
 ## Notes
 The bound is attained to first order in `t` by a bin with two equally likely outcomes at the ends of both
 spreads; random instances stay well inside it. It trades resolution against reach: narrower bins make `w` smaller but
-leave fewer outcomes, and fewer sampled ones ([[D11 — Sample and evidence|D11]]), in each bin, so the bin-wise regression is estimated with more
+leave fewer outcomes, and fewer sampled ones ([[D11 — Record, sample and evidence|D11]]), in each bin, so the bin-wise regression is estimated with more
 error. With one outcome per bin, `w = 0` and (i) is exact, as [[D10 — Evaluator, regression and residual|D10]]'s Notes say: the regression is then the target. The
 bound covers the pursuit of `F̂`, not best-of-`n`; for best-of-`n` the natural width of a bin is in units of
 `log Q(F̂)`, the log of the default's mass below a value, which is open (`NOTES.md` E8).

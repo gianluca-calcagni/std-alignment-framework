@@ -25,8 +25,11 @@ meaning in the world enter. The core has four kinds of item.
 - **Definitions** (D): each declares its **interpretation**, what its object is in the world and how a record verifies
   it, and justifies it. A statement about behaviour is *verifiable* when a test exists that ends in finite time if it is
   true, and *refutable* when its negation is verifiable [@carcassi2021]. Most statements about a behaviour are
-  verifiable only in the statistical sense, with error rates that vanish as the record grows; the interpretations say
-  which.
+  verifiable only in the statistical sense, with error rates that vanish as the record grows, and the statements so
+  verifiable are exactly the open sets of behaviours [@genin2017]; the interpretations say which, and by what test.
+- **Conventions**: choices that an equally reasonable principal could make otherwise. They are listed in one table at
+  the start of section 1, each justified as forced by a stated requirement, by mathematical convenience, or by the
+  literature whose results it lets the framework import, and marked by whether it changes a verdict.
 No result in `derived/` cites a premise in its Statement or its Proof, and the one premise a definition's Statement
 cites, [A5] in [D3], defines a word, "declared", that no proof uses: the results are facts about finite distributions,
 given the definitions. The premises and the interpretations carry the meaning, the bridge from those facts to judging
@@ -37,16 +40,18 @@ The framework in ten steps:
 1. **Foundations** (section 1). Probability on finitely many outcomes, and independent repetition, as mathematics gives
    them; finitely many outcomes, episodes and conditions as outcomes, objectives up to scale, one actor and one
    principal, as background conditions; and three premises: alignment is judged from behaviour in every condition,
-   misalignment is the rate of evidence against what was intended, and specifications are declared before they judge.
+   misalignment is the rate of evidence against what was intended, and specifications are declared before they judge;
+   with a table of the conventions, each justified.
 2. **Behaviour and pursuit** (section 2). Behaviour is a distribution over outcomes. Pursuing an objective reweights a
    default toward it. Derived: nothing is lost by this description, pursuit is the steepest climb, and the cost of
    departing from the default for which it is the best trade-off can only be the KL divergence
    (`derived/tilts-and-paths.md`, `derived/value.md`).
-3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts: for
-   "pursue `F`", every strength of pursuing `F`, or every behaviour that respects the order of `F`. Misalignment is the
-   KL divergence from the actual behaviour to the nearest acceptable one, the rate of evidence against the
-   specification. Derived: when it is zero, its closed forms, and that it is the departure spent beyond the cheapest
-   behaviour that reproduces what the specification credits (`derived/misalignment.md`).
+3. **Specification and misalignment** (section 3). The principal declares a default and the behaviours it accepts, often
+   as a family of targets: for "pursue `F`", every strength of pursuing `F`, or of any objective that respects the order
+   of `F`, or of any mix of candidate targets. Misalignment is the KL divergence from the actual behaviour to the
+   nearest acceptable one, the rate of evidence against the specification. Derived: when it is zero, its closed forms,
+   and that it is the departure spent beyond the cheapest behaviour that does at least as well as the actor on every
+   target of the family (`derived/misalignment.md`).
 4. **Resolution** (section 4). Distinctions the principal does not care about, and distinctions the actor cannot make
    (`derived/resolution.md`).
 5. **Stakes** (section 5). How much of the objective is lost, in its own units (`derived/stakes.md`).
@@ -60,8 +65,9 @@ The framework in ten steps:
 9. **The evaluator** (section 9). What the actor actually pursues, and what it tells about the principal's objective.
    Derived: through the evaluator, only the regression counts; a monotone regression rules out overoptimization, and a
    single-peaked one allows at most one fall (`derived/evaluator.md`).
-10. **Samples and evidence** (section 10). The record that every claim reaches the world through. Derived: the expected
-    evidence per decision is misalignment; detection, estimation and the evaluation gap (`derived/estimation.md`).
+10. **Records, samples and evidence** (section 10). The record that every claim reaches the world through. Derived: the
+    expected evidence per decision is misalignment; detection, estimation and the evaluation gap; what dependence and
+    drift between decisions add; and a test of acceptance from counts, exact at every size (`derived/estimation.md`).
 
 Specifications defined by a structure rather than by an objective need no definition of their own: several actors meant
 to act independently, behaviour meant to ignore the situation, a process meant to look the same run backward, and
@@ -70,11 +76,12 @@ could contradict, is collected in `derived/forbids.md`.
 
 **In scope.** One principal and one actor, where the actor may be a group acting on joint outcomes ([P39]) and the
 principal several principals with declared weights ([P42]); finitely many outcomes; behaviour in each of finitely many
-conditions, which may be the measurement rules the actor faces; any declared set of acceptable behaviours, with closed
-forms for "pursue `F`" and for the structural specifications of `derived/structure.md`; what the actor cannot
-distinguish, cannot do, or cannot perceive; what observation identifies, including misalignment that an actor shows
-only when it is not observed; the evaluator an actor pursues, and what pursuing it does to the principal's objective;
-and what independent samples reveal, where one sample may be a whole episode of dependent decisions.
+conditions, which may be the measurement rules the actor faces; any declared set of acceptable behaviours, and any
+declared family of targets, with closed forms for "pursue `F`" and for the structural specifications of
+`derived/structure.md`; what the actor cannot distinguish, cannot do, or cannot perceive; what observation identifies,
+including misalignment that an actor shows only when it is not observed; the evaluator an actor pursues, and what
+pursuing it does to the principal's objective; and what records reveal: by their counts, whatever the actor, and with
+intervals when they are samples, where one decision may be a whole episode of dependent decisions.
 
 **Out of scope**, stated so that no result is read as covering it:
 - *Internal states.* The core judges behaviour ([A1]). Two actors that behave alike in every condition are the same
@@ -88,9 +95,10 @@ and what independent samples reveal, where one sample may be a whole episode of 
   the weights, by aggregating preferences, is not.
 - *Outcomes that are not finite.* Drafted separately in `CORE-GENERAL.md`, with its results, expected and probed, in
   `general/`. Nothing there is claimed here.
-- *One long record of dependent decisions.* Samples are independent draws ([D11]). Decisions that depend on each other
-  within an episode are in scope, the episode being one outcome; one long record without episodes needs rates on
-  trajectories, which are not finite (`CORE-GENERAL.md`).
+- *Intervals from one long record of dependent decisions.* The misalignment of a record's counts needs no independence
+  of the actor ([A4]), what dependence and drift add is measured ([D11], Notes), and decisions that depend on each
+  other within an episode are one outcome. An interval for the actor's behaviour from one long record without episodes
+  needs rates of mixing, which the core does not model (`CORE-GENERAL.md`).
 - *Which objective is right.* The principal declares it; the core does not choose it.
 - *Explanations beyond the evaluator.* Why an actor pursues the evaluator it does, and by what mechanism, is not
   measured. The evaluator itself is in scope, as a hypothesis about behaviour that samples can test ([D10], [D11]).
@@ -133,7 +141,25 @@ each item give the names its objects carry in other fields.
 ## 1. Foundations
 
 What the framework takes from mathematics, the representation it assumes without loss of generality, and what it
-assumes about judging alignment, in that order.
+assumes about judging alignment, in that order; first, the conventions they and the definitions use.
+
+**Conventions.** Each is forced by a stated requirement, chosen for mathematical convenience, or taken from the
+literature so that its results import; often more than one. The last column but one says whether a principal who chose
+otherwise would reach another verdict.
+
+| Convention | Declared in | Justified by | Changes a verdict | Why |
+|---|---|---|---|---|
+| natural logarithms: divergences and evidence in nats | [D1], [D11] | convenience, literature | no: another base rescales every number alike | derivatives of `e^F` and of the tilt carry no constant; statistics and large deviations count in nats, coding theory in bits, a factor `log 2` apart |
+| evidence on a logarithmic scale, per decision | [A4], [D11] | forced, literature | no: only the unit is chosen | the evidence of independent decisions must add up, and the only continuous functions that turn products of probabilities into sums are multiples of the logarithm (Cauchy's functional equation); Good's weight of evidence, Wald's sequential test and the Neyman–Pearson lemma all count it so |
+| the accepted behaviour most favourable to the record | [A4], [D3] | literature, convenience | yes: an average over the accepted behaviours, or the least favourable, would charge more | the generalized likelihood ratio test judges a set of hypotheses by its member most favourable to the data ([@polyanskiy2025], §16.4); the minimum is attained ([P5](i)), at one behaviour for every family of targets ([P53](i)) |
+| accepted behaviours decide independently | [A4], [B2], [D11] | convenience, literature | only for a principal who intends decisions to depend on each other, who declares episodes instead ([B2]) | a test of a distribution takes independent draws from it as the hypothesis; the counts are then all the record says about it, and the method of types applies ([P55]) |
+| the shares of the record measured against the accepted behaviour, `KL(p̂‖p)`, in this order | [A4], [D3] | forced, literature | yes: the other order is another number, with another nearest behaviour | forced by [A4]: shares `s` become improbable under `p` at the rate `KL(s‖p)` ([P55](i)); maximum likelihood minimizes the same order, so the deviance and Wilks's theorem import ([P23]) |
+| intended behaviours of full support, the set closed in `Δ°` | [D3] | convenience | no: their limits count as intended ([P5](ii)) | every divergence from a full-support actor to an intended behaviour is finite, and its least value is attained |
+| doing nothing is intended: the default is in every family's specification | [D3] | convenience, literature | yes: an actor that stays at the default is not charged, though it may be useless | misalignment is then at most the departure ([P5](iii)); KL-regularized training keeps the reference policy admissible; a principal who wants something done declares a floor ([P35]) |
+| families of targets hold the constants and the positive mixes of their targets | [D3] | forced, convenience | only for a family that is not convex, judged as the union of its convex parts | constants change no aim ([B3]); a principal who accepts each of two targets, with weights not fixed, accepts their weighted pursuit ([P42](ii)); convexity gives one nearest behaviour and the credited reading ([P53]) |
+| objectives up to a positive factor and a constant | [B3] | forced | no | a pursuit reveals its objective only up to them ([P1](ii)) |
+| pursuit is a tilt of the default | [D2] | forced, literature | yes: another model of pursuit gives another standard specification | forced by the steepest climb in a geometry that ignores how finely outcomes are described, and by the best trade-off at a KL price ([P2], [P14]); it is the optimum of KL-regularized training, the logit choice rule and selection |
+| stakes in the objective's own units | [D5] | convenience | no: misalignment is in nats either way | the principal reads losses in the units it declared |
 
 ### M1 — Probability on finitely many outcomes
 **Statement.** On a finite set, a probability gives each element a non-negative mass, and the masses add up to one. The
@@ -212,8 +238,8 @@ determine.
   are the general case of what a finite record can tell apart.
 - *Nothing a record measures is lost.* On outcomes that are not finite, the divergence is the supremum of its values
   over finite descriptions, so each misalignment the framework reports there is a limit of misalignments on finitely
-  many outcomes (`CORE-GENERAL.md`, GA6; `general/dictionary.md`). What does not carry over, the existence of nearest
-  behaviours, heavy tails and atoms, is listed there, and is the qualifier of this condition.
+  many outcomes (`CORE-GENERAL.md`, GA1 and GD3; `general/dictionary.md`). What does not carry over, the existence of
+  nearest behaviours, heavy tails and atoms, is listed there, and is the qualifier of this condition.
 - *Exactness.* Every statement can be proved with finite sums and checked exactly on random instances.
 
 **Lineage.** v12: [A1]'s "finitely many outcomes" and [D1]'s first reason; new as a condition in v13.
@@ -226,8 +252,9 @@ the actor does not choose counts as part of the outcome, with its frequency fixe
 part of it.
 
 **Status.** A background condition, assumed without loss of generality: episodes, and pairs of a situation and an
-outcome, are again finitely many outcomes ([B1]), with a behaviour on them. What it moves is independence, assumed
-between episodes rather than within them (section 1, premise A4).
+outcome, are again finitely many outcomes ([B1]), with a behaviour on them. It is how a principal who intends decisions
+to depend on each other says so: within an episode they may; between episodes, the accepted behaviours decide
+independently, a convention of the declaration (the table of conventions above).
 
 **Why this choice.** A record of dependent decisions grouped into episodes, or of situations with their frequencies, is
 again a record of outcomes on a finite set, so every result applies to it unchanged; results about several situations
@@ -293,38 +320,50 @@ argument. New: behaviour in every condition, so that deceptive alignment is in s
 moved to [B1].
 
 ### A4 — Misalignment is evidence
-**Statement.** The misalignment of a behaviour, against the behaviours a principal accepts, is the least rate, per
-independent decision drawn from it, at which a record of the behaviour gathers evidence against an accepted behaviour,
-with evidence counted as the logarithm of the ratio of the record's likelihoods.
+**Statement.** The misalignment of the shares that a record of decisions shows, against the behaviours a principal
+accepts, is the rate per decision at which, as records with those shares grow, the largest probability that an accepted
+behaviour gives them falls, each accepted behaviour deciding independently. The misalignment of a behaviour is that of
+the shares that approach it.
 
-**In plain terms.** Watch the actor decide, one occasion after another. Misalignment is how fast the record builds a
-case that the actor is not acting in any acceptable way, against the acceptable way it resembles most.
+**In plain terms.** Watch the actor decide, and count what it does. Misalignment is how fast those counts become
+improbable for every acceptable way of acting, judged by the acceptable way that makes them most probable. It needs no
+model of how the actor decides.
 
-**Status.** Its form is a principle, conceptual: once evidence is the log-likelihood ratio and misalignment its rate
-under the actual behaviour against the nearest accepted one, the measure follows from the definitions, with no further
-assumption. It rests on one assumption, phenomenological: that decisions are drawn independently from one behaviour,
-between episodes ([B2]). A case states it, and can test it (`STANDARD.md`, the field Sampling).
+**Status.** A principle, conceptual: it says what a record of counts shows against acceptance, which is all that [A1]
+lets a judgement rest on, and it assumes nothing about how the actor decides: independently, alike over time, or
+neither. Three conventions give it its form, each justified in the table of conventions above: probability counted on a
+logarithmic scale, per decision; the accepted behaviour most favourable to the record; and accepted behaviours that
+decide independently, unless the principal declares episodes ([B2]).
 
 **Why this choice.**
-- *It needs nothing about the actor.* Evidence is defined by the record and the two behaviours compared, so the measure
-  applies to any actor and any declared set of acceptable behaviours, with no model of how the actor chooses, and no
-  price of departing from the default.
-- *The likelihood ratio is the canonical evidence.* Between two behaviours, the most powerful test thresholds it (the
-  Neyman–Pearson lemma, read in the open draft of [@polyanskiy2025], Theorem 14.11), and a sequential test that stops
-  when it crosses a threshold needs, on average, about the threshold divided by the rate.
-- *Under the actual behaviour, against the nearest.* The record comes from the actor, so the rate is the average under
-  its behaviour; the least over the accepted behaviours gives the actor the benefit of the doubt, and charges it only
-  for what no accepted behaviour explains. Each independent decision adds on average `KL(p̂‖p)` nats to the evidence for
-  `p̂` against `p`, so the measure is `inf_{p∈𝓘} KL(p̂‖p)`, its form and the order of its arguments; section 10 makes
-  the record exact.
+- *It needs nothing about the actor.* The probabilities are computed under the accepted behaviours, which the principal
+  declares, so the measure applies to any actor, any record and any declared set, with no model of how the actor
+  decides and no price of departing from the default.
+- *Improbability under acceptance is evidence against it.* Counts that are improbable under every accepted behaviour
+  are evidence that the actor acts in no accepted way. Judging a set of hypotheses by its member most favourable to the
+  data is the generalized likelihood ratio test ([@polyanskiy2025], §16.4), which gives the actor the benefit of the
+  doubt and charges it only for what no accepted behaviour explains.
+- *The measure follows.* The largest probability that an accepted behaviour gives the shares `s` falls at the rate
+  `inf_{p∈𝓘} KL(s‖p)` (Notes): that is the measure, its form and the order of its arguments.
+- *For an actor that decides independently, it is the rate of likelihood-ratio evidence.* Each independent decision
+  drawn from `p̂` adds on average `KL(p̂‖p)` nats to the evidence for `p̂` against `p` (the Neyman–Pearson lemma makes
+  that evidence canonical, [@polyanskiy2025], Theorem 14.11), so misalignment is also the least expected evidence per
+  decision. For an actor whose decisions depend on each other, or drift, that evidence is larger, by exactly two terms
+  that are reported beside it (Notes).
 - *Value lost, as a reading.* Every full-support behaviour is the best trade-off for its own objective at a KL price
   ([P4](ii)), so the same number is the least net value lost against an accepted behaviour, judged by that behaviour's
   own objective. Until v12 that reading was the premise, and it needed two premises on pursuit to make the price KL
   ([P14]); here it is a consequence, and the measure rests on evidence alone.
 
+**Notes.** The rate is the method of types, [P55](i); the test it gives, exact at every size of record, is [P55](ii);
+what dependence and drift add to the likelihood-ratio evidence is [P54]. That "misaligned" is verifiable in chance, and
+"exactly aligned" only refutable, is [P55], Notes, after Genin and Kelly [@genin2017].
+
 **Lineage.** v7.10: Thm 1 (regret is a divergence) and Prop 18 (detection). v8: [D3]'s "what the number means". v12:
 "misalignment is value lost", which this premise replaces, its reading kept as a consequence (`NOTES.md` §16, §17). The
-idea is the hunch H4 of `NOTES.md` §5.4.
+idea is the hunch H4 of `NOTES.md` §5.4. v13, at the PI's question whether independence could be dropped (Q53): the
+rate at which the record's shares become improbable under acceptance, which needs no independence of the actor, in
+place of the rate of likelihood-ratio evidence of an actor that decides independently, now a reading ([P54]).
 
 ### A5 — Declared before
 **Statement.** The default and the acceptable behaviours are fixed before, and without using, the behaviour they will
@@ -359,8 +398,9 @@ symmetric, so the order matters. Tilting reweights a behaviour toward the outcom
 **Interpretation.** *Declared.* An outcome is the narrowest result that a record of one decision tells apart from the
 others, such as the answer an assistant gave or whether a patient was seen within four hours. A behaviour is the actor's
 ensemble in one condition: the shares its outcomes take over unboundedly many independent decisions ([M2]). `E_p[F]` is
-the average score of those decisions. `KL(p‖r)` is the evidence one decision of an actor behaving as `p` gives, on
-average, against `r` ([A4]). `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
+the average score of those decisions. `KL(p‖r)` is the rate per decision at which shares `p` become improbable for an
+actor that decides as `r` ([A4]); for an actor that decides independently as `p`, it is also the evidence one decision
+gives, on average, against `r`. `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
 probability proportional to `e^F`: a selection a principal could carry out, by accepting or rejecting decisions.
 *Verified.* Which outcome occurred is decided by the record of one decision. A behaviour is approached by the shares in
 a record, never reached ([M2]): `p(x) > 0` is verified by a single occurrence of `x`, while `p(x) = 0` can only be
@@ -460,10 +500,13 @@ as no result used them (Q52).
 ### D3 — Specification, declaration and misalignment
 **Statement.** A **specification** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
-For an objective `F`, the **standard specification** is `(q, R_F)`: pursuit of `F` from `q` at every intensity,
-including none; the **ordinal specification** is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of
-F}`. A specification is **declared** when it is fixed as [A5] requires: before, and without using, the behaviour it
-will judge.
+A **family of targets** is a closed set `𝓚` of objectives that contains the constants and `a·G + b·G'` whenever it
+contains `G` and `G'`, for all numbers `a, b ≥ 0`; its specification is `(q, 𝓘_𝓚)`, with `𝓘_𝓚 = {tilt(q, G) : G ∈ 𝓚}`,
+the pursuits of its targets from `q`. For an objective `F`, the **standard specification** is that of the family
+`{t·F + c : t ≥ 0, c real}`, so that `𝓘_𝓚 = R_F`: pursuit of `F` from `q` at every intensity, including none; the
+**ordinal specification** is that of the family of non-decreasing functions of `F`, so that
+`𝓘_𝓚 = C_F = {p ∈ Δ° : p/q is a non-decreasing function of F}`. A specification is **declared** when it is fixed as [A5]
+requires: before, and without using, the behaviour it will judge.
 
 **In plain terms.** Before looking at what the actor does, the principal states a default behaviour and the set of
 behaviours it would accept. Misalignment is how far the actual behaviour is from the nearest acceptable one, in nats:
@@ -474,15 +517,17 @@ behaviour that favours better outcomes at least as much as worse ones, relative 
 either, an actor that stays at the default is not misaligned, though it may be useless, which is a different failure.
 
 **Interpretation.** *Declared.* A specification is the principal's standard, written down and dated before the record it
-judges is read ([A5]): a default, and the ensembles the principal accepts. Misalignment is the rate, in nats per
-decision, at which a record of the actor builds the case that it acts in no accepted way ([A4]): about `1/M` decisions
-give one nat, odds of about `e` to one. The standard specification accepts every strength of pursuing `F`, none
-included; the ordinal one accepts every ensemble that favours each outcome at least as much as any outcome `F` scores
-lower, relative to the default. *Verified.* `M > ε`, for `ε > 0`, is verifiable in the statistical sense: the evidence
-of a growing record crosses any threshold with a probability that tends to one. `M = 0` can only be refuted. An actor
-can be shown to be misaligned; it can never be shown to be exactly aligned, only consistent with alignment at a stated
-precision. *Justified.* Evidence is what a record supplies ([A4]), and fixing the standard first is what makes the
-judgement a test ([A5]).
+judges is read ([A5]): a default, and the ensembles the principal accepts. A family of targets is the set of aims the
+principal accepts being pursued: each at every strength, and every positive mix of them; "pursue `F`" is the smallest
+family that holds `F`, and "favour what `F` ranks higher" the family of its order. Misalignment is the rate, in nats per
+decision, at which a record's counts become improbable under every accepted behaviour ([A4]): about `1/M` decisions make
+them `e` times less probable. *Verified.* "Misaligned", `M > 0`, is verifiable in the statistical sense, by a test whose
+rate of false accusation is bounded at every size of record and whose power tends to one, with no model of how the actor
+decides (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides independently.
+"Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned within a stated
+margin, never exactly aligned. *Justified.* Counts are what a record supplies ([A4]); fixing the standard first is what
+makes the judgement a test ([A5]); and the statements above are verifiable or refutable because of their shape, open or
+closed in the behaviours, as the statistical form of reverse physics requires (Notes).
 
 **Why this choice.**
 - *The formula is [A4] made exact.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on
@@ -507,11 +552,17 @@ judgement a test ([A5]).
   principal for whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing
   is what makes it a set of compromises: without it, the only fully intended behaviours would be those on the best
   outcomes of `F`.
-- *Misalignment is excess departure.* Each of the two specifications credits the actor with some statistics of its
-  behaviour, and `M(p̂)` is the departure spent beyond the cheapest behaviour that reproduces them (Notes). The standard
-  specification credits the average of `F`, when the actor does better than the default; the ordinal one credits the
-  masses of the groups of outcomes that the order of `F` pools. What is charged is departure that buys nothing the
-  specification credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
+- *A family of targets, not one.* A principal often knows its target only up to a family: its order, a span of
+  candidate rewards, the objectives of several principals whose weights are not agreed. Declaring the family keeps one
+  definition for all of them; the single objective is the smallest family. The family holds the constants, since they
+  change no aim ([B3]), and positive mixes of its targets, since a principal who accepts each of two targets with
+  weights it has not fixed accepts their weighted pursuit; a family that is not convex is the union of the
+  specifications of its convex parts, and its misalignment is the least of theirs.
+- *Misalignment is excess departure.* Every family credits the actor with what it achieves on the family's targets, and
+  `M(p̂)` is the departure spent beyond the cheapest behaviour that does at least as well on every target (Notes). The
+  standard specification credits the average of `F`, only when the actor does better than the default; the ordinal one
+  credits reaching every threshold of `F` at least as often. What is charged is departure that buys nothing the family
+  credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
 - *The ordinal specification, for actors that rank.* An actor that picks by rank, such as best-of-`n`, behaves alike
   for every increasing transformation of `F`, and keeps the default's proportions within each level set of `F`. Its
   specification is the order of `F`, which accepts every pursuit of an increasing transformation of `F` and every
@@ -542,16 +593,20 @@ specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [P
 single point `q`, which is closed. That the ordinal specification is one, that it contains every best-of-`n` by `F`, and
 that its misalignment and the shape's add up to at most the standard one are [P36](i) and (iv). That the nearest
 intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [P6](ii), and
-that misalignment is the departure beyond what the specification credits, for both specifications and for every family
-of pursuits of named statistics, is [P53]. In statistics, the standard specification is a one-parameter exponential
-family and the ordinal one a cone of monotone likelihood ratios, and misalignment is the divergence from the actual
-behaviour to either.
+that, for every family of targets, the specification is closed, its nearest intended behaviour unique, and misalignment
+the departure beyond the cheapest behaviour that does at least as well on every target, is [P53]. The test that makes
+"misaligned" verifiable at every size, and the interval that makes "aligned within `ε`" verifiable, are [P55]; that the
+statements so verifiable are the open sets of behaviours, and the refutable ones the closed sets, is Genin and Kelly's
+theorem [@genin2017], the statistical form of the verifiable and refutable statements of reverse physics [@carcassi2021]
+([P55], Notes). In statistics, the standard specification is a one-parameter exponential family and the ordinal one a
+cone of monotone likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
 
 **Lineage.** v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), row 74, and the target sets of R7-7, cardinal or
 ordinal by the principal's declaration. New: behaviours that rule outcomes out are scored. v13: the ordinal
 specification moved here from [P36]; misalignment read first as evidence ([A4]); the draft's rule of a matched
-specification (its A6) replaced by the paired report (Q52).
+specification (its A6) replaced by the paired report (Q52); families of targets, of which the standard and the ordinal
+specification are cases, at the PI's question whether a family is more general than one target (Q53).
 
 ## 4. Resolution: what each side distinguishes
 
@@ -841,42 +896,51 @@ grade, a count or an indicator is.
 **Lineage.** v7.10: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note (an explanation adds an
 evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.
 
-## 10. Samples and evidence
+## 10. Records, samples and evidence
 
-### D11 — Sample and evidence
-**Statement.** A **sample** of size `n` from a behaviour `p` is a sequence `x_1, …, x_n` of outcomes drawn independently
-from `p`. Its **empirical behaviour** `p̂_n` gives each outcome its frequency in the sample. For full-support behaviours
-`r` and `r'`, the **evidence** that the sample gives for `r` against `r'` is `Σ_{i=1}^n log(r(x_i)/r'(x_i))`, in nats.
+### D11 — Record, sample and evidence
+**Statement.** A **record** of size `n` is the sequence `x_1, …, x_n` of the outcomes of `n` decisions, and its
+**empirical behaviour** `p̂_n` gives each outcome its share in the record. A record is a **sample** from a behaviour
+`p` when its outcomes are drawn independently from `p`. For full-support behaviours `r` and `r'`, the **evidence** that
+a record gives for `r` against `r'` is `Σ_{i=1}^n log(r(x_i)/r'(x_i))`, in nats.
 
-**In plain terms.** A sample is a record of what the actor did on separate occasions, each drawn from its behaviour
-independently of the others. Counting gives the empirical behaviour. The evidence for one behaviour against another is
-how much more likely the record is under the first than under the second, on a logarithmic scale.
+**In plain terms.** A record is what the actor did on successive occasions, in order. Counting gives the empirical
+behaviour. A sample is a record whose occasions are independent draws from one behaviour: a model of the actor, which a
+case can test. The evidence for one behaviour against another is how much more likely the record is under the first
+than under the second, on a logarithmic scale.
 
-**Interpretation.** *Declared.* A sample is a record of decisions made on separate occasions, independent of each other
-([A4]); the empirical behaviour is the shares in that record; the evidence for one behaviour against another is how much
-more likely the record is under the first, in nats. *Verified.* The record is what is verified; every claim about
-behaviour reaches the world through it. *Justified.* Independence is what makes the shares approach the behaviour ([M2])
-and the evidence add up decision by decision ([A4]); decisions that depend on each other within an episode are one
-outcome ([B2]).
+**Interpretation.** *Declared.* A record is the log of the actor's decisions; its empirical behaviour is the shares in
+it; a sample is a record whose decisions are independent draws from one behaviour; the evidence for one behaviour
+against another is how much more likely the record is under the first, in nats. *Verified.* The record is what is
+verified, decision by decision; every claim about behaviour reaches the world through it. That a record is a sample is
+a claim about the actor, which the order of the record can refute (Notes). *Justified.* Shares are what [A1] judges and
+[A4] measures, whatever the actor; independence is what makes them approach one behaviour ([M2]) and the evidence add
+up decision by decision, and decisions that depend on each other within an episode are one outcome ([B2]).
 
 **Why this choice.**
-- *Behaviours are never observed; samples are.* This is the act of measurement that [A1] presumes when it says that
+- *Behaviours are never observed; records are.* This is the act of measurement that [A1] presumes when it says that
   behaviour can be counted, and that [D9]'s observed conditions stand for.
 - *It is universal.* Counted choices, sampled genotypes, sampled responses, case records and logged units of work are
   all samples.
 - *Evidence is the canonical statistic.* Between two behaviours, the most powerful test thresholds the likelihood ratio
   (the Neyman–Pearson lemma [@cover2006], read in the open draft of [@polyanskiy2025], Theorem 14.11).
-- *It makes [A4] exact.* The expected evidence per decision, under the actual behaviour, for it against the nearest
-  intended behaviour is the misalignment (`derived/estimation.md`). Evidence gained ([A4]) and value lost ([P4](ii))
-  agree, in the same direction of KL, as the steepest climb and the best trade-off, the reasons of [D2], agree on the
-  cost.
+- *It makes [A4] exact.* For a sample, the expected evidence per decision, under the actual behaviour, for it against
+  the nearest intended behaviour is the misalignment (`derived/estimation.md`). Evidence gained ([A4]) and value lost
+  ([P4](ii)) agree, in the same direction of KL, as the steepest climb and the best trade-off, the reasons of [D2],
+  agree on the cost.
 - *It compares explanations in the same unit.* Two evaluators proposed for one actor are compared by the evidence a
   sample gives for one pursuit against the other, in nats, the unit of misalignment and of value.
-- *Independence is the default model.* Successive decisions of one actor can depend on each other; dependent samples
-  are out of scope until an item needs them.
+- *Records first, samples as a model.* What a record shows against acceptance needs no model of the actor ([A4]); a
+  sample is the model under which shares estimate one behaviour, with an interval. An actor whose decisions depend on
+  each other, or drift, is judged by its average behaviour, and what dependence and drift add is measured beside it
+  (Notes).
 
 **Notes.** The evidence is the log-likelihood ratio; I. J. Good called it the weight of evidence. In statistics a sample
-from a finite set is multinomial, and the empirical behaviour is the type of the sequence [@cover2006].
+from a finite set is multinomial, and the empirical behaviour is the type of the sequence [@cover2006]. For a record
+that is not a sample, [P54] gives what dependence and drift add to the evidence; [P55] gives the test of acceptance from
+counts, exact at every size, and the interval for a sample. Independence between episodes can be tested from the order
+of a record, for instance by comparing the shares of pairs of successive episodes with the products of their shares.
 
 **Lineage.** v7.10: Prop 18 (detection) and the deviance of v8's [P5] Notes, which used samples without defining them.
-New: the definition, and evidence as the second meaning of misalignment.
+New: the definition, and evidence as the second meaning of misalignment. v13: the record, of which the sample is the
+case of independent decisions (Q53).

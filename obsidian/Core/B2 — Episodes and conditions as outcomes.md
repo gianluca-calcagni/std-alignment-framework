@@ -17,8 +17,9 @@ part of it.
 
 ## Status
 A background condition, assumed without loss of generality: episodes, and pairs of a situation and an
-outcome, are again finitely many outcomes ([[B1 — Finitely many outcomes|B1]]), with a behaviour on them. What it moves is independence, assumed
-between episodes rather than within them (section 1, premise A4).
+outcome, are again finitely many outcomes ([[B1 — Finitely many outcomes|B1]]), with a behaviour on them. It is how a principal who intends decisions
+to depend on each other says so: within an episode they may; between episodes, the accepted behaviours decide
+independently, a convention of the declaration (the table of conventions above).
 
 ## Why this choice
 A record of dependent decisions grouped into episodes, or of situations with their frequencies, is
@@ -36,4 +37,4 @@ v13.
 ## Used by
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D8 — Conditions, responses and views|D8]] — Conditions, responses and views
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence

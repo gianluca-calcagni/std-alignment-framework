@@ -89,6 +89,6 @@ as no result used them (Q52).
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D4 — Resolution|D4]] — Resolution
 - [[D10 — Evaluator, regression and residual|D10]] — Evaluator, regression and residual
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
 - [[P3 — A fixed objective is visible in the changes of behaviour|P3]] — A fixed objective is visible in the changes of behaviour
 - [[C4 — Rescaling the objective is not misalignment|C4]] — Rescaling the objective is not misalignment

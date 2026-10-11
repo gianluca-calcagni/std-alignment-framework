@@ -31,13 +31,13 @@ and the matched pursuit underflowed to zeros; under-pursuit is now computed in c
 | Observed conditions | [[D9 — Observation and identification\|D9]] | all 1,000 prompts; the report is about these prompts only |
 | Objective's units | [[D5 — Stakes\|D5]] | the gold reward model's score |
 | Evaluator | [[D10 — Evaluator, regression and residual\|D10]] | known: the proxy of `train_proxy.py`, a linear Bradley–Terry model of the answer's hashed words and word pairs and of its length. It scores alike the answers with equal counts of these, among them every answer repeated word for word; in the median prompt, 3.8% of the answers share their score with another (`explore.json`) |
-| Sampling | [[D11 — Sample and evidence\|D11]] | the 12,600 answers of each prompt are independent draws of the initial policy at temperature 1; best-of-`n`'s behaviour is computed exactly from them, by Coste et al.'s estimator, with ties in the proxy broken at random; nothing is sampled |
+| Sampling | [[D11 — Record, sample and evidence\|D11]] | the 12,600 answers of each prompt are independent draws of the initial policy at temperature 1; best-of-`n`'s behaviour is computed exactly from them, by Coste et al.'s estimator, with ties in the proxy broken at random; nothing is sampled |
 
 ## 2. The observations
 
 | Field | Core | Entry |
 |---|---|---|
-| Behaviour | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]], [[D11 — Sample and evidence\|D11]] | 1,000 × 12,600 answers with their gold scores, and the proxy's scores computed here; best-of-`n` at `n` = 2, 16, 128, 1024, computed from them |
+| Behaviour | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]], [[D11 — Record, sample and evidence\|D11]] | 1,000 × 12,600 answers with their gold scores, and the proxy's scores computed here; best-of-`n` at `n` = 2, 16, 128, 1024, computed from them |
 | Interventions applied | [[D6 — Intervention and pass-through\|D6]] | none |
 | Departures from the declaration | [[A5 — Declared before\|A5]] | **the declaration was written after the data were seen in W1**, so every result below is exploratory, not confirmatory |
 
@@ -91,7 +91,7 @@ best-of-`n` does ([[P9 — What is at stake|P9]](i)). In one prompt the proxy sc
 no departure and `λ = 0`. Where `λ` is infinite or zero, the under-pursuit of [[P9 — What is at stake|P9]](ii) is not defined: at `n = 16` it is
 `1.268` (`1.131` to `1.426`) nats over the 996 prompts where `λ` is finite and positive.
 
-**Uncertainty** ([[D11 — Sample and evidence|D11]], [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]). The intervals are over prompts. They leave out two sources: the sampling of each
+**Uncertainty** ([[D11 — Record, sample and evidence|D11]], [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]). The intervals are over prompts. They leave out two sources: the sampling of each
 prompt's 12,600 answers, which estimate the default, and the proxy's training. [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s `χ²` reference does not apply, as
 above.
 

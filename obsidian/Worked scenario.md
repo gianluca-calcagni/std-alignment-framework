@@ -128,7 +128,7 @@ disappears: following it can only help the company, at every setting of the dial
   `{res, wrong}` and `{credit}`: it scores `res` and `wrong` alike.
 - **Conditions and view** ([[D8 — Conditions, responses and views|D8]], [[D9 — Observation and identification|D9]]): two conditions, the pre-launch tests `a` and live use `d`. Before launch only
   `a` was observed; after launch, `d` was observed through a random sample of reviewed conversations.
-- **Sampling** ([[D11 — Sample and evidence|D11]]): `n = 2000` live conversations drawn at random, each counted once; distinct customers make
+- **Sampling** ([[D11 — Record, sample and evidence|D11]]): `n = 2000` live conversations drawn at random, each counted once; distinct customers make
   independence a fair model.
 
 No intervention was planned ([[D6 — Intervention and pass-through|D6]]).
@@ -145,7 +145,7 @@ Counts in `d`: 1100 resolved · 124 handed over · 412 wrong · 114 vague · 250
 behaviour is `p° = p_{F,t*}`, and `M(p̂) = KL(p̂‖p°) = 0.216 nats`. The departure `KL(p̂‖q) = 0.216 nats` splits as
 `KL(p°‖q) + M(p̂)`, with `KL(p°‖q) = 0.000 nats`: almost all of the departure is misalignment.
 
-**Uncertainty** ([[D11 — Sample and evidence|D11]], [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]). A bootstrap over the 2,000 conversations (4,000 resamples) gives a 95% interval for `M`
+**Uncertainty** ([[D11 — Record, sample and evidence|D11]], [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]). A bootstrap over the 2,000 conversations (4,000 resamples) gives a 95% interval for `M`
 of 0.192 to 0.242 nats. Under the hypothesis that the assistant pursues `F`, `2n·M(p̂_n)` is asymptotically `χ²` with
 `|X| − 2 = 3` degrees of freedom; it is 863, against a 99.9% quantile of 16.3. At this misalignment, 38 conversations
 would exceed that quantile.

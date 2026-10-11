@@ -144,10 +144,12 @@ The proofs above, line by line. These are the places where a careful reader shou
 2. **The price in the best trade-off.** [P14] forces KL because D2's second reason prices departure at exactly `1/t`.
    If the best trade-offs are only asked to lie somewhere on the pursuit ray, any increasing function of KL passes
    ([P14], Notes). Since v13 the measure does not rest on this: A4 fixes it.
-3. **Evidence in A4.** Misalignment is the rate of evidence, under the actual behaviour, against the nearest acceptable
-   behaviour; that choice fixes the order of KL's arguments. Value lost is the same number ([P4](ii)), and the loss in
-   the principal's own units is a different quantity, the stakes ([D5]). The assumption in A4 that can fail is
-   independence between episodes (B2).
+3. **Evidence in A4.** Misalignment is the rate at which a record's counts become improbable under the accepted
+   behaviour most favourable to them; that fixes the order of KL's arguments ([P55](i)). It assumes nothing of how the
+   actor decides: independence is a convention of what is accepted, and what an actor's dependence and drift add is
+   measured beside it ([P54]). Value lost is the same number ([P4](ii)), and the loss in the principal's own units is a
+   different quantity, the stakes ([D5]). The conventions behind it are in the table of `CORE.md` §1: a reader may
+   reject one, and each says whether a verdict would change.
 4. **The edge cases of [P5](iv).** An actor that only ever picks the best outcomes is charged unless it splits its
    choices among tied outcomes as the default does.
 5. **Which specification.** No premise says which specification a principal declares. The standard one charges

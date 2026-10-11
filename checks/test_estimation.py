@@ -1,11 +1,14 @@
 """Checks of P21 (the expected evidence per decision is the KL divergence, so misalignment is the slowest rate of
 evidence against the specification), P22 (detection: the Chernoff information is at most either KL), P23 (the
 estimated misalignment of an actor that does pursue F is asymptotically χ² with |X| − 2 degrees of freedom; a light
-simulation), P24 (the evaluation gap) and P37 (a strong incentive masks the actor, and can fake alignment)."""
+simulation), P24 (the evaluation gap), P37 (a strong incentive masks the actor, and can fake alignment), P54
+(dependence and drift only add evidence) and P55 (what a record of counts certifies, at every size)."""
+from itertools import product
 import numpy as np
 from scipy.optimize import minimize_scalar
-from .common import EXACT, rng, simplex_interior, kl, tilt
-from .test_misalignment import misalignment
+from scipy.special import gammaln
+from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt
+from .test_misalignment import misalignment, isotonic, best_outcomes_limit
 import stdalign
 
 
@@ -221,3 +224,130 @@ def test_what_a_sample_certifies_by_access():
     est = by_two_samples(C, Cq, l, F); chi2 = q @ (p / q) ** 2 - 1
     assert abs(np.mean(est < 0) - 0.5) <= 5 * np.sqrt(0.25 / R)
     assert abs(n * est.var() / chi2 - 1) <= tol
+
+
+def marginals(P, n, K):
+    """The marginals of a joint behaviour P on sequences of n outcomes from K, as an n × K array."""
+    J = P.reshape((K,) * n)
+    return np.array([J.sum(axis=tuple(j for j in range(n) if j != i)) for i in range(n)])
+
+
+def product_of(rows):
+    """The joint behaviour of independent decisions with the given marginals, flattened."""
+    out = np.ones(1)
+    for row in rows:
+        out = np.outer(out, row).ravel()
+    return out
+
+
+def test_dependence_and_drift_only_add():
+    """P54: (1/n) KL(P || p^n) = KL(p̄ || p) + δ + κ for every p; against the ray of F the least of it is M(p̄) + δ + κ,
+    at p̄'s nearest intended behaviour; δ = 0 for identically distributed decisions and κ = 0 for independent ones, and
+    each is positive otherwise; the expected empirical behaviour is p̄."""
+    r = rng(5401); seen = {"iid": 0, "exchangeable": 0, "independent": 0, "generic": 0}
+    for trial in range(400):
+        n = int(r.integers(2, 4)); K = int(r.integers(2, 5 if n == 2 else 4)); kind = list(seen)[trial % 4]
+        if kind == "iid":
+            P = product_of([simplex_interior(r, K)] * n)
+        elif kind == "exchangeable":                                            # a mixture of i.i.d. behaviours
+            rows = [simplex_interior(r, K) for _ in range(3)]; w = r.dirichlet(np.ones(3))
+            P = sum(wi * product_of([ri] * n) for wi, ri in zip(w, rows))
+        elif kind == "independent":
+            P = product_of([simplex_interior(r, K) for _ in range(n)])
+        else:
+            P = simplex_interior(r, K ** n)
+        seen[kind] += 1
+        m = marginals(P, n, K); pbar = m.mean(axis=0)
+        delta = np.mean([kl(mi, pbar) for mi in m]); kappa = kl(P, product_of(m)) / n
+        for _ in range(5):
+            pp = simplex_interior(r, K)
+            lhs = kl(P, product_of([pp] * n)) / n
+            assert abs(lhs - (kl(pbar, pp) + delta + kappa)) <= EXACT * (1 + lhs)
+        q = simplex_interior(r, K); F = r.normal(0, 1, K)
+        M, ts = misalignment(pbar, q, F)
+        if np.isfinite(ts):                                                       # (ii) against the ray
+            po = tilt(q, ts * F)
+            assert abs(kl(P, product_of([po] * n)) / n - (M + delta + kappa)) <= 1e-9 * (1 + M)
+            for t in r.uniform(0, 4, 4):
+                assert kl(P, product_of([tilt(q, t * F)] * n)) / n >= M + delta + kappa - 1e-9 * (1 + M)
+        if kind in ("iid", "exchangeable"):
+            assert delta <= EXACT
+        else:
+            assert delta > 1e-6
+        if kind in ("iid", "independent"):
+            assert kappa <= EXACT
+        else:
+            assert kappa > 1e-6
+        seqs = np.array(list(product(range(K), repeat=n)))                       # (iii) the expected shares
+        shares = np.array([np.bincount(x, minlength=K) / n for x in seqs])
+        assert np.abs(P @ shares - pbar).max() <= EXACT
+    assert min(seen.values()) >= 100
+
+
+def compositions(n, K):
+    """Every vector of K non-negative counts that add up to n."""
+    if K == 1:
+        return [(n,)]
+    return [(a,) + rest for a in range(n + 1) for rest in compositions(n - a, K - 1)]
+
+
+def type_log_probs(C, p):
+    """log P(counts = c) for a sample of size n from p, for every row c of C."""
+    n = C[0].sum()
+    with np.errstate(divide="ignore", invalid="ignore"):
+        terms = np.where(C > 0, C * np.log(p), 0.0)
+    return gammaln(n + 1) - gammaln(C + 1).sum(axis=1) + terms.sum(axis=1)
+
+
+def ordinal_misalignment_of(s, q, F):
+    """M_ord of [P36](ii) for s ∈ Δ, from the q-weighted isotonic regression of the level ratios."""
+    levels = np.unique(F); at = np.searchsorted(levels, F)
+    qL = np.array([q[F == v].sum() for v in levels]); sL = np.array([s[F == v].sum() for v in levels])
+    return kl(s, q * isotonic(sL / qL, qL)[at])
+
+
+def test_what_a_record_certifies():
+    """P55: a sample from p shows the empirical behaviour s with probability between e^(−n KL(s||p))/k_n and
+    e^(−n KL(s||p)); for intended behaviours on the ray and at its limit, and for the ordinal specification,
+    P(n M(p̂_n) ≥ λ) ≤ k_n e^(−λ), computed exactly over every empirical behaviour; the same for n KL(p̂_n || r); the
+    bound needs its factor k_n; and the test catches a misaligned actor (seeded simulation)."""
+    r = rng(5501); seen = {"beyond one type": 0, "ray": 0, "ordinal": 0}
+    lams = np.array([0.5, 1.0, 2.0, 3.0, 5.0, 8.0])
+    for _ in range(40):
+        K = int(r.integers(2, 6)); n = int(r.integers(3, 13 if K <= 4 else 10))
+        C = np.array(compositions(n, K)); S = C / n; k = len(C)
+        assert k == round(np.exp(gammaln(n + K) - gammaln(n + 1) - gammaln(K)))
+        for _ in range(3):                                                         # (i) and (iv)
+            p = simplex_interior(r, K) if r.random() < 0.7 else with_zeros(r, K)
+            lp = type_log_probs(C, p); d = np.array([kl(s, p) for s in S]); ok = np.isfinite(d)
+            assert np.all(lp[ok] <= -n * d[ok] + 1e-9) and np.all(np.exp(lp[~ok]) == 0)
+            assert np.all(lp[ok] >= -n * d[ok] - np.log(k) - 1e-9)
+            for lam in lams:
+                assert np.exp(lp[n * d >= lam]).sum() <= k * np.exp(-lam) + 1e-12
+        q = simplex_interior(r, K); F = r.normal(0, 1, K)
+        Mray = np.array([misalignment(s, q, F)[0] for s in S])
+        Mord = np.array([ordinal_misalignment_of(s, q, F) for s in S])
+        for pp in [tilt(q, t * F) for t in (0.0, 0.3, 1.5, 6.0)] + [best_outcomes_limit(q, F)]:
+            lp = type_log_probs(C, pp)                                              # (ii): the ray, and its limit
+            assert np.all(np.array([kl(s, pp) for s in S]) >= Mray - 1e-10 * (1 + Mray))   # the step of the proof
+            for lam in lams:
+                prob = np.exp(lp[n * Mray >= lam - 1e-12]).sum()
+                assert prob <= k * np.exp(-lam) + 1e-12
+                seen["beyond one type"] += prob > np.exp(-lam)
+            seen["ray"] += 1
+        for _ in range(3):                                                          # (ii): the ordinal specification
+            levels = np.unique(F); ratios = np.sort(np.exp(r.normal(0, 1, len(levels))))
+            pp = q * ratios[np.searchsorted(levels, F)]; pp /= pp.sum()
+            lp = type_log_probs(C, pp)
+            assert np.all(np.array([kl(s, pp) for s in S]) >= Mord - 1e-10 * (1 + Mord))   # the step of the proof
+            for lam in lams:
+                assert np.exp(lp[n * Mord >= lam - 1e-12]).sum() <= k * np.exp(-lam) + 1e-12
+            seen["ordinal"] += 1
+    assert seen["beyond one type"] >= 5 and seen["ray"] >= 100 and seen["ordinal"] >= 100
+    alpha = 0.05; caught = 0                                                        # (iii), seeded
+    q = np.array([0.4, 0.3, 0.2, 0.1]); F = np.array([0.0, 1.0, 2.0, 3.0]); ph = np.array([0.1, 0.5, 0.1, 0.3])
+    M, _ = misalignment(ph, q, F); n = 3000; k = np.exp(gammaln(n + 4) - gammaln(n + 1) - gammaln(4))
+    assert M > 0.05 and n * M > 4 * np.log(k / alpha)
+    for _ in range(100):
+        caught += n * misalignment(r.multinomial(n, ph) / n, q, F)[0] >= np.log(k / alpha)
+    assert caught >= 99

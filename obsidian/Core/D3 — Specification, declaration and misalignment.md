@@ -10,10 +10,13 @@ source: "CORE.md"
 ## Statement
 A **specification** is a pair `(q, 𝓘)`: a default `q ∈ Δ°`, and a non-empty set `𝓘 ⊆ Δ°` of
 **intended behaviours**, closed in `Δ°`. The **misalignment** of a behaviour `p̂ ∈ Δ` is `M(p̂) = inf_{p ∈ 𝓘} KL(p̂‖p)`.
-For an objective `F`, the **standard specification** is `(q, R_F)`: pursuit of `F` from `q` at every intensity,
-including none; the **ordinal specification** is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of
-F}`. A specification is **declared** when it is fixed as [[A5 — Declared before|A5]] requires: before, and without using, the behaviour it
-will judge.
+A **family of targets** is a closed set `𝓚` of objectives that contains the constants and `a·G + b·G'` whenever it
+contains `G` and `G'`, for all numbers `a, b ≥ 0`; its specification is `(q, 𝓘_𝓚)`, with `𝓘_𝓚 = {tilt(q, G) : G ∈ 𝓚}`,
+the pursuits of its targets from `q`. For an objective `F`, the **standard specification** is that of the family
+`{t·F + c : t ≥ 0, c real}`, so that `𝓘_𝓚 = R_F`: pursuit of `F` from `q` at every intensity, including none; the
+**ordinal specification** is that of the family of non-decreasing functions of `F`, so that
+`𝓘_𝓚 = C_F = {p ∈ Δ° : p/q is a non-decreasing function of F}`. A specification is **declared** when it is fixed as [[A5 — Declared before|A5]]
+requires: before, and without using, the behaviour it will judge.
 
 ## In plain terms
 Before looking at what the actor does, the principal states a default behaviour and the set of
@@ -26,15 +29,17 @@ either, an actor that stays at the default is not misaligned, though it may be u
 
 ## Interpretation
 *Declared.* A specification is the principal's standard, written down and dated before the record it
-judges is read ([[A5 — Declared before|A5]]): a default, and the ensembles the principal accepts. Misalignment is the rate, in nats per
-decision, at which a record of the actor builds the case that it acts in no accepted way ([[A4 — Misalignment is evidence|A4]]): about `1/M` decisions
-give one nat, odds of about `e` to one. The standard specification accepts every strength of pursuing `F`, none
-included; the ordinal one accepts every ensemble that favours each outcome at least as much as any outcome `F` scores
-lower, relative to the default. *Verified.* `M > ε`, for `ε > 0`, is verifiable in the statistical sense: the evidence
-of a growing record crosses any threshold with a probability that tends to one. `M = 0` can only be refuted. An actor
-can be shown to be misaligned; it can never be shown to be exactly aligned, only consistent with alignment at a stated
-precision. *Justified.* Evidence is what a record supplies ([[A4 — Misalignment is evidence|A4]]), and fixing the standard first is what makes the
-judgement a test ([[A5 — Declared before|A5]]).
+judges is read ([[A5 — Declared before|A5]]): a default, and the ensembles the principal accepts. A family of targets is the set of aims the
+principal accepts being pursued: each at every strength, and every positive mix of them; "pursue `F`" is the smallest
+family that holds `F`, and "favour what `F` ranks higher" the family of its order. Misalignment is the rate, in nats per
+decision, at which a record's counts become improbable under every accepted behaviour ([[A4 — Misalignment is evidence|A4]]): about `1/M` decisions make
+them `e` times less probable. *Verified.* "Misaligned", `M > 0`, is verifiable in the statistical sense, by a test whose
+rate of false accusation is bounded at every size of record and whose power tends to one, with no model of how the actor
+decides (Notes). "Aligned within `ε`", `M < ε`, is verifiable in the same sense for an actor that decides independently.
+"Exactly aligned", `M = 0`, can only be refuted: an actor can be shown to be misaligned, or aligned within a stated
+margin, never exactly aligned. *Justified.* Counts are what a record supplies ([[A4 — Misalignment is evidence|A4]]); fixing the standard first is what
+makes the judgement a test ([[A5 — Declared before|A5]]); and the statements above are verifiable or refutable because of their shape, open or
+closed in the behaviours, as the statistical form of reverse physics requires (Notes).
 
 ## Why this choice
 - *The formula is [[A4 — Misalignment is evidence|A4]] made exact.* If the actor behaves as `p̂` and `p` is intended, each independent decision adds on
@@ -59,11 +64,17 @@ judgement a test ([[A5 — Declared before|A5]]).
   principal for whom doing nothing is a failure declares a smaller set (v7.10: the floor, Def 20). The cost of departing
   is what makes it a set of compromises: without it, the only fully intended behaviours would be those on the best
   outcomes of `F`.
-- *Misalignment is excess departure.* Each of the two specifications credits the actor with some statistics of its
-  behaviour, and `M(p̂)` is the departure spent beyond the cheapest behaviour that reproduces them (Notes). The standard
-  specification credits the average of `F`, when the actor does better than the default; the ordinal one credits the
-  masses of the groups of outcomes that the order of `F` pools. What is charged is departure that buys nothing the
-  specification credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
+- *A family of targets, not one.* A principal often knows its target only up to a family: its order, a span of
+  candidate rewards, the objectives of several principals whose weights are not agreed. Declaring the family keeps one
+  definition for all of them; the single objective is the smallest family. The family holds the constants, since they
+  change no aim ([[B3 — An objective up to scale and constant|B3]]), and positive mixes of its targets, since a principal who accepts each of two targets with
+  weights it has not fixed accepts their weighted pursuit; a family that is not convex is the union of the
+  specifications of its convex parts, and its misalignment is the least of theirs.
+- *Misalignment is excess departure.* Every family credits the actor with what it achieves on the family's targets, and
+  `M(p̂)` is the departure spent beyond the cheapest behaviour that does at least as well on every target (Notes). The
+  standard specification credits the average of `F`, only when the actor does better than the default; the ordinal one
+  credits reaching every threshold of `F` at least as often. What is charged is departure that buys nothing the family
+  credits, whether from a wrong goal or from a way of acting that cannot reach the cheapest behaviour.
 - *The ordinal specification, for actors that rank.* An actor that picks by rank, such as best-of-`n`, behaves alike
   for every increasing transformation of `F`, and keeps the default's proportions within each level set of `F`. Its
   specification is the order of `F`, which accepts every pursuit of an increasing transformation of `F` and every
@@ -95,19 +106,24 @@ specification, that is, that the pursuit ray is closed in `Δ°`, is shown in [[
 single point `q`, which is closed. That the ordinal specification is one, that it contains every best-of-`n` by `F`, and
 that its misalignment and the shape's add up to at most the standard one are [[P36 — Ordinal objectives|P36]](i) and (iv). That the nearest
 intended behaviour of a pursuer has the least departure among those with the actor's average of `F` is [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii), and
-that misalignment is the departure beyond what the specification credits, for both specifications and for every family
-of pursuits of named statistics, is [[P53 — Misalignment is the departure beyond what the specification credits|P53]]. In statistics, the standard specification is a one-parameter exponential
-family and the ordinal one a cone of monotone likelihood ratios, and misalignment is the divergence from the actual
-behaviour to either.
+that, for every family of targets, the specification is closed, its nearest intended behaviour unique, and misalignment
+the departure beyond the cheapest behaviour that does at least as well on every target, is [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]. The test that makes
+"misaligned" verifiable at every size, and the interval that makes "aligned within `ε`" verifiable, are [[P55 — What a record of counts certifies, at every size|P55]]; that the
+statements so verifiable are the open sets of behaviours, and the refutable ones the closed sets, is Genin and Kelly's
+theorem [[References|@genin2017]], the statistical form of the verifiable and refutable statements of reverse physics [[References|@carcassi2021]]
+([[P55 — What a record of counts certifies, at every size|P55]], Notes). In statistics, the standard specification is a one-parameter exponential family and the ordinal one a
+cone of monotone likelihood ratios, and misalignment is the divergence from the actual behaviour to either.
 
 ## Lineage
 v7.10: Def 19 and Prop 34 (the declared intended set), Def 17 (the free convention's half-ray), Def 23 (the
 declaration, slimmed; its timing slot becomes the rule of use), row 74, and the target sets of R7-7, cardinal or
 ordinal by the principal's declaration. New: behaviours that rule outcomes out are scored. v13: the ordinal
 specification moved here from [[P36 — Ordinal objectives|P36]]; misalignment read first as evidence ([[A4 — Misalignment is evidence|A4]]); the draft's rule of a matched
-specification (its A6) replaced by the paired report (Q52).
+specification (its A6) replaced by the paired report (Q52); families of targets, of which the standard and the ordinal
+specification are cases, at the PI's question whether a family is more general than one target (Q53).
 
 ## Depends on
+- [[B3 — An objective up to scale and constant|B3]] — An objective up to scale and constant
 - [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[A5 — Declared before|A5]] — Declared before
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
@@ -119,7 +135,7 @@ specification (its A6) replaced by the paired report (Q52).
 - [[D7 — Feasibility|D7]] — Feasibility
 - [[P35 — Floors and caps|P35]] — Floors and caps
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives
-- [[P53 — Misalignment is the departure beyond what the specification credits|P53]] — Misalignment is the departure beyond what the specification credits
+- [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] — Misalignment is the departure beyond what the family of targets credits
 - [[P33 — Error bounds for a known evaluator|P33]] — Error bounds for a known evaluator
 - [[P24 — The evaluation gap|P24]] — The evaluation gap
 - [[P39 — Several actors: coordination plus individual misalignment|P39]] — Several actors: coordination plus individual misalignment

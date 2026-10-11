@@ -34,6 +34,8 @@ levels stay here until they are worked out.
 | **intended behaviours** | [D3] | the behaviours the principal would accept | "intended" in the formal text, "acceptable" in plain terms | admissible set, safe set, satisfying behaviours | A |
 | **misalignment** | [D3] | KL from the actual behaviour to the nearest acceptable one | the subject of the framework | quantitative distance from the specification; nats of evidence per decision (expected log-likelihood ratio) | A |
 | **standard specification** | [D3] | pursue `F` at any intensity, including none | the specification of "pursue `F`" that charges the shape of the reweighting as well as the order, reported with the ordinal one beside it; the name is kept from v12, when it was the only one for "pursue `F`", since registered cases use it | v7.10's free convention; the cardinal target set of R7-7 | A |
+| **family of targets** | [D3] | the objectives a principal accepts being pursued, each at any strength, with the positive mixes of them and the constants | it names what the principal declares: a set of aims rather than one | a closed convex cone of objectives; a set of candidate rewards; the uncertain target of inverse reward design | A |
+| **dominate** | [P53] | reach every threshold of an objective at least as often | the statistics term, shortened | first-order stochastic dominance | A |
 | **nearest intended behaviour** | [P5] | the acceptable behaviour closest to the actual one | plain | I-projection (here a reverse I-projection, in the second argument), best-fitting model | A |
 | **revealed intensity** | [P5] | the intensity the actual behaviour reveals | parallels "revealed objective" | the weight maximum-entropy inverse RL fits for one feature [@ziebart2008] | A |
 | **departure** | [P6] | `KL(p̂‖q)`: how far the actor moved from the default | plain | KL from the reference policy, "KL budget" (RL fine-tuning) | A |
@@ -74,8 +76,9 @@ levels stay here until they are worked out.
 | **evaluator** | [D10] | what the actor actually pursues: a reward it is paid on, a measure it is judged by, or the objective its behaviour reveals | v7.10's word, neutral across fields; "proxy" presumes the target it stands in for, and "reward model" belongs to one field | proxy, reward model (ML), performance measure (economics), fitness of a selection regime (biology) | A |
 | **regression** | [D10] | what the evaluator tells, on average under the default, about the principal's objective | the statistical term for this conditional expectation | conditional expectation, regression function | A |
 | **residual** | [D10] | the part of the principal's objective that the evaluator does not see | the statistical term; unlike v7.10's "error", it needs no scale | the regression residual (statistics); the part of the target that the proxy does not explain | A |
-| **sample** | [D11] | a record of decisions, each drawn independently from the behaviour | plain | data, observations, trials | A |
-| **empirical behaviour** | [D11] | how often each outcome occurs in a sample | parallels "behaviour" | empirical distribution, type (information theory) | A |
+| **sample** | [D11] | a record whose decisions are each drawn independently from one behaviour | plain | data, observations, trials | A |
+| **record** | [D11] | the outcomes of successive decisions, in order | plain: what is logged | data, a log, a trajectory | A |
+| **empirical behaviour** | [D11] | how often each outcome occurs in a record | parallels "behaviour" | empirical distribution, type (information theory) | A |
 | **evidence** | [D11] | how much more likely a record is under one behaviour than under another, in nats | plain, and I. J. Good's "weight of evidence" | log-likelihood ratio, weight of evidence | A |
 | **evaluation gap** | [P24] | how much the misalignment of real use exceeds that of an evaluation that meets situations in other proportions | v7.10's name, kept | the cost of a shift in the distribution of situations | A |
 | **coordination** | [P39] | how much several actors' outcomes go together, beyond what each does on its own | plain: what a regulator means by it | total correlation (Watanabe), mutual information (two actors), multi-information | A |
@@ -92,6 +95,7 @@ levels stay here until they are worked out.
 | **named misalignment** | [P44] | the misalignment that the named objectives account for | plain | explained divergence (by analogy with an explained sum of squares) | A |
 | **runs** | [P45] | repetitions of an actor that should not matter to the principal, such as training runs or random seeds | plain, from machine learning | replicates (experimental science), seeds | A |
 | **drift** | [P45] | how much an outcome tells about which run produced it | the word for chance change between replicates, as in genetic drift | mutual information between run and outcome; generalized Jensen–Shannon divergence | A |
+| **dependence** | [P54] | how much the decisions of a record depend on each other, per decision | plain | total correlation, multi-information, divided by the number of decisions | A |
 | **shared misalignment** | [P45] | the misalignment of several runs judged against one intended behaviour | plain | — | A |
 | **reproducible difference** | [P46] | how differently the average of several runs acts in two conditions | plain: what every run would show | — | A |
 | **run-specific difference** | [P46] | the part of how differently runs act in two conditions that changes from run to run | plain | interaction of run and condition (analysis of variance) | A |
@@ -172,4 +176,5 @@ levels stay here until they are worked out.
 | **regression** and **residual**, in place of v7.10's "error" `E = F̂ − F` | v10 | PI approved | the error depends on the scale of the evaluator, which behaviour never identifies; the regression and the residual do not change under any increasing transformation of the evaluator |
 | "known" and "revealed" evaluators, in plain words, not as defined terms | v10 | executor | "declared" already means "fixed in advance" ([D3]); a known evaluator need not be fixed in advance, only known to be what the actor is rewarded on |
 | **sample**, **empirical behaviour**, **evidence** | v10 | PI approved sampling in the core | "evidence" over "log-likelihood ratio": plain, Good's name, and it says what the number is for |
+| **family of targets**, **record**, **dependence**, **dominate**; the table of conventions | v13 (Q53) | executor, at the PI's questions | a family names what a principal declares when its target is known only up to a set; a record is what is logged, whatever the actor, and a sample the independent case; the conventions are named so that each can be justified apart |
 | **evaluation gap** | v10 | v7.10's name, kept | — |

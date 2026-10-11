@@ -25,8 +25,9 @@ symmetric, so the order matters. Tilting reweights a behaviour toward the outcom
 *Declared.* An outcome is the narrowest result that a record of one decision tells apart from the
 others, such as the answer an assistant gave or whether a patient was seen within four hours. A behaviour is the actor's
 ensemble in one condition: the shares its outcomes take over unboundedly many independent decisions ([[M2 — Independent repetition|M2]]). `E_p[F]` is
-the average score of those decisions. `KL(p‖r)` is the evidence one decision of an actor behaving as `p` gives, on
-average, against `r` ([[A4 — Misalignment is evidence|A4]]). `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
+the average score of those decisions. `KL(p‖r)` is the rate per decision at which shares `p` become improbable for an
+actor that decides as `r` ([[A4 — Misalignment is evidence|A4]]); for an actor that decides independently as `p`, it is also the evidence one decision
+gives, on average, against `r`. `tilt(r, F)` is what remains of the ensemble `r` when each decision is kept with a
 probability proportional to `e^F`: a selection a principal could carry out, by accepting or rejecting decisions.
 *Verified.* Which outcome occurred is decided by the record of one decision. A behaviour is approached by the shares in
 a record, never reached ([[M2 — Independent repetition|M2]]): `p(x) > 0` is verified by a single occurrence of `x`, while `p(x) = 0` can only be

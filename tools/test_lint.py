@@ -555,3 +555,41 @@ def test_reports_as_data_keep_the_standard(tmp_path):
     assert not any("R16 the" in e for e in errors)                          # the real fields match the real standard
     errors, _ = make(tmp_path, extra=extra)                                  # a standard with other tables
     assert any("stdalign/report.py: R16 the declaration fields differ" in e for e in errors)
+
+
+CONVENTIONS = ("\n**Conventions.**\n\n| Convention | Declared in | Justified by | Changes a verdict | Why |\n"
+               "|---|---|---|---|---|\n| nats | [D1] | convenience, literature | no: a unit | derivatives carry no constant |\n")
+
+
+def with_conventions(table=CONVENTIONS):
+    return CORE.replace("## Premises\n", table + "\n## Premises\n")
+
+
+def test_a_table_of_conventions_passes(tmp_path):
+    errors, _ = make(tmp_path, core=with_conventions())
+    assert errors == [], errors
+
+
+@pytest.mark.parametrize("old,new", [
+    ("| [D1] | convenience", "| none | convenience"),                                         # declared nowhere
+    ("| [D1] | convenience", "| [D9] | convenience"),                                         # in no existing item
+    ("| [D1] | convenience", "| [P1] | convenience"),                                         # in a result
+    ("convenience, literature", "convenience, taste"),                                        # an unknown justification
+    ("| convenience, literature |", "|  |"),                                                  # no justification
+    ("| no: a unit |", "| maybe |"),                                                          # verdict not said
+    ("| derivatives carry no constant |", "|  |"),                                            # no reason
+    ("| derivatives carry no constant |", ""),                                                # a cell missing
+])
+def test_the_conventions_rule_fires(tmp_path, old, new):
+    table = CONVENTIONS.replace(old, new)
+    assert table != CONVENTIONS
+    errors, _ = make(tmp_path, core=with_conventions(table))
+    assert "17" in codes(errors), errors
+
+
+def test_a_status_that_speaks_of_a_convention_is_in_the_table(tmp_path):
+    core = with_conventions().replace("**Status.** A principle, conceptual.", "**Status.** A principle, with one convention.")
+    errors, _ = make(tmp_path, core=core)
+    assert any("A1's Status speaks of a convention, and no row" in e for e in errors), errors
+    errors, _ = make(tmp_path, core=CORE.replace("**Status.** A principle, conceptual.", "**Status.** A convention."))
+    assert any("there is no table of conventions" in e for e in errors), errors

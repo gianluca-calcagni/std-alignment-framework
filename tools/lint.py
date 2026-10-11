@@ -64,6 +64,10 @@ Rules
       tables, in order, and every cases/<name>/standard-report.json passes its validator: every field present, every
       estimated value with its interval, a quantity not identified given as bounds, and no report confirmatory whose
       declaration came after its data.
+  R17 Conventions. CORE.md lists its conventions in one table with the columns CONVENTION_COLUMNS. In every row, the
+      column "Declared in" names at least one item of the core, and only existing ones; "Justified by" lists one or
+      more of JUSTIFICATIONS, separated by commas; "Changes a verdict" starts with "yes", "no" or "only"; and "Why" is
+      not empty. Every item of the core whose Status speaks of a convention is named in some row.
 """
 import ast, hashlib, re, sys
 from pathlib import Path
@@ -77,6 +81,8 @@ DEPENDENCY_FIELDS = {"Statement", "Interpretation", "Status", "Why this choice",
 ITEM = re.compile(r"^### ([MBADPTLCR])(\d+) — (\S.*)$")
 LABEL = re.compile(r"^\*\*(" + "|".join(re.escape(f) for f in FIELDS) + r")\.\*\*")
 REF = re.compile(r"\[([MBADPTLCR]\d+)\]")
+CONVENTION_COLUMNS = ["Convention", "Declared in", "Justified by", "Changes a verdict", "Why"]
+JUSTIFICATIONS = {"forced", "convenience", "literature"}
 CHECK = re.compile(r"(checks/[\w/]+\.py)::(\w+)")
 CITE = re.compile(r"\[@([\w:-]+)\]")
 LISTED = re.compile(r"^- \[@([\w:-]+)\] \S")
@@ -318,6 +324,9 @@ def lint(root):
     if (root / "stdalign" / "report.py").exists():
         errors += lint_reports(root)
 
+    # R17
+    errors += lint_conventions(core_text, core_items, pos)
+
     # R8
     refs_file = root / "REFERENCES.md"
     listed = [m[1] for line in (refs_file.read_text(encoding="utf-8").splitlines() if refs_file.exists() else [])
@@ -487,6 +496,50 @@ def lint_design_rules(cases, standard):
                     errors.append(f"{name}: R15 prediction {row[0]} does not say where its threshold comes from")
         if not (case / "rehearsal.json").exists():
             errors.append(f"cases/{case.name}: R15 the rehearsal's record, rehearsal.json, is missing")
+    return errors
+
+
+def lint_conventions(core_text, core_items, pos):
+    """R17: the table of conventions in CORE.md."""
+    errors, lines = [], core_text.splitlines()
+    starts = [n for n, line in enumerate(lines) if line.startswith("|") and
+              [c.strip() for c in line.strip().strip("|").split("|")] == CONVENTION_COLUMNS]
+    declaring = [it["id"] for it in core_items if "convention" in it["fields"].get("Status", "").lower()]
+    if not starts:
+        return [f"CORE.md: R17 {iid}'s Status speaks of a convention, and there is no table of conventions"
+                for iid in declaring]
+    if len(starts) > 1:
+        errors.append("CORE.md: R17 there is more than one table of conventions")
+    block = []
+    for line in lines[starts[0]:]:
+        if not line.startswith("|"):
+            break
+        block.append(line)
+    named = set()
+    for row in table_rows(block)[1:]:
+        where = f"CORE.md: R17 the convention '{row[0]}'"
+        if len(row) != len(CONVENTION_COLUMNS):
+            errors.append(f"{where} has {len(row)} cells, not {len(CONVENTION_COLUMNS)}")
+            continue
+        refs = REF.findall(row[1])
+        if not refs:
+            errors.append(f"{where} names no item where it is declared")
+        for ref in refs:
+            if ref not in pos:
+                errors.append(f"{where} names [{ref}], which does not exist")
+            elif ref[0] not in CORE_KINDS:
+                errors.append(f"{where} is declared in [{ref}], which is not an item of the core")
+        named.update(refs)
+        kinds = [w.strip() for w in row[2].split(",")]
+        if not row[2].strip() or any(k not in JUSTIFICATIONS for k in kinds):
+            errors.append(f"{where} is justified by '{row[2]}', not by {', '.join(sorted(JUSTIFICATIONS))}")
+        if row[3].split(":")[0].split()[:1] not in (["yes"], ["no"], ["only"]):
+            errors.append(f"{where} does not say whether it changes a verdict")
+        if not row[4]:
+            errors.append(f"{where} gives no reason")
+    for iid in declaring:
+        if iid not in named:
+            errors.append(f"CORE.md: R17 {iid}'s Status speaks of a convention, and no row of the table names it")
     return errors
 
 

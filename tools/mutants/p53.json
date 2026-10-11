@@ -1,4 +1,5 @@
 {
+ "about": "P53's check (2026-10-11): families of targets, spans, the standard and the ordinal specification.",
  "tests": [
   "checks/test_misalignment.py",
   "-k",
@@ -6,7 +7,7 @@
  ],
  "mutants": [
   {
-   "name": "[P53](i) Pythagoras the wrong way",
+   "name": "[P53](iii) Pythagoras the wrong way, on a span",
    "edits": [
     [
      "checks/test_misalignment.py",
@@ -16,57 +17,57 @@
    ]
   },
   {
-   "name": "[P53](i) p* projected to the default's averages",
+   "name": "[P53](ii) the active set chosen by the reverse condition",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "ps = stdalign.project_linear(q, T, b)\n",
-     "ps = stdalign.project_linear(q, T, T @ q)\n"
+     "if lam.min() >= -1e-9 and np.all(T @ p >= T @ ph - 1e-10):",
+     "if lam.min() >= -1e-9 and np.all(T @ p <= T @ ph + 1e-10):"
     ]
    ]
   },
   {
-   "name": "[P53](i) p* the actor itself",
+   "name": "[P53](i) negative weights accepted, as for a span",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "ps = stdalign.project_linear(q, T, b)\n",
-     "ps = ph.copy()\n"
+     "if lam.min() >= -1e-9 and np.all(T @ p >= T @ ph - 1e-10):",
+     "if np.all(T @ p >= T @ ph - 1e-10):"
     ]
    ]
   },
   {
-   "name": "[P53](ii) the credit measured from the actor",
+   "name": "[P53](iii) misalignment measured from the actor's side",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "MT = kl(ph, q) - kl(ps, q)",
-     "MT = kl(ph, q) - kl(ph, ps)"
+     "        M = kl(ph, po); G0 = lam @ T\n",
+     "        M = kl(po, ph); G0 = lam @ T\n"
     ]
    ]
   },
   {
-   "name": "[P53](ii) the family cut to non-negative directions, as the ray is",
+   "name": "[P53](v) the order's credit read on lower tails",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "best = min(minimize(dual, x0, jac=slope, method=\"BFGS\", options={\"gtol\": 1e-12}).fun",
-     "best = min(minimize(dual, x0, jac=slope, method=\"L-BFGS-B\", bounds=[(0, None)] * d, options={\"gtol\": 1e-12}).fun"
+     "up = np.array([(F >= v).astype(float) for v in levels[1:]])",
+     "up = np.array([(F <= v).astype(float) for v in levels[:-1]])"
     ]
    ]
   },
   {
-   "name": "[P53](iii) the average of F credited below the default too",
+   "name": "[P53](v) the standard credit read below the actor's average",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "            assert abs(m - kl(ph, q)) <= 1e-9 * (1 + kl(ph, q))                         # nothing is credited",
-     "            ps = stdalign.project_linear(q, F[None, :], np.array([ph @ F]))\n            assert abs(m - (kl(ph, q) - kl(ps, q))) <= 1e-9 * (1 + kl(ph, q))"
+     "                if p @ F >= ph @ F:                                                    # in C",
+     "                if p @ F <= ph @ F:                                                    # in C"
     ]
    ]
   },
   {
-   "name": "[P53](iv) the level sets in place of the pooled blocks",
+   "name": "[P53](v) the level sets in place of the pooled blocks",
    "edits": [
     [
      "checks/test_misalignment.py",
@@ -76,12 +77,12 @@
    ]
   },
   {
-   "name": "[P53](iv) mass spread inside a block as the actor spreads it",
+   "name": "[P53] a span projected to the default's averages",
    "edits": [
     [
      "checks/test_misalignment.py",
-     "cheapest = q * (mass / np.array([q[blocks == j].sum() for j in range(nb)]))[blocks]",
-     "cheapest = ph.copy()"
+     "ps = stdalign.project_linear(q, T, b)\n",
+     "ps = stdalign.project_linear(q, T, T @ q)\n"
     ]
    ]
   }

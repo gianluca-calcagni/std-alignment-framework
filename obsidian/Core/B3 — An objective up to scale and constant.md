@@ -31,4 +31,5 @@ v7.10: Prop 16's gauge; new as a condition in v13.
 
 ## Used by
 - [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
+- [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D5 — Stakes|D5]] — Stakes
