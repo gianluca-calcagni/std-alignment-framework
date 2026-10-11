@@ -11,6 +11,7 @@ general parts of the framework stay apart, in their definitions and in their res
 | expected | argued, with no computation |
 | probed | computed on instances, without a prediction registered beforehand |
 | tested | computed against a prediction registered before the run (`probes/general/PREDICTIONS.md`); failed predictions are kept, and marked |
+| proved here | proved in this folder, from results read in an open text and results of `derived/`; no check runs it in CI yet |
 | proved | proved, with checks that run in CI: on finite outcomes, in `derived/` |
 
 | Reading order | File | What it holds |
