@@ -1263,9 +1263,11 @@ add), the order of KL's arguments (forced by [A4] through the method of types), 
 objectives up to scale and constant ([P1](ii)), and pursuit as a tilt (the two reasons of [D2]). Four change a verdict
 when chosen otherwise, and two only in stated cases, and the table says which: the most favourable accepted behaviour,
 the order of KL's arguments, doing nothing as intended, and pursuit as a tilt; then independence, for a principal who
-intends dependence, and convexity, for a family that is not convex. *Challenge:* convenience is a weak justification
-where a verdict changes; the table makes those places visible rather than defending them, and the one that matters most
-in practice is doing nothing as intended, which a principal who wants something done must override with a floor ([P35]).
+intends dependence, and convexity, for a family that is not convex. (Corrected at the reread before the pull request,
+§19: independence changes a verdict for any actor whose decisions depend on each other, so five change one in general,
+and one only in a stated case.) *Challenge:* convenience is a weak justification where a verdict changes; the table
+makes those places visible rather than defending them, and the one that matters most in practice is doing nothing as
+intended, which a principal who wants something done must override with a floor ([P35]).
 
 **2. Independence between episodes, dropped.** [A4] now measures the rate at which the record's counts become improbable
 under the accepted behaviour most favourable to them; independence is part of what is accepted, a convention of the
@@ -1383,8 +1385,9 @@ hypothesis dropped in the Notes"), two gaps in [P55](iv)'s proof (an interval bo
 need not exist, and a strict inequality left implicit), and four places where the wording claimed more than the
 Statement ([P54](ii)'s attainment, "exactly aligned can never be shown", "the largest probability", and [P54]'s plain
 terms). All are fixed; the overclaim on dependence had been copied into [D3]'s Interpretation, `STANDARD.md`'s Sampling
-row, `CORE-GENERAL.md` and `README.md`, and is fixed there too. It is not independent (rule (f)): the same model family
-wrote and read it.
+row, `CORE-GENERAL.md` and `README.md`, and is fixed there too, as is the conventions table, whose row on independence
+had said it changes a verdict only for a principal who intends dependence. It is not independent (rule (f)): the same
+model family wrote and read it.
 
 **Progress, and what got worse or was ignored, since Q49.** For the mathematics, the review's main finding (§15, point
 1: `M` charges the route as well as the goal) is answered in the definitions: the ordinal specification, the paired
