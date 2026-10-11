@@ -1,17 +1,17 @@
 # The general core
 
-> **Status: draft 4, on the kinds of v13 (Q53); its transfer lemma and dimension law proved in `general/transfer.md`,
-> TR1–TR6, not yet checked in CI (Q56).** Frozen by Q26, and unfrozen by Q33 for outcomes that are not finite and for
-> estimation (`ROADMAP.md`, step 3). This file extends the core (`CORE.md`, v13) from finitely many outcomes to the
-> outcome spaces met in practice: counts, waiting times, scores, texts, trait values. As `CORE.md` does, it keeps apart
-> what it imports from measure theory (GM), the representation it assumes without loss of generality (GB), what it
-> assumes about judging alignment (GA, numbered as the premises of the core they extend), and its definitions (GD), each
-> definition with its interpretation. Its results, expected, probed or tested, are in `general/`, as the finite core's
-> are in `derived/`, and nothing there is claimed until it is proved and checked. `general/dictionary.md` maps each
-> object from the finite core to this file. Every number the draft cites is reproduced by a script in `probes/general/`.
-> Lint checks that every item this file and `general/` name exists (R12); it does not yet check their structure. Draft
-> 3's GA2 and GA3 are now reasons of GD2, as the core's A2 and A3 became reasons of [[D2 — Pursuit of an objective|D2]], and its GA6 is now part of GA1
-> and of the definition of misalignment (GD3); their ids are not reused.
+> **Status: draft 4, on the kinds of v13 (Q53); its transfer lemma, dimension law, and the transfer of [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P54 — Dependence and drift only add evidence|P54]]
+> proved in `general/transfer.md`, TR1–TR8, not yet checked in CI (Q56).** Frozen by Q26, and unfrozen by Q33 for
+> outcomes that are not finite and for estimation (`ROADMAP.md`, step 3). This file extends the core (`CORE.md`, v13)
+> from finitely many outcomes to the outcome spaces met in practice: counts, waiting times, scores, texts, trait values.
+> As `CORE.md` does, it keeps apart what it imports from measure theory (GM), the representation it assumes without loss
+> of generality (GB), what it assumes about judging alignment (GA, numbered as the premises of the core they extend),
+> and its definitions (GD), each definition with its interpretation. Its results, expected, probed or tested, are in
+> `general/`, as the finite core's are in `derived/`, and nothing there is claimed until it is proved and checked.
+> `general/dictionary.md` maps each object from the finite core to this file. Every number the draft cites is reproduced
+> by a script in `probes/general/`. Lint checks that every item this file and `general/` name exists (R12); it does not
+> yet check their structure. Draft 3's GA2 and GA3 are now reasons of GD2, as the core's A2 and A3 became reasons of
+> [[D2 — Pursuit of an objective|D2]], and its GA6 is now part of GA1 and of the definition of misalignment (GD3); their ids are not reused.
 
 ## 0. What this file is
 
@@ -676,9 +676,10 @@ of them. *Verified.* As [[D8 — Conditions, responses and views|D8]]; across a 
 - *Reduction.* On finite sets, kernels are tables of behaviours, and the integral is [[D8 — Conditions, responses and views|D8]]'s sum.
 - *Invariance; finite determination.* Kernels are defined from events.
 - *Regularity across situations comes from the view.* By data processing, `KL(p_c‖p_c') ≤ KL(V_c‖V_c')` when the
-  response depends on the condition only through the view ([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], expected to carry). So the response can change across
-  a continuum of situations no faster than the view does. Generalizing from observed situations to nearby unobserved
-  ones needs some such regularity; here it follows from the view, and is not assumed of the response.
+  response depends on the condition only through the view ([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] on standard Borel spaces, `general/transfer.md`, TR7).
+  So the response can change across a continuum of situations no faster than the view does. Generalizing from observed
+  situations to nearby unobserved ones needs some such regularity; here it follows from the view, and is not assumed of
+  the response.
 
 **Lineage.** [[D8 — Conditions, responses and views|D8]]; `NOTES.md` §3.3, E5 and E7.
 
@@ -783,8 +784,10 @@ decision.
   has the same infimum ([[References|@csiszar1984]], Theorem 1).
 - *Dependence and drift.* As in [[P54 — Dependence and drift only add evidence|P54]], a record whose decisions depend on each other, or drift, holds more evidence than
   the misalignment of its average behaviour, by its dependence and its drift; the identity is the chain rule, which
-  holds on standard Borel spaces (expected, `general/transfer.md`). Two directions must not be confused: the probability
-  that a misaligned actor's record looks intended falls at the rate `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
+  holds on standard Borel spaces, with the divergence to the nearest intended behaviour in place of misalignment, the
+  two being equal when the intended behaviours are closed with a compact closure (`general/transfer.md`, TR8). Two
+  directions must not be confused: the probability that a misaligned actor's record looks intended falls at the rate
+  `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
 - *Distribution functions are exact for one number per outcome.* For a one-dimensional statistic, such as an evaluator's
   score or a waiting time, the empirical distribution function is within `√(log(2/α)/(2n))` of the true one everywhere,
   with probability at least `1 − α`, at every `n` and for every behaviour (the Dvoretzky–Kiefer–Wolfowitz inequality,

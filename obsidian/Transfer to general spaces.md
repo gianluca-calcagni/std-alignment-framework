@@ -14,11 +14,11 @@ the probes of `probes/general/`.
 | [[P11 — The misaligned share at the start of a change\|P11]], [[P13 — What the start of a change gains\|P13]]: the alignment plane | with a Gaussian default and linear target and proxy, along the pursuit of the proxy the target gains `√2·sd·cos θ` per square root of departure, and the misalignment is the departure times `sin²θ` (the whole departure when `cos θ < 0`), at every intensity: the departure splits like a right triangle. Under a χ² budget `B` the target gains `√B·ρ·sd` for every default, `ρ` the correlation under the default, the correlated proxy of Laidlaw et al. [[References\|@laidlaw2025]]. Under KL beyond Gaussians the law is local only | tested (B5, B4c): exact to `4·10⁻¹⁵` and `10⁻⁹`. B5's registered exponential case failed as posed: at intensity `2` the pursuit does not exist, and below `1` the law is exact for a product of identical exponentials. An exponential × normal default departs from it: `0.48`, `0.43`, `0.29` against `0.5` (exploratory) |
 | [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]] | carries where the tilts of the family exist: the cheapest behaviour that does at least as well on every target is Csiszár's I-projection onto a convex set, which exists when that set is closed in variation and holds a behaviour of finite divergence [[References\|@csiszar1975]], Theorem 2.1; the cone of targets must then be a cone of functions with an exponential moment under the default | expected |
 | [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]] | carries for linear limits [[References\|@csiszar1975]]. The unavoidable part is the rate at which the nearest intended behaviour produces, by chance, a record that meets the actor's limits; conditioned on that, its record looks like the best feasible behaviour [[References\|@csiszar1984]]. This reading holds on finite outcomes too, and belongs in the finite core first | probed: exact multinomial sums on three outcomes, rates `0.175`, `0.139`, `0.128` at `n = 50`, `200`, `800`, toward `0.123`; the conditional behaviour of one draw tends to the best feasible behaviour |
-| [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]] | carry, by data processing; regularity across a continuum of conditions comes from the view (GD8) | expected |
+| [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]] | [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]] carries, by data processing (TR7); [[P17 — What an unobserved condition can hide\|P17]] is expected to carry with it; regularity across a continuum of conditions comes from the view (GD8) | proved here for [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]] (TR7), not yet checked in CI; expected for [[P17 — What an unobserved condition can hide\|P17]] |
 | [[P19 — A monotone regression rules out overoptimization\|P19]] | carries: the association inequality holds under any behaviour | expected |
 | [[P20 — Where overoptimization starts, and how it ends\|P20]] | the end of pursuit changes when the evaluator's largest value has probability zero, or is never reached | expected |
 | [[P21 — The expected evidence is misalignment\|P21]], [[P22 — No test detects misalignment faster than misalignment\|P22]] | carry: both concern the log-ratio, a real number per decision | expected |
-| [[P54 — Dependence and drift only add evidence\|P54]] | carries: the chain rule for a product reference holds on standard Borel spaces ([[References\|@polyanskiy2025]], Theorem 2.16(c)), and the split of the marginals is [[P45 — Drift: what runs share, and what they do not\|P45]]'s | expected |
+| [[P54 — Dependence and drift only add evidence\|P54]] | carries, with the divergence to the nearest intended behaviour in place of misalignment, the two being equal when the intended behaviours are closed with a compact closure (TR8) | proved here (TR8), not yet checked in CI |
 | [[P55 — What a record of counts certifies, at every size\|P55]] | holds exactly on the counts of the cells of every finite description, for independent decisions, where it certifies the misalignment at that description; that is a lower bound of misalignment when the description is decidable for the actor, which it always is with no nearness, and whatever the nearness when the closure of the intended behaviours is compact (TR3). Under that compactness, a test on refining descriptions makes "misaligned" verifiable in chance (TR5). Without it, under a nearness, a description fixed in advance can accuse an actor whose misalignment is `0`: the on-target controller, with a cell edge at its target. "Aligned within `ε`" is not verifiable from records alone (GD11), with or without compactness; under a nearness with a countable basis of decidable events, Genin and Kelly's theorem says why: its set is not open in the weak topology [[References\|@genin2017]] | proved here for the compact case (TR5), not yet checked in CI; expected otherwise |
 | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]] | holds only at a record's resolution (GD11) | expected |
 | [[P36 — Ordinal objectives\|P36]] | for an evaluator without atoms, once each score is replaced by its rank under the default, the ordinal specification is the set of non-decreasing ratios on `[0, 1]`, the same for every default, and its nearest member is the isotonic regression [[References\|@robertson1988]] | expected |
@@ -190,3 +190,38 @@ by `log(1/w)` gives the limit.
 while `θ_w` can differ. Probed in T1 (`probes/general/`), with slopes `0.0998`, `1.0000`, `0.9997` and `0.3691` against
 `0.10`, `1`, `1` and `log 2/log 3`; the last, the Cantor measure, has no density and no atoms, and its information
 dimension is not given by the mixture theorem.
+
+### TR7 — What a view allows, on standard Borel spaces
+**Statement.** Let conditions, signals and outcomes form standard Borel spaces, and let the response depend on the
+condition only through a view `(Z, V)` (GD8). Then for conditions `c` and `c'`: (i) if `V_c = V_{c'}`, `p_c = p_{c'}`;
+(ii) `KL(p_c‖p_{c'}) ≤ KL(V_c‖V_{c'})`; (iii) if the view depends on the condition only through an input,
+`V_c = ∫ K_w W_c(dw)` for a kernel `w ↦ K_w` from a standard Borel space of inputs, then
+`KL(V_c‖V_{c'}) ≤ KL(W_c‖W_{c'})`.
+
+**In plain terms.** [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], on any outcome space met in practice: an actor cannot act more differently in two situations
+than it can tell them apart, however finely situations, signals and outcomes are described.
+
+**Proof.** `p_c` is the kernel `z ↦ π_z` applied to `V_c`, and `p_{c'}` the same kernel applied to `V_{c'}`. (i) is
+immediate, and (ii) and (iii) are the data-processing inequality for a kernel applied to two behaviours
+([[References|@polyanskiy2025]], Theorem 2.17, stated for standard Borel spaces, as everywhere in that book).
+
+### TR8 — Dependence and drift only add evidence, on standard Borel spaces
+**Statement.** Let `P` be a behaviour on `Xⁿ`, `X` standard Borel, with marginals `p̂_1, …, p̂_n`, average `p̄`, drift
+`δ = (1/n)·Σ_i KL(p̂_i‖p̄)` and dependence `κ = (1/n)·KL(P‖p̂_1 ⊗ … ⊗ p̂_n)`. (i) For every `p ∈ Δ`,
+`(1/n)·KL(P‖p^{⊗n}) = KL(p̄‖p) + δ + κ`, both sides possibly `+∞`. (ii) Over a set `𝓘` of behaviours, the least of the
+left side is `inf_{p∈𝓘} KL(p̄‖p) + δ + κ`; it is `M(p̄) + δ + κ` when `𝓘` is τ-closed with a compact closure (TR3), and
+otherwise `M(p̄)` may be smaller than that infimum. (iii) Every event's share in the record has expectation its
+probability under `p̄`.
+
+**In plain terms.** [[P54 — Dependence and drift only add evidence|P54]] on any outcome space met in practice, with one change: on a continuum the expected evidence
+is measured against the divergence to the nearest intended behaviour, which is the misalignment of the average behaviour
+exactly when the intended behaviours are closed and compact.
+
+**Proof.** (i) The chain rule for a product reference ([[References|@polyanskiy2025]], Theorem 2.16(c), (2.27)) gives
+`KL(P‖p^{⊗n}) = n·κ + Σ_i KL(p̂_i‖p)`. If some `p̂_i` is not absolutely continuous with respect to `p`, neither is `p̄`,
+and both sides are `+∞`. Otherwise `p̂_i ≤ n·p̄`, so `p̂_i` has a ratio to `p̄` bounded by `n`, and
+`log(dp̂_i/dp) = log(dp̂_i/dp̄) + log(dp̄/dp)` almost surely under `p̂_i`. The negative part of `log(dp̄/dp)` has
+`p̂_i`-average at most `n` times its `p̄`-average, which is at most `1/e`, since `r·log r ≥ −1/e`; so each average below
+is defined, and `KL(p̂_i‖p) = KL(p̂_i‖p̄) + E_{p̂_i}[log(dp̄/dp)]`. Summing over `i`, the last terms add to
+`n·E_{p̄}[log(dp̄/dp)] = n·KL(p̄‖p)`. (ii) `δ` and `κ` do not depend on `p`; the rest is TR3. (iii) The expected share
+of an event `C` is `(1/n)·Σ_i p̂_i(C) = p̄(C)`.
