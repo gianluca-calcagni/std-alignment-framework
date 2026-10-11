@@ -3,22 +3,27 @@ not claimed.
 
 Usage: python3 tools/lint.py [root]      (exit status 1 on any error)
 
-Where items live. CORE.md holds premises (A) and definitions (D). derived/ holds results (P proposition, T theorem,
-L lemma, C corollary) and remarks (R), one file per topic; derived/README.md lists the files in reading order.
+Where items live. CORE.md holds imported axioms (M), the mathematics taken as it is from probability theory;
+background conditions (B), assumed without loss of generality; premises (A); and definitions (D).
+derived/ holds results (P proposition, T theorem, L lemma, C corollary) and remarks (R), one file per topic;
+derived/README.md lists the files in reading order.
 
 Rules
   R1  CORE.md starts with a '# ' title. Every '### ' heading in CORE.md and in derived/*.md is an item:
-      '### <K><n> — <title>'. CORE.md holds only premises and definitions; derived/ holds only results and remarks.
+      '### <K><n> — <title>'. CORE.md holds only imported axioms, background conditions, premises and definitions;
+      derived/ holds only results and remarks.
       derived/README.md names every derived file once, in reading order, and names no missing file.
   R2  Item ids are unique; within each file, numbers increase within each kind.
   R3  Fields start a line with a bold label, appear at most once, in this order:
-      Statement, In plain terms, Why this choice, Proof, Example, Checks, Notes, Lineage.
-  R4  Required fields: every item has Statement, In plain terms and Lineage; a premise or definition has Why this choice;
-      a result has Proof and Checks. No field is empty; In plain terms has at least 8 words.
+      Statement, In plain terms, Interpretation, Status, Why this choice, Proof, Example, Checks, Notes, Lineage.
+  R4  Required fields: every item has Statement, In plain terms and Lineage; every item of CORE.md has Why this choice; a
+      definition has an Interpretation, what its object is in the world and how a record verifies it; an imported
+      axiom, a background condition or a premise has a Status, what kind of assumption it is; a result has Proof and
+      Checks. No field is empty; In plain terms has at least 8 words.
   R5  References are written [D1], [P3], ...; each names an existing item. Dependencies are the references in
-      Statement, Why this choice and Proof. A core Statement depends only on earlier core items. A result depends only
-      on core items and on results earlier in the reading order. A core "why" may cite any item, but the dependencies
-      form no cycle.
+      Statement, Interpretation, Status, Why this choice and Proof. A core Statement depends only on earlier core items.
+      A result depends only on core items and on results earlier in the reading order. A core "why", Status or
+      Interpretation may cite any item, but the dependencies form no cycle.
   R6  Checks cite pytest functions as checks/<file>.py::<test_name>; each exists. A result cites at least one.
   R7  Every test function in checks/ is cited by some item (no check without a claim).
   R8  Citations are written [@key]; each key is listed in REFERENCES.md as '- [@key] ...', listed once, and every
@@ -59,18 +64,25 @@ Rules
       tables, in order, and every cases/<name>/standard-report.json passes its validator: every field present, every
       estimated value with its interval, a quantity not identified given as bounds, and no report confirmatory whose
       declaration came after its data.
+  R17 Conventions. CORE.md lists its conventions in one table with the columns CONVENTION_COLUMNS. In every row, the
+      column "Declared in" names at least one item of the core, and only existing ones; "Justified by" lists one or
+      more of JUSTIFICATIONS, separated by commas; "Changes a verdict" starts with "yes", "no" or "only"; and "Why" is
+      not empty. Every item of the core whose Status speaks of a convention is named in some row.
 """
 import ast, hashlib, re, sys
 from pathlib import Path
 
-KINDS = {"A": "premise", "D": "definition", "P": "proposition", "T": "theorem", "L": "lemma", "C": "corollary",
-         "R": "remark"}
-CORE_KINDS, RESULTS, DERIVED_KINDS = set("AD"), set("PTLC"), set("PTLCR")
-FIELDS = ["Statement", "In plain terms", "Why this choice", "Proof", "Example", "Checks", "Notes", "Lineage"]
-DEPENDENCY_FIELDS = {"Statement", "Why this choice", "Proof"}
-ITEM = re.compile(r"^### ([ADPTLCR])(\d+) — (\S.*)$")
+KINDS = {"M": "imported axiom", "B": "background condition", "A": "premise", "D": "definition", "P": "proposition",
+         "T": "theorem", "L": "lemma", "C": "corollary", "R": "remark"}
+CORE_KINDS, RESULTS, DERIVED_KINDS = set("MBAD"), set("PTLC"), set("PTLCR")
+FIELDS = ["Statement", "In plain terms", "Interpretation", "Status", "Why this choice", "Proof", "Example", "Checks",
+          "Notes", "Lineage"]
+DEPENDENCY_FIELDS = {"Statement", "Interpretation", "Status", "Why this choice", "Proof"}
+ITEM = re.compile(r"^### ([MBADPTLCR])(\d+) — (\S.*)$")
 LABEL = re.compile(r"^\*\*(" + "|".join(re.escape(f) for f in FIELDS) + r")\.\*\*")
-REF = re.compile(r"\[([ADPTLCR]\d+)\]")
+REF = re.compile(r"\[([MBADPTLCR]\d+)\]")
+CONVENTION_COLUMNS = ["Convention", "Declared in", "Justified by", "Changes a verdict", "Why"]
+JUSTIFICATIONS = {"forced", "convenience", "literature"}
 CHECK = re.compile(r"(checks/[\w/]+\.py)::(\w+)")
 CITE = re.compile(r"\[@([\w:-]+)\]")
 LISTED = re.compile(r"^- \[@([\w:-]+)\] \S")
@@ -201,6 +213,10 @@ def lint(root):
         required = ["Statement", "In plain terms", "Lineage"]
         if it["kind"] in CORE_KINDS:
             required.append("Why this choice")
+        if it["kind"] == "D":
+            required.append("Interpretation")
+        if it["kind"] in "MBA":
+            required.append("Status")
         if it["kind"] in RESULTS:
             required += ["Proof", "Checks"]
         for f in required:
@@ -307,6 +323,9 @@ def lint(root):
     # R16
     if (root / "stdalign" / "report.py").exists():
         errors += lint_reports(root)
+
+    # R17
+    errors += lint_conventions(core_text, core_items, pos)
 
     # R8
     refs_file = root / "REFERENCES.md"
@@ -477,6 +496,50 @@ def lint_design_rules(cases, standard):
                     errors.append(f"{name}: R15 prediction {row[0]} does not say where its threshold comes from")
         if not (case / "rehearsal.json").exists():
             errors.append(f"cases/{case.name}: R15 the rehearsal's record, rehearsal.json, is missing")
+    return errors
+
+
+def lint_conventions(core_text, core_items, pos):
+    """R17: the table of conventions in CORE.md."""
+    errors, lines = [], core_text.splitlines()
+    starts = [n for n, line in enumerate(lines) if line.startswith("|") and
+              [c.strip() for c in line.strip().strip("|").split("|")] == CONVENTION_COLUMNS]
+    declaring = [it["id"] for it in core_items if "convention" in it["fields"].get("Status", "").lower()]
+    if not starts:
+        return [f"CORE.md: R17 {iid}'s Status speaks of a convention, and there is no table of conventions"
+                for iid in declaring]
+    if len(starts) > 1:
+        errors.append("CORE.md: R17 there is more than one table of conventions")
+    block = []
+    for line in lines[starts[0]:]:
+        if not line.startswith("|"):
+            break
+        block.append(line)
+    named = set()
+    for row in table_rows(block)[1:]:
+        where = f"CORE.md: R17 the convention '{row[0]}'"
+        if len(row) != len(CONVENTION_COLUMNS):
+            errors.append(f"{where} has {len(row)} cells, not {len(CONVENTION_COLUMNS)}")
+            continue
+        refs = REF.findall(row[1])
+        if not refs:
+            errors.append(f"{where} names no item where it is declared")
+        for ref in refs:
+            if ref not in pos:
+                errors.append(f"{where} names [{ref}], which does not exist")
+            elif ref[0] not in CORE_KINDS:
+                errors.append(f"{where} is declared in [{ref}], which is not an item of the core")
+        named.update(refs)
+        kinds = [w.strip() for w in row[2].split(",")]
+        if not row[2].strip() or any(k not in JUSTIFICATIONS for k in kinds):
+            errors.append(f"{where} is justified by '{row[2]}', not by {', '.join(sorted(JUSTIFICATIONS))}")
+        if row[3].split(":")[0].split()[:1] not in (["yes"], ["no"], ["only"]):
+            errors.append(f"{where} does not say whether it changes a verdict")
+        if not row[4]:
+            errors.append(f"{where} gives no reason")
+    for iid in declaring:
+        if iid not in named:
+            errors.append(f"CORE.md: R17 {iid}'s Status speaks of a convention, and no row of the table names it")
     return errors
 
 

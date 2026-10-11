@@ -25,7 +25,7 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
 | Goodhart's law and reward hacking | evaluator and target; overoptimization | rankings and worst cases, not a divergence | done: the evaluator ([[D10 — Evaluator, regression and residual\|D10]], [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]]); tested on unseen data: the best-of-`n` form against [[P13 — What the start of a change gains\|P13]] (W1, refuted); probed: heavy tails and the χ² angle law (`general/`); now: heavy tails as a condition of the general core; later: early stopping compared, hackability over a feasible set, proxies that omit attributes, quantilizers as a budget |
 | Principal–agent theory | delegation, performance measures, pass-through | equilibrium contracts, risk and payments | now: distortion and risk of a measure, read against [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii)'s split of the misaligned share; a test of distortion from how a measure degrades, as a world design for [[P20 — Where overoptimization starts, and how it ends\|P20]] |
 | Identification and causal inference | identified sets, interventions | no notion of misalignment | now: sharp identified sets; later: transportability from evaluation to use; comparison of experiments for views |
-| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([[D11 — Sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]); the cost of reweighting ([[P47 — The cost of reweighting\|P47]]); now: reweighting needs about `e^{KL}` draws; what samples alone can certify; later: Stein's exponent, the boundary case |
+| Hypothesis testing and sequential analysis | KL as a rate of evidence | a theory of tests, not of alignment | done: sampling, evidence, detection and estimation ([[D11 — Record, sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]); the cost of reweighting ([[P47 — The cost of reweighting\|P47]]); now: reweighting needs about `e^{KL}` draws; what samples alone can certify; later: Stein's exponent, the boundary case |
 | Deceptive alignment and AI evaluation | behaviour that differs when unobserved | intent-based definitions | done: across runs, differences between evaluation and use split into reproducible and run-specific parts ([[P46 — What runs share between conditions, and what they do not\|P46]]); now: a monitor trained against, as a tampered channel (H34, case C3); later: audit protocols |
 | Distribution shift | bounds across conditions | prediction error, not misalignment | later: divergence-based transfer bounds |
 | Statistics of misspecified models | the best fit of a family that excludes the truth, and the divergence left | estimation and model choice, not alignment | now: intervals at the revealed intensity; a test of which specification fits an actor better |
@@ -40,8 +40,8 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
 
 ## KL control and control as inference
 
-- *Sources.* Rafailov et al. [[References|@rafailov2023]]; Ziebart et al. [[References|@ziebart2008]]; Todorov's linearly solvable control and
-  Levine's review of control as inference *(to verify)*.
+- *Sources.* Rafailov et al. [[References|@rafailov2023]]; Korbak, Perez and Buckley [[References|@korbak2022]]; Ziebart et al. [[References|@ziebart2008]];
+  Todorov's linearly solvable control and Levine's review of control as inference *(to verify)*.
 - *Shared.* Pursuit is the KL-regularized optimum ([[D2 — Pursuit of an objective|D2]], [[P4 — What KL measures|P4]](i)). The maximum-entropy policy is the best feasible
   behaviour in a random environment ([[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], Notes).
 - *Different.* These theories compute optimal behaviour. We judge actual behaviour against declared behaviour, and
@@ -62,7 +62,7 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   outcomes that are not finite (Q33); Ay, Jost, Lê and Schwachhöfer [[References|@ay2015]], who extend Čencov's uniqueness of the
   Fisher metric to infinite sample spaces; Pistone and Sempi [[References|@pistone1995]], the manifold of behaviours equivalent to a
   given one, on which the tilts that exist live; Amari's monographs *(to verify)*.
-- *Shared.* The Fisher metric and its uniqueness ([[A2 — Pursuit is the steepest climb|A2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
+- *Shared.* The Fisher metric and its uniqueness ([[D2 — Pursuit of an objective|D2]], [[P2 — Every change of behaviour follows a replicator equation|P2]]); I-projections and the Pythagorean theorem ([[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]);
   the second-order expansion of KL ([[P11 — The misaligned share at the start of a change|P11]], [[P13 — What the start of a change gains|P13]]); total correlation, the misalignment of several actors against
   independent pursuit ([[P39 — Several actors: coordination plus individual misalignment|P39]]); the Jensen–Shannon divergence, the misalignment of a record of transitions against
   reversibility, where the nearest reversible record is the midpoint of the record and its reversal ([[P41 — Reversibility: the Jensen–Shannon divergence from the reversal|P41]]).
@@ -150,8 +150,8 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   optimizes the reward of the posterior mean, is [[P42 — Several principals: gridlock, and the pooled pursuit|P42]](ii): with the posterior's weights and each possible target
   pursued at intensity `1`, the behaviour least far from them on average is the pursuit of the posterior-mean target.
   Armstrong and Mindermann's theorem says that observation alone cannot split a policy into a planner and a reward
-  without a normative assumption; the core makes that assumption by its premises, pursuit as the steepest climb and the
-  best trade-off ([[A2 — Pursuit is the steepest climb|A2]], [[A3 — Pursuit is the best trade-off|A3]]), which is why a behaviour's revealed objective is identified up to a constant ([[P1 — Every behaviour is a tilt of any other|P1]]). Its
+  without a normative assumption; the core makes that assumption by its definition of pursuit, the steepest climb and
+  the best trade-off ([[D2 — Pursuit of an objective|D2]]), which is why a behaviour's revealed objective is identified up to a constant ([[P1 — Every behaviour is a tilt of any other|P1]]). Its
   price: a principal who is not a pursuer, such as CIRL's teaching human, whose best demonstrations depart from its own
   optimum, has a revealed objective that includes the teaching.
 - *What a request leaves unsaid* (`NOTES.md` §10). Inverse reward design's observation model makes a written reward
@@ -297,10 +297,10 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
 - *Sources.* Cover and Thomas [[References|@cover2006]] (Stein's lemma, Chernoff information); Wald [[References|@wald1945]]; Chernoff
   [[References|@chernoff1952]]; Wilks [[References|@wilks1938]]; Chatterjee and Diaconis [[References|@chatterjee2018]], on the sample size of importance
   sampling; McAllester and Stratos [[References|@mcallester2020]], on what samples can certify about information.
-- *Shared.* KL is the expected evidence per observation under the true behaviour ([[D11 — Sample and evidence|D11]], [[P21 — The expected evidence is misalignment|P21]]); `2n·M(p̂)` is a
+- *Shared.* KL is the expected evidence per observation under the true behaviour ([[D11 — Record, sample and evidence|D11]], [[P21 — The expected evidence is misalignment|P21]]); `2n·M(p̂)` is a
   likelihood-ratio statistic ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]]).
 - *Different.* A theory of tests; it does not define alignment.
-- *Import, done.* Sampling, as the act of measurement that connects behaviours to data ([[D11 — Sample and evidence|D11]]), with evidence ([[P21 — The expected evidence is misalignment|P21]],
+- *Import, done.* Sampling, as the act of measurement that connects behaviours to data ([[D11 — Record, sample and evidence|D11]]), with evidence ([[P21 — The expected evidence is misalignment|P21]],
   Wald in its Notes), detection ([[P22 — No test detects misalignment faster than misalignment|P22]], Chernoff) and estimation ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], Wilks) as derived results.
 - *Import, now* (for the estimation work, Q33). Chatterjee and Diaconis's law: reweighting draws of one behaviour to
   stand for another needs about `e^{KL}` draws, necessary and sufficient, with a cut-off on the logarithmic scale; the
@@ -467,5 +467,5 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
   verify)*.
 - *Shared.* A standard says what a report must declare and contain (`STANDARD.md`).
 - *Different.* Not about alignment.
-- *Import, now.* How to state uncertainty, now that sampling is in the framework ([[D11 — Sample and evidence|D11]]): the uncertainty of each
+- *Import, now.* How to state uncertainty, now that sampling is in the framework ([[D11 — Record, sample and evidence|D11]]): the uncertainty of each
   estimated result in `STANDARD.md` should follow a recognized convention.

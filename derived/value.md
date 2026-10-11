@@ -1,9 +1,9 @@
 # Derived — value
 
 What the KL divergence measures: the net value lost against a pursuit ([P4]). And why the cost of departing from the
-default is KL: it is the only cost for which pursuit, the steepest climb of [A2], is also the best trade-off of [A3]
-([P14]). The identity of [P4] has a counterpart for any convex cost and any concave value, with a Bregman divergence in
-place of KL ([P38]).
+default is KL: it is the only cost for which pursuit, the steepest climb, is also the best trade-off, the two reasons of
+[D2] ([P14]). The identity of [P4] has a counterpart for any convex cost and any concave value, with a Bregman
+divergence in place of KL ([P38]).
 
 ### P4 — What KL measures
 **Statement.** Let `q ∈ Δ°`, `F : X → ℝ` and `t > 0`. The **net value** of `p ∈ Δ` is `J_t(p) = E_p[F] − KL(p‖q)/t`:
@@ -56,9 +56,9 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 **Statement.** Let `q ∈ Δ°` and let `c : Δ° → ℝ` be differentiable. For every `F : X → ℝ` and every `t > 0`, the pursuit
 `p_{F,t}` maximizes `E_p[F] − c(p)/t` over `Δ°` if and only if `c(p) = KL(p‖q) + C` for a constant `C`.
 
-**In plain terms.** If pursuing an objective by the steepest route ([A2]) is also the best trade-off between the
-objective and a cost of change ([A3]), then the cost of change can only be the KL divergence from the default. No other
-cost makes the two agree.
+**In plain terms.** If pursuing an objective by the steepest route is also the best trade-off between the objective and
+a cost of change, the two reasons of [D2], then the cost of change can only be the KL divergence from the default. No
+other cost makes the two agree.
 
 **Proof.** Write `Dc(p)·v` for the derivative of `c` at `p` along a tangent vector `v`, one with `Σ_x v(x) = 0`. If
 `c = KL(·‖q) + C`, then `E_p[F] − c(p)/t = J_t(p) − C/t`, which [P4](i) maximizes at `p_{F,t}`. Conversely, `p_{F,t}`
@@ -72,13 +72,15 @@ hence constant.
 **Checks.** checks/test_value.py::test_the_cost_is_forced,
 checks/test_value.py::test_a_function_of_kl_moves_only_the_intensity
 
-**Notes.** [A2] says what pursuit is geometrically, and [A3] economically. [P2] shows that the first gives the
-reweighting of [D2]; this result shows that the second agrees with it for exactly one cost. [A3] reads the intensity as
-the reciprocal of the price of departure. Without that reading, asking only that the best trade-offs lie on the pursuit
-ray at some intensity, any increasing function of KL would also do; the second check shows `KL + KL²`, whose best
-trade-off at price `1/t` is the pursuit at intensity `t/(1 + 2·KL)`. The first check shows that χ², reverse KL and
-squared Hellinger make no point of the ray a best trade-off, with three or more outcomes. Hobson reached KL from other
-conditions [@hobson1969].
+**Notes.** The reasons of [D2] say what pursuit is geometrically, the steepest climb, and economically, the best
+trade-off; until v12 they were the premises A2 and A3. [P2] shows that the first gives the reweighting of [D2]; this
+result shows that the second agrees with it for exactly one cost. The second reads the intensity as the reciprocal of
+the price of departure. Without that reading, asking only that the best trade-offs lie on the pursuit ray at some
+intensity, any increasing function of KL would also do; the second check shows `KL + KL²`, whose best trade-off at price
+`1/t` is the pursuit at intensity `t/(1 + 2·KL)`. The first check shows that χ², reverse KL and squared Hellinger make
+no point of the ray a best trade-off, with three or more outcomes. Hobson reached KL from other conditions
+[@hobson1969]. Since v13 the measure rests on evidence ([A4]), not on this result: what it adds is that misalignment
+under the standard specification is also value lost at the one price on which the two reasons agree.
 
 **Lineage.** v7.10: Def 2 (the bounded actor, with the KL cost assumed) and Thm 1. New: the cost is derived.
 

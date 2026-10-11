@@ -1,0 +1,60 @@
+{
+ "about": "P54's check (2026-10-11).",
+ "tests": [
+  "checks/test_estimation.py",
+  "-k",
+  "dependence_and_drift"
+ ],
+ "mutants": [
+  {
+   "name": "[P54] dependence measured against the average behaviour",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "kappa = kl(P, product_of(m)) / n",
+     "kappa = kl(P, product_of([pbar] * n)) / n"
+    ]
+   ]
+  },
+  {
+   "name": "[P54] drift measured around the first decision",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "delta = np.mean([kl(mi, pbar) for mi in m])",
+     "delta = np.mean([kl(mi, m[0]) for mi in m])"
+    ]
+   ]
+  },
+  {
+   "name": "[P54] dependence subtracted",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "assert abs(lhs - (kl(pbar, pp) + delta + kappa)) <= EXACT * (1 + lhs)",
+     "assert abs(lhs - (kl(pbar, pp) + delta - kappa)) <= EXACT * (1 + lhs)"
+    ]
+   ]
+  },
+  {
+   "name": "[P54] the shares' expectation taken as the first marginal",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "assert np.abs(P @ shares - pbar).max() <= EXACT",
+     "assert np.abs(P @ shares - m[0]).max() <= EXACT"
+    ]
+   ]
+  },
+  {
+   "name": "[P54] the evidence judged at the average's own misalignment, without the extra terms",
+   "edits": [
+    [
+     "checks/test_estimation.py",
+     "assert abs(kl(P, product_of([po] * n)) / n - (M + delta + kappa)) <= 1e-9 * (1 + M)",
+     "assert abs(kl(P, product_of([po] * n)) / n - M) <= 1e-9 * (1 + M)"
+    ]
+   ]
+  }
+ ]
+}

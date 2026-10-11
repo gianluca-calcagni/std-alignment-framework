@@ -49,4 +49,4 @@ New. `NOTES.md` §5.4, H13; probes T5 and T5b.
 - [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
-- no later item
+- [[B4 — One actor and one principal|B4]] — One actor and one principal

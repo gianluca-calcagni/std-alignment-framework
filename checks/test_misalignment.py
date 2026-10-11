@@ -1,8 +1,10 @@
 """Checks of P5 (misalignment is attained for full-support behaviour, zero exactly on the closure of the intended set, at
 most the departure from the default when the default is intended; its closed form on the pursuit ray in all three cases;
 the deviance identity of its Notes), of P6 (the departure from the default splits into pursuit and misalignment), of
-P35 (floors and caps) and of P36 (ordinal objectives)."""
+P35 (floors and caps), of P36 (ordinal objectives) and of P53 (misalignment is the departure beyond what the
+specification credits)."""
 import numpy as np
+from scipy.optimize import minimize
 from .common import EXACT, rng, simplex_interior, with_zeros, kl, tilt
 
 
@@ -119,6 +121,57 @@ def test_departure_splits_into_pursuit_and_misalignment():
         if ph @ F <= q @ F:
             assert abs(m - departure) <= EXACT * (1 + departure)                # all of it is misalignment
     assert min(cases.values()) >= 50                                           # every case exercised
+
+
+def same_average(r, q, F, target, n):
+    """A random behaviour with average `target` of F: a random full-support r tilted by s·F, s found by bisection."""
+    base = simplex_interior(r, n); lo, hi = -1.0, 1.0
+    while tilt(base, lo * F) @ F > target:
+        lo *= 2
+    while tilt(base, hi * F) @ F < target:
+        hi *= 2
+    for _ in range(200):
+        mid = 0.5 * (lo + hi)
+        lo, hi = (mid, hi) if tilt(base, mid * F) @ F < target else (lo, mid)
+    return tilt(base, 0.5 * (lo + hi) * F)
+
+
+def test_excess_departure():
+    """P6(ii): when the actor does better than the default, KL(p || q) = KL(p° || q) + KL(p || p°) for every p with its
+    average of F, so p° has the least departure among them and M = KL(ph || q) − KL(p° || q); in the third case of
+    P5(iv), every behaviour on the best outcomes departs by at least −log q(A), with equality only at q(·|A). A behaviour
+    with another average breaks the identity, so the check sees the constraint."""
+    r = rng(408); seen = {"between": 0, "best": 0, "off": 0}
+    for _ in range(400):
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        ph = tilt(q, float(r.uniform(0.2, 3)) * F + r.normal(0, 0.7, n))
+        if ph @ F <= q @ F + 1e-3 or ph @ F >= F.max() - 1e-3:
+            continue
+        seen["between"] += 1
+        m, ts = misalignment(ph, q, F); po = nearest(ph, q, F)
+        scale = 1 + kl(ph, q)
+        assert abs(m - (kl(ph, q) - kl(po, q))) <= 1e-9 * scale
+        for _ in range(5):
+            p = same_average(r, q, F, ph @ F, n)
+            assert abs(p @ F - ph @ F) <= 1e-9 * (1 + np.abs(F).max())
+            gap = kl(p, q) - (kl(po, q) + kl(p, po))
+            assert abs(gap) <= 1e-9 * (1 + kl(p, q))
+            assert kl(p, q) >= kl(po, q) - EXACT * scale
+        other = same_average(r, q, F, 0.5 * (ph @ F + F.max()), n)     # a different average: the identity fails
+        if kl(other, po) > 1e-3:
+            seen["off"] += 1
+            assert abs(kl(other, q) - (kl(po, q) + kl(other, po))) > 1e-6
+    for _ in range(200):                                                # the third case: all mass on the best outcomes
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        top = np.argsort(F)[-2:]; F[top[0]] = F[top[1]]; A = F >= F.max(); qA = q[A].sum()
+        lim = best_outcomes_limit(q, F)
+        assert abs(kl(lim, q) + np.log(qA)) <= EXACT * (1 + abs(np.log(qA)))
+        p = np.zeros(n); p[A] = r.dirichlet(np.ones(A.sum()))
+        assert kl(p, q) >= -np.log(qA) - EXACT * (1 + abs(np.log(qA)))
+        if np.abs(p - lim).sum() > 1e-3:
+            seen["best"] += 1
+            assert kl(p, q) > -np.log(qA) + 1e-9
+    assert min(seen.values()) >= 50                                     # every case exercised
 
 
 def test_deviance_identity():
@@ -240,3 +293,121 @@ def test_ordinal_objectives():
             rcb = isotonic(Lb / qL, qL)
             assert kl(bon, q * rcb[np.searchsorted(levels, F)]) <= 1e-12
     assert strict >= 100                                                             # the cardinal adds a shape term
+
+
+def nearest_in_cone(ph, q, T):
+    """p° for the family {Σ_i λ_i·T_i + c : λ ≥ 0}, by the active set that satisfies [P53](ii): λ ≥ 0, equal averages
+    on the active targets, and at least the actor's averages on the others. Returns p°, λ, and how many sets passed."""
+    k = len(T); found = []
+    for mask in range(2 ** k):
+        S = [i for i in range(k) if mask >> i & 1]
+        if not S:
+            p, lam = q.copy(), np.zeros(k)
+        else:
+            p = stdalign.project_linear(q, T[S], T[S] @ ph)
+            V = np.vstack([np.ones(len(q)), T[S]]).T
+            lam = np.zeros(k); lam[S] = np.linalg.lstsq(V, np.log(p / q), rcond=None)[0][1:]
+        if lam.min() >= -1e-9 and np.all(T @ p >= T @ ph - 1e-10):
+            found.append((p, lam))
+    return found[0][0], found[0][1], len(found)
+
+
+def test_credited_statistics():
+    """P53: for a family of targets, a closed convex cone with the constants: the nearest intended behaviour p° does at
+    least as well as the actor on every target and as well on its own; KL(p̂ || p) ≥ M + KL(p° || p) on the family, with
+    equality at q; p° has the least departure among the behaviours that do at least as well on every target, and a
+    behaviour outside that set can depart less. Families: cones generated by random targets; spans, with direct
+    minimization over the span; the standard specification, which credits E_p[F] ≥ E_p̂[F]; the ordinal one, which
+    credits dominance in the order of F and the masses of [P36]'s blocks."""
+    r = rng(5301); seen = {"cone": 0, "cone off": 0, "family": 0, "off": 0, "better": 0, "worse": 0, "pooled": 0,
+                           "dominated off": 0}
+    for _ in range(150):                                                    # (i)-(iv): cones of random targets
+        k = int(r.integers(1, 4)); n = int(r.integers(k + 2, 10)); q = simplex_interior(r, n)
+        T = r.normal(0, 1, (k, n)); ph = simplex_interior(r, n)
+        po, lam, passed = nearest_in_cone(ph, q, T)
+        assert passed == 1                                                     # one active set satisfies (ii)
+        M = kl(ph, po); G0 = lam @ T
+        assert abs(po @ G0 - ph @ G0) <= 1e-9 * (1 + np.abs(G0).max())        # (ii): as well on its own target
+        assert np.all(T @ po >= T @ ph - 1e-10)                               # (ii): at least as well on every one
+        assert abs(kl(ph, q) - (kl(po, q) + M)) <= 1e-9 * (1 + kl(ph, q))     # (iii) at q
+        for _ in range(6):                                                     # (iii) on the family
+            pp = tilt(q, r.exponential(1.0, k) * (r.random(k) < 0.7) @ T)
+            assert kl(ph, pp) >= M + kl(po, pp) - 1e-9 * (1 + kl(ph, pp))
+        tries = 0                                                              # (iv) on the credited set C
+        while tries < 400:
+            tries += 1; p = r.dirichlet(np.ones(n) * 0.5)
+            if np.all(T @ p >= T @ ph):
+                assert kl(p, q) >= kl(po, q) + kl(p, po) - 1e-9 * (1 + kl(p, q))
+        seen["cone"] += 1
+        if not np.all(T @ q >= T @ ph) and kl(q, q) < kl(po, q) - 1e-6:       # outside C, departing less
+            seen["cone off"] += 1
+    for _ in range(100):                                                    # spans: ±T_i, compared with a direct minimization
+        d = int(r.integers(1, 4)); n = int(r.integers(d + 3, 12)); q = simplex_interior(r, n)
+        T = r.normal(0, 1, (d, n)); ph = simplex_interior(r, n); b = T @ ph
+        ps = stdalign.project_linear(q, T, b)
+        V = np.vstack([np.ones(n), T]).T
+        coef = np.linalg.lstsq(V, np.log(ps / q), rcond=None)[0]
+        assert np.abs(V @ coef - np.log(ps / q)).max() <= 1e-8                         # p° is a tilt of q by θ·T
+        MT = kl(ph, q) - kl(ps, q)
+        dual = lambda th: kl(ph, tilt(q, th @ T)); slope = lambda th: T @ tilt(q, th @ T) - b
+        best = min(minimize(dual, x0, jac=slope, method="BFGS", options={"gtol": 1e-12}).fun
+                   for x0 in (np.zeros(d), coef[1:]))
+        assert abs(MT - best) <= 1e-8 * (1 + kl(ph, q))                                 # the misalignment, credited
+        assert abs(MT - kl(ph, ps)) <= 1e-9 * (1 + kl(ph, q))
+        for j in range(4):                                                             # other behaviours of C
+            v = r.normal(0, 1, n); v -= V @ np.linalg.lstsq(V, v, rcond=None)[0]       # a direction within C
+            reach = np.min(ps[v < 0] / -v[v < 0])                                      # to the edge of Δ
+            p = np.maximum(ps + (1.0 if j == 0 else r.uniform(0.1, 0.99)) * reach * v, 0.0)
+            assert np.abs(T @ p - b).max() <= 1e-9 and abs(p.sum() - 1) <= 1e-12
+            rr = tilt(q, r.normal(0, 1.5, d) @ T)                                      # a member of the family
+            gap = kl(p, rr) - (kl(p, ps) + kl(ps, rr))
+            assert abs(gap) <= 1e-8 * (1 + kl(p, rr))
+            assert kl(p, q) >= kl(ps, q) - EXACT
+        seen["family"] += 1
+        other = simplex_interior(r, n); rr = tilt(q, r.normal(0, 1.5, d) @ T)           # other averages
+        if np.abs(T @ other - b).max() > 1e-2:                                         # the identity fails
+            seen["off"] += 1
+            assert abs(kl(other, rr) - (kl(other, ps) + kl(ps, rr))) > 1e-6
+    for _ in range(300):                                                    # (v): the standard specification
+        n = int(r.integers(3, 12)); q = simplex_interior(r, n); F = r.normal(0, 1, n)
+        ph = simplex_interior(r, n); m, ts = misalignment(ph, q, F); po = nearest(ph, q, F)
+        if ph @ F > q @ F + 1e-6:
+            seen["better"] += 1
+            ps = stdalign.project_linear(q, F[None, :], np.array([ph @ F]))
+            assert ts > 0 and np.abs(ps - po).max() <= 1e-8                           # p° reproduces E_p̂[F]
+            assert abs(m - (kl(ph, q) - kl(ps, q))) <= 1e-9 * (1 + kl(ph, q))
+            for _ in range(20):
+                p = r.dirichlet(np.ones(n) * 0.5)
+                if p @ F >= ph @ F:                                                    # in C: E_p[F] ≥ E_p̂[F]
+                    assert kl(p, q) >= kl(po, q) + kl(p, po) - 1e-9 * (1 + kl(p, q))
+        elif ph @ F < q @ F - 1e-6:
+            seen["worse"] += 1
+            assert abs(m - kl(ph, q)) <= 1e-9 * (1 + kl(ph, q))                         # q ∈ C: nothing credited
+    for _ in range(300):                                                    # (v): the ordinal specification
+        n = int(r.integers(3, 10)); q = simplex_interior(r, n)
+        F = r.integers(0, int(r.integers(2, n + 1)), n).astype(float)
+        if np.ptp(F) == 0:
+            F[0] += 1
+        ph = simplex_interior(r, n); levels = np.unique(F); at = np.searchsorted(levels, F)
+        qL = np.array([q[F == v].sum() for v in levels]); pL = np.array([ph[F == v].sum() for v in levels])
+        rc = isotonic(pL / qL, qL); po = q * rc[at]; Mord = kl(ph, po)
+        up = np.array([(F >= v).astype(float) for v in levels[1:]])                     # the indicators 1{F ≥ v}
+        assert np.all(up @ po >= up @ ph - 1e-12)                                      # p° dominates p̂
+        assert abs(Mord - (kl(ph, q) - kl(po, q))) <= 1e-10 * (1 + kl(ph, q))
+        for _ in range(20):
+            p = r.dirichlet(np.ones(n) * 0.5)
+            if np.all(up @ p >= up @ ph):                                              # p dominates p̂: in C
+                assert kl(p, q) >= kl(po, q) + kl(p, po) - 1e-9 * (1 + kl(p, q))
+        if not np.all(up @ q >= up @ ph) and kl(po, q) > 1e-6:
+            seen["dominated off"] += 1                                                 # q is outside C and departs less
+        blocks = np.unique(np.round(rc, 12), return_inverse=True)[1][at]
+        nb = blocks.max() + 1; seen["pooled"] += nb < len(levels)
+        mass = np.array([ph[blocks == j].sum() for j in range(nb)])
+        cheapest = q * (mass / np.array([q[blocks == j].sum() for j in range(nb)]))[blocks]
+        assert np.abs(cheapest - po).max() <= 1e-10                                    # the blocks' cheapest is p°
+        for _ in range(4):                                                             # others with the block masses
+            p = np.zeros(n)
+            for j in range(nb):
+                p[blocks == j] = mass[j] * r.dirichlet(np.ones((blocks == j).sum()))
+            assert kl(p, q) >= kl(cheapest, q) - EXACT
+    assert min(seen.values()) >= 50                                                    # every part exercised

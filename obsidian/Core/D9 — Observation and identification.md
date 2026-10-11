@@ -18,6 +18,14 @@ The principal watches the actor only in some situations. A quantity is identifie
 that fits what was watched, and what is assumed, gives it one value. Otherwise the honest report is the range of values
 it could take.
 
+## Interpretation
+*Declared.* The observed conditions are those for which a record exists. A quantity is identified
+when every response that agrees with the records and with the declared assumptions gives it one value; its identified
+set is the range of values they give otherwise. *Verified.* Identification is a property of the records and the
+declaration together, checked by computing the identified set. *Justified.* A report that gives one number for what the
+records and the assumptions leave open hides an assumption [[References|@manski2003]]; what no record can verify enters only as a
+declared assumption, and the report says which.
+
 ## Why this choice
 - *It reports what the evidence and the assumptions determine, and no more.* This is partial identification
   [[References|@manski2003]]. A report that gives one number for a quantity that is not identified hides an assumption.
@@ -42,6 +50,6 @@ New. v7.10: ROADMAP §6 I1 (the ladder: declare, measure, identify through inter
 - [[D8 — Conditions, responses and views|D8]] — Conditions, responses and views
 
 ## Used by
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
 - [[P17 — What an unobserved condition can hide|P17]] — What an unobserved condition can hide
 - [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] — What signals, audits and re-measurements reveal of tampering

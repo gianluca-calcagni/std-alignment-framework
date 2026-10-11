@@ -8,11 +8,11 @@ source: "derived/misalignment.md"
 > [!info] Generated from [derived/misalignment.md](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/derived/misalignment.md#p36--ordinal-objectives). Edit the source, not this note.
 
 ## Statement
-Let `F` be non-constant, with values `v_1 < … < v_m` on the level sets `L_1, …, L_m`. The **ordinal
-specification** of `F` is `(q, C_F)`, with `C_F = {p ∈ Δ° : p/q is a non-decreasing function of F}`. For `p̂ ∈ Δ°`, let
-`r°` be the isotonic regression of the level ratios `p̂(L_j)/q(L_j)` with weights `q(L_j)`: the non-decreasing sequence
-nearest to them in weighted least squares [[References|@robertson1988]], read as a function of `F` on `X`. Its pooled blocks
-`B_1, …, B_k` are the unions of consecutive level sets on which it is constant. Let `p° = q·r°`.
+Let `F` be non-constant, with values `v_1 < … < v_m` on the level sets `L_1, …, L_m`, and `(q, C_F)` its
+ordinal specification ([[D3 — Specification, declaration and misalignment|D3]]). For `p̂ ∈ Δ°`, let `r°` be the isotonic regression of the level ratios `p̂(L_j)/q(L_j)`
+with weights `q(L_j)`: the non-decreasing sequence nearest to them in weighted least squares [[References|@robertson1988]], read as a
+function of `F` on `X`. Its pooled blocks `B_1, …, B_k` are the unions of consecutive level sets on which it is
+constant. Let `p° = q·r°`.
 (i) `C_F` is the closure in `Δ°` of the union of the pursuit rays of `φ∘F` over the increasing functions `φ`, and it
 contains best-of-`n` by `F` for every `n ≥ 1`; it is closed in `Δ°`, so `(q, C_F)` is a specification ([[D3 — Specification, declaration and misalignment|D3]]).
 (ii) `p°` is the nearest intended behaviour, and the ordinal misalignment is
@@ -56,6 +56,8 @@ gap between the ordinal and the budget measure is of second order in `M_ord`; th
 
 ## Lineage
 v7.10: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure), with Prop 31 (c); R7-7.
+v13: the definition moved to [[D3 — Specification, declaration and misalignment|D3]], as a specification a principal may declare, and reported beside the standard one
+(`STANDARD.md`).
 
 ## Checks
 - [`checks/test_misalignment.py::test_ordinal_objectives`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_misalignment.py)
@@ -65,4 +67,4 @@ v7.10: Def 17 (target sets, the ordinal part) and Prop 32 (the ordinal measure),
 - [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
-- no later item
+- [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] — Misalignment is the departure beyond what the family of targets credits

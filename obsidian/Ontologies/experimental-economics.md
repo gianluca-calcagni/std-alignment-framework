@@ -15,7 +15,7 @@ reversal. One known result is reframed: cycles in a Rock–Paper–Scissors popu
 | **outcomes** | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | the population mix, the number of the group's players using each strategy: 45 mixes for 8 players and 3 strategies; for [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], a transition, the pair of mixes at two successive moments of a declared step | the players' strategies, recorded moment by moment | exact for the mix; approximate for transitions, since the step is declared |
 | **contexts** | [[D8 — Conditions, responses and views\|D8]] | the treatment, its payoff matrix; the session and the group | the design | exact |
 | **behaviour** | [[D1 — Outcomes, behaviours, divergence and tilt\|D1]] | the frequencies of the transitions between mixes over a session, per treatment | the recorded strategies | exact as frequencies |
-| **sample** | [[D11 — Sample and evidence\|D11]] | one transition | the recorded strategies | approximate: successive transitions form a chain, and a session's transitions depend on each other; error bars are computed by group |
+| **sample** | [[D11 — Record, sample and evidence\|D11]] | one transition | the recorded strategies | approximate: successive transitions form a chain, and a session's transitions depend on each other; error bars are computed by group, and [[P54 — Dependence and drift only add evidence\|P54]] measures the dependence |
 | **default** | [[D2 — Pursuit of an objective\|D2]] | play with no regard to payoffs: each player's strategy uniform and independent of the others' | none: a design choice, declared before the experiment | assumed |
 | **objective** | [[D2 — Pursuit of an objective\|D2]] | each player's payoff, given the mix it faces; for a game with a potential, the potential, which every player's payoff change follows | the payoff matrix | exact for payoffs; the potential exists only for some games |
 | **evaluator** | [[D10 — Evaluator, regression and residual\|D10]] | the payoffs the subjects receive, a known function of their strategy and of the mix | the payoff matrix | exact |
@@ -69,7 +69,7 @@ below is new.
   stationary chain, and the early part of a session may have to be set aside, as declared in advance.
 - Reversibility follows from pursuing a potential for log-linear learning; other learning rules, such as best responses
   with inertia, may break it in a potential game without any departure from pursuit.
-- Transitions within one session depend on each other, and the core's estimation assumes independent samples ([[D11 — Sample and evidence|D11]]):
+- Transitions within one session depend on each other, and the core's estimation assumes independent samples ([[D11 — Record, sample and evidence|D11]]):
   one session is one long record, outside the scope (`CORE.md` §0). The groups are the independent samples, and error
   bars are computed by group.
 

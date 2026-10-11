@@ -45,20 +45,24 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 
 | Failure mode | Evidence | Countermeasure |
 |---|---|---|
-| **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
+| **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed. Again in [[P55 — What a record of counts certifies, at every size\|P55]]'s first check (2026-10-11): the ordinal level was checked only through the final bound, loose at those sizes, so a mutant that judged the ordinal specification by the standard misalignment passed; the check now asserts the step of the proof, that every intended behaviour is at least as far from every count vector as its misalignment | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
+| **A mutant caught by a crash** | the first mutant list of [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]] (2026-10-11) restricted a minimization to one direction with a gradient of the wrong shape; the check failed with a `ValueError`, counted as "caught", though no assertion had judged the mathematics. Again the same day, in lint R17's list: a mutant that added a string to a set raised a `TypeError`; rewritten, an assertion catches it | read why each mutant is caught: an error raised by the mutated code itself tests nothing, so rewrite the mutant until an assertion fails |
+| **A push without the steps before every push** | C5's registration (2026-10-11) was committed and pushed with lint run but without regenerating `OVERVIEW.md` and `obsidian/`, which the NOTES and ROADMAP edits had made stale; CI run 241 failed on their freshness, and run 242, with them regenerated, passed. The registration's hash did not change | the block of `CLAUDE.md`, "Before every push", runs whole even for a push that only registers a case: a push meant to fix a moment in time is still a push |
 | **A tolerance without its scale, again** | the ray-closedness check compared a tight bound with no rounding margin (1.79134602e-43 against itself) | every comparison gets the relative margin of `EXACT`, including the "obvious" ones |
-| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it | keep R5; write the "why" from what is above |
-| **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴` | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp |
+| **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it. Again in the draft v13 (2026-10-10, §16): [[A4 — Misalignment is evidence\|A4]] and [A6] were first argued from [[D11 — Record, sample and evidence\|D11]], [[P21 — The expected evidence is misalignment\|P21]], [[P24 — The evaluation gap\|P24]] and [[P36 — Ordinal objectives\|P36]], built on [[D3 — Specification, declaration and misalignment\|D3]], which cites [A6]; R5 found seven cycles. Again in v13 as built (2026-10-11, §17): [[D1 — Outcomes, behaviours, divergence and tilt\|D1]]'s Interpretation cites
+[[M2 — Independent repetition|M2]], and [[M2 — Independent repetition|M2]]'s reason cited [[D1 — Outcomes, behaviours, divergence and tilt|D1]]; R5 found the cycle | keep R5; write the "why" from what is above; evidence that uses
+later results goes in Notes |
+| **A check helper that misclassifies at the edge of float64** | at intensity 40, the coarse actor's mass off the best outcome (about `1e-34`) vanished from its mean of `F`; the helper took the "all mass on the best outcomes" case and returned `+∞`; again in W1's report, where the matched pursuit at an intensity near `10³` underflowed to zeros and the under-pursuit of 9 prompts read infinite; and in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check, whose small-intensity ratio of two divergences near `10⁻⁹`, each a sum that cancels to that size, erred by `10⁻⁷` at intensity `10⁻³` and by `2.5·10⁻⁵` at `10⁻⁴`; and in the library itself, whose revealed intensity takes the best-outcomes case within `10⁻¹²` of `max F` and returns `M = ∞` for an actor of full support, in the regime that the checks of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] and [[P9 — What is at stake\|P9]] skip (§15, point 3) | keep check instances where float64 represents every mass; test limits by their own formula; compute a divergence to a tilt in closed form, with `log E_q[e^{tF}]` by log-sum-exp; a regime that a check skips is one the library either refuses with an error or computes another way, with a test there |
 | **A familiar formula that hides a typing error** | "the KL-regularized optimum is `tilt(π_ref, r/β)`" is true prompt by prompt, and false on prompt–response pairs: the pursuit ray of [[D2 — Pursuit of an objective\|D2]] would also reweight the prompts, which no policy can do. Found only when the ontologies had to say what an outcome is | typed slots in every ontology, including **contexts**; a formula from the literature enters only with its outcome space stated |
 | **A probe bug read as a refutation** | the first probe of [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]] for policies used `log E[e^V]` over the environment (the optimistic recursion of control as inference) and found the split off by 5 nats; the derivation said the projection averages over the environment, and with that the split was exact. The same slip, from the other side, in the grounding probe (Q32): the best grounded behaviour was first written with `log E_K[e^{t·F̂}|w]`, the trainer's optimum's own weights of worlds, where an actor that cannot touch the channel faces its average, `E_K[F̂|w]`; the numerical projection disagreed by `0.37`, and the derivation was redone | when a probe contradicts a derivation, check each against the other before concluding anything; what the actor cannot control enters by its average, not by its log-mean-exp; the slip is now a mutation in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s check |
 | **A rule test passing because another rule fired** | the lint tests for "numbers increase" and "a core Statement may not use a result" passed only because a duplicate id and a cycle fired too; both mutants survived | each rule test isolates its rule, or asserts its rule's own message; mutation-test the linter as well as the checks |
-| **A degenerate random instance hiding the property** | the first check of [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5) | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
-| **A plain-terms twin that claims more than the statement** | [[P19 — A monotone regression rules out overoptimization\|P19]]'s plain terms listed threshold selection among the covered paths; a threshold leaves `Δ°`, so the statement does not cover it (the conclusion holds there by a direct argument). Found in the review before the v10 commit | read each "In plain terms" against the Statement's hypotheses, one named example at a time |
+| **A degenerate random instance hiding the property** | the first check of [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]](i) moved mass between two inputs, one of which had almost none, so the two conditions barely differed (KL 1e-5). Again in [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]'s first check (2026-10-11): with `d` statistics on `d + 1` outcomes, the behaviours with given averages are a single point, so "another behaviour with the same averages" was not one; its own assertion caught it | build the instance so the property has something to show (here KL > 0.3), and assert that it does |
+| **A plain-terms twin that claims more than the statement** | [[P19 — A monotone regression rules out overoptimization\|P19]]'s plain terms listed threshold selection among the covered paths; a threshold leaves `Δ°`, so the statement does not cover it (the conclusion holds there by a direct argument). Found in the review before the v10 commit. Again in v13 (2026-10-11): [[P55 — What a record of counts certifies, at every size\|P55]]'s plain terms said its test needs no model of how the actor decides, though its level needs independence, and that exact alignment can never be shown, false when every behaviour is accepted; [[P54 — Dependence and drift only add evidence\|P54]]'s compared the evidence with what the counts show rather than with the misalignment of the average behaviour | read each "In plain terms" against the Statement's hypotheses, one named example at a time |
 | **A rate copied from a sketch** | [[P22 — No test detects misalignment faster than misalignment\|P22]]'s Notes said the Chernoff bound is approached like `1/log(1/ε)`; a computation across seven decades of `ε` showed `log log(1/ε)/log(1/ε)` | a rate in a Note is computed across several decades before it is written |
 | **A check whose instance generator kills the case it tests** | the first single-peaked regressions of [[P26 — The regression on bins governs at small intensity\|P26]]'s check capped the falling part at the peak, so every "falling" part was flat; a mutant claiming monotone curves survived until the counts were printed | assert that the hypothesis is visible in the instances (here: some curves do fall), as the failure mode on degenerate instances already asks |
 | **A concept that is trivial in the typical case** | the regression of [[D10 — Evaluator, regression and residual\|D10]] is the target itself whenever the evaluator gives distinct outcomes distinct values, the usual case for reward models and fitness; noticed only when filling the ontologies' evaluator slots, after [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]] were proved and checked on instances built with ties | build check instances from the typical case as well as the interesting one, and fill one ontology before a new definition is final |
 | **A result silent on its specification** | [[P24 — The evaluation gap\|P24]] said "the misalignment in deployment" without naming the specification on condition–outcome pairs; under one shared intensity its formula fails in 173 of 200 instances | every result over several conditions names the specification on pairs |
-| **Lineage amnesia after a restart** | [[P13 — What the start of a change gains\|P13]](ii) re-derived v7.10's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9 | before adding a result, search v7.10 (`git grep -i <idea> v7.10`) for its counterpart, and cite it in the Lineage |
+| **Lineage amnesia after a restart** | [[P13 — What the start of a change gains\|P13]](ii) re-derived v7.10's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9. Again in the review of 2026-10-10 (§15, point 1): its finding that misalignment charges an optimizer's route re-found v7.10's H8, item 2 of its review of v7.3.3 and the identification rule of its brainstorm B1, none of which the restart had carried over; found when the PI asked for the hunches of past executors to be read | before adding a result, search v7.10 (`git grep -i <idea> v7.10`) for its counterpart, and cite it in the Lineage; before a finding of a review, too |
 | **A data claim written from memory** | the industrial-organization ontology gave the German price archive the licence CC BY 4.0, the live feed's; by secondary sources the archive is CC BY-NC-SA 4.0, for non-commercial use. Found only when the PI asked which specification the public data can test | a Data paragraph says where each claim about licence and access comes from, and says so when the primary source was not reached |
 | **An intervention dated with the quantity it tests** | the known result dates adoption partly by the speed of a station's response to its rival, a dependence between the stations; a test of coordination before and after those dates would have been partly true by construction. Caught before registration | before registering, list how every intervention or group is defined, and drop any marker that measures the outcome tested |
 | **A threshold without its scale, in a registration** | case C2's verification required a recovery of `0.999` on a grid of step `0.05`, while a third of the peaks came before `t = 0.5`; and S1 scored the rule against the best of 32 noisy training runs, so its threshold measured luck. All three predictions failed; the exact pursuit on S1's own grid would have reached only 79% | before registering, compute every threshold on the design's noise-free case, with seeds the test will not use, and score against what the design can reach, not against the luckiest run |
@@ -70,8 +74,10 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 | **A specification with no named principal** | W3 and W4 declared as the target the reward the policy was trained on, the evaluator itself, while the machine-learning ontology's specification asks for a gold objective distinct from it; the executor declared it, for no principal in particular. What they measured is misalignment against the trainer's formal objective, and their texts said "misalignment" without saying whose. Caught by the PI | name the principal in the declaration; when the target is uncertain, declare the family of targets and report the interval it gives (§7) |
 | **An optimum taken from a solver's word** | the first check of [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]](i) ran the EM iteration a fixed number of steps and compared its value with the bound: 20,000 steps left gaps near `3·10⁻⁸`, and 50,000 left `10⁻⁶` where the minimum is `0` with more worlds than signals | certify a computed optimum by a bound that holds at any point, here `log max_w c(w)`, and test claims against the bracket, not the point |
 | **An abstract read as the theorem** | the import survey (§9) read McAllester and Stratos from their abstract, as a limit of `log N` on what samples certify about information, and inferred what it says of misalignment; their Theorem 3.1 holds with one behaviour known and the other sampled, a lower bound on `KL(known‖sampled)`, which is the reverse of misalignment's sampling. Caught on reading the text, once arXiv was reachable (Q34) | quote a theorem's hypotheses, not its abstract, before inferring from it; D12's rule, applied to readings as well as to imports |
-| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08) | open a record and match its title and authors before citing or passing on its link |
-| **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [[A2 — Pursuit is the steepest climb\|A2]] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
+| **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08). Again on 2026-10-10: the answer on the licence's aim (Q50) passed on nine links found by web search, on licences and on copyright in AI-written text, without opening them; when they were then fetched for these notes, their hosts were not allowed, so §11 says that those facts come from search results and that the primary pages were not read | open a record and match its title and authors before citing or passing on its link; when the host is not reachable, say so with the link, or ask the PI to allow it |
+| **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [A2] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
+| **A result's hypothesis dropped in the code that applies it** | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
+| **A hypothesis dropped in the Notes** | [[P55 — What a record of counts certifies, at every size\|P55]]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [[P54 — Dependence and drift only add evidence\|P54]]'s that [[P55 — What a record of counts certifies, at every size\|P55]] certifies `M(p̄)` with no assumption on how the actor decides; [[P54 — Dependence and drift only add evidence\|P54]](iii) gives only that the counts estimate `p̄` without bias, and [[P55 — What a record of counts certifies, at every size\|P55]]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]–[[P55 — What a record of counts certifies, at every size\|P55]] before the pull request, not independent (rule (f)) | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -124,7 +130,7 @@ derived; the cost of departing from the default is derived ([[P14 — The cost o
 and a reporting standard names every definition (`STANDARD.md`, lint R11).
 
 v10 added the two concepts approved after the retrospective (§5): the evaluator ([[D10 — Evaluator, regression and residual|D10]]), from which the Goodhart results
-of v7.10 are derived ([[P18 — Through the evaluator, only the regression counts|P18]]–[[P20 — Where overoptimization starts, and how it ends|P20]]), and sampling ([[D11 — Sample and evidence|D11]]), which gives misalignment its second meaning as a rate of
+of v7.10 are derived ([[P18 — Through the evaluator, only the regression counts|P18]]–[[P20 — Where overoptimization starts, and how it ends|P20]]), and sampling ([[D11 — Record, sample and evidence|D11]]), which gives misalignment its second meaning as a rate of
 evidence and brings detection, estimation and the evaluation gap ([[P21 — The expected evidence is misalignment|P21]]–[[P24 — The evaluation gap|P24]]). The core holds five premises and eleven
 definitions. Since then the import of v7.10 added [[P27 — The best use of a departure budget|P27]]–[[P38 — Any convex cost|P38]], [[L1 — Separable bounds are loose when two quantities change rank|L1]] and the forbidden statements ([[C1 — No ranking of errors holds at every budget|C1]]–[[C12 — No misalignment, no stakes|C12]]).
 
@@ -136,13 +142,13 @@ pursues its reward in the reward's own scale, but most of what the tuning change
 case run by an outside reader is not: W1 is reported to `STANDARD.md`, and the readers are requested (`REQUESTS.md`,
 R1), the hold on review having been lifted for one mathematical reader (Q33). Since then: nine diagnostics
 ([[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]), the law of estimated misalignment by access ([[P52 — What a sample certifies about misalignment, by access|P52]]), a diagnostic case (W4), a library (Q37), and a
-reader package (Q41). v12 made [[A2 — Pursuit is the steepest climb|A2]]'s geometry Riemannian, as Čencov's theorem requires (Q44). Where the framework
+reader package (Q41). v12 made [A2]'s geometry Riemannian, as Čencov's theorem requires (Q44). Where the framework
 stands, and what comes next, is kept in `ROADMAP.md`; this table keeps the gaps the core has closed.
 
 | Gap | State |
 |---|---|
 | sensitivity, resolution, stakes, the gain of a change | closed in v8: [[P7 — Indifference forgives exactly what happens inside cells\|P7]]–[[P10 — Sensitivity to the specification\|P10]], [[P13 — What the start of a change gains\|P13]] |
-| the KL cost was assumed | **closed by [[P14 — The cost of departing from the default is forced\|P14]]**: forced by [[A2 — Pursuit is the steepest climb\|A2]] and [[A3 — Pursuit is the best trade-off\|A3]] together |
+| the KL cost was assumed | **closed by [[P14 — The cost of departing from the default is forced\|P14]]**: forced by [A2] and [A3] together |
 | "cannot" versus "will not" | **closed by [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]]** for linear and convex limits; for capacity limits only a lower bound |
 | contexts (v8 design question Q1) | **closed by [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]]**: the shared intensity across contexts is derived, not chosen |
 | deceptive alignment | **opened as a measurable quantity**: [[D8 — Conditions, responses and views\|D8]], [[D9 — Observation and identification\|D9]], [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]]; bounds on the objective's average in an unobserved condition, sharp given `ε` |
@@ -174,7 +180,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q4 | identifiability into the core, so that deceptive alignment can be measured; interventions and stakes stay in the core | PI | [[D8 — Conditions, responses and views\|D8]], [[D9 — Observation and identification\|D9]], [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]]; [[D5 — Stakes\|D5]], [[D6 — Intervention and pass-through\|D6]] |
 | Q5 | C2 and C3 (merge P11 with P13; move the Price equation into P2) | PI: declined, merging only to have fewer items | not applied |
 | Q6 | the evaluator as the one strong concept to import, with the residual `R = F − E_q[F \| F̂]` as the canonical error | PI: approved | [[D10 — Evaluator, regression and residual\|D10]]; [[P18 — Through the evaluator, only the regression counts\|P18]]–[[P20 — Where overoptimization starts, and how it ends\|P20]] |
-| Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6); PI: approved | [[D11 — Sample and evidence\|D11]]; [[P21 — The expected evidence is misalignment\|P21]]–[[P24 — The evaluation gap\|P24]] |
+| Q7 | sampling in the core | PI: inclined to yes, as a universal act of measurement that the framework must interpret and can use for explanations; executor: yes, as definitions only (§5.6); PI: approved | [[D11 — Record, sample and evidence\|D11]]; [[P21 — The expected evidence is misalignment\|P21]]–[[P24 — The evaluation gap\|P24]] |
 | Q8 | a file on related theories | PI | `RELATED.md`, lint R12 |
 | Q9 | derived results whose proof is a classical theorem | PI: approved, with a light simulation unless a discrepancy shows | [[P22 — No test detects misalignment faster than misalignment\|P22]] (Chernoff), [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]] (Wilks): the theorem quoted with its hypotheses, and a check |
 | Q10 | [[P25 — The target's curve turns no more often than the regression\|P25]] (shape law, by Laguerre's rule of signs) and [[P26 — The regression on bins governs at small intensity\|P26]] (binned evaluators, E8) | executor, in a turn the PI left free; PI: worth merging | `derived/evaluator.md`; checks mutation-tested (eight mutants, all caught after two check fixes) |
@@ -211,11 +217,17 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q41 | continue until every step of the handover is done, then open one pull request into `main`. Applied: E1(b), the diagnostics in `stdalign` 0.2; E2, the report as data, with its validator and lint R16, and W1's report migrated; E3, `examples/quickstart.py`, run by CI, and every case's environment pinned, which lint R14 now requires; H1, `OVERVIEW.md`, generated from the items; H2, §13 and the requests updated; and the pull request | PI; executor (the package) | §13; `ROADMAP.md`; `REQUESTS.md`; `OVERVIEW.md`; `stdalign/`; `examples/` |
 | Q42 | a general doc hygiene before the handover's pull request is updated. Applied: the scripted sweep of §12 run again, statements the handover made stale fixed (`ROADMAP.md`, §2, §13, `REQUESTS.md`, `README.md`, `cases/README.md`), and pull request #31 updated | PI | `ROADMAP.md`; §2; §13 |
 | Q43 | review Johnson and Huo (2026), and put in the roadmap, with a priority of the executor's choosing, anything compelling for the framework. Applied: §14; the paper is in `RELATED.md`; nothing in it becomes a step: its theory is a mechanism ([[A1 — Behaviour suffices\|A1]]) and its evidence too thin to build a prediction on; the behavioural question it raises is H37, after E4 and below W5 and C3 (`ROADMAP.md`, not now) | PI; executor (the review and the priority) | §14; `RELATED.md`; `ROADMAP.md` |
-| Q44 | [[A2 — Pursuit is the steepest climb\|A2]]'s Statement says "a Riemannian geometry", as the executor recommended (`REQUESTS.md`, R6). Applied: [[A2 — Pursuit is the steepest climb\|A2]] with a reason on what "Riemannian" excludes and a Lineage line; GA2 follows it; the core is v12; `OVERVIEW.md`'s point of pressure restated. With it, step 8 done: every imported theorem read in an open text or derived where it is used (`REFERENCES.md`) | PI; executor (step 8) | `CORE.md`; `CORE-GENERAL.md`; `OVERVIEW.md`; `derived/`; `REFERENCES.md`; `ROADMAP.md` |
+| Q44 | [A2]'s Statement says "a Riemannian geometry", as the executor recommended (`REQUESTS.md`, R6). Applied: [A2] with a reason on what "Riemannian" excludes and a Lineage line; GA2 follows it; the core is v12; `OVERVIEW.md`'s point of pressure restated. With it, step 8 done: every imported theorem read in an open text or derived where it is used (`REFERENCES.md`) | PI; executor (step 8) | `CORE.md`; `CORE-GENERAL.md`; `OVERVIEW.md`; `derived/`; `REFERENCES.md`; `ROADMAP.md` |
 | Q45 | the contribution terms of `CONTRIBUTING.md` approved as drafted (R4): AGPL in and out, with a grant to relicense under another licence approved by the Open Source Initiative, recorded by a `Signed-off-by:` line | PI | `CONTRIBUTING.md` |
 | Q46 | a step, for the finish line's row "stable", is a merged pull request (R5); the count starts with the first pull request merged after the one that made v12 | PI | `README.md`; `ROADMAP.md`, step 7 |
 | Q47 | no release tag for the handover (R7): readers review `main` as it is when they start | PI | `REQUESTS.md` |
 | Q48 | hand over: the PI relays to an independent reviewer a starting message the executor prepared (R1), and the executor may finish what it chooses first. Applied: the message, pointing to `OVERVIEW.md`, its points of pressure, the checks and the record, given to the PI, not kept in the repository; the pull request that brings v12 and step 8 into `main`, so that the reviewer reads them | PI; executor (the message, the choice) | `REQUESTS.md`, R1 |
+| Q49 | review the framework in general: get familiar with its files, methodology and ethos, plan an exhaustive list of focus areas, then review them in turn, with challenges and constructive criticism. Applied: §15, with twelve focus areas, eleven findings and seven pieces of advice; `probes/review/`; `OVERVIEW.md`'s count of predictions and an orientation for a mathematician; Korbak, Perez and Buckley in `RELATED.md`; a row of §1 extended and one added; the order of the commands before a push fixed; three decisions asked (`REQUESTS.md`, R8–R10) | PI; executor (the review) | §15; `probes/review/`; `tools/overview_template.md`; `ROADMAP.md`; `REQUESTS.md` |
+| Q50 | the licence's aim during research: progress on the framework, by people or by models working on copies of it, is shared with everyone; the GNU Affero GPL, version 3 or later, is kept for the code and the text, and the adoption it costs is accepted; it is to be relaxed once research gives way to use. So R9 is declined, and the executor withdraws the recommendation behind it (§15, advice 6). Applied: §11, what a copyleft licence reaches and what it does not, and what gets closer; proposed and awaiting the PI: additional terms under the licence's section 7, a request to AI agents that work on copies, and a citation file with a DOI per release (`REQUESTS.md`, R11) | PI; executor (the analysis) | §11; §15; `REQUESTS.md`; `ROADMAP.md` |
+| Q51 | draft on a new branch the core the review's advice would give, and review whether it is more compelling and more solid than v12. Applied: branch `claude/core-reframe`, a draft v13: [[A4 — Misalignment is evidence\|A4]] misalignment is evidence, [A6] declared no finer than identified, [[D3 — Specification, declaration and misalignment\|D3]] with the ordinal and the matched specification, [[P6 — The departure from the default splits into pursuit and misalignment\|P6]](ii) the excess departure with its check and mutants (5 of 5 caught), `GA4`, `STANDARD.md`, `TERMS.md`, `README.md`, `RECORD.md` and the overview; §16 the review: adopt [[A4 — Misalignment is evidence\|A4]], [[P6 — The departure from the default splits into pursuit and misalignment\|P6]](ii), the ordinal specification as an option and the paired report, not [A6] (R12) | PI; executor (the draft and the review) | §16; the branch |
+| Q52 | v13 approved, in the lean form the executor proposed after Q51's review: three premises, [[A1 — Behaviour suffices\|A1]] behaviour suffices, [[A4 — Misalignment is evidence\|A4]] misalignment is evidence and [[A5 — Declared before\|A5]] declared before; v12's A2 and A3 made reasons of [[D2 — Pursuit of an objective\|D2]], since no result used them; A6 not adopted; the identity that misalignment is the departure beyond what a specification credits, as a result with its check and mutants; the paired report in `STANDARD.md`; the dependencies measured again; the estimation and diagnostics of the ordinal specification as steps. Applied on the existing branch, not a new one, and built by the method of Carcassi's reverse physics: what is imported from probability theory (M), what is assumed without loss of generality (B) and what is assumed (A) named apart, each with a Status saying what kind of starting point it is, and every definition with a physical or behavioural interpretation, declared and justified | PI; executor (the structure, the interpretations, [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]) | `CORE.md` v13; [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]; `STANDARD.md`; lint R1, R3–R5; `ROADMAP.md` O1, O2 and step 3; §17 |
+| Q53 | seven requests: justify every declared convention by mathematical convenience or the literature; drop the independence of decisions between episodes, if nothing important is lost; compare against a family of targets rather than one target, with Sanov; rework the continuous case, with the dictionary and the mapping; say how the ontologies and their declarations change; give the verifications statistical tests in a meaningful way; and say whether observing activations helps verification. Applied on `claude/core-reframe`: the table of conventions in `CORE.md` §1, with lint R17; [[A4 — Misalignment is evidence\|A4]] restated on the record's counts, which needs no independence of the actor, with [[P54 — Dependence and drift only add evidence\|P54]] (dependence and drift only add evidence); families of targets in [[D3 — Specification, declaration and misalignment\|D3]], and [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]] for every family; [[P55 — What a record of counts certifies, at every size\|P55]] (exact tests and intervals from counts, Sanov, Genin and Kelly's verifiability); [[D11 — Record, sample and evidence\|D11]] with records; `CORE-GENERAL.md` draft 4 on the kinds of v13, with misalignment as the supremum over the finite descriptions a record can decide, and `general/dictionary.md` and `general/transfer.md` brought to it; the ontologies' slots and declarations; H38 on activations; §18 | PI; executor (the derivations, the general core's design) | §18; `CORE.md`; `derived/misalignment.md`, `derived/estimation.md`; `CORE-GENERAL.md`; `ontologies/` |
+| Q54 | all accepted: misalignment on a continuum as the supremum over the finite descriptions a record can decide (`CORE-GENERAL.md` draft 4, open decision 1); H33 and H38, activations as observations, reopened under the freeze, starting with the narrow case H38 proposes; and the convention that doing nothing is intended, flagged as changing a verdict, kept as it stands. Then doc hygiene. Applied: `REQUESTS.md` R13 done; `CORE-GENERAL.md` §12; case C5 (`cases/c5-activations/`); §19 | PI | `CORE-GENERAL.md`; `cases/c5-activations/`; §19 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -382,7 +394,7 @@ sampling.
 
 **Candidate 1, recommended: the evaluator.** The objective the actor pursues, `F̂`: declared, as a reward model, a
 performance measure, a fine or a selection regime, or revealed, as `log(p̂/q)` up to scale and constant ([[P1 — Every behaviour is a tilt of any other|P1]]).
-- *Why it is canonical.* (a) It adds no assumption: by [[P1 — Every behaviour is a tilt of any other|P1]] and [[A3 — Pursuit is the best trade-off|A3]], every full-support behaviour is the best trade-off
+- *Why it is canonical.* (a) It adds no assumption: by [[P1 — Every behaviour is a tilt of any other|P1]] and [A3], every full-support behaviour is the best trade-off
   for exactly one objective direction, its revealed evaluator. (b) It is the actor's counterpart of the principal's
   objective, in the same currency: the principal declares `(q, F)`, the actor reveals `(q, t̂·F̂)`. (c) It is universal:
   each of the five ontologies has one (the reward model; selection through males; the fine; the report card; the
@@ -402,7 +414,7 @@ performance measure, a fine or a selection regime, or revealed, as `log(p̂/q)` 
 - *Why it is canonical.* It gives misalignment a second, independent meaning that agrees with the first (H4): the
   expected log-likelihood ratio per decision, under the actual behaviour, of the actual against the nearest intended
   behaviour is `M`, so in a sequential test (Wald) about `log(1/α)/M` decisions reject the intended behaviour. Value
-  lost ([[A4 — Misalignment is value lost|A4]]) and evidence gained agree, in the same direction of KL: the same pattern as [[A2 — Pursuit is the steepest climb|A2]] and [[A3 — Pursuit is the best trade-off|A3]] agreeing on the
+  lost ([[A4 — Misalignment is evidence|A4]]) and evidence gained agree, in the same direction of KL: the same pattern as [A2] and [A3] agreeing on the
   cost.
 - *What it would re-derive.* Prop 18 (with Chernoff's theorem), the estimation layer (E1: Wilks), and the standard's
   error bars, as results instead of instructions.
@@ -418,7 +430,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H1 | **Monotone regression rules out overoptimization.** If every revealed objective of a path is a non-decreasing function of `F̂` (pursuit of `F̂`, best-of-`n`, threshold selection, any monotone transform), and `m = E_q[F | F̂]` is non-decreasing, then `E_{p_s}[F]` never decreases. Proof sketch: the behaviours are tilts by functions of `F̂`, so `E_p[F] = E_p[m(F̂)]` ([[P8 — An actor that cannot tell outcomes apart\|P8]](i)); by [[P13 — What the start of a change gains\|P13]](i) the rate is `Cov_{p_s}(F_s, m(F̂))`, the covariance of two non-decreasing functions of `F̂`, which is never negative (Chebyshev's association inequality). It generalizes v7.10's Prop 21 (affine) and B §4 (Gaussian) | **proved as [[P19 — A monotone regression rules out overoptimization\|P19]]**; probe: 0 decreasing curves in 111 monotone instances; among 1889 non-monotone ones, 1474 decrease somewhere |
 | H2 | **Extremal Goodhart.** Along the pursuit of `F̂`, at large intensity the target decreases exactly when `m` is lower at the largest evaluator value than at the second largest; the peak, when there is one, is where `Cov_{p_t}(F̂, m(F̂)) = 0` | **proved as [[P20 — Where overoptimization starts, and how it ends\|P20]]**; probe: 1889 of 1889 in the limit (log-space); at moderate intensity, a third value close to the second can still dominate |
 | H3 | **Goodhart's four variants are four objects of v9.** Regressional: the cell average and its Jensen gap ([[P8 — An actor that cannot tell outcomes apart\|P8]]); extremal: H2; causal: an intervention that changes more than it adds ([[D6 — Intervention and pass-through\|D6]], [[P12 — What interventions reveal\|P12]]); adversarial: an actor whose view separates observed from unobserved conditions ([[D8 — Conditions, responses and views\|D8]], [[P17 — What an unobserved condition can hide\|P17]]) | C: a mapping, to be checked against Manheim and Garrabrant's definitions |
-| H4 | **Value and evidence agree.** Misalignment is both the least value lost ([[A4 — Misalignment is value lost\|A4]]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [[A3 — Pursuit is the best trade-off\|A3]] | **stated as [[P21 — The expected evidence is misalignment\|P21]]**: with the log-likelihood ratio as evidence ([[D11 — Sample and evidence\|D11]]) and samples drawn from the actual behaviour, the rate is `KL(p̂‖·)`, form and direction, without [[A3 — Pursuit is the best trade-off\|A3]]; it rests on the choice of evidence (Neyman–Pearson) instead. [[D3 — Specification, declaration and misalignment\|D3]]'s Why gives the reading, and argues from value |
+| H4 | **Value and evidence agree.** Misalignment is both the least value lost ([[A4 — Misalignment is evidence\|A4]]) and the evidence rate against the nearest intended behaviour under the actual one (Wald). Could justify the direction of KL independently of [A3] | **stated as [[P21 — The expected evidence is misalignment\|P21]]**: with the log-likelihood ratio as evidence ([[D11 — Record, sample and evidence\|D11]]) and samples drawn from the actual behaviour, the rate is `KL(p̂‖·)`, form and direction, without [A3]; it rests on the choice of evidence (Neyman–Pearson) instead. [[D3 — Specification, declaration and misalignment\|D3]]'s Why gives the reading, and argues from value |
 | H5 | **The measure is not the actor's cost.** [[P14 — The cost of departing from the default is forced\|P14]] forces the measure to be KL; v7.10's Prop 11 says an actor regularized by KL is exposed to heavy-tailed evaluator errors, and one regularized by χ² is not. Not a contradiction: the actor's cost belongs to its feasibility or its mechanism, never to the measure | B: keep the two apart in every future item |
 | H6 | **The alignment plane.** Target and evaluator span a two-parameter exponential family through `q`; the gold curve, the actor's misalignment along its own pursuit and the stakes may have closed forms in it | D: explore; **Gaussian closed form probed** (B5): gain per √departure = √2·sd·cos θ and M = departure·sin²θ, exact to 4e-15; not exact beyond (an exponential × normal default departs) |
 | H7 | **Active inference reached the same direction.** Its "risk" term is a KL from predicted to preferred outcomes, the direction of `M` | D: verify before citing |
@@ -447,11 +459,12 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H30 | **Saturation, not decline, and the shape is the finding.** In W1 the gold curve under best-of-`n` keeps the framework's initial slope up to `n = 16` and then saturates, with almost no fall; the literature's two numbers, `a` and `b`, hide that shape and misstate the slope. A report of overoptimization should give the curve's local slopes in `d` against the initial slope of [[P13 — What the start of a change gains\|P13]], not a fitted form. Whether a neural proxy gives the same shape is open | D: a candidate field for `STANDARD.md`'s evaluator row, not scheduled |
 | H31 | **Unconverged reinforcement learning changes more than it pursues.** In W3, the part of `log(π/π_ref)` along the reward has a slope near `1/β` (`4.27` against `5` at the starting KL coefficient), as [[P4 — What KL measures\|P4]] says, yet within each model's own continuations the reward explains only a tenth of it. The rest may be the drift a noisy policy gradient accumulates, which the KL penalty slows but does not aim. If so, along one run the reward's share of the revealed objective, within the tuned model's own continuations, should rise towards 1 as the run converges; a share that stays low at convergence would mean the rest is not drift but a systematic pull, of the value estimate or the adaptive coefficient, which the framework would then have to name. Test: checkpoints of one run, or runs at several `β`, with their reward model, all public | open: needs public checkpoints. W4 (`cases/w4-two-runs/`) asks the part two public runs can answer: whether the off-reward change recurs in another run |
 | H32 | **The most charitable principal.** When the principal's objective is known only to lie in the span of given functions, the least misalignment any such principal finds is the unexplained misalignment of [[P44 — What named objectives explain\|P44]], attained by the principal whose objective is the named pursuit's exponent, and the largest is the departure. So an uncertain target turns misalignment into an interval, as an unobserved condition does in [[P17 — What an unobserved condition can hide\|P17]]. Proof sketch: over the span, `inf_{c, t ≥ 0} KL(p̂‖tilt(q, t·c·Φ))` is the infimum over the whole exponential family, attained at the moment-matching tilt, which is the named pursuit ([[P44 — What named objectives explain\|P44]](i)); one of `±F'` never beats the default, so [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]](iv) gives the departure | **applied as [[P48 — Misalignment when the target is uncertain\|P48]]**, with a direct proof and a check (Q30); first probed in `probes/diagnostics/probe_charitable.py` |
-| H33 | **Logs as outcomes.** Activations logged from a black box are observations, so making them part of the declared outcome keeps [[A1 — Behaviour suffices\|A1]]: the core would judge their distribution, not their meaning, the move [[P50 — Tampering: a change of the measurement, not of the world\|P50]] made for measurements. Three consequences, none yet a result. (a) If the outputs are computed from the logged activations, these are a view of the condition ([[D8 — Conditions, responses and views\|D8]]), so by [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]] the divergence of activations between evaluation and use bounds from above how differently the actor can act there: the `ε` that [[P17 — What an unobserved condition can hide\|P17]] needs and that studies of evaluation awareness cannot give (H27). But an upper bound on a divergence between high-dimensional distributions cannot be estimated from samples without a model, so the bound inherits the model's error. (b) A surrogate, a white-box model trained on the logs, transfers its findings to the black box only within its fidelity, a divergence measurable where the surrogate was fitted and bounded elsewhere only by [[P17 — What an unobserved condition can hide\|P17]] again. (c) What the black box "knows" is identified from logs only under stated assumptions ([[D9 — Observation and identification\|D9]]): where the labels come from a fallible observer, a reporter that says the truth and one that says what the observer would believe fit the same data, and logs narrow the identified set only through assumptions such as consistency or sparsity. This is the programme of probing and dictionary learning in interpretability, not new; the framework would add its accounting: fidelity in nats, identified sets, the view bound | E: outside the scope (`IMPORT.md` §8, gap 5, "drop"); reopening it is the PI's decision under the freeze. A narrow test, if reopened: a small network whose internals are known, where the view bound and the surrogate's transfer are checked against the truth |
+| H33 | **Logs as outcomes.** Activations logged from a black box are observations, so making them part of the declared outcome keeps [[A1 — Behaviour suffices\|A1]]: the core would judge their distribution, not their meaning, the move [[P50 — Tampering: a change of the measurement, not of the world\|P50]] made for measurements. Three consequences, none yet a result. (a) If the outputs are computed from the logged activations, these are a view of the condition ([[D8 — Conditions, responses and views\|D8]]), so by [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]] the divergence of activations between evaluation and use bounds from above how differently the actor can act there: the `ε` that [[P17 — What an unobserved condition can hide\|P17]] needs and that studies of evaluation awareness cannot give (H27). But an upper bound on a divergence between high-dimensional distributions cannot be estimated from samples without a model, so the bound inherits the model's error. (b) A surrogate, a white-box model trained on the logs, transfers its findings to the black box only within its fidelity, a divergence measurable where the surrogate was fitted and bounded elsewhere only by [[P17 — What an unobserved condition can hide\|P17]] again. (c) What the black box "knows" is identified from logs only under stated assumptions ([[D9 — Observation and identification\|D9]]): where the labels come from a fallible observer, a reporter that says the truth and one that says what the observer would believe fit the same data, and logs narrow the identified set only through assumptions such as consistency or sparsity. This is the programme of probing and dictionary learning in interpretability, not new; the framework would add its accounting: fidelity in nats, identified sets, the view bound | E: outside the scope (`IMPORT.md` §8, gap 5, "drop"); reopening it is the PI's decision under the freeze. A narrow test, if reopened: a small network whose internals are known, where the view bound and the surrogate's transfer are checked against the truth; reopened by the PI with H38 (Q54): case C5 |
 | H34 | **A monitor trained against is tampered with.** A monitor whose verdict is computed from a channel the actor can influence, such as a probe on activations, is a signal in [[P50 — Tampering: a change of the measurement, not of the world\|P50]]'s sense, and training against it is the trainer's optimum of [[P50 — Tampering: a change of the measurement, not of the world\|P50]](iii): it tampers at every positive intensity, with a share at the start equal to the share of the monitor's variance not explained by what it is meant to detect. So optimizing against an imperfect monitor buys, from the first step, a change of what the monitor reads as well as of what it monitors. The reading needs the channel declared (the activations each behaviour would produce, before any training against the monitor), and the trainer's optimum idealizes training | D: a candidate simulation, after the tampering case; no world test named |
 | H35 | **The request as evidence, as a declared family.** Inverse reward design's posterior over true rewards, given a written one and the environment it was written for [[References\|@hadfieldmenell2017]], could be the family of [[P48 — Misalignment when the target is uncertain\|P48]] that a principal declares when the request is all there is: the least misalignment over it is the most charitable reading of the request, and the largest is the departure. Features that did not vary where the request was written get the prior's spread, so the interval widens exactly where the request was silent | D: a derived result only if a test needs it |
 | H36 | **The default from how people usually act.** Preferences implicit in the state of the world [[References\|@shah2019]] suggest estimating the default from a population's ordinary behaviour, so that the norms nobody states are carried by the cost of departure. Since a pursuit keeps the default's proportions among outcomes the request scores alike, an unstated norm then moves only through its regression on the request ([[P18 — Through the evaluator, only the regression counts\|P18]]) | D: a declaration practice for `STANDARD.md`, to try in a case |
 | H37 | **Misalignment along a conversation.** Each prefix of a conversation is a condition ([[D8 — Conditions, responses and views\|D8]]), so a model's next-turn behaviour over declared classes of outcome, good, bad and other (a resolution, [[D4 — Resolution\|D4]]), can be judged at each position against the standard specification of `F = 1_good − 1_bad`, and the path of behaviours tested for a fixed objective ([[P3 — A fixed objective is visible in the changes of behaviour\|P3]]). Evaluations that sample first turns and use that runs long meet these conditions in different proportions, so [[P24 — The evaluation gap\|P24]]'s gap applies, and [[P17 — What an unobserved condition can hide\|P17]] says first-turn alignment certifies nothing about later turns without a bound on how far the model tells them apart. Johnson and Huo's good-to-bad tipping [[References\|@johnson2026]] would be the case where the revealed objective turns from good to bad at a definite position (§14) | D: a diagnostic case, after E4, below W5 and C3 |
+| H38 | **Activations verify that an actor can tell situations apart, never that it cannot.** The PI asked whether observing activations helps verification (Q53). H33 and H34 already said most of it: logged activations are observations, so judging their distribution keeps [[A1 — Behaviour suffices\|A1]]; if the outputs are computed from them they are a view ([[D8 — Conditions, responses and views\|D8]]), and by [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]] their divergence between evaluation and use bounds from above how differently the actor can act, the `ε` that [[P17 — What an unobserved condition can hide\|P17]] needs; and a monitor on activations that the actor is trained against is tampered with. What the topology of verifiability adds is exact: a probe, any statistic of the activations, gives a lower bound on the divergence of the view by data processing (the Donsker–Varadhan formula, [[References\|@polyanskiy2025]], Theorem 4.6, is a supremum over such statistics), so "the actor tells evaluation from use" is verifiable from activations, an open statement, while "it cannot", the upper bound that [[P17 — What an unobserved condition can hide\|P17]] needs, is closed, refutable and never verifiable without a model ([[P55 — What a record of counts certifies, at every size\|P55]], Notes, after [[References\|@genin2017]]). So activations can refute the identification of unobserved behaviour, a warning, but cannot establish it. Where they do help: as side information that sharpens estimates, as log-probabilities, which are internals too, already do in [[P52 — What a sample certifies about misalignment, by access\|P52]]; as an audit channel in [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]](iii)'s sense, only while nothing is trained against it (H34); and by letting a white-box model be run on constructed situations, which then become observed conditions ([[D9 — Observation and identification\|D9]]) rather than inferred ones | reopened (Q54); case C5 done, all held: a linear probe was silent on an XOR-read cue of `0.339` nats, and [[P17 — What an unobserved condition can hide\|P17]]'s bound fed that silence failed in 200 of 200 instances (`cases/c5-activations/`). The narrow case as proposed: a small network whose internals are known, where probes' lower bounds on the view's divergence, [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]]'s bound and [[P17 — What an unobserved condition can hide\|P17]]'s hidden misalignment are compared with the truth |
 
 ### 5.5 Process
 
@@ -460,7 +473,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 - Most of what was "lost" is derivable: the archive is a source of statements to re-derive and check, not of text to
   copy.
 
-### 5.6 Drafts for v10 (applied as [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Sample and evidence|D11]]; kept for the record)
+### 5.6 Drafts for v10 (applied as [[D10 — Evaluator, regression and residual|D10]] and [[D11 — Record, sample and evidence|D11]]; kept for the record)
 
 **What changed from the drafts.** "Declared" and "revealed" became "known" and "revealed", since [[D3 — Specification, declaration and misalignment|D3]] uses "declared"
 for specifications. The target is named in [[D10 — Evaluator, regression and residual|D10]]'s statement. Wald's sequential test is a Note of [[P21 — The expected evidence is misalignment|P21]], not an item;
@@ -473,7 +486,7 @@ the actor pursues: **declared** when it is a known function the actor is rewarde
 `F̂ = log(p̂/q)` for a full-support behaviour `p̂`, which fixes it up to a positive factor and a constant. The
 **regression** of the target on the evaluator is `m = E_q[F | F̂]`, the cell average of `F` over the resolution whose
 cells are the level sets of `F̂`; the **residual** is `R = F − m`.
-*Why, in outline.* (a) No new assumption: by [[P1 — Every behaviour is a tilt of any other|P1]] and [[A3 — Pursuit is the best trade-off|A3]] every full-support behaviour reveals one evaluator, up to
+*Why, in outline.* (a) No new assumption: by [[P1 — Every behaviour is a tilt of any other|P1]] and [A3] every full-support behaviour reveals one evaluator, up to
 scale. (b) The actor's counterpart of the principal's objective, in the same currency. (c) Universal: each ontology has
 one. (d) Scale-free: `m` and `R` depend on `F̂` only through its level sets, and the monotonicity of `m` only through
 their order, so neither changes under an increasing transformation of `F̂`; the difference `F̂ − F` depends on a scale
@@ -494,7 +507,7 @@ and [[D9 — Observation and identification|D9]]'s "observed" is informal withou
 records, logged units of work. (c) The likelihood ratio is the most powerful statistic for two behaviours
 (Neyman–Pearson). (d) The expected evidence per decision, under `p`, for `p` against `r` is `KL(p‖r)`: misalignment is
 also the slowest rate at which evidence against the specification accumulates (H4), a second meaning, in the same
-direction, as the value lost of [[A4 — Misalignment is value lost|A4]]. (e) Explanations can be compared in the same unit: evidence in nats for one
+direction, as the value lost of [[A4 — Misalignment is evidence|A4]]. (e) Explanations can be compared in the same unit: evidence in nats for one
 evaluator against another. (f) Independence is the default model; dependent samples are out of scope until an item
 needs them.
 *Results it would carry, in a new `derived/estimation.md`.* the expected evidence identity; Wald's expected sample size
@@ -690,8 +703,8 @@ rewards to behaviour [[References|@ziebart2008]], [[References|@audiffren2026]].
   what it cannot explain is [[P44 — What named objectives explain|P44]]'s unexplained misalignment;
 - CIRL's deployment theorem, acting on the posterior-mean reward, is [[P42 — Several principals: gridlock, and the pooled pursuit|P42]](ii), the pooled pursuit, with posterior
   weights;
-- Armstrong and Mindermann's theorem asks for a normative assumption to identify a reward; the core's premises [[A2 — Pursuit is the steepest climb|A2]] and
-  [[A3 — Pursuit is the best trade-off|A3]] are that assumption, and the price is that a principal who teaches rather than pursues has the teaching in its
+- Armstrong and Mindermann's theorem asks for a normative assumption to identify a reward; the core's premises [A2] and
+  [A3] are that assumption, and the price is that a principal who teaches rather than pursues has the teaching in its
   revealed objective;
 - inverse reward design and preferences implicit in the state are the two halves of the example above: what the request
   fixes (H35), and what the default carries (H36).
@@ -734,6 +747,62 @@ and results anew, under any licence, and what makes them cite it is the norm of 
 of licence needs the consent of every holder of the copyright; while the PI is the only one, the PI can relicense at
 will, and once others contribute, keeping that freedom needs their agreement in advance, as a contributor agreement
 gives.
+
+**The licence's aim, made precise (Q50).** The PI wants progress on the framework, by people or by models working on
+copies of it, to be shared with everyone while the work is research, and accepts that the licence will cost some
+adoption meanwhile. What the GNU Affero GPL does toward that aim, read in this repository's `LICENSE`:
+- *A copy published or given to others*, of the code or of the text, modified or not, stays under the licence, with its
+  source, for those who receive it (sections 4 to 6 and 10). They are free to pass it on; nothing makes them send it
+  upstream, and a licence that did so would no longer be free.
+- *A modified program offered over a network*, such as an audit service built on a changed `stdalign`, must offer its
+  users the source of that version (section 13). This is what the Affero licence adds to the GPL, and the reason to keep
+  it.
+- *Private copies* owe nothing. A laboratory whose model improves the framework in-house, and never publishes or serves
+  it, is free to keep the result, under this licence and under every free one. The only licence approved by the Open
+  Source Initiative that tries to reach private use, the Reciprocal Public License, is counted non-free by the Free
+  Software Foundation for that reason, is incompatible with the GPL, and is rarely used; it is not recommended.
+- *Ideas* are not covered, as Q38 said. New results stated in one's own words, a new proof, or the library written anew
+  owe nothing to any licence of this repository. The framework's value is mostly mathematical, so this is the largest
+  gap between the aim and what a licence can do.
+- *Text and code written by a model* may not be protected at all. In the United States copyright requires a human
+  author: the Copyright Office's report on copyrightability (January 2025) holds that prompts alone are not enough, and
+  the Court of Appeals for the District of Columbia Circuit held in Thaler v. Perlmutter (March 2025) that a work needs
+  a human author. Much of this repository was written by an executor at the PI's direction; what is protected is likely
+  the PI's selection, arrangement, decisions and edits, and a licence binds only what copyright protects. The decisions
+  of §3.1 are a record of that human contribution, and are worth keeping as such. This is not legal advice.
+
+What gets closer to the aim, beyond the licence:
+1. *A notice every copy keeps.* Section 7(b) lets a licensor require that "specified reasonable legal notices or author
+   attributions" be preserved: an attribution naming the original work and its address on GitHub, with the request to
+   share progress beside it rather than inside it, since a bare request is not clearly a legal notice.
+2. *The original stays the original.* Section 7(c) lets a licensor require that modified versions be "marked in
+   reasonable ways as different from the original version", so that no copy presents itself as the framework or its
+   standard; improvements then have a reason to come back to where the standard is kept.
+3. *A request to the models that work on copies.* An agent working on a clone reads `CLAUDE.md` or `AGENTS.md`. A
+   section addressed to such agents can ask them to tell their user that this research asks for progress to be shared,
+   and to offer to prepare an issue or a pull request upstream. It asks them to tell their user, never to send anything
+   on their own: an instruction to act without the user would rightly be refused as an injection, and would be wrong.
+4. *Credit for sharing.* A citation file, `CITATION.cff`, a DOI for each release (through Zenodo, say), outside
+   contributors credited by name where `RECORD.md` and `RELATED.md` already say who found what, and issue templates for
+   a result, a counterexample and a case. Researchers share where sharing is credited.
+5. *Early publication.* Dated public commits, DOIs and preprints make the framework prior art, so that no one who builds
+   on it in private can claim its results first or patent them; the licence's section 11 grants the patent rights of
+   those who contribute.
+
+The prose stays under the same licence as the code. The Creative Commons Attribution-ShareAlike licence, version 4.0,
+is also share-alike once a work is published, and is one-way compatible with the GPL, version 3 (declared by Creative
+Commons in October 2015), so it remains an option for the text when the licence is relaxed; switching now would cost
+work and buy only familiarity for academic readers. A relaxation later can cover what was contributed upstream, under
+the grant of Q45; what others keep in their own copies stays under the Affero GPL unless its authors agree.
+
+*Sources.* The licence's sections 4–7, 9–11 and 13 were read in `LICENSE`. The other facts above come from web search
+results on 2026-10-10, whose primary pages were not read, since their hosts are not allowed (§1): on the Reciprocal
+Public License, its Wikipedia entry (`en.wikipedia.org/wiki/Reciprocal_Public_License`) and two posts to the Open Source
+Initiative's license-discuss list (2006, the FSF's objections; 2009, the licences approved by the OSI and listed
+non-free by the FSF); on Creative Commons, the announcement of 8 October 2015 and its wiki page on compatibility with
+GPLv3; on copyright in AI-written text, summaries by DLA Piper (March 2025) and by Sidley Austin (February 2025) of the
+Copyright Office's report and of Thaler v. Perlmutter. A point that matters, before it is acted on, is to be read in its
+primary source or checked by a lawyer.
 
 ## 12. A review of the whole framework, 2026-10-08 (Q39)
 
@@ -804,12 +873,14 @@ On the engineering side:
 
 ## 13. Handover, 2026-10-09 and 2026-10-10 (Q40, Q41)
 
+The last handover is now §19, which this section's state precedes: v13 and its branch came after it.
+
 The PI approved ending this phase with a handover: a close-out, then a reader package with a defined end, then the
 handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H2). The close-out came first; on the
 same day the PI asked for every step of the handover to be finished and merged in one pull request (Q41). This note is
 the state at the handover, for whoever takes the work up.
 
-**State.** The core is v12, [[A2 — Pursuit is the steepest climb|A2]] saying that the geometry of pursuit is Riemannian (Q44): five premises, eleven
+**State.** The core is v12, [A2] saying that the geometry of pursuit is Riemannian (Q44): five premises, eleven
 definitions, 52 propositions; every theorem a result imports is read in an open text or derived where it is used; lint
 is clean, and every test passes on both SIMD paths. The library `stdalign` 0.2 holds misalignment, its split and its
 estimates by access, the diagnostics [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]], the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], and the validator of reports as data. W1's
@@ -820,11 +891,11 @@ on, with their proofs, and CI keeps it equal to the items. Each function and too
 list in `tools/mutants/`, all caught.
 
 **Found while building the package**, each recorded where it is acted on:
-- [[A2 — Pursuit is the steepest climb|A2]] and [[D2 — Pursuit of an objective|D2]] rested on Čencov's theorem, cited only from a monograph behind a paywall; the review of 2026-10-08 did
+- [A2] and [[D2 — Pursuit of an objective|D2]] rested on Čencov's theorem, cited only from a monograph behind a paywall; the review of 2026-10-08 did
   not catch it (§1). Its statement is now read in Lê's open text, and Gibbs' and Pinsker's inequalities in Polyanskiy
   and Wu's draft. Seven more sources, cited in nine items, had no record of being read; step 8 read or derived each
   (Q44).
-- [[A2 — Pursuit is the steepest climb|A2]] said "a geometry", while Čencov's theorem covers Riemannian ones only. The PI decided to amend it (Q44), so the
+- [A2] said "a geometry", while Čencov's theorem covers Riemannian ones only. The PI decided to amend it (Q44), so the
   core is v12, and the count for "stable" restarts (Q46).
 - Two mutants of [[P44 — What named objectives explain|P44]]'s named split survived, and both are equivalent, for one reason: the named pursuit depends only
   on the span of `F` and the named objectives. Projecting from the default instead of from `p°` stays in the same
@@ -855,7 +926,7 @@ list in `tools/mutants/`, all caught.
 results and feasibility into it; step 3 gives the other quantities of a report their limit laws, which would replace the
 quickstart's bootstrap; and three merged pull requests that change no Statement and no scope meet the row "stable"
 (Q46). The open requests are in `REQUESTS.md`: readers (R1), whose package is ready; the LEEPS records (R2); and the
-Tankerkönig archive (R3). The contribution terms (Q45), the unit for stability (Q46), [[A2 — Pursuit is the steepest climb|A2]]'s wording (Q44) and the tag
+Tankerkönig archive (R3). The contribution terms (Q45), the unit for stability (Q46), [A2]'s wording (Q44) and the tag
 (Q47) are decided.
 
 **What the next executor should know.**
@@ -901,3 +972,450 @@ framework already has the instruments for it: misalignment along a conversation 
 diagnostic, not a test of the framework's predictions, and it needs E4's adapters for sequence models, as W5 does. It
 waits below W5 and C3, which test predictions of the framework. What the framework could give the paper is in
 `RELATED.md`.
+
+## 15. A review of the whole framework, 2026-10-10 (Q49)
+
+By the executor, a model of the Claude family, at the PI's request: get familiar with the project, plan an exhaustive
+list of focus areas, and review the framework area by area, with challenges and constructive criticism. It is not
+independent (rule (f)): the same model family wrote what it reviews. A reader who is a person is still what row 5 needs.
+
+**What was read and run.** In full: `ROADMAP.md`, `REQUESTS.md`, `README.md`, `CONTRIBUTING.md`, `CLAUDE.md`, `CORE.md`,
+`STANDARD.md`, `RECORD.md`, `cases/README.md`, §1 and §12–§14 of these notes; `derived/tilts-and-paths.md`, `value.md`,
+`misalignment.md` and `estimation.md`; the statements of `derived/diagnostics.md`; the library's `core.py`,
+`misalignment.py`, `estimation.py` and `report.py`; W3's registration and results, and W4's results; `OVERVIEW.md`'s
+sections 1 and 6 to 8; the checks of [[P1 — Every behaviour is a tilt of any other|P1]]–[[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P9 — What is at stake|P9]] and [[P14 — The cost of departing from the default is forced|P14]]; every mutant list. Run: lint, the freshness of the
+generated views, and the full suite (228 passed in 5 min 43 s, on Python 3.13). Six probes, in three scripts of
+`probes/review/`, give every number below.
+
+The focus areas, planned before the reading went further: the premises; the definitions; the six results the rest stands
+on; novelty and prior art; estimation and the diagnostics; the checks and their mutation testing; the library; the
+standard and its validator; the cases and the record; tooling and CI; governance; documentation.
+
+**What holds.** Credit first, since the findings below are narrower than this.
+- The proofs of [[P1 — Every behaviour is a tilt of any other|P1]], [[P2 — Every change of behaviour follows a replicator equation|P2]], [[P4 — What KL measures|P4]]–[[P6 — The departure from the default splits into pursuit and misalignment|P6]], [[P14 — The cost of departing from the default is forced|P14]], [[P21 — The expected evidence is misalignment|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P35 — Floors and caps|P35]]–[[P37 — A strong incentive masks the actor, and can fake alignment|P37]] and [[P52 — What a sample certifies about misalignment, by access|P52]] read without an error found. [[P14 — The cost of departing from the default is forced|P14]]
+  says where it needs [A3]'s price of `1/t`, and [[P23 — The estimated misalignment of an actor that pursues the objective|P23]] says that it excludes `t = 0`.
+- The checks are built as §1 asks: random instances, tolerances with a scale, negative cases, and assertions that a
+  degenerate case is visible. Each check names the parts it covers, and leaves imported parts to the proof.
+- The record is honest: departures from a registration are recorded in order, refutations keep their rows, and the
+  exploratory is labelled as such.
+- Every edit of `tools/mutants/` still applies, and a test keeps it so.
+
+**Found, and open.** Ranked by what each could change.
+1. *Misalignment charges the route as well as the goal.* Under the standard specification, an optimizer of the right
+   objective is charged when it is not an exact tilt. With no proxy at all, vanilla policy gradient on `F` leaves a
+   median misaligned share of `0.16` up to step 1,600 and `0.065` at step 4,000 (90th percentile `0.35` to `0.48`);
+   best-of-2 on `F` leaves `0.15`, and best-of-16 `0.036` (`probes/review/faithful_optimizers.py`, 200 random
+   instances). In known groups (`probes/review/known_groups.py`), with a proxy that correlates about `0.96` with the
+   target, the share ranks the exact pursuit of the wrong proxy as less misaligned than best-of-4 on the right target in
+   65% of pairs (AUC `0.35`). With a noisier proxy it separates them (AUC `0.81` to `0.83`). The ordinal misalignment of
+   [[P36 — Ordinal objectives|P36]] separates them in every row (AUC `0.98` to `1.00`). Part of that is by construction, since best-of-`n` on `F`
+   is ordinally aligned ([[P36 — Ordinal objectives|P36]](i)); policy gradient on `F` keeps a median ordinal share of `0.004`, at most `0.29`.
+   *Lineage, found after the review:* the archive had this three times, as H8 of its notes (v7.3.1: for a nearly right
+   evaluator, a median 2–14% of misalignment is order and the rest shape), as item 2 of its review of v7.3.3 ("every
+   positive `M_free` for a non-Gibbs optimizer may be shape"), and as the identification rule of its brainstorm B1
+   (declare no target set finer than the actor's channel identifies: a pursuit up to scale and constant, best-of-`n` up
+   to order, a Bradley–Terry learner up to a constant in each context). The restart did not carry them over (§1). §12
+   (point 2) said that the standard specification is strict by design; this puts numbers on what that costs a reader of
+   `M`. Neither the library nor the results of `STANDARD.md` ask for `M_ord`.
+2. *What the predictions tested.* W3's S1 and S2 test the optimum of KL-regularized training, the tilt of the reference
+   by `r/β`, which the literature derived before the framework, as the machine-learning ontology says [[References|@rafailov2023]],
+   and the convergence of one PPO run. Korbak, Perez and Buckley (2022, arXiv:2205.11275, known here from its record and
+   abstract) state the same reading as Bayesian inference. S1's refutation falls on the assumption that the run
+   converged; S2 tests which reward was used. W1 tests an expansion against a curve that the literature fitted. The
+   premises define terms, and data cannot refute a definition; data can refute a claim that an instrument measures what
+   its name says. So the row "makes testable predictions" is met in its letter and says little about the framework.
+   Tests of known groups, as in point 1, test what it does claim.
+3. *The library returns `M = ∞` for an actor of full support.* `_intensity` takes the third case of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](iv) whenever
+   `E_p[F]` is within `10⁻¹²·(1 + max|F|)` of `max F`. With `q = (0.25, 0.25, 0.5)`, `F = (0, 1, 2)` and mass `10⁻¹²`
+   off the best outcome, it returns `∞`, where the minimum is `1.27·10⁻¹¹` (`probes/review/library_edges.py
+   infinite`). The checks of [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] and [[P9 — What is at stake|P9]] skip exactly that regime, so nothing catches it (§1). A fix: take the third
+   case only when `p` puts no mass off the best outcomes, and solve the moment equation in log space otherwise.
+4. *The χ² reference at the boundary.* `from_counts` returns [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]'s `χ²(|X| − 2)` p-value at every intensity. [[P23 — The estimated misalignment of an actor that pursues the objective|P23]]
+   excludes `t = 0`, and proposal E1 of §3.3 already named the χ̄² law there. For an actor at the default, which the
+   standard specification intends, the test rejects at a nominal 5% in `10.3%`, `7.1%` and `6.7%` of samples for
+   `|X| = 3, 5, 10`. The mixture `½χ²(|X| − 2) + ½χ²(|X| − 1)` gives `5.7%`, `4.8%` and `5.1%`, and `2.3%` to `4.0%` at
+   interior intensities (`library_edges.py boundary`).
+5. *Intervals from log-ratios with few draws.* With 32 draws per context, as in W3 and W4, the 95% interval of
+   `from_log_ratios` covers `84%` to `87%` near the ray, and `46%` at `M ≈ 2.2` nats, where the estimate is `18%` low.
+   With 1,024 draws it covers `93.7%` to `95.5%` near the ray, and `77%` far from it (`library_edges.py log-ratios`).
+   The library reports the effective draws, with no threshold. `cases/README.md` lists "coverage measured before an
+   interval is reported" as held by nothing yet; this is what that gap costs. By counts, the interval held (`94.0%` to
+   `96.5%`) even where `M` was under a tenth of the plug-in's bias, because the plug-in's variance grows with the bias.
+   That was a hunch of this review, and its probe refuted it (`library_edges.py counts`).
+6. *The validator checks form, not substance.* An entry marked `exact`, on any stated basis, needs no interval; W1's
+   report gives eight medians of estimated intensities that way. An interval need not state its level.
+   `declared_before_data` is a boolean that the report asserts; it is not tied to a registration's commit and hash, as
+   lint R14 ties a case's result.
+7. *Mutation evidence that can be rerun.* The mutant lists in the repository cover the library, through the checks that
+   call it, [[P52 — What a sample certifies about misalignment, by access|P52]]'s check and the tools: 74 mutants. Most checks of [[P1 — Every behaviour is a tilt of any other|P1]]–[[P42 — Several principals: gridlock, and the pooled pursuit|P42]] have none; by the records they were
+   mutation-tested in earlier sessions, by scripts lost with their containers (§13), which this review could not verify.
+   So the row "solid" rests, for those checks, on records rather than on anything a reader can rerun.
+8. *The overview's count of predictions* said that three registered predictions failed and two held, counting W4's
+   diagnostic hypotheses; `RECORD.md` says one of the framework's three held. Fixed in this review.
+9. *Process.* The nine commits since Q38, in three pull requests, registered no test and derived no result: they were
+   engineering for the handover, the handover itself, hygiene and reviews, at the PI's direction. The reading asked
+   before any work is about 13,500 words, and these notes are about 1,000 lines; the advice of §12 to split them was not
+   taken. The next test, W5, waits on E4 and on sweeps of 4 to 10 hours each.
+10. *The licence.* The AGPL is kept until the framework gains predictive or diagnostic power (Q38). The readers that row
+    5 needs may have to come first: many companies do not allow AGPL code, and a standard serves those who report to
+    it. The contribution terms already allow a change (Q45). *Answered by Q50:* the PI accepts that cost while the work
+    is research, for the sake of sharing (§11).
+11. *Minor.* `pyproject.toml` declares Python 3.10 and NumPy 1.26 as floors, and CI tests only Python 3.11 with the
+    pins. Korbak, Perez and Buckley (2022) was not in `RELATED.md`; it is now [[References|@korbak2022]].
+
+**Fixed in this review.** `OVERVIEW.md`, through `tools/overview_template.md`: the count of point 8, with a sentence on
+what the tested predictions test; and a paragraph that tells a mathematician that the pursuits of `F` form a
+one-parameter exponential family, with [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]] and [[P23 — The estimated misalignment of an actor that pursues the objective|P23]] as its moment equation, its Pythagorean identity and Wilks's
+theorem. Korbak, Perez and Buckley in `RELATED.md` and `REFERENCES.md` (point 11). The order of the commands before a
+push, in `CLAUDE.md`, `CONTRIBUTING.md` and `README.md`: `overview.py` now runs before `obsidian.py`, since the view
+copies `OVERVIEW.md`; in the old order a change to the overview left the view stale, and the suite failed on it in this
+review's first run. In §1, a row's evidence extended for point 3 and a row added for point 4. The probes of
+`probes/review/`.
+
+**Advice.**
+1. Report the ordinal misalignment beside `M`, and lead with it when the optimizer is not known to be a tilt: in
+   `stdalign`, with [[P36 — Ordinal objectives|P36]]'s check pointed at it, and in the results of `STANDARD.md` (`REQUESTS.md`, R8).
+2. Before W5, register a simulation case of known groups (C4): optimizers of the right objective by several routes
+   (policy gradient, best-of-`n`, PPO with and without a KL term), optimizers of proxies at known correlations, and
+   several runs of each. Register that [[P36 — Ordinal objectives|P36]], [[P44 — What named objectives explain|P44]] and [[P45 — Drift: what runs share, and what they do not|P45]] separate the groups at stated error rates and that `M`
+   alone does not. It takes minutes, waits on nothing but the PI's approval (R8), can fail, and reads §12's first point,
+   what `M` means for a trained model, where the truth is known.
+3. Fix points 3 and 4 in `stdalign`, each with a test and a mutant, and flag an `Estimate` whose effective draws fall
+   below a threshold calibrated by coverage, as in point 5 (`ROADMAP.md`, E1(d)).
+4. Add a row "valid" to the finish line: on systems whose truth is known, each reported quantity separates what its
+   name says it separates, at measured error rates. After point 2, this is the row that would say most about the
+   framework (R10).
+5. Tie a report's `declared_before_data` to a registration's commit and hash, as R14 does for cases; require an
+   interval's level; and restrict `exact` to a few named kinds of basis.
+6. Reconsider the licence before the readers of R1 rather than after: Apache-2.0 for `stdalign` and CC BY 4.0 for the
+   documents, or the LGPL for the library at least (R9). *Withdrawn after Q50:* the PI's aim during research is that
+   progress be shared, not that the framework be adopted widely, and for that aim a strong copyleft is right; §11 says
+   what it reaches and what else gets closer.
+7. Put mutant lists for the older checks back in the repository, a few per file of `derived/`, so that the row "solid"
+   can be rerun.
+
+## 16. The reframe, drafted and reviewed, 2026-10-10 (Q51)
+
+By the executor, a model of the Claude family, at the PI's request: draft on a new branch the core that the review's
+advice would give (§15, and the answers that followed it), then review whether it is more compelling and more solid than
+v12. Not independent (rule (f)), and the drafter reviews its own proposal, which is the case §1 warns about most.
+
+**What the draft changes** (branch `claude/core-reframe`, called v13 there).
+- [[A4 — Misalignment is evidence|A4]] says that misalignment is evidence: the least rate, per independent decision, at which a record of the behaviour
+  gathers evidence against an accepted behaviour. "Value lost", v12's [[A4 — Misalignment is evidence|A4]], becomes a reading of the same number
+  ([[P4 — What KL measures|P4]](ii)), which needs [A2] and [A3] for its price ([[P14 — The cost of departing from the default is forced|P14]]); the measure no longer does. `GA4` follows, as `GA2`
+  followed [A2] in Q44.
+- [A6], a sixth premise: a specification distinguishes no more than the actor's way of acting can carry, its values for
+  an actor declared to pursue, its order otherwise, unless the declaration says why. It is the archive's identification
+  rule (§15, point 1, Lineage).
+- [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal specification beside the standard one, moved from [[P36 — Ordinal objectives|P36]], and the specification **matched**
+  to an actor. The name "standard specification" stays, since hashed registrations use it.
+- [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii): for an actor that does better than the default, the nearest intended behaviour has the least departure among
+  those with the actor's average of `F`, so misalignment is the departure spent beyond the cheapest way to that average.
+  Checked (`test_excess_departure`), and mutation-tested: `tools/mutants/p6.json`, 5 of 5 caught.
+- `STANDARD.md`: the specification says how the actor acts, and misalignment under the standard specification is
+  reported with the ordinal misalignment beside it. `TERMS.md`, `README.md`, `RECORD.md` and the overview follow.
+
+**Found while drafting.** The first draft argued [[A4 — Misalignment is evidence|A4]] and [A6] from results built on [[D3 — Specification, declaration and misalignment|D3]] ([[P21 — The expected evidence is misalignment|P21]], [[P24 — The evaluation gap|P24]], [[P36 — Ordinal objectives|P36]]), while
+[[D3 — Specification, declaration and misalignment|D3]] cites [A6]: lint R5 found seven cycles. That is a recorded failure (§1, "a justification leaning on a later
+result"), and the check that holds it worked. The premises now argue from elementary facts and earlier items, and the
+evidence that uses later results sits in their Notes, which carry no dependency.
+
+**The review.**
+1. *What the measure rests on: more solid.* In v12, misalignment is value lost judged at a KL price, and the price is
+   KL only through [A2] (pursuit as the steepest climb, by Čencov's theorem) and [A3] (pursuit as a trade-off priced at
+   `1/t`), with [[P14 — The cost of departing from the default is forced|P14]] joining them: three premises, two of them models of an idealized optimizer. In the draft it rests
+   on one: evidence counted as the log-likelihood ratio, at its rate under the actual behaviour, against the nearest
+   accepted behaviour. Those are statistical conventions, the first canonical by the Neyman–Pearson lemma, the second a
+   choice (the rate under the intended behaviour, or Chernoff's exponent, would weigh errors differently), the third the
+   same benefit of the doubt as v12's. No number changes: for every declared set, the two readings give the same
+   divergence ([[P4 — What KL measures|P4]](ii) holds for every full-support behaviour). What changes is what a reader must accept to trust the
+   number, and the optimizer's model moves from the foundation of the measure to the description of one kind of actor.
+2. *The excess-departure reading: a clear gain.* [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii) says plainly what the standard specification charges:
+   departure that buys no `F`, whatever its cause. It needs no premise, and it explains, in one sentence, why
+   best-of-`n` and policy gradient are charged (§15, point 1). It should be kept whatever happens to the rest.
+3. *[A6]: the wrong move, as drafted.* It fixes the case it was built for, best-of-`n` judged by values, and in the
+   known groups of §15 it makes best-of-`n` on the right objective exactly aligned. But it conflicts with three
+   commitments the core rests on.
+   - [[A1 — Behaviour suffices|A1]] judges behaviour "never from how the behaviour is produced"; under [A6], two actors with the same behaviour in
+     every condition get different misalignment when one is declared to pursue and the other to rank. Best-of-4 on the
+     principal's own objective is charged a median `0.067` nats, `0.11` of its departure, as a pursuer, and `0` as a
+     ranker (`probes/review/faithful_optimizers.py`, `probes/review/known_groups.py`). A behavioural reading exists, a
+     declared repertoire of behaviours as the objective varies, but it is a counterfactual few cases can observe.
+   - [[D3 — Specification, declaration and misalignment|D3]] keeps the actor's limits out of the measure: feasibility "splits misalignment instead of changing it". [A6]
+     lets the actor's way of acting change the measure.
+   - H5 (§5.4) says the actor's cost belongs to its feasibility or its mechanism, never to the measure; [A6] puts it in
+     the declaration.
+   The alternative the core already has does not do the job either: as a feasible set ([[D7 — Feasibility|D7]]), best-of-`n` includes
+   `n = 1`, the default, which is intended, so [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]] excuses nothing; excusing a method at the actor's own average of
+   `F` would need a new quantity. And the archive itself settled that cardinal or ordinal is the principal's
+   declaration, not the framework's choice (its notes, §4, "target sets"): [A6] makes it the actor's.
+4. *The trained models are not helped.* W3's and W4's PPO runs trained with a KL penalty, so under [A6] they are
+   declared to pursue, judged by the standard specification, and charged exactly as before: the route that unconverged
+   training took is still counted as misalignment. What would separate route from goal there is the learner's kernel as
+   a named objective (H3 of the archive's notes; §15's answers), not a declaration.
+5. *Costs.* A sixth premise; the count for "stable" restarts (Q46); a report under the matched specification is not
+   comparable with one under another, unless both numbers are given, as the draft's `STANDARD.md` asks; the default for
+   an actor whose way of acting is unknown becomes the ordinal specification, which forgives the shape of any
+   reweighting; and W1's report, a best-of-`n` case, would read differently under the draft, while its record stays as
+   computed.
+6. *Compelling?* v12 tells a stronger story, "everything is forced", and it overstates: the force is conditional on
+   modelling pursuit as a gradient flow on behaviours and on pricing departure at exactly `1/t`. The draft tells a
+   plainer one: a measure from evidence, a declared set, and a rule for which set. A mathematician will find its
+   premises easier to accept; a practitioner will find the excess-departure reading and the paired report more useful.
+   Part of the draft is more compelling, and [A6] is less, because it adds a judgement about the actor that a principal
+   often cannot make and that contradicts [[A1 — Behaviour suffices|A1]].
+
+**Verdict.** Adopt part of it: [[A4 — Misalignment is evidence|A4]] as evidence (with `GA4`), [[P6 — The departure from the default splits into pursuit and misalignment|P6]](ii), the ordinal specification defined in [[D3 — Specification, declaration and misalignment|D3]] as a
+principal's option, and the paired report in `STANDARD.md` (misalignment under the standard specification, with the
+ordinal misalignment and the excess-departure reading beside it). Do not adopt [A6] as a premise; keep instead, in
+`STANDARD.md`'s declaration, a field that says how the actor is known to act, so that a reader can see when misalignment
+charges a method. For trained models, test the learner's kernel as a named objective before any further change to the
+core. The partial version still changes [[A4 — Misalignment is evidence|A4]]'s and [[D3 — Specification, declaration and misalignment|D3]]'s Statements, so it is a v13, and the count for "stable"
+restarts. The decision is the PI's (`REQUESTS.md`, R12).
+
+## 17. v13 as built, 2026-10-11 (Q52)
+
+By the executor, a model of the Claude family, at the PI's request; not independent (rule (f)). The PI approved the lean
+core the executor proposed in answer to "can we assume less and keep the results?", and asked for it to be built on the
+existing branch by the method of reverse physics: name what is imported from mathematics, what is assumed without loss
+of generality, and what is assumed, and give every definition an interpretation, declared and justified.
+
+**The sources, read.** Four open texts, each read in full on arXiv, titles and authors matched (`REFERENCES.md`).
+Carcassi and Aidala (2022), the method: find the assumptions from which a theory's laws follow, and classify each as a
+principle or an assumption, conceptual (a logical necessity or a consequence of definitions) or phenomenological.
+Carcassi, Thrien and Aidala (2026), on quantum mechanics: separate the mathematical and the physical content, map every
+mathematical object to a physical one, and state the background conditions under which equivalences hold. Carcassi and
+Aidala (2021), on verifiability: verifiable, refutable and decidable statements, and the principle of scientific
+objectivity. Carcassi, Aidala and Thrien (2026), on ensembles: ensembles mix, the classical ones on finitely many
+outcomes form a simplex, and statistical quantities are affine in them.
+
+**What was built.**
+- *Kinds.* Three imported axioms: [[M1 — Probability on finitely many outcomes|M1]] probability on finitely many outcomes, [[M2 — Independent repetition|M2]] independent repetition with
+  Chebyshev's bound, [[M3 — Imported theorems|M3]] the list of imported theorems. Four background conditions assumed without loss of generality,
+  each with its qualifier: [[B1 — Finitely many outcomes|B1]] finitely many outcomes, [[B2 — Episodes and conditions as outcomes|B2]] episodes and conditions as outcomes, [[B3 — An objective up to scale and constant|B3]] an objective up
+  to scale and constant, [[B4 — One actor and one principal|B4]] one actor and one principal. Three premises, each with its Status: [[A1 — Behaviour suffices|A1]] a principle,
+  conceptual; [[A4 — Misalignment is evidence|A4]] a principle in its form, resting on one phenomenological assumption, independence between episodes;
+  [[A5 — Declared before|A5]] a principle, conceptual, a necessity of testing. Eleven definitions, each with an Interpretation in three parts:
+  *Declared* (what the object is in the world), *Verified* (how a record verifies or refutes a statement about it), and
+  *Justified* (why the map is right).
+- *Lint.* R1 admits the kinds M and B; R3 orders the new fields; R4 requires a Status of M, B and A items and an
+  Interpretation of every definition; R5 counts both fields as dependencies, so an interpretation cannot lean on a
+  result that rests on its own definition. Mutants: `tools/mutants/lint-core.json`, 8 of 8 caught; the overview's list
+  updated, 9 of 9.
+- *[[P53 — Misalignment is the departure beyond what the family of targets credits|P53]].* For named statistics `T`, the behaviour of least departure with the actor's averages of `T` is a tilt of the
+  default by `θ·T`, with a Pythagorean identity against every such tilt; so misalignment against the family is the
+  departure beyond it. The standard specification credits the average of `F`, only above the default's; the ordinal one
+  the masses of its pooled blocks. Part (i) is Csiszár's I-projection; what is new is one reading of the three
+  specifications. Checked (`test_credited_statistics`, about five seconds) and mutation-tested, 8 of 8 caught.
+- *Propagated.* [[D2 — Pursuit of an objective|D2]]'s reasons now hold v12's A2 and A3; [[D3 — Specification, declaration and misalignment|D3]] loses "matched" and A6; `STANDARD.md` asks for the ordinal
+  misalignment beside `M` in every report under the standard specification, and lists [[A1 — Behaviour suffices|A1]], [[A4 — Misalignment is evidence|A4]], [[A5 — Declared before|A5]] and [[B1 — Finitely many outcomes|B1]]–[[B4 — One actor and one principal|B4]] as
+  the premises a case may strain; `README.md`, `TERMS.md`, `RECORD.md`, `RELATED.md`, `CORE-GENERAL.md` (GA2 and GA3 as
+  reasons, its move to v13 a step), the overview and the derived notes follow.
+
+**The dependencies, measured again** (`probes/review/premise_reach.py`). No result of `derived/` cites an imported
+axiom, a background condition or a premise in its Statement or Proof. One definition's Statement cites a premise: [[D3 — Specification, declaration and misalignment|D3]]
+defines "declared" by [[A5 — Declared before|A5]], so 16 results reach [[A5 — Declared before|A5]] through [[D3 — Specification, declaration and misalignment|D3]]; no proof uses the word. Through the reasons, statuses
+and interpretations, 38 results reach [[A4 — Misalignment is evidence|A4]] and [[A5 — Declared before|A5]], 13 reach [[A1 — Behaviour suffices|A1]], and 38 to 43 reach [[B1 — Finitely many outcomes|B1]]–[[B3 — An objective up to scale and constant|B3]]. The counts are by
+citation: most results use [[D1 — Outcomes, behaviours, divergence and tilt|D1]]'s objects without citing it, so the counts for definitions understate their use. The
+reading stands: the results are facts about finite distributions given the definitions; the premises and the
+interpretations carry the bridge to judging an actor.
+
+**Where the method fits loosely.** Said so that no reader takes the label for more than it is.
+1. *Verifiability is statistical here.* Carcassi and Aidala's verifiable statements are settled by a test that ends in
+   finite time. A behaviour is never verified exactly: records give statements with error rates that vanish as they
+   grow ([[M2 — Independent repetition|M2]]). The interpretations say "verifiable in the statistical sense" where that is all that holds.
+2. *Some principles are norms.* [[A5 — Declared before|A5]] is a rule of testing, not a fact about the world; it is classed conceptual because
+   a standard fitted to its data cannot be refuted by them, which is a consequence of definitions.
+3. *Interpretations are claims, not checked properties.* Lint checks that every definition has one and that it does not
+   cite into a cycle; nothing checks that it is right. A reader who rejects one keeps the results and loses their
+   reading.
+4. *"Without loss of generality" has qualifiers.* [[B1 — Finitely many outcomes|B1]] loses nothing a finite record measures, but the existence of
+   nearest behaviours, heavy tails and atoms do not carry over (`CORE-GENERAL.md`); [[B2 — Episodes and conditions as outcomes|B2]] moves independence between
+   episodes, where [[A4 — Misalignment is evidence|A4]] assumes it.
+
+**Found while building.**
+- [[D1 — Outcomes, behaviours, divergence and tilt|D1]]'s Interpretation cites [[M2 — Independent repetition|M2]], and [[M2 — Independent repetition|M2]]'s reason cited [[D1 — Outcomes, behaviours, divergence and tilt|D1]]; R5 found the cycle (§1, "a justification leaning on a
+  later result").
+- [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]'s first check drew `d` statistics on `d + 1` outcomes, where the behaviours with given averages are one point
+  (§1, "a degenerate random instance"); and its first mutant list counted a crash as a catch (§1, "a mutant caught by a
+  crash").
+- `stdalign.project_linear` raises a `LinAlgError` from inside its Newton steps when no full-support behaviour has the
+  averages asked for, rather than saying so; its docstring states the condition. A clear error is added to E1(d).
+
+**What remains** (`ROADMAP.md`). O1, an interval for the ordinal misalignment, which the paired report now asks for and
+which has only a bootstrap so far; O2, the ordinal versions of the named, drift and run splits, where the projection is
+onto a cone and the splits may not be exact; the general core on v13's kinds, with step 3's draft 4. W1's registered
+report used the standard specification only; it stays as computed. Every core Statement changed, so the count for
+"stable" restarts when v13 is merged (Q46).
+
+## 18. Seven requests, answered and built, 2026-10-11 (Q53)
+
+By the executor, a model of the Claude family, at the PI's request; not independent (rule (f)). What was built is on
+`claude/core-reframe`, with v13, which is not yet merged; every Statement changed here is one of v13's.
+
+**1. Conventions, each justified.** A convention is a choice that an equally reasonable principal could make otherwise.
+`CORE.md` §1 now lists eleven, each with the items that declare it, its justification (forced by a stated requirement,
+mathematical convenience, or the literature whose results it imports), and whether it changes a verdict; lint R17 checks
+the table's form and that every item whose Status speaks of a convention is in it (mutants: 5 of 5). Five are forced,
+not chosen: evidence on a logarithmic scale (Cauchy's functional equation, once evidence of independent decisions must
+add), the order of KL's arguments (forced by [[A4 — Misalignment is evidence|A4]] through the method of types), constants in a family of targets ([[B3 — An objective up to scale and constant|B3]]),
+objectives up to scale and constant ([[P1 — Every behaviour is a tilt of any other|P1]](ii)), and pursuit as a tilt (the two reasons of [[D2 — Pursuit of an objective|D2]]). Four change a verdict
+when chosen otherwise, and two only in stated cases, and the table says which: the most favourable accepted behaviour,
+the order of KL's arguments, doing nothing as intended, and pursuit as a tilt; then independence, for a principal who
+intends dependence, and convexity, for a family that is not convex. (Corrected at the reread before the pull request,
+§19: independence changes a verdict for any actor whose decisions depend on each other, so five change one in general,
+and one only in a stated case.) *Challenge:* convenience is a weak justification where a verdict changes; the table
+makes those places visible rather than defending them, and the one that matters most in practice is doing nothing as
+intended, which a principal who wants something done must override with a floor ([[P35 — Floors and caps|P35]]).
+
+**2. Independence between episodes, dropped.** [[A4 — Misalignment is evidence|A4]] now measures the rate at which the record's counts become improbable
+under the accepted behaviour most favourable to them; independence is part of what is accepted, a convention of the
+declaration, and nothing is assumed of how the actor decides. [[P54 — Dependence and drift only add evidence|P54]] says what is lost and what is not: for any joint
+behaviour of a record, the expected evidence per decision against an accepted behaviour deciding independently is the
+misalignment of the average behaviour, plus the drift, plus the dependence, each term exactly, and the counts estimate
+the average behaviour without bias. So the measure loses nothing; the counts judge the average behaviour, and dependence
+is a separate, measurable quantity. What independence still buys is intervals: [[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P52 — What a sample certifies about misalignment, by access|P52]] and [[P55 — What a record of counts certifies, at every size|P55]](iv) need samples,
+and one long record without episodes needs mixing rates the core does not model. The test of [[P55 — What a record of counts certifies, at every size|P55]](ii) needs nothing of
+the actor, since its level is computed under the accepted behaviours. Checked, and mutation-tested: 5 of 5.
+
+**3. Families of targets, and Sanov.** D3 already admitted any closed intended set, so the core was general; what it
+lacked was the structured case. A family of targets, a closed convex cone of objectives with the constants, is what a
+principal declares when it knows its target only up to a set: one objective (the standard specification), its order (the
+ordinal one), a span of candidates ([[P48 — Misalignment when the target is uncertain|P48]]), several principals with weights not fixed ([[P42 — Several principals: gridlock, and the pooled pursuit|P42]](ii)). [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] now holds for
+every family: one nearest intended behaviour, which does at least as well as the actor on every target and exactly as
+well on its own; a Pythagorean inequality on the family; and misalignment is the departure beyond the cheapest behaviour
+that does at least as well on every target. For the ordinal specification that set is stochastic dominance in the order
+of `F`, a reading the core did not have. Sanov's theorem then reads the split: the departure is the rate at which a
+default actor would show the actor's counts, the credited departure the rate at which it would do at least as well on
+every target, and misalignment the rate of the counts given that (Notes of [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] and [[P55 — What a record of counts certifies, at every size|P55]]). Checked on random
+polyhedral cones, spans, and both specifications; mutation-tested: 8 of 8. *Challenge:* a family is convex by the
+convention above; a principal with two candidate targets that must not be mixed declares their union, and gets the least
+of two misalignments, with no single nearest behaviour.
+
+**4. Statistical tests for the verifications.** [[P55 — What a record of counts certifies, at every size|P55]]: whatever the specification, and at every record size, the test
+that declares misalignment when `n·M(p̂_n) ≥ log(k_n/α)` wrongly accuses an intended actor with probability at most `α`,
+and catches every actor whose counts settle away from the intended set; and a set of behaviours built from the same
+bound gives an interval for any specification, the ordinal one included, exact at every size and conservative. The
+bounds are the method of types, proved in the item, not imported. Genin and Kelly's theorem, read in its text, says
+that the statements a record can verify, in this sense, are exactly the open sets of the weak topology: on finite
+outcomes "misaligned" and "aligned within `ε`" are verifiable (the second for samples), while "exactly aligned" is
+closed, refutable and never verifiable. That is the statistical form of Carcassi and Aidala's verifiable and refutable
+statements, and every Interpretation of `CORE.md` now says which kind its statements are. Checked by exact enumeration
+of every count vector; mutation-tested: 7 of 7, after one survivor (§1). *Challenge:* the exact test is conservative,
+since `log k_n` grows like `(|X| − 1)·log n`, so with many outcomes it needs many decisions; it is the safe floor, and
+[[P52 — What a sample certifies about misalignment, by access|P52]] remains the sharp tool where its limit laws hold.
+
+**5. The continuous case.** `CORE-GENERAL.md` is draft 4, on v13's kinds: three imported items from measure theory
+(GM1–GM3), with what has been read marked; four background conditions (GB1–GB4); three premises (GA1, GA4, GA5), draft
+3's GA2 and GA3 being reasons of GD2 and its GA6 now part of GA1; five conventions a continuum adds; and an
+Interpretation for every definition. The decisive change is GD3: misalignment is defined as the supremum, over the
+finite descriptions that a record can decide, of the finite misalignment of the cells. A nearness is the principal's
+statement of which events records can decide, which is exactly Genin and Kelly's almost surely clopen events; the
+on-target controller is then forgiven under a nearness and infinitely misaligned without one, as before, but now by what
+records can show rather than by adding limits to the intended set. Draft 3's transfer lemma becomes a statement about
+compactness, with a proof sketch (an exchange of a supremum over an increasing family of lower semicontinuous functions
+and an infimum over a compact set). `general/dictionary.md` and `general/transfer.md` carry the new objects ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]],
+[[P54 — Dependence and drift only add evidence|P54]], [[P55 — What a record of counts certifies, at every size|P55]], records, conventions, interpretations); the imports that are read are now separated from those that are
+not ([[References|@kechris1995]], [[References|@renyi1959]], [[References|@dembo1998]], [[References|@pinsker1964]] in its own text). *Challenge:* on a continuum "aligned
+within `ε`" is not verifiable from records alone, so every report of small misalignment on continuous outcomes rests on
+a declared resolution or a model; draft 4 states it, and the standard does not yet have a field for a record's
+resolution (open decision 4).
+
+**6. The ontologies.** Their three columns, "In this discipline", "Observed as" and "Fit", are already the core's
+interpretation, declared, verified and justified, made for one discipline; `ontologies/README.md` now says so. The slot
+"sample" now asks what one decision and one episode are, and whether independence is a fair model for the intervals; the
+slot "specification" asks which family of targets is declared. Five declarations changed: machine learning (the gold
+objective's family, with its order beside it), behavioural economics (the goal, or its order), medical sciences (the
+stated aim and the literal measure, two candidate targets whose span a principal unsure between them can declare),
+evolutionary biology (one target, or its order), and the dependence notes of three samples. No prediction changed.
+
+**7. Activations.** They do not change what is measured ([[A1 — Behaviour suffices|A1]]); they change what can be verified, and only one way: a
+probe bounds the divergence of the actor's view from below, so activations can show that an actor tells evaluation from
+use, which refutes the identification of its unobserved behaviour, but can never show that it cannot, which is what
+bounding hidden misalignment needs. H33 and H34 of the archive's successors had most of this; H38 records what the
+topology adds, and where activations do help: sharper estimates, an audit channel while nothing is trained against it,
+and white-box runs that turn inferred situations into observed ones. Whether to reopen H33 is the PI's (R13).
+
+**The dependencies, measured again** (`probes/review/premise_reach.py`, 68 results). No result cites a premise in its
+Statement or Proof; [[M2 — Independent repetition|M2]] is cited by [[P55 — What a record of counts certifies, at every size|P55]], as an imported axiom should be; 16 results reach [[A5 — Declared before|A5]] through [[D3 — Specification, declaration and misalignment|D3]]'s
+"declared", which no proof uses; through the reasons, statuses and interpretations, 40 results reach each premise.
+
+**Found while building.** [[P55 — What a record of counts certifies, at every size|P55]]'s first check let a wrong statistic pass for the ordinal level (§1, "a check that omits
+the constraint it tests"); lint R17's first mutant list counted a crash as a catch (§1, "a mutant caught by a crash");
+the first script of the core edits lacked its final write, and was caught by rereading it before the next part was run.
+
+## 19. C5, doc hygiene, and the handover, 2026-10-11 (Q54)
+
+By the executor, a model of the Claude family; not independent (rule (f)). The PI accepted everything Q53 proposed
+(Q54): misalignment on a continuum as what records can decide, the reopening of activations, and the flag on the
+convention that doing nothing is intended. Then doc hygiene.
+
+**C5, activations.** Registered before any test seed was computed (commit `4b44819`), run once, all eight predictions
+held: a linear probe on a network's last hidden layer verified that the network tells evaluation from use where it read
+the cue linearly, was silent where it read the same cue as an XOR, with the view's divergence the same `0.339` nats, and
+[[P17 — What an unobserved condition can hide|P17]]'s bound fed that silence failed in 200 of 200 instances; a quadratic probe found the XOR cue, and every probe
+stayed below the truth on average. *Challenge to the case itself:* it was a demonstration, not a hard test; the
+rehearsal had shown every count at 200 of 200, and the construction makes S2 and S3 near certain once the probe is
+linear and the cue an XOR. What would make it a test is a network trained, not built, whose reading of the cue is not
+chosen by the designer: whether such a network reads it in a form linear probes see is the open question (A1 of the
+registration), and it is the next step if activations are pursued.
+
+**The pre-push slip.** The registration was pushed with lint run but without regenerating the overview and the Obsidian
+view; CI run 241 failed on their freshness, and run 242 fixed it with the registration unchanged (§1, "a push without
+the steps before every push").
+
+**Doc hygiene.** A scripted sweep, now kept in `probes/review/doc_sweep.py`, of every Markdown source but the generated
+ones: paths and links that name nothing, counts that disagree with lint, American spellings and `-ise` forms, lines
+over 120 columns, whitespace, paragraphs broken mid-sentence. Its flags were proper names and paper titles (kept as
+published), history (IMPORT.md's vault, RECORD.md's old ontology names, both explained where they stand), the README's
+badge line, and two formulas longer than a line, which were split. A reading for statements this week made stale found
+six: `README.md`'s rows for `CORE-GENERAL.md` (still "draft 3") and `probes/`, and its pointer to the last handover;
+`CLAUDE.md`'s pointer to it; `derived/README.md`'s estimation row, which lacked [[P54 — Dependence and drift only add evidence|P54]] and [[P55 — What a record of counts certifies, at every size|P55]]; and `ROADMAP.md`'s
+freeze, which did not say that activations were reopened. All fixed; `cases/README.md` gained the pre-push lesson.
+
+**The reread before the pull request.** The PI asked for the pull request, for a reading of the thread from its start
+(did the work progress, did anything get worse or go ignored), and for the errors found on the way to be fixed in it.
+The executor's reading found the count of kinds in `CORE.md` §0, its table of symbols, a conventions row that did not
+cite [[P4 — What KL measures|P4]](i), `README.md`'s format of an item still in v12's form, and this section's claim that every Statement
+changed. A subagent of the executor's, asked to read [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]–[[P55 — What a record of counts certifies, at every size|P55]] as a mathematician would, found no false Statement, and
+eight points, each verified here before it was acted on: two errors in the Notes (the counts were said to certify the
+misalignment of a dependent actor's average behaviour, and Sanov's theorem was quoted without its interior; §1, "a
+hypothesis dropped in the Notes"), two gaps in [[P55 — What a record of counts certifies, at every size|P55]](iv)'s proof (an interval bound routed through a specification that
+need not exist, and a strict inequality left implicit), and four places where the wording claimed more than the
+Statement ([[P54 — Dependence and drift only add evidence|P54]](ii)'s attainment, "exactly aligned can never be shown", "the largest probability", and [[P54 — Dependence and drift only add evidence|P54]]'s plain
+terms). All are fixed; the overclaim on dependence had been copied into [[D3 — Specification, declaration and misalignment|D3]]'s Interpretation, `STANDARD.md`'s Sampling
+row, `CORE-GENERAL.md` and `README.md`, and is fixed there too, as is the conventions table, whose row on independence
+had said it changes a verdict only for a principal who intends dependence. It is not independent (rule (f)): the same
+model family wrote and read it.
+
+**Progress, and what got worse or was ignored, since Q49.** For the mathematics, the review's main finding (§15, point
+1: `M` charges the route as well as the goal) is answered in the definitions: the ordinal specification, the paired
+report, and [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]'s reading of misalignment as departure beyond what a family of targets credits. The core assumes less
+and says of each starting point what kind it is. Independence of the actor is no longer assumed by the measure, and a
+test exact at every size exists. Worse: the reading load (`OVERVIEW.md` from about 5,800 words to 8,400, these notes
+past 1,400 lines, §12's advice to split them still not taken); `STANDARD.md` asks for quantities the library does not
+compute, so no report meets it yet; and the general core leans on imports not yet read. Ignored, and mostly engineering:
+§15's points 2 (what the predictions test; C4, R8), 3 to 5 (the library's edges, E1(d)), 6 (the validator checks form),
+7 (mutant lists for the older checks) and 11 (Python floors against CI). C5 is the first test registered since Q38, but
+a demonstration rather than a hard one.
+
+**Handover, for the next session.**
+- *Where things are.* Branch `claude/core-reframe` holds v13 and everything since: the lean core built by reverse
+  physics (Q52, §17), the seven requests of Q53 (§18), `CORE-GENERAL.md` draft 4, and case C5. Nothing of it is merged;
+  `main` holds v12. Every push of the branch was green but run 241 (§1). No pull request is open: the PI opens one when
+  ready, and the count for "stable" restarts when v13 merges (Q46).
+- *What to read.* `ROADMAP.md`; `REQUESTS.md`; this section; §1, every row; §18 for what v13 now claims; `CORE.md` §0
+  and §1 for the kinds and the table of conventions.
+- *What is next, by the roadmap.* E1(d), the library's edges and the exact test of [[P55 — What a record of counts certifies, at every size|P55]]; O1, a sharper interval for the
+  ordinal misalignment than [[P55 — What a record of counts certifies, at every size|P55]](iv)'s; step 3, the transfer lemma of draft 4 under compactness, and the imports of GM3
+  not yet read; W5 and C3 as before. If activations are pursued, a trained network for C5's question.
+- *Open with the PI.* R1 (readers), R2 and R3 (data), R8 (C4, known groups), R10 (a row "valid"), R11 (the licence's
+  package). Nothing from Q53 or Q54 is open.
+- *Risks.* v13 changes the starting points of the core at once, so a reviewer of the pull request faces a large diff;
+  §16 to §19 are the guide to it. What changed is narrower than the diff looks: the Statements of [[A1 — Behaviour suffices|A1]], [[A4 — Misalignment is evidence|A4]], [[D3 — Specification, declaration and misalignment|D3]] and
+  [[D11 — Record, sample and evidence|D11]], A2 and A3 retired into [[D2 — Pursuit of an objective|D2]]'s reasons, [[P36 — Ordinal objectives|P36]]'s Statement, [[P6 — The departure from the default splits into pursuit and misalignment|P6]]'s new part (ii), three new results
+  ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]–[[P55 — What a record of counts certifies, at every size|P55]]), and new kinds (M, B) and fields (Status, Interpretation) around Statements that stay as they were in
+  [[A5 — Declared before|A5]], [[D1 — Outcomes, behaviours, divergence and tilt|D1]], [[D2 — Pursuit of an objective|D2]], [[D4 — Resolution|D4]]–[[D10 — Evaluator, regression and residual|D10]] and every other result. (Corrected in the reread before the pull request: this line first
+  said that every Statement changed.) The general core's draft 4 claims nothing, and several of its imports are still
+  unread.

@@ -9,8 +9,10 @@ rules of evidence).
 
 **Nothing in the core is new mathematics.** Its proofs use the Gibbs variational principle, convex duality
 (Donsker–Varadhan), the Pythagorean identities of KL projections, data processing, Taylor expansion, Chernoff's and
-Wilks's theorems, isotonic regression and total positivity. What it adds is one vocabulary, five premises and eleven
-definitions, in which results from several fields are derived, checked, and reported through one standard.
+Wilks's theorems, isotonic regression and total positivity. What it adds is one vocabulary, three premises (five in v12;
+`NOTES.md` §16, §17), with the axioms it imports and the background conditions it assumes named apart, and eleven
+definitions, each with its interpretation, in which results from several fields are derived, checked, and reported
+through one standard.
 
 **Where to look for prior art first.** v7.10 searched for these and did not find them stated elsewhere:
 - the width as the exact worst case, with no separable bound ([[P29 — The width is the exact worst case|P29]], [[P30 — No separable bound on the worst case|P30]]);

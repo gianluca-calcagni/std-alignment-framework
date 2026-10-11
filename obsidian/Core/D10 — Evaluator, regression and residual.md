@@ -21,8 +21,17 @@ judged by, or, when nothing else is known, the objective its own behaviour revea
 evaluator tells, on average under the default, about the principal's objective; the residual is the part of the
 principal's objective that the evaluator does not see.
 
+## Interpretation
+*Declared.* An evaluator is the score the actor is trained, paid or selected on, such as a reward
+model, a performance measure or a fitness; or, when none is known, the objective its own behaviour reveals. The
+regression is what the evaluator says, on average under the default, about the principal's objective, and the residual
+is what it misses. *Verified.* From outcomes drawn from the default and scored by both the principal and the evaluator;
+that the actor pursues a known evaluator can be refuted as any pursuit can ([[D2 — Pursuit of an objective|D2]]). *Justified.* The regression depends
+on the evaluator only through the outcomes it scores alike, which is all that a ranking or a selection by the evaluator
+can use.
+
 ## Why this choice
-- *It adds no assumption.* By [[A3 — Pursuit is the best trade-off|A3]] and [[P1 — Every behaviour is a tilt of any other|P1]], every full-support behaviour is the best trade-off for one objective,
+- *It adds no assumption.* By [[P4 — What KL measures|P4]](ii) and [[P1 — Every behaviour is a tilt of any other|P1]], every full-support behaviour is the best trade-off for one objective,
   `log(p̂/q)` at intensity 1, fixed up to a constant ([[P1 — Every behaviour is a tilt of any other|P1]](ii)): every actor has a revealed evaluator. A known evaluator
   is a hypothesis about the actor, which behaviour can test ([[P1 — Every behaviour is a tilt of any other|P1]], [[P3 — A fixed objective is visible in the changes of behaviour|P3]]).
 - *It is the actor's counterpart of the principal's objective.* The principal declares a pursuit of `F` from `q`; the
@@ -50,10 +59,11 @@ v7.10: Def 13 (`F̂ = F + E`, an evaluator and its error `E`) and Def 12's note 
 evaluator). New: the revealed evaluator, and the regression and residual in place of the error, which needed a scale.
 
 ## Depends on
-- [[A3 — Pursuit is the best trade-off|A3]] — Pursuit is the best trade-off
+- [[D2 — Pursuit of an objective|D2]] — Pursuit of an objective
 - [[D4 — Resolution|D4]] — Resolution
 - [[P1 — Every behaviour is a tilt of any other|P1]] — Every behaviour is a tilt of any other
 - [[P3 — A fixed objective is visible in the changes of behaviour|P3]] — A fixed objective is visible in the changes of behaviour
+- [[P4 — What KL measures|P4]] — What KL measures
 
 ## Used by
 - [[P18 — Through the evaluator, only the regression counts|P18]] — Through the evaluator, only the regression counts

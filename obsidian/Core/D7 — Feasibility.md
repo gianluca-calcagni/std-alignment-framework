@@ -18,6 +18,14 @@ The feasible set is what the actor can do. It is linear when the actor's limits 
 averages cannot change": how often each situation arises, how the actor splits outcomes it cannot tell apart, how the
 environment responds to what the actor does.
 
+## Interpretation
+*Declared.* The feasible set is what the actor can produce: given by its design, such as a class of
+policies or a budget; by the world, such as how often situations arise and how the environment responds; or by its
+resolution. *Verified.* Declared from knowledge of the actor and the world. A behaviour seen in a record is feasible, so
+records can refute a declared feasible set, but never confirm it. *Justified.* A principal charges what the actor chose,
+not what no behaviour in its reach could avoid; the split between the two is exact for linear limits
+(`derived/feasibility.md`).
+
 ## Why this choice
 - *It separates "cannot" from "will not".* Misalignment ([[D3 — Specification, declaration and misalignment|D3]]) judges what the actor did; the feasible set says what it
   could have done. Without it, an actor is charged alike for what it chose and for what no behaviour in its reach could

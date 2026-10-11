@@ -10,7 +10,9 @@ result says whether it is identified ([D9]).
 
 The library `stdalign` computes the fields it holds so far, with the functions its `README.md` lists, verified by the
 checks of the items they name. A report on real data, field by field: `cases/w1-best-of-n-slope/REPORT.md` (best-of-`n`
-selection by a learned proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`.
+selection by a learned proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`. Both,
+and the quickstart's report, were written before v13 (Q52) asked for the ordinal misalignment beside the standard one,
+and do not report it yet; the library does not compute it yet (`ROADMAP.md`, E1(d)).
 
 ## 1. The declaration
 
@@ -22,7 +24,7 @@ Written before any behaviour is examined.
 | Conditions | [D8] | the conditions considered, and their frequencies when the actor does not choose them |
 | Default | [D2] | the default behaviour in each condition, and how it was measured apart from the behaviour to be judged |
 | Principal | [D3] | whose target the specification states: the party whose aims the report judges against, such as a trainer's formal objective, a user's, or a regulator's, which is not the evaluator unless the report says so; and, when that target is known only to lie in a family of objectives, the family ([P48]) |
-| Specification | [D3] | the intended set: "pursue `F`" with `F` written out, with a floor or a cap if any ([P35]), its order only ([P36]), or another closed set; who declared it, when, and where it is recorded |
+| Specification | [D3] | the intended set: a family of targets, written out (one objective `F`, its order, or the span or cone of candidate targets), or another closed set; for "pursue `F`", the standard specification or the ordinal one, and why that one (the standard one charges the shape of the reweighting as well as the order, so it fits an actor declared to pursue; the ordinal one charges only what contradicts the order, so it fits an actor that ranks or whose way of acting is not known), with a floor or a cap if any ([P35]); or another closed set. Who declared it, when, and where it is recorded |
 | Principal's resolution | [D4] | the distinctions declared irrelevant, or "finest" |
 | Feasible set | [D7] | what the actor is assumed able to do, and whether the set is linear, convex or neither; "everything" if nothing is assumed; a departure budget `δ` ([P27]) when only the departure from the default is limited, or a budget of another shape ([P31]) |
 | View | [D8] | what the actor is assumed to perceive of its conditions, including memory and side channels; "exact" if nothing is assumed |
@@ -30,7 +32,7 @@ Written before any behaviour is examined.
 | Observed conditions | [D9] | the conditions to be observed, and the conditions the report is about |
 | Objective's units | [D5] | the units in which the stakes will be counted |
 | Evaluator | [D10] | the evaluator the actor is rewarded on, if one is known; otherwise "revealed", to be read from behaviour; and which outcomes it scores alike. When it is computed from a measurement the actor may influence, which part of an outcome is the world and which the signal, and the honest channel from one to the other ([P50]) |
-| Sampling | [D11] | how decisions will be sampled in each condition, the sample sizes, and why independence is a fair model |
+| Sampling | [D11] | how decisions will be recorded in each condition, the sizes of the records, and what one episode is; whether the records are to be read as samples, independent draws, and why that is a fair model; how independence between episodes will be checked. The test of [P55](ii) keeps its level for an intended actor, which decides independently as acceptance asks, and for independent decisions that drift; an actor whose episodes depend on each other may be accused for that alone ([P55], Notes), which is why independence between episodes is checked. Intervals for the actor's behaviour need samples ([D11]) |
 | Access | [P52] | what is known of each draw: its outcome only, with the default known (counts); its log-ratio against the default (log-ratios); or that, with draws of the default as well (two samples); and which estimate of misalignment the report will give, chosen from [P52]'s variances before any behaviour is examined |
 | Named objectives | [P44] | the objectives besides `F` that the actor may be pursuing, in the order they will be named, or "none"; named here so that the analysis cannot pick them after seeing the behaviour |
 | Runs | [P45] | the independent repetitions of the actor that will be observed (training runs, random seeds), how many, and their weights; "one" if one |
@@ -49,8 +51,8 @@ For each result: its value, whether it is identified, and the assumptions it use
 
 | Field | Core | What to write |
 |---|---|---|
-| Misalignment | [D3], [P23] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
-| Uncertainty | [D11], [P23], [P47], [P52] | for every quantity estimated from samples: an interval, and how it was computed (for misalignment off the ray, the normal law of [P52] under the declared access; on it, the χ² reference of [P23] where it applies; otherwise a bootstrap over decisions); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
+| Misalignment | [D3], [P6], [P23], [P36], [P53], [P54], [P55] | `M(p̂)` in nats, for each observed condition, with `n` and `2n·M(p̂)`; under the standard specification, the ordinal misalignment of [P36] beside it, the part that contradicts the objective's order, the rest being the shape of the reweighting; each read as the departure beyond the cheapest behaviour that does at least as well as the actor on every target of the family ([P53]): the average of `F` for the standard one, and every threshold of `F` for the ordinal one; whether the test of [P55](ii) declares the actor misaligned, at the level declared, with `log k_n`; when the order of the record is kept, the drift and the dependence between episodes of [P54] beside it; for an actor tested for pursuing `F`, the χ² reference of [P23], when outcomes are counted and draws are independent; if outcomes were grouped, the resolution used, since grouping only lowers the estimate |
+| Uncertainty | [D11], [P23], [P47], [P52], [P55] | for every quantity estimated from samples: an interval, and how it was computed (for misalignment off the ray, the normal law of [P52] under the declared access; on it, the χ² reference of [P23] where it applies; for any specification, the ordinal one included, the interval of [P55](iv), exact at every size and conservative; otherwise a bootstrap over decisions, or over episodes when they may depend on each other); any bias correction; and, when an outcome has a zero count, the pseudo-count added and how the result moves when it changes; for every quantity estimated by reweighting draws of one behaviour to stand for another, the divergence between the two, which sets the cost ([P47]), and the number of draws |
 | Evidence and detection | [P21], [P22] | the evidence per decision against the nearest intended behaviour, and what it implies for how many decisions an observer needs |
 | Revealed intensity | [P5] | `t*`, and which of the three cases holds |
 | Departure split | [P6] | the departure `KL(p̂‖q)`, split into the pursuit part and misalignment |
@@ -68,7 +70,7 @@ For each result: its value, whether it is identified, and the assumptions it use
 | Pass-through | [P12] | for each intervention, the coefficient of `u`, and the distance of `log(p'/p)` from `span{u, 1}` |
 | Unobserved conditions | [D9], [P16], [P17] | for each condition the report is about but did not observe: whether its behaviour is identified; otherwise `ε`, how it was bounded (from the inputs, [P16](iii)), and the bounds of [P17] on the objective's average there |
 | Evaluation gap | [P24] | when evaluation and real use meet conditions in different proportions, the gap between the two misalignments |
-| Premises | [A1], [A2], [A3], [A4] | any premise the case strains, and why the report still applies |
+| Premises | [A1], [A4], [A5], [B1], [B2], [B3], [B4] | any premise, background condition or convention (`CORE.md` §1) the case strains, and why the report still applies; for the intervals, whether the records are samples ([D11]), and what the dependence between episodes adds ([P54]) |
 
 ## The report as data
 
@@ -83,6 +85,9 @@ its bounds, and no report confirmatory whose declaration came after its data. A 
 - Give a value estimated from samples without its interval ([D11]).
 - Call a test confirmatory when its data were seen before its prediction was registered ([A5]).
 - Fit the default or the specification to the behaviour it judges ([A5]).
+- Report misalignment under the standard specification without the ordinal misalignment beside it ([P36], [P53]):
+  best-of-`n` judged by the values of its objective is charged for its method as well as its goal, and only the pair
+  shows how much of each.
 - Report misalignment without stakes, or stakes without misalignment: one is in nats and says how far, the other is in
   the objective's units and says how much ([D5]).
 - Call an unobserved condition aligned because an observed one is, without bounding `ε` ([P17]).

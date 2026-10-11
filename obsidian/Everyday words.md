@@ -38,5 +38,5 @@ folder; "reading" is an interpretation that no computation backs, and "definitio
 | robust, with a margin | robustness counted in units of the actor's noise, which orders behaviours as misalignment does | `transfer.md` | tested (B6) |
 | lock-in, early luck decides | a rate in every run, fixed by early chance | `derived-spaces.md` | tested (T6) |
 | a track record | one sample on the space of trajectories | `derived-spaces.md` | reading |
-| splitting hairs | refining a description, which can only raise misalignment | GA6 | definition |
+| splitting hairs | refining a description, which can only raise misalignment | GA1, GD3 | definition |
 | moving the goalposts, cherry-picking the bins | a nearness or a record's resolution chosen after the data | GA5 | definition |

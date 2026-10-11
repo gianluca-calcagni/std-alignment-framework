@@ -9,7 +9,7 @@ source: "derived/estimation.md"
 
 ## Statement
 Let `p, r ∈ Δ°`.
-(i) For a sample from `p` ([[D11 — Sample and evidence|D11]]), the expected evidence per decision for `p` against `r` is `KL(p‖r)`.
+(i) For a sample from `p` ([[D11 — Record, sample and evidence|D11]]), the expected evidence per decision for `p` against `r` is `KL(p‖r)`.
 (ii) Let `(q, 𝓘)` be a specification and `p̂ ∈ Δ°`. For a sample from `p̂`, the expected evidence per decision for `p̂`
 against any intended behaviour is at least `M(p̂)`, with equality against a nearest intended behaviour ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](i)).
 
@@ -24,11 +24,11 @@ of a sum is the sum of the expectations. (ii) By (i), the expected evidence agai
 [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]](i) gives an intended behaviour that attains `M(p̂)`.
 
 ## Notes
-This is the second meaning of misalignment that [[D11 — Sample and evidence|D11]] announces: value lost ([[A4 — Misalignment is value lost|A4]]) and evidence gained
-agree, in the same direction of KL. In a sequential test that stops when the evidence against the nearest intended
-behaviour first exceeds `log(1/α)`, the expected number of decisions is about `log(1/α)/M(p̂)`, neglecting the overshoot
-at the boundary [[References|@wald1945]]. The same identity compares explanations: for two proposed evaluators, the expected evidence
-per decision for the pursuit that fits the actor against the one that does not is their KL divergence.
+This is [[A4 — Misalignment is evidence|A4]] made exact, as [[D11 — Record, sample and evidence|D11]] announces: evidence gained ([[A4 — Misalignment is evidence|A4]]) and value lost ([[P4 — What KL measures|P4]](ii)) agree, in the
+same direction of KL. In a sequential test that stops when the evidence against the nearest intended behaviour first
+exceeds `log(1/α)`, the expected number of decisions is about `log(1/α)/M(p̂)`, neglecting the overshoot at the boundary
+[[References|@wald1945]]. The same identity compares explanations: for two proposed evaluators, the expected evidence per decision
+for the pursuit that fits the actor against the one that does not is their KL divergence.
 
 ## Lineage
 v8: [[D3 — Specification, declaration and misalignment|D3]]'s "what the number means", where this was an argument. New as a result.
@@ -37,7 +37,7 @@ v8: [[D3 — Specification, declaration and misalignment|D3]]'s "what the number
 - [`checks/test_estimation.py::test_expected_evidence_is_misalignment`](https://github.com/gianluca-calcagni/std-alignment-framework/blob/main/checks/test_estimation.py)
 
 ## Depends on
-- [[D11 — Sample and evidence|D11]] — Sample and evidence
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
 - [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]] — Misalignment is attained, and zero exactly on the intended behaviours and their limits
 
 ## Used by

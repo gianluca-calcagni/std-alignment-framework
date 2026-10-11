@@ -1,0 +1,90 @@
+{
+ "about": "P53's check (2026-10-11): families of targets, spans, the standard and the ordinal specification.",
+ "tests": [
+  "checks/test_misalignment.py",
+  "-k",
+  "credited_statistics"
+ ],
+ "mutants": [
+  {
+   "name": "[P53](iii) Pythagoras the wrong way, on a span",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "gap = kl(p, rr) - (kl(p, ps) + kl(ps, rr))",
+     "gap = kl(p, rr) - (kl(p, ps) + kl(rr, ps))"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](ii) the active set chosen by the reverse condition",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "if lam.min() >= -1e-9 and np.all(T @ p >= T @ ph - 1e-10):",
+     "if lam.min() >= -1e-9 and np.all(T @ p <= T @ ph + 1e-10):"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](i) negative weights accepted, as for a span",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "if lam.min() >= -1e-9 and np.all(T @ p >= T @ ph - 1e-10):",
+     "if np.all(T @ p >= T @ ph - 1e-10):"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](iii) misalignment measured from the actor's side",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "        M = kl(ph, po); G0 = lam @ T\n",
+     "        M = kl(po, ph); G0 = lam @ T\n"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](v) the order's credit read on lower tails",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "up = np.array([(F >= v).astype(float) for v in levels[1:]])",
+     "up = np.array([(F <= v).astype(float) for v in levels[:-1]])"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](v) the standard credit read below the actor's average",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "                if p @ F >= ph @ F:                                                    # in C",
+     "                if p @ F <= ph @ F:                                                    # in C"
+    ]
+   ]
+  },
+  {
+   "name": "[P53](v) the level sets in place of the pooled blocks",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "blocks = np.unique(np.round(rc, 12), return_inverse=True)[1][at]",
+     "blocks = at"
+    ]
+   ]
+  },
+  {
+   "name": "[P53] a span projected to the default's averages",
+   "edits": [
+    [
+     "checks/test_misalignment.py",
+     "ps = stdalign.project_linear(q, T, b)\n",
+     "ps = stdalign.project_linear(q, T, T @ q)\n"
+    ]
+   ]
+  }
+ ]
+}

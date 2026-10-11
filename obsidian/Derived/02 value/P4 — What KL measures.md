@@ -65,11 +65,15 @@ full-support behaviour is. v7.10's Prop 15 (other regularizers) is not carried: 
 - [[P1 — Every behaviour is a tilt of any other|P1]] — Every behaviour is a tilt of any other
 
 ## Used by
+- [[A4 — Misalignment is evidence|A4]] — Misalignment is evidence
 - [[D3 — Specification, declaration and misalignment|D3]] — Specification, declaration and misalignment
 - [[D4 — Resolution|D4]] — Resolution
+- [[D10 — Evaluator, regression and residual|D10]] — Evaluator, regression and residual
+- [[D11 — Record, sample and evidence|D11]] — Record, sample and evidence
 - [[P14 — The cost of departing from the default is forced|P14]] — The cost of departing from the default is forced
 - [[P38 — Any convex cost|P38]] — Any convex cost
 - [[P36 — Ordinal objectives|P36]] — Ordinal objectives
+- [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] — Misalignment is the departure beyond what the family of targets credits
 - [[P7 — Indifference forgives exactly what happens inside cells|P7]] — Indifference forgives exactly what happens inside cells
 - [[P8 — An actor that cannot tell outcomes apart|P8]] — An actor that cannot tell outcomes apart
 - [[P9 — What is at stake|P9]] — What is at stake

@@ -13,16 +13,19 @@ every turn that opens, changes or closes a request; `ROADMAP.md` says which step
 
 ## Open
 
-The PI asked for a more solid engineering side before some steps are actioned (Q37). The engineering steps E1(b), E2
-and E3 of `ROADMAP.md` are done, and so is the overview H1 (2026-10-10): a reader now has a library to compute with, a
-report to check, a case to rerun in a minute, and ten pages to start from. Which of these requests come first is the
-PI's call.
+The PI asked for a more solid engineering side before some steps are actioned (Q37). The engineering steps E1(b), E2 and
+E3 of `ROADMAP.md` are done, and so is the overview H1 (2026-10-10): a reader now has a library to compute with, a
+report to check, a case to rerun in a minute, and about fifteen pages to start from. Which of these requests come first
+is the PI's call.
 
 | # | What | Unblocks | Why | Asked |
 |---|---|---|---|---|
 | R1 | two readers who are people: one reruns W1's report end to end from `STANDARD.md`, the case folder, its pinned `requirements.txt` and the public data, after `examples/quickstart.py`; one mathematician reads `OVERVIEW.md`, then `CORE.md` and `derived/`. The package is ready (H2, 2026-10-10), and a starting message for the mathematical reader was given to the PI to relay (Q48) | step 4, readers | the only unmet row of the finish line, "supports diagnostics, and shows its limits", needs a case run end to end by an outside reader; the hold on review is lifted for one mathematical reader (Q33) | 2026-10-07 (Q33) |
 | R2 | an email to the LEEPS laboratory at UC Santa Cruz, asking for the session records of Oprea, Henwood and Friedman (2011), hawk–dove in continuous time, and of Cason, Friedman and Hopkins (2014), Rock–Paper–Scissors under the same protocol; no affiliation is needed to ask | step 5, [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] | the potential arm of the test of [[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]] has no public record (D13) | 2026-10-07 |
 | R3 | registering for the Tankerkönig price archive (`creativecommons.tankerkoenig.de`), and its password as the environment variable `TANKERKOENIG_PASSWORD` | step 6, W2 | W2's data (D7) | 2026-10-03 |
+| R8 | approve a simulation case of known groups, C4, before W5 (`NOTES.md` §15, advice 1). Its second half, the ordinal misalignment of [[P36 — Ordinal objectives\|P36]] beside `M` in the results of `STANDARD.md` and so in the library, was approved with v13 (Q52), and is E1(d) and O1 | step C4 | with a proxy that correlates about `0.96` with the target, `M` ranks the exact pursuit of the proxy below best-of-4 on the target in 65% of pairs; the ordinal share separates them. More simulation cases need the PI's approval (`ROADMAP.md`, "Not now") | 2026-10-10 (Q49) |
+| R10 | a row "valid" for the finish line: on systems whose truth is known, each reported quantity separates what its name says it separates, at measured error rates (`NOTES.md` §15, advice 4) | the finish line | the predictions tested so far bear on KL-regularized training and on a fitted curve more than on the framework (§15, point 2) | 2026-10-10 (Q49) |
+| R11 | the package that gets closer to the licence's aim (Q50, `NOTES.md` §11): additional terms under the licence's section 7, an attribution with the upstream address that every copy keeps and a marking of modified versions, best worded with a lawyer; a section of `CLAUDE.md` addressed to AI agents that work on copies, asking them to tell their user that progress is to be shared and to offer an issue or a pull request upstream, never to send anything on their own; and `CITATION.cff`, with a DOI for each release | sharing of progress made on copies | a copyleft licence reaches published and served copies only; notices, requests to agents and credit reach further | 2026-10-10 (Q50) |
 
 ## Hosts allowed
 
@@ -51,5 +54,8 @@ Known to be refused, and not needed: `econometricsociety.org`, `r-packages.io`, 
 | papers behind paywalls (White, Vuong, Baker, Courty and Marschke, Ben-Tal et al., Polyanskiy and Wu): withdrawn; theorems are read in open texts or derived (Q36) | 2026-10-08 |
 | R4: the contribution terms of `CONTRIBUTING.md` approved as drafted (Q45) | 2026-10-10 |
 | R5: a step for the row "stable" is a merged pull request, counted after v12 (Q46) | 2026-10-10 |
-| R6: [[A2 — Pursuit is the steepest climb\|A2]] says "a Riemannian geometry"; the core is v12 (Q44) | 2026-10-10 |
+| R6: A2 says "a Riemannian geometry"; the core is v12 (Q44) | 2026-10-10 |
+| R12: v13 approved, as the lean core the executor proposed after the draft's review, built by the method of reverse physics: imported axioms, background conditions assumed without loss of generality, three premises with their Status, and an Interpretation for every definition; A2 and A3 become reasons of [[D2 — Pursuit of an objective\|D2]], A6 is not adopted, the paired report and [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]] are added (Q52) | 2026-10-11 |
+| R13: misalignment on a continuum as the supremum over decidable finite descriptions, adopted; activations (H33, H38) reopened, starting with case C5 (Q54) | 2026-10-11 |
 | R7: no release tag for the handover (Q47) | 2026-10-10 |
+| R9: the licence is kept, the GNU Affero GPL, for the code and the text, while the work is research; the executor's recommendation to relax it withdrawn (Q50) | 2026-10-10 |

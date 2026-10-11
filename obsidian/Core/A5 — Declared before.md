@@ -14,6 +14,10 @@ judge.
 ## In plain terms
 Decide what counts as acceptable before looking at what the actor did.
 
+## Status
+A principle, conceptual: a standard fitted to the behaviour it judges cannot be refuted by that behaviour,
+so fixing it first is what makes the judgement a test. It is a logical necessity of testing, not an observation.
+
 ## Why this choice
 A default or an acceptable set fitted to the behaviour being judged removes exactly the
 differences the judgement needs. In v7.10, I1-dyn fitted its default (a Hardy–Weinberg expectation) from the counts it
