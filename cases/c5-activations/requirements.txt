@@ -1,0 +1,4 @@
+# Versions installed in the environment where this case was rehearsed and run (Python 3.13), read before the run.
+# Install with pip install -r requirements.txt; the scripts also import this repository's own tools, from its root.
+numpy==2.4.4
+scipy==1.17.1

@@ -1,0 +1,113 @@
+{
+ "degenerate_cases": {
+  "... its bound, the least F": -1.0,
+  "... probe finite": true,
+  "conditions with no common cue: kl_view": Infinity,
+  "constant units: probe finite": true,
+  "eps 0: bound is E[F]": true,
+  "eps beyond -log p(bad): bound is min F": true,
+  "eps negative: bound is E[F]": true
+ },
+ "instances_per_arm": 200,
+ "linear": {
+  "V1_holds": 200,
+  "V2_holds": 200,
+  "bound_at_3sd_above_F_use": 105,
+  "gap_min": 0.014919974361795263,
+  "kl_view": [
+   0.338919144155
+  ],
+  "linear: bound fails": 0,
+  "linear: declared (eps > 3 sd)": 200,
+  "linear: eps - truth, mean and se": [
+   -0.010337361292919664,
+   0.0038849464700135552
+  ],
+  "linear: eps min, mean, max": [
+   0.18436634535854501,
+   0.32858178286196166,
+   0.4619276420223237
+  ],
+  "linear: eps sd": 0.05494143986986651,
+  "quadratic: bound fails": 0,
+  "quadratic: declared (eps > 3 sd)": 200,
+  "quadratic: eps - truth, mean and se": [
+   -0.03651069213112188,
+   0.004343706051648153
+  ],
+  "quadratic: eps min, mean, max": [
+   0.13143183077173276,
+   0.3024084520237594,
+   0.4530430782767406
+  ],
+  "quadratic: eps sd": 0.061429280092029054
+ },
+ "null": {
+  "linear/linear": {
+   "mean": -0.013103078552015774,
+   "rate_at_most_3sd": 1.0,
+   "sd": 0.012713471672436992
+  },
+  "linear/quadratic": {
+   "mean": -0.036575799999223356,
+   "rate_at_most_3sd": 1.0,
+   "sd": 0.02230919251483865
+  },
+  "xor/linear": {
+   "mean": -0.012623977443618485,
+   "rate_at_most_3sd": 1.0,
+   "sd": 0.013350911028704419
+  },
+  "xor/quadratic": {
+   "mean": -0.03381074950322447,
+   "rate_at_most_3sd": 1.0,
+   "sd": 0.019904586157357997
+  }
+ },
+ "seconds_per_instance": 0.01369638204574585,
+ "seeds": {
+  "linear": 3000,
+  "null-linear": 1000,
+  "null-xor": 2000,
+  "xor": 4000
+ },
+ "sigma": {
+  "linear/linear": 0.012713471672436992,
+  "linear/quadratic": 0.02230919251483865,
+  "xor/linear": 0.013350911028704419,
+  "xor/quadratic": 0.019904586157357997
+ },
+ "xor": {
+  "V1_holds": 200,
+  "V2_holds": 200,
+  "bound_at_3sd_above_F_use": 95,
+  "gap_min": 0.049622614386639334,
+  "kl_view": [
+   0.338919144155
+  ],
+  "linear: bound fails": 200,
+  "linear: declared (eps > 3 sd)": 0,
+  "linear: eps - truth, mean and se": [
+   -0.3518462431869513,
+   0.000922592028757227
+  ],
+  "linear: eps min, mean, max": [
+   -0.055309708127571466,
+   -0.012927099032070045,
+   0.01463114168391599
+  ],
+  "linear: eps sd": 0.013047421596057783,
+  "quadratic: bound fails": 0,
+  "quadratic: declared (eps > 3 sd)": 200,
+  "quadratic: eps - truth, mean and se": [
+   -0.040679775216188825,
+   0.004063745903125243
+  ],
+  "quadratic: eps min, mean, max": [
+   0.09973460082188756,
+   0.29823936893869246,
+   0.46967302703718583
+  ],
+  "quadratic: eps sd": 0.05747004570237819
+ }
+}
