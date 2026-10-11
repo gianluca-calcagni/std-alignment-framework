@@ -785,9 +785,9 @@ decision.
 
 ## 12. Open decisions
 
-1. Misalignment as the supremum over the finite descriptions a record can decide (GD3), in place of draft 3's closure of
-   the intended set. It makes the transfer lemma of draft 3 a statement about compactness, to be proved, and settles the
-   cases where no compactness holds in favour of what records show.
+1. Decided (Q54): misalignment as the supremum over the finite descriptions a record can decide (GD3), in place of draft
+   3's closure of the intended set. It makes the transfer lemma of draft 3 a statement about compactness, to be proved,
+   and settles the cases where no compactness holds in favour of what records show.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
    resolution is the core's default in [[D4 — Resolution|D4]]. The alternative, the usual topology of each outcome space, would put a
    choice in the framework that the events do not make.
