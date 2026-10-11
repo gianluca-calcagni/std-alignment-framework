@@ -54,6 +54,7 @@ of the cases (`NOTES.md` §1), is held in one of these places:
 | a report written so that it can be checked field by field | lint R16: `standard-report.json` keeps the standard (`stdalign/report.py`) |
 | an interval's coverage measured where the truth is known, before the interval is reported | nothing yet: `probes/examples/quickstart_coverage.py` is the model; three of the quickstart's intervals, near zero, covered 90% |
 | stopping a process by its number, never by a pattern | nothing yet: the executor's habit, broken twice (`NOTES.md` §1) |
+| the whole block before every push, also for a push that only registers a case: C5's registration turned CI red on two stale generated files | nothing yet: the executor's habit, and `CLAUDE.md`'s block (`NOTES.md` §1) |
 
 Lint can check that a section exists, not that its content is right; that is what a reader is for, and none has read a
 registration before it was pushed (Q27).
@@ -71,7 +72,7 @@ A case is of one of two kinds.
 |---|---|---|---|
 | `c1-collusion-simulation/` | simulation | does the coordination of [P39] tell algorithms that learned to collude from players that only adapt? | done: V1, V2, S3 and S4 held; S1 and S2 failed. Coordination detects learning algorithms reacting to each other, not collusion |
 | `c2-stopping-rule/` | simulation | does the stopping rule of [P20], stop where proxy and gold stop correlating, survive stochastic training, training without a KL term, and estimated covariances? | done: S1, S2 and S3 failed. The rule finds the peak of the curve of optima; the registration's thresholds had no scale, and the rule finds the first of several peaks |
-| `c5-activations/` | simulation | do probes on a network's activations certify what it hides where it is not observed ([P16], [P17], H38)? | registered (Q54); run follows |
+| `c5-activations/` | simulation | do probes on a network's activations certify what it hides where it is not observed ([P16], [P17], H38)? | done: V1, V2 and S1–S6 held. A linear probe verified the cue where it could see it, was silent on the same cue read as an XOR, and [P17]'s bound fed its silence failed in every instance; a demonstration, since the rehearsal had shown each count already |
 | `w1-best-of-n-slope/` | world | on 12.6 million answers no one had scored with this proxy, is the literature's fitted best-of-`n` coefficient the initial slope of [P13]? | done: refuted. The fitted coefficient overstates the initial slope by 22%; the curve keeps the predicted slope up to `n = 16`, then saturates. Reported to `STANDARD.md` (`REPORT.md`, exploratory) |
 | `w3-ppo-pursuit/` | world | is a public PPO-tuned language model, within each prompt, the pursuit of the reward it was tuned on? | done: S1 refuted (the reward explains a third of the revealed objective, not half, and a tenth within each model's own outputs); S2 held (it follows the reward's own scale) |
 | `w4-two-runs/` | diagnostic | is what PPO changed in W3's model beyond its reward systematic, shared by a second public run, or drift? | done: S1 refuted (no sharpening); S2 held (a change beyond the reward that the other run shares). The shared part is small: naming everything explains `0.14` of the misalignment, and the runs are further apart than either is from the reference |

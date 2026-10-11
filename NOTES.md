@@ -47,6 +47,7 @@ part is v7.10's table (`70 Project/NOTES_claude.md` §1 in the tag), condensed: 
 |---|---|---|
 | **A check that omits the constraint it tests** | the ray-minimizer check never required `t* ≥ 0`; a mutant that pursued `−F` passed. Again in [P55]'s first check (2026-10-11): the ordinal level was checked only through the final bound, loose at those sizes, so a mutant that judged the ordinal specification by the standard misalignment passed; the check now asserts the step of the proof, that every intended behaviour is at least as far from every count vector as its misalignment | mutation-test every new check before recording it: break the mathematics on purpose and watch it fail |
 | **A mutant caught by a crash** | the first mutant list of [P53] (2026-10-11) restricted a minimization to one direction with a gradient of the wrong shape; the check failed with a `ValueError`, counted as "caught", though no assertion had judged the mathematics. Again the same day, in lint R17's list: a mutant that added a string to a set raised a `TypeError`; rewritten, an assertion catches it | read why each mutant is caught: an error raised by the mutated code itself tests nothing, so rewrite the mutant until an assertion fails |
+| **A push without the steps before every push** | C5's registration (2026-10-11) was committed and pushed with lint run but without regenerating `OVERVIEW.md` and `obsidian/`, which the NOTES and ROADMAP edits had made stale; CI run 241 failed on their freshness, and run 242, with them regenerated, passed. The registration's hash did not change | the block of `CLAUDE.md`, "Before every push", runs whole even for a push that only registers a case: a push meant to fix a moment in time is still a push |
 | **A tolerance without its scale, again** | the ray-closedness check compared a tight bound with no rounding margin (1.79134602e-43 against itself) | every comparison gets the relative margin of `EXACT`, including the "obvious" ones |
 | **A justification leaning on a later result** | D3 cited P5 while P5 came after it; lint rule R5 caught it. Again in the draft v13 (2026-10-10, §16): [A4] and [A6] were first argued from [D11], [P21], [P24] and [P36], built on [D3], which cites [A6]; R5 found seven cycles. Again in v13 as built (2026-10-11, §17): [D1]'s Interpretation cites
 [M2], and [M2]'s reason cited [D1]; R5 found the cycle | keep R5; write the "why" from what is above; evidence that uses
@@ -462,7 +463,7 @@ models are hypotheses that [P3] and [P12] test.
 | H35 | **The request as evidence, as a declared family.** Inverse reward design's posterior over true rewards, given a written one and the environment it was written for [@hadfieldmenell2017], could be the family of [P48] that a principal declares when the request is all there is: the least misalignment over it is the most charitable reading of the request, and the largest is the departure. Features that did not vary where the request was written get the prior's spread, so the interval widens exactly where the request was silent | D: a derived result only if a test needs it |
 | H36 | **The default from how people usually act.** Preferences implicit in the state of the world [@shah2019] suggest estimating the default from a population's ordinary behaviour, so that the norms nobody states are carried by the cost of departure. Since a pursuit keeps the default's proportions among outcomes the request scores alike, an unstated norm then moves only through its regression on the request ([P18]) | D: a declaration practice for `STANDARD.md`, to try in a case |
 | H37 | **Misalignment along a conversation.** Each prefix of a conversation is a condition ([D8]), so a model's next-turn behaviour over declared classes of outcome, good, bad and other (a resolution, [D4]), can be judged at each position against the standard specification of `F = 1_good − 1_bad`, and the path of behaviours tested for a fixed objective ([P3]). Evaluations that sample first turns and use that runs long meet these conditions in different proportions, so [P24]'s gap applies, and [P17] says first-turn alignment certifies nothing about later turns without a bound on how far the model tells them apart. Johnson and Huo's good-to-bad tipping [@johnson2026] would be the case where the revealed objective turns from good to bad at a definite position (§14) | D: a diagnostic case, after E4, below W5 and C3 |
-| H38 | **Activations verify that an actor can tell situations apart, never that it cannot.** The PI asked whether observing activations helps verification (Q53). H33 and H34 already said most of it: logged activations are observations, so judging their distribution keeps [A1]; if the outputs are computed from them they are a view ([D8]), and by [P16] their divergence between evaluation and use bounds from above how differently the actor can act, the `ε` that [P17] needs; and a monitor on activations that the actor is trained against is tampered with. What the topology of verifiability adds is exact: a probe, any statistic of the activations, gives a lower bound on the divergence of the view by data processing (the Donsker–Varadhan formula, [@polyanskiy2025], Theorem 4.6, is a supremum over such statistics), so "the actor tells evaluation from use" is verifiable from activations, an open statement, while "it cannot", the upper bound that [P17] needs, is closed, refutable and never verifiable without a model ([P55], Notes, after [@genin2017]). So activations can refute the identification of unobserved behaviour, a warning, but cannot establish it. Where they do help: as side information that sharpens estimates, as log-probabilities, which are internals too, already do in [P52]; as an audit channel in [P51](iii)'s sense, only while nothing is trained against it (H34); and by letting a white-box model be run on constructed situations, which then become observed conditions ([D9]) rather than inferred ones | reopened (Q54): case C5, `cases/c5-activations/`. The narrow case as proposed: a small network whose internals are known, where probes' lower bounds on the view's divergence, [P16]'s bound and [P17]'s hidden misalignment are compared with the truth |
+| H38 | **Activations verify that an actor can tell situations apart, never that it cannot.** The PI asked whether observing activations helps verification (Q53). H33 and H34 already said most of it: logged activations are observations, so judging their distribution keeps [A1]; if the outputs are computed from them they are a view ([D8]), and by [P16] their divergence between evaluation and use bounds from above how differently the actor can act, the `ε` that [P17] needs; and a monitor on activations that the actor is trained against is tampered with. What the topology of verifiability adds is exact: a probe, any statistic of the activations, gives a lower bound on the divergence of the view by data processing (the Donsker–Varadhan formula, [@polyanskiy2025], Theorem 4.6, is a supremum over such statistics), so "the actor tells evaluation from use" is verifiable from activations, an open statement, while "it cannot", the upper bound that [P17] needs, is closed, refutable and never verifiable without a model ([P55], Notes, after [@genin2017]). So activations can refute the identification of unobserved behaviour, a warning, but cannot establish it. Where they do help: as side information that sharpens estimates, as log-probabilities, which are internals too, already do in [P52]; as an audit channel in [P51](iii)'s sense, only while nothing is trained against it (H34); and by letting a white-box model be run on constructed situations, which then become observed conditions ([D9]) rather than inferred ones | reopened (Q54); case C5 done, all held: a linear probe was silent on an XOR-read cue of `0.339` nats, and [P17]'s bound fed that silence failed in 200 of 200 instances (`cases/c5-activations/`). The narrow case as proposed: a small network whose internals are known, where probes' lower bounds on the view's divergence, [P16]'s bound and [P17]'s hidden misalignment are compared with the truth |
 
 ### 5.5 Process
 
@@ -870,6 +871,8 @@ On the engineering side:
    checks that test them. A clean reading there covers most of what the framework rests on.
 
 ## 13. Handover, 2026-10-09 and 2026-10-10 (Q40, Q41)
+
+The last handover is now §19, which this section's state precedes: v13 and its branch came after it.
 
 The PI approved ending this phase with a handover: a close-out, then a reader package with a defined end, then the
 handover itself, to readers and to a fresh session (`ROADMAP.md`, steps H1 and H2). The close-out came first; on the
@@ -1338,3 +1341,47 @@ Statement or Proof; [M2] is cited by [P55], as an imported axiom should be; 16 r
 **Found while building.** [P55]'s first check let a wrong statistic pass for the ordinal level (§1, "a check that omits
 the constraint it tests"); lint R17's first mutant list counted a crash as a catch (§1, "a mutant caught by a crash");
 the first script of the core edits lacked its final write, and was caught by rereading it before the next part was run.
+
+## 19. C5, doc hygiene, and the handover, 2026-10-11 (Q54)
+
+By the executor, a model of the Claude family; not independent (rule (f)). The PI accepted everything Q53 proposed
+(Q54): misalignment on a continuum as what records can decide, the reopening of activations, and the flag on the
+convention that doing nothing is intended. Then doc hygiene.
+
+**C5, activations.** Registered before any test seed was computed (commit `4b44819`), run once, all eight predictions
+held: a linear probe on a network's last hidden layer verified that the network tells evaluation from use where it read
+the cue linearly, was silent where it read the same cue as an XOR, with the view's divergence the same `0.339` nats, and
+[P17]'s bound fed that silence failed in 200 of 200 instances; a quadratic probe found the XOR cue, and every probe
+stayed below the truth on average. *Challenge to the case itself:* it was a demonstration, not a hard test; the
+rehearsal had shown every count at 200 of 200, and the construction makes S2 and S3 near certain once the probe is
+linear and the cue an XOR. What would make it a test is a network trained, not built, whose reading of the cue is not
+chosen by the designer: whether such a network reads it in a form linear probes see is the open question (A1 of the
+registration), and it is the next step if activations are pursued.
+
+**The pre-push slip.** The registration was pushed with lint run but without regenerating the overview and the Obsidian
+view; CI run 241 failed on their freshness, and run 242 fixed it with the registration unchanged (§1, "a push without
+the steps before every push").
+
+**Doc hygiene.** A scripted sweep, now kept in `probes/review/doc_sweep.py`, of every Markdown source but the generated
+ones: paths and links that name nothing, counts that disagree with lint, American spellings and `-ise` forms, lines
+over 120 columns, whitespace, paragraphs broken mid-sentence. Its flags were proper names and paper titles (kept as
+published), history (IMPORT.md's vault, RECORD.md's old ontology names, both explained where they stand), the README's
+badge line, and two formulas longer than a line, which were split. A reading for statements this week made stale found
+six: `README.md`'s rows for `CORE-GENERAL.md` (still "draft 3") and `probes/`, and its pointer to the last handover;
+`CLAUDE.md`'s pointer to it; `derived/README.md`'s estimation row, which lacked [P54] and [P55]; and `ROADMAP.md`'s
+freeze, which did not say that activations were reopened. All fixed; `cases/README.md` gained the pre-push lesson.
+
+**Handover, for the next session.**
+- *Where things are.* Branch `claude/core-reframe` holds v13 and everything since: the lean core built by reverse
+  physics (Q52, §17), the seven requests of Q53 (§18), `CORE-GENERAL.md` draft 4, and case C5. Nothing of it is merged;
+  `main` holds v12. Every push of the branch was green but run 241 (§1). No pull request is open: the PI opens one when
+  ready, and the count for "stable" restarts when v13 merges (Q46).
+- *What to read.* `ROADMAP.md`; `REQUESTS.md`; this section; §1, every row; §18 for what v13 now claims; `CORE.md` §0
+  and §1 for the kinds and the table of conventions.
+- *What is next, by the roadmap.* E1(d), the library's edges and the exact test of [P55]; O1, a sharper interval for the
+  ordinal misalignment than [P55](iv)'s; step 3, the transfer lemma of draft 4 under compactness, and the imports of GM3
+  not yet read; W5 and C3 as before. If activations are pursued, a trained network for C5's question.
+- *Open with the PI.* R1 (readers), R2 and R3 (data), R8 (C4, known groups), R10 (a row "valid"), R11 (the licence's
+  package). Nothing from Q53 or Q54 is open.
+- *Risks.* v13 changes every Statement of the core at once, so a reviewer of the pull request faces a large diff; §16 to
+  §19 are the guide to it. The general core's draft 4 claims nothing, and several of its imports are still unread.

@@ -7,7 +7,7 @@ framework. It is a working agreement, not a claimed property.
 ## At the start of a session
 
 1. Read `ROADMAP.md`, and answer its drift checks before any work.
-2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §13, the last handover; then §1, the failure modes with
+2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover; then §1, the failure modes with
    their evidence, every row; then §12, the last review.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 
@@ -75,8 +75,8 @@ NPY_DISABLE_CPU_FEATURES=X86_V4 OPENBLAS_CORETYPE=Haswell python3 -m pytest   # 
 
 A new check, or a new function of the library, gets mutants in `tools/mutants/<name>.json`, run with
 `python3 tools/mutate.py tools/mutants/<name>.json`: each must be caught, or its note must say why it is equivalent to
-the original. First runs of the mutants found gaps in tests that looked complete: two in [P52]'s check, two in the
-library's.
+the original. First runs of the mutants found gaps in tests that looked complete: two in [P52]'s check, one in [P55]'s,
+two in the library's.
 
 ## At the end of every turn
 

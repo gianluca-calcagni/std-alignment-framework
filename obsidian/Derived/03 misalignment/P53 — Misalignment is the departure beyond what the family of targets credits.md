@@ -49,15 +49,15 @@ so the derivative of `f` at `G°` along `G − G°` is not negative: `E_{p°}[G 
 `G = 2·G°`, both in the cone, `E_{p°}[G°] = E_{p̂}[G°]`, and then `E_{p°}[G] ≥ E_{p̂}[G]`. (iii) For `p = tilt(q, G)`,
 `log(p°/p) = G° − G` plus a constant, and since `p̂` and `p°` both add up to one,
 `KL(p̂‖p) − KL(p̂‖p°) − KL(p°‖p) = (E_{p̂} − E_{p°})[G° − G] = E_{p°}[G] − E_{p̂}[G] ≥ 0` by (ii); at `p = q`, `G = 0`
-and it is `0`. (iv) For `p ∈ C`,
-`KL(p‖q) − KL(p‖p°) = E_p[G°] − log E_q[e^{G°}] ≥ E_{p̂}[G°] − log E_q[e^{G°}] = E_{p°}[G°] − log E_q[e^{G°}] = KL(p°‖q)`,
-using `p ∈ C` and (ii). By (ii), `p° ∈ C`, and by Gibbs' inequality `p°` is the only minimizer; (iii) at `p = q` gives
-the formula. (v) For the span, `±T_i ∈ 𝓚`, so `C` asks for equal averages. For the standard specification,
-`𝓚 = {t·F + c : t ≥ 0}`, so `C` asks `E_p[F] ≥ E_{p̂}[F]`; if `q ∈ C`, the least departure in `C` is `0`; otherwise
-`p° ≠ q` has, by (ii), `E_{p°}[F] = E_{p̂}[F]`, since `G° = t°·F + c` with `t° > 0`. For the ordinal specification, a
-non-decreasing function of `F`, with values `g_1 ≤ … ≤ g_m` on the levels `v_1 < … < v_m`, is
-`g_1 + Σ_{j≥2} (g_j − g_{j−1})·1{F ≥ v_j}`, a non-negative combination of the indicators `1{F ≥ v_j}` plus a constant,
-so `C` asks `p(F ≥ v_j) ≥ p̂(F ≥ v_j)` for every `j`; `p°` is [[P36 — Ordinal objectives|P36]]'s, by uniqueness in
+and it is `0`. (iv) For `p ∈ C`, `KL(p‖q) − KL(p‖p°) = E_p[G°] − log E_q[e^{G°}]`, which is at least
+`E_{p̂}[G°] − log E_q[e^{G°}]`, and that is `E_{p°}[G°] − log E_q[e^{G°}] = KL(p°‖q)`, using `p ∈ C` and (ii). By (ii),
+`p° ∈ C`, and by Gibbs' inequality `p°` is the only minimizer; (iii) at `p = q` gives the formula. (v) For the span,
+`±T_i ∈ 𝓚`, so `C` asks for equal averages. For the standard specification, `𝓚 = {t·F + c : t ≥ 0}`, so `C` asks
+`E_p[F] ≥ E_{p̂}[F]`; if `q ∈ C`, the least departure in `C` is `0`; otherwise `p° ≠ q` has, by (ii),
+`E_{p°}[F] = E_{p̂}[F]`, since `G° = t°·F + c` with `t° > 0`. For the ordinal specification, a non-decreasing function
+of `F`, with values `g_1 ≤ … ≤ g_m` on the levels `v_1 < … < v_m`, is `g_1 + Σ_{j≥2} (g_j − g_{j−1})·1{F ≥ v_j}`, a
+non-negative combination of the indicators `1{F ≥ v_j}` plus a constant, so `C` asks `p(F ≥ v_j) ≥ p̂(F ≥ v_j)` for
+every `j`; `p°` is [[P36 — Ordinal objectives|P36]]'s, by uniqueness in
 (i) and [[P36 — Ordinal objectives|P36]](ii). On each block `B` of [[P36 — Ordinal objectives|P36]], a behaviour with the actor's mass `p̂(B)` departs by
 `Σ_B p̂(B)·log(p̂(B)/q(B)) + Σ_B p̂(B)·KL(p(·|B)‖q(·|B))` (the chain rule [[P4 — What KL measures|P4]](iii)), least when each `p(·|B) = q(·|B)`;
 the excess of `KL(p̂‖q)` over that least value is `Σ_B p̂(B)·KL(p̂(·|B)‖q(·|B)) = M(p̂)` by [[P36 — Ordinal objectives|P36]](ii).

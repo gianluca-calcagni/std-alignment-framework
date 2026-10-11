@@ -34,9 +34,9 @@ to `0` (the mass outside `A` decays exponentially in `t`) and the second to `−
 (ii) Since `KL(p̂‖q) = KL(p_{F,λ}‖q)`, [P4](i) at `t = λ` gives `λ·S(p̂) = λ·(J_λ(p_{F,λ}) − J_λ(p̂)) = KL(p̂‖p_{F,λ})`.
 A finite `λ` rules out the third case of [P5](iv), because a behaviour on `A` departs by at least `−log q(A)`. In the
 second case, `p° = p_{F,t*}` with `E_{p°}[F] = E_{p̂}[F]`, so
-`KL(p̂‖p_{F,λ}) − KL(p̂‖p°) = E_{p̂}[log(p°/p_{F,λ})] = (t* − λ)·E_{p̂}[F] − Λ(t*) + Λ(λ) = E_{p°}[log(p°/p_{F,λ})] = KL(p°‖p_{F,λ})`,
-and `E_{p̂}[F] > E_q[F]`. In the first case, `p° = q`, `M(p̂) = KL(p̂‖q)`, and
-`KL(p̂‖p_{F,λ}) = KL(p̂‖q) − λ·E_{p̂}[F] + Λ(λ) = M(p̂) + KL(q‖p_{F,λ}) + λ·(E_q[F] − E_{p̂}[F])`, because
+`KL(p̂‖p_{F,λ}) − KL(p̂‖p°) = E_{p̂}[log(p°/p_{F,λ})] = (t* − λ)·E_{p̂}[F] − Λ(t*) + Λ(λ)`, which is
+`E_{p°}[log(p°/p_{F,λ})] = KL(p°‖p_{F,λ})`, and `E_{p̂}[F] > E_q[F]`. In the first case, `p° = q`, `M(p̂) = KL(p̂‖q)`,
+and `KL(p̂‖p_{F,λ}) = KL(p̂‖q) − λ·E_{p̂}[F] + Λ(λ) = M(p̂) + KL(q‖p_{F,λ}) + λ·(E_q[F] − E_{p̂}[F])`, because
 `KL(q‖p_{F,λ}) = −λ·E_q[F] + Λ(λ)`.
 (iii) By [P1](ii), `tilt(q, t·(a·F + c)) = tilt(q, (t·a)·F)`, so the pursuit ray of `a·F + c` is the same set as that of
 `F`, and `M(p̂)` is unchanged. The matched pursuit is the same behaviour, since it is the point of the same ray with the
