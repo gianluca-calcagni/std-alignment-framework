@@ -14,7 +14,7 @@ says of each starting point what kind of starting point it is.
 **How the core is built.** It follows the method of reverse physics [[References|@carcassi2022]], [[References|@carcassi2026]]: separate what a
 theory takes from mathematics from what it assumes about the world, say of each assumption what kind it is, and map
 every mathematical object to what it stands for, declaring the map and justifying it, so that only objects with a
-meaning in the world enter. The core has four kinds of item.
+meaning in the world enter. The core has four kinds of item, and a table of the conventions they use.
 - **Imported axioms** (M): mathematics taken as it is, from probability theory. They assume nothing about actors or
   principals.
 - **Background conditions** (B): choices of representation assumed without loss of generality, each with the reason
@@ -120,6 +120,7 @@ each item give the names its objects carry in other fields.
 | `(q, 𝓘)` | a specification, declared by the principal: the default and the intended behaviours | [[D3 — Specification, declaration and misalignment\|D3]] |
 | `C_F` | the intended behaviours of the ordinal specification of `F` | [[D3 — Specification, declaration and misalignment\|D3]] |
 | `M(p̂)` | the misalignment of the actual behaviour `p̂` | [[D3 — Specification, declaration and misalignment\|D3]] |
+| `𝓚`, `𝓘_𝓚` | a family of targets; its intended behaviours, the pursuits of its targets | [[D3 — Specification, declaration and misalignment\|D3]] |
 | `ℬ`, `𝒜` | the principal's resolution; the actor's resolution | [[D4 — Resolution\|D4]] |
 | `E_q[F\|𝒜]`, `F̄` | the cell average of `F` under the default | [[D4 — Resolution\|D4]] |
 | `λ`, `S(p̂)` | the matched intensity; the shortfall, in the units of `F` | [[D5 — Stakes\|D5]] |
@@ -129,7 +130,7 @@ each item give the names its objects carry in other fields.
 | `Z`, `V_c` | the actor's view: its signals, and their distribution in condition `c` | [[D8 — Conditions, responses and views\|D8]] |
 | `O` | the observed conditions | [[D9 — Observation and identification\|D9]] |
 | `F̂`, `m`, `R` | an evaluator; the regression of the target on it; the residual | [[D10 — Evaluator, regression and residual\|D10]] |
-| `n`, `p̂_n` | the size of a sample; its empirical behaviour | [[D11 — Record, sample and evidence\|D11]] |
+| `n`, `p̂_n` | the size of a record; its empirical behaviour | [[D11 — Record, sample and evidence\|D11]] |
 | `s`, `F_s` | time along a path of behaviours; the objective the change reveals | [[P2 — Every change of behaviour follows a replicator equation\|P2]] |
 | `J_t` | net value: the objective's average minus the cost of departing from the default | [[P4 — What KL measures\|P4]] |
 | `t*`, `p°` | the revealed intensity; the nearest intended behaviour | [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]] |
@@ -158,7 +159,7 @@ otherwise would reach another verdict.
 | doing nothing is intended: the default is in every family's specification | [[D3 — Specification, declaration and misalignment\|D3]] | convenience, literature | yes: an actor that stays at the default is not charged, though it may be useless | misalignment is then at most the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]](iii)); KL-regularized training keeps the reference policy admissible; a principal who wants something done declares a floor ([[P35 — Floors and caps\|P35]]) |
 | families of targets hold the constants and the positive mixes of their targets | [[D3 — Specification, declaration and misalignment\|D3]] | forced, convenience | only for a family that is not convex, judged as the union of its convex parts | constants change no aim ([[B3 — An objective up to scale and constant\|B3]]); a principal who accepts each of two targets, with weights not fixed, accepts their weighted pursuit ([[P42 — Several principals: gridlock, and the pooled pursuit\|P42]](ii)); convexity gives one nearest behaviour and the credited reading ([[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]) |
 | objectives up to a positive factor and a constant | [[B3 — An objective up to scale and constant\|B3]] | forced | no | a pursuit reveals its objective only up to them ([[P1 — Every behaviour is a tilt of any other\|P1]](ii)) |
-| pursuit is a tilt of the default | [[D2 — Pursuit of an objective\|D2]] | forced, literature | yes: another model of pursuit gives another standard specification | forced by the steepest climb in a geometry that ignores how finely outcomes are described, and by the best trade-off at a KL price ([[P2 — Every change of behaviour follows a replicator equation\|P2]], [[P14 — The cost of departing from the default is forced\|P14]]); it is the optimum of KL-regularized training, the logit choice rule and selection |
+| pursuit is a tilt of the default | [[D2 — Pursuit of an objective\|D2]] | forced, literature | yes: another model of pursuit gives another standard specification | forced by the steepest climb in a geometry that ignores how finely outcomes are described, and by the best trade-off at a KL price ([[P2 — Every change of behaviour follows a replicator equation\|P2]], [[P4 — What KL measures\|P4]](i), [[P14 — The cost of departing from the default is forced\|P14]]); it is the optimum of KL-regularized training, the logit choice rule and selection |
 | stakes in the objective's own units | [[D5 — Stakes\|D5]] | convenience | no: misalignment is in nats either way | the principal reads losses in the units it declared |
 
 ## Items, in order

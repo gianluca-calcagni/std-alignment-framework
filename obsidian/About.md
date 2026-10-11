@@ -173,6 +173,7 @@ framework, decides which disciplines can be done.
 ### D1 — Outcomes and default
 **Statement.** A finite set `X` of outcomes, and a full-support distribution `q` on `X`, the default.
 **In plain terms.** The things that can happen, and how often each happens by default.
+**Interpretation.** *Declared.* … *Verified.* … *Justified.* …
 **Why this choice.** …
 **Lineage.** v7.10: Def 1 (in part).
 
@@ -184,9 +185,10 @@ framework, decides which disciplines can be done.
 **Lineage.** New.
 ```
 
-A premise (A) has the fields of a definition. A result lives in `derived/` and has the fields of P1 above. Optional
-fields, in order: **Example** (after Proof) and **Notes** (after Checks; attribution goes here, because a citation in a
-proof is a dependency claim).
+An imported axiom (M), a background condition (B) or a premise (A) has the fields of a definition, with a **Status** in
+place of the **Interpretation**. A result lives in `derived/` and has the fields of P1 above. Optional fields, in order:
+**Example** (after Proof) and **Notes** (after Checks; attribution goes here, because a citation in a proof is a
+dependency claim).
 
 ## Commands
 

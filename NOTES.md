@@ -1383,5 +1383,10 @@ freeze, which did not say that activations were reopened. All fixed; `cases/READ
   not yet read; W5 and C3 as before. If activations are pursued, a trained network for C5's question.
 - *Open with the PI.* R1 (readers), R2 and R3 (data), R8 (C4, known groups), R10 (a row "valid"), R11 (the licence's
   package). Nothing from Q53 or Q54 is open.
-- *Risks.* v13 changes every Statement of the core at once, so a reviewer of the pull request faces a large diff; §16 to
-  §19 are the guide to it. The general core's draft 4 claims nothing, and several of its imports are still unread.
+- *Risks.* v13 changes the starting points of the core at once, so a reviewer of the pull request faces a large diff;
+  §16 to §19 are the guide to it. What changed is narrower than the diff looks: the Statements of [A1], [A4], [D3] and
+  [D11], A2 and A3 retired into [D2]'s reasons, [P36]'s Statement, [P6]'s new part (ii), three new results
+  ([P53]–[P55]), and new kinds (M, B) and fields (Status, Interpretation) around Statements that stay as they were in
+  [A5], [D1], [D2], [D4]–[D10] and every other result. (Corrected in the reread before the pull request: this line first
+  said that every Statement changed.) The general core's draft 4 claims nothing, and several of its imports are still
+  unread.

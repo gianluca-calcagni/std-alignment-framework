@@ -1383,5 +1383,10 @@ freeze, which did not say that activations were reopened. All fixed; `cases/READ
   not yet read; W5 and C3 as before. If activations are pursued, a trained network for C5's question.
 - *Open with the PI.* R1 (readers), R2 and R3 (data), R8 (C4, known groups), R10 (a row "valid"), R11 (the licence's
   package). Nothing from Q53 or Q54 is open.
-- *Risks.* v13 changes every Statement of the core at once, so a reviewer of the pull request faces a large diff; §16 to
-  §19 are the guide to it. The general core's draft 4 claims nothing, and several of its imports are still unread.
+- *Risks.* v13 changes the starting points of the core at once, so a reviewer of the pull request faces a large diff;
+  §16 to §19 are the guide to it. What changed is narrower than the diff looks: the Statements of [[A1 — Behaviour suffices|A1]], [[A4 — Misalignment is evidence|A4]], [[D3 — Specification, declaration and misalignment|D3]] and
+  [[D11 — Record, sample and evidence|D11]], A2 and A3 retired into [[D2 — Pursuit of an objective|D2]]'s reasons, [[P36 — Ordinal objectives|P36]]'s Statement, [[P6 — The departure from the default splits into pursuit and misalignment|P6]]'s new part (ii), three new results
+  ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]–[[P55 — What a record of counts certifies, at every size|P55]]), and new kinds (M, B) and fields (Status, Interpretation) around Statements that stay as they were in
+  [[A5 — Declared before|A5]], [[D1 — Outcomes, behaviours, divergence and tilt|D1]], [[D2 — Pursuit of an objective|D2]], [[D4 — Resolution|D4]]–[[D10 — Evaluator, regression and residual|D10]] and every other result. (Corrected in the reread before the pull request: this line first
+  said that every Statement changed.) The general core's draft 4 claims nothing, and several of its imports are still
+  unread.

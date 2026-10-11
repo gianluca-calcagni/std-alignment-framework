@@ -10,7 +10,9 @@ result says whether it is identified ([[D9 — Observation and identification|D9
 
 The library `stdalign` computes the fields it holds so far, with the functions its `README.md` lists, verified by the
 checks of the items they name. A report on real data, field by field: `cases/w1-best-of-n-slope/REPORT.md` (best-of-`n`
-selection by a learned proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`.
+selection by a learned proxy, against a gold reward model). A hypothetical one, told three ways: `SCENARIO.md`. Both,
+and the quickstart's report, were written before v13 (Q52) asked for the ordinal misalignment beside the standard one,
+and do not report it yet; the library does not compute it yet (`ROADMAP.md`, E1(d)).
 
 ## 1. The declaration
 
