@@ -230,6 +230,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q54 | all accepted: misalignment on a continuum as the supremum over the finite descriptions a record can decide (`CORE-GENERAL.md` draft 4, open decision 1); H33 and H38, activations as observations, reopened under the freeze, starting with the narrow case H38 proposes; and the convention that doing nothing is intended, flagged as changing a verdict, kept as it stands. Then doc hygiene. Applied: `REQUESTS.md` R13 done; `CORE-GENERAL.md` §12; case C5 (`cases/c5-activations/`); §19 | PI | `CORE-GENERAL.md`; `cases/c5-activations/`; §19 |
 | Q55 | pull request #33 merged into `main` with its history (2026-10-11): v13, the review of Q49, the licence's aim (Q50), the seven requests (Q53), C5, doc hygiene, and the reread's fixes. Applied: the records that said v13 was not yet merged (`CORE.md`'s status, `README.md`, `ROADMAP.md`, §19's handover); the count for "stable" restarts at 0 of 3 (Q46) | PI | `CORE.md`; `README.md`; `ROADMAP.md`; §19 |
 | Q56 | the branch `claude/core-reframe` may be deleted; the executor agrees, since everything on it is in `main`. Priorities: the mathematics first, and `CORE-GENERAL.md` now, made correct and coherent rather than split or restructured; read the missing sources, asking for a host when one is needed; then a real-life simple case where the framework gives true insight, diagnosis or prediction, for which the engineering must be rethought or updated. A rewrite of the framework into a more digestible structure, most files ignorable without losing anything important and deep knowledge reachable when needed, is the PI's hunch, not a decision (H39). The executor keeps its own insights, hypotheses and hunches in these notes. Applied: §20; `general/transfer.md` TR1–TR8; the corrections of `CORE-GENERAL.md`; `REQUESTS.md` R14 | PI | §20; `CORE-GENERAL.md`; `general/` |
+| Q57 | `www.math.mcgill.ca` allowed (R14). Then: since the framework calls mathematical objects by words such as "misalignment", "outer alignment" or "tampering", and since theory and practice must agree through verification (Carcassi), verify every definition in the sense that its label corresponds to what its word means, with concrete arguments; a definition labelled wrongly gives a false sense of understanding, and accuracy here is worth its cost. Applied: R14 closed; a label verification, L1, registered and pushed before anything was computed (`probes/labels/REGISTRATION.md`), then run; §21 | PI | `probes/labels/`; §21 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1468,7 +1469,8 @@ read the new proofs (below).
   Corollary 1, with the extension to distribution functions with jumps derived by the quantile transform; Polyanskiy and
   Wu's Theorem 2.11, disintegration on standard Borel spaces; Haghighatshoar and Abbe's account of Rényi's definition
   and theorems. That the events fix no topology is now shown by an example, the line and the line cut at `0`, instead of
-  a citation. Kuratowski's and the Lusin–Souslin theorems wait on a host (`REQUESTS.md`, R14).
+  a citation. Kuratowski's and the Lusin–Souslin theorems waited on a host (`REQUESTS.md`, R14); read on 2026-10-14 in
+  Tserunyan's notes, Theorem 13.10, Theorem 13.3 and Corollary 13.4.
 - *Corrections* in `CORE-GENERAL.md`: GD3's Interpretation, Why and Notes; two rows of the conventions, whose column on
   verdicts now says that each changes one only where compactness fails; GM1–GM3's read status; GD1, GD2 and GD11's
   citations; §0 and §12. `general/dictionary.md` follows.
@@ -1494,5 +1496,5 @@ caught by one test fixed in advance. Where it is not, the nearness decides, and 
 is where every phenomenon the general core added lives: piles, near misses, the on-target controller. On finite
 outcomes compactness is free, which is why the finite core never met them (H39).
 
-**Open.** Checks in CI for TR1–TR8, which needs a decision on where checks of the general core live; R14; the rows of
+**Open.** Checks in CI for TR1–TR8, which needs a decision on where checks of the general core live; the rows of
 `general/transfer.md` still expected; H40 and H41.

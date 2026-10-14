@@ -33,7 +33,8 @@ def sources(root=ROOT):
         if rel.startswith((".git/", "obsidian/", ".pytest_cache/", "build/", "dist/")) or rel in ("REFERENCES.md",
                                                                                           "OVERVIEW.md"):
             continue
-        if re.match(r"cases/[^/]+/", rel) or rel in ("probes/general/PREDICTIONS.md", "probes/general/RESULTS.md"):
+        if re.match(r"cases/[^/]+/", rel) or rel in ("probes/general/PREDICTIONS.md", "probes/general/RESULTS.md",
+                                                     "probes/labels/REGISTRATION.md", "probes/labels/RESULTS.md"):
             continue
         out.append(p)
     return out

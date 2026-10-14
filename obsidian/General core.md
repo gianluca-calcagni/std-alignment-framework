@@ -53,10 +53,10 @@ choose one: where a topology matters, the principal or the actor supplies it, as
 
 **What the tests show about alignment.**
 - *Three kinds of outcome space, not more.* Any two uncountable standard Borel spaces are the same up to relabelling, by
-  Kuratowski's theorem [[References|@kechris1995]], not yet read in an open text here. By invariance, the framework tells apart only
-  finite, countable and continuous outcome spaces. Whether the outcomes are waiting times, trait values or responses,
-  alignment depends on them only through which events can be told apart (resolutions), which events are possible at all
-  (the default), and what the parties declare.
+  Kuratowski's Borel isomorphism theorem ([[References|@tserunyan2025]], Theorem 13.10). By invariance, the framework tells apart
+  only finite, countable and continuous outcome spaces. Whether the outcomes are waiting times, trait values or
+  responses, alignment depends on them only through which events can be told apart (resolutions), which events are
+  possible at all (the default), and what the parties declare.
 - *Geometry belongs to the parties.* Which outcomes are near which enters through the principal's objective, and through
   declarations of nearness, never through the framework.
 - *Two phenomena that finite outcomes hide.* (a) An actor can do what the default never does: pin one exact value, which
@@ -108,7 +108,7 @@ way.
 
 | Convention | Declared in | Justified by | Changes a verdict | Why |
 |---|---|---|---|---|
-| outcomes in a standard Borel space | GB1 | convenience, literature | no, for every outcome space met in practice | conditioning on a statistic is defined even when each of its values has probability zero; up to relabelling, only finite, countable and continuous spaces differ [[References\|@kechris1995]] |
+| outcomes in a standard Borel space | GB1 | convenience, literature | no, for every outcome space met in practice | conditioning on a statistic is defined even when each of its values has probability zero; up to relabelling, only finite, countable and continuous spaces differ ([[References\|@tserunyan2025]], Theorem 13.10) |
 | ratios to the default, never densities against length or volume | GD1 | forced, literature | yes: a density changes with units and coordinates | invariance; the behaviours equivalent to one measure are Pistone and Sempi's model [[References\|@pistone1995]] |
 | no nearness unless one is declared | GD3, GA5 | forced | only where no compact set holds the intended behaviours (`general/transfer.md`, TR3): there an actor that pins a value the default never produces is infinitely misaligned with no nearness, and may be aligned under one | the events fix no topology (GD3: the line, and the line cut at `0`, have the same events), so the framework cannot choose one; the finest resolution is the core's default in [[D4 — Resolution\|D4]] for the same reason |
 | misalignment as the supremum over the finite descriptions a record can decide | GA1, GA4, GD3 | forced | only where the intended behaviours omit some of their limits, or no compact set holds them; elsewhere it is the divergence to the nearest intended behaviour (`general/transfer.md`, TR3) | records decide finitely many events [[References\|@carcassi2021]], [[References\|@genin2017]]; the divergence itself is such a supremum ([[References\|@polyanskiy2025]], Theorem 4.5), over the descriptions a record can decide too (TR2) |
@@ -172,8 +172,9 @@ used by a claim until it is read.
 theorem for convex sets on any measurable space, an upper bound at every size and the limit under a condition on the
 interior ([[References|@csiszar1984]], Theorem 1), and the uniqueness of Ay, Jost, Lê and Schwachhöfer [[References|@ay2015]]. Rényi's information
 dimension, his definition and his theorems on vectors with a density and on mixtures, read as stated in
-[[References|@haghighatshoar2017]], his own text [[References|@renyi1959]] not read. Not yet read here: [[References|@kechris1995]], for Kuratowski's and the
-Lusin–Souslin theorems; the items that cite it say what for.
+[[References|@haghighatshoar2017]], his own text [[References|@renyi1959]] not read. Kuratowski's Borel isomorphism theorem and the Lusin–Souslin
+theorem, read in Tserunyan's open notes ([[References|@tserunyan2025]], Theorem 13.10, Theorem 13.3 and Corollary 13.4), stated there
+for Polish spaces, and so for standard Borel spaces, which carry the events of a Polish topology.
 
 **Why this choice.** As [[M3 — Imported theorems|M3]]: proving classical theorems again adds nothing, and listing what is borrowed, with what has
 been read, shows at a glance what the continuum rests on.
@@ -557,8 +558,9 @@ have probability zero (below).
   could record by answering countably many yes-or-no questions. Others mislead. The events that are countable, or whose
   complement is, form a σ-algebra whose cells are single outcomes; yet under a default that gives every single outcome
   probability zero it settles nothing, and every cell average over it is the overall average.
-- *Measurability is all or nothing.* A one-to-one statistic on a standard Borel space generates every event (the
-  Lusin–Souslin theorem [[References|@kechris1995]]), so a resolution is coarser than the finest only if its statistic merges
+- *Measurability is all or nothing.* A one-to-one statistic on a standard Borel space generates every event: by the
+  Lusin–Souslin theorem ([[References|@tserunyan2025]], Corollary 13.4) it carries each event `A` to an event `g(A)`, and `A` is the
+  set of outcomes whose value lies in `g(A)`; so a resolution is coarser than the finest only if its statistic merges
   outcomes: a pass-or-fail target, a risk model that reads a few variables, a reward that scores two responses alike.
   And a statistic that does merge outcomes makes almost no function a function of it. v7.10 withdrew a condition stated
   as non-measurability because it held generically (v7.10: row 4, "vacuous — generically satisfied"). The framework uses
