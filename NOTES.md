@@ -65,7 +65,7 @@ later results goes in Notes |
 | **Lineage amnesia after a restart** | [P13](ii) re-derived v7.10's B §4 (the gold slope `√2·ρ·sd` per `√KL`) and Prop 14 without crediting them; found only in the retrospective after v9. Again in the review of 2026-10-10 (§15, point 1): its finding that misalignment charges an optimizer's route re-found v7.10's H8, item 2 of its review of v7.3.3 and the identification rule of its brainstorm B1, none of which the restart had carried over; found when the PI asked for the hunches of past executors to be read | before adding a result, search v7.10 (`git grep -i <idea> v7.10`) for its counterpart, and cite it in the Lineage; before a finding of a review, too |
 | **A data claim written from memory** | the industrial-organization ontology gave the German price archive the licence CC BY 4.0, the live feed's; by secondary sources the archive is CC BY-NC-SA 4.0, for non-commercial use. Found only when the PI asked which specification the public data can test | a Data paragraph says where each claim about licence and access comes from, and says so when the primary source was not reached |
 | **An intervention dated with the quantity it tests** | the known result dates adoption partly by the speed of a station's response to its rival, a dependence between the stations; a test of coordination before and after those dates would have been partly true by construction. Caught before registration | before registering, list how every intervention or group is defined, and drop any marker that measures the outcome tested |
-| **A threshold without its scale, in a registration** | case C2's verification required a recovery of `0.999` on a grid of step `0.05`, while a third of the peaks came before `t = 0.5`; and S1 scored the rule against the best of 32 noisy training runs, so its threshold measured luck. All three predictions failed; the exact pursuit on S1's own grid would have reached only 79% | before registering, compute every threshold on the design's noise-free case, with seeds the test will not use, and score against what the design can reach, not against the luckiest run |
+| **A threshold without its scale, in a registration** | case C2's verification required a recovery of `0.999` on a grid of step `0.05`, while a third of the peaks came before `t = 0.5`; and S1 scored the rule against the best of 32 noisy training runs, so its threshold measured luck. All three predictions failed; the exact pursuit on S1's own grid would have reached only 79%; again in L1 (2026-10-14, §21): the outer misalignment of an order-preserving evaluator at intensity `1` was registered against an absolute threshold of `10⁻⁶`, and came out `2.9·10⁻⁷`, since at that intensity the trainer's optimum is almost wholly on the best outcome; positive as [P49](i) proves, but unresolved by the registration, so a failed prediction | before registering, compute every threshold on the design's noise-free case, with seeds the test will not use, and score against what the design can reach, not against the luckiest run |
 | **A run lost at its last step** | W1's report computed 35 minutes of per-prompt results and crashed in its final aggregation, a bootstrap indexing all 1,000 prompts over a list of 994; nothing had been saved | save per-item results (outside the repository) before aggregating, and aggregate in a function that can be rerun on them |
 | **A speed never measured** | W3's first launch was estimated at seconds per context and took about 50: the sampler recomputed every sequence at every token, and a second heavy job shared the processors. It was stopped before any context finished; a cached sampler in double precision, checked against the scorer, replaced it | before launching, time one context of the registered size on a made-up input, alone on the machine |
 | **A registered statistic that the design's mixture inflates** | W3 pooled, within each prompt, 32 continuations of the reference and 32 of the tuned model, and registered the `R²` of the revealed objective on the reward over all 64. The two sets differ by 16.5 nats on the objective and also on the reward, so most of the registered `0.358` comes from that difference; within either model's own continuations it is `0.10` to `0.12`. The verdict (refuted) stands, but the registered number understates the refutation, and a model whose change were pure pursuit of something correlated with the reward across the two sets could have passed S1 | before registering a statistic on a sample that mixes sources, compute it on each source alone in the calibration, and register the one that answers the question |
@@ -1498,3 +1498,75 @@ outcomes compactness is free, which is why the finite core never met them (H39).
 
 **Open.** Checks in CI for TR1–TR8, which needs a decision on where checks of the general core live; the rows of
 `general/transfer.md` still expected; H40 and H41.
+
+## 21. Do the labels mean what their words say? L1, 2026-10-14 (Q57)
+
+By the executor, a model of the Claude family, at the PI's request: verify that each definition's label corresponds to
+what its word means, since a definition with the wrong word gives a false sense of understanding. Not independent (rule
+(f)); the common-sense verdicts are the executor's, and wait for a person.
+
+**The answer to the PI's question.** No, until now nothing verified the labels. The Interpretation of each definition
+says what its object is in the world and how a record verifies its value; `TERMS.md` says why each name was chosen, by
+convention or by the literature. Neither tests the word against cases where its meaning is clear. L1 is the first such
+test.
+
+**Method.** For each label: its sense, in everyday use or in the text that coined it, read in an open text (Hubinger et
+al. for outer and inner alignment, Everitt et al. for tampering, Greenblatt et al. for alignment faking, Gao et al. for
+overoptimization); paradigm cases on a few outcomes where the sense clearly applies or clearly does not; and the
+framework's predicted verdict on each. All fixed and pushed before any computation (`probes/labels/REGISTRATION.md`,
+commit `14c15b0`), then computed with the library (`run.py`, `RESULTS.md`).
+
+**What it found.** 46 of 47 predictions held; the failure, L3c, was an instance whose value fell between the registered
+thresholds (§1). Of twelve labels, three agree with their words on every case: masking, overoptimization, and
+misalignment under the ordinal specification, with its outer version. Nine disagree on at least one:
+- *pursuit* ([D2]) is narrower than the word: best-of-`n` and a steeper pursuer pursue `F` but are not on its ray, and
+  doing nothing is its intensity `0`;
+- *misalignment* under the standard specification charges the method: best-of-4 and exact policy gradient on the right
+  objective are misaligned by `0.013` and `0.045` nats;
+- *aligned*, for misalignment `0`, includes doing nothing;
+- *inner misalignment* ([P49](ii)) charges selection by the training objective itself; Hubinger et al.'s inner alignment
+  concerns a learned optimizer's own objective, and the behavioural gap they cite is Leike et al.'s reward-result gap;
+- *tampering* ([P50]) charges best-of-4 by an honest sensor's reading (`0.314` nats), with the sensor untouched;
+- *fake alignment* ([P37](ii)) names an actor that complies with an incentive it faces, with nothing selective or
+  strategic, which is not what Greenblatt et al. call alignment faking;
+- *coordination* ([P39]) counts a common cause left out of the conditions;
+- *drift* within a record ([P54]) counts any variation across decisions, a fixed alternation of two tasks more than a
+  gradual change;
+- *attention* ([P40]) counts what the environment does to the outcome, unseen by the actor;
+- *shortfall* ([D5]) is measured at the actor's own departure, so an actor asked to pursue `F` that does nothing falls
+  short of nothing.
+After the verdicts, exploratory: an evaluator `e^F` that ranks outcomes exactly as `F` does is outer misaligned under
+the standard specification at every intensity, `9%` to `13%` of the departure for `t ≤ 0.1`, as [P49](i) proves.
+
+**What the findings share.** Most disagreements are one: the standard specification reads "pursue `F`" as "reweight by
+`e^{t·F}`", which is one way of pursuing, and every label built on it inherits the narrowing (pursuit, misalignment,
+outer and inner misalignment). The ordinal specification reads "pursue `F`" as "favour what `F` ranks higher, at least
+as much as the default does", and its labels agreed with their words on every registered case. So the error is less in
+the word "misalignment", which [D3] defines against any declared specification, than in naming the tilted family the
+reading of "pursue `F`". The other disagreements are labels that name a cause where the formula measures an effect with
+several causes: tampering and selection on noise; coordination and common causes; attention and the environment; drift
+and any non-stationarity; alignment faking and a mere incentive.
+
+**What the executor recommends, for the PI to decide** (`REQUESTS.md`, R15).
+1. Name the standard specification for what it is, the specification of *tilted pursuit*, and read "pursue `F`" by
+   default as the ordinal specification; misalignment keeps its name, relative to the declared specification. [D2]'s
+   object becomes *tilted pursuit*, and its ray the *tilted ray*.
+2. Never call misalignment `0` "aligned": it is "not misaligned". "Aligned" needs a floor that excludes doing nothing
+   ([P35]).
+3. Outer and inner misalignment against the ordinal specifications of the target and of the training objective; the
+   standard versions named *outer and inner misalignment of tilted pursuit*, and [P49](ii)'s quantity, which charges any
+   departure from the training objective's tilt, the *reward-result gap*, Leike et al.'s term as Hubinger et al. report
+   it.
+4. Rename the effects for what they measure, and name their causes in the Interpretation: *measurement distortion* for
+   [P50]'s `T` (tampering and selection on noise), *dependence between actors* for [P39]'s `K` (coordination and common
+   causes), *responsiveness* for [P40]'s quantity (attention and the environment), *variation across the record* for
+   [P54]'s `δ` (drift and schedules), and *shortfall for its departure* for [D5]'s `S`.
+5. Drop "fake alignment" from [P37](ii), which becomes "an incentive met only in evaluation hides misalignment in use";
+   behaviourally, alignment faking is an evaluation gap ([P24]) whose cause the framework cannot see ([A1]).
+6. Make the check part of the format: each Interpretation gains a part *Named*, the word's sense, its source and the
+   cases where the object departs from it; the paradigm cases become checks in CI, cited by a field Checks on
+   definitions; lint requires the part; and L2 extends the test to every term of `TERMS.md`, about a hundred.
+
+**What it does not show.** That a label agrees on a dozen paradigm cases does not make it right everywhere; it makes
+the cases where it is wrong visible. The senses are paraphrases; a person, the PI first, should read them, since the
+executor's sense of everyday use is itself what is being tested.
