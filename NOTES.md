@@ -1570,3 +1570,37 @@ and any non-stationarity; alignment faking and a mere incentive.
 **What it does not show.** That a label agrees on a dozen paradigm cases does not make it right everywhere; it makes
 the cases where it is wrong visible. The senses are paraphrases; a person, the PI first, should read them, since the
 executor's sense of everyday use is itself what is being tested.
+
+**On a continuum** (2026-10-14, at the PI's question whether the recommendations survive in the general core). Argued
+from the general core's definitions, its proved results and its probes; not a registered test.
+- *The ordinal reading of "pursue `F`" is stronger there.* When `F`'s upper tail under the default is heavier than
+  exponential, `T_F = {0}` (GD2): the tilted specification intends only the default, so every actor that raises `F` is
+  charged its whole departure. Best-of-`n` by an evaluator without atoms then has `M = log n − (n − 1)/n`, `0.19` nats
+  at `n = 2` ([@beirami2024]; `general/transfer.md`, best-of-`n`), while its ratio `n·G(F)^{n−1}` is non-decreasing in
+  `F`, so its ordinal misalignment is `0`. The ordinal specification needs no tilt to exist. The same holds for outer
+  misalignment: the trainer's tilted optimum for an order-preserving evaluator such as `e^F` may not exist at any
+  positive intensity, while the ordinal version is defined on behaviours.
+- *But the ordinal specification is not compact there.* Densities that are non-decreasing functions of `F` can pile
+  toward its supremum without limit in τ, so TR3 does not apply to it: at the extreme, the nearness still decides, as
+  for the tilted ray. And on any space it charges what `F` cannot see: its ratio to the default must be a function of
+  `F`, so a side preference among outcomes `F` scores alike is misalignment. L1 had no case for that; L2 should.
+- *A new failure, only on a continuum: near misses.* An actor that always outputs `0.001` where the principal wants `0`
+  is infinitely misaligned at full precision under both specifications, with or without the usual nearness (GD3; for the
+  ordinal one, a density non-increasing in `|x|` gives a cell of width `2η` around `0.001` at most about `η/0.001` of
+  its mass). The word grades by distance; the supremum does not. At a declared resolution `w` the value is graded:
+  offsets below `w` are forgiven, larger ones charged by how rarely intended behaviours visit their cell, and the
+  dimension law adds `(D − d)·log(1/w)` for unasked-for precision (TR6). So on a continuum "misalignment" should be
+  reported at a declared resolution or precision (GD4, GD7, GD11), and the supremum named *misalignment at full
+  precision*.
+- *Effects, refined.* Measurement distortion: selection among `n` honest draws gives a behaviour at most `n` times the
+  default, so its distortion is at most `log n` and has no singular part; a pile at an exact signal value the honest
+  channel never produces, or distortion beyond `log n` of the candidates the actor could sample, can only be tampering.
+  So the continuum names tampering where finite outcomes cannot, and the bound holds on finite outcomes too. Dependence
+  between actors and responsiveness are infinite at full precision for any deterministic link between continuous
+  quantities, so they too need a declared resolution. Shortfall: with a heavy upper tail every positive departure buys
+  unbounded gain ([P9]'s row in `general/transfer.md`), so every actor that departs has infinite shortfall and the one
+  that does nothing has `0`; it means something only where the frontier is finite.
+- *Survive unchanged:* "not misaligned" for misalignment `0`, which on a continuum also covers the on-target controller
+  under a nearness, an actor the word does call aligned, so the phrase is right and "aligned" still needs a floor;
+  dropping "fake alignment"; variation across the record; the part *Named* and checks in CI, with the general core's
+  own labels (nearness, decidable, precision, frontier, pile) added to L2.
