@@ -18,8 +18,10 @@ acceptable behaviour expects to pay more than its price. Its **growth rate** und
 (i) For every bet `h` against `A`, `E_p[log h] ≤ M_A(p)`.
 (ii) If `M_A(p) < ∞`, the minimum is attained at some `a* ∈ A`, and `h* = p/a*` on the support of `p`, `0` elsewhere,
 is a bet against `A` with `E_p[log h*] = M_A(p)`.
-(iii) If `M_A(p) = ∞`, there are bets whose growth rate under `p` exceeds any number. So `M_A(p) = sup_h E_p[log h]`
-over the bets against `A`, a maximum when it is finite.
+(iii) If `M_A(p) = ∞`, there are bets whose growth rate under `p` exceeds any number.
+(iv) If `A` is convex but not closed, `M_A(p) = M_{cl A}(p)`, and the bets against `A` are those against its closure
+`cl A`, which is convex; so (i) and (iii) hold for `A`, and the maximum of (ii) is attained in `cl A`, possibly outside
+`A`. So `M_A(p) = sup_h E_p[log h]` over the bets against `A`, a maximum when it is finite.
 
 **In plain terms.** Bet against the principal's standard, with tickets that the standard itself says are fair or worse.
 If the actor really is acceptable, no such bet grows on average. If it is not, the fastest any of them can grow is
@@ -37,14 +39,21 @@ differentiable on `[0, 1)`, with `φ(s) ≥ φ(0)`. Hence
 `E_p[log h*] = Σ_{x∈S} p(x)·log(p(x)/a*(x)) = KL(p‖a*) = M_A(p)`.
 (iii) If every `x ∈ S` had some `a_x ∈ A` with `a_x(x) > 0`, their average would lie in `A`, by convexity, and be
 positive on `S`, so `M_A(p)` would be finite. So some `x₀ ∈ S` has `a(x₀) = 0` for every `a ∈ A`. For `H > 1`, the
-function `h = 1` off `x₀` and `h(x₀) = H` is a bet, since `E_a[h] = 1 − a(x₀) = 1`, and `E_p[log h] = p(x₀)·log H`. ∎
+function `h = 1` off `x₀` and `h(x₀) = H` is a bet, since `E_a[h] = 1 − a(x₀) = 1`, and `E_p[log h] = p(x₀)·log H`.
+(iv) `a ↦ E_a[h]` is continuous, so a bet against `A` is one against `cl A`, and conversely since `A ⊆ cl A`.
+`M_{cl A}(p) ≤ M_A(p)` since `A ⊆ cl A`. Conversely, let `a ∈ cl A` with `KL(p‖a) < ∞`, so `a > 0` on the support of
+`p`, and `a_n ∈ A` with `a_n → a`; `KL(p‖·)` is a finite sum of continuous terms near `a`, so `KL(p‖a_n) → KL(p‖a)`, and
+`M_A(p) ≤ KL(p‖a)`. The closure of a convex set is convex. ∎
 
-**Notes.** Read in an open text: Grünwald, de Heide and Koolen ([@grunwald2023], Theorem 1) prove the general form, on
-any sample space, for a null hypothesis given as all mixtures of a family; the optimal bet is there "the
-growth-rate-optimal e-variable", the nearest behaviour "the reverse information projection", and a bet an "e-variable".
-The proof above is the finite case, self-contained. Checked on 300 random instances of v13's ordinal specification,
-which is convex: `h*` costs at most `1` under each of its extreme points, to within `5e-16`, and its growth rate equals
-`M` to within `5e-16` (`probes/v14/RESULTS.md`, VE1).
+**Notes.** Read in an open text: Grünwald, de Heide and Koolen ([@grunwald2023], Theorem 1) prove a general form, on any
+sample space, for a null hypothesis given as all mixtures of a family, when the actor's behaviour has full support and
+its misalignment is finite; the optimal bet is there "the growth-rate-optimal e-variable", the nearest behaviour "the
+reverse information projection", and a bet an "e-variable". The proof above is the finite case, self-contained. By (iv),
+VE1 covers v13's convex specifications, which are closed in `Δ°` but not always in `Δ`, such as the ordinal one: there
+v14's number is v13's. A forbidden set (`constraints.md`) has no counterpart in v13, which asked intended behaviours to
+have full support. Checked on random instances of v13's ordinal specification, a third of them with outcomes the actor
+never uses: `h*` costs at most `1` under each extreme point of the specification, which by (i) is what makes it the best
+bet (`probes/v14/RESULTS.md`, VE1); its growth rate equals `KL(p‖a*)` by definition.
 
 ### VE2 — Records hold an actor to the convex hull
 **Statement.** Let `A` be closed, not necessarily convex, and `conv A` its convex hull.
@@ -54,9 +63,10 @@ which may be smaller than `M_A(p)`.
 `ε` of the average `ā_n = (1/n)·Σ a_i`, outcome by outcome, with probability at least `1 − |X|/(4·n·ε²)`; and
 `ā_n ∈ conv A`.
 
-**In plain terms.** If acting one acceptable way at some decisions and another at others is fine, what the record shows
-is a mixture of acceptable behaviours. No record can tell that apart from an actor that always acts as that mixture, so
-no record can hold the actor to anything stricter than the mixtures.
+**In plain terms.** If acting one acceptable way at some decisions and another at others is fine, the shares a record
+shows are those of a mixture of acceptable behaviours. Judged by its shares, or by bets against what is acceptable, such
+an actor cannot be held to anything stricter than the mixtures. The order of the decisions may still reveal a fixed
+schedule, but nothing acceptable is breached by one.
 
 **Proof.** (i) `a ↦ E_a[h]` is affine, so `E_a[h] ≤ 1` on `A` implies it on every mixture of points of `A`; the
 converse holds since `A ⊆ conv A`. `conv A` is compact, as the convex hull of a compact set in finite dimension, so VE1
@@ -72,11 +82,11 @@ convex and contains the ray's hull, accuses it in none from counts, and in 1.9% 
 VE2). The lesson for v14: acceptable sets are convex, by a principle stated as such (`README.md`).
 
 ### VE3 — A test from bets keeps its level whatever the dependence
-**Statement.** Decisions `1, 2, …, n` are made in turn, each in a context. Before decision `i`, an acceptable set `A_i`
-is fixed by the context, and a bet `h_i` against `A_i` is chosen; both may depend on everything before decision `i`.
-The **wealth** after `k` decisions is `W_k = Π_{i≤k} h_i(x_i)`, with `W_0 = 1`. If, given everything before it, each
-decision is drawn from some behaviour in `A_i`, then for every `α ∈ (0, 1]`, the probability that `W_k ≥ 1/α` for some
-`k ≤ n` is at most `α`.
+**Statement.** Decisions `1, 2, …, n` are made in turn, each in one of finitely many contexts. Before decision `i`, an
+acceptable set `A_i` is fixed by the context, and a bet `h_i` against `A_i` is chosen; both may depend on everything
+before decision `i`. The **wealth** after `k` decisions is `W_k = Π_{i≤k} h_i(x_i)`, with `W_0 = 1`. If, given
+everything before it, each decision is drawn from some behaviour in `A_i`, then for every `α ∈ (0, 1]`, the probability
+that `W_k ≥ 1/α` for some `k ≤ n` is at most `α`.
 
 **In plain terms.** Keep betting against the standard, one decision at a time, changing the bet as you learn. If the
 actor acts acceptably at every step, given what came before, the chance that your wealth ever reaches `20` is at most
@@ -97,8 +107,10 @@ may be accused for that alone ([P55], Notes). Here the hypothesis is stated inst
 every actor that is acceptable at every step given its past, and an actor that is not, such as one that copies its first
 decision when the principal accepts only independent fair coins, is accused because it is not, which is what the
 declaration asked. In the probe, an actor that pursues `F` at intensity `8` right after the best outcome and at `0`
-otherwise, so that its decisions depend on each other, is accused by the bet in 1.2% of 2,000 records at level 5%, and
-by [P55]'s count test against the ray in 15.7% (`probes/v14/RESULTS.md`, VE2).
+otherwise, so that its decisions depend on each other while each is acceptable under the ordinal specification, is
+accused by the bet against that specification in 1.2% of 2,000 records at level 5%, as VE3 guarantees, and by [P55]'s
+count test against it in none; this instance does not show the count test failing under dependence, and its 15.7%
+against the ray is the ray's lack of convexity (VE2), not dependence (`probes/v14/RESULTS.md`, VE2).
 
 ### VE4 — A bet's growth is estimated by an average
 **Statement.** If decisions are independent draws from `p`, and `h` is a bet fixed in advance with `h > 0` on the

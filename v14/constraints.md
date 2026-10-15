@@ -8,7 +8,7 @@ no reference and no ranking. The PI asked for constraints as a concept of the co
 form of misalignment (Q59). Three forms cover what a principal states in practice, and each is a convex closed set of
 behaviours, so VE1 applies to it:
 - a **forbidden set** `C ⊆ X`, `C ≠ X`: `K = {a : a(C) = 0}`; "never give this answer";
-- a **rate limit** `(C, ε)`, `0 ≤ ε < 1`: `K = {a : a(C) ≤ ε}`; "at most one harmful answer in a thousand";
+- a **rate limit** `(C, ε)`, `C ≠ X`, `0 ≤ ε < 1`: `K = {a : a(C) ≤ ε}`; "at most one harmful answer in a thousand";
 - a **budget** `(g, b)`, a cost `g : X → ℝ` and a number `b` with `min g < b`: `K = {a : E_a[g] ≤ b}`; "on average at
   most five seconds", or "at most this much spent".
 
@@ -37,9 +37,9 @@ with its neighbours, as a measurement on a continuum may, verifies it only when 
 (`CORE-GENERAL.md`).
 
 ### VK2 — A rate limit, in closed form
-**Statement.** For a rate limit `(C, ε)` and `p ∈ Δ`: `M_K(p) = kl(p(C)‖ε)` if `p(C) > ε`, and `0` otherwise. The
-nearest acceptable behaviour keeps the actor's proportions inside `C` and outside it, and scales their masses to `ε`
-and `1 − ε`.
+**Statement.** For a rate limit `(C, ε)` and `p ∈ Δ`: `M_K(p) = kl(p(C)‖ε)` if `p(C) > ε`, and `0` otherwise. When
+`p(C) > ε > 0`, a nearest acceptable behaviour keeps the actor's proportions inside `C` and outside it, and scales their
+masses to `ε` and `1 − ε`; it is unique when `p(C) < 1`.
 
 **In plain terms.** Against a limit on how often something happens, the evidence of breach depends only on how often it
 does happen: it is the evidence against a coin that lands on "breach" at the permitted rate. What the actor does inside
@@ -59,7 +59,7 @@ breach, applies unchanged to a record of independent decisions, and VE3 to any r
 ### VK3 — A budget, by a Lagrange dual
 **Statement.** For a budget `(g, b)` and `p ∈ Δ`: if `E_p[g] ≤ b`, `M_K(p) = 0`. Otherwise, with
 `λ_max = 1/(b − min g)`, `M_K(p) = max_{0 ≤ λ ≤ λ_max} E_p[log(1 + λ·(g − b))]`, attained at some `λ* > 0`. The bet
-`h* = 1 + λ*·(g − b)` is the best bet against `K`, and the nearest acceptable behaviour is `a* = p/h*` on the support of
+`h* = 1 + λ*·(g − b)` is a best bet against `K`, and the nearest acceptable behaviour is `a* = p/h*` on the support of
 `p`, with any remaining mass on outcomes of least cost.
 
 **In plain terms.** Against a budget, the best bet is simple: stake a fixed fraction `λ` of your wealth on the cost
@@ -123,7 +123,7 @@ any `a` with `E_a[g] ≤ b`:
 the objective `F − ν·g` at intensity `t`, and since `ν ≥ 0`. The right side equals `E_{a_ν}[F] − KL(a_ν‖q)/t`, because
 `ν·(E_{a_ν}[g] − b) = 0`: either `ν = 0` or the budget binds. These are the Karush–Kuhn–Tucker conditions, verified
 directly. For a forbidden set, an `a` with `a(C) = 0` has `KL(a‖q) = KL(a‖q(·|X∖C)) − log q(X∖C)`, so the problem is
-[P4](i) with the default `q(·|X∖C)`. ∎
+[P4](i) on the outcomes `X ∖ C`, where `q(·|X∖C)` has full support, or trivial if `X ∖ C` has one outcome. ∎
 
 **Notes.** Checked against a numerical maximization on 30 random instances, within `3e-13`, and the derivative of the
 largest value in `b` equals `ν` within `8e-9` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for the

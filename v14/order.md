@@ -32,7 +32,8 @@ closed, being cut out by finitely many linear inequalities, and both contain `r`
 
 ### VO2 — v13's ordinal specification lies inside "better for every reading"
 **Statement.** For a total ranking by `F` and `r ∈ Δ°`, every behaviour `a` whose ratio `a/r` is a non-decreasing
-function of `F` lies in `B(r)`. The inclusion is strict when `F` takes at least three values.
+function of `F` lies in `B(r)`. The inclusion is strict when `F` takes at least three values, or when two outcomes tie
+in `F`.
 
 **In plain terms.** v13's ordinal specification, which asks the actor to favour better outcomes at every level relative
 to the reference, is a stronger demand than being better for everyone who holds the ranking.
@@ -40,9 +41,13 @@ to the reference, is a stronger demand than being better for everyone who holds 
 **Proof.** Let `ρ = a/r`, non-decreasing in `F`, with `E_r[ρ] = 1`, and `U = {F ≥ f}`. `ρ` and `1_U` are both
 non-decreasing functions of `F`, so `Cov_r(ρ, 1_U) ≥ 0` (for two non-decreasing functions of one variable,
 `Σ_{x,y} r(x)·r(y)·(ρ(x) − ρ(y))·(1_U(x) − 1_U(y)) ≥ 0`, each term being a product of two numbers of the same sign; the
-sum is twice the covariance). So `a(U) = E_r[ρ·1_U] ≥ E_r[ρ]·r(U) = r(U)`. Strictness: with three levels of equal
-reference mass, `a = (0, 2/3, 1/3)` on the levels in increasing order dominates `r` (its upper-set masses are
-`1, 1, 1/3` against `1, 2/3, 1/3`), and its ratio `(0, 2, 1)` is not non-decreasing. ∎
+sum is twice the covariance). So `a(U) = E_r[ρ·1_U] ≥ E_r[ρ]·r(U) = r(U)`. Strictness. With three levels
+`f_1 < f_2 < f_3` of `F`, move a mass `s`, with `0 < s ≤ r(F = f_1)`, from the outcomes at the lowest level to those at
+the middle one, in proportion to `r` within each. The mass of `{F ≥ f}` rises by `s` for `f_1 < f ≤ f_2` and is
+unchanged otherwise, so the result is in `B(r)`; its ratio is above `1` at the middle level and `1` at the top, so it is
+not non-decreasing. With two outcomes tied in `F`, moving a little mass from one to the other changes no upper set's
+mass, and makes `a/r` differ between two outcomes at the same level, which v13's ordinal specification, asking `a/r` to
+be a function of `F`, excludes. ∎
 
 **Notes.** Which of the two the order's requirement should be is an open question for the PI (`README.md`). `B(r)` asks
 only what every holder of the ranking would agree on; v13's cone asks, besides, a shape, which best-of-`n` and every
@@ -53,28 +58,31 @@ pursuit of an increasing transformation of `F` meet, and which a greedy decoder 
 ∈ W(r)`, both when `a(U) = r(U)` for every upper set, and **neither** otherwise. With records of independent decisions:
 (i) "not better", `a ∉ B(r)`, and "not worse", `a ∉ W(r)`, are verifiable in the statistical sense, by the bets of VE1
 against the convex sets `B(r)` and `W(r)`;
-(ii) "worse", and "better", are not verifiable: each is refutable only;
-(iii) for a total ranking, "worse by a margin `m > 0` on a declared range of upper sets", `a(U) ≤ r(U) − m` for every
-upper set `U` in a declared finite list, is verifiable.
+(ii) if some upper set `U` has `0 < r(U) < 1`, as it does when `r` has full support and the ranking has at least two
+classes, "worse or equal", `a ∈ W(r)`, and "better or equal", `a ∈ B(r)`, are not verifiable: each is refutable only;
+(iii) for a margin `m > 0` and a finite list `𝒰` of upper sets declared in advance, **worse by `m` at `𝒰`**,
+`a(U) < r(U) − m` for every `U ∈ 𝒰`, is verifiable. It is a verdict of its own: it does not imply `a ∈ W(r)`, since it
+says nothing of the upper sets outside `𝒰`.
 
 **In plain terms.** A record can show that an actor is not an improvement for everyone who holds the ranking, and that
-it is not a regression for everyone. It can never show that the actor is a regression for everyone, since a behaviour
-that equals the reference is a regression for no one and lies arbitrarily close to one that is; it can show a
-regression by a stated margin at stated standards.
+it is not a regression for everyone. It can never show that the actor is worse or equal for everyone: the reference
+itself is worse or equal, and behaviours arbitrarily close to it are not, so no finite record separates the two. It can
+show a shortfall by a stated margin at standards stated in advance, which is a different verdict.
 
 **Proof.** (i) The complement of a closed set is open in the behaviours, and the open sets are those verifiable in the
 statistical sense ([@genin2017], as cited in [D3]); the tests are VE3's, against `B(r)` or `W(r)`. (ii) `W(r)` and
 `B(r)` are closed and contain `r`. Every neighbourhood of `r` contains behaviours outside `W(r)`, unless every
 behaviour near `r` is in `W(r)`, which fails as soon as some upper set `U` has `0 < r(U) < 1`, by moving a little mass
 into `U`; likewise for `B(r)`. A set with a boundary point in it that is not interior is not open, so not verifiable.
-(iii) The set is cut out by finitely many strict inequalities, so it is open. ∎
+(iii) `a ↦ a(U)` is continuous, so the set is cut out by finitely many strict inequalities between continuous functions,
+and it is open. ∎
 
 **Notes.** The greedy decoder of `NOTES.md` §22: ten levels, a uniform reference, and an actor that always answers at
-level `8`. It meets the standard "level `9`" less often than the reference (`0` against `0.1`) and every standard up to
-level `8` more often, so it is neither better nor worse (`probes/v14/RESULTS.md`, VO3), while its average rank is
-`0.889` against `0.5`. v13's ordinal specification calls it misaligned. Common sense would not; what the decoder lacks
-is the principal's value scale, under which its average rank would count, or a declared standard ("at least level 8"),
-which it meets every time. The verdicts of v14 say this instead of one number: neither better nor worse for every
-reading, and better under the declared scale or standard, if one is declared. "Misaligned" is kept for a breach of a
-constraint, and for "worse", which the principal may declare by margins (iii). Whether these are the right words is for
-L2 to test before anyone adopts them.
+level `8`. It meets the standard "level `9`" less often than the reference (`0` against `0.1`), the standards from level
+`1` to level `8` more often, and level `0` as often, so it is neither better nor worse (`probes/v14/RESULTS.md`, VO3),
+while its average rank is `0.889` against `0.5`. v13's ordinal specification calls it misaligned. Common sense would
+not; what the decoder lacks is the principal's value scale, under which its average rank would count, or a declared
+standard ("at least level 8"), which it meets every time. The verdicts of v14 say this instead of one number: neither
+better nor worse for every reading, and better under the declared scale or standard, if one is declared. "Misaligned" is
+kept for a breach of a constraint, and for a shortfall by margins the principal declares in advance (iii). Whether these
+are the right words is for L2 to test before anyone adopts them.

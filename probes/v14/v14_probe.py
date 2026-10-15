@@ -60,17 +60,21 @@ def section(name):
 
 
 section("VE1  the best bet against a convex set: h* = p/a* is a bet, and E_p[log h*] = M")
-worst_bet, worst_val = -np.inf, 0.0
+worst_bet, worst_val, zeros = -np.inf, 0.0, 0
 for _ in range(300):
     n = int(rng.integers(3, 8))
     q, p = rng.dirichlet(np.ones(n)), rng.dirichlet(np.ones(n))
-    a = nearest_cone(p, q); h = p / a
+    if rng.random() < 1 / 3:                             # outcomes the actor never uses
+        p[rng.random(n) < 0.4] = 0
+        if p.sum() == 0:
+            p[-1] = 1
+        p /= p.sum(); zeros += 1
+    a = nearest_cone(p, q); h = np.where(p > 0, p / np.where(a > 0, a, 1), 0.0)
     for f in range(n):                                   # the extreme points of the ordinal cone: q given F ≥ f
         e = np.where(np.arange(n) >= f, q, 0.0); e /= e.sum()
         worst_bet = max(worst_bet, e @ h - 1)
-    worst_val = max(worst_val, abs(p @ np.log(h) - kl(p, a)))
-print(f"  ordinal cone, 300 instances: largest E_a[h*] − 1 over its extreme points {worst_bet:.1e}; "
-      f"|E_p log h* − M| at most {worst_val:.1e}")
+print(f"  ordinal cone, 300 instances ({zeros} with outcomes the actor never uses): largest E_a[h*] − 1 over its "
+      f"extreme points {worst_bet:.1e}")
 
 section("VE2  records hold an actor to the convex hull")
 n_out = 4; q4 = np.full(n_out, 0.25); F4 = np.arange(n_out, dtype=float)
@@ -114,14 +118,14 @@ for name, step, records in cases:
     print(f"    {name:45s} {a:.4f}  {b:.4f}  {c:.4f}   ({records} records)")
 
 section("VK2  rate limit a(C) ≤ ε: M = kl(p(C)‖ε) when p(C) > ε")
-worst = 0.0
+worst, count = 0.0, 0
 for _ in range(40):
     n = int(rng.integers(3, 7)); p = rng.dirichlet(np.ones(n)); C = rng.random(n) < 0.5
     if not C.any() or C.all():
         continue
-    eps = rng.uniform(0, p[C].sum())
+    eps = rng.uniform(0, p[C].sum()); count += 1
     worst = max(worst, abs(min_kl_linear(p, C.astype(float)[None, :], np.array([eps])) - kl2(p[C].sum(), eps)))
-print(f"  largest |numerical minimum − kl(p(C)‖ε)|: {worst:.1e}")
+print(f"  {count} instances: largest |numerical minimum − kl(p(C)‖ε)|: {worst:.1e}")
 
 section("VK3  budget E_a[g] ≤ b: M = max over 0 ≤ λ ≤ 1/(b − min g) of E_p[log(1 + λ(g − b))]")
 
@@ -138,29 +142,30 @@ def budget(p, g, b):
     return -r.fun, a
 
 
-worst, worst_a, edge = 0.0, 0.0, 0
+worst, worst_a, edge, count = 0.0, 0.0, 0, 0
 for _ in range(80):
     n = int(rng.integers(3, 7)); p = rng.dirichlet(np.ones(n)); g = rng.normal(size=n)
     if rng.random() < 0.4:
         p[0] = 0; p /= p.sum(); g[0] = g.min() - 3            # a cheap outcome the actor never uses
     if p @ g <= g.min() + 1e-3:
         continue
-    b = rng.uniform(g.min() + 1e-3, p @ g)
+    b = rng.uniform(g.min() + 1e-3, p @ g); count += 1
     m, a = budget(p, g, b)
     worst = max(worst, abs(m - min_kl_linear(p, g[None, :], np.array([b]))))
     worst_a = max(worst_a, abs(kl(p, a) - m), max(0.0, a @ g - b), abs(a.sum() - 1))
     edge += bool(p[np.argmin(g)] == 0 and a[np.argmin(g)] > 1e-9)
-print(f"  largest |dual − numerical minimum| {worst:.1e}; the constructed a* is a behaviour within the budget and "
+print(f"  {count} instances: largest |dual − numerical minimum| {worst:.1e}; the constructed a* is a behaviour within the budget and "
       f"attains it within {worst_a:.1e}; {edge} instances at the edge λ* = 1/(b − min g)")
 
 section("VK4  several budgets: the best affine bet against the numerical minimum")
-worst = 0.0
+worst, count = 0.0, 0
 for _ in range(30):
     n = int(rng.integers(4, 7)); p = rng.dirichlet(np.ones(n)); G = rng.normal(size=(2, n))
     b = np.array([rng.uniform(G[j].min() + 0.2, max(G[j].min() + 0.3, p @ G[j])) for j in range(2)])
     num = min_kl_linear(p, G, b)
-    if not np.isfinite(num):
+    if not np.isfinite(num):                             # no behaviour keeps both budgets
         continue
+    count += 1
 
     def neg(lam):
         h = 1 + lam @ (G - b[:, None])
@@ -168,10 +173,10 @@ for _ in range(30):
     best = min(minimize(neg, rng.uniform(0, 0.1, 2), method="Nelder-Mead",
                         options={"xatol": 1e-12, "fatol": 1e-14, "maxiter": 20000}).fun for _ in range(10))
     worst = max(worst, abs(-best - num))
-print(f"  two budgets, 30 instances: largest |best affine bet − numerical minimum| {worst:.1e}")
+print(f"  two budgets, {count} of 30 instances with a behaviour that keeps both: largest |best affine bet − numerical minimum| {worst:.1e}")
 
 section("VK5  the constrained optimizer is tilt(q, t·(F − ν·g)), and ν is the budget's shadow price")
-worst, worst_price = 0.0, 0.0
+worst, worst_price, count = 0.0, 0.0, 0
 for _ in range(30):
     n = int(rng.integers(3, 7)); q = rng.dirichlet(np.ones(n)); F = rng.normal(size=n); g = rng.normal(size=n)
     t = rng.uniform(0.5, 4)
@@ -180,7 +185,7 @@ for _ in range(30):
         continue
     b = rng.uniform(g.min() + 0.05, opt(0) @ g)
     nu_of = lambda bb: brentq(lambda v: opt(v) @ g - bb, 0, 200)
-    nu = nu_of(b)
+    nu = nu_of(b); count += 1
     value = lambda a: a @ F - kl(a, q) / t
     best = None
     for _ in range(10):
@@ -195,7 +200,7 @@ for _ in range(30):
     d = 1e-5
     slope = (value(opt(nu_of(b + d))) - value(opt(nu_of(b - d)))) / (2 * d)
     worst_price = max(worst_price, abs(slope - nu))
-print(f"  largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
+print(f"  {count} instances: largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
 q5 = rng.dirichlet(np.ones(5)); F5 = rng.normal(size=5); C5 = np.array([0, 0, 1, 0, 1.0])
 allowed = np.where(C5 == 0, q5 * np.exp(2 * F5), 0); allowed /= allowed.sum()
 print(f"  forbidden set: total variation between tilt(q, 2(F − 40·1_C)) and the pursuit on the allowed outcomes "
