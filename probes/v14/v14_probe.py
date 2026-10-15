@@ -176,7 +176,7 @@ for _ in range(30):
 print(f"  two budgets, {count} of 30 instances with a behaviour that keeps both: largest |best affine bet − numerical minimum| {worst:.1e}")
 
 section("VK5  the constrained optimizer is tilt(q, t·(F − ν·g)), and ν is the budget's shadow price")
-worst, worst_price, count = 0.0, 0.0, 0
+worst, worst_price, count, failed = 0.0, 0.0, 0, 0
 for _ in range(30):
     n = int(rng.integers(3, 7)); q = rng.dirichlet(np.ones(n)); F = rng.normal(size=n); g = rng.normal(size=n)
     t = rng.uniform(0.5, 4)
@@ -188,7 +188,7 @@ for _ in range(30):
     nu = nu_of(b); count += 1
     value = lambda a: a @ F - kl(a, q) / t
     best = None
-    for _ in range(10):
+    for _ in range(30):
         r = minimize(lambda a: -value(np.maximum(a, 1e-300)), rng.dirichlet(np.ones(n)), method="SLSQP",
                      bounds=[(1e-12, 1)] * n,
                      constraints=[{"type": "eq", "fun": lambda a: a.sum() - 1},
@@ -196,11 +196,14 @@ for _ in range(30):
                      options={"ftol": 1e-15, "maxiter": 3000})
         if r.success and (best is None or r.fun < best.fun):
             best = r
+    if best is None:                                     # the solver failed from every start: no comparison
+        failed += 1; count -= 1
+        continue
     worst = max(worst, abs(-best.fun - value(opt(nu))))
     d = 1e-5
     slope = (value(opt(nu_of(b + d))) - value(opt(nu_of(b - d)))) / (2 * d)
     worst_price = max(worst_price, abs(slope - nu))
-print(f"  {count} instances: largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
+print(f"  {count} instances ({failed} where the solver failed from every start): largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
 q5 = rng.dirichlet(np.ones(5)); F5 = rng.normal(size=5); C5 = np.array([0, 0, 1, 0, 1.0])
 allowed = np.where(C5 == 0, q5 * np.exp(2 * F5), 0); allowed /= allowed.sum()
 print(f"  forbidden set: total variation between tilt(q, 2(F − 40·1_C)) and the pursuit on the allowed outcomes "

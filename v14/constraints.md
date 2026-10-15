@@ -52,8 +52,8 @@ min_{v≤ε} kl(p(C)‖v)`, and `v ↦ kl(u‖v)` decreases on `[0, u]` and incr
 at `v = ε`, and when `u ≤ ε` it is `0` at `v = u`. The boundary `a(C) ∈ {0, 1}` gives `∞` unless `p` agrees, and is
 covered by the same formula. ∎
 
-**Notes.** With `ε = 0` it is VK1, since `kl(u‖0) = ∞` for `u > 0`. Checked against a numerical minimization on 40
-random instances, within `5e-12` (`probes/v14/RESULTS.md`, VK2). The exact test of [P55] on two outcomes, breach and no
+**Notes.** With `ε = 0` it is VK1, since `kl(u‖0) = ∞` for `u > 0`. Checked against a numerical minimization on 35
+random instances, within `3e-12` (`probes/v14/RESULTS.md`, VK2). The exact test of [P55] on two outcomes, breach and no
 breach, applies unchanged to a record of independent decisions, and VE3 to any record.
 
 ### VK3 — A budget, by a Lagrange dual
@@ -80,8 +80,8 @@ in `[−∞, ∞)`, `ψ(0) = 0`, so its maximum is attained at some `λ*`. Its r
   `g(x₀) − b = −1/λ*`. Then `E_{a*}[g − b] = D − λ*·D/λ* = 0`, so `a* ∈ K`.
 In both cases `KL(p‖a*) = E_p[log h_{λ*}] = ψ(λ*)`, so `M_K(p) ≤ ψ(λ*) ≤ M_K(p)`. ∎
 
-**Notes.** Checked against a numerical minimization on random instances, within `2e-8`, with the constructed nearest
-behaviour attaining it within `2e-7`; in 30 of them the maximum is at `λ_max` and the nearest acceptable behaviour moves
+**Notes.** Checked against a numerical minimization on 80 random instances, within `2e-8`, with the constructed nearest
+behaviour attaining it within `4e-8`; in 37 of them the maximum is at `λ_max` and the nearest acceptable behaviour moves
 mass to a cheap outcome the actor never uses (`probes/v14/RESULTS.md`, VK3). The dual is the empirical-likelihood form
 of a moment constraint in statistics (Owen; not read here). Two readings for v14: the misalignment of a budget is an
 average of a function of the outcome, so it is estimated from a record on a continuum with no bins (VE4); and its bet is
@@ -99,9 +99,10 @@ least that against the worst one, and a combined bet on the overruns is always a
 
 **Proof.** (i) `K ⊆ K_j`. (ii) For `a ∈ K`, `E_a[h_λ] = 1 + Σ_j λ_j·(E_a[g_j] − b_j) ≤ 1`; VE1(i). ∎
 
-**Notes.** (iii) holds on 30 random instances with two budgets, within `5e-13` (`probes/v14/RESULTS.md`, VK4); a proof
-needs the Karush–Kuhn–Tucker conditions for linear constraints, or Farkas's lemma, read in an open text first. Joining
-constraints to the order part of a request is the same intersection; `README.md` lists it among the open questions.
+**Notes.** (iii) holds on the 22 of 30 random instances with two budgets in which some behaviour keeps both, within
+`5e-13` (`probes/v14/RESULTS.md`, VK4); a proof needs the Karush–Kuhn–Tucker conditions for linear constraints, or
+Farkas's lemma, read in an open text first. Joining constraints to the order part of a request is the same intersection;
+`README.md` lists it among the open questions.
 
 ### VK5 — The constrained optimizer, by the Karush–Kuhn–Tucker conditions
 *This result belongs to the derived module, "actors that optimize": it is a fact about one model of an actor, not part

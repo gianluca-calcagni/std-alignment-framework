@@ -51,9 +51,9 @@ its misalignment is finite; the optimal bet is there "the growth-rate-optimal e-
 reverse information projection", and a bet an "e-variable". The proof above is the finite case, self-contained. By (iv),
 VE1 covers v13's convex specifications, which are closed in `Δ°` but not always in `Δ`, such as the ordinal one: there
 v14's number is v13's. A forbidden set (`constraints.md`) has no counterpart in v13, which asked intended behaviours to
-have full support. Checked on random instances of v13's ordinal specification, a third of them with outcomes the actor
-never uses: `h*` costs at most `1` under each extreme point of the specification, which by (i) is what makes it the best
-bet (`probes/v14/RESULTS.md`, VE1); its growth rate equals `KL(p‖a*)` by definition.
+have full support. Checked on 300 random instances of v13's ordinal specification, 104 of them with outcomes the actor
+never uses: `h*` costs at most `1` under each extreme point of the specification, to within `5e-16`, which by (i) is
+what makes it the best bet (`probes/v14/RESULTS.md`, VE1); its growth rate equals `KL(p‖a*)` by definition.
 
 ### VE2 — Records hold an actor to the convex hull
 **Statement.** Let `A` be closed, not necessarily convex, and `conv A` its convex hull.
