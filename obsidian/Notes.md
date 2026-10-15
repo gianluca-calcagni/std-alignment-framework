@@ -473,6 +473,8 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H40 | **A test from counts that tolerates dependence it is told about.** [[P55 — What a record of counts certifies, at every size\|P55]]'s test accuses an actor whose decisions depend on each other, for that alone (§19). For an actor whose decisions more than `b` apart are independent, the counts of every other block of `b` decisions are independent, so [[P55 — What a record of counts certifies, at every size\|P55]] on blocks, as episodes of length `b` ([[B2 — Episodes and conditions as outcomes\|B2]]), would keep its level with the order of the record as the only extra information; a declared `b` is a resolution of time, declared before the data like any other | D: a derived result if a case needs it; a question for the PI first, since it touches the convention that acceptance means independence |
 | H41 | **Verifiability without compactness.** TR5 makes "misaligned" verifiable in chance when the closure of the intended behaviours is compact. Without compactness and with no nearness, misalignment may be witnessed only by descriptions outside any countable family fixed in advance, so it may fail to be verifiable; whether it can fail is open, and a counterexample would say exactly what a principal must add (a nearness, a resolution, or a compact family) for a verdict of misalignment to be reachable | D: mathematics, after the PI's priorities |
 | H42 | **The real-life case should live where compactness is free.** The PI wants a simple real case with true insight (Q56). Finite outcomes make every result of the core exact and every closure compact, and the ordinal specification needs only a ranking: a public record of choices among a few options, under a known incentive and a known default, judged against a declared ranking, with the paired report of `STANDARD.md` and [[P55 — What a record of counts certifies, at every size\|P55]]'s test, would use only what is proved and checked. What it needs from the engineering is E1(d): the ordinal misalignment and [[P55 — What a record of counts certifies, at every size\|P55]] in the library | D: for the case after the general core, with the PI |
+| H43 | **An undetectable loss of order `√n`.** Over `n` decisions, a shift of about `1/√(n·I)` per decision escapes every test of the record, yet loses about `√(n/I)` in `F` in all (`I` the shift's Fisher information). No resolution, bin or distribution function closes it; a guarantee from records should state it | U: a local-asymptotic sketch, not proved (`NOTES.md` §22) |
+| H44 | **A ranking certifies three verdicts, not two.** With a ranking and a reference only, an actor is better for every reading of the ranking (its rank under the reference dominates the uniform law), worse for every reading, or neither; a greedy decoder at the 0.9 quantile is neither, and the ordinal specification calls it misaligned. "Misaligned" in its everyday sense needs a value scale, a floor or forbidden outcomes | U: to be registered as a case of L2 before it is computed (`NOTES.md` §22) |
 
 ### 5.5 Process
 
@@ -1701,3 +1703,22 @@ reported beside it; and how much of `derived/` must be carried before v14 replac
   misalignment for one behaviour ("favour the better answers" more than what?). A frozen model is judged against an
   absolute acceptable set (constraints, thresholds, forbidden outcomes), against a declared reference behaviour (a
   baseline, a previous model, a population of answers), or by a floor; each is a declaration, none a training.
+
+**Second thoughts, the same day** (by the executor, not independent; nothing decided).
+- *A blind spot no test closes.* A shift of `δ_n ≈ c/√(n·I)` per decision stays below any test's power over `n`
+  decisions, yet costs `n·δ_n ≈ c·√(n/I)` in `F` in all. So every guarantee from records leaves an undetectable
+  cumulative loss of order `√n`, whatever replaces bins: a limit to state, not a defect to repair. Hunch H43, unproved.
+- *Which order a ranking certifies.* With a ranking alone, a principal's values are any increasing function of `F`.
+  Every such principal prefers the actor to the reference exactly when `U = G_q(F)` dominates the uniform law (first
+  order); the ratio non-decreasing in `F` (a convex distribution function of `U`) is stronger. A frozen model decoded
+  greedily that always returns an answer at its prompt's 0.9 quantile fails both: a principal who values only the top
+  5% prefers the reference. Common sense would not call it misaligned. So the honest verdicts of a ranking and a
+  reference are three, better for every reading, worse for every reading, and neither; "misaligned" in its everyday
+  sense needs more than a ranking (a value scale, a floor, or forbidden outcomes). The ordinal specification passed L1's
+  finite cases; this is a case it is predicted to fail, to be registered before it is computed (L2).
+- *Contexts.* With a reference per context, `U = G_{q(·|x)}(F)` is uniform under the reference whatever the context, so
+  ranks can be pooled over prompts, and a mixture of non-decreasing densities is non-decreasing: a pooled violation
+  accuses, a pooled pass does not exonerate any one context. The pooled ranks are identifiable from one draw per prompt;
+  the behaviour per prompt is not. This resembles the rank histogram of ensemble forecasting (a hunch; no source read).
+  It is a candidate for H42's real case: a frozen model against a reference model, one scorer, ranks among the
+  reference's own samples.
