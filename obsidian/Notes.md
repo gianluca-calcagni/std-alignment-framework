@@ -231,6 +231,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q55 | pull request #33 merged into `main` with its history (2026-10-11): v13, the review of Q49, the licence's aim (Q50), the seven requests (Q53), C5, doc hygiene, and the reread's fixes. Applied: the records that said v13 was not yet merged (`CORE.md`'s status, `README.md`, `ROADMAP.md`, §19's handover); the count for "stable" restarts at 0 of 3 (Q46) | PI | `CORE.md`; `README.md`; `ROADMAP.md`; §19 |
 | Q56 | the branch `claude/core-reframe` may be deleted; the executor agrees, since everything on it is in `main`. Priorities: the mathematics first, and `CORE-GENERAL.md` now, made correct and coherent rather than split or restructured; read the missing sources, asking for a host when one is needed; then a real-life simple case where the framework gives true insight, diagnosis or prediction, for which the engineering must be rethought or updated. A rewrite of the framework into a more digestible structure, most files ignorable without losing anything important and deep knowledge reachable when needed, is the PI's hunch, not a decision (H39). The executor keeps its own insights, hypotheses and hunches in these notes. Applied: §20; `general/transfer.md` TR1–TR8; the corrections of `CORE-GENERAL.md`; `REQUESTS.md` R14 | PI | §20; `CORE-GENERAL.md`; `general/` |
 | Q57 | `www.math.mcgill.ca` allowed (R14). Then: since the framework calls mathematical objects by words such as "misalignment", "outer alignment" or "tampering", and since theory and practice must agree through verification (Carcassi), verify every definition in the sense that its label corresponds to what its word means, with concrete arguments; a definition labelled wrongly gives a false sense of understanding, and accuracy here is worth its cost. Applied: R14 closed; a label verification, L1, registered and pushed before anything was computed (`probes/labels/REGISTRATION.md`), then run; §21 | PI | `probes/labels/`; §21 |
+| Q58 | open to a major revamp of the core, if it brings the terminology closer to common sense; no quick fixes or workarounds; the framework must be trustworthy, mathematically formal and general. A brainstorm first. Applied: §22, a proposal for the PI | PI | §22 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1604,3 +1605,67 @@ from the general core's definitions, its proved results and its probes; not a re
   under a nearness, an actor the word does call aligned, so the phrase is right and "aligned" still needs a floor;
   dropping "fake alignment"; variation across the record; the part *Named* and checks in CI, with the general core's
   own labels (nearness, decidable, precision, frontier, pile) added to L2.
+
+## 22. A revamp for words that mean what they say: a brainstorm, 2026-10-15 (Q58)
+
+By the executor, at the PI's request: a major revamp of the core is open, if it brings the terminology closer to common
+sense; no quick fixes; the framework must be trustworthy, mathematically formal and general. A proposal, not a decision.
+
+**What the experience shows.**
+1. *The request was confused with a mechanism.* The standard specification reads "pursue `F`" as "reweight by
+   `e^{t·F}`", the optimum of one training method; every label built on it inherits the narrowing (§21). Tilts are not
+   the problem: every behaviour is a tilt of the default ([[P1 — Every behaviour is a tilt of any other|P1]]). The cone is: `{t·F + c}` is the smallest family that
+   holds `F`, while the request "favour what `F` ranks higher" is the largest, every non-decreasing function of `F`.
+2. *The behavioural premise forbids causal words.* [[A1 — Behaviour suffices|A1]] lets a record show effects; tampering, coordination, attention,
+   drift and faking are causes. Each label that named a cause failed on a case with another cause.
+3. *"How much" was folded into "whether".* Doing nothing is intended by convention, so "aligned" covered uselessness,
+   and shortfall was measured at the actor's own departure.
+4. *Tolerance was implicit.* On a continuum, misalignment at full precision makes a near miss infinite; on finite
+   outcomes, the cells silently fix the tolerance.
+5. *What held.* Misalignment as a rate of evidence ([[A4 — Misalignment is evidence|A4]], forcing the direction of KL), the credited reading ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]),
+   the exact tests from counts ([[P55 — What a record of counts certifies, at every size|P55]]), compactness as the hinge of generality (TR3), and the Interpretations, once
+   they also say what a record can verify.
+
+**The proposal: one core, three layers, each with its own words.**
+- *The request* (what the principal wants), declared before the record: a **default**; a **resolution**, the
+  distinctions that count, which is at once the tolerance and the scope of side effects (finite cells, or a countably
+  generated σ-algebra on a standard Borel space); a **ranking**, a preorder on what the resolution distinguishes,
+  partial when the principal has several objectives; optionally a **price** or **scores**, when the principal means
+  cardinal values; and optionally a **floor**, how much is enough. The intended behaviours are the tilts of the default
+  by every score that respects the ranking: the largest cone consistent with what was said, never a smaller one by
+  default. A cardinal request with a price gives back today's standard specification, now named for what it asks.
+  Families of targets ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]) remain the general form, and several structural specifications are cones too (independence
+  of actors: additive scores; ignoring the situation: scores of the outcome alone).
+- *Two numbers, two words.* **Misalignment**: the departure from the default not credited by the request, that is,
+  beyond the cheapest behaviour that does at least as well by the ranking ([[P53 — Misalignment is the departure beyond what the family of targets credits|P53]]; for a ranking, stochastic dominance).
+  It answers "did it go the wrong way, or change what was not asked?". **Gain**, against the floor or the frontier:
+  "did it do enough?". "Aligned" is reserved for both: not misaligned and above the floor. Doing nothing is not
+  misaligned and not aligned.
+- *The actor's mechanism*, as hypotheses tested on records, never part of the request: tilted (KL-regularized)
+  optimization, best-of-`n`, a fixed objective along a path ([[P3 — A fixed objective is visible in the changes of behaviour|P3]]). "Pursuit" survives in its everyday sense, as a
+  behaviour in the request's intended set; the tilt ray becomes a model of an optimizer.
+- *The record*: evidence, samples, dependence as a declared episode structure, tests with their verifiability class
+  (verifiable, refutable, or decidable at a resolution, after Genin and Kelly), stated in every report.
+- *Effects named as effects; causes only where declared structure identifies them*: measurement distortion, with
+  tampering certified where distortion exceeds what selection could produce; dependence between actors, with
+  coordination given the declared common causes; responsiveness, with attention given the view; variation across the
+  record, with drift given a declared schedule.
+- *Generality by construction*: everything stated on standard Borel spaces at the request's resolution; on a finite
+  resolution compactness is free and every result is exact; full precision is a limit, with TR3's compactness or a
+  declared nearness, reported as such.
+
+**How, without quick fixes.**
+1. *Words first.* A glossary of every word the revamp will use, each with its sense, its source and paradigm cases,
+   registered and tested before any definition is written (L2): label-first design.
+2. *Draft v14 on a branch*, with v13 kept as the reference; every item of v13 mapped to v14 (kept, renamed, restated or
+   dropped) in a table that lint checks, as `IMPORT.md` does for the archive; every result re-proved or re-checked.
+3. *The format enforces it*: each definition's Interpretation gains a part *Named* (sense, source, the cases where the
+   object departs from the word) and a verifiability class; label checks run in CI; lint requires both.
+4. *A person reads it* before it is called stable (R1): the executor's own reviews keep finding what its reading missed
+   (§1).
+5. *The library and the standard follow the core*, not the reverse.
+
+**Open questions for the PI.** Whether the default reading of a bare objective is its ranking (recommended) or its
+values with a price; whether side effects are charged by default (the resolution is everything the record
+distinguishes) or only when declared; whether dependence between decisions is part of the request (episodes) or
+reported beside it; and how much of `derived/` must be carried before v14 replaces v13.
