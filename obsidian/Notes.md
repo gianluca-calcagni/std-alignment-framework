@@ -1669,3 +1669,35 @@ sense; no quick fixes; the framework must be trustworthy, mathematically formal 
 values with a price; whether side effects are charged by default (the resolution is everything the record
 distinguishes) or only when declared; whether dependence between decisions is part of the request (episodes) or
 reported beside it; and how much of `derived/` must be carried before v14 replaces v13.
+
+**The PI's challenges, and the executor's answers** (2026-10-15, open discussion, nothing decided).
+- *Fixed bins can be cheated.* They can: a bin forgives every move inside it exactly, so an actor that lands
+  systematically low inside each bin gains up to the bin's width per decision in the principal's objective, invisibly,
+  and the loss accumulates over decisions. The defect is a request that is coarser than its own objective: the
+  resolution must make the ranking measurable (`σ(F)` inside it), which no finite set of bins does for a continuous
+  `F`. "Resolution" also had a finite role, indifference ([[D4 — Resolution|D4]]); only its role as a tolerance is continuum-only.
+- *Any exact forgiveness is cheated the same way;* a tolerance in a metric on distribution functions forgives a
+  systematic shift as surely as a bin does. The cure is a measure that grades small shifts as small, never as zero. The
+  evidence rate already does: a shift by `δ` of a smooth behaviour costs about `δ²·I/2` nats per decision (`I` its
+  Fisher information), while the principal loses about `δ` per decision in `F`. So a salami-slicing actor shows small
+  misalignment and large cumulative stakes, and detection, about `1/δ²` decisions, lags the damage. Both numbers must be
+  reported, the stakes over the horizon of use, not per decision.
+- *Empirical distribution functions instead of bins:* right for the order part of a request on one ranked quantity, and
+  exactly so. For `F` without atoms, with `U = G_q(F)` its rank under the reference, the ratio to the reference is a
+  non-decreasing function of `F` if and only if `U` has a non-decreasing density, that is, a convex distribution
+  function on `[0, 1]` (the ordinal dominance curve). The laws with convex distribution functions are closed under weak
+  convergence, so "the order is violated" is open, hence verifiable from the empirical distribution function with no
+  bins (after Genin and Kelly), with Massart's uniform band. The nearest member is the greatest convex minorant, a
+  Grenander-type estimate (to be read in an open text before it is cited). Limits: in two or more ranked dimensions (a
+  partial order) the upper sets shatter arbitrarily many points, so there is no distribution-free uniform band, and
+  rates need assumptions; side effects inside the level sets of `F` are invisible to the distribution of `F`; and the
+  divergence of an empirical behaviour from any continuous one is infinite, so magnitudes come from estimators in the
+  cone, not by plugging in. What records can do on a continuum without a model: bound misalignment below, never above.
+- *An optimization-free core.* Agreed, and most of it is already: misalignment as the evidence against a declared set
+  of acceptable behaviours ([[D3 — Specification, declaration and misalignment|D3]], [[A4 — Misalignment is evidence|A4]]) needs no optimizer. What brings optimization in is the construction of the
+  acceptable set from tilts, intensities and prices ([[D2 — Pursuit of an objective|D2]]), and the reasons of [[D2 — Pursuit of an objective|D2]]; those become a derived module,
+  "actors that optimize", with Goodhart, outer and inner misalignment, overoptimization and the frontier. A
+  minimization in a proof is not an optimizer in the model. The open point is the reference: a ranking alone defines no
+  misalignment for one behaviour ("favour the better answers" more than what?). A frozen model is judged against an
+  absolute acceptable set (constraints, thresholds, forbidden outcomes), against a declared reference behaviour (a
+  baseline, a previous model, a population of answers), or by a floor; each is a declaration, none a training.
