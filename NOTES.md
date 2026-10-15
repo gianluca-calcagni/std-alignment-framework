@@ -476,6 +476,8 @@ models are hypotheses that [P3] and [P12] test.
 | H42 | **The real-life case should live where compactness is free.** The PI wants a simple real case with true insight (Q56). Finite outcomes make every result of the core exact and every closure compact, and the ordinal specification needs only a ranking: a public record of choices among a few options, under a known incentive and a known default, judged against a declared ranking, with the paired report of `STANDARD.md` and [P55]'s test, would use only what is proved and checked. What it needs from the engineering is E1(d): the ordinal misalignment and [P55] in the library | D: for the case after the general core, with the PI |
 | H43 | **An undetectable loss of order `√n`.** Over `n` decisions, a shift of about `1/√(n·I)` per decision escapes every test of the record, yet loses about `√(n/I)` in `F` in all (`I` the shift's Fisher information). No resolution, bin or distribution function closes it; a guarantee from records should state it | U: a local-asymptotic sketch, not proved (`NOTES.md` §22) |
 | H44 | **A ranking certifies three verdicts, not two.** With a ranking and a reference only, an actor is better for every reading of the ranking (its rank under the reference dominates the uniform law), worse for every reading, or neither; a greedy decoder at the 0.9 quantile is neither, and the ordinal specification calls it misaligned. "Misaligned" in its everyday sense needs a value scale, a floor or forbidden outcomes | U: to be registered as a case of L2 before it is computed (`NOTES.md` §22) |
+| H45 | **Join the order and the constraints by intersection, with a reference that keeps the constraints.** The acceptable set is the constraints' set intersected with the order's requirement against the reference; a reference that breaches a constraint is replaced by its nearest behaviour that does not, or else "better than the reference" can require a breach | U: a design hunch (`NOTES.md` §23) |
+| H46 | **Bets chosen from the record approach the best bet at a rate set by the bets allowed.** On a continuum, bets refitted before each decision from the earlier ones reach the best growth rate at a rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor | U: not proved (`NOTES.md` §23) |
 
 ### 5.5 Process
 
@@ -1723,3 +1725,55 @@ reported beside it; and how much of `derived/` must be carried before v14 replac
   the behaviour per prompt is not. This resembles the rank histogram of ensemble forecasting (a hunch; no source read).
   It is a candidate for H42's real case: a frozen model against a reference model, one scorer, ranks among the
   reference's own samples.
+
+## 23. v14, begun: constraints, bets and three verdicts, 2026-10-15 (Q59)
+
+By the executor, a model of the Claude family, at the PI's request (Q59), on the branch `claude/core-v14`. Not
+independent (rule (f)); no review by anyone else yet.
+
+**What the PI asked.** A pull request with the latest changes (#34), then the core reworked as the executor recommends,
+from everything discussed in §21 and §22, with constraints as a new concept: outcomes the principal finds unacceptable,
+whose breach is plainly misalignment, enforced too where optimization is treated, perhaps through the
+Karush–Kuhn–Tucker conditions. The PI's decisions on R15 and R16 wait until the rework has absorbed this.
+
+**What was done.** A draft in a new folder, `v14/`, beside the core rather than in it, so that `main`'s v13 stays whole
+until the PI adopts something: `v14/README.md`, the structure proposed and a map from v13's items; and three files of
+results proved here, with a probe, `probes/v14/v14_probe.py`, that reproduces every number. Lint reads `v14/` for
+citations and item references, as it reads `general/`.
+- *Evidence as a bet* (`v14/evidence.md`). VE1: against a convex closed set, misalignment equals the growth rate of the
+  best bet that no acceptable behaviour expects to win, the bet being the ratio of the actor's behaviour to the nearest
+  acceptable one; read in Grünwald, de Heide and Koolen's Theorem 1, proved here in the finite case. VE2: records hold
+  an actor only to the convex hull of what is acceptable, and v13's pursuit ray is not convex. VE3: a test from bets
+  keeps its level whatever the dependence between decisions, when each is acceptable given the past (Ville's inequality
+  on a finite horizon, proved from finite sums). VE4: a bet's growth rate is estimated by an average, with no bins.
+- *Constraints* (`v14/constraints.md`). Forbidden sets, rate limits and budgets, all convex. VK1: one forbidden outcome
+  is decisive evidence, and the magnitude moves to the rate. VK2: a rate limit's misalignment is `kl(p(C)‖ε)`. VK3: a
+  budget's is a Lagrange dual, the Kelly growth rate of a bet on the overrun. VK4: several constraints, with the dual's
+  equality supported numerically, not proved. VK5, for the derived module: an optimizer under a budget is the
+  unconstrained optimizer of `F − ν·g`, `ν` the shadow price, by the Karush–Kuhn–Tucker conditions, verified directly.
+- *Order against a reference* (`v14/order.md`). VO1: better for every reading of a ranking is dominance on upper sets,
+  for partial rankings too. VO2: v13's ordinal specification lies strictly inside it. VO3: better, worse, both or
+  neither; "not better" and "not worse" are verifiable, "worse" is only refutable unless a margin is declared.
+
+**What the work says about alignment.**
+- *The PI's remark was the missing piece.* §22 found that a ranking alone cannot ground "misaligned" (H44). Constraints
+  are the absolute standard that can: a breach needs no reference, no ranking and no model of the actor, and a forbidden
+  outcome needs one witness. The everyday sense of "misaligned", working against what the principal wants, now has a
+  form that is exact (a breach) and one that is graded (worse, by declared margins).
+- *Bets unify what §22 left in pieces.* The PI's objection to bins, the empirical distribution function, dependence
+  between decisions, and the continuum all meet in one object: a bet is a function, so its average needs no bins; its
+  product is a fair game under acceptance whatever the dependence; and its best growth rate is v13's number on convex
+  sets. The question "what is the right resolution" becomes "which bets did the principal allow", a declaration.
+- *Convexity is a principle, not a convenience.* v13 kept the pursuit ray, which is not convex, and VE2's probe shows
+  the price: an actor acceptable at every decision is accused in most records. "A mixture of acceptable ways of acting
+  is acceptable" is common sense, and it is forced by what records can show.
+- *v13 charged obedience.* An actor that keeps the principal's own budget optimally lies off the ray of `F`, so v13's
+  standard specification called it misaligned (VK5). In v14 the budget is in the request.
+
+**Hunches.** H45: the order's requirement and the constraints are best joined by intersection, and the reference should
+itself meet the constraints, or be replaced by its nearest behaviour that does; otherwise "better than the reference"
+can require a breach. H46: on a continuum, bets chosen from the record before each decision approach the best bet at a
+rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor.
+
+**Open.** L2, to register before anything is computed; the PI's questions listed in `v14/README.md`; VK4(iii); the
+items in `CORE.md`'s format; the map of the 55 propositions.

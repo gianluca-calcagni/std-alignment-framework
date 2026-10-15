@@ -26,7 +26,7 @@ library that computes what the standard asks, a report that can be checked as da
 three are in place (Q41). The theory grows where one of these needs it, and the archive of what is done is in `NOTES.md`
 §4.
 
-## Where we are (2026-10-11)
+## Where we are (2026-10-15)
 
 - **On `main`**, since pull request #33 was merged (Q55), the core is v13, approved by the PI (Q52, `NOTES.md` §17) and
   built by the method of reverse physics: three axioms imported from probability theory, four background conditions
@@ -58,6 +58,12 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   ordinal specification agreed with their words on every case; nine disagreed on at least one, most because the standard
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15).
+- **v14, begun** (Q59, `NOTES.md` §23): on the branch `claude/core-v14`, a draft in `v14/` beside the core, not in it.
+  Constraints as a concept of the core (forbidden sets, rate limits, budgets); misalignment read as the growth rate of
+  the best bet against acceptability, equal to v13's measure on convex sets, with a test that keeps its level under any
+  dependence; three verdicts under a ranking against a reference; optimization moved to a derived module, where a budget
+  enters as a shadow price. Twelve results proved here, none in CI yet. The PI's decisions on R15 and R16 wait for it;
+  L2 comes next.
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and
@@ -197,3 +203,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-15 | the PI challenged bins on a continuum and asked for an optimization-free core; the discussion recorded in `NOTES.md` §22: any exact forgiveness can be cheated, so measures must grade small shifts as small and stakes be reported over the horizon; distribution functions serve the order part exactly; optimization moves to a derived module; a reference or an absolute standard is needed by any ranking | 2 (a version, if adopted) |
 | 2026-10-15 | second thoughts in `NOTES.md` §22: an undetectable loss of order `√n` over `n` decisions whatever the resolution (H43); a ranking and a reference certify three verdicts, and the ordinal specification calls a greedy decoder at the 0.9 quantile misaligned (H44); ranks under a reference per context pool over prompts, accusing but not exonerating; three questions added to R16 | 2 (a version, if adopted); 5 (what the quantities mean) |
 | 2026-10-15 | the PI asked for a pull request with the latest changes, and for the core to be reworked on a branch as the executor recommends, with constraints as a new concept of the core (Q59); R15 and R16 postponed until the rework absorbs them | 2 (a version) |
+| 2026-10-15 | v14 begun on `claude/core-v14` (Q59, `NOTES.md` §23): `v14/README.md`, the structure and a map from v13; `v14/evidence.md`, `v14/constraints.md` and `v14/order.md`, twelve results proved here and probed (`probes/v14/`); lint reads `v14/`; R17 asks the PI to read the direction | 2 (a version) |
