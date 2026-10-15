@@ -109,7 +109,8 @@ def accused(step, n=400, records=2000, alpha=0.05, seed=1):
     return hits / records
 
 
-cases = [("each decision intensity 0 or 3, at random", lambda last, g: ray(0.0) if g.random() < 0.5 else ray(3.0), 2000),
+cases = [("each decision intensity 0 or 3, at random",
+          lambda last, g: ray(0.0) if g.random() < 0.5 else ray(3.0), 2000),
          ("intensity 8 after the best outcome, else 0", lambda last, g: ray(8.0) if last == 3 else ray(0.0), 2000),
          ("pursues −F at intensity 1", lambda last, g: ray(-1.0), 300)]
 print("  share of records of 400 decisions accused at level 0.05: bet vs cone, count test vs cone, count test vs ray")
@@ -154,7 +155,8 @@ for _ in range(80):
     worst = max(worst, abs(m - min_kl_linear(p, g[None, :], np.array([b]))))
     worst_a = max(worst_a, abs(kl(p, a) - m), max(0.0, a @ g - b), abs(a.sum() - 1))
     edge += bool(p[np.argmin(g)] == 0 and a[np.argmin(g)] > 1e-9)
-print(f"  {count} instances: largest |dual − numerical minimum| {worst:.1e}; the constructed a* is a behaviour within the budget and "
+print(f"  {count} instances: largest |dual − numerical minimum| {worst:.1e}; "
+      f"the constructed a* is a behaviour within the budget and "
       f"attains it within {worst_a:.1e}; {edge} instances at the edge λ* = 1/(b − min g)")
 
 section("VK4  several budgets: the best affine bet against the numerical minimum")
@@ -173,7 +175,8 @@ for _ in range(30):
     best = min(minimize(neg, rng.uniform(0, 0.1, 2), method="Nelder-Mead",
                         options={"xatol": 1e-12, "fatol": 1e-14, "maxiter": 20000}).fun for _ in range(10))
     worst = max(worst, abs(-best - num))
-print(f"  two budgets, {count} of 30 instances with a behaviour that keeps both: largest |best affine bet − numerical minimum| {worst:.1e}")
+print(f"  two budgets, {count} of 30 instances with a behaviour that keeps both: "
+      f"largest |best affine bet − numerical minimum| {worst:.1e}")
 
 section("VK5  the constrained optimizer is tilt(q, t·(F − ν·g)), and ν is the budget's shadow price")
 worst, worst_price, count, failed = 0.0, 0.0, 0, 0
@@ -203,7 +206,8 @@ for _ in range(30):
     d = 1e-5
     slope = (value(opt(nu_of(b + d))) - value(opt(nu_of(b - d)))) / (2 * d)
     worst_price = max(worst_price, abs(slope - nu))
-print(f"  {count} instances ({failed} where the solver failed from every start): largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
+print(f"  {count} instances ({failed} where the solver failed from every start): "
+      f"largest |numerical optimum − value of the tilt| {worst:.1e}; largest |d value/d b − ν| {worst_price:.1e}")
 q5 = rng.dirichlet(np.ones(5)); F5 = rng.normal(size=5); C5 = np.array([0, 0, 1, 0, 1.0])
 allowed = np.where(C5 == 0, q5 * np.exp(2 * F5), 0); allowed /= allowed.sum()
 print(f"  forbidden set: total variation between tilt(q, 2(F − 40·1_C)) and the pursuit on the allowed outcomes "

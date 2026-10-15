@@ -126,8 +126,8 @@ the objective `F − ν·g` at intensity `t`, and since `ν ≥ 0`. The right si
 directly. For a forbidden set, an `a` with `a(C) = 0` has `KL(a‖q) = KL(a‖q(·|X∖C)) − log q(X∖C)`, so the problem is
 [P4](i) on the outcomes `X ∖ C`, where `q(·|X∖C)` has full support, or trivial if `X ∖ C` has one outcome. ∎
 
-**Notes.** Checked against a numerical maximization on 30 random instances, within `3e-13`, and the derivative of the
-largest value in `b` equals `ν` within `8e-9` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for the
+**Notes.** Checked against a numerical maximization on 29 random instances, within `3e-9`, and the derivative of the
+largest value in `b` equals `ν` within `2e-8` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for the
 derived module.
 - *Obeying and valuing look alike.* An actor that keeps a budget because it must, and one that values the cost at `ν`,
   behave identically; by [A1], the core cannot and need not tell them apart.
