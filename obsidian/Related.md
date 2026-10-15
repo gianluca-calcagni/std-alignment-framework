@@ -317,9 +317,11 @@ outside the framework's scope, recorded so the question is not reopened. *Done*:
 
 ## Deceptive alignment and AI evaluation
 
-- *Sources.* Hubinger et al. [[References|@hubinger2019]] on risks from learned optimization; Baker, Huizinga and coauthors
-  [[References|@baker2025]], on monitoring the reasoning of a model trained against its monitor; the sleeper agents study, studies of
-  evaluation awareness, and Ward et al.'s causal definition of deception *(to verify)*.
+- *Sources.* Hubinger et al. [[References|@hubinger2019]] on risks from learned optimization; Greenblatt et al. [[References|@greenblatt2024]],
+  who define alignment faking as selectively complying with the training objective in training, to prevent modification
+  of the behaviour out of training; Baker, Huizinga and coauthors [[References|@baker2025]], on monitoring the reasoning of a model
+  trained against its monitor; the sleeper agents study, studies of evaluation awareness, and Ward et al.'s causal
+  definition of deception *(to verify)*.
 - *Shared.* An actor that behaves differently when it is observed ([[D8 — Conditions, responses and views|D8]], [[D9 — Observation and identification|D9]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]]).
 - *Different.* Several of these define deception by beliefs or intent, internal states that the core does not judge
   ([[A1 — Behaviour suffices|A1]]). We bound what an unobserved condition can hide from what the actor can perceive.

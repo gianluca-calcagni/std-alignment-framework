@@ -22,6 +22,7 @@ in `RESULTS.md`.
 | `t6_lockin.py` | a Pólya urn against fair draws, 400 runs | each run's rate is KL(final share‖½); the rates are spread, with mean ln 2 − ½ | held: within 3.5e-4; mean 0.199, standard deviation 0.185 |
 | `draft1_examples.py` | the examples of draft 1 (GD3, GD5, section 12), and T7 | the draft's numbers; T7: masking without a gap tends to 4.082 like 1/κ | reproduced; T7 held: 4.064 at κ = 1000 |
 | `vocabulary_examples.py` | fudging, rounding, a narrow exploit, acting for the camera (section 15) | none registered: these were exploratory | — |
+| `t8_transfer.py` | TR3 of `general/transfer.md`, on a circle and on a ray with an atom at its limit | none registered: the result is proved, and the probe computes it on two instances | the misalignment of finer descriptions rises to the least divergence over the closure: `0.005616` on the circle; `0.105103` on the ray, with and without a nearness |
 
 ## Second batch: the related theories
 

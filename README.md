@@ -18,10 +18,10 @@ report that keeps the standard, in under a minute.
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
-results in `derived/`, is v13 on this branch, approved by the PI (Q52; `main` holds v12 until it is merged), and claims
-what it proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not
-finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds
-on finite outcomes, it is proved in `derived/` and cited from `general/`.
+results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
+proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not finite,
+and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds on
+finite outcomes, it is proved in `derived/` and cited from `general/`.
 
 | | |
 |---|---|
@@ -29,7 +29,7 @@ on finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
-| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover |
+| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, and §21 the test of the labels |
 | `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
@@ -44,7 +44,7 @@ on finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `stdalign/` | the library: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify; so far misalignment, its split, its estimates by access, the diagnostics of `derived/diagnostics.md`, and the validator of reports as data (`ROADMAP.md`, step E1). Version 0.2, on finite outcomes; install with `pip install -e .`, and read its `README.md` |
 | `examples/` | `quickstart.py`: a case on simulated data, from the declaration to a report as data that keeps the standard, in under a minute; CI runs it (`examples/test_quickstart.py`) |
 | `cases/` | tests registered before they are computed, each with its registration, script and result: on the world (they count toward the finish line) or in simulation (they test an instrument where the truth is known). `cases/README.md` lists them |
-| `probes/` | exploratory scripts behind numbers cited elsewhere: those of `CORE-GENERAL.md` and `general/`, with the predictions registered before they were run and their verdicts, failures included (`probes/general/`); those in the Notes of the diagnostics (`probes/diagnostics/`); timings for cases not yet registered (`probes/cases/`); the coverage of the quickstart's intervals (`probes/examples/`); claims of related work, checked before `RELATED.md` reviews them (`probes/related/`); and the numbers of the review of 2026-10-10, the dependencies of v13 and the doc sweep (`probes/review/`, `NOTES.md` §15, §17–§19). Not checks: CI does not run them, and no result rests on them |
+| `probes/` | exploratory scripts behind numbers cited elsewhere: those of `CORE-GENERAL.md` and `general/`, with the predictions registered before they were run and their verdicts, failures included (`probes/general/`); those in the Notes of the diagnostics (`probes/diagnostics/`); timings for cases not yet registered (`probes/cases/`); the coverage of the quickstart's intervals (`probes/examples/`); claims of related work, checked before `RELATED.md` reviews them (`probes/related/`); the numbers of the review of 2026-10-10, the dependencies of v13 and the doc sweep (`probes/review/`, `NOTES.md` §15, §17–§19); and L1, whether the framework's labels mean what their words say, registered before it ran (`probes/labels/`, §21). Not checks: CI does not run them, and no result rests on them |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
 | `tools/mdwrap.py`, `tools/mutate.py`, `tools/overview.py` | the first keeps the Markdown sources wrapped at 120 columns, and CI checks it; the second runs the mutant lists of `tools/mutants/` against the tests; the third builds `OVERVIEW.md` |
 | `obsidian/` | a read-only view for reading in Obsidian: one note per item, every reference a link, with what each item depends on and what depends on it. Generated by `tools/obsidian.py` and checked fresh by CI; open the folder as a vault. Edit the sources, not the notes; notes of your own go in `obsidian/Annotations/`, which the generator never touches |
@@ -139,19 +139,19 @@ where each comes from):
   family are correlated, and "independent" then means less than it says.
 
 **Versions.** A version changes only when the Statement of an item of the core changes, or the scope does (`CORE.md`
-§0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. On this branch
-the core is v13, approved by the PI (Q52; `NOTES.md` §16, §17), built by the method of reverse physics: what is imported
-from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of item, and
-every definition declares and justifies its interpretation. [A4] says that misalignment is the rate of evidence against
-the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are reasons of [D2], as no
-result used them; and [D3] defines the ordinal specification beside the standard one, reported side by side. At the PI's
-seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, a measure that needs no independence of
-the actor, though the test from counts may accuse a dependent actor for its dependence alone; [D3] gained families of
-targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. `main` holds v12, in which A2's
-Statement says that the geometry of pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md` §3.1, Q44). v11
-widened the scope to groups, several principals with declared weights, rules as conditions and episodes as outcomes
-(Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is a draft
-with its own numbering; until it is approved, it changes no Statement of the core.
+§0): either changes what a reader may rely on. Results, checks and ontologies are added within a version. The core is
+v13, approved by the PI (Q52; `NOTES.md` §16, §17) and merged (Q55), built by the method of reverse physics: what is
+imported from probability theory, what is assumed without loss of generality, and what is assumed are separate kinds of
+item, and every definition declares and justifies its interpretation. [A4] says that misalignment is the rate of
+evidence against the specification, the reading as value lost becoming a consequence; v12's premises A2 and A3 are
+reasons of [D2], as no result used them; and [D3] defines the ordinal specification beside the standard one, reported
+side by side. At the PI's seven requests (Q53, `NOTES.md` §18), [A4] was restated on the record's counts, a measure that
+needs no independence of the actor, though the test from counts may accuse a dependent actor for its dependence alone;
+[D3] gained families of targets; [D11] records; and `CORE.md` §1 a table of conventions, each justified. v12, which v13
+replaced, had A2's Statement say that the geometry of pursuit is Riemannian, as Čencov's theorem requires (`NOTES.md`
+§3.1, Q44). v11 widened the scope to groups, several principals with declared weights, rules as conditions and episodes
+as outcomes (Q24, Q25). A step, for the finish line's row "stable", is a merged pull request (Q46). `CORE-GENERAL.md` is
+a draft with its own numbering; until it is approved, it changes no Statement of the core.
 
 ## The finish line
 
@@ -160,7 +160,7 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | Goal | Criterion | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
-| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changes the core's Statements; the count starts with the next merged pull request after it |
+| stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changed the core's Statements, merged on 2026-10-11 (Q55); the count starts with the next merged pull request, 0 of 3 so far |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`) |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported, and the reader package is ready; no outside reader yet |

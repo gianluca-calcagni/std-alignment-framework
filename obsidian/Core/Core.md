@@ -1,10 +1,10 @@
 # The core
 
-> **Status: v13, on branch `claude/core-reframe`, approved by the PI (Q52); `main` holds v12 until it is merged.** The
-> core holds what the framework takes from outside and what it cannot derive: three imported axioms of probability,
-> four background conditions assumed without loss of generality, three premises, and the definitions the whole
-> framework uses, each with the interpretation it declares. Everything that follows from them is in `derived/`, with
-> proofs and checks that run in CI. The format is in `README.md`.
+> **Status: v13, approved by the PI (Q52) and merged into `main` with pull request #33 (Q55).** The core holds what the
+> framework takes from outside and what it cannot derive: three imported axioms of probability, four background
+> conditions assumed without loss of generality, three premises, and the definitions the whole framework uses, each with
+> the interpretation it declares. Everything that follows from them is in `derived/`, with proofs and checks that run in
+> CI. The format is in `README.md`.
 
 ## 0. What the core is
 

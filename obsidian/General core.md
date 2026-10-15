@@ -1,16 +1,17 @@
 # The general core
 
-> **Status: draft 4, on the kinds of v13 (Q53).** Frozen by Q26, and unfrozen by Q33 for outcomes that are not finite
-> and for estimation (`ROADMAP.md`, step 3). This file extends the core (`CORE.md`, v13) from finitely many outcomes to
-> the outcome spaces met in practice: counts, waiting times, scores, texts, trait values. As `CORE.md` does, it keeps
-> apart what it imports from measure theory (GM), the representation it assumes without loss of generality (GB), what
-> it assumes about judging alignment (GA, numbered as the premises of the core they extend), and its definitions (GD),
-> each definition with its interpretation. Its results, expected, probed or tested, are in `general/`, as the finite
-> core's are in `derived/`, and nothing there is claimed until it is proved and checked. `general/dictionary.md` maps
-> each object from the finite core to this file. Every number the draft cites is reproduced by a script in
-> `probes/general/`. Lint checks that every item this file and `general/` name exists (R12); it does not yet check their
-> structure. Draft 3's GA2 and GA3 are now reasons of GD2, as the core's A2 and A3 became reasons of [[D2 — Pursuit of an objective|D2]], and its GA6
-> is now part of GA1 and of the definition of misalignment (GD3); their ids are not reused.
+> **Status: draft 4, on the kinds of v13 (Q53); its transfer lemma, dimension law, and the transfer of [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P54 — Dependence and drift only add evidence|P54]]
+> proved in `general/transfer.md`, TR1–TR8, not yet checked in CI (Q56).** Frozen by Q26, and unfrozen by Q33 for
+> outcomes that are not finite and for estimation (`ROADMAP.md`, step 3). This file extends the core (`CORE.md`, v13)
+> from finitely many outcomes to the outcome spaces met in practice: counts, waiting times, scores, texts, trait values.
+> As `CORE.md` does, it keeps apart what it imports from measure theory (GM), the representation it assumes without loss
+> of generality (GB), what it assumes about judging alignment (GA, numbered as the premises of the core they extend),
+> and its definitions (GD), each definition with its interpretation. Its results, expected, probed or tested, are in
+> `general/`, as the finite core's are in `derived/`, and nothing there is claimed until it is proved and checked.
+> `general/dictionary.md` maps each object from the finite core to this file. Every number the draft cites is reproduced
+> by a script in `probes/general/`. Lint checks that every item this file and `general/` name exists (R12); it does not
+> yet check their structure. Draft 3's GA2 and GA3 are now reasons of GD2, as the core's A2 and A3 became reasons of
+> [[D2 — Pursuit of an objective|D2]], and its GA6 is now part of GA1 and of the definition of misalignment (GD3); their ids are not reused.
 
 ## 0. What this file is
 
@@ -28,7 +29,10 @@ verify, wrong with a bounded chance at every size and right with a chance tendin
 the weak topology, on a sample space whose topology has a countable basis of events that records can decide
 [[References|@genin2017]]. So this file defines misalignment as what records can show: the supremum of the finite core's misalignment
 over the finite descriptions that a record can decide (GD3). Where that supremum falls below the divergence to the
-nearest intended behaviour, the divergence asserts more than any record could show, and is not the measure.
+nearest intended behaviour, the divergence asserts more than any record could show, and is not the measure. That happens
+only in two ways: the intended behaviours omit some of their own limits, or no compact set holds them; when their
+closure, under the convergence of every event's probability, is compact, misalignment is the least divergence to it,
+whatever the nearness (`general/transfer.md`, TR3).
 
 **Three tests.** In the finite core, each choice had its own canonicity argument: Čencov's theorem for pursuit, [[P14 — The cost of departing from the default is forced|P14]]
 for the cost. Here every definition must also pass three tests.
@@ -44,21 +48,23 @@ descriptions its values are the core's, by reduction, and in general they are th
 determination. A freedom remains only in a structure, such as which events a record can decide; each item's "Why" names
 it, and hands it to a declaration by the principal or a fact about the actor. The finite core met all three tests
 without stating them. On a finite set every topology that separates points is the discrete one, so the core never had to
-say which outcomes are near which. On a continuum many topologies have the same events [[References|@kechris1995]], so the framework
-cannot choose one: where a topology matters, the principal or the actor supplies it, as each supplies a resolution.
+say which outcomes are near which. On a continuum many topologies have the same events (GD3), so the framework cannot
+choose one: where a topology matters, the principal or the actor supplies it, as each supplies a resolution.
 
 **What the tests show about alignment.**
-- *Three kinds of outcome space, not more.* Any two uncountable standard Borel spaces are the same up to relabelling
-  [[References|@kechris1995]]. By invariance, the framework tells apart only finite, countable and continuous outcome spaces. Whether
-  the outcomes are waiting times, trait values or responses, alignment depends on them only through which events can be
-  told apart (resolutions), which events are possible at all (the default), and what the parties declare.
+- *Three kinds of outcome space, not more.* Any two uncountable standard Borel spaces are the same up to relabelling, by
+  Kuratowski's Borel isomorphism theorem ([[References|@tserunyan2025]], Theorem 13.10). By invariance, the framework tells apart
+  only finite, countable and continuous outcome spaces. Whether the outcomes are waiting times, trait values or
+  responses, alignment depends on them only through which events can be told apart (resolutions), which events are
+  possible at all (the default), and what the parties declare.
 - *Geometry belongs to the parties.* Which outcomes are near which enters through the principal's objective, and through
   declarations of nearness, never through the framework.
 - *Two phenomena that finite outcomes hide.* (a) An actor can do what the default never does: pin one exact value, which
   the default produces with probability zero. Its misalignment is then infinite unless a declared nearness makes the
-  exact value one that no record can decide (GD3). (b) The tail of an objective can stop pursuit at a finite intensity;
-  past it, more departure buys more of the objective only by betting on ever rarer extremes (GD2, GD5). Both say that
-  the default decides more than it seemed to: which outcomes are possible, and how far pursuit can go.
+  exact value one that no record can decide, and the intended behaviours approach it (GD3). (b) The tail of an objective
+  can stop pursuit at a finite intensity; past it, more departure buys more of the objective only by betting on ever
+  rarer extremes (GD2, GD5). Both say that the default decides more than it seemed to: which outcomes are possible, and
+  how far pursuit can go.
 - *Strategic scenarios become standard ones on derived spaces.* Several actors, actors that respond to the measurement,
   several principals and dependent samples each become a scenario with one principal and one actor, on a space of joint
   actions, rules, principals or trajectories, most of them continua even when the outcomes are finite. What stays
@@ -102,10 +108,10 @@ way.
 
 | Convention | Declared in | Justified by | Changes a verdict | Why |
 |---|---|---|---|---|
-| outcomes in a standard Borel space | GB1 | convenience, literature | no, for every outcome space met in practice | conditioning on a statistic is defined even when each of its values has probability zero; up to relabelling, only finite, countable and continuous spaces differ [[References\|@kechris1995]] |
+| outcomes in a standard Borel space | GB1 | convenience, literature | no, for every outcome space met in practice | conditioning on a statistic is defined even when each of its values has probability zero; up to relabelling, only finite, countable and continuous spaces differ ([[References\|@tserunyan2025]], Theorem 13.10) |
 | ratios to the default, never densities against length or volume | GD1 | forced, literature | yes: a density changes with units and coordinates | invariance; the behaviours equivalent to one measure are Pistone and Sempi's model [[References\|@pistone1995]] |
-| no nearness unless one is declared | GD3, GA5 | forced | yes: an actor that pins a value the default never produces is then infinitely misaligned | the events fix no topology [[References\|@kechris1995]], so the framework cannot choose one; the finest resolution is the core's default in [[D4 — Resolution\|D4]] for the same reason |
-| misalignment as the supremum over the finite descriptions a record can decide | GA1, GA4, GD3 | forced | yes, where it falls below the divergence to the nearest intended behaviour | records decide finitely many events [[References\|@carcassi2021]], [[References\|@genin2017]]; the divergence itself is such a supremum ([[References\|@polyanskiy2025]], Theorem 4.5) |
+| no nearness unless one is declared | GD3, GA5 | forced | only where no compact set holds the intended behaviours (`general/transfer.md`, TR3): there an actor that pins a value the default never produces is infinitely misaligned with no nearness, and may be aligned under one | the events fix no topology (GD3: the line, and the line cut at `0`, have the same events), so the framework cannot choose one; the finest resolution is the core's default in [[D4 — Resolution\|D4]] for the same reason |
+| misalignment as the supremum over the finite descriptions a record can decide | GA1, GA4, GD3 | forced | only where the intended behaviours omit some of their limits, or no compact set holds them; elsewhere it is the divergence to the nearest intended behaviour (`general/transfer.md`, TR3) | records decide finitely many events [[References\|@carcassi2021]], [[References\|@genin2017]]; the divergence itself is such a supremum ([[References\|@polyanskiy2025]], Theorem 4.5), over the descriptions a record can decide too (TR2) |
 | tilts only where the log-normalizer is finite | GD2 | forced | no: elsewhere no pursuit exists | past `t_max`, no behaviour is the best trade-off (GD2) |
 
 ### GM1 — Probability on standard Borel spaces
@@ -122,7 +128,8 @@ another, and what a behaviour looks like once a statistic of its outcomes is kno
 **Status.** Imported from measure theory as it is: Kolmogorov's axioms, the Radon–Nikodym theorem, and conditional
 behaviours on standard Borel spaces, which exist there and can fail elsewhere. It assumes nothing about actors or
 principals. The ratio, and the divergence defined through it, are read in [[References|@polyanskiy2025]], §2.1; the existence of
-conditional behaviours is standard, and not yet read in an open text here.
+conditional behaviours, as a kernel on a standard Borel space, is read in its Theorem 2.11, with the fact that a
+standard Borel space's events are generated by countably many of them (stated before its Theorem 2.12).
 
 **Why this choice.** Reduction: on a finite set it is [[M1 — Probability on finitely many outcomes|M1]]. Invariance: events, ratios and conditional behaviours need
 no distance. Finite determination: countable additivity is what lets the cells of finer and finer finite descriptions
@@ -134,13 +141,16 @@ approximate every event.
 **Statement.** Decisions drawn independently from one behaviour have, jointly, the product behaviour on sequences. The
 share of an event among `n` such decisions has as average its probability and a variance of at most `1/(4n)`. For one
 real statistic, the largest gap between the empirical distribution function of `n` decisions and the true one exceeds
-`ε` with probability at most `2·e^{−2nε²}`, at every `n`.
+`ε` with probability at most `2·e^{−2nε²}`, at every `n` and every `ε > 0`.
 
 **In plain terms.** As in the core, independent decisions make shares approach probabilities; and for one number per
 decision, such as a waiting time or a score, the whole curve of shares approaches the true one at a known rate.
 
 **Status.** Imported: the product behaviour; Chebyshev's inequality, as in [[M2 — Independent repetition|M2]]; and the Dvoretzky–Kiefer–Wolfowitz
-inequality with Massart's constant [[References|@massart1990]], not yet read in an open text here.
+inequality with Massart's constant, read in its scan ([[References|@massart1990]], Corollary 1), where the distribution function is
+continuous. For one with jumps the bound follows: a statistic with distribution function `G` is distributed as `G⁻¹(U)`,
+with `U` uniform on `[0, 1]` and `G⁻¹(u) = inf{y : G(y) ≥ u}`, and then `{G⁻¹(U_i) ≤ y} = {U_i ≤ G(y)}`, so the gap at
+`y` is the uniform sample's gap at `G(y)`, never more than its largest.
 
 **Why this choice.** As [[M2 — Independent repetition|M2]]. The second part is why distribution functions, not counts in cells, are the natural
 record of one number per decision (GD11).
@@ -149,8 +159,8 @@ record of one number per decision (GD11).
 
 ### GM3 — Imported theorems
 **Statement.** Besides GM1 and GM2, the expected results of `general/` use: the Gelfand–Yaglom–Perez theorem, that the
-divergence is the supremum, over finite descriptions, of the divergence between cell probabilities; the
-Donsker–Varadhan formula; Csiszár's I-projections on general spaces; Sanov's theorem on Polish spaces; the uniqueness of
+divergence is the supremum, over finite descriptions, of the divergence between cell probabilities; the Donsker–Varadhan
+formula; Csiszár's I-projections on general spaces; Sanov's theorem for convex sets on general spaces; the uniqueness of
 the Fisher metric under sufficient statistics on infinite sample spaces; Kuratowski's and the Lusin–Souslin theorems on
 standard Borel spaces; and Rényi's information dimension.
 
@@ -158,10 +168,13 @@ standard Borel spaces; and Rényi's information dimension.
 used by a claim until it is read.
 
 **Status.** Imported. Read in open texts: the Gelfand–Yaglom–Perez theorem and the Donsker–Varadhan formula
-([[References|@polyanskiy2025]], Theorems 4.5 and 4.6), Sanov's theorem with its condition on Polish spaces (Theorem 15.13),
-Csiszár's Theorems 2.1 and 2.3 and section 3 [[References|@csiszar1975]], and the uniqueness of Ay, Jost, Lê and Schwachhöfer
-[[References|@ay2015]]. Not yet read here: [[References|@kechris1995]], [[References|@renyi1959]], [[References|@dembo1998]], [[References|@pinsker1964]] in its own text; the items that
-cite them say what they are cited for.
+([[References|@polyanskiy2025]], Theorems 4.5 and 4.6), Csiszár's Theorems 2.1 and 2.3 and section 3 [[References|@csiszar1975]], Csiszár's Sanov
+theorem for convex sets on any measurable space, an upper bound at every size and the limit under a condition on the
+interior ([[References|@csiszar1984]], Theorem 1), and the uniqueness of Ay, Jost, Lê and Schwachhöfer [[References|@ay2015]]. Rényi's information
+dimension, his definition and his theorems on vectors with a density and on mixtures, read as stated in
+[[References|@haghighatshoar2017]], his own text [[References|@renyi1959]] not read. Kuratowski's Borel isomorphism theorem and the Lusin–Souslin
+theorem, read in Tserunyan's open notes ([[References|@tserunyan2025]], Theorem 13.10, Theorem 13.3 and Corollary 13.4), stated there
+for Polish spaces, and so for standard Borel spaces, which carry the events of a Polish topology.
 
 **Why this choice.** As [[M3 — Imported theorems|M3]]: proving classical theorems again adds nothing, and listing what is borrowed, with what has
 been read, shows at a glance what the continuum rests on.
@@ -251,12 +264,14 @@ about behaviour as records see it.
 - *Finite determination, made a premise.* Draft 3 stated it as a sixth premise, GA6; here it is what [[A1 — Behaviour suffices|A1]] says on a
   continuum. Behaviour is observed by counting, and a count is always of finitely many cells: a clock that reads
   minutes, a score kept to two digits.
-- *What it forces*, each to be proved (`general/transfer.md`):
+- *What it forces* (`general/transfer.md`):
   - the KL divergence as the cost of departure on every outcome space: on each finite description [[P14 — The cost of departing from the default is forced|P14]] forces it, and
     the divergence is the supremum of its finite values ([[References|@polyanskiy2025]], Theorem 4.5);
   - the framework's only nearness between behaviours: two behaviours are near when every finite description that a
-    record can decide finds their cell probabilities near;
-  - misalignment as a supremum over finite descriptions (GD3);
+    record can decide finds their cell probabilities near: with no nearness, Csiszár's τ-topology, the convergence of
+    every event's probability; under a nearness, weak convergence, since the decidable descriptions are those whose
+    edges the limit does not charge. TR3 to TR5 use τ in every case; - misalignment as a supremum over finite
+    descriptions (GD3), which under compactness is the least divergence to the closure of the intended behaviours (TR3);
   - the exclusion of quantities with no finite limit. The entropy of finer and finer descriptions of a continuous
     behaviour grows without bound, so differential entropy, which also changes with the units of measurement, is not a
     quantity of the framework; neither is a default that is not a probability (GD2).
@@ -338,8 +353,9 @@ of outcomes; densities against length or volume are not used, since they change 
 - *Reduction.* On a finite set the ratio is `p(x)/r(x)` where `r(x) > 0`; divergence and tilt are [[D1 — Outcomes, behaviours, divergence and tilt|D1]]'s.
 - *Invariance.* A ratio is defined from the two behaviours alone, with no reference measure.
 - *Finite determination.* The divergence is the supremum, over finite descriptions, of the core's divergence between the
-  cell probabilities [[References|@pinsker1964]]. A tilt by a function constant on the cells of a finite description is the core's
-  tilt on those cells, with the proportions inside each cell kept, and every tilt is a limit of such tilts.
+  cell probabilities ([[References|@polyanskiy2025]], Theorem 4.5), and over those a record can decide too (`general/transfer.md`,
+  TR2). A tilt by a function constant on the cells of a finite description is the core's tilt on those cells, with the
+  proportions inside each cell kept, and every tilt is a limit of such tilts, in total variation (TR1).
 - *Equivalence replaces full support.* "Full support", positive probability on every open set, needs a topology and
   changes with it. On a finite set, full support is equivalence to any behaviour with full support; equivalence needs no
   topology, and GD2 uses it with the default.
@@ -372,7 +388,7 @@ extended.
 - *Reduction.* On a finite set, with a default of full support as [[D2 — Pursuit of an objective|D2]] requires, every objective is bounded,
   `T_F = [0, ∞)`, and `Δ_q = Δ°`: this is [[D2 — Pursuit of an objective|D2]].
 - *Invariance; finite determination.* For an objective constant on the cells of a finite description, the pursuit is the
-  core's, on the cells; every pursuit is a limit of these.
+  core's, on the cells; every pursuit is a limit of these, in total variation (`general/transfer.md`, TR1).
 - *The steepest climb,* draft 3's GA2. Splitting outcomes in fixed proportions needs no distance: it is a kernel from
   coarse outcomes to fine ones. A behaviour whose ratio to another is constant on the cells of a finite description is
   a behaviour on those cells, split inside each in fixed proportions; among such behaviours Čencov's theorem gives the
@@ -428,31 +444,43 @@ precise pursuit.
 
 **Interpretation.** *Declared.* As [[D3 — Specification, declaration and misalignment|D3]]. A nearness is the principal's statement of which events its records can decide:
 with the usual nearness of a clock, "the wait was between two and three hours" is decidable for an actor that never
-waits exactly two hours, and "the wait was exactly two hours" is not decidable for one that often does. *Verified.* At
-each decidable description, the misalignment of the cells is verified as in [[D3 — Specification, declaration and misalignment|D3]], and the test of [[P55 — What a record of counts certifies, at every size|P55]] on the counts of
-the cells certifies it, exactly at every size; so "misaligned" is verifiable. "Aligned within `ε`" is not verifiable
-from records alone: some behaviour as close as one likes to an intended one, in total variation, has misalignment as
-large as one likes (GD11), so it needs a declared resolution or a model. *Justified.* GA1 and GA4: the supremum is what
-records can show, and the divergence to the nearest intended behaviour, when it is larger, asserts what no record could
-support.
+waits exactly two hours, and "the wait was exactly two hours" is not decidable for one that often does. *Verified.* At a
+description declared before the record, the test of [[P55 — What a record of counts certifies, at every size|P55]] on the counts of the cells certifies, exactly at every size
+and for decisions that are independent, that the misalignment of the cells is positive. That certifies "misaligned" when
+the description is decidable for the actor, as it always is with no nearness. When the closure of the intended
+behaviours is compact, the misalignment of every finite description, decidable or not, is a lower bound
+(`general/transfer.md`, TR3), and refining descriptions make "misaligned" verifiable in chance, with cell edges drawn at
+random before the data when a nearness is declared (TR5). Without compactness, under a nearness, decidability is an
+assumption about the actor, which a record kept at that description cannot check, as in Genin and Kelly's theorem.
+"Aligned within `ε`" is not verifiable from records alone in general: with no nearness, some behaviour as close as one
+likes to an intended one, in total variation, has misalignment as large as one likes (GD11), so it needs a declared
+resolution or a model. It is verifiable on finite outcomes ([[P55 — What a record of counts certifies, at every size|P55]](iv)), and trivially when the specification accepts so
+much that every behaviour is aligned within `ε`. *Justified.* GA1 and GA4: the supremum is what records can show, and
+the divergence to the nearest intended behaviour, when it is larger, asserts what no record could support.
 
 **Why this choice.**
 - *Reduction.* On a finite set the only nearness is the discrete one, every event is decidable, and the supremum is
   reached at the finest description, where `M_𝒫` is [[D3 — Specification, declaration and misalignment|D3]]'s misalignment: coarser descriptions give less ([[P4 — What KL measures|P4]](iv)).
-- *Invariance: the framework fixes no nearness.* The events do not determine a topology: any event can be made both open
-  and closed by refining a topology without changing the events [[References|@kechris1995]]. Which outcomes are near is part of what
-  the principal means, like its resolution: waiting times a second apart are near for a four-hour target, and not for a
-  sprint. So a nearness is declared, or there is none.
+- *Invariance: the framework fixes no nearness.* The events do not determine a topology. On the line, take the usual
+  topology, and the line cut at `0`: the half-lines `(−∞, 0)` and `[0, ∞)` each with its usual topology, side by side.
+  Each is given by a complete separable metric (`(−∞, 0)` through `x ↦ log(−x)`, which carries it onto the whole line),
+  every open set of either is an event of the other, so the events are the same; yet `0` is a limit of negative numbers
+  in one and not in the other. Which outcomes are near is part of what the principal means, like its resolution: waiting
+  times a second apart are near for a four-hour target, and not for a sprint. So a nearness is declared, or there is
+  none.
 - *The supremum, not the divergence to the nearest.* By data processing, `M_𝒫(p̂) ≤ inf_{p∈𝓘} KL(p̂‖p)` for every `𝒫`,
-  so misalignment is at most the divergence to the nearest intended behaviour. The two are equal when the intended
-  behaviours are compact for the convergence of every event's probability, and no nearness is declared: the supremum
-  over an increasing family of lower semicontinuous functions and the infimum over a compact set can then be exchanged,
-  and the divergence is the supremum of its finite values ([[References|@polyanskiy2025]], Theorem 4.5) (expected, with that sketch,
-  `general/transfer.md`). They differ where intended behaviours escape every compact set. With densities proportional
-  to `1 + ½·sin(k·x)` on a circle declared intended, the uniform behaviour's divergence from each is `0.069`, for every
-  `k`, while every finite description finds them converging to it: its misalignment is `0`, which is what every record
-  says (`general/transfer.md`). Draft 3 reached the same `0` by adding the limits to the intended set; the supremum
-  reaches it by defining misalignment as what records show.
+  so misalignment is at most the divergence to the nearest intended behaviour. When the closure of the intended
+  behaviours, under the convergence of every event's probability, is compact, misalignment is the least divergence to
+  that closure, under any nearness or none (`general/transfer.md`, TR3). This covers every family whose ratios to the
+  default are continuous in a compact parameter, and the pursuit ray when its intensities form a closed bounded interval
+  or when the best outcomes of `F` have positive probability under the default (TR4). So the two differ in only two
+  ways. *The intended set omits some of its limits.* With densities proportional to `1 + ½·sin(k·x)` on a circle
+  declared intended, the uniform behaviour's divergence from each is `0.069`, for every `k`, while every event's
+  probability under them converges to its probability under the uniform: the closure adds the uniform, and misalignment
+  is `0`, which is what every record says. Draft 3 reached the same `0` by adding the limits to the intended set; the
+  supremum reaches it by defining misalignment as what records show. *No compact set holds the intended set,* as when
+  pursuit drives probability toward an outcome the default gives probability zero; then the nearness decides, as the
+  next case shows.
 - *What a nearness decides: the on-target controller.* With a standard normal default on the real line and `F(x) = −x²`,
   pursuit narrows toward `0`. For an actor that always outputs exactly `0`, under the usual nearness of the line the
   event `{0}` is not decidable, since its boundary has probability one; every decidable description puts `0` inside a
@@ -463,13 +491,16 @@ support.
   misaligned under the usual nearness too: decidable cells separate `0.001` from `0`, and no intended behaviour gives a
   small cell around `0.001` much probability. In plain terms, to pin a real number is to decide every one of its digits,
   and each digit decided beyond what the objective asks is a choice the principal did not ask for. At a resolution of
-  width `w` the count is finite, and it grows at a precise rate: like `(D − d)·log(1/w)`, where `D` is the number of
-  real coordinates of an outcome and `d` the information dimension of the actor's behaviour [[References|@renyi1959]], `D` for a
-  behaviour spread like the default and `0` for one pinned to points. So each decimal digit of the record adds
+  width `w` the count is finite. Against intended behaviours with densities bounded above and below on a cube, it grows,
+  asymptotically, like `(D − d)·log(1/w)`, where `D` is the number of real coordinates of an outcome and `d` the
+  information dimension of the actor's behaviour [[References|@renyi1959]], `D` for a behaviour with a density and `0` for one pinned
+  to points (`general/transfer.md`, TR6). So, on average over many digits, each decimal digit of the record adds about
   `2.3·(D − d)` nats: `2.3` for an actor pinned to points on a line, a tenth of that for one that piles a tenth of its
-  behaviour on one value, and again `2.3` for one that pins one of two attributes and spreads the other
-  (`general/transfer.md`). A principal who wants near misses graded declares a resolution (GD4), or judges outcomes
-  that include noise the actor does not control (GD7).
+  behaviour on one value, and again `2.3` for one that pins one of two attributes and spreads the other. The pursuit
+  here narrows toward `0`, so its densities are not bounded, and TR6 does not apply; the controller `0.001` off target
+  is computed directly, and grows at the same rate, `3.72` at `w = 10⁻⁴` and `8.33` at `10⁻⁶` (`general/transfer.md`). A
+  principal who wants near misses graded declares a resolution (GD4), or judges outcomes that include noise the actor
+  does not control (GD7).
 - *Families of targets.* As in [[D3 — Specification, declaration and misalignment|D3]]; on a continuum their tilts exist only where the log-normalizer is finite (GD2), so
   a family of objectives with heavy tails may have few intended behaviours. The credited reading of [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] is expected to
   carry where they exist, the cheapest behaviour that does at least as well being Csiszár's I-projection on a general
@@ -480,10 +511,10 @@ support.
 **Notes.** Decidable events are Genin and Kelly's almost surely clopen sets; their theorem makes the statements that
 records can verify the open sets of the weak topology, under a nearness with a countable basis of such events
 [[References|@genin2017]]. With no nearness, that theorem's hypotheses do not hold, and the descriptions are all finite partitions
-into events: the setwise convergence in which large deviations of empirical behaviours are stated on general spaces
-[[References|@dembo1998]]. That, under a nearness, the supremum over decidable descriptions is the divergence wherever it is finite
-and the intended behaviours compact, as the Donsker–Varadhan formula over bounded continuous functions suggests
-([[References|@polyanskiy2025]], Theorem 4.6, (4.12)), is to be proved.
+into events: the τ-topology of convergence of every event's probability, in which Csiszár states Sanov's theorem on any
+measurable space ([[References|@csiszar1984]], (2.14) and Theorem 1). Under a nearness, the supremum over the descriptions a record
+can decide is still the divergence, for every pair of behaviours (`general/transfer.md`, TR2), and with a compact
+closure of the intended behaviours misalignment is the same with or without the nearness (TR3).
 
 **Lineage.** [[D3 — Specification, declaration and misalignment|D3]]. Draft 3's GD3, which added to the intended set the limits that finite descriptions cannot tell apart,
 replaced by the supremum over decidable descriptions (Q53). v7.10: R7-5, case 5: "A controller 1 mm off target scores
@@ -527,8 +558,9 @@ have probability zero (below).
   could record by answering countably many yes-or-no questions. Others mislead. The events that are countable, or whose
   complement is, form a σ-algebra whose cells are single outcomes; yet under a default that gives every single outcome
   probability zero it settles nothing, and every cell average over it is the overall average.
-- *Measurability is all or nothing.* A one-to-one statistic on a standard Borel space generates every event (the
-  Lusin–Souslin theorem [[References|@kechris1995]]), so a resolution is coarser than the finest only if its statistic merges
+- *Measurability is all or nothing.* A one-to-one statistic on a standard Borel space generates every event: by the
+  Lusin–Souslin theorem ([[References|@tserunyan2025]], Corollary 13.4) it carries each event `A` to an event `g(A)`, and `A` is the
+  set of outcomes whose value lies in `g(A)`; so a resolution is coarser than the finest only if its statistic merges
   outcomes: a pass-or-fail target, a risk model that reads a few variables, a reward that scores two responses alike.
   And a statistic that does merge outcomes makes almost no function a function of it. v7.10 withdrew a condition stated
   as non-measurability because it held generically (v7.10: row 4, "vacuous — generically satisfied"). The framework uses
@@ -653,9 +685,10 @@ of them. *Verified.* As [[D8 — Conditions, responses and views|D8]]; across a 
 - *Reduction.* On finite sets, kernels are tables of behaviours, and the integral is [[D8 — Conditions, responses and views|D8]]'s sum.
 - *Invariance; finite determination.* Kernels are defined from events.
 - *Regularity across situations comes from the view.* By data processing, `KL(p_c‖p_c') ≤ KL(V_c‖V_c')` when the
-  response depends on the condition only through the view ([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], expected to carry). So the response can change across
-  a continuum of situations no faster than the view does. Generalizing from observed situations to nearby unobserved
-  ones needs some such regularity; here it follows from the view, and is not assumed of the response.
+  response depends on the condition only through the view ([[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] on standard Borel spaces, `general/transfer.md`, TR7).
+  So the response can change across a continuum of situations no faster than the view does. Generalizing from observed
+  situations to nearby unobserved ones needs some such regularity; here it follows from the view, and is not assumed of
+  the response.
 
 **Lineage.** [[D8 — Conditions, responses and views|D8]]; `NOTES.md` §3.3, E5 and E7.
 
@@ -745,26 +778,32 @@ decision.
 - *A record shows "at least", not "at most"* (expected, `general/transfer.md`). When the default gives every single
   outcome probability zero, for every `n`, some behaviour within total variation `1/(100·n)` of an intended one, so that
   no test on `n` decisions tells them apart with a difference in rejection probability above `0.01`, has a misalignment
-  as large as one likes: move a little probability to where the objective is low and the default rarely goes. So a
-  report that misalignment is small rests on a declared resolution, or on a model of the behaviour, never on samples
-  alone. What records can show without a model is the rate: the misalignment of finer and finer records grows like
-  `(D − d)·log(1/w)` (GD3), so its slope against the logarithm of the resolution estimates the dimension deficit
-  `D − d`, within the resolutions that the sample size supports: on a line, the share of the behaviour piled on single
-  values, when the rest is spread.
+  as large as one likes: with no nearness, move a little probability onto one outcome; under a nearness, onto a small
+  region where the objective is low and every intended behaviour rarely goes, as pursuit rarely goes where its objective
+  is low. So a report that misalignment is small rests on a declared resolution, or on a model of the behaviour, never
+  on samples alone. What records can show without a model is the rate: against intended behaviours with densities
+  bounded above and below on a cube, the misalignment of finer and finer records grows, asymptotically, like
+  `(D − d)·log(1/w)` (GD3; `general/transfer.md`, TR6), so its slope against the logarithm of the resolution estimates
+  the dimension deficit `D − d`, within the resolutions that the sample size supports: on a line, the share of the
+  behaviour piled on single values, when the rest is spread.
 - *Evidence, and Sanov.* The expected evidence per decision is the divergence, as [[P21 — The expected evidence is misalignment|P21]] states for samples. As in [[A4 — Misalignment is evidence|A4]],
   misalignment is the rate at which the most favourable intended behaviour makes the record's counts improbable: on
   finite outcomes and on each finite description, the method of types, with the test of [[P55 — What a record of counts certifies, at every size|P55]], exact at every size; on a
-  continuum, Sanov's theorem, under its condition on Polish spaces ([[References|@polyanskiy2025]], Theorem 15.13), or as the limit
-  of the finite one [[References|@dembo1998]].
+  continuum, Csiszár's Sanov theorem: on any measurable space, the probability that the empirical behaviour of `n`
+  independent decisions lies in a convex set of behaviours is at most `e^{−n·inf KL}`, the infimum of the divergence
+  from the set to the actual behaviour, at every `n`, and falls at that rate when the set's interior in the τ-topology
+  has the same infimum ([[References|@csiszar1984]], Theorem 1).
 - *Dependence and drift.* As in [[P54 — Dependence and drift only add evidence|P54]], a record whose decisions depend on each other, or drift, holds more evidence than
   the misalignment of its average behaviour, by its dependence and its drift; the identity is the chain rule, which
-  holds on standard Borel spaces (expected, `general/transfer.md`). Two directions must not be confused: the probability
-  that a misaligned actor's record looks intended falls at the rate `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
+  holds on standard Borel spaces, with the divergence to the nearest intended behaviour in place of misalignment, the
+  two being equal when the intended behaviours are closed with a compact closure (`general/transfer.md`, TR8). Two
+  directions must not be confused: the probability that a misaligned actor's record looks intended falls at the rate
+  `inf_{p ∈ 𝓘} KL(p‖p̂)`, not at `M(p̂)`.
 - *Distribution functions are exact for one number per outcome.* For a one-dimensional statistic, such as an evaluator's
   score or a waiting time, the empirical distribution function is within `√(log(2/α)/(2n))` of the true one everywhere,
   with probability at least `1 − α`, at every `n` and for every behaviour (the Dvoretzky–Kiefer–Wolfowitz inequality,
-  with Massart's constant [[References|@massart1990]]). This is where distribution functions, rather than counts in cells, are the
-  right record.
+  with Massart's constant, extended to statistics with atoms in GM2 [[References|@massart1990]]). This is where distribution
+  functions, rather than counts in cells, are the right record.
 
 **Lineage.** [[D11 — Record, sample and evidence|D11]]; [[P21 — The expected evidence is misalignment|P21]]–[[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P54 — Dependence and drift only add evidence|P54]], [[P55 — What a record of counts certifies, at every size|P55]].
 
@@ -786,8 +825,8 @@ decision.
 ## 12. Open decisions
 
 1. Decided (Q54): misalignment as the supremum over the finite descriptions a record can decide (GD3), in place of draft
-   3's closure of the intended set. It makes the transfer lemma of draft 3 a statement about compactness, to be proved,
-   and settles the cases where no compactness holds in favour of what records show.
+   3's closure of the intended set. It makes the transfer lemma of draft 3 a statement about compactness, now proved
+   (`general/transfer.md`, TR3, Q56), and settles the cases where no compactness holds in favour of what records show.
 2. No nearness when nothing is declared, so that nothing is forgiven that a finite description could see, as the finest
    resolution is the core's default in [[D4 — Resolution|D4]]. The alternative, the usual topology of each outcome space, would put a
    choice in the framework that the events do not make.

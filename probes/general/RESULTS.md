@@ -174,3 +174,33 @@ B6: depends on r/sigma only (max gap 0.0e+00); non-increasing in r: True; zero f
 ```
 B7: largest gap between the misalignment against 'ignoring the situation' and the mutual information: 3.1e-16
 ```
+
+## t8_transfer.py
+
+```
+circle: least divergence over the closure = 0.005616
+  N =     2: M_P = 0.002223
+  N =     4: M_P = 0.004392
+  N =    16: M_P = 0.005534
+  N =    64: M_P = 0.005610
+  N =   256: M_P = 0.005615
+  N =  1024: M_P = 0.005616
+  N =  4096: M_P = 0.005616
+ray: least divergence over the closure = 0.105103 at t = 5.7793 (the limit at t = ∞ is at +∞)
+  {1} its own cell (no nearness)
+    N =     1: M_P = 0.000000
+    N =     2: M_P = 0.086419
+    N =     4: M_P = 0.100678
+    N =    16: M_P = 0.104830
+    N =    64: M_P = 0.105086
+    N =   256: M_P = 0.105101
+    N =  1024: M_P = 0.105102
+  1 in the last bin (usual nearness)
+    N =     1: M_P = 0.000000
+    N =     2: M_P = 0.000000
+    N =     4: M_P = 0.018136
+    N =    16: M_P = 0.067789
+    N =    64: M_P = 0.094032
+    N =   256: M_P = 0.102207
+    N =  1024: M_P = 0.104370
+```

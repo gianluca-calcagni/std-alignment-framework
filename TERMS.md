@@ -5,6 +5,17 @@ level. Lint rule R9 checks two things: every term the core or a derived result d
 entry in section 1, and every item named here exists. Only level A may appear in `CORE.md` or `derived/`; the other
 levels stay here until they are worked out.
 
+**Labels tested against their words** (L1, `probes/labels/`, `NOTES.md` §21, 2026-10-14). Level A says that a name is
+adopted, not that it means what its word says. On paradigm cases registered before computing, these labels disagreed
+with their words, and renames wait on the PI (`REQUESTS.md`, R15): **pursuit** (narrower: one way of pursuing,
+reweighting by `e^{t·F}`), **misalignment** under the standard specification (it charges the method, as best-of-`n` on
+the right objective shows), **aligned** for misalignment `0` (it includes doing nothing), **inner misalignment** (it
+charges selection by the training objective itself), **tampering** (it charges selection on an honest sensor's noise),
+**fake alignment** (it names compliance with an incentive), **coordination** (it counts common causes left out of the
+conditions), **drift** within a record (it counts any variation), **attention** (it counts what the environment does)
+and **shortfall** (it is measured at the actor's own departure). Masking, overoptimization, and misalignment under the
+ordinal specification agreed on every case.
+
 | Level | Meaning |
 |---|---|
 | **A** | Adopted. A definition of the core, or a correspondence that is standard and cited, or checked. |

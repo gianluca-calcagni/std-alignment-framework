@@ -7,8 +7,8 @@ framework. It is a working agreement, not a claimed property.
 ## At the start of a session
 
 1. Read `ROADMAP.md`, and answer its drift checks before any work.
-2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover; then §1, the failure modes with
-   their evidence, every row; then §12, the last review.
+2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover, with §20, the general core, and §21,
+   the labels, since; then §1, the failure modes with their evidence, every row; then §12, the last review.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 
 ## Who decides
