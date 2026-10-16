@@ -129,3 +129,25 @@ average is estimated by an average, and by VE1(i) every bet gives a lower bound 
 advance, or chosen before each decision from the earlier ones as in VE3, accuses soundly with no bins. What a fixed bet
 cannot do is reach the best one; how close bets chosen from the record come, and how fast, is open on a continuum, and
 is where H43's `√n` blind spot reappears.
+
+## Why this measure, among all the others
+
+A reader may ask why misalignment is this number, and not a distance between behaviours chosen otherwise: total
+variation, a Wasserstein distance, a Rényi or `χ²` divergence. The answer is that the number is not chosen as a
+distance; it is the rate at which evidence against acceptability accumulates, and each step from that to the formula is
+either forced by a stated requirement or a convention taken from the literature, listed in `v14/README.md`.
+- *Evidence of independent decisions must add*, so it is counted on a logarithmic scale: the only continuous functions
+  that turn products of probabilities into sums are multiples of the logarithm (Cauchy's functional equation), and the
+  base only sets the unit. In the bet form this is the wealth's logarithm.
+- *A bet must be fair under acceptance*, `E_a[h] ≤ 1` for every acceptable `a`, or a large wealth would be no evidence
+  against acceptability; that is what makes VE3's level hold under any dependence. It is the definition of an
+  e-variable ([@grunwald2023]).
+- *Its growth is measured under what the actor does*, since that is what a record of the actor shows (VE4); a rate
+  under an acceptable behaviour would describe a record the actor never produces.
+- *The best bet is taken*, so that misalignment charges only what no acceptable behaviour explains: the generalized
+  likelihood ratio's benefit of the doubt, as in v13's table.
+Given these four, VE1 leaves no freedom: the number is `min_{a∈A} KL(p̂‖a)`, with its order of arguments forced. Another
+divergence measures something else: total variation and Wasserstein distances measure how far probability must move, in
+a geometry of outcomes the principal would have to declare, and say nothing of how fast a record convicts. A principal
+who cares about such a distance declares it as a requirement (`constraints.md`, VK0), and misalignment then counts the
+evidence against that requirement.

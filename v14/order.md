@@ -86,3 +86,12 @@ standard ("at least level 8"), which it meets every time. The verdicts of v14 sa
 better nor worse for every reading, and better under the declared scale or standard, if one is declared. "Misaligned" is
 kept for a breach of a constraint, and for a shortfall by margins the principal declares in advance (iii). Whether these
 are the right words is for L2 to test before anyone adopts them.
+
+## Why dominance is the canonical requirement of a ranking
+
+A ranking, read only up to increasing transformations, is all the principal declares; "better" must then mean better
+for every principal who holds that ranking, or it adds a commitment the principal did not make. VO1 shows that this is
+exactly dominance on upper sets, so dominance is not one order among several but the content of the ranking itself.
+Every stronger requirement adds something: v13's ordinal specification adds a shape (VO2), a value scale adds cardinal
+values, a margin adds a threshold. Each is legitimate when declared, and each changes verdicts; none is implied by the
+ranking. A ranking alone loses nothing by being read as dominance, and a principal who wants more says so.

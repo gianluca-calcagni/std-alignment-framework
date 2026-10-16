@@ -1,130 +1,140 @@
-# v14, a draft: the core reworked so that its words mean what they say
+# v14, a draft: a core whose words mean what they say
 
-> **Status: a working draft on the branch `claude/core-v14`, started at the PI's request (Q59). Nothing here is
-> approved, and nothing here replaces `CORE.md` or `derived/` yet.** It gathers what the label test L1, the general
-> core and the discussion of `NOTES.md` §22 taught, adds constraints as a concept of the core, as the PI asked, and
-> proves the first results the new structure rests on. The PI's decisions on R15 and R16 wait until this draft has
-> absorbed them (Q59).
+> **Status: a working draft on the branch `claude/core-v14` (Q59–Q64). Nothing here is approved, and nothing here
+> replaces `CORE.md` or `derived/` yet.** It gathers what the label test L1, the general core and the discussions of
+> `NOTES.md` §22–§28 taught, and proves the results the new structure rests on. The PI's decisions on R15 and R16 wait
+> until the draft has absorbed them (Q59). The work ahead is in `ROADMAP.md`'s recommendations.
 
 ## Why a rework
 
-Four findings, each recorded with its evidence in `NOTES.md` §21 and §22:
-- *The core defines misalignment through a model of optimization.* v13's standard specification is the pursuit ray, the
-  set of optimizers of `F` at a KL price ([D2], [D3]). L1 traced most of its label disagreements to that: best-of-`n`
-  by the right objective, and an actor that values better outcomes more steeply, are called misaligned for the shape of
-  their reweighting, not for wanting the wrong thing. The PI asked for a core with no optimization in it, in which a
-  frozen model's misaligned behaviour can be defined beyond doubt (Q58).
-- *The pursuit ray is not convex.* An actor that, at each decision, pursues `F` at intensity `0` or `3`, at random,
-  acts acceptably at every decision, yet v13 charges it `0.0546` nats per decision, and [P55]'s test accuses it in 69%
-  of records of 400 decisions (`evidence.md`, VE2). Records can hold an actor to the mixtures of what is acceptable,
-  never to less.
-- *A ranking alone does not support "misaligned".* With a ranking and a reference, an actor is better for every reading
-  of the ranking, worse for every reading, or neither; a decoder that always answers at its prompt's 0.9 quantile is
-  neither (`order.md`, VO3). The everyday sense of "misaligned", working against what the principal wants, needs an
-  absolute standard as well.
-- *Constraints were missing.* Some outcomes are unacceptable to the principal whatever else happens: a forbidden
-  answer, a rate of harm above a limit, a cost over a budget. Breaking one is plainly misalignment, and v13 had no word
-  for it (Q59).
+Five findings, each recorded with its evidence in `NOTES.md` §21–§26:
+- *v13 defines misalignment through a model of optimization.* Its standard specification is the pursuit ray, the set of
+  optimizers of `F` at a KL price ([D2], [D3]). L1 traced most of its label disagreements to that: best-of-`n` by the
+  right objective is called misaligned for the shape of its reweighting. The PI asked for a core with no optimization in
+  it, in which a frozen model's misaligned behaviour is defined beyond doubt (Q58).
+- *The pursuit ray is not convex.* An actor that pursues `F` at intensity `0` or `3` at random, acceptably at every
+  decision, is charged `0.0546` nats per decision, and [P55]'s test against the ray accuses it in 69% of records of 400
+  decisions (`evidence.md`, VE2).
+- *A ranking alone does not support "misaligned".* A decoder that always answers at its prompt's 0.9 quantile is
+  neither better nor worse than its reference for every reading of the ranking (`order.md`, VO3).
+- *Constraints were missing.* Some outcomes are unacceptable whatever else happens, and breaking one is plainly
+  misalignment (Q59).
+- *v13 mixed what happened, whether the actor could have done otherwise, and why.* Culpability, coarse perception and
+  tampering need what the actor sees and can do, not a model of optimization (Q61); and one of v13's labels, [P15](v)'s
+  "unavoidable", says more than its split proves (`factorization.md`).
 
-## The files, as the PI decided (Q62)
+## The files
 
 Three layers, each built only on the ones below it, each with a twin for outcomes that are not finite that states only
-what changes there, as `general/transfer.md` does:
+what changes there, as `general/transfer.md` does (Q62):
 
-| File | Holds | Twin |
+| File, to be written | Holds | Twin |
 |---|---|---|
-| `CORE` | behaviours per condition; the request, a list of requirements, each a convex closed set; misalignment as evidence against their intersection, with a verdict per requirement; records and bets | `CORE_GENERAL` |
+| `CORE` | behaviours per condition; the request, a list of requirements, each a convex closed set; misalignment as the evidence against their intersection, with a verdict per requirement; records and bets | `CORE_GENERAL` |
 | `INTERFACE` | what the actor sees, what it can do, and how the world turns its actions into outcomes; feasibility, culpability, coarse perception, noise, tampering, collusion | `INTERFACE_GENERAL` |
 | `OPTIMIZERS` | objectives, pursuit, the KL price, evaluators, training, shadow prices; gaming, overoptimization, outer and inner misalignment, strategic deception | `OPTIMIZERS_GENERAL` |
 
-Beside them, `LIMITS.md`, what the framework cannot do and what it leaves out, and `MIGRATION.md`, what of v13 survives.
-The proposal below predates the layers (Q59–Q61, `NOTES.md` §23–§25); where it places a concept in "the core", read CORE
-or INTERFACE as §25 sorts it.
+The draft so far, in this folder:
 
-## The structure proposed
-
-**The core, with no optimization in it.**
-1. *Outcomes and behaviours.* As v13's [M1]–[M3], [B1], [B2], [B4], [A1] and [D1] without the tilt. A behaviour may
-   depend on a context, such as a prompt: one behaviour per context.
-2. *The request*, declared before it judges ([A5]): what the principal asks, in parts that each can be absent.
-   - **Constraints** (new): statements every acceptable behaviour satisfies, whatever else it does. Three forms, all
-     convex: a **forbidden set** of outcomes, `a(C) = 0`; a **rate limit**, `a(C) ≤ ε`; a **budget**, `E_a[g] ≤ b`.
-     They need no reference and no ranking: they are the absolute standard (`constraints.md`).
-   - **Order**: a ranking of outcomes, possibly partial, read only up to increasing transformations ([B3] becomes this).
-   - **Reference**: a behaviour per context against which the order is judged: a base model, the previous version, a
-     population of answers, or the status quo. It replaces the default; it is a declaration, never a training.
-   - **Indifference**: a partition of outcomes within which the principal does not care (v13's [D4], the principal's
-     side). The tolerance of a measurement is not part of the request: on a continuum it is a property of the record
-     (`CORE-GENERAL.md`), and a tolerance that forgives exactly can be cheated (`NOTES.md` §22).
-   - **Value scale**, optional: units in which the principal reads gains and losses, needed for stakes.
-3. *Acceptability.* The acceptable behaviours are those that satisfy every constraint and the order's requirement
-   against the reference. They form a convex closed set, by a principle stated as such: **a mixture of acceptable ways
-   of acting is acceptable**, since an actor that randomizes between two acceptable actions does nothing unacceptable,
-   and records cannot tell the difference anyway (VE2).
-4. *Verdicts, each with its own name*, never folded into one number:
-   - **breach** of a constraint: verifiable, by a single witness for a forbidden set (VK1); with its rate or excess, in
-     the constraint's own units;
-   - **better / worse / neither** under the order against the reference, "for every reading" of the ranking (VO1–VO3);
-   - **misalignment**, the evidence against acceptability: the best long-run growth rate of a bet, fixed in advance,
-     that no acceptable behaviour expects to win (VE1). It equals v13's measure, the least divergence from the actual
-     behaviour to an acceptable one, whenever the acceptable set is convex.
-5. *Evidence from records.* Bets multiply over decisions, and their product stays a fair game under acceptance whatever
-   the dependence between decisions, so a test from bets keeps its level when each decision, given the past, is
-   acceptable (VE3). This replaces v13's convention that accepted behaviours decide independently, and needs no bins on
-   a continuum: a bet is a function, its average is estimated by an average.
-6. *Stakes*, in the units of the value scale and of each constraint, totalled over the horizon of use, with the limit
-   that no record removes: a shift of about `1/√n` per decision escapes every test over `n` decisions (H43).
-
-**Derived: actors that optimize.** Everything that needs a model of optimization moves here, and is stated as a
-hypothesis about an actor that a record can test, never as part of what the principal asks: pursuit and the tilt
-([D2]), the KL price and the intensity, the steepest climb ([P2], [P4], [P14]), interventions and pass-through ([D6]),
-the evaluator and overoptimization ([D10]), outer and inner misalignment ([P49]), and the frontier. Constraints enter
-here through Lagrange multipliers: an actor that optimizes `F` under a budget acts exactly as one that optimizes
-`F − ν·g` with no budget, `ν ≥ 0` being the budget's shadow price (VK5, by the Karush–Kuhn–Tucker conditions).
-
-**What stays, what moves, what goes**, by v13 item:
-
-| v13 | v14 |
-|---|---|
-| [M1]–[M3], [B1], [B4], [A1], [A5] | kept; [M3] gains the results read for VE1 |
-| [B2] episodes and conditions as outcomes | kept for episodes; contexts become the conditioning of a behaviour, and dependence between decisions is handled by bets (VE3) instead of a convention |
-| [B3] an objective up to scale and constant | the order is read up to increasing transformations; scale returns only in the value scale |
-| [A4] misalignment is evidence | kept in substance, restated as the growth rate of the best bet against acceptability; equal to v13's form on convex sets (VE1) |
-| [D1] outcomes, behaviours, divergence and tilt | kept without the tilt, which moves to the derived module |
-| [D2] pursuit | derived module |
-| [D3] specification and misalignment | replaced by the request (constraints, order, reference, indifference, value scale) and acceptability, a convex set; v13's ordinal specification survives as one way to judge the order; the standard specification moves to the derived module, as the acceptable set of an optimizer at a KL price, held by records to its convex hull |
-| [D4] resolution | the principal's side is indifference, in the request; the actor's side moves with feasibility |
-| [D5] stakes | kept, with constraint excess and totals over the horizon |
-| [D6] interventions | derived module |
-| [D7] feasibility, [D8] conditions and views, [D9] observation | kept: none needs optimization |
-| [D10] evaluator | derived module |
-| [D11] records and evidence | rewritten on bets (VE3, VE4); [P55]'s exact test kept for independent decisions |
-
-The 55 propositions follow their definitions; a full map comes with the next step.
-
-## What is proved here so far
-
-| File | Results | Status |
+| File | What it holds | Status |
 |---|---|---|
-| `evidence.md` | VE1, misalignment against a convex set is the growth rate of the best bet; VE2, records hold an actor to the convex hull; VE3, a test from bets keeps its level under any dependence; VE4, the average log-bet tends to its expectation | proved here; VE1 also read in an open text (Grünwald, de Heide and Koolen, Theorem 1) |
-| `constraints.md` | VK1 forbidden sets; VK2 rate limits, in closed form; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions | proved here, except VK4's equality, which the probe supports and which is not yet proved |
-| `order.md` | VO1 "better for every reading" is dominance on upper sets; VO2 v13's ordinal specification lies inside it; VO3 three verdicts, and which of them a record can verify | proved here |
-| `factorization.md` | FA1 nested interfaces factor misalignment exactly; FA2 its Pythagorean form for linear interfaces, with culpability `K = E + R`; FA3 nested linear interfaces toward a fixed target; the earlier splits by mechanism and layer, with one label of v13 that overclaims; VF1–VF3 the verification status of every factor's label | proved here |
+| `evidence.md` | VE1 misalignment against a convex set is the growth rate of the best bet; VE2 records hold an actor to the convex hull; VE3 a test from bets keeps its level under any dependence; VE4 a bet's growth is an average; why this measure | proved here; VE1 also read in an open text ([@grunwald2023], Theorem 1) |
+| `constraints.md` | VK0 every convex requirement is a set of budgets; VK1 forbidden sets; VK2 rate limits; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions (for OPTIMIZERS) | proved here, except VK4(iii), supported by a probe |
+| `order.md` | VO1 better for every reading is dominance on upper sets; VO2 v13's ordinal specification lies inside it; VO3 three verdicts and what a record verifies; why dominance is canonical | proved here |
+| `interface.md` | the interface, feasibility, culpability, elicitation; IN1 every convex feasible set is an interface's; every form of misalignment by the layer that defines it | definitions proposed; IN1 proved here |
+| `factorization.md` | FA1 nested interfaces factor misalignment exactly; FA2, FA3 its Pythagorean forms; v13's exact splits by mechanism and layer; VF1–VF3 the verification status of every factor's label | proved here |
+| `LIMITS.md` | what the framework cannot do and leaves out | proved, chosen, or marked as a hunch |
+| `MIGRATION.md` | what of v13 survives, item by item | the executor's assessment, not reviewed |
 
-None runs in CI yet. The probe `probes/v14/v14_probe.py` reproduces every number, with its output in
-`probes/v14/RESULTS.md`.
+None runs in CI yet. The probes in `probes/v14/` reproduce every number, with their outputs beside them.
 
-## Next steps, in order
+## The design
 
-1. *Labels first.* Register L2 before computing it: the label cases this draft predicts it fixes (best-of-`n`, the
-   mixing actor, the constrained optimizer under v13's standard specification, the greedy decoder) and new ones for the
-   new words (breach, better, worse, neither, misalignment against a request with constraints), each with its sense in
-   the defining text or in everyday use.
-2. *Open questions for the PI*, after L2: the names; whether the order's requirement is dominance (VO1) or the stronger
-   ordinal specification (VO2); what the order is judged against when the reference itself breaches a constraint; the
-   margins with which "worse" becomes verifiable (VO3).
-3. *The items.* The new core in `CORE.md`'s format, M/B/A/D with Interpretations, in this folder, with lint support.
-4. *The derived results* re-proved or moved, with checks and mutants; the library; the general core, where bets need no
-   bins.
-5. *The real case* (H42): a frozen model against a reference model, with forbidden outputs as constraints and one
-   scorer as the order, judged by bets over prompts.
+**CORE**, with no optimization in it, built by the method v13 used, reverse physics [@carcassi2022]: imported
+mathematics (M), background conditions assumed without loss of generality, each with its qualifier (B), premises with
+their status (A), and definitions with their interpretation (D).
+1. *Outcomes and behaviours.* As v13's [M1], [M2], [B1], [B2], [A1] and [D1] without the tilt; a behaviour may depend
+   on a condition, such as a prompt.
+2. *The request*, declared before it judges ([A5]): a finite list of **requirements**, each a convex closed set of
+   behaviours. The **acceptable set** is their intersection.
+3. *Misalignment*, the evidence against acceptability: the best long-run growth rate of a bet, fixed in advance or
+   chosen before each decision, that no acceptable behaviour expects to win ([A4] in its bet form, VE1), with a
+   **breach** verdict for each requirement.
+4. *Records*, judged by bets, valid whatever the dependence when each decision is acceptable given the past (VE3), with
+   [P55]'s exact test for samples.
+
+**Refinements of CORE that build requirements**, none of them a new kind of object: the catalogue of constraints
+(`constraints.md`); an order against a reference (`order.md`); indifference, as requirements that depend only on the
+masses of cells; structural requirements, such as acting alike in every condition ([P40]) or invariance under time
+reversal ([P41]). **Refinements of the principal's side**: a value scale for stakes and severity (`NOTES.md` §24), and
+several principals with weights ([P42]).
+
+**INTERFACE** (`interface.md`) and **OPTIMIZERS**, as in the table above; a constraint enters OPTIMIZERS through its
+shadow price (VK5).
+
+## Why the design loses no generality, and where it does
+
+A framework meant for every case of misalignment, in any domain, must say of each of its choices that no case is lost,
+or say which cases are. These are the claims, each with its ground and its qualifier.
+
+| Claim | Why nothing is lost | Qualifier |
+|---|---|---|
+| finitely many outcomes | a record of finitely many decisions at finite precision decides finitely many events, and misalignment on a continuum is the supremum over them ([B1]; `general/transfer.md`, TR2) | the existence of nearest behaviours needs compactness (TR3–TR5); heavy tails and atoms in `CORE-GENERAL.md` |
+| episodes and conditions as outcomes | an episode, or a condition with its outcome, is again an outcome ([B2]) | one long record with no episodes |
+| a request is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | none |
+| requirements are closed | closing a requirement changes no misalignment and no bet (VE1(iv)) | none |
+| requirements are convex | forced by judging each decision with no model of how the actor decides: an actor may switch between acceptable behaviours, and no bet, nor any record of such an actor, separates a set from its hull (VE2) | a set that is not convex, independence among them, is enforced as its hull; for a sample it can still be judged (`factorization.md`, VF1), a choice the PI should make knowingly |
+| every convex requirement is a set of budgets | the separating hyperplane, from the nearest point (`constraints.md`, VK0) | some need infinitely many budgets |
+| a ranking means dominance | dominance is exactly "better for every holder of the ranking" (VO1) | an order stronger than the ranking must be declared |
+| every convex feasible set is an interface's | the actions can be the feasible behaviours themselves (`interface.md`, IN1) | an actor that cannot randomize has a feasible set that is not convex, declared as a set |
+| misalignment factors over any chain of interfaces | telescoping, with no hypothesis (`factorization.md`, FA1) | the terms are evidence rates only for linear interfaces (FA2, FA3) |
+| misalignment is the growth rate of the best bet | equal to the least divergence to the hull (VE1, VE2), whatever the requirement | none beyond the conventions below |
+
+## The conventions, each justified
+
+A convention is a choice an equally reasonable principal could make otherwise. As in v13's table (`CORE.md` §1), each
+is forced by a stated requirement, chosen for mathematical convenience, or taken from the literature whose results it
+imports, and marked by whether it changes a verdict.
+
+| Convention | Where | Justified by | Changes a verdict | Why |
+|---|---|---|---|---|
+| natural logarithms | everywhere | convenience | no | another base rescales every number alike |
+| evidence on a logarithmic scale, per decision | `evidence.md` | forced, literature | no | evidence of independent decisions must add, and only multiples of the logarithm turn products into sums (Cauchy's functional equation) |
+| bets fair under acceptance | VE1, VE3 | forced, literature | no | otherwise a large wealth is no evidence against acceptability, and the level of VE3 fails; the definition of an e-variable [@grunwald2023] |
+| growth measured under the actor's behaviour, `KL(p̂‖a)` in this order | VE1, VE4 | forced | yes: the other order is another number | a record of the actor shows its own behaviour, and a bet's growth on it is an average under that behaviour |
+| the best bet, the acceptable behaviour most favourable to the record | VE1 | literature | yes: an average or the least favourable would charge more | the generalized likelihood ratio's benefit of the doubt, as in v13 |
+| each decision judged given the past, mixtures accepted | VE2, VE3 | forced | yes, for a requirement that is not convex | no model of how the actor decides, and a level at every size whatever the dependence; under them nothing separates a set from its hull |
+| requirements closed | VE1(iv) | convenience | no | nothing changes, and minima are attained |
+| a ranking read as dominance | `order.md` | forced by the ranking's content | yes, against v13's ordinal cone | the cone adds a shape the ranking does not declare (VO2); which one the order requires is the PI's to decide |
+| culpability as evidence, `K` | `interface.md` | convenience, consistency with [A4] | no on whether the actor is culpable, yes on how much | `K` and the avoidable excess `E` vanish together; `K` is an evidence rate, testable by bets, `E` a difference of two |
+| every concept in the least layer that can define it | `interface.md` | convenience | no | a reader learns what each form of misalignment needs, and no concept depends on more than it must |
+| pursuit as a tilt, its price KL | OPTIMIZERS | forced, given v13's two reasons of [D2] | yes, within OPTIMIZERS | the steepest climb in the Fisher geometry and the best trade-off at a KL price agree only there ([P14]); it no longer touches what misalignment is |
+
+## Challenges, and the answers
+
+Objections a reader is likely to raise, with what the draft says to each; acknowledging one without these answers would
+weaken the framework more than it should.
+- *"KL is one divergence among many; why not total variation or a Wasserstein distance?"* Misalignment is not chosen as
+  a distance; it is the rate at which a fair bet against acceptability grows, and the conventions above force the
+  formula (`evidence.md`, why this measure). A principal who cares about a geometry of outcomes declares it as a
+  requirement, which VK0 always allows.
+- *"Convex requirements lose cases, such as 'act independently' or 'pursue exactly `F`'."* They lose what no record
+  could enforce when each decision is judged with no model of the actor: an actor that switches between acceptable
+  behaviours shows only a mixture (VE2). For a sample of independent decisions such a requirement is still judged
+  (VF1), and the choice between the two is stated, not hidden (`LIMITS.md`).
+- *"A core that is a list of sets says nothing."* It says exactly what a judgement from behaviour can say ([A1]), and
+  every convex requirement is a list of limits on averages (VK0), the form in which principals state constraints. The
+  content of a domain is in its requirements, built by refinements that are proved, not assumed.
+- *"Without optimization the core cannot see reward hacking or goal-directed failure."* It sees what happened: the
+  measured requirement met and the true one breached is the evaluation gap, in CORE. Why it happened, the motive, is an
+  OPTIMIZERS hypothesis that records can refute and never verify (`factorization.md`, VF2), as it should be.
+- *"Culpability depends on an interface the principal declares; that is arbitrary."* The interface is a hypothesis that
+  records refute when the actor does what it says the actor cannot, and an excuse about capability is tested in
+  elicitation conditions or reported as resting on the declaration (VF3). Nothing is excused silently.
+- *"Severity is ignored."* It is separated, on purpose: evidence and harm rank breaches differently (`NOTES.md` §24),
+  and stakes on a declared value scale are reported beside misalignment, never folded into it.
+- *"Dominance is too weak: a good greedy decoder comes out as neither."* Dominance is the strongest verdict every
+  holder of the ranking agrees with (VO1); more needs a value scale or a threshold, which the principal declares.
+- *"Finite outcomes and finitely many conditions are a restriction."* They are what a record decides (TR2). The general
+  twins are to carry v14's results to standard Borel spaces with their qualifiers, as `general/transfer.md` already
+  carries v13's transfer lemma, [P16] and [P54]; until they are written, v14 claims nothing beyond finite outcomes.

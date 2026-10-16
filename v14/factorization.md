@@ -85,7 +85,10 @@ behaviour of `𝓕_{j+1}` nearest to `f_j`. The identity follows by applying [P1
 `r = a°`, FA3's terms are evidence rates between named behaviours; but `KL(f_1‖a°)` is the least misalignment of `𝓕_1`
 only if `a°` is also the acceptable behaviour nearest to `𝓕_1`. When it is not, the target, chosen for the smallest
 interface, is not the best for the larger ones, and FA3 overstates what the larger interfaces could not avoid. FA1 is
-then the factorization with exact labels, and FA3 the one with readings as evidence.
+then the factorization with exact labels, and FA3 the one with readings as evidence. **Generality.** FA1 needs nothing
+of the sets: every chain of capabilities a principal can declare, convex or not, factors exactly. The Pythagorean forms
+are the special case in which each term is also an evidence rate; their hypotheses, linear interfaces and full-support
+targets, are the qualifiers, listed in `LIMITS.md`.
 
 ## What the earlier splits had found
 

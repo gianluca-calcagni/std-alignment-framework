@@ -239,6 +239,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q61 | separate files built on their cores: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; culpability to be defined formally; the full list of forms of misalignment (unavoidable breaches, coarse understanding, cheating, and others), which `CORE` alone can factor, and the least additional concepts each of the others needs. Applied: §25, a discussion; nothing changed in `v14/` yet | PI | §25 |
 | Q62 | three layers, each with its twin: `CORE`, `CORE_GENERAL`, `INTERFACE`, `INTERFACE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; a file of the framework's limits and what it leaves out; prove that the factorization is exactly additive, as the earlier splits were by Pythagoras, looking for the factors those splits found; prove that Carcassi's methodology of verification can justify the factors' labels; report any issue, and anything the PI is forgetting. Applied: `v14/factorization.md`, `v14/LIMITS.md`, `v14/README.md`'s plan of files; §26; a failure mode of [P15](v)'s label | PI | §26; `v14/` |
 | Q63 | prepend the executor's recommendations to the roadmap, to be worked on together; and say how much of the previous work the new core and files can save, and what is incompatible whatever the fix. Applied: `ROADMAP.md`'s recommendations; `v14/MIGRATION.md`; §27 | PI | `ROADMAP.md`; `v14/MIGRATION.md`; §27 |
+| Q64 | consolidate the findings in the appropriate files; find again the work that made the core compelling, every convention and definition without loss of generality and mathematically canonical, understand its method, and say whether the new core and files keep to it, explaining so in the files, as a defence against challenges that would weaken the framework if acknowledged without further thought. Applied: `v14/README.md` rewritten to the current design, with the claims of generality and their qualifiers, the conventions justified, and the challenges answered; `v14/interface.md`, the INTERFACE layer and the forms of misalignment; VK0 and IN1; the canonicity sections of `evidence.md` and `order.md`; §28 | PI | `v14/`; §28 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1944,3 +1945,37 @@ every verdict registered, under v13's name. Those stay as v13's record; new test
 reported under it; the registered verdicts of the cases and `RECORD.md`'s ledger; [P39](ii)'s coordination as
 misalignment; [P37](ii)'s "fake alignment"; [C12]; three conventions of v13's table (full support, the default in every
 specification, independence by convention); and the names L1 found to disagree with their words.
+
+## 28. Is v14 compelling, by v13's method? 2026-10-16 (Q64)
+
+By the executor, at the PI's request (Q64); not independent, and under review by a subagent at the time of writing.
+
+**The method, found again.** v13 made the core compelling by two devices (§17, §18). The method of reverse physics
+[@carcassi2022]: every item said what kind it is, imported mathematics, a background condition assumed without loss of
+generality with its reason and its qualifier, a premise with its status (principle or assumption, conceptual or
+phenomenological), or a definition with its interpretation, declared, verified and justified. And a table of
+conventions (Q53): every choice an equally reasonable principal could make otherwise, each forced by a stated
+requirement, chosen for convenience, or taken from the literature, and marked by whether it changes a verdict. The
+lesson of §16 was kept too: v12's "everything is forced" overstated, since the force was conditional; a claim of
+generality must say what it is conditional on.
+
+**v14 against it.** The draft keeps to the method, and in places goes further than v13 could. Every claim of generality
+now has a ground and a qualifier (`v14/README.md`): finitely many outcomes and episodes as v13's [B1] and [B2]; the
+request as a list of sets, by [A1]; closed requirements, since closing changes nothing (VE1(iv)); convex requirements,
+forced by judging each decision with no model of the actor (VE2), with the qualifier that a set that is not convex,
+independence among them, is enforced as its hull; every convex requirement as a set of budgets (VK0, new: the separating
+hyperplane from the nearest point), so that the PI's constraints and CORE's requirements are one object; a ranking as
+dominance (VO1); every convex feasible set as an interface's (IN1, new); misalignment factoring over any chain (FA1).
+The conventions table is redone for v14, eleven rows; four change a verdict in general and two in stated cases. The
+measure itself is more canonical than v13's: given that evidence adds, that a bet must be fair under acceptance, that
+its growth is measured under what the actor does and that the best bet is taken, VE1 leaves no freedom, and no model of
+optimization enters.
+
+**Where it is weaker, said plainly.** Convexity is forced only under the choice of judging each decision; for samples,
+v13's non-convex specifications could be judged, so the choice costs cases that v13 covered, and the PI should make it
+knowingly (`ROADMAP.md`, recommendation 2). The Pythagorean factors hold only for linear interfaces. And the general
+twins do not exist yet, so v14 claims nothing beyond finite outcomes.
+
+**Consolidated.** The INTERFACE layer, its definitions and the table of forms of misalignment, which were only in §25
+and §26, are now in `v14/interface.md`; the README holds the current design, so §23's proposal of a request in five
+parts is superseded by a list of requirements and refinements that build them (§24).

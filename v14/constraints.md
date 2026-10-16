@@ -17,6 +17,28 @@ budget with `b = min g` is excluded, since it is a forbidden set in disguise and
 behaviour **breaches** a constraint when it lies outside it. Notation as in `evidence.md`; `kl(u‖v)` is the divergence
 between the two-outcome behaviours `(u, 1 − u)` and `(v, 1 − v)`.
 
+### VK0 — Every convex requirement is a set of budgets
+**Statement.** Let `S ⊆ Δ` be non-empty, convex and closed. For every behaviour `x ∉ S` there is a budget `(g, b)` that
+every member of `S` keeps and `x` breaks. So `S` is the intersection of the budgets its members all keep.
+
+**In plain terms.** Whatever a principal requires of a behaviour, as long as mixing two acceptable behaviours stays
+acceptable, the requirement says no more than a list of limits on averages: "on average, at most this much of that". A
+budget is not one kind of constraint among others; it is the general form of every convex requirement, and a forbidden
+set and a rate limit are budgets of indicator functions.
+
+**Proof.** Read behaviours as vectors in `ℝ^X`. `S` is compact, so some `c ∈ S` minimizes the Euclidean distance
+`‖x − y‖` over `y ∈ S`, and `c ≠ x`. For `y ∈ S` and `s ∈ [0, 1]`, `c + s·(y − c) ∈ S` by convexity, so
+`‖x − c − s·(y − c)‖² ≥ ‖x − c‖²`; the derivative in `s` at `0` is `−2·⟨x − c, y − c⟩ ≥ 0`. Let `g = x − c`, read as a
+function on `X`, and `b = ⟨g, c⟩`. Every `y ∈ S` has `E_y[g] = ⟨g, y⟩ ≤ b`, and `E_x[g] = b + ‖x − c‖² > b`. So the
+budgets that `S` keeps exclude every `x ∉ S`, and contain `S`. ∎
+
+**Notes.** This is the separating hyperplane theorem in its finite form, proved here from the nearest point. Forbidden
+sets, rate limits, v13's ordinal specification and dominance (`order.md`) need finitely many budgets; a requirement with
+a curved boundary, such as a ball around a reference, needs infinitely many. It is why the PI's choice to declare
+constraints explicitly, as a general concept (Q60), loses nothing: CORE's requirement, a convex closed set, and the PI's
+constraint are the same object. VK4 then gives every bet of the affine form a lower bound on misalignment against any
+convex requirement, and VE1 the equality when all bets are allowed.
+
 ### VK1 — A forbidden set: one occurrence decides
 **Statement.** For a forbidden set `C`: `M_K(p) = ∞` if `p(C) > 0`, and `0` otherwise. For every `H > 1`, the function
 `h = H` on `C` and `1` off `C` is a bet against `K`. A test that rejects at the first outcome in `C` has level `0`.
