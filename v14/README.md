@@ -37,8 +37,9 @@ what changes there, as `general/transfer.md` does:
 | `INTERFACE` | what the actor sees, what it can do, and how the world turns its actions into outcomes; feasibility, culpability, coarse perception, noise, tampering, collusion | `INTERFACE_GENERAL` |
 | `OPTIMIZERS` | objectives, pursuit, the KL price, evaluators, training, shadow prices; gaming, overoptimization, outer and inner misalignment, strategic deception | `OPTIMIZERS_GENERAL` |
 
-Beside them, `LIMITS.md`, what the framework cannot do and what it leaves out. The proposal below predates the layers
-(Q59–Q61, `NOTES.md` §23–§25); where it places a concept in "the core", read CORE or INTERFACE as §25 sorts it.
+Beside them, `LIMITS.md`, what the framework cannot do and what it leaves out, and `MIGRATION.md`, what of v13 survives.
+The proposal below predates the layers (Q59–Q61, `NOTES.md` §23–§25); where it places a concept in "the core", read CORE
+or INTERFACE as §25 sorts it.
 
 ## The structure proposed
 

@@ -238,6 +238,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q60 | back to the drawing board for a turn: constraints are declared explicitly, as a general concept, since some are not available in the principal's family of targets (a bound on an average, a resolution); a fee or cost against a misaligned event is not a concept of the core, since each target carries it implicitly in the event's probability, and it is to be derived where optimization needs it; which other concepts can move from the core to refinements? Applied: §24, a discussion; nothing changed in `v14/` yet | PI | §24 |
 | Q61 | separate files built on their cores: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; culpability to be defined formally; the full list of forms of misalignment (unavoidable breaches, coarse understanding, cheating, and others), which `CORE` alone can factor, and the least additional concepts each of the others needs. Applied: §25, a discussion; nothing changed in `v14/` yet | PI | §25 |
 | Q62 | three layers, each with its twin: `CORE`, `CORE_GENERAL`, `INTERFACE`, `INTERFACE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; a file of the framework's limits and what it leaves out; prove that the factorization is exactly additive, as the earlier splits were by Pythagoras, looking for the factors those splits found; prove that Carcassi's methodology of verification can justify the factors' labels; report any issue, and anything the PI is forgetting. Applied: `v14/factorization.md`, `v14/LIMITS.md`, `v14/README.md`'s plan of files; §26; a failure mode of [P15](v)'s label | PI | §26; `v14/` |
+| Q63 | prepend the executor's recommendations to the roadmap, to be worked on together; and say how much of the previous work the new core and files can save, and what is incompatible whatever the fix. Applied: `ROADMAP.md`'s recommendations; `v14/MIGRATION.md`; §27 | PI | `ROADMAP.md`; `v14/MIGRATION.md`; §27 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1926,3 +1927,20 @@ values as estimated, when they depend on the declarations alone. **A correction 
 requirement a record can enforce" holds under v14's choice of judging each decision and accepting mixtures; for a sample
 of joint decisions, leaving the independent behaviours is verifiable. [P15]'s Notes, for contexts and an actor's
 resolution, and [D7]'s reasons carry the same overclaim of "unavoidable" as [P15](v); R18 covers them.
+
+## 27. What of v13 survives, 2026-10-16 (Q63)
+
+By the executor, at the PI's question (Q63); an assessment, not reviewed yet. `v14/MIGRATION.md` gives every item and
+result a fate: keep, move to another layer with its words changed, rewrite for v14's objects, or incompatible.
+
+**The finding.** Almost all of the mathematics survives: of 68 results, 13 keep their place in CORE or a refinement of
+it, 8 move to INTERFACE, 42 to OPTIMIZERS, 4 need rewriting, and one, [C12], is incompatible. What does not survive is
+the meaning v13 gave its central number: under the standard specification, v13's misalignment is the distance to the
+set of KL-optimal pursuits, a fact about optimizers, while v14's is evidence against a declared convex requirement. So
+the incompatible part is not where the effort went, the theorems, but where the claims went: every number reported, and
+every verdict registered, under v13's name. Those stay as v13's record; new tests are registered under v14.
+
+**Seven things incompatible whatever the fix**: the name "misalignment" for the distance to the ray, with every number
+reported under it; the registered verdicts of the cases and `RECORD.md`'s ledger; [P39](ii)'s coordination as
+misalignment; [P37](ii)'s "fake alignment"; [C12]; three conventions of v13's table (full support, the default in every
+specification, independence by convention); and the names L1 found to disagree with their words.

@@ -4,6 +4,33 @@ The anchor against drift. Read it first in every session, and before starting an
 end of every turn. `NOTES.md` holds the executor's working notes and the history; this file holds only the goal, where
 the framework stands against it, and what comes next.
 
+## The executor's recommendations for v14 (2026-10-16, Q63)
+
+Prepended at the PI's request, to be worked on together; the order is the executor's proposal. The ground for each is
+in `NOTES.md` §22–§27 and in `v14/`.
+
+1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
+   and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
+   unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
+2. **Decide the three choices the draft rests on**, knowingly: the mixture principle, which buys tests valid under any
+   dependence at the price of requirements that are not convex, independence among them (`v14/LIMITS.md`); the order's
+   requirement, dominance or v13's ordinal cone (`v14/order.md`, VO2); and a reference that meets the constraints (H45).
+3. **Correct [P15](v)'s "unavoidable" on `main`**, or leave it to v14 (R18).
+4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `OPTIMIZERS` and their twins, each twin
+   stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
+   and mutants with them.
+5. **Close the open proofs**: VK4(iii), several constraints, with Farkas's lemma read in an open text; the Pythagorean
+   factor for forbidden sets (`v14/factorization.md`, FA2); intervals for misalignment, culpability and the avoidable
+   excess from records, with bets.
+6. **Elicitation in INTERFACE**: conditions with a declared link to the condition judged, so that excuses can be
+   refuted (`v14/factorization.md`, VF3); without them, every excuse rests on the declared interface.
+7. **The report and the library on v14**: a new `STANDARD.md`, a verdict per requirement, the bets, the interface and
+   what it excuses, stakes on a declared scale; `stdalign`'s API to match.
+8. **The real case** (H42): a frozen model against a reference model, forbidden outputs as constraints, one scorer as
+   the order, judged by bets over prompts, with elicitation conditions; registered before it runs.
+9. **People**: a mathematician who reads the six files once drafted (R1), and the label verdicts of L1 and L2 read by
+   the PI (R15).
+
 ## The goal
 
 A standard formal framework for alignment problems in general, not only in machine learning: solid enough to build on,
@@ -58,12 +85,17 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   ordinal specification agreed with their words on every case; nine disagreed on at least one, most because the standard
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15).
-- **v14, begun** (Q59, `NOTES.md` §23): on the branch `claude/core-v14`, a draft in `v14/` beside the core, not in it.
-  Constraints as a concept of the core (forbidden sets, rate limits, budgets); misalignment read as the growth rate of
-  the best bet against acceptability, equal to v13's measure on convex sets, with a test that keeps its level under any
-  dependence; three verdicts under a ranking against a reference; optimization moved to a derived module, where a budget
-  enters as a shadow price. Twelve results proved here, none in CI yet. The PI's decisions on R15 and R16 wait for it;
-  L2 comes next.
+- **v14, begun** (Q59–Q63, `NOTES.md` §23–§27): on the branch `claude/core-v14`, a draft in `v14/` beside the core, not
+  in it. Three layers, each with a twin: CORE (a request as a list of convex requirements, misalignment as evidence
+  against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse perception,
+  tampering) and OPTIMIZERS (pursuit, evaluators, training, shadow prices). Proved here and probed, none in CI yet:
+  evidence as a bet, constraints, three verdicts under a ranking, and the factorization with the verification status of
+  its labels; `v14/LIMITS.md` for what the framework cannot do; `v14/MIGRATION.md` for what of v13 survives. The PI's
+  decisions on R15 and R16 wait for it; L2 comes next. Constraints as a concept of the core (forbidden sets, rate
+  limits, budgets); misalignment read as the growth rate of the best bet against acceptability, equal to v13's measure
+  on convex sets, with a test that keeps its level under any dependence; three verdicts under a ranking against a
+  reference; optimization moved to a derived module, where a budget enters as a shadow price. Twelve results proved
+  here, none in CI yet. The PI's decisions on R15 and R16 wait for it; L2 comes next.
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([P5], [P6]), the estimates by access with their intervals ([P23], [P47], [P52]), and the diagnostics
   [P43]–[P51] with the projection of [P15]; the checks of those items run on it, its own tests cover its interface, and
@@ -207,3 +239,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-16 | the PI's position on constraints and fees, and the question of what else leaves the core (Q60): `NOTES.md` §24, a discussion; agreed that fees belong to the optimization module, challenged that severity lives in probabilities, and proposed a core whose only declared object is a list of requirements | 2 (a version, if adopted) |
 | 2026-10-16 | the forms of misalignment and the layers they need (Q61, `NOTES.md` §25): an interface layer, views, actions and an environment kernel, proposed between `CORE` and `OPTIMIZERS`; factoring by nested interfaces; two candidates for culpability; the full list by layer | 2 (a version, if adopted) |
 | 2026-10-16 | three layers with their twins decided (Q62); `v14/factorization.md`, the factorization proved two ways, the earlier splits sorted by mechanism and layer, and the labels' verification status (VF1–VF3); `v14/LIMITS.md`; [P15](v)'s label found to overclaim (§1, R18) | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-16 | what of v13 survives v14 (Q63): `v14/MIGRATION.md`, a fate for every item and result, and seven things incompatible whatever the fix; the executor's recommendations prepended to this file | 2 (a version) |
