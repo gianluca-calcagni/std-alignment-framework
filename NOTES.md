@@ -1967,10 +1967,10 @@ forced by judging each decision with no model of the actor (VE2), with the quali
 independence among them, is enforced as its hull; every convex requirement as a set of budgets (VK0, new: the separating
 hyperplane from the nearest point), so that the PI's constraints and CORE's requirements are one object; a ranking as
 dominance (VO1); every convex feasible set as an interface's (IN1, new); misalignment factoring over any chain (FA1).
-The conventions table is redone for v14, eleven rows; four change a verdict in general and two in stated cases. The
-measure itself is more canonical than v13's: given that evidence adds, that a bet must be fair under acceptance, that
-its growth is measured under what the actor does and that the best bet is taken, VE1 leaves no freedom, and no model of
-optimization enters.
+The conventions table is redone for v14, twelve rows after the review below; five change a verdict in general and three
+in stated cases. The measure itself is more canonical than v13's: given that evidence adds, that a bet must be fair
+under acceptance, that its growth is measured under what the actor does and that the best bet is taken, VE1 leaves no
+freedom, and no model of optimization enters.
 
 **Where it is weaker, said plainly.** Convexity is forced only under the choice of judging each decision; for samples,
 v13's non-convex specifications could be judged, so the choice costs cases that v13 covered, and the PI should make it
