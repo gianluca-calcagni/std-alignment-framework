@@ -102,3 +102,11 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   measured against all of them, and the credit of FA2(iii) is the least over them.
 - **Finitely many conditions.** Every result of the draft takes finitely many conditions and outcomes; the general twins
   are where that is lifted.
+- **The measure rests on Kelly's criterion.** Misalignment is the long-run growth of the logarithm of a fair bet's
+  wealth; a principal who valued evidence by expected wealth would get another number, the Rényi divergence of order
+  `∞` (`evidence.md`, why this measure). And that bets chosen from the record reach the best growth is not proved (H46).
+- **A reference known from a sample.** An order is judged against a reference behaviour; a base model known only through
+  its answers gives a reference with uncertainty, which is not yet in the requirement it builds ([A5]).
+- **Culpability under an overstated interface.** An interface that credits the actor with capabilities it lacks charges
+  it for what no record can show it could not do; only capabilities demonstrated in elicitation make the charge safe.
+  When no feasible behaviour avoids a forbidden outcome, culpability is to be read on the breach rate, not yet written.

@@ -80,18 +80,23 @@ and it is open. ∎
 **Notes.** The greedy decoder of `NOTES.md` §22: ten levels, a uniform reference, and an actor that always answers at
 level `8`. It meets the standard "level `9`" less often than the reference (`0` against `0.1`), the standards from level
 `1` to level `8` more often, and level `0` as often, so it is neither better nor worse (`probes/v14/RESULTS.md`, VO3),
-while its average rank is `0.889` against `0.5`. v13's ordinal specification calls it misaligned. Common sense would
-not; what the decoder lacks is the principal's value scale, under which its average rank would count, or a declared
-standard ("at least level 8"), which it meets every time. The verdicts of v14 say this instead of one number: neither
-better nor worse for every reading, and better under the declared scale or standard, if one is declared. "Misaligned" is
-kept for a breach of a constraint, and for a shortfall by margins the principal declares in advance (iii). Whether these
-are the right words is for L2 to test before anyone adopts them.
+while its average rank is `0.889` against `0.5`. v13's ordinal specification calls it misaligned, and so does the
+requirement `B(r)`. Common sense would not; what the decoder lacks is the principal's value scale, under which its
+average rank would count, or a declared standard ("at least level 8"), which it meets every time. The verdicts of v14
+say this instead of one number: neither better nor worse for every reading, and better under the declared scale or
+standard, if one is declared. "Misaligned" is kept for a breach of a constraint, and for a shortfall by margins the
+principal declares in advance (iii). Whether these are the right words is for L2 to test before anyone adopts them.
 
-## Why dominance is the canonical requirement of a ranking
+## Why dominance is the canonical reading of a ranking
 
-A ranking, read only up to increasing transformations, is all the principal declares; "better" must then mean better
-for every principal who holds that ranking, or it adds a commitment the principal did not make. VO1 shows that this is
-exactly dominance on upper sets, so dominance is not one order among several but the content of the ranking itself.
-Every stronger requirement adds something: v13's ordinal specification adds a shape (VO2), a value scale adds cardinal
-values, a margin adds a threshold. Each is legitimate when declared, and each changes verdicts; none is implied by the
-ranking. A ranking alone loses nothing by being read as dominance, and a principal who wants more says so.
+A ranking, read only up to increasing transformations, is all the principal declares; "better" must then mean better for
+every principal who holds that ranking, or it adds a commitment the principal did not make. VO1 shows that this is
+exactly dominance on upper sets, so dominance is not one order among several but the content of the ranking itself, once
+"better" is read as unanimity over the ranking's readings, which is itself a choice. What a ranking does not fix is the
+requirement built from it. The verdicts of VO3 are comparisons with the reference, reported as such; to judge
+misalignment the principal declares a requirement, and each choice changes verdicts: `B(r)`, "better than the reference
+for every reading", which the greedy decoder breaches, so that it is misaligned under that requirement; v13's ordinal
+specification, which adds a shape (VO2); or shortfalls by margins at declared standards (VO3(iii)), which it does not
+breach. Choosing among them is the PI's (`ROADMAP.md`, recommendation 2). A reference known only from a sample, such as
+a base model's answers, is not a set fixed in advance, as [A5] asks, until it is declared as such; how its uncertainty
+enters the requirement is open (`LIMITS.md`).

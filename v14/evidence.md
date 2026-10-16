@@ -133,21 +133,29 @@ is where H43's `√n` blind spot reappears.
 ## Why this measure, among all the others
 
 A reader may ask why misalignment is this number, and not a distance between behaviours chosen otherwise: total
-variation, a Wasserstein distance, a Rényi or `χ²` divergence. The answer is that the number is not chosen as a
-distance; it is the rate at which evidence against acceptability accumulates, and each step from that to the formula is
-either forced by a stated requirement or a convention taken from the literature, listed in `v14/README.md`.
+variation, a Wasserstein distance, a Rényi or `χ²` divergence. The number is not chosen as a distance; it is the rate
+at which evidence against acceptability accumulates. Each step from that to the formula is forced by a stated
+requirement, or is a choice, named as one and listed in `v14/README.md`.
 - *Evidence of independent decisions must add*, so it is counted on a logarithmic scale: the only continuous functions
-  that turn products of probabilities into sums are multiples of the logarithm (Cauchy's functional equation), and the
-  base only sets the unit. In the bet form this is the wealth's logarithm.
+  that turn products of probabilities into sums are multiples of the logarithm (Cauchy's functional equation). Forced.
 - *A bet must be fair under acceptance*, `E_a[h] ≤ 1` for every acceptable `a`, or a large wealth would be no evidence
-  against acceptability; that is what makes VE3's level hold under any dependence. It is the definition of an
-  e-variable ([@grunwald2023]).
-- *Its growth is measured under what the actor does*, since that is what a record of the actor shows (VE4); a rate
-  under an acceptable behaviour would describe a record the actor never produces.
+  against acceptability, and VE3's level would fail. Forced; it is the definition of an e-variable ([@grunwald2023]).
+- *Wealth is valued by its long-run growth, the expected logarithm* (Kelly's criterion). A choice: a bettor who
+  maximized expected wealth would be led to the Rényi divergence of order `∞`, and power utilities to other orders. It
+  is the choice under which the evidence of independent decisions adds, and under which the number is v13's: the rate,
+  per decision, at which acceptance makes the actor's record improbable ([A4], Sanov's rate).
+- *The question is how improbable acceptance makes the actor's record*, the exponent of false accusation while the actor
+  is reliably convicted, which is `KL(p̂‖a)`. The other order, `KL(a‖p̂)`, answers another question, how fast a
+  misaligned actor stops escaping at a fixed level of false accusation (Stein's exponent); both are about how fast a
+  record convicts. The order is forced only given this question, which is [A4]'s.
 - *The best bet is taken*, so that misalignment charges only what no acceptable behaviour explains: the generalized
-  likelihood ratio's benefit of the doubt, as in v13's table.
-Given these four, VE1 leaves no freedom: the number is `min_{a∈A} KL(p̂‖a)`, with its order of arguments forced. Another
-divergence measures something else: total variation and Wasserstein distances measure how far probability must move, in
-a geometry of outcomes the principal would have to declare, and say nothing of how fast a record convicts. A principal
-who cares about such a distance declares it as a requirement (`constraints.md`, VK0), and misalignment then counts the
-evidence against that requirement.
+  likelihood ratio's benefit of the doubt, as in v13's table. A convention from the literature.
+- *Under the mixture principle, the acceptable set is its convex hull* (VE2), so the number is the least divergence to
+  the hull, `min_{a ∈ conv A} KL(p̂‖a)`; for a convex requirement, the requirement itself.
+Given these, VE1 leaves no further freedom. One thing it does not settle: the best bet `p̂/a*` needs the actor's
+behaviour, which a record only estimates. That bets chosen before each decision from the earlier ones reach the best
+growth rate is not proved here (H46); a bet fixed in advance gives a lower bound, which is what a sound accusation
+needs. Another divergence measures something else: total variation and Wasserstein distances measure how far
+probability must move, in a geometry of outcomes the principal would have to declare, and say nothing of how fast a
+record convicts. A principal who cares about such a distance declares it as a requirement (`constraints.md`, VK0), and
+misalignment then counts the evidence against that requirement.

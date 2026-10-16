@@ -79,16 +79,16 @@ or say which cases are. These are the claims, each with its ground and its quali
 
 | Claim | Why nothing is lost | Qualifier |
 |---|---|---|
-| finitely many outcomes | a record of finitely many decisions at finite precision decides finitely many events, and misalignment on a continuum is the supremum over them ([B1]; `general/transfer.md`, TR2) | the existence of nearest behaviours needs compactness (TR3–TR5); heavy tails and atoms in `CORE-GENERAL.md` |
+| finitely many outcomes | a record of finitely many decisions at finite precision decides finitely many events, and misalignment on a continuum is the supremum over them ([B1]; `general/transfer.md`, TR2) | that supremum equals the least divergence to the acceptable behaviours only when their closure is compact (TR3); heavy tails and atoms in `CORE-GENERAL.md`; v14's own results are proved for finite outcomes only |
 | episodes and conditions as outcomes | an episode, or a condition with its outcome, is again an outcome ([B2]) | one long record with no episodes |
-| a request is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | none |
-| requirements are closed | closing a requirement changes no misalignment and no bet (VE1(iv)) | none |
-| requirements are convex | forced by judging each decision with no model of how the actor decides: an actor may switch between acceptable behaviours, and no bet, nor any record of such an actor, separates a set from its hull (VE2) | a set that is not convex, independence among them, is enforced as its hull; for a sample it can still be judged (`factorization.md`, VF1), a choice the PI should make knowingly |
+| a request is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | comparisons with a reference (`order.md`, VO3) are reported beside the verdicts; they become requirements only when the principal declares which |
+| requirements are closed | closing a requirement changes no misalignment and no bet (VE1(iv)) | the breach verdict changes at boundary behaviours, such as a rate exactly at a strict limit, which no record can tell apart |
+| requirements are convex | forced given two premises: a schedule of acceptable behaviours is acceptable, and tests must keep their level whatever the dependence. Independent draws from a mixture have the law of a random schedule of its components, so a test valid for every schedule is valid at the hull; and no bet separates a set from its hull (VE2) | a set that is not convex, independence among them, is enforced as its hull; for a sample it can still be judged (`factorization.md`, VF1); the premises are a choice the PI should make knowingly |
 | every convex requirement is a set of budgets | the separating hyperplane, from the nearest point (`constraints.md`, VK0) | some need infinitely many budgets |
-| a ranking means dominance | dominance is exactly "better for every holder of the ranking" (VO1) | an order stronger than the ranking must be declared |
+| a ranking is read as dominance | dominance is exactly "better for every holder of the ranking" (VO1) | reading "better" as unanimity over the ranking's readings is a choice; the requirement built from the order (`B(r)`, the ordinal cone, or margins) is declared, not implied |
 | every convex feasible set is an interface's | the actions can be the feasible behaviours themselves (`interface.md`, IN1) | an actor that cannot randomize has a feasible set that is not convex, declared as a set |
 | misalignment factors over any chain of interfaces | telescoping, with no hypothesis (`factorization.md`, FA1) | the terms are evidence rates only for linear interfaces (FA2, FA3) |
-| misalignment is the growth rate of the best bet | equal to the least divergence to the hull (VE1, VE2), whatever the requirement | none beyond the conventions below |
+| misalignment is the growth rate of the best bet | equal to the least divergence to the hull (VE1, VE2), whatever the requirement | given the conventions below, Kelly's among them; that bets chosen from the record reach the best growth is not proved (H46) |
 
 ## The conventions, each justified
 
@@ -101,11 +101,12 @@ imports, and marked by whether it changes a verdict.
 | natural logarithms | everywhere | convenience | no | another base rescales every number alike |
 | evidence on a logarithmic scale, per decision | `evidence.md` | forced, literature | no | evidence of independent decisions must add, and only multiples of the logarithm turn products into sums (Cauchy's functional equation) |
 | bets fair under acceptance | VE1, VE3 | forced, literature | no | otherwise a large wealth is no evidence against acceptability, and the level of VE3 fails; the definition of an e-variable [@grunwald2023] |
-| growth measured under the actor's behaviour, `KL(p̂‖a)` in this order | VE1, VE4 | forced | yes: the other order is another number | a record of the actor shows its own behaviour, and a bet's growth on it is an average under that behaviour |
+| wealth valued by its long-run growth, the expected logarithm | VE1, VE4 | literature, a choice | yes: expected wealth would give the Rényi divergence of order `∞` | Kelly's criterion; the one under which evidence of independent decisions adds and the number is [A4]'s rate |
+| the question is how improbable acceptance makes the actor's record, `KL(p̂‖a)` in this order | VE1, VE4 | forced, given [A4] | yes: the other order, Stein's exponent, answers how fast a misaligned actor stops escaping | the exponent of false accusation while the actor is reliably convicted; Sanov's rate |
 | the best bet, the acceptable behaviour most favourable to the record | VE1 | literature | yes: an average or the least favourable would charge more | the generalized likelihood ratio's benefit of the doubt, as in v13 |
-| each decision judged given the past, mixtures accepted | VE2, VE3 | forced | yes, for a requirement that is not convex | no model of how the actor decides, and a level at every size whatever the dependence; under them nothing separates a set from its hull |
-| requirements closed | VE1(iv) | convenience | no | nothing changes, and minima are attained |
-| a ranking read as dominance | `order.md` | forced by the ranking's content | yes, against v13's ordinal cone | the cone adds a shape the ranking does not declare (VO2); which one the order requires is the PI's to decide |
+| each decision judged given the past, mixtures accepted | VE2, VE3 | forced, given two premises | yes, for a requirement that is not convex | the premises: a schedule of acceptable behaviours is acceptable, and the level holds whatever the dependence; under them the number is the least divergence to the hull |
+| requirements closed | VE1(iv) | convenience | no for misalignment and bets; yes for the breach verdict at the boundary | minima are attained; a boundary behaviour no record can tell apart |
+| a ranking read as dominance | `order.md` | forced, given unanimity over the ranking's readings | yes, against v13's ordinal cone | the cone adds a shape the ranking does not declare (VO2); which requirement the order gives is the PI's to decide |
 | culpability as evidence, `K` | `interface.md` | convenience, consistency with [A4] | no on whether the actor is culpable, yes on how much | `K` and the avoidable excess `E` vanish together; `K` is an evidence rate, testable by bets, `E` a difference of two |
 | every concept in the least layer that can define it | `interface.md` | convenience | no | a reader learns what each form of misalignment needs, and no concept depends on more than it must |
 | pursuit as a tilt, its price KL | OPTIMIZERS | forced, given v13's two reasons of [D2] | yes, within OPTIMIZERS | the steepest climb in the Fisher geometry and the best trade-off at a KL price agree only there ([P14]); it no longer touches what misalignment is |
@@ -115,26 +116,31 @@ imports, and marked by whether it changes a verdict.
 Objections a reader is likely to raise, with what the draft says to each; acknowledging one without these answers would
 weaken the framework more than it should.
 - *"KL is one divergence among many; why not total variation or a Wasserstein distance?"* Misalignment is not chosen as
-  a distance; it is the rate at which a fair bet against acceptability grows, and the conventions above force the
-  formula (`evidence.md`, why this measure). A principal who cares about a geometry of outcomes declares it as a
-  requirement, which VK0 always allows.
+  a distance; it is the rate at which a fair bet against acceptability grows, and given the conventions above, Kelly's
+  criterion and [A4]'s question among them, the formula has no freedom left (`evidence.md`, why this measure). A
+  principal who cares about a geometry of outcomes declares it as a requirement, which VK0 always allows.
 - *"Convex requirements lose cases, such as 'act independently' or 'pursue exactly `F`'."* They lose what no record
   could enforce when each decision is judged with no model of the actor: an actor that switches between acceptable
   behaviours shows only a mixture (VE2). For a sample of independent decisions such a requirement is still judged
   (VF1), and the choice between the two is stated, not hidden (`LIMITS.md`).
 - *"A core that is a list of sets says nothing."* It says exactly what a judgement from behaviour can say ([A1]), and
-  every convex requirement is a list of limits on averages (VK0), the form in which principals state constraints. The
-  content of a domain is in its requirements, built by refinements that are proved, not assumed.
+  every convex requirement is a list of limits on averages (VK0), possibly infinite, the form in which principals state
+  constraints. The content of a domain is in its requirements, declared through refinements whose results are proved.
 - *"Without optimization the core cannot see reward hacking or goal-directed failure."* It sees what happened: the
   measured requirement met and the true one breached is the evaluation gap, in CORE. Why it happened, the motive, is an
   OPTIMIZERS hypothesis that records can refute and never verify (`factorization.md`, VF2), as it should be.
 - *"Culpability depends on an interface the principal declares; that is arbitrary."* The interface is a hypothesis that
   records refute when the actor does what it says the actor cannot, and an excuse about capability is tested in
-  elicitation conditions or reported as resting on the declaration (VF3). Nothing is excused silently.
+  elicitation conditions or reported as resting on the declaration (VF3). The refutation runs one way: an interface that
+  overstates the actor's capability charges it for what no record can show it could not do, so the declared capabilities
+  should be ones demonstrated in elicitation. Reporting what an excuse or a charge rests on is a rule of the report, not
+  a theorem.
 - *"Severity is ignored."* It is separated, on purpose: evidence and harm rank breaches differently (`NOTES.md` §24),
   and stakes on a declared value scale are reported beside misalignment, never folded into it.
-- *"Dominance is too weak: a good greedy decoder comes out as neither."* Dominance is the strongest verdict every
-  holder of the ranking agrees with (VO1); more needs a value scale or a threshold, which the principal declares.
+- *"Dominance is too weak: a good greedy decoder comes out as neither."* Dominance is the strongest comparison every
+  holder of the ranking agrees with (VO1); a verdict of misalignment needs a requirement built from it, `B(r)`, under
+  which the decoder is misaligned, or margins at declared standards, under which it is not, or a value scale. The
+  principal declares which.
 - *"Finite outcomes and finitely many conditions are a restriction."* They are what a record decides (TR2). The general
   twins are to carry v14's results to standard Borel spaces with their qualifiers, as `general/transfer.md` already
   carries v13's transfer lemma, [P16] and [P54]; until they are written, v14 claims nothing beyond finite outcomes.

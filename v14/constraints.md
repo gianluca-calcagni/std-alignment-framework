@@ -18,26 +18,33 @@ behaviour **breaches** a constraint when it lies outside it. Notation as in `evi
 between the two-outcome behaviours `(u, 1 − u)` and `(v, 1 − v)`.
 
 ### VK0 — Every convex requirement is a set of budgets
-**Statement.** Let `S ⊆ Δ` be non-empty, convex and closed. For every behaviour `x ∉ S` there is a budget `(g, b)` that
-every member of `S` keeps and `x` breaks. So `S` is the intersection of the budgets its members all keep.
+**Statement.** Let `S ⊆ Δ` be non-empty, convex and closed. For every behaviour `x ∉ S` there is a budget `(g, b)`,
+with `min g < b` as the definition above asks, that every member of `S` keeps and `x` breaks. So `S` is the
+intersection of the budgets its members all keep.
 
 **In plain terms.** Whatever a principal requires of a behaviour, as long as mixing two acceptable behaviours stays
-acceptable, the requirement says no more than a list of limits on averages: "on average, at most this much of that". A
-budget is not one kind of constraint among others; it is the general form of every convex requirement, and a forbidden
-set and a rate limit are budgets of indicator functions.
+acceptable, the requirement says no more than a list of limits on averages, "on average, at most this much of that",
+though the list may be infinite. A budget is not one kind of constraint among others; it is the general form of every
+convex requirement. A rate limit is one budget, of an indicator; a forbidden set is the rate limits at every rate above
+zero.
 
 **Proof.** Read behaviours as vectors in `ℝ^X`. `S` is compact, so some `c ∈ S` minimizes the Euclidean distance
 `‖x − y‖` over `y ∈ S`, and `c ≠ x`. For `y ∈ S` and `s ∈ [0, 1]`, `c + s·(y − c) ∈ S` by convexity, so
 `‖x − c − s·(y − c)‖² ≥ ‖x − c‖²`; the derivative in `s` at `0` is `−2·⟨x − c, y − c⟩ ≥ 0`. Let `g = x − c`, read as a
-function on `X`, and `b = ⟨g, c⟩`. Every `y ∈ S` has `E_y[g] = ⟨g, y⟩ ≤ b`, and `E_x[g] = b + ‖x − c‖² > b`. So the
-budgets that `S` keeps exclude every `x ∉ S`, and contain `S`. ∎
+function on `X`, and `b = ⟨g, c⟩ + ‖x − c‖²/2`. Every `y ∈ S` has `E_y[g] = ⟨g, y⟩ ≤ ⟨g, c⟩ < b`;
+`E_x[g] = ⟨g, c⟩ + ‖x − c‖² > b`; and `b > ⟨g, c⟩ = E_c[g] ≥ min g`. So the budgets that `S` keeps exclude every
+`x ∉ S`, and contain `S`. ∎
 
-**Notes.** This is the separating hyperplane theorem in its finite form, proved here from the nearest point. Forbidden
-sets, rate limits, v13's ordinal specification and dominance (`order.md`) need finitely many budgets; a requirement with
-a curved boundary, such as a ball around a reference, needs infinitely many. It is why the PI's choice to declare
+**Notes.** This is the separating hyperplane theorem in its finite form, proved here from the nearest point. How many
+budgets a requirement needs: a rate limit with `ε > 0`, one; v13's ordinal specification, with a default of full
+support, and dominance (`order.md`), when every proper upper set has reference mass strictly between `0` and `1`,
+finitely many; a forbidden set, infinitely many, `a(C) ≤ ε` for every `ε > 0`, or one limit `E_a[1_C] ≤ 0` if limits
+with `b = min g` are admitted, which VK3's dual does not cover; balls in total variation, and in a Wasserstein distance
+on finitely many outcomes, finitely many, since both are polyhedral; balls in KL, Euclidean or Hellinger distance whose
+boundary meets the interior of `Δ`, on three or more outcomes, infinitely many. It is why the PI's choice to declare
 constraints explicitly, as a general concept (Q60), loses nothing: CORE's requirement, a convex closed set, and the PI's
-constraint are the same object. VK4 then gives every bet of the affine form a lower bound on misalignment against any
-convex requirement, and VE1 the equality when all bets are allowed.
+constraint are the same object. VK4 gives every bet of the affine form a lower bound on misalignment against any convex
+requirement, and VE1 the equality when all bets are allowed.
 
 ### VK1 — A forbidden set: one occurrence decides
 **Statement.** For a forbidden set `C`: `M_K(p) = ∞` if `p(C) > 0`, and `0` otherwise. For every `H > 1`, the function
