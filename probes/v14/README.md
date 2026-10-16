@@ -11,3 +11,4 @@ Its output, as run once, is in `RESULTS.md`.
 | VK2–VK5 | `v14/constraints.md` | the closed forms and duals against numerical minimization; the constrained optimizer and its shadow price |
 | VO3 | `v14/order.md` | the greedy decoder's verdicts |
 | `culpability.py` | `NOTES.md` §25 | the excess misalignment against the evidence of culpability, when a breach is unavoidable |
+| `factorization.py` | `v14/factorization.md` | v13's [P15](v) split against the least misalignment of the feasible set; FA2's identity `K = E + R`; FA3 on nested linear sets; output in `RESULTS-factorization.md` |
