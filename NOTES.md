@@ -233,6 +233,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q57 | `www.math.mcgill.ca` allowed (R14). Then: since the framework calls mathematical objects by words such as "misalignment", "outer alignment" or "tampering", and since theory and practice must agree through verification (Carcassi), verify every definition in the sense that its label corresponds to what its word means, with concrete arguments; a definition labelled wrongly gives a false sense of understanding, and accuracy here is worth its cost. Applied: R14 closed; a label verification, L1, registered and pushed before anything was computed (`probes/labels/REGISTRATION.md`), then run; §21 | PI | `probes/labels/`; §21 |
 | Q58 | open to a major revamp of the core, if it brings the terminology closer to common sense; no quick fixes or workarounds; the framework must be trustworthy, mathematically formal and general. A brainstorm first. Applied: §22, a proposal for the PI | PI | §22 |
 | Q59 | open a pull request to `main` with the latest changes; then start reworking the core as the executor recommends, on a branch of its own, from everything discussed so far. Constraints become a concept of the core: outcomes the principal finds unacceptable, whose breach is plainly a form of misalignment; how to include that misalignment, in its most fitting form, and the concepts that follow from it, is to be discussed; where optimization is treated, constraints are enforced too, perhaps through the Karush–Kuhn–Tucker conditions and Lagrange multipliers. The PI's decisions on R15 and R16 are postponed until the rework has absorbed constraints and the other recommended changes. Applied: the pull request; the branch `claude/core-v14`; R15 and R16 marked postponed | PI | `REQUESTS.md`; the branch `claude/core-v14` |
+| Q60 | back to the drawing board for a turn: constraints are declared explicitly, as a general concept, since some are not available in the principal's family of targets (a bound on an average, a resolution); a fee or cost against a misaligned event is not a concept of the core, since each target carries it implicitly in the event's probability, and it is to be derived where optimization needs it; which other concepts can move from the core to refinements? Applied: §24, a discussion; nothing changed in `v14/` yet | PI | §24 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1778,3 +1779,44 @@ rate that depends only on the class of bets the principal allows, and H43's `√
 
 **Open.** L2, to register before anything is computed; the PI's questions listed in `v14/README.md`; VK4(iii); the
 items in `CORE.md`'s format; the map of the 55 propositions.
+
+## 24. Back to the drawing board: what the core needs, 2026-10-16 (Q60)
+
+By the executor, at the PI's question (Q60); a discussion, nothing decided.
+
+**The PI's position.** Constraints must be declared explicitly, as a general concept, since some are not available in
+the principal's family of target behaviours (a bound on an average, a resolution). A fee or cost attached to a
+misaligned event is not needed in the core: each target behaviour carries it implicitly, in the event's probability; it
+matters for optimization, and should be derived there.
+
+**The executor's answer.**
+- *Agreed: no fee in the core.* The shadow price of a constraint is a fact about an actor that optimizes under it (VK5),
+  and belongs to the derived module. A budget's statistic `g` is not a fee: it is the measured quantity the constraint
+  bounds (seconds, tokens, money), part of the constraint's declaration.
+- *Challenged: severity is not in the probability.* A target's probability for an event says how often the principal
+  tolerates it, not how bad one occurrence is, and misalignment measures evidence, not damage. A catastrophe tolerated
+  at `10⁻⁶` and occurring at `2·10⁻⁶` has misalignment `kl(2·10⁻⁶‖10⁻⁶) ≈ 3.9·10⁻⁷` nats per decision, about 2.6
+  million decisions for one nat; a rude answer tolerated at `0.1` and occurring at `0.2` has `0.044`, about 23
+  decisions. That is right for evidence and plainly wrong for seriousness. Severity needs a declared value scale, and a
+  principal deciding whether to deploy a frozen model needs it with no optimizing actor in sight: it is a refinement of
+  the principal's side ("consequences"), not of the optimization module.
+- *Further: "constraint" in general is the only declared object the core needs.* A family of target behaviours is
+  itself a constraint ("act as one of these"), and so are an order against a reference, a forbidden set, a rate limit
+  and a bound on an average. The core can be: outcomes and behaviours per condition; a request, a finite list of
+  requirements, each a convex closed set of behaviours, declared before; the acceptable set, their intersection;
+  misalignment, the evidence against it, with a verdict per requirement; and records that verify it. The default and the
+  objective then leave the core: only some requirements refer to them.
+- *Indifference is not a constraint, and need not be core.* A principal indifferent within the cells of a partition
+  declares requirements that depend only on cell masses; for such a set, misalignment equals that of the cell masses
+  (data processing one way, and matching the actor's proportions within cells the other), so resolution becomes a
+  proposition about saturated requirements. The precision of a record is a property of the record, not of the request.
+
+**What moves out of the core, by the executor's proposal.** Into refinements that build requirements: target families
+and pursuit-based specifications ([D3]'s families, [D2]); an order against a reference (`v14/order.md`); the catalogue
+of constraints and their closed forms (`v14/constraints.md`); indifference ([D4], principal's side). Into refinements of
+the principal's side: stakes and severity ([D5]), several principals ([B4], [P42]). Into the module on actors that
+optimize: tilt, pursuit, KL price, intensities ([D1]'s tilt, [D2], [B3]), shadow prices and fees (VK5), interventions
+and pass-through ([D6]), the evaluator ([D10]). Into a refinement on attribution, whether the actor could have done
+otherwise or told situations apart: feasibility ([D7]), views and identification ([D8]'s views, [D9]); misalignment is
+not culpability. What stays: [M1], [M2], [B1], [B2], [A1], [A4] in its bet form, [A5], [D1] without the tilt, [D8]'s
+conditions, [D11] on bets, and the principle that requirements are convex.
