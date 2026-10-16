@@ -10,3 +10,4 @@ Its output, as run once, is in `RESULTS.md`.
 | VE2 | `v14/evidence.md` | an actor that mixes intensities, judged against the ray and against the ordinal specification; tests from bets and from counts, on actors whose decisions are independent or depend on each other |
 | VK2–VK5 | `v14/constraints.md` | the closed forms and duals against numerical minimization; the constrained optimizer and its shadow price |
 | VO3 | `v14/order.md` | the greedy decoder's verdicts |
+| `culpability.py` | `NOTES.md` §25 | the excess misalignment against the evidence of culpability, when a breach is unavoidable |

@@ -234,6 +234,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q58 | open to a major revamp of the core, if it brings the terminology closer to common sense; no quick fixes or workarounds; the framework must be trustworthy, mathematically formal and general. A brainstorm first. Applied: §22, a proposal for the PI | PI | §22 |
 | Q59 | open a pull request to `main` with the latest changes; then start reworking the core as the executor recommends, on a branch of its own, from everything discussed so far. Constraints become a concept of the core: outcomes the principal finds unacceptable, whose breach is plainly a form of misalignment; how to include that misalignment, in its most fitting form, and the concepts that follow from it, is to be discussed; where optimization is treated, constraints are enforced too, perhaps through the Karush–Kuhn–Tucker conditions and Lagrange multipliers. The PI's decisions on R15 and R16 are postponed until the rework has absorbed constraints and the other recommended changes. Applied: the pull request; the branch `claude/core-v14`; R15 and R16 marked postponed | PI | `REQUESTS.md`; the branch `claude/core-v14` |
 | Q60 | back to the drawing board for a turn: constraints are declared explicitly, as a general concept, since some are not available in the principal's family of targets (a bound on an average, a resolution); a fee or cost against a misaligned event is not a concept of the core, since each target carries it implicitly in the event's probability, and it is to be derived where optimization needs it; which other concepts can move from the core to refinements? Applied: §24, a discussion; nothing changed in `v14/` yet | PI | §24 |
+| Q61 | separate files built on their cores: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; culpability to be defined formally; the full list of forms of misalignment (unavoidable breaches, coarse understanding, cheating, and others), which `CORE` alone can factor, and the least additional concepts each of the others needs. Applied: §25, a discussion; nothing changed in `v14/` yet | PI | §25 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1820,3 +1821,54 @@ and pass-through ([[D6 — Intervention and pass-through|D6]]), the evaluator ([
 otherwise or told situations apart: feasibility ([[D7 — Feasibility|D7]]), views and identification ([[D8 — Conditions, responses and views|D8]]'s views, [[D9 — Observation and identification|D9]]); misalignment is
 not culpability. What stays: [[M1 — Probability on finitely many outcomes|M1]], [[M2 — Independent repetition|M2]], [[B1 — Finitely many outcomes|B1]], [[B2 — Episodes and conditions as outcomes|B2]], [[A1 — Behaviour suffices|A1]], [[A4 — Misalignment is evidence|A4]] in its bet form, [[A5 — Declared before|A5]], [[D1 — Outcomes, behaviours, divergence and tilt|D1]] without the tilt, [[D8 — Conditions, responses and views|D8]]'s
 conditions, [[D11 — Record, sample and evidence|D11]] on bets, and the principle that requirements are convex.
+
+## 25. What CORE can factor, and what each other form of misalignment needs, 2026-10-16 (Q61)
+
+By the executor, at the PI's question (Q61); a discussion, nothing decided.
+
+**The PI's proposal.** Separate files, each built on the one below: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`,
+`OPTIMIZERS_GENERAL`; culpability defined formally; the full list of forms of misalignment, which `CORE` can factor, and
+the least additional concepts each of the others needs.
+
+**The executor's answer, in short.** One layer is missing between the two: an actor's **interface**, what it perceives
+(views), what it can do (actions) and how the world turns its actions into outcomes (an environment kernel). It needs no
+optimization, a frozen model has one, and it is exactly what culpability, coarse perception, tampering and collusion
+need. The feasible behaviours are those the interface's policies produce, a convex set, and a record showing a behaviour
+outside it refutes the declared interface. So three layers, each with its general twin: `CORE`, `INTERFACE`,
+`OPTIMIZERS`; and the principal's value scale (stakes, severity) as a refinement of `CORE`.
+
+**Factoring by nested interfaces.** If `𝓕_1 ⊇ 𝓕_2 ⊇ … ⊇ 𝓕_k ∋ p`, each the feasible set of a more restricted interface
+(full information and control, then the actor's views, then its actions, then its execution noise), then
+`M_A(p) = M_A(𝓕_1) + Σ_j (M_A(𝓕_{j+1}) − M_A(𝓕_j)) + (M_A(p) − M_A(𝓕_k))`, every term non-negative, with
+`M_A(𝓕) = min_{f∈𝓕} M_A(f)`: what no actor could avoid, what each limitation of the interface costs, and the excess the
+actor could have avoided. Each limitation is a form of misalignment that needs only its part of the interface.
+
+**Culpability, two candidates.** With `𝓕*` the feasible behaviours of least misalignment, convex: the excess
+`E(p) = M_A(p) − M_A(𝓕)`, the last term above; and the evidence `K(p) = min_{f∈𝓕*} KL(p‖f)` that the actor is not doing
+the best it could, testable by bets. Both are `0` exactly when `p ∈ 𝓕*`; they are not ordered (on 400 random instances
+with an unavoidable breach, `E > K` in 330 and `E < K` in the others, by up to `0.82` nats;
+`probes/v14/culpability.py`). The executor's recommendation: `K` is culpability, as evidence ([[A4 — Misalignment is evidence|A4]]), and `E` is the
+share of misalignment that was avoidable, as accounting; L2 to test both names.
+
+**The list.** In `CORE`, with requirement-building refinements only: breach of each requirement; misalignment by
+condition, including a shift of the conditions' weights between test and use; hidden misalignment, in conditions no
+record covers (defined in `CORE`; bounding it from records needs views); drift and dependence over time ([[P54 — Dependence and drift only add evidence|P54]]); the
+evaluation gap, a measured requirement met while the true one is breached, on outcomes that hold both; a shortfall
+below a declared floor; side effects, as breaches of requirements on other coordinates. Needing the interface:
+unavoidable against avoidable (feasibility); coarse perception, including not knowing what the principal asks when the
+requirement depends on a part of the condition the actor does not see (views); execution noise (the environment
+kernel); tampering against honest selection (which variables the actions reach, and what is seen before acting: a
+record that no honest interface produces refutes it); ignoring the situation against the environment's doing (the split
+of actions from outcomes); collusion between actors (each actor's views and private randomness: the product behaviours
+are not convex, and their hull is every joint behaviour, so independence is no requirement a record can enforce;
+coordination needs a declared information structure). Needing `OPTIMIZERS`: gaming or reward hacking as a motive (the
+actor's objective, an evaluator), overoptimization (intensity), outer misalignment (the trainer's objective), inner
+misalignment (the learned objective against the trainer's), strategic deception and alignment faking (views to tell
+when it is observed, and an objective over its own future), and the shadow prices of constraints. Outside the actor:
+misspecification, the principal's declaration being wrong, needs a second standard (another principal, or a later
+judgement); severity needs the value scale.
+
+**Three questions, one per layer.** What happened (`CORE`: breach, where, when, how detected); could the actor have
+done otherwise, or known (`INTERFACE`: culpability, coarse perception, noise, tampering); why (`OPTIMIZERS`: the
+objective the behaviour serves). The grades of fault map onto them: a breach, negligence (culpability `> 0`), intent
+(the breach serves the actor's objective).
