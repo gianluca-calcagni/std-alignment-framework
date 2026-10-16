@@ -26,6 +26,20 @@ Four findings, each recorded with its evidence in `NOTES.md` §21 and §22:
   answer, a rate of harm above a limit, a cost over a budget. Breaking one is plainly misalignment, and v13 had no word
   for it (Q59).
 
+## The files, as the PI decided (Q62)
+
+Three layers, each built only on the ones below it, each with a twin for outcomes that are not finite that states only
+what changes there, as `general/transfer.md` does:
+
+| File | Holds | Twin |
+|---|---|---|
+| `CORE` | behaviours per condition; the request, a list of requirements, each a convex closed set; misalignment as evidence against their intersection, with a verdict per requirement; records and bets | `CORE_GENERAL` |
+| `INTERFACE` | what the actor sees, what it can do, and how the world turns its actions into outcomes; feasibility, culpability, coarse perception, noise, tampering, collusion | `INTERFACE_GENERAL` |
+| `OPTIMIZERS` | objectives, pursuit, the KL price, evaluators, training, shadow prices; gaming, overoptimization, outer and inner misalignment, strategic deception | `OPTIMIZERS_GENERAL` |
+
+Beside them, `LIMITS.md`, what the framework cannot do and what it leaves out. The proposal below predates the layers
+(Q59–Q61, `NOTES.md` §23–§25); where it places a concept in "the core", read CORE or INTERFACE as §25 sorts it.
+
 ## The structure proposed
 
 **The core, with no optimization in it.**
@@ -94,6 +108,7 @@ The 55 propositions follow their definitions; a full map comes with the next ste
 | `evidence.md` | VE1, misalignment against a convex set is the growth rate of the best bet; VE2, records hold an actor to the convex hull; VE3, a test from bets keeps its level under any dependence; VE4, the average log-bet tends to its expectation | proved here; VE1 also read in an open text (Grünwald, de Heide and Koolen, Theorem 1) |
 | `constraints.md` | VK1 forbidden sets; VK2 rate limits, in closed form; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions | proved here, except VK4's equality, which the probe supports and which is not yet proved |
 | `order.md` | VO1 "better for every reading" is dominance on upper sets; VO2 v13's ordinal specification lies inside it; VO3 three verdicts, and which of them a record can verify | proved here |
+| `factorization.md` | FA1 nested interfaces factor misalignment exactly; FA2 its Pythagorean form for linear interfaces, with culpability `K = E + R`; FA3 nested linear interfaces toward a fixed target; the earlier splits by mechanism and layer, with one label of v13 that overclaims; VF1–VF3 the verification status of every factor's label | proved here |
 
 None runs in CI yet. The probe `probes/v14/v14_probe.py` reproduces every number, with its output in
 `probes/v14/RESULTS.md`.

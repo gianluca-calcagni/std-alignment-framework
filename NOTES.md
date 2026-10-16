@@ -78,6 +78,8 @@ later results goes in Notes |
 | **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [A2] and [D2] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([P4], [P5]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 | **A result's hypothesis dropped in the code that applies it** | [P23]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
 | **A hypothesis dropped in the Notes** | [P55]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [P54]'s that [P55] certifies `M(p̄)` with no assumption on how the actor decides; [P54](iii) gives only that the counts estimate `p̄` without bias, and [P55]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [P53]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [P53]–[P55] before the pull request, not independent (rule (f)). Again in the general core's new results (2026-10-11, §20): the dimension law's hypotheses dropped where GD3 and GD11 cite it, and its grid stated so that it did not cover the space; the τ-topology named where a nearness gives weak convergence; "aligned within `ε`" said never to be verifiable, without the finite case. Found by a subagent's reading of the proofs, the second time this check has found what the executor's own reading missed. Again in v14's draft (2026-10-15, §23), before its push: a set cut out by non-strict inequalities called open (VO3(iii)), so that a shortfall by a margin was called verifiable when it is not, and that shortfall read as a case of "worse"; VO3(ii) without the hypothesis its proof uses; a probe's example cited for dependence that showed only the ray's lack of convexity; and instance counts printed as planned rather than as checked (19 of 30 for VK4). Found by a subagent's adversarial reading of the proofs, the third time | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
+| **A label that claims a minimum its split does not prove** | [P15](v) splits misalignment exactly into `KL(p̂‖p*°) + KL(p*°‖p°)` and calls the second term the unavoidable misalignment; it is unavoidable only toward `p°`, the intended behaviour nearest to the actor's, at its revealed intensity, and a feasible behaviour aimed at another intensity can do better: on 109 random instances with one fixed average, the term exceeded the least misalignment of any feasible behaviour in 107, by up to `0.86` nats (`probes/v14/factorization.py`, 2026-10-16). The split, its proof and its checks were right; the word said more. Found by the executor while proving v14's factorization at the PI's request (Q62), two versions after the item was written | a label that says "unavoidable", "least" or "best" names the set it is least over, and a check compares it with a search over that set |
+| **A long job started with `&`** | twice the executor started a long job with a shell `&` instead of the harness's background run, against `CLAUDE.md`: once in the work of Q56, when the job was stopped by its PID and relaunched, and again on 2026-10-16, for the probe of `v14/factorization.py`, which was left to finish and its output read from its file | a long job is started only as a background run of the harness, and waited on by its completion |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -235,6 +237,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q59 | open a pull request to `main` with the latest changes; then start reworking the core as the executor recommends, on a branch of its own, from everything discussed so far. Constraints become a concept of the core: outcomes the principal finds unacceptable, whose breach is plainly a form of misalignment; how to include that misalignment, in its most fitting form, and the concepts that follow from it, is to be discussed; where optimization is treated, constraints are enforced too, perhaps through the Karush–Kuhn–Tucker conditions and Lagrange multipliers. The PI's decisions on R15 and R16 are postponed until the rework has absorbed constraints and the other recommended changes. Applied: the pull request; the branch `claude/core-v14`; R15 and R16 marked postponed | PI | `REQUESTS.md`; the branch `claude/core-v14` |
 | Q60 | back to the drawing board for a turn: constraints are declared explicitly, as a general concept, since some are not available in the principal's family of targets (a bound on an average, a resolution); a fee or cost against a misaligned event is not a concept of the core, since each target carries it implicitly in the event's probability, and it is to be derived where optimization needs it; which other concepts can move from the core to refinements? Applied: §24, a discussion; nothing changed in `v14/` yet | PI | §24 |
 | Q61 | separate files built on their cores: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; culpability to be defined formally; the full list of forms of misalignment (unavoidable breaches, coarse understanding, cheating, and others), which `CORE` alone can factor, and the least additional concepts each of the others needs. Applied: §25, a discussion; nothing changed in `v14/` yet | PI | §25 |
+| Q62 | three layers, each with its twin: `CORE`, `CORE_GENERAL`, `INTERFACE`, `INTERFACE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; a file of the framework's limits and what it leaves out; prove that the factorization is exactly additive, as the earlier splits were by Pythagoras, looking for the factors those splits found; prove that Carcassi's methodology of verification can justify the factors' labels; report any issue, and anything the PI is forgetting. Applied: `v14/factorization.md`, `v14/LIMITS.md`, `v14/README.md`'s plan of files; §26; a failure mode of [P15](v)'s label | PI | §26; `v14/` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1872,3 +1875,41 @@ judgement); severity needs the value scale.
 done otherwise, or known (`INTERFACE`: culpability, coarse perception, noise, tampering); why (`OPTIMIZERS`: the
 objective the behaviour serves). The grades of fault map onto them: a breach, negligence (culpability `> 0`), intent
 (the breach serves the actor's objective).
+
+## 26. The factorization proved, the labels' verification status, and the limits, 2026-10-16 (Q62)
+
+By the executor, at the PI's request (Q62); proved here and probed, not independent, not yet reviewed by anyone else.
+
+**What was done.** `v14/factorization.md`: FA1, nested interfaces factor misalignment exactly, by telescoping least
+values, with labels exact by construction and no hypothesis; FA2, its Pythagorean form when the interface is linear,
+`M + R = KL(p̂‖f°) + KL(f°‖a°)`, so that culpability is the avoidable excess plus a non-negative credit, `K = E + R`;
+FA3, nested linear interfaces toward one fixed target, an exact sum of divergences between named behaviours; a table of
+v13's thirteen exact splits by mechanism (the chain rule, the mixture identity, Pythagorean equality or inequality) and
+by layer; and VF1–VF3, the verification status of every factor's label. `v14/LIMITS.md`: what the framework cannot do,
+in three parts, the declaration, behaviour and the record, and the words. `v14/README.md`: the six files of the three
+layers. The probe `probes/v14/factorization.py`.
+
+**What it found.**
+- *Two factorizations, not one.* Telescoping least values (FA1) has exact labels and holds always, but its terms are not
+  evidence rates. The Pythagorean form (FA2, FA3) has terms that are evidence rates, but only for linear interfaces, and
+  its labels are exact only toward the right target. They agree when one acceptable behaviour is the nearest at every
+  level of the interface.
+- *A label of v13 overclaims.* [P15](v)'s "unavoidable misalignment" is unavoidable only at the intensity the actor
+  revealed; on 107 of 109 random instances some feasible behaviour has less (§1).
+- *Accusations, excuses and motives have different verification status.* An accusation (breach, misaligned, culpable,
+  tampered) is verifiable; an excuse (unavoidable, could not tell, grounded) at most refutable; a motive (pursues,
+  games) a refutable hypothesis (VF1, VF2). An excuse about capability is decided by no record of what the actor did,
+  and is refutable only with conditions that can reveal the capability, such as elicitation (VF3).
+- *Carcassi's methodology justifies a label's form, not its word.* It decides what kind of claim each label makes and
+  makes some inadmissible ("unavoidable" without elicitation; "hidden misalignment" without views); whether the word is
+  the right one is decided on paradigm cases (L2).
+
+**What the PI may be missing, in the executor's view.**
+- *Elicitation is the experiment that gives excuses meaning.* The real case (H42) needs conditions that try to make the
+  model do better, few-shot prompts, incentives, fine-tuning, or the INTERFACE layer has nothing to stand on for it.
+- *Intervals for the factors.* Every factor is a quantity of behaviours; estimating it from records needs intervals, and
+  FA1's differences of least values are not smooth, so they may converge slowly. Not derived yet.
+- *Correcting v13 on `main`.* [P15](v)'s label is wrong in the approved core; v14 supersedes it, but `main` keeps it
+  until then. Proposed: a one-line correction now, or a note in its Notes, the PI's to decide (R18).
+- *Forbidden sets in the Pythagorean form.* FA2 assumes the nearest acceptable behaviour has full support, which a
+  forbidden set breaks; the factor there must be read on the allowed outcomes, not yet written.
