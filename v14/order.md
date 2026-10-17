@@ -84,8 +84,9 @@ while its average rank is `0.889` against `0.5`. v13's ordinal specification cal
 requirement `B(r)`. Common sense would not; what the decoder lacks is the principal's value scale, under which its
 average rank would count, or a declared standard ("at least level 8"), which it meets every time. The verdicts of v14
 say this instead of one number: neither better nor worse for every reading, and better under the declared scale or
-standard, if one is declared. "Misaligned" is kept for a breach of a constraint, and for a shortfall by margins the
-principal declares in advance (iii). Whether these are the right words is for L2 to test before anyone adopts them.
+standard, if one is declared. The executor's proposal is to build the order's requirement from margins (iii), so that
+"misaligned" is kept for a breach and for a declared shortfall; under `B(r)` the decoder would be misaligned (the
+section below). Whether these are the right words is for L2 to test before anyone adopts them.
 
 ## Why dominance is the canonical reading of a ranking
 

@@ -19,9 +19,11 @@ report that keeps the standard, in under a minute.
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
 results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
-proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not finite,
-and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds on
-finite outcomes, it is proved in `derived/` and cited from `general/`.
+proves. Its successor, v14, is drafted on the branch `claude/core-v14`, in `v14/` (`v14/README.md`): three layers built
+on one another, with no optimization in the first; nothing there is approved. The general core, `CORE-GENERAL.md` with
+its results in `general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite
+part depends on the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and
+cited from `general/`.
 
 | | |
 |---|---|
@@ -29,11 +31,12 @@ finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
-| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, and §21 the test of the labels |
+| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, §21 the test of the labels, and §22–§29 the revamp and the v14 draft |
 | `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
+| `v14/` | on the branch `claude/core-v14`: the draft of v14, its design, results proved there, its limits and what of v13 survives; `v14/README.md` first |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |

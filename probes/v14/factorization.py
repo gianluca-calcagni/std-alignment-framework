@@ -1,5 +1,5 @@
-"""v14/factorization.md: (1) v13's [P15](v) "unavoidable" part against the least misalignment of any feasible behaviour,
-under the standard specification with one fixed average; (2) FA2, K = E + R, with the ordinal specification and one fixed
+"""v14/factorization.md: (1) v13's [P15](v) "unavoidable" part against the least misalignment of any feasible
+behaviour, under the standard specification with one fixed average; (2) FA2, K = E + R, with the ordinal specification and one fixed
 average, the joint minimum found by alternating minimization and checked by an independent search; (3) FA3 on nested
 linear sets. Probed, not tested. Run from the repository's root: python3 probes/v14/factorization.py   (a few minutes)
 """

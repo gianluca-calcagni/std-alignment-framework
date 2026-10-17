@@ -79,7 +79,8 @@ intensity `0` or `3`, each with probability ½, on four outcomes with a uniform 
 acceptably at every decision; v13 charges it `0.0546` nats per decision, and [P55]'s count test against the ray accuses
 it in 68.9% of 2,000 records of 400 decisions at level 5%, while a test against the ordinal specification, which is
 convex and contains the ray's hull, accuses it in none from counts, and in 1.9% from bets (`probes/v14/RESULTS.md`,
-VE2). The lesson for v14: acceptable sets are convex, by a principle stated as such (`README.md`).
+VE2). The lesson for v14: acceptable sets are convex, forced given two premises stated as such (`README.md`, the
+conventions).
 
 ### VE3 — A test from bets keeps its level whatever the dependence
 **Statement.** Decisions `1, 2, …, n` are made in turn, each in one of finitely many contexts. Before decision `i`, an

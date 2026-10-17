@@ -16,10 +16,13 @@ for _ in range(400):
     V=rng.dirichlet(np.ones(n),size=3)          # feasible set: mixtures of three behaviours
     V[:,C]+=0.3; V/=V.sum(1,keepdims=True)      # push them to breach
     mix=lambda w: (np.abs(w)/np.abs(w).sum())@V
-    r=min((minimize(lambda w: MA(mix(w)), rng.random(3), method="Nelder-Mead",options={"xatol":1e-12,"fatol":1e-14,"maxiter":4000}) for _ in range(5)), key=lambda r:r.fun)
+    r = min((minimize(lambda w: MA(mix(w)), rng.random(3), method="Nelder-Mead",
+                      options={"xatol": 1e-12, "fatol": 1e-14, "maxiter": 4000}) for _ in range(5)),
+            key=lambda r: r.fun)
     fstar=mix(r.x); unavoid=r.fun
     if unavoid<1e-9: continue
     w=rng.dirichlet(np.ones(3)); p=w@V
-    E=MA(p)-unavoid; Cu=kl(p,fstar)   # f* unique: MA strictly convex in a(C) along the polytope? report anyway
+    E = MA(p) - unavoid; Cu = kl(p, fstar)   # f*: the best feasible behaviour found; K against it
     tot+=1; worst=max(worst,E-Cu); viol+= E>Cu+1e-7
-print(f"{tot} instances with an unavoidable breach: excess > evidence against the best feasible in {viol}; largest excess − evidence {worst:.3g}")
+print(f"{tot} instances with an unavoidable breach: excess > evidence against the best feasible in {viol}; "
+      f"largest excess − evidence {worst:.3g}")
