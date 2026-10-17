@@ -1,9 +1,9 @@
 # v14, a draft: a core whose words mean what they say
 
-> **Status: a working draft on the branch `claude/core-v14` (Q59–Q65). Nothing here is approved, and nothing here
-> replaces `CORE.md` or `derived/` yet.** It gathers what the label test L1, the general core and the discussions of
-> `NOTES.md` §22–§28 taught, and proves the results the new structure rests on. The PI's decisions on R15 and R16 wait
-> until the draft has absorbed them (Q59). The work ahead is in `ROADMAP.md`'s recommendations.
+> **Status: a working draft, drafted on the branch `claude/core-v14` (Q59–Q68). Nothing here is approved, and nothing
+> here replaces `CORE.md` or `derived/` yet.** It gathers what the label test L1, the general core and the discussions
+> of `NOTES.md` §22–§28 taught, and proves the results the new structure rests on. The PI's decisions on R15 and R16
+> wait until the draft has absorbed them (Q59). The work ahead is in `ROADMAP.md`'s recommendations.
 
 ## Why a rework
 

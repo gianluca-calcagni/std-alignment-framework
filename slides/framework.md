@@ -5,7 +5,7 @@
 
 What it is, and how to use it, on one simple example
 
-The v14 draft, on the branch `claude/core-v14` (October 2026). Nothing in v14 is approved yet; `main` holds v13.
+The v14 draft, in `v14/` (October 2026). Nothing in v14 is approved yet; the approved core is v13.
 
 ---
 

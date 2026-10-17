@@ -244,6 +244,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q65 | pull request #34 merged into `main`; [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v)'s overclaim left on `main` for now, to be corrected in v14's migration (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
 | Q66 | a presentation of about thirty slides, in whatever format suits slides that change often, presenting the framework and how to use it on one simple example, kept in the repository where it fits best. Applied: `slides/framework.md` (32 slides, Marp Markdown) with `slides/README.md` and `slides/.marprc.yml`; the example's numbers from `probes/slides/support_bot.py`; §30 | PI | `slides/`; `probes/slides/`; §30 |
 | Q67 | what drafting the slides and running the example taught: lessons of formalization, methodology and applicability, and gaps in theory or practice. Applied: §31; H47, H48; `ROADMAP.md`, recommendation 10 | PI | §31 |
+| Q68 | merge the v14 draft to `main`, then delete the branches no longer needed, after an analysis of which. Applied: the files that placed v14 on its branch made true on `main`; a pull request from `claude/core-v14`; the analysis of the branches in the pull request and the turn's answer | PI | `README.md`, `ROADMAP.md`, `CLAUDE.md`, `slides/`, `v14/README.md` |
 
 ### 3.2 Papers and data the PI could supply
 

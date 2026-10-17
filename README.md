@@ -19,7 +19,7 @@ report that keeps the standard, in under a minute.
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
 results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
-proves. Its successor, v14, is drafted on the branch `claude/core-v14`, in `v14/` (`v14/README.md`): three layers built
+proves. Its successor, v14, is drafted in `v14/` (`v14/README.md`), beside the core and not in it: three layers built
 on one another, with no optimization in the first; nothing there is approved. The general core, `CORE-GENERAL.md` with
 its results in `general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite
 part depends on the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and
@@ -36,8 +36,8 @@ cited from `general/`.
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
-| `v14/` | on the branch `claude/core-v14`: the draft of v14, its design, results proved there, its limits and what of v13 survives; `v14/README.md` first |
-| `slides/` | on the branch `claude/core-v14`: about thirty slides presenting the framework and its use on one worked example, in Marp Markdown; every number from `probes/slides/support_bot.py` |
+| `v14/` | the draft of v14, not yet approved: its design, results proved there, its limits and what of v13 survives; `v14/README.md` first |
+| `slides/` | about thirty slides presenting the framework and its use on one worked example, in Marp Markdown; every number from `probes/slides/support_bot.py` |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |

@@ -21,5 +21,5 @@ The rendered files are not kept in the repository; they are built from the sourc
 `probes/slides/RESULTS.md`. When the example changes, change the probe first, rerun it, and copy the numbers from its
 output, so that the slides never hold a number nothing reproduces.
 
-**What they follow.** The slides describe the v14 draft on the branch `claude/core-v14`, which nothing has approved;
-`main` holds v13. When the draft changes, the slides follow it.
+**What they follow.** The slides describe the v14 draft in `v14/`, which nothing has approved; `main` holds v13. When
+the draft changes, the slides follow it.
