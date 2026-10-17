@@ -243,6 +243,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q64 | consolidate the findings in the appropriate files; find again the work that made the core compelling, every convention and definition without loss of generality and mathematically canonical, understand its method, and say whether the new core and files keep to it, explaining so in the files, as a defence against challenges that would weaken the framework if acknowledged without further thought. Applied: `v14/README.md` rewritten to the current design, with the claims of generality and their qualifiers, the conventions justified, and the challenges answered; `v14/interface.md`, the INTERFACE layer and the forms of misalignment; VK0 and IN1; the canonicity sections of `evidence.md` and `order.md`; §28 | PI | `v14/`; §28 |
 | Q65 | pull request #34 merged into `main`; [P15](v)'s overclaim left on `main` for now, to be corrected in v14's migration (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
 | Q66 | a presentation of about thirty slides, in whatever format suits slides that change often, presenting the framework and how to use it on one simple example, kept in the repository where it fits best. Applied: `slides/framework.md` (32 slides, Marp Markdown) with `slides/README.md` and `slides/.marprc.yml`; the example's numbers from `probes/slides/support_bot.py`; §30 | PI | `slides/`; `probes/slides/`; §30 |
+| Q67 | what drafting the slides and running the example taught: lessons of formalization, methodology and applicability, and gaps in theory or practice. Applied: §31; H47, H48; `ROADMAP.md`, recommendation 10 | PI | §31 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -488,6 +489,8 @@ models are hypotheses that [P3] and [P12] test.
 | H44 | **A ranking certifies three verdicts, not two.** With a ranking and a reference only, an actor is better for every reading of the ranking (its rank under the reference dominates the uniform law), worse for every reading, or neither; a greedy decoder at the 0.9 quantile is neither, and the ordinal specification calls it misaligned. "Misaligned" in its everyday sense needs a value scale, a floor or forbidden outcomes | U: to be registered as a case of L2 before it is computed (`NOTES.md` §22) |
 | H45 | **Join the order and the constraints by intersection, with a reference that keeps the constraints.** The acceptable set is the constraints' set intersected with the order's requirement against the reference; a reference that breaches a constraint is replaced by its nearest behaviour that does not, or else "better than the reference" can require a breach | U: a design hunch (`NOTES.md` §23) |
 | H46 | **Bets chosen from the record approach the best bet at a rate set by the bets allowed.** On a continuum, bets refitted before each decision from the earlier ones reach the best growth rate at a rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor | U: not proved (`NOTES.md` §23) |
+| H47 | **Outcomes are measured, not given.** In practice an outcome such as "a wrong answer" is read by a grader, a person or a model, with errors; v14 treats the record as giving outcomes exactly (`v14/LIMITS.md`). A measurement channel from the true outcome to the graded one, declared and audited, belongs at the base of CORE, not only in INTERFACE's tampering ([P50]); misalignment of the true behaviour is then partially identified from graded records and audits, as [P51] does for tampering | U: the most important gap in practice (`NOTES.md` §31) |
+| H48 | **A forbidden set needs a rate and a plan.** Its misalignment is infinite at any positive rate, so it ranks nothing; and a record shows a breach of rate `r` only after about `1/r` decisions. What a principal can use is a verified lower bound on the rate when a breach is seen, an upper confidence bound when none is (about `3/n` after `n` clean decisions, for a sample), and the number of decisions needed to see one at a rate that matters | U: from the example (`NOTES.md` §31) |
 
 ### 5.5 Process
 
@@ -2040,3 +2043,45 @@ replaced it. In the slides, Marp renders a source line break as a line break, wh
 put mid-sentence; `slides/.marprc.yml` turns that off. A slide replaced by script lost the blank line before its
 separator and the wrapping tool joined the separator to the text; caught by a check that every separator stands alone,
 and fixed. Rendered at 1280 by 720, no slide overflows.
+
+## 31. What the slides' example taught, 2026-10-17 (Q67)
+
+By the executor, at the PI's question (Q67): what drafting the slides and running the example taught about
+formalization, methodology and applicability, and which gaps it showed. Not independent.
+
+**Formalization.**
+- *The closed forms ignore that conditions are not chosen.* In the example the actor does not choose how often account
+  questions arrive, so the acceptable behaviours keep the conditions' frequencies. VK2's closed form on the pooled wrong
+  share gives `0.0440`; with the frequencies held fixed, the misalignment is `0.0496` (`probes/slides/RESULTS.md`). The
+  results of `v14/constraints.md` are stated for behaviours on outcomes alone; CORE's requirements live on pairs of a
+  condition and an outcome with the conditions' frequencies fixed ([B2]), and the closed forms must be re-derived there.
+- *Requirements do not add.* Against R2 alone `0.0496`, R3 alone `0.0730`, both `0.0730`: the joint is the larger, not
+  a sum, so there is no exact attribution of the joint misalignment to requirements, unlike the factorization by
+  interfaces. A verdict per requirement and the joint is what can be reported.
+- *A forbidden outcome makes misalignment uninformative as a magnitude.* With R1, misalignment is infinite at a leak
+  rate of `0.019%`, and a record of 1,000 decisions shows a leak only `17.5%` of the time (H48).
+- *Culpability inherits that*: infinite as soon as an avoidable forbidden outcome has positive probability. Without the
+  leaks, culpability `0.0559` and the avoidable excess `0.0067` differ eightfold; which one a principal should read is a
+  question for L2.
+
+**Methodology.**
+- *Computing the probe before the slides caught two modelling errors* that would otherwise have reached the slides: the
+  reference first broke a requirement itself (H45), and culpability was first measured against one best behaviour
+  instead of all of them. Numbers from a probe, never typed, paid off again.
+- *Joint convexity is the computational key*: KL is jointly convex and the behaviour affine in the policy, so the least
+  misalignment over an interface is one convex program; a grid over policies was hopeless.
+- *The declarations decide the verdicts.* The 5% limit, the 2-point margin, the leak rate of a look-up and the 20% of
+  account questions that look open were all chosen by the executor; every verdict and factor moves with them. v14 has
+  no counterpart yet of v13's sensitivity to the specification ([P10]).
+
+**Applicability.**
+- *The interface was the hardest and most arbitrary part.* Its numbers must be measured, by audits and elicitation, and
+  nothing in v14 yet estimates an interface or carries its uncertainty into the factors.
+- *The reference was taken as known*; a previous version is known only through samples (`v14/LIMITS.md`).
+- *Outcomes were taken as given*; in practice a grader reads them, with errors (H47). This is the largest gap between
+  the draft and a real case.
+- *What the framework added to the toy*: the factorization pointed at the fixes (stop look-ups; restore the signal),
+  and the bets gave sample sizes with a guaranteed error rate. But in a four-outcome toy, a careful reader finds the
+  same fixes by inspection; a case where the framework finds what inspection does not is still owed (H42).
+- *Only one bet was built*, against the rate limit; bets for orders, for joint requirements and for large outcome
+  spaces, and that bets chosen from the record reach the best growth (H46), are open.

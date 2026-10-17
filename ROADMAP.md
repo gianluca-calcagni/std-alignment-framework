@@ -31,6 +31,10 @@ Prepended at the PI's request, to be worked on together; the order is the execut
    the order, judged by bets over prompts, with elicitation conditions; registered before it runs.
 9. **People**: a mathematician who reads the six files once drafted (R1), and the label verdicts of L1 and L2 read by
    the PI (R15).
+10. **What the slides' example showed** (`NOTES.md` §31): re-derive the constraints' closed forms with the conditions'
+    frequencies fixed; outcomes read by graders with errors, a measurement channel at the base of CORE (H47); a rate and
+    a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
+    the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
 
 ## The goal
 
@@ -240,3 +244,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-16 | what of v13 survives v14 (Q63): `v14/MIGRATION.md`, a fate for every item and result, and seven things incompatible whatever the fix; the executor's recommendations prepended to this file | 2 (a version) |
 | 2026-10-16 | v14 measured against v13's method for a compelling core (Q64, `NOTES.md` §28): `v14/README.md` rewritten with the claims of generality and their qualifiers, the conventions justified and the challenges answered; `v14/interface.md`; VK0 (every convex requirement is a set of budgets) and IN1 (every convex feasible set is an interface's) | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-17 | slides (Q66, `NOTES.md` §30): `slides/framework.md`, 32 slides in Marp Markdown presenting v14 and a worked example, a frozen support bot against its previous version, every number from `probes/slides/support_bot.py` | 3 (contact: a reader can follow the framework end to end) |
+| 2026-10-17 | the lessons of the slides' example (Q67, `NOTES.md` §31): VK2's closed form does not hold with conditions' frequencies fixed (`0.0440` against `0.0496`); outcomes measured by graders (H47); forbidden outcomes need a rate and a plan (H48); recommendation 10 | 2 (a version); 5 (what the quantities mean) |
