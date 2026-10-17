@@ -298,8 +298,9 @@ def lint(root):
         errors += lint_ledger(rtext, predictions)
     elif predictions:
         errors.append("RECORD.md: R13 the record, with the ledger of the ontologies' predictions, is missing")
-    folder, cases = root / "general", root / "cases"
-    general = sorted(f.relative_to(root).as_posix() for f in folder.glob("*.md")) if folder.exists() else []
+    cases = root / "cases"
+    general = sorted(f.relative_to(root).as_posix() for d in ("general", "v14") if (root / d).exists()
+                     for f in (root / d).glob("*.md"))
     case_docs = sorted(f.relative_to(root).as_posix() for f in cases.rglob("*.md")) if cases.exists() else []
     docs = ["RELATED.md", "IMPORT.md", "CORE-GENERAL.md", "SCENARIO.md", "ROADMAP.md", "REQUESTS.md", "CONTRIBUTING.md",
             "CLAUDE.md", "OVERVIEW.md"]

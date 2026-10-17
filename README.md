@@ -19,9 +19,11 @@ report that keeps the standard, in under a minute.
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
 results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
-proves. The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes that are not finite,
-and claims nothing yet. Nothing in the finite part depends on the general one; where a general result also holds on
-finite outcomes, it is proved in `derived/` and cited from `general/`.
+proves. Its successor, v14, is drafted in `v14/` (`v14/README.md`), beside the core and not in it: three layers built
+on one another, with no optimization in the first; nothing there is approved. The general core, `CORE-GENERAL.md` with
+its results in `general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite
+part depends on the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and
+cited from `general/`.
 
 | | |
 |---|---|
@@ -29,11 +31,13 @@ finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
-| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, and §21 the test of the labels |
+| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, §21 the test of the labels, and §22–§29 the revamp and the v14 draft |
 | `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
+| `v14/` | the draft of v14, not yet approved: its design, results proved there, its limits and what of v13 survives; `v14/README.md` first |
+| `slides/` | about thirty slides presenting the framework and its use on one worked example, in Marp Markdown; every number from `probes/slides/support_bot.py` |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |
@@ -44,7 +48,7 @@ finite outcomes, it is proved in `derived/` and cited from `general/`.
 | `stdalign/` | the library: the quantities `STANDARD.md` asks for, one implementation each, which the checks verify; so far misalignment, its split, its estimates by access, the diagnostics of `derived/diagnostics.md`, and the validator of reports as data (`ROADMAP.md`, step E1). Version 0.2, on finite outcomes; install with `pip install -e .`, and read its `README.md` |
 | `examples/` | `quickstart.py`: a case on simulated data, from the declaration to a report as data that keeps the standard, in under a minute; CI runs it (`examples/test_quickstart.py`) |
 | `cases/` | tests registered before they are computed, each with its registration, script and result: on the world (they count toward the finish line) or in simulation (they test an instrument where the truth is known). `cases/README.md` lists them |
-| `probes/` | exploratory scripts behind numbers cited elsewhere: those of `CORE-GENERAL.md` and `general/`, with the predictions registered before they were run and their verdicts, failures included (`probes/general/`); those in the Notes of the diagnostics (`probes/diagnostics/`); timings for cases not yet registered (`probes/cases/`); the coverage of the quickstart's intervals (`probes/examples/`); claims of related work, checked before `RELATED.md` reviews them (`probes/related/`); the numbers of the review of 2026-10-10, the dependencies of v13 and the doc sweep (`probes/review/`, `NOTES.md` §15, §17–§19); and L1, whether the framework's labels mean what their words say, registered before it ran (`probes/labels/`, §21). Not checks: CI does not run them, and no result rests on them |
+| `probes/` | exploratory scripts behind numbers cited elsewhere: those of `CORE-GENERAL.md` and `general/`, with the predictions registered before they were run and their verdicts, failures included (`probes/general/`); those in the Notes of the diagnostics (`probes/diagnostics/`); timings for cases not yet registered (`probes/cases/`); the coverage of the quickstart's intervals (`probes/examples/`); claims of related work, checked before `RELATED.md` reviews them (`probes/related/`); the numbers of the review of 2026-10-10, the dependencies of v13 and the doc sweep (`probes/review/`, `NOTES.md` §15, §17–§19); and L1, whether the framework's labels mean what their words say, registered before it ran (`probes/labels/`, §21). Not checks: CI does not run them, and no result rests on them; and those of the v14 draft (`probes/v14/`), on its branch |
 | `tools/lint.py` | the rules below, as code; `tools/test_lint.py` tests them |
 | `tools/mdwrap.py`, `tools/mutate.py`, `tools/overview.py` | the first keeps the Markdown sources wrapped at 120 columns, and CI checks it; the second runs the mutant lists of `tools/mutants/` against the tests; the third builds `OVERVIEW.md` |
 | `obsidian/` | a read-only view for reading in Obsidian: one note per item, every reference a link, with what each item depends on and what depends on it. Generated by `tools/obsidian.py` and checked fresh by CI; open the folder as a vault. Edit the sources, not the notes; notes of your own go in `obsidian/Annotations/`, which the generator never touches |

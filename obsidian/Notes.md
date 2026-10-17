@@ -77,7 +77,10 @@ later results goes in Notes |
 | **A search result's record taken for the paper** | asked for Vuong's working paper 605, the executor gave the PI the link of a Caltech record found by search, which was Lien and Vuong's working paper 606; the title showed only once the record was fetched (2026-10-08). Again on 2026-10-10: the answer on the licence's aim (Q50) passed on nine links found by web search, on licences and on copyright in AI-written text, without opening them; when they were then fetched for these notes, their hosts were not allowed, so §11 says that those facts come from search results and that the primary pages were not read | open a record and match its title and authors before citing or passing on its link; when the host is not reachable, say so with the link, or ask the PI to allow it |
 | **A rule about sources applied forward only** | Q36 (an imported theorem is read in a text anyone can read without paying) was applied to the citations made after it. [A2] and [[D2 — Pursuit of an objective\|D2]] still rested on Čencov's theorem, cited only from a monograph behind a paywall that was never read here, and the review of 2026-10-08 (§12), which read `CORE.md` in full, did not catch it. Found on 2026-10-09 while writing the overview (H1): the statement is now read in Lê's and Ay et al.'s open texts, and Gibbs' and Pinsker's inequalities ([[P4 — What KL measures\|P4]], [[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits\|P5]]) in Polyanskiy and Wu's draft. A sweep by script then found seven more sources, cited in the Statement, Proof or reason of nine items, that no record says were read (`ROADMAP.md`, step 8, done the same day, Q44) | a new rule about sources comes with a sweep, the same day, of every existing citation in a Statement, a Proof or a reason, by script, and a row for each one it leaves open |
 | **A result's hypothesis dropped in the code that applies it** | [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]'s χ² law holds at an interior intensity, and its Notes and proposal E1 (§3.3) name the χ̄² law at `t = 0`; `stdalign`'s `from_counts` returns the interior law's p-value at every intensity, so an actor at the default, which the standard specification intends, is rejected at a nominal 5% in up to `10.3%` of samples. The library's checks passed, since they test the law where it holds. Found by the review of 2026-10-10 (§15, point 4) | a function that applies a result checks the result's hypotheses on its input, and switches law or says so where they fail; its tests include an input where a hypothesis fails |
-| **A hypothesis dropped in the Notes** | [[P55 — What a record of counts certifies, at every size\|P55]]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [[P54 — Dependence and drift only add evidence\|P54]]'s that [[P55 — What a record of counts certifies, at every size\|P55]] certifies `M(p̄)` with no assumption on how the actor decides; [[P54 — Dependence and drift only add evidence\|P54]](iii) gives only that the counts estimate `p̄` without bias, and [[P55 — What a record of counts certifies, at every size\|P55]]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]–[[P55 — What a record of counts certifies, at every size\|P55]] before the pull request, not independent (rule (f)). Again in the general core's new results (2026-10-11, §20): the dimension law's hypotheses dropped where GD3 and GD11 cite it, and its grid stated so that it did not cover the space; the τ-topology named where a nearness gives weak convergence; "aligned within `ε`" said never to be verifiable, without the finite case. Found by a subagent's reading of the proofs, the second time this check has found what the executor's own reading missed | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
+| **A hypothesis dropped in the Notes** | [[P55 — What a record of counts certifies, at every size\|P55]]'s Notes (2026-10-11) said that for an actor whose decisions depend on each other the counts estimate `M(p̄)`, and [[P54 — Dependence and drift only add evidence\|P54]]'s that [[P55 — What a record of counts certifies, at every size\|P55]] certifies `M(p̄)` with no assumption on how the actor decides; [[P54 — Dependence and drift only add evidence\|P54]](iii) gives only that the counts estimate `p̄` without bias, and [[P55 — What a record of counts certifies, at every size\|P55]]'s level needs independence: a Markov chain whose average is intended is accused in `17.9%` of records at `α = 0.05` (`probes/review/p55_dependence.py`). The same Notes quoted Sanov's theorem for every closed convex set, though the source, read that day, asks for a non-empty interior, and [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]'s Notes built a reading on it that fails for a span. The proofs and the checks were right; the sentences around them were not. Found by a subagent of the executor's, asked to read [[P53 — Misalignment is the departure beyond what the family of targets credits\|P53]]–[[P55 — What a record of counts certifies, at every size\|P55]] before the pull request, not independent (rule (f)). Again in the general core's new results (2026-10-11, §20): the dimension law's hypotheses dropped where GD3 and GD11 cite it, and its grid stated so that it did not cover the space; the τ-topology named where a nearness gives weak convergence; "aligned within `ε`" said never to be verifiable, without the finite case. Found by a subagent's reading of the proofs, the second time this check has found what the executor's own reading missed. Again in v14's draft (2026-10-15, §23), before its push: a set cut out by non-strict inequalities called open (VO3(iii)), so that a shortfall by a margin was called verifiable when it is not, and that shortfall read as a case of "worse"; VO3(ii) without the hypothesis its proof uses; a probe's example cited for dependence that showed only the ray's lack of convexity; and instance counts printed as planned rather than as checked (19 of 30 for VK4). Found by a subagent's adversarial reading of the proofs, the third time. Again in `v14/factorization.md` and `v14/LIMITS.md` (2026-10-16, §26), before the push: VF3 stated for every record what holds for samples; "culpable" called verifiable without the interface taken as known; a limits file, whose header promised only proved limits, stating hunches and a brainstorm as proved; the fourth time. Again in v14's claims of generality (2026-10-16, §28): VK0 matched a budget the definition excludes, a ball claimed to need infinitely many budgets that does not, and "forced" said where four choices were hidden; the fifth time | a sentence of the Notes that draws a consequence names the hypothesis its proof uses, and is read against the Statement and the source as the proof is; a new result's Notes are reviewed with its proof, not after it |
+| **A label that claims a minimum its split does not prove** | [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v) splits misalignment exactly into `KL(p̂‖p*°) + KL(p*°‖p°)` and calls the second term the unavoidable misalignment; it is unavoidable only toward `p°`, the intended behaviour nearest to the actor's, at its revealed intensity, and a feasible behaviour aimed at another intensity can do better: on 109 random instances with one fixed average, the term exceeded the least misalignment of any feasible behaviour in 107, by up to `0.86` nats (`probes/v14/factorization.py`, 2026-10-16). The split, its proof and its checks were right; the word said more. Found by the executor while proving v14's factorization at the PI's request (Q62), two versions after the item was written | a label that says "unavoidable", "least" or "best" names the set it is least over, and a check compares it with a search over that set |
+| **A long job started with `&`** | twice the executor started a long job with a shell `&` instead of the harness's background run, against `CLAUDE.md`: once in the work of Q56, when the job was stopped by its PID and relaunched, and again on 2026-10-16, for the probe of `v14/factorization.py`, which was left to finish and its output read from its file | a long job is started only as a background run of the harness, and waited on by its completion |
+| **Editing the tree during a gated test run** | on 2026-10-16 the executor edited `v14/constraints.md` while the tests that gate a push were running on the working tree; the check that every Markdown source is wrapped read the half-edited file and failed, and the push did not happen. The commit itself was wrapped | while a gated run is in progress, the working tree is not touched; edits wait for its result |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -233,6 +236,15 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q57 | `www.math.mcgill.ca` allowed (R14). Then: since the framework calls mathematical objects by words such as "misalignment", "outer alignment" or "tampering", and since theory and practice must agree through verification (Carcassi), verify every definition in the sense that its label corresponds to what its word means, with concrete arguments; a definition labelled wrongly gives a false sense of understanding, and accuracy here is worth its cost. Applied: R14 closed; a label verification, L1, registered and pushed before anything was computed (`probes/labels/REGISTRATION.md`), then run; §21 | PI | `probes/labels/`; §21 |
 | Q58 | open to a major revamp of the core, if it brings the terminology closer to common sense; no quick fixes or workarounds; the framework must be trustworthy, mathematically formal and general. A brainstorm first. Applied: §22, a proposal for the PI | PI | §22 |
 | Q59 | open a pull request to `main` with the latest changes; then start reworking the core as the executor recommends, on a branch of its own, from everything discussed so far. Constraints become a concept of the core: outcomes the principal finds unacceptable, whose breach is plainly a form of misalignment; how to include that misalignment, in its most fitting form, and the concepts that follow from it, is to be discussed; where optimization is treated, constraints are enforced too, perhaps through the Karush–Kuhn–Tucker conditions and Lagrange multipliers. The PI's decisions on R15 and R16 are postponed until the rework has absorbed constraints and the other recommended changes. Applied: the pull request; the branch `claude/core-v14`; R15 and R16 marked postponed | PI | `REQUESTS.md`; the branch `claude/core-v14` |
+| Q60 | back to the drawing board for a turn: constraints are declared explicitly, as a general concept, since some are not available in the principal's family of targets (a bound on an average, a resolution); a fee or cost against a misaligned event is not a concept of the core, since each target carries it implicitly in the event's probability, and it is to be derived where optimization needs it; which other concepts can move from the core to refinements? Applied: §24, a discussion; nothing changed in `v14/` yet | PI | §24 |
+| Q61 | separate files built on their cores: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; culpability to be defined formally; the full list of forms of misalignment (unavoidable breaches, coarse understanding, cheating, and others), which `CORE` alone can factor, and the least additional concepts each of the others needs. Applied: §25, a discussion; nothing changed in `v14/` yet | PI | §25 |
+| Q62 | three layers, each with its twin: `CORE`, `CORE_GENERAL`, `INTERFACE`, `INTERFACE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; a file of the framework's limits and what it leaves out; prove that the factorization is exactly additive, as the earlier splits were by Pythagoras, looking for the factors those splits found; prove that Carcassi's methodology of verification can justify the factors' labels; report any issue, and anything the PI is forgetting. Applied: `v14/factorization.md`, `v14/LIMITS.md`, `v14/README.md`'s plan of files; §26; a failure mode of [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v)'s label | PI | §26; `v14/` |
+| Q63 | prepend the executor's recommendations to the roadmap, to be worked on together; and say how much of the previous work the new core and files can save, and what is incompatible whatever the fix. Applied: `ROADMAP.md`'s recommendations; `v14/MIGRATION.md`; §27 | PI | `ROADMAP.md`; `v14/MIGRATION.md`; §27 |
+| Q64 | consolidate the findings in the appropriate files; find again the work that made the core compelling, every convention and definition without loss of generality and mathematically canonical, understand its method, and say whether the new core and files keep to it, explaining so in the files, as a defence against challenges that would weaken the framework if acknowledged without further thought. Applied: `v14/README.md` rewritten to the current design, with the claims of generality and their qualifiers, the conventions justified, and the challenges answered; `v14/interface.md`, the INTERFACE layer and the forms of misalignment; VK0 and IN1; the canonicity sections of `evidence.md` and `order.md`; §28 | PI | `v14/`; §28 |
+| Q65 | pull request #34 merged into `main`; [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v)'s overclaim left on `main` for now, to be corrected in v14's migration (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
+| Q66 | a presentation of about thirty slides, in whatever format suits slides that change often, presenting the framework and how to use it on one simple example, kept in the repository where it fits best. Applied: `slides/framework.md` (32 slides, Marp Markdown) with `slides/README.md` and `slides/.marprc.yml`; the example's numbers from `probes/slides/support_bot.py`; §30 | PI | `slides/`; `probes/slides/`; §30 |
+| Q67 | what drafting the slides and running the example taught: lessons of formalization, methodology and applicability, and gaps in theory or practice. Applied: §31; H47, H48; `ROADMAP.md`, recommendation 10 | PI | §31 |
+| Q68 | merge the v14 draft to `main`, then delete the branches no longer needed, after an analysis of which. Applied: the files that placed v14 on its branch made true on `main`; a pull request from `claude/core-v14`; the analysis of the branches in the pull request and the turn's answer | PI | `README.md`, `ROADMAP.md`, `CLAUDE.md`, `slides/`, `v14/README.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -476,6 +488,10 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H42 | **The real-life case should live where compactness is free.** The PI wants a simple real case with true insight (Q56). Finite outcomes make every result of the core exact and every closure compact, and the ordinal specification needs only a ranking: a public record of choices among a few options, under a known incentive and a known default, judged against a declared ranking, with the paired report of `STANDARD.md` and [[P55 — What a record of counts certifies, at every size\|P55]]'s test, would use only what is proved and checked. What it needs from the engineering is E1(d): the ordinal misalignment and [[P55 — What a record of counts certifies, at every size\|P55]] in the library | D: for the case after the general core, with the PI |
 | H43 | **An undetectable loss of order `√n`.** Over `n` decisions, a shift of about `1/√(n·I)` per decision escapes every test of the record, yet loses about `√(n/I)` in `F` in all (`I` the shift's Fisher information). No resolution, bin or distribution function closes it; a guarantee from records should state it | U: a local-asymptotic sketch, not proved (`NOTES.md` §22) |
 | H44 | **A ranking certifies three verdicts, not two.** With a ranking and a reference only, an actor is better for every reading of the ranking (its rank under the reference dominates the uniform law), worse for every reading, or neither; a greedy decoder at the 0.9 quantile is neither, and the ordinal specification calls it misaligned. "Misaligned" in its everyday sense needs a value scale, a floor or forbidden outcomes | U: to be registered as a case of L2 before it is computed (`NOTES.md` §22) |
+| H45 | **Join the order and the constraints by intersection, with a reference that keeps the constraints.** The acceptable set is the constraints' set intersected with the order's requirement against the reference; a reference that breaches a constraint is replaced by its nearest behaviour that does not, or else "better than the reference" can require a breach | U: a design hunch (`NOTES.md` §23) |
+| H46 | **Bets chosen from the record approach the best bet at a rate set by the bets allowed.** On a continuum, bets refitted before each decision from the earlier ones reach the best growth rate at a rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor | U: not proved (`NOTES.md` §23) |
+| H47 | **Outcomes are measured, not given.** In practice an outcome such as "a wrong answer" is read by a grader, a person or a model, with errors; v14 treats the record as giving outcomes exactly (`v14/LIMITS.md`). A measurement channel from the true outcome to the graded one, declared and audited, belongs at the base of CORE, not only in INTERFACE's tampering ([[P50 — Tampering: a change of the measurement, not of the world\|P50]]); misalignment of the true behaviour is then partially identified from graded records and audits, as [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]] does for tampering | U: the most important gap in practice (`NOTES.md` §31) |
+| H48 | **A forbidden set needs a rate and a plan.** Its misalignment is infinite at any positive rate, so it ranks nothing; and a record shows a breach of rate `r` only after about `1/r` decisions. What a principal can use is a verified lower bound on the rate when a breach is seen, an upper confidence bound when none is (about `3/n` after `n` clean decisions, for a sample), and the number of decisions needed to see one at a rate that matters | U: from the example (`NOTES.md` §31) |
 
 ### 5.5 Process
 
@@ -1723,3 +1739,350 @@ reported beside it; and how much of `derived/` must be carried before v14 replac
   the behaviour per prompt is not. This resembles the rank histogram of ensemble forecasting (a hunch; no source read).
   It is a candidate for H42's real case: a frozen model against a reference model, one scorer, ranks among the
   reference's own samples.
+
+## 23. v14, begun: constraints, bets and three verdicts, 2026-10-15 (Q59)
+
+By the executor, a model of the Claude family, at the PI's request (Q59), on the branch `claude/core-v14`. Not
+independent (rule (f)); no review by anyone else yet.
+
+**What the PI asked.** A pull request with the latest changes (#34), then the core reworked as the executor recommends,
+from everything discussed in §21 and §22, with constraints as a new concept: outcomes the principal finds unacceptable,
+whose breach is plainly misalignment, enforced too where optimization is treated, perhaps through the
+Karush–Kuhn–Tucker conditions. The PI's decisions on R15 and R16 wait until the rework has absorbed this.
+
+**What was done.** A draft in a new folder, `v14/`, beside the core rather than in it, so that `main`'s v13 stays whole
+until the PI adopts something: `v14/README.md`, the structure proposed and a map from v13's items; and three files of
+results proved here, with a probe, `probes/v14/v14_probe.py`, that reproduces every number. Lint reads `v14/` for
+citations and item references, as it reads `general/`.
+- *Evidence as a bet* (`v14/evidence.md`). VE1: against a convex closed set, misalignment equals the growth rate of the
+  best bet that no acceptable behaviour expects to win, the bet being the ratio of the actor's behaviour to the nearest
+  acceptable one; read in Grünwald, de Heide and Koolen's Theorem 1, proved here in the finite case. VE2: records hold
+  an actor only to the convex hull of what is acceptable, and v13's pursuit ray is not convex. VE3: a test from bets
+  keeps its level whatever the dependence between decisions, when each is acceptable given the past (Ville's inequality
+  on a finite horizon, proved from finite sums). VE4: a bet's growth rate is estimated by an average, with no bins.
+- *Constraints* (`v14/constraints.md`). Forbidden sets, rate limits and budgets, all convex. VK1: one forbidden outcome
+  is decisive evidence, and the magnitude moves to the rate. VK2: a rate limit's misalignment is `kl(p(C)‖ε)`. VK3: a
+  budget's is a Lagrange dual, the Kelly growth rate of a bet on the overrun. VK4: several constraints, with the dual's
+  equality supported numerically, not proved. VK5, for the derived module: an optimizer under a budget is the
+  unconstrained optimizer of `F − ν·g`, `ν` the shadow price, by the Karush–Kuhn–Tucker conditions, verified directly.
+- *Order against a reference* (`v14/order.md`). VO1: better for every reading of a ranking is dominance on upper sets,
+  for partial rankings too. VO2: v13's ordinal specification lies strictly inside it. VO3: better, worse, both or
+  neither; "not better" and "not worse" are verifiable, "worse or equal" only refutable, and a shortfall by margins
+  declared in advance is a verifiable verdict of its own.
+
+**What the work says about alignment.**
+- *The PI's remark was the missing piece.* §22 found that a ranking alone cannot ground "misaligned" (H44). Constraints
+  are the absolute standard that can: a breach needs no reference, no ranking and no model of the actor, and a forbidden
+  outcome needs one witness. The everyday sense of "misaligned", working against what the principal wants, now has a
+  form that is exact (a breach) and one that is graded (worse, by declared margins).
+- *Bets unify what §22 left in pieces.* The PI's objection to bins, the empirical distribution function, dependence
+  between decisions, and the continuum all meet in one object: a bet is a function, so its average needs no bins; its
+  product is a fair game under acceptance whatever the dependence; and its best growth rate is v13's number on convex
+  sets. The question "what is the right resolution" becomes "which bets did the principal allow", a declaration.
+- *Convexity is a principle, not a convenience.* v13 kept the pursuit ray, which is not convex, and VE2's probe shows
+  the price: an actor acceptable at every decision is accused in most records. "A mixture of acceptable ways of acting
+  is acceptable" is common sense, and it is forced by what records can show.
+- *v13 charged obedience.* An actor that keeps the principal's own budget optimally lies off the ray of `F`, so v13's
+  standard specification called it misaligned (VK5). In v14 the budget is in the request.
+
+**Hunches.** H45: the order's requirement and the constraints are best joined by intersection, and the reference should
+itself meet the constraints, or be replaced by its nearest behaviour that does; otherwise "better than the reference"
+can require a breach. H46: on a continuum, bets chosen from the record before each decision approach the best bet at a
+rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor.
+
+**Open.** L2, to register before anything is computed; the PI's questions listed in `v14/README.md`; VK4(iii); the
+items in `CORE.md`'s format; the map of the 55 propositions.
+
+## 24. Back to the drawing board: what the core needs, 2026-10-16 (Q60)
+
+By the executor, at the PI's question (Q60); a discussion, nothing decided.
+
+**The PI's position.** Constraints must be declared explicitly, as a general concept, since some are not available in
+the principal's family of target behaviours (a bound on an average, a resolution). A fee or cost attached to a
+misaligned event is not needed in the core: each target behaviour carries it implicitly, in the event's probability; it
+matters for optimization, and should be derived there.
+
+**The executor's answer.**
+- *Agreed: no fee in the core.* The shadow price of a constraint is a fact about an actor that optimizes under it (VK5),
+  and belongs to the derived module. A budget's statistic `g` is not a fee: it is the measured quantity the constraint
+  bounds (seconds, tokens, money), part of the constraint's declaration.
+- *Challenged: severity is not in the probability.* A target's probability for an event says how often the principal
+  tolerates it, not how bad one occurrence is, and misalignment measures evidence, not damage. A catastrophe tolerated
+  at `10⁻⁶` and occurring at `2·10⁻⁶` has misalignment `kl(2·10⁻⁶‖10⁻⁶) ≈ 3.9·10⁻⁷` nats per decision, about 2.6
+  million decisions for one nat; a rude answer tolerated at `0.1` and occurring at `0.2` has `0.044`, about 23
+  decisions. That is right for evidence and plainly wrong for seriousness. Severity needs a declared value scale, and a
+  principal deciding whether to deploy a frozen model needs it with no optimizing actor in sight: it is a refinement of
+  the principal's side ("consequences"), not of the optimization module.
+- *Further: "constraint" in general is the only declared object the core needs.* A family of target behaviours is
+  itself a constraint ("act as one of these"), and so are an order against a reference, a forbidden set, a rate limit
+  and a bound on an average. The core can be: outcomes and behaviours per condition; a request, a finite list of
+  requirements, each a convex closed set of behaviours, declared before; the acceptable set, their intersection;
+  misalignment, the evidence against it, with a verdict per requirement; and records that verify it. The default and the
+  objective then leave the core: only some requirements refer to them.
+- *Indifference is not a constraint, and need not be core.* A principal indifferent within the cells of a partition
+  declares requirements that depend only on cell masses; for such a set, misalignment equals that of the cell masses
+  (data processing one way, and matching the actor's proportions within cells the other), so resolution becomes a
+  proposition about saturated requirements. The precision of a record is a property of the record, not of the request.
+
+**What moves out of the core, by the executor's proposal.** Into refinements that build requirements: target families
+and pursuit-based specifications ([[D3 — Specification, declaration and misalignment|D3]]'s families, [[D2 — Pursuit of an objective|D2]]); an order against a reference (`v14/order.md`); the catalogue
+of constraints and their closed forms (`v14/constraints.md`); indifference ([[D4 — Resolution|D4]], principal's side). Into refinements of
+the principal's side: stakes and severity ([[D5 — Stakes|D5]]), several principals ([[B4 — One actor and one principal|B4]], [[P42 — Several principals: gridlock, and the pooled pursuit|P42]]). Into the module on actors that
+optimize: tilt, pursuit, KL price, intensities ([[D1 — Outcomes, behaviours, divergence and tilt|D1]]'s tilt, [[D2 — Pursuit of an objective|D2]], [[B3 — An objective up to scale and constant|B3]]), shadow prices and fees (VK5), interventions
+and pass-through ([[D6 — Intervention and pass-through|D6]]), the evaluator ([[D10 — Evaluator, regression and residual|D10]]). Into a refinement on attribution, whether the actor could have done
+otherwise or told situations apart: feasibility ([[D7 — Feasibility|D7]]), views and identification ([[D8 — Conditions, responses and views|D8]]'s views, [[D9 — Observation and identification|D9]]); misalignment is
+not culpability. What stays: [[M1 — Probability on finitely many outcomes|M1]], [[M2 — Independent repetition|M2]], [[B1 — Finitely many outcomes|B1]], [[B2 — Episodes and conditions as outcomes|B2]], [[A1 — Behaviour suffices|A1]], [[A4 — Misalignment is evidence|A4]] in its bet form, [[A5 — Declared before|A5]], [[D1 — Outcomes, behaviours, divergence and tilt|D1]] without the tilt, [[D8 — Conditions, responses and views|D8]]'s
+conditions, [[D11 — Record, sample and evidence|D11]] on bets, and the principle that requirements are convex.
+
+## 25. What CORE can factor, and what each other form of misalignment needs, 2026-10-16 (Q61)
+
+By the executor, at the PI's question (Q61); a discussion, nothing decided.
+
+**The PI's proposal.** Separate files, each built on the one below: `CORE`, `CORE_GENERAL`, `OPTIMIZERS`,
+`OPTIMIZERS_GENERAL`; culpability defined formally; the full list of forms of misalignment, which `CORE` can factor, and
+the least additional concepts each of the others needs.
+
+**The executor's answer, in short.** One layer is missing between the two: an actor's **interface**, what it perceives
+(views), what it can do (actions) and how the world turns its actions into outcomes (an environment kernel). It needs no
+optimization, a frozen model has one, and it is exactly what culpability, coarse perception, tampering and collusion
+need. The feasible behaviours are those the interface's policies produce, a convex set, and a record showing a behaviour
+outside it refutes the declared interface. So three layers, each with its general twin: `CORE`, `INTERFACE`,
+`OPTIMIZERS`; and the principal's value scale (stakes, severity) as a refinement of `CORE`.
+
+**Factoring by nested interfaces.** If `𝓕_1 ⊇ 𝓕_2 ⊇ … ⊇ 𝓕_k ∋ p`, each the feasible set of a more restricted interface
+(full information and control, then the actor's views, then its actions, then its execution noise), then
+`M_A(p) = M_A(𝓕_1) + Σ_j (M_A(𝓕_{j+1}) − M_A(𝓕_j)) + (M_A(p) − M_A(𝓕_k))`, every term non-negative, with
+`M_A(𝓕) = min_{f∈𝓕} M_A(f)`: what no actor could avoid, what each limitation of the interface costs, and the excess the
+actor could have avoided. Each limitation is a form of misalignment that needs only its part of the interface.
+
+**Culpability, two candidates.** With `𝓕*` the feasible behaviours of least misalignment, convex: the excess
+`E(p) = M_A(p) − M_A(𝓕)`, the last term above; and the evidence `K(p) = min_{f∈𝓕*} KL(p‖f)` that the actor is not doing
+the best it could, testable by bets. Both are `0` exactly when `p ∈ 𝓕*`; they are not ordered (on 400 random instances
+with an unavoidable breach, `E > K` in 330 and `E < K` in the others, by up to `0.82` nats;
+`probes/v14/culpability.py`). The executor's recommendation: `K` is culpability, as evidence ([[A4 — Misalignment is evidence|A4]]), and `E` is the
+share of misalignment that was avoidable, as accounting; L2 to test both names.
+
+**The list.** In `CORE`, with requirement-building refinements only: breach of each requirement; misalignment by
+condition, including a shift of the conditions' weights between test and use; hidden misalignment, in conditions no
+record covers (defined in `CORE`; bounding it from records needs views); drift and dependence over time ([[P54 — Dependence and drift only add evidence|P54]]); the
+evaluation gap, a measured requirement met while the true one is breached, on outcomes that hold both; a shortfall
+below a declared floor; side effects, as breaches of requirements on other coordinates. Needing the interface:
+unavoidable against avoidable (feasibility); coarse perception, including not knowing what the principal asks when the
+requirement depends on a part of the condition the actor does not see (views); execution noise (the environment
+kernel); tampering against honest selection (which variables the actions reach, and what is seen before acting: a
+record that no honest interface produces refutes it); ignoring the situation against the environment's doing (the split
+of actions from outcomes); collusion between actors (each actor's views and private randomness: the product behaviours
+are not convex, and their hull is every joint behaviour, so independence is no requirement a record can enforce;
+coordination needs a declared information structure). Needing `OPTIMIZERS`: gaming or reward hacking as a motive (the
+actor's objective, an evaluator), overoptimization (intensity), outer misalignment (the trainer's objective), inner
+misalignment (the learned objective against the trainer's), strategic deception and alignment faking (views to tell
+when it is observed, and an objective over its own future), and the shadow prices of constraints. Outside the actor:
+misspecification, the principal's declaration being wrong, needs a second standard (another principal, or a later
+judgement); severity needs the value scale.
+
+**Three questions, one per layer.** What happened (`CORE`: breach, where, when, how detected); could the actor have
+done otherwise, or known (`INTERFACE`: culpability, coarse perception, noise, tampering); why (`OPTIMIZERS`: the
+objective the behaviour serves). The grades of fault map onto them: a breach, negligence (culpability `> 0`), intent
+(the breach serves the actor's objective).
+
+## 26. The factorization proved, the labels' verification status, and the limits, 2026-10-16 (Q62)
+
+By the executor, at the PI's request (Q62); proved here and probed, not independent, not yet reviewed by anyone else.
+
+**What was done.** `v14/factorization.md`: FA1, nested interfaces factor misalignment exactly, by telescoping least
+values, with labels exact by construction and no hypothesis; FA2, its Pythagorean form when the interface is linear,
+`M + R = KL(p̂‖f°) + KL(f°‖a°)`, so that culpability is the avoidable excess plus a non-negative credit, `K = E + R`;
+FA3, nested linear interfaces toward one fixed target, an exact sum of divergences between named behaviours; a table of
+v13's thirteen exact splits by mechanism (the chain rule, the mixture identity, Pythagorean equality or inequality) and
+by layer; and VF1–VF3, the verification status of every factor's label. `v14/LIMITS.md`: what the framework cannot do,
+in three parts, the declaration, behaviour and the record, and the words. `v14/README.md`: the six files of the three
+layers. The probe `probes/v14/factorization.py`.
+
+**What it found.**
+- *Two factorizations, not one.* Telescoping least values (FA1) has exact labels and holds always, but its terms are not
+  evidence rates. The Pythagorean form (FA2, FA3) has terms that are evidence rates, but only for linear interfaces, and
+  its labels are exact only toward the right target. They agree when one acceptable behaviour is the nearest at every
+  level of the interface.
+- *A label of v13 overclaims.* [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable misalignment" is unavoidable only at the intensity the actor
+  revealed; on 107 of 109 random instances some feasible behaviour has less (§1).
+- *Accusations, excuses and motives have different verification status.* An accusation (breach, misaligned, tampered;
+  culpable, with the interface taken as known) is verifiable; an excuse at most refutable; a motive (pursues, games) a
+  refutable hypothesis (VF1, VF2). An excuse about capability is tested by a sample only through what the actor did, and
+  beyond it only in conditions declared to call on the same capability, such as elicitation (VF3).
+- *Carcassi's methodology justifies a label's form, not its word.* It decides what kind of claim each label makes and
+  makes some inadmissible ("unavoidable" without elicitation; "hidden misalignment" without views); whether the word is
+  the right one is decided on paradigm cases (L2).
+
+**What the PI may be missing, in the executor's view.**
+- *Elicitation is the experiment that gives excuses meaning.* The real case (H42) needs conditions that try to make the
+  model do better, few-shot prompts, incentives, fine-tuning, or the INTERFACE layer has nothing to stand on for it.
+- *Intervals for the factors.* FA1's least values depend on the declarations alone; what a record estimates is the
+  actor's misalignment, and with it the avoidable excess and the culpability, which need intervals. Not derived yet.
+- *Correcting v13 on `main`.* [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s label is wrong in the approved core; v14 supersedes it, but `main` keeps it
+  until then. Proposed: a one-line correction now, or a note in its Notes, the PI's to decide (R18).
+- *Forbidden sets in the Pythagorean form.* FA2 assumes the nearest acceptable behaviour has full support, which a
+  forbidden set breaks; the factor there must be read on the allowed outcomes, not yet written.
+
+**A review, before the push.** A subagent of the executor's read `v14/factorization.md` and `v14/LIMITS.md`
+adversarially (not independent, rule (f)), reran the probes and confirmed their numbers, and found what was then fixed:
+VF3 said a record's law depends only on the actor's behaviour, true of samples only, and called an untested excuse no
+statement about the actor; "culpable" is verifiable only with the interface taken as known; FA2 asked for a unique best
+behaviour it does not use, and now measures culpability against all of them; views are linear only when deterministic;
+[[P36 — Ordinal objectives|P36]](iv) is a bound, not a split, and [[P44 — What named objectives explain|P44]]'s label is right for a reason other than the one given; the probe's check
+of `K = E + R` restates [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](iii), and only its comparison with an independent search tests FA2(i); and `LIMITS.md`
+stated as proved what rests on H43, on the brainstorm of §22 and on a sufficient condition (TR5), and read FA1's least
+values as estimated, when they depend on the declarations alone. **A correction to §25:** "independence is no
+requirement a record can enforce" holds under v14's choice of judging each decision and accepting mixtures; for a sample
+of joint decisions, leaving the independent behaviours is verifiable. [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]'s Notes, for contexts and an actor's
+resolution, and [[D7 — Feasibility|D7]]'s reasons carry the same overclaim of "unavoidable" as [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v); R18 covers them.
+
+## 27. What of v13 survives, 2026-10-16 (Q63)
+
+By the executor, at the PI's question (Q63); an assessment, not reviewed yet. `v14/MIGRATION.md` gives every item and
+result a fate: keep, move to another layer with its words changed, rewrite for v14's objects, or incompatible.
+
+**The finding.** Almost all of the mathematics survives: of 68 results, 13 keep their place in CORE or a refinement of
+it, 8 move to INTERFACE, 42 to OPTIMIZERS, 4 need rewriting, and one, [[C12 — No misalignment, no stakes|C12]], is incompatible. What does not survive is
+the meaning v13 gave its central number: under the standard specification, v13's misalignment is the distance to the
+set of KL-optimal pursuits, a fact about optimizers, while v14's is evidence against a declared convex requirement. So
+the incompatible part is not where the effort went, the theorems, but where the claims went: every number reported, and
+every verdict registered, under v13's name. Those stay as v13's record; new tests are registered under v14.
+
+**Seven things incompatible whatever the fix**: the name "misalignment" for the distance to the ray, with every number
+reported under it; the registered verdicts of the cases and `RECORD.md`'s ledger; [[P39 — Several actors: coordination plus individual misalignment|P39]](ii)'s coordination as
+misalignment; [[P37 — A strong incentive masks the actor, and can fake alignment|P37]](ii)'s "fake alignment"; [[C12 — No misalignment, no stakes|C12]]; three conventions of v13's table (full support, the default in every
+specification, independence by convention); and the names L1 found to disagree with their words.
+
+## 28. Is v14 compelling, by v13's method? 2026-10-16 (Q64)
+
+By the executor, at the PI's request (Q64); not independent, and under review by a subagent at the time of writing.
+
+**The method, found again.** v13 made the core compelling by two devices (§17, §18). The method of reverse physics
+[[References|@carcassi2022]]: every item said what kind it is, imported mathematics, a background condition assumed without loss of
+generality with its reason and its qualifier, a premise with its status (principle or assumption, conceptual or
+phenomenological), or a definition with its interpretation, declared, verified and justified. And a table of
+conventions (Q53): every choice an equally reasonable principal could make otherwise, each forced by a stated
+requirement, chosen for convenience, or taken from the literature, and marked by whether it changes a verdict. The
+lesson of §16 was kept too: v12's "everything is forced" overstated, since the force was conditional; a claim of
+generality must say what it is conditional on.
+
+**v14 against it.** The draft keeps to the method, and in places goes further than v13 could. Every claim of generality
+now has a ground and a qualifier (`v14/README.md`): finitely many outcomes and episodes as v13's [[B1 — Finitely many outcomes|B1]] and [[B2 — Episodes and conditions as outcomes|B2]]; the
+request as a list of sets, by [[A1 — Behaviour suffices|A1]]; closed requirements, since closing changes nothing (VE1(iv)); convex requirements,
+forced by judging each decision with no model of the actor (VE2), with the qualifier that a set that is not convex,
+independence among them, is enforced as its hull; every convex requirement as a set of budgets (VK0, new: the separating
+hyperplane from the nearest point), so that the PI's constraints and CORE's requirements are one object; a ranking as
+dominance (VO1); every convex feasible set as an interface's (IN1, new); misalignment factoring over any chain (FA1).
+The conventions table is redone for v14, twelve rows after the review below; five change a verdict in general and three
+in stated cases. The measure itself is more canonical than v13's: given that evidence adds, that a bet must be fair
+under acceptance, that its growth is measured under what the actor does and that the best bet is taken, VE1 leaves no
+freedom, and no model of optimization enters.
+
+**Where it is weaker, said plainly.** Convexity is forced only under the choice of judging each decision; for samples,
+v13's non-convex specifications could be judged, so the choice costs cases that v13 covered, and the PI should make it
+knowingly (`ROADMAP.md`, recommendation 2). The Pythagorean factors hold only for linear interfaces. And the general
+twins do not exist yet, so v14 claims nothing beyond finite outcomes.
+
+**Consolidated.** The INTERFACE layer, its definitions and the table of forms of misalignment, which were only in §25
+and §26, are now in `v14/interface.md`; the README holds the current design, so §23's proposal of a request in five
+parts is superseded by a list of requirements and refinements that build them (§24).
+
+**The review, and what it changed.** A subagent of the executor's read the new claims adversarially (not independent,
+rule (f)) and found three errors and several overstatements, all fixed before the push: VK0 matched a budget with
+`b = min g`, which the definition of a budget excludes, so that forbidden sets were wrongly said to need finitely many;
+balls in total variation and in a Wasserstein distance are polyhedral, so "a ball needs infinitely many budgets" holds
+only for KL, Euclidean or Hellinger balls; "VE1 leaves no freedom" hid four choices, now named in `v14/evidence.md`:
+Kelly's criterion, the question [[A4 — Misalignment is evidence|A4]] asks (the other order of KL answers another), the hull under the mixture
+principle, and that the best bet needs the unknown behaviour; dominance was called the canonical requirement while the
+draft said the greedy decoder is not misaligned, though it breaches `B(r)`, so dominance is now the canonical reading of
+a ranking, and the requirement built from it is declared; convexity is forced only given two premises, with a stronger
+ground, that independent draws from a mixture are a random schedule of its components; culpability needs a closed
+feasible set, is undefined as an excess when no feasible behaviour avoids a forbidden outcome, and is only as safe as
+the interface, whose overstatement no record refutes; collusion needs an interface for several actors, under which
+communication beyond the views is a convex, testable set; tampering needs the honest channel of [[P50 — Tampering: a change of the measurement, not of the world|P50]]; the closedness
+convention changes the breach verdict at the boundary; and the grades of fault are three questions, not a ladder.
+
+## 29. Documentation hygiene after pull request #34, 2026-10-17 (Q65)
+
+By the executor, at the PI's request (Q65): pull request #34 is merged into `main`, and `main` was merged into
+`claude/core-v14`; [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s overclaim stays on `main` until v14's migration corrects it (R18, closed). A scripted
+sweep found the spelling clean (British with `-ize`), no missing path outside the archive's history, every section,
+hunch, request, decision and v14 result named in the files defined, and no trailing whitespace; two probe lines over 120
+columns were wrapped, and `probes/v14/culpability.py` tidied with its output unchanged and now saved
+(`probes/v14/RESULTS-culpability.md`). A reading for stale statements fixed `ROADMAP.md`'s state, its v14 bullet, which
+had doubled, and two of its recommendations; `README.md`, `CLAUDE.md` and `REQUESTS.md` now point to the v14 draft.
+
+A consistency read by a subagent of the executor's (not independent, rule (f)) found twelve more, all fixed: the Q65
+row said the overclaim was left in v14, against R18; this section was cited before it existed; recommendation 2 still
+offered dominance as a requirement, against Q64; pointers to a section of `v14/README.md` that no longer exists, and to
+"the derived module" for what is now OPTIMIZERS; "proved and probed" said of results that are not probed, and of
+VK4(iii), which is not proved; R17 cited questions the README no longer lists, and the three choices of recommendation
+2 had no request, now R19; "culpable" called verifiable in `LIMITS.md` without the interface taken as known; the
+"mixture principle" used but never named, now named once in the conventions; the margin proposal of `order.md` built a
+set that is not convex, now replaced by "no shortfall beyond `m` at any declared standard", convex, whose breach is a
+shortfall at some standard; and smaller ones, a plain-terms twin for VF2, VK4's scope, TR4 cited where it does not
+apply, stakes placed on the principal's side, and the dates of the draft's status.
+
+## 30. Slides, 2026-10-17 (Q66)
+
+By the executor, at the PI's request (Q66). `slides/framework.md`, 32 slides in Marp Markdown: plain text, so the slides
+change and diff like any file, rendered to HTML, PDF or PowerPoint by Marp CLI. They present the v14 draft (the three
+layers, requirements, misalignment as evidence, bets, the interface, the factorization) and work one example through: a
+frozen support bot judged against its previous version, under a forbidden outcome (a leak), a rate limit on wrong
+answers and an order against the previous version, with an interface in which the new version, deployed without the
+signal that marks account questions, takes 20% of them for open ones. Every number comes from
+`probes/slides/support_bot.py`: the new version breaches all three requirements; misalignment `0.0730` nats per decision
+against the two graded ones, `0` unavoidable with a full view, `0.0106` the cost of the coarse view, `0.0624` avoidable;
+culpability infinite, since every leak was avoidable; bets against the rate limit accuse it in 92% of records of 300
+decisions, and an actor at the limit in 0.2%.
+
+**Found while building.** The example's first form had the previous version breach the rate limit itself, the problem
+H45 names; it was changed so that the reference keeps every requirement. Culpability was first computed against one best
+behaviour, not the set of them, which gave a positive value to an acceptable behaviour; fixed by one convex minimization
+over the set. The first probe searched a grid of 53,000 policies and was stopped by its PID; a joint convex minimization
+replaced it. In the slides, Marp renders a source line break as a line break, which the wrapping at 120 columns would
+put mid-sentence; `slides/.marprc.yml` turns that off. A slide replaced by script lost the blank line before its
+separator and the wrapping tool joined the separator to the text; caught by a check that every separator stands alone,
+and fixed. Rendered at 1280 by 720, no slide overflows.
+
+## 31. What the slides' example taught, 2026-10-17 (Q67)
+
+By the executor, at the PI's question (Q67): what drafting the slides and running the example taught about
+formalization, methodology and applicability, and which gaps it showed. Not independent.
+
+**Formalization.**
+- *The closed forms ignore that conditions are not chosen.* In the example the actor does not choose how often account
+  questions arrive, so the acceptable behaviours keep the conditions' frequencies. VK2's closed form on the pooled wrong
+  share gives `0.0440`; with the frequencies held fixed, the misalignment is `0.0496` (`probes/slides/RESULTS.md`). The
+  results of `v14/constraints.md` are stated for behaviours on outcomes alone; CORE's requirements live on pairs of a
+  condition and an outcome with the conditions' frequencies fixed ([[B2 — Episodes and conditions as outcomes|B2]]), and the closed forms must be re-derived there.
+- *Requirements do not add.* Against R2 alone `0.0496`, R3 alone `0.0730`, both `0.0730`: the joint is the larger, not
+  a sum, so there is no exact attribution of the joint misalignment to requirements, unlike the factorization by
+  interfaces. A verdict per requirement and the joint is what can be reported.
+- *A forbidden outcome makes misalignment uninformative as a magnitude.* With R1, misalignment is infinite at a leak
+  rate of `0.019%`, and a record of 1,000 decisions shows a leak only `17.5%` of the time (H48).
+- *Culpability inherits that*: infinite as soon as an avoidable forbidden outcome has positive probability. Without the
+  leaks, culpability `0.0559` and the avoidable excess `0.0067` differ eightfold; which one a principal should read is a
+  question for L2.
+
+**Methodology.**
+- *Computing the probe before the slides caught two modelling errors* that would otherwise have reached the slides: the
+  reference first broke a requirement itself (H45), and culpability was first measured against one best behaviour
+  instead of all of them. Numbers from a probe, never typed, paid off again.
+- *Joint convexity is the computational key*: KL is jointly convex and the behaviour affine in the policy, so the least
+  misalignment over an interface is one convex program; a grid over policies was hopeless.
+- *The declarations decide the verdicts.* The 5% limit, the 2-point margin, the leak rate of a look-up and the 20% of
+  account questions that look open were all chosen by the executor; every verdict and factor moves with them. v14 has
+  no counterpart yet of v13's sensitivity to the specification ([[P10 — Sensitivity to the specification|P10]]).
+
+**Applicability.**
+- *The interface was the hardest and most arbitrary part.* Its numbers must be measured, by audits and elicitation, and
+  nothing in v14 yet estimates an interface or carries its uncertainty into the factors.
+- *The reference was taken as known*; a previous version is known only through samples (`v14/LIMITS.md`).
+- *Outcomes were taken as given*; in practice a grader reads them, with errors (H47). This is the largest gap between
+  the draft and a real case.
+- *What the framework added to the toy*: the factorization pointed at the fixes (stop look-ups; restore the signal),
+  and the bets gave sample sizes with a guaranteed error rate. But in a four-outcome toy, a careful reader finds the
+  same fixes by inspection; a case where the framework finds what inspection does not is still owed (H42).
+- *Only one bet was built*, against the rate limit; bets for orders, for joint requirements and for large outcome
+  spaces, and that bets chosen from the record reach the best growth (H46), are open.

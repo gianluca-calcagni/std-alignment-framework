@@ -4,6 +4,38 @@ The anchor against drift. Read it first in every session, and before starting an
 end of every turn. `NOTES.md` holds the executor's working notes and the history; this file holds only the goal, where
 the framework stands against it, and what comes next.
 
+## The executor's recommendations for v14 (2026-10-16, Q63)
+
+Prepended at the PI's request, to be worked on together; the order is the executor's proposal. The ground for each is in
+`NOTES.md` §22–§29 and in `v14/`.
+
+1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
+   and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
+   unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
+2. **Decide the three choices the draft rests on**, knowingly: the mixture principle, which buys tests valid under any
+   dependence at the price of requirements that are not convex, independence among them (`v14/LIMITS.md`); the
+   requirement built from an order, `B(r)`, v13's ordinal cone, or no shortfall beyond declared margins (`v14/order.md`;
+   dominance is the ranking's reading, not a requirement); and a reference that meets the constraints (H45).
+3. **[[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
+4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `OPTIMIZERS` and their twins, each twin
+   stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
+   and mutants with them.
+5. **Close the open proofs**: VK4(iii), several constraints, with Farkas's lemma read in an open text; the Pythagorean
+   factor for forbidden sets (`v14/factorization.md`, FA2); intervals for misalignment, culpability and the avoidable
+   excess from records, with bets.
+6. **Elicitation in INTERFACE**: conditions with a declared link to the condition judged, so that excuses can be
+   refuted (`v14/factorization.md`, VF3); without them, every excuse rests on the declared interface.
+7. **The report and the library on v14**: a new `STANDARD.md`, a verdict per requirement, the bets, the interface and
+   what it excuses, stakes on a declared scale; `stdalign`'s API to match.
+8. **The real case** (H42): a frozen model against a reference model, forbidden outputs as constraints, one scorer as
+   the order, judged by bets over prompts, with elicitation conditions; registered before it runs.
+9. **People**: a mathematician who reads the six files once drafted (R1), and the label verdicts of L1 and L2 read by
+   the PI (R15).
+10. **What the slides' example showed** (`NOTES.md` §31): re-derive the constraints' closed forms with the conditions'
+    frequencies fixed; outcomes read by graders with errors, a measurement channel at the base of CORE (H47); a rate and
+    a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
+    the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
+
 ## The goal
 
 A standard formal framework for alignment problems in general, not only in machine learning: solid enough to build on,
@@ -26,38 +58,47 @@ library that computes what the standard asks, a report that can be checked as da
 three are in place (Q41). The theory grows where one of these needs it, and the archive of what is done is in `NOTES.md`
 §4.
 
-## Where we are (2026-10-11)
+## Where we are (2026-10-17)
 
-- **On `main`**, since pull request #33 was merged (Q55), the core is v13, approved by the PI (Q52, `NOTES.md` §17) and
-  built by the method of reverse physics: three axioms imported from probability theory, four background conditions
-  assumed without loss of generality, three premises, each with its Status ([[A1 — Behaviour suffices|A1]] behaviour suffices, [[A4 — Misalignment is evidence|A4]] misalignment
-  is evidence, [[A5 — Declared before|A5]] declared before), and eleven definitions, each with its Interpretation, declared and justified.
-  v12's A2 and A3 are reasons of [[D2 — Pursuit of an objective|D2]], as no result used them; the draft's A6 was not adopted. [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal
-  specification, which `STANDARD.md` asks to report beside the standard one. Then, at the PI's seven requests (Q53,
-  `NOTES.md` §18): a table of conventions, each justified, which lint R17 holds; [[A4 — Misalignment is evidence|A4]] on the record's counts, which
-  needs no independence of the actor, with [[P54 — Dependence and drift only add evidence|P54]] for what dependence and drift add; families of targets in [[D3 — Specification, declaration and misalignment|D3]], with
-  [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] for every family; [[P55 — What a record of counts certifies, at every size|P55]], tests and intervals from counts, exact at every size, with Genin and Kelly's
-  verifiability; the general core's draft 4 on v13's kinds; the ontologies' declarations; and H38 on activations. The PI
-  accepted it all (Q54): case C5 ran, all held, and the docs were swept (`NOTES.md` §19, the last handover). No result
-  cites a premise in its Statement or Proof (`probes/review/premise_reach.py`). 55 propositions; 102 checks of the
-  items, and 148 tests of the tools, the scenario, the library and the quickstart, pass on both paths. v12, which v13
-  replaced, had five premises and 52 propositions.
-- **The focus now** (Q56): the mathematics first, and the general core made correct and coherent rather than split or
-  restructured; then a real-life simple case where the framework gives true insight, diagnosis or prediction, for which
-  the engineering must be rethought. A rewrite into a more digestible structure is the PI's hunch, not a decision
-  (`NOTES.md`, H39). The general core is draft 4 on v13's kinds; its transfer lemma is proved (`general/transfer.md`,
-  TR1–TR5): misalignment, the supremum over the descriptions a record can decide, is the least divergence over the
-  closure of the intended behaviours whenever that closure is compact, whatever the nearness, and under that compactness
-  "misaligned" is verifiable in chance. The dimension law is proved too (TR6), and [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P54 — Dependence and drift only add evidence|P54]] carry to standard
-  Borel spaces (TR7, TR8). None of the eight runs in CI yet. Every import of the general core is read in an open text or
-  replaced; the last two, Kuratowski's and the Lusin–Souslin theorems, in Tserunyan's notes once the PI allowed their
-  host (R14). Nine results of the finite core are diagnostics ([[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]); five were used in a case, all in W4, and
-  [[P46 — What runs share between conditions, and what they do not|P46]], [[P49 — Outer and inner misalignment|P49]], [[P50 — Tampering: a change of the measurement, not of the world|P50]] and [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] in none yet.
+- **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
+  `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
+  background conditions assumed without loss of generality, three premises, each with its Status ([[A1 — Behaviour suffices|A1]] behaviour
+  suffices, [[A4 — Misalignment is evidence|A4]] misalignment is evidence, [[A5 — Declared before|A5]] declared before), and eleven definitions, each with its Interpretation,
+  declared and justified. v12's A2 and A3 are reasons of [[D2 — Pursuit of an objective|D2]], as no result used them; the draft's A6 was not adopted.
+  [[D3 — Specification, declaration and misalignment|D3]] defines the ordinal specification, which `STANDARD.md` asks to report beside the standard one. Then, at the PI's
+  seven requests (Q53, `NOTES.md` §18): a table of conventions, each justified, which lint R17 holds; [[A4 — Misalignment is evidence|A4]] on the
+  record's counts, which needs no independence of the actor, with [[P54 — Dependence and drift only add evidence|P54]] for what dependence and drift add; families of
+  targets in [[D3 — Specification, declaration and misalignment|D3]], with [[P53 — Misalignment is the departure beyond what the family of targets credits|P53]] for every family; [[P55 — What a record of counts certifies, at every size|P55]], tests and intervals from counts, exact at every size, with Genin
+  and Kelly's verifiability; the general core's draft 4 on v13's kinds; the ontologies' declarations; and H38 on
+  activations. The PI accepted it all (Q54): case C5 ran, all held, and the docs were swept (`NOTES.md` §19, the last
+  handover). No result cites a premise in its Statement or Proof (`probes/review/premise_reach.py`). 55 propositions;
+  102 checks of the items, and 148 tests of the tools, the scenario, the library and the quickstart, pass on both paths.
+  v12, which v13 replaced, had five premises and 52 propositions.
+- **The general core** (Q56, on `main` since #34): the mathematics first, made correct and coherent rather than split or
+  restructured; the rewrite the PI suspected (H39) became v14, below. The general core is draft 4 on v13's kinds; its
+  transfer lemma is proved (`general/transfer.md`, TR1–TR5): misalignment, the supremum over the descriptions a record
+  can decide, is the least divergence over the closure of the intended behaviours whenever that closure is compact,
+  whatever the nearness, and under that compactness "misaligned" is verifiable in chance. The dimension law is proved
+  too (TR6), and [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P54 — Dependence and drift only add evidence|P54]] carry to standard Borel spaces (TR7, TR8). None of the eight runs in CI yet. Every
+  import of the general core is read in an open text or replaced; the last two, Kuratowski's and the Lusin–Souslin
+  theorems, in Tserunyan's notes once the PI allowed their host (R14). Nine results of the finite core are diagnostics
+  ([[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]]); five were used in a case, all in W4, and [[P46 — What runs share between conditions, and what they do not|P46]], [[P49 — Outer and inner misalignment|P49]], [[P50 — Tampering: a change of the measurement, not of the world|P50]] and [[P51 — What signals, audits and re-measurements reveal of tampering|P51]] in none yet.
 - **The labels** (Q57, `NOTES.md` §21): whether each label means what its word says, tested for the first time by L1,
   registered before it ran (`probes/labels/`). Of twelve labels, masking, overoptimization and misalignment under the
   ordinal specification agreed with their words on every case; nine disagreed on at least one, most because the standard
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
-  The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15).
+  The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15), postponed
+  until v14 absorbs them (Q59).
+- **v14, a draft** (Q59–Q68, `NOTES.md` §22–§31): in `v14/` beside the core, not in it, drafted on `claude/core-v14` and
+  brought to `main` as a draft (Q68). Three layers, each with a twin for outcomes that are not finite: CORE (a request
+  as a list of convex requirements, misalignment as the evidence against it, records judged by bets), INTERFACE (what
+  the actor sees and can do: culpability, coarse perception, tampering) and OPTIMIZERS (pursuit, evaluators, training,
+  shadow prices). Twenty results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a
+  bet (VE1–VE4), constraints (VK0–VK5), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization
+  and its labels' verification status (FA1–FA3, VF1–VF3). `v14/README.md` holds the design with its claims of
+  generality, its conventions and the challenges answered; `v14/LIMITS.md` what the framework cannot do;
+  `v14/MIGRATION.md` what of v13 survives. The PI's decisions on R15 and R16 wait for it; L2 comes next (the
+  recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and
@@ -197,3 +238,12 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-15 | the PI challenged bins on a continuum and asked for an optimization-free core; the discussion recorded in `NOTES.md` §22: any exact forgiveness can be cheated, so measures must grade small shifts as small and stakes be reported over the horizon; distribution functions serve the order part exactly; optimization moves to a derived module; a reference or an absolute standard is needed by any ranking | 2 (a version, if adopted) |
 | 2026-10-15 | second thoughts in `NOTES.md` §22: an undetectable loss of order `√n` over `n` decisions whatever the resolution (H43); a ranking and a reference certify three verdicts, and the ordinal specification calls a greedy decoder at the 0.9 quantile misaligned (H44); ranks under a reference per context pool over prompts, accusing but not exonerating; three questions added to R16 | 2 (a version, if adopted); 5 (what the quantities mean) |
 | 2026-10-15 | the PI asked for a pull request with the latest changes, and for the core to be reworked on a branch as the executor recommends, with constraints as a new concept of the core (Q59); R15 and R16 postponed until the rework absorbs them | 2 (a version) |
+| 2026-10-15 | v14 begun on `claude/core-v14` (Q59, `NOTES.md` §23): `v14/README.md`, the structure and a map from v13; `v14/evidence.md`, `v14/constraints.md` and `v14/order.md`, twelve results proved here and probed (`probes/v14/`); lint reads `v14/`; R17 asks the PI to read the direction | 2 (a version) |
+| 2026-10-16 | the PI's position on constraints and fees, and the question of what else leaves the core (Q60): `NOTES.md` §24, a discussion; agreed that fees belong to the optimization module, challenged that severity lives in probabilities, and proposed a core whose only declared object is a list of requirements | 2 (a version, if adopted) |
+| 2026-10-16 | the forms of misalignment and the layers they need (Q61, `NOTES.md` §25): an interface layer, views, actions and an environment kernel, proposed between `CORE` and `OPTIMIZERS`; factoring by nested interfaces; two candidates for culpability; the full list by layer | 2 (a version, if adopted) |
+| 2026-10-16 | three layers with their twins decided (Q62); `v14/factorization.md`, the factorization proved two ways, the earlier splits sorted by mechanism and layer, and the labels' verification status (VF1–VF3); `v14/LIMITS.md`; [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v)'s label found to overclaim (§1, R18) | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-16 | what of v13 survives v14 (Q63): `v14/MIGRATION.md`, a fate for every item and result, and seven things incompatible whatever the fix; the executor's recommendations prepended to this file | 2 (a version) |
+| 2026-10-16 | v14 measured against v13's method for a compelling core (Q64, `NOTES.md` §28): `v14/README.md` rewritten with the claims of generality and their qualifiers, the conventions justified and the challenges answered; `v14/interface.md`; VK0 (every convex requirement is a set of budgets) and IN1 (every convex feasible set is an interface's) | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-17 | slides (Q66, `NOTES.md` §30): `slides/framework.md`, 32 slides in Marp Markdown presenting v14 and a worked example, a frozen support bot against its previous version, every number from `probes/slides/support_bot.py` | 3 (contact: a reader can follow the framework end to end) |
+| 2026-10-17 | the lessons of the slides' example (Q67, `NOTES.md` §31): VK2's closed form does not hold with conditions' frequencies fixed (`0.0440` against `0.0496`); outcomes measured by graders (H47); forbidden outcomes need a rate and a plan (H48); recommendation 10 | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-17 | the v14 draft brought to `main` by a pull request (Q68), the files that placed it on its branch corrected; the branches no longer needed listed for deletion | 2 (a version, as a draft) |
