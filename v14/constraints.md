@@ -35,16 +35,20 @@ function on `X`, and `b = ⟨g, c⟩ + ‖x − c‖²/2`. Every `y ∈ S` has `
 `E_x[g] = ⟨g, c⟩ + ‖x − c‖² > b`; and `b > ⟨g, c⟩ = E_c[g] ≥ min g`. So the budgets that `S` keeps exclude every
 `x ∉ S`, and contain `S`. ∎
 
-**Notes.** This is the separating hyperplane theorem in its finite form, proved here from the nearest point. How many
-budgets a requirement needs: a rate limit with `ε > 0`, one; v13's ordinal specification, with a default of full
-support, and dominance (`order.md`), when every proper upper set has reference mass strictly between `0` and `1`,
-finitely many; a forbidden set, infinitely many, `a(C) ≤ ε` for every `ε > 0`, or one limit `E_a[1_C] ≤ 0` if limits
-with `b = min g` are admitted, which VK3's dual does not cover; balls in total variation, and in a Wasserstein distance
-on finitely many outcomes, finitely many, since both are polyhedral; balls in KL, Euclidean or Hellinger distance whose
-boundary meets the interior of `Δ`, on three or more outcomes, infinitely many. It is why the PI's choice to declare
-constraints explicitly, as a general concept (Q60), loses nothing: CORE's requirement, a convex closed set, and the PI's
-constraint are the same object. For finitely many budgets, VK4 gives every bet of the affine form as a lower bound on
-misalignment; for any convex requirement, VE1 gives the equality when all bets are allowed.
+**Notes.** This is the separating hyperplane theorem in its finite form, proved here from the nearest point. With VK3's
+bets it is a **bipolar correspondence**: a convex closed requirement is exactly the set of behaviours under which every
+bet against it is fair, since for `x ∉ S` the bet `1 + λ·(g − b)`, with `0 < λ ≤ 1/(b − min g)`, is fair under `S` and
+has expected payoff above `1` under `x`; a small enough `λ` also makes it grow under `x`. A principal could therefore
+declare a requirement by the bets it accepts as fair. How many budgets a requirement needs: a rate limit with `ε > 0`,
+one; v13's ordinal specification, with a default of full support, and dominance (`order.md`), when every proper upper
+set has reference mass strictly between `0` and `1`, finitely many; a forbidden set, infinitely many, `a(C) ≤ ε` for
+every `ε > 0`, or one limit `E_a[1_C] ≤ 0` if limits with `b = min g` are admitted, which VK3's dual does not cover;
+balls in total variation, and in a Wasserstein distance on finitely many outcomes, finitely many, since both are
+polyhedral; balls in KL, Euclidean or Hellinger distance whose boundary meets the interior of `Δ`, on three or more
+outcomes, infinitely many. It is why the PI's choice to declare constraints explicitly, as a general concept (Q60),
+loses nothing: CORE's requirement, a convex closed set, and the PI's constraint are the same object. For finitely many
+budgets, VK4 gives every bet of the affine form as a lower bound on misalignment; for any convex requirement, VE1 gives
+the equality when all bets are allowed.
 
 ### VK1 — A forbidden set: one occurrence decides
 **Statement.** For a forbidden set `C`: `M_K(p) = ∞` if `p(C) > 0`, and `0` otherwise. For every `H > 1`, the function
@@ -130,9 +134,15 @@ least that against the worst one, and a combined bet on the overruns is always a
 
 **Notes.** (iii) holds on the 22 of 30 random instances with two budgets in which some behaviour keeps both, within
 `5e-13` (`probes/v14/RESULTS.md`, VK4); a proof needs the Karush–Kuhn–Tucker conditions for linear constraints, or
-Farkas's lemma, read in an open text first. Joining constraints to an order is the same intersection; how the reference
-should meet the constraints is H45, and the requirement built from an order is the PI's choice (`ROADMAP.md`,
-recommendation 2).
+Farkas's lemma, read in an open text first. *Requirements do not add.* In the support bot of `slides/framework.md`, the
+misalignment against the rate limit on wrong answers alone is `0.0496`, against the order alone `0.0730`, and against
+both `0.0730` (`probes/slides/RESULTS.md`): the joint is at least the largest, as (i) says, and can be smaller than the
+sum, as here, or larger: for the uniform behaviour on three outcomes and the limits `a_1 ≤ 0.05` and `a_2 ≤ 0.05`, each
+alone gives `0.396`, the sum `0.793`, and both `0.934`. An exact split exists only along a chosen order of the
+requirements, `M_{A_1∩A_2} = M_{A_1} + (M_{A_1∩A_2} − M_{A_1})`, the same telescoping as FA1, and it depends on the
+order. A report gives a verdict and a misalignment per requirement, and the joint. Joining constraints to an order is
+the same intersection; how the reference should meet the constraints is H45, and the requirement built from an order is
+the PI's choice (`ROADMAP.md`, recommendation 2).
 
 ### VK5 — The constrained optimizer, by the Karush–Kuhn–Tucker conditions
 *This result belongs to OPTIMIZERS: it is a fact about one model of an actor, not part of what the principal asks.*
@@ -163,3 +173,105 @@ OPTIMIZERS.
 - *v13 charged obedience.* Under v13's standard specification of `F`, the constrained optimizer is charged, since it
   lies on the ray of `F − ν·g`, not of `F`: the principal's own budget made its actor "misaligned". Under v14 the budget
   is part of the request, and the optimizer that keeps it breaches nothing.
+
+### VK6 — A pooled rate limit when the conditions are not chosen
+**Statement.** Let the conditions `c` have frequencies `w_c > 0` that the actor does not choose, so that behaviours are
+tuples `(a_c)_c` judged on pairs ([B2]), and let the rate limit be pooled over them: `K = {(a_c)_c : Σ_c w_c·a_c(C) ≤
+ε}`, `0 < ε < 1`. Let `u_c = p_c(C)` and `ū = Σ_c w_c·u_c`. If `ū ≤ ε`, `M_K(p) = 0`. Otherwise
+`M_K(p) = Σ_c w_c·kl(u_c‖v_c(θ))`, where, for `θ > 0` and `u ∈ [0, 1]`,
+`v(θ, u) = ((θ + 1) − √((θ + 1)² − 4·θ·u))/(2·θ)`, and `θ > 0` is a number with `Σ_c w_c·v(θ, u_c) = ε`. A nearest
+acceptable behaviour keeps, in each condition, the actor's proportions inside `C` and outside it. And `M_K(p) ≥
+kl(ū‖ε)`, VK2's pooled formula, which is therefore a lower bound.
+
+**In plain terms.** When the actor cannot choose how often each situation arises, a limit on the overall rate of
+breaches is judged condition by condition: the nearest acceptable actor lowers its breach rate in every condition, by
+`θ·v·(1 − v)` at the new rate `v`, until the overall rate meets the limit. Treating the record as one pool, as VK2 does,
+understates the evidence.
+
+**Proof.** In each condition, as in VK2, the chain rule on `C` and `X ∖ C` reduces the problem to choosing the breach
+rates `v_c`, with the proportions inside and outside `C` kept: minimize `f(v) = Σ_c w_c·kl(u_c‖v_c)` over `v ∈ [0, 1]^𝒞`
+with `Σ_c w_c·v_c ≤ ε`. For `θ > 0`, the function `v ↦ kl(u‖v) + θ·v` is convex on `[0, 1]` and least at `v(θ, u)`: for
+`0 < u < 1`, its derivative `(v − u)/(v·(1 − v)) + θ` vanishes where `θ·v² − (θ + 1)·v + u = 0`, whose smaller root is
+`v(θ, u)`, in `[0, u]` since the quadratic is `u ≥ 0` at `0` and `θ·u·(u − 1) ≤ 0` at `u`; for `u = 0`, the function is
+`−log(1 − v) + θ·v`, increasing, least at `0 = v(θ, 0)`; for `u = 1`, it is `−log v + θ·v`, least at
+`min(1, 1/θ) = v(θ, 1)`. The map `θ ↦ Σ_c w_c·v(θ, u_c)` is continuous, tends to `ū > ε` as `θ → 0` and to `0` as
+`θ → ∞`, so some `θ` gives `ε`. Let `v* = v(θ, u)`. For every feasible `v`,
+`f(v) ≥ f(v) + θ·(Σ_c w_c·v_c − ε) ≥ Σ_c w_c·(kl(u_c‖v*_c) + θ·v*_c) − θ·ε = f(v*)`, since each term is least at `v*_c`
+and `Σ_c w_c·v*_c = ε`. The lower bound: without the frequencies fixed, the pooled limit is VK2's on the pairs, whose
+acceptable set contains `K`. ∎
+
+**Notes.** Against a numerical minimization on 40 random instances, within `1e-10`; the pooled formula falls short of it
+by up to `0.19`. For the support bot of `slides/framework.md`, wrong answers in `2.91%` of open questions and `35.34%`
+of account questions give `0.04956`, the number its probe found by minimization, where VK2's pooled formula gives
+`0.0440` (`probes/v14/RESULTS-resolution.md`). This was the first lesson of the slides' example (`NOTES.md` §31): the
+closed forms of this file hold for behaviours on outcomes alone, and on pairs whose frequencies are fixed they become
+one-parameter forms like this one.
+
+### VK7 — How misalignment moves with the budget
+**Statement.** Let `(g, b)` be a budget with `E_p[g] > b > min g`, `M(b)` the misalignment against it, and `λ*(b)` the
+best fraction of VK3. For every `b' > min g`, `M(b') ≥ M(b) − log(1 + λ*(b)·(b' − b)) ≥ M(b) − λ*(b)·(b' − b)`. So
+`b ↦ M(b)` is convex and non-increasing, `−λ*(b)` is a subgradient of it, and wherever `λ*` is continuous,
+`M'(b) = −λ*(b)`.
+
+**In plain terms.** For an actor held fixed, the best bet's stake is also the price of the budget: loosening the budget
+by one unit of cost removes about `λ*` nats per decision of evidence. The price depends on the actor's behaviour and on
+the budget, and rescales with the units of the cost, so no constant converts units of cost into nats of evidence.
+
+**Proof.** Let `h* = 1 + λ*·(g − b)` and `a*` the nearest acceptable behaviour of VK3, equal to `p/h*` on the support
+`S` of `p`. Take `a` with `E_a[g] ≤ b'` and `KL(p‖a) < ∞`, so `a > 0` on `S`. By Jensen's inequality,
+`KL(p‖a) − M(b) = E_p[log(a*/a)] ≥ −log E_p[a/a*] = −log Σ_{x∈S} a(x)·h*(x) ≥ −log E_a[h*]`, as `h* ≥ 0`, and
+`E_a[h*] = 1 + λ*·(E_a[g] − b) ≤ 1 + λ*·(b' − b)`, which is positive since `λ* ≤ 1/(b − min g)` and `b' > min g`. Take
+the infimum over `a`; `log(1 + y) ≤ y` gives the second inequality. Convexity: if `a_0`, `a_1` are nearest for `b_0`,
+`b_1`, their mixture with weight `s` keeps the budget `(1 − s)·b_0 + s·b_1`, and `KL(p‖·)` is convex. A convex function
+with the subgradients `−λ*(b)` satisfies `−λ*(b) ≤ (M(b') − M(b))/(b' − b) ≤ −λ*(b')` for `b < b'`, so it is
+differentiable where `λ*` is continuous. ∎
+
+**Notes.** On 30 random budgets, the derivative of `M`, by finite differences, equals `−λ*` within `1e-7`, and the first
+inequality holds on a grid of 25 values of `b'` each (`probes/v14/RESULTS-resolution.md`). An independent reviewer found
+`M` differentiable with `M' = −λ*` also where `λ* = λ_max`, on 166 instances, and `λ*` continuous across the switch, so
+`M` is probably continuously differentiable on `(min g, ∞)`; the continuity of `λ*` is not proved here. This answers a
+gap the slides' example showed (`NOTES.md` §31): v13 had a sensitivity of verdicts to the specification ([P10]) and v14
+had none; the sensitivity of misalignment to a budget is the budget's best bet. It is also where severity, a cost scale
+the principal declares, meets evidence (`v14/severity.md`).
+
+## Declaring a specification: what is implicit, what must be explicit
+
+The PI asked when a constraint is part of the other definitions and when it must be declared explicitly, because there
+would be no other way to account for it, and how the interface enters (Q69). Every requirement is a convex closed set,
+and by VK0 a list of budgets; the question is only which of them a declaration states by itself.
+
+**What each declared object already constrains.**
+
+| Declared | The requirements it makes, with no constraint written | Where |
+|---|---|---|
+| the outcomes `X` | none; but nothing outside them can be required: an effect no record holds is out of reach | `LIMITS.md` |
+| conditions and their frequencies | `a(c) = w_c` for every condition: the actor does not choose its situations | [B2]; VK6 |
+| the principal's σ-algebra `ℬ` | no requirement inside its cells: indifference | `resolution.md`, RS3 |
+| a family of targets and a reference `r` | `E_a[G_i] ≥ E_r[G_i]` for each generating target; a forbidden set when `−1_C` is a target and `r(C) = 0` | `targets.md`, TG1 |
+| a ranking and a reference | dominance at every standard, `B(r)`, or the requirement the principal builds from it | `order.md` |
+
+**When a constraint must be explicit.** When nothing else in the declaration implies it:
+- *there is no reference*: absolute standards, such as a legal limit or "never";
+- *the quantity is one no target of the family scores*: side effects, cost, latency, privacy, about which a family of
+  targets says nothing;
+- *the tolerance is not the reference's*: stricter, because the reference itself breaks it (H45), or looser;
+- *the reference produces a forbidden outcome*, `r(C) > 0`, so TG1(iv) does not forbid it;
+- *the requirement ties conditions together*, such as acting alike in every condition ([P40]), which no per-condition
+  average states.
+
+**The interface is not part of the specification.** The specification says what the actor *may* do; the interface what
+it *can* do.
+- A capability the actor lacks needs no requirement: no record can show it, and declaring it as one would make an
+  inability look like obedience.
+- A requirement that no feasible behaviour meets is not an error of the specification: it shows as unavoidable
+  misalignment, `m_1 > 0` in FA1, and culpability is measured against the best feasible behaviours, not against it.
+- A requirement that the interface makes automatic, `𝓕 ⊆ A_j`, still belongs in the specification: a new version, a
+  shaped actor or a wider deployment can have a larger feasible set.
+- For an actor that optimizes, a binding constraint acts as a shadow price (VK5), and VK7 gives what it costs in
+  evidence.
+
+**In five questions.** Before any record is read: (1) what are the outcomes, and the conditions with their frequencies?
+(2) Which distinctions between outcomes does the principal not care about? (3) Is there a reference, and which targets
+must it not be beaten on? (4) What is required absolutely: forbidden outcomes, rates, averages? (5) What can the actor
+see and do, declared apart, as its interface? The first four make the specification; the fifth only explains it.
+`slides/specification.md` walks through them.

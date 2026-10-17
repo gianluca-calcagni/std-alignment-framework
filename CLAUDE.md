@@ -8,7 +8,7 @@ framework. It is a working agreement, not a claimed property.
 
 1. Read `ROADMAP.md`, and answer its drift checks before any work.
 2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover, with §20, the general core, §21, the
-   labels, and §22–§31, the revamp and the v14 draft (`v14/README.md`), since; then §1, the failure modes with their
+   labels, and §22–§32, the revamp and the v14 draft (`v14/README.md`), since; then §1, the failure modes with their
    evidence, every row; then §12, the last review.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 

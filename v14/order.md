@@ -28,7 +28,8 @@ empty. ∎
 **Notes.** For a total ranking this is the classical characterization of first-order stochastic dominance, proved here
 in a few lines rather than cited. The sets `B(r) = {a : a(U) ≥ r(U) for every upper set U}`, "better or equal for every
 reading", and `W(r) = {a : a(U) ≤ r(U) for every upper set U}`, "worse or equal for every reading", are convex and
-closed, being cut out by finitely many linear inequalities, and both contain `r`.
+closed, being cut out by finitely many linear inequalities, and both contain `r`. `B(r)` is `targets.md`'s TG1 for the
+family of a ranking's readings: "no worse than the reference on any target", with the readings as the targets.
 
 ### VO2 — v13's ordinal specification lies inside "better for every reading"
 **Statement.** For a total ranking by `F` and `r ∈ Δ°`, every behaviour `a` whose ratio `a/r` is a non-decreasing

@@ -30,7 +30,9 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   between acceptable behaviours from one decision to the next. Under that choice a record holds the actor only to the
   mixtures of what is acceptable (`evidence.md`, VE2), and a requirement that is not convex is enforced as its convex
   hull. For a sample, independent decisions from one behaviour, leaving a closed set that is not convex is still
-  verifiable (`factorization.md`, VF1); the limit is the price of the choice, not of records.
+  verifiable (`factorization.md`, VF1); the limit is the price of the choice, not of records. Its sharpest case is tail
+  risk: at a tail of 10%, two behaviours with CVaR `0.6` mix into one with CVaR `0.72`, so a limit on CVaR is enforced
+  only as its hull (`NOTES.md` §32).
 
 ## Behaviour, not mind
 
@@ -64,10 +66,14 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **A blind spot of order `√n`, a hunch.** If H43 holds, a shift of about `1/√(n·I)` per decision escapes every test
   over `n` decisions and costs about `√(n/I)` in all, so every guarantee from records leaves such a loss undetected. It
   is a local-asymptotic sketch, not proved.
+- **Hidden inside the record's cells.** A record whose σ-algebra is coarser than the principal's, such as a grader that
+  cannot tell a wrong answer from a harmful one, shows only the misalignment at its own resolution; the rest is neither
+  verifiable nor refutable from it, and only a finer record or a declared interface bounds it (`resolution.md`, RS4).
 - **Convicting, never certifying.** "Misaligned" is verifiable, and "culpable" with the interface taken as known;
   "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a standard, never
-  to meet it exactly; "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]),
-  and not shown for others.
+  to meet it exactly, and the draft has no verdict yet that certifies a margin, "breach rate at most `ε`", under
+  dependence, which a deployment decision needs (H51; `related.md`, entries 2 and 4); "aligned within a margin" is shown
+  verifiable for an actor whose decisions are independent ([D3]), and not shown for others.
 - **Dependence.** A test from bets keeps its level whatever the dependence, but only against the hypothesis that each
   decision, given the past, is acceptable (`evidence.md`, VE3). Drift and dependence ([P54]) are identified only from
   repeated records or declared episodes; one long record, with no repetition, does not separate them. That a test's

@@ -29,8 +29,21 @@ as for a forbidden outcome no feasible behaviour avoids, `E` is not defined and 
 culpability must then be read on the breach rate, the least rate a feasible behaviour reaches, not yet written.
 Culpability is only as good as the declared interface: one that overstates the actor's capability charges it for what no
 record of it can show it could not do, so an interface should declare capabilities demonstrated in elicitation, which
-are verifiable, rather than assumed. The executor recommends `K` as culpability, as evidence ([A4]), and `E` as the
-share of misalignment that was avoidable; L2 is to test both names.
+are verifiable, rather than assumed. The executor recommended `K` as culpability, as evidence ([A4]), and `E` as the
+share of misalignment that was avoidable; L2 is to test both names. The example of `slides/mathematicians.md` showed
+that `K` is infinite exactly when the actor produces an outcome no best feasible behaviour produces (`𝓕*` is convex, so
+the union of its members' supports is one member's support), which is the common case, the best behaviours of a convex
+program over a polytope sitting on its boundary, often with a deterministic policy: so `K` is `0` or `∞` for most
+actors. And when `M_A(𝓕)` is finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` say the same thing, so `K` adds no verdict, only a
+growth-rate reading where it is finite. The recommendation is now `E` for the size, and the verdict "culpable" read as
+`p̂ ∉ 𝓕*`, verifiable with the interface taken as known (VF2) (`NOTES.md` §32, H52). Culpability needs no new measure:
+`K(p̂) = M_{𝓕*}(p̂)`, the misalignment against the **derived requirement** `𝓕*`, which is convex and closed when `A` and
+`𝓕` are, being the set where a convex lower semicontinuous function on `𝓕` takes its least value; so VE1's bets, VE3's
+test and VF1's status apply to it unchanged. The same holds for "the interface fits", the requirement `𝓕`, and for
+"perceives no more than its view" (`resolution.md`, RS5): INTERFACE adds requirements derived from the declarations, not
+measures (`NOTES.md` §32, item 7). Two refinements from the literature are open (`v14/related.md`, entries 18 and 24):
+blame mitigated by the cost of the better alternative, which `K` ignores, and the worst-case breach rate over `𝓕`, which
+a deployment protocol guarantees whatever the actor does.
 
 **Elicitation.** A condition `c'` is an **elicitation** of a condition `c` when the declaration links the actor's
 feasible behaviours there, such as one set of policies faced with another prompt or incentive. Only through such links
@@ -67,7 +80,7 @@ Each form is sorted by the least the framework needs to define it. Three questio
 | breach of a requirement | CORE | the requirement |
 | misalignment by condition, and a shift of the conditions' weights between test and use | CORE | conditions |
 | hidden misalignment, in conditions no record covers | CORE to define; INTERFACE to bound | views or feasible sets that tie them to recorded ones ([D9], [P17]) |
-| drift and dependence over time | CORE | repeated records or declared episodes ([P54]) |
+| drift across runs or episodes | CORE | runs or episodes declared as conditions, judged by condition; dependence between acceptable decisions is no misalignment under the mixture principle (VE2, VE3), so [P54]'s drift and dependence terms are evidence against v13's independence, not parts of v14's number |
 | the evaluation gap: a measured requirement met while the true one is breached | CORE | outcomes that hold both the measure and the truth |
 | a shortfall below a declared floor | CORE | the floor, a requirement |
 | side effects | CORE | requirements on the other coordinates of the outcome |

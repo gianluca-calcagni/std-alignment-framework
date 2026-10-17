@@ -36,6 +36,11 @@ Prepended at the PI's request, to be worked on together; the order is the execut
     a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
     the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
 
+11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): a *certify* verdict beside the convict
+    verdict, from the bets the draft already builds (H51), first, since a deployment decision needs it; cite the
+    e-value literature for VE1, VE2 and VK5, and import its answers to H46 and VK4(iii) after reading them; weigh the
+    CVaR counterexample in R19; decide the names (R20); then brainstorm SHAPING and severity on their drafts.
+
 ## The goal
 
 A standard formal framework for alignment problems in general, not only in machine learning: solid enough to build on,
@@ -89,16 +94,19 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15), postponed
   until v14 absorbs them (Q59).
-- **v14, a draft** (Q59–Q68, `NOTES.md` §22–§31): in `v14/` beside the core, not in it, drafted on `claude/core-v14` and
-  brought to `main` as a draft (Q68). Three layers, each with a twin for outcomes that are not finite: CORE (a request
-  as a list of convex requirements, misalignment as the evidence against it, records judged by bets), INTERFACE (what
-  the actor sees and can do: culpability, coarse perception, tampering) and OPTIMIZERS (pursuit, evaluators, training,
-  shadow prices). Twenty results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a
-  bet (VE1–VE4), constraints (VK0–VK5), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization
-  and its labels' verification status (FA1–FA3, VF1–VF3). `v14/README.md` holds the design with its claims of
-  generality, its conventions and the challenges answered; `v14/LIMITS.md` what the framework cannot do;
-  `v14/MIGRATION.md` what of v13 survives. The PI's decisions on R15 and R16 wait for it; L2 comes next (the
-  recommendations above).
+- **v14, a draft** (Q59–Q69, `NOTES.md` §22–§32): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
+  brought to `main` as a draft (Q68), and extended at the PI's ten questions on the slides (Q69). Three layers, each
+  with a twin for outcomes that are not finite: CORE (a request as a list of convex requirements, misalignment as the
+  evidence against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse
+  perception, tampering) and OPTIMIZERS (pursuit, evaluators, training, shadow prices). Thirty-one results, all proved
+  here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK7), three
+  verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status
+  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS5), a family of targets with a
+  reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity and who grades
+  (`v14/severity.md`), a fourth layer for training (`v14/training.md`), and new names (R20). A survey of competing
+  frameworks (`v14/related.md`). `v14/README.md` holds the design with its claims of generality, its conventions and the
+  challenges answered; `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. The PI's
+  decisions on R15 and R16 wait for it; L2 comes next (the recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and
@@ -247,3 +255,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-17 | slides (Q66, `NOTES.md` §30): `slides/framework.md`, 32 slides in Marp Markdown presenting v14 and a worked example, a frozen support bot against its previous version, every number from `probes/slides/support_bot.py` | 3 (contact: a reader can follow the framework end to end) |
 | 2026-10-17 | the lessons of the slides' example (Q67, `NOTES.md` §31): VK2's closed form does not hold with conditions' frequencies fixed (`0.0440` against `0.0496`); outcomes measured by graders (H47); forbidden outcomes need a rate and a plan (H48); recommendation 10 | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-17 | the v14 draft brought to `main` by a pull request (Q68), the files that placed it on its branch corrected; the branches no longer needed listed for deletion | 2 (a version, as a draft) |
+| 2026-10-17 | the PI's ten questions on the slides (Q69, `NOTES.md` §32): a deck for mathematicians (`slides/mathematicians.md`) and one on declaring a specification (`slides/specification.md`); σ-algebras in three positions (`v14/resolution.md`, RS1–RS5), families of targets and Sanov (`v14/targets.md`), VK6 and VK7; proposals for severity, a training layer and new names (R20); a survey of competing frameworks (`v14/related.md`), with a tail-risk counterexample to the mixture principle | 2 (a version); 3 (contact: readers, and the literature); 5 (what the quantities mean) |

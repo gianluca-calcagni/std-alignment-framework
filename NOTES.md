@@ -81,6 +81,8 @@ later results goes in Notes |
 | **A label that claims a minimum its split does not prove** | [P15](v) splits misalignment exactly into `KL(p̂‖p*°) + KL(p*°‖p°)` and calls the second term the unavoidable misalignment; it is unavoidable only toward `p°`, the intended behaviour nearest to the actor's, at its revealed intensity, and a feasible behaviour aimed at another intensity can do better: on 109 random instances with one fixed average, the term exceeded the least misalignment of any feasible behaviour in 107, by up to `0.86` nats (`probes/v14/factorization.py`, 2026-10-16). The split, its proof and its checks were right; the word said more. Found by the executor while proving v14's factorization at the PI's request (Q62), two versions after the item was written | a label that says "unavoidable", "least" or "best" names the set it is least over, and a check compares it with a search over that set |
 | **A long job started with `&`** | twice the executor started a long job with a shell `&` instead of the harness's background run, against `CLAUDE.md`: once in the work of Q56, when the job was stopped by its PID and relaunched, and again on 2026-10-16, for the probe of `v14/factorization.py`, which was left to finish and its output read from its file | a long job is started only as a background run of the harness, and waited on by its completion |
 | **Editing the tree during a gated test run** | on 2026-10-16 the executor edited `v14/constraints.md` while the tests that gate a push were running on the working tree; the check that every Markdown source is wrapped read the half-edited file and failed, and the push did not happen. The commit itself was wrapped | while a gated run is in progress, the working tree is not touched; edits wait for its result |
+| **A result applied outside its hypothesis** | on 2026-10-17 (Q69) the draft of `v14/severity.md` and `v14/training.md` read VK7, which holds the actor fixed, as saying how a trainer's budget moves the evidence against the actor it trains, which changes with the budget, and called the trainer's and the bettor's prices "two prices of one budget", which are never both positive for one actor and one budget; RS5(iii) said that coarsening a resolution shrinks the feasible set, which needs the environment's splits to be consistent. Caught by the adversarial review of §32 before any push | before a result is used in a proposal or a gloss, write its hypotheses beside the use, and check that the use keeps every one |
+| **A gloss written from the intended meaning, not from the formula** | the same day: SH1's middle term glossed as "what the feedback costs by rewarding behaviours the principal does not accept", where it is positive exactly when the feedback leaves out every best feasible behaviour; VK6's plain terms "more where it breaches more", false once the nearest rate passes ½; VK4's Notes "no exact attribution exists", where one exists along a chosen order. Caught by the same review | derive each gloss from the formula, with one instance that would make it false, before writing it; the fifth row of this table's kind, after "A plain-terms twin that claims more than the statement" |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -245,6 +247,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q66 | a presentation of about thirty slides, in whatever format suits slides that change often, presenting the framework and how to use it on one simple example, kept in the repository where it fits best. Applied: `slides/framework.md` (32 slides, Marp Markdown) with `slides/README.md` and `slides/.marprc.yml`; the example's numbers from `probes/slides/support_bot.py`; §30 | PI | `slides/`; `probes/slides/`; §30 |
 | Q67 | what drafting the slides and running the example taught: lessons of formalization, methodology and applicability, and gaps in theory or practice. Applied: §31; H47, H48; `ROADMAP.md`, recommendation 10 | PI | §31 |
 | Q68 | merge the v14 draft to `main`, then delete the branches no longer needed, after an analysis of which. Applied: the files that placed v14 on its branch made true on `main`; a pull request from `claude/core-v14`; the analysis of the branches in the pull request and the turn's answer | PI | `README.md`, `ROADMAP.md`, `CLAUDE.md`, `slides/`, `v14/README.md` |
+| Q69 | after reviewing the slides, ten requests: (0) which of the slides' lessons to include now; (1) a second, independent deck of about thirty slides for mathematicians who know probability but not alignment, explaining σ-algebras and factoring their effect on misalignment, families of targets with Sanov, and every factorization result named and its label verified by Carcassi's methodology; (2) a better name than OPTIMIZERS, which suggests machine-learning training and is, in practice, about mesa-optimizers; (3) a fourth file and twin for training, with ontology-neutral terms, as a draft for a brainstorm; (4) severity, agreed to be independent of misalignment, measured and played against it in training; (5) how constraints are declared, where they are implicit, where explicit, the interface's role, and whether to call them a specification; (6) whether the principal is the only one who grades, and in what form; (7) formal elegance and reverse-physics methodology to adopt; (8) what the framework includes that the rest already gives; (9) a survey of competing frameworks, both ways. Applied: §32; `v14/resolution.md`, `v14/targets.md`, VK6 and VK7 and the section on declaring in `v14/constraints.md`, `v14/severity.md`, `v14/training.md`, `v14/related.md`; `slides/mathematicians.md`, `slides/specification.md`; `probes/v14/resolution.py`, `probes/slides/qa_model.py`; R20 | PI | §32 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -492,6 +495,10 @@ models are hypotheses that [P3] and [P12] test.
 | H46 | **Bets chosen from the record approach the best bet at a rate set by the bets allowed.** On a continuum, bets refitted before each decision from the earlier ones reach the best growth rate at a rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor | U: not proved (`NOTES.md` §23) |
 | H47 | **Outcomes are measured, not given.** In practice an outcome such as "a wrong answer" is read by a grader, a person or a model, with errors; v14 treats the record as giving outcomes exactly (`v14/LIMITS.md`). A measurement channel from the true outcome to the graded one, declared and audited, belongs at the base of CORE, not only in INTERFACE's tampering ([P50]); misalignment of the true behaviour is then partially identified from graded records and audits, as [P51] does for tampering | U: the most important gap in practice (`NOTES.md` §31) |
 | H48 | **A forbidden set needs a rate and a plan.** Its misalignment is infinite at any positive rate, so it ranks nothing; and a record shows a breach of rate `r` only after about `1/r` decisions. What a principal can use is a verified lower bound on the rate when a breach is seen, an upper confidence bound when none is (about `3/n` after `n` clean decisions, for a sample), and the number of decisions needed to see one at a rate that matters | U: from the example (`NOTES.md` §31) |
+| H49 | **Every factorization is a telescoping along a chain in a lattice, and Pythagorean exactly on linear families.** FA1 telescopes along feasible sets ordered by inclusion, RS1 along σ-algebras ordered by refinement, [P54] along the filtration of a record; each term is non-negative because misalignment is monotone along the lattice, and each is an evidence rate between named behaviours when the chain consists of linear families, Csiszár's Pythagorean case. A rule for new splits: name the lattice and the chain, and say whether its members are linear (§32) | D: a pattern seen in every split of `factorization.md` and `resolution.md`, not a theorem |
+| H50 | **The trainer's shadow price and the bettor's stake, across two budgets.** A trainer at a KL price under its own severity budget acts on its objective minus `ν` times the severity (VK5), and keeps that budget, so against the same budget the trained actor has no misalignment and `λ* = 0`. When the principal's budget differs from the trainer's, in conditions, grader or cost, the trained actor can break it, and for that actor held fixed the evidence moves with the principal's tolerance at `−λ*` (VK7). How `ν` and `λ*` relate across the two budgets is open (`v14/severity.md`); an earlier form of this hunch, "two prices of one budget", was wrong, as the review of §32 showed | D: a guess, restated after review |
+| H51 | **A certify verdict, from the same bets.** VK3's bet is the capital process of a betting confidence sequence for a mean, so an upper confidence sequence for a rate or a budget comes from the bets v14 already builds, giving "breach rate at most `ε`, with confidence `1 − α`" beside the convict verdict, valid under dependence if the literature's martingale argument carries over (`v14/related.md`, entry 2; not read by the executor) | D: from the survey; to be read and proved |
+| H52 | **Report culpability's size by `E`.** `K = M_{𝓕*}(p̂)` is infinite exactly when the actor produces an outcome that no best feasible behaviour produces, which is the common case: the best behaviours of a convex program over a polytope sit on its boundary, often deterministic in some condition. So `K` is `0` or `∞` for most actors and ranks nothing; and with `M_A(𝓕)` finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` are one verdict. The avoidable excess `E = M_A(p̂) − M_A(𝓕)` is finite whenever `M_A(p̂)` is, and is the size to report; a smoothed `K`, against the best behaviours within a declared margin, is a third candidate for L2 (§32) | D: from the example of `slides/mathematicians.md` |
 
 ### 5.5 Process
 
@@ -2086,3 +2093,184 @@ formalization, methodology and applicability, and which gaps it showed. Not inde
   same fixes by inspection; a case where the framework finds what inspection does not is still owed (H42).
 - *Only one bet was built*, against the rate limit; bets for orders, for joint requirements and for large outcome
   spaces, and that bets chosen from the record reach the best growth (H46), are open.
+
+## 32. The PI's review of the slides: ten questions, 2026-10-17 (Q69)
+
+By the executor, at the PI's request (Q69); not independent. The survey of item (9) is by a research assistant the
+executor briefed, and the executor checked by hand the one claim of it that bears on a decision. Each item gives the
+answer, then where it is in the files.
+
+**(0) Which lessons of §31 to include now.** Three, because they are corrections or cheap, and they are in:
+- *The closed forms on pairs.* VK6 (`v14/constraints.md`) gives the pooled rate limit with the conditions' frequencies
+  fixed, in closed form up to one scalar: the support bot's `0.04956`, where VK2's pooled formula gives `0.0440`, now a
+  stated lower bound.
+- *Requirements do not add.* VK4's Notes say so, with the numbers: the joint can be smaller or larger than the sum, and
+  splits exactly only along a chosen order of the requirements; a report gives each requirement and the joint.
+- *The sensitivity to the declaration.* VK7: the derivative of misalignment in a budget is minus the best bet's stake,
+  `M'(b) = −λ*(b)`. It is also the bridge to severity in (4).
+Deferred, because each needs a decision or a case first: estimating an interface with its uncertainty (needs a real
+case), a reference known from samples (two-sample bets, from the survey), graders with errors (H47; a validity account,
+from the survey), bets for orders and joint requirements, and a case where the framework finds what inspection does not
+(H42).
+
+**(1) The deck for mathematicians.** `slides/mathematicians.md`, 32 slides, independent of `slides/framework.md`, with
+its own example, a question-answering model under three σ-algebras (`probes/slides/qa_model.py`). Four new results
+carry it, in two new files:
+- `v14/resolution.md`: σ-algebras in three positions. RS1, grouping hides and refinement adds up exactly; RS2, a bet a
+  record at `ℛ` can settle grows at most at the coarse misalignment, and one attains it; RS3, a requirement stated on
+  the principal's σ-algebra is judged there; RS4, hidden misalignment, whose interval is `[M^ℛ, max over the fibre]` and
+  which is neither verifiable nor refutable from the record that hides it; RS5, the actor's view and resolution are
+  linear interfaces, so their costs are FA1 terms.
+- `v14/targets.md`: TG1, a family of targets with a reference is a list of budgets, "no worse than the reference on any
+  target", with dominance as its ordinal case; TG2, that is not v13's "pursue some target": with targets in tension,
+  pursuing one breaches another, and v13's own measure is TG1 with the actor as its reference; SN1, Sanov's rate, the
+  best bet and the reverse information projection are one number on convex sets, and part exactly where the set is not
+  convex.
+- In the example: misalignment `0.0474` against both requirements splits as `0.0227` seen by a grader that cannot tell
+  wrong from harmful, `0.0247` revealed by telling them apart, `0` by telling short from long; from the grader's record
+  alone it lies in `[0.0227, 0.1483]`. By capabilities, `0` unavoidable, `0.0037` the cost of merging borderline and
+  adversarial prompts, `0.0438` avoidable. Culpability `K` is infinite: every best behaviour the new model's view allows
+  answers benign questions long and never refuses one, and the new model answers 45% of them short and refuses 5%
+  (below, and H52).
+Every factorization result is named in a table of the deck with its mechanism, whether it is exact, and its label's
+verification status. As `factorization.md` says, Carcassi's methodology fixes the status of each label, not whether its
+word fits; the words go to L2.
+
+**(2) The name of the third layer.** The PI is right that OPTIMIZERS misleads, and the executor recommends
+**PURPOSE**, with **aim** for the object, an objective the actor is hypothesized to pursue, and teleonomy, the
+biologists' word for goal-directedness without a mind, as its gloss. Runners-up: AIMS; TELEONOMY, the most precise and
+the least plain. One challenge: the layer is not about mesa-optimizers in general. A person, a firm or an organism
+under selection has aims without being produced by an outer optimizer. "Mesa" names an aim *produced by training*,
+which is the composition of this layer with the training layer of (3), and is defined there (`v14/training.md`).
+Renaming is the PI's decision (R20).
+
+**(3) A fourth layer for training.** `v14/training.md`, a proposal: the layer **SHAPING**, with a **shaper**, its
+**feedback**, **steps**, a **course** and the **shaped actor**, terms that read the same for training, selection,
+education and regulation. The five questions: *when*, the profile of misalignment along the course, to the principal
+and to the shaper; *where*, by condition, shaping against deployment conditions, with misgeneralization and emergent
+misalignment; *why*, SH1, an exact factorization when the shaped actor does what its feedback asks, into unavoidable,
+the feedback's cost (outer), and the course's remainder, with inner misalignment as evidence against the shaper's own
+specification, reported beside it; *how*, the change per step and its efficiency; *whom*, an owner for each term. Five
+questions for the brainstorm are at its end.
+
+**(4) Severity.** `v14/severity.md`, a proposal. Severity is not in nats: nats measure evidence, severity value, and VK7
+shows there is no fixed exchange rate, since the price `λ*` depends on the actor. The principal declares a severity
+scale, or severity levels read as an order, and a tolerance, as a budget on expected severity or as rates `ε_k = R/s_k`
+from a risk appetite; a report gives the breach, the misalignment, the expected severity, the overrun and the price. In
+training, severity weights the feedback (VK5's shadow price) and misalignment decides when to stop or ship. A trainer
+that keeps the principal's own severity budget produces an actor with no misalignment against it, so the two prices meet
+only when the trainer's budget differs from the principal's (H50).
+
+**(5) Declaring a specification.** A new section of `v14/constraints.md` and a short deck, `slides/specification.md`. A
+constraint and a requirement are the same object (VK0); "constraint" names the absolute ones. The table there says what
+each declared object constrains with no constraint written (conditions fix their frequencies; the principal's σ-algebra
+forbids nothing inside cells; a family of targets with a reference gives budgets, and may forbid an outcome by itself,
+TG1(iv)); and when a constraint must be explicit: no reference, a quantity no target scores, a tolerance that is not the
+reference's, a forbidden outcome the reference produces, a requirement across conditions. The interface says what the
+actor *can* do, the specification what it *may*: an inability needs no requirement, and a requirement no feasible
+behaviour meets shows as unavoidable misalignment. On the name: the executor recommends calling the whole declaration
+the **specification**, each element a **requirement**, and keeping **constraint** for the absolute forms;
+"specification" is the word of formal methods and of specification gaming, and v13 used it (R20).
+
+**(6) Who grades.** In `v14/severity.md`: all normative grading is in the specification and is the principal's, in four
+forms now (acceptable sets, rankings, budgets' costs, rate limits), and severity would be a fifth, a budget's cost. Only
+the principal declares grades, by definition, since misalignment is always to a declared principal; another party's
+grades are another principal's specification, reported separately. A grader applies grades, as a measurement with errors
+(H47); the actor never grades itself unless its self-report is a declared, audited channel.
+
+**(7) Elegance, and reverse physics.** Five structures the draft already has and should say it has:
+- *One number, four readings*: the large-deviation rate of the most favourable acceptable behaviour, the growth of the
+  best bet, the divergence to the reverse information projection, and, for a budget, the dual whose multiplier is the
+  bet's stake and the price of the budget (SN1, VE1, VK3, VK7).
+- *Requirements and bets are polar*: a convex closed requirement is exactly the set on which all its bets are fair, and
+  VK0 is one half of the bipolar correspondence; a principal could declare a requirement by the bets it accepts as
+  fair.
+- *Factorizations are telescopings along chains in lattices*, exact always and Pythagorean on linear families (H49).
+- *The interface adds requirements, not measures*: culpability is misalignment against `𝓕*`, a derived requirement, and
+  "the interface fits", "perceives no more than its view" and "grounded" are requirements too, so VE1, VE3 and VF1 apply
+  to all of them unchanged.
+- *Statuses follow from semicontinuity*: misalignment is lower semicontinuous, so "`M > m`" is verifiable for every `m`,
+  and continuous on convex closed requirements with a full-support member, where "`M < m`" is too; this is Genin and
+  Kelly's theorem read on the superlevel sets of one function. Whether it matches Carcassi and Aidala's construction of
+  quantities from verifiable statements is to be read, not assumed.
+For the method of reverse physics, three practices to adopt: every convention marked "changes a verdict" gets a
+registered counterexample that shows the change, as the CVaR example now does for the mixture principle; every symbol
+in a report is marked declared, measured or derived; and every new split names its lattice and chain (H49).
+
+**(8) What the framework includes that the rest gives anyway.** The executor's audit, each with a verdict:
+- *Forbidden sets and rate limits* are budgets (VK0): keep them as named forms with closed forms, not as concepts.
+- *Dominance against a reference* is TG1 with the ordinal family: `order.md`'s requirement becomes a case of
+  `targets.md`'s, and should be stated so.
+- *Misalignment by condition, drift, the evaluation gap and a shift of the conditions' weights* are one split, the
+  chain rule over conditions: one concept with several labels.
+- *Culpability* is misalignment against the derived requirement `𝓕*`, and the avoidable excess a difference of two
+  misalignments: neither is a new measure (`interface.md`).
+- *Elicitation* is a feasible set on pairs that ties conditions together, not a new primitive.
+- *Severity* needs no new primitive: a budget whose cost is the severity, and the overrun as a reported quantity.
+- *FA3* adds only a reading of FA2 toward a fixed target, and overstates the larger interfaces' unavoidable parts when
+  the target is not theirs: demote it to a note of FA2.
+- *The structural requirements* ([P40], [P41]) are instances of linear requirements, not concepts.
+- *[P55]'s count test for accusation* is superseded by VE3's bets, which need no independence; keep [P55] only for the
+  interval that certifies "within a margin" for samples.
+Kept although derivable: the interface's tuple `(U, Z, V, E)`, since IN1 makes the feasible set enough to compute, but
+the labels of the factors (view, noise, environment) need the tuple.
+
+**(9) Competing frameworks.** `v14/related.md`: 33 entries over about 110 works, each record opened and its title and
+authors matched, about 30 read for the statement cited. The findings that matter most, with the executor's view:
+- *The closest competitor is the statistics of e-values and anytime-valid inference*, not an alignment theory: VE1, VE2
+  and their general forms are published (Larsson, Ramdas and Ruf), VK5 is published (Khalifa et al.'s GDC, after
+  Csiszár), and two open items, H46 for independent decisions and VK4(iii) away from the boundary, are answered there.
+  The draft must cite them and say plainly that its evidence results are theirs; what is ours is the assembly for
+  principals: requirements as the object, verdicts per requirement, the factorization by capabilities with its labels'
+  statuses, and behaviour-only definitions with every premise labelled.
+- *v14 convicts and does not certify.* A deployment decision needs "breach rate at most `ε`, with confidence", which
+  betting confidence sequences and Learn then Test give; H51 says the draft's own bets may give it. This is the largest
+  practical gap the survey found.
+- *A tail-risk limit is not convex under mixtures.* Checked here by hand: at a tail of 10%, the loss `1` with
+  probability `0.06` and the loss `0.6` for sure both have CVaR `0.6`, and their even mixture has CVaR `0.72`. Under the
+  mixture principle such a limit is enforced only as its hull. It is the cleanest counterexample yet to the principle,
+  and the PI should weigh it in R19.
+- *Culpability ignores the cost of the better alternative*, which Halpern and Kleiman-Weiner's blame includes; and harm
+  *caused* needs a default and a counterfactual (Richens et al.), which INTERFACE can supply, while severity of outcomes
+  stays declared.
+- *Where others are simply better today*: safety cases and control evaluations have adoption and a regulatory audience;
+  conformal methods give finite-sample design guarantees; rare-event estimators say something about a forbidden outcome
+  before it occurs.
+The executor disagrees with one emphasis of the survey: it ranks the import of the e-value theorems first, and the
+certify verdict second. For the PI's goal, a framework others can use to decide, the certify verdict comes first; the
+imports are attribution and a shortcut for the general twin.
+
+**Found while building: culpability as a magnitude fails when supports differ.** In the example, `K = M_{𝓕*}(p̂)` is
+infinite, because the best feasible behaviours never produce an outcome the actor produces, a short answer to a benign
+question, the way a forbidden set makes misalignment infinite (§31). As evidence that the actor is not at its best this
+is right, and decisive; as a measure of how culpable it is, it is useless, since a slight inefficiency and a grave one
+both score `∞`. The convex program first returned `5.71`, a finite artefact of its tolerance on the best misalignment;
+the probe now shows the value growing as the tolerance shrinks, `2.61` at `1e-6` and `4.46` at `1e-8`, while moving 1%
+of benign answers from long to short raises the best misalignment only from `0.00369` to `0.00372`. The executor's
+recommendation in `v14/interface.md`, `K` as culpability, is changed: the avoidable excess `E` for the magnitude, and
+the verdict "culpable" read as `p̂ ∉ 𝓕*`, which `K > 0` and `E > 0` both state, unless L2 finds a better number (H52).
+This is the third lesson of that shape, after forbidden sets (§31) and [P15](v): a quantity that is right as evidence
+can be wrong as a size.
+
+**The review, and what it changed.** A subagent of the executor's read every new statement adversarially (not
+independent, rule (f)), reran the example, and wrote its checks in the scratchpad. It found five errors: VK7 misapplied
+to training, with the impossible "two prices of one budget" (H50 restated); SH1's middle term mislabelled; RS5(iii)
+missing the consistency of the environment's splits, with a four-outcome counterexample; VK4's claim that requirements
+admit no exact split, when they do along a chosen order, and an instance where the joint exceeds the sum (`0.934`
+against `0.793`); and the deck's table of factorizations, which held [P54], whose drift and dependence terms are not
+parts of v14's number under the mixture principle, and VK6, a closed form, not a split. It found gaps: the continuity
+hypothesis of `resolution.md`'s table excluded every rate limit and budget, replaced by "convex, closed, with a
+full-support member", with its proof; culpability infinite *exactly* when supports differ, `0` or `∞` for most actors,
+and no new verdict beside `E > 0`; FA2's hypotheses on the slide; SH1's conditions with no common space; the iso-risk
+tolerances, which allow `m·R` over `m` classes, not `R`; and `λ*` estimated, not computed. And it found overclaims in
+plain terms and on slides, each corrected. It confirmed RS1–RS4, TG1, TG2, SN1, VK6's formula (within `2.3e-11` on 300
+instances), VK7, the derived requirement `𝓕*`, the example's numbers, and the CVaR counterexample, which it
+strengthened: CVaR is concave under mixtures of behaviours, and on the example's outcomes the hull enforced is the
+single budget `a(1) + 0.06·a(0.6) ≤ 0.06`. The two slips are rows of §1.
+
+**Found while building.** The example's first design had a harm limit that did not bind once the other requirement was
+met, so the grader's blind spot showed nothing, and a view that cost nothing; the environment and the limit were changed
+before any slide quoted a number. A minimization that failed from every start returned `∞`, which the first run printed
+as a factor; the solvers now start from the previous model, which is acceptable, and accept any solution that meets the
+constraints. The σ-algebra probe's first form nested two optimizers and was stopped by its PID after twenty minutes; one
+joint convex program replaced it, as in §30.
