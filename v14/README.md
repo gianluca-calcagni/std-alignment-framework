@@ -1,6 +1,6 @@
 # v14, a draft: a core whose words mean what they say
 
-> **Status: a working draft on the branch `claude/core-v14` (Q59–Q64). Nothing here is approved, and nothing here
+> **Status: a working draft on the branch `claude/core-v14` (Q59–Q65). Nothing here is approved, and nothing here
 > replaces `CORE.md` or `derived/` yet.** It gathers what the label test L1, the general core and the discussions of
 > `NOTES.md` §22–§28 taught, and proves the results the new structure rests on. The PI's decisions on R15 and R16 wait
 > until the draft has absorbed them (Q59). The work ahead is in `ROADMAP.md`'s recommendations.
@@ -15,8 +15,9 @@ Five findings, each recorded with its evidence in `NOTES.md` §21–§26:
 - *The pursuit ray is not convex.* An actor that pursues `F` at intensity `0` or `3` at random, acceptably at every
   decision, is charged `0.0546` nats per decision, and [P55]'s test against the ray accuses it in 69% of records of 400
   decisions (`evidence.md`, VE2).
-- *A ranking alone does not support "misaligned".* A decoder that always answers at its prompt's 0.9 quantile is
-  neither better nor worse than its reference for every reading of the ranking (`order.md`, VO3).
+- *A ranking alone does not support "misaligned".* A decoder that always answers at its prompt's 0.9 quantile, level 8
+  of 10 in `order.md`'s instance, is neither better nor worse than its reference for every reading of the ranking
+  (`order.md`, VO3).
 - *Constraints were missing.* Some outcomes are unacceptable whatever else happens, and breaking one is plainly
   misalignment (Q59).
 - *v13 mixed what happened, whether the actor could have done otherwise, and why.* Culpability, coarse perception and
@@ -46,7 +47,8 @@ The draft so far, in this folder:
 | `LIMITS.md` | what the framework cannot do and leaves out | proved, chosen, or marked as a hunch |
 | `MIGRATION.md` | what of v13 survives, item by item | the executor's assessment, not reviewed |
 
-None runs in CI yet. The probes in `probes/v14/` reproduce every number, with their outputs beside them.
+None runs in CI yet. The probes in `probes/v14/` reproduce every number, with their outputs beside them; VK0, VO1, VO2,
+IN1, FA1 and VF1–VF3 have no probe, as their proofs leave nothing to compute.
 
 ## The design
 
@@ -104,7 +106,7 @@ imports, and marked by whether it changes a verdict.
 | wealth valued by its long-run growth, the expected logarithm | VE1, VE4 | literature, a choice | yes: expected wealth would give the Rényi divergence of order `∞` | Kelly's criterion; the one under which evidence of independent decisions adds and the number is [A4]'s rate |
 | the question is how improbable acceptance makes the actor's record, `KL(p̂‖a)` in this order | VE1, VE4 | forced, given [A4] | yes: the other order, Stein's exponent, answers how fast a misaligned actor stops escaping | the exponent of false accusation while the actor is reliably convicted; Sanov's rate |
 | the best bet, the acceptable behaviour most favourable to the record | VE1 | literature | yes: an average or the least favourable would charge more | the generalized likelihood ratio's benefit of the doubt, as in v13 |
-| each decision judged given the past, mixtures accepted | VE2, VE3 | forced, given two premises | yes, for a requirement that is not convex | the premises: a schedule of acceptable behaviours is acceptable, and the level holds whatever the dependence; under them the number is the least divergence to the hull |
+| each decision judged given the past, mixtures accepted: the **mixture principle** | VE2, VE3 | forced, given two premises | yes, for a requirement that is not convex | the premises: a schedule of acceptable behaviours is acceptable, and the level holds whatever the dependence; under them the number is the least divergence to the hull |
 | requirements closed | VE1(iv) | convenience | no for misalignment and bets; yes for the breach verdict at the boundary | minima are attained; a boundary behaviour no record can tell apart |
 | a ranking read as dominance | `order.md` | forced, given unanimity over the ranking's readings | yes, against v13's ordinal cone | the cone adds a shape the ranking does not declare (VO2); which requirement the order gives is the PI's to decide |
 | culpability as evidence, `K` | `interface.md` | convenience, consistency with [A4] | no on whether the actor is culpable, yes on how much | `K` and the avoidable excess `E` vanish together; `K` is an evidence rate, testable by bets, `E` a difference of two |

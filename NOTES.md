@@ -241,7 +241,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q62 | three layers, each with its twin: `CORE`, `CORE_GENERAL`, `INTERFACE`, `INTERFACE_GENERAL`, `OPTIMIZERS`, `OPTIMIZERS_GENERAL`; a file of the framework's limits and what it leaves out; prove that the factorization is exactly additive, as the earlier splits were by Pythagoras, looking for the factors those splits found; prove that Carcassi's methodology of verification can justify the factors' labels; report any issue, and anything the PI is forgetting. Applied: `v14/factorization.md`, `v14/LIMITS.md`, `v14/README.md`'s plan of files; §26; a failure mode of [P15](v)'s label | PI | §26; `v14/` |
 | Q63 | prepend the executor's recommendations to the roadmap, to be worked on together; and say how much of the previous work the new core and files can save, and what is incompatible whatever the fix. Applied: `ROADMAP.md`'s recommendations; `v14/MIGRATION.md`; §27 | PI | `ROADMAP.md`; `v14/MIGRATION.md`; §27 |
 | Q64 | consolidate the findings in the appropriate files; find again the work that made the core compelling, every convention and definition without loss of generality and mathematically canonical, understand its method, and say whether the new core and files keep to it, explaining so in the files, as a defence against challenges that would weaken the framework if acknowledged without further thought. Applied: `v14/README.md` rewritten to the current design, with the claims of generality and their qualifiers, the conventions justified, and the challenges answered; `v14/interface.md`, the INTERFACE layer and the forms of misalignment; VK0 and IN1; the canonicity sections of `evidence.md` and `order.md`; §28 | PI | `v14/`; §28 |
-| Q65 | pull request #34 merged into `main`; [P15](v)'s overclaim left in v14 for now, to be merged later (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
+| Q65 | pull request #34 merged into `main`; [P15](v)'s overclaim left on `main` for now, to be corrected in v14's migration (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -1996,3 +1996,24 @@ feasible set, is undefined as an excess when no feasible behaviour avoids a forb
 the interface, whose overstatement no record refutes; collusion needs an interface for several actors, under which
 communication beyond the views is a convex, testable set; tampering needs the honest channel of [P50]; the closedness
 convention changes the breach verdict at the boundary; and the grades of fault are three questions, not a ladder.
+
+## 29. Documentation hygiene after pull request #34, 2026-10-17 (Q65)
+
+By the executor, at the PI's request (Q65): pull request #34 is merged into `main`, and `main` was merged into
+`claude/core-v14`; [P15](v)'s overclaim stays on `main` until v14's migration corrects it (R18, closed). A scripted
+sweep found the spelling clean (British with `-ize`), no missing path outside the archive's history, every section,
+hunch, request, decision and v14 result named in the files defined, and no trailing whitespace; two probe lines over 120
+columns were wrapped, and `probes/v14/culpability.py` tidied with its output unchanged and now saved
+(`probes/v14/RESULTS-culpability.md`). A reading for stale statements fixed `ROADMAP.md`'s state, its v14 bullet, which
+had doubled, and two of its recommendations; `README.md`, `CLAUDE.md` and `REQUESTS.md` now point to the v14 draft.
+
+A consistency read by a subagent of the executor's (not independent, rule (f)) found twelve more, all fixed: the Q65
+row said the overclaim was left in v14, against R18; this section was cited before it existed; recommendation 2 still
+offered dominance as a requirement, against Q64; pointers to a section of `v14/README.md` that no longer exists, and to
+"the derived module" for what is now OPTIMIZERS; "proved and probed" said of results that are not probed, and of
+VK4(iii), which is not proved; R17 cited questions the README no longer lists, and the three choices of recommendation
+2 had no request, now R19; "culpable" called verifiable in `LIMITS.md` without the interface taken as known; the
+"mixture principle" used but never named, now named once in the conventions; the margin proposal of `order.md` built a
+set that is not convex, now replaced by "no shortfall beyond `m` at any declared standard", convex, whose breach is a
+shortfall at some standard; and smaller ones, a plain-terms twin for VF2, VK4's scope, TR4 cited where it does not
+apply, stakes placed on the principal's side, and the dates of the draft's status.

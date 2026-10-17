@@ -6,15 +6,16 @@ the framework stands against it, and what comes next.
 
 ## The executor's recommendations for v14 (2026-10-16, Q63)
 
-Prepended at the PI's request, to be worked on together; the order is the executor's proposal. The ground for each is
-in `NOTES.md` §22–§27 and in `v14/`.
+Prepended at the PI's request, to be worked on together; the order is the executor's proposal. The ground for each is in
+`NOTES.md` §22–§29 and in `v14/`.
 
 1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
    and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
    unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
 2. **Decide the three choices the draft rests on**, knowingly: the mixture principle, which buys tests valid under any
-   dependence at the price of requirements that are not convex, independence among them (`v14/LIMITS.md`); the order's
-   requirement, dominance or v13's ordinal cone (`v14/order.md`, VO2); and a reference that meets the constraints (H45).
+   dependence at the price of requirements that are not convex, independence among them (`v14/LIMITS.md`); the
+   requirement built from an order, `B(r)`, v13's ordinal cone, or no shortfall beyond declared margins (`v14/order.md`;
+   dominance is the ranking's reading, not a requirement); and a reference that meets the constraints (H45).
 3. **[[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
 4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `OPTIMIZERS` and their twins, each twin
    stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
@@ -84,15 +85,15 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15), postponed
   until v14 absorbs them (Q59).
-- **v14, a draft** (Q59–Q65, `NOTES.md` §23–§29): on the branch `claude/core-v14`, in `v14/` beside the core, not in it.
+- **v14, a draft** (Q59–Q65, `NOTES.md` §22–§29): on the branch `claude/core-v14`, in `v14/` beside the core, not in it.
   Three layers, each with a twin for outcomes that are not finite: CORE (a request as a list of convex requirements,
   misalignment as the evidence against it, records judged by bets), INTERFACE (what the actor sees and can do:
   culpability, coarse perception, tampering) and OPTIMIZERS (pursuit, evaluators, training, shadow prices). Twenty
-  results proved here and probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK5), three verdicts
-  under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status (FA1–FA3,
-  VF1–VF3). `v14/README.md` holds the design with its claims of generality, its conventions and the challenges answered;
-  `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. The PI's decisions on R15 and
-  R16 wait for it; L2 comes next (the recommendations above).
+  results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4),
+  constraints (VK0–VK5), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its
+  labels' verification status (FA1–FA3, VF1–VF3). `v14/README.md` holds the design with its claims of generality, its
+  conventions and the challenges answered; `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13
+  survives. The PI's decisions on R15 and R16 wait for it; L2 comes next (the recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and

@@ -76,7 +76,7 @@ Each form is sorted by the least the framework needs to define it. Three questio
 | execution noise | INTERFACE | the environment kernel |
 | tampering against honest selection | INTERFACE, extended | the outcome split into the world and its measurement, with a declared honest channel the actions cannot reach ([P50]), and what is seen before acting |
 | ignoring the situation against the environment's doing | INTERFACE | the split of actions from outcomes |
-| collusion between actors | INTERFACE, for several actors (not yet defined here) | each actor's views and actions; with shared randomness allowed, the joint behaviours reachable with no communication beyond the views are mixtures of local strategies, a convex set, so communication is testable by bets; independence of private randomness is not convex, and no requirement a record enforces under the mixture principle (`LIMITS.md`) |
+| collusion between actors | INTERFACE, for several actors (not yet defined here) | each actor's views and actions; with shared randomness allowed, the joint behaviours reachable with no communication beyond the views are mixtures of local strategies, a convex set, so communication is testable by bets; independence of private randomness is not convex, and no requirement a record enforces under the mixture principle (`v14/README.md`, the conventions; `LIMITS.md`) |
 | gaming or reward hacking as a motive | OPTIMIZERS | the actor's objective, an evaluator |
 | overoptimization | OPTIMIZERS | an intensity of optimization |
 | outer misalignment | OPTIMIZERS | the trainer's objective |

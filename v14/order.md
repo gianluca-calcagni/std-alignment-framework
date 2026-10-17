@@ -49,9 +49,9 @@ not non-decreasing. With two outcomes tied in `F`, moving a little mass from one
 mass, and makes `a/r` differ between two outcomes at the same level, which v13's ordinal specification, asking `a/r` to
 be a function of `F`, excludes. ∎
 
-**Notes.** Which of the two the order's requirement should be is an open question for the PI (`README.md`). `B(r)` asks
-only what every holder of the ranking would agree on; v13's cone asks, besides, a shape, which best-of-`n` and every
-pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not.
+**Notes.** Which requirement an order gives, `B(r)`, the ordinal cone or margins, is the PI's to decide (`ROADMAP.md`,
+recommendation 2). `B(r)` asks only what every holder of the ranking would agree on; v13's cone asks, besides, a shape,
+which best-of-`n` and every pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not.
 
 ### VO3 — Three verdicts, and which of them a record verifies
 **Statement.** Against a reference `r` and a ranking, a behaviour `a` is **better** when `a ∈ B(r)`, **worse** when `a
@@ -84,9 +84,12 @@ while its average rank is `0.889` against `0.5`. v13's ordinal specification cal
 requirement `B(r)`. Common sense would not; what the decoder lacks is the principal's value scale, under which its
 average rank would count, or a declared standard ("at least level 8"), which it meets every time. The verdicts of v14
 say this instead of one number: neither better nor worse for every reading, and better under the declared scale or
-standard, if one is declared. The executor's proposal is to build the order's requirement from margins (iii), so that
-"misaligned" is kept for a breach and for a declared shortfall; under `B(r)` the decoder would be misaligned (the
-section below). Whether these are the right words is for L2 to test before anyone adopts them.
+standard, if one is declared. The executor's proposal is to build the order's requirement from margins: no shortfall
+beyond `m` at any declared standard, `a(U) ≥ r(U) − m` for every `U ∈ 𝒰`, a convex closed set whose breach is a
+shortfall at some declared standard, verifiable by VF1; (iii)'s "worse by `m` at `𝒰`", short at every one, is a stronger
+verdict, not a requirement, since what it leaves acceptable is not convex. So "misaligned" is kept for a breach of a
+constraint and for a declared shortfall; under `B(r)` the decoder would be misaligned (the section below). Whether these
+are the right words is for L2 to test before anyone adopts them.
 
 ## Why dominance is the canonical reading of a ranking
 

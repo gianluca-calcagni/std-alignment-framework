@@ -26,11 +26,11 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   requirements in response to the actor, without declaring how, is outside the framework; so is the strategic interplay
   of a principal and an actor that each adapt to the other.
 - **Requirements that are not convex, by a choice.** v14 judges each decision against what is acceptable and accepts any
-  mixture of acceptable ways of acting (`v14/README.md`), so an actor may switch between acceptable behaviours from one
-  decision to the next. Under that choice a record holds the actor only to the mixtures of what is acceptable
-  (`evidence.md`, VE2), and a requirement that is not convex is enforced as its convex hull. For a sample, independent
-  decisions from one behaviour, leaving a closed set that is not convex is still verifiable (`factorization.md`, VF1);
-  the limit is the price of the choice, not of records.
+  mixture of acceptable ways of acting, the mixture principle (`v14/README.md`, the conventions), so an actor may switch
+  between acceptable behaviours from one decision to the next. Under that choice a record holds the actor only to the
+  mixtures of what is acceptable (`evidence.md`, VE2), and a requirement that is not convex is enforced as its convex
+  hull. For a sample, independent decisions from one behaviour, leaving a closed set that is not convex is still
+  verifiable (`factorization.md`, VF1); the limit is the price of the choice, not of records.
 
 ## Behaviour, not mind
 
@@ -64,9 +64,10 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **A blind spot of order `√n`, a hunch.** If H43 holds, a shift of about `1/√(n·I)` per decision escapes every test
   over `n` decisions and costs about `√(n/I)` in all, so every guarantee from records leaves such a loss undetected. It
   is a local-asymptotic sketch, not proved.
-- **Convicting, never certifying.** "Misaligned" and "culpable" are verifiable; "aligned" and "not culpable" only
-  refutable (`factorization.md`, VF1). An actor can be shown to fail a standard, never to meet it exactly; "aligned
-  within a margin" is shown verifiable for an actor whose decisions are independent ([D3]), and not shown for others.
+- **Convicting, never certifying.** "Misaligned" is verifiable, and "culpable" with the interface taken as known;
+  "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a standard, never
+  to meet it exactly; "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]),
+  and not shown for others.
 - **Dependence.** A test from bets keeps its level whatever the dependence, but only against the hypothesis that each
   decision, given the past, is acceptable (`evidence.md`, VE3). Drift and dependence ([P54]) are identified only from
   repeated records or declared episodes; one long record, with no repetition, does not separate them. That a test's
@@ -75,7 +76,7 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   infinite, so magnitudes need estimators or bets; a distribution-free uniform band for a partial order in two or more
   dimensions is not expected to exist (a brainstorm, `NOTES.md` §22, not proved); a record decides only events open in
   its precision; and when the closure of the acceptable behaviours is compact, misalignment is a minimum and one test
-  fixed in advance catches it (`general/transfer.md`, TR3–TR5), while without compactness that is not shown (H41).
+  fixed in advance catches it (`general/transfer.md`, TR3, TR5), while without compactness that is not shown (H41).
 - **Estimation of factors.** In FA1, the least values `m_j` depend on the declarations alone; what a record estimates is
   the actor's misalignment `M_A(p̂)`, and with it the avoidable excess and the culpability. Intervals for them are not
   yet derived.

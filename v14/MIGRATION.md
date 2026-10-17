@@ -1,8 +1,8 @@
 # What of v13 survives v14
 
 > **Status: draft of v14 (Q63), the executor's assessment, not reviewed yet.** Each item of v13 gets one fate, with its
-> layer in v14 (`v14/README.md`): CORE, INTERFACE, OPTIMIZERS, or a refinement of CORE that builds requirements or reads
-> stakes.
+> layer in v14 (`v14/README.md`): CORE, INTERFACE, OPTIMIZERS, or a refinement: of CORE, building requirements, or of
+> the principal's side, reading stakes.
 
 **The fates.**
 - **Keep**: the statement and its proof hold in v14 as they are; only the file changes.
@@ -16,11 +16,12 @@
 **In short.** Almost all of the mathematics survives, since a theorem does not stop being true when its words change: of
 v13's 68 results (55 propositions, a lemma and 12 corollaries), 13 keep their place in CORE or a refinement of it, 8
 move to INTERFACE, 42 move to OPTIMIZERS, 4 need rewriting ([P5], [P7], [P35], [P48]), and one, [C12], is incompatible;
-within results that move, two readings are incompatible ([P37](ii), [P39](ii)) and two parts need rewriting ([P15](v),
-[P54](ii)). Most of the move to OPTIMIZERS is v13's work on optimizers, which was always about them. What does not
-survive is the meaning v13 gave its central number: v13's misalignment under the standard specification is the distance
-to the set of KL-optimal pursuits, a fact about optimizers, and v14's misalignment is evidence against a declared convex
-requirement. Every number v13 reported under that name, and every verdict registered with it, belongs to v13.
+within results kept or moved, two readings are incompatible ([P37](ii), [P39](ii)) and two parts need rewriting
+([P15](v), [P54](ii)). Most of the move to OPTIMIZERS is v13's work on optimizers, which was always about them. What
+does not survive is the meaning v13 gave its central number: v13's misalignment under the standard specification is the
+distance to the set of KL-optimal pursuits, a fact about optimizers, and v14's misalignment is evidence against a
+declared convex requirement. Every number v13 reported under that name, and every verdict registered with it, belongs to
+v13.
 
 ## The core's items
 
@@ -41,7 +42,7 @@ requirement. Every number v13 reported under that name, and every verdict regist
 | [D4] resolution | rewrite | the principal's indifference becomes a proposition about requirements that depend only on cell masses; the actor's resolution moves to INTERFACE |
 | [D5] stakes | rewrite | the shortfall at the matched intensity moves to OPTIMIZERS; stakes in CORE need a declared value scale (`NOTES.md` §24) |
 | [D6] interventions and pass-through | move | pass-through to OPTIMIZERS; known changes of what the actor faces are conditions, and elicitation, a declared link between conditions, is INTERFACE (`factorization.md`, VF3) |
-| [D7] feasibility | move | INTERFACE, with the overclaim of "unavoidable" in its reasons corrected (R18) |
+| [D7] feasibility | move | INTERFACE, with the overclaim of "unavoidable" in its reasons to be corrected here (Q65, R18) |
 | [D8] conditions, responses and views | keep the conditions; move the views | conditions CORE; views INTERFACE |
 | [D9] observation and identification | move | INTERFACE |
 | [D10] evaluator, regression and residual | move | OPTIMIZERS |

@@ -143,6 +143,9 @@ is to say "`p ∉ S`" is not refutable. "`p ∈ S`" is refutable since its negat
 ### VF2 — The verification status of every factor's label
 **Statement.** With the declared requirements and interfaces closed, the statements below have the status given.
 
+**In plain terms.** Every label of a factor makes one of three kinds of claim: an accusation a record can prove, a claim
+of compliance or an excuse a record can only disprove, or a number computed from the declarations alone.
+
 | Label | Statement | Status |
 |---|---|---|
 | breach of requirement `j`; misaligned | `p̂ ∉ A_j`; `p̂ ∉ A` | verifiable (VF1) |

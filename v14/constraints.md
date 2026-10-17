@@ -43,8 +43,8 @@ with `b = min g` are admitted, which VK3's dual does not cover; balls in total v
 on finitely many outcomes, finitely many, since both are polyhedral; balls in KL, Euclidean or Hellinger distance whose
 boundary meets the interior of `Δ`, on three or more outcomes, infinitely many. It is why the PI's choice to declare
 constraints explicitly, as a general concept (Q60), loses nothing: CORE's requirement, a convex closed set, and the PI's
-constraint are the same object. VK4 gives every bet of the affine form a lower bound on misalignment against any convex
-requirement, and VE1 the equality when all bets are allowed.
+constraint are the same object. For finitely many budgets, VK4 gives every bet of the affine form as a lower bound on
+misalignment; for any convex requirement, VE1 gives the equality when all bets are allowed.
 
 ### VK1 — A forbidden set: one occurrence decides
 **Statement.** For a forbidden set `C`: `M_K(p) = ∞` if `p(C) > 0`, and `0` otherwise. For every `H > 1`, the function
@@ -59,10 +59,10 @@ it is that rate, with the stakes it carries, that says how bad the breach is.
 ∎
 
 **Notes.** This is where misalignment, read as evidence, is infinite and still informative: the evidence is decisive,
-and the magnitude moves to the rate and the stakes, which are reported beside it (`README.md`, verdicts). v13 asked
-intended behaviours to have full support ([D3], the table of conventions), which a forbidden set cannot meet; v14 drops
-that convention. Verifying the breach needs the occurrence to be recognized without error: a record that confuses `C`
-with its neighbours, as a measurement on a continuum may, verifies it only when `C` is open in the record's topology
+and the magnitude moves to the rate and the stakes, which are reported beside it (`v14/README.md`, the design, 3). v13
+asked intended behaviours to have full support ([D3], the table of conventions), which a forbidden set cannot meet; v14
+drops that convention. Verifying the breach needs the occurrence to be recognized without error: a record that confuses
+`C` with its neighbours, as a measurement on a continuum may, verifies it only when `C` is open in the record's topology
 (`CORE-GENERAL.md`).
 
 ### VK2 — A rate limit, in closed form
@@ -130,12 +130,12 @@ least that against the worst one, and a combined bet on the overruns is always a
 
 **Notes.** (iii) holds on the 22 of 30 random instances with two budgets in which some behaviour keeps both, within
 `5e-13` (`probes/v14/RESULTS.md`, VK4); a proof needs the Karush–Kuhn–Tucker conditions for linear constraints, or
-Farkas's lemma, read in an open text first. Joining constraints to the order part of a request is the same intersection;
-`README.md` lists it among the open questions.
+Farkas's lemma, read in an open text first. Joining constraints to an order is the same intersection; how the reference
+should meet the constraints is H45, and the requirement built from an order is the PI's choice (`ROADMAP.md`,
+recommendation 2).
 
 ### VK5 — The constrained optimizer, by the Karush–Kuhn–Tucker conditions
-*This result belongs to the derived module, "actors that optimize": it is a fact about one model of an actor, not part
-of what the principal asks.*
+*This result belongs to OPTIMIZERS: it is a fact about one model of an actor, not part of what the principal asks.*
 
 **Statement.** Let `q ∈ Δ°`, `F : X → ℝ`, `t > 0`, and a budget `(g, b)`. Among behaviours `a` with `E_a[g] ≤ b`, the
 value `E_a[F] − KL(a‖q)/t` is largest at `a_ν = tilt(q, t·(F − ν·g))`, where `ν = 0` if `E_{a_0}[g] ≤ b`, and otherwise
@@ -156,8 +156,8 @@ directly. For a forbidden set, an `a` with `a(C) = 0` has `KL(a‖q) = KL(a‖q(
 [P4](i) on the outcomes `X ∖ C`, where `q(·|X∖C)` has full support, or trivial if `X ∖ C` has one outcome. ∎
 
 **Notes.** Checked against a numerical maximization on 29 random instances, within `3e-9`, and the derivative of the
-largest value in `b` equals `ν` within `2e-8` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for the
-derived module.
+largest value in `b` equals `ν` within `2e-8` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for
+OPTIMIZERS.
 - *Obeying and valuing look alike.* An actor that keeps a budget because it must, and one that values the cost at `ν`,
   behave identically; by [A1], the core cannot and need not tell them apart.
 - *v13 charged obedience.* Under v13's standard specification of `F`, the constrained optimizer is charged, since it
