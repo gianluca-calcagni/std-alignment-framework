@@ -1,0 +1,5 @@
+# Marp's settings for the slides: the Markdown sources are wrapped at 120 columns (tools/mdwrap.py), so a line break
+# in the source must not become a line break on the slide.
+options:
+  markdown:
+    breaks: false

@@ -242,6 +242,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q63 | prepend the executor's recommendations to the roadmap, to be worked on together; and say how much of the previous work the new core and files can save, and what is incompatible whatever the fix. Applied: `ROADMAP.md`'s recommendations; `v14/MIGRATION.md`; §27 | PI | `ROADMAP.md`; `v14/MIGRATION.md`; §27 |
 | Q64 | consolidate the findings in the appropriate files; find again the work that made the core compelling, every convention and definition without loss of generality and mathematically canonical, understand its method, and say whether the new core and files keep to it, explaining so in the files, as a defence against challenges that would weaken the framework if acknowledged without further thought. Applied: `v14/README.md` rewritten to the current design, with the claims of generality and their qualifiers, the conventions justified, and the challenges answered; `v14/interface.md`, the INTERFACE layer and the forms of misalignment; VK0 and IN1; the canonicity sections of `evidence.md` and `order.md`; §28 | PI | `v14/`; §28 |
 | Q65 | pull request #34 merged into `main`; [[P15 — Misalignment splits into what the actor could avoid and what it could not\|P15]](v)'s overclaim left on `main` for now, to be corrected in v14's migration (R18 closed); a turn of documentation hygiene and consistency across the files. Applied: `main` merged into `claude/core-v14`; `ROADMAP.md`, `README.md`, `REQUESTS.md`, `CLAUDE.md` and the v14 files swept; §29 | PI | §29 |
+| Q66 | a presentation of about thirty slides, in whatever format suits slides that change often, presenting the framework and how to use it on one simple example, kept in the repository where it fits best. Applied: `slides/framework.md` (32 slides, Marp Markdown) with `slides/README.md` and `slides/.marprc.yml`; the example's numbers from `probes/slides/support_bot.py`; §30 | PI | `slides/`; `probes/slides/`; §30 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -2017,3 +2018,25 @@ VK4(iii), which is not proved; R17 cited questions the README no longer lists, a
 set that is not convex, now replaced by "no shortfall beyond `m` at any declared standard", convex, whose breach is a
 shortfall at some standard; and smaller ones, a plain-terms twin for VF2, VK4's scope, TR4 cited where it does not
 apply, stakes placed on the principal's side, and the dates of the draft's status.
+
+## 30. Slides, 2026-10-17 (Q66)
+
+By the executor, at the PI's request (Q66). `slides/framework.md`, 32 slides in Marp Markdown: plain text, so the slides
+change and diff like any file, rendered to HTML, PDF or PowerPoint by Marp CLI. They present the v14 draft (the three
+layers, requirements, misalignment as evidence, bets, the interface, the factorization) and work one example through: a
+frozen support bot judged against its previous version, under a forbidden outcome (a leak), a rate limit on wrong
+answers and an order against the previous version, with an interface in which the new version, deployed without the
+signal that marks account questions, takes 20% of them for open ones. Every number comes from
+`probes/slides/support_bot.py`: the new version breaches all three requirements; misalignment `0.0730` nats per decision
+against the two graded ones, `0` unavoidable with a full view, `0.0106` the cost of the coarse view, `0.0624` avoidable;
+culpability infinite, since every leak was avoidable; bets against the rate limit accuse it in 92% of records of 300
+decisions, and an actor at the limit in 0.2%.
+
+**Found while building.** The example's first form had the previous version breach the rate limit itself, the problem
+H45 names; it was changed so that the reference keeps every requirement. Culpability was first computed against one best
+behaviour, not the set of them, which gave a positive value to an acceptable behaviour; fixed by one convex minimization
+over the set. The first probe searched a grid of 53,000 policies and was stopped by its PID; a joint convex minimization
+replaced it. In the slides, Marp renders a source line break as a line break, which the wrapping at 120 columns would
+put mid-sentence; `slides/.marprc.yml` turns that off. A slide replaced by script lost the blank line before its
+separator and the wrapping tool joined the separator to the text; caught by a check that every separator stands alone,
+and fixed. Rendered at 1280 by 720, no slide overflows.

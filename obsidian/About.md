@@ -37,6 +37,7 @@ cited from `general/`.
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
 | `v14/` | on the branch `claude/core-v14`: the draft of v14, its design, results proved there, its limits and what of v13 survives; `v14/README.md` first |
+| `slides/` | on the branch `claude/core-v14`: about thirty slides presenting the framework and its use on one worked example, in Marp Markdown; every number from `probes/slides/support_bot.py` |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
 | `RECORD.md` | what the framework claims about the world and what it has taken back: the honest position, every prediction with its label and state, and the retractions |
