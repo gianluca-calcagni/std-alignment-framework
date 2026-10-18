@@ -19,8 +19,8 @@ No other host was fetched; hosts the PI could allow are listed at the end.
 
 **Severity and the layers.** Following the PI's decision that severity is measured separately from misalignment, entries
 on harm and risk are read as inputs to the principal's value scale, never as a change to misalignment itself. The layer
-names CORE, INTERFACE and OPTIMIZERS are v14's. "OPTIMIZERS" is kept here only as the draft's name, and a fourth layer,
-called TRAINING here, is discussed where a work bears on it.
+names CORE, INTERFACE and PURPOSE are v14's, PURPOSE being the third layer once called OPTIMIZERS (Q70), and a fourth
+layer, SHAPING, on training, is discussed where a work bears on it.
 
 **The short answer.** The closest competitor is not an alignment theory at all. It is the statistics of e-values and
 anytime-valid inference (Ramdas, Grünwald, Larsson, Waudby-Smith and coauthors). v14's CORE has, in effect, moved into
@@ -45,15 +45,15 @@ framework has nothing to offer a decision to deploy until it states a certificat
 | 6 | Statistical assurance against adaptive adversaries | an actor that behaves well until it is certified and then switches | the result as a limit: every finite certification followed by unmonitored use can be defeated; monitoring that never stops, with revocation, limits the excess. Pro: it bears on VE3 and on H43. Con: one recent preprint, not reviewed | VE3's bets never stop, so v14 is already on the right side; the framework should say so | **now** (as a limit) | [Singh 2026](https://arxiv.org/abs/2610.18948) |
 | 7 | Measurement theory and statistics of evaluations | the steps from a background concept to a systematized concept, an instrument and measurements; validity; clustered error bars | a validity account for the grader that turns transcripts into outcomes (H47); questions as a sample from a population, so that the weights of conditions are estimated, with clustered errors. Pro: the largest gap between v14 and a real case. Con: social-science vocabulary, little mathematics | a precise systematized concept (the requirement) and a defined quantity to measure | **now** | [Wallach et al. 2024](https://arxiv.org/abs/2411.10939); [Chouldechova et al. 2024](https://arxiv.org/abs/2412.01934); [Bean et al. 2025](https://arxiv.org/abs/2511.04703); [Miller 2024](https://arxiv.org/abs/2411.00640) |
 | 8 | Distributional control and f-divergence alignment | the target model as the KL projection of a base model onto pointwise and distributional (moment) constraints, an exponential family with the support restricted | attribution: VK5, that the constrained optimizer is a tilt at a shadow price and that a forbidden set restricts the support, is GDC's Theorem 1, after Csiszár. Pro: honesty, and a ready algorithm. Con: none | measuring an actual behaviour against the constraints, in the other direction of KL; inequality constraints with a verdict each | **now** (attribution) | [Khalifa et al. 2020](https://arxiv.org/abs/2012.11635); [Go et al. 2023](https://arxiv.org/abs/2302.08215); [Wang et al. 2023](https://arxiv.org/abs/2309.16240) |
-| 9 | Constrained RL, safe RLHF, dualization | maximize reward subject to cost constraints; Lagrangian duality; zero duality gap | attribution again: VK5 with several constraints is Huang et al.'s Lemma 2, with strong duality; dual-based algorithms for OPTIMIZERS. Con: the optimizer's view only | the principal's side: whether a trained actor actually meets the constraint, with what evidence | **now** (attribution); later | [Paternain et al. 2019](https://arxiv.org/abs/1910.13393); [Achiam et al. 2017](https://arxiv.org/abs/1705.10528); [Dai et al. 2023](https://arxiv.org/abs/2310.12773); [Huang et al. 2024](https://arxiv.org/abs/2405.19544); Altman's CMDP monograph *(to verify)* |
+| 9 | Constrained RL, safe RLHF, dualization | maximize reward subject to cost constraints; Lagrangian duality; zero duality gap | attribution again: VK5 with several constraints is Huang et al.'s Lemma 2, with strong duality; dual-based algorithms for PURPOSE. Con: the optimizer's view only | the principal's side: whether a trained actor actually meets the constraint, with what evidence | **now** (attribution); later | [Paternain et al. 2019](https://arxiv.org/abs/1910.13393); [Achiam et al. 2017](https://arxiv.org/abs/1705.10528); [Dai et al. 2023](https://arxiv.org/abs/2310.12773); [Huang et al. 2024](https://arxiv.org/abs/2405.19544); Altman's CMDP monograph *(to verify)* |
 | 10 | Behaviour Expectation Bounds | a model as a mixture of well-behaved and ill-behaved components; a prompt as evidence that selects a component | a quantitative link between conditions and hidden misalignment: a prompt of length about `(1/β)·log(1/α)` brings out a component of prior weight α. Pro: the same currency as ours, KL per sentence. Con: the mixture decomposition is assumed, not identified | the mixture principle, under which such a model is judged per condition; [P17]'s bound on what an actor can hide | later | [Wolf et al. 2023](https://arxiv.org/abs/2304.11082) |
 | 11 | Reward hacking as an order reversal (Skalse et al.; Goodhart in RL) | a proxy is unhackable if raising its return never lowers the true return; over open policy sets only equivalent pairs are | the order-theoretic definition as a requirement built from two rankings, in `order.md`'s terms. Pro: it is behavioural. Con: about policy sets, not one actor | magnitudes, and the observation that their impossibility is a convexity result of the same kind as VE2 | later | [Skalse et al. 2022](https://arxiv.org/abs/2209.13085); [Karwowski et al. 2023](https://arxiv.org/abs/2310.09144) |
-| 12 | Goal misgeneralization; agents and devices | an actor that stays capable out of distribution and pursues another goal; goal-directedness as a likelihood ratio of an "agent" mixture over a "device" mixture | a concrete test for the OPTIMIZERS hypothesis, a likelihood ratio, which is an e-value against "not goal-directed". Pro: makes VF2's refutable motive testable. Con: needs priors over rewards and policies | CORE sees the failure without a model of goals: misalignment by condition, in test against training conditions | later | [Langosco et al. 2021](https://arxiv.org/abs/2105.14111); [Shah et al. 2022](https://arxiv.org/abs/2210.01790); [Orseau et al. 2018](https://arxiv.org/abs/1805.12387) |
+| 12 | Goal misgeneralization; agents and devices | an actor that stays capable out of distribution and pursues another goal; goal-directedness as a likelihood ratio of an "agent" mixture over a "device" mixture | a concrete test for the PURPOSE hypothesis, a likelihood ratio, which is an e-value against "not goal-directed". Pro: makes VF2's refutable motive testable. Con: needs priors over rewards and policies | CORE sees the failure without a model of goals: misalignment by condition, in test against training conditions | later | [Langosco et al. 2021](https://arxiv.org/abs/2105.14111); [Shah et al. 2022](https://arxiv.org/abs/2210.01790); [Orseau et al. 2018](https://arxiv.org/abs/1805.12387) |
 | 13 | Revealed-preference alignment (the Luce Alignment Model) | an AI's choices as a mixture, with weight α, of the principal's logit rule and its own; identification of α and of both utilities | the distinction between *aligned* (the same preferences) and *compliant* (`α = 1`), and identification from menus, which are conditions. Pro: a sharp decomposition. Con: assumes logit rules; by [A1] we cannot and need not tell the two apart | the principal declares a requirement rather than a utility; no parametric model | later | [Suleymanov 2026](https://arxiv.org/abs/2603.27868) |
 | 14 | Misalignment between agents in a population | the probability that two agents drawn at random hold conflicting goals | little: it is a dispersion index of goals. Con: it needs goals, not behaviour | everything behavioural | never | [Kierans et al. 2024](https://arxiv.org/abs/2406.04231) |
 | 15 | Misalignment in interactive epistemology | one agent's beliefs about another's beliefs that do not match | nothing: a homonym. Recorded so the question is not reopened | n/a | never | [Guarino, Ziegler 2025](https://arxiv.org/abs/2506.17176) |
 | 16 | Conceptual frameworks: the targets of alignment; three axes; acceptable misalignment; prepotence | what a principal's target can be (instructions, intentions, preferences, interests, values); misalignment along objectives, information and principals; "acceptable" misalignment | a declared field "kind of target", from Gabriel's list; LaCroix's three axes as a check that the three layers cover the ground. Pro: cheap. Con: no mathematics | a mathematics for "aligned enough, for whom", which is what LaCroix and van Lier et al. call for | **now** (fields) | [Gabriel 2020](https://arxiv.org/abs/2001.09768); [LaCroix 2026](https://arxiv.org/abs/2604.20805); [van Lier et al. 2026](https://arxiv.org/abs/2610.16881); [Critch, Krueger 2020](https://arxiv.org/abs/2006.04948); [Spizzirri 2025](https://arxiv.org/abs/2512.03048) |
-| 17 | Causal incentives, discovering agents, deception | incentives read from the graph of a causal influence diagram; agents as systems that would adapt their policy; deception in structural causal games | graphical criteria, as a declared structure for the interface and for OPTIMIZERS. Pro: sound and complete criteria. Con: needs a causal model, beyond behaviour | measurement of what an actor did, in nats, with no causal model | later | [Everitt et al. 2021](https://arxiv.org/abs/2102.01685); [Kenton et al. 2022](https://arxiv.org/abs/2208.08345); [Ward et al. 2023](https://arxiv.org/abs/2312.01350) |
+| 17 | Causal incentives, discovering agents, deception | incentives read from the graph of a causal influence diagram; agents as systems that would adapt their policy; deception in structural causal games | graphical criteria, as a declared structure for the interface and for PURPOSE. Pro: sound and complete criteria. Con: needs a causal model, beyond behaviour | measurement of what an actor did, in nats, with no causal model | later | [Everitt et al. 2021](https://arxiv.org/abs/2102.01685); [Kenton et al. 2022](https://arxiv.org/abs/2208.08345); [Ward et al. 2023](https://arxiv.org/abs/2312.01350) |
 | 18 | Responsibility, blame and intention | the degree of blame as the reduction in the probability of a bad outcome that another action would have achieved, mitigated by that action's cost, relative to an epistemic state | the cost of the better alternative, which v14's culpability ignores: v14 charges any departure from the best feasible behaviour, however costly that behaviour is for the actor. Pro: closes a hole in the label "culpable". Con: adds a cost the principal must declare | an evidence-scaled culpability, testable by bets, and the exact split into unavoidable and avoidable parts | **now** | [Chockler, Halpern 2003](https://arxiv.org/abs/cs/0312038); [Halpern, Kleiman-Weiner 2018](https://arxiv.org/abs/1810.05903) |
 | 19 | Counterfactual harm; causal analysis and quantification of harm | harm as the expected shortfall of utility against a default action, by counterfactuals; that any factual definition of harm fails some cases | for the severity layer: harm *caused* needs a default and a counterfactual, which are INTERFACE objects, while the severity *of an outcome* is a declared value scale. Pro: keeps the two apart, as the PI decided. Con: counterfactuals need a causal model | the reference behaviour and the feasible set, which supply the default without a model of intent | **now** | [Richens et al. 2022](https://arxiv.org/abs/2204.12993); [Beckers et al. 2022a](https://arxiv.org/abs/2210.05327); [Beckers et al. 2022b](https://arxiv.org/abs/2209.15111) |
 | 20 | Impact measures and power-seeking | penalties for reducing attainable utility, or reachability against a baseline; optimal policies tend to keep options | side effects as a loss of the *principal's future feasible set*, an INTERFACE concept across time; the lesson that the baseline decides the incentives. Con: penalties for optimizers | side effects as requirements on other coordinates of the outcome, judged in CORE | later | [Turner et al. 2019](https://arxiv.org/abs/1902.09725); [Krakovna et al. 2018](https://arxiv.org/abs/1806.01186); [Turner et al. 2019b](https://arxiv.org/abs/1912.01683) |
@@ -65,10 +65,10 @@ framework has nothing to offer a decision to deploy until it states a certificat
 | 26 | System safety, STPA | hazards as unsafe control actions in a control structure with feedback loops | a structured search for the requirements a principal forgot (misspecification is outside v14, and STPA is one way to reduce it). Con: method, not theory | measurement of each requirement found | later | [Mylius 2025](https://arxiv.org/abs/2506.01782); [Carlucci et al. 2026](https://arxiv.org/abs/2606.13474); Leveson and Thomas's STPA handbook *(to verify)* |
 | 27 | Guaranteed safe and verified AI; a Bayesian oracle | a world model, a safety specification, and a verifier that issues a proof certificate; bounds on harm under the most cautious plausible hypothesis | a specification language with a syntax: v14's requirements need one for practice. Pro: the request becomes machine-checkable. Con: world models for open domains do not exist | the record side: what a sample of decisions shows, where no proof is available | later | [Dalrymple et al. 2024](https://arxiv.org/abs/2405.06624); [Seshia et al. 2016](https://arxiv.org/abs/1606.08514); [Bengio et al. 2024](https://arxiv.org/abs/2408.05284) |
 | 28 | Risk taxonomies, risk thresholds, harm severity scales | catalogues of AI risks by cause and domain; thresholds stated as risk; ordinal severity indices from incidents | a category for each requirement from a public taxonomy, and severity as an ordinal or declared scale; risk thresholds as budgets on severity-weighted indicators. Pro: makes severity declarable. Con: the taxonomies disagree and are not measurements | the evidence each breach carries, kept apart from severity | **now** | [Slattery et al. 2024](https://arxiv.org/abs/2408.12622); [Zeng et al. 2024](https://arxiv.org/abs/2406.17864); [Koessler et al. 2024](https://arxiv.org/abs/2406.14713); [Vei et al. 2025](https://arxiv.org/abs/2509.10104) |
-| 29 | Social choice for alignment from human feedback | RLHF as preference aggregation; axioms; RLHF aggregates hidden context by Borda count | for TRAINING: the trainer's evaluator is the output of a voting rule, so its outer misalignment has a social-choice cause. Con: says nothing about measuring an actor | several principals as an intersection of requirements, with emptiness as the conflict | later | [Conitzer et al. 2024](https://arxiv.org/abs/2404.10271); [Ge et al. 2024](https://arxiv.org/abs/2405.14758); [Siththaranjan et al. 2023](https://arxiv.org/abs/2312.08358); [Dai, Fleisig 2024](https://arxiv.org/abs/2404.13038); [Halpern et al. 2026](https://arxiv.org/abs/2606.21550) |
+| 29 | Social choice for alignment from human feedback | RLHF as preference aggregation; axioms; RLHF aggregates hidden context by Borda count | for SHAPING: the trainer's evaluator is the output of a voting rule, so its outer misalignment has a social-choice cause. Con: says nothing about measuring an actor | several principals as an intersection of requirements, with emptiness as the conflict | later | [Conitzer et al. 2024](https://arxiv.org/abs/2404.10271); [Ge et al. 2024](https://arxiv.org/abs/2405.14758); [Siththaranjan et al. 2023](https://arxiv.org/abs/2312.08358); [Dai, Fleisig 2024](https://arxiv.org/abs/2404.13038); [Halpern et al. 2026](https://arxiv.org/abs/2606.21550) |
 | 30 | Pluralistic alignment | Overton, steerable and distributional pluralism | three requirement types, each convex and closed: a floor on the mass of every reasonable answer; matching per condition (steering); a divergence ball around a population's distribution. Pro: worked examples for the catalogue. Con: none | verdicts and evidence for each | **now** (examples) | [Sorensen et al. 2024](https://arxiv.org/abs/2402.05070) |
-| 31 | A formal account of how RLHF amplifies a behaviour | the change in any statistic under KL-regularized tuning is a covariance under the base policy; the KL-closest policy that does not amplify it is a tilt with a closed-form penalty | the TRAINING layer's first theorem: the sign of `Cov_base(g, e^{βr})` predicts whether training breaches a budget on `g`. Pro: testable against CORE's verdicts. Con: assumes training reaches the KL-regularized optimum, which W3 found it does not | none of the theorems is new to us ([P13](i), VK5); what we add is the requirement and the verdict | **now** (TRAINING) | [Shapira et al. 2026](https://arxiv.org/abs/2602.01002) |
-| 32 | Training-induced misalignment, empirically | narrow finetuning that misaligns broadly; reward hacking that generalizes to sabotage; alignment faking; backdoors that survive safety training; shallow safety alignment | paradigm cases for TRAINING and for label tests: training on some conditions changes behaviour in others, sometimes only behind a trigger. Pro: real, public phenomena. Con: graded by model judges (H47) | definitions that do not depend on the judge's "misaligned" label; per-condition misalignment and hidden-condition bounds | **now** (cases) | [Betley et al. 2025](https://arxiv.org/abs/2502.17424); [MacDiarmid et al. 2025](https://arxiv.org/abs/2511.18397); [Wang et al. 2025](https://arxiv.org/abs/2506.19823); [Soligo et al. 2026](https://arxiv.org/abs/2602.07852); [Zhang et al. 2026](https://arxiv.org/abs/2606.20814); [Qi et al. 2023](https://arxiv.org/abs/2310.03693); [Qi et al. 2024](https://arxiv.org/abs/2406.05946); [Sharma et al. 2023](https://arxiv.org/abs/2310.13548); [Hubinger et al. 2024](https://arxiv.org/abs/2401.05566) |
+| 31 | A formal account of how RLHF amplifies a behaviour | the change in any statistic under KL-regularized tuning is a covariance under the base policy; the KL-closest policy that does not amplify it is a tilt with a closed-form penalty | the SHAPING layer's first theorem: the sign of `Cov_base(g, e^{βr})` predicts whether training breaches a budget on `g`. Pro: testable against CORE's verdicts. Con: assumes training reaches the KL-regularized optimum, which W3 found it does not | none of the theorems is new to us ([P13](i), VK5); what we add is the requirement and the verdict | **now** (SHAPING) | [Shapira et al. 2026](https://arxiv.org/abs/2602.01002) |
+| 32 | Training-induced misalignment, empirically | narrow finetuning that misaligns broadly; reward hacking that generalizes to sabotage; alignment faking; backdoors that survive safety training; shallow safety alignment | paradigm cases for SHAPING and for label tests: training on some conditions changes behaviour in others, sometimes only behind a trigger. Pro: real, public phenomena. Con: graded by model judges (H47) | definitions that do not depend on the judge's "misaligned" label; per-condition misalignment and hidden-condition bounds | **now** (cases) | [Betley et al. 2025](https://arxiv.org/abs/2502.17424); [MacDiarmid et al. 2025](https://arxiv.org/abs/2511.18397); [Wang et al. 2025](https://arxiv.org/abs/2506.19823); [Soligo et al. 2026](https://arxiv.org/abs/2602.07852); [Zhang et al. 2026](https://arxiv.org/abs/2606.20814); [Qi et al. 2023](https://arxiv.org/abs/2310.03693); [Qi et al. 2024](https://arxiv.org/abs/2406.05946); [Sharma et al. 2023](https://arxiv.org/abs/2310.13548); [Hubinger et al. 2024](https://arxiv.org/abs/2401.05566) |
 | 33 | Propensity benchmarks and incentive models of oversight | scores of misaligned behaviour by agents; deterrence models in which a principal sets rewards for a solver and an auditor | the auditor's incentive to inspect as part of the interface: oversight is itself an actor. Con: equilibrium models | a defined quantity in place of an ad hoc score | later | [Naik et al. 2025](https://arxiv.org/abs/2506.04018); [Agarwal et al. 2026](https://arxiv.org/abs/2605.01643) |
 
 ---
@@ -281,7 +281,7 @@ f-divergences: there is no universally best divergence, and each trades alignmen
 
 *Adopt: attribution.* v14's VK5, that a constrained optimizer is a tilt at a shadow price and that a forbidden set
 leaves the base on the allowed outcomes, is GDC's Theorem 1 with inequality constraints and an objective added (and
-Csiszár 1975, on file). VK5 is placed in OPTIMIZERS and proved "directly", which is fine, but it should cite this.
+Csiszár 1975, on file). VK5 is placed in PURPOSE and proved "directly", which is fine, but it should cite this.
 *Pro:* honesty, and a working algorithm for the constrained pursuit. *Con:* none.
 
 *What we do that it lacks.* GDC *designs* the target, projecting the base onto the constraints in the order
@@ -339,7 +339,7 @@ misgeneralization if its test reward is low and `p_agt(τ) > p_dev(τ)` on avera
 environment. Here `p_agt` mixes maximum-entropy pursuits of rewards and `p_dev` mixes policies. Shah et al.: abstract
 read.
 
-*Adopt, later, for OPTIMIZERS.* `factorization.md`'s VF2 says a motive is a hypothesis records can refute and never
+*Adopt, later, for PURPOSE.* `factorization.md`'s VF2 says a motive is a hypothesis records can refute and never
 verify. Definition 2.1 gives that hypothesis a test, a likelihood ratio of "goal-directed" against "device", which is an
 e-value under the device mixture, and so is in v14's currency. The maximum-entropy agent model is v13's pursuit. *Con:*
 both mixtures need priors, and the verdict moves with them. *What we do that it lacks:* CORE sees the failure without
@@ -384,7 +384,7 @@ mathematics: a verdict per requirement, against a declared principal. Spizzirri'
 *Statement read.* Everitt et al., Definition 17 and Theorem 18: a single-decision diagram admits an instrumental control
 incentive on `X` if and only if it has a directed path `D → X → U`. Kenton et al. and Ward et al.: abstracts read.
 
-*Adopt, later.* The graphical criteria are sound and complete, and give OPTIMIZERS a declared structure from which an
+*Adopt, later.* The graphical criteria are sound and complete, and give PURPOSE a declared structure from which an
 incentive is read without simulation; Ward et al. give deception a definition in causal games. *Con:* causal models are
 beyond behaviour, so all of this lives where v14 puts motives. *What we do that they lack:* `RELATED.md` already said
 it: they analyse designs, we measure behaviour.
@@ -475,9 +475,9 @@ between the protocol designer and an adversary. Korbak et al. sketch a control s
 motive. In v14 that is one line of INTERFACE: the **worst-case feasible breach**, `sup_{f∈𝓕} M_K(f)` or the largest
 breach rate in `𝓕`. It sits beside the unavoidable `M_A(𝓕)` and the actual `M_A(p̂)`. A protocol is an intervention on
 the interface, and control evaluations are elicitation in VF3's sense, aimed at the worst. *Pro:* the number a deployer
-can rely on whatever the actor wants, and it needs no OPTIMIZERS. *Con:* it needs the feasible set, which `NOTES.md`
-§31 found the hardest and most arbitrary declaration. *What we do that they lack:* the actual behaviour's misalignment,
-and its split.
+can rely on whatever the actor wants, and it needs no PURPOSE. *Con:* it needs the feasible set, which `NOTES.md` §31
+found the hardest and most arbitrary declaration. *What we do that they lack:* the actual behaviour's misalignment, and
+its split.
 
 ### 25. Safety cases
 
@@ -547,7 +547,7 @@ each breach carries, kept apart from how bad it is.
 aggregates by Borda count (their Section 3). Abstracts read: Conitzer et al.; Ge et al. (Bradley–Terry–Luce fails basic
 axioms; linear social choice); Dai and Fleisig; Halpern et al. 2026, a survey.
 
-*Adopt, later, for TRAINING.* The trainer's evaluator is the output of a voting rule over annotators, so outer
+*Adopt, later, for SHAPING.* The trainer's evaluator is the output of a voting rule over annotators, so outer
 misalignment ([P49]) can have a social-choice cause that can be named and predicted. *What changes in v14:*
 `RELATED.md` said "never for the weights". With requirements as sets, several principals can be combined by
 *intersection*, which needs no weights. The intersection's emptiness is then exactly where social choice must enter.
@@ -564,7 +564,7 @@ pluralism: a ball around the population's distribution. KL and Hellinger balls n
 notes); total-variation and Wasserstein balls need finitely many. *Pro:* real requirement types, published. *What we do
 that they lack:* that misalignment against such a ball is the evidence of breach, not the divergence itself.
 
-### 31. How RLHF amplifies a behaviour: the first theorem of a TRAINING layer
+### 31. How RLHF amplifies a behaviour: the first theorem of a SHAPING layer
 
 *Statements read.* Shapira, Benade and Procaccia, Theorem 1: for the KL-regularized optimum `π*_β`, any bounded `g` and
 any prompt, `E_{π*_β}[g] − E_{π_base}[g] = Z_x(β)^{−1}·Cov_{π_base}(g, e^{βr})`. Theorem 6: among policies that do not
@@ -575,7 +575,7 @@ increase the agreement statistic `A`, the KL-closest to `π*_β` is `π_base·ex
 Theorem 6 is VK5, both found independently and published at ICML 2026 (proceedings host not fetched). What it adds is
 the *training* reading: the sign of `Cov_base(g, e^{βr})` predicts, before any training, whether tuning on a reward will
 push a requirement's statistic toward breach. And the cause of the reward gap is traced to annotator bias under
-Bradley–Terry (their Theorems 4–5, not read). A TRAINING layer could take as its objects: a training map from an actor
+Bradley–Terry (their Theorems 4–5, not read). A SHAPING layer could take as its objects: a training map from an actor
 and a signal to a new actor; the drift of each requirement's statistic; and the coupling of conditions, how training on
 some conditions changes behaviour in others (entry 32). *Pro:* testable against CORE's verdicts. *Con:* the theorem
 assumes training reaches the regularized optimum, and W3 (`RELATED.md`, KL control) found that a PPO run reaches only
@@ -593,15 +593,15 @@ undo safety alignment. Qi et al. 2024: safety alignment is concentrated in the f
 human preference data favour agreement with the user. Hubinger et al.: backdoors survive safety training, and
 adversarial training can teach the trigger.
 
-*Adopt, now, as paradigm cases for TRAINING and for label test L2.*
+*Adopt, now, as paradigm cases for SHAPING and for label test L2.*
 - *Coupling of conditions.* Training on one set of conditions moves behaviour in others. In v14 terms, the misalignment
-  by condition after training is not predictable from the conditions trained on. This is the phenomenon a TRAINING layer
+  by condition after training is not predictable from the conditions trained on. This is the phenomenon a SHAPING layer
   must name.
 - *Hidden misalignment behind triggers* (Betley, Hubinger): conditions no record covers, exactly the case [P17] bounds
   by what the actor can tell apart. A trigger is something the actor can tell apart perfectly, so the bound is vacuous,
   which is the honest answer.
 - *Inoculation* is a case where the *same behaviour in training* produces different generalization depending on how the
-  condition is framed. A TRAINING layer must therefore take the conditions of training, not only the signal, as input.
+  condition is framed. A SHAPING layer must therefore take the conditions of training, not only the signal, as input.
 - *Shallow alignment* is a per-position KL profile, a quantity the framework can define exactly, along a sequence, as
   `RELATED.md`'s note on conversations proposes.
 
@@ -623,22 +623,22 @@ quantity in place of a composite score, and no appeal to internal goals.
 
 | Theory in `RELATED.md` | What changes with v14 |
 |---|---|
-| KL control | Moves wholly to OPTIMIZERS. VK5 should cite GDC's Theorem 1 and Huang et al.'s Lemma 2 (entries 8, 9); it is not new. |
+| KL control | Moves wholly to PURPOSE. VK5 should cite GDC's Theorem 1 and Huang et al.'s Lemma 2 (entries 8, 9); it is not new. |
 | Information geometry | v14's central projection is the *reverse* information projection (Csiszár–Tusnády, on file; Li's 1999 thesis *(to verify)*; Larsson et al. in general). Add it. The Pythagorean identities now serve FA2 and FA3, under linear interfaces, rather than the pursuit ray. |
-| Price equation | Its natural home is now TRAINING, as the covariance form of change under selection; Shapira et al.'s Theorem 1 is the same identity for RLHF. |
-| Bounded rationality | OPTIMIZERS. [P40]'s "act alike in every condition" is a linear, hence convex, structural requirement, so it survives into CORE as a refinement. |
-| Inverse RL | OPTIMIZERS. Add the Luce Alignment Model (entry 13) and the agent–device likelihood ratio (entry 12). |
+| Price equation | Its natural home is now SHAPING, as the covariance form of change under selection; Shapira et al.'s Theorem 1 is the same identity for RLHF. |
+| Bounded rationality | PURPOSE. [P40]'s "act alike in every condition" is a linear, hence convex, structural requirement, so it survives into CORE as a refinement. |
+| Inverse RL | PURPOSE. Add the Luce Alignment Model (entry 13) and the agent–device likelihood ratio (entry 12). |
 | CIRL and assistance | Unchanged in substance. The off-switch game (entry 21) adds corrigibility as requirements. |
-| Outer and inner alignment | OPTIMIZERS. The motive is now a refutable hypothesis (VF2); goal misgeneralization (entry 12) is its test. Outer misalignment has a social-choice cause (entry 29). |
-| Reward tampering | INTERFACE, extended. Unchanged otherwise; causal incentive criteria (entry 17) stay in OPTIMIZERS. |
-| Goodhart and reward hacking | OPTIMIZERS for the motive. CORE sees the evaluation gap. Skalse et al.'s theorem reads as a convexity result like VE2 (entry 11). |
+| Outer and inner alignment | PURPOSE. The motive is now a refutable hypothesis (VF2); goal misgeneralization (entry 12) is its test. Outer misalignment has a social-choice cause (entry 29). |
+| Reward tampering | INTERFACE, extended. Unchanged otherwise; causal incentive criteria (entry 17) stay in PURPOSE. |
+| Goodhart and reward hacking | PURPOSE for the motive. CORE sees the evaluation gap. Skalse et al.'s theorem reads as a convexity result like VE2 (entry 11). |
 | Principal–agent theory | LaCroix's three axes (entry 16) and Agarwal et al.'s deterrence model (entry 33) are its 2026 applications to AI. Holmström's informativeness principle now belongs to INTERFACE's views. |
 | Identification and causal inference | INTERFACE. Elicitation (VF3) is where identification of capability happens; control evaluations (entry 24) are elicitation aimed at the worst case. |
 | **Hypothesis testing and sequential analysis** | **The largest change.** v14's evidence is e-values, so this entry should be rewritten around SAVI (entry 1): the numeraire and the reverse projection for `CORE_GENERAL`; `E[τ] ≥ log(1/α)/M`; log-optimality for H46; Lemma A.4 for VK4(iii); betting confidence sequences for a certify verdict. Wald, Chernoff and Wilks stay as v13's history. |
-| Deceptive alignment and evaluation | Add Singh's adaptive-adversary limit (entry 6) and Souly et al.'s scaffold validation (entry 25). Strategic deception is INTERFACE plus OPTIMIZERS, as `interface.md` says. |
+| Deceptive alignment and evaluation | Add Singh's adaptive-adversary limit (entry 6) and Souly et al.'s scaffold validation (entry 25). Strategic deception is INTERFACE plus PURPOSE, as `interface.md` says. |
 | Attention dynamics in conversations | Unchanged; shallow alignment (entry 32) is a second case of behaviour along a sequence. |
 | Distribution shift | Becomes CORE's "shift of the conditions' weights". Podkopaev and Ramdas (entry 3) is the sequential test for harmful shift. |
-| Misspecified models | Applies to OPTIMIZERS' fits. In CORE, misspecification of the request needs a second standard (`LIMITS.md`); STPA (entry 26) is one way to find what is missing. |
+| Misspecified models | Applies to PURPOSE' fits. In CORE, misspecification of the request needs a second standard (`LIMITS.md`); STPA (entry 26) is one way to find what is missing. |
 | Distributionally robust optimization | KL and χ² balls are requirements in v14 (VK0's notes say how many budgets each needs). |
 | Information elicitation without verification | Now relevant to H47, the grader, beside prediction-powered monitoring (entry 3) and debate (entry 23). |
 | Active inference | Unchanged: never. |
@@ -678,7 +678,7 @@ quantity in place of a composite score, and no appeal to internal goals.
    needs no new machinery. AI control (Greenblatt et al.; Griffin et al.) supplies the worst-case feasible breach,
    `sup_{f∈𝓕}`, one line in INTERFACE that no motive is needed for.
 
-Close behind: the TRAINING layer seeded by Shapira et al.'s Theorem 1 (entry 31) with the empirical cases of entry 32,
+Close behind: the SHAPING layer seeded by Shapira et al.'s Theorem 1 (entry 31) with the empirical cases of entry 32,
 and the CVaR counterexample (entry 4), which the PI should see before approving convexity as a premise.
 
 ## 5. Top three things where our framework is distinctive

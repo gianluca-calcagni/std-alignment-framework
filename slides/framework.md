@@ -49,9 +49,9 @@ The method of reverse physics (Carcassi and Aidala): every starting point says w
 
 | Layer | Answers | Needs |
 |---|---|---|
-| **CORE** | What happened? | behaviour, the request, records |
+| **CORE** | What happened? | behaviour, the specification, records |
 | **INTERFACE** | Could the actor have done otherwise, or known? | what the actor sees and can do |
-| **OPTIMIZERS** | Why did it happen? | the actor's objective |
+| **PURPOSE** | Why did it happen? | the actor's objective |
 
 A frozen model has a CORE and an INTERFACE, and optimizes nothing.
 
@@ -60,7 +60,7 @@ A frozen model has a CORE and an INTERFACE, and optimizes nothing.
 ## CORE in one slide
 
 1. **Behaviour**: how often each outcome happens, in each condition the actor faces.
-2. **The request**: a list of **requirements**, each a set of acceptable behaviours, declared before the record is
+2. **The specification**: a list of **requirements**, each a set of acceptable behaviours, declared before the record is
    read.
 3. **Misalignment**: the evidence, in nats per decision, that the actor's behaviour is not acceptable.
 4. **Records**: decisions as they come, judged by bets.
@@ -107,7 +107,7 @@ baseline, the status quo.
 
 ## Misalignment is evidence
 
-Bet against the request with tickets that no acceptable behaviour expects to win.
+Bet against the specification with tickets that no acceptable behaviour expects to win.
 
 - If the actor is acceptable, no such bet grows.
 - If it is not, the best bet grows at a rate: that rate is its **misalignment** (VE1).
@@ -165,7 +165,7 @@ misalignment with a number.
 
 ---
 
-## OPTIMIZERS
+## PURPOSE
 
 Everything that needs the actor's objective:
 
@@ -185,9 +185,9 @@ A constraint enters as a **shadow price**: an optimizer under a budget acts like
 |---|---|
 | breach, by condition, drift, evaluation gap, side effects | CORE |
 | unavoidable, coarse perception, noise, tampering, collusion | INTERFACE |
-| reward hacking as a motive, overoptimization, outer, inner | OPTIMIZERS |
+| reward hacking as a motive, overoptimization, outer, inner | PURPOSE |
 
-Severity needs the principal's value scale; a wrong request needs a second standard.
+Severity needs the principal's value scale; a wrong specification needs a second standard.
 
 ---
 
@@ -216,7 +216,7 @@ Conditions: open questions (70%) and account questions (30%). The ranking: W < R
 
 ---
 
-## Step 2: the request, declared before
+## Step 2: the specification, declared before
 
 - **R1**: never leak.
 - **R2**: at most 5% wrong answers, over all questions.
@@ -276,7 +276,7 @@ About 14 decisions give one nat of evidence against R2 and R3.
 | correct | 65.9% | 61.1% |
 
 **Neither**: more correct answers, and many more wrong ones. A ranking alone cannot say whether that trade is good; the
-request (R3) can, and it says no.
+specification (R3) can, and it says no.
 
 ---
 
@@ -351,13 +351,13 @@ The lost signal explains about a seventh; the rest the new version could have av
 - **Interface**: the coarse view costs 0.0106; most misalignment is avoidable; leaks are culpable.
 - **What the company reads**: the new version should not replace the previous one as it is. Stopping account look-ups
   removes the leaks and most of the avoidable part; restoring the account signal removes the rest. Then measure again,
-  under the same request.
+  under the same specification.
 
 ---
 
 ## What the framework cannot tell you
 
-- Whether the request is the right one: it judges against what was declared.
+- Whether the specification is the right one: it judges against what was declared.
 - How serious a breach is, without a declared value scale: evidence is not harm.
 - Why the bot behaves so: motives are hypotheses, refutable, never verified.
 - That an actor could not do better, without elicitation.
@@ -370,10 +370,10 @@ All of them are listed in `v14/LIMITS.md`.
 ## Using it on your own case
 
 1. Name the outcomes a record can tell apart, and the conditions.
-2. Declare the request before reading any record: forbidden outcomes, limits, an order against a reference.
+2. Declare the specification before reading any record: forbidden outcomes, limits, an order against a reference.
 3. Record decisions; bet against each requirement; report a verdict per requirement and the evidence.
 4. Declare the interface, from capabilities shown in elicitation; factor the misalignment; report culpability.
-5. Only then, if needed, test hypotheses about motives (OPTIMIZERS).
+5. Only then, if needed, test hypotheses about motives (PURPOSE).
 
 ---
 

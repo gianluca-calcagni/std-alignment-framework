@@ -81,7 +81,7 @@ so `a ∈ A`, and the chain rule gives `KL(p‖a) = KL(p_ℬ‖a'_ℬ)`, every w
 **Notes.** This is v13's [P7](i), now with no default and no requirement of full support. On 40 random instances with
 budgets whose costs are constant on the cells of a partition, the misalignment and the misalignment at that partition
 agree within `1e-13` (`RESULTS-resolution.md`). Indifference is declared, never assumed ([D4]): a principal who declared
-a coarse σ-algebra to hide a distinction it cares about has misspecified its request, which no record can show
+a coarse σ-algebra to hide a distinction it cares about has misspecified its specification, which no record can show
 (`LIMITS.md`).
 
 ### RS4 — What a coarse record leaves open: hidden misalignment
@@ -159,6 +159,56 @@ budget whose cheapest outcome differs by condition, the least misalignment is `0
 that merges two conditions, and `0.990` with no view; an actor that sees nothing has
 `7.149 = 0 + 0.190 + 0.800 + 6.159`, the last term avoidable (`RESULTS-resolution.md`). The example's is in
 `slides/mathematicians.md`.
+
+### RS6 — An actor at least as fine as the principal loses nothing to resolution
+**Statement.** Let `A` be stated at a partition `ℬ` (RS3), and let an actor have the resolution `𝒜` with full-support
+splits `e(·|A)` (RS5(ii)), feasible set `𝓕_𝒜`. If `𝒜` refines `ℬ`, then `M_A(𝓕_𝒜) = M_A(Δ)`: its resolution costs
+nothing. If `𝒜` does not refine `ℬ`, the cost `M_A(𝓕_𝒜) − M_A(Δ)` can be positive: it is the misalignment due to
+**missing resolution**, a term of FA1 when the splits are consistent.
+
+**In plain terms.** An actor that can tell apart everything the principal cares about can meet any specification that
+an actor seeing everything could meet. Only when it cannot tell apart two outcomes the principal treats differently
+does its resolution cost misalignment, and that cost is a factor of its own.
+
+**Proof.** For any `f ∈ Δ`, let `p` give each cell `A` of `𝒜` the mass `f(A)`, split by `e(·|A)`; then `p ∈ 𝓕_𝒜`. Each
+cell of `ℬ` is a union of cells of `𝒜`, so `p_ℬ = f_ℬ`, and RS3 gives `M_A(p) = M_A^ℬ(p) = M_A^ℬ(f) = M_A(f)`. So
+`M_A(𝓕_𝒜) ≤ M_A(Δ)`, and the converse holds since `𝓕_𝒜 ⊆ Δ`. For the second sentence: two outcomes in one cell of `𝒜`,
+split evenly, and a principal who forbids one of them and accepts the other: every feasible behaviour that uses the
+cell breaks the requirement, while the actor that sees both need not. ∎
+
+### RS7 — Latitude: what the actor does where the specification is silent (a proposal)
+**Definition, proposed.** Let `ℬ` be the principal's partition and `r ∈ Δ°` a declared reference. The **latitude taken**
+by a behaviour `p̂` is `L_r(p̂) = Σ_{C∈ℬ, p̂(C)>0} p̂(C)·KL(p̂(·|C)‖r(·|C))`, the divergence of its splits inside the
+principal's cells from the reference's.
+
+**Statement.** (i) `L_r(p̂) = KL(p̂‖r) − KL(p̂_ℬ‖r_ℬ) ≥ 0`, with equality exactly when `p̂` splits every cell of `ℬ` it
+charges as `r` does. (ii) For a specification stated at `ℬ`, behaviours with the same cell masses have the same
+misalignment and may have any latitude: latitude never changes a verdict. (iii) `L_r` is continuous on `Δ`, so
+"`L_r > l`" is verifiable from records at any partition that refines `ℬ` and resolves the outcomes inside its cells,
+and, like hidden misalignment, untestable from records at a partition no finer than `ℬ`. (iv) For an actor of resolution
+`𝒜` with splits `e`, and a reference that splits each cell of `𝒜` as `e` does, `L_r(p̂) = KL(p̂_𝒜‖r_𝒜) − KL(p̂_ℬ‖r_ℬ)`
+for every feasible `p̂`; it is `0` for every feasible behaviour when `ℬ` refines `𝒜`. Only distinctions finer than the
+principal's give latitude.
+
+**In plain terms.** Where the principal has said it does not care, an actor that can tell more apart may still choose:
+answer long or short, use one tool or another. Those choices break nothing declared, but the principal did not foresee
+them, and a large latitude says the specification may be silent where the principal would not be. It is a signal to
+revise the specification for the next record, never a verdict on this one.
+
+**Proof.** (i) The chain rule on the cells of `ℬ`; a KL divergence is `0` exactly when its arguments agree, and `r(C) >
+0` makes every conditional defined. (ii) RS3. (iii) `r ∈ Δ°` makes `KL(·‖r)` and `KL(·_ℬ‖r_ℬ)` continuous, so the set
+`{L_r > l}` is open (VF1); two behaviours with the same cell masses of a partition no finer than `ℬ`, one split as `r`
+and one not, have the same law of such records. (iv) Inside each cell of `𝒜` both `p̂` and `r` split as `e`, so
+`KL(p̂‖r) = KL(p̂_𝒜‖r_𝒜)` by the chain rule; when `ℬ` refines `𝒜`, `p̂_ℬ` and `r_ℬ` split the cells of `𝒜` as `e` too,
+so `KL(p̂_ℬ‖r_ℬ) = KL(p̂_𝒜‖r_𝒜)`. ∎
+
+**Notes.** This is v13's within-cell departure ([P7](ii)) with a reference in place of the default, and v7.10's
+underdetermination (G1, [D4]'s reasons) given a number. The PI suggested "deviance" or "miscalibration"; the executor
+proposes **latitude** because both have fixed meanings in statistics, deviance being twice a log-likelihood ratio
+against a saturated model and miscalibration a forecast whose probabilities disagree with frequencies. Its interplay
+with declarations: it needs a declared reference and the principal's partition; found on a record, it is exploratory
+for that record ([A5]) and can only motivate a specification declared before the next one (`NOTES.md` §33). No probe:
+the proofs leave nothing to compute.
 
 ## The three positions together
 

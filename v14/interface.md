@@ -19,9 +19,9 @@ distribution `π(·|z)` on `U` for each signal, with finite support when `U` is 
 read, as in [B2], as one behaviour on pairs of a condition and an outcome, with the conditions' frequencies `w_c` fixed
 by the declaration, and divergences between tuples are taken on those pairs.
 
-**Culpability and the avoidable excess.** For a request whose acceptable set is `A` and an actor whose actual behaviour
-`p̂` lies in `𝓕 = 𝓕(ℐ)`: the **unavoidable misalignment** `M_A(𝓕) = inf_{f∈𝓕} M_A(f)`; the **best feasible behaviours**
-`𝓕* = {f ∈ 𝓕 : M_A(f) = M_A(𝓕)}`; the **avoidable excess** `E(p̂) = M_A(p̂) − M_A(𝓕)`; and the
+**Culpability and the avoidable excess.** For a specification whose acceptable set is `A` and an actor whose actual
+behaviour `p̂` lies in `𝓕 = 𝓕(ℐ)`: the **unavoidable misalignment** `M_A(𝓕) = inf_{f∈𝓕} M_A(f)`; the **best feasible
+behaviours** `𝓕* = {f ∈ 𝓕 : M_A(f) = M_A(𝓕)}`; the **avoidable excess** `E(p̂) = M_A(p̂) − M_A(𝓕)`; and the
 **culpability** `K(p̂) = inf_{f∈𝓕*} KL(p̂‖f)`, the evidence that the actor does not do the best it could. When `M_A(𝓕)`
 is finite, both are `0` exactly when `p̂ ∈ 𝓕*`; `K = E + R ≥ E` for linear interfaces whose best behaviours have nearest
 acceptable behaviours of full support (`factorization.md`, FA2), and they are not ordered otherwise. When `M_A(𝓕) = ∞`,
@@ -73,7 +73,7 @@ set, and FA1 factors it, while FA2's Pythagorean form does not apply. With finit
 ## Every form of misalignment, by the layer that can define it
 
 Each form is sorted by the least the framework needs to define it. Three questions mark the layers: what happened
-(CORE), whether the actor could have done otherwise or known (INTERFACE), and why (OPTIMIZERS).
+(CORE), whether the actor could have done otherwise or known (INTERFACE), and why (PURPOSE).
 
 | Form | Layer | The least it needs |
 |---|---|---|
@@ -90,17 +90,17 @@ Each form is sorted by the least the framework needs to define it. Three questio
 | tampering against honest selection | INTERFACE, extended | the outcome split into the world and its measurement, with a declared honest channel the actions cannot reach ([P50]), and what is seen before acting |
 | ignoring the situation against the environment's doing | INTERFACE | the split of actions from outcomes |
 | collusion between actors | INTERFACE, for several actors (not yet defined here) | each actor's views and actions; with shared randomness allowed, the joint behaviours reachable with no communication beyond the views are mixtures of local strategies, a convex set, so communication is testable by bets; independence of private randomness is not convex, and no requirement a record enforces under the mixture principle (`v14/README.md`, the conventions; `LIMITS.md`) |
-| gaming or reward hacking as a motive | OPTIMIZERS | the actor's objective, an evaluator |
-| overoptimization | OPTIMIZERS | an intensity of optimization |
-| outer misalignment | OPTIMIZERS | the trainer's objective |
-| inner misalignment | OPTIMIZERS | the learned objective against the trainer's |
-| strategic deception, alignment faking | INTERFACE and OPTIMIZERS | views to tell when it is observed, and an objective over its own future |
-| the shadow price of a constraint | OPTIMIZERS | a model of the actor optimizing under it (VK5) |
+| gaming or reward hacking as a motive | PURPOSE | the actor's objective, an evaluator |
+| overoptimization | PURPOSE | an intensity of optimization |
+| outer misalignment | PURPOSE | the trainer's objective |
+| inner misalignment | PURPOSE | the learned objective against the trainer's |
+| strategic deception, alignment faking | INTERFACE and PURPOSE | views to tell when it is observed, and an objective over its own future |
+| the shadow price of a constraint | PURPOSE | a model of the actor optimizing under it (VK5) |
 | misspecification | none: not the actor's | a second standard, another principal or a later judgement |
 | severity | the principal's side | a declared value scale (`NOTES.md` §24) |
 
 **Three questions, not a ladder.** A breach (CORE), culpability above `0` (INTERFACE) and intent, the breach serving the
-actor's objective (OPTIMIZERS), are separate verdicts: intent is possible with culpability `0`, when the best the actor
+actor's objective (PURPOSE), are separate verdicts: intent is possible with culpability `0`, when the best the actor
 could do serves its objective too. Their verification status differs: a breach is verifiable, culpability verifiable
 with the interface taken as known, intent a refutable hypothesis (`factorization.md`, VF2). Culpability above `0`
 charges any departure from the best feasible behaviour; reading it as negligence needs a tolerance, a margin the

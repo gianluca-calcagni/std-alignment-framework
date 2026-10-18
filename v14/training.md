@@ -19,7 +19,7 @@ What the layer is about has a different name in each ontology the framework serv
 | institutions | regulation, reform, incentive design | a regulator, a board | fines, bonuses, ratings |
 | markets | competition | customers | prices, revenue |
 
-**Proposal: SHAPING**, with these terms:
+**SHAPING**, the name the PI approved (Q70), with these terms:
 - the **shaper**, who changes the actor: a training pipeline, an environment that selects, a teacher, a regulator;
 - the **feedback**, the signal the shaper acts on, computed from records of the actor;
 - a **step**, one change of the actor; a **course**, the sequence of actors a run of steps produces;
@@ -27,15 +27,16 @@ What the layer is about has a different name in each ontology the framework serv
 
 "Shaping" says "changed in response to feedback" in each ontology: traits shaped by selection, a child shaped by
 upbringing, a market shaped by regulation, behaviour shaped by reinforcement in psychology. Its one crossing in machine
-learning is *reward shaping*, which is a way of designing the feedback, inside the layer's own subject. Alternatives
-considered: *adaptation*, which suggests the actor adapts by itself and crosses *domain adaptation*; *training* and
-*learning*, which read as machine learning; *selection*, which fits evolution and markets, not gradient descent;
-*conditioning*, which collides with the framework's conditions.
+learning is *reward shaping*, which is a way of designing the feedback, inside the layer's own subject. The PI also
+liked *aligning*; it was not taken because it names the hoped-for direction, while a course can as well misalign, and
+the layer must describe both. Alternatives considered: *adaptation*, which suggests the actor adapts by itself and
+crosses *domain adaptation*; *training* and *learning*, which read as machine learning; *selection*, which fits
+evolution and markets, not gradient descent; *conditioning*, which collides with the framework's conditions.
 
 ## Where it sits
 
 SHAPING uses CORE for each actor of the course, INTERFACE for what each can do and for the shaper's measurement, and the
-third layer (now OPTIMIZERS; the executor proposes PURPOSE, `NOTES.md` §32) only for hypotheses about why: the shaper as
+third layer, PURPOSE (once OPTIMIZERS, renamed by the PI's decision, Q70), only for hypotheses about why: the shaper as
 an optimizer of its feedback, and the aim a course may produce in the actor, which machine learning calls a
 mesa-objective. "Mesa" names the composition of the two layers, an aim produced by shaping, not either layer alone.
 

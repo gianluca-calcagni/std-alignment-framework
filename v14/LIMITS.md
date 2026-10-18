@@ -6,7 +6,7 @@
 
 The framework judges what an actor does against what a principal declared, from records of decisions. Each limit is one
 of those three things failing: the declaration, the judgement of behaviour, or the record. The layers are named as in
-`v14/README.md`: CORE, INTERFACE, OPTIMIZERS.
+`v14/README.md`: CORE, INTERFACE, PURPOSE.
 
 ## The declaration is an input, never checked
 
@@ -37,7 +37,7 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 ## Behaviour, not mind
 
 - **Internal states.** Two actors that behave alike in every condition are the same actor ([A1]). Goals, beliefs and
-  intentions enter only in OPTIMIZERS, as hypotheses about behaviour that records can refute and never verify
+  intentions enter only in PURPOSE, as hypotheses about behaviour that records can refute and never verify
   (`factorization.md`, VF2). "It wanted to" is never established; "it behaves as nothing that wanted the right thing
   would" can be.
 - **Excuses.** "It could not have done better" is about behaviours the actor did not produce. A sample of what it did
@@ -92,8 +92,8 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Labels are tested on paradigm cases.** A label is verified when it agrees with its word's sense on cases registered
   before computing (L1); outside those cases a word may still mislead. Carcassi's methodology justifies what kind of
   claim a label makes, not that it is the right word (`factorization.md`).
-- **Every number is relative to a declaration.** Misalignment to the request, culpability to the interface, a motive to
-  a model of optimization. A report that omits the declaration it is relative to says less than it seems to.
+- **Every number is relative to a declaration.** Misalignment to the specification, culpability to the interface, a
+  motive to a model of optimization. A report that omits the declaration it is relative to says less than it seems to.
 
 ## The factors
 

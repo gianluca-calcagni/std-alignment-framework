@@ -21,7 +21,7 @@ acceptable behaviour lies in all of them.
 - So a **constraint** and a requirement are the same kind of object. "Constraint" names the ones stated absolutely,
   with no reference.
 
-The draft calls the list "the request"; the executor proposes "specification" (`REQUESTS.md`, R20).
+Named "specification" by the PI's decision (Q70); the draft called it "the request".
 
 ---
 

@@ -2,13 +2,13 @@
 
 > **Status: draft of v14 (Q59); proved here, not yet checked in CI.** The numbers come from `probes/v14/v14_probe.py`.
 
-The order part of a request is a ranking of outcomes, which the principal may give only up to increasing transformations
-([B3] becomes this), and a **reference** `r ∈ Δ`, a behaviour against which it is judged: a base model, the previous
-version, a population of answers, the status quo. The ranking is a **preorder** `≽` on `X`: reflexive and transitive,
-possibly partial, as when outcomes are ranked on two scales at once. An **upper set** is a set `U ⊆ X` that contains
-every outcome ranked at least as high as one of its members; a **reading** of the ranking is a function `u : X → ℝ` that
-is non-decreasing (`x ≽ y` implies `u(x) ≥ u(y)`), the scores of a principal who holds this ranking and no other
-commitment.
+The order part of a specification is a ranking of outcomes, which the principal may give only up to increasing
+transformations ([B3] becomes this), and a **reference** `r ∈ Δ`, a behaviour against which it is judged: a base model,
+the previous version, a population of answers, the status quo. The ranking is a **preorder** `≽` on `X`: reflexive and
+transitive, possibly partial, as when outcomes are ranked on two scales at once. An **upper set** is a set `U ⊆ X` that
+contains every outcome ranked at least as high as one of its members; a **reading** of the ranking is a function
+`u : X → ℝ` that is non-decreasing (`x ≽ y` implies `u(x) ≥ u(y)`), the scores of a principal who holds this ranking and
+no other commitment.
 
 ### VO1 — Better for every reading is dominance on upper sets
 **Statement.** For behaviours `a` and `r`, these are equivalent: (a) `E_a[u] ≥ E_r[u]` for every reading `u`; (b) `a(U)

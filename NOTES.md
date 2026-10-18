@@ -248,6 +248,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q67 | what drafting the slides and running the example taught: lessons of formalization, methodology and applicability, and gaps in theory or practice. Applied: §31; H47, H48; `ROADMAP.md`, recommendation 10 | PI | §31 |
 | Q68 | merge the v14 draft to `main`, then delete the branches no longer needed, after an analysis of which. Applied: the files that placed v14 on its branch made true on `main`; a pull request from `claude/core-v14`; the analysis of the branches in the pull request and the turn's answer | PI | `README.md`, `ROADMAP.md`, `CLAUDE.md`, `slides/`, `v14/README.md` |
 | Q69 | after reviewing the slides, ten requests: (0) which of the slides' lessons to include now; (1) a second, independent deck of about thirty slides for mathematicians who know probability but not alignment, explaining σ-algebras and factoring their effect on misalignment, families of targets with Sanov, and every factorization result named and its label verified by Carcassi's methodology; (2) a better name than OPTIMIZERS, which suggests machine-learning training and is, in practice, about mesa-optimizers; (3) a fourth file and twin for training, with ontology-neutral terms, as a draft for a brainstorm; (4) severity, agreed to be independent of misalignment, measured and played against it in training; (5) how constraints are declared, where they are implicit, where explicit, the interface's role, and whether to call them a specification; (6) whether the principal is the only one who grades, and in what form; (7) formal elegance and reverse-physics methodology to adopt; (8) what the framework includes that the rest already gives; (9) a survey of competing frameworks, both ways. Applied: §32; `v14/resolution.md`, `v14/targets.md`, VK6 and VK7 and the section on declaring in `v14/constraints.md`, `v14/severity.md`, `v14/training.md`, `v14/related.md`; `slides/mathematicians.md`, `slides/specification.md`; `probes/v14/resolution.py`, `probes/slides/qa_model.py`; R20 | PI | §32 |
+| Q70 | after reading §32: record every analysis, the survey of competitors with its pros and cons included, where it belongs; say which of the lessons, elegances, redundancies and gaps were already applied to the tree, and brainstorm the rest; brainstorm whether conditions and outcomes need to stay split, or can be one distribution; a clearer method, after Carcassi, that justifies pairing each label with its formalization; a measure of what an actor does with distinctions finer than the principal's ("deviance" or "miscalibration", a better name welcome), beside the factor for distinctions it lacks; whether "adversarial" can be defined and measured. Decisions: R19, the mixture principle, to be solved from the literature, statistical or Carcassi's, where mixtures are founding; culpability to be redefined, with the literature's help; R20 approved (PURPOSE, SHAPING, specification), the PI liking "aligning" too and asking the executor to defend "declaration" and "specification" against common usage or to brainstorm better names; a turn of documentation hygiene, then the brainstorm. Applied: §33 | PI | §33 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -499,6 +500,11 @@ models are hypotheses that [P3] and [P12] test.
 | H50 | **The trainer's shadow price and the bettor's stake, across two budgets.** A trainer at a KL price under its own severity budget acts on its objective minus `ν` times the severity (VK5), and keeps that budget, so against the same budget the trained actor has no misalignment and `λ* = 0`. When the principal's budget differs from the trainer's, in conditions, grader or cost, the trained actor can break it, and for that actor held fixed the evidence moves with the principal's tolerance at `−λ*` (VK7). How `ν` and `λ*` relate across the two budgets is open (`v14/severity.md`); an earlier form of this hunch, "two prices of one budget", was wrong, as the review of §32 showed | D: a guess, restated after review |
 | H51 | **A certify verdict, from the same bets.** VK3's bet is the capital process of a betting confidence sequence for a mean, so an upper confidence sequence for a rate or a budget comes from the bets v14 already builds, giving "breach rate at most `ε`, with confidence `1 − α`" beside the convict verdict, valid under dependence if the literature's martingale argument carries over (`v14/related.md`, entry 2; not read by the executor) | D: from the survey; to be read and proved |
 | H52 | **Report culpability's size by `E`.** `K = M_{𝓕*}(p̂)` is infinite exactly when the actor produces an outcome that no best feasible behaviour produces, which is the common case: the best behaviours of a convex program over a polytope sit on its boundary, often deterministic in some condition. So `K` is `0` or `∞` for most actors and ranks nothing; and with `M_A(𝓕)` finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` are one verdict. The avoidable excess `E = M_A(p̂) − M_A(𝓕)` is finite whenever `M_A(p̂)` is, and is the size to report; a smoothed `K`, against the best behaviours within a declared margin, is a third candidate for L2 (§32) | D: from the example of `slides/mathematicians.md` |
+| H53 | **Conditions are an exogenous σ-algebra, not a type.** One space `Ω` and one distribution; the conditions are a sub-σ-algebra `ℰ` whose law the world fixes, which carries no evidence about the actor, may arrive in any order, and makes pooled requirements state their weights (§33.2) | D: a proposal |
+| H54 | **Latitude.** What the actor does inside the principal's cells, against a declared reference, `KL(p̂‖r) − KL(p̂_ℬ‖r_ℬ)`: never a verdict, a signal that the specification is silent where the principal may not be (RS7, §33.4) | D: a proposal, its identities proved |
+| H55 | **Evaluation gaming is measurable with honeypots.** Conditions the principal records and the actor's view merges with unobserved use stand for use; acting differently in evaluations and honeypots is verifiable, and the sign of the misalignment gap says whether it flatters the actor (§33.5) | D: a proposal |
+| H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
+| H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
 
 ### 5.5 Process
 
@@ -2274,3 +2280,165 @@ before any slide quoted a number. A minimization that failed from every start re
 as a factor; the solvers now start from the previous model, which is acceptable, and accept any solution that meets the
 constraints. The σ-algebra probe's first form nested two optimizers and was stopped by its PID after twenty minutes; one
 joint convex program replaced it, as in §30.
+
+## 33. Hygiene after Q69, and a brainstorm on the PI's questions, 2026-10-17 and 2026-10-18 (Q70)
+
+By the executor, at the PI's request (Q70); not independent. Written first so that nothing of it depends on the
+session's memory. The literature that bears on R19, culpability and "adversarial" is being read by a research assistant;
+what it finds is added to this section when it is read, not before.
+
+### 33.1 What is already in the tree, and what is not
+
+Applied by Q69 or this turn: VK6 (pooled rate limits with fixed conditions), VK7 (the budget's price), VK4's note on
+requirements (exact only in a chosen order), VK0's bipolar remark, `order.md`'s note that dominance is TG1's ordinal
+case, culpability as misalignment against the derived requirement `𝓕*` with `E` as its size (H52), RS1–RS5, and this
+turn RS6 (an actor as fine as the principal loses nothing to resolution) and RS7, latitude, as a proposal; the names of
+R20 (PURPOSE, SHAPING, specification), in `v14/` and `slides/`, the notes before Q70 keeping the old ones; the review of
+§32 saved as `probes/review/q69-review.md`; the survey of competitors, with its pros and cons, in `v14/related.md`, the
+place the executor judges right for it (it is about v14; `RELATED.md` keeps v13's comparison and points to it).
+
+Not applied, and why:
+- *Redundancies* (§32, item 8): `order.md` restated as a case of `targets.md`, FA3 demoted, [P55]'s count test limited
+  to certification, the condition splits merged into one, elicitation reread as a feasible set on pairs. Each changes a
+  file's structure, and the first and fourth depend on B below; they wait for the six files.
+- *Gaps from the survey*: a certify verdict (H51; a candidate in E below), the e-value literature cited in VE1, VE2 and
+  VK5 (the executor must read the statements first, by `CLAUDE.md`), two-sample bets for a reference known from
+  samples, a grader's validity (H47), the worst-case feasible breach (F below), rare-event estimates for forbidden
+  outcomes. Each needs reading or a decision; none is applied.
+- *Practices* (§32, item 7): a registered counterexample for every convention that changes a verdict, the provenance of
+  every symbol in a report, and the chain named in every split (H49): to be written into `README.md`'s rules when the PI
+  agrees, as rules of the repository.
+
+### 33.2 One distribution, or conditions and outcomes?
+
+The PI's proposal: pair conditions and outcomes into one distribution, analysed as a unit, unless there is a good
+argument to keep them apart. The executor's answer: **one space and one distribution, yes; the conditions survive as a
+sub-σ-algebra with a role, not as a type.**
+- *What unifies.* Let `Ω` be the outcomes, pairs included. A condition is an event of a σ-algebra `ℰ ⊆ 𝒫(Ω)`, the
+  **exogenous** σ-algebra: what the world, not the actor, decides. The actor's view is a sub-σ-algebra of `ℰ`; the
+  principal's and the record's are σ-algebras on `Ω` like the others (`resolution.md`). "By condition" becomes the
+  chain rule along `ℰ`, and every result of `resolution.md` applies to conditions as to outcomes. Nothing that the
+  split expresses is lost: a requirement per condition is a set of distributions whose conditionals given `ℰ` lie in
+  given sets.
+- *What must stay, and why.* Exogeneity has three consequences that a bare joint distribution would lose, each with
+  evidence. (1) *No evidence from `ℰ`*: how often a condition occurs says nothing about the actor, so the acceptable
+  behaviours share the world's law on `ℰ`; dropping that gave `0.0440` instead of `0.0496` for the support bot (VK6),
+  charging the actor less by imagining other worlds. (2) *Validity*: conditions can arrive in any order, chosen by users
+  or adversaries, not drawn at a fixed rate; bets must then be fair given the condition, decision by decision, as VE3
+  allows with its contexts, and a test that assumed `ℰ` drawn at rate `w` would lose its level. (3) *Pooled requirements
+  need their weights stated*: a limit on the overall rate over conditions means either over a declared mix `w` or over
+  the mix the record realizes, and the two differ when conditions are not drawn at a fixed rate.
+- *Recommendation.* Write CORE on one space `Ω` with σ-algebras, of which `ℰ` is declared exogenous; behaviours are the
+  distributions on `Ω` whose law on `ℰ` is the world's (or, for (2), kernels given `ℰ`); requirements are sets of them.
+  This removes a type and keeps every distinction that matters. H53.
+
+### 33.3 Pairing a label with its formalization, after Carcassi
+
+The PI is right that §26 and VF1–VF3 give a label's *status* (verifiable, refutable, computed), which is necessary and
+not sufficient. A **correspondence protocol** for each label, in five steps, proposed for `v14/labels.md`:
+1. *Operational content.* Write the word's commitments as statements a record could settle: what would show, in finite
+   time, that the word applies, and what would show that it does not. These are the label's experimental domain.
+2. *Formal object.* Name the set or the quantity, and prove that its verifiable and refutable statements are exactly
+   those of step 1: a **correspondence theorem**, soundness and completeness. For a quantity, the statements are "`Q >
+   q`" and "`Q < q`", and the theorem says which of them are verifiable, as Carcassi and Aidala build quantities from
+   ordered verifiable statements (to be read, by the research assistant's report).
+3. *Canonicity.* Show that any other formal object with the same verifiable statements is equivalent, so the choice
+   adds nothing the word does not carry: the formal object is fixed by the domain, up to what no record can tell.
+4. *Paradigm cases.* Registered before computing (L1, L2): the word's ordinary sense, on cases chosen for it, agrees
+   with the formal verdicts. Steps 1–3 cannot reach the word's sense outside the operational content; this step does.
+5. *What it does not mean.* A short list of readings the word invites and the object does not support.
+The protocol would have caught H52 before the example did: "how culpable" commits to a comparison of what the actor did
+with what it could have done, in size; `K`'s statements "`K > k`" are evidence of non-optimality, not size, so step 2
+fails for the size and passes for the verdict. The executor proposes to fill the protocol for misaligned, breach,
+culpable, hidden, latitude and unavoidable first, as the core of `v14/labels.md`, then register L2 on its step 4.
+
+### 33.4 The actor's σ-algebra against the principal's
+
+- *Coarser*: RS6 and FA1 give the factor of **missing resolution**, `M_A(𝓕_𝒜) − M_A(Δ)`, zero when the actor's
+  resolution refines the principal's; the same for the view against conditions the specification treats apart. It is
+  the "missing understanding, resolution or capability" the PI named, in one term per declared limit.
+- *Finer*: RS7 proposes **latitude**, `L_r(p̂) = KL(p̂‖r) − KL(p̂_ℬ‖r_ℬ)`, what the actor does inside the principal's
+  cells against a declared reference. It never changes a verdict; it signals choices the specification did not foresee.
+  The name: "deviance" is twice a log-likelihood ratio in statistics, "miscalibration" a forecast that disagrees with
+  frequencies; "latitude" (granted by the specification, taken by the actor) collides with neither. Alternatives:
+  discretion, underdetermination (v7.10's G1).
+- *Interplay with declarations*: latitude needs a declared reference and the principal's partition; on a record it is
+  exploratory ([A5]) and can only prompt a specification declared before the next record. A principal who wants
+  latitude bounded declares a requirement inside the cells, and then it is misalignment, not latitude. Open: a
+  reference-free latitude, against the maximum-entropy split, which measures concentration rather than departure.
+
+### 33.5 Can "adversarial" be defined and measured?
+
+Not as one word; as four things, one per layer, three of them behavioural:
+- *The worst case* (INTERFACE): the largest misalignment any feasible behaviour reaches, `sup_{f∈𝓕} M_A(f)`, or the
+  largest breach rate; computed from the declarations, what a deployment protocol must withstand whatever the actor
+  does, as AI control asks. A property of the interface, not of the actor.
+- *Evaluation gaming* (INTERFACE): behaviour that depends on being observed, in the direction that looks better. With
+  **honeypots**, conditions the principal records that the actor's view merges with unobserved use, and in which the
+  world responds
+to its actions as in use, RS5's equality makes the honeypot stand for use. Two quantities, both verifiable from records
+of evaluations and honeypots: the
+  evidence that the actor acts differently in evaluations and honeypots, a misalignment against "act alike" ([P40]'s
+  linear requirement), and the gap `M_A(honeypot) − M_A(evaluation)`, whose sign says whether the difference flatters
+  the actor. Sandbagging is the mirror: capability shown in honeypots that evaluations hid, which refutes the excuse
+  (VF3).
+- *Adaptation against certification* (CORE): behaviour that changes after evidence accumulates or after a certificate;
+  misalignment by period, the period after certification being a condition. VE3's convictions keep their level against
+  any adaptive actor; certifications do not, which argues for monitoring that never stops (`related.md`, entry 6).
+- *An adversarial aim* (PURPOSE): an aim that lowers the principal's targets; a hypothesis records can refute, never
+  verify.
+A record never shows adversarial intent; with honeypots it can show an adversarial pattern. H55.
+
+### 33.6 R19, the mixture principle: a candidate
+
+The principle buys validity under any dependence at the price of convexity, and tail risk is its sharpest cost (§32). A
+candidate that keeps both, pending the literature:
+- **Per-decision requirements**: each decision, given the past, is to be acceptable; convex; judged by bets (VE1–VE3);
+  the mixture principle applies, and is then not a choice but what "each decision" means.
+- **Pooled requirements**: about the average of the actor's conditional behaviours over a declared horizon, `p̄_n =
+  (1/n)·Σ_i a_i`, `a_i` the law of decision `i` given the past. The record's shares minus `p̄_n` form a martingale
+  average, so they concentrate around `p̄_n` whatever the dependence, and time-uniform confidence sets for `p̄_n` exist
+  (to be read: confidence sequences for averages of conditional means). A pooled requirement may be any closed set,
+  convex or not, so a CVaR limit over a deployment is a pooled requirement, judged by whether the confidence set for
+  `p̄_n` leaves it.
+- The principal declares, for each requirement, which kind it is. The mixture principle then stops being a premise of
+  the framework and becomes the definition of a per-decision requirement. What is lost: a pooled verdict is about one
+  deployment, at a level, not a rate per decision; its magnitude is a distance from a confidence set, not VE1's growth
+  rate. H56.
+Carcassi and Aidala are reported to found ensembles on mixing; if so, a per-decision requirement is a set of ensembles
+closed under mixing, the same object, and a pooled one is a property of one ensemble, the deployment's (to be read).
+
+### 33.7 Culpability, again
+
+`K` is `0` or `∞` for most actors (H52), and `E` ignores what doing better would cost. Candidates, before the
+literature:
+- **At a care margin** `δ`, declared: `K_δ(p̂) = M_{𝓕*_δ}(p̂)`, with `𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕) + δ}`, the
+  evidence that the actor is not within `δ` of its best. For `δ > 0` the set usually holds behaviours of full support,
+  so `K_δ` is finite; `δ` is the standard of care, the "reasonable actor" made a number. A convex set, so VE1, VE3
+  apply.
+- **By the cost of the better alternative** (Hand's rule, `B < P·L`, and Halpern and Kleiman-Weiner's blame): culpable
+  when some feasible behaviour lowers expected severity by more than it costs; the size is that difference, in the
+  principal's units. Needs a severity scale and a declared cost on the feasible set.
+- **The avoidable excess `E`**, as now, as the size in nats.
+The executor's recommendation, provisional: verdict and evidence by `K_δ`, size by `E`, and the Hand-style gap where
+severity and costs are declared; the literature may change it. H57.
+
+### 33.8 "Declaration" and "specification" against common usage
+
+- *Specification* is defended. In formal methods a specification is a property: the set of acceptable behaviours, and
+  satisfaction is membership, often partial; v14's is that, for distributions, like a probabilistic temporal property
+  that defines a set of Markov chains. In AI safety, "specification gaming" (Krakovna et al., to verify) is meeting the
+  literal specification while missing what was meant: in v14 the shaper's feedback is a specification `A_S` and the
+  principal's another, `A`, and gaming is meeting `A_S` while breaking `A`, which is SH1's outer term realized; the
+  misfit between `A` and what the principal meant is misspecification, outside one specification, as `LIMITS.md` says.
+  The usage matches. Its one risk is a reader who expects a specification to be complete; v14's may be silent inside
+  cells, which is what latitude measures.
+- *Declaration* is the weaker word. v14 uses it for the act of fixing the specification, the reference and the
+  interface, dated, before the record is read ([A5]). Common usage reads "declaration" as a formal statement, without
+  the timing; statistics calls the timing "pre-registration". The executor proposes to keep "declare" for the act, since
+  it covers objects that are not tests, and to define it in one line as "fixed, dated and published before the record it
+  judges is read", the repository's "register" staying for tests.
+
+### 33.9 Hunches
+
+H53–H57, in §5.4.

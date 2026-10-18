@@ -145,7 +145,7 @@ the same intersection; how the reference should meet the constraints is H45, and
 the PI's choice (`ROADMAP.md`, recommendation 2).
 
 ### VK5 — The constrained optimizer, by the Karush–Kuhn–Tucker conditions
-*This result belongs to OPTIMIZERS: it is a fact about one model of an actor, not part of what the principal asks.*
+*This result belongs to PURPOSE: it is a fact about one model of an actor, not part of what the principal asks.*
 
 **Statement.** Let `q ∈ Δ°`, `F : X → ℝ`, `t > 0`, and a budget `(g, b)`. Among behaviours `a` with `E_a[g] ≤ b`, the
 value `E_a[F] − KL(a‖q)/t` is largest at `a_ν = tilt(q, t·(F − ν·g))`, where `ν = 0` if `E_{a_0}[g] ≤ b`, and otherwise
@@ -167,12 +167,12 @@ directly. For a forbidden set, an `a` with `a(C) = 0` has `KL(a‖q) = KL(a‖q(
 
 **Notes.** Checked against a numerical maximization on 29 random instances, within `3e-9`, and the derivative of the
 largest value in `b` equals `ν` within `2e-8` (`probes/v14/RESULTS.md`, VK5). Two consequences, recorded here for
-OPTIMIZERS.
+PURPOSE.
 - *Obeying and valuing look alike.* An actor that keeps a budget because it must, and one that values the cost at `ν`,
   behave identically; by [A1], the core cannot and need not tell them apart.
 - *v13 charged obedience.* Under v13's standard specification of `F`, the constrained optimizer is charged, since it
   lies on the ray of `F − ν·g`, not of `F`: the principal's own budget made its actor "misaligned". Under v14 the budget
-  is part of the request, and the optimizer that keeps it breaches nothing.
+  is part of the specification, and the optimizer that keeps it breaches nothing.
 
 ### VK6 — A pooled rate limit when the conditions are not chosen
 **Statement.** Let the conditions `c` have frequencies `w_c > 0` that the actor does not choose, so that behaviours are

@@ -27,21 +27,22 @@ Five findings, each recorded with its evidence in `NOTES.md` §21–§26:
 
 ## The files
 
-Three layers, each built only on the ones below it, each with a twin for outcomes that are not finite that states only
-what changes there, as `general/transfer.md` does (Q62):
+Three layers, and a fourth on training (Q69, Q70), each built only on the ones below it, each with a twin for outcomes
+that are not finite that states only what changes there, as `general/transfer.md` does (Q62):
 
 | File, to be written | Holds | Twin |
 |---|---|---|
-| `CORE` | behaviours per condition; the request, a list of requirements, each a convex closed set; misalignment as the evidence against their intersection, with a verdict per requirement; records and bets | `CORE_GENERAL` |
+| `CORE` | behaviours per condition; the specification, a list of requirements, each a convex closed set; misalignment as the evidence against their intersection, with a verdict per requirement; records and bets | `CORE_GENERAL` |
 | `INTERFACE` | what the actor sees, what it can do, and how the world turns its actions into outcomes; feasibility, culpability, coarse perception, noise, tampering, collusion | `INTERFACE_GENERAL` |
-| `OPTIMIZERS` | objectives, pursuit, the KL price, evaluators, training, shadow prices; gaming, overoptimization, outer and inner misalignment, strategic deception | `OPTIMIZERS_GENERAL` |
+| `PURPOSE` | aims: objectives, pursuit, the KL price, evaluators, shadow prices; gaming as a motive, strategic deception | `PURPOSE_GENERAL` |
+| `SHAPING` | how an actor is changed by feedback: training, selection, education, regulation; outer and inner misalignment, overoptimization, misgeneralization (`training.md`, a proposal) | `SHAPING_GENERAL` |
 
 The draft so far, in this folder:
 
 | File | What it holds | Status |
 |---|---|---|
 | `evidence.md` | VE1 misalignment against a convex set is the growth rate of the best bet; VE2 records hold an actor to the convex hull; VE3 a test from bets keeps its level under any dependence; VE4 a bet's growth is an average; why this measure | proved here; VE1 also read in an open text ([@grunwald2023], Theorem 1) |
-| `constraints.md` | VK0 every convex requirement is a set of budgets; VK1 forbidden sets; VK2 rate limits; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions (for OPTIMIZERS) | proved here, except VK4(iii), supported by a probe |
+| `constraints.md` | VK0 every convex requirement is a set of budgets; VK1 forbidden sets; VK2 rate limits; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions (for PURPOSE) | proved here, except VK4(iii), supported by a probe |
 | `order.md` | VO1 better for every reading is dominance on upper sets; VO2 v13's ordinal specification lies inside it; VO3 three verdicts and what a record verifies; why dominance is canonical | proved here |
 | `interface.md` | the interface, feasibility, culpability, elicitation; IN1 every convex feasible set is an interface's; every form of misalignment by the layer that defines it | definitions proposed; IN1 proved here |
 | `factorization.md` | FA1 nested interfaces factor misalignment exactly; FA2, FA3 its Pythagorean forms; v13's exact splits by mechanism and layer; VF1–VF3 the verification status of every factor's label | proved here |
@@ -53,10 +54,10 @@ The draft so far, in this folder:
 | `training.md` | a fourth layer, SHAPING, for training, selection, education and regulation; SH1 | a proposal; SH1 proved |
 | `related.md` | competing frameworks, both ways | a survey by a research assistant, not reviewed |
 
-**Names under discussion** (Q69, R20): the executor proposes PURPOSE for the third layer, now OPTIMIZERS, SHAPING for a
-fourth, and "specification" for the request; until the PI decides, the files keep the draft's names. None runs in CI
-yet. The probes in `probes/v14/` reproduce every number, with their outputs beside them; VK0, VO1, VO2, IN1, FA1 and
-VF1–VF3 have no probe, as their proofs leave nothing to compute.
+**Names** (R20, approved by the PI, Q70): PURPOSE for the third layer, once OPTIMIZERS; SHAPING for a fourth, on
+training (`training.md`); and "specification" for what the principal declares, once "the request". Notes written before
+Q70 keep the old names. None runs in CI yet. The probes in `probes/v14/` reproduce every number, with their outputs
+beside them; VK0, VO1, VO2, IN1, FA1 and VF1–VF3 have no probe, as their proofs leave nothing to compute.
 
 ## The design
 
@@ -65,7 +66,7 @@ mathematics (M), background conditions assumed without loss of generality, each 
 their status (A), and definitions with their interpretation (D).
 1. *Outcomes and behaviours.* As v13's [M1], [M2], [B1], [B2], [A1] and [D1] without the tilt; a behaviour may depend
    on a condition, such as a prompt.
-2. *The request*, declared before it judges ([A5]): a finite list of **requirements**, each a convex closed set of
+2. *The specification*, declared before it judges ([A5]): a finite list of **requirements**, each a convex closed set of
    behaviours. The **acceptable set** is their intersection.
 3. *Misalignment*, the evidence against acceptability: the best long-run growth rate of a bet, fixed in advance or
    chosen before each decision, that no acceptable behaviour expects to win ([A4] in its bet form, VE1), with a
@@ -79,8 +80,8 @@ masses of cells; structural requirements, such as acting alike in every conditio
 reversal ([P41]). **Refinements of the principal's side**: a value scale for stakes and severity (`NOTES.md` §24), and
 several principals with weights ([P42]).
 
-**INTERFACE** (`interface.md`) and **OPTIMIZERS**, as in the table above; a constraint enters OPTIMIZERS through its
-shadow price (VK5).
+**INTERFACE** (`interface.md`) and **PURPOSE**, as in the table above; a constraint enters PURPOSE through its shadow
+price (VK5).
 
 ## Why the design loses no generality, and where it does
 
@@ -91,7 +92,7 @@ or say which cases are. These are the claims, each with its ground and its quali
 |---|---|---|
 | finitely many outcomes | a record of finitely many decisions at finite precision decides finitely many events, and misalignment on a continuum is the supremum over them ([B1]; `general/transfer.md`, TR2) | that supremum equals the least divergence to the acceptable behaviours only when their closure is compact (TR3); heavy tails and atoms in `CORE-GENERAL.md`; v14's own results are proved for finite outcomes only |
 | episodes and conditions as outcomes | an episode, or a condition with its outcome, is again an outcome ([B2]) | one long record with no episodes |
-| a request is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | comparisons with a reference (`order.md`, VO3) are reported beside the verdicts; they become requirements only when the principal declares which |
+| a specification is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | comparisons with a reference (`order.md`, VO3) are reported beside the verdicts; they become requirements only when the principal declares which |
 | requirements are closed | closing a requirement changes no misalignment and no bet (VE1(iv)) | the breach verdict changes at boundary behaviours, such as a rate exactly at a strict limit, which no record can tell apart |
 | requirements are convex | forced given two premises: a schedule of acceptable behaviours is acceptable, and tests must keep their level whatever the dependence. Independent draws from a mixture have the law of a random schedule of its components, so a test valid for every schedule is valid at the hull; and no bet separates a set from its hull (VE2) | a set that is not convex, independence among them, is enforced as its hull, and so is a limit on tail risk: at a tail of 10%, two behaviours with CVaR `0.6` mix into one with CVaR `0.72` (`NOTES.md` §32); for a sample it can still be judged (`factorization.md`, VF1); the premises are a choice the PI should make knowingly |
 | every convex requirement is a set of budgets | the separating hyperplane, from the nearest point (`constraints.md`, VK0) | some need infinitely many budgets |
@@ -119,7 +120,7 @@ imports, and marked by whether it changes a verdict.
 | a ranking read as dominance | `order.md` | forced, given unanimity over the ranking's readings | yes, against v13's ordinal cone | the cone adds a shape the ranking does not declare (VO2); which requirement the order gives is the PI's to decide |
 | culpability's verdict as `p̂ ∉ 𝓕*`, its size as the avoidable excess `E`; `K` as its evidence rate | `interface.md` | convenience, consistency with [A4] | no on whether the actor is culpable, yes on how much | `K`, `E` and `p̂ ∉ 𝓕*` agree on the verdict; `K` is an evidence rate, testable by bets, but infinite exactly when the actor produces an outcome no best feasible behaviour does, the common case, so it ranks nothing (H52); `E` is a difference of two misalignments, finite with them |
 | every concept in the least layer that can define it | `interface.md` | convenience | no | a reader learns what each form of misalignment needs, and no concept depends on more than it must |
-| pursuit as a tilt, its price KL | OPTIMIZERS | forced, given v13's two reasons of [D2] | yes, within OPTIMIZERS | the steepest climb in the Fisher geometry and the best trade-off at a KL price agree only there ([P14]); it no longer touches what misalignment is |
+| pursuit as a tilt, its price KL | PURPOSE | forced, given v13's two reasons of [D2] | yes, within PURPOSE | the steepest climb in the Fisher geometry and the best trade-off at a KL price agree only there ([P14]); it no longer touches what misalignment is |
 
 ## Challenges, and the answers
 
@@ -138,7 +139,7 @@ weaken the framework more than it should.
   constraints. The content of a domain is in its requirements, declared through refinements whose results are proved.
 - *"Without optimization the core cannot see reward hacking or goal-directed failure."* It sees what happened: the
   measured requirement met and the true one breached is the evaluation gap, in CORE. Why it happened, the motive, is an
-  OPTIMIZERS hypothesis that records can refute and never verify (`factorization.md`, VF2), as it should be.
+  PURPOSE hypothesis that records can refute and never verify (`factorization.md`, VF2), as it should be.
 - *"Culpability depends on an interface the principal declares; that is arbitrary."* The interface is a hypothesis that
   records refute when the actor does what it says the actor cannot, and an excuse about capability is tested in
   elicitation conditions or reported as resting on the declaration (VF3). The refutation runs one way: an interface that

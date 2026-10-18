@@ -17,7 +17,7 @@ Prepended at the PI's request, to be worked on together; the order is the execut
    requirement built from an order, `B(r)`, v13's ordinal cone, or no shortfall beyond declared margins (`v14/order.md`;
    dominance is the ranking's reading, not a requirement); and a reference that meets the constraints (H45).
 3. **[[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
-4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `OPTIMIZERS` and their twins, each twin
+4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `PURPOSE` and their twins, each twin
    stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
    and mutants with them.
 5. **Close the open proofs**: VK4(iii), several constraints, with Farkas's lemma read in an open text; the Pythagorean
@@ -36,10 +36,11 @@ Prepended at the PI's request, to be worked on together; the order is the execut
     a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
     the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
 
-11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): a *certify* verdict beside the convict
-    verdict, from the bets the draft already builds (H51), first, since a deployment decision needs it; cite the
-    e-value literature for VE1, VE2 and VK5, and import its answers to H46 and VK4(iii) after reading them; weigh the
-    CVaR counterexample in R19; decide the names (R20); then brainstorm SHAPING and severity on their drafts.
+11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): a *certify* verdict beside the convict verdict,
+    from the bets the draft already builds (H51), first, since a deployment decision needs it; cite the e-value
+    literature for VE1, VE2 and VK5, and import its answers to H46 and VK4(iii) after reading them; weigh the CVaR
+    counterexample in R19; the names are decided (R20, Q70); then brainstorm SHAPING and severity on
+their drafts, with the questions of Q70 (`NOTES.md` §33).
 
 ## The goal
 
@@ -94,14 +95,18 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15), postponed
   until v14 absorbs them (Q59).
-- **v14, a draft** (Q59–Q69, `NOTES.md` §22–§32): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
-  brought to `main` as a draft (Q68), and extended at the PI's ten questions on the slides (Q69). Three layers, each
+- **v14, a draft** (Q59–Q70, `NOTES.md` §22–§33): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
+  brought to `main` as a draft (Q68), extended at the PI's ten questions on the slides (Q69), its names decided (Q70:
+  PURPOSE, SHAPING, specification),
+and RS6 and RS7 (latitude, proposed) added; a brainstorm on one distribution against conditions and outcomes, a protocol
+for pairing labels with their formalizations, latitude, "adversarial", R19 and culpability is in `NOTES.md` §33. Three
+layers, each
   with a twin for outcomes that are not finite: CORE (a request as a list of convex requirements, misalignment as the
   evidence against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse
-  perception, tampering) and OPTIMIZERS (pursuit, evaluators, training, shadow prices). Thirty-one results, all proved
+  perception, tampering) and PURPOSE (pursuit, evaluators, training, shadow prices). Thirty-one results, all proved
   here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK7), three
   verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status
-  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS5), a family of targets with a
+  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS6), a family of targets with a
   reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity and who grades
   (`v14/severity.md`), a fourth layer for training (`v14/training.md`), and new names (R20). A survey of competing
   frameworks (`v14/related.md`). `v14/README.md` holds the design with its claims of generality, its conventions and the
@@ -256,3 +261,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-17 | the lessons of the slides' example (Q67, `NOTES.md` §31): VK2's closed form does not hold with conditions' frequencies fixed (`0.0440` against `0.0496`); outcomes measured by graders (H47); forbidden outcomes need a rate and a plan (H48); recommendation 10 | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-17 | the v14 draft brought to `main` by a pull request (Q68), the files that placed it on its branch corrected; the branches no longer needed listed for deletion | 2 (a version, as a draft) |
 | 2026-10-17 | the PI's ten questions on the slides (Q69, `NOTES.md` §32): a deck for mathematicians (`slides/mathematicians.md`) and one on declaring a specification (`slides/specification.md`); σ-algebras in three positions (`v14/resolution.md`, RS1–RS5), families of targets and Sanov (`v14/targets.md`), VK6 and VK7; proposals for severity, a training layer and new names (R20); a survey of competing frameworks (`v14/related.md`), with a tail-risk counterexample to the mixture principle | 2 (a version); 3 (contact: readers, and the literature); 5 (what the quantities mean) |
+| 2026-10-18 | documentation hygiene and a brainstorm (Q70, `NOTES.md` §33): the names of R20 applied (PURPOSE, SHAPING, specification); the review of Q69 kept (`probes/review/q69-review.md`); RS6 (an actor as fine as the principal loses nothing to resolution) and RS7 (latitude, proposed); proposals on one distribution with an exogenous σ-algebra, a correspondence protocol for labels, evaluation gaming measured with honeypots, per-decision and pooled requirements for R19, and culpability at a care margin (H53–H57) | 2 (a version); 5 (what the quantities mean) |
