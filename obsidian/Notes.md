@@ -505,6 +505,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H55 | **Evaluation gaming is measurable with honeypots.** Conditions the principal records and the actor's view merges with unobserved use stand for use; acting differently in evaluations and honeypots is verifiable, and the sign of the misalignment gap says whether it flatters the actor (§33.5) | D: a proposal |
 | H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
 | H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
+| H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − sup_{a∈A} exp(−D_∞(a‖p̂))`, the least share of decisions that must be unacceptable to explain the behaviour: bounded, finite at forbidden outcomes, with no convexity needed; after Carcassi and Aidala's `fcap` (§33.10) | D: a proposal, its formula checked |
 
 ### 5.5 Process
 
@@ -2442,3 +2443,55 @@ severity and costs are declared; the literature may change it. H57.
 ### 33.9 Hunches
 
 H53–H57, in §5.4.
+
+### 33.10 What the literature added (2026-10-18)
+
+The research assistant's report is `v14/literature-q70.md`; every source's record was opened on arXiv, and what is cited
+below as read was read in the text by the assistant, not yet by the executor. The executor checked the two derivations
+that bear on decisions.
+- *R19.* (1) The mixture principle has a name in the literature: a null that is **fork-convex** (Ramdas, Ruf, Larsson
+  and Koolen, Definition 10 and Theorem 13): every non-negative supermartingale for a set is one for its closed
+  fork-convex hull, the set of schedules chosen from the past. So VE2 is a case of a published theorem, and the
+  principle is the choice of testing by supermartingales, not an assumption the framework adds. (2) **Pooled
+  requirements are supported**: Howard, Ramdas, McAuliffe and Sekhon, Theorem 4, give time-uniform confidence sequences
+  for the running average of *conditional* means, "requiring neither independence nor a common mean"; Waudby-Smith and
+  Ramdas's betting sequences do not cover varying means. A pooled requirement, any closed set `Q`, is then rejected at
+  the first time the confidence set for `p̄_t` misses `Q`, at level `α` under any dependence (the assistant's
+  derivation; a union bound over outcomes). The CVaR case checks by hand: losses `(0, 1, 10)`, tail `0.1`, a point mass
+  at `1` and `(0.99, 0, 0.01)` both have CVaR `1`, their even mixture `1.45`; the pooled test catches the alternation
+  that the hull forgives. (3) Universal inference handles non-convex nulls only for independent data or a likelihood
+  model of the dependence, so it does not escape the choice. (4) A convex fallback: a principal who fixes the VaR level
+  in advance gets a linear budget (Rockafellar and Uryasev's form, to verify), which survives mixtures but excludes some
+  behaviours that meet the limit. **The executor's recommendation for R19**: adopt the two tiers of §33.6, per-decision
+  requirements convex and judged by bets, pooled requirements any closed set and judged by confidence sequences over a
+  declared horizon; the cost is that a pooled verdict has a level, not a growth rate in nats.
+- *Carcassi and Aidala.* Mixing is founding: an ensemble space is "a bounded convex subset", convex combinations
+  "represent statistical mixtures" (arXiv:2602.01470, arXiv:2608.27543, read). Entropy is not derived from mixing but
+  tied to it by strict concavity; KL appears as a projection, the shape of `M_A`. Nothing read treats sets that are not
+  closed under mixing, so their work supports the per-decision tier and does not settle the pooled one. Their method of
+  pairing (arXiv:1807.07896, Axiom II.2, read) is a **double definition**, an informal clause and a formal clause stated
+  together, and their way of justifying it (arXiv:2608.27543, §2, read) is to give several formalizations of one
+  informal idea under one name and prove them equivalent over a named background condition, so that the formal object is
+  not one arbitrary choice. This sharpens §33.3: step 2's correspondence theorem becomes "several formalizations, proved
+  equivalent", as VE1, SN1 and [[P55 — What a record of counts certifies, at every size|P55]] already do for misalignment (the growth of the best bet, Sanov's rate, the
+  divergence to the hull). The full axioms are in their book, on `assumptionsofphysics.org`, not an allowed host (R21).
+- *A new tool: the fraction capacity* (Carcassi and Aidala's `fcap`, read in its definition; the formula derived by the
+  assistant, checked by the executor): the largest share of an actor's decisions that can be acceptable, if the rest may
+  be anything, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`, `D_∞` the Rényi divergence of order `∞`. Its complement is the
+  least share of decisions that must be unacceptable to explain the behaviour. It is bounded, needs no convexity, and
+  never blows up, where KL does at a forbidden outcome. A candidate companion to misalignment for forbidden sets and for
+  culpability's size. H58.
+- *Culpability.* Halpern and Kleiman-Weiner's blame (Definitions 3.1–3.2, read): the reduction in the probability of the
+  bad outcome that an alternative would bring, mitigated by the alternative's cost, judged in the epistemic state the
+  actor *should* have had; Chockler and Halpern's responsibility `1/(k + 1)` and blame as its expectation. The Hand rule
+  is known only through a secondary source. The assistant's derivation: "negligent" exactly when `p̂` is not among the
+  feasible behaviours that minimize expected harm plus a declared cost at a declared rate, a convex derived requirement,
+  so bets apply; its size the excess over that minimum, finite. The executor's recommendation now: the care margin of
+  §33.7 when no costs are declared, and this negligence form when severity and costs are, with `1 − fcap_p̂(𝓕*)`, the
+  share of decisions below the best, beside either.
+- *Adversarial.* Behavioural and measured in the literature: the worst case over red-team policies (control games,
+  Griffin et al., Definitions 3.1 and 3.4, read), the compliance gap of alignment faking (between conditions the model
+  is told are monitored or not), switching after certification (Singh, Theorem 1), evaluation awareness measured as a
+  classifier's AUC. Internal, not behavioural: the "strategic" part of sandbagging, and faking's motive. This confirms
+  §33.5's split, with one caution: a honeypot works only as far as the actor cannot tell it from use, and evaluation
+  awareness bounds how good honeypots can be.

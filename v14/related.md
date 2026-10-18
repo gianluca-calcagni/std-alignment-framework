@@ -5,6 +5,8 @@
 > again before any item cites it, as `CLAUDE.md` asks, and adds it to `REFERENCES.md` then. The executor checked by
 > hand the one counterexample that bears on a decision, the tail-risk limit of entry 4 (`NOTES.md` §32).
 
+A second survey, on mixtures after Carcassi, R19, culpability and adversarial actors, is `literature-q70.md` (Q70).
+
 A survey for the PI's question of 2026-10-17: which published frameworks, theories and studies of misalignment do
 things the framework should do itself, which do we do that they should, and with what pros and cons. It extends
 `RELATED.md`, which compares 22 neighbouring theories with v13, and reads everything against the v14 draft (`v14/`).
