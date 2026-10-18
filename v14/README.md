@@ -53,7 +53,8 @@ The draft so far, in this folder:
 | `severity.md` | severity as a declared scale, never in nats; what a report gives; who grades | a proposal |
 | `training.md` | a fourth layer, SHAPING, for training, selection, education and regulation; SH1 | a proposal; SH1 proved |
 | `related.md` | competing frameworks, both ways | a survey by a research assistant, not reviewed |
-| `literature-q70.md` | mixtures after Carcassi, the cost of the mixture principle, culpability, adversarial actors | a survey by a research assistant, not reviewed; two derivations checked |
+| `literature-q70.md` | mixtures after Carcassi, the cost of the mixture principle, culpability, adversarial actors | a survey by a research assistant, not reviewed; two derivations checked, one claim corrected |
+| `book-q70.md` | Carcassi and Aidala's book read: ensemble spaces, the method of pairing a word with its formal object, a seven-step protocol for the labels | a research assistant's reading, not reviewed |
 
 **Names** (R20, approved by the PI, Q70): PURPOSE for the third layer, once OPTIMIZERS; SHAPING for a fourth, on
 training (`training.md`); and "specification" for what the principal declares, once "the request". Notes written before

@@ -42,6 +42,12 @@ Prepended at the PI's request, to be worked on together; the order is the execut
     counterexample in R19; the names are decided (R20, Q70); then brainstorm SHAPING and severity on
 their drafts, with the questions of Q70 (`NOTES.md` §33).
 
+12. **The brainstorm of Q70** (`NOTES.md` §33): R19 by two tiers of requirement, per-decision and pooled; one
+    distribution with an exogenous σ-algebra; `v14/labels.md` on the seven-step protocol from Carcassi and Aidala's
+    book, first for misaligned, breach, culpable, hidden, latitude and unavoidable; culpability at a care margin, or by
+    negligence where costs are declared; "adversarial" as worst case, evaluation gaming with honeypots, and aim. Each
+    waits for the PI's reading of §33.
+
 ## The goal
 
 A standard formal framework for alignment problems in general, not only in machine learning: solid enough to build on,
@@ -263,3 +269,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-17 | the PI's ten questions on the slides (Q69, `NOTES.md` §32): a deck for mathematicians (`slides/mathematicians.md`) and one on declaring a specification (`slides/specification.md`); σ-algebras in three positions (`v14/resolution.md`, RS1–RS5), families of targets and Sanov (`v14/targets.md`), VK6 and VK7; proposals for severity, a training layer and new names (R20); a survey of competing frameworks (`v14/related.md`), with a tail-risk counterexample to the mixture principle | 2 (a version); 3 (contact: readers, and the literature); 5 (what the quantities mean) |
 | 2026-10-18 | documentation hygiene and a brainstorm (Q70, `NOTES.md` §33): the names of R20 applied (PURPOSE, SHAPING, specification); the review of Q69 kept (`probes/review/q69-review.md`); RS6 (an actor as fine as the principal loses nothing to resolution) and RS7 (latitude, proposed); proposals on one distribution with an exogenous σ-algebra, a correspondence protocol for labels, evaluation gaming measured with honeypots, per-decision and pooled requirements for R19, and culpability at a care margin (H53–H57) | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-18 | the literature for Q70 (`v14/literature-q70.md`, `NOTES.md` §33.10): the mixture principle is a fork-convex null; pooled requirements judged by confidence sequences for averages of conditional means, valid under any dependence, recommended for R19; Carcassi and Aidala's double definitions and equivalent formalizations for the label protocol; the fraction capacity (H58); culpability by negligence where costs are declared; R21, a host for Carcassi's book | 3 (imports); 5 (what the quantities mean) |
+| 2026-10-18 | Carcassi and Aidala's book read (`v14/book-q70.md`, `NOTES.md` §33.11), R21 closed: mixing is an axiom of the space of behaviours, not of requirements; statistical quantities are affine, a criterion for R19's two tiers; the fraction capacity takes the hull, which corrects H58 (a slip, §1); a seven-step protocol for pairing labels with their formalizations | 3 (imports); 5 (what the quantities mean) |

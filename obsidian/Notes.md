@@ -83,6 +83,7 @@ later results goes in Notes |
 | **Editing the tree during a gated test run** | on 2026-10-16 the executor edited `v14/constraints.md` while the tests that gate a push were running on the working tree; the check that every Markdown source is wrapped read the half-edited file and failed, and the push did not happen. The commit itself was wrapped | while a gated run is in progress, the working tree is not touched; edits wait for its result |
 | **A result applied outside its hypothesis** | on 2026-10-17 (Q69) the draft of `v14/severity.md` and `v14/training.md` read VK7, which holds the actor fixed, as saying how a trainer's budget moves the evidence against the actor it trains, which changes with the budget, and called the trainer's and the bettor's prices "two prices of one budget", which are never both positive for one actor and one budget; RS5(iii) said that coarsening a resolution shrinks the feasible set, which needs the environment's splits to be consistent. Caught by the adversarial review of §32 before any push | before a result is used in a proposal or a gloss, write its hypotheses beside the use, and check that the use keeps every one |
 | **A gloss written from the intended meaning, not from the formula** | the same day: SH1's middle term glossed as "what the feedback costs by rewarding behaviours the principal does not accept", where it is positive exactly when the feedback leaves out every best feasible behaviour; VK6's plain terms "more where it breaches more", false once the nearest rate passes ½; VK4's Notes "no exact attribution exists", where one exists along a chosen order. Caught by the same review | derive each gloss from the formula, with one instance that would make it false, before writing it; the fifth row of this table's kind, after "A plain-terms twin that claims more than the statement" |
+| **A formula checked, its source not read** | on 2026-10-18 (Q70) the executor checked the research assistant's formula for Carcassi and Aidala's fraction capacity, `sup_{a∈A} exp(−D_∞(a‖p))`, for one acceptable behaviour, and wrote in §33.10 and H58 that it "needs no convexity", without reading the book's definition, which takes the hull (Definition 4.173); the reading of the book the same day found it | before a formula is attributed to a source, read the source's definition, not only the formula's proof; the third row of this table about reading the source, after "An abstract read as the theorem" |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -505,7 +506,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H55 | **Evaluation gaming is measurable with honeypots.** Conditions the principal records and the actor's view merges with unobserved use stand for use; acting differently in evaluations and honeypots is verifiable, and the sign of the misalignment gap says whether it flatters the actor (§33.5) | D: a proposal |
 | H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
 | H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
-| H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − sup_{a∈A} exp(−D_∞(a‖p̂))`, the least share of decisions that must be unacceptable to explain the behaviour: bounded, finite at forbidden outcomes, with no convexity needed; after Carcassi and Aidala's `fcap` (§33.10) | D: a proposal, its formula checked |
+| H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − fcap_p̂(A)`, the least share of decisions that must be unacceptable to explain the behaviour, where Carcassi and Aidala's `fcap` takes the hull of `A` (Definition 4.173): for convex `A`, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`. Bounded, finite at forbidden outcomes, continuous on finite outcomes for compact `A`, so both of its directions are verifiable; it convexifies as the mixture principle does, so it is no way around R19. An earlier form of this row claimed it needed no convexity, which was wrong (§33.11) | D: a proposal, its formula checked for convex `A` |
 
 ### 5.5 Process
 
@@ -2478,9 +2479,11 @@ that bear on decisions.
 - *A new tool: the fraction capacity* (Carcassi and Aidala's `fcap`, read in its definition; the formula derived by the
   assistant, checked by the executor): the largest share of an actor's decisions that can be acceptable, if the rest may
   be anything, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`, `D_∞` the Rényi divergence of order `∞`. Its complement is the
-  least share of decisions that must be unacceptable to explain the behaviour. It is bounded, needs no convexity, and
-  never blows up, where KL does at a forbidden outcome. A candidate companion to misalignment for forbidden sets and for
-  culpability's size. H58.
+  least share of decisions that must be unacceptable to explain the behaviour. It is bounded and never blows up, where
+  KL does at a forbidden outcome. A candidate companion to misalignment for
+forbidden sets and for culpability's size. H58. *Corrected in §33.11:* the book defines the capacity over the hull of
+`A` (Definition 4.173), so "it needs no convexity", written here first, is wrong; the formula is the book's only for
+convex `A`.
 - *Culpability.* Halpern and Kleiman-Weiner's blame (Definitions 3.1–3.2, read): the reduction in the probability of the
   bad outcome that an alternative would bring, mitigated by the alternative's cost, judged in the epistemic state the
   actor *should* have had; Chockler and Halpern's responsibility `1/(k + 1)` and blame as its expectation. The Hand rule
@@ -2495,3 +2498,50 @@ that bear on decisions.
   classifier's AUC. Internal, not behavioural: the "strategic" part of sandbagging, and faking's motive. This confirms
   §33.5's split, with one caution: a honeypot works only as far as the actor cannot tell it from use, and evaluation
   awareness bounds how good honeypots can be.
+
+### 33.11 Carcassi and Aidala's book, read (2026-10-18)
+
+The PI supplied the book's address (fulcrum.org, open access, doi:10.3998/mpub.12204707, version 3.0 of 2025-12-30); its
+record matches the title and authors, and R21 is closed without a new host. A research assistant read Part I's summary,
+Part II chapters 1–4 and Part III (`v14/book-q70.md`, every quotation with its printed page); the executor read Axiom
+4.7 and its justification (pp. 205–206) and Definition 4.173 (p. 260) in the text.
+- *Mixing is an axiom of the space, not of its subsets.* Axiom 4.7: "The statistical mixture of two ensembles is an
+  ensemble", justified by a random selector between two preparation procedures; Corollary 4.8 makes every ensemble space
+  convex. Nothing makes a requirement convex: the book itself uses subsets that are not, such as equilibria ("the
+  mixture of two equilibria at different temperatures is not an equilibrium", p. 270). So the book supports v14's space
+  of behaviours and says nothing for or against convex requirements: the mixture principle is v14's testing premise,
+  not Carcassi's.
+- *The schedule is an open question there too.* A footnote to Axiom 4.7 (p. 206): a procedure that "alternates the
+  selection deterministically" could prepare mixtures exactly, and "It is not clear whether this would create problems
+  or not", left to future work. VE2's schedules are that procedure.
+- *Statistical quantities are affine* (Definition 4.181, p. 263), justified by preparation instances being independent.
+  This gives R19's two tiers a criterion from the book's own vocabulary, the assistant's derivation: a **per-decision**
+  requirement is a set of limits on statistical quantities, which on finitely many outcomes, with VK0, are exactly the
+  convex closed requirements; a **pooled** requirement is stated through a functional that does not average under
+  mixing, as CVaR, an entropy cap or a quantile do, and it registers the variability the selector adds, which is why the
+  CVaR limit fails under mixing. The book calls a claim about one deployment a hypothesis about "a single event",
+  falsifiable, "not a scientific law" (p. 203): the pooled tier's verdicts are of that kind, and should say so.
+- *The fraction capacity takes the hull* (Definition 4.173), which corrects §33.10 and H58, and offers no way around
+  R19. On finite outcomes it is continuous for compact sets, so its size is two-sided verifiable, unlike misalignment,
+  which is one-sided where a forbidden outcome is possible.
+- *KL and the book.* The book defines no relative entropy; its only divergences are the mixing entropy, the
+  Jensen–Shannon divergence, and the Fisher–Rao metric. Two glosses, derived by the assistant and checked by the
+  executor: the slope at `λ → 0⁺` of the mixing-entropy gap `S(λ·a + (1 − λ)·b) − λ·S(a) − (1 − λ)·S(b)` is `KL(a‖b)`,
+  so `KL(p̂‖a)` is the rate at which variability rises as a little of the actor's behaviour is mixed into the acceptable
+  one; and `KL(p̂‖a) < ∞` exactly when `p̂` is a component of `a`, in the book's sense (Definition 4.15). Glosses, not a
+  justification of the order, which still comes from [[A4 — Misalignment is evidence|A4]].
+- *The method of pairing*, stated by the book (pp. 99–100): every axiom and definition has an informal clause, a
+  "Formally" clause, and a justification "why the elements in the informal system must be mapped into the formal system
+  in the way proposed"; for falsifiable and decidable statements it writes "We have to show they are equivalent" (pp.
+  117–118). The assistant's protocol in seven steps (`book-q70.md`, §4.2) replaces §33.3's five: (1) a double
+  definition; (2) an operational justification for every formal clause, or the clause marked an assumption or a
+  convention; (3) a proof that the informal and formal clauses cover the same cases; (4) the verifiable content, a size
+  being a quantity only if both "`Q > q`" and "`Q < q`" are verifiable (Definition 3.6, Theorem 3.9), otherwise a
+  one-sided bound; (5) several characterizations, proved equivalent over a named background; (6) uniqueness of every
+  free choice and invariance under what the record cannot tell apart, the rest listed as conventions; (7) paradigm
+  cases, an exclusion example per clause, a disagreement case for every rival formalization, and the failures recorded.
+  Its worked example on "misaligned" finds misalignment a one-sided quantity, verifiable from above where a forbidden
+  outcome is possible; on "culpable", that `K`, `E` and the share of decisions off the best agree on the verdict and
+  differ in size, so the size is the PI's choice, the share being two-sided verifiable and finite where `K` is not.
+  **The executor's recommendation**: adopt the seven steps as `v14/labels.md`'s template, and fill it first for
+  misaligned, breach, culpable, hidden, latitude and unavoidable.

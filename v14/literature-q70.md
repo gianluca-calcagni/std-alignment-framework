@@ -112,10 +112,13 @@ forces convexity of a requirement, which is exactly v14's two premises (`README.
 behaviours on finitely many outcomes, p = λa + (1 − λ)b with b a behaviour holds iff p(x) ≥ λa(x) for every x (then b =
 (p − λa)/(1 − λ) is non-negative and sums to one). So fcap_p({a}) = min over x with a(x) > 0 of p(x)/a(x), capped at 1,
 and fcap_p(A) = sup_{a∈A} exp(−D_∞(a‖p)), with D_∞(a‖p) = log max_x a(x)/p(x). Its plain twin: the largest share of the
-actor's decisions that can be acceptable, if the rest may be anything. It needs no convexity of A; for a schedule of
-acceptable behaviours one takes hull(A), and the two differ exactly when A is not convex. A check: behaviours on three
-outcomes p₁ = (0, 1, 0), p₂ = (0.99, 0, 0.01), their equal mixture m: fcap_m({p₁}) = fcap_m({p₂}) = 0.5, as it should
-(computed by the assistant's own script in the scratchpad, not a repository probe).
+actor's decisions that can be acceptable, if the rest may be anything. *Corrected after the book was read
+(`book-q70.md`, §4.3; Definition 4.173, p. 260): the book's fraction capacity takes the hull,
+`fcap_e(A) = sup(frac_e(hull(A)) ∪ {0})`, so the formula above is the book's only for convex `A`, and the claim that
+follows is wrong.* It needs no convexity of A; for a schedule of acceptable behaviours one takes hull(A), and the two
+differ exactly when A is not convex. A check: behaviours on three outcomes p₁ = (0, 1, 0), p₂ = (0.99, 0, 0.01), their
+equal mixture m: fcap_m({p₁}) = fcap_m({p₂}) = 0.5, as it should (computed by the assistant's own script in the
+scratchpad, not a repository probe).
 
 ### 1.4 Pairing an informal concept with its formal object
 
