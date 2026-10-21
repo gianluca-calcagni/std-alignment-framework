@@ -109,15 +109,15 @@ for pairing labels with their formalizations, latitude, "adversarial", R19 and c
 layers, each
   with a twin for outcomes that are not finite: CORE (a request as a list of convex requirements, misalignment as the
   evidence against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse
-  perception, tampering) and PURPOSE (pursuit, evaluators, training, shadow prices). Thirty-one results, all proved
-  here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK7), three
-  verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status
-  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS6, RS8), a family of targets with a
-  reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity and who grades
-  (`v14/severity.md`), a fourth layer for training (`v14/training.md`), and new names (R20). A survey of competing
-  frameworks (`v14/related.md`). `v14/README.md` holds the design with its claims of generality, its conventions and the
-  challenges answered; `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. The PI's
-  decisions on R15 and R16 wait for it; L2 comes next (the recommendations above).
+  perception, tampering) and PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for training.
+  Thirty-three results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a bet
+  (VE1–VE4), constraints (VK0–VK7), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and
+  its labels' verification status (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS6,
+  RS8), a family of targets with a reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity
+  and who grades (`v14/severity.md`), a fourth layer for training (`v14/training.md`), and new names (R20). A survey of
+  competing frameworks (`v14/related.md`). `v14/README.md` holds the design with its claims of generality, its
+  conventions and the challenges answered; `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13
+  survives. The PI's decisions on R15 and R16 wait for it; L2 comes next (the recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([P5], [P6]), the estimates by access with their intervals ([P23], [P47], [P52]), and the diagnostics
   [P43]–[P51] with the projection of [P15]; the checks of those items run on it, its own tests cover its interface, and
