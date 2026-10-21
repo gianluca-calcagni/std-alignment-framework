@@ -251,6 +251,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q69 | after reviewing the slides, ten requests: (0) which of the slides' lessons to include now; (1) a second, independent deck of about thirty slides for mathematicians who know probability but not alignment, explaining σ-algebras and factoring their effect on misalignment, families of targets with Sanov, and every factorization result named and its label verified by Carcassi's methodology; (2) a better name than OPTIMIZERS, which suggests machine-learning training and is, in practice, about mesa-optimizers; (3) a fourth file and twin for training, with ontology-neutral terms, as a draft for a brainstorm; (4) severity, agreed to be independent of misalignment, measured and played against it in training; (5) how constraints are declared, where they are implicit, where explicit, the interface's role, and whether to call them a specification; (6) whether the principal is the only one who grades, and in what form; (7) formal elegance and reverse-physics methodology to adopt; (8) what the framework includes that the rest already gives; (9) a survey of competing frameworks, both ways. Applied: §32; `v14/resolution.md`, `v14/targets.md`, VK6 and VK7 and the section on declaring in `v14/constraints.md`, `v14/severity.md`, `v14/training.md`, `v14/related.md`; `slides/mathematicians.md`, `slides/specification.md`; `probes/v14/resolution.py`, `probes/slides/qa_model.py`; R20 | PI | §32 |
 | Q70 | after reading §32: record every analysis, the survey of competitors with its pros and cons included, where it belongs; say which of the lessons, elegances, redundancies and gaps were already applied to the tree, and brainstorm the rest; brainstorm whether conditions and outcomes need to stay split, or can be one distribution; a clearer method, after Carcassi, that justifies pairing each label with its formalization; a measure of what an actor does with distinctions finer than the principal's ("deviance" or "miscalibration", a better name welcome), beside the factor for distinctions it lacks; whether "adversarial" can be defined and measured. Decisions: R19, the mixture principle, to be solved from the literature, statistical or Carcassi's, where mixtures are founding; culpability to be redefined, with the literature's help; R20 approved (PURPOSE, SHAPING, specification), the PI liking "aligning" too and asking the executor to defend "declaration" and "specification" against common usage or to brainstorm better names; a turn of documentation hygiene, then the brainstorm. Applied: §33 | PI | §33 |
 | Q71 | the point of σ-algebras, made explicit by the PI: in general the actor and the principal do not know each other's σ-algebras; they know mismatches are possible but cannot point to where they are, which is why confusion occurs and why perplexity can be measured; the PI expects this to change how mismatches are treated and factored, not to prevent measuring them; and Carcassi and Aidala's book supplied (R21). Applied: RS8 in `v14/resolution.md`; §33.11, §33.12 | PI | §33.11, §33.12 |
+| Q72 | after the executor proposed R19 and certification as the next brainstorm: above the PI's expertise; consolidate it in the notes with the decision pending the PI, the answer perhaps forced once the framework's desiderata are clear; the PI still wants more clarity on latitude available and confusion on a continuum, good enough for now. Applied: §33.15, R19 updated | PI | §33.15 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -2695,3 +2696,65 @@ diagnostics proposed in §33.12, and there the book's moves import cleanly, with
 **The executor's recommendation.** Adopt imports 1 to 4: every entropy-based diagnostic relative to a declared
 reference or in mixing form, the unit justified by mixing, and limits taken topologically. Report latitude available
 and confusion on a continuum only with a declared precision, and say so where they are reported.
+
+### 33.15 R19 and certification: two kinds of requirement, two kinds of verdict (2026-10-21, pending the PI)
+
+The executor proposed this as the next brainstorm, since the label protocol, culpability, severity budgets and the
+reporting of latitude all depend on what a specification may require and what a record may conclude. The PI asked for
+it to be consolidated here, with the decision pending (R19), observing that an answer is sometimes forced once the
+desiderata are clear. So the section states the proposal, then the desiderata, then what they force; what remains is
+listed at the end.
+
+**The proposal.**
+1. *Per-decision requirements*: every decision, given the past, is acceptable. Convex by meaning, a selector between
+   acceptable ways of acting being acceptable (Carcassi and Aidala's Axiom 4.7 applied decision by decision); judged by
+   bets, valid under any dependence (VE3); their size is misalignment, in nats per decision.
+2. *Pooled requirements*: the average of the actor's conditional behaviours over a declared horizon, `p̄_n`, lies in a
+   closed set `Q`, convex or not. Judged by confidence sequences for `p̄_n`, valid under any dependence (Howard, Ramdas,
+   McAuliffe and Sekhon, Theorem 4, read by the assistant, §33.10): a breach when the confidence set leaves `Q`. They
+   hold what does not average: CVaR, quantiles, entropy caps. Their size is a verdict at a level and a distance, not a
+   rate.
+3. *Two verdicts for each*: **convict**, a breach shown at a level; **certify**, the requirement met with a margin at a
+   level, the margin being forced since exact compliance is never verifiable (VF1). The same confidence sequences give
+   both for pooled requirements, and for per-decision ones an upper confidence sequence on the rate or the budget (H51).
+
+**The desiderata, and what they force.**
+- *D1, validity whatever the dependence*: forces bets for per-decision requirements and confidence sequences for the
+  average of conditional behaviours for pooled ones; it excludes tests that assume decisions independent, and universal
+  inference, which assumes independence or a model of it (§33.10).
+- *D2, a requirement means what the principal's words say*: forces the kind from the declared quantity. A limit on a
+  statistical quantity, affine in the behaviour (Carcassi and Aidala, Definition 4.181), can be either kind, and the two
+  differ: "at most 5% at every decision" is a per-decision requirement on each conditional rate, and "at most 5% over
+  this deployment" a pooled one on their average, which lets a risky decision be offset by a safe one. A limit on a
+  quantity that does not average, CVaR or a quantile, can only be pooled. So the kind is forced by the quantity, except
+  for affine ones, where it is forced by the next desideratum.
+- *D3, the guarantee goes to whoever bears the risk*: if each decision affects someone who is owed the guarantee, a user
+  or a patient, the requirement is per-decision; if the harm adds up over the deployment and only its total matters, a
+  budget of losses or of emissions, it is pooled. This is a fact about the principal's situation, to be declared, not a
+  choice the framework makes. **Answer to (a)**: no default; the declaration states the kind, and lint can check that a
+  non-affine quantity is never declared per-decision.
+- *D4, declared before ([[A5 — Declared before|A5]])*: a pooled requirement over an unstated horizon is not fully declared, since its verdict
+  changes with the horizon. **Answer to (b)**: the horizon is part of the requirement, a fixed number of decisions, a
+  period, or rolling windows for monitoring, stated with it; the framework supplies none.
+- *D5, numbers on different scales are never added*: a per-decision misalignment is a rate in nats per decision; a
+  pooled breach is a verdict at a level with a distance. **Answer to (c)**: the pooled breach gets a name of its own,
+  proposed
+  **aggregate breach**, and the two are reported side by side, never summed.
+- *D6, the principal sets every tolerance*: the margin of a certification is a tolerance, so it comes from the
+  principal, like the limits themselves (`v14/severity.md`, who grades). **Answer to (d)**: declared per requirement;
+  the framework reports the smallest margin a record can certify at the declared level, so that a principal sees what
+  its data can support before choosing.
+
+**What remains for the PI.** If D1–D6 are the desiderata, every question above is answered by them, and what is left is
+to accept or amend the desiderata themselves: D3 and D6 are the ones a principal could reasonably reject, D3 if it
+wanted the framework to choose the kind of an affine requirement, D6 if it wanted default margins. Open mathematics,
+whatever the decision: the size of an aggregate breach (a distance from the confidence set to `Q`, in which divergence),
+the power of the pooled test, and certification under dependence for per-decision requirements, which H51 suggests the
+existing bets give.
+
+**Kept for later: latitude available and confusion on a continuum.** The PI wants more clarity there (Q72). The
+executor's seed: a record has finite precision, so no record shows latitude finer than the record's σ-algebra resolves;
+the record's σ-algebra is then a natural default for the declared precision of H61, making latitude available and
+confusion finite and operational at the resolution where they could ever be seen, and leaving anything finer hidden, as
+hidden misalignment is (RS4). To be worked through, with its interplay with the actor's own precision, when the PI
+returns to it.
