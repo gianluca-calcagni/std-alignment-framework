@@ -107,8 +107,8 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
 and RS6 and RS7 (latitude, proposed) added; a brainstorm on one distribution against conditions and outcomes, a protocol
 for pairing labels with their formalizations, latitude, "adversarial", R19 and culpability is in `NOTES.md` §33. Three
 layers, each
-  with a twin for outcomes that are not finite: CORE (a request as a list of convex requirements, misalignment as the
-  evidence against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse
+  with a twin for outcomes that are not finite: CORE (a specification as a list of convex requirements, misalignment as
+  the evidence against it, records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse
   perception, tampering) and PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for training.
   Thirty-three results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a bet
   (VE1–VE4), constraints (VK0–VK7), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and
