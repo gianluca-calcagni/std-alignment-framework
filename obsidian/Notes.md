@@ -250,6 +250,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q68 | merge the v14 draft to `main`, then delete the branches no longer needed, after an analysis of which. Applied: the files that placed v14 on its branch made true on `main`; a pull request from `claude/core-v14`; the analysis of the branches in the pull request and the turn's answer | PI | `README.md`, `ROADMAP.md`, `CLAUDE.md`, `slides/`, `v14/README.md` |
 | Q69 | after reviewing the slides, ten requests: (0) which of the slides' lessons to include now; (1) a second, independent deck of about thirty slides for mathematicians who know probability but not alignment, explaining σ-algebras and factoring their effect on misalignment, families of targets with Sanov, and every factorization result named and its label verified by Carcassi's methodology; (2) a better name than OPTIMIZERS, which suggests machine-learning training and is, in practice, about mesa-optimizers; (3) a fourth file and twin for training, with ontology-neutral terms, as a draft for a brainstorm; (4) severity, agreed to be independent of misalignment, measured and played against it in training; (5) how constraints are declared, where they are implicit, where explicit, the interface's role, and whether to call them a specification; (6) whether the principal is the only one who grades, and in what form; (7) formal elegance and reverse-physics methodology to adopt; (8) what the framework includes that the rest already gives; (9) a survey of competing frameworks, both ways. Applied: §32; `v14/resolution.md`, `v14/targets.md`, VK6 and VK7 and the section on declaring in `v14/constraints.md`, `v14/severity.md`, `v14/training.md`, `v14/related.md`; `slides/mathematicians.md`, `slides/specification.md`; `probes/v14/resolution.py`, `probes/slides/qa_model.py`; R20 | PI | §32 |
 | Q70 | after reading §32: record every analysis, the survey of competitors with its pros and cons included, where it belongs; say which of the lessons, elegances, redundancies and gaps were already applied to the tree, and brainstorm the rest; brainstorm whether conditions and outcomes need to stay split, or can be one distribution; a clearer method, after Carcassi, that justifies pairing each label with its formalization; a measure of what an actor does with distinctions finer than the principal's ("deviance" or "miscalibration", a better name welcome), beside the factor for distinctions it lacks; whether "adversarial" can be defined and measured. Decisions: R19, the mixture principle, to be solved from the literature, statistical or Carcassi's, where mixtures are founding; culpability to be redefined, with the literature's help; R20 approved (PURPOSE, SHAPING, specification), the PI liking "aligning" too and asking the executor to defend "declaration" and "specification" against common usage or to brainstorm better names; a turn of documentation hygiene, then the brainstorm. Applied: §33 | PI | §33 |
+| Q71 | the point of σ-algebras, made explicit by the PI: in general the actor and the principal do not know each other's σ-algebras; they know mismatches are possible but cannot point to where they are, which is why confusion occurs and why perplexity can be measured; the PI expects this to change how mismatches are treated and factored, not to prevent measuring them; and Carcassi and Aidala's book supplied (R21). Applied: RS8 in `v14/resolution.md`; §33.11, §33.12 | PI | §33.11, §33.12 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -507,6 +508,8 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
 | H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
 | H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − fcap_p̂(A)`, the least share of decisions that must be unacceptable to explain the behaviour, where Carcassi and Aidala's `fcap` takes the hull of `A` (Definition 4.173): for convex `A`, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`. Bounded, finite at forbidden outcomes, continuous on finite outcomes for compact `A`, so both of its directions are verifiable; it convexifies as the mixture principle does, so it is no way around R19. An earlier form of this row claimed it needed no convexity, which was wrong (§33.11) | D: a proposal, its formula checked for convex `A` |
+| H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the room for latitude, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
+| H60 | **Factors that need an unknown σ-algebra are families of exact splits.** One split per σ-algebra consistent with the record; the actor's view revealed from below only (RS8), so the cost of missing resolution is bounded above by records and shown positive only by elicitation (§33.12) | D: RS8 proved; the rest a proposal |
 
 ### 5.5 Process
 
@@ -2545,3 +2548,49 @@ Part II chapters 1–4 and Part III (`v14/book-q70.md`, every quotation with its
   differ in size, so the size is the PI's choice, the share being two-sided verifiable and finite where `K` is not.
   **The executor's recommendation**: adopt the seven steps as `v14/labels.md`'s template, and fill it first for
   misaligned, breach, culpable, hidden, latitude and unavoidable.
+
+### 33.12 When neither side knows the other's σ-algebra (2026-10-21, Q71)
+
+The PI made explicit the point of σ-algebras: the actor and the principal do not know each other's; they know that
+mismatches are possible and cannot point to where. RS1–RS7 assumed every partition declared. The executor agrees that
+this does not prevent measurement, and finds that it sorts the quantities into three kinds.
+- *What the principal measures with its own σ-algebra alone*: misalignment, the breach of each requirement, hidden
+  misalignment against its own record's σ-algebra (RS4), and latitude (RS7), which needs only `ℬ`, a reference and the
+  actor's behaviour. None needs the actor's σ-algebra, so no verdict waits on it.
+- *What needs the actor's σ-algebra*: the factor of missing resolution (RS6, FA1), the attribution of latitude to the
+  actor's finer distinctions (RS7(iv)), and culpability, whose feasible set depends on what the actor can tell apart.
+  RS8 shows the actor's view is revealed from below only: records show which distinctions it makes, never which it
+  cannot. So these become **families of exact splits**, one for each σ-algebra consistent with the record: the cost of
+  missing resolution lies in `[0, M_A(𝓕_≈) − M_A(𝓕_full)]`, the avoidable excess in the complementary interval, and for
+  each candidate the split adds up exactly. The upper ends fall as records reveal more distinctions; the lower ends rise
+  above `0` only through elicitation, conditions declared to call on the distinction. This is RS4's pattern, an exact
+  identity with an unknown term bounded from the side the record can see.
+- *What the actor faces*: the specification reaches it as words or feedback, never as the principal's partition. Events
+  of `ℬ` that its σ-algebra does not resolve are ones it can meet only by luck; its uncertainty about `ℬ` is a belief, a
+  matter for PURPOSE, and its reduction by feedback a matter for SHAPING, where the shaper's σ-algebra `𝒮` is the only
+  part of `ℬ` the actor is ever shown.
+
+**Perplexity, proposed.** Under a declared distribution `r`, the reference or the actor's behaviour, the size of the
+mismatch between the principal's partition `ℬ` and the actor's `𝒜` has two parts, in nats:
+- `H_r(ℬ|𝒜)`, the uncertainty about the principal's cell left by the actor's cell: what the actor cannot resolve of what
+  the principal cares about. Its exponential, `exp(H_r(ℬ|𝒜))`, is the **perplexity**: the effective number of the
+  principal's cells per cell of the actor. It is `0`, perplexity `1`, exactly when `𝒜` refines `ℬ` where `r` has mass,
+  RS6's condition for no cost.
+- `H_r(𝒜|ℬ)`, the actor's distinctions inside the principal's cells: the room for latitude. It is `0` exactly when `ℬ`
+  refines `𝒜`, RS7(iv)'s condition for none.
+- Their sum is the variation of information between the two partitions, a metric on partitions (Meilă, to verify): the
+  **confusion** between the two sides.
+These measure a *potential*, how far the two σ-algebras disagree where the behaviour has mass; the missing-resolution
+factor and the latitude taken measure its *realized effects* on misalignment and on choices the specification left
+open. With the actor's σ-algebra unknown, RS8 bounds them from the record: the true `𝒜` refines the revealed `𝒜_≈`, so
+`H_r(ℬ|𝒜) ≤ H_r(ℬ|𝒜_≈)` and `H_r(𝒜|ℬ) ≥ H_r(𝒜_≈|ℬ)`, conditioning on a finer partition never raising entropy. So
+"perplexity at most `h`" is what records can establish, and "at least" only elicitation can.
+
+**Locating mismatches.** Neither side can point to a mismatch in advance, but each can probe for one: the principal by
+conditions built to separate two of its cells (a distinction honeypot, as in §33.5), which verifies that the actor makes
+the distinction when it does; the actor through feedback, which shows it `𝒮`. Over a course of shaping, perplexity can
+be tracked and its fall is a measure of what the course taught, a candidate quantity for SHAPING.
+
+**The executor's recommendation.** Keep every verdict on the principal's σ-algebra alone, as now; report the factors
+that need the actor's σ-algebra as intervals over the σ-algebras consistent with the record, with the revealed one
+named; adopt perplexity and confusion as declared-distribution diagnostics of the mismatch, beside latitude. H59, H60.

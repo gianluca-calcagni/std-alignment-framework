@@ -210,6 +210,33 @@ with declarations: it needs a declared reference and the principal's partition; 
 for that record ([A5]) and can only motivate a specification declared before the next one (`NOTES.md` §33). No probe:
 the proofs leave nothing to compute.
 
+### RS8 — An actor's view is revealed from below, never from above
+**Statement.** Let an actor choose its outcome through a view `𝒱`, a partition of the conditions, with the environment
+the identity (RS5(i)), or responding alike in conditions the view merges. For its behaviour `p̂`, write `c ≈ c'` when
+`p̂(·|c) = p̂(·|c')`, and call the partition into classes of `≈` the **revealed view**.
+(i) `𝒱` refines the revealed view: whatever the actor cannot tell apart, it treats alike.
+(ii) "`c ≉ c'`", the actor tells `c` from `c'`, is verifiable from records of the two conditions; "`c ≈ c'`" is only
+refutable. So the revealed view, estimated from records, can only grow finer, toward `𝒱` and never past it.
+(iii) Every view that refines the revealed view could have produced `p̂`, and no other could. So the cost of missing
+resolution (RS6, FA1) is known only within `[0, M_A(𝓕_≈) − M_A(𝓕_full)]`, `𝓕_≈` the feasible set of the revealed view:
+a record bounds it from above and never shows it positive.
+
+**In plain terms.** Watching an actor shows which situations it tells apart, never which it cannot: treating two
+situations alike may be choice as well as blindness. So the part of misalignment due to what the actor cannot see is
+bounded by records, and only conditions declared to call on the distinction, elicitation, can show it real.
+
+**Proof.** (i) If `𝒱` merges `c` and `c'`, the actor's choice is the same in both and so is the environment's response,
+so `p̂(·|c) = p̂(·|c')`. (ii) `{p : p(·|c) ≠ p(·|c')}` is open, its complement closed (VF1). (iii) `p̂` is constant on
+the classes of `≈`, so any view refining them can produce it; a view that merges `c ≉ c'` cannot, by (i). The feasible
+set grows as the view refines, so the least misalignment falls; the coarsest consistent view, the revealed one, gives
+the largest cost. ∎
+
+**Notes.** This is VF3 for perception: an excuse of "could not tell" is refutable, never verifiable, from what the
+actor did. It matters because, as the PI observed (Q71), neither party knows the other's σ-algebra: the principal
+declares its own, the actor has its own, and each can at most bound the other's from records (`NOTES.md` §33.12). The
+same holds for an actor's resolution on outcomes, read from departures from the environment's split. No probe: the
+proof leaves nothing to compute.
+
 ## The three positions together
 
 The two factorizations below are of the same number, `M_A(p̂)`, by different chains.
