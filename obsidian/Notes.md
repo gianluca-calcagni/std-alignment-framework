@@ -510,6 +510,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − fcap_p̂(A)`, the least share of decisions that must be unacceptable to explain the behaviour, where Carcassi and Aidala's `fcap` takes the hull of `A` (Definition 4.173): for convex `A`, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`. Bounded, finite at forbidden outcomes, continuous on finite outcomes for compact `A`, so both of its directions are verifiable; it convexifies as the mixture principle does, so it is no way around R19. An earlier form of this row claimed it needed no convexity, which was wrong (§33.11) | D: a proposal, its formula checked for convex `A` |
 | H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the latitude available, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
 | H60 | **Factors that need an unknown σ-algebra are families of exact splits.** One split per σ-algebra consistent with the record; the actor's view revealed from below only (RS8), so the cost of missing resolution is bounded above by records and shown positive only by elicitation (§33.12) | D: RS8 proved; the rest a proposal |
+| H61 | **A declared reference is the framework's count of states, and a declared precision its minimal cell.** After Carcassi and Aidala (§4.4, §4.7), entropy-based diagnostics on a continuum are taken relative to a declared distribution, which fixes their zero, sign and coordinates; those that measure the actor's own spread, latitude available and confusion, need besides a declared precision, the smallest cell the actor can act on, the role physics gives a minimal cell of phase space (§33.14) | D: a proposal |
 
 ### 5.5 Process
 
@@ -2639,3 +2640,58 @@ alternatives: here the effective number of the principal's classes in each of th
 *Latitude* is freedom left by a rule; "room for latitude" was redundant, and is renamed **latitude available**, the
 potential, beside **latitude taken**, RS7's realized departure. The pair mirrors perplexity: the actor short of the
 principal's distinctions, and the actor beyond them.
+
+### 33.14 How Carcassi and Aidala tame entropy on a continuum, and what imports (2026-10-21)
+
+At the PI's question. Read by the executor in the book (version 3.0): Axiom 4.55 and its justification (pp. 222–224),
+Proposition 4.56 (p. 225), Corollary 4.66 (p. 229), the passage on infinite mixtures and Definition 4.14 (pp. 208–209),
+the remark before Definition 4.139 (p. 250), and §4.7's opening and Definition 4.162 (pp. 254–256). Not independent.
+
+**What the book does.** It does not repair the formula; it arranges the theory so that the formula's defects never
+matter.
+1. *Entropy is defined by how it behaves under mixing, not by a formula.* Axiom 4.55 asks for continuity, strict
+   concavity, an upper bound on the increase under mixing by a universal function `I(p, p̄)` of the coefficients alone,
+   attained exactly for orthogonal ensembles, and that mixtures preserve orthogonality. Every one of these is a
+   statement about `S(p·a + p̄·b) − p·S(a) − p̄·S(b)`, which is unchanged when a constant is added to `S`. So the axioms
+   never ask entropy to be non-negative, and the continuous case's negative values are no defect: Proposition 4.56
+   checks the axiom with the differential entropy `−∫ρ·log ρ dμ` itself.
+2. *The unit comes from mixing.* `I` is proved to be Shannon's entropy of the coefficients, and Corollary 4.66 fixes the
+   unit by `I(½, ½) = 1`: one bit is the variability added by an even mixture of two orthogonal ensembles. The scale is
+   set by a dimensionless operation, not by coordinates.
+3. *The zero comes from a count of states.* §4.7 defines the state capacity as the largest `2^S` reachable by mixing
+   (Definition 4.162), and notes that for a uniform distribution over a region it is the region's Liouville measure. A
+   negative differential entropy then says only that the ensemble is spread over less than one unit of that measure;
+   the zero is the choice of the measure, which classical mechanics makes canonical.
+4. *Blow-up is left to the topology.* Only finite mixtures are guaranteed; an infinite one exists only as a topological
+   limit, decided by what can be verified (Definition 4.14), and the entropy's upper bound makes every line of the space
+   bounded (Theorem 4.105, p. 242, not read in full), which excludes the divergent mixtures that a bare convex space
+   allows.
+5. *Coordinates are fixed by mixing.* Only coordinates linear in the mixture are privileged (p. 250), and the metric is
+   defined from the mixing entropy's second variation in them; the mixing entropy at equal weights is the
+   Jensen–Shannon divergence, non-negative and bounded by one bit.
+
+**What this means for the framework.** The quantities the framework already rests on never had the problem: KL is a
+relative entropy, non-negative, unchanged by any change of coordinates, infinite only where supports disagree, and it
+needs no reference measure, because the second argument is one. The problems the PI names belong to the entropy-based
+diagnostics proposed in §33.12, and there the book's moves import cleanly, with one exception.
+- *Import 1, the declared reference as the count of states.* Every entropy of the actor's behaviour is taken relative
+  to a declared distribution: `−KL(p̂‖r)` in place of `H(p̂)`. The zero is then the declaration, the sign is fixed, and
+  coordinates do not matter, as the book's Liouville measure does for physics. Latitude taken (RS7) is already of this
+  form. Perplexity, `H(ℬ|𝒜)`, needs no reference, being bounded by `H(ℬ)` for the principal's few classes.
+- *Import 2, the mixing entropy for bounded diagnostics.* Where a diagnostic must compare behaviours without one being
+  acceptable, the Jensen–Shannon divergence is bounded, symmetric and coordinate-free, and needs no reference: for
+  instance, how distinguishable the actor's behaviours are in two of the principal's cells.
+- *Import 3, the unit from mixing.* The conventions table's "natural logarithms, for convenience" gains an operational
+  reading: a unit is fixed by the variability an even mixture of two distinguishable behaviours adds. Nothing changes
+  but the justification.
+- *Import 4, infinite objects as topological limits*: already the general core's choice, misalignment on a continuum as
+  the supremum over decidable finite descriptions (R13); the book's Definition 4.14 is the same move for mixtures.
+- *What does not import.* Latitude available, `H(𝒜|ℬ)`, and confusion stay infinite when the actor's σ-algebra is a
+  continuum, even relative to a reference: an actor that can concentrate on a point has unbounded latitude. Physics
+  bounds the count of states per region with a minimal cell; the framework has no such constant. The import needs a
+  **declared precision** of the actor, the smallest cell it can act on, which the interface would declare and
+  elicitation could test. H61.
+
+**The executor's recommendation.** Adopt imports 1 to 4: every entropy-based diagnostic relative to a declared
+reference or in mixing form, the unit justified by mixing, and limits taken topologically. Report latitude available
+and confusion on a continuum only with a declared precision, and say so where they are reported.
