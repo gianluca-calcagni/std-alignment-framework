@@ -508,7 +508,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
 | H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
 | H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − fcap_p̂(A)`, the least share of decisions that must be unacceptable to explain the behaviour, where Carcassi and Aidala's `fcap` takes the hull of `A` (Definition 4.173): for convex `A`, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`. Bounded, finite at forbidden outcomes, continuous on finite outcomes for compact `A`, so both of its directions are verifiable; it convexifies as the mixture principle does, so it is no way around R19. An earlier form of this row claimed it needed no convexity, which was wrong (§33.11) | D: a proposal, its formula checked for convex `A` |
-| H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the room for latitude, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
+| H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the latitude available, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
 | H60 | **Factors that need an unknown σ-algebra are families of exact splits.** One split per σ-algebra consistent with the record; the actor's view revealed from below only (RS8), so the cost of missing resolution is bounded above by records and shown positive only by elicitation (§33.12) | D: RS8 proved; the rest a proposal |
 
 ### 5.5 Process
@@ -2576,8 +2576,8 @@ mismatch between the principal's partition `ℬ` and the actor's `𝒜` has two 
   the principal cares about. Its exponential, `exp(H_r(ℬ|𝒜))`, is the **perplexity**: the effective number of the
   principal's cells per cell of the actor. It is `0`, perplexity `1`, exactly when `𝒜` refines `ℬ` where `r` has mass,
   RS6's condition for no cost.
-- `H_r(𝒜|ℬ)`, the actor's distinctions inside the principal's cells: the room for latitude. It is `0` exactly when `ℬ`
-  refines `𝒜`, RS7(iv)'s condition for none.
+- `H_r(𝒜|ℬ)`, the actor's distinctions inside the principal's cells: the **latitude available**, beside RS7's latitude
+  taken. It is `0` exactly when `ℬ` refines `𝒜`, RS7(iv)'s condition for none.
 - Their sum is the variation of information between the two partitions, a metric on partitions (Meilă, to verify): the
   **confusion** between the two sides.
 These measure a *potential*, how far the two σ-algebras disagree where the behaviour has mass; the missing-resolution
@@ -2594,3 +2594,48 @@ be tracked and its fall is a measure of what the course taught, a candidate quan
 **The executor's recommendation.** Keep every verdict on the principal's σ-algebra alone, as now; report the factors
 that need the actor's σ-algebra as intervals over the σ-algebras consistent with the record, with the revealed one
 named; adopt perplexity and confusion as declared-distribution diagnostics of the mismatch, beside latitude. H59, H60.
+
+### 33.13 Do these lift to the general twins, and do they factor out of misalignment? (2026-10-21)
+
+At the PI's two questions. Not independent.
+
+**The general twins.** What is built on KL lifts; what is built on entropy lifts only for the principal's side.
+- *Lift with the transfer lemma's hinge.* RS1's inequality is the data-processing inequality for KL under a
+  sub-σ-algebra, which holds on any measurable space; RS2 is VE1 restricted to bets measurable for the record's
+  σ-algebra, whose general twin is the numeraire of `literature-q70.md`'s survey; RS3 and RS7(i) need the chain rule,
+  hence regular conditional probabilities, which standard Borel spaces have. The step to the full σ-algebra,
+  misalignment as the limit along a refining chain, is the general core's transfer lemma: it holds when the closure of
+  the acceptable behaviours is compact (TR3) and is not shown without it (H41). FA2's Pythagorean form is Csiszár's,
+  proved on general spaces.
+- *Lift with a loss.* RS4's fibre is infinite-dimensional: the lower end and the non-verifiability stay, the maximum at
+  a vertex does not, and the upper end may be infinite. Latitude taken, RS7, is lower semicontinuous only, so "latitude
+  above `l`" stays verifiable and "below" does not.
+- *Does not lift as stated.* RS8 reads the actor's view from conditions seen repeatedly; on a continuum of conditions
+  each is seen once, so the revealed view needs a declared regularity or a declared grid of conditions. And entropy: on
+  a continuum `H(𝒜|ℬ)` is infinite when `𝒜` is, so **latitude available** and **confusion** exist only at a declared
+  precision, as v13's misalignment on a continuum does (R13). **Perplexity** lifts whenever the principal's partition is
+  countable with finite entropy, the usual case, since `H(ℬ|𝒜) ≤ H(ℬ)` whatever `𝒜` is. The asymmetry is welcome: the
+  principal's classes are few and declared; the actor's may be a continuum.
+
+**Do they factor out of misalignment?** No, and by design.
+- *Latitude* never enters misalignment: a specification stated on `ℬ` makes misalignment a function of the cell masses
+  `p̂_ℬ` alone (RS3), and latitude a function of the splits inside the cells alone. Write `p̂` as the pair (`p̂_ℬ`, the
+  splits): misalignment reads the first coordinate, latitude the second. What latitude factors out of exactly is the
+  departure from the reference, `KL(p̂‖r) = KL(p̂_ℬ‖r_ℬ) + L_r(p̂)` (RS7(i)): the departure splits into a part the
+  specification judges and a part it is silent on.
+- *Perplexity and latitude available* are not terms of any split of misalignment: they depend on the declared
+  distribution and on the two partitions, not on how far the actor is from acceptance. Neither bounds the cost of a
+  mismatch. Two outcomes the principal separates and the actor cannot, one forbidden, merged in one cell that the actor
+  must use to meet another requirement: misalignment is infinite whatever the perplexity, which here depends only on
+  the reference's masses. Conversely a large perplexity costs nothing when the specification is slack on the merged
+  distinctions.
+- *The term that does factor out* is RS6's missing-resolution cost, a term of FA1: the mismatch's effect in evidence.
+  So the mismatch has two numbers on two scales: its size, perplexity and latitude available, in nats of entropy under
+  a declared distribution; and its effects, the missing-resolution cost in misalignment and the latitude taken in the
+  departure from the reference. The first pair says where to look; the second what the mismatch did.
+
+**On the names.** *Perplexity* is information theory's word for the exponential of an entropy, an effective number of
+alternatives: here the effective number of the principal's classes in each of the actor's, and the PI's own word.
+*Latitude* is freedom left by a rule; "room for latitude" was redundant, and is renamed **latitude available**, the
+potential, beside **latitude taken**, RS7's realized departure. The pair mirrors perplexity: the actor short of the
+principal's distinctions, and the actor beyond them.
