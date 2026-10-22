@@ -258,6 +258,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q74 | the PI likes the six desiderata and how they interplay, sometimes against one another, drawing a border, an interface; promote them, and revisit them from time to time; if the list forces a pending decision, decide it directly; then a turn of documentation hygiene. Applied: the desiderata in `README.md`, with a drift check in `ROADMAP.md` and a rule in `CLAUDE.md`; §33.17, the decisions they force, taken by the executor under this row: R19 by two kinds of requirement and two verdicts, an order's requirement as dominance with declared margins, a reference that may break a constraint, culpability at a declared care margin with `E` as its size, one space with an exogenous σ-algebra, the entropy imports, the redundancies, and three working agreements; R19, R22 and R16 closed, R15 trimmed; the hygiene of `v14/` and `slides/` | PI; executor (the decisions forced) | §33.17 |
 | Q75 | once Q74's work is done and CI is green, bring it to `main`. Applied: a pull request from `claude/peaceful-ritchie-cnu5r3`, merged with a merge commit, as `CLAUDE.md` asks rather than a push to `main` | PI | `ROADMAP.md` |
 | Q76 | the PI deleted the merged branch; an external review by another model family, to be weighed and not imported; the question of Q70 on conditions and outcomes seemed unanswered: read all the PI's prompts, judge each actioned or lost, then fix the docs and the slides. Applied: §34, the audit and the review weighed; conditions and outcomes as one distribution with a declared exogenous σ-algebra, in `v14/` and the three decks; "declare" defined; certification corrected to averages; two rules for v14's report; H62, H63 | PI; executor (the audit, the review weighed) | §34 |
+| Q77 | a brainstorm: misalignment as a sum weighted by severity, to be rid of infinities without losing the factorization; a simpler CORE, with no reference, targets as a closed convex set of desired distributions with severity scores, and a specification as a signature with an algorithm deciding records in finite time; an exhaustive list of junctures, where the framework's parts meet, with how to treat them and the measures they inspire, from other disciplines too; challenge everything. Applied: §35, `v14/junctures.md`, `probes/v14/contamination.py`, H64–H68, R24 | PI | §35 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -520,6 +521,11 @@ models are hypotheses that [P3] and [P12] test.
 | H61 | **A declared reference is the framework's count of states, and a declared precision its minimal cell.** After Carcassi and Aidala (§4.4, §4.7), entropy-based diagnostics on a continuum are taken relative to a declared distribution, which fixes their zero, sign and coordinates; those that measure the actor's own spread, latitude available and confusion, need besides a declared precision, the smallest cell the actor can act on, the role physics gives a minimal cell of phase space (§33.14) | D: a proposal; adopted (Q74, §33.17) |
 | H62 | **Evidence for a motive is relative.** A hypothesis of PURPOSE is never verified (VF2), but two hypotheses that each predict a behaviour can be compared by bets, the likelihood ratio of their predictions growing as evidence for one against the other; a motive gains evidence only against named rivals, and a report says which (from an external review, Q76) | D: a proposal |
 | H63 | **A real record where v13 and v14 disagree.** One arm of the real case (H42): an actor that mixes acceptable behaviours, such as decoding at a temperature chosen per prompt, judged by v13's ray and by v14's hull; the verdicts should differ as VE2 says, a prediction that can fail (from an external review, Q76) | D: a proposal for H42's registration |
+| H64 | **Zero tolerances reported lexicographically.** A forbidden set is reported as a decisive verdict with its breach rate and interval as the size, beside the finite misalignment of the rest, never summed; this removes every infinity from what a report ranks (§35.1) | D: a proposal |
+| H65 | **A declared contamination tolerance.** `A_η = (1 − η)·A + η·Δ` bounds misalignment by `log(1/η)`, keeps convexity, bets and Sanov, and returns to `M_A` as `η → 0`; for a rate limit it loosens the limit to `(1 − η)·ε + η`; for a forbidden outcome the number is dominated by `η`, so it suits a tolerance the principal truly holds (§35.1, `probes/v14/contamination.py`) | D: proved in §35.1, a proposal for CORE |
+| H66 | **"Criteria" for v13's targets.** The PI read "target" as a desired distribution, which is what CORE's acceptable behaviours are; v13's targets are scores on outcomes; renaming them criteria removes the clash (§35.2) | D: a proposal |
+| H67 | **The record's signature as a declared object.** The outcomes, the world's part `ℰ`, the record's σ-algebra and the horizon, declared together as the contract between a specification and its records; the algorithm supplied by the framework from the acceptable set, not declared (§35.2) | D: a proposal |
+| H68 | **Capability and evaluability pull against each other.** A finer view lowers unavoidable misalignment and weakens excuses, and lets the actor tell evaluation from use, weakening honeypots ([P16], [P17]); a report on a more capable actor needs evaluation that the actor's view cannot separate from use, or monitoring in use (`v14/junctures.md`) | D: a proposal |
 
 ### 5.5 Process
 
@@ -2961,3 +2967,96 @@ v14 measures reward hacking less than v13, overlooks SH1's outer term; reporting
 since Q74; a note on closed requirements, right in its conclusion and wrong in its reason (continuity of KL in its
 second argument on finite outcomes, not lower semicontinuity); the provenance of the slides' numbers, already a rule
 and checked.
+
+## 35. Brainstorm: severity against infinities, a simpler CORE, and junctures, 2026-10-22 (Q77)
+
+The PI asked three things, to be challenged: whether misalignment should be a sum weighted by a severity score over the
+outcomes, to be rid of infinities without losing the factorization; whether CORE can be simpler, with no reference, a
+family of targets that is a closed convex set of desired distributions with severity scores, and a specification that is
+a signature with an algorithm deciding records in finite time; and an exhaustive list of the places where the
+framework's parts meet, the junctures, with the measures they inspire. The third is `v14/junctures.md`.
+
+### 35.1 Severity against infinities
+
+**Where the infinities come from.** `M_A(p) = inf_{a∈A} KL(p‖a)` is infinite exactly when every acceptable behaviour
+gives probability zero to an outcome the actor produces: a forbidden outcome, a rate limit of zero. Culpability's `K`
+is infinite for the same reason, against the best feasible behaviours. So every infinity is a **zero tolerance**, and
+it is the correct evidence: one forbidden outcome is impossible under acceptance. What it lacks is a size: one leak in a
+million decisions and one in ten both give `∞`.
+
+**A severity weight does not remove them.** Weighting the divergence's terms by a severity `s(x)`, `Σ_x s(x)·p(x)·
+log(p(x)/a(x))`, keeps `log(p/0) = ∞` wherever `s > 0`, and a forbidden outcome has the highest severity. It also stops
+being a divergence: it can be negative, and has no Sanov or betting reading. A plain severity sum, `E_p[s]`, is finite,
+but it is another quantity, how bad the outcomes are on average in the principal's units, not how strong the evidence
+is that the actor breaks the specification. Merging the two is what desideratum 4 filters out, and what the PI decided
+against when severity became its own scale (Q69, `v14/severity.md`).
+
+**What removes the infinities, keeping misalignment as evidence.** Two ways, both declared by the principal:
+- *A lexicographic report for zero tolerances.* The forbidden set `C` is reported as a verdict and a rate: convicted
+  (decisive, the infinity), with the breach rate `p(C)` and its interval as the size, in its own unit, a frequency; and
+  beside it the finite misalignment of what the actor does outside `C`, `M_A(p(·|C^c))`. Two numbers on two scales,
+  never summed, ordered: any breach of a forbidden set comes first.
+- *A contamination tolerance.* The principal declares `η > 0`, "a fraction `η` of decisions may be anything", Huber's
+  contamination: `A_η = {(1 − η)·a + η·q : a ∈ A, q any behaviour}`. Then `M_{A_η}(p) ≤ log(1/η)` for every `p`, since
+  `(1 − η)·a + η·p ≥ η·p` pointwise; `A_η` is convex and closed when `A` is, so bets and Sanov keep their meaning; and
+  `M_{A_η}(p)` rises to `M_A(p)` as `η → 0`, by compactness and lower semicontinuity. For a rate limit `a(C) ≤ ε`,
+  `A_η` is the rate limit at `(1 − η)·ε + η`. A forbidden outcome produced at rate `u = 0.02` gives `0.0411` nats per
+  decision at `η = 10⁻³` and `0.3164` at `η = 10⁻⁹`, growing like `u·log(1/η)` (`probes/v14/contamination.py`). So for a
+  forbidden outcome the number is mostly the declared `η`: contamination suits a principal who truly tolerates a
+  fraction of anything, and the lexicographic report suits a forbidden set.
+
+**The factorization survives both, and severity too.** FA1 is a telescoping along a chain of sets and holds for any
+functional, so it holds for misalignment against `A_η`, and for a severity number such as the avoidable severity
+`E_p[s] − min_{f∈𝓕} E_f[s]`, term by term. What is particular to KL is that the terms are evidence rates between named
+behaviours (FA2, on linear families, which contamination does not keep) and that refinement along σ-algebras adds up
+exactly (RS1). Severity is linear, so it splits exactly by condition, and along σ-algebras its hidden part is an
+interval, `Σ_B p(B)·[min_B s, max_B s]`.
+
+**Recommendation.** Keep misalignment as evidence. Report zero tolerances lexicographically, with the breach rate as
+their size. Offer the contamination tolerance as a declared option, never a default (desideratum 2). Report severity as
+a second, finite number, factored along the same chains, beside misalignment and never summed with it. H64, H65.
+
+### 35.2 A simpler CORE
+
+**No reference in CORE: already so.** CORE's object is the acceptable set `A`, a set of behaviours, and misalignment is
+Sanov's rate against it (SN1). The PI's "closed convex set of targets, each a desired distribution" *is* `A`. A
+reference enters only as one way of building `A`, for comparative specifications such as "no worse than the previous
+version" (`targets.md`, TG1; `order.md`), the commonest in practice, so it stays as a refinement. The confusion is a
+word: v13's *targets* are functions on outcomes, scores whose averages the principal cares about, and the PI read
+"target" as a desired distribution, which is what machine learning means by a target distribution. That is evidence the
+label misleads (desideratum 4). Proposal: call v13's targets **criteria**, a family of criteria, and keep "acceptable
+behaviours" for the desired distributions. H66.
+
+**Severity attached to outcomes, not to targets.** Pairing each desired distribution with its own severity breaks the
+convex structure: the mixture of `(a_1, s_1)` and `(a_2, s_2)` has no defined severity. Severity is a function on
+outcomes, and its average `E_a[s]` is affine in `a`, a statistical quantity in Carcassi and Aidala's sense (Definition
+4.181), so mixtures keep their meaning. A principal unsure of its severities declares a closed convex family `S` of
+them, and a budget robust to it, `sup_{s∈S} E_a[s] ≤ b`, is still a convex requirement.
+
+**A specification as a signature and an algorithm.** Two halves, which deserve opposite answers.
+- *The signature, yes.* What a record must contain to be judged, the outcomes, the world's part `ℰ`, the record's
+  σ-algebra `ℛ` and the horizon, should be a declared object of its own: it is the contract at the juncture between the
+  specification and the record (`junctures.md`, J2). Today it is scattered across the files.
+- *The algorithm, no, as the specification.* (i) A decision in finite time for every record is decidability, and almost
+  no specification of interest is decidable from records: "misaligned" is verifiable and "aligned" only refutable
+  (VF1), so an algorithm that must always decide either errs without bound or decides nothing of interest; what exists
+  is a test that decides one side, with a bounded error. (ii) Many algorithms test one standard, with different power;
+  the set of behaviours is what they share, and is canonical, while each algorithm is an instrument (desideratum 4).
+  (iii) An algorithm is an input only an expert could write (desideratum 6). (iv) The two are dual: an algorithm defines
+  the set of behaviours under which it rejects with probability at most `α`, and a set defines its best tests, the bets
+  of VE1 and VE3. So the framework supplies the algorithm from the set, with its verification status, and a principal
+  who brings an algorithm has it read as the set it accepts. A checker applied to each decision, such as "passes the
+  unit tests", is an event, and its failure a forbidden set or a rate limit.
+
+**So the minimal CORE is**: outcomes, the world's part `ℰ`, a behaviour as one distribution, the signature of records,
+and a specification as a list of requirements, each per-decision or pooled, with its tolerances; misalignment as
+evidence against the per-decision ones, a verdict per requirement, and everything else (references, criteria, orders,
+constraints, severity) as refinements that build requirements or report beside them. That is v14's design with the
+signature added and a word changed, which is the executor's honest answer: the room for simplification is mostly in the
+words and in the declarations' layout, not in the mathematics. H67.
+
+### 35.3 Junctures
+
+`v14/junctures.md` lists fourteen junctures, the couplings between them, three rules and imports to read. The one the
+executor finds most consequential: refining the actor's view lowers its unavoidable misalignment and its excuses, and
+raises its ability to tell evaluation from use, so capability and evaluability pull against each other. H68.

@@ -53,6 +53,7 @@ The draft so far, in this folder:
 | `targets.md` | TG1 a family of targets with a reference is a list of budgets; TG2 that is not pursuing one target; SN1 Sanov's rate, the best bet and the projection are one number | proved here; TG1's reading decided (Q74) |
 | `severity.md` | severity as a declared scale, never in nats; what a report gives; who grades | a proposal |
 | `training.md` | a fourth layer, SHAPING, for training, selection, education and regulation; SH1 | a proposal; SH1 proved |
+| `junctures.md` | where the framework's parts meet, how each meeting fails, and the measure it inspires; how refining one σ-algebra moves the others | a brainstorm (Q77) |
 | `related.md` | competing frameworks, both ways | a survey by a research assistant, not reviewed |
 | `literature-q70.md` | mixtures after Carcassi, the cost of the mixture principle, culpability, adversarial actors | a survey by a research assistant, not reviewed; two derivations checked, one claim corrected |
 | `book-q70.md` | Carcassi and Aidala's book read: ensemble spaces, the method of pairing a word with its formal object, a seven-step protocol for the labels | a research assistant's reading, not reviewed |
