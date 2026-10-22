@@ -252,6 +252,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q70 | after reading §32: record every analysis, the survey of competitors with its pros and cons included, where it belongs; say which of the lessons, elegances, redundancies and gaps were already applied to the tree, and brainstorm the rest; brainstorm whether conditions and outcomes need to stay split, or can be one distribution; a clearer method, after Carcassi, that justifies pairing each label with its formalization; a measure of what an actor does with distinctions finer than the principal's ("deviance" or "miscalibration", a better name welcome), beside the factor for distinctions it lacks; whether "adversarial" can be defined and measured. Decisions: R19, the mixture principle, to be solved from the literature, statistical or Carcassi's, where mixtures are founding; culpability to be redefined, with the literature's help; R20 approved (PURPOSE, SHAPING, specification), the PI liking "aligning" too and asking the executor to defend "declaration" and "specification" against common usage or to brainstorm better names; a turn of documentation hygiene, then the brainstorm. Applied: §33 | PI | §33 |
 | Q71 | the point of σ-algebras, made explicit by the PI: in general the actor and the principal do not know each other's σ-algebras; they know mismatches are possible but cannot point to where they are, which is why confusion occurs and why perplexity can be measured; the PI expects this to change how mismatches are treated and factored, not to prevent measuring them; and Carcassi and Aidala's book supplied (R21). Applied: RS8 in `v14/resolution.md`; §33.11, §33.12 | PI | §33.11, §33.12 |
 | Q72 | after the executor proposed R19 and certification as the next brainstorm: above the PI's expertise; consolidate it in the notes with the decision pending the PI, the answer perhaps forced once the framework's desiderata are clear; the PI still wants more clarity on latitude available and confusion on a continuum, good enough for now. Applied: §33.15, R19 updated | PI | §33.15 |
+| Q73 | the PI wants more time on the desiderata: they shape the project so much that they need much consideration; the framework is to be formally well-defined, coherent and general, import known results (from its ontologies above all), make testable predictions and serve as a diagnostic, and guide a person or a model to say what alignment means in a context and how the declarations shape the analysis; desiderata should be few, general, informal but not too much, and filtering, and §33.15's looked oddly specific. Applied: §33.16, a draft of six; §33.15's D1–D6 restated as design rules that follow from them; R22 | PI | §33.16 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -2718,7 +2719,8 @@ listed at the end.
    level, the margin being forced since exact compliance is never verifiable (VF1). The same confidence sequences give
    both for pooled requirements, and for per-decision ones an upper confidence sequence on the rate or the budget (H51).
 
-**The desiderata, and what they force.**
+**The desiderata, and what they force.** *Restated after Q73*: these six are design rules for R19, not the framework's
+desiderata, which §33.16 drafts; each rule below follows from them.
 - *D1, validity whatever the dependence*: forces bets for per-decision requirements and confidence sequences for the
   average of conditional behaviours for pooled ones; it excludes tests that assume decisions independent, and universal
   inference, which assumes independence or a model of it (§33.10).
@@ -2758,3 +2760,58 @@ the record's σ-algebra is then a natural default for the declared precision of 
 confusion finite and operational at the resolution where they could ever be seen, and leaving anything finer hidden, as
 hidden misalignment is (RS4). To be worked through, with its interplay with the actor's own precision, when the PI
 returns to it.
+
+### 33.16 Desiderata for the framework: a draft for the PI's consideration (2026-10-22, Q73)
+
+The PI judged §33.15's D1–D6 oddly specific for desiderata, and asked for the framework's desiderata to be few, general,
+informal but not vague, and filtering: each should exclude something from the framework. The PI's aims, restated:
+formally well-defined, coherent and general; importing known results, those of its ontologies above all; making
+testable predictions and serving as a diagnostic; and guiding a person or a model to say what alignment means in a
+context and how the declarations shape the analysis. D1–D6 were design rules for one decision, not desiderata. The
+executor's draft, six, each with what it filters out, the evidence that it already acts in the project, and where it
+pulls against another.
+
+1. **Behavioural.** Every concept is defined from what actors do and what principals declare, and says what a record of
+   decisions can do with it: verify, refute, or neither. *Filters out*: goals, beliefs and intentions as definitions
+   (they enter only as hypotheses a record can refute); quantities no record could bear on; "aligned" as a property a
+   record certifies exactly. *Already acting*: [A1], the layers of v14, VF1–VF3.
+2. **Declared.** Every normative choice is a principal's, stated before the record it judges, and every number is
+   relative to a declaration the report names; the framework supplies no values of its own. *Filters out*: defaults that
+   encode values (tolerances, severities, margins, which risks matter, weights among principals); standards fitted to
+   the data they judge. *Already acting*: [A5]; the PI's removal of costs from the core (Q60); `v14/severity.md`.
+3. **General, or the loss named.** It applies to any actor, principal and domain; every restriction is shown to lose
+   nothing or is named as a qualifier; and nothing assumes a mechanism it does not need: optimization, training,
+   independence, a model of the actor. *Filters out*: concepts of one ontology in the core (reward, training, gradient);
+   misalignment defined through optimization (v13's pursuit ray); independence by convention. *Already acting*: Q58,
+   the generality table of `v14/README.md` (Q64).
+4. **Canonical and faithful.** Each formal object is the one its word's requirements force, as far as they force it,
+   with every remaining choice named as a convention; the pairing of word and object is justified, after Carcassi and
+   Aidala, and tested on paradigm cases; and quantities on different scales are never merged. *Filters out*: distances
+   or composite scores chosen for convenience; labels that say more than their objects ([P15](v)'s "unavoidable",
+   culpability's `K` as a size); sums of evidence and harm. *Already acting*: the conventions table, L1, §33.11's
+   protocol, H52.
+5. **Open to the world.** It is stated in standard mathematics, so known results import, from statistics and from its
+   ontologies' own theories; and it is accountable: it makes predictions that can fail, offers diagnostics that split
+   what happened by cause, and states what it cannot do. *Filters out*: bespoke formalisms that block imports;
+   constructs no test could refute; claims of novelty for results that are known. *Already acting*: the import surveys
+   (`v14/related.md`), `RECORD.md`, `LIMITS.md`.
+6. **Guiding.** It leads a person or a model from an intention to a declaration: every declared object is elicited by a
+   question in plain words, and the analysis shows how each declaration shapes the verdicts. *Filters out*: hidden
+   parameters; inputs only an expert could set; verdicts whose dependence on the declaration is hidden. *Already
+   acting*: the five questions of `slides/specification.md`; VK7, the sensitivity of misalignment to a budget.
+
+**Where they pull against each other.** Generality (3) against testable predictions (5): the fewer assumptions, the more
+data a verdict needs; declarations (2) add the structure that sharpens predictions, and say so. Declared (2) against
+guiding (6): the framework must guide without supplying values, so it guides by questions and by showing the
+consequences of each answer, never by defaults. Canonical (4) against general (3): a canonical form may need structure
+a general setting lacks, as Kelly's criterion does; the choice is then named, not hidden.
+
+**What they make of R19.** §33.15's six rules follow, and stop being desiderata: validity whatever the dependence from
+1 and 3, no model of the actor; the kind of a requirement fixed by its quantity from 4; who bears the risk, the horizon
+and the margins declared, from 2; the aggregate breach named apart and never summed, from 4; and the smallest margin a
+record can certify reported, from 6. If the PI accepts the six desiderata, R19's answers are forced; if the PI amends
+one, the rule that follows from it changes, and nothing else.
+
+**What they would still filter from the current draft**, as a test that they filter: FA3, which overstates the larger
+interfaces' unavoidable parts (4); culpability's `K` reported as a size (4, already changed); the CVaR limit enforced
+as its hull without saying so (4 and 5); and any default severity or margin a later draft might add (2).
