@@ -2931,8 +2931,10 @@ of the roadmap, before L2.
 declaration: which part the world chooses, a sub-σ-algebra `ℰ`, trivial when the world chooses nothing. By the chain
 rule the divergence splits into a term about the world's mix and one about the actor given it; misalignment keeps the
 second, by comparing with acceptable behaviours that share the actor's law on `ℰ`. That is the one good argument for
-keeping anything of the split, and it keeps a declaration, not a type (`v14/README.md`, the section on one
-distribution; the mathematicians' deck, slide 5).
+keeping anything of the split, and it keeps a declaration, not a type (`v14/README.md`, the section on one distribution;
+the mathematicians' deck, slide 5). §33.17's item 5 said that a conversation, a condition partly made of the actor's
+earlier outputs, is then expressible; it is, but with the acceptable behaviours sharing the world's responses given the
+history, turn by turn, not the world's overall mix, a form not yet written.
 
 **The external review**, by a model of another family than the executor's (rule (f)). The PI asked for it to be
 weighed, not imported. Taken:
