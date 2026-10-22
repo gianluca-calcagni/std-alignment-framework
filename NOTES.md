@@ -84,6 +84,8 @@ later results goes in Notes |
 | **A result applied outside its hypothesis** | on 2026-10-17 (Q69) the draft of `v14/severity.md` and `v14/training.md` read VK7, which holds the actor fixed, as saying how a trainer's budget moves the evidence against the actor it trains, which changes with the budget, and called the trainer's and the bettor's prices "two prices of one budget", which are never both positive for one actor and one budget; RS5(iii) said that coarsening a resolution shrinks the feasible set, which needs the environment's splits to be consistent. Caught by the adversarial review of §32 before any push | before a result is used in a proposal or a gloss, write its hypotheses beside the use, and check that the use keeps every one |
 | **A gloss written from the intended meaning, not from the formula** | the same day: SH1's middle term glossed as "what the feedback costs by rewarding behaviours the principal does not accept", where it is positive exactly when the feedback leaves out every best feasible behaviour; VK6's plain terms "more where it breaches more", false once the nearest rate passes ½; VK4's Notes "no exact attribution exists", where one exists along a chosen order. Caught by the same review | derive each gloss from the formula, with one instance that would make it false, before writing it; the fifth row of this table's kind, after "A plain-terms twin that claims more than the statement" |
 | **A formula checked, its source not read** | on 2026-10-18 (Q70) the executor checked the research assistant's formula for Carcassi and Aidala's fraction capacity, `sup_{a∈A} exp(−D_∞(a‖p))`, for one acceptable behaviour, and wrote in §33.10 and H58 that it "needs no convexity", without reading the book's definition, which takes the hull (Definition 4.173); the reading of the book the same day found it | before a formula is attributed to a source, read the source's definition, not only the formula's proof; the third row of this table about reading the source, after "An abstract read as the theorem" |
+| **A PI's question answered in the notes, never carried into the files** | the PI asked on 2026-10-17 (Q70) whether conditions and outcomes could be one distribution; §33.2 answered, H53 recorded it, and Q74 decided it (§33.17, item 5), but `v14/` and the slides kept conditions as a type until Q76, and the PI, reading the files, could not find the answer. The same for "declare" defined in one line (§33.8), never written into `v14/`. Found by the PI (Q76); an audit of all 44 of the PI's prompts found no other ask lost, and two left waiting without the PI being told (§34) | an answer to a PI's question ends in the file the PI reads for that subject, or the turn's answer says where it waits; at each handover, read the PI's prompts against the tree |
+| **A verdict assumed for every kind of requirement** | §33.15, §33.17 and H51 put a certify verdict beside the convict verdict for per-decision requirements, the obstacle named as dependence; it is not dependence: two actors that differ at one decision, fixed in advance and independent of everything, cannot be told apart well enough to certify that every decision was acceptable, so only an average is certifiable (`v14/LIMITS.md`, Q76). Found by the executor when an external review asked for H51 to be proved | before claiming a verdict exists for a class of requirements, try the actor that changes one decision |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [P8] claims only the small-effort
@@ -255,6 +257,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q73 | the PI wants more time on the desiderata: they shape the project so much that they need much consideration; the framework is to be formally well-defined, coherent and general, import known results (from its ontologies above all), make testable predictions and serve as a diagnostic, and guide a person or a model to say what alignment means in a context and how the declarations shape the analysis; desiderata should be few, general, informal but not too much, and filtering, and §33.15's looked oddly specific. Applied: §33.16, a draft of six; §33.15's D1–D6 restated as design rules that follow from them; R22 | PI | §33.16 |
 | Q74 | the PI likes the six desiderata and how they interplay, sometimes against one another, drawing a border, an interface; promote them, and revisit them from time to time; if the list forces a pending decision, decide it directly; then a turn of documentation hygiene. Applied: the desiderata in `README.md`, with a drift check in `ROADMAP.md` and a rule in `CLAUDE.md`; §33.17, the decisions they force, taken by the executor under this row: R19 by two kinds of requirement and two verdicts, an order's requirement as dominance with declared margins, a reference that may break a constraint, culpability at a declared care margin with `E` as its size, one space with an exogenous σ-algebra, the entropy imports, the redundancies, and three working agreements; R19, R22 and R16 closed, R15 trimmed; the hygiene of `v14/` and `slides/` | PI; executor (the decisions forced) | §33.17 |
 | Q75 | once Q74's work is done and CI is green, bring it to `main`. Applied: a pull request from `claude/peaceful-ritchie-cnu5r3`, merged with a merge commit, as `CLAUDE.md` asks rather than a push to `main` | PI | `ROADMAP.md` |
+| Q76 | the PI deleted the merged branch; an external review by another model family, to be weighed and not imported; the question of Q70 on conditions and outcomes seemed unanswered: read all the PI's prompts, judge each actioned or lost, then fix the docs and the slides. Applied: §34, the audit and the review weighed; conditions and outcomes as one distribution with a declared exogenous σ-algebra, in `v14/` and the three decks; "declare" defined; certification corrected to averages; two rules for v14's report; H62, H63 | PI; executor (the audit, the review weighed) | §34 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -504,7 +507,7 @@ models are hypotheses that [P3] and [P12] test.
 | H48 | **A forbidden set needs a rate and a plan.** Its misalignment is infinite at any positive rate, so it ranks nothing; and a record shows a breach of rate `r` only after about `1/r` decisions. What a principal can use is a verified lower bound on the rate when a breach is seen, an upper confidence bound when none is (about `3/n` after `n` clean decisions, for a sample), and the number of decisions needed to see one at a rate that matters | U: from the example (`NOTES.md` §31) |
 | H49 | **Every factorization is a telescoping along a chain in a lattice, and Pythagorean exactly on linear families.** FA1 telescopes along feasible sets ordered by inclusion, RS1 along σ-algebras ordered by refinement, [P54] along the filtration of a record; each term is non-negative because misalignment is monotone along the lattice, and each is an evidence rate between named behaviours when the chain consists of linear families, Csiszár's Pythagorean case. A rule for new splits: name the lattice and the chain, and say whether its members are linear (§32) | D: a pattern seen in every split of `factorization.md` and `resolution.md`, not a theorem |
 | H50 | **The trainer's shadow price and the bettor's stake, across two budgets.** A trainer at a KL price under its own severity budget acts on its objective minus `ν` times the severity (VK5), and keeps that budget, so against the same budget the trained actor has no misalignment and `λ* = 0`. When the principal's budget differs from the trainer's, in conditions, grader or cost, the trained actor can break it, and for that actor held fixed the evidence moves with the principal's tolerance at `−λ*` (VK7). How `ν` and `λ*` relate across the two budgets is open (`v14/severity.md`); an earlier form of this hunch, "two prices of one budget", was wrong, as the review of §32 showed | D: a guess, restated after review |
-| H51 | **A certify verdict, from the same bets.** VK3's bet is the capital process of a betting confidence sequence for a mean, so an upper confidence sequence for a rate or a budget comes from the bets v14 already builds, giving "breach rate at most `ε`, with confidence `1 − α`" beside the convict verdict, valid under dependence if the literature's martingale argument carries over (`v14/related.md`, entry 2; not read by the executor) | D: from the survey; to be read and proved |
+| H51 | **A certify verdict, from the same bets.** VK3's bet is the capital process of a betting confidence sequence for a mean, so an upper confidence sequence for a rate or a budget comes from the bets v14 already builds, giving "breach rate at most `ε`, with confidence `1 − α`" beside the convict verdict, valid under dependence if the literature's martingale argument carries over (`v14/related.md`, entry 2; not read by the executor) | D: from the survey; corrected (Q76, §34): only the average breach rate is certifiable, a pooled verdict, and per decision only for a sample |
 | H52 | **Report culpability's size by `E`.** `K = M_{𝓕*}(p̂)` is infinite exactly when the actor produces an outcome that no best feasible behaviour produces, which is the common case: the best behaviours of a convex program over a polytope sit on its boundary, often deterministic in some condition. So `K` is `0` or `∞` for most actors and ranks nothing; and with `M_A(𝓕)` finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` are one verdict. The avoidable excess `E = M_A(p̂) − M_A(𝓕)` is finite whenever `M_A(p̂)` is, and is the size to report; a smoothed `K`, against the best behaviours within a declared margin, is a third candidate for L2 (§32) | D: from the example of `slides/mathematicians.md` |
 | H53 | **Conditions are an exogenous σ-algebra, not a type.** One space `Ω` and one distribution; the conditions are a sub-σ-algebra `ℰ` whose law the world fixes, which carries no evidence about the actor, may arrive in any order, and makes pooled requirements state their weights (§33.2) | D: a proposal; decided (Q74, §33.17) |
 | H54 | **Latitude.** What the actor does inside the principal's cells, against a declared reference, `KL(p̂‖r) − KL(p̂_ℬ‖r_ℬ)`: never a verdict, a signal that the specification is silent where the principal may not be (RS7, §33.4) | D: a proposal, its identities proved |
@@ -515,6 +518,8 @@ models are hypotheses that [P3] and [P12] test.
 | H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the latitude available, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
 | H60 | **Factors that need an unknown σ-algebra are families of exact splits.** One split per σ-algebra consistent with the record; the actor's view revealed from below only (RS8), so the cost of missing resolution is bounded above by records and shown positive only by elicitation (§33.12) | D: RS8 proved; the rest a proposal |
 | H61 | **A declared reference is the framework's count of states, and a declared precision its minimal cell.** After Carcassi and Aidala (§4.4, §4.7), entropy-based diagnostics on a continuum are taken relative to a declared distribution, which fixes their zero, sign and coordinates; those that measure the actor's own spread, latitude available and confusion, need besides a declared precision, the smallest cell the actor can act on, the role physics gives a minimal cell of phase space (§33.14) | D: a proposal; adopted (Q74, §33.17) |
+| H62 | **Evidence for a motive is relative.** A hypothesis of PURPOSE is never verified (VF2), but two hypotheses that each predict a behaviour can be compared by bets, the likelihood ratio of their predictions growing as evidence for one against the other; a motive gains evidence only against named rivals, and a report says which (from an external review, Q76) | D: a proposal |
+| H63 | **A real record where v13 and v14 disagree.** One arm of the real case (H42): an actor that mixes acceptable behaviours, such as decoding at a temperature chosen per prompt, judged by v13's ray and by v14's hull; the verdicts should differ as VE2 says, a prediction that can fail (from an external review, Q76) | D: a proposal for H42's registration |
 
 ### 5.5 Process
 
@@ -2844,6 +2849,8 @@ favour an answer, it says so. A decision taken this way is the executor's, under
    VF1), with the smallest margin a record can certify reported (6). A pooled breach is named **aggregate breach** and
    reported beside misalignment, never summed with it (4). Open, as mathematics, not decisions: the size of an aggregate
    breach, the power of the pooled test, and certification under dependence for per-decision requirements (H51).
+   *Corrected (Q76, §34): for a per-decision requirement only a sample can be certified; for a changing actor, certify
+   is the pooled verdict on the average, whatever the dependence.*
 2. **R19(ii), the requirement an order builds: decided as dominance with declared margins**, `B_m(r) = {a : a(U) ≥ r(U)
    − m_U for every upper set U}`, the margins `m_U ≥ 0` declared (2), "no worse than the reference" declaring them `0`,
    which is `B(r)`. v13's ordinal cone is excluded from CORE: it asks a shape that pursuit of an increasing transform of
@@ -2890,3 +2897,65 @@ favour an answer, it says so. A decision taken this way is the executor's, under
 
 **Not forced, and left open.** Nothing in the list chooses Kelly's criterion over another valuation of wealth (the
 conventions table names it as a choice), the words themselves before L2, or the priority of the steps.
+
+## 34. An audit of the PI's prompts, and an external review weighed, 2026-10-22 (Q76)
+
+**Why.** The PI found that the question of Q70 on conditions and outcomes seemed unanswered, and asked whether every
+prompt can be read and judged actioned or lost, perhaps to the compaction of the session's context. The executor read
+all 44 of the PI's prompts in this session's transcript, from 2026-10-10 to 2026-10-22, against the tree.
+
+**The audit.** Every prompt has a decision row (Q49–Q76). What each asked, and where it stands:
+
+| Prompts | Asked | Where it stands |
+|---|---|---|
+| 2026-10-10 (Q49–Q50) | a review; the mathematics and engineering; the licence; hunches | done: §12–§15, §11, R11 open for the licence's package |
+| 2026-10-10 to 10-11 (Q51–Q55) | v13, its reframe by reverse physics, the seven requests, a pull request, a reread | done, #33 |
+| 2026-10-11 (Q56) | the general core correct and coherent; then a real case giving insight, the engineering rethought | the first done (§20); the real case deferred by the PI's priority, now recommendation 8 (H42), not lost |
+| 2026-10-11 to 10-14 (Q57) | do the labels mean their words | done, L1 (§21) |
+| 2026-10-14 to 10-15 (Q58) | do the recommendations survive on the continuum; a revamp; bins can be cheated, empirical distribution functions; a core without optimization | done: §21's end, §22 (bins and distribution functions answered by bets), v14 |
+| 2026-10-15 to 10-16 (Q59–Q64) | constraints in the core, KKT; costs out of the core; layers and twins; the forms of misalignment; limits; additive factors; Carcassi's verification of labels; what survives; the compelling method | done: `v14/`, VK5, FA1–FA3, VF1–VF3, `LIMITS.md`, `MIGRATION.md`, the generality table |
+| 2026-10-17 (Q65–Q68) | hygiene; slides; lessons; merge and branches | done, #35 |
+| 2026-10-17 (Q69) | ten questions on the slides | done (§32), the redundancies decided for the six files (Q74) |
+| 2026-10-17 (Q70) | record the analysis; what was applied; **conditions and outcomes as one distribution**; Carcassi's pairing method made clear; latitude; adversarial; R19, culpability, R20 | **conditions: answered (§33.2) and decided (Q74), never written into `v14/` or the slides: lost to the files, now applied.** "Declare" defined in one line (§33.8): likewise, now applied. **The pairing method**: a seven-step protocol proposed (§33.3, §33.11), `v14/labels.md` never written; it waited on "the PI's reading" (recommendation 12) without the PI being told. The rest done (§33) |
+| 2026-10-18 to 10-21 (Q71–Q73) | the book; neither side knows the other's σ-algebra; the general twins; entropy on a continuum; desiderata | done (§33.11–§33.16); latitude available and confusion on a continuum left open at the PI's word (Q72), a seed in §33.15 |
+| 2026-10-22 (Q74–Q75) | promote the desiderata, decide what they force, hygiene; to `main` | done, #36 |
+| 2026-10-22 (Q76) | an external review; this audit; the docs and slides | this section |
+
+So one ask was lost to the files, its answer kept only in the notes, and with it a one-line definition; the pairing
+method waited without the PI knowing it waited. A failure row in §1 records the pattern. The pairing protocol is forced
+in principle by desideratum 4 ("the pairing of word and object is justified, after Carcassi and Aidala, and tested on
+paradigm cases"); its seven steps are the executor's design, so they are proposed, and `v14/labels.md` is the next step
+of the roadmap, before L2.
+
+**Conditions and outcomes, the answer made explicit.** One distribution on the outcomes, conditions included, and one
+declaration: which part the world chooses, a sub-σ-algebra `ℰ`, trivial when the world chooses nothing. By the chain
+rule the divergence splits into a term about the world's mix and one about the actor given it; misalignment keeps the
+second, by comparing with acceptable behaviours that share the actor's law on `ℰ`. That is the one good argument for
+keeping anything of the split, and it keeps a declaration, not a type (`v14/README.md`, the section on one
+distribution; the mathematicians' deck, slide 5).
+
+**The external review**, by a model of another family than the executor's (rule (f)). The PI asked for it to be
+weighed, not imported. Taken:
+- *Certification*, which the review asked to be proved for per-decision requirements under dependence. The executor
+  found it cannot be: with two actors differing at one decision, fixed in advance, `P_b(E) ≥ c·P_g(E)` for every event
+  of the record, `c` the least likelihood ratio of the changed decision, so no test certifies "every decision within
+  `ε`" with power above `α/c`, dependent or not. Only the average of the conditional behaviours, a pooled statement, is
+  certifiable, and per decision only for a sample. Corrected in `v14/LIMITS.md`, `v14/README.md`, §33.17 and H51; a
+  failure row in §1.
+- *Two rules for v14's report*: every capability-based charge says whether it rests on capability shown in elicitation
+  or on the declared interface; every verdict says its kind and whether its guarantee is proved or expected
+  (`ROADMAP.md`, recommendation 7).
+- *Relative evidence for a motive*, H62; *a real record where v13 and v14 disagree*, H63, an arm of H42.
+- *A sentence in `v14/resolution.md`*: the σ-algebra and interface splits are two decompositions of one number, not
+  nested.
+
+Declined, with the reason: predictability, already in VE3 ("chosen before decision `i`", "may depend on everything
+before") and SN1(ii) ("fitted to the record, not fixed in advance"), and the review's claim that H46 is mostly closed
+is wrong, since SN1 shows only that the hindsight bet reaches the rate; "best feasible with respect to what", answered
+by the definition through `M_A`; CI for v14 now, which lint forbids before v14's results are items, and which comes with
+the six files (recommendation 4); review of the survey files, already labelled and covered by the rule of reading
+sources; a PURPOSE result before approval, whose example, training's question 5, is SHAPING's, and whose premise, that
+v14 measures reward hacking less than v13, overlooks SH1's outer term; reporting both `M_A` and `M_{conv A}`, obsolete
+since Q74; a note on closed requirements, right in its conclusion and wrong in its reason (continuity of KL in its
+second argument on finite outcomes, not lower semicontinuity); the provenance of the slides' numbers, already a rule
+and checked.

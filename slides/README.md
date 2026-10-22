@@ -5,7 +5,7 @@ Three decks, each independent of the others:
 | Deck | For | Example | Numbers from |
 |---|---|---|---|
 | `framework.md` | anyone: the framework, as drafted in `v14/`, and how to use it; 32 slides | a frozen support bot judged against its previous version | `probes/slides/support_bot.py` |
-| `mathematicians.md` | mathematicians who know probability and statistics but not alignment: evidence, σ-algebras, families of targets with Sanov, every factorization named with its label's status; 32 slides | a question-answering model under three σ-algebras | `probes/slides/qa_model.py` |
+| `mathematicians.md` | mathematicians who know probability and statistics but not alignment: evidence, σ-algebras, families of targets with Sanov, every factorization named with its label's status; 33 slides | a question-answering model under three σ-algebras | `probes/slides/qa_model.py` |
 | `specification.md` | a principal writing a specification: what is implicit, what must be explicit, and the interface; 12 slides | the support bot | `probes/slides/support_bot.py`, `probes/v14/resolution.py` |
 
 **Format.** Marp Markdown: plain text, so the slides change as easily as any other file and their history reads in

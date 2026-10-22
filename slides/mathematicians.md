@@ -38,14 +38,29 @@ The draft defines misalignment from behaviour and a declaration alone, and puts 
 
 ## The setting
 
-- Finitely many **conditions** `c`, with frequencies `w_c` the actor does not choose; finitely many **outcomes** `x`.
-- A **behaviour** `p = (p_c)_c`: a distribution on outcomes in each condition; equivalently, a distribution on pairs
-  `(c, x)` with marginal `w`.
-- A **record**: decisions in turn, each a condition and an outcome; not assumed independent.
+- Finitely many **outcomes** `ω ∈ Ω`, each holding what the record notes of a decision, its situation included.
+- A **behaviour** `p`: one distribution on `Ω`, analysed as a unit.
+- One declaration: the **exogenous** σ-algebra `ℰ`, what the world chooses; its cells `c` are the **conditions**, with
+  frequencies `w_c` the actor does not choose (trivial `ℰ` if there are none).
+- A **record**: decisions in turn; not assumed independent.
 - The principal's **specification**: a finite list of **requirements** `A_1, …, A_m`, each a set of behaviours,
   declared before the record is read. The acceptable set is `A = ∩_j A_j`.
 
 Finiteness is what a record at finite precision decides; the general twins lift it.
+
+---
+
+## One distribution, and the one declaration left
+
+Conditions and outcomes are one distribution on `Ω`; every specification is a set of them. What a split carried is one
+fact, which the principal declares: **which part the world chooses**, `ℰ`. By the chain rule,
+
+`KL(p‖a) = KL(p_ℰ‖a_ℰ) + Σ_c p(c)·KL(p(·|c)‖a(·|c))`.
+
+The first term is evidence about the world, not the actor, so the acceptable behaviours share the actor's law on `ℰ`.
+Without the declaration, the actor is either charged for the world's mix, or credited with mixes the world did not
+deliver: pooled, the support bot's evidence is `0.0440` nats per decision; with the mix fixed, `0.0496` (VK6). Bets are
+fair given the world's choice, decision by decision (VE3).
 
 ---
 
@@ -112,7 +127,8 @@ The older reading (v13): accept `tilt(q, G) ∝ q·e^G` for any `G ∈ 𝓚`, th
 
 ## Misalignment
 
-`M_A(p) = inf_{a ∈ A} KL(p‖a)`, in nats per decision, with the conditions' frequencies fixed.
+`M_A(p) = inf {KL(p‖a) : a ∈ A, a_ℰ = p_ℰ}`, in nats per decision: by the chain rule, the world's choices carry no
+evidence about the actor.
 
 Three readings, one number:
 
@@ -433,8 +449,8 @@ Bets refitted before each decision, at level 5% (VE3); the share of records that
 
 ## What is open
 
-- **Certification**: v14 convicts; certifying "breach rate at most `ε`" needs confidence sequences from betting, known
-  in the literature and not yet in the draft.
+- **Certification**: a record certifies only an average of the conditional behaviours, never that every decision was
+  acceptable; by confidence sequences, known in the literature and not yet proved in the draft.
 - **Achievability**: bets refitted from the record reach the best growth rate; answered for independent decisions in
   the literature, open under dependence (H46).
 - **A blind spot of order `√n`**, a hunch (H43): shifts of `1/√(n·I)` per decision are detected over `n` decisions with

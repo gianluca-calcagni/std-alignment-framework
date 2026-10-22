@@ -242,10 +242,16 @@ proof leaves nothing to compute.
 The two factorizations below are of the same number, `M_A(p̂)`, by different chains.
 - *What is seen*, along σ-algebras of the record (RS1): `M_A(p̂) = M_A^ℛ(p̂) + H_ℛ(p̂)`, the misalignment a record at
   `ℛ` can detect plus the hidden part; when the record's partition is coarser than the principal's, `ℛ ⊑ ℬ`, as for a
-  grader whose classes merge the
-principal's, `M_A^ℛ + (M_A^ℬ − M_A^ℛ) + 0` (RS3); in general the two partitions need not be ordered.
+  grader whose classes merge the principal's, `M_A^ℛ + (M_A^ℬ − M_A^ℛ) + 0` (RS3); in general the two partitions need
+  not be ordered.
 - *What could be done*, along interfaces (FA1, RS5): `M_A(p̂) = m_full + Σ_j (m_{j+1} − m_j) + E(p̂)`, with a term for
   each coarsening of the actor's view or resolution.
+
+The two are different decompositions of one quantity, not nested in each other: the hidden part `H_ℛ` is not a sum of
+interface terms, nor contains one, and a report gives each with the chain it telescopes along (`README.md`, every split
+names its chain). The conditions are not a third position: they are the part of the outcome the world chooses, a
+declared sub-σ-algebra `ℰ`, and every result above holds with the acceptable behaviours sharing the actor's law on `ℰ`
+(`README.md`, one distribution).
 
 **Verification status of the labels** (VF1, VF2), for an acceptable set `A` that is convex, closed and has a
 full-support member, as rate limits with `ε > 0`, budgets with `b > min g` and dominance sets do. Then every `M_A^𝒢` is

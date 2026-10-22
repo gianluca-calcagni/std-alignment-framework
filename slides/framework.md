@@ -72,7 +72,8 @@ No optimization, no reward and no training appear in CORE.
 
 ## Behaviour
 
-A behaviour is the share of each outcome over many decisions, one share per condition.
+A behaviour is the share of each outcome over many decisions, one share per condition, the conditions being what the
+world chooses, not the actor.
 
 - A support bot's answers to account questions: wrong 35%, escalated 65%.
 - A behaviour is never seen exactly; a record of decisions estimates it.

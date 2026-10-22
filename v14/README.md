@@ -67,20 +67,52 @@ beside them; VK0, VO1, VO2, IN1, FA1 and VF1–VF3 have no probe, as their proof
 **CORE**, with no optimization in it, built by the method v13 used, reverse physics [@carcassi2022]: imported
 mathematics (M), background conditions assumed without loss of generality, each with its qualifier (B), premises with
 their status (A), and definitions with their interpretation (D).
-1. *Outcomes and behaviours.* As v13's [M1], [M2], [B1], [B2], [A1] and [D1] without the tilt; a behaviour may depend
-   on a condition, such as a prompt.
-2. *The specification*, declared before it judges ([A5]): a finite list of **requirements**, each declared of one of
-   two kinds (Q74, `NOTES.md` §33.17). A **per-decision** requirement, that every decision given the past be acceptable,
-   is a convex closed set of behaviours; a **pooled** one, on the average of the conditional behaviours over a declared
-   horizon, is any closed set, CVaR limits included. The **acceptable set** is the intersection; when it is empty, which
-   the declarations alone show, the specification is reported as **inconsistent** before any record is read.
+1. *Outcomes and behaviours.* As v13's [M1], [M2], [B1], [B2], [A1] and [D1] without the tilt. An outcome holds
+   everything a record notes of a decision, the situation it arose in included, such as a prompt; a behaviour is one
+   distribution on the outcomes, analysed as a unit. One declaration remains of the old split into conditions and
+   outcomes: which part of an outcome the world, not the actor, chooses (the next section).
+2. *The specification*, **declared** before it judges ([A5]), declared meaning fixed, dated and published before the
+   record it judges is read (`NOTES.md` §33.8; a test is "registered", in the repository's older word): a finite list of
+   **requirements**, each declared of one of two kinds (Q74, `NOTES.md` §33.17). A **per-decision** requirement, that
+   every decision given the past be acceptable, is a convex closed set of behaviours; a **pooled** one, on the average
+   of the conditional behaviours over a declared horizon, is any closed set, CVaR limits included. The **acceptable
+   set** is the intersection; when it is empty, which the declarations alone show, the specification is reported as
+   **inconsistent** before any record is read.
 3. *Misalignment*, the evidence against acceptability: the best long-run growth rate of a bet, fixed in advance or
    chosen before each decision, that no acceptable behaviour expects to win ([A4] in its bet form, VE1), with a
    **breach** verdict for each requirement.
 4. *Records*, judged by bets, valid whatever the dependence when each decision is acceptable given the past (VE3), and
    pooled requirements by confidence sequences for the average of the conditional behaviours, valid whatever the
    dependence; two verdicts, **convict** and **certify** at a declared margin, a pooled breach named an **aggregate
-   breach** and never summed with misalignment; [P55]'s exact test kept for certifying samples.
+   breach** and never summed with misalignment; [P55]'s exact test kept for certifying samples. Certify applies to a
+   pooled requirement, and to a per-decision one only for a sample, independent draws from one behaviour: no record
+   certifies that every decision of a changing actor was acceptable (`LIMITS.md`, Q76).
+
+## Conditions and outcomes: one distribution, and the one declaration that remains
+
+The PI asked whether conditions and outcomes can be paired into one distribution, analysed as a unit, unless a good
+argument keeps them apart (Q70). They can, and v14 does (`NOTES.md` §33.2, decided under Q74, §33.17, item 5): a
+condition is part of the outcome, and every specification is a set of distributions on the pairs, so nothing a
+specification can say is lost. What the split carried that one distribution does not is one fact, which the principal
+declares: **which part of the outcome the world chooses**, a sub-σ-algebra `ℰ` of the outcomes, its cells what were
+called conditions. When the world chooses nothing, `ℰ` is trivial and nothing else is needed.
+
+**Why it cannot be dropped.** By the chain rule, for behaviours `p` and `a`,
+`KL(p‖a) = KL(p_ℰ‖a_ℰ) + Σ_C p(C)·KL(p(·|C)‖a(·|C))`, the sum over the cells `C` of `ℰ`. The first term is evidence
+about how often the world posed each situation, which says nothing about the actor. So misalignment is taken against the
+acceptable behaviours that share the actor's law on `ℰ`, `M_A(p) = inf {KL(p‖a) : a ∈ A, a_ℰ = p_ℰ}`, which leaves the
+second term only. Without the declaration the framework errs one of two ways, both seen in numbers: it charges the actor
+for the world's mix, when the requirement fixes a mix the world did not deliver; or it credits the actor with acceptable
+behaviours that would need the world to have posed the situations at other rates, as pooling does for the support bot,
+`0.0440` nats per decision against `0.0496` with the mix held fixed (`constraints.md`, VK6). Bets are likewise fair
+given the world's choice, decision by decision, the contexts of VE3, or a world that changes its mix would move the
+wealth.
+
+**What it gains.** Requirements across situations ("act alike whatever the user's name", [P40]) and within them are one
+kind of object; the σ-algebra results of `resolution.md` apply to what the world chooses as to what the actor does; and
+a situation partly made by the actor, a conversation whose later turns follow its earlier answers, is expressed by
+declaring only the user's turns exogenous. The results stated per condition (VK6, `interface.md`) are the case where `ℰ`
+is generated by a finite list of conditions.
 
 **Refinements of CORE that build requirements**, none of them a new kind of object: the catalogue of constraints
 (`constraints.md`); an order against a reference (`order.md`); indifference, as requirements that depend only on the
@@ -99,7 +131,7 @@ or say which cases are. These are the claims, each with its ground and its quali
 | Claim | Why nothing is lost | Qualifier |
 |---|---|---|
 | finitely many outcomes | a record of finitely many decisions at finite precision decides finitely many events, and misalignment on a continuum is the supremum over them ([B1]; `general/transfer.md`, TR2) | that supremum equals the least divergence to the acceptable behaviours only when their closure is compact (TR3); heavy tails and atoms in `CORE-GENERAL.md`; v14's own results are proved for finite outcomes only |
-| episodes and conditions as outcomes | an episode, or a condition with its outcome, is again an outcome ([B2]) | one long record with no episodes |
+| episodes and conditions as outcomes | an episode, or a situation with what the actor did in it, is again an outcome ([B2]); which part the world chooses is declared as a sub-σ-algebra `ℰ` (the section above) | one long record with no episodes; a principal who leaves out `ℰ` charges the actor for the world's mix, or credits it with mixes the world did not deliver |
 | a specification is a list of requirements, each a set of behaviours | by [A1] a judgement from behaviour is a statement about behaviours, which is a set of them, and a list holds a conjunction | comparisons with a reference (`order.md`, VO3) are reported beside the verdicts; they become requirements only when the principal declares which |
 | requirements are closed | closing a requirement changes no misalignment and no bet (VE1(iv)) | the breach verdict changes at boundary behaviours, such as a rate exactly at a strict limit, which no record can tell apart |
 | per-decision requirements are convex | forced given two premises: a schedule of acceptable behaviours is acceptable, and tests must keep their level whatever the dependence. Independent draws from a mixture have the law of a random schedule of its components, so a test valid for every schedule is valid at the hull; and no bet separates a set from its hull (VE2) | a set that is not convex, declared per decision, is enforced as its hull; a limit on tail risk, which is not convex (at a tail of 10%, two behaviours with CVaR `0.6` mix into one with CVaR `0.72`, `NOTES.md` §32), is declared pooled, and judged on the average behaviour over its horizon, whatever the dependence (Q74) |

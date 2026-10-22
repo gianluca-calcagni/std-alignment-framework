@@ -17,7 +17,8 @@ distribution `π(·|z)` on `U` for each signal, with finite support when `U` is 
 `𝓕(ℐ)` are the closure of those the policies produce,
 `{(p_c)_c : p_c(x) = Σ_z V(z|c)·Σ_u π(u|z)·E(x|c, u), π a policy}`, so that best behaviours exist. A tuple `(p_c)_c` is
 read, as in [B2], as one behaviour on pairs of a condition and an outcome, with the conditions' frequencies `w_c` fixed
-by the declaration, and divergences between tuples are taken on those pairs.
+by the declaration, and divergences between tuples are taken on those pairs: v14's one space, the conditions being the
+cells of the declared exogenous σ-algebra `ℰ` (`README.md`, one distribution).
 
 **Culpability and the avoidable excess.** For a specification whose acceptable set is `A` and an actor whose actual
 behaviour `p̂` lies in `𝓕 = 𝓕(ℐ)`: the **unavoidable misalignment** `M_A(𝓕) = inf_{f∈𝓕} M_A(f)`; the **best feasible

@@ -74,12 +74,20 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Hidden inside the record's cells.** A record whose σ-algebra is coarser than the principal's, such as a grader that
   cannot tell a wrong answer from a harmful one, shows only the misalignment at its own resolution; the rest is neither
   verifiable nor refutable from it, and only a finer record or a declared interface bounds it (`resolution.md`, RS4).
-- **Convicting exactly, certifying only within a margin.** "Misaligned" is verifiable, and "culpable" with the interface
-  taken as known; "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a
-  standard, never to meet it exactly. A certify verdict at a declared margin is part of the design (Q74): for pooled
-  requirements from confidence sequences, valid under dependence; for per-decision ones, "breach rate at most `ε`" under
-  dependence is expected from the bets the draft builds (H51; `related.md`, entries 2 and 4) and not yet proved;
-  "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]).
+- **Convicting exactly, certifying only within a margin, and only an average.** "Misaligned" is verifiable, and
+  "culpable" with the interface taken as known; "aligned" and "not culpable" only refutable (`factorization.md`, VF1).
+  An actor can be shown to fail a standard, never to meet it exactly. A certify verdict at a declared margin is part of
+  the design (Q74), for what a record can certify: the average of the actor's conditional behaviours over the record, a
+  pooled statement, by confidence sequences valid under dependence; and, for a sample, independent draws from one
+  behaviour, an assumption the report then names, that behaviour itself ([D3], [P55]). That *every* decision was
+  acceptable within a margin is not certifiable by any record, dependent or not (Q76, `NOTES.md` §34). *Why*: let an
+  actor `g` draw every decision from an acceptable behaviour `a_0`, and a second actor `b` do the same except at one
+  decision fixed in advance, where it draws from `b_0`, outside the margin, with `b_0 ≥ c·a_0` for some `c > 0`. The two
+  records differ in the law of one decision, so for every event `E` of the record, `P_b(E) ≥ c·P_g(E)`: a test that
+  certifies the second actor with probability at most `α` certifies the first with probability at most `α/c`, at every
+  size of record. For a forbidden outcome tolerated at `0.05` and a decision at `0.05 + 2ε`, `c = (0.95 − 2ε)/0.95`,
+  close to `1`. So H51's "breach rate at most `ε`" is a pooled verdict, on the average rate, which a risky decision
+  offset by safe ones can meet.
 - **Dependence.** A test from bets keeps its level whatever the dependence, but only against the hypothesis that each
   decision, given the past, is acceptable (`evidence.md`, VE3). Drift and dependence ([P54]) are identified only from
   repeated records or declared episodes; one long record, with no repetition, does not separate them. That a test's

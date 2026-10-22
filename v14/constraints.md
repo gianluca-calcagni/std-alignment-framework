@@ -201,11 +201,13 @@ with `Σ_c w_c·v_c ≤ ε`. For `θ > 0`, the function `v ↦ kl(u‖v) + θ·v
 and `Σ_c w_c·v*_c = ε`. The lower bound: without the frequencies fixed, the pooled limit is VK2's on the pairs, whose
 acceptable set contains `K`. ∎
 
-**Notes.** Against a numerical minimization on 40 random instances, within `1e-10`; the pooled formula falls short of it
-by up to `0.19`. For the support bot of `slides/framework.md`, wrong answers in `2.91%` of open questions and `35.34%`
-of account questions give `0.04956`, the number its probe found by minimization, where VK2's pooled formula gives
-`0.0440` (`probes/v14/RESULTS-resolution.md`). This was the first lesson of the slides' example (`NOTES.md` §31): the
-closed forms of this file hold for behaviours on outcomes alone, and on pairs whose frequencies are fixed they become
+**Notes.** In v14's one space (`README.md`, one distribution), the conditions are the cells of the declared exogenous
+σ-algebra `ℰ`, and "frequencies fixed" is the acceptable behaviours sharing the actor's law on `ℰ`; VK6 is that case.
+Against a numerical minimization on 40 random instances, within `1e-10`; the pooled formula falls short of it by up to
+`0.19`. For the support bot of `slides/framework.md`, wrong answers in `2.91%` of open questions and `35.34%` of account
+questions give `0.04956`, the number its probe found by minimization, where VK2's pooled formula gives `0.0440`
+(`probes/v14/RESULTS-resolution.md`). This was the first lesson of the slides' example (`NOTES.md` §31): the closed
+forms of this file hold for behaviours on outcomes alone, and on pairs whose frequencies are fixed they become
 one-parameter forms like this one.
 
 ### VK7 — How misalignment moves with the budget

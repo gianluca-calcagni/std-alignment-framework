@@ -12,10 +12,11 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
    and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
    unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
-2. **The three choices the draft rests on**: decided as the desiderata force them (Q74, `NOTES.md` §33.17). Two kinds
-   of requirement, per-decision and convex, or pooled over a declared horizon and any closed set, each with convict and
-   certify verdicts; an order's requirement as dominance with declared margins, `B_m(r)`, v13's cone kept for PURPOSE;
-   a reference that may break a constraint, an empty intersection reported as an inconsistent specification.
+2. **The three choices the draft rests on**: decided as the desiderata force them (Q74, `NOTES.md` §33.17). Two kinds of
+   requirement, per-decision and convex, or pooled over a declared horizon and any closed set, both convicted, and
+   certified only as an average or, per decision, for a sample (Q76); an order's requirement as dominance with declared
+   margins, `B_m(r)`, v13's cone kept for PURPOSE; a reference that may break a constraint, an empty intersection
+   reported as an inconsistent specification.
 3. **[[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
 4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `PURPOSE` and their twins, each twin
    stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
@@ -26,9 +27,12 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 6. **Elicitation in INTERFACE**: conditions with a declared link to the condition judged, so that excuses can be
    refuted (`v14/factorization.md`, VF3); without them, every excuse rests on the declared interface.
 7. **The report and the library on v14**: a new `STANDARD.md`, a verdict per requirement, the bets, the interface and
-   what it excuses, stakes on a declared scale; `stdalign`'s API to match.
+   what it excuses, stakes on a declared scale; `stdalign`'s API to match. Two rules from an external review (Q76,
+   `NOTES.md` §34): every capability-based charge says whether it rests on capability shown in elicitation or on the
+   declared interface; every verdict says its kind and whether its guarantee is proved or expected.
 8. **The real case** (H42): a frozen model against a reference model, forbidden outputs as constraints, one scorer as
-   the order, judged by bets over prompts, with elicitation conditions; registered before it runs.
+   the order, judged by bets over prompts, with elicitation conditions; registered before it runs; with an arm where v13
+   and v14 should disagree (H63).
 9. **People**: a mathematician who reads the six files once drafted (R1), and the label verdicts of L1 and L2 read by
    the PI (R15).
 10. **What the slides' example showed** (`NOTES.md` §31): re-derive the constraints' closed forms with the conditions'
@@ -44,10 +48,11 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 their drafts, with the questions of Q70 (`NOTES.md` §33).
 
 12. **The brainstorm of Q70** (`NOTES.md` §33): decided under Q74 (§33.17), R19 by two kinds of requirement, one space
-    with an exogenous σ-algebra, and culpability at a care margin, or by negligence where costs are declared; still for
-    the PI's reading, `v14/labels.md` on the seven-step protocol from Carcassi and Aidala's book, first for misaligned,
-    breach, culpable, hidden, latitude and unavoidable, and "adversarial" as worst case, evaluation gaming with
-    honeypots, and aim.
+    with an exogenous σ-algebra, and culpability at a care margin, or by negligence where costs are declared. Next,
+    before L2: `v14/labels.md` on the seven-step protocol from Carcassi and Aidala's book, first for misaligned, breach,
+    culpable, hidden, latitude and unavoidable, the protocol waiting on the PI (`REQUESTS.md`, R23; the audit of Q76
+    found it had waited without the PI being told); "adversarial" as worst case, evaluation gaming with honeypots, and
+    aim, still for the PI's reading.
 
 ## The goal
 
@@ -108,20 +113,21 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   PURPOSE, SHAPING, specification), and RS6 and RS7 (latitude, proposed) added. The framework's six desiderata were
   accepted and promoted to `README.md` (Q74), and the decisions they force were taken (`NOTES.md` §33.17): R19 by two
   kinds of requirement, per-decision and convex, judged by bets, or pooled and any closed set, judged by confidence
-  sequences, with convict and certify verdicts; an order's requirement as dominance with declared margins; a reference
-  that may break a constraint, an empty intersection reported as an inconsistent specification; culpability at a
-  declared care margin, its size `E`; one space with an exogenous σ-algebra. Three layers, each with a twin for outcomes
-  that are not finite: CORE (a specification as a list of requirements, misalignment as the evidence against it,
-  records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse perception, tampering) and
-  PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for training. Thirty-three results, all proved
-  here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK7), three
-  verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status
-  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS6, RS8), a family of targets with a
-  reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity and who grades
-  (`v14/severity.md`) and the fourth layer (`v14/training.md`). A survey of competing frameworks (`v14/related.md`).
-  `v14/README.md` holds the design with its claims of generality, its conventions and the challenges answered;
-  `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. L2 comes next (the
-  recommendations above).
+  sequences, with convict and certify verdicts, certify being for averages (Q76); an order's requirement as dominance
+  with declared margins; a reference that may break a constraint, an empty intersection reported as an inconsistent
+  specification; culpability at a declared care margin, its size `E`; one space with an exogenous σ-algebra, now written
+  into `v14/` and the slides (Q76, conditions and outcomes as one distribution, with the world's part declared). Three
+  layers, each with a twin for outcomes that are not finite: CORE (a specification as a list of requirements,
+  misalignment as the evidence against it, records judged by bets), INTERFACE (what the actor sees and can do:
+  culpability, coarse perception, tampering) and PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for
+  training. Thirty-three results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a
+  bet (VE1–VE4), constraints (VK0–VK7), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization
+  and its labels' verification status (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor
+  (RS1–RS6, RS8), a family of targets with a reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not
+  decided: severity and who grades (`v14/severity.md`) and the fourth layer (`v14/training.md`). A survey of competing
+  frameworks (`v14/related.md`). `v14/README.md` holds the design with its claims of generality, its conventions and the
+  challenges answered; `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. L2 comes
+  next (the recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and
@@ -284,3 +290,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-22 | the framework's desiderata drafted for the PI's consideration (Q73, `NOTES.md` §33.16): six, general and filtering, with their tensions; §33.15's rules restated as following from them; R22 | 1 (the goal); 2 (a version) |
 | 2026-10-22 | the desiderata accepted and promoted to `README.md`, with a drift check and a rule in `CLAUDE.md` (Q74); the decisions they force taken (`NOTES.md` §33.17): R19 by two kinds of requirement and two verdicts, an order's requirement as dominance with declared margins, a reference that may break a constraint, culpability at a declared care margin, one space with an exogenous σ-algebra, the entropy imports, the redundancies, three working agreements; R16, R19 and R22 closed, R15 trimmed; hygiene of `v14/` and `slides/` | 1 (the goal); 2 (a version) |
 | 2026-10-22 | the work since pull request #35 brought to `main` by a pull request, at the PI's request (Q75) | 2 (a version) |
+| 2026-10-22 | an audit of all 44 of the PI's prompts (Q76, `NOTES.md` §34): one ask lost to the files, conditions and outcomes as one distribution, answered and decided only in the notes, now written into `v14/` and the three decks with "declare" defined; the pairing protocol for labels made a request (R23); an external review weighed, five items taken: certification corrected to averages, two rules for the report, H62, H63, a sentence in `resolution.md` | 2 (a version); 5 (what the quantities mean) |

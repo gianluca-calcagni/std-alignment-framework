@@ -16,7 +16,7 @@ rows of `NOTES.md` §3.1.
 A **specification** is a list of **requirements**. Each requirement is a set of acceptable behaviours, and every
 acceptable behaviour lies in all of them.
 
-- A **behaviour** says how often each outcome happens, in each condition the actor faces.
+- A **behaviour** says how often each outcome happens, the situation it arose in included: one distribution.
 - Every requirement for which a mix of acceptable behaviours is acceptable is a list of limits on averages: "on
   average, at most this much of that" (VK0).
 - So a **constraint** and a requirement are the same kind of object. "Constraint" names the ones stated absolutely,
@@ -43,16 +43,17 @@ A forbidden outcome is a rate limit of zero; a rate limit is a budget on how oft
 | Declared | What it already requires |
 |---|---|
 | the outcomes | nothing outside them can be required |
-| the conditions and how often each arises | the actor does not choose its situations |
+| which part of an outcome the world chooses | the actor is judged on the world's mix, never charged for it |
 | what the principal does not care about | nothing inside those groups of outcomes |
 | a reference and the targets it must not lose on | no worse than the reference on each target |
 | a ranking and a reference | at least as often as the reference at every standard |
 
 ---
 
-## Conditions are a requirement too
+## What the world chooses
 
-The actor does not choose how often each kind of question arrives.
+The actor does not choose how often each kind of question arrives: that part of the outcome, the **conditions**, is
+declared as the world's.
 
 - Support bot: wrong in 2.9% of open questions, 35.3% of account questions; 12.6% overall; the limit is 5%.
 - Judged as one pool: 0.0440 nats per decision.
@@ -123,7 +124,7 @@ is the stake of the best bet against it (VK7).
 
 ## In five questions
 
-1. What are the outcomes, and the conditions with how often each arises?
+1. What are the outcomes, and which part of them does the world choose?
 2. Which distinctions between outcomes does the principal not care about?
 3. Is there a reference, and on which targets must it not be beaten?
 4. What is required absolutely: forbidden outcomes, rates, averages?
