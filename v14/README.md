@@ -1,8 +1,8 @@
 # v14, a draft: a core whose words mean what they say
 
 > **Status: a working draft, drafted on the branch `claude/core-v14` (Q59–Q68), brought to `main` as a draft, and
-> extended (Q69–Q74). It is not approved as a whole, and nothing here replaces `CORE.md` or `derived/` yet.** It gathers
-> what the label test L1, the general core and the discussions of `NOTES.md` §22–§33 taught, and proves the results the
+> extended (Q69–Q77). It is not approved as a whole, and nothing here replaces `CORE.md` or `derived/` yet.** It gathers
+> what the label test L1, the general core and the discussions of `NOTES.md` §22–§35 taught, and proves the results the
 > new structure rests on. Its design follows the framework's six desiderata (`README.md`, Q74); the three choices it
 > rests on, R19, were decided as they force them (`NOTES.md` §33.17), and the PI's other decisions on it are rows of
 > `NOTES.md` §3.1. The work ahead is in `ROADMAP.md`'s recommendations.
@@ -43,13 +43,13 @@ The draft so far, in this folder:
 | File | What it holds | Status |
 |---|---|---|
 | `evidence.md` | VE1 misalignment against a convex set is the growth rate of the best bet; VE2 records hold an actor to the convex hull; VE3 a test from bets keeps its level under any dependence; VE4 a bet's growth is an average; why this measure | proved here; VE1 also read in an open text ([@grunwald2023], Theorem 1) |
-| `constraints.md` | VK0 every convex requirement is a set of budgets; VK1 forbidden sets; VK2 rate limits; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions (for PURPOSE) | proved here, except VK4(iii), supported by a probe |
+| `constraints.md` | VK0 every convex requirement is a set of budgets; VK1 forbidden sets; VK2 rate limits; VK3 budgets, by a Lagrange dual; VK4 several constraints; VK5 the constrained optimizer, by the Karush–Kuhn–Tucker conditions (for PURPOSE); VK6 a rate limit over conditions the world chooses; VK7 how misalignment moves with a budget | proved here, except VK4(iii), supported by a probe |
 | `order.md` | VO1 better for every reading is dominance on upper sets; VO2 v13's ordinal specification lies inside it; VO3 three verdicts and what a record verifies; why dominance is canonical | proved here; to be written as a case of TG1 (Q74) |
-| `interface.md` | the interface, feasibility, culpability, elicitation; IN1 every convex feasible set is an interface's; every form of misalignment by the layer that defines it | definitions proposed; IN1 proved here |
+| `interface.md` | the interface, feasibility, culpability, elicitation; IN1 every convex feasible set is an interface's; every form of misalignment by the layer that defines it | definitions proposed, except culpability's shape, decided (Q74); IN1 proved here |
 | `factorization.md` | FA1 nested interfaces factor misalignment exactly; FA2, FA3 its Pythagorean forms; v13's exact splits by mechanism and layer; VF1–VF3 the verification status of every factor's label | proved here |
 | `LIMITS.md` | what the framework cannot do and leaves out | proved, chosen, or marked as a hunch |
 | `MIGRATION.md` | what of v13 survives, item by item | the executor's assessment, not reviewed |
-| `resolution.md` | σ-algebras of the principal, the record and the actor: RS1 refinement adds up exactly; RS2 bets a coarse record can settle; RS3 indifference; RS4 hidden misalignment, neither verifiable nor refutable; RS5 views and resolutions are linear interfaces | proved here |
+| `resolution.md` | σ-algebras of the principal, the record and the actor: RS1 refinement adds up exactly; RS2 bets a coarse record can settle; RS3 indifference; RS4 hidden misalignment, neither verifiable nor refutable; RS5 views and resolutions are linear interfaces; RS6 a resolution at least as fine as the principal's costs nothing; RS7 latitude taken, a proposal; RS8 a view is revealed from below | proved here, except RS7, a proposal |
 | `targets.md` | TG1 a family of targets with a reference is a list of budgets; TG2 that is not pursuing one target; SN1 Sanov's rate, the best bet and the projection are one number | proved here; TG1's reading decided (Q74) |
 | `severity.md` | severity as a declared scale, never in nats; what a report gives; who grades | a proposal |
 | `training.md` | a fourth layer, SHAPING, for training, selection, education and regulation; SH1 | a proposal; SH1 proved |
@@ -61,7 +61,8 @@ The draft so far, in this folder:
 **Names** (R20, approved by the PI, Q70): PURPOSE for the third layer, once OPTIMIZERS; SHAPING for a fourth, on
 training (`training.md`); and "specification" for what the principal declares, once "the request". Notes written before
 Q70 keep the old names. None runs in CI yet. The probes in `probes/v14/` reproduce every number, with their outputs
-beside them; VK0, VO1, VO2, IN1, FA1 and VF1–VF3 have no probe, as their proofs leave nothing to compute.
+beside them; VK0, VO1, VO2, TG1, IN1, FA1, VF1–VF3, RS6–RS8 and SH1 have no probe, as their proofs leave nothing to
+compute.
 
 ## The design
 
@@ -113,10 +114,10 @@ about how often the world posed each situation, which says nothing about the act
 acceptable behaviours that share the actor's law on `ℰ`, `M_A(p) = inf {KL(p‖a) : a ∈ A, a_ℰ = p_ℰ}`, which leaves the
 second term only. Without the declaration the framework errs one of two ways, both seen in numbers: it charges the actor
 for the world's mix, when the requirement fixes a mix the world did not deliver; or it credits the actor with acceptable
-behaviours that would need the world to have posed the situations at other rates, as pooling does for the support bot,
-`0.0440` nats per decision against `0.0496` with the mix held fixed (`constraints.md`, VK6). Bets are likewise fair
-given the world's choice, decision by decision, the contexts of VE3, or a world that changes its mix would move the
-wealth.
+behaviours that would need the world to have posed the situations at other rates, as merging the conditions does for the
+support bot, `0.0440` nats per decision against `0.0496` with the mix held fixed (`constraints.md`, VK6). Bets are
+likewise fair given the world's choice, decision by decision, the contexts of VE3, or a world that changes its mix would
+move the wealth.
 
 **What it gains.** Requirements across situations ("act alike whatever the user's name", [P40]) and within them are one
 kind of object; the σ-algebra results of `resolution.md` apply to what the world chooses as to what the actor does; and
@@ -182,7 +183,7 @@ weaken the framework more than it should.
   every convex requirement is a list of limits on averages (VK0), possibly infinite, the form in which principals state
   constraints. The content of a domain is in its requirements, declared through refinements whose results are proved.
 - *"Without optimization the core cannot see reward hacking or goal-directed failure."* It sees what happened: the
-  measured requirement met and the true one breached is the evaluation gap, in CORE. Why it happened, the motive, is an
+  measured requirement met and the true one breached is the evaluation gap, in CORE. Why it happened, the motive, is a
   PURPOSE hypothesis that records can refute and never verify (`factorization.md`, VF2), as it should be.
 - *"Culpability depends on an interface the principal declares; that is arbitrary."* The interface is a hypothesis that
   records refute when the actor does what it says the actor cannot, and an excuse about capability is tested in

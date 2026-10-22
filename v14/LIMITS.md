@@ -6,7 +6,7 @@
 
 The framework judges what an actor does against what a principal declared, from records of decisions. Each limit is one
 of those three things failing: the declaration, the judgement of behaviour, or the record. The layers are named as in
-`v14/README.md`: CORE, INTERFACE, PURPOSE.
+`v14/README.md`: CORE, INTERFACE, PURPOSE, and SHAPING, a proposal.
 
 ## The declaration is an input, never checked
 
@@ -14,8 +14,8 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   wrong standard. Nothing in a record of the actor can show that the standard is wrong; that needs a second standard,
   another principal or a later judgement, compared with the first. Label tests (L1, L2) check that the framework's words
   mean what they say, not that the principal asked for the right thing.
-- **Whose alignment.** Whether a principal's requests are legitimate, fair or good is outside the framework. It measures
-  alignment to a declared principal, whoever that is.
+- **Whose alignment.** Whether a principal's specifications are legitimate, fair or good is outside the framework. It
+  measures alignment to a declared principal, whoever that is.
 - **Severity.** Misalignment is evidence, not harm. A catastrophe tolerated at `10⁻⁶` and occurring at `2·10⁻⁶` has
   misalignment `3.9·10⁻⁷` nats per decision, a rude answer tolerated at `0.1` and occurring at `0.2` has `0.044`
   (`NOTES.md` §24). How bad an outcome is comes from a value scale the principal declares; without one the framework

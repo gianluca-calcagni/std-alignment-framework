@@ -1,8 +1,9 @@
 # Probes for the v14 draft
 
 Exploratory scripts behind the numbers in `v14/`. They are not checks: CI does not run them, and every result they
-compute is proved in its file, except VK4(iii), which they only support. Run `python3 probes/v14/v14_probe.py` from the
-repository's root; it takes a few minutes. Its output, as run once, is in `RESULTS.md`.
+compute is proved in its file, except VK4(iii), which they only support; `contamination.py` stands behind `NOTES.md`
+§35's brainstorm (Q77), which proves nothing in `v14/`. Run `python3 probes/v14/v14_probe.py` from the repository's
+root; it takes a few minutes. Its output, as run once, is in `RESULTS.md`.
 
 | Section | Result | What it computes |
 |---|---|---|

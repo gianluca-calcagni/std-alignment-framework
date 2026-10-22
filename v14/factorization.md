@@ -134,7 +134,8 @@ dependence between decisions, as long as each decision, given the past, is drawn
 to one is shown for samples only.
 
 **In plain terms.** A record can show that an actor is outside a closed standard, never that it is inside one: it can
-convict, never certify.
+convict, never certify membership exactly; a certify verdict exists only at a declared margin, for a pooled requirement
+or a sample (`LIMITS.md`).
 
 **Proof.** The complement of `S` is open, so "`p ∉ S`" is verifiable. `Δ` is convex, hence connected, so the only sets
 both open and closed in it are `∅` and `Δ`; `S` is neither, so `S` is not open, and "`p ∈ S`" is not verifiable, which
@@ -149,7 +150,7 @@ of compliance or an excuse a record can only disprove, or a number computed from
 | Label | Statement | Status |
 |---|---|---|
 | breach of requirement `j`; misaligned | `p̂ ∉ A_j`; `p̂ ∉ A` | verifiable (VF1) |
-| culpable | `p̂ ∉ 𝓕*`, the feasible behaviours of least misalignment, closed since `M_A` is lower semicontinuous | verifiable with the declared interface taken as known (VF1); with the interface itself under test, `p̂ ∈ 𝓕 ∖ 𝓕*` has an empty interior when `𝓕` is linear, and is not verifiable |
+| culpable | `p̂ ∉ 𝓕*_δ`, at a declared care margin `δ` (`δ = 0` gives `𝓕*`, the feasible behaviours of least misalignment), a sublevel set of the lower semicontinuous `M_A`, so closed | verifiable with the declared interface taken as known (VF1); with the interface itself under test, `p̂ ∈ 𝓕 ∖ 𝓕*` has an empty interior when `𝓕` is linear, and is not verifiable |
 | the declared interface fits | `p̂ ∈ 𝓕` | refutable (VF1) |
 | the actor perceives no more than its declared view | `p̂_c` depends on `c` only through the view: linear equalities for a deterministic view, inequalities for a noisy one, closed either way | refutable, from records of the conditions the view merges (VF1) |
 | the actor perceives more than its declared view | its negation | verifiable |

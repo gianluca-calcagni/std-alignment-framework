@@ -10,8 +10,9 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 `NOTES.md` §22–§29 and in `v14/`.
 
 1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
-   and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
-   unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
+   and neither, misalignment against a specification with constraints, culpable at a care margin, sized by `E`, with
+   `K_δ` as its evidence, unavoidable, coarse perception, tampering against selection, and every factor of
+   `v14/factorization.md`; after `v14/labels.md` (R23).
 2. **The three choices the draft rests on**: decided as the desiderata force them (Q74, `NOTES.md` §33.17). Two kinds of
    requirement, per-decision and convex, or pooled over a declared horizon and any closed set, both convicted, and
    certified only as an average or, per decision, for a sample (Q76); an order's requirement as dominance with declared
@@ -20,7 +21,7 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 3. **[[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
 4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `PURPOSE` and their twins, each twin
    stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
-   and mutants with them.
+   and mutants with them; after the PI's choices on Q77 (R24), with the redundancies of `NOTES.md` §33.17, item 7.
 5. **Close the open proofs**: VK4(iii), several constraints, with Farkas's lemma read in an open text; the Pythagorean
    factor for forbidden sets (`v14/factorization.md`, FA2); intervals for misalignment, culpability and the avoidable
    excess from records, with bets.
@@ -40,19 +41,17 @@ Prepended at the PI's request, to be worked on together; the order is the execut
     a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
     the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
 
-11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): a *certify* verdict beside the convict verdict,
-    from the bets the draft already builds (H51), first, since a deployment decision needs it; cite the e-value
-    literature for VE1, VE2 and VK5, and import its answers to H46 and VK4(iii) after reading them; the CVaR
-    counterexample weighed in R19 (decided, Q74); the names are decided (R20, Q70); then brainstorm SHAPING and severity
-    on
-their drafts, with the questions of Q70 (`NOTES.md` §33).
+11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): cite the e-value literature for VE1, VE2 and
+    VK5, and import its answers to H46 and VK4(iii) after reading them. Decided since: the certify verdict, for averages
+    and, per decision, for samples only (H51 corrected, Q76); the CVaR counterexample, in R19 (Q74); the names (R20,
+    Q70). Severity and SHAPING stay proposals (`v14/severity.md`, `v14/training.md`).
 
 12. **The brainstorm of Q70** (`NOTES.md` §33): decided under Q74 (§33.17), R19 by two kinds of requirement, one space
     with an exogenous σ-algebra, and culpability at a care margin, or by negligence where costs are declared. Next,
     before L2: `v14/labels.md` on the seven-step protocol from Carcassi and Aidala's book, first for misaligned, breach,
     culpable, hidden, latitude and unavoidable, the protocol waiting on the PI (`REQUESTS.md`, R23; the audit of Q76
     found it had waited without the PI being told); "adversarial" as worst case, evaluation gaming with honeypots, and
-    aim, still for the PI's reading.
+    aim (§33.5, H55), for the PI's reading with R24.
 
 ## The goal
 
@@ -65,7 +64,7 @@ of the finish line is met.
 | Goal | Criterion (`README.md`) | State |
 |---|---|---|
 | solid | lint and every check pass on both SIMD paths; new checks are mutation-tested | met |
-| stable | neither the scope nor a premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | not met: v13 changes the core's Statements (Q52); met once three pull requests merged after the one that brings v13 into `main` change no Statement and no scope |
+| stable | neither the scope nor a premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | **met by the letter**: pull requests #34, #35 and #36, merged after #33 brought v13 to `main`, changed no Statement and no scope (only `CORE.md`'s status note; `git diff 3e68e1c 7daf9d4 -- CORE.md derived/`), 3 of 3; adopting v14 would change the Statements and restart the count, and the PI is asked whether a core with its successor drafted beside it counts as stable (`REQUESTS.md`, R25) |
 | easy to import into | every item of the archive has a recorded fate | met |
 | makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **met**: W1 refuted a prediction about the literature's curve; W3 tested the framework's bet itself, on a model tuned by PPO, and the bet held in part (one prediction held, one refuted). Three predictions tested on unseen data, one held |
 | supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: W1 is reported to `STANDARD.md` with intervals, from public data and code (`cases/w1-best-of-n-slope/REPORT.md`), and its environment is pinned; no outside reader has run it. The hold on review is lifted for one mathematical reader (Q33), and the reader package is ready (H2) |
@@ -108,26 +107,28 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
   The renames the executor recommended are superseded by v14's words, which L2 is to test (Q74); the common-sense
   verdicts wait on the PI's reading (`REQUESTS.md`, R15).
-- **v14, a draft** (Q59–Q74, `NOTES.md` §22–§33): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
-  brought to `main` as a draft (Q68), extended at the PI's ten questions on the slides (Q69), its names decided (Q70:
-  PURPOSE, SHAPING, specification), and RS6 and RS7 (latitude, proposed) added. The framework's six desiderata were
-  accepted and promoted to `README.md` (Q74), and the decisions they force were taken (`NOTES.md` §33.17): R19 by two
-  kinds of requirement, per-decision and convex, judged by bets, or pooled and any closed set, judged by confidence
-  sequences, with convict and certify verdicts, certify being for averages (Q76); an order's requirement as dominance
-  with declared margins; a reference that may break a constraint, an empty intersection reported as an inconsistent
-  specification; culpability at a declared care margin, its size `E`; one space with an exogenous σ-algebra, now written
-  into `v14/` and the slides (Q76, conditions and outcomes as one distribution, with the world's part declared). Three
-  layers, each with a twin for outcomes that are not finite: CORE (a specification as a list of requirements,
-  misalignment as the evidence against it, records judged by bets), INTERFACE (what the actor sees and can do:
-  culpability, coarse perception, tampering) and PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for
-  training. Thirty-three results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a
-  bet (VE1–VE4), constraints (VK0–VK7), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization
-  and its labels' verification status (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor
-  (RS1–RS6, RS8), a family of targets with a reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not
+- **v14, a draft** (Q59–Q77, `NOTES.md` §22–§35): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
+  brought to `main` as a draft with #35 (Q68), extended with #36 (Q69–Q75), and on the branch since (Q76, Q77, not yet
+  merged): extended at the PI's ten questions on the slides (Q69), its names decided (Q70: PURPOSE, SHAPING,
+  specification), and RS6 and RS7 (latitude, proposed) added. The framework's six desiderata were accepted and promoted
+  to `README.md` (Q74), and the decisions they force were taken (`NOTES.md` §33.17): R19 by two kinds of requirement,
+  per-decision and convex, judged by bets, or pooled and any closed set, judged by confidence sequences, with convict
+  and certify verdicts, certify being for averages and, per decision, only for a sample (Q76); an order's requirement as
+  dominance with declared margins; a reference that may break a constraint, an empty intersection reported as an
+  inconsistent specification; culpability at a declared care margin, its size `E`; one space with an exogenous
+  σ-algebra, now written into `v14/` and the slides (Q76, conditions and outcomes as one distribution, with the world's
+  part declared). Three layers, each with a twin for outcomes that are not finite: CORE (a specification as a list of
+  requirements, misalignment as the evidence against it, records judged by bets), INTERFACE (what the actor sees and can
+  do: culpability, coarse perception, tampering) and PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed
+  for training. Thirty-three results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as
+  a bet (VE1–VE4), constraints (VK0–VK7), three verdicts under a ranking (VO1–VO3), the interface (IN1), the
+  factorization and its labels' verification status (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the
+  actor (RS1–RS6, RS8), a family of targets with a reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not
   decided: severity and who grades (`v14/severity.md`), the fourth layer (`v14/training.md`), and the junctures where
   the parts meet (`v14/junctures.md`, Q77). A survey of competing frameworks (`v14/related.md`). `v14/README.md` holds
   the design with its claims of generality, its conventions and the challenges answered; `v14/LIMITS.md` what the
-  framework cannot do; `v14/MIGRATION.md` what of v13 survives. L2 comes next (the recommendations above).
+  framework cannot do; `v14/MIGRATION.md` what of v13 survives. Next: `v14/labels.md` on the protocol that waits on the
+  PI (R23), then L2; the brainstorm of Q77 (H64–H68, `v14/junctures.md`) waits on the PI's choices (R24).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([[P5 — Misalignment is attained, and zero exactly on the intended behaviours and their limits|P5]], [[P6 — The departure from the default splits into pursuit and misalignment|P6]]), the estimates by access with their intervals ([[P23 — The estimated misalignment of an actor that pursues the objective|P23]], [[P47 — The cost of reweighting|P47]], [[P52 — What a sample certifies about misalignment, by access|P52]]), and the diagnostics
   [[P43 — Misalignment at any intensity|P43]]–[[P51 — What signals, audits and re-measurements reveal of tampering|P51]] with the projection of [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]]; the checks of those items run on it, its own tests cover its interface, and
@@ -169,7 +170,8 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
 Each step names the row it serves and what it waits for. A step that serves no row is not on this list. The PI approved
 ending this phase with a handover (Q40): the close-out, E1(b), E2, E3, H1 and H2 are done (Q41), and the work passes to
 readers and to a fresh session, which starts the next phase with W5. E1(c), E4, E5, C3 and the steps after them belong
-to that next phase. Steps 4–6 wait on the PI.
+to that next phase. Since then the v14 recommendations above come first (Q59, Q74); of the steps below, 4–6 and C4 wait
+on the PI.
 
 | # | Step | Row | Waits for |
 |---|---|---|---|
@@ -190,7 +192,7 @@ to that next phase. Steps 4–6 wait on the PI.
 | 5 | **[[P41 — Reversibility: the Jensen–Shannon divergence from the reversal\|P41]], irreversibility of play** (experimental economics): the Jensen–Shannon divergence of a group's record of transitions from its reversal is zero within sampling error in a potential game, and positive in Rock–Paper–Scissors. The potential arm is the risky one; no public record under a comparable protocol was found (D13) | 4 | the records, from the authors (`REQUESTS.md`, R2) |
 | 6 | **W2**, industrial organization: register the revised prediction from [[P39 — Several actors: coordination plus individual misalignment\|P39]] (both stations adopted, against one); then run it once | 4 | the German price archive's credentials (`REQUESTS.md`, R3) |
 | O2 | **Ordinal diagnostics** (v13, Q52): the splits of [[P44 — What named objectives explain\|P44]]–[[P46 — What runs share between conditions, and what they do not\|P46]] for the ordinal specification, where the nearest intended behaviour is a projection onto a cone rather than a linear family, so named, drift and run-specific parts may not add up exactly; derived, checked, and mutation-tested only when a case needs them | 5 | O1; a case that needs it |
-| 7 | Three steps with no change of scope, premise or definition, a step being a merged pull request (Q46) | 2 | nothing: the count starts with the first pull request merged after the one that brings v13 into `main` |
+| 7 | Three steps with no change of scope, premise or definition, a step being a merged pull request (Q46) | 2 | done by the letter, 3 of 3 (#34–#36); the PI to confirm (R25) |
 | 8 | **Sources of imported theorems** (Q36). Done, 2026-10-10: Wilks ([[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]) and Aumann ([[D4 — Resolution\|D4]]) read in their scans on Project Euclid; the Neyman–Pearson lemma ([[D11 — Record, sample and evidence\|D11]]), Chernoff's exponent ([[P22 — No test detects misalignment faster than misalignment\|P22]]) and Pinsker's inequality ([[P51 — What signals, audits and re-measurements reveal of tampering\|P51]]) in Polyanskiy and Wu's open draft; the entropy bound of [[P32 — Regulation costs departure\|P32]] and the projection facts of [[P36 — Ordinal objectives\|P36]] derived in their proofs; Laguerre's rule, which [[P25 — The target's curve turns no more often than the regression\|P25]] already proved, and Manski's term ([[D9 — Observation and identification\|D9]]) cited as attributions; [[P23 — The estimated misalignment of an actor that pursues the objective\|P23]]'s proof gained the change of coordinates Wilks's statement needs | 1 | done |
 
 **Why this order.** The PI approved ending this phase with a handover (Q40), and it is done (Q41): the reader package is
@@ -292,3 +294,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-22 | the work since pull request #35 brought to `main` by a pull request, at the PI's request (Q75) | 2 (a version) |
 | 2026-10-22 | an audit of all 44 of the PI's prompts (Q76, `NOTES.md` §34): one ask lost to the files, conditions and outcomes as one distribution, answered and decided only in the notes, now written into `v14/` and the three decks with "declare" defined; the pairing protocol for labels made a request (R23); an external review weighed, five items taken: certification corrected to averages, two rules for the report, H62, H63, a sentence in `resolution.md` | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-22 | a brainstorm (Q77, `NOTES.md` §35): infinities come from zero tolerances, not from the lack of severity, and a severity weight does not remove them; reported lexicographically, or bounded by a declared contamination tolerance (`probes/v14/contamination.py`); severity a second number, factored along the same chains; CORE already has no reference, "criteria" proposed for v13's targets, the record's signature as a declared object, the algorithm supplied rather than declared; fourteen junctures with their couplings (`v14/junctures.md`); H64–H68, R24 | 5 (what the quantities mean) |
+| 2026-10-22 | documentation hygiene (Q78, `NOTES.md` §36): three reviewers' findings checked and applied across `v14/`, the slides and the top-level files: decided choices no longer called open, the one space and the certify correction carried everywhere, `K` the evidence of culpability and `E` its size, VK6 an overall rate limit, indexes and the roadmap made true; the row "stable" met by the letter, the PI asked (R25) | 1 (the goal); 2 (a version) |

@@ -1,7 +1,8 @@
 # Training: how an actor is changed, and the misalignment that comes with it
 
-> **Status: a proposal for a fourth layer and its twin (Q69), the executor's draft for a brainstorm with the PI; not
-> reviewed, not decided.** One statement, SH1, is proved, as a case of FA1; the rest are definitions and questions.
+> **Status: a proposal for a fourth layer and its twin (Q69), the executor's draft for a brainstorm with the PI; its
+> name approved (Q70), the rest not reviewed, not decided.** One statement, SH1, is proved, as a case of FA1; the rest
+> are definitions and questions.
 
 CORE judges one actor; training is a map from one actor to another. The PI asked for a fourth file and twin for it,
 with terms that fit every ontology, and for how to compute training misalignment: when, where, why, how, and whom
@@ -42,14 +43,15 @@ mesa-objective. "Mesa" names the composition of the two layers, an aim produced 
 
 ## Definitions, proposed
 
-- **A course.** Actors `0, 1, …, T` with behaviours `p_t` per condition and feasible sets `𝓕_t`; capability may grow
-  along a course, so the feasible sets need not be nested.
+- **A course.** Actors `0, 1, …, T` with behaviours `p_t`, responses given the world's part `ℰ`, and feasible sets
+  `𝓕_t`; capability may grow along a course, so the feasible sets need not be nested.
 - **Shaping conditions and deployment conditions.** The shaper records the actor in conditions `𝒞_S` with frequencies
   `w^S`; the principal's specification `A` judges it in conditions `𝒞_D` with frequencies `w^D`. Both are declared.
-- **One space for both.** Behaviours are tuples over the conditions `𝒞_S ∪ 𝒞_D`; a set stated on the shaping
-  conditions, such as `A_S`, is read as the set of tuples whose shaping part lies in it, and the principal's `M_A` is
-  computed with the deployment frequencies `w^D`. Without this, `𝓕_T ∩ A_S` below has no meaning when `𝒞_S ≠ 𝒞_D`,
-  which is the case misgeneralization is about.
+- **One space for both.** The world's part `ℰ` is declared as in CORE (`README.md`, one distribution), its cells the
+  conditions `𝒞_S ∪ 𝒞_D`. The actor is carried from one world to the other as its response given `ℰ`; the shaper's `A_S`
+  judges it under the law `w^S` on `ℰ`, the principal's `A` under `w^D`, each against acceptable behaviours sharing that
+  law. With finitely many conditions this is `interface.md`'s tuple. Without it, `𝓕_T ∩ A_S` below has no meaning when
+  `w^S ≠ w^D`, which is the case misgeneralization is about.
 - **The shaper's measurement.** The shaper sees outcomes at its own σ-algebra `𝒮`, its grader's (`resolution.md`).
 - **The shaper's specification** `A_S`: the behaviours its feedback treats as fully rewarded, a convex closed set stated
   at `𝒮` in the shaping conditions. When the feedback is a score with no "fully rewarded" level, `A_S` is a requirement
@@ -106,7 +108,7 @@ target and into misalignment, the angle law of `RELATED.md`'s information geomet
 | shaping conditions that miss the deployment ones | the shaper's choice of conditions | misalignment by condition |
 | the grader's blind spot | the shaper's measurement | RS4's interval |
 | the course's remainder, and inner misalignment | the course: the shaper's method and the actor together | SH1's last term; `M_{A_S}(p_T)` |
-| culpability at each step | the actor, under its interface | `interface.md`, against `𝓕_t` |
+| culpability at each step, at a declared care margin `δ`, its size `E` (Q74) | the actor, under its interface | `interface.md`, against `𝓕_t` |
 | unavoidable | no one: the capability | `M_A(𝓕_T)` |
 
 ## Forms of misalignment that SHAPING defines
@@ -130,8 +132,8 @@ the shaped actor held fixed, VK7 says how the evidence per decision moves with t
 
 ## Questions for the brainstorm
 
-1. Is SHAPING the right name, and is the layer above PURPOSE or beside it? The executor's view: beside, since a course
-   can be described with no hypothesis about aims.
+1. Is the layer above PURPOSE or beside it (its name, SHAPING, approved under Q70)? The executor's view: beside, since a
+   course can be described with no hypothesis about aims.
 2. Should the shaper's specification `A_S` always be declared, or derived from the feedback? Derived is general but
    needs a rule, such as TG1's, for scores with no "fully rewarded" level.
 3. Is a course's profile enough for "when", or does CORE need records indexed by step, with drift ([P54]) between them?

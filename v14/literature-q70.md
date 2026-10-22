@@ -3,7 +3,10 @@
 > **Status: a survey for v14 (Q70), by a research assistant the executor briefed; not independent and not reviewed.** A
 > statement marked *statement read* was read in the source by the assistant; the executor reads it again before an item
 > cites it. The executor checked by hand the two derivations that bear on decisions: the CVaR example of 2.4 and the
-> fraction capacity of 1.3 (`NOTES.md` §33.10).
+> fraction capacity of 1.3 (`NOTES.md` §33.10). > *Since written*: R19 decided as two kinds of requirement, per-decision
+> and pooled, with certify for averages and, >
+per decision, samples only; culpability a verdict at a declared care margin `δ`, its size `E`, `K` its evidence rate >
+only (Q74, Q76, `NOTES.md` §33.17, §34); OPTIMIZERS is now PURPOSE, "the request" the specification (Q70).
 
 A research assistant's survey for the executor, 2026-10-18. Nothing here is reviewed. Each source's record was opened on
 arXiv and its title and authors matched; every PDF was downloaded into its own directory under the scratchpad and read
@@ -279,20 +282,20 @@ dependence and any schedule. Then:
 
 ### 2.5 What this suggests for the framework
 
-*Pros.* R19 need not be all or nothing. The literature supports a two-tier request: per-decision requirements, convex,
-judged by bets with VE3's validity, where the mixture principle is a theorem (fork-convexity, Theorem 13) rather than a
-convention; and **pooled requirements**, any closed set, judged on the average conditional behaviour p̄_t with Howard et
-al.'s Theorem 4, valid under any dependence, so a CVaR limit, a quota or "no more than k% of outcomes of a kind over the
-deployment" is enforced as written. Independence among decisions, the other casualty, remains VF1's i.i.d. route
-(universal inference, or e-processes against non-fork-convex nulls). The tiers nest for convex sets (p_i ∈ R for all i
-implies p̄_t ∈ R), so a convex requirement may be declared at either tier, and the declaration says which. *Cons.* A
-pooled verdict is a confidence-set test, not a bet: it gives no growth rate in nats, so VE1's reading of misalignment as
-evidence does not carry over (a natural size, min_{q∈Q} KL(p̂_t‖q) on the empirical pooled outcomes, has a Sanov reading
-only for i.i.d. decisions, to be stated as such). The pooled object depends on the deployment window (from when is p̄_t
-averaged?), which must be declared, and a pooled requirement can be met by front-loading or back-loading breaches within
-the window. Union bounds over K outcomes cost power. And the pooled tier gives up "each decision is judged given the
-past" for those requirements, which is exactly the PI's choice in R19, now with a concrete alternative instead of a
-refusal.
+*Pros.* R19 need not be all or nothing. The literature supports a two-tier specification: per-decision requirements,
+convex, judged by bets with VE3's validity, where the mixture principle is a theorem (fork-convexity, Theorem 13) rather
+than a convention; and **pooled requirements**, any closed set, judged on the average conditional behaviour p̄_t with
+Howard et al.'s Theorem 4, valid under any dependence, so a CVaR limit, a quota or "no more than k% of outcomes of a
+kind over the deployment" is enforced as written. Independence among decisions, the other casualty, remains VF1's i.i.d.
+route (universal inference, or e-processes against non-fork-convex nulls). The tiers nest for convex sets (p_i ∈ R for
+all i implies p̄_t ∈ R), so a convex requirement may be declared at either tier, and the declaration says which. *Cons.*
+A pooled verdict is a confidence-set test, not a bet: it gives no growth rate in nats, so VE1's reading of misalignment
+as evidence does not carry over (a natural size, min_{q∈Q} KL(p̂_t‖q) on the empirical pooled outcomes, has a Sanov
+reading only for i.i.d. decisions, to be stated as such). The pooled object depends on the deployment window (from when
+is p̄_t averaged?), which must be declared, and a pooled requirement can be met by front-loading or back-loading
+breaches within the window. Union bounds over K outcomes cost power. And the pooled tier gives up "each decision is
+judged given the past" for those requirements, which is exactly the PI's choice in R19, now with a concrete alternative
+instead of a refusal.
 
 ---
 
@@ -337,7 +340,7 @@ found on arXiv beyond these; van der Weij et al. (4.2) borrow Halpern and Kleima
 
 ### 3.4 Candidates for v14, derived here
 
-Let 𝓕 be the feasible behaviours, A the request, H(f) an expected harm on the principal's declared value scale
+Let 𝓕 be the feasible behaviours, A the specification, H(f) an expected harm on the principal's declared value scale
 (`severity.md`), c(f) the actor's cost of behaviour f on a declared scale, and λ > 0 the declared exchange rate.
 - **The Hand verdict**: the actor is negligent iff some feasible f has H(p̂) − H(f) > λ(c(f) − c(p̂)), "a precaution
   whose burden is less than the harm it averts". This holds iff p̂ ∉ 𝓕_λ = argmin_{f∈𝓕} [H(f) + λc(f)] (if p̂ minimizes
@@ -428,7 +431,7 @@ declared, else E; report 1 − fcap beside it as the share of decisions that fel
 | control: worst-case safety over red-team policies | what the actor sees and can do, a protocol | yes; an interface quantity |
 | Singh's adaptive adversary | conditional behaviour as a function of an observed signal | yes |
 | compliance gap (alignment faking's measure) | behaviour in two conditions the actor can distinguish | yes, when the "unmonitored" condition is secretly recorded |
-| alignment faking itself | reasoning: compliance *in order to* avoid modification | no; a motive, OPTIMIZERS |
+| alignment faking itself | reasoning: compliance *in order to* avoid modification | no; a motive, PURPOSE |
 | underperformance (sandbagging) | exhibited against elicited capability | yes, relative to an elicitation |
 | "strategic" (sandbagging) | the actor's belief that it will benefit | no |
 | evaluation awareness | accuracy at telling evaluation from deployment | yes, a capability of the view |
@@ -448,7 +451,7 @@ evaluation, a monitored tier, certification). Three separate notions, one per la
   unmonitored in its view, and G is hidden (`resolution.md`, RS4's case). The fraction capacity gives a bounded
   companion: the least share of decisions that must be unacceptable, 1 − fcap_p̂(A), compared across the two values of
   s.
-- **Adversarial intent** (OPTIMIZERS): the gap serving an objective (sandbagging's "strategic", alignment faking's "to
+- **Adversarial intent** (PURPOSE): the gap serving an objective (sandbagging's "strategic", alignment faking's "to
   prevent modification"); a refutable hypothesis, never verified (VF2).
 
 ### 4.4 What this suggests for the framework

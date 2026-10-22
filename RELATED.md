@@ -11,9 +11,9 @@ sources.
 outside the framework's scope, recorded so the question is not reopened. *Done*: imported, with the items that carry it.
 
 **Against v14** (Q69). This file compares neighbouring theories with v13. `v14/related.md` surveys formal frameworks of
-misalignment against the v14 draft, both ways, in 33 entries, with what changes for each theory below now that the
-framework moves to v14; its main finding is that v14's evidence results belong to the statistics of e-values and
-anytime-valid inference, which the draft must cite.
+misalignment against the v14 draft, both ways, in 33 entries, with what would change for each theory below should v14 be
+adopted, a survey by a research assistant, not reviewed; its main finding is that v14's evidence results belong to the
+statistics of e-values and anytime-valid inference, which the draft must cite.
 
 ## Overview
 

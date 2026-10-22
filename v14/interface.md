@@ -1,8 +1,8 @@
 # The interface: what the actor sees and can do
 
-> **Status: draft of v14 (Q61–Q64); the definitions are proposals, the results proved here, not yet checked in CI.**
-> This file gathers what `NOTES.md` §25 and §26 found, so that the INTERFACE layer has one place before it is written in
-> `CORE.md`'s format.
+> **Status: draft of v14 (Q61–Q64); the definitions are proposals, culpability's shape decided (Q74), the results proved
+> here, not yet checked in CI.** This file gathers what `NOTES.md` §25 and §26 found, so that the INTERFACE layer has
+> one place before it is written in `CORE.md`'s format.
 
 CORE judges what an actor did. INTERFACE adds what it could have done and what it could tell, with no model of
 optimization: a frozen model has an interface, and nothing in it optimizes. Notation as in `evidence.md` and
@@ -16,41 +16,43 @@ of **actions**, a set `Z` of **signals** with, for each condition, a **view** `V
 distribution `π(·|z)` on `U` for each signal, with finite support when `U` is infinite. The **feasible behaviours**
 `𝓕(ℐ)` are the closure of those the policies produce,
 `{(p_c)_c : p_c(x) = Σ_z V(z|c)·Σ_u π(u|z)·E(x|c, u), π a policy}`, so that best behaviours exist. A tuple `(p_c)_c` is
-read, as in [B2], as one behaviour on pairs of a condition and an outcome, with the conditions' frequencies `w_c` fixed
-by the declaration, and divergences between tuples are taken on those pairs: v14's one space, the conditions being the
-cells of the declared exogenous σ-algebra `ℰ` (`README.md`, one distribution).
+read, as in [B2], as one behaviour on pairs of a condition and an outcome, with the conditions' frequencies `w_c` the
+actor's law on `ℰ`, which the behaviours compared with it share, and divergences between tuples are taken on those
+pairs: v14's one space, the conditions being the cells of the declared exogenous σ-algebra `ℰ` (`README.md`, one
+distribution).
 
 **Culpability and the avoidable excess.** For a specification whose acceptable set is `A` and an actor whose actual
 behaviour `p̂` lies in `𝓕 = 𝓕(ℐ)`: the **unavoidable misalignment** `M_A(𝓕) = inf_{f∈𝓕} M_A(f)`; the **best feasible
 behaviours** `𝓕* = {f ∈ 𝓕 : M_A(f) = M_A(𝓕)}`; the **avoidable excess** `E(p̂) = M_A(p̂) − M_A(𝓕)`; and the
-**culpability** `K(p̂) = inf_{f∈𝓕*} KL(p̂‖f)`, the evidence that the actor does not do the best it could. When `M_A(𝓕)`
-is finite, both are `0` exactly when `p̂ ∈ 𝓕*`; `K = E + R ≥ E` for linear interfaces whose best behaviours have nearest
-acceptable behaviours of full support (`factorization.md`, FA2), and they are not ordered otherwise. When `M_A(𝓕) = ∞`,
-as for a forbidden outcome no feasible behaviour avoids, `E` is not defined and `K` is `0` for every feasible behaviour;
-culpability must then be read on the breach rate, the least rate a feasible behaviour reaches, not yet written.
-Culpability is only as good as the declared interface: one that overstates the actor's capability charges it for what no
-record of it can show it could not do, so an interface should declare capabilities demonstrated in elicitation, which
-are verifiable, rather than assumed. The executor recommended `K` as culpability, as evidence ([A4]), and `E` as the
-share of misalignment that was avoidable; L2 is to test both names. The example of `slides/mathematicians.md` showed
-that `K` is infinite exactly when the actor produces an outcome no best feasible behaviour produces (`𝓕*` is convex, so
-the union of its members' supports is one member's support), which is the common case, the best behaviours of a convex
-program over a polytope sitting on its boundary, often with a deterministic policy: so `K` is `0` or `∞` for most
-actors. And when `M_A(𝓕)` is finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` say the same thing, so `K` adds no verdict, only a
-growth-rate reading where it is finite. The recommendation became `E` for the size, and the verdict "culpable" read as
-`p̂ ∉ 𝓕*`, verifiable with the interface taken as known (VF2) (`NOTES.md` §32, H52). Decided in its shape (Q74,
-`NOTES.md` §33.17): the verdict is "culpable at a care margin `δ`", `p̂ ∉ 𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕) + δ}`, with
-`δ`, a standard of care, declared by the principal, and `δ = 0` the strict reading above; its evidence rate is
-`K_δ = M_{𝓕*_δ}(p̂)`, finite in the usual case for `δ > 0`; its size is `E`; and where severity and the costs of the
-alternatives are declared, a negligence size in the principal's units is reported beside `E`, never summed with it.
-Whether "culpable" is the right word is left to L2. Culpability needs no new measure: `K(p̂) = M_{𝓕*}(p̂)`, the
-misalignment against the **derived requirement** `𝓕*`, which is convex and closed when `A` and `𝓕` are, being the set
-where a convex lower semicontinuous function on `𝓕` takes its least value; so VE1's bets, VE3's test and VF1's status
-apply to it unchanged. The same holds for "the interface fits", the requirement `𝓕`, and for "perceives no more than its
-view" (`resolution.md`, RS5): INTERFACE adds requirements derived from the declarations, not measures (`NOTES.md` §32,
-item 7); so is `𝓕*_δ`, a sublevel set of a convex lower semicontinuous function. Two refinements came from the
-literature (`v14/related.md`, entries 18 and 24): blame mitigated by the cost of the better alternative, which `K`
-ignores, now the negligence size where costs are declared, its formula still to be written; and the worst-case breach
-rate over `𝓕`, which a deployment protocol guarantees whatever the actor does, still open.
+**evidence of culpability** `K(p̂) = inf_{f∈𝓕*} KL(p̂‖f)`, the evidence that the actor does not do the best it could.
+When `M_A(𝓕)` is finite, both are `0` exactly when `p̂ ∈ 𝓕*`; `K = E + R ≥ E` for linear interfaces whose best
+behaviours have nearest acceptable behaviours of full support (`factorization.md`, FA2), and they need not be ordered
+otherwise. When `M_A(𝓕) = ∞`, as for a forbidden outcome no feasible behaviour avoids, `E` is not defined and `K` is `0`
+for every feasible behaviour; culpability must then be read on the breach rate, the least rate a feasible behaviour
+reaches, not yet written. Culpability is only as good as the declared interface: one that overstates the actor's
+capability charges it for what no record of it can show it could not do, so an interface should declare capabilities
+demonstrated in elicitation, which are verifiable, rather than assumed. The executor recommended `K` as culpability, as
+evidence ([A4]), and `E` as the share of misalignment that was avoidable; L2 is to test both names. The example of
+`slides/mathematicians.md` showed that `K` is infinite exactly when the actor produces an outcome no best feasible
+behaviour produces (`𝓕*` is convex, so the union of its members' supports is one member's support), which is the common
+case, the best behaviours of a convex program over a polytope sitting on its boundary, often with a deterministic
+policy: so `K` is `0` or `∞` for most actors. And when `M_A(𝓕)` is finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` say the same
+thing, so `K` adds no verdict, only a growth-rate reading where it is finite. The recommendation became `E` for the
+size, and the verdict "culpable" read as `p̂ ∉ 𝓕*`, verifiable with the interface taken as known (VF2) (`NOTES.md` §32,
+H52). Decided in its shape (Q74, `NOTES.md` §33.17): the verdict is "culpable at a care margin `δ`",
+`p̂ ∉ 𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕) + δ}`, with `δ`, a standard of care, declared by the principal, and `δ = 0` the
+strict reading above; its evidence rate is `K_δ = M_{𝓕*_δ}(p̂)`, finite in the usual case for `δ > 0`; its size is `E`;
+and where severity and the costs of the alternatives are declared, a negligence size in the principal's units is
+reported beside `E`, never summed with it. Whether "culpable" is the right word is left to L2. Culpability needs no new
+measure: `K(p̂) = M_{𝓕*}(p̂)`, the misalignment against the **derived requirement** `𝓕*`, which is convex and closed
+when `A` and `𝓕` are, being the set where a convex lower semicontinuous function on `𝓕` takes its least value; so VE1's
+bets, VE3's test and VF1's status apply to it unchanged. The same holds for "the interface fits", the requirement `𝓕`,
+and for "perceives no more than its view" (`resolution.md`, RS5): INTERFACE adds requirements derived from the
+declarations, not measures (`NOTES.md` §32, item 7); so is `𝓕*_δ`, a sublevel set of a convex lower semicontinuous
+function. Two refinements came from the literature (`v14/related.md`, entries 18 and 24): blame mitigated by the cost of
+the better alternative, which `K` ignores, now the negligence size where costs are declared, its formula still to be
+written; and the worst-case breach rate over `𝓕`, which a deployment protocol guarantees whatever the actor does, still
+open.
 
 **Elicitation.** A condition `c'` is an **elicitation** of a condition `c` when the declaration links the actor's
 feasible behaviours there, such as one set of policies faced with another prompt or incentive. Only through such links

@@ -46,9 +46,9 @@ every `ε > 0`, or one limit `E_a[1_C] ≤ 0` if limits with `b = min g` are adm
 balls in total variation, and in a Wasserstein distance on finitely many outcomes, finitely many, since both are
 polyhedral; balls in KL, Euclidean or Hellinger distance whose boundary meets the interior of `Δ`, on three or more
 outcomes, infinitely many. It is why the PI's choice to declare constraints explicitly, as a general concept (Q60),
-loses nothing: CORE's requirement, a convex closed set, and the PI's constraint are the same object. For finitely many
-budgets, VK4 gives every bet of the affine form as a lower bound on misalignment; for any convex requirement, VE1 gives
-the equality when all bets are allowed.
+loses nothing: CORE's per-decision requirement, a convex closed set, and the PI's constraint are the same object. For
+finitely many budgets, VK4 gives every bet of the affine form as a lower bound on misalignment; for any convex
+requirement, VE1 gives the equality when all bets are allowed.
 
 ### VK1 — A forbidden set: one occurrence decides
 **Statement.** For a forbidden set `C`: `M_K(p) = ∞` if `p(C) > 0`, and `0` otherwise. For every `H > 1`, the function
@@ -63,11 +63,11 @@ it is that rate, with the stakes it carries, that says how bad the breach is.
 ∎
 
 **Notes.** This is where misalignment, read as evidence, is infinite and still informative: the evidence is decisive,
-and the magnitude moves to the rate and the stakes, which are reported beside it (`v14/README.md`, the design, 3). v13
-asked intended behaviours to have full support ([D3], the table of conventions), which a forbidden set cannot meet; v14
-drops that convention. Verifying the breach needs the occurrence to be recognized without error: a record that confuses
-`C` with its neighbours, as a measurement on a continuum may, verifies it only when `C` is open in the record's topology
-(`CORE-GENERAL.md`).
+and the magnitude moves to the rate and the stakes, which are reported beside it (`v14/README.md`, the refinements of
+the principal's side; `severity.md`). v13 asked intended behaviours to have full support ([D3], the table of
+conventions), which a forbidden set cannot meet; v14 drops that convention. Verifying the breach needs the occurrence to
+be recognized without error: a record that confuses `C` with its neighbours, as a measurement on a continuum may,
+verifies it only when `C` is open in the record's topology (`CORE-GENERAL.md`).
 
 ### VK2 — A rate limit, in closed form
 **Statement.** For a rate limit `(C, ε)` and `p ∈ Δ`: `M_K(p) = kl(p(C)‖ε)` if `p(C) > ε`, and `0` otherwise. When
@@ -175,14 +175,14 @@ PURPOSE.
   lies on the ray of `F − ν·g`, not of `F`: the principal's own budget made its actor "misaligned". Under v14 the budget
   is part of the specification, and the optimizer that keeps it breaches nothing.
 
-### VK6 — A pooled rate limit when the conditions are not chosen
+### VK6 — An overall rate limit when the world chooses the conditions
 **Statement.** Let the conditions `c` have frequencies `w_c > 0` that the actor does not choose, so that behaviours are
-tuples `(a_c)_c` judged on pairs ([B2]), and let the rate limit be pooled over them: `K = {(a_c)_c : Σ_c w_c·a_c(C) ≤
-ε}`, `0 < ε < 1`. Let `u_c = p_c(C)` and `ū = Σ_c w_c·u_c`. If `ū ≤ ε`, `M_K(p) = 0`. Otherwise
-`M_K(p) = Σ_c w_c·kl(u_c‖v_c(θ))`, where, for `θ > 0` and `u ∈ [0, 1]`,
+tuples `(a_c)_c` judged on pairs ([B2]), and let the rate limit hold over all conditions together:
+`K = {(a_c)_c : Σ_c w_c·a_c(C) ≤ ε}`, `0 < ε < 1`. Let `u_c = p_c(C)` and `ū = Σ_c w_c·u_c`. If `ū ≤ ε`, `M_K(p) = 0`.
+Otherwise `M_K(p) = Σ_c w_c·kl(u_c‖v_c(θ))`, where, for `θ > 0` and `u ∈ [0, 1]`,
 `v(θ, u) = ((θ + 1) − √((θ + 1)² − 4·θ·u))/(2·θ)`, and `θ > 0` is a number with `Σ_c w_c·v(θ, u_c) = ε`. A nearest
-acceptable behaviour keeps, in each condition, the actor's proportions inside `C` and outside it. And `M_K(p) ≥
-kl(ū‖ε)`, VK2's pooled formula, which is therefore a lower bound.
+acceptable behaviour keeps, in each condition, the actor's proportions inside `C` and outside it. And
+`M_K(p) ≥ kl(ū‖ε)`, VK2's formula on the merged conditions, which is therefore a lower bound.
 
 **In plain terms.** When the actor cannot choose how often each situation arises, a limit on the overall rate of
 breaches is judged condition by condition: the nearest acceptable actor lowers its breach rate in every condition, by
@@ -198,16 +198,16 @@ with `Σ_c w_c·v_c ≤ ε`. For `θ > 0`, the function `v ↦ kl(u‖v) + θ·v
 `min(1, 1/θ) = v(θ, 1)`. The map `θ ↦ Σ_c w_c·v(θ, u_c)` is continuous, tends to `ū > ε` as `θ → 0` and to `0` as
 `θ → ∞`, so some `θ` gives `ε`. Let `v* = v(θ, u)`. For every feasible `v`,
 `f(v) ≥ f(v) + θ·(Σ_c w_c·v_c − ε) ≥ Σ_c w_c·(kl(u_c‖v*_c) + θ·v*_c) − θ·ε = f(v*)`, since each term is least at `v*_c`
-and `Σ_c w_c·v*_c = ε`. The lower bound: without the frequencies fixed, the pooled limit is VK2's on the pairs, whose
-acceptable set contains `K`. ∎
+and `Σ_c w_c·v*_c = ε`. The lower bound: without the frequencies fixed, the limit with the conditions merged is VK2's on
+the pairs, whose acceptable set contains `K`. ∎
 
 **Notes.** In v14's one space (`README.md`, one distribution), the conditions are the cells of the declared exogenous
 σ-algebra `ℰ`, and "frequencies fixed" is the acceptable behaviours sharing the actor's law on `ℰ`; VK6 is that case.
-Against a numerical minimization on 40 random instances, within `1e-10`; the pooled formula falls short of it by up to
+Against a numerical minimization on 40 random instances, within `1e-10`; the merged formula falls short of it by up to
 `0.19`. For the support bot of `slides/framework.md`, wrong answers in `2.91%` of open questions and `35.34%` of account
-questions give `0.04956`, the number its probe found by minimization, where VK2's pooled formula gives `0.0440`
-(`probes/v14/RESULTS-resolution.md`). This was the first lesson of the slides' example (`NOTES.md` §31): the closed
-forms of this file hold for behaviours on outcomes alone, and on pairs whose frequencies are fixed they become
+questions give `0.04956`, the number its probe found by minimization, where VK2's formula on the merged conditions gives
+`0.0440` (`probes/v14/RESULTS-resolution.md`). This was the first lesson of the slides' example (`NOTES.md` §31): the
+closed forms of this file hold for behaviours on outcomes alone, and on pairs whose frequencies are fixed they become
 one-parameter forms like this one.
 
 ### VK7 — How misalignment moves with the budget
@@ -240,18 +240,19 @@ the principal declares, meets evidence (`v14/severity.md`).
 ## Declaring a specification: what is implicit, what must be explicit
 
 The PI asked when a constraint is part of the other definitions and when it must be declared explicitly, because there
-would be no other way to account for it, and how the interface enters (Q69). Every requirement is a convex closed set,
-and by VK0 a list of budgets; the question is only which of them a declaration states by itself.
+would be no other way to account for it, and how the interface enters (Q69). Every per-decision requirement is a convex
+closed set, and by VK0 a list of budgets, and a pooled one, any closed set, lies outside VK0; the question is only which
+of them a declaration states by itself.
 
 **What each declared object already constrains.**
 
 | Declared | The requirements it makes, with no constraint written | Where |
 |---|---|---|
 | the outcomes `X` | none; but nothing outside them can be required: an effect no record holds is out of reach | `LIMITS.md` |
-| conditions and their frequencies | `a(c) = w_c` for every condition: the actor does not choose its situations | [B2]; VK6 |
+| the world's part, the exogenous σ-algebra `ℰ` | `a_ℰ = p_ℰ`: the behaviours compared with the actor share its law on `ℰ`, since the actor does not choose its situations | [B2]; VK6; `README.md`, one distribution |
 | the principal's σ-algebra `ℬ` | no requirement inside its cells: indifference | `resolution.md`, RS3 |
 | a family of targets and a reference `r` | `E_a[G_i] ≥ E_r[G_i]` for each generating target; a forbidden set when `−1_C` is a target and `r(C) = 0` | `targets.md`, TG1 |
-| a ranking and a reference | dominance at every standard, `B(r)`, or the requirement the principal builds from it | `order.md` |
+| a ranking and a reference | dominance with declared margins, `B_m(r)`, margins `0` giving `B(r)` (Q74) | `order.md` |
 
 **When a constraint must be explicit.** When nothing else in the declaration implies it:
 - *there is no reference*: absolute standards, such as a legal limit or "never";
@@ -273,8 +274,8 @@ it *can* do.
 - For an actor that optimizes, a binding constraint acts as a shadow price (VK5), and VK7 gives what it costs in
   evidence.
 
-**In five questions.** Before any record is read: (1) what are the outcomes, and the conditions with their frequencies?
-(2) Which distinctions between outcomes does the principal not care about? (3) Is there a reference, and which targets
-must it not be beaten on? (4) What is required absolutely: forbidden outcomes, rates, averages? (5) What can the actor
-see and do, declared apart, as its interface? The first four make the specification; the fifth only explains it.
-`slides/specification.md` walks through them.
+**In five questions.** Before any record is read: (1) what are the outcomes, and which part of them does the world
+choose (`ℰ`)? (2) Which distinctions between outcomes does the principal not care about? (3) Is there a reference, and
+which targets must it not be beaten on? (4) What is required absolutely: forbidden outcomes, rates, averages? (5) What
+can the actor see and do, declared apart, as its interface? The first four make the specification; the fifth only
+explains it. `slides/specification.md` walks through them.

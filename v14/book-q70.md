@@ -3,7 +3,9 @@
 > **Status: a research assistant's reading for the executor; not independent and not reviewed.** Every quotation was
 > read in the book's text and is given with its printed page. A claim marked **derived here** is the assistant's own,
 > with its short argument, and needs the executor's check and a probe before it enters an item. Two of them were checked
-> numerically by a throwaway script in the scratchpad (not a repository probe); this is said where it applies.
+> numerically by a throwaway script in the scratchpad (not a repository probe); this is said where it applies. > *Since
+> written*: R19, which section 4.1 discusses, was decided under Q74 (`NOTES.md` §33.17); the protocol of
+section 4.2 > waits on the PI (`REQUESTS.md`, R23).
 
 **Source.** Gabriele Carcassi and Christine A. Aidala, *Assumptions of Physics*, Maize Books, open access,
 doi:10.3998/mpub.12204707. The copy read is "Ver 3.0 - December 31, 2025" on its title page; its changelog dates the

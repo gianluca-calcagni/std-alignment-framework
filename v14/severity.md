@@ -1,7 +1,8 @@
 # Severity, and who grades
 
-> **Status: a proposal for v14 (Q69), the executor's, not reviewed and not decided.** Only VK7, cited from
-> `constraints.md`, is proved; everything else here is a definition proposed for the PI to accept, change or refuse.
+> **Status: a proposal for v14 (Q69), the executor's, not reviewed and not decided.** It proves nothing new; it cites
+> VK5, VK7, VE3, VF1 and VO1, proved elsewhere. Everything else here is a definition proposed for the PI to accept,
+> change or refuse.
 
 The PI agreed that severity is a thing of its own, independent of misalignment, and asked whether it is measured in nats
 too, how the two interplay when an actor is trained, and whether the principal should be the one, and the only one, who
@@ -32,17 +33,19 @@ grades, while graders apply them and the actor never grades itself.
    harm". `∞` is allowed, and marks the outcomes the principal forbids: they become a forbidden set, and budgets and
    rates apply to the outcomes of finite severity.
 2. Or, when only an order is known, **severity levels**: a ranking of outcomes by how bad they are, read as `order.md`
-   reads any ranking. "No worse than the reference at every level of severity" is then dominance (VO1), with no units
-   needed.
+   reads any ranking. "No worse than the reference at every level of severity" is then dominance with declared margins,
+   `B_m(r)` (Q74), margins `0` giving VO1's `B(r)`, with no units needed.
 3. **A tolerance**, in one of two forms:
    - a budget on expected severity, `E_a[s] ≤ b`: on average, at most this much harm per decision (`constraints.md`,
      VK3);
-      - or tolerances by class, derived from a declared **risk appetite** `R`: a class of outcomes, of one severity
-        `s_k`
+   - or tolerances by class, derived from a declared **risk appetite** `R`: a class of outcomes, of one severity `s_k`
      (severity constant on the class, or the class's largest), may occur at rate at most `ε_k = R/s_k`, so that each
      class carries expected harm at most `R`, as a risk matrix's iso-risk lines do. These are rate limits, one per
      class, not the budget `E_a[s] ≤ R`: `m` classes together allow up to `m·R`. A class with `s_k ≤ R` gets no limit;
      a class of infinite severity gets `ε = 0`, a forbidden set.
+
+   Each tolerance is declared per decision, judged by bets, or pooled over a declared horizon, judged by confidence
+   sequences; a limit on a tail measure such as CVaR is pooled, and its breach an aggregate breach (Q74).
 
 ## What a report gives
 
@@ -50,7 +53,7 @@ For each requirement built from severity:
 
 | Quantity | Units | What it says | Verification status |
 |---|---|---|---|
-| breach | yes or no | the requirement is broken | verifiable (VF1) |
+| verdict | convict, or certify at a declared margin | the requirement is broken; or met within the margin, on average, or per decision for a sample (Q76) | convict verifiable (VF1); certify for averages and samples only |
 | misalignment | nats per decision | how fast a record convicts | verifiable that it is above any `m` (VF1) |
 | expected severity, `E_p̂[s]` | the principal's units per decision | how much harm the actor does on average | estimated, with an interval |
 | overrun, `E_p̂[s] − b` | the principal's units per decision | how far beyond the tolerance | estimated, with an interval |
@@ -61,18 +64,19 @@ overrun, or by the expected severity itself.
 
 ## Severity and misalignment in training
 
-Training changes an actor in response to feedback (`v14/training.md`). Two numbers steer it, and they play different
-roles:
+Training changes an actor in response to feedback (`training.md`). Two numbers steer it, and they play different roles:
 - *Severity shapes the feedback.* A trainer that must keep a severity budget, and optimizes its objective at a KL price,
   produces the actor that optimizes the objective minus the severity at the budget's shadow price `ν` (VK5): severity
   enters training as a weight, in the objective's units per unit of harm.
-- *Misalignment decides when to stop or ship.* Evidence against the specification, in nats, is what a test of the
-  trained actor accumulates, with a level that holds whatever the dependence between decisions (VE3).
-- *Their interplay needs two budgets.* A trainer that keeps the principal's own severity budget produces an actor
-  inside it, so the misalignment against that budget is `0` and so is the bettor's stake `λ*`; the trainer's price `ν`
-  and the bettor's `λ*` are never both positive for one actor and one budget. They meet when the trainer's budget
-  differs from the principal's: other conditions, another grader's σ-algebra, another cost. Then, for the trained actor
-  held fixed, VK7 says how the evidence per decision against the principal's budget moves with the principal's
+- *Misalignment decides when to stop.* Evidence against the specification, in nats, is what a test of the trained actor
+  accumulates; a conviction keeps its level whatever the dependence between decisions (VE3). Shipping needs a
+  certificate, which covers an average or, per decision, only a sample of independent draws, an assumption the report
+  names (Q76).
+- *Their interplay needs two budgets.* A trainer that keeps the principal's own severity budget produces an actor inside
+  it, so the misalignment against that budget is `0` and so is the bettor's stake `λ*`; the trainer's price `ν` and the
+  bettor's `λ*` are never both positive for one actor and one budget. They meet when the trainer's budget differs from
+  the principal's: another law on the world's part `ℰ`, another grader's σ-algebra, another cost. Then, for the trained
+  actor held fixed, VK7 says how the evidence per decision against the principal's budget moves with the principal's
   tolerance, while changing the trainer's budget changes the actor itself, which VK7 does not cover. How `ν` and `λ*`
   relate across two such budgets is open (H50).
 

@@ -2,8 +2,11 @@
 
 > **Status: a survey for v14 (Q69), by a research assistant the executor briefed; not independent of the executor and
 > not reviewed.** A statement marked *statement read* was read in the source by the assistant; the executor reads it
-> again before any item cites it, as `CLAUDE.md` asks, and adds it to `REFERENCES.md` then. The executor checked by
-> hand the one counterexample that bears on a decision, the tail-risk limit of entry 4 (`NOTES.md` §32).
+> again before any item cites it, as `CLAUDE.md` asks, and adds it to `REFERENCES.md` then. The executor checked by hand
+> the one counterexample that bears on a decision, the tail-risk limit of entry 4 (`NOTES.md` §32). > *Since written*:
+> R19 decided as two kinds of requirement, per-decision and pooled, with certify for averages and, >
+per decision, samples only; culpability a verdict at a declared care margin `δ`, its size `E`, `K` its evidence rate >
+only (Q74, Q76, `NOTES.md` §33.17, §34); OPTIMIZERS is now PURPOSE, "the request" the specification (Q70).
 
 A second survey, on mixtures after Carcassi, R19, culpability and adversarial actors, is `literature-q70.md` (Q70).
 
@@ -355,8 +358,8 @@ goals, as misalignment by condition, training against test. The word "goal" belo
 
 *Adopt, later.* Two things. Menus are conditions, and identification needs their variation, as [D9] does. And the
 distinction between compliant and aligned is a clean statement of what [A1] gives up: a fully compliant AI with
-different preferences is, by behaviour, aligned. *Con:* parametric (logit). *What we do that it lacks:* a request need
-not be a utility, and the framework needs no model of the AI's preferences.
+different preferences is, by behaviour, aligned. *Con:* parametric (logit). *What we do that it lacks:* a specification
+need not be a utility, and the framework needs no model of the AI's preferences.
 
 ### 14 and 15. Two misalignment measures that are not ours
 
@@ -640,11 +643,11 @@ quantity in place of a composite score, and no appeal to internal goals.
 | Deceptive alignment and evaluation | Add Singh's adaptive-adversary limit (entry 6) and Souly et al.'s scaffold validation (entry 25). Strategic deception is INTERFACE plus PURPOSE, as `interface.md` says. |
 | Attention dynamics in conversations | Unchanged; shallow alignment (entry 32) is a second case of behaviour along a sequence. |
 | Distribution shift | Becomes CORE's "shift of the conditions' weights". Podkopaev and Ramdas (entry 3) is the sequential test for harmful shift. |
-| Misspecified models | Applies to PURPOSE' fits. In CORE, misspecification of the request needs a second standard (`LIMITS.md`); STPA (entry 26) is one way to find what is missing. |
+| Misspecified models | Applies to PURPOSE's fits. In CORE, misspecification of the specification needs a second standard (`LIMITS.md`); STPA (entry 26) is one way to find what is missing. |
 | Distributionally robust optimization | KL and χ² balls are requirements in v14 (VK0's notes say how many budgets each needs). |
 | Information elicitation without verification | Now relevant to H47, the grader, beside prediction-powered monitoring (entry 3) and debate (entry 23). |
 | Active inference | Unchanged: never. |
-| **Formal specification** | **Moves to the centre.** v14's request is a specification, a list of requirements; a syntax (entry 27) and quantitative semantics are now core needs, not later ones. Note that a tail-risk (CVaR) requirement is not convex (entry 4). |
+| **Formal specification** | **Moves to the centre.** v14's specification is a list of requirements; a syntax (entry 27) and quantitative semantics are now core needs, not later ones. Note that a tail-risk (CVaR) requirement is not convex (entry 4). |
 | Learning in games, collusion | Changes: "act independently" is not convex, so under the mixture principle it is not enforceable from records (`LIMITS.md`); [P39] survives as a measured number against a declared information structure. |
 | Network theory | Unchanged; reversibility is a linear requirement (symmetric joint transitions), so it is convex and survives into CORE. |
 | Social choice | Changes from "never" to "where intersections are empty" (entry 29). |

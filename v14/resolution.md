@@ -17,13 +17,13 @@ third, the record's, and gives each position its own exact factorization. In sho
 - *the actor's*, on conditions (its view) and on outcomes (its resolution), says what it can do; both are linear
   interfaces, so their costs are exact terms of `factorization.md`'s FA1, Pythagorean under FA2 (RS5).
 
-Notation as in `evidence.md`. For a partition `𝒢` of `X` and `p ∈ Δ`, `p_𝒢` is the behaviour on cells, `p_𝒢(C) =
-p(C)`. `𝒢 ⊑ ℋ` says that `ℋ` **refines** `𝒢`: every cell of `ℋ` lies in a cell of `𝒢`; the finest partition, one
-outcome per cell, refines every other. For a set `A ⊆ Δ`, `A_𝒢 = {a_𝒢 : a ∈ A}`, and the **misalignment at resolution
-`𝒢`** is `M_A^𝒢(p) = inf_{a∈A} KL(p_𝒢‖a_𝒢)`, the misalignment of the cell masses against the cell masses of the
-acceptable behaviours; at the finest partition it is `M_A(p)`. With conditions, by [B2], `X` holds the pairs of a
-condition and an outcome, with the conditions' frequencies fixed, and a σ-algebra of the record that sees the
-conditions has cells inside each condition.
+Notation as in `evidence.md`. For a partition `𝒢` of `X` and `p ∈ Δ`, `p_𝒢` is the behaviour on cells, `p_𝒢(C) = p(C)`.
+`𝒢 ⊑ ℋ` says that `ℋ` **refines** `𝒢`: every cell of `ℋ` lies in a cell of `𝒢`; the finest partition, one outcome per
+cell, refines every other. For a set `A ⊆ Δ`, `A_𝒢 = {a_𝒢 : a ∈ A}`, and the **misalignment at resolution `𝒢`** is
+`M_A^𝒢(p) = inf_{a∈A} KL(p_𝒢‖a_𝒢)`, the misalignment of the cell masses against the cell masses of the acceptable
+behaviours; at the finest partition it is `M_A(p)`. With conditions, by [B2], `X` holds the pairs of a condition and an
+outcome, with the acceptable behaviours sharing the actor's law on `ℰ` (`README.md`, one distribution), and a σ-algebra
+of the record that sees the conditions has cells inside each condition.
 
 ### RS1 — A coarser record shows less, and refinement adds up exactly
 **Statement.** Let `A ⊆ Δ` be non-empty and `p ∈ Δ`.
@@ -248,10 +248,10 @@ The two factorizations below are of the same number, `M_A(p̂)`, by different ch
   each coarsening of the actor's view or resolution.
 
 The two are different decompositions of one quantity, not nested in each other: the hidden part `H_ℛ` is not a sum of
-interface terms, nor contains one, and a report gives each with the chain it telescopes along (`README.md`, every split
-names its chain). The conditions are not a third position: they are the part of the outcome the world chooses, a
-declared sub-σ-algebra `ℰ`, and every result above holds with the acceptable behaviours sharing the actor's law on `ℰ`
-(`README.md`, one distribution).
+interface terms, nor contains one, and a report gives each with the chain it telescopes along (the root `README.md`,
+every split names its chain). The conditions are not a third position: they are the part of the outcome the world
+chooses, a declared sub-σ-algebra `ℰ`, and every result above holds with the acceptable behaviours sharing the actor's
+law on `ℰ` (`README.md`, one distribution).
 
 **Verification status of the labels** (VF1, VF2), for an acceptable set `A` that is convex, closed and has a
 full-support member, as rate limits with `ε > 0`, budgets with `b > min g` and dominance sets do. Then every `M_A^𝒢` is

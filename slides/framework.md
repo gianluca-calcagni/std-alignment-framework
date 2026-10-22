@@ -60,7 +60,7 @@ A frozen model has a CORE and an INTERFACE, and optimizes nothing.
 
 ## CORE in one slide
 
-1. **Behaviour**: how often each outcome happens, in each condition the actor faces.
+1. **Behaviour**: how often each outcome happens, the situation it arose in included: one distribution.
 2. **The specification**: a list of **requirements**, each a set of acceptable behaviours, declared before the record is
    read.
 3. **Misalignment**: the evidence, in nats per decision, that the actor's behaviour is not acceptable.
@@ -141,7 +141,8 @@ Total variation measures how far probability must move, not how fast a record co
 - So a test from bets keeps its error rate with no model of how the actor decides.
 - A bet needs no bins: its average is an average, even on a continuum.
 
-A record can **convict** an actor, never **certify** it: "misaligned" is verifiable, "aligned" only refutable (VF1).
+A record can **convict** an actor; it **certifies** only an average, or a sample of independent draws, an assumption
+the report names: "misaligned" is verifiable, that every decision was acceptable never is (VF1).
 
 ---
 
@@ -150,7 +151,8 @@ A record can **convict** an actor, never **certify** it: "misaligned" is verifia
 What the actor **sees** (its views), what it **can do** (its actions), and how the world turns actions into outcomes.
 
 - These fix the **feasible** behaviours, a hypothesis a record can refute.
-- **Culpability**: the evidence that the actor is not doing the best it could.
+- **Culpability**: a verdict, culpable at a declared care margin; its size is the avoidable excess, and its evidence a
+  rate, never the size.
 - An excuse ("it could not do better") is tested only in conditions that try to make it do better: **elicitation**
   (VF3).
 
@@ -337,10 +339,10 @@ The lost signal explains about a seventh; the rest the new version could have av
 
 ## Step 11: culpability
 
-- Every leak was avoidable: escalating instead of looking up never leaks. So the culpability of the new version is
-  **infinite**: one leak is decisive evidence that it did not do its best.
-- Without its look-ups it would never leak: its misalignment would fall to 0.0173, of which 0.0067 avoidable, and its
-  culpability to 0.0559.
+- Every leak was avoidable: escalating instead of looking up never leaks. So the new version is **culpable** at any
+  care margin: one leak is decisive evidence that it did not do its best. Its size is the avoidable excess, 0.06235.
+- Without its look-ups it would never leak: its misalignment would fall to 0.0173, of which 0.0067 avoidable, the size;
+  the evidence of culpability would be 0.0559 nats per decision.
 - What remains is the coarse view's cost, which only restoring the account signal removes.
 
 ---
@@ -388,4 +390,5 @@ All of them are listed in `v14/LIMITS.md`.
 | `probes/slides/support_bot.py` | every number of this example |
 | `ROADMAP.md` | what comes next |
 
-Next: test the new words on chosen cases (L2), write the three layers as items, then a real case.
+Next: the label protocol (`v14/labels.md`), then test the new words on chosen cases (L2), write the six files, then a
+real case.

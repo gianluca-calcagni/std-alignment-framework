@@ -20,8 +20,7 @@ within results kept or moved, two readings are incompatible ([P37](ii), [P39](ii
 ([P15](v), [P54](ii)). Most of the move to PURPOSE is v13's work on optimizers, which was always about them. What does
 not survive is the meaning v13 gave its central number: v13's misalignment under the standard specification is the
 distance to the set of KL-optimal pursuits, a fact about optimizers, and v14's misalignment is evidence against a
-declared convex requirement. Every number v13 reported under that name, and every verdict registered with it, belongs to
-v13.
+declared requirement. Every number v13 reported under that name, and every verdict registered with it, belongs to v13.
 
 ## The core's items
 
@@ -38,7 +37,7 @@ v13.
 | [A5] declared before | keep | CORE |
 | [D1] outcomes, behaviours, divergence and tilt | keep, without the tilt | CORE; the tilt moves to PURPOSE |
 | [D2] pursuit | move | PURPOSE |
-| [D3] specification and misalignment | rewrite | CORE: the specification as a list of convex requirements; v13's families of targets and the standard specification move to PURPOSE, the ordinal specification to the order refinement |
+| [D3] specification and misalignment | rewrite | CORE: the specification as a list of requirements, per-decision (convex closed) or pooled (closed); a family of targets with a reference read by TG1 (`targets.md`); its pursuits and the standard specification to PURPOSE, the ordinal cone to PURPOSE as a shape of pursuit (Q74) |
 | [D4] resolution | rewrite | the principal's indifference becomes a proposition about requirements that depend only on cell masses; the actor's resolution moves to INTERFACE |
 | [D5] stakes | rewrite | the shortfall at the matched intensity moves to PURPOSE; stakes in CORE need a declared value scale (`NOTES.md` §24) |
 | [D6] interventions and pass-through | move | pass-through to PURPOSE; known changes of what the actor faces are conditions, and elicitation, a declared link between conditions, is INTERFACE (`factorization.md`, VF3) |
@@ -56,7 +55,7 @@ v13.
 | [P7] indifference forgives inside cells | rewrite | CORE refinement, for requirements that depend only on cell masses |
 | [P21] the expected evidence is misalignment; [P22], [C7] no test faster | keep, for samples | CORE |
 | [P24] the evaluation gap; [C8] | keep | CORE |
-| [P36] ordinal objectives | move | the order refinement of CORE, beside dominance (`order.md`, VO2) |
+| [P36] ordinal objectives | move | PURPOSE, as a shape of pursuit; the order refinement keeps dominance with declared margins, `B_m(r)` (`order.md`, VO2; Q74) |
 | [P35] floors and caps | rewrite | the catalogue of constraints (`constraints.md`) |
 | [P40] attention | keep the quantity | CORE: "acting alike in every condition" is a linear requirement; the label "attention" needs INTERFACE's split of actions from outcomes (L1, L9c) |
 | [P41] reversibility | keep | CORE: invariance under time reversal is a linear requirement on path behaviours |
@@ -116,12 +115,12 @@ v13.
 | Part | Fate |
 |---|---|
 | `checks/`, 102 checks of the results | each moves with its result; the checks of v13's conventions in [D3] are rewritten |
-| `stdalign`, the library | its mathematics is kept (`kl`, `tilt`, the isotonic fit, the diagnostics); its API is rewritten: `misalignment` will mean v14's measure, and the distance to the ray moves to an optimizers module; new functions for requirements, constraints and bets |
+| `stdalign`, the library | its mathematics is kept (`kl`, `tilt`, the isotonic fit, the diagnostics); its API is rewritten: `misalignment` will mean v14's measure, and the distance to the ray moves to a PURPOSE module; new functions for requirements, constraints and bets |
 | `STANDARD.md` and `stdalign/report.py` | rewritten: a v14 report lists the requirements and a verdict per requirement, the bets, the interface and what it excuses, and the stakes on a declared scale; the validator's machinery is kept |
 | `cases/` | registrations and results kept as v13's record; scripts and data fetching reusable |
 | `ontologies/` | the domain knowledge is kept; each declaration is rewritten in v14's terms |
 | `SCENARIO.md`, `scenario/`, `examples/quickstart.py` | rewritten on v14 |
 | `CORE-GENERAL.md`, `general/` | GD items follow their D items; TR2, TR3, TR5, TR6, TR8 to `CORE_GENERAL`, TR7 to `INTERFACE_GENERAL`, TR1, TR4 to `PURPOSE_GENERAL` |
-| `tools/` | kept; lint gains the three layers and their twins |
+| `tools/` | kept; lint gains the layers and their twins (and SHAPING's, if adopted) |
 | `probes/`, `NOTES.md`, `REFERENCES.md`, `RELATED.md`, `TERMS.md` | kept; `TERMS.md` rewritten with the vocabulary L2 passes |
 | the finish line | "stable" restarts at `0` of `3` when v14 replaces v13 (Q46) |

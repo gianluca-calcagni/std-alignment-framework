@@ -88,12 +88,12 @@ while its average rank is `0.889` against `0.5`. v13's ordinal specification cal
 requirement `B(r)`. Common sense would not; what the decoder lacks is the principal's value scale, under which its
 average rank would count, or a declared standard ("at least level 8"), which it meets every time. The verdicts of v14
 say this instead of one number: neither better nor worse for every reading, and better under the declared scale or
-standard, if one is declared. The executor's proposal is to build the order's requirement from margins: no shortfall
+standard, if one is declared. As decided (Q74), the order's requirement is built from margins, `B_m(r)`: no shortfall
 beyond `m` at any declared standard, `a(U) ≥ r(U) − m` for every `U ∈ 𝒰`, a convex closed set whose breach is a
 shortfall at some declared standard, verifiable by VF1; (iii)'s "worse by `m` at `𝒰`", short at every one, is a stronger
 verdict, not a requirement, since what it leaves acceptable is not convex. So "misaligned" is kept for a breach of a
-constraint and for a declared shortfall; under `B(r)` the decoder would be misaligned (the section below). Whether these
-are the right words is for L2 to test before anyone adopts them.
+constraint and for a declared shortfall; under `B(r)` the decoder would be misaligned (the section below). Whether
+"misaligned" is the right word for a declared shortfall is left to L2.
 
 ## Why dominance is the canonical reading of a ranking
 

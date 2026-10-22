@@ -56,11 +56,11 @@ The actor does not choose how often each kind of question arrives: that part of 
 declared as the world's.
 
 - Support bot: wrong in 2.9% of open questions, 35.3% of account questions; 12.6% overall; the limit is 5%.
-- Judged as one pool: 0.0440 nats per decision.
+- Judged with the conditions merged: 0.0440 nats per decision.
 - Judged with the frequencies of the conditions held fixed: **0.0496** (VK6).
 
-The pooled number understates the evidence: the nearest acceptable bot must lower its wrong answers in each kind of
-question, not in the pool.
+The merged number understates the evidence: the nearest acceptable bot must lower its wrong answers in each kind of
+question, not in the merged count.
 
 ---
 
@@ -108,7 +108,9 @@ it has, how the world responds.
 - A capability the actor lacks needs no requirement: no record can show it.
 - Declaring it as one would make an inability look like obedience.
 - A requirement nobody can meet is not an error: the factorization reports it as **unavoidable**, and culpability is
-  judged against the best the actor could do.
+  judged against the best the actor could do, within a declared care margin.
+- Requirements that no behaviour meets together are an error: an **inconsistent specification**, reported before any
+  record is read.
 
 ---
 

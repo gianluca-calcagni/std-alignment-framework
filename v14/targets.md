@@ -1,14 +1,14 @@
 # A family of targets, a reference, and Sanov's rate
 
-> **Status: draft of v14 (Q69); proved here, not yet checked in CI. TG1's reading of a family is the executor's
-> proposal, not a decision.** The numbers come from `probes/v14/resolution.py` (`probes/v14/RESULTS-resolution.md`).
+> **Status: draft of v14 (Q69); proved here, not yet checked in CI. TG1's reading of a family was decided under Q74
+> (`NOTES.md` §33.17).** The numbers come from `probes/v14/resolution.py` (`probes/v14/RESULTS-resolution.md`).
 
 v13 let a principal accept a whole **family of targets** `𝓚` ([D3]): a closed set of objectives `G : X → ℝ` that holds
 the constants and every combination `a·G + b·G'`, `a, b ≥ 0`, of its members: one objective with its positive
 rescalings, a ranking's increasing functions, or a span of candidates. v13 read the family through optimization: its
 intended behaviours were the pursuits `tilt(q, G)`, `G ∈ 𝓚`, of its targets from a default `q`. v14's CORE has no
-optimization, so it needs another reading. This file proposes one, compares it with v13's, and gives the large-deviation
-reading of misalignment, Sanov's rate, which holds whatever the acceptable set.
+optimization, so it needs another reading. This file gives one, decided under Q74, compares it with v13's, and gives the
+large-deviation reading of misalignment, Sanov's rate, which holds whatever the acceptable set.
 
 ### TG1 — A family of targets and a reference give a list of budgets
 **Statement.** Let `𝓚` be a family of targets and `r ∈ Δ` a reference. Let `D_𝓚(r) = {a ∈ Δ : E_a[G] ≥ E_r[G]` for

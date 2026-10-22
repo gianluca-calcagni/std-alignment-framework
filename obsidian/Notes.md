@@ -86,6 +86,7 @@ later results goes in Notes |
 | **A formula checked, its source not read** | on 2026-10-18 (Q70) the executor checked the research assistant's formula for Carcassi and Aidala's fraction capacity, `sup_{a∈A} exp(−D_∞(a‖p))`, for one acceptable behaviour, and wrote in §33.10 and H58 that it "needs no convexity", without reading the book's definition, which takes the hull (Definition 4.173); the reading of the book the same day found it | before a formula is attributed to a source, read the source's definition, not only the formula's proof; the third row of this table about reading the source, after "An abstract read as the theorem" |
 | **A PI's question answered in the notes, never carried into the files** | the PI asked on 2026-10-17 (Q70) whether conditions and outcomes could be one distribution; §33.2 answered, H53 recorded it, and Q74 decided it (§33.17, item 5), but `v14/` and the slides kept conditions as a type until Q76, and the PI, reading the files, could not find the answer. The same for "declare" defined in one line (§33.8), never written into `v14/`. Found by the PI (Q76); an audit of all 44 of the PI's prompts found no other ask lost, and two left waiting without the PI being told (§34) | an answer to a PI's question ends in the file the PI reads for that subject, or the turn's answer says where it waits; at each handover, read the PI's prompts against the tree |
 | **A verdict assumed for every kind of requirement** | §33.15, §33.17 and H51 put a certify verdict beside the convict verdict for per-decision requirements, the obstacle named as dependence; it is not dependence: two actors that differ at one decision, fixed in advance and independent of everything, cannot be told apart well enough to certify that every decision was acceptable, so only an average is certifiable (`v14/LIMITS.md`, Q76). Found by the executor when an external review asked for H51 to be proved | before claiming a verdict exists for a class of requirements, try the actor that changes one decision |
+| **A strict change claimed where the result gives a weak one** | in `v14/junctures.md` (Q77) the executor wrote that refining the record makes visible misalignment rise and hidden fall, that refining the principal makes misalignment rise, and that new actions make unavoidable misalignment fall, where RS1, RS6 and the definition as an infimum give only "does not fall" or "does not rise", and the principal's case needs the finer acceptable set inside the coarser; and cited H55, about honeypots, for the worst case. Found by a reviewing subagent (Q78) | a monotone result is written with its weak inequality, and with the inclusion it needs |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -259,6 +260,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q75 | once Q74's work is done and CI is green, bring it to `main`. Applied: a pull request from `claude/peaceful-ritchie-cnu5r3`, merged with a merge commit, as `CLAUDE.md` asks rather than a push to `main` | PI | `ROADMAP.md` |
 | Q76 | the PI deleted the merged branch; an external review by another model family, to be weighed and not imported; the question of Q70 on conditions and outcomes seemed unanswered: read all the PI's prompts, judge each actioned or lost, then fix the docs and the slides. Applied: §34, the audit and the review weighed; conditions and outcomes as one distribution with a declared exogenous σ-algebra, in `v14/` and the three decks; "declare" defined; certification corrected to averages; two rules for v14's report; H62, H63 | PI; executor (the audit, the review weighed) | §34 |
 | Q77 | a brainstorm: misalignment as a sum weighted by severity, to be rid of infinities without losing the factorization; a simpler CORE, with no reference, targets as a closed convex set of desired distributions with severity scores, and a specification as a signature with an algorithm deciding records in finite time; an exhaustive list of junctures, where the framework's parts meet, with how to treat them and the measures they inspire, from other disciplines too; challenge everything. Applied: §35, `v14/junctures.md`, `probes/v14/contamination.py`, H64–H68, R24 | PI | §35 |
+| Q78 | a thorough turn of documentation hygiene. Applied: §36; the stale passages of `v14/`, the slides and the top-level files fixed; the row "stable" recorded as met by the letter, with R25 | PI | §36 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -3060,3 +3062,33 @@ words and in the declarations' layout, not in the mathematics. H67.
 `v14/junctures.md` lists fourteen junctures, the couplings between them, three rules and imports to read. The one the
 executor finds most consequential: refining the actor's view lowers its unavoidable misalignment and its excuses, and
 raises its ability to tell evaluation from use, so capability and evaluability pull against each other. H68.
+
+## 36. Documentation hygiene after Q77, 2026-10-22 (Q78)
+
+**How.** The doc sweep (`probes/review/doc_sweep.py`) and a check that every file cited in backticks exists found
+nothing real. Three reviewers, subagents of the executor's own model family and so not independent (rule (f)), read
+`v14/` (its core files; its proposals and surveys) and the top-level files and slides against a sheet of the current
+decisions, and reported without editing; the executor checked each finding against the files before applying it.
+
+**What was stale, and is fixed.**
+- *Decided choices still called open*: TG1's reading, the order's margins, culpability's shape, the name SHAPING.
+- *The one space not carried everywhere*: frequencies declared rather than shared with the actor's law on `ℰ` in
+  `interface.md`, `constraints.md`, `resolution.md`, `training.md` and `severity.md`; the framework deck's definition
+  of a behaviour.
+- *Certification*: the framework deck and VF1's plain terms said "never certify"; `severity.md` said misalignment
+  decides when to ship; now, certify for averages and samples only (Q76).
+- *Culpability's size*: `K` called culpability in `interface.md`, VF2's table and two decks; now the evidence of
+  culpability, with `E` the size.
+- *A clash of words*: VK6's "pooled" rate limit, now an overall rate limit, since "pooled" names Q74's kind of
+  requirement.
+- *Old names*: OPTIMIZERS, "the request" for the specification, "an PURPOSE"; in the surveys, a note of what was
+  decided since they were written.
+- *Indexes and counts*: `v14/README.md`'s table missed VK6, VK7, RS6–RS8 and the probes list was short; `README.md`'s
+  v14 row missed `junctures.md` and the surveys; `CLAUDE.md` pointed to §12 as the last review (§15 is, with §34).
+- *The roadmap*: "Where we are", recommendations 1, 4, 11 and 12, and the order of the next steps.
+- *Slips of the executor's in `junctures.md`*: "rises" and "falls" where the results give only "does not fall" and
+  "does not rise", and a hunch cited for the worst case that is about honeypots; §1.
+
+**The finish line's row "stable".** By its letter it is met: pull requests #34, #35 and #36, merged after #33 brought
+v13 to `main`, changed no Statement and no scope, only `CORE.md`'s status note. v14, drafted beside the core, would
+change the Statements if adopted. Recorded as met by the letter, with the question to the PI (R25).
