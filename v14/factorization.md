@@ -105,10 +105,10 @@ Every exact split of v13, by the mechanism that makes it exact and the layer it 
 | world and tampering | [P50](i), (ii) | chain rule: always exact | INTERFACE (the channel the actions cannot reach) | exact |
 | the actor's resolution: best effort and what it cannot remove | [P8] | Pythagorean, linear | INTERFACE | exact |
 | avoidable and unavoidable | [P15](v) | Pythagorean, linear, toward the nearest intended behaviour `p°` | INTERFACE | **overclaims**: below |
-| departure: pursuit and misalignment | [P6] | Pythagorean, exponential family | OPTIMIZERS | exact |
-| named and unexplained | [P44] | Pythagorean, linear | OPTIMIZERS | exact: the unexplained part is a least value over the span ([P48]), and `𝓛` fixes `E_p[F]`, so `p°` is the right target |
-| outer and strict inner | [P49](ii) | Pythagorean, via [P48] | OPTIMIZERS | exact |
-| what tampering adds to net value | [P50](iv) | Pythagorean, linear | OPTIMIZERS | exact, at the trainer's intensity |
+| departure: pursuit and misalignment | [P6] | Pythagorean, exponential family | PURPOSE | exact |
+| named and unexplained | [P44] | Pythagorean, linear | PURPOSE | exact: the unexplained part is a least value over the span ([P48]), and `𝓛` fixes `E_p[F]`, so `p°` is the right target |
+| outer and strict inner | [P49](ii) | Pythagorean, via [P48] | PURPOSE | exact |
+| what tampering adds to net value | [P50](iv) | Pythagorean, linear | PURPOSE | exact, at the trainer's intensity |
 
 **The label that overclaims.** [P15](v) splits `M(p̂) = KL(p̂‖p*°) + KL(p*°‖p°)` exactly, and calls the second term the
 unavoidable misalignment. It is unavoidable only toward `p°`, the intended behaviour nearest to the actor's own, at the
@@ -155,7 +155,7 @@ of compliance or an excuse a record can only disprove, or a number computed from
 | the actor perceives more than its declared view | its negation | verifiable |
 | tampered | `p̂` not grounded ([P50]), when the world is recorded | verifiable; with the world never recorded, verifiable only where the signals alone force tampering, through [P51]'s lower bound |
 | unavoidable, with interface `j`; the cost of a limitation | `m_1 > 0`; `m_{j+1} − m_j > 0` | not about the record: decided by computation from the declarations |
-| the actor pursues an objective (OPTIMIZERS) | `p̂` in the closure in `Δ` of a family of pursuits (v13's ray is closed in `Δ°`, not in `Δ`) | refutable, never verifiable |
+| the actor pursues an objective (PURPOSE) | `p̂` in the closure in `Δ` of a family of pursuits (v13's ray is closed in `Δ°`, not in `Δ`) | refutable, never verifiable |
 
 **Proof.** Each row applies VF1 to the closed set named. `𝓕*` is closed: `M_A` is lower semicontinuous, as an infimum of
 the jointly lower semicontinuous `KL` over a compact `A`, so `{f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕)}` is closed. A deterministic view

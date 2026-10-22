@@ -12,12 +12,12 @@ Prepended at the PI's request, to be worked on together; the order is the execut
 1. **Register L2 before computing anything** (`probes/labels/`): paradigm cases for v14's words, breach, better, worse
    and neither, misalignment against a request with constraints, culpability `K` against the avoidable excess `E`,
    unavoidable, coarse perception, tampering against selection, and every factor of `v14/factorization.md`.
-2. **Decide the three choices the draft rests on**, knowingly: the mixture principle, which buys tests valid under any
-   dependence at the price of requirements that are not convex, independence among them (`v14/LIMITS.md`); the
-   requirement built from an order, `B(r)`, v13's ordinal cone, or no shortfall beyond declared margins (`v14/order.md`;
-   dominance is the ranking's reading, not a requirement); and a reference that meets the constraints (H45).
+2. **The three choices the draft rests on**: decided as the desiderata force them (Q74, `NOTES.md` §33.17). Two kinds
+   of requirement, per-decision and convex, or pooled over a declared horizon and any closed set, each with convict and
+   certify verdicts; an order's requirement as dominance with declared margins, `B_m(r)`, v13's cone kept for PURPOSE;
+   a reference that may break a constraint, an empty intersection reported as an inconsistent specification.
 3. **[P15](v)'s "unavoidable"**: decided, left on `main` for now and corrected in v14's migration (Q65, R18).
-4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `OPTIMIZERS` and their twins, each twin
+4. **Write the six files** in `CORE.md`'s format of items: `CORE`, `INTERFACE`, `PURPOSE` and their twins, each twin
    stating only what changes; lint for the layout; then migrate v13's items and results by `v14/MIGRATION.md`, checks
    and mutants with them.
 5. **Close the open proofs**: VK4(iii), several constraints, with Farkas's lemma read in an open text; the Pythagorean
@@ -36,12 +36,26 @@ Prepended at the PI's request, to be worked on together; the order is the execut
     a sample plan for forbidden outcomes (H48); estimating an interface and carrying its uncertainty into the factors;
     the sensitivity of verdicts to the declared limits and margins; bets for orders and joint requirements.
 
+11. **What the PI's review of the slides showed** (`NOTES.md` §32, Q69): a *certify* verdict beside the convict verdict,
+    from the bets the draft already builds (H51), first, since a deployment decision needs it; cite the e-value
+    literature for VE1, VE2 and VK5, and import its answers to H46 and VK4(iii) after reading them; the CVaR
+    counterexample weighed in R19 (decided, Q74); the names are decided (R20, Q70); then brainstorm SHAPING and severity
+    on
+their drafts, with the questions of Q70 (`NOTES.md` §33).
+
+12. **The brainstorm of Q70** (`NOTES.md` §33): decided under Q74 (§33.17), R19 by two kinds of requirement, one space
+    with an exogenous σ-algebra, and culpability at a care margin, or by negligence where costs are declared; still for
+    the PI's reading, `v14/labels.md` on the seven-step protocol from Carcassi and Aidala's book, first for misaligned,
+    breach, culpable, hidden, latitude and unavoidable, and "adversarial" as worst case, evaluation gaming with
+    honeypots, and aim.
+
 ## The goal
 
 A standard formal framework for alignment problems in general, not only in machine learning: solid enough to build on,
 substrate-independent, easy to import existing theorems into, and able to make testable predictions, support
-diagnostics, and show its own limits (`README.md`). The framework is a standard, not only a checked calculus, when every
-row of the finish line is met.
+diagnostics, and show its own limits (`README.md`). Its six desiderata (`README.md`, Q74) say what that excludes, and
+every design choice names the ones it follows. The framework is a standard, not only a checked calculus, when every row
+of the finish line is met.
 
 | Goal | Criterion (`README.md`) | State |
 |---|---|---|
@@ -58,7 +72,7 @@ library that computes what the standard asks, a report that can be checked as da
 three are in place (Q41). The theory grows where one of these needs it, and the archive of what is done is in `NOTES.md`
 §4.
 
-## Where we are (2026-10-17)
+## Where we are (2026-10-22)
 
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
@@ -87,17 +101,26 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   registered before it ran (`probes/labels/`). Of twelve labels, masking, overoptimization and misalignment under the
   ordinal specification agreed with their words on every case; nine disagreed on at least one, most because the standard
   specification reads "pursue `F`" as one way of pursuing; one prediction failed, on a threshold without its scale (§1).
-  The renames the executor recommends, and the common-sense verdicts, wait on the PI (`REQUESTS.md`, R15), postponed
-  until v14 absorbs them (Q59).
-- **v14, a draft** (Q59–Q68, `NOTES.md` §22–§31): in `v14/` beside the core, not in it, drafted on `claude/core-v14` and
-  brought to `main` as a draft (Q68). Three layers, each with a twin for outcomes that are not finite: CORE (a request
-  as a list of convex requirements, misalignment as the evidence against it, records judged by bets), INTERFACE (what
-  the actor sees and can do: culpability, coarse perception, tampering) and OPTIMIZERS (pursuit, evaluators, training,
-  shadow prices). Twenty results, all proved here except VK4(iii), most of them probed, none in CI yet: evidence as a
-  bet (VE1–VE4), constraints (VK0–VK5), three verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization
-  and its labels' verification status (FA1–FA3, VF1–VF3). `v14/README.md` holds the design with its claims of
-  generality, its conventions and the challenges answered; `v14/LIMITS.md` what the framework cannot do;
-  `v14/MIGRATION.md` what of v13 survives. The PI's decisions on R15 and R16 wait for it; L2 comes next (the
+  The renames the executor recommended are superseded by v14's words, which L2 is to test (Q74); the common-sense
+  verdicts wait on the PI's reading (`REQUESTS.md`, R15).
+- **v14, a draft** (Q59–Q74, `NOTES.md` §22–§33): in `v14/` beside the core, not in it, drafted on `claude/core-v14`,
+  brought to `main` as a draft (Q68), extended at the PI's ten questions on the slides (Q69), its names decided (Q70:
+  PURPOSE, SHAPING, specification), and RS6 and RS7 (latitude, proposed) added. The framework's six desiderata were
+  accepted and promoted to `README.md` (Q74), and the decisions they force were taken (`NOTES.md` §33.17): R19 by two
+  kinds of requirement, per-decision and convex, judged by bets, or pooled and any closed set, judged by confidence
+  sequences, with convict and certify verdicts; an order's requirement as dominance with declared margins; a reference
+  that may break a constraint, an empty intersection reported as an inconsistent specification; culpability at a
+  declared care margin, its size `E`; one space with an exogenous σ-algebra. Three layers, each with a twin for outcomes
+  that are not finite: CORE (a specification as a list of requirements, misalignment as the evidence against it,
+  records judged by bets), INTERFACE (what the actor sees and can do: culpability, coarse perception, tampering) and
+  PURPOSE (pursuit, evaluators, shadow prices), with SHAPING proposed for training. Thirty-three results, all proved
+  here except VK4(iii), most of them probed, none in CI yet: evidence as a bet (VE1–VE4), constraints (VK0–VK7), three
+  verdicts under a ranking (VO1–VO3), the interface (IN1), the factorization and its labels' verification status
+  (FA1–FA3, VF1–VF3), σ-algebras of the principal, the record and the actor (RS1–RS6, RS8), a family of targets with a
+  reference and Sanov's rate (TG1, TG2, SN1), and SH1. Proposals, not decided: severity and who grades
+  (`v14/severity.md`) and the fourth layer (`v14/training.md`). A survey of competing frameworks (`v14/related.md`).
+  `v14/README.md` holds the design with its claims of generality, its conventions and the challenges answered;
+  `v14/LIMITS.md` what the framework cannot do; `v14/MIGRATION.md` what of v13 survives. L2 comes next (the
   recommendations above).
 - **Engineering** (Q37, Q41): `stdalign` 0.2, the library, holds misalignment, the revealed intensity and the split of
   the departure ([P5], [P6]), the estimates by access with their intervals ([P23], [P47], [P52]), and the diagnostics
@@ -204,6 +227,9 @@ Before starting any piece of work, answer these; if an answer is "no", stop and 
    the registration is pushed (`NOTES.md` §1)?
 5. At the end of the turn: is this file's "Where we are" true, does the log below have a line, and does `REQUESTS.md`
    list every open request?
+6. Which desiderata (`README.md`) does each design choice follow, and does it pull against another? From time to time,
+   at least once per merged pull request, ask whether a desideratum should be amended, and put the question to the PI
+   when one should (Q74).
 
 ## Log
 
@@ -247,3 +273,14 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-17 | slides (Q66, `NOTES.md` §30): `slides/framework.md`, 32 slides in Marp Markdown presenting v14 and a worked example, a frozen support bot against its previous version, every number from `probes/slides/support_bot.py` | 3 (contact: a reader can follow the framework end to end) |
 | 2026-10-17 | the lessons of the slides' example (Q67, `NOTES.md` §31): VK2's closed form does not hold with conditions' frequencies fixed (`0.0440` against `0.0496`); outcomes measured by graders (H47); forbidden outcomes need a rate and a plan (H48); recommendation 10 | 2 (a version); 5 (what the quantities mean) |
 | 2026-10-17 | the v14 draft brought to `main` by a pull request (Q68), the files that placed it on its branch corrected; the branches no longer needed listed for deletion | 2 (a version, as a draft) |
+| 2026-10-17 | the PI's ten questions on the slides (Q69, `NOTES.md` §32): a deck for mathematicians (`slides/mathematicians.md`) and one on declaring a specification (`slides/specification.md`); σ-algebras in three positions (`v14/resolution.md`, RS1–RS5), families of targets and Sanov (`v14/targets.md`), VK6 and VK7; proposals for severity, a training layer and new names (R20); a survey of competing frameworks (`v14/related.md`), with a tail-risk counterexample to the mixture principle | 2 (a version); 3 (contact: readers, and the literature); 5 (what the quantities mean) |
+| 2026-10-18 | documentation hygiene and a brainstorm (Q70, `NOTES.md` §33): the names of R20 applied (PURPOSE, SHAPING, specification); the review of Q69 kept (`probes/review/q69-review.md`); RS6 (an actor as fine as the principal loses nothing to resolution) and RS7 (latitude, proposed); proposals on one distribution with an exogenous σ-algebra, a correspondence protocol for labels, evaluation gaming measured with honeypots, per-decision and pooled requirements for R19, and culpability at a care margin (H53–H57) | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-18 | the literature for Q70 (`v14/literature-q70.md`, `NOTES.md` §33.10): the mixture principle is a fork-convex null; pooled requirements judged by confidence sequences for averages of conditional means, valid under any dependence, recommended for R19; Carcassi and Aidala's double definitions and equivalent formalizations for the label protocol; the fraction capacity (H58); culpability by negligence where costs are declared; R21, a host for Carcassi's book | 3 (imports); 5 (what the quantities mean) |
+| 2026-10-18 | Carcassi and Aidala's book read (`v14/book-q70.md`, `NOTES.md` §33.11), R21 closed: mixing is an axiom of the space of behaviours, not of requirements; statistical quantities are affine, a criterion for R19's two tiers; the fraction capacity takes the hull, which corrects H58 (a slip, §1); a seven-step protocol for pairing labels with their formalizations | 3 (imports); 5 (what the quantities mean) |
+| 2026-10-21 | neither side knows the other's σ-algebra (Q71, `NOTES.md` §33.12): RS8, an actor's view revealed from below only; factors that need it become families of exact splits; perplexity and confusion between σ-algebras proposed (H59, H60) | 5 (what the quantities mean) |
+| 2026-10-21 | the PI's two questions (`NOTES.md` §33.13): the σ-algebra results lift to the general twins where built on KL, with the transfer lemma's compactness; perplexity lifts for a principal's countable partition, latitude available and confusion only at a declared precision; latitude factors out of the departure from the reference, not out of misalignment, and perplexity bounds no cost; "room for latitude" renamed latitude available | 5 (what the quantities mean) |
+| 2026-10-21 | how Carcassi and Aidala tame entropy on a continuum (`NOTES.md` §33.14): entropy defined by mixing, its unit by an even mixture, its zero by a count of states, limits by the topology; imports recommended for the entropy-based diagnostics, latitude available and confusion needing a declared precision (H61) | 3 (imports); 5 (what the quantities mean) |
+| 2026-10-21 | R19 and certification consolidated, pending the PI (Q72, `NOTES.md` §33.15): per-decision and pooled requirements, convict and certify verdicts, and six desiderata that would force the answers; the record's σ-algebra kept as a seed for latitude on a continuum | 2 (a version); 5 (what the quantities mean) |
+| 2026-10-22 | the framework's desiderata drafted for the PI's consideration (Q73, `NOTES.md` §33.16): six, general and filtering, with their tensions; §33.15's rules restated as following from them; R22 | 1 (the goal); 2 (a version) |
+| 2026-10-22 | the desiderata accepted and promoted to `README.md`, with a drift check and a rule in `CLAUDE.md` (Q74); the decisions they force taken (`NOTES.md` §33.17): R19 by two kinds of requirement and two verdicts, an order's requirement as dominance with declared margins, a reference that may break a constraint, culpability at a declared care margin, one space with an exogenous σ-algebra, the entropy imports, the redundancies, three working agreements; R16, R19 and R22 closed, R15 trimmed; hygiene of `v14/` and `slides/` | 1 (the goal); 2 (a version) |
+| 2026-10-22 | the work since pull request #35 brought to `main` by a pull request, at the PI's request (Q75) | 2 (a version) |

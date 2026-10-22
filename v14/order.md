@@ -2,13 +2,13 @@
 
 > **Status: draft of v14 (Q59); proved here, not yet checked in CI.** The numbers come from `probes/v14/v14_probe.py`.
 
-The order part of a request is a ranking of outcomes, which the principal may give only up to increasing transformations
-([B3] becomes this), and a **reference** `r ∈ Δ`, a behaviour against which it is judged: a base model, the previous
-version, a population of answers, the status quo. The ranking is a **preorder** `≽` on `X`: reflexive and transitive,
-possibly partial, as when outcomes are ranked on two scales at once. An **upper set** is a set `U ⊆ X` that contains
-every outcome ranked at least as high as one of its members; a **reading** of the ranking is a function `u : X → ℝ` that
-is non-decreasing (`x ≽ y` implies `u(x) ≥ u(y)`), the scores of a principal who holds this ranking and no other
-commitment.
+The order part of a specification is a ranking of outcomes, which the principal may give only up to increasing
+transformations ([B3] becomes this), and a **reference** `r ∈ Δ`, a behaviour against which it is judged: a base model,
+the previous version, a population of answers, the status quo. The ranking is a **preorder** `≽` on `X`: reflexive and
+transitive, possibly partial, as when outcomes are ranked on two scales at once. An **upper set** is a set `U ⊆ X` that
+contains every outcome ranked at least as high as one of its members; a **reading** of the ranking is a function
+`u : X → ℝ` that is non-decreasing (`x ≽ y` implies `u(x) ≥ u(y)`), the scores of a principal who holds this ranking and
+no other commitment.
 
 ### VO1 — Better for every reading is dominance on upper sets
 **Statement.** For behaviours `a` and `r`, these are equivalent: (a) `E_a[u] ≥ E_r[u]` for every reading `u`; (b) `a(U)
@@ -28,7 +28,8 @@ empty. ∎
 **Notes.** For a total ranking this is the classical characterization of first-order stochastic dominance, proved here
 in a few lines rather than cited. The sets `B(r) = {a : a(U) ≥ r(U) for every upper set U}`, "better or equal for every
 reading", and `W(r) = {a : a(U) ≤ r(U) for every upper set U}`, "worse or equal for every reading", are convex and
-closed, being cut out by finitely many linear inequalities, and both contain `r`.
+closed, being cut out by finitely many linear inequalities, and both contain `r`. `B(r)` is `targets.md`'s TG1 for the
+family of a ranking's readings: "no worse than the reference on any target", with the readings as the targets.
 
 ### VO2 — v13's ordinal specification lies inside "better for every reading"
 **Statement.** For a total ranking by `F` and `r ∈ Δ°`, every behaviour `a` whose ratio `a/r` is a non-decreasing
@@ -49,9 +50,12 @@ not non-decreasing. With two outcomes tied in `F`, moving a little mass from one
 mass, and makes `a/r` differ between two outcomes at the same level, which v13's ordinal specification, asking `a/r` to
 be a function of `F`, excludes. ∎
 
-**Notes.** Which requirement an order gives, `B(r)`, the ordinal cone or margins, is the PI's to decide (`ROADMAP.md`,
-recommendation 2). `B(r)` asks only what every holder of the ranking would agree on; v13's cone asks, besides, a shape,
-which best-of-`n` and every pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not.
+**Notes.** Which requirement an order gives is decided (Q74, `NOTES.md` §33.17): dominance with declared margins,
+`B_m(r) = {a : a(U) ≥ r(U) − m_U for every upper set U}`, margins `0` giving `B(r)`. `B(r)` is TG1 with the indicators
+of the upper sets as targets, margins make `B_m(r)` a list of budgets (VK0), and this file is to be written as that
+case. `B(r)` asks only what every holder of the ranking would agree on; v13's cone asks, besides, a shape, which
+best-of-`n` and every pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not: a mark
+of a mechanism, so the cone stays in PURPOSE, as the hypothesis of pursuit.
 
 ### VO3 — Three verdicts, and which of them a record verifies
 **Statement.** Against a reference `r` and a ranking, a behaviour `a` is **better** when `a ∈ B(r)`, **worse** when `a
@@ -101,6 +105,7 @@ requirement built from it. The verdicts of VO3 are comparisons with the referenc
 misalignment the principal declares a requirement, and each choice changes verdicts: `B(r)`, "better than the reference
 for every reading", which the greedy decoder breaches, so that it is misaligned under that requirement; v13's ordinal
 specification, which adds a shape (VO2); or shortfalls by margins at declared standards (VO3(iii)), which it does not
-breach. Choosing among them is the PI's (`ROADMAP.md`, recommendation 2). A reference known only from a sample, such as
-a base model's answers, is not a set fixed in advance, as [A5] asks, until it is declared as such; how its uncertainty
-enters the requirement is open (`LIMITS.md`).
+breach. The choice is decided (Q74): `B_m(r)`, which holds the first and the third as its margins `0` and `m`, the
+margins declared by the principal; the cone, a shape of pursuit, stays in PURPOSE. A reference known only from a sample,
+such as a base model's answers, is not a set fixed in advance, as [A5] asks, until it is declared as such; how its
+uncertainty enters the requirement is open (`LIMITS.md`).

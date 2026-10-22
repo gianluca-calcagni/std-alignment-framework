@@ -8,7 +8,7 @@ framework. It is a working agreement, not a claimed property.
 
 1. Read `ROADMAP.md`, and answer its drift checks before any work.
 2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover, with §20, the general core, §21, the
-   labels, and §22–§31, the revamp and the v14 draft (`v14/README.md`), since; then §1, the failure modes with their
+   labels, and §22–§33, the revamp and the v14 draft (`v14/README.md`), since; then §1, the failure modes with their
    evidence, every row; then §12, the last review.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 
@@ -19,6 +19,9 @@ framework. It is a working agreement, not a claimed property.
   and records.
 - Give a recommendation, not a survey, and say what is wrong when it is, with the evidence. Ask the PI only what is the
   PI's to decide; otherwise choose, say what was chosen, and go on.
+- A design choice names the desiderata of `README.md` it follows. A pending decision they force is taken, not asked:
+  record it with the desiderata that force it, as the PI's rule Q74 allows, and the PI can overturn it; one they only
+  favour is proposed. From time to time ask whether a desideratum should change (`ROADMAP.md`, drift check 6).
 - Record failures; do not repair them away (rule (a)). A slip of the executor's is a row of `NOTES.md` §1.
 
 ## Git and GitHub

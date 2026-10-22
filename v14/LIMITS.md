@@ -6,7 +6,7 @@
 
 The framework judges what an actor does against what a principal declared, from records of decisions. Each limit is one
 of those three things failing: the declaration, the judgement of behaviour, or the record. The layers are named as in
-`v14/README.md`: CORE, INTERFACE, OPTIMIZERS.
+`v14/README.md`: CORE, INTERFACE, PURPOSE.
 
 ## The declaration is an input, never checked
 
@@ -25,17 +25,22 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Declared before.** A standard fitted to the behaviour it judges cannot fail ([A5]). A principal who changes its
   requirements in response to the actor, without declaring how, is outside the framework; so is the strategic interplay
   of a principal and an actor that each adapt to the other.
-- **Requirements that are not convex, by a choice.** v14 judges each decision against what is acceptable and accepts any
-  mixture of acceptable ways of acting, the mixture principle (`v14/README.md`, the conventions), so an actor may switch
-  between acceptable behaviours from one decision to the next. Under that choice a record holds the actor only to the
-  mixtures of what is acceptable (`evidence.md`, VE2), and a requirement that is not convex is enforced as its convex
-  hull. For a sample, independent decisions from one behaviour, leaving a closed set that is not convex is still
-  verifiable (`factorization.md`, VF1); the limit is the price of the choice, not of records.
+- **Requirements that are not convex, per decision.** v14 judges a per-decision requirement against what is acceptable
+  at each decision and accepts any mixture of acceptable ways of acting, the mixture principle (`v14/README.md`, the
+  conventions), so an actor may switch between acceptable behaviours from one decision to the next. A record then holds
+  the actor only to the mixtures of what is acceptable (`evidence.md`, VE2), and a set that is not convex, declared per
+  decision, is enforced as its convex hull. Its sharpest case is tail risk: at a tail of 10%, two behaviours with CVaR
+  `0.6` mix into one with CVaR `0.72` (`NOTES.md` §32). What is not lost (Q74, `NOTES.md` §33.17): the same set can be
+  declared pooled, a requirement on the average of the conditional behaviours over a declared horizon, judged by
+  confidence sequences whatever the dependence; it then speaks of one deployment, at a level, not of each decision, and
+  its breach, an aggregate breach, has no rate per decision. The size of an aggregate breach and the power of its test
+  are not yet derived. For a sample, independent decisions from one behaviour, the closed set is also verifiable as it
+  stands (`factorization.md`, VF1).
 
 ## Behaviour, not mind
 
 - **Internal states.** Two actors that behave alike in every condition are the same actor ([A1]). Goals, beliefs and
-  intentions enter only in OPTIMIZERS, as hypotheses about behaviour that records can refute and never verify
+  intentions enter only in PURPOSE, as hypotheses about behaviour that records can refute and never verify
   (`factorization.md`, VF2). "It wanted to" is never established; "it behaves as nothing that wanted the right thing
   would" can be.
 - **Excuses.** "It could not have done better" is about behaviours the actor did not produce. A sample of what it did
@@ -49,10 +54,12 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   With neither, nothing better than the largest misalignment any behaviour can have bounds it.
 - **Collusion, by the same choice.** The behaviours of independent actors do not form a convex set, and their mixtures
   are every joint behaviour, so under v14's choice of judging each decision and accepting mixtures, "act independently"
-  is no requirement a record can enforce (`NOTES.md` §25); for a sample of joint decisions, leaving the closed set of
-  independent behaviours is verifiable, and [P39] measures it. Coordination is a measured number ([P39]); calling it
-  misalignment needs a declared information structure: what each actor sees, and that their private randomness is
-  independent. Shared randomness that no one records is indistinguishable from collusion, and from a common cause.
+  is no per-decision requirement a record can enforce (`NOTES.md` §25). Declared pooled, it is judged on the average
+  joint behaviour over the horizon, which is another requirement: independent actors whose behaviour changes over time
+  leave it too. For a sample of joint decisions, leaving the closed set of independent behaviours is verifiable, and
+  [P39] measures it. Coordination is a measured number ([P39]); calling it misalignment needs a declared information
+  structure: what each actor sees, and that their private randomness is independent. Shared randomness that no one
+  records is indistinguishable from collusion, and from a common cause.
 - **Causes in the world.** The framework judges distributions of recorded outcomes. Effects the actor has beyond them,
   externalities nobody records, are invisible to it; tampering with the measurement is defined only against a declared
   honest channel, and identified only where the world itself is recorded, sometimes ([P50], [P51]).
@@ -64,10 +71,15 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **A blind spot of order `√n`, a hunch.** If H43 holds, a shift of about `1/√(n·I)` per decision escapes every test
   over `n` decisions and costs about `√(n/I)` in all, so every guarantee from records leaves such a loss undetected. It
   is a local-asymptotic sketch, not proved.
-- **Convicting, never certifying.** "Misaligned" is verifiable, and "culpable" with the interface taken as known;
-  "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a standard, never
-  to meet it exactly; "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]),
-  and not shown for others.
+- **Hidden inside the record's cells.** A record whose σ-algebra is coarser than the principal's, such as a grader that
+  cannot tell a wrong answer from a harmful one, shows only the misalignment at its own resolution; the rest is neither
+  verifiable nor refutable from it, and only a finer record or a declared interface bounds it (`resolution.md`, RS4).
+- **Convicting exactly, certifying only within a margin.** "Misaligned" is verifiable, and "culpable" with the interface
+  taken as known; "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a
+  standard, never to meet it exactly. A certify verdict at a declared margin is part of the design (Q74): for pooled
+  requirements from confidence sequences, valid under dependence; for per-decision ones, "breach rate at most `ε`" under
+  dependence is expected from the bets the draft builds (H51; `related.md`, entries 2 and 4) and not yet proved;
+  "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]).
 - **Dependence.** A test from bets keeps its level whatever the dependence, but only against the hypothesis that each
   decision, given the past, is acceptable (`evidence.md`, VE3). Drift and dependence ([P54]) are identified only from
   repeated records or declared episodes; one long record, with no repetition, does not separate them. That a test's
@@ -86,8 +98,8 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Labels are tested on paradigm cases.** A label is verified when it agrees with its word's sense on cases registered
   before computing (L1); outside those cases a word may still mislead. Carcassi's methodology justifies what kind of
   claim a label makes, not that it is the right word (`factorization.md`).
-- **Every number is relative to a declaration.** Misalignment to the request, culpability to the interface, a motive to
-  a model of optimization. A report that omits the declaration it is relative to says less than it seems to.
+- **Every number is relative to a declaration.** Misalignment to the specification, culpability to the interface, a
+  motive to a model of optimization. A report that omits the declaration it is relative to says less than it seems to.
 
 ## The factors
 
