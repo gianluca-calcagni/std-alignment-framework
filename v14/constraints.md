@@ -141,8 +141,9 @@ sum, as here, or larger: for the uniform behaviour on three outcomes and the lim
 alone gives `0.396`, the sum `0.793`, and both `0.934`. An exact split exists only along a chosen order of the
 requirements, `M_{A_1∩A_2} = M_{A_1} + (M_{A_1∩A_2} − M_{A_1})`, the same telescoping as FA1, and it depends on the
 order. A report gives a verdict and a misalignment per requirement, and the joint. Joining constraints to an order is
-the same intersection; how the reference should meet the constraints is H45, and the requirement built from an order is
-the PI's choice (`ROADMAP.md`, recommendation 2).
+the same intersection, and the reference need not meet the constraints (Q74, `NOTES.md` §33.17): when the intersection
+is empty, the declarations alone show it, and the specification is reported as inconsistent before any record; the
+requirement built from an order is dominance with declared margins (`order.md`).
 
 ### VK5 — The constrained optimizer, by the Karush–Kuhn–Tucker conditions
 *This result belongs to PURPOSE: it is a fact about one model of an actor, not part of what the principal asks.*

@@ -1,4 +1,4 @@
-# std-alignment-framework — the core (v13, in progress)
+# std-alignment-framework — the core (v13; v14 drafted)
 
 [![checks](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml/badge.svg)](https://github.com/gianluca-calcagni/std-alignment-framework/actions/workflows/checks.yml)
 
@@ -15,15 +15,49 @@ standard.
 proofs. Anyone who wants to run it: `python3 examples/quickstart.py`, a case on simulated data from declaration to a
 report that keeps the standard, in under a minute.
 
+## Desiderata
+
+Six, accepted by the PI (Q74, `NOTES.md` §33.16), and revisited from time to time. Each filters something out of the
+framework; a design choice names the desiderata it follows, and a choice they force is taken, not asked (`CLAUDE.md`).
+1. **Behavioural.** Every concept is defined from what actors do and what principals declare, and says what a record of
+   decisions can do with it: verify, refute, or neither. *Filters out* goals, beliefs and intentions as definitions,
+   which enter only as hypotheses a record can refute; quantities no record bears on; "aligned" as a property a record
+   certifies exactly.
+2. **Declared.** Every normative choice is a principal's, stated before the record it judges, and every number names the
+   declaration it is relative to; the framework supplies no values of its own. *Filters out* defaults that encode
+   values, such as tolerances, severities, margins, which risks matter and the weights of principals; standards fitted
+   to the data they judge.
+3. **General, or the loss named.** It applies to any actor, principal and domain; a restriction is shown to lose
+   nothing, or named as a qualifier; nothing assumes a mechanism it does not need, such as optimization, training,
+   independence or a model of the actor. *Filters out* concepts of one ontology in the core; misalignment defined
+   through optimization; independence by convention.
+4. **Canonical and faithful.** Each formal object is the one its word's requirements force, as far as they force it,
+   every remaining choice named as a convention; the pairing of word and object is justified and tested on paradigm
+   cases; quantities on different scales are never merged. *Filters out* distances and composite scores chosen for
+   convenience; labels that say more than their objects; sums of evidence and harm.
+5. **Open to the world.** It is stated in standard mathematics, so that known results import, from statistics and from
+   its ontologies' own theories; it makes predictions that can fail, offers diagnostics that split what happened by
+   cause, and states what it cannot do. *Filters out* bespoke formalisms that block imports; constructs no test could
+   refute; claims of novelty for known results.
+6. **Guiding.** It leads a person or a model from an intention to a declaration: every declared object is asked for by a
+   question in plain words, and the analysis shows how each declaration shapes the verdicts. *Filters out* hidden
+   parameters; inputs only an expert could set; verdicts whose dependence on the declaration is hidden.
+
+**Where they pull against each other**, which draws the border between what the framework does and what it leaves to the
+principal. Generality against prediction: the fewer the assumptions, the more data a verdict needs, and the structure
+that sharpens a prediction comes from declarations, which say so. Declared against guiding: the framework guides without
+supplying values, by questions and by showing what each answer changes, never by defaults. Canonical against general: a
+canonical form may need structure a general setting lacks, as Kelly's criterion does, and the choice is then named.
+
 ## Where things are
 
 The framework has two parts, kept apart in their definitions and in their results. The finite core, `CORE.md` with its
 results in `derived/`, is v13, approved by the PI (Q52) and merged with pull request #33 (Q55), and claims what it
-proves. Its successor, v14, is drafted in `v14/` (`v14/README.md`), beside the core and not in it: three layers built
-on one another, with no optimization in the first; nothing there is approved. The general core, `CORE-GENERAL.md` with
-its results in `general/`, is a draft for outcomes that are not finite, and claims nothing yet. Nothing in the finite
-part depends on the general one; where a general result also holds on finite outcomes, it is proved in `derived/` and
-cited from `general/`.
+proves. Its successor, v14, is drafted in `v14/` (`v14/README.md`), beside the core and not in it: three layers built on
+one another, with no optimization in the first; it is not approved as a whole, and the PI's decisions on it are rows of
+`NOTES.md` §3.1 (Q59–Q74). The general core, `CORE-GENERAL.md` with its results in `general/`, is a draft for outcomes
+that are not finite, and claims nothing yet. Nothing in the finite part depends on the general one; where a general
+result also holds on finite outcomes, it is proved in `derived/` and cited from `general/`.
 
 | | |
 |---|---|
@@ -31,12 +65,12 @@ cited from `general/`.
 | `ROADMAP.md` | the anchor against drift: the goal, where the framework stands on the finish line, the next steps with what each waits for, what is not done now, and the checks to run before any new work. Read it first |
 | `REQUESTS.md` | what the executor needs from the PI, in one place: readers, data, credentials and hosts, each with the step it unblocks; and the hosts the PI has allowed |
 | `CONTRIBUTING.md` | what contributions are welcome, on what terms, and how to make one the framework can accept |
-| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, §21 the test of the labels, and §22–§29 the revamp and the v14 draft |
+| `CLAUDE.md` | the working rules of an AI executor on this repository, from the sessions that built the framework; `NOTES.md` §19 is the last handover, §20 the work on the general core since, §21 the test of the labels, and §22–§33 the revamp and the v14 draft |
 | `CORE.md` | the core: scope, imported axioms (M), background conditions (B), premises (A) and definitions (D), read top to bottom |
 | `CORE-GENERAL.md` | draft 4, on the kinds of v13 (Q53, Q54), frozen (`NOTES.md`, Q26) except for outcomes that are not finite and estimation (Q33), of the core for outcomes that are not finite: counts, times, scores. Imported items (GM), background conditions (GB), premises (GA) and definitions (GD) with their interpretations, which reduce to the core's on finite outcomes and use only events; misalignment is what records can decide, the supremum over finite descriptions. Its last section lists the decisions open to the PI. It changes no Statement of `CORE.md` |
 | `derived/` | the results (P), one file per topic, each with proofs and checks; `derived/README.md` gives the reading order |
 | `general/` | what the general core is expected to imply, each statement marked expected, probed, tested or proved: what transfers from the finite core, strategic scenarios as standard ones on derived spaces, the disciplines on a continuum, and everyday words. Nothing there is claimed; `general/README.md` gives the reading order |
-| `v14/` | the draft of v14, not yet approved: its design, results proved there, its limits, what of v13 survives, proposals for severity and a training layer, and a survey of competing frameworks; `v14/README.md` first |
+| `v14/` | the draft of v14, not approved as a whole: its design, results proved there, its limits, what of v13 survives, proposals for severity and a training layer, and a survey of competing frameworks; `v14/README.md` first |
 | `slides/` | decks in Marp Markdown: the framework and its use on a worked example (`framework.md`); the same for mathematicians, with σ-algebras and the factorizations (`mathematicians.md`); declaring a specification (`specification.md`); every number from `probes/slides/` |
 | `SCENARIO.md` | one hypothetical scenario, an assistant tuned on a rating model, told three ways: in plain terms, in simple intuitive terms and formally. Every number is computed by `scenario/compute.py`, and `scenario/test_scenario.py` checks them. An illustration, not evidence |
 | `STANDARD.md` | the reporting standard: what a report of misalignment must declare, observe and report |
@@ -112,6 +146,12 @@ on both paths, rather than reproduce printed digits.
   degenerate and sign cases, and tolerances derived from the quantity's scale. Every new check is mutation-tested.
 - **Every choice is justified.** "Why this choice" argues it, by generality, by canonicity, or by a named case where the
   alternative gives a wrong verdict. Assume less and derive more.
+- **Every split names its chain.** A factorization names the lattice and the chain it telescopes along, and says
+  whether the chain's members are linear families, since the terms depend on the chain (H49; Q74).
+- **Every number names its declaration.** A reported number says which specification, interface, reference or model it
+  is relative to (Q74).
+- **Every convention that changes a verdict has its example.** A registered case shows the verdict that changes when the
+  convention does (Q74).
 - **Every interpretation is declared and justified.** A definition says what its object is in the world, how a record
   verifies or refutes a statement about it, and why that map is right; a mathematical object with no such map does not
   enter the core. A starting point says what kind it is: imported, assumed without loss of generality, or assumed, as a

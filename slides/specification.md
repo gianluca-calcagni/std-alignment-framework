@@ -6,7 +6,8 @@
 
 What a principal writes down before any record is read, what it implies by itself, and what must be stated outright
 
-The v14 draft (`v14/constraints.md`, the last section). Nothing in v14 is approved yet.
+The v14 draft (`v14/constraints.md`, the last section). v14 is not approved as a whole; the PI's decisions on it are
+rows of `NOTES.md` §3.1.
 
 ---
 

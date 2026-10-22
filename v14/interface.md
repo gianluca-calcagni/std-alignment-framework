@@ -35,15 +35,21 @@ that `K` is infinite exactly when the actor produces an outcome no best feasible
 the union of its members' supports is one member's support), which is the common case, the best behaviours of a convex
 program over a polytope sitting on its boundary, often with a deterministic policy: so `K` is `0` or `∞` for most
 actors. And when `M_A(𝓕)` is finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` say the same thing, so `K` adds no verdict, only a
-growth-rate reading where it is finite. The recommendation is now `E` for the size, and the verdict "culpable" read as
-`p̂ ∉ 𝓕*`, verifiable with the interface taken as known (VF2) (`NOTES.md` §32, H52). Culpability needs no new measure:
-`K(p̂) = M_{𝓕*}(p̂)`, the misalignment against the **derived requirement** `𝓕*`, which is convex and closed when `A` and
-`𝓕` are, being the set where a convex lower semicontinuous function on `𝓕` takes its least value; so VE1's bets, VE3's
-test and VF1's status apply to it unchanged. The same holds for "the interface fits", the requirement `𝓕`, and for
-"perceives no more than its view" (`resolution.md`, RS5): INTERFACE adds requirements derived from the declarations, not
-measures (`NOTES.md` §32, item 7). Two refinements from the literature are open (`v14/related.md`, entries 18 and 24):
-blame mitigated by the cost of the better alternative, which `K` ignores, and the worst-case breach rate over `𝓕`, which
-a deployment protocol guarantees whatever the actor does.
+growth-rate reading where it is finite. The recommendation became `E` for the size, and the verdict "culpable" read as
+`p̂ ∉ 𝓕*`, verifiable with the interface taken as known (VF2) (`NOTES.md` §32, H52). Decided in its shape (Q74,
+`NOTES.md` §33.17): the verdict is "culpable at a care margin `δ`", `p̂ ∉ 𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕) + δ}`, with
+`δ`, a standard of care, declared by the principal, and `δ = 0` the strict reading above; its evidence rate is
+`K_δ = M_{𝓕*_δ}(p̂)`, finite in the usual case for `δ > 0`; its size is `E`; and where severity and the costs of the
+alternatives are declared, a negligence size in the principal's units is reported beside `E`, never summed with it.
+Whether "culpable" is the right word is left to L2. Culpability needs no new measure: `K(p̂) = M_{𝓕*}(p̂)`, the
+misalignment against the **derived requirement** `𝓕*`, which is convex and closed when `A` and `𝓕` are, being the set
+where a convex lower semicontinuous function on `𝓕` takes its least value; so VE1's bets, VE3's test and VF1's status
+apply to it unchanged. The same holds for "the interface fits", the requirement `𝓕`, and for "perceives no more than its
+view" (`resolution.md`, RS5): INTERFACE adds requirements derived from the declarations, not measures (`NOTES.md` §32,
+item 7); so is `𝓕*_δ`, a sublevel set of a convex lower semicontinuous function. Two refinements came from the
+literature (`v14/related.md`, entries 18 and 24): blame mitigated by the cost of the better alternative, which `K`
+ignores, now the negligence size where costs are declared, its formula still to be written; and the worst-case breach
+rate over `𝓕`, which a deployment protocol guarantees whatever the actor does, still open.
 
 **Elicitation.** A condition `c'` is an **elicitation** of a condition `c` when the declaration links the actor's
 feasible behaviours there, such as one set of policies faced with another prompt or incentive. Only through such links

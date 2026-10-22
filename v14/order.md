@@ -50,9 +50,12 @@ not non-decreasing. With two outcomes tied in `F`, moving a little mass from one
 mass, and makes `a/r` differ between two outcomes at the same level, which v13's ordinal specification, asking `a/r` to
 be a function of `F`, excludes. ∎
 
-**Notes.** Which requirement an order gives, `B(r)`, the ordinal cone or margins, is the PI's to decide (`ROADMAP.md`,
-recommendation 2). `B(r)` asks only what every holder of the ranking would agree on; v13's cone asks, besides, a shape,
-which best-of-`n` and every pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not.
+**Notes.** Which requirement an order gives is decided (Q74, `NOTES.md` §33.17): dominance with declared margins,
+`B_m(r) = {a : a(U) ≥ r(U) − m_U for every upper set U}`, margins `0` giving `B(r)`. `B(r)` is TG1 with the indicators
+of the upper sets as targets, margins make `B_m(r)` a list of budgets (VK0), and this file is to be written as that
+case. `B(r)` asks only what every holder of the ranking would agree on; v13's cone asks, besides, a shape, which
+best-of-`n` and every pursuit of an increasing transformation of `F` meet, and which a greedy decoder does not: a mark
+of a mechanism, so the cone stays in PURPOSE, as the hypothesis of pursuit.
 
 ### VO3 — Three verdicts, and which of them a record verifies
 **Statement.** Against a reference `r` and a ranking, a behaviour `a` is **better** when `a ∈ B(r)`, **worse** when `a
@@ -102,6 +105,7 @@ requirement built from it. The verdicts of VO3 are comparisons with the referenc
 misalignment the principal declares a requirement, and each choice changes verdicts: `B(r)`, "better than the reference
 for every reading", which the greedy decoder breaches, so that it is misaligned under that requirement; v13's ordinal
 specification, which adds a shape (VO2); or shortfalls by margins at declared standards (VO3(iii)), which it does not
-breach. Choosing among them is the PI's (`ROADMAP.md`, recommendation 2). A reference known only from a sample, such as
-a base model's answers, is not a set fixed in advance, as [A5] asks, until it is declared as such; how its uncertainty
-enters the requirement is open (`LIMITS.md`).
+breach. The choice is decided (Q74): `B_m(r)`, which holds the first and the third as its margins `0` and `m`, the
+margins declared by the principal; the cone, a shape of pursuit, stays in PURPOSE. A reference known only from a sample,
+such as a base model's answers, is not a set fixed in advance, as [A5] asks, until it is declared as such; how its
+uncertainty enters the requirement is open (`LIMITS.md`).

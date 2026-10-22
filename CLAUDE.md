@@ -19,6 +19,9 @@ framework. It is a working agreement, not a claimed property.
   and records.
 - Give a recommendation, not a survey, and say what is wrong when it is, with the evidence. Ask the PI only what is the
   PI's to decide; otherwise choose, say what was chosen, and go on.
+- A design choice names the desiderata of `README.md` it follows. A pending decision they force is taken, not asked:
+  record it with the desiderata that force it, as the PI's rule Q74 allows, and the PI can overturn it; one they only
+  favour is proposed. From time to time ask whether a desideratum should change (`ROADMAP.md`, drift check 6).
 - Record failures; do not repair them away (rule (a)). A slip of the executor's is a row of `NOTES.md` §1.
 
 ## Git and GitHub

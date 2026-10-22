@@ -25,14 +25,17 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Declared before.** A standard fitted to the behaviour it judges cannot fail ([A5]). A principal who changes its
   requirements in response to the actor, without declaring how, is outside the framework; so is the strategic interplay
   of a principal and an actor that each adapt to the other.
-- **Requirements that are not convex, by a choice.** v14 judges each decision against what is acceptable and accepts any
-  mixture of acceptable ways of acting, the mixture principle (`v14/README.md`, the conventions), so an actor may switch
-  between acceptable behaviours from one decision to the next. Under that choice a record holds the actor only to the
-  mixtures of what is acceptable (`evidence.md`, VE2), and a requirement that is not convex is enforced as its convex
-  hull. For a sample, independent decisions from one behaviour, leaving a closed set that is not convex is still
-  verifiable (`factorization.md`, VF1); the limit is the price of the choice, not of records. Its sharpest case is tail
-  risk: at a tail of 10%, two behaviours with CVaR `0.6` mix into one with CVaR `0.72`, so a limit on CVaR is enforced
-  only as its hull (`NOTES.md` §32).
+- **Requirements that are not convex, per decision.** v14 judges a per-decision requirement against what is acceptable
+  at each decision and accepts any mixture of acceptable ways of acting, the mixture principle (`v14/README.md`, the
+  conventions), so an actor may switch between acceptable behaviours from one decision to the next. A record then holds
+  the actor only to the mixtures of what is acceptable (`evidence.md`, VE2), and a set that is not convex, declared per
+  decision, is enforced as its convex hull. Its sharpest case is tail risk: at a tail of 10%, two behaviours with CVaR
+  `0.6` mix into one with CVaR `0.72` (`NOTES.md` §32). What is not lost (Q74, `NOTES.md` §33.17): the same set can be
+  declared pooled, a requirement on the average of the conditional behaviours over a declared horizon, judged by
+  confidence sequences whatever the dependence; it then speaks of one deployment, at a level, not of each decision, and
+  its breach, an aggregate breach, has no rate per decision. The size of an aggregate breach and the power of its test
+  are not yet derived. For a sample, independent decisions from one behaviour, the closed set is also verifiable as it
+  stands (`factorization.md`, VF1).
 
 ## Behaviour, not mind
 
@@ -51,10 +54,12 @@ of those three things failing: the declaration, the judgement of behaviour, or t
   With neither, nothing better than the largest misalignment any behaviour can have bounds it.
 - **Collusion, by the same choice.** The behaviours of independent actors do not form a convex set, and their mixtures
   are every joint behaviour, so under v14's choice of judging each decision and accepting mixtures, "act independently"
-  is no requirement a record can enforce (`NOTES.md` §25); for a sample of joint decisions, leaving the closed set of
-  independent behaviours is verifiable, and [P39] measures it. Coordination is a measured number ([P39]); calling it
-  misalignment needs a declared information structure: what each actor sees, and that their private randomness is
-  independent. Shared randomness that no one records is indistinguishable from collusion, and from a common cause.
+  is no per-decision requirement a record can enforce (`NOTES.md` §25). Declared pooled, it is judged on the average
+  joint behaviour over the horizon, which is another requirement: independent actors whose behaviour changes over time
+  leave it too. For a sample of joint decisions, leaving the closed set of independent behaviours is verifiable, and
+  [P39] measures it. Coordination is a measured number ([P39]); calling it misalignment needs a declared information
+  structure: what each actor sees, and that their private randomness is independent. Shared randomness that no one
+  records is indistinguishable from collusion, and from a common cause.
 - **Causes in the world.** The framework judges distributions of recorded outcomes. Effects the actor has beyond them,
   externalities nobody records, are invisible to it; tampering with the measurement is defined only against a declared
   honest channel, and identified only where the world itself is recorded, sometimes ([P50], [P51]).
@@ -69,11 +74,12 @@ of those three things failing: the declaration, the judgement of behaviour, or t
 - **Hidden inside the record's cells.** A record whose σ-algebra is coarser than the principal's, such as a grader that
   cannot tell a wrong answer from a harmful one, shows only the misalignment at its own resolution; the rest is neither
   verifiable nor refutable from it, and only a finer record or a declared interface bounds it (`resolution.md`, RS4).
-- **Convicting, never certifying.** "Misaligned" is verifiable, and "culpable" with the interface taken as known;
-  "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a standard, never
-  to meet it exactly, and the draft has no verdict yet that certifies a margin, "breach rate at most `ε`", under
-  dependence, which a deployment decision needs (H51; `related.md`, entries 2 and 4); "aligned within a margin" is shown
-  verifiable for an actor whose decisions are independent ([D3]), and not shown for others.
+- **Convicting exactly, certifying only within a margin.** "Misaligned" is verifiable, and "culpable" with the interface
+  taken as known; "aligned" and "not culpable" only refutable (`factorization.md`, VF1). An actor can be shown to fail a
+  standard, never to meet it exactly. A certify verdict at a declared margin is part of the design (Q74): for pooled
+  requirements from confidence sequences, valid under dependence; for per-decision ones, "breach rate at most `ε`" under
+  dependence is expected from the bets the draft builds (H51; `related.md`, entries 2 and 4) and not yet proved;
+  "aligned within a margin" is shown verifiable for an actor whose decisions are independent ([D3]).
 - **Dependence.** A test from bets keeps its level whatever the dependence, but only against the hypothesis that each
   decision, given the past, is acceptable (`evidence.md`, VE3). Drift and dependence ([P54]) are identified only from
   repeated records or declared episodes; one long record, with no repetition, does not separate them. That a test's

@@ -6,8 +6,8 @@
 
 Evidence, σ-algebras and exact factorizations, for mathematicians new to alignment
 
-The v14 draft, in `v14/` (October 2026). Nothing in v14 is approved yet; every number here comes from a probe in
-`probes/`.
+The v14 draft, in `v14/` (October 2026). v14 is not approved as a whole; the PI's decisions on it are rows of `NOTES.md`
+§3.1. Every number here comes from a probe in `probes/`.
 
 ---
 
@@ -49,19 +49,18 @@ Finiteness is what a record at finite precision decides; the general twins lift 
 
 ---
 
-## Why requirements are convex
+## Why per-decision requirements are convex
 
 **The mixture principle** (a premise, stated as a choice):
 
 1. a schedule of acceptable behaviours, one per decision, is acceptable;
 2. tests must keep their level whatever the dependence between decisions.
 
-Independent draws from a mixture have the law of a random schedule of its components, so a test valid for every
-schedule is valid at the hull; and no bet separates a set from its hull (VE2).
+Independent draws from a mixture have the law of a random schedule of its components, so a valid test is valid at the
+hull; no bet separates a set from its hull (VE2).
 
-So a valid test enforces only the convex hull of what is declared: the draft takes requirements convex, and closed,
-which changes no misalignment, only verdicts at the boundary. The price: a tail-risk limit is not convex under mixtures
-(CVaR at 10%: two behaviours at `0.6`, their even mixture at `0.72`), and is enforced only as its hull.
+So per-decision requirements are convex and closed. A tail-risk limit is not (CVaR at 10%: two behaviours at `0.6`,
+their mixture at `0.72`): it is declared **pooled**, judged on the average behaviour by confidence sequences (Q74).
 
 ---
 
@@ -272,7 +271,8 @@ An **interface** `(U, Z, V, E)`: actions, signals with a view `V(z|c)`, an envir
 - **Unavoidable**: `m(𝓕) = inf_{f ∈ 𝓕} M_A(f)`. **Best feasible**: `𝓕* = {f ∈ 𝓕 : M_A(f) = m(𝓕)}`, convex and closed.
 - **Culpability**: `K(p̂) = inf_{f ∈ 𝓕*} KL(p̂‖f) = M_{𝓕*}(p̂)`, misalignment against a derived requirement, so VE1 and
   VE3 apply unchanged.
-- **Avoidable excess**: `E(p̂) = M_A(p̂) − m(𝓕)`.
+- **Avoidable excess**: `E(p̂) = M_A(p̂) − m(𝓕)`, the size.
+- **At a declared care margin `δ`** (Q74): `𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ m(𝓕) + δ}`, the verdict `p̂ ∉ 𝓕*_δ`.
 
 INTERFACE adds requirements, not new measures.
 

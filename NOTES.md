@@ -253,6 +253,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q71 | the point of σ-algebras, made explicit by the PI: in general the actor and the principal do not know each other's σ-algebras; they know mismatches are possible but cannot point to where they are, which is why confusion occurs and why perplexity can be measured; the PI expects this to change how mismatches are treated and factored, not to prevent measuring them; and Carcassi and Aidala's book supplied (R21). Applied: RS8 in `v14/resolution.md`; §33.11, §33.12 | PI | §33.11, §33.12 |
 | Q72 | after the executor proposed R19 and certification as the next brainstorm: above the PI's expertise; consolidate it in the notes with the decision pending the PI, the answer perhaps forced once the framework's desiderata are clear; the PI still wants more clarity on latitude available and confusion on a continuum, good enough for now. Applied: §33.15, R19 updated | PI | §33.15 |
 | Q73 | the PI wants more time on the desiderata: they shape the project so much that they need much consideration; the framework is to be formally well-defined, coherent and general, import known results (from its ontologies above all), make testable predictions and serve as a diagnostic, and guide a person or a model to say what alignment means in a context and how the declarations shape the analysis; desiderata should be few, general, informal but not too much, and filtering, and §33.15's looked oddly specific. Applied: §33.16, a draft of six; §33.15's D1–D6 restated as design rules that follow from them; R22 | PI | §33.16 |
+| Q74 | the PI likes the six desiderata and how they interplay, sometimes against one another, drawing a border, an interface; promote them, and revisit them from time to time; if the list forces a pending decision, decide it directly; then a turn of documentation hygiene. Applied: the desiderata in `README.md`, with a drift check in `ROADMAP.md` and a rule in `CLAUDE.md`; §33.17, the decisions they force, taken by the executor under this row: R19 by two kinds of requirement and two verdicts, an order's requirement as dominance with declared margins, a reference that may break a constraint, culpability at a declared care margin with `E` as its size, one space with an exogenous σ-algebra, the entropy imports, the redundancies, and three working agreements; R19, R22 and R16 closed, R15 trimmed; the hygiene of `v14/` and `slides/` | PI; executor (the decisions forced) | §33.17 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -496,7 +497,7 @@ models are hypotheses that [P3] and [P12] test.
 | H42 | **The real-life case should live where compactness is free.** The PI wants a simple real case with true insight (Q56). Finite outcomes make every result of the core exact and every closure compact, and the ordinal specification needs only a ranking: a public record of choices among a few options, under a known incentive and a known default, judged against a declared ranking, with the paired report of `STANDARD.md` and [P55]'s test, would use only what is proved and checked. What it needs from the engineering is E1(d): the ordinal misalignment and [P55] in the library | D: for the case after the general core, with the PI |
 | H43 | **An undetectable loss of order `√n`.** Over `n` decisions, a shift of about `1/√(n·I)` per decision escapes every test of the record, yet loses about `√(n/I)` in `F` in all (`I` the shift's Fisher information). No resolution, bin or distribution function closes it; a guarantee from records should state it | U: a local-asymptotic sketch, not proved (`NOTES.md` §22) |
 | H44 | **A ranking certifies three verdicts, not two.** With a ranking and a reference only, an actor is better for every reading of the ranking (its rank under the reference dominates the uniform law), worse for every reading, or neither; a greedy decoder at the 0.9 quantile is neither, and the ordinal specification calls it misaligned. "Misaligned" in its everyday sense needs a value scale, a floor or forbidden outcomes | U: to be registered as a case of L2 before it is computed (`NOTES.md` §22) |
-| H45 | **Join the order and the constraints by intersection, with a reference that keeps the constraints.** The acceptable set is the constraints' set intersected with the order's requirement against the reference; a reference that breaches a constraint is replaced by its nearest behaviour that does not, or else "better than the reference" can require a breach | U: a design hunch (`NOTES.md` §23) |
+| H45 | **Join the order and the constraints by intersection, with a reference that keeps the constraints.** The acceptable set is the constraints' set intersected with the order's requirement against the reference; a reference that breaches a constraint is replaced by its nearest behaviour that does not, or else "better than the reference" can require a breach | U: a design hunch (`NOTES.md` §23); decided otherwise (Q74, §33.17): the reference may break a constraint, and an empty intersection is reported as an inconsistent specification |
 | H46 | **Bets chosen from the record approach the best bet at a rate set by the bets allowed.** On a continuum, bets refitted before each decision from the earlier ones reach the best growth rate at a rate that depends only on the class of bets the principal allows, and H43's `√n` is that rate's floor | U: not proved (`NOTES.md` §23) |
 | H47 | **Outcomes are measured, not given.** In practice an outcome such as "a wrong answer" is read by a grader, a person or a model, with errors; v14 treats the record as giving outcomes exactly (`v14/LIMITS.md`). A measurement channel from the true outcome to the graded one, declared and audited, belongs at the base of CORE, not only in INTERFACE's tampering ([P50]); misalignment of the true behaviour is then partially identified from graded records and audits, as [P51] does for tampering | U: the most important gap in practice (`NOTES.md` §31) |
 | H48 | **A forbidden set needs a rate and a plan.** Its misalignment is infinite at any positive rate, so it ranks nothing; and a record shows a breach of rate `r` only after about `1/r` decisions. What a principal can use is a verified lower bound on the rate when a breach is seen, an upper confidence bound when none is (about `3/n` after `n` clean decisions, for a sample), and the number of decisions needed to see one at a rate that matters | U: from the example (`NOTES.md` §31) |
@@ -504,15 +505,15 @@ models are hypotheses that [P3] and [P12] test.
 | H50 | **The trainer's shadow price and the bettor's stake, across two budgets.** A trainer at a KL price under its own severity budget acts on its objective minus `ν` times the severity (VK5), and keeps that budget, so against the same budget the trained actor has no misalignment and `λ* = 0`. When the principal's budget differs from the trainer's, in conditions, grader or cost, the trained actor can break it, and for that actor held fixed the evidence moves with the principal's tolerance at `−λ*` (VK7). How `ν` and `λ*` relate across the two budgets is open (`v14/severity.md`); an earlier form of this hunch, "two prices of one budget", was wrong, as the review of §32 showed | D: a guess, restated after review |
 | H51 | **A certify verdict, from the same bets.** VK3's bet is the capital process of a betting confidence sequence for a mean, so an upper confidence sequence for a rate or a budget comes from the bets v14 already builds, giving "breach rate at most `ε`, with confidence `1 − α`" beside the convict verdict, valid under dependence if the literature's martingale argument carries over (`v14/related.md`, entry 2; not read by the executor) | D: from the survey; to be read and proved |
 | H52 | **Report culpability's size by `E`.** `K = M_{𝓕*}(p̂)` is infinite exactly when the actor produces an outcome that no best feasible behaviour produces, which is the common case: the best behaviours of a convex program over a polytope sit on its boundary, often deterministic in some condition. So `K` is `0` or `∞` for most actors and ranks nothing; and with `M_A(𝓕)` finite, `K > 0`, `E > 0` and `p̂ ∉ 𝓕*` are one verdict. The avoidable excess `E = M_A(p̂) − M_A(𝓕)` is finite whenever `M_A(p̂)` is, and is the size to report; a smoothed `K`, against the best behaviours within a declared margin, is a third candidate for L2 (§32) | D: from the example of `slides/mathematicians.md` |
-| H53 | **Conditions are an exogenous σ-algebra, not a type.** One space `Ω` and one distribution; the conditions are a sub-σ-algebra `ℰ` whose law the world fixes, which carries no evidence about the actor, may arrive in any order, and makes pooled requirements state their weights (§33.2) | D: a proposal |
+| H53 | **Conditions are an exogenous σ-algebra, not a type.** One space `Ω` and one distribution; the conditions are a sub-σ-algebra `ℰ` whose law the world fixes, which carries no evidence about the actor, may arrive in any order, and makes pooled requirements state their weights (§33.2) | D: a proposal; decided (Q74, §33.17) |
 | H54 | **Latitude.** What the actor does inside the principal's cells, against a declared reference, `KL(p̂‖r) − KL(p̂_ℬ‖r_ℬ)`: never a verdict, a signal that the specification is silent where the principal may not be (RS7, §33.4) | D: a proposal, its identities proved |
 | H55 | **Evaluation gaming is measurable with honeypots.** Conditions the principal records and the actor's view merges with unobserved use stand for use; acting differently in evaluations and honeypots is verifiable, and the sign of the misalignment gap says whether it flatters the actor (§33.5) | D: a proposal |
-| H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem to be read |
-| H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal |
+| H56 | **Per-decision and pooled requirements dissolve R19.** Per-decision requirements are convex by meaning and judged by bets; pooled requirements, on the average of the conditional behaviours over a horizon, may be any closed set, CVaR included, judged by a confidence set valid under any dependence (§33.6) | D: a proposal, its key theorem read (§33.10); decided (Q74, §33.17) |
+| H57 | **Culpability at a care margin.** `K_δ`, the evidence that the actor is not within a declared `δ` of its best, finite for `δ > 0` in the usual case; the size by `E`, and a Hand-style gap where severity and costs are declared (§33.7) | D: a proposal; decided in its shape (Q74, §33.17), the word left to L2 |
 | H58 | **The fraction capacity as a bounded companion of misalignment.** `1 − fcap_p̂(A)`, the least share of decisions that must be unacceptable to explain the behaviour, where Carcassi and Aidala's `fcap` takes the hull of `A` (Definition 4.173): for convex `A`, `fcap_p̂(A) = sup_{a∈A} exp(−D_∞(a‖p̂))`. Bounded, finite at forbidden outcomes, continuous on finite outcomes for compact `A`, so both of its directions are verifiable; it convexifies as the mixture principle does, so it is no way around R19. An earlier form of this row claimed it needed no convexity, which was wrong (§33.11) | D: a proposal, its formula checked for convex `A` |
 | H59 | **Perplexity and confusion between σ-algebras.** Under a declared distribution, `H(ℬ|𝒜)` (its exponential the perplexity, the effective number of the principal's cells per cell of the actor) measures what the actor cannot resolve of what the principal cares about, `H(𝒜|ℬ)` the latitude available, and their sum, the variation of information, the confusion; potentials beside the realized missing-resolution factor and latitude (§33.12) | D: a proposal |
 | H60 | **Factors that need an unknown σ-algebra are families of exact splits.** One split per σ-algebra consistent with the record; the actor's view revealed from below only (RS8), so the cost of missing resolution is bounded above by records and shown positive only by elicitation (§33.12) | D: RS8 proved; the rest a proposal |
-| H61 | **A declared reference is the framework's count of states, and a declared precision its minimal cell.** After Carcassi and Aidala (§4.4, §4.7), entropy-based diagnostics on a continuum are taken relative to a declared distribution, which fixes their zero, sign and coordinates; those that measure the actor's own spread, latitude available and confusion, need besides a declared precision, the smallest cell the actor can act on, the role physics gives a minimal cell of phase space (§33.14) | D: a proposal |
+| H61 | **A declared reference is the framework's count of states, and a declared precision its minimal cell.** After Carcassi and Aidala (§4.4, §4.7), entropy-based diagnostics on a continuum are taken relative to a declared distribution, which fixes their zero, sign and coordinates; those that measure the actor's own spread, latitude available and confusion, need besides a declared precision, the smallest cell the actor can act on, the role physics gives a minimal cell of phase space (§33.14) | D: a proposal; adopted (Q74, §33.17) |
 
 ### 5.5 Process
 
@@ -2700,6 +2701,8 @@ and confusion on a continuum only with a declared precision, and say so where th
 
 ### 33.15 R19 and certification: two kinds of requirement, two kinds of verdict (2026-10-21, pending the PI)
 
+*Decided in §33.17 (Q74).*
+
 The executor proposed this as the next brainstorm, since the label protocol, culpability, severity budgets and the
 reporting of latitude all depend on what a specification may require and what a record may conclude. The PI asked for
 it to be consolidated here, with the decision pending (R19), observing that an answer is sometimes forced once the
@@ -2763,6 +2766,8 @@ returns to it.
 
 ### 33.16 Desiderata for the framework: a draft for the PI's consideration (2026-10-22, Q73)
 
+*Accepted by the PI and promoted to `README.md` (Q74, §33.17).*
+
 The PI judged §33.15's D1–D6 oddly specific for desiderata, and asked for the framework's desiderata to be few, general,
 informal but not vague, and filtering: each should exclude something from the framework. The PI's aims, restated:
 formally well-defined, coherent and general; importing known results, those of its ontologies above all; making
@@ -2815,3 +2820,72 @@ one, the rule that follows from it changes, and nothing else.
 **What they would still filter from the current draft**, as a test that they filter: FA3, which overstates the larger
 interfaces' unavoidable parts (4); culpability's `K` reported as a size (4, already changed); the CVaR limit enforced
 as its hull without saying so (4 and 5); and any default severity or margin a later draft might add (2).
+
+### 33.17 The desiderata promoted, and the decisions they force (2026-10-22, Q74)
+
+The PI accepted the six desiderata of §33.16 and the way they pull against one another, which draws a border, an
+interface, between what the framework does and what it leaves to the principal; they are promoted to `README.md`'s
+"Desiderata", to be revisited from time to time (a drift check of `ROADMAP.md`). The PI asked the executor to decide
+directly any pending decision the list forces. Each decision below names the desiderata that force it; where they only
+favour an answer, it says so. A decision taken this way is the executor's, under Q74, and the PI can overturn it.
+
+1. **R19(i), the mixture principle: decided as two kinds of requirement.** A *per-decision* requirement, every decision
+   acceptable given the past, is convex: a record held to such a requirement under any dependence holds the actor only
+   to its hull (VE2), so a set that is not convex, declared per decision, would be a label saying more than its object
+   (4), and an assumption of independence to rescue it is excluded (3). It is judged by bets (VE1–VE3). A *pooled*
+   requirement, on the average of the conditional behaviours over a declared horizon, may be any closed set, CVaR and
+   quantiles included, judged by confidence sequences for that average, valid under any dependence (Howard, Ramdas,
+   McAuliffe and Sekhon, Theorem 4, §33.10). That the pooled kind exists is forced by 3's first clause, a framework for
+   any principal, including one whose requirement is a tail limit: 3 allows a named loss only where avoiding it costs an
+   assumption, and here it costs none. The kind of each requirement, its horizon and the margins of certification are
+   declared, with no default (2); a quantity that does not average, declared per decision, is flagged as enforced only
+   as its hull. Two verdicts, **convict** and **certify** at a declared margin (1: exact compliance is never verifiable,
+   VF1), with the smallest margin a record can certify reported (6). A pooled breach is named **aggregate breach** and
+   reported beside misalignment, never summed with it (4). Open, as mathematics, not decisions: the size of an aggregate
+   breach, the power of the pooled test, and certification under dependence for per-decision requirements (H51).
+2. **R19(ii), the requirement an order builds: decided as dominance with declared margins**, `B_m(r) = {a : a(U) ≥ r(U)
+   − m_U for every upper set U}`, the margins `m_U ≥ 0` declared (2), "no worse than the reference" declaring them `0`,
+   which is `B(r)`. v13's ordinal cone is excluded from CORE: it asks a shape that pursuit of an increasing transform of
+   the ranking produces (VO2), a mechanism the words "better at every standard" do not carry (3, 4); it stays in PURPOSE
+   as the hypothesis of pursuit. `B(r)` is TG1 with the indicators of upper sets as targets, and margins make `B_m(r)` a
+   list of budgets (VK0), so `order.md` becomes a case of `targets.md` (4).
+3. **R19(iii), H45, a reference that breaks a constraint: decided, it may.** The acceptable set is the intersection of
+   the requirements as declared. Replacing the reference by its nearest behaviour that keeps the constraints, as H45
+   proposed, would supply a reference the principal did not declare (2). An empty intersection, in some condition or in
+   all, is computed from the declarations alone, a feasibility problem, and reported before any record is read as an
+   **inconsistent specification**, with the requirements that conflict (4, 6); the guiding question then offers the
+   principal the repair, such as declaring the nearest reference that keeps the constraints, or loosening a target.
+4. **Culpability: decided in its shape; the PI's revisit stays open on its word.** The verdict is "culpable at a care
+   margin `δ`", `p̂ ∉ 𝓕*_δ`, with `𝓕*_δ = {f ∈ 𝓕 : M_A(f) ≤ M_A(𝓕) + δ}`; `δ` is a standard of care, so declared (2),
+   `δ = 0` the strict reading. Its evidence rate is `K_δ = M_{𝓕*_δ}(p̂)`, finite in the usual case for `δ > 0`, and `K =
+   K_0`, being `0` or `∞` for most actors, is never reported as a size (4, H52). The size is the avoidable excess `E`, in
+   nats. Where the principal declares severity and the costs of the alternatives, the negligence form, Hand's and
+   Halpern and Kleiman-Weiner's, adds a size in the principal's units, reported beside `E`, never summed with it (2, 4).
+   Whether "culpable" is the right word for this object is for L2's paradigm cases and the PI (Q70).
+5. **One space with an exogenous σ-algebra (H53): decided.** CORE is written on one space `Ω` with σ-algebras; the
+   conditions are a sub-σ-algebra `ℰ` that the principal declares exogenous, whose law the world fixes. Forced by 2,
+   since which part of an outcome the actor does not choose is a declaration, and by 3, since a condition partly made of
+   the actor's earlier outputs, a conversation, is then expressible. On finite outcomes, with `ℰ` generated by a
+   partition, it is equivalent to conditions and outcomes as two types; the change is where the line is declared, and
+   that one chain rule along `ℰ` replaces the split by condition (4).
+6. **Entropy on a continuum (§33.14, H61): imports 1 to 4 adopted.** Every entropy-based diagnostic is taken relative
+   to a declared reference or in mixing form, the unit justified by an even mixture, and limits taken topologically (5,
+   4); latitude available and confusion on a continuum are reported only at a declared precision of the actor (2).
+7. **The redundancies of §32, item 8: decided, to apply when the six files are written** (4): FA3 demoted to a remark
+   on FA2; `order.md` written as a case of TG1; [P55]'s count test kept only for certification, VE3's bets taking
+   accusation; the splits by condition merged into the chain rule along `ℰ`; elicitation read as a feasible set on
+   pairs of conditions.
+8. **The practices of §33.1: decided, as working agreements in `README.md`.** Every split names the lattice and the
+   chain it telescopes along, and says whether its members are linear (H49; 4, since the split depends on the chain);
+   every number in a report names the declaration it is relative to (2); every convention that changes a verdict has a
+   registered example of the change (4, 5).
+9. **Requests.** R19 and R22 are closed by this section. R16, the revamp of §22, is closed as absorbed: its three layers
+   are v14's specification, misalignment and gain as two numbers are 4, mechanisms as hypotheses are 1, a default
+   reading of a bare objective and side effects by default are excluded by 2, dependence in the specification is item 1
+   above, and the √n blind spot is in `LIMITS.md` (5); what to carry from `derived/` is `MIGRATION.md`'s, and whether to
+   register the greedy decoder and pooled ranks goes to L2's registration. R15 is trimmed to what only a person can
+   give, the PI's reading of L1's common-sense verdicts: its renames of v13's quantities are superseded by v14's words,
+   which L2 is to test on paradigm cases (4). R17 stays open.
+
+**Not forced, and left open.** Nothing in the list chooses Kelly's criterion over another valuation of wealth (the
+conventions table names it as a choice), the words themselves before L2, or the priority of the steps.

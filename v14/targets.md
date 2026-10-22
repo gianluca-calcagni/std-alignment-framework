@@ -60,9 +60,9 @@ at least as well as `p̂` on every target, is `D_𝓚(p̂)`; [P53](iv) is the fo
 
 **Notes.** For four outcomes, a uniform default, `G_1 = (0, 1, 2, 3)` and `G_2 = (3, 2, 0, 1)`, with covariance `−1.0`
 under `q`, the pursuit of `G_1` at intensity `0.5` raises `E[G_1]` from `1.5` to `2.08` and lowers `E[G_2]` from `1.5`
-to `1.09`; and (iv) holds within `1e-13` on 30 random two-target cones (`RESULTS-resolution.md`). Which reading CORE
-takes is the PI's decision; the executor recommends TG1's, because it needs no model of optimization, is convex, and
-makes v13's own measure a special case of comparing with a reference.
+to `1.09`; and (iv) holds within `1e-13` on 30 random two-target cones (`RESULTS-resolution.md`). CORE takes TG1's
+reading (Q74, `NOTES.md` §33.17): it needs no model of optimization, which the desiderata exclude from CORE, is convex,
+and makes v13's own measure a special case of comparing with a reference.
 
 ### SN1 — Sanov's rate, the best bet and the nearest acceptable behaviour are one number
 **Statement.** Let `A ⊆ Δ` be non-empty, `n ≥ 1`, and `k_n = (n + |X| − 1)!/(n!·(|X| − 1)!)`.
