@@ -1,0 +1,150 @@
+{
+ "about": "The MVP's library, stdalign/spec.py (Q80), against its unit tests and the checks of mvp/CORE.md.",
+ "tests": [
+  "stdalign/tests/test_spec.py",
+  "mvp/checks/test_core.py",
+  "mvp/examples/test_quickstart.py"
+ ],
+ "mutants": [
+  {
+   "name": "bet looks at the current decision",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "mean = (s1 + b) / k ",
+     "mean = (s1 + yi + b) / k "
+    ]
+   ]
+  },
+  {
+   "name": "bet cap above the wealth",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "lcap = 0.5 / (b - cost_min)",
+     "lcap = 2.0 / (b - cost_min)"
+    ]
+   ]
+  },
+  {
+   "name": "certificate margin halved",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "margin = lam / 8 + L / (n * lam)",
+     "margin = lam / 16 + L / (2 * n * lam)"
+    ]
+   ]
+  },
+  {
+   "name": "certificate two-sided level dropped",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "L = np.log(2 / alpha)",
+     "L = np.log(1 / alpha)"
+    ]
+   ]
+  },
+  {
+   "name": "world's law not shared",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "            b_eq.append(p[idx].sum())",
+     "            b_eq.append(1.0 / len(_cells(world, n)))"
+    ]
+   ]
+  },
+  {
+   "name": "limit inside a condition not scaled",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "            b_ub.append(lim.b * p[inside].sum())",
+     "            b_ub.append(lim.b)"
+    ]
+   ]
+  },
+  {
+   "name": "lower bound with the wrong sign",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    return float(p[s] @ np.log(h[s])) - float(np.log(m))",
+     "    return float(p[s] @ np.log(h[s])) + float(np.log(m))"
+    ]
+   ]
+  },
+  {
+   "name": "certify on the lower bound",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    if bd.upper[-1] <= limit:",
+     "    if bd.lower[-1] <= limit:"
+    ]
+   ]
+  },
+  {
+   "name": "avoidable excess reversed",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    E = misalignment(p, limits, world).value - m",
+     "    E = m - misalignment(p, limits, world).value"
+    ]
+   ]
+  },
+  {
+   "name": "budget bet reversed",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "        h = 1 + lam * (g[s] - b)",
+     "        h = 1 + lam * (b - g[s])"
+    ]
+   ]
+  },
+  {
+   "name": "nearest behaviour from the wrong target",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    target = PS / k",
+     "    target = PS * k"
+    ]
+   ]
+  },
+  {
+   "name": "binary divergence reversed",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    return kl(np.array([u, 1 - u]), np.array([v, 1 - v]))",
+     "    return kl(np.array([v, 1 - v]), np.array([u, 1 - u]))"
+    ]
+   ]
+  },
+  {
+   "name": "overall limit root at the wrong level",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    f = lambda th: w @ _v(th, u) - eps",
+     "    f = lambda th: w @ _v(th, u) - eps / 2"
+    ]
+   ]
+  },
+  {
+   "name": "resolution split ignores the cells",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    values = [misalignment(p, limits, world, cells).value for cells in chain]",
+     "    values = [misalignment(p, limits, world).value for cells in chain]"
+    ]
+   ]
+  }
+ ]
+}

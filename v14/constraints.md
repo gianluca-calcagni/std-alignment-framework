@@ -177,7 +177,8 @@ PURPOSE.
 
 ### VK6 — An overall rate limit when the world chooses the conditions
 **Statement.** Let the conditions `c` have frequencies `w_c > 0` that the actor does not choose, so that behaviours are
-tuples `(a_c)_c` judged on pairs ([B2]), and let the rate limit hold over all conditions together:
+tuples `(a_c)_c` judged on pairs ([B2]), each condition having outcomes both in `C` and outside it (otherwise its
+breach rate is forced to `1` or `0`; added in Q80), and let the rate limit hold over all conditions together:
 `K = {(a_c)_c : Σ_c w_c·a_c(C) ≤ ε}`, `0 < ε < 1`. Let `u_c = p_c(C)` and `ū = Σ_c w_c·u_c`. If `ū ≤ ε`, `M_K(p) = 0`.
 Otherwise `M_K(p) = Σ_c w_c·kl(u_c‖v_c(θ))`, where, for `θ > 0` and `u ∈ [0, 1]`,
 `v(θ, u) = ((θ + 1) − √((θ + 1)² − 4·θ·u))/(2·θ)`, and `θ > 0` is a number with `Σ_c w_c·v(θ, u_c) = ε`. A nearest

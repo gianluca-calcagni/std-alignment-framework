@@ -1,7 +1,8 @@
 """stdalign: the quantities of the framework's reporting standard (`STANDARD.md`), one implementation each.
 
 Every function names the item of `CORE.md` or `derived/` it computes, and the checks in `checks/` verify those items'
-claims on this code. Finite outcomes only, so far; see `stdalign/README.md`.
+claims on this code. Finite outcomes only, so far; see `stdalign/README.md`. `stdalign.spec` computes the MVP's quantities
+(`mvp/CORE.md`): misalignment against a declared specification, bets, tests, certificates and splits.
 """
 from .core import as_distribution, as_objective, kl, tilt, pursuit, log_normalizer, kl_tilts, log_mean_exp
 from .misalignment import (Assessment, assess, misalignment, revealed_intensity, nearest_intended, best_outcomes,
@@ -14,4 +15,6 @@ from .diagnostics import (IntensityTerms, intensity_terms, min_over_intensity, S
                           uncertain_target_interval, outer_misalignment, inner_split, pairs, tampering,
                           grounded_pursuit, least_tampering, most_tampering, remeasured)
 
-__version__ = "0.2.0"
+from . import spec
+
+__version__ = "0.3.0"

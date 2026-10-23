@@ -4,6 +4,11 @@ The anchor against drift. Read it first in every session, and before starting an
 end of every turn. `NOTES.md` holds the executor's working notes and the history; this file holds only the goal, where
 the framework stands against it, and what comes next.
 
+## First: the MVP plan (2026-10-23, Q80)
+
+The PI asked for a plan that fills the minimal gaps for a publishable MVP, taking priority over everything below; it is
+`mvp/PLAN.md`, and its steps P1–P8 come before the recommendations and the backlog.
+
 ## The executor's recommendations for v14 (2026-10-16, Q63)
 
 Prepended at the PI's request, to be worked on together; the order is the executor's proposal. The ground for each is in
@@ -296,3 +301,5 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-22 | a brainstorm (Q77, `NOTES.md` §35): infinities come from zero tolerances, not from the lack of severity, and a severity weight does not remove them; reported lexicographically, or bounded by a declared contamination tolerance (`probes/v14/contamination.py`); severity a second number, factored along the same chains; CORE already has no reference, "criteria" proposed for v13's targets, the record's signature as a declared object, the algorithm supplied rather than declared; fourteen junctures with their couplings (`v14/junctures.md`); H64–H68, R24 | 5 (what the quantities mean) |
 | 2026-10-22 | documentation hygiene (Q78, `NOTES.md` §36): three reviewers' findings checked and applied across `v14/`, the slides and the top-level files: decided choices no longer called open, the one space and the certify correction carried everywhere, `K` the evidence of culpability and `E` its size, VK6 an overall rate limit, indexes and the roadmap made true; the row "stable" met by the letter, the PI asked (R25) | 1 (the goal); 2 (a version) |
 | 2026-10-23 | a step back (Q79, `NOTES.md` §37): the executor's valuation, pros, cons and gaps; the recommendation to rebalance toward one v14 case, an outside reader and CORE as items in CI before more theory | 4 (predictions); 5 (diagnostics) |
+| 2026-10-23 | the MVP plan (Q80, `mvp/PLAN.md`): v14's first layer and the diagnostic part of its second, on finite outcomes, as checked items with a library, a quickstart and one case on real data; it takes priority over the roadmap | 4, 5 (predictions, diagnostics) |
+| 2026-10-23 | MVP steps P2–P5 (Q80): `mvp/CORE.md`, ten definitions and eighteen results with proofs, two new (a certificate for an average under any dependence, and no certificate for every decision); `stdalign/spec.py`, misalignment as the best bet's growth with a certified interval, bets, tests, certificates and splits, version 0.3.0; `mvp/checks/`, a check per result and a structural check; 14 of 14 mutants caught after three gaps closed; `mvp/examples/quickstart.py`; VK6's missing hypothesis found and recorded (§1) | 2 (solid); 5 (diagnostics) |
