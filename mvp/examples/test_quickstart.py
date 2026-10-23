@@ -25,3 +25,14 @@ def test_quickstart_runs_and_reaches_its_verdicts():
     assert iface["wrong_answers"]["unavoidable"] < 1e-9
     assert iface["wrong_answers"]["culpable_at_margin"]
     assert iface["leaks"]["culpable_at_any_margin"]
+
+
+def test_readme_example_runs_as_written():
+    import re
+    from pathlib import Path
+    text = (Path(__file__).resolve().parents[1] / "README.md").read_text(encoding="utf-8")
+    code = re.search(r"```python\n(.*?)```", text, re.S).group(1)
+    scope = {}
+    exec(code, scope)
+    assert round(scope["m"].value, 4) == 0.0413
+    assert scope["verdict"] == "convict"
