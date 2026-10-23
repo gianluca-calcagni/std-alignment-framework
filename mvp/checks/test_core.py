@@ -140,6 +140,27 @@ def test_r2_infinite_case():
         assert float(p @ np.log(h)) == pytest.approx(0.1 * math.log(H))
 
 
+def test_r2_bet_against_whole_set():
+    """R2(iv): for per-condition requirements, the best bet is fair under every acceptable behaviour, whatever its law on
+    the conditions, not only under those that share the actor's."""
+    r = rng(24)
+    world = np.array([0, 0, 0, 1, 1, 1])
+    C = np.array([1, 0, 0, 1, 0, 0], bool)
+    for _ in range(20):
+        p = r.dirichlet(np.ones(6))
+        lims = [S.rate_limit(C, 0.1, cell=0), S.rate_limit(C, 0.2, cell=1)]
+        m = S.misalignment(p, lims, world)
+        a = m.nearest
+        h = np.where(p > 0, p / np.maximum(a, 1e-300), 0.0)
+        for w0 in np.linspace(0.05, 0.95, 7):            # acceptable behaviours with other laws on the conditions
+            A_ub = [np.where(world == 0, C, 0).astype(float) - 0.1 * (world == 0),
+                    np.where(world == 1, C, 0).astype(float) - 0.2 * (world == 1)]
+            A_eq = [np.ones(6), (world == 0).astype(float)]
+            lp = linprog(-h, A_ub=np.array(A_ub), b_ub=[0, 0], A_eq=np.array(A_eq), b_eq=[1, w0],
+                         bounds=[(0, None)] * 6, method="highs")
+            assert -lp.fun <= 1 + 1e-6
+
+
 # ------------------------------------------------------------------------------------------------------------ R3
 
 def test_r3_hull_bets():
@@ -271,6 +292,8 @@ def test_r7_forbidden():
     assert S.rate_limit_misalignment(0.001, 0.0) == np.inf
     assert S.misalignment(p, [S.forbidden([0], 2)]).value == np.inf
     assert S.misalignment(np.array([0.0, 1.0]), [S.forbidden([0], 2)]).value == pytest.approx(0.0, abs=EXACT)
+    whole = S.misalignment(np.array([0.5, 0.5]), [S.rate_limit([0, 1], 0.5, 2)])   # C = X: no behaviour keeps it
+    assert whole.value == np.inf and not whole.consistent
     r = rng(11)          # convicting at the first forbidden outcome never convicts an actor that never produces one
     assert not any(np.any(r.random(500) < 0.0) for _ in range(100))
 

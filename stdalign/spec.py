@@ -259,13 +259,14 @@ def budget_misalignment(p, g, b):
 
 
 def _v(theta, u):
-    return ((theta + 1) - np.sqrt((theta + 1) ** 2 - 4 * theta * u)) / (2 * theta)
+    u = np.clip(u, 0.0, 1.0)                                  # mixtures can land a rounding error outside [0, 1]
+    return ((theta + 1) - np.sqrt(np.maximum((theta + 1) ** 2 - 4 * theta * u, 0.0))) / (2 * theta)
 
 
 def overall_rate_limit(w, u, eps):
     """R10: misalignment against an overall rate limit eps when the world fixes the conditions' law w and the actor's
     breach rate in condition E is u[E]; returns (value, θ, the nearest acceptable rates)."""
-    w, u = np.asarray(w, float), np.asarray(u, float)
+    w, u = np.asarray(w, float), np.clip(np.asarray(u, float), 0.0, 1.0)
     if w @ u <= eps:
         return 0.0, 0.0, u.copy()
     f = lambda th: w @ _v(th, u) - eps
