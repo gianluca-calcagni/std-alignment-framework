@@ -164,7 +164,8 @@
      "    starts = [np.full(kf, 1.0 / kf)] + [np.eye(kf)[i] * 0.5 + np.eye(kf)[j] * 0.5\n                                         for i in range(kf) for j in range(i + 1, kf)]",
      "    starts = [np.full(kf, 1.0 / kf)]"
     ]
-   ]
+   ],
+   "note": "Caught on the default SIMD path only. SLSQP from the uniform mixture stalls at 0.00652 on the test's instance, against a minimum near 0.006048; on the second path it does not stall there. A stall depends on rounding, which is why the search keeps several starts."
   },
   {
    "name": "avoidable excess with the wrong sign",
