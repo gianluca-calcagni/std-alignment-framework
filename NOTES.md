@@ -261,6 +261,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q76 | the PI deleted the merged branch; an external review by another model family, to be weighed and not imported; the question of Q70 on conditions and outcomes seemed unanswered: read all the PI's prompts, judge each actioned or lost, then fix the docs and the slides. Applied: §34, the audit and the review weighed; conditions and outcomes as one distribution with a declared exogenous σ-algebra, in `v14/` and the three decks; "declare" defined; certification corrected to averages; two rules for v14's report; H62, H63 | PI; executor (the audit, the review weighed) | §34 |
 | Q77 | a brainstorm: misalignment as a sum weighted by severity, to be rid of infinities without losing the factorization; a simpler CORE, with no reference, targets as a closed convex set of desired distributions with severity scores, and a specification as a signature with an algorithm deciding records in finite time; an exhaustive list of junctures, where the framework's parts meet, with how to treat them and the measures they inspire, from other disciplines too; challenge everything. Applied: §35, `v14/junctures.md`, `probes/v14/contamination.py`, H64–H68, R24 | PI | §35 |
 | Q78 | a thorough turn of documentation hygiene. Applied: §36; the stale passages of `v14/`, the slides and the top-level files fixed; the row "stable" recorded as met by the letter, with R25 | PI | §36 |
+| Q79 | a step back: how the executor values the framework, its pros and cons, and its gaps, given the recent changes, the goals, the desiderata, the mathematics and the method. Applied: §37 | PI | §37 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -3092,3 +3093,49 @@ decisions, and reported without editing; the executor checked each finding again
 **The finish line's row "stable".** By its letter it is met: pull requests #34, #35 and #36, merged after #33 brought
 v13 to `main`, changed no Statement and no scope, only `CORE.md`'s status note. v14, drafted beside the core, would
 change the Statements if adopted. Recorded as met by the letter, with the question to the PI (R25).
+
+## 37. A step back: the executor's valuation of the framework, 2026-10-23 (Q79)
+
+The PI asked how the executor values the framework, its pros and cons, and its gaps, given the recent changes, the
+goals, the desiderata, the mathematics and the method. The executor's answer, recorded so that it can be checked later.
+
+**Valuation in one paragraph.** As mathematics, sound and unusually honest about what records can show; as a
+contribution, mostly an assembly of known results (Sanov, the I-projection, Kelly, e-values and Ville's inequality,
+Csiszár's Pythagorean identity, telescoping) into a disciplined language with tested labels, declared choices and
+stated limits. Its value today is as a standard for saying precisely what a claim of misalignment means and rests on;
+it has not yet shown that it changes a decision anyone would make in practice. The risk is that its internal coherence
+grows faster than its contact with the world.
+
+**Against the desiderata.** Behavioural (1), declared (2) and canonical and faithful (4): well met, and the draft's
+strength. General (3): met with named qualifiers, but finite outcomes and the general twins unwritten for v14. Open to
+the world (5): the weakest; imports are real, predictions few (three on unseen data, one held, two refuted, testing
+KL-regularized training more than the framework, §15), and v14 has none. Guiding (6): designed for, never tested on a
+person or a model writing a specification.
+
+**Pros.** Verification status for every label (VF1–VF3, RS4, `LIMITS.md`); a core free of optimization, with evidence,
+severity, culpability and motive kept apart; one canonical number with several readings, valid under any dependence;
+exact factorizations with an owner for each term; a method that registers tests, keeps failures (66 rows in §1) and
+mutation-tests its checks; generality claimed only with qualifiers.
+
+**Cons.** (i) Novelty is thin in the mathematics and must be stated as such (desideratum 5); the objection "e-values
+renamed" is half right. (ii) Contact with the world is thin: the finish line's diagnostic row is unmet, no outside
+reader has read it (R1 open since 2026-10-07), and no v14 result has met data. (iii) The hardest part of alignment,
+saying what is wanted, is an input the framework takes as given, and the list of declarations grows turn by turn
+(requirements and their kinds, horizons, margins, care margins, `ℰ`, the interface, perhaps `η` and a signature), with
+no evidence that a principal can supply them. (iv) Practical estimation on large outcome spaces, such as text, is
+unsolved: v14 has no estimator or library, and a realistic record is a coarse grader, so the hidden part (RS4) may
+dominate. (v) Instability: v12, v13 and v14 in about four weeks, v14's 33 results not yet items and not in CI, names
+still moving. (vi) Process cost and correlated review: NOTES at about 3,100 lines, 79 decisions, and nearly every review
+by the executor's own model family, whose reviews keep finding the executor's slips, so more remain.
+
+**Gaps, by priority.** (1) One real case on v14, registered, with an arm where v13 and v14 disagree (H42, H63), and an
+outside reader (R1). (2) CORE and INTERFACE written as items with checks in CI (recommendation 4), before more theory.
+(3) Estimation for v14 from records: intervals for misalignment against a declared polytope, under dependence, in the
+library. (4) A decision interface, or an explicit statement that the framework stops at the report: how verdicts,
+severity and certified margins feed a decision to stop or ship. (5) Evidence that specifications can be written: L2,
+the label protocol (R23), and a trial with a person or a model writing one. (6) A short, reviewed statement of what is
+new and what is known. (7) Interaction over turns and performativity, written. (8) Making visible to practitioners that
+deployment guarantees are pooled (Q76).
+
+**Recommendation.** Rebalance: no new layer or brainstorm until gaps 1 and 2 have moved; the marginal value of more
+theory is now lower than that of one case and one reader.
