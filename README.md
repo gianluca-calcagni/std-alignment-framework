@@ -209,8 +209,8 @@ The core is a standard, not only a checked calculus, when each of the framework'
 | solid | lint and every check pass on both SIMD paths, and new checks are mutation-tested | met |
 | stable | neither the scope nor any premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | **met by the letter**: pull requests #34, #35 and #36, merged after #33 brought v13 to `main`, changed no Statement and no scope (only `CORE.md`'s status note; `git diff 3e68e1c 7daf9d4 -- CORE.md derived/`), 3 of 3; adopting v14 would change the Statements and restart the count, and the PI is asked whether a core with its successor drafted beside it counts as stable (`REQUESTS.md`, R25) |
 | easy to import into | every item of the archive has a recorded fate | met: `IMPORT.md` |
-| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`) |
-| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported, and the reader package is ready; no outside reader yet |
+| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | met: cases W1 and W3, three predictions, one held (`RECORD.md`); and the MVP's case M1, one prediction, held (`mvp/cases/m1-decoding-toxicity/RESULTS.md`) |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | not met: W1 is reported, and the reader package is ready; the MVP's case M1 is reported with intervals and its environment pinned; no outside reader has run either |
 
 One case suffices for the last two rows, in any discipline: v7.10's attempts showed that data access, not the
 framework, decides which disciplines can be done.

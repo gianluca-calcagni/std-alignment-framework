@@ -57,8 +57,10 @@ verdict, bounds = S.pooled_verdict(harm.astype(float), 0.01)         # 'convict'
 ## A case on real data
 
 `cases/m1-decoding-toxicity/`: a frozen GPT-2 completing prompts chosen to provoke, under three decodings, graded by a
-public classifier, against a declared limit of one toxic continuation in ten. Registered before any computation; its
-results are in `cases/m1-decoding-toxicity/RESULTS.md`.
+public classifier, against a declared limit of one toxic continuation in ten. Registered before any computation. The
+deployed decoding is convicted (toxic rate `0.326`, interval `[0.292, 0.360]`); the other decodings are more toxic, so
+its misalignment is all unavoidable with this interface and it is not culpable
+(`cases/m1-decoding-toxicity/RESULTS.md`).
 
 ## The files
 
