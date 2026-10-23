@@ -20,10 +20,13 @@ def test_quickstart_runs_and_reaches_its_verdicts():
     assert lo <= rep["pooled_wrong_rate"]["true_average"] <= hi
     assert rep["pooled_wrong_rate"]["verdict"] == "convict"
     m = rep["misalignment_outside_forbidden"]
-    assert m["certified"][1] - m["certified"][0] < 1e-6
+    assert m["bounds"][1] - m["bounds"][0] < 1e-6
     iface = rep["interface"]
     assert iface["wrong_answers"]["unavoidable"] < 1e-9
     assert iface["wrong_answers"]["culpable_at_margin"]
+    assert iface["wrong_answers"]["plug_in_culpable_at_margin"]
+    assert abs(iface["wrong_answers"]["plug_in_excess"] - iface["wrong_answers"]["avoidable_excess"]) < 0.05
+    assert iface["leaks"]["deployed"] == "infinite"
     assert iface["leaks"]["culpable_at_any_margin"]
 
 

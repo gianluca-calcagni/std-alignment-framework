@@ -145,6 +145,116 @@
      "    values = [misalignment(p, limits, world).value for cells in chain]"
     ]
    ]
+  },
+  {
+   "name": "unavoidable keeps vertices of infinite misalignment",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    finite = np.flatnonzero(np.isfinite(single))",
+     "    finite = np.arange(k)"
+    ]
+   ]
+  },
+  {
+   "name": "unavoidable from one start only",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    starts = [np.full(kf, 1.0 / kf)] + [np.eye(kf)[i] * 0.5 + np.eye(kf)[j] * 0.5\n                                         for i in range(kf) for j in range(i + 1, kf)]",
+     "    starts = [np.full(kf, 1.0 / kf)]"
+    ]
+   ]
+  },
+  {
+   "name": "avoidable excess with the wrong sign",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "\"avoidable_excess\": total - m[-1]",
+     "\"avoidable_excess\": m[-1] - total"
+    ]
+   ]
+  },
+  {
+   "name": "no-worse-than reference with the wrong sign",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "float(-r @ np.asarray(G, float))",
+     "float(r @ np.asarray(G, float))"
+    ]
+   ]
+  },
+  {
+   "name": "forbidden as a small rate",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    return rate_limit(C, 0.0, n, cell,",
+     "    return rate_limit(C, 1e-3, n, cell,"
+    ]
+   ]
+  },
+  {
+   "name": "forbidden breach of a rate limit not infinite",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    if eps == 0:\n        return np.inf",
+     "    if eps == 0:\n        return 0.0"
+    ]
+   ]
+  },
+  {
+   "name": "starved cell not read as infinite",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    if lp.x[-1] <= TINY:",
+     "    if lp.x[-1] < 0:"
+    ]
+   ]
+  },
+  {
+   "name": "target not completed on the uncharged outcomes",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "        candidates.insert(0, done)",
+     "        pass"
+    ]
+   ]
+  },
+  {
+   "name": "pooled verdict read before its horizon",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    if y.size < N:\n        return \"pending\", bd",
+     "    if y.size < N // 2:\n        return \"pending\", bd"
+    ]
+   ]
+  },
+  {
+   "name": "rounding crossing left in the bounds",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "        lower = min(lower, upper)",
+     "        pass"
+    ]
+   ]
+  },
+  {
+   "name": "unavoidable stops before reaching zero",
+   "edits": [
+    [
+     "stdalign/spec.py",
+     "    if finite.size == 1 or best[0] <= TOL:",
+     "    if finite.size == 1 or best[0] <= 1.0:"
+    ]
+   ]
   }
  ]
 }

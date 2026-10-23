@@ -7,7 +7,8 @@ the framework stands against it, and what comes next.
 ## First: the MVP plan (2026-10-23, Q80)
 
 The PI asked for a plan that fills the minimal gaps for a publishable MVP, taking priority over everything below; it is
-`mvp/PLAN.md`, and its steps P1–P8 come before the recommendations and the backlog.
+`mvp/PLAN.md`, and its steps P1–P8 come before the recommendations and the backlog. **All eight are done** (`NOTES.md`
+§38). What remains is the PI's: an outside review (`REQUESTS.md`, R26), then the second repository.
 
 ## The executor's recommendations for v14 (2026-10-16, Q63)
 
@@ -71,8 +72,8 @@ of the finish line is met.
 | solid | lint and every check pass on both SIMD paths; new checks are mutation-tested | met |
 | stable | neither the scope nor a premise's or definition's Statement changes for three consecutive steps, a step being a merged pull request (Q46) | **met by the letter**: pull requests #34, #35 and #36, merged after #33 brought v13 to `main`, changed no Statement and no scope (only `CORE.md`'s status note; `git diff 3e68e1c 7daf9d4 -- CORE.md derived/`), 3 of 3; adopting v14 would change the Statements and restart the count, and the PI is asked whether a core with its successor drafted beside it counts as stable (`REQUESTS.md`, R25) |
 | easy to import into | every item of the archive has a recorded fate | met |
-| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **met**: W1 refuted a prediction about the literature's curve; W3 tested the framework's bet itself, on a model tuned by PPO, and the bet held in part (one prediction held, one refuted). Three predictions tested on unseen data, one held |
-| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: W1 is reported to `STANDARD.md` with intervals, from public data and code (`cases/w1-best-of-n-slope/REPORT.md`), and its environment is pinned; no outside reader has run it. The hold on review is lifted for one mathematical reader (Q33), and the reader package is ready (H2) |
+| makes testable predictions | one empirical prediction, pre-registered and tested on data not seen before; a refutation counts | **met**: W1 refuted a prediction about the literature's curve; W3 tested the framework's bet itself, on a model tuned by PPO, and the bet held in part (one prediction held, one refuted). Three predictions tested on unseen data, one held; and the MVP's case M1 (Q80): one empirical prediction on unseen data, held |
+| supports diagnostics, and shows its limits | one worked case, reported to `STANDARD.md` with intervals, run end to end by an outside reader | **not met**: the MVP's case M1 is reported with intervals and its environment pinned (`mvp/cases/m1-decoding-toxicity/`); W1 is reported to `STANDARD.md` with intervals, from public data and code (`cases/w1-best-of-n-slope/REPORT.md`), and its environment is pinned; no outside reader has run it. The hold on review is lifted for one mathematical reader (Q33), and the reader package is ready (H2) |
 
 **What matters now** (Q35, Q37): contact with the world, and a bridge from theory to practice. Contact means tests that
 can fail and readers who are not the executor; the bridge means estimates a reader can compute, with intervals, from the
@@ -81,8 +82,12 @@ library that computes what the standard asks, a report that can be checked as da
 three are in place (Q41). The theory grows where one of these needs it, and the archive of what is done is in `NOTES.md`
 §4.
 
-## Where we are (2026-10-22)
+## Where we are (2026-10-23)
 
+- **The MVP** (Q80, `mvp/`, `NOTES.md` §38): v14's first layer and the diagnostic part of its second, on finite
+  outcomes. Ten definitions and eighteen results with proofs and checks; the library `stdalign/spec.py`, its 25 mutants
+  caught; a quickstart; case M1 on real data, registered first, its prediction held. Reviewed twice inside the
+  executor's model family, its findings fixed; not yet read outside it (R26). Everything below is unchanged by it.
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
   background conditions assumed without loss of generality, three premises, each with its Status ([[A1 — Behaviour suffices|A1]] behaviour
@@ -303,3 +308,5 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-23 | a step back (Q79, `NOTES.md` §37): the executor's valuation, pros, cons and gaps; the recommendation to rebalance toward one v14 case, an outside reader and CORE as items in CI before more theory | 4 (predictions); 5 (diagnostics) |
 | 2026-10-23 | the MVP plan (Q80, `mvp/PLAN.md`): v14's first layer and the diagnostic part of its second, on finite outcomes, as checked items with a library, a quickstart and one case on real data; it takes priority over the roadmap | 4, 5 (predictions, diagnostics) |
 | 2026-10-23 | MVP steps P2–P5 (Q80): `mvp/CORE.md`, ten definitions and eighteen results with proofs, two new (a certificate for an average under any dependence, and no certificate for every decision); `stdalign/spec.py`, misalignment as the best bet's growth with a certified interval, bets, tests, certificates and splits, version 0.3.0; `mvp/checks/`, a check per result and a structural check; 14 of 14 mutants caught after three gaps closed; `mvp/examples/quickstart.py`; VK6's missing hypothesis found and recorded (§1) | 2 (solid); 5 (diagnostics) |
+| 2026-10-23 | MVP steps P6–P7 (Q80): case M1 registered, run and recorded, the deployed decoding convicted, its misalignment unavoidable with its decodings, not culpable, the prediction held; `mvp/README.md`, `LIMITS.md` and `KNOWN.md` | 4 (predictions); 5 (diagnostics) |
+| 2026-10-23 | MVP step P8 (Q80, `NOTES.md` §38): the whole MVP reread adversarially; two library bugs fixed (`unavoidable` with an infinite vertex, a loose upper bound on records with zero counts), "certified" bounds renamed numerical, M1's results reworded and their unregistered choices named, the analysis rerun on the fixed library with every number reproduced; 25 of 25 mutants caught; three failure rows (§1); the outside review asked for (R26) | 2 (solid); 5 (diagnostics) |

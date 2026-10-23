@@ -1,6 +1,7 @@
 """M1, the analysis (REGISTRATION.md, the procedure, step 6): verdicts, rates, misalignment, the factorization by the
 decodings available, and culpability, from the per-draw values that run.py left in $CASE_SCRATCH/m1. Writes only
-aggregates, to analysis.json beside this file (or rehearsal.json with --rehearse-simulated).
+aggregates, beside this file: analysis.json for the test, rehearsal_pipeline.json for --tag rehearsal, and
+rehearsal_simulated.json for --rehearse-simulated.
 
 Run: python3 mvp/cases/m1-decoding-toxicity/analyze.py [--tag test|rehearsal] [--rehearse-simulated SEED]
 """
@@ -97,7 +98,7 @@ def analyse(data):
     C = np.tile([False, True], sub)
     general = S.misalignment(p, [S.rate_limit(C, EPS)], world)
     out["verification"] = {"closed_form": misalignment(u, np.full(sub, 1 / sub)), "general_solver": general.value,
-                           "general_certified": [general.lower, general.upper]}
+                           "general_bounds": [general.lower, general.upper]}
     return out
 
 

@@ -11,10 +11,11 @@ person and an institution are judged alike, by what they do.
 
 ## Conventions
 
-Outcomes are finite. `Δ` is the set of distributions on a finite set `X`, a **behaviour** being one of them. For `p, a ∈
-Δ`, `KL(p‖a) = Σ_{x : p(x)>0} p(x)·log(p(x)/a(x))`, natural logarithms, with `log(·/0) = +∞`; `kl(u‖v)` is `KL` between
-`(u, 1 − u)` and `(v, 1 − v)`. `E_a[g] = Σ_x a(x)·g(x)`. Every choice below that an equally reasonable principal could
-make otherwise is named here, with what it changes.
+Outcomes are finite. `Δ` is the set of distributions on a finite set `X`, a **behaviour** being one of them. For
+`p, a ∈ Δ`, `KL(p‖a) = Σ_{x : p(x)>0} p(x)·log(p(x)/a(x))`, natural logarithms, with `log(·/0) = +∞`; `kl(u‖v)` is `KL`
+between `(u, 1 − u)` and `(v, 1 − v)`. `E_a[g] = Σ_x a(x)·g(x)`. For partitions `𝒢, ℋ` of `X`, `𝒢 ⊑ ℋ` means that `ℋ`
+refines `𝒢`: every cell of `ℋ` lies inside a cell of `𝒢`. `M_K` is the misalignment of D5 against a set `K`. Every
+choice below that an equally reasonable principal could make otherwise is named here, with what it changes.
 
 | Convention | Why | What changes otherwise |
 |---|---|---|
@@ -63,7 +64,10 @@ tell apart: a grader that marks answers only "acceptable" or "harmful" sees two 
 one of two kinds:
 - **per decision**: a set `A_E ⊆ Δ(E)`, convex and closed, for each condition `E`, asking that in every condition the
   conditional behaviour lie in `A_E`; or a convex closed `A ⊆ Δ` with the world's law fixed (R10). The **acceptable
-  set** is the set of behaviours that meet every per-decision requirement;
+  set** is the set of behaviours that meet every per-decision requirement. A requirement of the second form is tested
+  decision by decision (R4) only when the world draws each decision's condition from its declared law, given the past;
+  otherwise, as when a fixed list of prompts is gone through in order, it is read pooled, with its verdict from R16 and
+  its misalignment from R10;
 - **pooled**: a closed set `Q ⊆ Δ` and a horizon `N`, asking that the average `p̄_N = (1/N)·Σ_{i≤N} p_i` of the
   conditional behaviours lie in `Q`.
 
@@ -108,9 +112,10 @@ model of how the actor's decisions depend on each other.
 **Lineage.** v14's bets (`v14/evidence.md`); e-values [@grunwald2023].
 
 ### D7 — Certification
-**Statement.** At a declared level `α` and margin, the record **certifies** a pooled requirement on a rate or a budget
-when the confidence bound of R16 for the average conditional behaviour, read at the declared horizon `N`, lies inside
-it. For a sample, the average is the behaviour itself, and a certificate is about every decision.
+**Statement.** At a declared level `α`, the record **certifies** a pooled requirement on a rate or a budget when the
+upper confidence bound of R16 for the average conditional rate or cost, read at the declared horizon `N`, is at most the
+limit. The margin is the bound's distance from the record's average, fixed by `α`, `N` and R16's `λ`. For a sample, the
+average is the behaviour itself, and a certificate is about every decision.
 
 **Interpretation.** Evidence that a requirement is met, within a margin, at an error rate fixed in advance. It is about
 an average: no record certifies that every decision of an actor that may change was acceptable (R17).
@@ -120,7 +125,8 @@ an average: no record certifies that every decision of an actor that may change 
 ### D8 — What a record can see
 **Statement.** For a partition `𝒢` of `X` refining `ℰ`, `p_𝒢` is the behaviour on cells, and the **misalignment at
 resolution `𝒢`** is `M_A^𝒢(p) = inf {KL(p_𝒢‖a_𝒢) : a ∈ A, a_ℰ = p_ℰ}`. The misalignment **hidden** from `𝒢` is
-`H_𝒢(p) = M_A(p) − M_A^𝒢(p)` when `M_A(p)` is finite, and `∞` when `M_A(p) = ∞ > M_A^𝒢(p)`.
+`H_𝒢(p) = M_A(p) − M_A^𝒢(p)` when `M_A(p)` is finite, `∞` when `M_A(p) = ∞ > M_A^𝒢(p)`, and `0` when both are infinite,
+since the record at `𝒢` then already sees an infinite misalignment.
 
 **Interpretation.** What a record at that resolution can detect, and what lies inside its cells, out of its sight.
 
@@ -232,7 +238,9 @@ and `W_0 = 1, W_1, …, W_N` non-negative, each `W_k` known at `ℱ_k`, with `E[
 `α ∈ (0, 1]`, the probability that `W_k ≥ 1/α` for some `k ≤ N` is at most `α`; letting `N → ∞`, the same holds for
 some `k` at all, by continuity of probability.
 (ii) In particular, if each decision, given the past, is drawn from an acceptable behaviour, and each bet `h_k` is
-chosen before decision `k` from what came before, the wealth of D6 convicts with probability at most `α`.
+chosen before decision `k` from what came before, the wealth of D6 convicts with probability at most `α`. For a
+requirement with the world's law fixed, "acceptable" includes drawing the condition from that law, so (ii) applies only
+when the world does (D4).
 
 **In plain terms.** Keep betting against the standard, one decision at a time, changing the bet as you learn. If the
 actor acts acceptably at every step, given what came before, the chance that your wealth ever reaches `20` is at most
@@ -289,9 +297,9 @@ that", possibly infinite.
 **Lineage.** v14's VK0; the separating hyperplane theorem, finite form.
 
 ### R7 — Forbidden sets and rate limits in closed form
-**Statement.** With `ℰ = {X}`, for a rate limit `(C, ε)` with `C ≠ X` and `p ∈ Δ`: `M_K(p) = kl(p(C)‖ε)` if `p(C) > ε`,
-and `0` otherwise. For a forbidden set (`ε = 0`), `M_K(p) = ∞` if `p(C) > 0`, and the test that convicts at the first
-outcome in `C` has level `0`.
+**Statement.** With `ℰ = {X}`, for a rate limit `(C, ε)` with `C ≠ X`, `K = {a ∈ Δ : a(C) ≤ ε}` and `p ∈ Δ`:
+`M_K(p) = kl(p(C)‖ε)` if `p(C) > ε`, and `0` otherwise. For a forbidden set (`ε = 0`), `M_K(p) = ∞` if `p(C) > 0`, and
+the test that convicts at the first outcome in `C` has level `0`.
 
 **In plain terms.** Against a limit on how often something happens, the evidence of a breach depends only on how often
 it happens; one forbidden outcome is decisive. How often a forbidden outcome happens, the breach rate `p(C)`, is then
@@ -310,9 +318,9 @@ behaviour of a forbidden set an outcome in `C` has probability `0`. ∎
 **Lineage.** v14's VK1, VK2.
 
 ### R8 — A budget, by a one-parameter bet
-**Statement.** With `ℰ = {X}`, for a budget `(g, b)` and `p` with `E_p[g] > b`: for `λ_max = 1/(b − min g)`,
-`M_K(p) = max_{0≤λ≤λ_max} E_p[log(1 + λ·(g − b))]`, attained at some `λ* > 0`, and `h* = 1 + λ*·(g − b)` is a best bet.
-If `E_p[g] ≤ b`, `M_K(p) = 0`.
+**Statement.** With `ℰ = {X}`, for a budget `(g, b)`, `K = {a ∈ Δ : E_a[g] ≤ b}` and `p` with `E_p[g] > b`: for
+`λ_max = 1/(b − min g)`, `M_K(p) = max_{0≤λ≤λ_max} E_p[log(1 + λ·(g − b))]`, attained at some `λ* > 0`, and
+`h* = 1 + λ*·(g − b)` is a best bet. If `E_p[g] ≤ b`, `M_K(p) = 0`.
 
 **In plain terms.** Against a budget, the best bet stakes a fixed fraction of wealth on the cost coming in above the
 budget: Kelly's criterion applied to overspending.

@@ -8,8 +8,9 @@ framework. It is a working agreement, not a claimed property.
 
 1. Read `ROADMAP.md`, and answer its drift checks before any work.
 2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover, with §20, the general core, §21, the
-   labels, and §22–§37, the revamp and the v14 draft (`v14/README.md`), since; then §1, the failure modes with their
-   evidence, every row; then §15, the last review of the whole framework, and §34, the external review of v14 weighed.
+   labels, and §22–§38, the revamp, the v14 draft (`v14/README.md`) and the MVP (`mvp/README.md`), since; then §1, the
+   failure modes with their evidence, every row; then §15, the last review of the whole framework, and §34, the external
+   review of v14 weighed.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 
 ## Who decides

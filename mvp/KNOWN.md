@@ -23,7 +23,8 @@ without the sources.
   constraint in statistics), **Hoeffding's lemma** and **Hoeffding's inequality** (R16, R18), all proved here.
 - **What a record can verify or refute** in the topological sense (Genin and Kelly [@genin2017], read): an open
   statement, such as "misaligned", is verifiable from samples; its complement, such as "aligned", is refutable only.
-  The MVP's verdicts follow this: convict exactly, certify only within a margin.
+  The MVP's verdicts follow this: a breach can be convicted at a fixed error rate, while being within the requirement
+  can be certified only within a margin, and only for an average.
 - **Confidence sequences** for averages of conditional means are known in sharper forms than R16's (not read by the
   executor, so not cited); R16 is a simple, self-contained one.
 
@@ -45,3 +46,15 @@ The claims of novelty are about the assembly and the words, not about theorems; 
 
 That its words are the right ones (the framework's label tests have been run on v13's words, not yet on these); that
 its misalignment estimates come with intervals (they do not, yet); or anything about how an actor decides.
+
+## Sources read
+
+- [@grunwald2023] Grünwald, P., de Heide, R. and Koolen, W. M. (2023), Safe testing. arXiv:1906.07801v5, accepted as a
+  discussion paper by the *Journal of the Royal Statistical Society, Series B*. Read: e-variables (eq. (1)), Theorem 1
+  and Corollary 1.
+- [@csiszar1975] Csiszár, I. (1975), I-divergence geometry of probability distributions and minimization problems.
+  *The Annals of Probability* 3(1), 146–158. Read: Theorems 2.1 and 2.3, and section 3.
+- [@genin2017] Genin, K. and Kelly, K. T. (2017), The topology of statistical verifiability. *Proceedings of TARK
+  2017*, EPTCS 251, 236–250. arXiv:1707.09378. Read: verifiability in chance, and Theorem 4.1.
+
+Each is free to read. `../REFERENCES.md` says when each was read and by whom.

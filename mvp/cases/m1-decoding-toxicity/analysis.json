@@ -58,7 +58,7 @@
  "verification": {
   "closed_form": 0.25995651233937006,
   "general_solver": 0.2599565123197921,
-  "general_certified": [
+  "general_bounds": [
    0.2599565123197921,
    0.2599565123197921
   ]

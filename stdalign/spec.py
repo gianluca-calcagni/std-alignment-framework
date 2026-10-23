@@ -5,15 +5,18 @@ Outcomes are finite and indexed 0..n-1. A behaviour is an array of n masses. The
 `world`, an array of n condition labels, or None when the world chooses nothing. A per-decision requirement is a list of
 `Limit`s, linear limits on averages (R6): E_a[g · 1_cell] ≤ b · a(cell), where `cell` is a condition label, or None for
 the whole outcome space. Since the behaviours compared share the actor's law on the conditions (D5), a limit inside a
-condition is linear in a. Misalignment is computed by convex optimization and returned with a certified interval: the
-upper end is the divergence to a behaviour that meets the requirement, the lower end the growth of a bet that the
-requirement calls fair (R2(i)), checked by a linear program.
+condition is linear in a. Misalignment is computed by convex optimization and returned with two numerical bounds: the
+upper end is the divergence to a behaviour that meets the requirement, the lower end the growth of a payoff scaled into a
+bet that the requirement calls fair (R2(i)), its cost checked by a linear program. Both hold to the solvers' tolerance, not
+exactly: the behaviour behind the upper end meets each limit to 1e-8, so either end can be off by about that.
 """
 from dataclasses import dataclass, field
 import numpy as np
 from scipy.optimize import linprog, minimize, brentq, minimize_scalar
 
 TOL = 1e-9          # feasibility tolerance of the linear programs and of the solver's constraints
+TINY = 1e-12        # a charged cell that no acceptable behaviour can give more than this is treated as forbidden
+INVERSION = 1e-7    # bounds crossing by more than this flag a solver error; less is the linear programs' tolerance
 
 
 # ----------------------------------------------------------------------------------------------- declarations (D4)
@@ -94,6 +97,8 @@ def _constraints(limits, p, world, n):
             A_ub.append(g)
             b_ub.append(lim.b)
         else:
+            if labels is None or not np.any(labels == lim.cell):
+                raise ValueError(f"limit {lim.name!r} names the condition {lim.cell!r}, which `world` does not have")
             inside = labels == lim.cell
             A_ub.append(np.where(inside, g, 0.0))
             b_ub.append(lim.b * p[inside].sum())
@@ -111,8 +116,9 @@ def _constraints(limits, p, world, n):
 
 @dataclass
 class Misalignment:
-    """M_A at a resolution, with a certified interval [lower, upper], the nearest acceptable behaviour found, and the
-    best bet, constant on the resolution's cells (R2, R12). `value` is `upper`; `infinite` when no acceptable behaviour
+    """M_A at a resolution, with numerical bounds [lower, upper] (to the solvers' tolerance), the nearest acceptable
+    behaviour found, and the best bet, constant on the resolution's cells (R2, R12). `value` is `upper`; `inverted` when
+    the lower end exceeds the upper by more than 1e-9, a sign of solver error; `infinite` when no acceptable behaviour
     charges every cell that p charges; `consistent` False when no acceptable behaviour shares p's law at all."""
     value: float
     lower: float
@@ -121,6 +127,7 @@ class Misalignment:
     bet: np.ndarray = field(repr=False)
     infinite: bool = False
     consistent: bool = True
+    inverted: bool = False
 
 
 def misalignment(p, limits, world=None, cells=None):
@@ -129,9 +136,10 @@ def misalignment(p, limits, world=None, cells=None):
     share p's law on `world`.
 
     Computed as the growth of the best bet constant on the cells (R2, R12): maximize E_P[log k] over cell payoffs k
-    whose largest cost under the requirement is at most 1, that cost written by linear-programming duality, so every
-    point the solver visits is a bet and its growth a certified lower bound. The upper bound is the divergence to an
-    acceptable behaviour recovered from the bet, by a linear program."""
+    whose largest cost under the requirement is at most 1, that cost written by linear-programming duality. The payoff
+    found is then scaled by its exact largest cost (a linear program), so its growth is a lower bound. The upper bound
+    is the divergence to an acceptable behaviour recovered from the bet, by a linear program that keeps every charged
+    cell's mass positive."""
     p = np.asarray(p, float)
     n = p.size
     A_ub, b_ub, A_eq, b_eq = _constraints(limits, p, world, n)
@@ -152,7 +160,7 @@ def misalignment(p, limits, world=None, cells=None):
                  b_eq=b_eq, bounds=[(0, None)] * n + [(0, 1)], method="highs")
     if lp.status != 0:
         return Misalignment(np.inf, np.inf, np.inf, *nan, infinite=True, consistent=False)
-    if lp.x[-1] <= TOL:
+    if lp.x[-1] <= TINY:
         return Misalignment(np.inf, np.inf, np.inf, *nan, infinite=True)
     # the bet: payoffs k on the charged cells, dual variables y ≥ 0 (limits) and z (equalities), with
     # A_ub^T y + A_eq^T z ≥ G_S^T k outcome by outcome and b_ub·y + b_eq·z ≤ 1
@@ -186,31 +194,107 @@ def misalignment(p, limits, world=None, cells=None):
     lower = bet_lower_bound(p, h @ Gm, limits, world)
     # the nearest acceptable behaviour: cell masses P/k on the charged cells, as nearly as the requirement allows
     target = PS / k
-    a = _nearest(GS, target, A_ub, b_ub, A_eq, b_eq, n, lp.x[:n])
-    q = Gm @ a
-    upper = float(PS @ np.log(PS / np.maximum(q[S], 1e-300))) if np.all(q[S] > 0) else np.inf
-    upper = max(upper, 0.0)                                   # a divergence; rounding can leave −1e−17
-    return Misalignment(upper, min(max(lower, 0.0), upper), upper, a, h)
+    # candidates: the bet's own target, when the cells are outcomes (R2(ii): a* = p/h*); the target completed on the
+    # uncharged outcomes at the least relative deviation; the nearest point in total deviation; the interior point of
+    # the feasibility program. The best feasible one that starves no charged
+    # cell gives the upper bound, after a descent that keeps only feasible points.
+    candidates = [lp.x[:n], _nearest(GS, target, A_ub, b_ub, A_eq, b_eq, n, lp.x[:n])]
+    done = _completed(GS, target, A_ub, b_ub, A_eq, b_eq, n)
+    if done is not None:
+        candidates.insert(0, done)
+    if cells is None:
+        t = np.zeros(n)
+        t[S] = target
+        candidates[:0] = [t, _repaired(t, lp.x[:n], A_ub, b_ub, A_eq, b_eq)]
+    div = lambda x: float(PS @ np.log(PS / (Gm @ x)[S])) if np.all((Gm @ x)[S] > 0) else np.inf
+    ok = [x for x in candidates if _feasible(x, A_ub, b_ub, A_eq, b_eq) and np.isfinite(div(x))]
+    a = min(ok, key=div) if ok else lp.x[:n]
+    a = _polish(a, GS, PS, A_ub, b_ub, A_eq, b_eq)
+    upper = max(div(a), 0.0)                                  # a divergence; rounding can leave −1e−17
+    lower = max(lower, 0.0)
+    inverted = bool(lower > upper + INVERSION)
+    if not inverted:                                          # a crossing within tolerance is the solvers' rounding
+        lower = min(lower, upper)
+    return Misalignment(upper, lower, upper, a, h, inverted=inverted)
+
+
+def _feasible(a, A_ub, b_ub, A_eq, b_eq):
+    return (np.all(a >= -TOL) and np.allclose(A_eq @ a, b_eq, atol=10 * TOL)
+            and (A_ub.shape[0] == 0 or np.all(A_ub @ a <= b_ub + 10 * TOL)))
+
+
+def _repaired(t, interior, A_ub, b_ub, A_eq, b_eq):
+    """The least mixture of t with a feasible interior point that is feasible, by bisection on the mixing weight."""
+    if _feasible(t, A_ub, b_ub, A_eq, b_eq):
+        return t
+    lo, hi = 0.0, 1.0
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        if _feasible((1 - mid) * t + mid * interior, A_ub, b_ub, A_eq, b_eq):
+            hi = mid
+        else:
+            lo = mid
+    return (1 - hi) * t + hi * interior
+
+
+def _polish(a, GS, PS, A_ub, b_ub, A_eq, b_eq):
+    """Lower the divergence from a feasible a by a direct minimization, keeping the result only if it is feasible and
+    better: the upper bound must come from a behaviour that meets the requirement."""
+    def obj(x):
+        return float(PS @ np.log(PS / np.maximum(GS @ x, 1e-300)))
+
+    def grad(x):
+        return -(PS / np.maximum(GS @ x, 1e-300)) @ GS
+
+    cons = [{"type": "eq", "fun": lambda x: A_eq @ x - b_eq, "jac": lambda x: A_eq}]
+    if A_ub.shape[0]:
+        cons.append({"type": "ineq", "fun": lambda x: b_ub - A_ub @ x, "jac": lambda x: -A_ub})
+    try:
+        r = minimize(obj, a, jac=grad, constraints=cons, bounds=[(0, 1)] * a.size, method="SLSQP",
+                     options={"ftol": 1e-15, "maxiter": 500})
+    except ValueError:
+        return a
+    x = np.clip(r.x, 0, None)
+    if _feasible(x, A_ub, b_ub, A_eq, b_eq) and np.all(GS @ x > 0) and obj(x) < obj(a):
+        return x
+    return a
 
 
 def _nearest(GS, target, A_ub, b_ub, A_eq, b_eq, n, fallback):
     """An acceptable behaviour whose masses on the charged cells are as near `target` as possible (least total
     deviation, by a linear program); `fallback` if the program fails."""
     mS = GS.shape[0]
-    # variables: a (n), s+ (mS), s- (mS); minimize Σ s; G a − s+ + s- = target
+    # variables: a (n), s+ (mS), s- (mS); minimize Σ s; G a − s+ + s- = target; and G a ≥ target/2, so that no
+    # charged cell is left with zero mass
     c = np.r_[np.zeros(n), np.ones(2 * mS)]
     Aeq = np.vstack([np.hstack([GS, -np.eye(mS), np.eye(mS)]), np.hstack([A_eq, np.zeros((A_eq.shape[0], 2 * mS))])])
     beq = np.r_[target, b_eq]
-    Aub = np.hstack([A_ub, np.zeros((A_ub.shape[0], 2 * mS))]) if A_ub.shape[0] else None
-    lp = linprog(c, A_ub=Aub, b_ub=b_ub if A_ub.shape[0] else None, A_eq=Aeq, b_eq=beq,
-                 bounds=[(0, None)] * (n + 2 * mS), method="highs")
+    floor = np.hstack([-GS, np.zeros((mS, 2 * mS))])
+    Aub = np.vstack([np.hstack([A_ub, np.zeros((A_ub.shape[0], 2 * mS))]), floor])
+    bub = np.r_[b_ub, -target / 2]
+    lp = linprog(c, A_ub=Aub, b_ub=bub, A_eq=Aeq, b_eq=beq, bounds=[(0, None)] * (n + 2 * mS), method="highs")
     return lp.x[:n] if lp.status == 0 else fallback
+
+
+def _completed(GS, target, A_ub, b_ub, A_eq, b_eq, n):
+    """An acceptable behaviour whose charged cells' masses are all within a common relative deviation η of `target`,
+    with η least (a linear program): the uncharged outcomes take the mass the target leaves, and the divergence it
+    gives exceeds the target's by at most about η. None if the program fails."""
+    mS = GS.shape[0]
+    # variables: a (n), η; target(1 − η) ≤ G a ≤ target(1 + η); minimize η
+    c = np.r_[np.zeros(n), 1.0]
+    Aub = np.vstack([np.hstack([A_ub, np.zeros((A_ub.shape[0], 1))]),
+                     np.hstack([GS, -target[:, None]]), np.hstack([-GS, -target[:, None]])])
+    bub = np.r_[b_ub, target, -target]
+    lp = linprog(c, A_ub=Aub, b_ub=bub, A_eq=np.hstack([A_eq, np.zeros((A_eq.shape[0], 1))]), b_eq=b_eq,
+                 bounds=[(0, None)] * n + [(0, 0.5)], method="highs")
+    return lp.x[:n] if lp.status == 0 else None
 
 
 def bet_lower_bound(p, h, limits, world=None):
     """R2(i): any payoff h ≥ 0 gives a lower bound on misalignment once scaled into a bet. Its largest cost m under the
     acceptable behaviours sharing p's law (a linear program) makes h/m a bet, whose growth E_p[log h] − log m is at
-    most M_A(p). Use it to certify the evidence of a bet chosen in any way."""
+    most M_A(p). Use it to bound the evidence of a bet chosen in any way."""
     p, h = np.asarray(p, float), np.asarray(h, float)
     n = p.size
     A_ub, b_ub, A_eq, b_eq = _constraints(limits, p, world, n)
@@ -336,12 +420,17 @@ def average_bounds(y, alpha=0.05, horizon=None, lam=None):
 
 
 def pooled_verdict(y, limit, alpha=0.05, horizon=None):
-    """D7 and R16 for a pooled limit "average of the conditional means of y ≤ limit": 'certify' when the upper bound
-    at the record's end is at most the limit, 'convict' when the lower bound is above it, else 'neither'."""
-    bd = average_bounds(y, alpha, horizon)
-    if bd.upper[-1] <= limit:
+    """D7 and R16 for a pooled limit "average of the conditional means of y over the horizon ≤ limit", read at the
+    declared horizon (the record's length if none is declared): 'certify' when the upper bound there is at most the
+    limit, 'convict' when the lower bound is above it, 'neither' otherwise, and 'pending' before the horizon."""
+    y = np.asarray(y, float)
+    N = horizon or y.size
+    bd = average_bounds(y, alpha, N)
+    if y.size < N:
+        return "pending", bd
+    if bd.upper[N - 1] <= limit:
         return "certify", bd
-    if bd.lower[-1] > limit:
+    if bd.lower[N - 1] > limit:
         return "convict", bd
     return "neither", bd
 
@@ -357,21 +446,38 @@ def resolution_split(p, limits, chain, world=None):
 
 def unavoidable(vertices, limits, world=None):
     """m(𝓕) of D9 for 𝓕 the convex hull of `vertices` (behaviours sharing one law on the conditions): the least
-    misalignment of a mixture, by minimizing over the mixture weights; returns (value, weights)."""
+    misalignment of a mixture, by minimizing over the mixture weights; returns (value, weights). A vertex of infinite
+    misalignment makes every mixture that weighs it infinite (it charges an outcome no acceptable behaviour may), so the
+    search runs over the others. The value is a numerical minimum: an upper bound on m(𝓕), to the solvers' tolerance."""
     V = np.asarray(vertices, float)
     k = V.shape[0]
-    f = lambda wt: misalignment(np.clip(wt, 0, None) / max(np.clip(wt, 0, None).sum(), 1e-300) @ V,
+    single = np.array([misalignment(V[j], limits, world).value for j in range(k)])
+    finite = np.flatnonzero(np.isfinite(single))
+    if finite.size == 0:
+        return np.inf, np.eye(k)[0]
+    j0 = finite[np.argmin(single[finite])]
+    best = (float(single[j0]), np.eye(k)[j0])
+    if finite.size == 1 or best[0] <= TOL:                    # misalignment is never negative: 0 is the minimum
+        return best
+    Vf = V[finite]
+    f = lambda wt: misalignment(np.clip(wt, 0, None) / max(np.clip(wt, 0, None).sum(), 1e-300) @ Vf,
                                 limits, world).value
-    best = min(((f(np.eye(k)[j]), np.eye(k)[j]) for j in range(k)), key=lambda t: t[0])
-    x0 = np.full(k, 1.0 / k)
-    if np.isfinite(f(x0)):
-        r = minimize(f, x0, method="SLSQP", bounds=[(0, 1)] * k,
+    kf = finite.size
+    starts = [np.full(kf, 1.0 / kf)] + [np.eye(kf)[i] * 0.5 + np.eye(kf)[j] * 0.5
+                                         for i in range(kf) for j in range(i + 1, kf)]
+    for x0 in starts:
+        r = minimize(f, x0, method="SLSQP", bounds=[(0, 1)] * kf,
                      constraints=[{"type": "eq", "fun": lambda wt: wt.sum() - 1}], options={"ftol": 1e-13})
-        wt = np.clip(r.x, 0, None) / np.clip(r.x, 0, None).sum()
-        val = f(wt)
-        if val < best[0]:
-            best = (val, wt)
-    return float(best[0]), best[1]
+        for cand in (np.clip(r.x, 0, None), x0):
+            wt = cand / cand.sum()
+            val = f(wt)
+            if val < best[0]:
+                full = np.zeros(k)
+                full[finite] = wt
+                best = (float(val), full)
+        if best[0] <= TOL:
+            break
+    return best
 
 
 def factorization(p, chain, limits, world=None):

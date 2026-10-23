@@ -30,11 +30,17 @@ Nothing out of scope is deleted from the repository; the MVP only does not depen
 | P1 | this plan, and the records that put it first | `ROADMAP.md` points here first; a decision row (Q80) |
 | P2 | `mvp/CORE.md`: the definitions, each with its interpretation, and the results, each with a statement, plain terms, a proof and the checks that test it; including a certificate for a pooled rate, derived here, and the impossibility of certifying every decision (Q76) | every item complete; every proof read against its statement by a reviewing subagent, its findings fixed |
 | P3 | the library, `stdalign/spec.py`: misalignment against declared linear requirements with the world's part; the closed form for a rate limit; a bet and its test; the certificate; the factorization along feasible sets; the split along the record's resolution; a report as data | unit tests pass on both SIMD paths; every function mutation-tested |
-| P4 | `mvp/checks/`: at least one check per result, on random instances and degenerate cases, with tolerances from the quantity's scale; a structural check that every item has its fields and cites checks that exist, and every check is cited | all pass on both paths; mutants of the checks caught or explained |
+| P4 | `mvp/checks/`: at least one check per result, on random instances and degenerate cases, with tolerances from the quantity's scale; a structural check that every item has its fields and cites checks that exist, and every check is cited | all pass on both paths; the library's mutants (`tools/mutants/spec.json`) caught by the checks and unit tests, or explained |
 | P5 | `mvp/examples/quickstart.py`: from a declaration to a report in under a minute, on simulated data | CI runs it |
 | P6 | one case on real data, `cases/m1-decoding-toxicity/`: a frozen public language model under several decodings, judged by a public classifier against a declared rate limit; convict or certify, the factorization by the decodings available, culpability; one empirical prediction, labelled; registered and pushed before any computation | registration pushed before the run; results and a report recorded, whatever they say |
 | P7 | `mvp/README.md` to start from, `mvp/LIMITS.md`, and `mvp/KNOWN.md`, what is known and what is new, citing only sources read | a reader can go from README to a run without another file |
 | P8 | an adversarial reread of the whole MVP by a subagent of the executor's model family (not independent, rule (f)), its findings fixed; then the PI's external review asked for | findings fixed; the request for review in `REQUESTS.md` |
+
+## State (2026-10-23)
+
+Every step is done, each exit criterion met (`../NOTES.md` §38). P2's proof review and P8's whole reread were both by
+subagents of the executor's family; their findings are fixed and recorded (`../NOTES.md` §1). P8's request for an
+outside review is R26 in `../REQUESTS.md`.
 
 ## What the MVP does not need from the PI
 

@@ -90,6 +90,9 @@ later results goes in Notes |
 | **A closed form proved for a case it does not cover** | v14's VK6, an overall rate limit with the conditions' law fixed, solved for each condition's breach rate as if it could take any value in `[0, 1]`; a condition all of whose outcomes lie in `C` forces it to `1`, and then the closed form gives a finite number where no acceptable behaviour exists. Found when the MVP's library, solving the same problem by linear programming, disagreed on a random instance (Q80, 2026-10-23); the hypothesis added to VK6 and to the MVP's R10 | test a closed form against a general solver on random instances that include the degenerate ones, not only the generic |
 | **A result carried into a new setting without its hypotheses** | writing the MVP's core (Q80), the executor restated R3 (the hull) and R7 (a rate limit) in a setting where the world's part is declared, and dropped v14's `C ≠ X` from R7: R3 is false with a non-trivial world's part, R7 false for `C = X`; R16 conditioned on the decisions where it needed what the conditional behaviours condition on, and its plain terms and R17's overclaimed. Found by a reviewing subagent before the push, not independent (rule (f)) | when a result moves to a new setting, list the hypotheses of its source and check each in the new one |
 | **A push gated on a test run whose failure a pipe hid** | on 2026-10-23 (Q80) the executor ran the full suite as `pytest -q 2>&1 \| tail -1 && …`: the pipe's status is `tail`'s, so the second path ran and the push followed though collection had failed, three test modules of `mvp/` clashing by name with `checks/` and `examples/`, a clash hidden when `mvp/` was tested alone. CI on the pushed commit was red; fixed by making `mvp/` a package | gate on pytest's own exit status (`set -o pipefail`, or no pipe), and run the whole suite, never one folder, before a push |
+| **A search over a set derailed by one point at infinity** | the MVP's `stdalign.spec.unavoidable`, the least misalignment over the mixtures of an interface's vertices, returned `∞` whenever one vertex breached a forbidden outcome, since every start of its search weighed that vertex; so an interface with one bad action and a good mixture of the others read as having no acceptable option, and culpability as false. Found by the whole-MVP review (step P8, a subagent of the executor's family, not independent, rule (f)), on a three-vertex instance; fixed by searching only the finite vertices, which is exact (a mixture that weighs an infinite vertex charges an outcome no acceptable behaviour may), with several starts; tests and mutants added for both | test a minimum over a set that contains a point of infinite value, and a minimum attained only inside the set |
+| **An upper bound from a witness that was not a behaviour** | `stdalign.spec.misalignment` took its upper bound from the best bet's target `p/h*`, which puts no mass on the outcomes `p` does not charge; with conditions whose breach rate is `0` or `1`, that target missed up to a tenth of the mass, and the repairs gave an upper bound that was infinite or loose (`0.594` against R10's `0.522` on one instance). The reported value was the upper bound, so the error was in the number a user reads. Found by the whole-MVP review (P8); fixed by completing the target on the uncharged outcomes at the least common relative deviation, a linear program; none of about 460 random instances now differs from R10 by more than `10⁻⁶`. Case M1 was unaffected: it used R10's closed form, and its rerun reproduced every number | check an upper bound's witness for feasibility, and test on records with zero counts, not only on generic ones |
+| **Numerical bounds called a certificate, and a verification that could not fail** | the library's docstring, the MVP's README, a test's name and the quickstart's output called misalignment's two ends a "certified interval", though both hold only to the solvers' tolerance, the witness meeting each limit to `10⁻⁸`. In M1's results, the avoidable excess `0` was said to rest on the deployed decoding's lower overall rate, an inference R10 does not give (it depends on the per-prompt rates); the bet test was reported beside R16 as if it tested the same requirement; and M1-V1 was registered as a verification though `analyze.py` computes the excess as a difference, so it could not fail. Found by the whole-MVP review (P8); all reworded, M1-V1 marked as holding by construction | name a number by how it is computed; before registering a verification, say how it could fail |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -3143,3 +3146,28 @@ deployment guarantees are pooled (Q76).
 
 **Recommendation.** Rebalance: no new layer or brainstorm until gaps 1 and 2 have moved; the marginal value of more
 theory is now lower than that of one case and one reader.
+
+## 38. The MVP, completed, 2026-10-23 (Q80)
+
+The plan of `mvp/PLAN.md`, steps P1–P8, is done. What there is, for the PI and for the second repository:
+- `mvp/CORE.md`: ten definitions and eighteen results, each with a proof and checks in CI. Two are new as stated, the
+  certificate for an average under any dependence (R16) and the impossibility of certifying every decision against a
+  slight departure (R17); the rest are known results in finite form (`mvp/KNOWN.md`).
+- `stdalign/spec.py`, version 0.3.0: one function per quantity. Misalignment comes with two numerical bounds, to the
+  solvers' tolerance, not a certificate. 25 mutants, all caught.
+- `mvp/examples/quickstart.py`: a support bot, from a declaration to a report, in about a second.
+- `mvp/cases/m1-decoding-toxicity/`: registered before its data were opened; its one empirical prediction held.
+- `mvp/README.md`, `mvp/LIMITS.md`, `mvp/KNOWN.md`: what it does, what it cannot do, what is known and what is new.
+
+**Who reviewed it.** Two adversarial reads by subagents of the executor's model family, neither independent (rule (f)):
+one of the proofs (P2), which found two false statements and several gaps, and one of the whole MVP (P8), which found
+two bugs in the library and several overclaims (§1, the last three rows). All are fixed. No one outside the model family
+has read it; that is R26, and it should come before the PI publishes.
+
+**What the executor would not claim.** That the MVP changes a decision anyone would make: M1's verdict is unsurprising,
+and its value is showing the pipeline on real data. That its words are the right ones: L2 has not run on them. That its
+misalignment numbers from a record are more than plug-in estimates.
+
+**For the second repository.** `mvp/` is self-contained except for the library, `stdalign/spec.py`, and its tests. The
+Lineage fields, the Q-numbers and the links to `../NOTES.md` are provenance and can be dropped. Keep the case's
+registration hash and the order of its commits, since they are its evidence.
