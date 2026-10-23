@@ -1,0 +1,9 @@
+# Versions installed in the environment where this case was rehearsed and run (Python 3.13), read on 2026-10-23.
+# Install with pip install -r requirements.txt; the scripts also import this repository's own package, from its root.
+numpy==2.4.4
+scipy==1.17.1
+torch==2.14.1
+transformers==5.18.0
+tokenizers==0.23.2
+safetensors==0.8.0
+huggingface_hub==1.33.0
