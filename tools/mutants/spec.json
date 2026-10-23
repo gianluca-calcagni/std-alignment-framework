@@ -81,8 +81,8 @@
    "edits": [
     [
      "stdalign/spec.py",
-     "    if bd.upper[-1] <= limit:",
-     "    if bd.lower[-1] <= limit:"
+     "    if bd.upper[N - 1] <= limit:",
+     "    if bd.lower[N - 1] <= limit:"
     ]
    ]
   },
