@@ -275,6 +275,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q80 | make a new plan that fills the minimal gaps for publishing the framework as an MVP, taking priority over the roadmap and backlog, and carry it out until done; the PI will later publish the MVP from a second repository, cleaned for readers. Applied: `mvp/PLAN.md` | PI; executor (the plan) | `mvp/PLAN.md` |
 | Q81 | no executor's work: a brainstorm with a new session, to propose new ideas and steer the project in keeping with the PI's goals, which are to model every type of misalignment, its causes and the diagnostics that expose it, at the low level (random mistakes) as at the high level (hidden intentions), not by the mechanistic route; get familiar with the whole project, flag issues, say what is solid, above all in the foundations and beyond the MVP; then growth, simplicity without loss of generality, firmer formal ground, and general feedback. Applied: §39, two probes, H69–H78, two rows of §1, R27; no item, no library code and no Statement changed | PI | §39 |
 | Q82 | consolidate everything as requests or notes for now; in the same way review the core in full, the continuous version and the slides included; say at the end what is left to read; revise the previous feedback if warranted. Applied: §40; R27 extended; H79; one row of §1, the executor's own slip of lineage; a probe of two thresholds; nothing else changed | PI | §40 |
+| Q83 | explain how the PI's goals are understood, what the project gets right and what not from what has been read, with hunches and insights; the PI is most convinced that the framework can detect and discuss many causes of misalignment, and unsure that all possible causes are identified. Applied: §41; H80–H82; R27 extended; nothing else changed | PI | §41 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -553,6 +554,9 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H77 | **Report the set of specifications a record convicts.** Declare a family of tolerances before the record, and report the least not convicted and the greatest certified; the declared point picks the verdict from a report that shows how it moves (§39.4) | D: a proposal for the report |
 | H78 | **A proof assistant as the independent reader.** Machine-checked statements of the MVP's eighteen results would take the model family's correlated reading out of the mathematics (§39.4) | D: a proposal; what the libraries already hold is to be checked |
 | H79 | **The twin of v14's CORE is short.** A requirement that is a finite list of budgets is stated at the σ-algebra of its criteria, so misalignment on any outcome space depends on the behaviour through the joint law of finitely many numbers, with a dual in finitely many stakes; no default, nearness or compactness enters, and a near miss is graded, `log(δ/b)` against a budget `b` on the distance. Draft 4's hard parts come from tilted families and belong to PURPOSE's twin. What stays hard: infinitely many budgets, events whose boundary the actor charges, unbounded criteria (§40.2) | U: argued from R8 and R11(iii), not proved on general spaces; to read first: the existence of the reverse information projection there |
+| H80 | **No attribution without intervention.** On one condition a breach has three pure explanations that fit exactly, an aim ([[P1 — Every behaviour is a tilt of any other\|P1]]), an incapacity (IN1) and chance; a cause is a property of how the behaviour responds to a change, one intervention for each input of a decision: inform, enable, change the stakes, repeat, hide or show the observer. A cause no intervention separates is reported as a set left open, as [[D9 — Observation and identification\|D9]] reports a quantity (§41) | U: the three explanations are immediate from [[P1 — Every behaviour is a tilt of any other\|P1]] and IN1; the scheme of interventions is a proposal |
+| H81 | **A ladder of dependence.** The low-to-high axis is what the breach depends on: nothing, the situation, being observed, the verdicts so far; each rung a σ-algebra, and independence of it a linear requirement testable by bets. H71 is its first step, H55 its third (§41) | U: a proposal |
+| H82 | **Causes with no name yet, from a generating scheme.** A cause is an input of a decision (knowledge, ability, aim, chance), a place (the actor, its parts, the environment and other actors, the principal, the measurement) and a path back from the actor. Unnamed in `v14/interface.md` and `junctures.md`: capture, a chosen interface, subversion by a third party, composition and delegation, the strategic environment, horizon, inheritance, the parts of the avoidable excess, the principal's drift; and misdiagnosis as a third family. "Unavoidable" hides three of them (§41) | U: a list against two files and a search of the tree; `derived/` and the surveys not read |
 
 ### 5.5 Process
 
@@ -3507,3 +3511,75 @@ proofs of TR1–TR8, `derived-spaces.md` and `vocabulary.md`; the three decks an
 - All code: `stdalign/` but for the signatures of `spec.py`, `checks/`, `tools/`, and the probes of others.
 - These notes: §3–§14, §16–§20, §23–§32, §33.1–§33.3, §33.9–§33.17, and the hunches H4–H39.
 - The archive, tag `v7.10`.
+
+## 41. Are all causes identified? The PI's goals as the executor reads them, 2026-11-11 (Q83)
+
+By the executor, a model of the Claude family, at the PI's request: say how the goals are understood, what the project
+gets right and what not, from what has been read (§40.5 lists what has not), and give hunches. The PI is most convinced
+that the framework can detect and discuss many causes of misalignment, and is not sure that all possible causes are
+identified. Not independent (rule (f)). Notes only; the proposals join R27.
+
+**The goals, as read.** A standard, formal and general, for alignment between any actor and any principal; defined from
+behaviour and declarations, not from mechanisms; aiming at every type of misalignment, its causes and the diagnostics
+that expose each, from random mistakes to hidden intentions; with words that mean what they say, known mathematics
+imported, tests that can fail, and its own limits stated.
+
+**A challenge to the conviction.** The framework *discusses* many causes and *detects effects*. It has shown a cause
+apart from the others once on real data, case M1, with an interface the executor declared, and in simulation in C5. L1
+found that every label that named a cause failed on a case with another cause (§21, §22). So "detects causes" is ahead
+of the evidence, and the reason is structural, below.
+
+**No attribution without intervention** (H80). On one condition, a behaviour `p̂` outside `A` has three pure
+explanations that fit it exactly: an aim, since every full-support behaviour is the pursuit of some objective ([[P1 — Every behaviour is a tilt of any other|P1]]); an
+incapacity, since the feasible set `{p̂}` is an interface's (IN1); and chance, an environment that returns `p̂` whatever
+the action. No record of that condition separates them. A cause is therefore a property of how the behaviour *responds
+to a change*, not of the behaviour: the cause was ignorance if informing the actor removes the breach, incapacity if
+enabling it does, aim if a change of stakes does, chance if repeats disagree. [[D6 — Intervention and pass-through|D6]] and [[D9 — Observation and identification|D9]] are the tools, and
+elicitation (VF3) is their one use so far. Each intervention is a declared link between conditions; a cause that no
+available intervention separates is reported as a set of causes left open, as [[D9 — Observation and identification|D9]] reports a quantity.
+
+**A generating scheme, so that completeness can be checked.** A decision has inputs: what the actor knows (of the
+specification, of the situation, of what its actions do), what it can do (actions, precision, search), what it aims at
+(another aim, no aim, several aims), and chance. Each lies somewhere: in the actor, in its parts, in the environment and
+other actors, in the principal, in the measurement. And the actor may reach back into each of the others. A cause is an
+input, a place and, where there is one, a path back. Completeness is then relative to the scheme, and a gap is a cell
+with no name.
+
+**Cells with no name in `v14/interface.md` and `junctures.md`** (H82). A search of the tree found none of them as a
+form; delegation and wireheading occur in files not yet read.
+1. *Capture*: the actor changes what the principal asks, or who judges. [[A5 — Declared before|A5]] protects a test from a standard fitted
+   after the record, not from an actor that shaped the standard before it.
+2. *A chosen interface*: an actor that avoids information or sheds a capability, so that the breach reads as
+   unavoidable; the converse, gaining capability, is in J4.
+3. *Subversion by a third party*: the actor serves another principal through its inputs, by injection or bribery;
+   neither collusion nor noise.
+4. *Composition*: acceptable parts and an unacceptable whole, through aggregation or a chain of delegation; too little
+   coordination, where [[P39 — Several actors: coordination plus individual misalignment|P39]] names too much. The relation of principal and actor repeats inside the actor, so the scheme
+   is recursive.
+5. *The strategic environment*: competition that makes the breach each actor's best reply. It lands in the environment
+   and reads as unavoidable.
+6. *Horizon*: an actor that weighs the near term more, or less, than the principal; consequences after the record ends.
+7. *Inheritance*: where the actor started, apart from the feedback that shaped it; M1's cause is of this kind.
+8. *Inside the avoidable excess*: an honest mistake about what actions do, a search that stops short, chance, another
+   aim, no aim. FA1 splits what excuses the actor, capability by capability, and leaves what charges it as one term.
+9. *The principal's side over time*: an intention that moved while the specification stayed; outcomes that matter and
+   are not among the declared ones.
+Apart from these, a third family beside misalignment and misspecification: *misdiagnosis*, a wrong verdict on an
+acceptable or an unacceptable actor (J7, J8), which the lists mix with the first.
+
+**"Unavoidable" is where causes go to hide.** It ends the attribution at the actor's boundary. Items 2, 5 and 7 all read
+as unavoidable. The attribution should go on, to whoever set the interface: the "whom" table of `training.md`, extended
+to every term.
+
+**The low-to-high axis as a ladder of dependence** (H81). What the breach depends on: nothing (chance); the situation
+(systematic); being observed (strategic); the verdicts so far (adaptive); and beyond dependence, the principal itself
+changed (capture). Each rung is one more argument of the actor's response, a σ-algebra the breach is measurable against,
+and "the breach does not depend on it" is a linear requirement, testable by bets as [[P40 — Attention: misalignment against ignoring the situation|P40]]'s is. H71 is the first step of
+the ladder and H55 the third.
+
+**What it gets right, and not.** Right: evidence, harm, capability and motive kept apart; what a record can do with each
+label; the view bound; the method. Not: cause-detection claimed ahead of its tests; the charged side unsplit; no
+generating scheme; three cores; little contact with data that could embarrass it.
+
+**From memory, not read:** the interventionist account of causation (Woodward); the Model Penal Code's four levels of
+culpability, purpose, knowledge, recklessness and negligence, of which the care margin is the last.

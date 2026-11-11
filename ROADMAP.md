@@ -95,7 +95,8 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   repeated, and an edge of `stdalign.spec.overall_rate_limit` that returns `∞` for a tiny positive rate. Then (Q82, §40,
   2026-11-11) the core read in full, with the general core and the slides: seven of v13's eleven definitions owe nothing
   to pursuit and stay; the twin of v14's CORE may be short (H79); three of §39's proposals restated what v13 already
-  holds, recorded as a slip (§1).
+  holds, recorded as a slip (§1). Then (Q83, §41) whether all causes are identified: a scheme that generates them, and
+  nine with no name yet (H80–H82).
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
   background conditions assumed without loss of generality, three premises, each with its Status ([A1] behaviour
@@ -320,3 +321,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-10-23 | MVP step P8 (Q80, `NOTES.md` §38): the whole MVP reread adversarially; two library bugs fixed (`unavoidable` with an infinite vertex, a loose upper bound on records with zero counts), "certified" bounds renamed numerical, M1's results reworded and their unregistered choices named, the analysis rerun on the fixed library with every number reproduced; 25 of 25 mutants caught; three failure rows (§1); the outside review asked for (R26) | 2 (solid); 5 (diagnostics) |
 | 2026-11-11 | a brainstorm with a new session (Q81, `NOTES.md` §39): what is solid, nine issues, ten proposals (H69–H78, R27); one bet fixed in advance reaches the plug-in misalignment on every record, proved in the notes and probed; the plug-in given the world's part over-reads without repeated conditions, and an edge of the library, both probed and recorded (§1), neither fixed | 5 (what the quantities mean); 2 (the records true) |
 | 2026-11-11 | the core read in full, with the general core, its transfer results and the three decks (Q82, `NOTES.md` §40): what is solid and what is not in each; §39 revised, three proposals found to restate v13 (§1); H79, the twin of v14's CORE through its criteria; a probe of [P55]'s threshold against §39.3's; what is still unread listed; R27 extended, nothing else changed | 5 (what the quantities mean); 2 (the records true) |
+| 2026-11-11 | the PI's goals as the executor reads them, and whether all causes are identified (Q83, `NOTES.md` §41): no attribution without intervention; a generating scheme for causes and nine cells with no name; the low-to-high axis as a ladder of dependence; H80–H82, R27 extended, nothing else changed | 5 (what the quantities mean) |
