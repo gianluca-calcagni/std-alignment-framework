@@ -96,6 +96,7 @@ later results goes in Notes |
 | **A claim of mutants and a test checked on less than CI runs** | in step P8 (Q80) the executor wrote "25 of 25 mutants caught" into the records after running only the new mutants; the full run then stopped at an old mutant whose target line the step had changed (`pooled_verdict` now reads at the horizon), so the claim had been checked on 11 of 25. And a test pinned at a value found by a random search on the default floating-point path failed on the second path, where the solver lands `1.4·10⁻⁶` higher. Both found by the pre-push gate, before any push; the mutant repointed and the full run done (25 of 25), the test's threshold set between the stalled and the reached values | run the whole mutants file after any change to the code it targets, before writing its count; calibrate a numerical test's threshold on both paths |
 | **A reading as a rate of evidence, stated where no bettor can learn the bet** | the MVP's D5 says misalignment is the rate at which evidence accumulates per decision, and R2(iv) gives the best bet for requirements with a world's part; that bet depends on each condition's own behaviour. With case M1's shape and one draw per condition, the plug-in is about `0.385` whether the truth is `0.190` or `0.394`, and with four draws an actor at `0.190` reads `0.220` (`probes/review/q81_plugin_bias.py`, 2026-11-10); R5's "polynomial factor" is exponential once outcomes number as many as decisions. The results are right; the Interpretation and M1's column of plug-in misalignments say more than a record without repeats can back. Found by the executor of Q81 on reading the MVP against its case, three weeks after both were written and twice reviewed | before an Interpretation says what a record shows, compute the quantity on a record of the regime it will meet, here conditions seen once; a plug-in of a convex function of estimated rates is reported with the number of repeats behind it |
 | **A closed form's smaller root computed by a difference that cancels** | `stdalign.spec._v` takes the smaller root of R10's quadratic as `((θ + 1) − √((θ + 1)² − 4θu))/(2θ)`; for a breach rate `u` that is positive and below about `10⁻¹⁵` the difference is `0` in floating point, the nearest rate comes out `0`, and `overall_rate_limit` returns `∞` where the value at `u = 0` is `0.542` (`q81_plugin_bias.py edge`). A rate computed as a complement or a difference can land there. Found by the executor of Q81 when a simulated truth read infinite; not fixed in that turn, a brainstorm (§39.2, item 9). Of the kind of the row above on the edge of float64 | compute the smaller root of a quadratic in its conjugate form, `2u/((θ + 1) + √…)`; test a closed form at inputs a rounding error away from its special cases, not only at them |
+| **A proposal made before the item it restates was read** | §39 proposed, as H72, to define misalignment on records and to treat laws as declared models, and filed the MVP's two definitions of a behaviour as an issue of the framework; `CORE.md`'s [[A4 — Misalignment is evidence\|A4]] and [[D11 — Record, sample and evidence\|D11]] say exactly that since Q53, and the executor of Q81 had read only `CORE.md`'s §0. It also proposed the audit certificate (H73) without [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]](iii) and [[P17 — What an unobserved condition can hide\|P17]](iv), which it makes operational, and the kernel view (H74) without [[D8 — Conditions, responses and views\|D8]]'s Notes. Found the next turn, when the PI asked for the core to be read in full (Q82, §40.4). The row on lineage amnesia, again, inside one version of the tree | before a proposal is recorded, search the approved core for its words (`git grep`), as that row asks of the archive; a review says what it has not read before it proposes, and proposes about those parts only as questions |
 
 **One that worked.** "Misalignment of a coarse actor grows with effort" was the natural claim from v7.10's B1 ("rises
 with budget"). A 400-instance probe before writing it found 123 non-monotone cases, so [[P8 — An actor that cannot tell outcomes apart|P8]] claims only the small-effort
@@ -273,6 +274,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q79 | a step back: how the executor values the framework, its pros and cons, and its gaps, given the recent changes, the goals, the desiderata, the mathematics and the method. Applied: §37 | PI | §37 |
 | Q80 | make a new plan that fills the minimal gaps for publishing the framework as an MVP, taking priority over the roadmap and backlog, and carry it out until done; the PI will later publish the MVP from a second repository, cleaned for readers. Applied: `mvp/PLAN.md` | PI; executor (the plan) | `mvp/PLAN.md` |
 | Q81 | no executor's work: a brainstorm with a new session, to propose new ideas and steer the project in keeping with the PI's goals, which are to model every type of misalignment, its causes and the diagnostics that expose it, at the low level (random mistakes) as at the high level (hidden intentions), not by the mechanistic route; get familiar with the whole project, flag issues, say what is solid, above all in the foundations and beyond the MVP; then growth, simplicity without loss of generality, firmer formal ground, and general feedback. Applied: §39, two probes, H69–H78, two rows of §1, R27; no item, no library code and no Statement changed | PI | §39 |
+| Q82 | consolidate everything as requests or notes for now; in the same way review the core in full, the continuous version and the slides included; say at the end what is left to read; revise the previous feedback if warranted. Applied: §40; R27 extended; H79; one row of §1, the executor's own slip of lineage; a probe of two thresholds; nothing else changed | PI | §40 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -541,15 +543,16 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H67 | **The record's signature as a declared object.** The outcomes, the world's part `ℰ`, the record's σ-algebra and the horizon, declared together as the contract between a specification and its records; the algorithm supplied by the framework from the acceptable set, not declared (§35.2) | D: a proposal |
 | H68 | **Capability and evaluability pull against each other.** A finer view lowers unavoidable misalignment and weakens excuses, and lets the actor tell evaluation from use, weakening honeypots ([[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]], [[P17 — What an unobserved condition can hide\|P17]]); a report on a more capable actor needs evaluation that the actor's view cannot separate from use, or monitoring in use (`v14/junctures.md`) | D: a proposal |
 | H69 | **One bet, fixed in advance, reaches the plug-in on every record.** The uniform mixture over the convex body of bets against `A` has log-wealth within `d·log(n + 1) + 1` of `n·M_A` of the record's shares, for every sequence, and is a test of R4's kind; so the plug-in has a threshold of conviction valid at every moment and under any dependence, and Sanov's polynomial factor is the regret (§39.3) | D: proved in §39.3, probed on 25 records (`probes/review/q81_universal_bet.py`); the argument remembered from universal portfolios, its sources not read; answers H46 on finite outcomes |
-| H70 | **Evidence a record can learn.** With a world's part, the best bet depends on each condition's behaviour, and the regret of H69 is a sum over conditions; a record that repeats no condition realizes only the value with conditions merged. Let the record's resolution coarsen the conditions; what `n` decisions realize at a resolution of `d` cells is about `n·M − d·log(n + 1)`, a rule for how many conditions and repeats an evaluation should have (§39.2, item 3; §39.4) | D: a proposal; the gap probed (`q81_plugin_bias.py`), the rule not derived |
+| H70 | **Evidence a record can learn.** With a world's part, the best bet depends on each condition's behaviour, and the regret of H69 is a sum over conditions; a record that repeats no condition realizes only the value with conditions merged. Let the record's resolution coarsen the conditions; what `n` decisions realize at a resolution of `d` cells is about `n·M − d·log(n + 1)`, a rule for how many conditions and repeats an evaluation should have (§39.2, item 3; §39.4) | D: a proposal; the gap probed (`q81_plugin_bias.py`), the rule not derived; TR5's refinement schedule is its limit form (§40.2) |
 | H71 | **A coherence split.** The step from misalignment with conditions merged to misalignment given them is the evidence that breaches are predictable from the condition: `0` for an actor that fails alike everywhere, largest for one that always fails on a fixed set. It separates random mistakes from systematic ones, needs repeats, and from `K` repeats is bounded by a moment problem on the rates across conditions. To be compared with Hägele et al.'s split of error into bias and variance, which is taken the other way (§39.4) | U: a proposal; the split is R11's, its estimation and the comparison are not derived |
-| H72 | **Misalignment on records, and three targets.** Define misalignment of a record at a resolution as the growth of the best fixed bet in hindsight, `M_A` of its shares, reachable in real time by H69; laws enter as declared models. Every claim names its target: the realized record, a propensity under a model, or the prospect, never certified. Removes the conditional behaviour of the MVP's D3 from the base (§39.2, item 2; §39.4) | D: a proposal for CORE |
-| H73 | **An audit certificate.** For a pooled requirement over a recorded horizon, decisions sampled for grading after they are made, by the auditor's randomness, give an interval for the realized rate that rests on that randomness alone: no law of the actor, no independence, no evaluation gaming. Replaces R16's target, a propensity, where the requirement asks for a total (§39.2, item 4) | D: a proposal; the known form, risk-limiting audits, not read beyond an abstract |
+| H72 | **Misalignment on records, and three targets.** Define misalignment of a record at a resolution as the growth of the best fixed bet in hindsight, `M_A` of its shares, reachable in real time by H69; laws enter as declared models. Every claim names its target: the realized record, a propensity under a model, or the prospect, never certified. Removes the conditional behaviour of the MVP's D3 from the base (§39.2, item 2; §39.4) | D: a proposal for CORE; it is v13's [[A4 — Misalignment is evidence\|A4]] and [[D11 — Record, sample and evidence\|D11]], which the executor had not read (§40.4, §1) |
+| H73 | **An audit certificate.** For a pooled requirement over a recorded horizon, decisions sampled for grading after they are made, by the auditor's randomness, give an interval for the realized rate that rests on that randomness alone: no law of the actor, no independence, no evaluation gaming. Replaces R16's target, a propensity, where the requirement asks for a total (§39.2, item 4) | D: a proposal; the known form, risk-limiting audits, not read beyond an abstract; it is [[P17 — What an unobserved condition can hide\|P17]](iv) made operational, through [[P16 — An actor cannot behave more differently than it can tell conditions apart\|P16]](iii) (§40.4) |
 | H74 | **The actor as a kernel, the framework as a diagram.** Actor, world, environment and sensor are maps, a behaviour their composition, and misalignment the least divergence between compositions with every map but the actor's held fixed; the world's part, the record's resolution, the interface, a grader's errors, tampering and performativity become one construction, and conversations the chain rule turn by turn (§39.4) | U: a design hunch for the six files; to read first: causal conditioning, Witsenhausen's intrinsic model |
 | H75 | **A taxonomy complete relative to its diagram, and its test.** A form of misalignment is an arrow of H74's diagram and a way it fails; replacing the maps by their ideals one at a time gives a chain along which FA1 splits misalignment, one term per arrow. Tested by a table of planted causes against diagnosed ones on actors built to have one cause each, C4 and C5 its first rows (§39.4) | U: a proposal; the row "valid" of R10 is its finish line |
 | H76 | **A specification is a credal set.** Closed convex sets of distributions judged by the bets they call fair are Walley's imprecise probabilities; R6 is the lower-envelope theorem, a per-decision requirement along a record an imprecise probability tree. To read and to cite (§39.4) | U: from memory and one abstract; nothing read |
 | H77 | **Report the set of specifications a record convicts.** Declare a family of tolerances before the record, and report the least not convicted and the greatest certified; the declared point picks the verdict from a report that shows how it moves (§39.4) | D: a proposal for the report |
 | H78 | **A proof assistant as the independent reader.** Machine-checked statements of the MVP's eighteen results would take the model family's correlated reading out of the mathematics (§39.4) | D: a proposal; what the libraries already hold is to be checked |
+| H79 | **The twin of v14's CORE is short.** A requirement that is a finite list of budgets is stated at the σ-algebra of its criteria, so misalignment on any outcome space depends on the behaviour through the joint law of finitely many numbers, with a dual in finitely many stakes; no default, nearness or compactness enters, and a near miss is graded, `log(δ/b)` against a budget `b` on the distance. Draft 4's hard parts come from tilted families and belong to PURPOSE's twin. What stays hard: infinitely many budgets, events whose boundary the actor charges, unbounded criteria (§40.2) | U: argued from R8 and R11(iii), not proved on general spaces; to read first: the existence of the reverse information projection there |
 
 ### 5.5 Process
 
@@ -3385,3 +3388,122 @@ abstract, except Hägele et al., whose decomposition was read in the text's HTML
 
 From memory, not opened: Walley (1991), *Statistical Reasoning with Imprecise Probabilities*; Cover (1991) and Blum and
 Kalai (1999) on universal portfolios; Hazan, Agarwal and Kale (2007), found by search only, its host not reachable.
+
+## 40. The core read in full, with the general core and the slides; §39 revised, 2026-11-11 (Q82)
+
+By the executor, a model of the Claude family, at the PI's request: consolidate everything as requests or notes for now,
+review the core in full in the same way, the continuous version and the slides included, say what is left to read, and
+revise §39 where warranted. Not independent (rule (f)). Nothing was changed but these records and one probe
+(`probes/review/q82_thresholds.py`); every proposal waits on the PI (R27).
+
+**Read in full this turn.** `CORE.md` (v13); `CORE-GENERAL.md` (draft 4); `general/README.md`, `transfer.md` with the
+proofs of TR1–TR8, `derived-spaces.md` and `vocabulary.md`; the three decks and `slides/README.md`; the Statements of
+[[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]] and [[P55 — What a record of counts certifies, at every size|P55]]; four rows of `v14/MIGRATION.md`. What is still unread is listed at the end.
+
+### 40.1 The finite core, v13
+
+**Solid.**
+- *The form of an item.* Status, Interpretation (declared, verified, justified), "Why this choice", and a table of
+  conventions with a column for whether each changes a verdict. The MVP's items are thinner: no Status, no "Why this
+  choice".
+- *Records first.* [[A4 — Misalignment is evidence|A4]] defines the misalignment of the shares a record shows, and of a behaviour only as the shares
+  that approach it; [[D11 — Record, sample and evidence|D11]] says "records first, samples as a model", and [[D1 — Outcomes, behaviours, divergence and tilt|D1]] that a behaviour is never observed. This is
+  cleaner on what is observed than the MVP's D3.
+- *Seven definitions that owe nothing to pursuit*: [[D1 — Outcomes, behaviours, divergence and tilt|D1]] without the tilt, [[D4 — Resolution|D4]] resolution, [[D6 — Intervention and pass-through|D6]] intervention and
+  pass-through, [[D7 — Feasibility|D7]] feasibility, [[D8 — Conditions, responses and views|D8]] conditions and views, [[D9 — Observation and identification|D9]] observation and identification, [[D11 — Record, sample and evidence|D11]] records. With
+  [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P17 — What an unobserved condition can hide|P17]] they are the framework's vocabulary for causes and for what observation leaves open.
+- *[[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]](iii) and [[P17 — What an unobserved condition can hide|P17]].* How differently an actor can act in two conditions is bounded by how differently its *inputs*
+  are distributed, whatever its view; and from that bound alone the loss an unobserved condition can hide is bounded
+  sharply, and identified when the bound is `0`.
+
+**Issues.**
+1. *Four definitions carry the pursuit model*: [[D2 — Pursuit of an objective|D2]], the standard and ordinal specifications of [[D3 — Specification, declaration and misalignment|D3]], [[D5 — Stakes|D5]] and [[D10 — Evaluator, regression and residual|D10]].
+   L1's disagreements came from them (§21), and v14 moves them to PURPOSE. So "retire v13" in §39 was too blunt: seven
+   of eleven definitions stay as they are.
+2. *The convention "accepted behaviours decide independently"* is the one row of the table that makes [[P55 — What a record of counts certifies, at every size|P55]]'s test
+   accuse an actor for its dependence alone. For a convex specification §39.3 removes that cost: the same counts, with
+   the threshold `log(1/α) + d·log(n + 1) + 1` in place of `log(k_n/α)`, keep their level whenever each decision, given
+   the past, is drawn from an accepted behaviour. The new threshold is `1.3` to `1.8` times the old on the sizes tried
+   (`q82_thresholds.py`). An actor that copies its last decision is still convicted, rightly, since its conditional
+   behaviour is not accepted.
+3. *The world's mix is a limit of the actor in v13* ([[B2 — Episodes and conditions as outcomes|B2]], [[D7 — Feasibility|D7]]) *and part of the measure in v14* (the MVP's D5). Both
+   are in the tree; the six files must choose one, and R1's three errors (§39.1) argue for v14's.
+
+### 40.2 The general core, draft 4
+
+**Solid.**
+- *The three tests*: reduction, invariance, finite determination. They are a method, and they leave the general
+  definitions little freedom.
+- *No topology in the framework.* The line and the line cut at `0` have the same events and different limits, so a
+  nearness is declared or absent. This is the best single argument in the file.
+- *TR3 and its proof*, read line by line with TR1, TR2, TR4–TR8: no error found. Compactness of the closure of the
+  intended behaviours is the hinge; the supremum over decidable descriptions is then a minimum.
+- *The record shows "at least", never "at most"* (GD11), and the dimension law (TR6).
+
+**Issues.**
+1. *It generalizes the core that is being replaced.* GD2, GD5, GD6 and GD10 are about pursuit from a default, and GD3's
+   intended behaviours are tilts equivalent to the default. Its hardest parts, an actor infinitely misaligned for
+   pinning a value, the nearness, the compactness, come from that: a tilted family asks the actor to have a ratio to the
+   default.
+2. *Under v14's specification most of that difficulty does not arise* (H79, a hunch). A requirement that is a finite
+   list of budgets is stated at the σ-algebra of its criteria (the MVP's R11(iii), with conditional behaviours on a
+   standard Borel space), so misalignment depends on the behaviour only through the joint law of finitely many numbers,
+   and its dual is a problem in finitely many stakes (R8, VK4). No default, no nearness and no compactness enter. A near
+   miss is then graded with nothing declared beyond the budget: against "the distance from the target averages at most
+   `b`", an actor that always lands at distance `δ > b` has misalignment `log(δ/b)`, by R8 with the stake at its cap,
+   where GD3 gives `∞`. What stays hard is named: requirements that need infinitely many budgets, such as dominance at
+   every threshold of two or more criteria; a rate limit on an event whose boundary the actor charges, where
+   decidability returns; criteria without bounds. So the twin of v14's CORE may be short, and draft 4 is mostly the twin
+   of PURPOSE.
+3. *TR5 already holds the rule of H70.* Its test refines the description as the record grows, with
+   `|𝒫_{j(n)}|·log(n + 1)/n → 0`: the number of cells a record of `n` decisions can afford. With §39.3 in place of [[P55 — What a record of counts certifies, at every size|P55]]
+   the same schedule keeps its level under dependence, for a convex closure.
+4. *None of TR1–TR8 runs in CI*, and the file's own list of open decisions (section 12) has waited since Q54.
+
+### 40.3 The slides
+
+- *They do desideratum 6's work better than any file*: the specification deck's five questions are the nearest thing the
+  tree has to a guide for a principal.
+- *The five questions leave out what case M1 had to declare*: whether each requirement is per decision or pooled, its
+  horizon, the level, the care margin and the record's resolution. The deck names a level or a horizon once. So the
+  burden of declaring (§39.2, item 7) is understated where a principal would first meet it.
+- *Stale since the MVP*, in the mathematicians' deck, "What is open": certification "not yet proved here" (the MVP's R16
+  proves it for averages), and achievability "open under dependence" (§39.3 answers it for the record's shares).
+- *"Three readings, one number"* holds in the decks' examples, whose two or three conditions repeat; it needs §39.2's
+  third issue as a qualifier wherever conditions are many.
+- *A wording slip*, specification deck, question 3: "on which targets must it not be beaten" says the reference must not
+  be beaten; the requirement is that the actor do no worse.
+- The counts of `slides/README.md` are right: 32, 33 and 12 slides.
+
+### 40.4 §39 revised
+
+- **H72 is v13's position, not a new one.** "Misalignment on records, laws as declared models" is [[A4 — Misalignment is evidence|A4]] and [[D11 — Record, sample and evidence|D11]] (Q53).
+  The MVP left it when it gave each decision a conditional law. The proposal becomes: keep v13's record-first
+  definition, and add v14's validity under dependence through §39.3. A slip of lineage, recorded in §1.
+- **§39.2, item 2 is the MVP's fault, not the framework's.** v13 defines a behaviour once.
+- **H73 is [[P17 — What an unobserved condition can hide|P17]](iv) made operational.** Sampling the decisions to grade from use itself makes the inputs of the audited
+  and the unaudited decisions one distribution, the case `ε = 0`. And [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]](iii) answers RS8 for the purpose of bounds:
+  the actor's view is revealed only from below, but the principal controls the inputs, and their divergence bounds the
+  view's.
+- **H74 has its parts in the tree already**: [[D8 — Conditions, responses and views|D8]] calls a response through a view a kernel composed with a channel, [[D7 — Feasibility|D7]]
+  the environment's fixed responses, GD7 a noise kernel, GD8 a response kernel. What is proposed is to make composition
+  the base, where now it is one distribution and its partitions.
+- **H70's rule is in TR5** (above).
+- **"One core" restated**: the MVP's D4 and D5 in place of [[D2 — Pursuit of an objective|D2]] and [[D3 — Specification, declaration and misalignment|D3]]; v13's [[D4 — Resolution|D4]], [[D6 — Intervention and pass-through|D6]]–[[D9 — Observation and identification|D9]] and [[D11 — Record, sample and evidence|D11]] kept, with
+  [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P17 — What an unobserved condition can hide|P17]], as INTERFACE's first content, as `MIGRATION.md` plans; items in v13's form.
+- **Unchanged**: §39.2's items 1 and 3–9, §39.3, H69, H71, H75–H78, and the order of §39.5, with one addition:
+  INTERFACE's views and identification before any new layer, since they are what the PI's aim uses most and the MVP has
+  none of them.
+
+### 40.5 What is still unread
+
+- `derived/`: the proofs and Statements of 55 propositions, but for [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]], [[P17 — What an unobserved condition can hide|P17]] and [[P55 — What a record of counts certifies, at every size|P55]]'s Statements.
+- `general/dictionary.md` and `general/disciplines.md`.
+- `v14/`: `evidence.md`, `constraints.md`, `order.md`, `targets.md`, `resolution.md` but for RS7, `MIGRATION.md` but for
+  four rows, and the three surveys but for one entry.
+- `mvp/`: `README.md`, `PLAN.md`, the checks, the quickstart, M1's scripts.
+- `STANDARD.md`, `RECORD.md`, `TERMS.md`, `RELATED.md`, `IMPORT.md`, `SCENARIO.md`, `OVERVIEW.md`, `CONTRIBUTING.md`.
+- The six ontologies; the cases W1–W4, C1, C2 and C5.
+- All code: `stdalign/` but for the signatures of `spec.py`, `checks/`, `tools/`, and the probes of others.
+- These notes: §3–§14, §16–§20, §23–§32, §33.1–§33.3, §33.9–§33.17, and the hunches H4–H39.
+- The archive, tag `v7.10`.
