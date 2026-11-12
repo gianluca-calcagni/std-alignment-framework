@@ -278,6 +278,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q83 | explain how the PI's goals are understood, what the project gets right and what not from what has been read, with hunches and insights; the PI is most convinced that the framework can detect and discuss many causes of misalignment, and unsure that all possible causes are identified. Applied: §41; H80–H82; R27 extended; nothing else changed | PI | §41 |
 | Q84 | the PI's confidence rests on the exact, additive factorization, misalignment = unavoidable + the cost of each limitation + the avoidable excess; from §41 it may miss pieces (ignorance, inability, aim, chance); brainstorm whether the gap can be filled in full, with hunches, reading from the derivations as needed. Applied: §42; a probe; H83–H85; R27 extended; nothing else changed | PI | §42 |
 | Q85 | consolidate, then brainstorm whether the factorization can be reshaped so that each term is calculated independently, a stronger property than the order of the factors not mattering; explore hunches and read more as needed. Applied: §43; a probe; H86–H88; R27 extended; nothing else changed | PI | §43 |
+| Q86 | the factorization by stage is not satisfactory: to discuss misalignment the PI wants to know which part is unavoidable, not which part was at stage 1, which gives no clarity on what can be acted on, though the PI is open to challenge; read more of the project; the foundation and the interpretation are to be general, clear and complete from a diagnostic perspective; interventions are a possible addition. Applied: §44; a probe; H89–H91; §43 withdrawn as the diagnostic to report; R27 extended; nothing else changed | PI | §44 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -562,9 +563,12 @@ models are hypotheses that [P3] and [P12] test.
 | H83 | **One chain, from anything to exactly what the actor did.** FA1's chain continues below the interface through sets that describe what the actor did (the view it used, the actions it used, its randomness, its score on a named proxy) down to `{p̂}`; each step is what that feature alone entails, the last the unexplained excess, which measures how complete the list is. Excuse and charge differ by the restriction's owner, not its kind: one ledger of restrictions, each with a cost and an owner (§42) | U: the telescoping is FA1's; [P44] is the pattern for objectives; probed on one instance (`probes/review/q84_factorization.py`) |
 | H84 | **The cost of a limitation depends on the order.** With two capabilities the view costs `0.3628` or `0.2379` and the tool `0.2315` or `0.1066`, by which is removed first; the Shapley share, the average over orders, is exact, additive and non-negative, a convention with axioms; or report each cost alone and together (§42) | D: probed; the choice is the PI's |
 | H85 | **The proxy's frontier.** The least misalignment over the feasible behaviours that score at least `g` on a proxy, less the unavoidable part: convex and non-decreasing in `g`, what reaching that much of the proxy must cost, with no model of optimization; SH1's middle term is its top. And a factorial table of interventions for why a feature is there, its least entry a verified upper bound on the unavoidable part (§42) | U: convexity from R15; not computed |
-| H86 | **A stage-wise specification has terms computed alone.** When the specification asks only that each of the actor's stages, given the history before it, lie in a convex closed set, misalignment is the sum over stages and histories of the stage's own misalignment, weighted by how often the history occurs: the chain rule, the infimum of a sum of separate terms. Each stage then has its own verdict. Per decision against pooled (Q74), per condition against overall (R1, R10) and per stage against the outcome are one dichotomy (§43) | D: proved in §43 in one direction, the converse argued; probed on nine actors (`probes/review/q85_stages.py`) |
+| H86 | **A stage-wise specification has terms computed alone.** When the specification asks only that each of the actor's stages, given the history before it, lie in a convex closed set, misalignment is the sum over stages and histories of the stage's own misalignment, weighted by how often the history occurs: the chain rule, the infimum of a sum of separate terms. Each stage then has its own verdict. Per decision against pooled (Q74), per condition against overall (R1, R10) and per stage against the outcome are one dichotomy (§43) | D: proved in §43 in one direction, the converse argued; probed on nine actors (`probes/review/q85_stages.py`); withdrawn as the diagnostic to report, kept as the device that separates terms (Q86, §44) |
 | H87 | **A pooled requirement is a family of stage-wise ones.** `M_A` is the least `M_R` over the stage-wise specifications inside `A`, attained at the nearest acceptable behaviour; so every misalignment splits exactly into stages as evidence rates, the terms tied through that one behaviour. A declared allocation gives terms computed alone; the total it adds is the price of the allocation (§43) | D: proved in §43; probed on a rate limit over two conditions |
 | H88 | **In place, and in isolation.** A stage's term weighs histories as the actor reached them, so it moves with the stages before it; weighed as an acceptable upstream would give them, it does not, and is measured by testing the stage on given inputs; the terms in isolation, summed, differ from the whole by what the stages do to one another (§43) | U: a proposal; the two weightings probed |
+| H89 | **Tiers nested by nature.** World ⊇ deployment ⊇ actor ∋ the behaviour: unavoidable in this world, the deployment's limits, what the actor cannot do, what it did not do; the order is forced, each tier has an owner and a remedy, the first two are computed from facts verifiable apart from the actor, and the last two are an interval that only records under interventions narrow (§44) | U: FA1 on a chain fixed by fact; RS8(iii) and VF3 for the interval; probed (`probes/review/q86_tiers.py`) |
+| H90 | **Every term with its bounds, every bound with its remedy.** The tree has six results of one shape, a quantity the passive record leaves open and the new record that narrows it: R13, [P51], [P17], RS8, VF3, [P48]. Ask it of every term of the factorization, as [D9] asks it of a quantity; that is what complete from a diagnostic perspective can mean (§44) | D: a proposal for the report |
+| H91 | **Interventions in the foundation.** A declared change of one declared object, its tier named, with a link saying the actor is the same; its potential, computed, and its realized gain, verified from records before and after. A positive realized gain is the first verified cost of a limitation; a strong incentive shows what an actor can do and hides its aim ([P37]). Completeness is relative to the declared remedies (§44) | U: generalizes [D6] and [P12]; a proposal |
 
 ### 5.5 Process
 
@@ -3746,3 +3750,87 @@ two limitations the Shapley share is their mean.
 as far as the specification is stage-wise; where it is pooled, the terms are tied by one choice, the allocation, which
 can be declared or left to the actor's benefit. The independence is a property of what the principal asks, not of how
 the answer is split.
+
+## 44. A factorization by who can act, and interventions in the foundation, 2026-11-12 (Q86)
+
+By the executor, a model of the Claude family, at the PI's request. The PI finds §43's factorization by stage
+unsatisfactory: to discuss misalignment one wants to know which part is unavoidable, not which part was at stage 1; a
+stage gives no clarity on what can be acted on. The PI asks for more of the project to be read, for a foundation and an
+interpretation that are general, clear and complete from a diagnostic perspective, and finds interventions a possible
+addition. Not independent (rule (f)). Read this turn: `STANDARD.md` in full; `derived/README.md`; the Statements of
+[P9], [P12], [P24] and [P37]; the plain terms of [P3], [P10], [P43], [P45], [P46], [P50] and [P51]; RS5, RS6 and RS8.
+One probe (`probes/review/q86_tiers.py`, output in `RESULTS-q86.md`). Notes only; the proposals join R27.
+
+**Conceded.** A stage says where, and where is neither a cause nor an action. §43's result stands as mathematics, and as
+the device that lets terms be computed alone; as the diagnostic to report, it is withdrawn. One kind of "where" does
+select a remedy, the condition: [P24]'s misalignment by condition, whose terms are computed alone.
+
+**A challenge in return.** "Unavoidable" is the term a record can say least about. VF2 gives its status as computed from
+the declarations, and RS8(iii) says of its commonest part, what the actor cannot see, that a record bounds it from above
+and never shows it positive: acting alike in two situations may be choice as well as blindness. So "which part is
+unavoidable" has no answer until it says unavoidable *for whom*, and for the actor itself the honest answer is an
+interval.
+
+**Tiers nested by nature** (H89; desiderata 1, 4, 6). Four sets, each inside the one before for a reason of fact, so
+that their order is not a choice, which is what §42 found missing in "the cost of each limitation":
+`world ⊇ deployment ⊇ actor ∋ the behaviour`.
+
+| Term | What it is | Who can act | Remedy | What a record can do with it |
+|---|---|---|---|---|
+| unavoidable in this world | the least misalignment of any actor with everything the world offers | the principal | change the task or the specification | computed from the environment and the specification; the environment is verifiable apart from the actor |
+| the deployment's limits | what is lost by the information and the tools this deployment withholds | the operator | grant the information or the tool | computed from facts of the deployment that can be inspected: the inputs delivered ([P16](iii)), the tools offered |
+| the actor's limits, "cannot" | what this actor cannot do with what it is given | the shaper | train or replace the actor | an interval from `0`: bounded above by the best the actor has been shown to do; never shown positive by a record of the actor |
+| the actor's choice, "did not" | what it could do and did not | whoever instructs, rewards or selects it | instruct, reward, select | an interval: bounded below by what elicitation recovered |
+
+The four add up exactly, each is non-negative, and the last two are known together from a record and the deployment:
+only their split is open. In the probe an actor deployed with the view and without the look-up has misalignment
+`0.3274`: `0` unavoidable in this world, `0.2315` from the deployment, and `0.0959` that is "cannot" or "did not", each
+anywhere in `[0, 0.0959]` on the record as deployed. A second record, under an instruction, shows the actor reaching
+`0.2333`: "cannot" is then at most `0.0018` and "did not" at least `0.0941`.
+
+**Inside a tier, §42 still holds.** Two limits of one deployment, a view and a tool, have no order of their own; each is
+reported alone and with the other. And §42's named features describe the last tier, with its unexplained remainder.
+
+**One schema for every term that excuses** (H90; desiderata 1, 3, 5). The tree already holds six results of one shape: a
+quantity the passive record leaves open, the set of values it can take, and the kind of new record that narrows it.
+
+| What is left open | Its bounds | What narrows it |
+|---|---|---|
+| misalignment inside the record's cells | the MVP's R13 | a finer record |
+| tampering with the measurement | [P51] | an audit, or a re-measurement, through a channel the actor cannot touch |
+| behaviour where nobody watches | [P17], from the inputs by [P16](iii) | conditions made to look like use; or sampling from use itself (H73) |
+| what the actor cannot see | RS8(iii) | conditions that call on the distinction |
+| what the actor cannot do | VF3 | elicitation; a strong incentive, under which every actor does what it can ([P37](i)) |
+| which aim the behaviour serves | [P48], [P44] | objectives named before the record |
+
+Stated once: *every term of the factorization is reported as the set of values the records and the declarations leave
+it, with the intervention that would narrow it.* [D9] is this for a quantity; the proposal is to ask it of every term.
+That is what "complete from a diagnostic perspective" can mean: no term without its bounds, and no bound without its
+remedy. It is the MVP that lacks this, not the framework: `STANDARD.md` asks for nineteen results, among them
+pass-through, unobserved conditions, the evaluation gap, tampering, drift and sensitivity, and the MVP's report has
+verdicts, a rate and the split by one interface.
+
+**Interventions as part of the foundation** (H91; desiderata 1, 5). [D6] defines one kind, a known incentive, and [P12]
+its test. Generalized: an **intervention** is a declared change of one declared object, the tier it belongs to named,
+everything above it held fixed, with a declared link saying that the actor is the same. By tier: on the specification,
+no new record is needed, and the answer is a sensitivity ([P10], VK7); on the deployment, inform or enable; on the
+actor, instruct, reward or retrain; on the observer, hide or show it. Each has two numbers. Its **potential**, computed
+from the declarations: how much the least misalignment falls. Its **realized gain**, verified from a record before and
+one after: how much the actor's misalignment fell. A positive realized gain is the first statement of the form "this
+limitation cost this actor at least this much" that a record verifies; in the probe, granting the look-up, with a
+potential of `0.2315`, was followed by a fall of `0.3274`. A potential with no realized gain says the limit was not what
+held the actor back, and moves the charge down a tier. One warning the tree already proves: a strong incentive makes all
+actors alike ([P37]), so rewarding shows what an actor *can* do and hides what it *aims* at; aims show when the
+incentive and the observer are taken away.
+
+**What would make it complete, and relative to what.** For a declared list of remedies, the potentials and realized
+gains of every subset are all that declarations and records determine about causes at that grain; every statement of
+cause is a function of that table, and every summary, tiers, shares, alone and together, a view of it. Complete, then,
+means relative to the declared remedies: a cause that none of them touches stays in the unexplained remainder or in
+"unavoidable in this world", and the report says which remedies were considered.
+
+**Open.** The actor's tier needs the link between the actor before and after an intervention, which is a declaration
+(VF3); retraining makes another actor. The intervals are for misalignment known exactly; with estimates their ends carry
+intervals of their own. The world's tier needs the environment, which a deployment may not let anyone explore. Whether
+principals can name remedies more easily than interfaces is untested, though a remedy is a thing one can do, and an
+interface is not.
