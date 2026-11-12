@@ -277,6 +277,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q82 | consolidate everything as requests or notes for now; in the same way review the core in full, the continuous version and the slides included; say at the end what is left to read; revise the previous feedback if warranted. Applied: §40; R27 extended; H79; one row of §1, the executor's own slip of lineage; a probe of two thresholds; nothing else changed | PI | §40 |
 | Q83 | explain how the PI's goals are understood, what the project gets right and what not from what has been read, with hunches and insights; the PI is most convinced that the framework can detect and discuss many causes of misalignment, and unsure that all possible causes are identified. Applied: §41; H80–H82; R27 extended; nothing else changed | PI | §41 |
 | Q84 | the PI's confidence rests on the exact, additive factorization, misalignment = unavoidable + the cost of each limitation + the avoidable excess; from §41 it may miss pieces (ignorance, inability, aim, chance); brainstorm whether the gap can be filled in full, with hunches, reading from the derivations as needed. Applied: §42; a probe; H83–H85; R27 extended; nothing else changed | PI | §42 |
+| Q85 | consolidate, then brainstorm whether the factorization can be reshaped so that each term is calculated independently, a stronger property than the order of the factors not mattering; explore hunches and read more as needed. Applied: §43; a probe; H86–H88; R27 extended; nothing else changed | PI | §43 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -561,6 +562,9 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H83 | **One chain, from anything to exactly what the actor did.** FA1's chain continues below the interface through sets that describe what the actor did (the view it used, the actions it used, its randomness, its score on a named proxy) down to `{p̂}`; each step is what that feature alone entails, the last the unexplained excess, which measures how complete the list is. Excuse and charge differ by the restriction's owner, not its kind: one ledger of restrictions, each with a cost and an owner (§42) | U: the telescoping is FA1's; [[P44 — What named objectives explain\|P44]] is the pattern for objectives; probed on one instance (`probes/review/q84_factorization.py`) |
 | H84 | **The cost of a limitation depends on the order.** With two capabilities the view costs `0.3628` or `0.2379` and the tool `0.2315` or `0.1066`, by which is removed first; the Shapley share, the average over orders, is exact, additive and non-negative, a convention with axioms; or report each cost alone and together (§42) | D: probed; the choice is the PI's |
 | H85 | **The proxy's frontier.** The least misalignment over the feasible behaviours that score at least `g` on a proxy, less the unavoidable part: convex and non-decreasing in `g`, what reaching that much of the proxy must cost, with no model of optimization; SH1's middle term is its top. And a factorial table of interventions for why a feature is there, its least entry a verified upper bound on the unavoidable part (§42) | U: convexity from R15; not computed |
+| H86 | **A stage-wise specification has terms computed alone.** When the specification asks only that each of the actor's stages, given the history before it, lie in a convex closed set, misalignment is the sum over stages and histories of the stage's own misalignment, weighted by how often the history occurs: the chain rule, the infimum of a sum of separate terms. Each stage then has its own verdict. Per decision against pooled (Q74), per condition against overall (R1, R10) and per stage against the outcome are one dichotomy (§43) | D: proved in §43 in one direction, the converse argued; probed on nine actors (`probes/review/q85_stages.py`) |
+| H87 | **A pooled requirement is a family of stage-wise ones.** `M_A` is the least `M_R` over the stage-wise specifications inside `A`, attained at the nearest acceptable behaviour; so every misalignment splits exactly into stages as evidence rates, the terms tied through that one behaviour. A declared allocation gives terms computed alone; the total it adds is the price of the allocation (§43) | D: proved in §43; probed on a rate limit over two conditions |
+| H88 | **In place, and in isolation.** A stage's term weighs histories as the actor reached them, so it moves with the stages before it; weighed as an acceptable upstream would give them, it does not, and is measured by testing the stage on given inputs; the terms in isolation, summed, differ from the whole by what the stages do to one another (§43) | U: a proposal; the two weightings probed |
 
 ### 5.5 Process
 
@@ -3662,3 +3666,83 @@ upper bound, verified by a record, on the unavoidable part, which a declaration 
 Shapley convention, the PI's to choose; the terms' reading as evidence, which holds only on linear chains (FA2); the
 features' estimation from records, each feature being a statement about the policy; and that the first tier describes
 and only the second explains.
+
+## 43. Can each term be computed on its own? 2026-11-12 (Q85)
+
+By the executor, a model of the Claude family, at the PI's request: consolidate, then brainstorm whether the
+factorization can be reshaped so that each term is calculated independently, a stronger property than the order not
+mattering. Not independent (rule (f)). Consolidation: §39–§42 and R27 already hold everything; the tree was clean. Read
+for this: VK4 and the library's reading of limits inside a condition. Searched: the tree has no word for rectangular
+sets, contracts that assume and guarantee, or sufficient and necessary causes. One probe gives every number
+(`probes/review/q85_stages.py`, output in `RESULTS-q85.md`), on an invented instance. Notes only; the proposals join
+R27.
+
+**What "independently" can mean.** (a) *Computed alone*: a term needs its own piece of the behaviour and its own piece
+of the specification, and no joint optimization and no order. (b) *Unmoved by the others*: changing another cause leaves
+the term as it was. (b) is stronger still.
+
+**No reshaping of the terms can do it for the specification as it stands.** If each limitation has a cost of its own and
+the costs add up to the least misalignment for every combination of limitations, that least misalignment is a sum over
+limitations. In §42's instance it is not: `0.3628 + 0.2315 ≠ 0.4694`. The view and the tool interact in the world: the
+tool is worth less to an actor that cannot tell when to use it. That is a fact about the case, and no accounting removes
+it. What can be reshaped is the specification.
+
+**A specification written stage by stage has terms that are computed alone** (H86). Let an outcome be a tuple of stages
+in a declared order, such as the situation, what the actor read of it, what it did, what came of it; some stages the
+world's, the others the actor's. By the chain rule a behaviour is one conditional behaviour per stage and history. Call
+a specification **stage-wise** when it asks, of each of the actor's stages `j` and each history `h` before it, that the
+conditional behaviour lie in a convex closed set `A_j(h)`, and nothing else. Then
+`M_A(p) = Σ_j Σ_h p(h)·M_{A_j(h)}(p_j(·|h))`, the sum over the actor's stages.
+*Proof.* For `a ∈ A` sharing the world's stages, the chain rule gives `KL(p‖a) = Σ_j Σ_h p(h)·KL(p_j(·|h)‖a_j(·|h))`,
+the world's stages contributing `0`. The average is taken under `p`, and `A` lets each `a_j(·|h)` be chosen in `A_j(h)`
+separately, so the infimum of the sum is the sum of the infima. ∎ Where a stage of the world's comes after one of the
+actor's, "sharing the world's stages" is H74's reading of the MVP's D5, not yet written; in the probe the world's only
+stage is the first. The converse is argued, not proved: if misalignment is such a sum for every behaviour, the
+behaviours of misalignment `0` are those acceptable stage by stage, so the specification was stage-wise. Each term is
+non-negative, the order is the order of events and not a choice, and each stage's part of the best bet is fair given the
+past, so the stage wealths multiply and **each stage has its own verdict**, as each requirement has. In the probe, with
+contracts on the reading and on the decision given the reading, the two terms computed separately add up to the
+misalignment the library finds on the twelve joint outcomes, within `5·10⁻¹⁰`, for nine actors; the perception term is
+`0`, `0.0894` or `1.1736` whatever the decisions.
+
+**This is one dichotomy the framework already has, in three places.** Along time: a per-decision requirement, each
+decision given the past, against a pooled one (Q74). Across the world's part: a requirement per condition (R1(ii))
+against an overall one (R10). Within a decision: a requirement per stage against one on the final outcome. In each place
+the first kind adds up with terms computed alone, by the chain rule, and the second couples its terms. The earlier
+splits that are "always exact" by the chain rule ([[P46 — What runs share between conditions, and what they do not|P46]], [[P54 — Dependence and drift only add evidence|P54]], R1) are of the first kind. `junctures.md`'s first rule,
+a contract at every juncture, is what makes a specification stage-wise; this is its payoff.
+
+**A pooled requirement is a family of stage-wise ones, judged at the one kindest to the actor** (H87). For any `A`,
+`M_A(p)` is the least of `M_R(p)` over the stage-wise specifications `R` inside `A`: each such `R` gives at least `M_A`,
+and the one that holds only the nearest acceptable behaviour `a*` gives exactly it. So
+`M_A(p) = Σ_j Σ_h p(h)·KL(p_j(·|h)‖a*_j(·|h))` for every specification: an exact split into stages with each term an
+evidence rate, with no hypothesis of linearity, where FA2 needs one. Its terms answer "where is the breach most cheaply
+repaired", and they move together, through `a*`. That is where the coupling lives: in the benefit of the doubt over how
+a shared tolerance is split. In the probe the overall limit of 5% gives `0.0494`, the least over 20,001 allocations to
+the two conditions gives `0.0494`, an equal allocation `0.1324`; and at the kindest allocation the open questions are
+charged `0.0076` though their rate, 2.9%, is under the limit. A principal who declares the allocation gets terms
+computed alone and fixed before the record; one who does not gets the kindest allocation, fitted to the actor. The
+difference between the two totals is the **price of the allocation**: what the declared split charges an actor for not
+being allowed to make up at one stage for another.
+
+**In place, and in isolation** (H88). A stage's term weighs each history by how often the actor reached it. So the terms
+are computed alone, sense (a), and the decision term still moves when the perception changes: `0.3612`, `0.2890` and `0`
+for the actor without the look-up, as its perception goes from exact to blind, since a blind actor never reaches the
+reading where the look-up is needed. That is right for what happened. For sense (b), weigh each history as an acceptable
+upstream would give it: the decision term is then `0.3612` whatever the perception, and it is measured by testing the
+stage on inputs it is given, not on those it meets. The terms in isolation do not add up to the misalignment of the
+whole; their sum less the whole is what the stages do to one another. These are the unit test and the integration test
+of engineering.
+
+**What it costs.** The record must note the stages between the situation and the outcome; for an agent, its tool calls
+are such a record, its reading of the situation usually is not. The principal must say what is acceptable at each stage,
+which is more to declare (desideratum 6 against 2), and whether stage contracts together guarantee an outcome
+requirement is a computation on the declarations, not done here. A stage-wise specification forbids making up for one
+stage at another. And two limitations of one stage still interact; for those §42 stands, with each cost given alone and
+together: alone is what the limitation suffices for, together with the rest removed is what it is necessary for, and for
+two limitations the Shapley share is their mean.
+
+**So, to the PI's question.** Yes, each term can be computed on its own, exactly and with the terms adding up, when and
+as far as the specification is stage-wise; where it is pooled, the terms are tied by one choice, the allocation, which
+can be declared or left to the actor's benefit. The independence is a property of what the principal asks, not of how
+the answer is split.

@@ -97,7 +97,8 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   to pursuit and stay; the twin of v14's CORE may be short (H79); three of §39's proposals restated what v13 already
   holds, recorded as a slip (§1). Then (Q83, §41) whether all causes are identified: a scheme that generates them, and
   nine with no name yet (H80–H82); and (Q84, §42) the factorization continued to an unexplained excess, its terms shown
-  to move with the chain's order (H83–H85).
+  to move with the chain's order (H83–H85); and (Q85, §43) terms computed alone for a specification written stage by
+  stage (H86–H88).
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
   background conditions assumed without loss of generality, three premises, each with its Status ([A1] behaviour
@@ -324,3 +325,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-11-11 | the core read in full, with the general core, its transfer results and the three decks (Q82, `NOTES.md` §40): what is solid and what is not in each; §39 revised, three proposals found to restate v13 (§1); H79, the twin of v14's CORE through its criteria; a probe of [P55]'s threshold against §39.3's; what is still unread listed; R27 extended, nothing else changed | 5 (what the quantities mean); 2 (the records true) |
 | 2026-11-11 | the PI's goals as the executor reads them, and whether all causes are identified (Q83, `NOTES.md` §41): no attribution without intervention; a generating scheme for causes and nine cells with no name; the low-to-high axis as a ladder of dependence; H80–H82, R27 extended, nothing else changed | 5 (what the quantities mean) |
 | 2026-11-12 | whether the factorization can be filled in full (Q84, `NOTES.md` §42): the cost of a limitation moves with the order of the chain, probed; the chain continued below the interface, through features of what the actor did, to an unexplained excess; one ledger of restrictions with owners; H83–H85, R27 extended, nothing else changed | 5 (what the quantities mean) |
+| 2026-11-12 | whether each term of the factorization can be computed on its own (Q85, `NOTES.md` §43): yes, exactly, for a specification written stage by stage, by the chain rule, probed on nine actors; a pooled requirement is a family of such specifications judged at the kindest; terms in place and in isolation; H86–H88, R27 extended, nothing else changed | 5 (what the quantities mean) |
