@@ -276,6 +276,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q81 | no executor's work: a brainstorm with a new session, to propose new ideas and steer the project in keeping with the PI's goals, which are to model every type of misalignment, its causes and the diagnostics that expose it, at the low level (random mistakes) as at the high level (hidden intentions), not by the mechanistic route; get familiar with the whole project, flag issues, say what is solid, above all in the foundations and beyond the MVP; then growth, simplicity without loss of generality, firmer formal ground, and general feedback. Applied: §39, two probes, H69–H78, two rows of §1, R27; no item, no library code and no Statement changed | PI | §39 |
 | Q82 | consolidate everything as requests or notes for now; in the same way review the core in full, the continuous version and the slides included; say at the end what is left to read; revise the previous feedback if warranted. Applied: §40; R27 extended; H79; one row of §1, the executor's own slip of lineage; a probe of two thresholds; nothing else changed | PI | §40 |
 | Q83 | explain how the PI's goals are understood, what the project gets right and what not from what has been read, with hunches and insights; the PI is most convinced that the framework can detect and discuss many causes of misalignment, and unsure that all possible causes are identified. Applied: §41; H80–H82; R27 extended; nothing else changed | PI | §41 |
+| Q84 | the PI's confidence rests on the exact, additive factorization, misalignment = unavoidable + the cost of each limitation + the avoidable excess; from §41 it may miss pieces (ignorance, inability, aim, chance); brainstorm whether the gap can be filled in full, with hunches, reading from the derivations as needed. Applied: §42; a probe; H83–H85; R27 extended; nothing else changed | PI | §42 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -557,6 +558,9 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H80 | **No attribution without intervention.** On one condition a breach has three pure explanations that fit exactly, an aim ([[P1 — Every behaviour is a tilt of any other\|P1]]), an incapacity (IN1) and chance; a cause is a property of how the behaviour responds to a change, one intervention for each input of a decision: inform, enable, change the stakes, repeat, hide or show the observer. A cause no intervention separates is reported as a set left open, as [[D9 — Observation and identification\|D9]] reports a quantity (§41) | U: the three explanations are immediate from [[P1 — Every behaviour is a tilt of any other\|P1]] and IN1; the scheme of interventions is a proposal |
 | H81 | **A ladder of dependence.** The low-to-high axis is what the breach depends on: nothing, the situation, being observed, the verdicts so far; each rung a σ-algebra, and independence of it a linear requirement testable by bets. H71 is its first step, H55 its third (§41) | U: a proposal |
 | H82 | **Causes with no name yet, from a generating scheme.** A cause is an input of a decision (knowledge, ability, aim, chance), a place (the actor, its parts, the environment and other actors, the principal, the measurement) and a path back from the actor. Unnamed in `v14/interface.md` and `junctures.md`: capture, a chosen interface, subversion by a third party, composition and delegation, the strategic environment, horizon, inheritance, the parts of the avoidable excess, the principal's drift; and misdiagnosis as a third family. "Unavoidable" hides three of them (§41) | U: a list against two files and a search of the tree; `derived/` and the surveys not read |
+| H83 | **One chain, from anything to exactly what the actor did.** FA1's chain continues below the interface through sets that describe what the actor did (the view it used, the actions it used, its randomness, its score on a named proxy) down to `{p̂}`; each step is what that feature alone entails, the last the unexplained excess, which measures how complete the list is. Excuse and charge differ by the restriction's owner, not its kind: one ledger of restrictions, each with a cost and an owner (§42) | U: the telescoping is FA1's; [[P44 — What named objectives explain\|P44]] is the pattern for objectives; probed on one instance (`probes/review/q84_factorization.py`) |
+| H84 | **The cost of a limitation depends on the order.** With two capabilities the view costs `0.3628` or `0.2379` and the tool `0.2315` or `0.1066`, by which is removed first; the Shapley share, the average over orders, is exact, additive and non-negative, a convention with axioms; or report each cost alone and together (§42) | D: probed; the choice is the PI's |
+| H85 | **The proxy's frontier.** The least misalignment over the feasible behaviours that score at least `g` on a proxy, less the unavoidable part: convex and non-decreasing in `g`, what reaching that much of the proxy must cost, with no model of optimization; SH1's middle term is its top. And a factorial table of interventions for why a feature is there, its least entry a verified upper bound on the unavoidable part (§42) | U: convexity from R15; not computed |
 
 ### 5.5 Process
 
@@ -3583,3 +3587,78 @@ generating scheme; three cores; little contact with data that could embarrass it
 
 **From memory, not read:** the interventionist account of causation (Woodward); the Model Penal Code's four levels of
 culpability, purpose, knowledge, recklessness and negligence, of which the care margin is the last.
+
+## 42. Can the factorization be filled in full? 2026-11-12 (Q84)
+
+By the executor, a model of the Claude family, at the PI's request: the PI's confidence rests on the exact, additive
+factorization, misalignment = unavoidable + the cost of each limitation + the avoidable excess; §41 suggests it misses
+pieces (ignorance, inability, aim, chance); brainstorm whether the gap can be filled in full, reading from the
+derivations as needed. Not independent (rule (f)). Read for this: the Statements of [[P8 — An actor that cannot tell outcomes apart|P8]], [[P15 — Misalignment splits into what the actor could avoid and what it could not|P15]], [[P44 — What named objectives explain|P44]], [[P48 — Misalignment when the target is uncertain|P48]] and [[P49 — Outer and inner misalignment|P49]].
+One probe gives every number (`probes/review/q84_factorization.py`, output in `RESULTS-q84.md`), on an invented instance
+in the shape of the slides' support bot. Notes only; the proposals join R27.
+
+**A caution first.** That the sum is exact and additive is not where the value lies. FA1 telescopes along any chain of
+sets, for any functional (§35.1 says so of severity), so exactness is free. What carries meaning is that each term is
+non-negative, which comes from the nesting; what each set is called; and which chain is chosen, and in what order.
+
+**"The cost of each limitation" is not one number** (H84). With two capabilities, a view that tells open questions from
+account ones and a look-up tool, the least misalignment is `0` with both, `0.2315` without the tool, `0.3628` without
+the view, `0.4694` with neither. So losing the view costs `0.3628` if it goes first and `0.2379` if it goes after the
+tool; losing the tool, `0.2315` or `0.1066`. Every order adds up to `0.4694`. The framework's working agreement asks
+that a split name its chain (H49); the headline formula does not show that the terms move with it. An order-free
+attribution exists: each limitation's average cost over all orders, its Shapley share, here `0.3004` and `0.1691`. It is
+exact, additive, and non-negative because the least misalignment can only grow as limitations are added; it is a
+convention all the same, justified by its axioms (from memory, not read), and it costs one computation per subset of
+limitations. The honest alternative is to report each limitation's cost alone and together, so that the overlap shows.
+
+**One chain, from anything to exactly what the actor did** (H83). FA1's chain stops at the actor's interface, and the
+excess is what is left. Nothing in FA1 requires stopping there. Below the interface, continue with sets that *describe
+what the actor did*, each holding the actor: the feasible behaviours that use no more of the view than it used; no more
+of the actions; that randomize at least as much; that score at least as high as it does on a named proxy; down to the
+single behaviour `p̂`. The least misalignment over each set, less that of the set before, is what that feature alone
+entails: any actor with the feature is at least that misaligned. The steps are exact, additive and non-negative as
+before, and the last step, to `{p̂}`, is what no named feature entails: the **unexplained excess**. [[P44 — What named objectives explain|P44]] is this
+pattern for named objectives, with (iii) its monotone step: naming more only moves misalignment from unexplained to
+named. In the probe, an actor with both capabilities that, on account questions, answers 20%, escalates 60% and looks up
+20% has an excess of `0.0848`; "looks up at most 20% of the time" alone entails `0.0845`, "answers account questions at
+least 20% of the time" alone `0.0194`, both together `0.0845`, and `0.0003` is unexplained.
+
+**So the gap can be filled, in this sense.** The formula becomes: misalignment = the cost of each limitation imposed on
+the actor + what each named feature of its behaviour entails + the unexplained excess. "In full" has a test: the
+unexplained excess is zero, or below a declared margin. That is a property of a list of features for one actor and one
+record, to be measured, never a theorem about all actors.
+
+**The line between excuse and charge is an owner, not a kind.** "Never looks the account up" is one set and one number,
+whether the tool was withheld or the actor left it unused. So the object is one list of restrictions, each with a cost
+and an owner: nature, the designer of the interface, the shaper (SH1's middle term is the restriction to what the
+feedback rewards), other actors, the actor itself. "Unavoidable", "the cost of a limitation", "outer" and "avoidable"
+are names of owners. This removes §41's objection that "unavoidable" hides causes: the ledger does not stop at the
+actor's boundary.
+
+**Where the four inputs of §41 land.**
+- *Inability*: imposed restrictions on actions and on precision. Already terms.
+- *Ignorance* is two things. Information not delivered is an imposed restriction of the view, already a term.
+  Information delivered and not used is a feature: the response factors through a coarser view than the declared one
+  (RS8). The number is the same; which it is needs an intervention.
+- *Chance* is three things. Noise the actor cannot remove is an imposed restriction (GD7's precision). Randomness it
+  chooses is a feature. The luck of the record is not a cause of misalignment at all, but of misdiagnosis, and the
+  test's level handles it.
+- *Aim*, without a model of optimization (H85): the set of feasible behaviours that score at least `g` on a proxy `G` is
+  convex, so the least misalignment over it, less the unavoidable part, is a convex, non-decreasing curve in `g`: what
+  reaching that much of the proxy must cost. Its value at the actor's own score is what the proxy entails; SH1's middle
+  term is its value at the top. Proposed name: the proxy's frontier. Not computed here.
+- *A wrong belief about what actions do, and a search that stops short* are not features of one behaviour. They are
+  differences between this actor and a counterpart, and need either a model of how the actor chooses (PURPOSE: a path of
+  hypothetical actors from the ideal one to this one, each step changing one input, exact, with terms of either sign) or
+  interventions.
+
+**The second tier: why a feature is there** (H80, continued). Each feature has a reason, which only a change can show.
+With `k` interventions, such as informing, enabling and changing the stakes, the misalignment of the actor under every
+subset of them is a table of `2^k` numbers, a factorial experiment. It splits the drop in misalignment exactly into each
+intervention's own effect and their interactions, with signs free; and the least misalignment any subset reaches is an
+upper bound, verified by a record, on the unavoidable part, which a declaration only asserts.
+
+**What stays open.** Whether a short list of features leaves little unexplained on real actors; a canonical order or the
+Shapley convention, the PI's to choose; the terms' reading as evidence, which holds only on linear chains (FA2); the
+features' estimation from records, each feature being a statement about the policy; and that the first tier describes
+and only the second explains.
