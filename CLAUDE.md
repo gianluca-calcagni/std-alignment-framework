@@ -10,9 +10,9 @@ framework. It is a working agreement, not a claimed property.
 2. Read `REQUESTS.md`, what waits on the PI, and `NOTES.md` §19, the last handover, with §20, the general core, §21, the
    labels, and §22–§38, the revamp, the v14 draft (`v14/README.md`) and the MVP (`mvp/README.md`), since, with §39 and
    §40, the last brainstorm and its review of the core, and §41 to §44, on causes, the factorization and interventions,
-   and §45 and §46, the goals, ethos and method as summarized for the PI, with the PI's answers; then §1, the failure
-   modes with their evidence, every row; then §15, the last review of the whole framework, and §34, the external review
-   of v14 weighed.
+   and §45 and §46, the goals, ethos and method as summarized for the PI, with the PI's answers, and §47, the coverage
+   table and INTERFACE on two concepts, begun; then §1, the failure modes with their evidence, every row; then §15, the
+   last review of the whole framework, and §34, the external review of v14 weighed.
 3. Then `README.md`'s rules and the format of an item, and whatever files the step needs.
 
 ## Who decides

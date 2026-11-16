@@ -102,7 +102,8 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   (H89–H91). Before any decision on these, the PI asked for a summary of the goals, the ethos and the method (Q87, §45),
   and answered its four questions (Q88, §46): completeness belongs to each basis, the factorization validates and
   simplifies, and "general" means that every form of misalignment authors popularized has a level that diagnoses it; a
-  coverage test is proposed (H92).
+  coverage test is proposed (H92). Begun (Q89, §47): `v14/coverage.md`, a first draft of the table, and
+  `v14/interface-items.md`, INTERFACE on two concepts; neither reviewed nor in CI.
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
   background conditions assumed without loss of generality, three premises, each with its Status ([A1] behaviour
@@ -333,3 +334,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-11-12 | a factorization by who can act, at the PI's objection to stages (Q86, `NOTES.md` §44): world, deployment, actor, nested by fact; "cannot" and "did not" as an interval that interventions narrow, probed; every term with its bounds and its remedy; interventions with a potential and a realized gain; `STANDARD.md` and eleven more results read; H89–H91, R27 extended, nothing else changed | 5 (what the quantities mean) |
 | 2026-11-16 | the goals, the ethos and the method as the executor understands them, for the PI to confirm before deciding on §39–§44 (Q87, `NOTES.md` §45), after reading the decisions Q1–Q86, the record, the contribution terms, the rules for cases and ontologies and the MVP's plan; four questions (R28); nothing else changed | 1 (the goal) |
 | 2026-11-16 | the PI's four answers (Q88, `NOTES.md` §46): completeness belongs to each basis, not to the core; the factorization validates and simplifies, no more; the executor's judgement is for the whole framework; "general" means every popularized form has a level that diagnoses it. A coverage test proposed (H92); R28 closed; a correction to §41; nothing else changed | 1 (the goal) |
+| 2026-11-16 | begun at the PI's word (Q89, `NOTES.md` §47): `v14/interface-items.md`, INTERFACE on two concepts, a limit and a link, the earlier ten notions as their implementations, with the unavoidable part as an interval and three verdicts on culpability, probed; `v14/coverage.md`, thirty-one forms of misalignment with the least level that diagnoses each, from the tree's files, no source read yet | 5 (diagnostics); 1 (the goal: generality as a test) |

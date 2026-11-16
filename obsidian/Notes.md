@@ -281,6 +281,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q86 | the factorization by stage is not satisfactory: to discuss misalignment the PI wants to know which part is unavoidable, not which part was at stage 1, which gives no clarity on what can be acted on, though the PI is open to challenge; read more of the project; the foundation and the interpretation are to be general, clear and complete from a diagnostic perspective; interventions are a possible addition. Applied: §44; a probe; H89–H91; §43 withdrawn as the diagnostic to report; R27 extended; nothing else changed | PI | §44 |
 | Q87 | before deciding anything, read more of the project, to be sure of having its goals, ethos and methodology in full; then summarize them for the PI to confirm. Applied: §45, the summary and four questions; R28; nothing else changed | PI | §45 |
 | Q88 | the PI's answers to §45's four questions: the core cannot be complete by itself, since refining causes needs a refined basis; the factorization validates the theory and the diagnostics, an elegance with practical simplifications, and need not be more special than that; the executor's judgement is wanted for the entire framework, the MVP being worked on with another model; and "general" is operational: if some authors popularized a form of misalignment, there should be a level where it can be diagnosed somehow. Applied: §46; R28 closed; H92; nothing else changed | PI | §46 |
+| Q89 | the PI likes §46's proposal; INTERFACE is to be general: no distinct concepts where a few can do and the difference is in the implementation, as one distribution with constraints replaced a distribution made of two elements. Applied: `v14/interface-items.md`, INTERFACE on two concepts, a limit and a link, with five results; `v14/coverage.md`, thirty-one forms with the least level that diagnoses each; a probe; §47 | PI; executor (the drafts) | §47; `v14/interface-items.md`; `v14/coverage.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -571,7 +572,8 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H89 | **Tiers nested by nature.** World ⊇ deployment ⊇ actor ∋ the behaviour: unavoidable in this world, the deployment's limits, what the actor cannot do, what it did not do; the order is forced, each tier has an owner and a remedy, the first two are computed from facts verifiable apart from the actor, and the last two are an interval that only records under interventions narrow (§44) | U: FA1 on a chain fixed by fact; RS8(iii) and VF3 for the interval; probed (`probes/review/q86_tiers.py`) |
 | H90 | **Every term with its bounds, every bound with its remedy.** The tree has six results of one shape, a quantity the passive record leaves open and the new record that narrows it: R13, [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], [[P17 — What an unobserved condition can hide\|P17]], RS8, VF3, [[P48 — Misalignment when the target is uncertain\|P48]]. Ask it of every term of the factorization, as [[D9 — Observation and identification\|D9]] asks it of a quantity; that is what complete from a diagnostic perspective can mean (§44) | D: a proposal for the report |
 | H91 | **Interventions in the foundation.** A declared change of one declared object, its tier named, with a link saying the actor is the same; its potential, computed, and its realized gain, verified from records before and after. A positive realized gain is the first verified cost of a limitation; a strong incentive shows what an actor can do and hides its aim ([[P37 — A strong incentive masks the actor, and can fake alignment\|P37]]). Completeness is relative to the declared remedies (§44) | U: generalizes [[D6 — Intervention and pass-through\|D6]] and [[P12 — What interventions reveal\|P12]]; a proposal |
-| H92 | **A coverage test for generality.** One table: every form of misalignment that authors popularized, with its source's definition and a paradigm case; the least layer and declared objects it needs; the item that diagnoses it; what a record must contain; the diagnosis's status; and whether it is diagnosed now, defined only, or not expressible, with the limit. Generality then fails or holds row by row, and the table says which layer to build next (§46, after the PI's answer 4) | D: a proposal; `general/vocabulary.md` and L1 are its precedents |
+| H92 | **A coverage test for generality.** One table: every form of misalignment that authors popularized, with its source's definition and a paradigm case; the least layer and declared objects it needs; the item that diagnoses it; what a record must contain; the diagnosis's status; and whether it is diagnosed now, defined only, or not expressible, with the limit. Generality then fails or holds row by row, and the table says which layer to build next (§46, after the PI's answer 4) | D: a proposal; `general/vocabulary.md` and L1 are its precedents; a first draft from the tree's own files, no source read, in `v14/coverage.md` (Q89) |
+| H93 | **INTERFACE on two concepts.** A limit, a set of behaviours declared as a fact with its owner, the same object as a requirement; and a link, which makes what the actor did in another condition a shown capability. What the actor could do lies between what it has shown and what limits it, so the unavoidable part and the avoidable excess are intervals, and culpability has three verdicts: shown, excused, open (`v14/interface-items.md`) | D: drafted at the PI's direction (Q89); its results are monotonicity and a table of results already in the tree; probed, not in CI |
 
 ### 5.5 Process
 
@@ -3966,3 +3968,40 @@ again, and §41 did say the surveys were unread.
 sources read row by row. (2) INTERFACE as items, starting from what v13 proved. (3) Each new diagnostic says the chain
 along which it adds up, as the working agreement already asks: the factorization as validation, in the PI's sense.
 Nothing is started.
+
+## 47. A coverage table and INTERFACE on two concepts, begun, 2026-11-16 (Q89)
+
+The PI liked §46's proposal and set one rule for INTERFACE: be general, and define no distinct concept where a few can
+do and the difference is in the implementation; as when an earlier core compared a distribution made of two elements,
+and one distribution with constraints proved more general and simpler to define. Two drafts in `v14/`, by the executor,
+not reviewed, not in CI; one probe (`probes/review/q89_interface.py`, output in `RESULTS-q89.md`).
+
+**`v14/interface-items.md`.** The earlier drafts gave INTERFACE ten notions: actions, signals, views, an environment, a
+resolution, a precision, an honest channel, observed conditions, interventions, elicitation. The draft keeps two. A
+**limit** is a closed set of behaviours declared as a fact, with its owner and what verifies it: the same kind of object
+as a requirement, with the status of a fact where a requirement is a norm. A **link** declares that what the actor does
+in one condition it could do in another, and makes what it did there a **shown capability**. What the actor could do is
+then not declared: it lies between what it has shown and what limits it. Five short results follow: the unavoidable part
+and the avoidable excess as intervals (IR1); three verdicts on culpability, shown, excused and open (IR2); the ten
+notions as limits, shown capabilities or links, each with its shape and the result that proves it (IR3); limits adding
+up along an order, as a validation (IR4); an intervention as a chosen condition with a link, or a lifted limit, with no
+object of its own (IR5). Desiderata: 3, no mechanism assumed; 4, the object a requirement already is; 1, every verdict
+with what a record can do with it. In the probe the unavoidable part of the support bot is anywhere in
+`[0.2315, 0.3274]` from one record and exactly `0.2315` with a second and their mixtures; the four cases give "culpable,
+shown", "excused by the limits" and "open" twice. Case M1 reads "open" under it, where the MVP says "not culpable": a
+difference for whoever works on the MVP to weigh.
+
+**`v14/coverage.md`.** Thirty-one forms of misalignment, each with the least level that can define it, the declared
+objects it needs, the item that diagnoses it, what a record can do with the diagnosis, and its state. On the executor's
+reading of the tree, with no source read yet: 10 diagnosed, 6 partly, 11 defined and not diagnosed, 3 not expressible, 1
+outside by choice. INTERFACE holds the most rows not yet diagnosed. Two forms that authors popularized have no level,
+influence on the principal and the loss of the principal's options over time, and by Q88 are owed one. The file says
+what a row needs to be called checked: its source read, a paradigm case and a contrary case registered, the diagnosis at
+the least level, and any disagreement kept.
+
+**Not done.** No source was read for the table. Neither file has checks in CI. INTERFACE's twin for outcomes that are
+not finite, limits over time, and an actor that changes its own limits are not written. `interface.md` and the MVP's D9
+are untouched.
+
+**Next, unless the PI redirects.** The table's rows, source by source, starting with the INTERFACE rows that have a
+public paradigm case; then the two rows with no level.
