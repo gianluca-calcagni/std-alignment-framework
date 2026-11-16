@@ -279,6 +279,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q84 | the PI's confidence rests on the exact, additive factorization, misalignment = unavoidable + the cost of each limitation + the avoidable excess; from §41 it may miss pieces (ignorance, inability, aim, chance); brainstorm whether the gap can be filled in full, with hunches, reading from the derivations as needed. Applied: §42; a probe; H83–H85; R27 extended; nothing else changed | PI | §42 |
 | Q85 | consolidate, then brainstorm whether the factorization can be reshaped so that each term is calculated independently, a stronger property than the order of the factors not mattering; explore hunches and read more as needed. Applied: §43; a probe; H86–H88; R27 extended; nothing else changed | PI | §43 |
 | Q86 | the factorization by stage is not satisfactory: to discuss misalignment the PI wants to know which part is unavoidable, not which part was at stage 1, which gives no clarity on what can be acted on, though the PI is open to challenge; read more of the project; the foundation and the interpretation are to be general, clear and complete from a diagnostic perspective; interventions are a possible addition. Applied: §44; a probe; H89–H91; §43 withdrawn as the diagnostic to report; R27 extended; nothing else changed | PI | §44 |
+| Q87 | before deciding anything, read more of the project, to be sure of having its goals, ethos and methodology in full; then summarize them for the PI to confirm. Applied: §45, the summary and four questions; R28; nothing else changed | PI | §45 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -3834,3 +3835,76 @@ means relative to the declared remedies: a cause that none of them touches stays
 intervals of their own. The world's tier needs the environment, which a deployment may not let anyone explore. Whether
 principals can name remedies more easily than interfaces is untested, though a remedy is a thing one can do, and an
 interface is not.
+
+## 45. The goals, the ethos and the method, as the executor understands them, for the PI to confirm, 2026-11-16 (Q87)
+
+By the executor, a model of the Claude family, at the PI's request: before deciding anything on §39–§44, read more of
+the project, be sure to have its goals, ethos and methodology in full, and summarize them for the PI to confirm. Read
+this turn: the table of decisions, Q1–Q86, row by row; `CONTRIBUTING.md`; `RECORD.md`; `cases/README.md`; the head of
+`ontologies/README.md` with the disciplines declined; §6, §28 and §33.16 of these notes, with §5.5 and the licence's aim
+in §11; `mvp/README.md` and `mvp/PLAN.md`; the heads of `IMPORT.md` and `TERMS.md`. A summary, not a decision; what the
+PI corrects is to be recorded here.
+
+**The goals.**
+1. *A standard, not a theory of one system.* One formal vocabulary and one way of reporting, for alignment between any
+   actor and any principal: models, people, institutions, organisms. A discipline enters through an ontology, a
+   dictionary that proves nothing, and only if it has a principal and an actor, behaviour in numbers, and data that can
+   be read.
+2. *Diagnosis.* To say of a misalignment what kind it is, what caused it and what would expose it, from random mistakes
+   to hidden intentions, without opening the actor.
+3. *Words that mean what they say.* A definition labelled wrongly gives a false sense of understanding, and accuracy
+   here is worth its cost (Q57); the core was reworked twice for it (Q58, Q59).
+4. *Known mathematics, imported and credited.* Novelty is not a goal (`RECORD.md`, the honest position); what is added
+   is the vocabulary, the assembly and the standard.
+5. *Accountable to the world.* Predictions that can fail, diagnostics that split what happened, limits stated.
+6. *A guide.* A person or a model is led from an intention to a declaration, and shown how each declaration shapes the
+   verdicts.
+7. *Shared.* Progress stays open while the work is research (Q50); the MVP is what an outside reader can read, run and
+   judge.
+
+**The ethos.**
+- *Honest before impressive.* Failures are recorded and never repaired away; refuted predictions and retractions keep
+  their rows; the base rate is quoted against the framework (5 of 15 in the archive, 1 of 3 since).
+- *The framework supplies no values.* Every normative choice is a principal's, declared before the record.
+- *Behaviour, not mind.* Goals and intentions are hypotheses a record can refute.
+- *Forced, or named.* Each object is the one its word's requirements force; every remaining choice is a convention,
+  listed with whether it changes a verdict; "forced" says what it is conditional on (§28).
+- *General, or the loss named.* Assume less and derive more; the core holds only what cannot be derived; nothing is
+  merged only to be fewer (Q2, Q5).
+- *No quick fixes* (Q58); reliability over elegance.
+- *Distrust of one's own reading.* Every review says who made it; one model family is not independent; "more checks,
+  fewer re-reads" (§1).
+- *Contact before growth.* When theory outran tests the PI froze it (Q26, Q27).
+- *Care with other people's work.* Open texts only, no third-party data in the tree, and in doubt the safer way with
+  licences (Q27, Q36).
+- *The PI decides, and wants to be challenged*: foundational choices are given time (Q73), what is beyond the PI's
+  expertise is parked with the reasons (Q72), and the executor is asked to say what is wrong.
+
+**The method.**
+- *Reverse physics* (Carcassi): every starting point says what kind it is, imported, assumed without loss, or assumed,
+  and every definition what its object is in the world, how a record verifies it, and why; every statement has a status,
+  verifiable, refutable or neither.
+- *Items in a fixed form, held by lint*: a property of the framework is claimed only if a tool checks it.
+- *A proof and a check that could fail*, the check mutation-tested, on two floating-point paths, with tolerances from
+  the quantity's scale; a number comes from a probe that reproduces it.
+- *Cases registered before they are computed*, hashed, rehearsed on synthetic data, thresholds with a source; seen data
+  are exploratory; world, simulation and diagnostic cases count differently.
+- *Labels tested on paradigm cases* chosen before computing (L1, then L2).
+- *Lessons become defaults* only through a template, a tool or a check (Q29).
+- *Finite first.* The general twins claim nothing until proved, and must reduce to the finite case, use only events, and
+  be limits of finite descriptions.
+- *Layers by question*: what happened, whether the actor could have done otherwise, why, and how it was shaped.
+- *Desiderata as filters*: what they force is decided, what they favour is proposed.
+- *The record of the work*: decisions (Q), requests (R), hunches (H), failure modes (§1), a roadmap with drift checks,
+  one step to a branch and a pull request.
+
+**Where §39–§44 sit against this.** They are hunches and notes, as asked. Several add structure, stages, tiers,
+interventions, features, at a time when the project's own rule and §37 say that contact with the world is owed first;
+the PI asked for the brainstorm, and the tension is the PI's to weigh. Three of them restated v13 for want of reading
+(§1).
+
+**What the executor is unsure of, and asks.** (i) Whether completeness of causes is meant for the core or for the layers
+above it. (ii) Whether the factorization, unavoidable, limitations, avoidable, is to head every report, or is one
+diagnostic among those of `STANDARD.md`. (iii) Which comes first now: the MVP's outside review and publication, or the
+diagnostic side it lacks. (iv) Whether "general" is meant to keep the four ontologies beyond machine learning in play
+for the next version, or as a constraint on design only.
