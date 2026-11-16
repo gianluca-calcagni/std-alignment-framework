@@ -280,6 +280,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q85 | consolidate, then brainstorm whether the factorization can be reshaped so that each term is calculated independently, a stronger property than the order of the factors not mattering; explore hunches and read more as needed. Applied: §43; a probe; H86–H88; R27 extended; nothing else changed | PI | §43 |
 | Q86 | the factorization by stage is not satisfactory: to discuss misalignment the PI wants to know which part is unavoidable, not which part was at stage 1, which gives no clarity on what can be acted on, though the PI is open to challenge; read more of the project; the foundation and the interpretation are to be general, clear and complete from a diagnostic perspective; interventions are a possible addition. Applied: §44; a probe; H89–H91; §43 withdrawn as the diagnostic to report; R27 extended; nothing else changed | PI | §44 |
 | Q87 | before deciding anything, read more of the project, to be sure of having its goals, ethos and methodology in full; then summarize them for the PI to confirm. Applied: §45, the summary and four questions; R28; nothing else changed | PI | §45 |
+| Q88 | the PI's answers to §45's four questions: the core cannot be complete by itself, since refining causes needs a refined basis; the factorization validates the theory and the diagnostics, an elegance with practical simplifications, and need not be more special than that; the executor's judgement is wanted for the entire framework, the MVP being worked on with another model; and "general" is operational: if some authors popularized a form of misalignment, there should be a level where it can be diagnosed somehow. Applied: §46; R28 closed; H92; nothing else changed | PI | §46 |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -560,7 +561,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H79 | **The twin of v14's CORE is short.** A requirement that is a finite list of budgets is stated at the σ-algebra of its criteria, so misalignment on any outcome space depends on the behaviour through the joint law of finitely many numbers, with a dual in finitely many stakes; no default, nearness or compactness enters, and a near miss is graded, `log(δ/b)` against a budget `b` on the distance. Draft 4's hard parts come from tilted families and belong to PURPOSE's twin. What stays hard: infinitely many budgets, events whose boundary the actor charges, unbounded criteria (§40.2) | U: argued from R8 and R11(iii), not proved on general spaces; to read first: the existence of the reverse information projection there |
 | H80 | **No attribution without intervention.** On one condition a breach has three pure explanations that fit exactly, an aim ([[P1 — Every behaviour is a tilt of any other\|P1]]), an incapacity (IN1) and chance; a cause is a property of how the behaviour responds to a change, one intervention for each input of a decision: inform, enable, change the stakes, repeat, hide or show the observer. A cause no intervention separates is reported as a set left open, as [[D9 — Observation and identification\|D9]] reports a quantity (§41) | U: the three explanations are immediate from [[P1 — Every behaviour is a tilt of any other\|P1]] and IN1; the scheme of interventions is a proposal |
 | H81 | **A ladder of dependence.** The low-to-high axis is what the breach depends on: nothing, the situation, being observed, the verdicts so far; each rung a σ-algebra, and independence of it a linear requirement testable by bets. H71 is its first step, H55 its third (§41) | U: a proposal |
-| H82 | **Causes with no name yet, from a generating scheme.** A cause is an input of a decision (knowledge, ability, aim, chance), a place (the actor, its parts, the environment and other actors, the principal, the measurement) and a path back from the actor. Unnamed in `v14/interface.md` and `junctures.md`: capture, a chosen interface, subversion by a third party, composition and delegation, the strategic environment, horizon, inheritance, the parts of the avoidable excess, the principal's drift; and misdiagnosis as a third family. "Unavoidable" hides three of them (§41) | U: a list against two files and a search of the tree; `derived/` and the surveys not read |
+| H82 | **Causes with no name yet, from a generating scheme.** A cause is an input of a decision (knowledge, ability, aim, chance), a place (the actor, its parts, the environment and other actors, the principal, the measurement) and a path back from the actor. Unnamed in `v14/interface.md` and `junctures.md`: capture, a chosen interface, subversion by a third party, composition and delegation, the strategic environment, horizon, inheritance, the parts of the avoidable excess, the principal's drift; and misdiagnosis as a third family. "Unavoidable" hides three of them (§41) | U: a list against two files and a search of the tree; `derived/` and the surveys not read; capture is in `v14/related.md`, entry 21, as influence on the principal, filed outside scope (§46) |
 | H83 | **One chain, from anything to exactly what the actor did.** FA1's chain continues below the interface through sets that describe what the actor did (the view it used, the actions it used, its randomness, its score on a named proxy) down to `{p̂}`; each step is what that feature alone entails, the last the unexplained excess, which measures how complete the list is. Excuse and charge differ by the restriction's owner, not its kind: one ledger of restrictions, each with a cost and an owner (§42) | U: the telescoping is FA1's; [[P44 — What named objectives explain\|P44]] is the pattern for objectives; probed on one instance (`probes/review/q84_factorization.py`) |
 | H84 | **The cost of a limitation depends on the order.** With two capabilities the view costs `0.3628` or `0.2379` and the tool `0.2315` or `0.1066`, by which is removed first; the Shapley share, the average over orders, is exact, additive and non-negative, a convention with axioms; or report each cost alone and together (§42) | D: probed; the choice is the PI's |
 | H85 | **The proxy's frontier.** The least misalignment over the feasible behaviours that score at least `g` on a proxy, less the unavoidable part: convex and non-decreasing in `g`, what reaching that much of the proxy must cost, with no model of optimization; SH1's middle term is its top. And a factorial table of interventions for why a feature is there, its least entry a verified upper bound on the unavoidable part (§42) | U: convexity from R15; not computed |
@@ -570,6 +571,7 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H89 | **Tiers nested by nature.** World ⊇ deployment ⊇ actor ∋ the behaviour: unavoidable in this world, the deployment's limits, what the actor cannot do, what it did not do; the order is forced, each tier has an owner and a remedy, the first two are computed from facts verifiable apart from the actor, and the last two are an interval that only records under interventions narrow (§44) | U: FA1 on a chain fixed by fact; RS8(iii) and VF3 for the interval; probed (`probes/review/q86_tiers.py`) |
 | H90 | **Every term with its bounds, every bound with its remedy.** The tree has six results of one shape, a quantity the passive record leaves open and the new record that narrows it: R13, [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], [[P17 — What an unobserved condition can hide\|P17]], RS8, VF3, [[P48 — Misalignment when the target is uncertain\|P48]]. Ask it of every term of the factorization, as [[D9 — Observation and identification\|D9]] asks it of a quantity; that is what complete from a diagnostic perspective can mean (§44) | D: a proposal for the report |
 | H91 | **Interventions in the foundation.** A declared change of one declared object, its tier named, with a link saying the actor is the same; its potential, computed, and its realized gain, verified from records before and after. A positive realized gain is the first verified cost of a limitation; a strong incentive shows what an actor can do and hides its aim ([[P37 — A strong incentive masks the actor, and can fake alignment\|P37]]). Completeness is relative to the declared remedies (§44) | U: generalizes [[D6 — Intervention and pass-through\|D6]] and [[P12 — What interventions reveal\|P12]]; a proposal |
+| H92 | **A coverage test for generality.** One table: every form of misalignment that authors popularized, with its source's definition and a paradigm case; the least layer and declared objects it needs; the item that diagnoses it; what a record must contain; the diagnosis's status; and whether it is diagnosed now, defined only, or not expressible, with the limit. Generality then fails or holds row by row, and the table says which layer to build next (§46, after the PI's answer 4) | D: a proposal; `general/vocabulary.md` and L1 are its precedents |
 
 ### 5.5 Process
 
@@ -3908,3 +3910,59 @@ above it. (ii) Whether the factorization, unavoidable, limitations, avoidable, i
 diagnostic among those of `STANDARD.md`. (iii) Which comes first now: the MVP's outside review and publication, or the
 diagnostic side it lacks. (iv) Whether "general" is meant to keep the four ontologies beyond machine learning in play
 for the next version, or as a constraint on design only.
+
+## 46. The PI's four answers, and what they change, 2026-11-16 (Q88)
+
+The PI answered §45's four questions and corrected nothing else in the summary. Recorded as the PI gave them, then what
+the executor draws from them. Read for this: the table of `v14/related.md`, its 33 entries in one line each. Notes only.
+
+**The answers.**
+1. *Completeness.* The core cannot be complete by itself, even if one wanted it to be: to refine causes, one needs a
+   refined basis.
+2. *The factorization* is meant to validate the theory and the diagnostics: a sprinkle of elegance, if true, that also
+   gives practical simplifications. It need not be more special than that.
+3. *The executor's role.* Not the MVP alone, which the PI will work on with another model; the executor's judgement is
+   wanted for the entire framework.
+4. *"General" is operational.* Misalignment scenarios are to be discussed in full generality: if some authors
+   popularized a form of misalignment, there should be a level at which it can be diagnosed somehow.
+
+**What they settle.**
+- *From 1:* completeness is asked of each basis, not of the core. A layer adds declared objects, and a cause is told
+  apart at the first layer whose objects separate it; the column "the least it needs" of `v14/interface.md`'s table is
+  the right form. §41's question, whether all causes are identified, becomes answer 4's: for each form, is there a
+  level.
+- *From 2:* §42–§44 gave the factorization more weight than the PI does. They stay as notes. Nothing is to be bent to
+  make a sum prettier; a split earns its place by checking that a set of diagnostics accounts for the whole, and by
+  saving work. The two questions that closed §44's answer to the PI, on what should head a report, fall away.
+- *From 3:* the MVP's findings of §39.2, the plug-in that over-reads without repeats and the library's edge, are for
+  whoever works on the MVP; they are in R27 and are not pursued here.
+- *From 4:* generality has a test that can fail, row by row.
+
+**A coverage test** (H92; desiderata 3, 4, 5). One table. Its rows are the forms of misalignment that authors
+popularized, each with its source's definition, read in an open text, and one paradigm case from that source. Its
+columns: the least layer, and the declared objects, that the form needs; the item that diagnoses it; what a record must
+contain; the status of the diagnosis, verifiable, refutable or an interval; and its state: diagnosed now, defined but
+not diagnosed, or not expressible, with the limit that says why. Where a row is computed, the case is registered first,
+as L1's were. The tree has done this twice on other vocabularies: `general/vocabulary.md` matches some forty everyday
+words to formal objects, each with its evidence, and L1 tested twelve labels. It has the material for this one: the
+twenty-one forms of `v14/interface.md`, the thirty-three entries of `v14/related.md`, of which entry 32 already names
+paradigm cases for label tests, and §41's list. The table would say which layer to build next: the one with the most
+rows it alone can diagnose.
+
+**A first reading, not the table.** Of the twenty-one forms listed, about seven are diagnosed in CORE; the rest need
+INTERFACE, PURPOSE or SHAPING, which exist as drafts and proposals. And the survey itself marks forms that no level
+reaches yet: influence on the principal (entry 21, said to be outside v14's scope), an actor with no clean boundary from
+its world (entry 22, a limit to record), the loss of the principal's future options (entry 20), oversight that is itself
+an actor (entry 33). By answer 4 the first and the third of these are owed a level. So the executor's judgement for the
+whole framework: INTERFACE is where generality is decided, and it is the least built of the layers that matter. v13
+holds its best material, [[D6 — Intervention and pass-through|D6]]–[[D9 — Observation and identification|D9]], [[P16 — An actor cannot behave more differently than it can tell conditions apart|P16]] and [[P17 — What an unobserved condition can hide|P17]].
+
+**A correction to §41.** Its list said that capture had no name in the tree. `v14/related.md`, entry 21, has it, as a
+ban on influencing the principal's channel, "[[P50 — Tampering: a change of the measurement, not of the world|P50]]'s tampering turned on the principal", and files it as outside scope.
+The search was for the word; the idea was there. Not a new failure mode: §1's row on proposals made before reading,
+again, and §41 did say the surveys were unread.
+
+**What the executor would do next, for the PI to weigh.** (1) The coverage table, from the tree's own material first,
+sources read row by row. (2) INTERFACE as items, starting from what v13 proved. (3) Each new diagnostic says the chain
+along which it adds up, as the working agreement already asks: the factorization as validation, in the PI's sense.
+Nothing is started.
