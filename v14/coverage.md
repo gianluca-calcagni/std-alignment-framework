@@ -1,9 +1,10 @@
 # Coverage: which forms of misalignment the framework can diagnose, and at which level
 
-> **Status: a first draft (Q89), the executor's, built from the tree's own files; not reviewed.** No source was read
-> for it: each row names where the tree treats the form, and a row counts as checked only when its source's definition
-> has been read in an open text and a paradigm case from it registered (`NOTES.md` §46, H92). Until then the column
-> "State" is the executor's reading of the tree, to be corrected row by row.
+> **Status: a first draft (Q89), the executor's, built from the tree's own files; then checked by G1 (Q90), whose
+> results are the last sections; not reviewed.** No source was read for it: each row names where the tree treats the
+> form, and a row counts as checked only when its source's definition has been read in an open text and a paradigm case
+> from it registered (`NOTES.md` §46, H92). Until then the column "State" is the executor's reading of the tree, to be
+> corrected row by row.
 
 The PI's test of generality (Q88): if some authors popularized a form of misalignment, there should be a level at which
 the framework can diagnose it somehow. This table is that test, one row per form. A row fails when no level diagnoses
@@ -68,3 +69,148 @@ expressible**, with the limit.
    as L1's were (`probes/labels/`).
 3. The framework's diagnosis on both, at the least level, with its status.
 4. Where the diagnosis disagrees with the form's sense, the row says so and keeps the disagreement.
+
+## After G1 (2026-11-17, Q90)
+
+G1, registered before it ran (`probes/coverage/`), read a source for each form it cased and checked the framework's
+diagnosis on a paradigm case and a contrary case: 79 predictions, all held. Its own reading of what that is worth is in
+`probes/coverage/RESULTS.md`: the cases were built to show their diagnoses, so a held row says that the framework can
+state and diagnose the form at its level, and how its diagnosis departs from the source's word; it does not say that the
+diagnosis works on a real record. "Checked" below means that, and no more.
+
+| Row | G1's cases | Source read | What G1 found | State after G1 |
+|---|---|---|---|---|
+| 1 | G1 | — | as predicted | diagnosed; checked |
+| 2 | G2 | Amodei et al. 2016, §3 | silent until the vase is named in a requirement | checked; silent by design (desideratum 2) |
+| 3 | G3 | Amodei et al. 2016, §2 | the gap by the mix of situations | diagnosed; checked |
+| 4 | G4 | — (H47) | the grader sees nothing; the hidden part is all of it | diagnosed; checked |
+| 5 | — | — | — | diagnosed in v13 (W4); not cased |
+| 6 | G6 | Hägele et al. 2026 | the step from tasks merged to tasks apart: `0` for the same failure rate everywhere, positive for one task always failed | checked; needs repeats, as before |
+| 7 | G7 | Ji et al. 2023, §2 (*summary*) | the unsupported part of a hallucination is hidden from a grader that checks contradiction only | checked |
+| 8, 9 | G8 | — | three verdicts: excused, culpable and shown, open | checked |
+| 10 | G10 | — | an upper end on the cost of not telling situations apart; shown culpable once it is seen telling them apart | checked |
+| 11 | G11 | van der Weij et al. 2024, §2 | a drop under evaluation on one topic, with a control topic; **broader**: the intent is not diagnosed | checked; conduct only |
+| 12 | G12 | Needham et al. 2025 | evidence of acting differently, and its sign; telling evaluation from use, asked | checked |
+| 13 | G13 | Greenblatt et al. 2024 | conduct keyed to the training cue; **broader**: the reason is not diagnosed | checked; conduct only |
+| 14 | G14 | Everitt et al. 2021, §4 | tampering with the reward's input against an honest channel; gaming the sensor honestly is not tampering | checked |
+| 15 | G15 | Sharma et al. 2024, §2 | answers keyed to the user's stated belief | checked |
+| 16, 28 | G16 | Motwani et al. 2024 | the action's dependence on private information given the open messages; overt collusion scores `0` | checked |
+| 17 | G17 | Greshake et al. 2023, §3 | a requirement per kind of retrieved text | checked |
+| 18 | G18 | Hadfield-Menell et al. 2017 | a forbidden outcome in the condition of shutdown | checked; the incentive to allow shutdown is PURPOSE's |
+| 19 | G19 | Carroll et al. 2024 | **a level proposed**: below | defined, at CORE with the principal's state in the outcome; checked |
+| 20 | G20 | Turner et al. 2021, Definition 5.2 | **a level proposed**: below | defined, at INTERFACE over time; checked |
+| 21 | G21 | Greenblatt et al. 2024 (control) | the largest breach within the limits; `0.9048` against the source's 85%, a simpler case | checked |
+| 22 | G22 | Skalse et al. 2022, Definition 1 | the measured requirement met, the meant one breached | checked |
+| 23 | — | Manheim and Garrabrant 2018, read in full | below | read; not cased |
+| 24 | — | Hubinger et al. 2019, §1 | below | read; not cased |
+| 25 | G25 | Langosco et al. 2022, Definition 2.1 | goal and capability misgeneralization told apart only by a goal named in advance | checked |
+| 26 | G26 | Betley et al. 2025 | the rise on unrelated questions against a control | checked |
+| 27 | G27 | Hubinger et al. 2024 | **silent in evaluation** when the trigger is never posed; diagnosed in use | checked |
+| 29 | G29 | — | an inconsistent specification, before any record | checked |
+| 30 | — | — | — | outside by choice |
+| 31 | — | Demski and Garrabrant 2019, §1–§2 | below | not expressible |
+
+**Counts after G1.** Of 31 rows: 26 checked on a paradigm and a contrary case, by 24 groups of cases; 3 read and not
+cased (rows 23, 24, 31); 1 diagnosed in v13 and not cased (row 5); 1 outside by choice (row 30). No row is now without a
+level but rows 30, outside by choice, and 31. On real data the count is unchanged: rows 1 and 8 (case M1), 5 (W4), 23
+(W1, one prediction refuted; and C2, in simulation, one rule failed).
+
+**Read and not cased.**
+- *Goodhart's four variants* (row 23; Manheim and Garrabrant). Regressional, selecting on the proxy's noise: the
+  regression of the target on the evaluator, [P18]. Extremal, leaving the region where proxy and goal agree: where the
+  regression stops rising, [P20]. Causal, an intervention that changes the structure: the test of [P12] that a change
+  is a pass-through of the intervention and nothing else, which fails when the structure moved. Adversarial, an actor
+  with other goals: the several actors of row 16. All four are PURPOSE's, through an evaluator, and v13's items.
+- *Inner, outer and deceptive alignment* (rows 13, 24, 25; Hubinger et al., §1 verbatim, §4 *summary*). Outer alignment
+  is the gap between the training objective and the designers' intent: SH1's middle term, or [P49](i). Inner alignment
+  and the mesa-optimizer are defined by the source on the learned algorithm's structure, which by [A1] the framework
+  does not judge; their behavioural consequence is goal misgeneralization (row 25), and deceptive alignment's is conduct
+  keyed to training (row 13).
+- *Embedded agency* (row 31; Demski and Garrabrant). An agent inside its environment, with no clean channels in and
+  out. Every object of the framework presupposes that the actor's conduct can be told from the world's, so the row
+  stays not expressible, a limit of the framework kept as such.
+
+## Two forms given a level (Q90)
+
+The first draft found two forms that authors popularized with no level (rows 19 and 20). Both ask the framework to
+treat as reachable by the actor something it takes as fixed. Each is given a level here with the objects the framework
+already has, and no new kind of object; G1's cases G19 and G20 compute them on paradigm cases (`probes/coverage/`).
+
+**Influence on the principal** (row 19; Carroll et al., 2405.17713). [A5] fixes the declaration before the record, and
+nothing in CORE lets the actor reach it. But the principal's *state*, what it prefers or believes, can be part of the
+outcome, as a condition is: declare it a coordinate of the outcome, declare what the actor's conduct may do to it as a
+requirement, and judge it as any other. The least such requirement is "leave the principal as it would be left alone":
+the principal's change, given the situation, has the law it has under a declared reference, such as the actor absent or
+inactive, the inaction baseline the source compares with. Its misalignment is then the divergence of the principal's
+change from that law, in nats, from records of the principal before and after. Three things stay declared: the
+reference, which coordinates of the principal count, and which changes are welcome; the source's own point, that not all
+influence is objectionable, is a requirement the principal states, such as "changes every one of my preferences would
+accept", not a property of the measure. The declaration that judges stays fixed before the record, as [A5] asks; what
+the actor may reach is the principal's later state, not the declaration that judges it. Needs: a record of the
+principal, and a reference for its change. Level: CORE, with the principal's state as part of the outcome; the reference
+may need INTERFACE (a link to the condition in which the actor is absent).
+
+**Power, and closing the principal's options** (row 20; Turner et al., 1912.01683). The source defines power as the
+ability to achieve a wide range of goals: the average optimal value over a distribution of reward functions. The
+framework has the dual without optimization: for a declared family of specifications, the misalignment that each one
+leaves *unavoidable* from a position, `m(L)` of `interface-items.md` with `L` the behaviours reachable from it, averaged
+over the family with declared weights. Less unavoidable misalignment on average is more power: more of the family's
+goals can still be met. Seeking power is moving to positions where that average is lower; closing the principal's
+options is the same quantity computed for the principal's reachable set, before and after the actor acts. Needs:
+positions and what is reachable from each (limits, ID1), and a declared family with weights, the source's distribution
+over goals. Level: INTERFACE over time, the limits indexed by position. What it is not: a judgement that seeking power
+is misaligned; that is a requirement the principal declares, such as "leave the principal's average unavoidable
+misalignment no higher than it was".
+
+**Still not expressible.** An actor with no clean boundary from its world (row 31; Demski and Garrabrant, 1902.09469,
+read in §1–§2): the framework's outcomes, limits and links all presuppose that the actor's conduct can be told apart
+from the world's. Kept as a limit.
+
+## Sources
+
+Records opened on `arxiv.org` and matched by title and authors, 2026-11-16 and 2026-11-17; the text read in the HTML
+version, in part verbatim and in part through the fetching tool's summary, as `probes/coverage/REGISTRATION.md` says.
+- Amodei, Olah, Steinhardt, Christiano, Schulman and Mané (2016), Concrete problems in AI safety,
+  [arXiv:1606.06565](https://arxiv.org/abs/1606.06565).
+- Betley, Tan, Warncke, Sztyber-Betley, Bao, Soto, Labenz and Evans (2025), Emergent misalignment,
+  [arXiv:2502.17424](https://arxiv.org/abs/2502.17424).
+- Carroll, Foote, Siththaranjan, Russell and Dragan (2024), AI alignment with changing and influenceable reward
+  functions, [arXiv:2405.17713](https://arxiv.org/abs/2405.17713).
+- Demski and Garrabrant (2019), Embedded agency, [arXiv:1902.09469](https://arxiv.org/abs/1902.09469).
+- Everitt, Hutter, Kumar and Krakovna (2021), Reward tampering problems and solutions in reinforcement learning,
+  [arXiv:1908.04734](https://arxiv.org/abs/1908.04734).
+- Greenblatt, Denison, Wright, Roger, MacDiarmid, Marks, Treutlein and others (2024), Alignment faking in large language
+  models, [arXiv:2412.14093](https://arxiv.org/abs/2412.14093).
+- Greenblatt, Shlegeris, Sachan and Roger (2024), AI control: improving safety despite intentional subversion,
+  [arXiv:2312.06942](https://arxiv.org/abs/2312.06942).
+- Greshake, Abdelnabi, Mishra, Endres, Holz and Fritz (2023), Not what you've signed up for,
+  [arXiv:2302.12173](https://arxiv.org/abs/2302.12173).
+- Hadfield-Menell, Dragan, Abbeel and Russell (2017), The off-switch game,
+  [arXiv:1611.08219](https://arxiv.org/abs/1611.08219).
+- Hägele, Gema, Sleight, Perez and Sohl-Dickstein (2026), The hot mess of AI,
+  [arXiv:2601.23045](https://arxiv.org/abs/2601.23045).
+- Hubinger, van Merwijk, Mikulik, Skalse and Garrabrant (2019), Risks from learned optimization,
+  [arXiv:1906.01820](https://arxiv.org/abs/1906.01820).
+- Hubinger, Denison, Mu, Lambert, Tong, MacDiarmid and others (2024), Sleeper agents,
+  [arXiv:2401.05566](https://arxiv.org/abs/2401.05566).
+- Ji, Lee, Frieske, Yu, Su, Xu and others (2023), Survey of hallucination in natural language generation,
+  [arXiv:2202.03629](https://arxiv.org/abs/2202.03629).
+- Langosco, Koch, Sharkey, Pfau, Orseau and Krueger (2022), Goal misgeneralization in deep reinforcement learning,
+  [arXiv:2105.14111](https://arxiv.org/abs/2105.14111).
+- Manheim and Garrabrant (2018), Categorizing variants of Goodhart's law,
+  [arXiv:1803.04585](https://arxiv.org/abs/1803.04585).
+- Motwani, Baranchuk, Strohmeier, Bolina, Torr, Hammond and Schroeder de Witt (2024), Secret collusion among AI agents,
+  [arXiv:2402.07510](https://arxiv.org/abs/2402.07510).
+- Needham, Edkins, Pimpale, Bartsch and Hobbhahn (2025), Large language models often know when they are being evaluated,
+  [arXiv:2505.23836](https://arxiv.org/abs/2505.23836).
+- Sharma, Tong, Korbak, Duvenaud, Askell, Bowman and others (2024), Towards understanding sycophancy in language models,
+  [arXiv:2310.13548](https://arxiv.org/abs/2310.13548).
+- Skalse, Howe, Krasheninnikov and Krueger (2022), Defining and characterizing reward hacking,
+  [arXiv:2209.13085](https://arxiv.org/abs/2209.13085).
+- Turner, Smith, Shah, Critch and Tadepalli (2021), Optimal policies tend to seek power,
+  [arXiv:1912.01683](https://arxiv.org/abs/1912.01683).
+- van der Weij, Hofstätter, Jaffe, Brown and Ward (2024), AI sandbagging,
+  [arXiv:2406.07358](https://arxiv.org/abs/2406.07358).
+
+The years are those of the version the record names; where the record's year differs from the arXiv identifier's, the
+record's is given, and a later reader should check each against its record before citing it in an item.

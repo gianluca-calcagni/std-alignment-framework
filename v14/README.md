@@ -54,7 +54,7 @@ The draft so far, in this folder:
 | `severity.md` | severity as a declared scale, never in nats; what a report gives; who grades | a proposal |
 | `training.md` | a fourth layer, SHAPING, for training, selection, education and regulation; SH1 | a proposal; SH1 proved |
 | `interface-items.md` | INTERFACE on two concepts, a limit and a link: ID1–ID3; IR1 the unavoidable part and the avoidable excess as intervals; IR2 three verdicts on culpability; IR3 the earlier notions as limits, shown capabilities or links; IR4 limits add up along an order; IR5 an intervention needs no object of its own | a draft (Q89), proved here, not reviewed |
-| `coverage.md` | thirty-one forms of misalignment, each with the least level that diagnoses it, what it needs, and its state | a first draft (Q89) from the tree's files; no source read |
+| `coverage.md` | thirty-one forms of misalignment, each with the least level that diagnoses it, what it needs, and its state | a first draft (Q89) from the tree's files, then checked by G1 on twenty sources (Q90, `probes/coverage/`) |
 | `junctures.md` | where the framework's parts meet, how each meeting fails, and the measure it inspires; how refining one σ-algebra moves the others | a brainstorm (Q77) |
 | `related.md` | competing frameworks, both ways | a survey by a research assistant, not reviewed |
 | `literature-q70.md` | mixtures after Carcassi, the cost of the mixture principle, culpability, adversarial actors | a survey by a research assistant, not reviewed; two derivations checked, one claim corrected |

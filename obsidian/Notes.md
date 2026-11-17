@@ -282,6 +282,7 @@ Everything waiting on the PI or deferred by agreement, in one place.
 | Q87 | before deciding anything, read more of the project, to be sure of having its goals, ethos and methodology in full; then summarize them for the PI to confirm. Applied: §45, the summary and four questions; R28; nothing else changed | PI | §45 |
 | Q88 | the PI's answers to §45's four questions: the core cannot be complete by itself, since refining causes needs a refined basis; the factorization validates the theory and the diagnostics, an elegance with practical simplifications, and need not be more special than that; the executor's judgement is wanted for the entire framework, the MVP being worked on with another model; and "general" is operational: if some authors popularized a form of misalignment, there should be a level where it can be diagnosed somehow. Applied: §46; R28 closed; H92; nothing else changed | PI | §46 |
 | Q89 | the PI likes §46's proposal; INTERFACE is to be general: no distinct concepts where a few can do and the difference is in the implementation, as one distribution with constraints replaced a distribution made of two elements. Applied: `v14/interface-items.md`, INTERFACE on two concepts, a limit and a link, with five results; `v14/coverage.md`, thirty-one forms with the least level that diagnoses each; a probe; §47 | PI; executor (the drafts) | §47; `v14/interface-items.md`; `v14/coverage.md` |
+| Q90 | approved: proceed with the coverage table, source by source, then the two forms with no level, until the end; the PI changed the session's model midway, after a usage limit, and asked the new one to carry on from the first one's work. Applied: twenty sources read; G1 registered, pushed and run (`probes/coverage/`), 79 of 79 predictions held; `v14/coverage.md` updated row by row; influence on the principal and power given a level (H94); §48 | PI | §48; `probes/coverage/`; `v14/coverage.md` |
 
 ### 3.2 Papers and data the PI could supply
 
@@ -572,8 +573,9 @@ models are hypotheses that [[P3 — A fixed objective is visible in the changes 
 | H89 | **Tiers nested by nature.** World ⊇ deployment ⊇ actor ∋ the behaviour: unavoidable in this world, the deployment's limits, what the actor cannot do, what it did not do; the order is forced, each tier has an owner and a remedy, the first two are computed from facts verifiable apart from the actor, and the last two are an interval that only records under interventions narrow (§44) | U: FA1 on a chain fixed by fact; RS8(iii) and VF3 for the interval; probed (`probes/review/q86_tiers.py`) |
 | H90 | **Every term with its bounds, every bound with its remedy.** The tree has six results of one shape, a quantity the passive record leaves open and the new record that narrows it: R13, [[P51 — What signals, audits and re-measurements reveal of tampering\|P51]], [[P17 — What an unobserved condition can hide\|P17]], RS8, VF3, [[P48 — Misalignment when the target is uncertain\|P48]]. Ask it of every term of the factorization, as [[D9 — Observation and identification\|D9]] asks it of a quantity; that is what complete from a diagnostic perspective can mean (§44) | D: a proposal for the report |
 | H91 | **Interventions in the foundation.** A declared change of one declared object, its tier named, with a link saying the actor is the same; its potential, computed, and its realized gain, verified from records before and after. A positive realized gain is the first verified cost of a limitation; a strong incentive shows what an actor can do and hides its aim ([[P37 — A strong incentive masks the actor, and can fake alignment\|P37]]). Completeness is relative to the declared remedies (§44) | U: generalizes [[D6 — Intervention and pass-through\|D6]] and [[P12 — What interventions reveal\|P12]]; a proposal |
-| H92 | **A coverage test for generality.** One table: every form of misalignment that authors popularized, with its source's definition and a paradigm case; the least layer and declared objects it needs; the item that diagnoses it; what a record must contain; the diagnosis's status; and whether it is diagnosed now, defined only, or not expressible, with the limit. Generality then fails or holds row by row, and the table says which layer to build next (§46, after the PI's answer 4) | D: a proposal; `general/vocabulary.md` and L1 are its precedents; a first draft from the tree's own files, no source read, in `v14/coverage.md` (Q89) |
+| H92 | **A coverage test for generality.** One table: every form of misalignment that authors popularized, with its source's definition and a paradigm case; the least layer and declared objects it needs; the item that diagnoses it; what a record must contain; the diagnosis's status; and whether it is diagnosed now, defined only, or not expressible, with the limit. Generality then fails or holds row by row, and the table says which layer to build next (§46, after the PI's answer 4) | D: a proposal; `general/vocabulary.md` and L1 are its precedents; a first draft from the tree's own files in `v14/coverage.md` (Q89), then checked by G1 on twenty sources, 79 of 79 verification predictions held (Q90, §48) |
 | H93 | **INTERFACE on two concepts.** A limit, a set of behaviours declared as a fact with its owner, the same object as a requirement; and a link, which makes what the actor did in another condition a shown capability. What the actor could do lies between what it has shown and what limits it, so the unavoidable part and the avoidable excess are intervals, and culpability has three verdicts: shown, excused, open (`v14/interface-items.md`) | D: drafted at the PI's direction (Q89); its results are monotonicity and a table of results already in the tree; probed, not in CI |
+| H94 | **Influence and power with the objects the framework has.** Influence on the principal: the principal's later state as part of the outcome, its change judged against its law under a declared reference, the actor absent. Power: for a declared family of goals with weights, the misalignment each leaves unavoidable from a position, averaged; seeking power is moving to positions where it is lower, closing the principal's options the same computed for the principal. Neither calls influence or power misaligned; that is a requirement to declare (§48, `v14/coverage.md`) | D: proposed and checked on paradigm cases (G1's G19, G20); not on real data |
 
 ### 5.5 Process
 
@@ -4005,3 +4007,46 @@ are untouched.
 
 **Next, unless the PI redirects.** The table's rows, source by source, starting with the INTERFACE rows that have a
 public paradigm case; then the two rows with no level.
+
+## 48. G1, the coverage test, registered and run; two forms given a level, 2026-11-17 (Q90)
+
+The PI approved the next step of §47 and asked for the work to go on until the end. In the course of it the PI changed
+the session's model, after a usage limit; the cases and `probes/coverage/run.py` were written by one model of the Claude
+family, and the registration, the run and everything after by another of the same family, which read the first one's
+work in the session before going on (rule (f): neither is independent of the other).
+
+**What was done.** Twenty sources were read on `arxiv.org`, each record matched by title and authors, the text read in
+the HTML version, about forty thousand characters verbatim and the rest through the fetching tool's summary, which the
+registration marks where a definition rests on it. G1 was registered (`probes/coverage/REGISTRATION.md`, commit
+`a127991`), the whole pre-push block run, and pushed before the script ran: for each of twenty-four groups of forms, a
+paradigm case and a contrary case shaped after the source, the source's sense, the framework's diagnosis at its least
+level, and the predicted sign. Then run: **79 predictions, 79 held** (`RESULTS.md`). `v14/coverage.md` gained G1's
+results row by row, the readings of the three sources read and not cased, the two new levels, and the sources with
+links.
+
+**What it is worth, said first.** Every prediction is a verification prediction, every case was built to show its
+diagnosis, and one model family made and judged them. G1 shows that the framework can state and diagnose each cased form
+at its level, and where its diagnosis departs from the source's word; not that the diagnosis works on a real record. The
+count of forms diagnosed on real data is unchanged: rows 1 and 8 (M1), 5 (W4), 23 (W1).
+
+**What it found.**
+- *Four departures from the sense, predicted and kept.* Side effects are silent until a requirement names them (G2a);
+  sandbagging and alignment faking are diagnosed as conduct, not intent (G11c, G13c); a trigger never posed in
+  evaluation is invisible there (G27a). The first is desideratum 2 as designed, the second [[A1 — Behaviour suffices|A1]] as designed, the third
+  what a record can show.
+- *Two declarations that the cases make visible.* Goal and capability misgeneralization are told apart only by a goal
+  named before the record (G25), [[P44 — What named objectives explain|P44]]'s pattern; secret collusion is dependence given the open messages, and overt
+  collusion scores `0` (G16).
+- *Two forms given a level*, with objects the framework has (H94): influence on the principal, the principal's later
+  state as part of the outcome and its change judged against its law with the actor absent (G19); power, the
+  misalignment a declared family of goals leaves unavoidable from a position, averaged (G20, `1.5351` at a dead end
+  against `0.7675` with two options, as computed by hand before the run). Each needs a reference or a family declared,
+  and neither says that influence or power is misaligned: that is a requirement the principal states.
+- *Goodhart's four variants*, read in full in their source, are four objects of v13's PURPOSE: [[P18 — Through the evaluator, only the regression counts|P18]], [[P20 — Where overoptimization starts, and how it ends|P20]], [[P12 — What interventions reveal|P12]]'s
+  test, and several actors. *Inner alignment* is defined by its source on the learned algorithm's structure, outside
+  [[A1 — Behaviour suffices|A1]]; its behavioural consequences are rows 13 and 25. *Embedded agency* stays not expressible.
+
+**What the PI may weigh next.** The test that matters now is the one G1 cannot be: a world case for an INTERFACE row,
+where a better behaviour must be shown on a real record. Sandbagging (row 11) is the cleanest candidate: the source's
+own setting pairs an evaluation with an elicited condition and a control topic, and its benchmarks are public. It needs
+a registration, a model and its hosts, which are the PI's to allow (`REQUESTS.md`, R27).
