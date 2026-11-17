@@ -89,7 +89,7 @@ diagnosis works on a real record. "Checked" below means that, and no more.
 | 7 | G7 | Ji et al. 2023, §2 (*summary*) | the unsupported part of a hallucination is hidden from a grader that checks contradiction only | checked |
 | 8, 9 | G8 | — | three verdicts: excused, culpable and shown, open | checked |
 | 10 | G10 | — | an upper end on the cost of not telling situations apart; shown culpable once it is seen telling them apart | checked |
-| 11 | G11 | van der Weij et al. 2024, §2 | a drop under evaluation on one topic, with a control topic; **broader**: the intent is not diagnosed | checked; conduct only |
+| 11 | G11 | van der Weij et al. 2024, §2 | a drop under evaluation on one topic, with a control topic; **broader**: the intent is not diagnosed | checked; conduct only; then C6, on a real model's answers (simulation kind): selective sandbagging convicted on its topic and certified on the control |
 | 12 | G12 | Needham et al. 2025 | evidence of acting differently, and its sign; telling evaluation from use, asked | checked |
 | 13 | G13 | Greenblatt et al. 2024 | conduct keyed to the training cue; **broader**: the reason is not diagnosed | checked; conduct only |
 | 14 | G14 | Everitt et al. 2021, §4 | tampering with the reward's input against an honest channel; gaming the sensor honestly is not tampering | checked |

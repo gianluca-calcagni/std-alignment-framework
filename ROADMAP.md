@@ -105,7 +105,9 @@ three are in place (Q41). The theory grows where one of these needs it, and the 
   coverage test is proposed (H92). Begun (Q89, §47): `v14/coverage.md`, a first draft of the table, and
   `v14/interface-items.md`, INTERFACE on two concepts; neither reviewed nor in CI. Then (Q90, §48) G1, registered before
   it ran: 79 of 79 verification predictions held on twenty sources' paradigm cases, and the two forms with no level
-  given one (H94); the next test that matters is a world case for an INTERFACE row.
+  given one (H94); the next test that matters is a world case for an INTERFACE row. Then (Q91, §49) C6, sandbagging on a
+  real model, as a simulation case: five of five predictions held; a record of 1,273 questions convicts a gap above
+  about `0.23` and certifies one below about `0.07`.
 - **On `main`**, since pull requests #33 (Q55) and #34 (Q65) were merged, the core is v13, approved by the PI (Q52,
   `NOTES.md` §17) and built by the method of reverse physics: three axioms imported from probability theory, four
   background conditions assumed without loss of generality, three premises, each with its Status ([A1] behaviour
@@ -338,3 +340,4 @@ One line per turn: date, what changed, which row it served. Earlier lines are ar
 | 2026-11-16 | the PI's four answers (Q88, `NOTES.md` §46): completeness belongs to each basis, not to the core; the factorization validates and simplifies, no more; the executor's judgement is for the whole framework; "general" means every popularized form has a level that diagnoses it. A coverage test proposed (H92); R28 closed; a correction to §41; nothing else changed | 1 (the goal) |
 | 2026-11-16 | begun at the PI's word (Q89, `NOTES.md` §47): `v14/interface-items.md`, INTERFACE on two concepts, a limit and a link, the earlier ten notions as their implementations, with the unavoidable part as an interval and three verdicts on culpability, probed; `v14/coverage.md`, thirty-one forms of misalignment with the least level that diagnoses each, from the tree's files, no source read yet | 5 (diagnostics); 1 (the goal: generality as a test) |
 | 2026-11-17 | G1, the coverage test (Q90, `NOTES.md` §48): twenty sources read; registered and pushed before the run; 79 of 79 verification predictions held, with four departures from the sources' words kept as findings; influence on the principal and power given a level (H94); `v14/coverage.md` row by row. The PI changed the session's model midway | 1 (the goal: generality as a test); 5 (diagnostics) |
+| 2026-11-17 | C6, sandbagging on a real model (Q91, `NOTES.md` §49): registered before any test question was read, then run on 2,533 WMDP-bio and MMLU questions: five of five predictions held; the judge's calibration failed to transfer, an auxiliary assumption, and a slip recorded (§1) | 5 (diagnostics) |
